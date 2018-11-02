@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="sub-title">
+      <div class="heading">Sign up</div>
+      <div class="description">Welcome to use BookLab</div>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "/shared/error_messages", target: resource %>
+
+      <div class="form-group">
+        <%= f.label :slug %>
+        <%= f.text_field :slug, autofocus: true, autocomplete: "username", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+
+        <%= link_to "Sign in", new_session_path(resource_name), class: "btn"  %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

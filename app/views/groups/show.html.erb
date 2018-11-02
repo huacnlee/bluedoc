@@ -1,0 +1,15 @@
+<% title_tag @group.name %>
+
+<%= render "groups/menu" %>
+
+<% @repositories = @group.repositories.recent_updated.limit(20).offset(params[:offset]) %>
+<div class="group-repositories">
+  <% if @repositories.blank? %>
+    <div class="blankslate">
+      <h3>There is no repository</h3>
+      <p>You can create first repository, <%= link_to "Create new", "/new" %>.</p>
+    </div>
+  <% else %>
+    <%= render @repositories %>
+  <% end %>
+</div>

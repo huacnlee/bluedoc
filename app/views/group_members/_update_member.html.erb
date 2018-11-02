@@ -1,0 +1,18 @@
+<%= render layout: "shared/modal", locals: {
+  title: "Change member role",
+  button_text: "Change role...",
+  button_class: "dropdown-item"
+} do %>
+  <div class="Box-body overflow-auto">
+    <%= form_with(model: member, url: group_member_path(@group, member), method: :put) do |form| %>
+      <div class="form-group">
+        <%= form.label :role, class: "control-label" %>
+        <%= form.select :role, Member.roles.keys, {}, class: "form-select" %>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary">Update</button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<% title_tag "Stars", "Dashboard" %>
+
+<div class="col-12 d-table">
+  <%= render "menu" %>
+
+  <div class="col-10 d-table-cell p-5">
+    <div class="sub-title">All stars</div>
+    <%= render "action_repositories" %>
+    <%= paginate @repositories %>
+  </div>
+</div>

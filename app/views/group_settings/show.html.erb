@@ -1,0 +1,89 @@
+<% title_tag "Settings", @group.name %>
+
+<div class="col-12 d-table group-settings">
+  <%= render "menu" %>
+
+  <div class="col-8 d-table-cell">
+    <div class="col-12 d-table mb-4">
+      <div class="d-table-cell col-8">
+        <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
+          <div class="form-title"><h2>Group profile</h2></div>
+
+          <input type="hidden" name="_by" value="show" />
+          <%= render "/shared/error_messages", target: @group %>
+
+          <div class="form-group">
+            <%= form.label :name, class: "control-label" %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :url, class: "control-label" %>
+            <%= form.url_field :url, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :location, class: "control-label" %>
+            <%= form.text_field :location, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :description, class: "control-label" %>
+            <%= form.text_field :description, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :slug, class: "control-label" %>
+            <%= form.text_field :slug, class: "form-control" %>
+            <div class="form-text">
+              <%= Setting.host %>/:username
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Update profile", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="d-table-cell pl-4 col-3">
+        <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
+        <input type="hidden" name="_by" value="show" />
+        <div class="form-title"><h2>Logo</h2></div>
+        <div class="image-box width-full text-center">
+          <%= user_avatar_tag(@group, style: :large, link: false) %>
+        </div>
+        <div class="form-group">
+          <label class="btn width-full text-center">
+             Upload new logo
+             <%= form.file_field :avatar, class: "btn js-manual-file-chooser manual-file-chooser width-full text-center"  %>
+           </label>
+        </div>
+        <script>
+          $("form").on("change", ".js-manual-file-chooser", (e) => {
+            $form = $(e.delegateTarget);
+            $form.submit();
+          });
+        </script>
+        <% end %>
+      </div>
+    </div>
+
+    <% if can? :manage, @group %>
+    <div class="form-title"><h2>Danger zone</h2></div>
+    <div class="Box mb-3">
+      <div class="Box-row d-flex flex-items-center">
+        <div class="flex-auto">
+          <label class="form-check-label font-weight-bold">
+            Delete this group
+          </label>
+          <div class="form-text d-table-cell">
+            Once you delete a group, there is no going back. Please be certain.
+          </div>
+        </div>
+        <%= link_to "Delete this group", group_settings_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

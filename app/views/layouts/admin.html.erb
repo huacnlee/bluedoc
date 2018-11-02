@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookLab Admin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'app', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+    <script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="//unpkg.com/rails-ujs@5.2.1/lib/assets/compiled/rails-ujs.js"></script>
+    <script src="//unpkg.com/turbolinks@5.2.0/dist/turbolinks.js"></script>
+    <%= javascript_pack_tag 'vendors', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <div class="nav-header">
+    <div class="navbar flex-auto">
+      <a class="navbar-brand" href="/admin"><%= icon_tag("book", label: "BookLab Admin") %></a>
+    </div>
+    <div class="navbar">
+      <details class="dropdown details-reset details-overlay d-inline-block">
+        <summary aria-haspopup="true">
+          <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
+          <div class="dropdown-caret"></div>
+        </summary>
+        <div class="dropdown-menu dropdown-menu-sw">
+          <div class="dropdown-header">
+            Signed in as <strong><%= current_user.slug %></strong>
+          </div>
+          <ul>
+            <li><a class="dropdown-item" data-turbolinks="false" href="<%= root_path %>">Back to Front</a></li>
+            <li class="dropdown-divider" role="separator"></li>
+            <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">Sign out</a></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <body class="admin-body">
+    <%= notice_message %>
+    <div class="main-container">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

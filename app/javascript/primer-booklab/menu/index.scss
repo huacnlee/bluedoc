@@ -1,0 +1,17 @@
+@import "../colors.scss";
+
+.menu-item {
+  padding: 8px 18px;
+  color: #505050;
+  
+  &.selected {
+    color: #505050;
+    font-weight: normal;
+    
+    &:before {
+      background-color: $primary;
+      width: 2px;
+      margin-left: -1px;
+    }
+  }
+}

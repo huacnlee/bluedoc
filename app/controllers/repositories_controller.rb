@@ -1,0 +1,94 @@
+class RepositoriesController < Users::ApplicationController
+  before_action :authenticate_user!, only: %i[new edit create update destroy action toc]
+
+  before_action :set_user, only: %i(show edit update destroy docs action toc)
+  before_action :set_repository, only: %i(show edit update destroy docs action toc)
+
+
+  def index
+    authorize! :read, user
+  end
+
+  #
+  def new
+    @repository = Repository.new
+  end
+
+  # POST /repositories
+  def create
+    @repository = Repository.new(repository_params)
+    @repository.creator_id = current_user.id
+
+    authorize! :create, @repository
+
+    respond_to do |format|
+      if @repository.save
+        notice = "Repository was successfully created."
+        if repository_params[:gitbook_url]
+          RepositoryImportJob.perform_later(@repository, type: "gitbook", user: current_user, url: repository_params[:gitbook_url])
+          notice = "Repository as created, and runing import GitBook on background."
+        end
+
+        format.html { redirect_to @repository.to_path, notice: notice }
+        format.json { render :show, status: :created, location: @repository }
+      else
+        format.html { render :new }
+        format.json { render json: @repository.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /:user/:repo
+  def show
+    authorize! :read, @repository
+
+    unless @repository.has_toc?
+      docs
+      render "docs"
+    end
+  end
+
+  # GET /:user/:repo/docs/list
+  def docs
+    authorize! :read, @repository
+
+    @docs = @repository.docs.includes(:last_editor).recent.page(params[:page]).per(50)
+  end
+
+  # GET /:user/:repo/toc/edit
+  def toc
+    authorize! :create_doc, @repository
+
+    if request.get?
+      @docs = @repository.docs.order("id desc")
+    else
+      if @repository.update(params.require(:repository).permit(:toc))
+        redirect_to @repository.to_path, notice: "Table of Contents has updated"
+      else
+        render :toc
+      end
+    end
+  end
+
+  def action
+    authorize! :read, @repository
+
+    if request.post?
+      User.create_action(params[:action_type], target: @repository, user: current_user)
+    else
+      User.destroy_action(params[:action_type], target: @repository, user: current_user)
+    end
+    @repository.reload
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_repository
+      @repository = @user.repositories.find_by_slug!(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def repository_params
+      params.require(:repository).permit(:user_id, :slug, :name, :description, :privacy, :gitbook_url)
+    end
+end

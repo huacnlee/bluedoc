@@ -1,0 +1,51 @@
+upstream app_backend {
+  server 127.0.0.1:7000 fail_timeout=0;
+  keepalive 3;
+}
+
+log_format timed_combined '$remote_addr - $remote_user [$time_local] '
+                          '"$request" $status $body_bytes_sent '
+                          '"$http_referer" "$http_user_agent" '
+                          '$request_time $upstream_response_time $pipe';
+
+server {
+  listen 80 default_server;
+
+  location /nginx_status {
+    allow 127.0.0.1;
+    deny all;
+    stub_status on;
+  }
+
+  root /home/app/booklab/public;
+
+  location ~ (/system|/favicon.ico|/*.txt) {
+    access_log        off;
+    expires           7d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  location /packs {
+    access_log        off;
+    expires           365d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  location / {
+    proxy_redirect     off;
+    proxy_set_header   Host $http_host;
+    proxy_set_header   X-Forwarded-Host $http_host;
+    proxy_set_header   X-Forwarded-Server $http_host;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_buffering    on;
+    proxy_http_version 1.1;
+    proxy_set_header   Upgrade $http_upgrade;
+    proxy_set_header   Connection "Upgrade";
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_pass         http://app_backend;
+    gzip on;
+  }
+}

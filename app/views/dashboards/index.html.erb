@@ -1,0 +1,28 @@
+<div class="col-12 d-table">
+  <%= render "menu" %>
+  
+  <div class="col-6 bg-white d-table-cell pl-5">
+    <div class="sub-title">Recent activity</div>
+    <div class="mb-5">
+      <%= render partial: "docs", locals: { items: @recent_docs } %>
+    </div>
+  
+    <div class="sub-title">All activity</div>
+    <div class="blankslate">
+      <h3>No activity</h3>
+      <p>You have no activity in recently.</p>
+    </div>
+  </div>
+  
+  <div class="col-4 bg-white d-table-cell px-5">
+    <div class="sub-title">My Groups</div>
+    <div class="group-list d-flex">
+      <% @groups.each do |group| %>
+        <div class="group-item mx-2">
+          <%= user_avatar_tag(group, style: :medium) %>
+          <%= user_name_tag(group) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

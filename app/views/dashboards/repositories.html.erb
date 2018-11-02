@@ -1,0 +1,11 @@
+<% title_tag "Repositories", "Dashboard" %>
+
+<div class="col-12 d-table">
+  <%= render "menu" %>
+
+  <div class="col-10 d-table-cell p-5">
+    <div class="sub-title">Recent repositories</div>
+    <%= render partial: "repositories", locals: { items: @user_actives } %>
+    <%= paginate @user_actives %>
+  </div>
+</div>

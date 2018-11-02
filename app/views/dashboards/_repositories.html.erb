@@ -1,0 +1,28 @@
+<table class="dashboard-table">
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Stars</td>
+    <td>Watches</td>
+    <td>Last visit</td>
+  </tr>
+  <% items.each do |item| %>
+  <tr class="recent-repo-item">
+    <td>
+      <%= repository_path_tag(item.subject) %>
+    </td>
+    <td>
+      <%= item.subject&.description %>
+    </td>
+    <td>
+      <%= item.subject&.stars_count %>
+    </td>
+    <td>
+      <%= item.subject&.watches_count %>
+    </td>
+    <td>
+      <%= timeago item.updated_at %>
+    </td>
+  </tr>
+  <% end %>
+</table>

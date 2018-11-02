@@ -1,0 +1,31 @@
+<div class="group-member border-bottom py-3 d-table col-12">
+  <div class="d-table-cell col-1 v-align-middle">
+    <%= user_avatar_tag(member.user, style: :medium) %>
+  </div>
+  <div class="d-table-cell col-7 v-align-middle">
+    <div class="member-name"><%= link_to member.user.name, member.user.to_path, class: "link-gray-dark text-bold" %></div>
+    <div class="member-slug"><%= user_name_tag(member.user) %></div>
+  </div>
+  <div class="d-table-cell col-1 v-align-middle">
+    <span class="text-gray"><%= member.role %></span>
+  </div>
+
+
+  <div class="d-table-cell col-1 v-align-middle">
+    <% if can? :manage, @group %>
+      <% if member.user_id != current_user.id %>
+        <details class="dropdown float-right details-reset details-overlay d-inline-block">
+          <summary class="btn" aria-haspopup="true">
+            <%= icon_tag("gear") %>
+            <div class="dropdown-caret"></div>
+          </summary>
+
+          <ul class="dropdown-menu dropdown-menu-sw">
+            <li><%= render "update_member", member: member %></li>
+            <li><a class="dropdown-item" href="<%= group_member_path(@group, member) %>" data-method="delete">Remove</a></li>
+          </ul>
+        </details>
+      <% end %>
+    <% end %>
+  </div>
+</div>

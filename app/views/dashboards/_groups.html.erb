@@ -1,0 +1,25 @@
+<table class="dashboard-table">
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Members</td>
+    <td>Last visit</td>
+  </tr>
+  <% items.each do |item| %>
+  <tr class="recent-group-item Box-row">
+    <td>
+      <%= user_avatar_tag(item.subject, style: :tiny) %>
+      <%= user_name_tag(item.subject) %>
+    </td>
+    <td class="text-gray">
+      <%= item.subject&.description %>
+    </td>
+    <td class="text-gray">
+      <%= item.subject&.members_count %>
+    </td>
+    <td>
+      <%= timeago item.updated_at %>
+    </td>
+  </tr>
+  <% end %>
+</table>

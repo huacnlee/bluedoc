@@ -1,0 +1,5 @@
+<% if current_page.first? %>
+  <span class="previous_page disabled"><%= t('views.pagination.previous').html_safe %></span>
+<% else %>
+  <%= link_to t('views.pagination.previous').html_safe, url,class: "previous_page", rel: 'prev', remote: remote %>
+<% end %>

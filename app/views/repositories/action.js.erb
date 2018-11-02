@@ -1,0 +1,15 @@
+if ($(".data-action-button-reload")) {
+  Turbolinks.visit(window.location);
+} else {
+  var btnAction = $(".repository-<%= @repository.id %>-<%= params[:action_type ] %>-button");
+  var btn = $(".btn", btnAction);
+  <% if request.post? %>
+    btn.attr("data-method", "delete");
+    $("span", btnAction).text(btn.attr("data-undo-label"));
+  <% else %>
+    btn.attr("data-method", "post");
+    $("span", btnAction).text(btn.attr("data-label"));
+  <% end %>
+
+  $(".social-count", btnAction).text("<%= @repository.send("#{params[:action_type].pluralize}_count") %>")
+}

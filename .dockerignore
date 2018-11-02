@@ -1,0 +1,15 @@
+/data/
+/log/
+/tmp/
+/public/packs
+/public/packs-test
+/public/system/
+/storage/
+/public/uploads/
+/test/
+/coverage/
+/node_modules/
+
+Dockerfile
+.env.*
+*.md

@@ -1,0 +1,5 @@
+<% if current_page.last? %>
+  <span class="next_page disabled"><%= t('views.pagination.next').html_safe %></span>
+<% else %>
+  <%= link_to t('views.pagination.next').html_safe, url, class: "next_page", rel: 'next', remote: remote %>
+<% end%>

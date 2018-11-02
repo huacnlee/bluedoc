@@ -1,0 +1,22 @@
+@import "../colors.scss";
+
+.btn { 
+  @include btn-solid(#222, #FFF, #FFF); 
+  font-weight: normal;
+  color: #4a4a4a;
+  
+  &:hover {
+    border-color: rgba(27, 31, 35, 0.3);
+    color: #4a4a4a;
+  }
+}
+
+.btn-primary { 
+  @include btn-solid(#fff, $primary-bg, $primary-bg); 
+  font-weight: normal;
+  
+  &:hover {
+    color: #fff;
+    border-color: #395a9a;
+  }
+}

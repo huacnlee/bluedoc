@@ -1,0 +1,55 @@
+<% title_tag "Account Settings" %>
+
+<div class="d-table col-12">
+  <%= render "menu" %>
+
+  <div class="d-table-cell col-8">
+    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
+      <div class="form-title"><h2>Change password</h2></div>
+      <%= render "/shared/error_messages", target: @user %>
+
+      <input type="hidden" name="_by" value="password" />
+
+      <div class="form-group">
+        <%= f.label :password, class: "control-label" %>
+        <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, class: "control-label" %>
+        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password, class: "control-label" %>
+        <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+        <div class="form-text">
+          We need your current password to confirm your changes.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Update password", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+   <div class="form-title"><h2>Danger zone</h2></div>
+    <div class="Box mb-3">
+      <div class="Box-row d-flex flex-items-center">
+        <div class="flex-auto">
+          <label class="form-check-label font-weight-bold">
+            Delete my account
+          </label>
+          <div class="form-text d-table-cell">
+            Once you delete your account, there is no going back. Please be certain.
+          </div>
+        </div>
+        <%= button_to "Delete my account", account_settings_path, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+    </div>
+  </div>
+</div>

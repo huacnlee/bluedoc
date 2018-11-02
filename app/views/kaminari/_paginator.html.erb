@@ -1,0 +1,15 @@
+<%= paginator.render do -%>
+  <div class="pagination my-3">
+    <%= prev_page_tag %>
+    <% each_page do |page| -%>
+      <% if page.display_tag? -%>
+        <%= page_tag page %>
+      <% elsif !page.was_truncated? -%>
+        <%= gap_tag %>
+      <% end -%>
+    <% end -%>
+    <% unless current_page.out_of_range? %>
+      <%= next_page_tag %>
+    <% end %>
+  </div>
+<% end -%>

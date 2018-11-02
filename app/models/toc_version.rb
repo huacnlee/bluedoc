@@ -1,0 +1,2 @@
+class TocVersion < Version
+end

@@ -1,0 +1,38 @@
+<% if @repositories.blank? %>
+<div class="blankslate">
+  <p>You don't have any <%= action_name.singularize %> repositories.
+</div>
+<% else %>
+<table class="dashboard-table" data-action-button-reload>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Stars</td>
+    <td>Watches</td>
+    <td>Last visit</td>
+  </tr>
+  <% @repositories.each do |repo| %>
+  <tr class="repo-item">
+    <td>
+      <%= repository_path_tag(repo) %>
+    </td>
+    <td>
+      <%= repo.description %>
+    </td>
+    <td>
+      <%= repo.stars_count %>
+    </td>
+    <td>
+      <%= repo.watches_count %>
+    </td>
+    <td>
+      <% if action_name == "stars" %>
+        <%= action_button_tag(repo, :star, undo: true) %>
+      <% else %>
+        <%= action_button_tag(repo, :watch, icon: :eye, undo: true) %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

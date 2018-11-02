@@ -1,0 +1,28 @@
+<div class="user-sidebar col-3 d-table-cell v-align-top pr-5 pt-3">
+  <div class="user-avatar-box">
+    <%= user_avatar_tag(@user, style: :large, link: false) %>
+  </div>
+
+  <div class="user-name-box py-3">
+    <h1><%= @user.name %></h1>
+    <div class="user-name"><%= @user.slug %></div>
+    <% if @user.location.present? %>
+    <div class="location mt-1 text-gray"><%= @user.location %></div>
+    <% end %>
+    <div class="created-on mt-1 text-gray" title="Created Date"><%= @user.created_at.to_date %></div>
+  </div>
+
+  <% if @user.description.present? %>
+  <div class="border-top py-3 clearfix">
+    <h4 class="mb-1">Bio</h4>
+    <%= @user.description %>
+  </div>
+  <% end %>
+
+  <div class="border-top py-3 clearfix">
+    <h4 class="mb-2">Groups</h4>
+    <% @user.groups.with_attached_avatar.each do |group| %>
+      <%= user_avatar_tag(group) %>
+    <% end %>
+  </div>
+</div>

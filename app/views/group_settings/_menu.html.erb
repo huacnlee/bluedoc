@@ -1,0 +1,9 @@
+<%= render "groups/menu" %>
+
+<div class="col-2 d-table-cell pr-4">
+  <ul class="menu">
+    <%= render_list_items(class: "menu-item", type: :link) do |li|
+      li << link_to("Profile", group_settings_path(@group), class: "menu-item")
+    end %>
+  </ul>
+</div>

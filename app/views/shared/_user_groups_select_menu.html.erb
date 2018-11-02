@@ -1,0 +1,22 @@
+<% if current_user %>
+  <%= render "/shared/select_menu", button_html: "" do %>
+    <%
+      groups = current_user.groups.with_attached_avatar.to_a
+      groups.unshift(current_user)
+
+      if value.blank?
+        value = current_user.id
+      end
+    %>
+
+    <% groups.each do |group| %>
+      <%= render partial: "/groups/select_menu_item",
+        locals: {
+          group: group,
+          checked: (group.id == value),
+          input_name: input_name
+        }
+      %>
+    <% end %>
+  <% end %>
+<% end %>

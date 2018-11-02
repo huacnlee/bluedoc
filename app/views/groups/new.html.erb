@@ -1,0 +1,32 @@
+<% title_tag "New Group" %>
+
+<div class="col-12">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="sub-title">
+      <div class="heading">New Group</div>
+      <div class="description">Group accounts allow your team to plan, build, review, and ship documents — all while tracking bugs and discussing ideas..</div>
+    </div>
+
+    <%= form_with(model: @group, local: true) do |form| %>
+      <%= render "/shared/error_messages", target: @group %>
+
+      <div class="form-group" style="width: 400px">
+        <%= form.label :slug, class: "control-label" %>
+        <%= form.text_field :slug, class: "form-control" %>
+        <div class="form-text">
+          Great group names are short and memorable.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :name, class: "control-label" %>
+        <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

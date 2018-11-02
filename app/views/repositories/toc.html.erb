@@ -1,0 +1,45 @@
+<% title_tag @repository.name, "Edit TOC" %>
+
+<%= form_with(model: @repository, url: toc_user_repository_path(@user, @repository), local: true, remote: true) do |form| %>
+  <div class="form-title">
+    <%= group_name_tag(@user) %>
+    <span class="divider">/</span>
+    <%= repository_name_tag(@repository) %>
+    <span class="divider">/</span>
+    Table of Contents / Edit
+  </div>
+
+  <%= render "/shared/error_messages", target: @repository %>
+
+  <input type="hidden" name="_by" value="toc">
+  <div class="form-group">
+    <%= form.text_area :toc, value: @repository.toc_text, class: "form-control", style: "min-height: 400px" %>
+
+    <div class="form-text">
+      <p>Use YAML format to edit Table of Contents of this repository.</p>
+
+      <details class="markdown-body">
+        <summary>Show example...</summary>
+        <pre class="mt-2">---
+- title: Welcome
+  url: welcome
+  depth: 0
+- title: API
+  url:
+  depth: 0
+- title: Users API
+  url: api-users
+  depth: 1
+- title: Repositories API
+  url: api-repositories
+  depth: 1</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary px-4 mr-2">Update</button>
+    <a href="<%= @repository.to_path %>" class="btn">Cancel</a>
+  </div>
+
+<% end %>

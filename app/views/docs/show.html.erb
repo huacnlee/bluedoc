@@ -1,0 +1,94 @@
+<% title_tag @doc ? @doc.title : "Not found" %>
+
+<% content_for :subnav do %>
+<div class="reader-navbar">
+  <div class="navbar-title">
+    <a class="navbar-brand" href="<%= root_path %>" title="Back to list"><%= icon_tag("book") %> BookLab</a>
+    <span class="hide-sm">
+      <span class="divide">/</span>
+      <%= group_name_tag @user %>
+      <span class="divide">/</span>
+      <%= repository_name_tag @repository %>
+      <span class="divide">/</span>
+      <strong>Read</strong>
+      <% if @doc&.private? %>
+        <span class="label-private ml-2">Private</span>
+      <% end %>
+    </span>
+  </div>
+
+  <% if @doc %>
+  <div class="navbar-buttons">
+    <% if can? :update, @doc %>
+    <%= link_to "Edit", edit_user_repository_doc_path(@user, @repository, @doc), class: "btn px-4" %>
+    <% end %>
+
+    <details class="dropdown details-reset details-overlay d-inline-block">
+      <summary class="btn px-2 ml-1" aria-haspopup="true">
+         <%= icon_tag("kebab-horizontal") %>
+      </summary>
+
+      <ul class="dropdown-menu dropdown-menu-sw">
+        <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+        <% if can? :create_doc, @repository %>
+        <li><a class="dropdown-item" href="<%= new_user_repository_doc_path(@user, @repository) %>">Create new doc</a></li>
+        <% end %>
+        <li class="dropdown-divider" role="separator"></li>
+        <% if can? :update, @doc %>
+        <li><a class="dropdown-item" href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
+        <li class="dropdown-divider" role="separator"></li>
+        <li><a class="dropdown-item" href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
+        <% end %>
+        <% if can? :destroy, @doc %>
+        <li><a class="dropdown-item text-red" data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
+        <% end %>
+      </ul>
+    </details>
+  </div>
+  <% end %>
+</div>
+<% end %>
+<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-sidebar py-4 flex-justify-start overflow-auto border-right bg-gray-light">
+    <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
+      <% if @repository.has_toc? %>
+        <%= sanitize_html @repository.toc_html(prefix: nil) %>
+      <% else %>
+        <ul class="toc-items toc-items-without-toc">
+        <% @repository.docs.each do |doc| %>
+          <li class="toc-item">
+            <%= link_to doc.to_path, class: "item-link" do %>
+              <span class="item-title"><%= doc.title %></span>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <script type="text/javascript">
+    $(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']").addClass("active");
+  </script>
+  <div class="doc-main main-content py-4">
+
+    <% if @doc %>
+    <h1 class="doc-title"><%= @doc.title %></h1>
+    <div class="markdown-body markdown-with-toc">
+      <%= @doc.body_html %>
+    </div>
+    <div class="doc-info mt-5 py-2 border-top">
+      <% if @doc.last_editor %>
+      Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+      <% else %>
+      Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+      <% end %>
+    </div>
+    <% else %>
+    <div class="blankslate">
+      <h3>Doc not found</h3>
+      <p>Sorry, this Doc does not exists.</p>
+    </div>
+    <% end %>
+  </div>
+  <div class="doc-body-toc">
+  </div>
+</div>

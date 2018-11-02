@@ -1,0 +1,12 @@
+<a href="<%= version_path(version) %>" data-remote="true"
+  class="version-item version-item-<%= version.id %><%= " selected" if defined? current %>">
+  <div class="title"><%= timeago version.created_at %></div>
+  <div class="info clearfix">
+    <% if version.user %>
+    <span class="user-name" title="<%= version.user&.name %>"><%= version.user&.slug %></span>
+    <% end %>
+    <% if defined? current %>
+    <label class="Label current Label--outline v-align-middle float-right">Current</label>
+    <% end %>
+  </div>
+</a>

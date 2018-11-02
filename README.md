@@ -1,24 +1,16 @@
-# README
+# BookLab
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development
 
-Things you may want to cover:
+- `./bin/webpack-dev-server` - to start webpack dev server.
+- `rails s` - to start rails
 
-* Ruby version
+```bash
+$ ./bin/webpack-dev-server
+```
 
-* System dependencies
+In other Termal tab:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+$ rails s
+```

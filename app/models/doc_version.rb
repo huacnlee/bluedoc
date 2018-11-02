@@ -1,0 +1,2 @@
+class DocVersion < Version
+end

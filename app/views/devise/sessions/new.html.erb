@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="sub-title">
+      <div class="heading">Sign in</div>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "/shared/error_messages", target: resource %>
+
+      <div class="form-group">
+        <%= f.label :email, "Username / Email" %>
+        <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="form-group form-check">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, class: "form-check-label" %>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

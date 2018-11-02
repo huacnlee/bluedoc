@@ -1,0 +1,8 @@
+---
+:concurrency: <%= ENV["sidekiq_threads"] || 20 %>
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log
+:queues:
+  - [mailers, 5]
+  - [booklab_default, 3]
+  - [default, 3]

@@ -1,0 +1,34 @@
+<% content_for :subnav do %>
+<div class="pagehead repohead experiment-repo-nav">
+  <div class="container-lg repohead-details-container px-3 clearfix">
+    <div class="repo-heading">
+      <div class="clearfix">
+        <div class="group-avatar-box float-left pr-3 v-align-middle">
+          <%= user_avatar_tag(@group, style: :medium, link: false) %>
+        </div>
+        <div class="v-align-middle">
+          <div class="d-block"><%= @group.name %></div>
+          <div class="pt-2">
+            <% if @group.location %>
+            <span class="group-location mr-3"><%= icon_tag("location") %> <%= @group.location %></span>
+            <% end %>
+
+            <% if @group.url %>
+            <span class="group-url"><%= icon_tag("link") %> <%= link_to @group.url, @group.url %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-lg px-3">
+    <nav class="reponav clearfix" role="navigation">
+      <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
+        item << link_to("Repositories", @group.to_path, class: "reponav-item")
+        item << link_to("People", group_members_path(@group), class: "reponav-item")
+        item << link_to("Settings", group_settings_path(@group), class: "reponav-item") if can? :update, @group
+      end %>
+    </nav>
+  </div>
+</div>
+<% end %>

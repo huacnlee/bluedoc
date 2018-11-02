@@ -1,0 +1,10 @@
+<nav class="UnderlineNav mb-3 js-sticky top-0">
+  <div class="UnderlineNav-body">
+    <%= render_list_items(type: :link, class: "UnderlineNav-item", check_parameters: true) do |item|
+      item << link_to("Overview", @user.to_path, class: "UnderlineNav-item")
+      item << link_to("Stars", @user.to_path("?tab=stars"), class: "UnderlineNav-item")
+      item << link_to("Followers", @user.to_path("?tab=followers"), class: "UnderlineNav-item")
+      item << link_to("Following", @user.to_path("?tab=following"), class: "UnderlineNav-item")
+    end %>
+  </div>
+</nav>

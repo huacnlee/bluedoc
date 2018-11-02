@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="sub-title">
+      <div class="heading">Reset password</div>
+      <div class="description">Input your account Email address, we will send a reset password link to you Email.</div>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "/shared/error_messages", target: resource %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Booklab</title>
+    <title><%= content_for?(:title) ? yield(:title) : "BookLab" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render "/layouts/head_links" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="page-<%= controller_name %>">
+    <div class="nav-header">
+      <div class="navbar flex-auto">
+        <a class="navbar-brand" href="/"><%= icon_tag("book", label: "BookLab") %></a>
+      </div>
+      <div class="navbar">
+        <details class="dropdown details-reset details-overlay d-inline-block mr-3">
+          <summary aria-haspopup="true">
+            <%= icon_tag("plus") %>
+            <div class="dropdown-caret"></div>
+          </summary>
+          <div class="dropdown-menu dropdown-menu-sw">
+            <ul>
+              <li><a class="dropdown-item" href="<%= new_repository_path %>">New Repository</a></li>
+              <li><a class="dropdown-item" href="<%= new_group_path %>">New Group</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <% if current_user %>
+          <details class="dropdown details-reset details-overlay d-inline-block">
+            <summary aria-haspopup="true">
+              <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
+              <div class="dropdown-caret"></div>
+            </summary>
+            <div class="dropdown-menu dropdown-menu-sw">
+              <div class="dropdown-header">
+                Signed in as <strong><%= current_user.slug %></strong>
+              </div>
+              <ul>
+                <li><a class="dropdown-item" href="<%= current_user.to_path %>">Your profile</a></li>
+                <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>">Your repositories</a></li>
+                <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>">Your stars</a></li>
+                <% if current_user.admin? %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" data-turbolinks="false" href="<%= admin_root_path %>">Admin Panel</a></li>
+                <% end %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" href="<%= account_settings_path %>">Settings</a></li>
+                <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">Sign out</a></li>
+              </ul>
+            </div>
+          </details>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= notice_message %>
+    <%= yield :subnav %>
+    <div class="main-container">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

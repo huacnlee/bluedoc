@@ -1,0 +1,10 @@
+<div class="user-stars">
+  <% if @repositories.blank? %>
+    <div class="blankslate">
+      <p><strong><%= @user.name %></strong> was not star any repositories</p>
+    </p>
+  <% else %>
+    <%= render @repositories %>
+    <%= paginate @repositories %>
+  <% end %>
+</div>

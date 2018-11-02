@@ -1,0 +1,49 @@
+<% content_for :subnav do %>
+<div class="pagehead repohead experiment-repo-nav">
+  <div class="container-lg repohead-details-container px-3 clearfix">
+    <div class="repo-heading">
+      <div class="row">
+        <ul class="pagehead-actions">
+          <li>
+            <div class="clearfix">
+              <%= action_button_tag(@repository, :watch, icon: "eye", with_count: true) %>
+            </div>
+          </li>
+          <li>
+            <div class="clearfix">
+              <%= action_button_tag(@repository, :star, with_count: true) %>
+            </div>
+          </li>
+          <% if can? :create_doc, @repository %>
+          <li>
+            <div class="clearfix">
+            <%= link_to "Create doc", new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary" %>
+            </div>
+          </li>
+          <% end %>
+        </div>
+        <h1>
+          <%= octicon("repo") %>
+          <span class="author url fn"><%= group_name_tag @user %></span>
+          <span class="path-divider">/</span>
+          <strong>
+            <%= repository_name_tag @repository %>
+            <% if @repository.private? %>
+              <span class="label-private ml-2">Private</span>
+            <% end %>
+          </strong>
+        </h1>
+      </div>
+    </div>
+    <div class="container-lg px-3">
+      <nav class="reponav clearfix" role="navigation">
+        <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
+          item << link_to("Summary", @repository.to_path, class: "reponav-item")
+          item << link_to("Docs", docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc?
+          item << link_to("Settings", user_repository_settings_path(@user, @repository), class: "reponav-item") if can? :update, @repository
+        end %>
+      </nav>
+    </div>
+  </div>
+</div>
+<% end %>

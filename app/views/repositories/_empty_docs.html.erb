@@ -1,0 +1,6 @@
+<div class="blankslate">
+  <h3>There is no documents</h3>
+  <% if can? :create_doc, @repository %>
+  <p>You can create first document, <%= link_to "Create doc", @repository.to_path("/docs/new") %>.</p>
+  <% end %>
+</div>

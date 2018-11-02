@@ -1,0 +1,18 @@
+<div class="select-menu js-menu-container js-active-navigation-container js-select-menu">
+  <button class="btn select-menu-button js-menu-target" type="button" aria-haspopup="true" aria-expanded="false">
+    <span class="js-select-button">
+      <% if defined? button_html %>
+        <%= button_html %>
+      <% else %>
+        Choose an item
+      <% end %>
+    </span>
+  </button>
+  <div class="select-menu-modal-holder">
+    <div class="select-menu-modal js-menu-content">
+      <div class="select-menu-list js-navigation-container">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>

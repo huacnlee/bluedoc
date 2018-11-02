@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booklab - Editor</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="turbolinks-visit-control" content="reload">
+
+    <%= render "/layouts/head_links" %>
+  </head>
+
+  <body class="editor-body">
+
+    <%= notice_message %>
+    <%= yield :subnav %>
+    <div class="main-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

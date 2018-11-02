@@ -1,0 +1,13 @@
+<%
+name = "user_id"
+name = input_name if defined? input_name
+%>
+
+<label class="select-menu-item js-navigation-item<%= " selected" if checked %>" role="menuitemradio">
+  <input type="radio" name="<%= name %>" value="<%= group.id %>" <%= "checked" if checked %> class="js-owner-radio-button">
+  <%= octicon("check", class: "select-menu-item-icon") %>
+  <div class="select-menu-item-text js-select-button-text">
+    <%= user_avatar_tag(group, style: :tiny, link: false) %>
+    <%= group.slug %>
+  </div>
+</label>

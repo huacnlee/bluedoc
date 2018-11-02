@@ -1,0 +1,150 @@
+@import "booklab/editor/icons";
+
+.editor-body {
+  .main-container {
+    padding: 0 !important;
+  }
+
+  .flash-full {
+    .container {
+      margin-left: 0;
+      margin-right: 0;
+      width: auto;
+    }
+  }
+  overflow: hidden;
+}
+
+#editor-form {
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0px;
+}
+
+.editor-container {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+  margin: 0;
+}
+
+.editor-bg {
+  padding: 50px 20px;
+  background: #f9f9f9;
+  text-align: center;
+  overflow-y: scroll;
+  height: calc(100vh - 113px);
+}
+
+
+.editor-toolbar {
+  padding: 10px;
+  padding-left: 40px;
+  border-bottom: 1px solid #e9e9e9;
+  background: #fbfbfb;
+  text-align: center;
+
+  .bar-button {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    color: #666;
+    padding: 4px;
+    line-height: 0px;
+    border-radius: 2px;
+    margin: 0 1px;
+    border: 1px solid transparent;
+    display: inline-block;
+
+    i {
+      fill: #777;
+    }
+
+    &:hover,
+    &.active {
+      background: #eee;
+      border: 1px solid #e9e9e9;
+    }
+  }
+
+  .bar-divider {
+    border-left: 1px solid #e9e9e9;
+    margin-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+
+.editor-box {
+  margin: 0 auto;
+  width: 850px;
+  text-align: left;
+  padding: 32px 64px;
+  background: #FFF;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(125, 125, 125, 0.09);
+  border: 1px solid #eaeaea;
+
+  .editor-title {
+    input {
+      border: 0px;
+      padding: 0;
+      padding-bottom: 12px;
+      font-size: 26px;
+      width: 100%;
+      outline: none;
+      font-weight: bold;
+    }
+
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 0px;
+  }
+
+  .editor-slug {
+    input {
+      border: 0px;
+      padding: 8px 0;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+      font-weight: normal;
+    }
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 20px;
+  }
+
+  .editor-text {
+    font-size: 15px;
+    line-height: 24px;
+    cursor: text;
+
+    &>div{
+      min-height: 800px;
+    }
+  }
+
+  /* HOTFIX */
+  .markdown-body {
+    ol > li > p,
+    ul > li > p {
+      margin: 0;
+    }
+
+    a:not([href]) {
+      color: #3c6fe8;
+      text-decoration: underline;
+    }
+
+    p:empty {
+      margin: 0;
+    }
+  }
+}

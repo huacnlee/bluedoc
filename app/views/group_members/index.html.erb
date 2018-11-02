@@ -1,0 +1,16 @@
+<% title_tag "Members", @group.name %>
+
+<%= render "menu" %>
+
+<div class="group-members">
+  <div class="pagehead clearfix">
+    <ul class="pagehead-actions">
+      <li><%= render "add_member" %></li>
+    </ul>
+    <h1>Members</h1>
+  </div>
+
+  <div class="member-list">
+    <%= render partial: "member", collection: @members %>
+  </div>
+</div>

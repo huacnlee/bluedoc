@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+class User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+
+  before_validation on: :create do
+    self.name = slug if name.blank?
+  end
+
+  # Override Devise to send mails with async
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    email = conditions.delete(:email).downcase
+    where(conditions.to_h).where(["(slug = :value OR lower(email) = :value)", { value: email }]).first
+  end
+end

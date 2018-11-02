@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "BookLab" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= render "/layouts/head_links" %>
+  </head>
+
+  <body class="reader-body">
+
+    <%= notice_message %>
+    <%= yield :subnav %>
+    <div class="main-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

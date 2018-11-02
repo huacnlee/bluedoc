@@ -1,5 +1,21 @@
 {
   "name": "booklab",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "https://github.com/rails/webpacker",
+    "actiontext": "https://github.com/rails/actiontext",
+    "babel-preset-react": "^6.24.1",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.11",
+    "primer": "^10.8.1",
+    "rich-md-editor": "^5.0.8",
+    "slate": "^0.34.5",
+    "slate-react": "^0.12.3",
+    "styled-components": "^3.2.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.9"
+  }
 }

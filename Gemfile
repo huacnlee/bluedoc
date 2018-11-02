@@ -3,22 +3,49 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.5.1"
-
 gem "rails"
 gem "pg"
+gem "redis"
 gem "puma", "~> 3.11"
 
-gem "sass-rails"
-gem "uglifier"
-gem "coffee-rails"
+gem "sidekiq"
+
+gem 'webpacker', '>= 4.0.x', github: "rails/webpacker"
 gem "turbolinks"
 gem "jbuilder"
+gem "kaminari"
+
+gem "mini_magick"
+gem "file_validators"
+gem "letter_avatar"
 
 gem "bootsnap", ">= 1.1.0", require: false
 
+gem "rails-i18n"
+gem "rails-settings-cached"
+
+gem "devise"
+gem "cancancan"
+
+gem "activestorage-aliyun"
+gem "notifications"
+gem "action-store"
+gem "actiontext", github: "rails/actiontext", require: "action_text"
+gem "exception-track"
+
+gem "html-pipeline"
+gem "html-pipeline-rouge_filter"
+gem "redcarpet"
+gem "sanitize"
+
+gem "octicons_helper"
+
+gem "booklab-toc"
+
 group :development, :test do
+  gem "letter_opener"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -30,6 +57,7 @@ group :development do
 end
 
 group :test do
+  gem "database_cleaner"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

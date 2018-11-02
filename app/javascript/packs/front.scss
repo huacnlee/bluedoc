@@ -1,0 +1,304 @@
+@import "~booklab/mixin";
+
+.form-title {
+  color: #777;
+  padding: 0px 0 15px 0;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+
+  h2 {
+    color: #333;
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.subnav {
+  background: #FFF;
+  border-bottom: 1px solid $border-color;
+  padding-top: 20px;
+
+  .nav-tabs:last-child {
+    margin-bottom: -1px;
+  }
+
+  .nav-tabs {
+    .nav-link {
+      padding: 10px 15px;
+      font-size: 15px;
+      margin-right: 15px;
+      border: 0px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-link.active {
+      border-bottom-color: $primary;
+    }
+  }
+}
+
+.page-dashboards {
+  .main-container {
+    padding: 0 !important;
+    & > .container {
+      width: 100%;
+    }
+  }
+
+  .dashboard-menu {
+    border-right: 1px solid #e1e4e8;
+    padding: 24px;
+    min-width: 200px;
+    height: calc(100vh - 50px);
+    background: #fafbfc;
+
+    .dashboard-menu-divider {
+      border-top: 1px solid #e1e4e8;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-menu-item {
+      height: 38px;
+      line-height: 38px;
+      padding: 0 15px;
+      display: block;
+      color: #666;
+      background: transparent;
+      text-decoration: none;
+      font-size: 16px;
+
+      .octicon {
+        width: 17px;
+        height: 17px;
+        fill: #666;
+        margin-right: 3px;
+      }
+
+      &.selected {
+        color: $primary;
+
+        .octicon { fill: $primary; }
+      }
+
+      &:hover {
+        background: #fefefe;
+
+        .octicon { fill: #888; }
+      }
+    }
+  }
+
+  .group-list {
+    .group-item {
+      width: 80px;
+      text-align: center;
+      a { display: block; }
+    }
+  }
+
+  .dashboard-table {
+    width: 100%;
+    tr {
+      &:hover {
+        td {
+          background: #fafbfc;
+        }
+      }
+
+      &:first-child {
+        border-top: 1px solid #e1e4e8;
+        td {
+          background: #fafbfc;
+        }
+      }
+      td {
+        &:first-child {
+          border-left: 1px solid #e1e4e8;
+        }
+        &:last-child {
+          border-right: 1px solid #e1e4e8;
+        }
+        background: #fff; padding: 8px;
+        border-bottom: 1px solid #e1e4e8;
+      }
+    }
+  }
+
+  .recent-docs {
+    .recent-doc-item {
+      .info {
+        font-size: 13px;
+        color: $text-gray;
+        a { color: $text-gray; }
+
+        .timeago { color: #a0a0a0; }
+      }
+    }
+  }
+}
+
+.repo-heading {
+  margin-top: 20px;
+
+  h1 {
+    a { color: #303030; }
+    .path-divider { color: #d0d0d0;}
+  }
+}
+
+.repo-description {
+  margin-bottom: 20px;
+  font-size: 16px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.toc-items {
+  .toc-item {
+  }
+
+  @for $i from 0 through 4 {
+    .toc-item-#{$i} {
+      .item-title {
+        margin-left: ($i * 21px) !important;
+      }
+    }
+  }
+}
+
+.doc-sidebar {
+  @for $i from 0 through 4 {
+    .toc-item-#{$i} {
+      .item-title {
+        margin-left: ($i * 12px) !important;
+      }
+    }
+  }
+}
+
+.repo-toc {
+  font-size: 16px;
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 3px;
+  box-shadow: 0 0px 2px rgba(125, 125, 125, 0.1);
+
+  .toc-header {
+    position: relative;
+
+    .title {
+      padding-bottom: 12px;
+      text-align: center;
+      color: #252525;
+      font-size: 24px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: #8a8a8a;
+    }
+
+    .edit-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #505050;
+      vertical-align: bottom;
+      font-size: 14px;
+
+      .octicon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  .toc-list {
+    width: 700px;
+    margin: 30px auto;
+    text-align: left;
+
+    ul {
+      li {
+        list-style: none;
+        line-height: 18px;
+        padding: 10px 0;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        @extend .clearfix;
+
+        &:after {
+          content: " ";
+          width: 100%;
+          border-bottom: 1px dashed #e8e8e8;
+          position: absolute;
+          top: 50%;
+          right: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        .item-slug,
+        .item-link {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          height: 18px;
+        }
+
+        .item-link {
+          position: absolute;
+          background: #FFF;
+          padding-right: 15px;
+          font-size: 15px;
+          z-index: 1;
+          min-width: 0;
+          max-width: 70%;
+          color: #555;
+          &:hover {
+            color: #222;
+          }
+        }
+
+        .item-slug {
+          position: relative;
+          background: #fff;
+          padding-left: 15px;
+          z-index: 1;
+          min-width: 0;
+          max-width: 30%;
+          font-size: 13px;
+          color: #aaa;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.diff{overflow:auto;}
+.diff ul{background:#fff;overflow:auto;font-size:13px;list-style:none;margin:0;padding:0;display:table;width:100%;}
+.diff del, .diff ins{display:block;text-decoration:none;}
+.diff li{padding:0; display:table-row;margin: 0;height:1em;}
+.diff li.ins{background:#dfd; color:#080}
+.diff li.del{background:#fee; color:#b00}
+.diff li:hover{background:#ffc}
+/* try 'whitespace:pre;' if you don't want lines to wrap */
+.diff del, .diff ins, .diff span{white-space:pre-wrap;font-family:courier;}
+.diff del strong{font-weight:normal;background:#fcc;}
+.diff ins strong{font-weight:normal;background:#9f9;}
+.diff li.diff-comment { display: none; }
+.diff li.diff-block-info { background: none repeat scroll 0 0 gray; }

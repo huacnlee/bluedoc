@@ -1,0 +1,39 @@
+<% content_for :subnav do %>
+<div class="reader-navbar">
+  <div class="navbar-title">
+    <a class="navbar-brand" href="<%= @doc.to_path %>" title="Back to Document"><%= icon_tag("book") %></a>
+    <span class="hide-sm">
+      <span class="divide">/</span>
+      <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>
+      <span class="divide">/</span>
+      <strong>Versions</strong>
+    </span>
+  </div>
+
+  <div class="navbar-buttons">
+    <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
+      local: true, remote: true) do |form| %>
+      <input type="hidden" name="version_id">
+      <button type="submit" disabled class="btn btn-revert btn-primary px-5">Revert</button>
+      <%= link_to "Cancel", @doc.to_path, class: "btn" %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right bg-gray-light">
+    <%= render partial: "versions/version", locals: { version: @current_version, current: true } %>
+    <div class="version-items" data-selected-id="<%= @current_version.id %>">
+      <%= render "versions" %>
+    </div>
+  </div>
+  <div class="doc-main main-content py-4">
+    <h1 class="doc-title"><%= @doc.title %></h1>
+    <div class="version-preview">
+      <div class="markdown-body">
+        <%= raw @current_version.body_html %>
+      </div>
+    </div>
+  </div>
+</div>
