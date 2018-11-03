@@ -11,16 +11,24 @@ class UsersController < ApplicationController
   def show
     per_page = 20
 
+    if params[:tab] == "stars"
+      @repositories = @user.star_repositories.includes(:user)
+    else
+      @repositories = @user.repositories.recent_updated
+    end
+
+    # Only get then public repositories unless has permisson
+    # Same behivers for other tab
+    if cannot? :read_repo, @user
+      @repositories = @repositories.publics
+    end
+
+    @repositories = @repositories.page(params[:page]).per(per_page)
+
     if @user.group?
       @group = @user
       render "groups/show"
     else
-      if params[:tab] == "stars"
-        @repositories = @user.star_repositories.includes(:user).page(params[:page]).per(per_page)
-      else
-        @repositories = @user.repositories.recent_updated.page(params[:page]).per(per_page)
-      end
-
       render "users/show"
     end
   end

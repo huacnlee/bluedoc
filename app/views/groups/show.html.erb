@@ -2,7 +2,6 @@
 
 <%= render "groups/menu" %>
 
-<% @repositories = @group.repositories.recent_updated.limit(20).offset(params[:offset]) %>
 <div class="group-repositories">
   <% if @repositories.blank? %>
     <div class="blankslate">

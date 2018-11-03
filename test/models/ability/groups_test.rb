@@ -9,6 +9,8 @@ class Ability::GroupsTest < ActiveSupport::TestCase
 
   test "with user" do
     assert @ability.can? :manage, @user
+    assert @ability.can? :update, @user
+    assert @ability.can? :read_repo, @user
 
     other_user = create(:user)
     assert @ability.cannot? :manage, other_user
@@ -25,6 +27,7 @@ class Ability::GroupsTest < ActiveSupport::TestCase
 
     assert @ability.can? :read, @group
     assert @ability.can? :create_repo, @group
+    assert @ability.can? :read_repo, @group
     assert @ability.cannot? :update, @group
     assert @ability.cannot? :destroy, @group
   end
@@ -33,6 +36,7 @@ class Ability::GroupsTest < ActiveSupport::TestCase
     @group.add_member(@user, :reader)
 
     assert @ability.can? :read, @group
+    assert @ability.can? :read_repo, @group
     assert @ability.cannot? :create_repo, @group
     assert @ability.cannot? :update, @group
     assert @ability.cannot? :destroy, @group
@@ -41,6 +45,7 @@ class Ability::GroupsTest < ActiveSupport::TestCase
   test "not member" do
     assert @ability.can? :read, @group
     assert @ability.cannot? :create_repo, @group
+    assert @ability.cannot? :read_repo, @group
     assert @ability.cannot? :update, @group
     assert @ability.cannot? :destroy, @group
   end

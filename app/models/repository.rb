@@ -19,6 +19,7 @@ class Repository < ApplicationRecord
   validates :name, presence: true
   validates :slug, uniqueness: { scope: :user_id }
 
+  scope :publics, -> { where(privacy: :public) }
   scope :recent_updated, -> { order("updated_at desc") }
 
   def to_path(suffix = nil)
