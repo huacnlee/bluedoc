@@ -39,7 +39,7 @@
               </div>
               <ul>
                 <li><a class="dropdown-item" href="<%= current_user.to_path %>">Your profile</a></li>
-                <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>">Your repositories</a></li>
+                <li><a class="dropdown-item" href="<%= current_user.to_path %>">Your repositories</a></li>
                 <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>">Your stars</a></li>
                 <% if current_user.admin? %>
                 <li class="dropdown-divider" role="separator"></li>
