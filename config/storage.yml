@@ -14,6 +14,15 @@ amazon:
   region: <%= ENV["AWS_S3_REGION"] || "us-east-1" %>
   bucket: <%= ENV["AWS_S3_BUCKET"] || "booklab" %>
 
+aliyun:
+  service: Aliyun
+  access_key_id: <%= ENV["ALIYUN_ACCESS_KEY_ID"]  || "need-access-key-id" %>
+  access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY"]  || "need-access-key-secret" %>
+  bucket: <%= ENV["ALIYUN_BUCKET"] || "booklab" %>
+  endpoint: <%= ENV["ALIYUN_ENDPOINT"] || "https://oss-cn-beijing.aliyuncs.com" %>
+  cname: <%= ENV["cname"] || false %>
+
+
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
