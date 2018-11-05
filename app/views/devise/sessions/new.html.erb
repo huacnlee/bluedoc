@@ -43,7 +43,7 @@ auth_info = auth_session.dig("info")
     <% end %>
   </div>
   <div class="column one-third pt-8">
-    <% if resource_class.omniauth_providers.any? %>
+    <% if resource_class.omniauth_providers.any? && defined? omniauth_authorize_path %>
     <div class="Box">
       <div class="Box-body">
         <%- resource_class.omniauth_providers.each do |provider| %>
