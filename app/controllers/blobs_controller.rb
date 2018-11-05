@@ -19,7 +19,7 @@ class BlobsController < ApplicationController
       if BookLab::Blob.disk_service?
         send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: :inline
       else
-        redirect_to blob.service_url(expires_in: 1.week)
+        redirect_to blob.service_url(expires_in: 1.weeks)
       end
     end
 
