@@ -24,7 +24,7 @@ class User
 
     style = :small unless AVATAR_STYLES.include?(style)
 
-    "/uploads/#{self.avatar.blob.key}?s=#{style}"
+    self.avatar.service_url(expires_in: 1.day)
   rescue
     self.default_avatar
   end

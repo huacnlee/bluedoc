@@ -5,12 +5,7 @@ class BlobsController < ApplicationController
   # GET /uploads/:id?s=large
   def show
     expires_in 3.days
-    if params[:s]
-      variation_key = BookLab::Blob.variation(params[:s])
-      send_file_by_disk_key @blob.representation(variation_key).processed, content_type: @blob.content_type
-    else
-      send_file_by_disk_key @blob, content_type: @blob.content_type
-    end
+    send_file_by_disk_key @blob, content_type: @blob.content_type
   end
 
   private

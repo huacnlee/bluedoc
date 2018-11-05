@@ -22,7 +22,7 @@
     <%= form.hidden_field :title %>
     <%= form.text_area :body, class: "booklab-editor", value: doc.body_plain, data: {
        direct_upload_url: rails_direct_uploads_url,
-       blob_url_template: upload_path(":id", s: :xlarge)
+       blob_url_template: upload_path(":id")
       } %>
   </div>
 <% end %>
