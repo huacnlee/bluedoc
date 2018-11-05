@@ -4,8 +4,9 @@ app_root = "/home/app/booklab"
 daemonize false
 port 7000
 environment ENV.fetch("RAILS_ENV") { "production" }
-workers (ENV["workers"] || 4)
-threads (ENV["min_threads"] || 8), (ENV["max_threads"] || 8)
+workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+threads_count = ENV.fetch("RAILS_MAX_THREADS") { 64 }
+threads threads_count, threads_count
 preload_app!
 
 on_worker_boot do
