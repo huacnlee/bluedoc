@@ -20,6 +20,7 @@ aliyun:
   access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY"]  || "need-access-key-secret" %>
   bucket: <%= ENV["ALIYUN_BUCKET"] || "booklab" %>
   endpoint: <%= ENV["ALIYUN_ENDPOINT"] || "https://oss-cn-beijing.aliyuncs.com" %>
+  mode: private
   cname: <%= ENV["cname"] || false %>
 
 
