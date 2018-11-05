@@ -46,6 +46,9 @@ class MemberTest < ActiveSupport::TestCase
 
     assert_equal 1, Member.count
     assert_equal 1, repo.members.where(user_id: @user.id, role: :admin).count
+
+    # should track user active
+    assert_equal 1, @user.user_actives.where(subject: repo).count
   end
 
   test "Group" do
@@ -53,5 +56,8 @@ class MemberTest < ActiveSupport::TestCase
 
     assert_equal 1, Member.count
     assert_equal 1, group.members.where(user_id: @user.id, role: :admin).count
+
+    # should track user active
+    assert_equal 1, @user.user_actives.where(subject: group).count
   end
 end
