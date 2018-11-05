@@ -9,6 +9,7 @@ require_relative "./support/groups/sign_in_helpers"
 
 DatabaseCleaner.strategy = :transaction
 DatabaseCleaner.orm = :active_record
+OmniAuth.config.test_mode = true
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
@@ -46,5 +47,11 @@ class ActionDispatch::IntegrationTest
     yield block
     assert_equal 302, response.status
     assert_match /\/account\/sign_in/, response.headers["Location"]
+  end
+
+  def assert_signed_in
+    get account_settings_path
+    assert_equal 200, response.status
+    assert_match /Signed in as/, response.body
   end
 end

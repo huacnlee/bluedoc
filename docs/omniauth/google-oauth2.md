@@ -16,3 +16,14 @@ to get:
 And then visit: https://console.developers.google.com/apis/library/plus.googleapis.com?q=Google%2B%20API&id=98f0e0cd-7dc7-469a-baac-d5ed9a99e403
 
 To enable Google Plus API.
+
+## Setup BookLab
+
+You need custom two environment:
+
+```
+omniauth_google_client_id=xxxx
+omniauth_google_client_secret=xxxx
+```
+
+when you setup that and start BookLab, you will see the "Sign in with Google" button, on Sign in page.

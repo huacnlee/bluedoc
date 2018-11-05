@@ -5,7 +5,7 @@ module Slugable
     validates :slug, presence: true, format: { with: BookLab::Slug::REGEXP }, length: 2..128
 
     before_validation do
-      self.slug = self.slug.downcase
+      self.slug = self.slug.downcase if self.slug.present?
     end
   end
 

@@ -7,6 +7,8 @@ class User
 
   attr_accessor :omniauth_provider, :omniauth_uid
 
+  has_many :authorizations
+
   before_validation on: :create do
     self.name = slug if name.blank?
   end

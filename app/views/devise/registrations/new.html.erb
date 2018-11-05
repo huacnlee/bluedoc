@@ -1,25 +1,30 @@
-<div class="row">
-  <div class="col-lg-3"></div>
-  <div class="col-lg-6">
+<%
+auth_session = session[:omniauth] || {}
+auth_info = auth_session.dig("info")
+if auth_info
+  resource.omniauth_provider = auth_session.dig("provider")
+  resource.omniauth_uid = auth_session.dig("uid")
+
+  resource.email = auth_info.dig("email") if resource.email.blank?
+  resource.name = auth_info.dig("name") if resource.name.blank?
+  if resource.slug.blank?
+    resource.slug = auth_info.dig("login") || BookLab::Slug.slugize(auth_info.dig("name"))
+  end
+end
+%>
+
+<div class="columns">
+  <div class="column">
     <div class="sub-title">
       <div class="heading">Sign up</div>
       <div class="description">Welcome to use BookLab</div>
     </div>
-    <%
-    auth_info = session[:omniauth].dig("info")
-    if auth_info
-      resource.email ||= auth_info.dig("email")
-      resource.name ||= auth_info.dig("name")
-      resource.slug ||= auth_info.dig("login") || BookLab::Slug.slugize(auth_info.dig("name"))
-      resource.omniauth_provider ||= session[:omniauth].dig("provider")
-      resource.omniauth_uid = session[:omniauth].dig("uid")
-    end
-    %>
 
     <% if auth_info %>
-    <div class="flash flash-warn">
+    <div class="flash flash-warn mt-5">
       <strong>Complete your account info</strong>
-      <p>You must complete the below form to bind with <b><%= session[:omniauth]["provider"].humanize %></b> login</p>
+      <p>You must complete the below form for sign up with <b><%= session[:omniauth]["provider"].humanize %></b></p>
+      <p>Or if you had a exists BookLab account, you can <%= link_to "Sign in", new_session_path(resource_name) %> to bind account.</p>
     </div>
     <% end %>
 
@@ -53,9 +58,9 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary" %>
+        <%= f.submit "Sign up", class: "btn btn-primary mr-2" %>
 
-        <%= link_to "Sign in", new_session_path(resource_name), class: "btn"  %>
+        <%= link_to "Already have a account", new_session_path(resource_name) %>
       </div>
     <% end %>
   </div>

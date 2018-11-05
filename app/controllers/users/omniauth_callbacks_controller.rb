@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user
       sign_in_and_redirect @user, event: :authentication
     else
-      redirect_to new_user_registration_path, notice: "Please bind Google Auth with a new Account, or you can sign with exist user"
+      redirect_to new_user_registration_path
     end
   end
 
