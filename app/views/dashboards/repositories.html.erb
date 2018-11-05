@@ -4,8 +4,8 @@
   <%= render "menu" %>
 
   <div class="col-10 d-table-cell p-5">
-    <div class="sub-title">Recent repositories</div>
-    <%= render partial: "repositories", locals: { items: @user_actives } %>
-    <%= paginate @user_actives %>
+    <div class="sub-title">All repositories of me</div>
+    <%= render partial: "repositories", locals: { items: @repositories } %>
+    <%= paginate @repositories %>
   </div>
 </div>

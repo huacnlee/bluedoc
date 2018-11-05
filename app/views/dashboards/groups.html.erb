@@ -4,8 +4,8 @@
   <%= render "menu" %>
 
   <div class="col-10 d-table-cell p-5">
-    <div class="sub-title">Recent groups</div>
-    <%= render partial: "groups", locals: { items: @user_actives } %>
-    <%= paginate @user_actives %>
+    <div class="sub-title">All groups of me</div>
+    <%= render partial: "groups", locals: { items: @groups } %>
+    <%= paginate @groups %>
   </div>
 </div>

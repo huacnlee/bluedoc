@@ -25,6 +25,22 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "jason", user.name
   end
 
+  test ".repositories" do
+    user = create(:user)
+    repo0 = create(:repository, user_id: user.id)
+    repo1 = create(:repository, user_id: user.id)
+
+    group0 = create(:group)
+    group0.add_member(user, :editor)
+    repo2 = create(:repository, user_id: group0.id)
+
+    group1 = create(:group)
+    repo3 = create(:repository, user_id: group1.id)
+
+    assert_equal 3, user.repositories.count
+    assert_equal [repo0.id, repo1.id, repo2.id], user.repositories.pluck(:id).sort
+  end
+
   test "find_by_slug" do
     create(:user, slug: "huacnlee")
 

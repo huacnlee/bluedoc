@@ -8,17 +8,17 @@
   <% items.each do |item| %>
   <tr class="recent-group-item Box-row">
     <td>
-      <%= user_avatar_tag(item.subject, style: :tiny) %>
-      <%= user_name_tag(item.subject) %>
+      <%= user_avatar_tag(item, style: :tiny) %>
+      <%= user_name_tag(item) %>
     </td>
     <td class="text-gray">
-      <%= item.subject&.description %>
+      <%= item.description %>
     </td>
     <td class="text-gray">
-      <%= item.subject&.members_count %>
+      <%= item.members_count %>
     </td>
     <td>
-      <%= timeago item.updated_at %>
+      <%= timeago item.created_at %>
     </td>
   </tr>
   <% end %>

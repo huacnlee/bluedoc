@@ -9,16 +9,16 @@
   <% items.each do |item| %>
   <tr class="recent-repo-item">
     <td>
-      <%= repository_path_tag(item.subject) %>
+      <%= repository_path_tag(item) %>
     </td>
     <td>
-      <%= item.subject&.description %>
+      <%= item.description %>
     </td>
     <td>
-      <%= item.subject&.stars_count %>
+      <%= item.stars_count %>
     </td>
     <td>
-      <%= item.subject&.watches_count %>
+      <%= item.watches_count %>
     </td>
     <td>
       <%= timeago item.updated_at %>

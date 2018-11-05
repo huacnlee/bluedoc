@@ -5,9 +5,8 @@ class User < ApplicationRecord
 
   depends_on :devise, :avatar, :actions, :membership, :search
 
-  has_many :repositories, dependent: :destroy
+  has_many :owned_repositories, dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy
-  has_many :group_actives, as: :subject, class_name: "UserActive", dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..20 }
   validates :slug, uniqueness: true
@@ -21,5 +20,9 @@ class User < ApplicationRecord
 
   def admin?
     Setting.has_admin?(self.email)
+  end
+
+  def repositories
+    Repository.where(user_id: self.group_ids).order("updated_at desc")
   end
 end

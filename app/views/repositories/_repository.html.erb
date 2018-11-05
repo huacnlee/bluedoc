@@ -1,6 +1,10 @@
 <div class="repository-item border-bottom py-3">
   <div class="d-inline-block mb-1">
-    <h4><%= repository_name_tag(repository) %></h4>
+    <h4>
+      <% if defined?(current_group) && current_group.id != repository.user_id %>
+      <%= user_name_tag(repository.user) %> <span class="divider">/</span>
+      <% end %>
+      <%= repository_name_tag(repository) %></h4>
   </div>
   <div class="text-gray mb-2 pr-4">
     <%= repository.description %>

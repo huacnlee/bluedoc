@@ -13,11 +13,11 @@ class DashboardsController < ApplicationController
   end
 
   def groups
-    @user_actives = current_user.user_actives.groups.page(params[:page]).per(10)
+    @groups = current_user.groups.with_attached_avatar.page(params[:page]).per(10)
   end
 
   def repositories
-    @user_actives = current_user.user_actives.repositories.page(params[:page]).per(10)
+    @repositories = current_user.repositories.includes(:user).page(params[:page]).per(10)
   end
 
   def docs
