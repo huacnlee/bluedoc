@@ -15,6 +15,7 @@ gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
 
+gem "aws-sdk-s3", require: false
 gem "mini_magick"
 gem "file_validators"
 gem "letter_avatar"

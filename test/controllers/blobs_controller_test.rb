@@ -20,9 +20,16 @@ class BlobsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @blob.content_type, response.content_type
   end
 
-  test "GET /blobs/:id?resize=:resize" do
+  test "GET /blobs/:id?s=small" do
     get upload_path(@blob.key, s: :small)
+
+    variation_key = BookLab::Blob.variation(:small)
     assert_equal 200, response.status
     assert_equal @blob.content_type, response.content_type
+
+    BookLab::Blob.stub(:disk_service?, false) do
+      get upload_path(@blob.key, s: :small)
+      assert_redirected_to @blob.representation(variation_key).processed.service_url
+    end
   end
 end
