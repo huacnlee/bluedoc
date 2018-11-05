@@ -6,6 +6,6 @@ class ApplicationController
   protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:slug])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:slug, :omniauth_provider, :omniauth_uid, :name])
     end
 end

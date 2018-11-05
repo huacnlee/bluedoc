@@ -5,9 +5,32 @@
       <div class="heading">Sign up</div>
       <div class="description">Welcome to use BookLab</div>
     </div>
+    <%
+    auth_info = session[:omniauth].dig("info")
+    if auth_info
+      resource.email ||= auth_info.dig("email")
+      resource.name ||= auth_info.dig("name")
+      resource.slug ||= auth_info.dig("login") || BookLab::Slug.slugize(auth_info.dig("name"))
+      resource.omniauth_provider ||= session[:omniauth].dig("provider")
+      resource.omniauth_uid = session[:omniauth].dig("uid")
+    end
+    %>
+
+    <% if auth_info %>
+    <div class="flash flash-warn">
+      <strong>Complete your account info</strong>
+      <p>You must complete the below form to bind with <b><%= session[:omniauth]["provider"].humanize %></b> login</p>
+    </div>
+    <% end %>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "/shared/error_messages", target: resource %>
+
+      <% if auth_info %>
+        <%= f.hidden_field :omniauth_provider %>
+        <%= f.hidden_field :omniauth_uid %>
+        <%= f.hidden_field :name %>
+      <% end %>
 
       <div class="form-group">
         <%= f.label :slug %>

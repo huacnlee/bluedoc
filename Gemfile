@@ -26,6 +26,7 @@ gem "rails-i18n"
 gem "rails-settings-cached"
 
 gem "devise"
+gem "omniauth-google-oauth2"
 gem "cancancan"
 
 gem "activestorage-aliyun"

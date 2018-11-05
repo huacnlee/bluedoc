@@ -6,5 +6,10 @@ module BookLab
     def self.valid?(slug)
       REGEXP.match? slug
     end
+
+    def self.slugize(slug)
+      return "" if slug.blank?
+      slug.underscore.gsub(" ", "-")
+    end
   end
 end
