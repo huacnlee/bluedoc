@@ -1,8 +1,14 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    session[:omniauth] = request.env["omniauth.auth"]
+    omniauth_auth = request.env["omniauth.auth"]
 
-    @user = Authorization.find_user_by_provider(request.env["omniauth.auth"].provider, request.env["omniauth.auth"].uid)
+    if omniauth_auth.blank?
+      redirect_to new_user_session_path and return
+    end
+
+    session[:omniauth] = omniauth_auth
+
+    @user = Authorization.find_user_by_provider(omniauth_auth.provider, omniauth_auth.uid)
     if @user
       sign_in_and_redirect @user, event: :authentication
     else

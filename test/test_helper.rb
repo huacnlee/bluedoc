@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] ||= "test"
+# setup omniauth for test
+ENV["omniauth_google_client_id"] ||= "fake-client-id"
+ENV["omniauth_google_client_secret"] ||= "fake-client-secret"
+
 require_relative "../config/environment"
 require 'minitest/autorun'
 require "rails/test_help"
