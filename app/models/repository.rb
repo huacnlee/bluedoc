@@ -5,7 +5,7 @@ class Repository < ApplicationRecord
   include Markdownable
   include Memberable
 
-  depends_on :preferences, :toc
+  depends_on :preferences, :toc, :user_active
 
   enum privacy: %i(private public), _prefix: :is
 
@@ -14,7 +14,6 @@ class Repository < ApplicationRecord
   belongs_to :user
   belongs_to :creator, class_name: "User", required: false
   has_many :docs, dependent: :destroy
-  has_many :user_actives, as: :subject, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, uniqueness: { scope: :user_id }

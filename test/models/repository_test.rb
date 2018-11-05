@@ -28,6 +28,13 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 0, UserActive.where(subject_type: "Repository").count
   end
 
+  test "track user active" do
+    user = create(:user)
+    repo = create(:repository, creator_id: user.id)
+    assert_equal 1, user.user_actives.where(subject: repo).count
+    assert_equal 1, user.user_actives.where(subject: repo.user).count
+  end
+
   test "find_by_slug" do
     repository = create(:repository)
     assert_equal repository, Repository.find_by_slug(repository.slug)

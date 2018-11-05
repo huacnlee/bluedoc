@@ -1,6 +1,6 @@
 class UserActive < ApplicationRecord
   belongs_to :subject, polymorphic: true, required: false
-  belongs_to :user
+  belongs_to :user, required: false
 
   default_scope -> { order("updated_at desc, id desc")  }
   scope :with_user, -> (user) { where(user_id: user.id) }
@@ -10,9 +10,9 @@ class UserActive < ApplicationRecord
 
   def self.track(subject, user_id: nil, user: nil)
     return false if subject.blank?
-    if user
-      user_id = user.id
-    end
+
+    user_id = user.id if user
+    return false if user_id.blank?
 
     # avoid track User type, only Group
     if subject.is_a?(User) && !subject.group?

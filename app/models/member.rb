@@ -4,11 +4,14 @@ class Member < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :subject, required: false, polymorphic: true, counter_cache: true
 
-  after_create :track_user_active
+  after_commit :track_user_active, on: :create
 
   private
     def track_user_active
-      UserActive.track(self.subject, user_id: self.user_id) if self.subject.present?
+      return false if self.subject.blank?
+      return false if self.user.blank?
+
+      UserActive.track(self.subject, user: self.user)
     end
 
 end

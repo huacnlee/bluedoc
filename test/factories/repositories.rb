@@ -7,6 +7,5 @@ FactoryBot.define do
     sequence(:description) { |n| "description #{n}" }
     association :user, factory: :group
     privacy { "public" }
-    creator_id { 0 }
   end
 end
