@@ -2,8 +2,8 @@
 
 ENV["RAILS_ENV"] ||= "test"
 # setup omniauth for test
-ENV["omniauth_google_client_id"] ||= "fake-client-id"
-ENV["omniauth_google_client_secret"] ||= "fake-client-secret"
+ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
+ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
 
 require_relative "../config/environment"
 require 'minitest/autorun'
@@ -46,6 +46,10 @@ end
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   include Groups::SignInHelpers
+
+  teardown do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+  end
 
   def assert_require_user(&block)
     yield block
