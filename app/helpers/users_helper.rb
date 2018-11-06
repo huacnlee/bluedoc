@@ -34,4 +34,21 @@ module UsersHelper
       image_html
     end
   end
+
+  def follow_user_tag(user, opts = {})
+    return "" if current_user.blank?
+    return "" if user.blank?
+    return "" if current_user.id == user.id
+    followed = current_user.follow_user_ids.include?(user.id)
+    opts[:class] ||= "btn btn-block"
+
+    class_names = "btn-follow-user #{opts[:class]}"
+    slug        = user.slug
+
+    if followed
+      link_to "Unfollow", unfollow_user_path(user), data: { remote: true, id: slug, method: :delete }, class: "#{class_names} active"
+    else
+      link_to "Follow", follow_user_path(user), data: { remote: true, id: slug, method: :post }, class: class_names
+    end
+  end
 end

@@ -7,8 +7,11 @@ class Activity < ApplicationRecord
 
   ACTIONS = %w[star_repo follow_user create_repo update_repo create_doc update_doc]
 
-  def self.track_activity(action, target, user: nil, user_id: nil, meta: nil)
+  def self.track_activity(action, target, user: nil, user_id: nil, actor_id: nil, meta: nil)
     return false unless ACTIONS.include?(action.to_s)
+
+    actor_id ||= Current.user&.id
+    return false if actor_id.blank?
 
     user_ids = []
     if user_id.is_a?(Array)
@@ -33,7 +36,7 @@ class Activity < ApplicationRecord
     activity_params = {
       action: action,
       target: target,
-      actor: Current.user
+      actor_id: actor_id
     }
 
     fill_depend_id_for_target(activity_params)

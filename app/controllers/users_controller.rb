@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user, except: %i[index new create]
-  before_action :authenticate_user!, only: %i[new edit create update destroy]
+  before_action :authenticate_user!, only: %i[new edit create update destroy follow unfollow]
 
   def index
   end
@@ -11,8 +11,13 @@ class UsersController < ApplicationController
   def show
     per_page = 20
 
-    if params[:tab] == "stars"
+    case params[:tab]
+    when "stars"
       @repositories = @user.star_repositories.includes(:user)
+    when "followers"
+      return _followers
+    when "following"
+      return _following
     else
       @repositories = @user.repositories.recent_updated
     end
@@ -31,6 +36,24 @@ class UsersController < ApplicationController
     else
       render "users/show"
     end
+  end
+
+  def _followers
+    @followers = @user.follow_users.includes(:target).page(params[:page]).per(20)
+    render "users/show"
+  end
+
+  def _following
+    @following = @user.follow_users.includes(:target).page(params[:page]).per(20)
+    render "users/show"
+  end
+
+  def follow
+    current_user.follow_user(@user)
+  end
+
+  def unfollow
+    current_user.unfollow_user(@user)
   end
 
   def new

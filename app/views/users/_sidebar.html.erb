@@ -12,6 +12,10 @@
     <div class="created-on mt-1 text-gray" title="Created Date"><%= @user.created_at.to_date %></div>
   </div>
 
+  <div class="py-3">
+    <%= follow_user_tag(@user) %>
+  </div>
+
   <% if @user.description.present? %>
   <div class="border-top py-3 clearfix">
     <h4 class="mb-1">Bio</h4>

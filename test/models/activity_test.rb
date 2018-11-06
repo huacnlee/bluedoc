@@ -34,6 +34,12 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal 1, user2.activities.where(action: :star_repo).count
     assert_equal 1, user3.activities.where(action: :star_repo).count
     assert_equal 1, user4.activities.where(action: :star_repo).count
+
+    # trach with actor_id
+    Activity.track_activity(:follow_user, user1, user_id: user1.id, actor_id: user2.id)
+    assert_equal 1, user1.activities.where(action: :follow_user, target: user1).count
+    activity = user1.activities.where(action: :follow_user, target: user1).last
+    assert_equal user2.id, activity.actor_id
   end
 
   test "track_activity update_doc" do
