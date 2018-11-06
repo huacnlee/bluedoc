@@ -116,4 +116,42 @@ class UserTest < ActiveSupport::TestCase
     assert_equal user, User.find_for_database_authentication({ email: "jason" })
     assert_equal user, User.find_for_database_authentication({ email: "jason@gmail.com" })
   end
+
+  test "follows" do
+    user = create(:user)
+    other_user = create(:user)
+
+    mock_current(user: user)
+
+    user.follow_user(other_user)
+    user.follow_user(user)
+
+    other_user.reload
+    user.reload
+    assert_equal 1, other_user.followers_count
+    assert_equal 1, user.following_count
+
+    assert_equal 1, other_user.activities.where(action: "follow_user").count
+    activity = other_user.activities.where(action: "follow_user").last
+    assert_equal user.id, activity.actor_id
+
+    assert_equal 1, user.follow_users.count
+    assert_equal 1, other_user.follow_by_users.count
+
+    user.unfollow_user(other_user)
+    assert_equal 0, user.follow_users.count
+    assert_equal 0, other_user.follow_by_users.count
+
+    user1 = create(:user)
+    user2 = create(:user)
+    other_user1 = create(:user)
+    user.stub(:follow_user_ids, [user1.id, user2.id]) do
+      user.follow_user(other_user1)
+      assert_equal 3, Activity.where(action: "follow_user", target: other_user1).count
+      assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: user1.id).count
+      assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: user2.id).count
+      assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: other_user1.id).count
+    end
+
+  end
 end

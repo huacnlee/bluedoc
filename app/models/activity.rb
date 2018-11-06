@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, required: false
   belongs_to :actor, class_name: "User"
   belongs_to :target, polymorphic: true
 
@@ -7,10 +7,28 @@ class Activity < ApplicationRecord
 
   ACTIONS = %w[star_repo follow_user create_repo update_repo create_doc update_doc]
 
-  def self.track_activity(action, target, user:, meta: nil)
+  def self.track_activity(action, target, user: nil, user_id: nil, meta: nil)
     return false unless ACTIONS.include?(action.to_s)
-    users = user
-    users = [user] if !user.is_a?(Array)
+
+    user_ids = []
+    if user_id.is_a?(Array)
+      user_ids = user_id
+    else
+      user_ids = [user_id] if !user_id.blank?
+    end
+
+    if user.is_a?(Array)
+      users = user
+    else
+      users = [user] if !user.blank?
+    end
+
+    if users.present?
+      user_ids = users.map(&:id)
+    end
+    user_ids.uniq!
+
+    return false if user_ids.blank?
 
     activity_params = {
       action: action,
@@ -21,8 +39,8 @@ class Activity < ApplicationRecord
     fill_depend_id_for_target(activity_params)
 
     Activity.transaction do
-      users.each do |user|
-        Activity.create!(activity_params.merge(user: user))
+      user_ids.each do |user_id|
+        Activity.create!(activity_params.merge(user_id: user_id))
       end
     end
   end

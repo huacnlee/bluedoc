@@ -19,6 +19,21 @@ class ActivityTest < ActiveSupport::TestCase
     Activity.track_activity("star_repo111", repo, user: @user)
 
     assert_equal 0, @user.activities.where(action: "star_repo111").count
+
+    # track with user_id
+    user1 = create(:user)
+    user2 = create(:user)
+    user3 = create(:user)
+    user4 = create(:user)
+    repo1 = create(:repository)
+
+    Activity.track_activity(:star_repo, repo1, user_id: [user1.id, user2.id])
+    Activity.track_activity(:star_repo, repo1, user_id: user3.id)
+    Activity.track_activity(:star_repo, repo1, user: [user4])
+    assert_equal 1, user1.activities.where(action: :star_repo).count
+    assert_equal 1, user2.activities.where(action: :star_repo).count
+    assert_equal 1, user3.activities.where(action: :star_repo).count
+    assert_equal 1, user4.activities.where(action: :star_repo).count
   end
 
   test "track_activity update_doc" do

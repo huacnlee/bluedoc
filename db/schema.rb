@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_061822) do
+ActiveRecord::Schema.define(version: 2018_11_06_090530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,6 +180,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_061822) do
     t.string "url"
     t.string "description"
     t.string "location", limit: 50
+    t.integer "followers_count", default: 0, null: false
+    t.integer "following_count", default: 0, null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["type", "email"], name: "index_users_on_type_and_email"
