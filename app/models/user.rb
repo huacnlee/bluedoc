@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :devise, :avatar, :actions, :membership, :search
+  depends_on :devise, :avatar, :actions, :membership, :search, :activities
 
   has_many :owned_repositories, class_name: "Repository", dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy
