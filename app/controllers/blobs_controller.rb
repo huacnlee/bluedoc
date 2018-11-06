@@ -21,7 +21,7 @@ class BlobsController < ApplicationController
     end
 
     def set_blob
-      @blob = Rails.cache.fetch("blobs:{params:id}") { ActiveStorage::Blob.find_by(key: params[:id]) }
+      @blob = Rails.cache.fetch("blobs:#{params[:id]}") { ActiveStorage::Blob.find_by(key: params[:id]) }
       head :not_found if @blob.blank?
     end
 end
