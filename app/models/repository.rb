@@ -4,6 +4,7 @@ class Repository < ApplicationRecord
   include Slugable
   include Markdownable
   include Memberable
+  include Activityable
 
   second_level_cache expires_in: 1.week
 

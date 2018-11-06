@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_061822) do
     t.string "action", limit: 20, null: false
     t.bigint "user_id", null: false
     t.integer "actor_id", null: false
+    t.integer "group_id"
+    t.integer "repository_id"
     t.string "target_type", limit: 20, null: false
     t.integer "target_id", null: false
     t.text "meta"

@@ -1,5 +1,6 @@
 class Version < ApplicationRecord
   include Markdownable
+  include Activityable
 
   belongs_to :subject, required: false, polymorphic: true
   belongs_to :user, required: false

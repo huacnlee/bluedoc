@@ -12,9 +12,42 @@ class Activity < ApplicationRecord
     users = user
     users = [user] if !user.is_a?(Array)
 
+    activity_params = {
+      action: action,
+      target: target,
+      actor: Current.user
+    }
+
+    fill_depend_id_for_target(activity_params)
+
     Activity.transaction do
       users.each do |user|
-        Activity.create!(action: action, target: target, user: user, actor: Current.user)
+        Activity.create!(activity_params.merge(user: user))
+      end
+    end
+  end
+
+  def self.fill_depend_id_for_target(activity_params)
+    target = activity_params[:target]
+
+    case target.class.name
+    when "Group"
+      activity_params[:group_id] = target.id
+    when "Repository"
+      activity_params[:group_id] = target.user_id
+      activity_params[:repository_id] = target.id
+    when "Doc"
+      activity_params[:repository_id] = target.repository_id
+      activity_params[:group_id] = target.repository&.user_id
+    when "Member"
+      subject = target.subject
+      case target.subject_type
+      when "Group"
+      when "User"
+        activity_params[:group_id] = subject.id
+      when "Repository"
+        activity_params[:group_id] = subject.user_id
+        activity_params[:repository_id] = subject.id
       end
     end
   end

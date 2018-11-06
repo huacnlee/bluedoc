@@ -4,6 +4,5 @@ FactoryBot.define do
     association :user
     association :actor, factory: :user
     association :target, factory: :repository
-    meta { "" }
   end
 end

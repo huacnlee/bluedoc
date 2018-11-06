@@ -2,6 +2,7 @@
 
 class Group < User
   include Memberable
+  include Activityable
 
   depends_on :user_active
 

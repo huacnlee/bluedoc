@@ -4,6 +4,8 @@ class CreateActivities < ActiveRecord::Migration[5.2]
       t.string :action, limit: 20, null: false
       t.references :user, null: false
       t.integer :actor_id, null: false
+      t.integer :group_id
+      t.integer :repository_id
       t.string :target_type, limit: 20, null: false
       t.integer :target_id, null: false
       t.text :meta, limit: 16777215
