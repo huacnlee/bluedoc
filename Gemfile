@@ -25,6 +25,8 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "rails-i18n"
 gem "rails-settings-cached"
 
+gem "second_level_cache"
+
 gem "devise"
 gem "omniauth-google-oauth2"
 gem "cancancan"

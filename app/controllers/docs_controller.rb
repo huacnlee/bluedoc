@@ -46,7 +46,6 @@ class DocsController < Users::ApplicationController
   def create
     @doc = Doc.new(doc_params)
     @doc.repository_id = @repository.id
-    @doc.creator_id = current_user.id
     @doc.last_editor_id = current_user.id
 
     authorize! :create, @doc

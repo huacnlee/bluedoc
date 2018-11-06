@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  second_level_cache expires_in: 1.week
+
   enum role: %i(admin editor reader)
 
   belongs_to :user, required: false

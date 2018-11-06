@@ -2,7 +2,9 @@ class Doc < ApplicationRecord
   include Slugable
   include Markdownable
 
-  depends_on :body_touch, :user_active, :versions
+  second_level_cache expires_in: 1.week
+
+  depends_on :actors, :body_touch, :user_active, :versions
 
   has_rich_text :body
   has_rich_text :draft_body
@@ -10,8 +12,6 @@ class Doc < ApplicationRecord
   delegate :private?, :public?, to: :repository
 
   belongs_to :repository, touch: true
-  belongs_to :last_editor, class_name: "User", required: false
-  belongs_to :creator, class_name: "User", required: false
 
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :repository_id }

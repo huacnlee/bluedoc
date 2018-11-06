@@ -7,6 +7,9 @@ module Memberable
     attr_accessor :creator_id
 
     before_commit :add_creator_as_admin!, on: [:create]
+    before_create do
+      self.creator_id ||= Current.user.id if Current.user.present?
+    end
   end
 
   def user_role(user)
@@ -39,7 +42,7 @@ module Memberable
   private
 
   def add_creator_as_admin!
-    return if self.creator_id.blank?
-    self.members.create!(user_id: self.creator_id, subject: self, role: :admin)
+    return if Current.user.blank?
+    self.members.create!(user_id: Current.user.id, subject: self, role: :admin)
   end
 end

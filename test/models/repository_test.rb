@@ -30,7 +30,8 @@ class RepositoryTest < ActiveSupport::TestCase
 
   test "track user active" do
     user = create(:user)
-    repo = create(:repository, creator_id: user.id)
+    mock_current(user: user)
+    repo = create(:repository)
     assert_equal 1, user.user_actives.where(subject: repo).count
     assert_equal 1, user.user_actives.where(subject: repo.user).count
   end

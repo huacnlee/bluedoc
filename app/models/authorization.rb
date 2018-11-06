@@ -3,6 +3,8 @@
 class Authorization < ApplicationRecord
   belongs_to :user
 
+  second_level_cache expires_in: 1.week
+
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: :provider }
 

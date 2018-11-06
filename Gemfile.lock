@@ -290,6 +290,9 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
       nokogumbo (~> 1.4)
+    second_level_cache (2.4.3)
+      activerecord (>= 5.2.0.rc, < 6)
+      activesupport (>= 5.2.0.rc, < 6)
     sidekiq (5.2.2)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
@@ -365,6 +368,7 @@ DEPENDENCIES
   redis
   rubocop
   sanitize
+  second_level_cache
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)

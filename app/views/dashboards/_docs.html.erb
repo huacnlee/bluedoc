@@ -1,6 +1,6 @@
 <ul class="recent-docs Box">
   <% items.each do |item| %>
-    <div class="recent-doc-item Box-row py-2">
+    <li class="recent-doc-item Box-row py-2">
       <div class="title">
         <%= doc_title_tag(item.subject) %>
       </div>
@@ -9,6 +9,6 @@
 
         <span class="ml-1 float-right"><%= timeago item.updated_at %></span>
       </div>
-    </div>
+    </li>
   <% end %>
 </ul>

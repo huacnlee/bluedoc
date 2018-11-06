@@ -23,7 +23,18 @@ class ActiveSupport::TestCase
   end
 
   teardown do
+    Rails.cache.clear
+    Current.reset
     DatabaseCleaner.clean
+  end
+
+  # Mock Current.xxx to a value
+  #
+  #   mock_current(user: user, request_id: "aaabbbccc123")
+  def mock_current(opts = {})
+    opts.each_key do |key|
+      Current.send("#{key}=", opts[key])
+    end
   end
 
   def read_file(fname)

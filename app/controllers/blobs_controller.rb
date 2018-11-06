@@ -6,6 +6,8 @@ class BlobsController < ApplicationController
   def show
     expires_in 3.days
     send_file_by_disk_key @blob, content_type: @blob.content_type
+  rescue ActionController::MissingFile
+    head :not_found
   end
 
   private
@@ -19,7 +21,7 @@ class BlobsController < ApplicationController
     end
 
     def set_blob
-      @blob = ActiveStorage::Blob.find_by(key: params[:id])
+      @blob = Rails.cache.fetch("blobs:{params:id}") { ActiveStorage::Blob.find_by(key: params[:id]) }
       head :not_found if @blob.blank?
     end
 end

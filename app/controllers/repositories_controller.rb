@@ -17,7 +17,6 @@ class RepositoriesController < Users::ApplicationController
   # POST /repositories
   def create
     @repository = Repository.new(repository_params)
-    @repository.creator_id = current_user.id
 
     authorize! :create, @repository
 

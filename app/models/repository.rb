@@ -5,6 +5,8 @@ class Repository < ApplicationRecord
   include Markdownable
   include Memberable
 
+  second_level_cache expires_in: 1.week
+
   depends_on :preferences, :toc, :user_active
 
   enum privacy: %i(private public), _prefix: :is

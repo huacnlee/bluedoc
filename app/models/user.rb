@@ -3,9 +3,11 @@
 class User < ApplicationRecord
   include Slugable
 
+  second_level_cache expires_in: 1.week
+
   depends_on :devise, :avatar, :actions, :membership, :search
 
-  has_many :owned_repositories, dependent: :destroy
+  has_many :owned_repositories, class_name: "Repository", dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..20 }

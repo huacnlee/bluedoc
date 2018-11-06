@@ -6,7 +6,8 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "Memberable base" do
-    repo = create(:repository, creator_id: @user.id)
+    mock_current(user: @user)
+    repo = create(:repository)
     repo.add_member(@user, :admin)
 
     # not allow add Group type as member
@@ -42,9 +43,9 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "Repository" do
-    repo = create(:repository, creator_id: @user.id)
+    mock_current(user: @user)
+    repo = create(:repository)
 
-    assert_equal 1, Member.count
     assert_equal 1, repo.members.where(user_id: @user.id, role: :admin).count
 
     # should track user active
@@ -52,7 +53,8 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "Group" do
-    group = create(:group, creator_id: @user.id)
+    mock_current(user: @user)
+    group = create(:group)
 
     assert_equal 1, Member.count
     assert_equal 1, group.members.where(user_id: @user.id, role: :admin).count

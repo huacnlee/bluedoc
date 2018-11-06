@@ -37,4 +37,24 @@ class DocTest < ActiveSupport::TestCase
     doc1.destroy
     assert_equal 0, UserActive.where(subject_type: "Doc").count
   end
+
+  test "actors" do
+    user = create(:user)
+
+    mock_current(user: user)
+    doc = create(:doc)
+
+    assert_equal user.id, doc.creator_id
+    assert_equal user.id, doc.last_editor_id
+
+    doc = create(:doc, last_editor_id: 11, creator_id: 22)
+    assert_equal user.id, doc.last_editor_id
+    assert_equal user.id, doc.creator_id
+
+    user1 = create(:user)
+    mock_current(user: user1)
+    doc.save
+    assert_equal user1.id, doc.last_editor_id
+    assert_equal user.id, doc.creator_id
+  end
 end

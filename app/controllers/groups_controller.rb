@@ -10,7 +10,6 @@ class GroupsController < Groups::ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.creator_id = current_user.id
     if @group.save
       redirect_to @group.to_path, notice: "Group has created"
     else

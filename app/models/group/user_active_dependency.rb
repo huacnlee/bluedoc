@@ -5,7 +5,7 @@ class Group
 
   private
     def track_user_active
-      return false if self.creator_id.blank?
-      UserActive.track(self, user_id: self.creator_id)
+      return false if Current.user.blank?
+      UserActive.track(self, user_id: Current.user.id)
     end
 end

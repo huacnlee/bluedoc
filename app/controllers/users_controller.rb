@@ -39,7 +39,6 @@ class UsersController < ApplicationController
 
   def create
     @user = Group.new(user_params)
-    @user.creator_id = current_user.id
     if @user.create
       redirect_to @user.to_path, notice: "Group has created"
     else

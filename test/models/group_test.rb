@@ -19,7 +19,9 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   test "track user active" do
-    group = create(:group, creator_id: @user.id)
+    mock_current(user: @user)
+
+    group = create(:group)
     assert_equal 1, @user.user_actives.where(subject: group).count
   end
 end
