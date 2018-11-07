@@ -64,6 +64,7 @@ class DocTest < ActiveSupport::TestCase
     assert_equal false, doc.new_record?
     assert_not_nil doc.slug
     assert_equal "New Document", doc.title
+    assert_equal "New Document", doc.draft_title
     assert_equal repo.id, doc.repository_id
     assert_equal 123, doc.last_editor_id
   end

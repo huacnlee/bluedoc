@@ -46,13 +46,16 @@ class DocsController < Users::ApplicationController
     authorize! :update, @doc
     @doc.last_editor_id = current_user.id
 
+    doc_params[:draft_title] ||= doc_params[:title]
+    doc_params[:draft_body] ||= doc_params[:body]
+
     respond_to do |format|
       if @doc.update(doc_params)
         format.html { redirect_to @doc.to_path, notice: 'Doc was successfully updated.' }
-        format.json { render :show, status: :ok, location: @doc }
+        format.json { render json: { ok: true } }
       else
         format.html { render :edit, layout: "editor" }
-        format.json { render json: @doc.errors, status: :unprocessable_entity }
+        format.json { render json: { ok: false } }
       end
     end
   end

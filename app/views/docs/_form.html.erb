@@ -1,5 +1,5 @@
 <%= form_with(model: [@user, @repository, doc],
-  url: doc.new_record? ? user_repository_docs_path(@user, @repository) : user_repository_doc_path(@user, @repository, @doc),
+  url: user_repository_doc_path(@user, @repository, @doc),
   local: true, remote: true) do |form| %>
   <div id="editor-form">
     <div class="reader-navbar editor-navbar">
@@ -9,16 +9,17 @@
         <%= repository_name_tag @repository %>
         <span class="divide">/</span>
         <%= doc.title || "New doc" %>
+        <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
-        <button type="button" data-url="<%= doc.new_record? ? user_repository_docs_path(@user, @repository) : user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
+        <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
         <button type="submit" class="btn btn-primary">Publish</button>
       </div>
     </div>
 
     <%= form.hidden_field :slug %>
-    <%= form.hidden_field :title %>
-    <%= form.text_area :body, class: "booklab-editor", value: doc.body_plain, data: {
+    <%= form.hidden_field :title, value: @doc.draft_title %>
+    <%= form.text_area :body, class: "booklab-editor", value: doc.draft_body_plain, data: {
        direct_upload_url: rails_direct_uploads_url,
        blob_url_template: upload_path(":id")
       } %>

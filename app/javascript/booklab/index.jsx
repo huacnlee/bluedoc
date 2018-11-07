@@ -25,6 +25,7 @@ document.addEventListener("turbolinks:load", () => {
   if (editorEls.length > 0) {
     const editorInput = editorEls[0];
     editorInput.hidden = true;
+    const editorMessage = $(".editor-message");
 
     const titleInput = document.getElementsByName("doc[title]")[0];
     const slugInput = document.getElementsByName("doc[slug]")[0];
@@ -44,13 +45,17 @@ document.addEventListener("turbolinks:load", () => {
       slugInput.value = value
     }
 
+    // Save button
     $(".btn-save").click((e) => {
       const $btn = $(e.currentTarget)
       const url = $btn.attr("data-url")
+      editorMessage.show()
+      editorMessage.text("saving...")
 
       $.ajax({
         method: "PUT",
         url: url,
+        dataType: "JSON",
         data: {
           doc: {
             draft_title: titleInput.value,
@@ -58,12 +63,21 @@ document.addEventListener("turbolinks:load", () => {
           },
         },
         success: (res) => {
-          console.log("Save successed", res);
+          editorMessage.text("saved")
+          setTimeout(() => editorMessage.fadeOut(), 3000)
         }
       })
 
       return false;
     })
+
+    // auto save in 15s
+    if (window.editorAutosaveTimer) {
+      clearInterval(window.editorAutosaveTimer)
+    }
+    window.editorAutosaveTimer = setInterval(() => {
+      $(".btn-save").trigger("click")
+    }, 15000);
 
     $("form").after(editorDiv);
     ReactDOM.render(

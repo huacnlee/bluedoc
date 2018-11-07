@@ -31,6 +31,7 @@ class Doc < ApplicationRecord
       doc.repository_id = repo.id
       doc.last_editor_id = user_id
       doc.title = "New Document"
+      doc.draft_title = doc.title
       doc.slug = BookLab::Slug.random(seed: 999999)
       doc.save!
       doc
