@@ -7,6 +7,7 @@ class BookLab::BlobTest < ActiveSupport::TestCase
 
   test "combine_options" do
     assert_equal({ thumbnail: "36x36^", gravity: "center", extent: "36x36" }, BookLab::Blob.combine_options(:tiny))
+    assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BookLab::Blob.combine_options(nil))
     assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BookLab::Blob.combine_options(:small))
     assert_equal({ thumbnail: "96x96^", gravity: "center", extent: "96x96" }, BookLab::Blob.combine_options(:medium))
     assert_equal({ thumbnail: "440x440^", gravity: "center", extent: "440x440" }, BookLab::Blob.combine_options(:large))
@@ -19,6 +20,7 @@ class BookLab::BlobTest < ActiveSupport::TestCase
   end
 
   test "process_for_aliyun" do
+    assert_equal "image/resize,m_fill,w_64,h_64", BookLab::Blob.process_for_aliyun(nil)
     assert_equal "image/resize,m_fill,w_36,h_36", BookLab::Blob.process_for_aliyun(:tiny)
     assert_equal "image/resize,m_fill,w_64,h_64", BookLab::Blob.process_for_aliyun(:small)
     assert_equal "image/resize,m_fill,w_96,h_96", BookLab::Blob.process_for_aliyun(:medium)

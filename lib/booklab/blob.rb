@@ -12,7 +12,7 @@ module BookLab
       end
 
       def process_for_aliyun(style)
-        style = style.to_sym
+        style = style&.to_sym
         size = IMAGE_SIZES[style] || IMAGE_SIZES[:small]
 
         if style == :xlarge
@@ -23,7 +23,7 @@ module BookLab
       end
 
       def combine_options(style)
-        style = style.to_sym
+        style = style&.to_sym
         size = IMAGE_SIZES[style] || IMAGE_SIZES[:small]
 
         if style == :xlarge

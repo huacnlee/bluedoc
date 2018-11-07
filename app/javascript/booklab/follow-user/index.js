@@ -10,7 +10,7 @@ document.addEventListener("turbolinks:load", () => {
     const btn = $(e.currentTarget)
     const userId = btn.data("id")
     const span = btn.find("span")
-    const followerCounter = $(".followers-count[data-login="+ userId +"]")
+    const followerCounter = $(".followers-count[data-login='"+ userId +"']")
 
     if (btn.hasClass("active")) {
       $.ajax({
