@@ -26,7 +26,7 @@ server {
     add_header  Cache-Control public;
   }
 
-  location /packs {
+  location ~ (/packs|/assets) {
     access_log        off;
     expires           365d;
     gzip_static on;
