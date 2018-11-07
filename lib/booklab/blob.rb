@@ -3,12 +3,23 @@ module BookLab
     class << self
       IMAGE_SIZES = { tiny: 36, small: 64, medium: 96, large: 440, xlarge: 1600 }
 
-      def disk_service?
-        ActiveStorage::Blob.service.send(:service_name) == "Disk"
+      def service_name
+        ActiveStorage::Blob.service.send(:service_name)
       end
 
       def variation(style)
         ActiveStorage::Variation.new(combine_options: combine_options(style))
+      end
+
+      def process_for_aliyun(style)
+        style = style.to_sym
+        size = IMAGE_SIZES[style] || IMAGE_SIZES[:small]
+
+        if style == :xlarge
+          return "image/resize,w_#{size}"
+        else
+          return "image/resize,m_fill,w_#{size},h_#{size}"
+        end
       end
 
       def combine_options(style)

@@ -12,7 +12,7 @@ class BlobsControllerTest < ActionDispatch::IntegrationTest
     FileUtils.rm_f @filename
   end
 
-  test "GET /blobs/:id" do
+  test "GET /uploads/:id" do
     assert_equal false, @blob.new_record?
 
     get upload_path(@blob.key)
@@ -20,7 +20,7 @@ class BlobsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @blob.content_type, response.content_type
   end
 
-  test "GET /blobs/:id?s=small" do
+  test "GET /uploads/:id?s=small" do
     get upload_path(@blob.key, s: :small)
 
     variation_key = BookLab::Blob.variation(:small)

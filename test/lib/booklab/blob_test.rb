@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class BookLab::BlobTest < ActiveSupport::TestCase
+  test "service_name" do
+    assert_equal "Disk", BookLab::Blob.service_name
+  end
+
   test "combine_options" do
     assert_equal({ thumbnail: "36x36^", gravity: "center", extent: "36x36" }, BookLab::Blob.combine_options(:tiny))
     assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BookLab::Blob.combine_options(:small))
@@ -12,6 +16,15 @@ class BookLab::BlobTest < ActiveSupport::TestCase
 
     # default use :small
     assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BookLab::Blob.combine_options("foo"))
+  end
+
+  test "process_for_aliyun" do
+    assert_equal "image/resize,m_fill,w_36,h_36", BookLab::Blob.process_for_aliyun(:tiny)
+    assert_equal "image/resize,m_fill,w_64,h_64", BookLab::Blob.process_for_aliyun(:small)
+    assert_equal "image/resize,m_fill,w_96,h_96", BookLab::Blob.process_for_aliyun(:medium)
+    assert_equal "image/resize,m_fill,w_440,h_440", BookLab::Blob.process_for_aliyun(:large)
+    assert_equal "image/resize,w_1600", BookLab::Blob.process_for_aliyun(:xlarge)
+    assert_equal BookLab::Blob.process_for_aliyun(:xlarge), BookLab::Blob.process_for_aliyun("xlarge")
   end
 
   test "variation" do
