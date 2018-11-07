@@ -34,6 +34,8 @@ class UsersController < ApplicationController
       @group = @user
       render "groups/show"
     else
+      @activities = @user.actor_activities.includes(:target, :actor).offset(params[:offset]).limit(20)
+
       render "users/show"
     end
   end

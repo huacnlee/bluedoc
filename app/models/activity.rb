@@ -36,15 +36,18 @@ class Activity < ApplicationRecord
     activity_params = {
       action: action,
       target: target,
-      actor_id: actor_id
+      target_type: target.class.name,
+      target_id: target.id,
+      actor_id: actor_id,
+      meta: meta,
     }
 
     fill_depend_id_for_target(activity_params)
 
     # create Activity for receivers, for dashboard timeline
-    Activity.transaction do
+    Activity.bulk_insert(set_size: 100) do |worker|
       user_ids.each do |user_id|
-        Activity.create!(activity_params.merge(user_id: user_id))
+        worker.add(activity_params.merge(user_id: user_id))
       end
     end
 

@@ -2,9 +2,21 @@
   <% if @repositories.blank? %>
     <div class="blankslate">
       <p><strong><%= @user.name %></strong> was not have any repositories</p>
-    </p>
+    </div>
   <% else %>
     <%= render partial: "/repositories/repository", collection: @repositories, locals: { current_group: @user } %>
     <%= paginate @repositories %>
   <% end %>
+
+  <div class="user-activities mt-4">
+    <div class="sub-title">Recent activity</div>
+    <% if @activities.blank? %>
+      <div class="blankslate">
+        <p><strong><%= @user.name %></strong> was not have any activities</p>
+      </div>
+    <% else %>
+      <%= render @activities %>
+    <% end %>
+  </div>
 </div>
+

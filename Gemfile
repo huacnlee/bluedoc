@@ -27,6 +27,8 @@ gem "rails-settings-cached"
 
 gem "second_level_cache"
 
+gem "bulk_insert"
+
 gem "devise"
 gem "omniauth-google-oauth2"
 gem "cancancan"
