@@ -1,5 +1,11 @@
 <div class="user-following">
-  <div class="blankslate">
-    <p>This feature still work on...</p>
+  <% if @users.blank? %>
+    <div class="blankslate">
+      <p><%= @user.name %> not has following any one</p>
+    </div>
   </div>
+  <% else %>
+    <%= render @users %>
+    <%= paginate @users %>
+  <% end %>
 </div>

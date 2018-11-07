@@ -1,5 +1,10 @@
 <div class="user-followers">
-  <div class="blankslate">
-    <p>This feature still work on...</p>
-  </div>
+  <% if @users.blank? %>
+    <div class="blankslate">
+      <p><%= @user.name %> not has followers</p>
+    </div>
+  <% else %>
+    <%= render @users %>
+    <%= paginate @users %>
+  <% end %>
 </div>

@@ -7,6 +7,12 @@ module UsersHelper
     link_to user.slug, user.to_path, class: "user-name"
   end
 
+  def user_display_name_tag(user)
+    return "" if user.blank?
+
+    link_to user.name, user.to_path, class: "user-display-name"
+  end
+
   def group_name_tag(group)
     return "" if group.blank?
 

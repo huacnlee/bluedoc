@@ -8,7 +8,11 @@
         Followers <span class="Counter followers-count" data-login="<%= @user.slug %>"><%= @user.followers_count %></span>
         <%
       end
-      item << link_to("Following", @user.to_path("?tab=following"), class: "UnderlineNav-item")
+      item << link_to(@user.to_path("?tab=following"), class: "UnderlineNav-item") do
+        %>
+        Following <span class="Counter"><%= @user.following_count %></span>
+        <%
+      end
     end %>
   </div>
 </nav>

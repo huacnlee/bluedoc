@@ -17,6 +17,13 @@ class UsersHelperTest < ActionView::TestCase
     assert_html_equal %(<a class="user-name" href="/#{user.slug}">#{user.slug}</a>), user_name_tag(user)
   end
 
+  test "user_display_name_tag" do
+    assert_equal "", user_display_name_tag(nil)
+    user = build(:user)
+
+    assert_html_equal %(<a class="user-display-name" href="/#{user.slug}">#{user.name}</a>), user_display_name_tag(user)
+  end
+
   test "user_avatar_tag" do
     assert_equal "", user_avatar_tag(nil)
 

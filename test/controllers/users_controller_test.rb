@@ -59,14 +59,29 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:slug?tab=followers" do
+    user1 = create(:user)
+    user2 = create(:user)
+
+    user1.follow_user(@user)
+    user2.follow_user(@user)
+
+
     get user_path(@user), params: { tab: "followers" }
     assert_equal 200, response.status
-    assert_match /class="user-followers"/, response.body
+    assert_select ".user-followers"
+    assert_select ".user-followers .user-item", 2
   end
 
   test "GET /:slug?tab=following" do
+    user1 = create(:user)
+    user2 = create(:user)
+
+    @user.follow_user(user1)
+    @user.follow_user(user2)
+
     get user_path(@user), params: { tab: "following" }
     assert_equal 200, response.status
-    assert_match /class="user-following"/, response.body
+    assert_select ".user-following"
+    assert_select ".user-following .user-item", 2
   end
 end
