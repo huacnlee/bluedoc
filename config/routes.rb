@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   root to: "dashboards#index"
   resource :dashboard do
     member do
+      get :activities
       get :groups
       get :repositories
       get :docs

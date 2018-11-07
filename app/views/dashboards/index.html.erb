@@ -7,15 +7,18 @@
       <%= render partial: "docs", locals: { items: @recent_docs } %>
     </div>
 
-    <div class="sub-title">All activity</div>
-    <% if @activities.blank? %>
-      <div class="blankslate">
-        <h3>No activity</h3>
-        <p>You have no activity in recently.</p>
-      </div>
-    <% else %>
-      <%= render @activities %>
-    <% end %>
+    <div class="activities">
+      <div class="sub-title">All activity</div>
+      <% if @activities.blank? %>
+        <div class="blankslate">
+          <h3>No activity</h3>
+          <p>You have no activity in recently.</p>
+        </div>
+      <% else %>
+        <%= render @activities %>
+        <%= render "/shared/more_button", url: activities_dashboard_path %>
+      <% end %>
+    </div>
   </div>
 
   <div class="col-4 bg-white d-table-cell px-5">

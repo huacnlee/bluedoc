@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   def show
     per_page = 20
 
+    if @user.group?
+      return _group_show
+    end
+
     case params[:tab]
     when "stars"
       @repositories = @user.star_repositories.includes(:user)
@@ -18,26 +22,35 @@ class UsersController < ApplicationController
       return _followers
     when "following"
       return _following
-    else
+    when "repositories"
       @repositories = @user.repositories.recent_updated
+    else
+      @activities = @user.actor_activities.includes(:target, :actor).page(params[:page]).per(per_page)
     end
 
+    if @repositories
+      # Only get then public repositories unless has permisson
+      # Same behivers for other tab
+      if cannot? :read_repo, @user
+        @repositories = @repositories.publics
+      end
+
+      @repositories = @repositories.page(params[:page]).per(per_page)
+    end
+  end
+
+  def _group_show
+    @repositories = @user.repositories.recent_updated
     # Only get then public repositories unless has permisson
     # Same behivers for other tab
     if cannot? :read_repo, @user
       @repositories = @repositories.publics
     end
 
-    @repositories = @repositories.page(params[:page]).per(per_page)
+    @repositories = @repositories.page(params[:page]).per(20)
 
-    if @user.group?
-      @group = @user
-      render "groups/show"
-    else
-      @activities = @user.actor_activities.includes(:target, :actor).offset(params[:offset]).limit(20)
-
-      render "users/show"
-    end
+    @group = @user
+    render "groups/show"
   end
 
   def _followers

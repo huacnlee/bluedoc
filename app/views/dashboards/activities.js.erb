@@ -1,0 +1,7 @@
+<% if @activities.blank? %>
+  $(".activities form.more-button").remove();
+<% else %>
+var html = '<%= escape_javascript(render(@activities)) %>';
+html += '<%= escape_javascript render "/shared/more_button", url: activities_dashboard_path %>';
+$(".activities form.more-button").replaceWith(html);
+<% end %>
