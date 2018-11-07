@@ -12,9 +12,10 @@ module BookLab
       slug.underscore.gsub(/[^#{FORMAT}]+/, "-")
     end
 
-    # generate random number to 36 radix as slug
-    def self.random
-      SecureRandom.random_number(9999999999).to_s(36)
+    # generate range of 1000 .. seed random number to 36 radix as slug
+    def self.random(seed: 9999999999)
+      num = SecureRandom.random_number(seed) + 100000
+      num.to_s(36)
     end
   end
 end

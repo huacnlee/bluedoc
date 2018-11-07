@@ -14,8 +14,9 @@ class BookLab::SlugTest < ActionView::TestCase
   end
 
   test "random" do
-    1000.times do
+    10000.times do
       assert_not_equal BookLab::Slug.random, BookLab::Slug.random
+      assert BookLab::Slug.random.length > 3
     end
   end
 end
