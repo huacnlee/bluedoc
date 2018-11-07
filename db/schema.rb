@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_090530) do
 
   create_table "activities", force: :cascade do |t|
     t.string "action", limit: 20, null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id"
     t.integer "actor_id", null: false
     t.integer "group_id"
     t.integer "repository_id"
