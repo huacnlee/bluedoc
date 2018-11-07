@@ -14,6 +14,8 @@ class ActivityTest < ActiveSupport::TestCase
 
     assert_equal 1, @user.activities.where(action: :star_repo).count
     assert_equal 1, @actor.actor_activities.where(action: :star_repo).count
+    assert_equal 1, Activity.where(actor_id: @actor.id, user_id: @user.id).count
+    assert_equal 1, Activity.where(actor_id: @actor.id, user_id: nil).count
 
     # skip disallow action
     Activity.track_activity("star_repo111", repo, user: @user)
@@ -35,7 +37,8 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal 1, user3.activities.where(action: :star_repo).count
     assert_equal 1, user4.activities.where(action: :star_repo).count
 
-    # trach with actor_id
+
+    # track with actor_id
     Activity.track_activity(:follow_user, user1, user_id: user1.id, actor_id: user2.id)
     assert_equal 1, user1.activities.where(action: :follow_user, target: user1).count
     activity = user1.activities.where(action: :follow_user, target: user1).last
@@ -49,6 +52,7 @@ class ActivityTest < ActiveSupport::TestCase
     Activity.track_activity(:update_doc, doc, user: @user)
 
     assert_equal 1, @user.activities.where(action: :update_doc).count
+    assert_equal 1, @actor.actor_activities.where(action: :update_doc).count
     activity = @user.activities.last
     assert_equal "update_doc", activity.action
     assert_equal @user.id, activity.user_id
@@ -64,6 +68,7 @@ class ActivityTest < ActiveSupport::TestCase
     Activity.track_activity(:create_doc, doc, user: @user)
 
     assert_equal 1, @user.activities.where(action: :create_doc).count
+    assert_equal 1, @actor.actor_activities.where(action: :create_doc).count
     activity = @user.activities.last
     assert_equal "create_doc", activity.action
     assert_equal @user.id, activity.user_id
@@ -79,6 +84,7 @@ class ActivityTest < ActiveSupport::TestCase
     Activity.track_activity(:create_repo, repo, user: @user)
 
     assert_equal 1, @user.activities.where(action: :create_repo).count
+    assert_equal 1, @actor.actor_activities.where(action: :create_repo).count
     activity = @user.activities.last
     assert_equal "create_repo", activity.action
     assert_equal @user.id, activity.user_id

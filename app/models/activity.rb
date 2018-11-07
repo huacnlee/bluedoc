@@ -41,11 +41,15 @@ class Activity < ApplicationRecord
 
     fill_depend_id_for_target(activity_params)
 
+    # create Activity for receivers, for dashboard timeline
     Activity.transaction do
       user_ids.each do |user_id|
         Activity.create!(activity_params.merge(user_id: user_id))
       end
     end
+
+    # create Activity for actor, for display on user profile page
+    Activity.create!(activity_params)
   end
 
   def self.fill_depend_id_for_target(activity_params)
