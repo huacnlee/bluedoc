@@ -74,6 +74,10 @@ class RepositoriesController < Users::ApplicationController
 
     if request.post?
       User.create_action(params[:action_type], target: @repository, user: current_user)
+
+      if params[:action_type] == "star"
+        Activities::Repository.new(@repository).star
+      end
     else
       User.destroy_action(params[:action_type], target: @repository, user: current_user)
     end

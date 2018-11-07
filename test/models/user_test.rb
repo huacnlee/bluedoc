@@ -145,14 +145,20 @@ class UserTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
     other_user1 = create(:user)
-    user.stub(:follow_user_ids, [user1.id, user2.id]) do
+    user.stub(:follower_ids, [user1.id, user2.id]) do
       user.follow_user(other_user1)
-      assert_equal 4, Activity.where(action: "follow_user", target: other_user1).count
       assert_equal 1, Activity.where(action: "follow_user", target: other_user1, actor_id: user.id, user_id: nil).count
       assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: user1.id).count
       assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: user2.id).count
       assert_equal 1, Activity.where(action: "follow_user", target: other_user1, user_id: other_user1.id).count
     end
+  end
 
+  test ".follower_ids" do
+    user = create(:user)
+    user1 = create(:user)
+    user.follow_user(user1)
+
+    assert_equal [user.id], user1.follower_ids
   end
 end

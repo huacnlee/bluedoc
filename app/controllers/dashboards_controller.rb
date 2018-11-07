@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
   def index
     @groups = current_user.groups.with_attached_avatar.limit(10)
     @recent_docs = current_user.user_actives.docs.limit(5)
+    @activities = current_user.activities.includes(:actor, :target).offset(params[:offset]).limit(20)
   end
 
   def show

@@ -7,7 +7,7 @@ class Activity < ApplicationRecord
 
   ACTIONS = %w[star_repo follow_user create_repo update_repo create_doc update_doc]
 
-  def self.track_activity(action, target, user: nil, user_id: nil, actor_id: nil, meta: nil)
+  def self.track_activity(action, target, user: nil, user_id: nil, actor_id: nil, meta: nil, unique: true)
     return false unless ACTIONS.include?(action.to_s)
 
     actor_id ||= Current.user&.id
@@ -44,15 +44,23 @@ class Activity < ApplicationRecord
 
     fill_depend_id_for_target(activity_params)
 
+    # clean first if unique: true
+    if unique
+      Activity.transaction do
+        Activity.where(action: action, actor_id: actor_id, user_id: nil, target_type: activity_params[:target_type], target_id: activity_params[:target_id]).delete_all
+        Activity.where(action: action, actor_id: actor_id, user_id: user_ids, target_type: activity_params[:target_type], target_id: activity_params[:target_id]).delete_all
+      end
+    end
+
+    # create Activity for actor, for display on user profile page
+    Activity.create!(activity_params)
+
     # create Activity for receivers, for dashboard timeline
     Activity.bulk_insert(set_size: 100) do |worker|
       user_ids.each do |user_id|
         worker.add(activity_params.merge(user_id: user_id))
       end
     end
-
-    # create Activity for actor, for display on user profile page
-    Activity.create!(activity_params)
   end
 
   def self.fill_depend_id_for_target(activity_params)

@@ -29,14 +29,18 @@ class ActivityTest < ActiveSupport::TestCase
     user4 = create(:user)
     repo1 = create(:repository)
 
-    Activity.track_activity(:star_repo, repo1, user_id: [user1.id, user2.id])
+    Activity.track_activity(:star_repo, repo1, user_id: [user1.id, user2.id, user2.id])
     Activity.track_activity(:star_repo, repo1, user_id: user3.id)
-    Activity.track_activity(:star_repo, repo1, user: [user4])
+    # star agin to ensure unique
+    Activity.track_activity(:star_repo, repo1, user_id: user3.id)
     assert_equal 1, user1.activities.where(action: :star_repo).count
     assert_equal 1, user2.activities.where(action: :star_repo).count
     assert_equal 1, user3.activities.where(action: :star_repo).count
-    assert_equal 1, user4.activities.where(action: :star_repo).count
 
+    # with unique: false
+    Activity.track_activity(:star_repo, repo1, user: [user4])
+    Activity.track_activity(:star_repo, repo1, user: user4, unique: false)
+    assert_equal 2, user4.activities.where(action: :star_repo).count
 
     # track with actor_id
     Activity.track_activity(:follow_user, user1, user_id: user1.id, actor_id: user2.id)
