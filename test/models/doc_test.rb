@@ -58,6 +58,26 @@ class DocTest < ActiveSupport::TestCase
     assert_equal user.id, doc.creator_id
   end
 
+  test ".draft_title" do
+    doc = Doc.new(title: "AAA")
+    assert_equal "AAA", doc.title
+    assert_equal doc.title, doc.draft_title
+
+    doc.draft_title = "BBB"
+    assert_equal "AAA", doc.title
+    assert_equal "BBB", doc.draft_title
+  end
+
+  test ".draft_body" do
+    doc = create(:doc, body: "AAA")
+    assert_equal "AAA", doc.body_plain
+    assert_equal doc.body_plain, doc.draft_body_plain
+
+    doc.update(draft_body: "BBB")
+    assert_equal "AAA", doc.body_plain
+    assert_equal "BBB", doc.draft_body_plain
+  end
+
   test "create_new" do
     repo = create(:repository)
     doc = Doc.create_new(repo, 123)

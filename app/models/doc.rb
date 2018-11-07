@@ -21,8 +21,12 @@ class Doc < ApplicationRecord
     "#{repository.to_path}/#{self.slug}#{suffix}"
   end
 
+  def draft_title
+    self[:draft_title] || self.title
+  end
+
   def draft_body_plain
-    self.draft_body&.body&.to_plain_text
+    self.draft_body&.body&.to_plain_text || self.body_plain
   end
 
   class << self
