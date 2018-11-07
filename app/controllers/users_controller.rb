@@ -50,10 +50,14 @@ class UsersController < ApplicationController
 
   def follow
     current_user.follow_user(@user)
+    @user.reload
+    render json: { count: @user.followers_count }
   end
 
   def unfollow
     current_user.unfollow_user(@user)
+    @user.reload
+    render json: { count: @user.followers_count }
   end
 
   def new

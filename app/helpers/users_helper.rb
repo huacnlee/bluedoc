@@ -46,9 +46,9 @@ module UsersHelper
     slug        = user.slug
 
     if followed
-      link_to "Unfollow", unfollow_user_path(user), data: { remote: true, id: slug, method: :delete }, class: "#{class_names} active"
+      link_to raw("<span>Unfollow</span>"), "#", data: { id: slug }, class: "#{class_names} active"
     else
-      link_to "Follow", follow_user_path(user), data: { remote: true, id: slug, method: :post }, class: class_names
+      link_to raw("<span>Follow</span>"), "#", data: { id: slug }, class: class_names
     end
   end
 end

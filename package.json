@@ -7,6 +7,7 @@
     "@rails/webpacker": "https://github.com/rails/webpacker",
     "actiontext": "https://github.com/rails/actiontext",
     "babel-preset-react": "^6.24.1",
+    "backbone": "^1.3.3",
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
     "primer": "^10.8.1",

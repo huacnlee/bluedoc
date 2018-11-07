@@ -8,14 +8,15 @@ import "vendor/styleguide.js"
 import "vendor/jquery.timeago.js"
 import "vendor/jquery.timeago.settings.js"
 import MarkdownEditor from './editor/index'
-import './reader/index.js'
 
 Turbolinks.start()
 window.$ = jQuery
-
 window.App = {
   locale: 'en'
 }
+
+import './reader/index.js'
+import './follow-user/index.js'
 
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago()

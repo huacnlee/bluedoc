@@ -4,6 +4,12 @@ class UsersHelperTest < ActionView::TestCase
   include ApplicationHelper
   include Webpacker::Helper
 
+  setup do
+    @user = create(:user)
+  end
+
+  def current_user; @user; end
+
   test "user_name_tag" do
     assert_equal "", user_name_tag(nil)
     user = build(:user)
@@ -30,5 +36,17 @@ class UsersHelperTest < ActionView::TestCase
     avatar_url = "/system/letter_avatars/2/S/162_136_126/240.png"
     assert_html_equal %(<a class="user-avatar" href="/#{user.slug}"><img class="avatar avatar-small" alt="#{user.slug}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
     assert_html_equal %(<img class="avatar avatar-tiny" alt="#{user.slug}" src="#{avatar_url}" />), user_avatar_tag(user, style: :tiny, link: false)
+  end
+
+  test "follow_user_tag" do
+    assert_equal "", follow_user_tag(nil)
+
+    user = create(:user)
+
+    assert_equal %(<a data-id="#{user.slug}" class="btn-follow-user btn btn-block" href="#"><span>Follow</span></a>), follow_user_tag(user)
+
+    @user.stub(:follow_user_ids, [user.id]) do
+      assert_equal %(<a data-id="#{user.slug}" class="btn-follow-user btn btn-block active" href="#"><span>Unfollow</span></a>), follow_user_tag(user)
+    end
   end
 end
