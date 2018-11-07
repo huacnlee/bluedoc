@@ -46,6 +46,9 @@ server {
     proxy_set_header   Connection "Upgrade";
     proxy_set_header   X-Forwarded-Proto $scheme;
     proxy_pass         http://app_backend;
+    proxy_buffer_size          128k;
+    proxy_buffers              4 256k;
+    proxy_busy_buffers_size    256k;
     gzip on;
   }
 }
