@@ -36,7 +36,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     user_repo = create(:repository, user: @user)
     get user_repo.to_path("/docs/new")
-    assert_equal 200, response.status
+    doc = user_repo.docs.last
+    assert_redirected_to doc.to_path("/edit")
 
     sign_in_role :reader, group: @group
     get @repo.to_path("/docs/new")
@@ -44,42 +45,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in_role :editor, group: @group
     get @repo.to_path("/docs/new")
-    assert_equal 200, response.status
-  end
-
-  test "POST /:user/:repo/docs" do
-    doc = build(:doc)
-    doc_params = {
-      title: doc.title,
-      slug: doc.slug,
-      body: "Hello world",
-      draft_title: "Draft #{doc.title}",
-      draft_body: "Draft body",
-    }
-
-    assert_require_user do
-      post @repo.to_path("/docs"), params: { doc: doc_params }
-    end
-
-    sign_in @user
-    post @repo.to_path("/docs"), params: { doc: doc_params }
-    assert_equal 403, response.status
-
-    sign_in_role :reader, group: @group
-    post @repo.to_path("/docs"), params: { doc: doc_params }
-    assert_equal 403, response.status
-
-    user = sign_in_role :editor, group: @group
-    post @repo.to_path("/docs"), params: { doc: doc_params }
-    assert_redirected_to @repo.to_path("/#{doc.slug}")
-
-    doc = @repo.docs.find_by_slug!(doc.slug)
-    assert_equal doc_params[:title], doc.title
-    assert_equal doc_params[:draft_title], doc.draft_title
-    assert_equal doc_params[:body], doc.body_plain
-    assert_equal doc_params[:draft_body], doc.draft_body_plain
-    assert_equal user.id, doc.last_editor_id
-    assert_equal user.id, doc.creator_id
+    doc = @repo.docs.last
+    assert_redirected_to doc.to_path("/edit")
   end
 
   test "GET /:user/:repo/:slug" do

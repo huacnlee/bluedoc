@@ -11,9 +11,7 @@
         <%= doc.title || "New doc" %>
       </div>
       <div class="navbar-buttons">
-        <% unless @doc.new_record? %>
-        <%= link_to "Versions", versions_path(subject_type: "Doc", subject_id: @doc.id), remote: true, class: "btn btn-version-toggle" %>
-        <% end %>
+        <button type="button" data-url="<%= doc.new_record? ? user_repository_docs_path(@user, @repository) : user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
         <button type="submit" class="btn btn-primary">Publish</button>
       </div>
     </div>

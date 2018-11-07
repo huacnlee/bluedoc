@@ -24,4 +24,18 @@ class Doc < ApplicationRecord
   def draft_body_plain
     self.draft_body&.body&.to_plain_text
   end
+
+  class << self
+    def create_new(repo, user_id)
+      doc = Doc.new
+      doc.repository_id = repo.id
+      doc.last_editor_id = user_id
+      doc.title = "New Document"
+      doc.slug = BookLab::Slug.random
+      doc.save!
+      doc
+    rescue ActiveRecord::RecordNotUnique
+      retry
+    end
+  end
 end

@@ -44,6 +44,27 @@ document.addEventListener("turbolinks:load", () => {
       slugInput.value = value
     }
 
+    $(".btn-save").click((e) => {
+      const $btn = $(e.currentTarget)
+      const url = $btn.attr("data-url")
+
+      $.ajax({
+        method: "PUT",
+        url: url,
+        data: {
+          doc: {
+            draft_title: titleInput.value,
+            draft_body: editorInput.value,
+          },
+        },
+        success: (res) => {
+          console.log("Save successed", res);
+        }
+      })
+
+      return false;
+    })
+
     $("form").after(editorDiv);
     ReactDOM.render(
       <MarkdownEditor name="MarkdownEditor"

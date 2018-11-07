@@ -9,7 +9,12 @@ module BookLab
 
     def self.slugize(slug)
       return "" if slug.blank?
-      slug.underscore.gsub(" ", "-")
+      slug.underscore.gsub(/[^#{FORMAT}]+/, "-")
+    end
+
+    # generate random number to 36 radix as slug
+    def self.random
+      SecureRandom.random_number(9999999999).to_s(36)
     end
   end
 end

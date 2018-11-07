@@ -57,4 +57,14 @@ class DocTest < ActiveSupport::TestCase
     assert_equal user1.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
   end
+
+  test "create_new" do
+    repo = create(:repository)
+    doc = Doc.create_new(repo, 123)
+    assert_equal false, doc.new_record?
+    assert_not_nil doc.slug
+    assert_equal "New Document", doc.title
+    assert_equal repo.id, doc.repository_id
+    assert_equal 123, doc.last_editor_id
+  end
 end

@@ -29,37 +29,15 @@ class DocsController < Users::ApplicationController
   def new
     authorize! :create_doc, @repository
 
-    @doc = Doc.new
-    @doc.title = "New Document"
-    @doc.slug = Time.now.to_i.to_s(36)
-    render :new, layout: "editor"
+    @doc = Doc.create_new(@repository, current_user.id)
+
+    redirect_to @doc.to_path("/edit")
   end
 
   # GET /docs/1/edit
   def edit
     authorize! :update, @doc
     render :new, layout: "editor"
-  end
-
-  # POST /docs
-  # POST /docs.json
-  def create
-    @doc = Doc.new(doc_params)
-    @doc.repository_id = @repository.id
-    @doc.last_editor_id = current_user.id
-
-    authorize! :create, @doc
-
-    # FIXME: check repo permission
-    respond_to do |format|
-      if @doc.save
-        format.html { redirect_to @doc.to_path, notice: 'Doc was successfully created.' }
-        format.json { render :show, status: :created, location: @doc }
-      else
-        format.html { render :new, layout: "editor" }
-        format.json { render json: @doc.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /docs/1
