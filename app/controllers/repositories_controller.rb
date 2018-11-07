@@ -22,6 +22,8 @@ class RepositoriesController < Users::ApplicationController
 
     respond_to do |format|
       if @repository.save
+        Activities::Repository.new(@repository).create
+
         notice = "Repository was successfully created."
         if repository_params[:gitbook_url]
           RepositoryImportJob.perform_later(@repository, type: "gitbook", user: current_user, url: repository_params[:gitbook_url])

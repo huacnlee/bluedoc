@@ -1,0 +1,17 @@
+<div class="repository-card Box p-3">
+  <div class="d-inline-block mb-1">
+    <h4 class="f4 lh-condensed text-bold text-gray-dark">
+      <% if defined?(current_group) && current_group.id != repository.user_id %>
+      <%= user_name_tag(repository.user) %> <span class="divider">/</span>
+      <% end %>
+      <%= repository_name_tag(repository) %>
+    </h4>
+  </div>
+  <div class="desc text-gray mb-2 pr-4">
+    <%= repository.description %>
+  </div>
+  <div class="f6 text-gray mt-2">
+    <span class="counter"><%= icon_tag("star") %> <%= repository.stars_count %></span>
+    <span class="updated">Update <%= timeago repository.updated_at %></span>
+  </div>
+</div>

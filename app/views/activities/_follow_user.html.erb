@@ -1,2 +1,7 @@
-<%= user_avatar_tag(activity.actor, style: :tiny) %>
-<%= user_name_tag(activity.actor) %> <span class="text-gray">has followed</span> <%= user_name_tag(activity.target) %>
+<div class="info">
+  <%= user_name_tag(activity.actor) %> <span class="text-gray">has followed</span> <%= user_name_tag(activity.target) %>
+  <span class="time"><%= timeago activity.created_at %></span>
+</div>
+<div class="detail">
+  <%= render "/users/card", user: activity.target %>
+</div>

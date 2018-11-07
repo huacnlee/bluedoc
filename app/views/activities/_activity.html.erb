@@ -1,6 +1,10 @@
 <% if activity.target.present? || activity.actor.present? %>
 <div class="activity-item width-full py-3 border-bottom border-gray-light clearfix">
-  <%= render partial: "activities/#{activity.action}", locals: { activity: activity } %>
-  <span class="time"><%= timeago activity.created_at %></span>
+  <div class="avatar-box">
+    <%= user_avatar_tag(activity.actor, style: :small) %>
+  </div>
+  <div class="infos">
+    <%= render partial: "activities/#{activity.action}", locals: { activity: activity } %>
+  </div>
 </div>
 <% end %>

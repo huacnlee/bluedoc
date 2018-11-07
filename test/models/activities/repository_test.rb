@@ -27,4 +27,16 @@ class Activities::RepositoryTest < ActiveSupport::TestCase
     Activities::Repository.new(private_repo).star
     assert_equal 0, Activity.where(action: "star_repo", target: private_repo).count
   end
+
+  test "create" do
+    Activities::Repository.new(@repo).create
+
+    assert_equal 1, Activity.where(action: "create_repo", target: @repo, actor_id: @actor.id, user_id: nil).count
+    assert_equal 2, Activity.where(action: "create_repo", target: @repo, actor_id: @actor.id, user_id: @actor.follower_ids).count
+
+    # private Repo
+    private_repo = create(:repository, privacy: :private)
+    Activities::Repository.new(private_repo).star
+    assert_equal 0, Activity.where(action: "create_repo", target: private_repo).count
+  end
 end

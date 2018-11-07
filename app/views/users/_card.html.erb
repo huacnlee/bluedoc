@@ -1,0 +1,16 @@
+<div class="user-card Box p-3">
+  <div class="avatar-box">
+    <%= user_avatar_tag(user, style: :medium) %>
+  </div>
+  <div class="infos">
+    <div class="d-inline-block mb-1">
+      <h4 class="f4 lh-condensed text-bold text-gray-dark">
+        <%= user_display_name_tag(user) %>
+        <%= user_name_tag(user) %>
+      </h4>
+    </div>
+    <div class="f6 text-gray">
+      <span class="counter"><%= user.followers_count %> followers</span>
+    </div>
+  </div>
+</div>

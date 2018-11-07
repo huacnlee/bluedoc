@@ -289,8 +289,61 @@
   }
 }
 
+.repository-card {
+  padding: 15px;
+  a.repository-name { color: #444; font-size: 16px; }
+  .desc { font-size: 13px; }
+
+  .counter {
+    margin-right: 15px;
+
+    .octicon {
+      fill: #666;
+    }
+  }
+}
+
+.user-card {
+  position: relative;
+
+
+  .avatar-box {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+
+    .avatar { width: 40px !important; height: 40px !important; }
+  }
+
+  .infos {
+    padding-left: 45px;
+  }
+
+  .user-display-name { font-weight: bold; color: #333; margin-right: 5px; }
+  .user-name { font-weight: normal; color: #666; }
+}
+
+
+
 .divider { color: #aaa; font-weight: normal; }
 
 .activity-item {
+  position: relative;
+
+  & > .avatar-box {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    .avatar { width: 32px !important; height: 32px !important; }
+  }
+
+  & > .infos { padding-left: 40px; }
   .time { margin-left: 3px; font-size: 13px; color: #aaa; }
+  .info {
+    color: #a0a0a0;
+    a { color: #333; }
+  }
+  .detail {
+    padding-top: 10px;
+  }
 }
