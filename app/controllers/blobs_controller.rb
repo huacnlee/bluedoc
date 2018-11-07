@@ -17,7 +17,11 @@ class BlobsController < ApplicationController
       when "Disk"
         send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: :inline
       when "Aliyun"
-        redirect_to blob.service_url(expires_in: 1.weeks, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(params[:s]) })
+        if params[:s]
+          redirect_to blob.service_url(expires_in: 1.weeks, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(params[:s]) })
+        else
+          redirect_to blob.service_url(expires_in: 1.weeks)
+        end
       else
         redirect_to blob.service_url(expires_in: 1.weeks)
       end
