@@ -6,7 +6,7 @@ class RepositoriesController < Users::ApplicationController
 
 
   def index
-    authorize! :read, user
+    authorize! :read, @user
   end
 
   #
