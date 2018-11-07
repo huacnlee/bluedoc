@@ -1,6 +1,6 @@
 <auto-complete aria-expanded="false" aria-haspopup="listbox" aria-owns="user-autocomplete-results"
-  class="position-relative d-block" role="combobox" src="<%= users_autocomplete_path %>">
+  class="d-block" role="combobox" src="<%= users_autocomplete_path %>">
   <input type="text" name="<%= input_name %>" class="form-control" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="user-autocomplete-results">
-  <ul class="autocomplete-results" id="user-autocomplete-results">
+  <ul class="autocomplete-results" style="min-width: 400px" id="user-autocomplete-results">
   </ul>
 </auto-complete>

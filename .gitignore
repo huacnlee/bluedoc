@@ -29,6 +29,7 @@
 /public/packs-test
 /public/system
 /node_modules
+/data/
 yarn-debug.log*
 .yarn-integrity
 .DS_Store
