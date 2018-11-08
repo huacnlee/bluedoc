@@ -1,0 +1,42 @@
+require 'test_helper'
+
+<% module_namespacing do -%>
+class <%= controller_class_name %>ControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @admin = create(:user)
+    sign_in_admin @admin
+
+    @<%= file_name %> = create(:<%= file_name %>)
+  end
+
+  test "should get index" do
+    get <%= index_helper %>_path
+    assert_equal 200, response.status
+  end
+
+  test "should show <%= singular_table_name %>" do
+    get <%= singular_table_name %>_path(@<%= file_name %>.id)
+    assert_equal 200, response.status
+  end
+
+  test "should get edit" do
+    get edit_<%= singular_table_name %>_path(@<%= file_name %>.id)
+    assert_equal 200, response.status
+  end
+
+  test "should update <%= singular_table_name %>" do
+    <%= file_name %>_params = {
+    }
+    patch <%= singular_table_name %>_path(@<%= file_name %>.id), params: { <%= file_name %>: <%= file_name %>_params }
+    assert_redirected_to <%= index_helper %>_path
+  end
+
+  test "should destroy <%= singular_table_name %>" do
+    assert_difference('<%= file_name.camelize %>.count', -1) do
+      delete <%= singular_table_name %>_path(@<%= file_name %>.id)
+    end
+
+    assert_redirected_to <%= index_helper %>_path
+  end
+end
+<% end -%>

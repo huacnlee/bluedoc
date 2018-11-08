@@ -1,0 +1,41 @@
+<%%= render 'base' %>
+
+<div class="subnav">
+  <nav class="subnav-links">
+    <a href="<%%= new_<%= singular_table_name %>_path %>" class="subnav-item">New</a>
+  </nav>
+  <div class="subnav-search float-left">
+    <form action="" method="GET">
+      <input type="search" name="q" class="form-control subnav-search-input" value="<%%= params[:q] %>" aria-label="Search">
+      <%%= octicon "search", class: "subnav-search-icon" %>
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="admin-<%= plural_table_name %>">
+  <table class="table">
+    <tr class="head">
+      <td>Id</td>
+<% attributes.each do |attr| -%>
+      <td><%%= t("activerecord.attributes.<%= file_name %>.<%= attr.name %>") %></td>
+<% end %>
+      <td>Created At</td>
+      <td class="opts"></td>
+    </tr>
+    <%% @<%= plural_file_name %>.each do |item| %>
+    <tr class="<%%= cycle("","even") %>">
+      <td><%%= link_to item.id, <%= singular_table_name %>_path(item.id) %></td>
+<% attributes.each do |attr| %>
+      <td><%%= item.<%= attr.name %> %></td>
+<% end %>
+      <td><%%= l(item.created_at, format: :long) %></td>
+      <td class="opts">
+        <%%= link_to icon_tag("pencil"), edit_<%= singular_table_name %>_path(item.id) %>
+        <%%= link_to icon_tag("trashcan"), <%= singular_table_name %>_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+      </td>
+    </tr>
+    <%% end %>
+  </table>
+  <%%= paginate @<%= plural_file_name %> %>
+</div>

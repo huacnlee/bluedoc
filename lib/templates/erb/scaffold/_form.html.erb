@@ -1,0 +1,19 @@
+<%
+  form_model_name = "@#{file_name}"
+  if controller_class_name.include?('::')
+    namespace = controller_class_name.split('::').first.downcase
+    form_model_name = "[:#{namespace},@#{file_name}]"
+  end
+%>
+<%%= form_for(<%= form_model_name %>) do |f| %>
+  <%%= render "/shared/error_messages", target: @<%= file_name %>  %>
+  <% for attribute in attributes %>
+  <div class="form-group">
+    <%%= f.label :<%= attribute.name %>, class: "control-label" %>
+    <%%= f.text_field :<%= attribute.name %>, class: "form-control" %>
+  </div>
+  <% end %>
+  <div class="form-action">
+    <%%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%%= link_to "Cancel", <%= index_helper %>_path %>
+  </div>
+<%% end %>
