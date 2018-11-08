@@ -35,6 +35,7 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal user1.id, member.user_id
     assert_equal "reader", member.role
     assert_equal 2, repo.members.count
+    assert_equal [@user.id, user1.id].sort, repo.member_user_ids.sort
     assert_equal :reader, repo.user_role(user1)
 
     repo.remove_member(user1)

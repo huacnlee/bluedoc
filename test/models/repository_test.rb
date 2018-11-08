@@ -15,6 +15,29 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal false, repository.valid?
   end
 
+  test "auto member watch" do
+    group = create(:group)
+    user1 = create(:user)
+    group.add_member(user1, :editor)
+    user2 = create(:user)
+    group.add_member(user2, :reader)
+    group.reload
+
+    repo = create(:repository, user: group)
+    assert_equal group.member_user_ids.sort, repo.watch_by_user_ids.sort
+    assert_equal 2, repo.watches_count
+
+    assert_equal true, user1.watch_repository?(repo)
+    assert_equal true, user2.watch_repository?(repo)
+
+    # for User
+    user = create(:user)
+    repo = create(:repository, user: user)
+    assert_equal [user.id], repo.watch_by_user_ids
+    assert_equal true, user.watch_repository?(repo)
+    assert_equal 1, repo.watches_count
+  end
+
   test "destroy dependent :user_actives" do
     user0 = create(:user)
     user1 = create(:user)

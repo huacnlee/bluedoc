@@ -8,7 +8,7 @@ class Repository < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :preferences, :toc, :user_active
+  depends_on :preferences, :toc, :user_active, :watches
 
   enum privacy: %i(private public), _prefix: :is
 

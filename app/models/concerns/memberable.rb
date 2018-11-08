@@ -22,6 +22,10 @@ module Memberable
     self.members.where(user: user).any?
   end
 
+  def member_user_ids
+    @member_user_ids ||= self.members.pluck(:user_id)
+  end
+
   def add_member(user, role)
     return false if user.blank?
     return false unless user.user?
