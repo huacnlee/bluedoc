@@ -8,9 +8,7 @@ class Repository < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :preferences, :toc, :user_active, :watches
-
-  enum privacy: %i(private public), _prefix: :is
+  depends_on :preferences, :toc, :user_active, :watches, :privacy
 
   attr_accessor :gitbook_url, :last_editor_id
 
@@ -21,19 +19,10 @@ class Repository < ApplicationRecord
   validates :name, presence: true
   validates :slug, uniqueness: { scope: :user_id }
 
-  scope :publics, -> { where(privacy: :public) }
   scope :recent_updated, -> { order("updated_at desc") }
 
   def to_path(suffix = nil)
     "/#{self.user.slug}/#{self.slug}#{suffix}"
-  end
-
-  def private?
-    self.is_private?
-  end
-
-  def public?
-    self.is_public?
   end
 
   def transfer(to_slug)

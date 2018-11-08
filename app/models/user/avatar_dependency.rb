@@ -4,7 +4,7 @@ class User
   has_one_attached :avatar, dependent: false
   validates :avatar, file_size: { less_than_or_equal_to: 5.megabytes },
                      file_content_type: { allow: %w[image/jpeg image/png] },
-                     if: -> { avatar.present? }
+                     if: -> { avatar.attached? }
 
  class << self
    include ActionView::Helpers::AssetUrlHelper

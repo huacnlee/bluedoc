@@ -45,10 +45,28 @@ class RepositoryTest < ActiveSupport::TestCase
 
     UserActive.track(repo, user: user0)
     UserActive.track(repo, user: user1)
-    assert_equal 2, UserActive.where(subject_type: "Repository").count
+    assert_equal 2, UserActive.where(subject: repo).count
 
     repo.destroy
-    assert_equal 0, UserActive.where(subject_type: "Repository").count
+    assert_equal 0, UserActive.where(subject: repo).count
+  end
+
+  test "private dependent :activites" do
+    repo = create(:repository)
+    doc = create(:doc)
+    create(:activity, target: repo)
+    create(:activity, target: repo)
+    create(:activity, target: doc, repository_id: repo.id)
+    assert_equal 2, Activity.where(target: repo).count
+    assert_equal 1, Activity.where(repository_id: repo.id).count
+
+    repo.update(name: "new name", privacy: :public)
+    assert_equal 2, Activity.where(target: repo).count
+    assert_equal 1, Activity.where(repository_id: repo.id).count
+
+    repo.update(privacy: :private)
+    assert_equal 0, Activity.where(target: repo).count
+    assert_equal 0, Activity.where(repository_id: repo.id).count
   end
 
   test "track user active" do
