@@ -1,8 +1,9 @@
-if ($(".data-action-button-reload")) {
+if ($(".data-action-button-reload").length > 0) {
   Turbolinks.visit(window.location);
 } else {
   var btnAction = $(".repository-<%= @repository.id %>-<%= params[:action_type ] %>-button");
   var btn = $(".btn", btnAction);
+  console.log(btn);
   <% if request.post? %>
     btn.attr("data-method", "delete");
     $("span", btnAction).text(btn.attr("data-undo-label"));
