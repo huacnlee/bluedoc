@@ -4,7 +4,14 @@
   <div class="col-6 bg-white d-table-cell pl-5 pb-8">
     <div class="sub-title">Recent activity</div>
     <div class="mb-5">
-      <%= render partial: "docs", locals: { items: @recent_docs } %>
+      <% if @recent_docs.blank? %>
+        <div class="blankslate">
+          <h3>No recent docs</h3>
+          <p>You have no update Doc in recently.</p>
+        </div>
+      <% else %>
+        <%= render partial: "docs", locals: { items: @recent_docs } %>
+      <% end %>
     </div>
 
     <div class="activities">
