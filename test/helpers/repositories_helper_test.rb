@@ -28,6 +28,7 @@ class RepositoriesHelperTest < ActionView::TestCase
 
   test "action_button_tag" do
     assert_equal "", action_button_tag(nil, :watch)
+    @user.unwatch_repository(@repository)
     html = action_button_tag(@repository, :watch, icon: "eye", with_count: true)
     assert_action_button html, @repository, :watch, text: "Watch", label: "Watch", undo_label: "Unwatch", icon: "eye", method: :post, with_count: true
 
