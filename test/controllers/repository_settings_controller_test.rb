@@ -60,6 +60,35 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal repo_params[:privacy], updated_repo.privacy
   end
 
+  test "PATCH /:user/:repo/settings/transfer" do
+    repo = create(:repository, user: @group)
+
+    sign_in @user
+    patch repo.to_path("/settings/transfer")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    patch repo.to_path("/settings/transfer")
+    assert_equal 403, response.status
+
+    repo_params = { transfer_to_user: "not-exist" }
+
+    sign_in_role :admin, group: @group
+    patch repo.to_path("/settings/transfer"), params: { repository: repo_params }
+    assert_redirected_to repo.to_path("/settings/advanced")
+    get repo.to_path("/settings/advanced")
+    assert_equal 200, response.status
+    assert_match 'Transfer target: [not-exist] does not exists', response.body
+
+    user = create(:user)
+    repo_params = { transfer_to_user: user.slug }
+    patch repo.to_path("/settings/transfer"), params: { repository: repo_params }
+    assert_redirected_to "/#{user.slug}/#{repo.slug}"
+
+    updated_repo = Repository.find_by_id(repo.id)
+    assert_equal user.id, updated_repo.user_id
+  end
+
   test "DELETE /:user/:repo/settings/profile" do
     repo = create(:repository, user: @group)
     assert_require_user do

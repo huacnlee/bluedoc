@@ -76,6 +76,7 @@ Rails.application.routes.draw do
           patch :update, path: "profile"
           delete :destroy, path: "profile"
           get :advanced
+          patch :transfer
         end
       end
 

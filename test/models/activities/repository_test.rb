@@ -39,4 +39,20 @@ class Activities::RepositoryTest < ActiveSupport::TestCase
     Activities::Repository.new(private_repo).star
     assert_equal 0, Activity.where(action: "create_repo", target: private_repo).count
   end
+
+  test "transfer" do
+    @repo.stub(:watch_by_user_ids, [1, 2, 3]) do
+      Activities::Repository.new(@repo).transfer
+
+      assert_equal 1, Activity.where(action: "transfer_repo", target: @repo, actor_id: @actor.id, user_id: nil).count
+      assert_equal 3, Activity.where(action: "transfer_repo", target: @repo, actor_id: @actor.id, user_id: @repo.watch_by_user_ids).count
+      activity = Activity.where(action: "transfer_repo", target: @repo, actor_id: @actor.id, user_id: nil).last
+
+
+      # private Repo
+      private_repo = create(:repository, privacy: :private)
+      Activities::Repository.new(private_repo).transfer
+      assert_not_equal 0, Activity.where(action: "transfer_repo", target: private_repo).count
+    end
+  end
 end

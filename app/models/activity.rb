@@ -5,7 +5,7 @@ class Activity < ApplicationRecord
 
   serialize :meta, Hash
 
-  ACTIONS = %w[star_repo follow_user create_repo update_repo create_doc update_doc]
+  ACTIONS = %w[star_repo follow_user create_repo update_repo transfer_repo create_doc update_doc]
 
   def self.track_activity(action, target, user: nil, user_id: nil, actor_id: nil, meta: nil, unique: true)
     return false unless ACTIONS.include?(action.to_s)
@@ -31,15 +31,13 @@ class Activity < ApplicationRecord
     end
     user_ids.uniq!
 
-    return false if user_ids.blank?
-
     activity_params = {
       action: action,
       target: target,
       target_type: target.class.name,
       target_id: target.id,
       actor_id: actor_id,
-      meta: meta,
+      meta: meta&.deep_symbolize_keys
     }
 
     fill_depend_id_for_target(activity_params)
@@ -54,6 +52,11 @@ class Activity < ApplicationRecord
 
     # create Activity for actor, for display on user profile page
     Activity.create!(activity_params)
+
+    if activity_params[:meta]
+      # bulk_insert must convert serialize field to String
+      activity_params[:meta] = YAML.dump(activity_params[:meta])
+    end
 
     # create Activity for receivers, for dashboard timeline
     Activity.bulk_insert(set_size: 100) do |worker|

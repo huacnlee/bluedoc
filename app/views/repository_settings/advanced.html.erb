@@ -2,7 +2,64 @@
 
 <div class="col-12 d-table">
   <%= render "menu" %>
-  <div class="col-10 d-table-cell">
+  <div class="col-8 d-table-cell">
+     <div class="form-title"><h2>Transfer</h2></div>
+     <div class="Box mb-3">
+       <div class="Box-row d-flex flex-items-center">
+         <div class="flex-auto">
+           <label class="form-check-label font-weight-bold">
+             Transfer ownership
+           </label>
+           <div class="form-text">
+             Transfer this repository to another user or to an group where you have the ability to create repositories.
+           </div>
+         </div>
+         <%= render "transfer" %>
+       </div>
+     </div>
 
+    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository),  remote: true, method: :patch) do |form| %>
+      <div class="form-title"><h2>Danger Zone</h2></div>
+
+      <% if params[:_by] == "danger-zone" %>
+        <%= render "/shared/error_messages", target: @repository %>
+      <% end %>
+      <input type="hidden" name="_action" value="advanced" />
+      <input type="hidden" name="_by" value="danger-zone" />
+
+      <div class="Box mb-3">
+        <div class="Box-row d-flex flex-items-center">
+          <div class="flex-auto">
+            <label class="form-check-label font-weight-bold">
+              <% if @repository.private? %>
+              Make this repository public
+              <% else %>
+              Make this repository private
+              <% end %>
+            </label>
+            <div class="form-text">
+              <% if @repository.private? %>
+                Public this repository from the private.
+              <% else %>
+                Private this repository from the public.
+              <% end %>
+            </div>
+          </div>
+          <%= form.hidden_field :privacy, value: (@repository.private? ? "public" : "private") %>
+          <button type="submit" class="btn btn-danger btn-sm" data-confirm="Are you sure?"><%= @repository.private? ? "Make public" : "Make private" %></button>
+        </div>
+        <div class="Box-row d-flex flex-items-center">
+          <div class="flex-auto">
+            <label class="form-check-label font-weight-bold">
+              Delete this repository
+            </label>
+            <div class="form-text d-table-cell">
+              Once you delete a repository, there is no going back. Please be certain.
+            </div>
+          </div>
+          <%= link_to "Delete this repository", user_repository_settings_path(@user, @repository), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

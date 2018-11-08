@@ -35,4 +35,17 @@ class Repository < ApplicationRecord
   def public?
     self.is_public?
   end
+
+  def transfer(to_slug)
+    user = User.find_by_slug(to_slug)
+    if user.blank?
+      self.errors.add(:user_id, "Transfer target: [#{to_slug}] does not exists, please check it.")
+      return false
+    end
+
+    from_user = self.user
+    self.update(user_id: user.id)
+    Activities::Repository.new(self).transfer
+    true
+  end
 end

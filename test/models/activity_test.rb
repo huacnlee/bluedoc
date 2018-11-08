@@ -49,6 +49,17 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal user2.id, activity.actor_id
   end
 
+  test "track_activity with meta" do
+    user = create(:user)
+    actor = create(:user)
+    meta = { from: { id: 123, name: "Foo" }, age: 123 }
+    Activity.track_activity(:follow_user, user, user_id: user.id, actor_id: actor.id, meta: meta)
+    activity = actor.actor_activities.last
+    assert_equal meta, activity.meta
+    activity = user.activities.last
+    assert_equal meta, activity.meta
+  end
+
   test "track_activity update_doc" do
     doc = create(:doc)
     user = create(:user)

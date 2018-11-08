@@ -17,7 +17,19 @@ class RepositorySettingsController < Users::ApplicationController
     if @repository.update(repository_params)
       redirect_to user_repository_settings_path(@user, @repository), notice: "Update successed"
     else
-      render params[:action]
+      render params[:_action]
+    end
+  end
+
+  def transfer
+    authorize! :update, @repository
+
+    new_slug = params.require(:repository).permit(:transfer_to_user)[:transfer_to_user]
+
+    if @repository.transfer(new_slug)
+      redirect_to @repository.to_path, notice: "Repository has transfer successed"
+    else
+      redirect_to advanced_user_repository_settings_path(@user, @repository), alert: @repository.errors[:user_id].join("")
     end
   end
 

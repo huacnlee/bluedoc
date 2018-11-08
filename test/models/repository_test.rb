@@ -115,4 +115,18 @@ class RepositoryTest < ActiveSupport::TestCase
     repo = build(:repository, toc: toc)
     assert_equal true, repo.valid?
   end
+
+  test "transfer" do
+    repo = create(:repository)
+    to_user = create(:user)
+
+    mock_current(user: to_user)
+    assert_equal false, repo.transfer("not-exist")
+    assert_equal ["Transfer target: [not-exist] does not exists, please check it."], repo.errors[:user_id]
+
+    assert_equal true, repo.transfer(to_user.slug)
+    assert_equal to_user.id, repo.user_id
+
+    assert_not_equal 0, Activity.where(action: :transfer_repo, target: repo).count
+  end
 end
