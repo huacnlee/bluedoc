@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboards#show"
     resource :dashboard
+    resources :groups
+    resources :users
+    resources :repositories
+    resources :docs
   end
 
   # short attachment url

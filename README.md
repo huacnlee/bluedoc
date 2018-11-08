@@ -14,3 +14,9 @@ In other Termal tab:
 ```bash
 $ rails s
 ```
+
+### Generate Admin
+
+```bash
+$ rails g scaffold_controller admin/repository slug:string name:string user:references description:string
+```

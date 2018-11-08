@@ -7,3 +7,35 @@
     fill: #333;
   }
 }
+
+.table {
+  .opts {
+    a { margin-left: 5px; }
+  }
+}
+
+.detail {
+  .detail-action {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .detail-row {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px;
+    vertical-align: top;
+
+    @extend .clearfix;
+
+    .detail-label {
+      margin-bottom: 5px;
+      float: left;
+      text-align: right;
+      margin-right: 10px;
+      width: 150px;
+      color: #666;
+
+      vertical-align: top;
+    }
+  }
+}

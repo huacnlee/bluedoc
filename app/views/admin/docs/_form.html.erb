@@ -1,0 +1,18 @@
+
+<%= form_for([:admin,@doc]) do |f| %>
+  <%= render "/shared/error_messages", target: @doc  %>
+
+  <div class="form-group">
+    <%= f.label :title, class: "control-label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :slug, class: "control-label" %>
+    <%= f.text_field :slug, class: "form-control" %>
+  </div>
+
+  <div class="form-action">
+    <%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%= link_to "Cancel", admin_docs_path %>
+  </div>
+<% end %>

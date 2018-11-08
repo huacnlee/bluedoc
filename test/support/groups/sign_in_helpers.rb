@@ -13,6 +13,7 @@ module Groups::SignInHelpers
   end
 
   def sign_in_admin(user)
+    sign_in user
     Setting.admin_emails = user.email
   end
 end

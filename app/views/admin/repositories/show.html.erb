@@ -1,0 +1,30 @@
+<%= render 'base' %>
+
+<div class="detail admin-edit-admin_repository">
+  <div class="detail-action">
+    <%= link_to 'Back to list', admin_repositories_path, class: "btn" %>
+    <%= link_to icon_tag("pencil", label: "Edit"), edit_admin_repository_path(@repository.id), class: "btn" %>
+    <%= link_to "All docs", admin_docs_path(repository_id: @repository.id), class: "btn" %>
+  </div>
+
+
+  <div class="detail-row">
+    <div class="detail-label">Slug:</div>
+    <div class="detail-value"><%= @repository.slug %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Name:</div>
+    <div class="detail-value"><%= @repository.name %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">User:</div>
+    <div class="detail-value"><%= @repository.user&.slug %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Description:</div>
+    <div class="detail-value"><%= @repository.description %></div>
+  </div>
+</div>

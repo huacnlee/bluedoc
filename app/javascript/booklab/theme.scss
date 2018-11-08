@@ -45,6 +45,10 @@
     color: $black;
     @extend .px-md-1;
     @extend .px-lg-2;
+
+    &.selected {
+      color: $primary;
+    }
   }
 
   .dropdown-caret {

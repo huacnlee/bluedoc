@@ -16,7 +16,14 @@
 
   <div class="nav-header">
     <div class="navbar flex-auto">
-      <a class="navbar-brand" href="/admin"><%= icon_tag("book", label: "BookLab Admin") %></a>
+      <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("book", label: "Admin") %></a>
+
+      <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
+        li <<  link_to("Group", admin_groups_path, class: "nav-link")
+        li <<  link_to("User", admin_users_path, class: "nav-link")
+        li <<  link_to("Repository", admin_repositories_path, class: "nav-link")
+        li <<  link_to("Doc", admin_docs_path, class: "nav-link")
+      end %>
     </div>
     <div class="navbar">
       <details class="dropdown details-reset details-overlay d-inline-block">
@@ -42,6 +49,13 @@
     <%= notice_message %>
     <div class="main-container">
       <div class="container">
+        <nav class="Breadcrumb mb-3">
+          <ol>
+            <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+            <%= yield :breadcrumb %>
+            <li class="breadcrumb-item text-small breadcrumb-item-selected"><%= action_name %></li>
+          </ol>
+        </nav>
         <%= yield %>
       </div>
     </div>

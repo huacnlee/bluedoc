@@ -1,0 +1,21 @@
+
+<%= form_for([:admin,@user]) do |f| %>
+  <%= render "/shared/error_messages", target: @user  %>
+
+    <div class="form-group">
+    <%= f.label :slug, class: "control-label" %>
+    <%= f.text_field :slug, class: "form-control" %>
+  </div>
+    <div class="form-group">
+    <%= f.label :name, class: "control-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+    <div class="form-group">
+    <%= f.label :followers_count, class: "control-label" %>
+    <%= f.text_field :followers_count, class: "form-control" %>
+  </div>
+  
+  <div class="form-action">
+    <%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%= link_to "Cancel", admin_users_path %>
+  </div>
+<% end %>

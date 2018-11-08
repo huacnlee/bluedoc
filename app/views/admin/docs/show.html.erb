@@ -1,0 +1,25 @@
+<%= render 'base' %>
+
+<div class="detail admin-edit-admin_doc">
+  <div class="detail-action">
+    <%= link_to 'Back to list', admin_docs_path, class: "btn" %>
+    <%= link_to icon_tag("pencil", label: "Edit"), edit_admin_doc_path(@doc.id), class: "btn" %>
+  </div>
+
+
+  <div class="detail-row">
+    <div class="detail-label">Title:</div>
+    <div class="detail-value"><%= @doc.title %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Slug:</div>
+    <div class="detail-value"><%= @doc.slug %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Repository:</div>
+    <div class="detail-value"><%= @doc.repository %></div>
+  </div>
+
+</div>

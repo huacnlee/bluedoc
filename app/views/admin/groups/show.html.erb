@@ -1,0 +1,42 @@
+<%= render "base" %>
+
+<div class="detail">
+  <div class="detail-action">
+    <%= link_to "Back", admin_groups_path, class: "btn" %>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Avatar</div>
+    <div class="detail-value"><%= image_tag @group.avatar_url, class: "avatar avatar-small" %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Slug</div>
+    <div class="detail-value"><%= @group.slug %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Name</div>
+    <div class="detail-value"><%= @group.name %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Description</div>
+    <div class="detail-value"><%= @group.description %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Members Count</div>
+    <div class="detail-value"><%= @group.members_count %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Created At</div>
+    <div class="detail-value"><%= l @group.created_at, format: :long %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label"></div>
+    <%= link_to "View", @group.to_path, target: "_blank", class: "btn" %>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<%= render 'base' %>
+
+<div class="subnav">
+  <nav class="subnav-links">
+    <a href="<%= new_admin_doc_path %>" class="subnav-item">New</a>
+  </nav>
+  <div class="subnav-search float-left">
+    <form action="" method="GET">
+      <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" aria-label="Search">
+      <%= octicon "search", class: "subnav-search-icon" %>
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="admin-admin_docs">
+  <table class="table">
+    <tr class="head">
+      <td>Id</td>
+      <td><%= t("activerecord.attributes.doc.repository") %></td>
+      <td><%= t("activerecord.attributes.doc.title") %></td>
+      <td><%= t("activerecord.attributes.doc.slug") %></td>
+      <td>Created At</td>
+      <td class="opts"></td>
+    </tr>
+    <% @docs.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= link_to item.repository&.name, admin_docs_path(repository_id: item.repository_id) %></td>
+      <td><%= link_to item.title, admin_doc_path(item.id) %></td>
+
+      <td><%= item.slug %></td>
+
+
+
+      <td><%= l(item.created_at, format: :long) %></td>
+      <td class="opts">
+        <%= link_to icon_tag("pencil"), edit_admin_doc_path(item.id) %>
+        <%= link_to icon_tag("trashcan"), admin_doc_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @docs %>
+</div>
