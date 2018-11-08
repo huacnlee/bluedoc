@@ -5,7 +5,14 @@
 
   <div class="col-10 d-table-cell p-5">
     <div class="sub-title">Recent docs</div>
-    <%= render partial: "docs", locals: { items: @user_actives } %>
-    <%= paginate @user_actives %>
+    <% if @user_actives.blank? %>
+      <div class="blankslate">
+        <h3>No recent docs</h3>
+        <p>You have no update Doc in recently.</p>
+      </div>
+    <% else %>
+      <%= render partial: "docs", locals: { items: @user_actives } %>
+      <%= paginate @user_actives %>
+    <% end %>
   </div>
 </div>
