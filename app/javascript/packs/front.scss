@@ -303,6 +303,16 @@
   }
 }
 
+.repository-item {
+  .counter {
+    margin-right: 8px;
+
+    .octicon {
+      fill: #666;
+    }
+  }
+}
+
 .user-card {
   position: relative;
 
