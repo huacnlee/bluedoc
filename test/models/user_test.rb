@@ -25,6 +25,14 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "jason", user.name
   end
 
+  test "slug validation" do
+    assert_equal true, build(:user, slug: "foo").valid?
+
+    u = build(:user, slug: "new")
+    assert_equal false, u.valid?
+    assert_equal ["invalid or [#{u.slug}] is a keyword"], u.errors[:slug]
+  end
+
   test ".repositories" do
     user = create(:user)
     repo0 = create(:repository, user_id: user.id)

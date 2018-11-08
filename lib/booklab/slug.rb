@@ -3,8 +3,16 @@ module BookLab
     FORMAT = 'A-Za-z0-9\-\_\.'
     REGEXP = /\A[#{Slug::FORMAT}]+\z/
 
+    USER_KEYWORDS = YAML.load(File.open(Rails.root.join("config/keywords.yml")).read)["user"]
+
     def self.valid?(slug)
       REGEXP.match? slug
+    end
+
+    def self.valid_user?(slug)
+      return false if !self.valid?(slug)
+      return false if USER_KEYWORDS.include?(slug.downcase)
+      true
     end
 
     def self.slugize(slug)

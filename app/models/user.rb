@@ -14,6 +14,13 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 2..20 }
   validates :slug, uniqueness: true
 
+  before_validation :check_slug_keywords
+  def check_slug_keywords
+    if !BookLab::Slug.valid_user?(self.slug)
+      self.errors.add(:slug, "invalid or [#{self.slug}] is a keyword")
+    end
+  end
+
   def to_path(suffix = nil)
     "/#{self.slug}#{suffix}"
   end
