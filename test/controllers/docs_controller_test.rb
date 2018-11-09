@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class DocsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -54,8 +56,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_match /#{doc.title}/, response.body
-    assert_select '.markdown-body'
-    assert_select '.label-private', 0
+    assert_select ".markdown-body"
+    assert_select ".label-private", 0
 
     # private
     doc = create(:doc, repository: @private_repo)
@@ -70,14 +72,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :reader, group: @group
     get doc.to_path
     assert_equal 200, response.status
-    assert_select '.label-private'
+    assert_select ".label-private"
   end
 
   test "GET /:user/:repo/:slug with doc not exist" do
     # allow open page even doc not exist
     get @repo.to_path("/not-exist-doc")
     assert_equal 200, response.status
-    assert_select '.blankslate'
+    assert_select ".blankslate"
     assert_match /Doc not found/, response.body
 
     # but private repo still not allow
@@ -89,7 +91,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     doc = create(:doc, repository: @repo)
     get doc.to_path
     assert_equal 200, response.status
-    assert_select '.toc-items-without-toc', 0
+    assert_select ".toc-items-without-toc", 0
 
     repo = create(:repository)
     repo.update(has_toc: 0)
@@ -97,7 +99,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     get doc.to_path
     assert_equal 200, response.status
-    assert_select '.toc-items-without-toc', 1
+    assert_select ".toc-items-without-toc", 1
   end
 
   test "PUT /:user/:repo/:slug" do
@@ -195,12 +197,12 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     last_version = create(:version, type: "DocVersion", subject: doc)
-    assert_select '.version-item', 8
-    assert_select '.version-item label.current', 1
-    assert_select '.version-item.selected', 1
-    assert_select '.version-items .version-item', 7
-    assert_select '.version-items .version-item label.current', 0
-    assert_select '.markdown-body'
+    assert_select ".version-item", 8
+    assert_select ".version-item label.current", 1
+    assert_select ".version-item.selected", 1
+    assert_select ".version-items .version-item", 7
+    assert_select ".version-items .version-item label.current", 0
+    assert_select ".markdown-body"
 
     # paginate with remote: true
     get doc.to_path("/versions"), xhr: true, params: { page: 2 }

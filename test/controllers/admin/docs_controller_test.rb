@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -32,7 +34,7 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy admin_doc" do
-    assert_difference('Doc.count', -1) do
+    assert_difference("Doc.count", -1) do
       delete admin_doc_path(@doc.id)
     end
 

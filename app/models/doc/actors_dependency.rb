@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Doc
   belongs_to :last_editor, class_name: "User", required: false
   belongs_to :creator, class_name: "User", required: false

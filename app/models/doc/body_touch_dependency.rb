@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Doc
   before_save do
     self.body_updated_at = Time.now

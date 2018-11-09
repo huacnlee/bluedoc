@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BlobsController < ApplicationController
   before_action :set_blob
 
@@ -12,7 +14,7 @@ class BlobsController < ApplicationController
 
   private
 
-    def send_file_by_disk_key(blob, content_type: )
+    def send_file_by_disk_key(blob, content_type:)
       case BookLab::Blob.service_name
       when "Disk"
         send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: :inline

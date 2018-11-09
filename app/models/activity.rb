@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Activity < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :actor, class_name: "User"

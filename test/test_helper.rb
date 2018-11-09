@@ -6,7 +6,7 @@ ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
 ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
 
 require_relative "../config/environment"
-require 'minitest/autorun'
+require "minitest/autorun"
 require "rails/test_help"
 require "database_cleaner"
 require_relative "./support/groups/sign_in_helpers"

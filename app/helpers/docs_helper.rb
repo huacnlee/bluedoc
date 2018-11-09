@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DocsHelper
   def doc_title_tag(doc)
     return "" if doc.blank?

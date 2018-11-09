@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -70,10 +72,10 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     assert_match /#{repo.name}/, response.body
-    assert_select '.btn-create-doc', 0
-    assert_select '.reponav-item-docs', 1
-    assert_select '.repo-toc'
-    assert_select '.label-private', 0
+    assert_select ".btn-create-doc", 0
+    assert_select ".reponav-item-docs", 1
+    assert_select ".repo-toc"
+    assert_select ".label-private", 0
 
     assert_raise(ActiveRecord::RecordNotFound) do
       get "/foo/#{repo.slug}"
@@ -92,22 +94,22 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
     assert_no_match /#{repo.to_path("/settings")}/, response.body
-    assert_select '.btn-create-doc'
-    assert_select '.label-private'
+    assert_select ".btn-create-doc"
+    assert_select ".label-private"
 
     sign_in_role :admin, group: @group
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
     assert_match /#{repo.to_path("/settings")}/, response.body
-    assert_select '.btn-create-doc'
+    assert_select ".btn-create-doc"
 
     # has_doc? enable, should render :docs
     repo = create(:repository, user: @group)
     repo.update(has_toc: 0)
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
-    assert_select '.reponav-item-docs', 0
-    assert_select '.repository-docs'
+    assert_select ".reponav-item-docs", 0
+    assert_select ".repository-docs"
   end
 
   test "GET /:user/:repo TOC List" do

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -32,7 +34,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy admin_user" do
-    assert_difference('User.count', -1) do
+    assert_difference("User.count", -1) do
       delete admin_user_path(@user.id)
     end
 

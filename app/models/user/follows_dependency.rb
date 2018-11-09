@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   action_store :follow, :user, counter_cache: "followers_count",
                                user_counter_cache: "following_count"

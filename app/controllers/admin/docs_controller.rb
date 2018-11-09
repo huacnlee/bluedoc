@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::DocsController < Admin::ApplicationController
   before_action :set_doc, only: [:show, :edit, :update, :destroy]
 

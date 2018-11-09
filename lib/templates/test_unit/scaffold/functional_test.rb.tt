@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 <% module_namespacing do -%>
 class <%= controller_class_name %>ControllerTest < ActionDispatch::IntegrationTest
@@ -32,7 +34,7 @@ class <%= controller_class_name %>ControllerTest < ActionDispatch::IntegrationTe
   end
 
   test "should destroy <%= singular_table_name %>" do
-    assert_difference('<%= file_name.camelize %>.count', -1) do
+    assert_difference("<%= file_name.camelize %>.count", -1) do
       delete <%= singular_table_name %>_path(@<%= file_name %>.id)
     end
 

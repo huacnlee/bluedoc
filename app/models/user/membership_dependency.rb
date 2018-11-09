@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   has_many :memberships, class_name: "Member", dependent: :destroy
   has_many :groups, through: :memberships, source: :subject, source_type: "User"

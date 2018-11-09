@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   AVATAR_STYLES = %i[tiny small medium large]
 
@@ -6,18 +8,18 @@ class User
                      file_content_type: { allow: %w[image/jpeg image/png] },
                      if: -> { avatar.attached? }
 
- class << self
-   include ActionView::Helpers::AssetUrlHelper
-   include Webpacker::Helper
+  class << self
+    include ActionView::Helpers::AssetUrlHelper
+    include Webpacker::Helper
 
-   def default_user_avatar
-     @default_user_avatar ||= asset_pack_path("images/default-user.png")
-   end
+    def default_user_avatar
+      @default_user_avatar ||= asset_pack_path("images/default-user.png")
+    end
 
-   def default_group_avatar
-     @default_group_avatar ||= asset_pack_path("images/default-group.png")
-   end
- end
+    def default_group_avatar
+      @default_group_avatar ||= asset_pack_path("images/default-group.png")
+    end
+  end
 
   def avatar_url(style: :small)
     return self.default_avatar unless self.avatar.attached?
@@ -36,5 +38,4 @@ class User
   def default_avatar
     self.type == "Group" ? self.class.default_group_avatar : self.class.default_user_avatar
   end
-
 end

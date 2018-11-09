@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Repository
   enum privacy: %i(private public), _prefix: :is
 

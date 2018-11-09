@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ApplicationHelperTest < ActionView::TestCase
   test "markdown" do
@@ -33,7 +35,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   private
 
-  def assert_sanitize_markdown(excepted, raw)
-    assert_equal excepted, markdown(raw)
-  end
+    def assert_sanitize_markdown(excepted, raw)
+      assert_equal excepted, markdown(raw)
+    end
 end

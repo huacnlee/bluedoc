@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BootstrapHelper
   def render_list(opts = {})
     list = []

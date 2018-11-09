@@ -10,7 +10,7 @@ gem "puma", "~> 3.11"
 
 gem "sidekiq"
 
-gem 'webpacker', '>= 4.0.x', github: "rails/webpacker"
+gem "webpacker", ">= 4.0.x", github: "rails/webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Groups::SignInHelpers
   def sign_in_user
     user = create(:user)
@@ -5,7 +7,7 @@ module Groups::SignInHelpers
     user
   end
 
-  def sign_in_role(role, group: )
+  def sign_in_role(role, group:)
     user = create(:user)
     group.add_member(user, role)
     sign_in user

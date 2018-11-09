@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :blob, class: "ActiveStorage::Blob" do
     key { SecureRandom.uuid }

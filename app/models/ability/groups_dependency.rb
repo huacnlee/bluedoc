@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   def abilities_for_groups
     can :manage, User, id: user.id

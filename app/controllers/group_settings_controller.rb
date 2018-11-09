@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupSettingsController < Groups::ApplicationController
   before_action :set_group
 

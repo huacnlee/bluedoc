@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab
   class Blob
     class << self

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class RepositoriesHelperTest < ActionView::TestCase
   include ApplicationHelper
@@ -70,6 +72,6 @@ class RepositoriesHelperTest < ActionView::TestCase
         #{count_html}
         </div>
        TEXT
-      assert_equal expected.gsub(/\n/,""), html
+      assert_equal expected.gsub(/\n/, ""), html
     end
 end

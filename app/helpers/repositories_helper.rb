@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RepositoriesHelper
   def repository_name_tag(repo)
     return "" if repo.blank?

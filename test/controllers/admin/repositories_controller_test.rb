@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Admin::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -32,7 +34,7 @@ class Admin::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy admin_repository" do
-    assert_difference('Repository.count', -1) do
+    assert_difference("Repository.count", -1) do
       delete admin_repository_path(@repository.id)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositoriesController < Users::ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy action toc]
 

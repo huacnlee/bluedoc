@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Doc
   after_create :track_doc_version_on_create
   after_update :track_doc_version

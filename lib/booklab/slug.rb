@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab
   class Slug
     FORMAT = 'A-Za-z0-9\-\_\.'

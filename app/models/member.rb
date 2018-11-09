@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Member < ApplicationRecord
   include Activityable
 
@@ -17,5 +19,4 @@ class Member < ApplicationRecord
 
       UserActive.track(self.subject, user: self.user)
     end
-
 end

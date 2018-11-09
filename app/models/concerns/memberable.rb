@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Memberable
   extend ActiveSupport::Concern
 
@@ -45,8 +47,8 @@ module Memberable
 
   private
 
-  def add_creator_as_admin!
-    return if Current.user.blank?
-    self.members.create!(user_id: Current.user.id, subject: self, role: :admin)
-  end
+    def add_creator_as_admin!
+      return if Current.user.blank?
+      self.members.create!(user_id: Current.user.id, subject: self, role: :admin)
+    end
 end

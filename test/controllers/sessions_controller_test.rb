@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -63,7 +65,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/sign_in with omniauth" do
-    OmniAuth.config.add_mock(:google_oauth2, { uid: "123" })
+    OmniAuth.config.add_mock(:google_oauth2, uid: "123")
 
     get "/account/auth/google_oauth2/callback"
     assert_redirected_to new_user_registration_path
@@ -83,7 +85,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     delete destroy_user_session_path
 
     user1 = create(:user, password: "123456", password_confirmation: "123456")
-    OmniAuth.config.add_mock(:google_oauth2, { uid: "234" })
+    OmniAuth.config.add_mock(:google_oauth2, uid: "234")
     get "/account/auth/google_oauth2/callback"
     assert_redirected_to new_user_registration_path
     post user_session_path, params: { user: { email: user1.email, password: "123456" } }
@@ -96,7 +98,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/sign_in with omniauth when bind exist" do
-    OmniAuth.config.add_mock(:google_oauth2, { uid: "123" })
+    OmniAuth.config.add_mock(:google_oauth2, uid: "123")
 
     create(:authorization, provider: "google_oauth2", uid: "123", user: @user)
 
@@ -116,5 +118,4 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal 1, Authorization.count
   end
-
 end

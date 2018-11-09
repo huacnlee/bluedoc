@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   def self.prefix_search(term, user: nil, group: nil, repository: nil, limit: 30)
     following = []

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Repository
   has_many :user_actives, as: :subject, dependent: :destroy
   after_commit :track_user_active, on: :create

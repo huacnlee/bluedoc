@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class AbilityTest < ActiveSupport::TestCase
   test "admin can manage all" do

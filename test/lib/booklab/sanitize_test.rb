@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 # test Sanitize via ApplicationHelper methods
 class BookLab::SanitizeTest < ActionView::TestCase
@@ -89,11 +91,11 @@ class BookLab::SanitizeTest < ActionView::TestCase
 
   private
 
-  def assert_sanitize(expected, html)
-    assert_equal expected, sanitize_html(html)
-  end
+    def assert_sanitize(expected, html)
+      assert_equal expected, sanitize_html(html)
+    end
 
-  def assert_sanitize_same(html)
-    assert_sanitize html, html
-  end
+    def assert_sanitize_same(html)
+      assert_sanitize html, html
+    end
 end

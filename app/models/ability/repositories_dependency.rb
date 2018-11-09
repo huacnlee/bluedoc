@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   def abilities_for_repositories
     can :read, Repository, privacy: :public

@@ -117,12 +117,12 @@ class UserTest < ActiveSupport::TestCase
 
   test ".find_for_database_authentication" do
     user = create(:user, slug: "huacnlee", email: "huacnlee@gmail.com")
-    assert_equal user, User.find_for_database_authentication({ email: "huacnlee" })
-    assert_equal user, User.find_for_database_authentication({ email: "huacnlee@gmail.com" })
+    assert_equal user, User.find_for_database_authentication(email: "huacnlee")
+    assert_equal user, User.find_for_database_authentication(email: "huacnlee@gmail.com")
 
     user = create(:user, slug: "Jason", email: "JASON@Gmail.com")
-    assert_equal user, User.find_for_database_authentication({ email: "jason" })
-    assert_equal user, User.find_for_database_authentication({ email: "jason@gmail.com" })
+    assert_equal user, User.find_for_database_authentication(email: "jason")
+    assert_equal user, User.find_for_database_authentication(email: "jason@gmail.com")
   end
 
   test "follows" do

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class BookLab::MarkdownTest < ActiveSupport::TestCase
   test "render" do
@@ -6,7 +8,7 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
     out = BookLab::Markdown.render(raw)
     assert_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>\n<p>hello <strong>world</strong></p>), out
   end
-  
+
   test "heading" do
     assert_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>), BookLab::Markdown.render("# This is **title**")
     assert_equal %(<h1 id="this-is-"><a href="#this-is-" class="heading-anchor">#</a>This is 中文</h1>), BookLab::Markdown.render("# This is 中文")

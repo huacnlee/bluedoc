@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -78,7 +80,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to repo.to_path("/settings/advanced")
     get repo.to_path("/settings/advanced")
     assert_equal 200, response.status
-    assert_match 'Transfer target: [not-exist] does not exists', response.body
+    assert_match "Transfer target: [not-exist] does not exists", response.body
 
     user = create(:user)
     repo_params = { transfer_to_user: user.slug }

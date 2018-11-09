@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Repository
   after_create :trigger_members_watch
 
@@ -13,7 +15,7 @@ class Repository
 
       Action.bulk_insert do |work|
         user_ids.each do |user_id|
-          work.add({ action_type: "watch", target_type: "Repository", target_id: self.id, user_type: "User", user_id: user_id })
+          work.add(action_type: "watch", target_type: "Repository", target_id: self.id, user_type: "User", user_id: user_id)
         end
       end
 

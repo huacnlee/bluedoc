@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     omniauth_auth = request.env["omniauth.auth"]
 
     if omniauth_auth.blank?
-      redirect_to new_user_session_path and return
+      redirect_to(new_user_session_path) && (return)
     end
 
     session[:omniauth] = omniauth_auth

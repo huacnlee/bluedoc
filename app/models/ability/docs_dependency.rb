@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   def abilities_for_docs
     can :read, Doc do |doc|

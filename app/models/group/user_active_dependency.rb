@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group
   has_many :user_actives, as: :subject, dependent: :destroy
 

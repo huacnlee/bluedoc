@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class DashboardsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -20,8 +22,8 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/"
     assert_equal 200, response.status
-    assert_select '.recent-docs .recent-doc-item', 2
-    assert_select '.group-list .group-item', 1
+    assert_select ".recent-docs .recent-doc-item", 2
+    assert_select ".group-list .group-item", 1
 
     get "/dashboard"
     assert_redirected_to "/"
@@ -40,7 +42,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/docs"
     assert_equal 200, response.status
-    assert_select '.recent-docs .recent-doc-item', 2
+    assert_select ".recent-docs .recent-doc-item", 2
   end
 
   test "GET /dashboard/repositories" do
@@ -58,7 +60,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/repositories"
     assert_equal 200, response.status
-    assert_select '.dashboard-table .recent-repo-item', 2
+    assert_select ".dashboard-table .recent-repo-item", 2
   end
 
   test "GET /dashboard/groups" do
@@ -76,7 +78,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/groups"
     assert_equal 200, response.status
-    assert_select '.dashboard-table .recent-group-item', 2
+    assert_select ".dashboard-table .recent-group-item", 2
   end
 
   test "GET /dashboard/stars" do
@@ -93,7 +95,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/stars"
     assert_equal 200, response.status
-    assert_select '.dashboard-table .repo-item', 2
+    assert_select ".dashboard-table .repo-item", 2
   end
 
   test "GET /dashboard/watches" do
@@ -110,6 +112,6 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/watches"
     assert_equal 200, response.status
-    assert_select '.dashboard-table .repo-item', 2
+    assert_select ".dashboard-table .repo-item", 2
   end
 end

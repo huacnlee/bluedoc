@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class RegistrationsController < ActionDispatch::IntegrationTest
   test "normal user sign up" do
@@ -26,7 +28,7 @@ class RegistrationsController < ActionDispatch::IntegrationTest
   end
 
   test "Sign up with Omniauth" do
-    OmniAuth.config.add_mock(:google_oauth2, { uid: "123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" } })
+    OmniAuth.config.add_mock(:google_oauth2, uid: "123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" })
 
     get "/account/auth/google_oauth2/callback"
     assert_redirected_to new_user_registration_path

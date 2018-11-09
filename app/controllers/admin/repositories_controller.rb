@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::RepositoriesController < Admin::ApplicationController
   before_action :set_repository, only: [:show, :edit, :update, :destroy]
 

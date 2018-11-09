@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DocsController < Users::ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy versions revert]
 
@@ -51,7 +53,7 @@ class DocsController < Users::ApplicationController
 
     respond_to do |format|
       if @doc.update(doc_params)
-        format.html { redirect_to @doc.to_path, notice: 'Doc was successfully updated.' }
+        format.html { redirect_to @doc.to_path, notice: "Doc was successfully updated." }
         format.json { render json: { ok: true } }
       else
         format.html { render :edit, layout: "editor" }
@@ -92,7 +94,7 @@ class DocsController < Users::ApplicationController
 
     @doc.destroy
     respond_to do |format|
-      format.html { redirect_to @repository.to_path, notice: 'Doc was successfully destroyed.' }
+      format.html { redirect_to @repository.to_path, notice: "Doc was successfully destroyed." }
       format.json { head :no_content }
     end
   end

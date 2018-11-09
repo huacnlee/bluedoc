@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Override ActiveStorage DiskService service_url method to generate custom controller path
 module ActiveStorageDiskServiceURL
   def url(key, expires_in:, filename:, disposition:, content_type:)
@@ -14,7 +16,7 @@ module ActiveStorageS3ServiceURL
   def upload(key, io, checksum: nil)
     instrument :upload, key: key, checksum: checksum do
       begin
-        object_for(key).put(upload_options.merge(body: io, content_md5: checksum, acl: 'public-read', cache_control: "max-age=#{300.days}"))
+        object_for(key).put(upload_options.merge(body: io, content_md5: checksum, acl: "public-read", cache_control: "max-age=#{300.days}"))
       rescue Aws::S3::Errors::BadDigest
         raise ActiveStorage::IntegrityError
       end
@@ -25,7 +27,7 @@ module ActiveStorageS3ServiceURL
     instrument :url, key: key do |payload|
       generated_url = object_for(key).presigned_url :put, expires_in: expires_in.to_i,
         content_type: content_type, content_length: content_length, content_md5: checksum,
-        acl: 'public-read', cache_control: "max-age=#{300.days}"
+        acl: "public-read", cache_control: "max-age=#{300.days}"
 
       payload[:url] = generated_url
 

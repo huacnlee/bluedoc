@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Activities
   class Base
     attr_accessor :actor

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -32,7 +34,7 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy admin_group" do
-    assert_difference('Group.count', -1) do
+    assert_difference("Group.count", -1) do
       delete admin_group_path(@group.id)
     end
 

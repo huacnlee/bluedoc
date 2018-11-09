@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Doc
   after_commit :track_user_active, on: [:create, :update]
 
