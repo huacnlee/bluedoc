@@ -111,6 +111,6 @@ class DocsController < Users::ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doc_params
-      params.require(:doc).permit(:title, :draft_title, :body, :draft_body, :slug)
+      params.require(:doc).permit(:title, :draft_title, :body, :body_sml, :draft_body, :draft_body_sml, :slug)
     end
 end

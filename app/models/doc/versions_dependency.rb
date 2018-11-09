@@ -2,10 +2,9 @@
 
 class Doc
   after_create :track_doc_version_on_create
-  after_update :track_doc_version
+  after_update :track_doc_version_on_update
 
   has_many :versions, -> { order("id desc") }, class_name: "DocVersion", as: :subject
-
 
   # Revert to a version, this still create a new version
   def revert(version_id, user_id: nil)
@@ -15,18 +14,22 @@ class Doc
       return false
     end
 
-    self.update(body: version.body_plain, last_editor_id: user_id)
+    self.update(body: version.body_plain, body_sml: version.body_sml, last_editor_id: user_id)
   end
 
   private
 
     def track_doc_version_on_create
-      self.versions.create!(user_id: self.last_editor_id, body: self.body)
+      _track_doc_version
     end
 
-    def track_doc_version
-      return unless self.body.changed?
+    def track_doc_version_on_update
+      if self.body.changed? || self.body_sml.changed?
+        _track_doc_version
+      end
+    end
 
-      self.versions.create!(user_id: self.last_editor_id, body: self.body)
+    def _track_doc_version
+      self.versions.create!(user_id: self.last_editor_id, body: self.body, body_sml: self.body_sml)
     end
 end

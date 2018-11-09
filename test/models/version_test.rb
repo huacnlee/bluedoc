@@ -11,7 +11,7 @@ class VersionTest < ActiveSupport::TestCase
   end
 
   test "Versionable with Doc" do
-    doc = build(:doc, body: "This is new body")
+    doc = build(:doc, body: "This is new body", body_sml: "AAA this is new body")
     doc.save
 
     assert_equal false, doc.new_record?
@@ -20,15 +20,17 @@ class VersionTest < ActiveSupport::TestCase
     version0 = doc.versions.first
     assert_equal "DocVersion", version0.type
     assert_equal "This is new body", version0.body_plain
+    assert_equal "AAA this is new body", version0.body_sml_plain
 
     doc.update(title: "Foo bar")
     versions = doc.versions
     assert_equal 1, versions.count
 
-    doc.update(body: "123456")
+    doc.update(body: "123456", body_sml: "23456")
     assert_equal 2, doc.versions.count
     version1 = doc.versions.first
     assert_equal "123456", version1.body_plain
+    assert_equal "23456", version1.body_sml_plain
 
     # revert
     assert_equal false, doc.revert(-1)
@@ -38,6 +40,7 @@ class VersionTest < ActiveSupport::TestCase
     assert_equal true, doc.revert(version0.id, user_id: user.id)
     doc.reload
     assert_equal version0.body_plain, doc.body_plain
+    assert_equal version0.body_sml_plain, doc.body_sml_plain
     assert_equal user.id, doc.last_editor_id
     assert_equal 3, doc.versions.count
     assert_equal user.id, doc.versions.first.user_id

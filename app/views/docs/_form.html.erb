@@ -23,5 +23,6 @@
        direct_upload_url: rails_direct_uploads_url,
        blob_url_template: upload_path(":id")
       } %>
+    <%= form.text_area :body_sml, value: doc.draft_body_sml_plain, style: "display: none" %>
   </div>
 <% end %>

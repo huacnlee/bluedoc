@@ -2,6 +2,7 @@
 
 class Version < ApplicationRecord
   include Markdownable
+  include Smlable
   include Activityable
 
   belongs_to :subject, required: false, polymorphic: true
@@ -9,6 +10,4 @@ class Version < ApplicationRecord
 
   # use for view render show offset
   attr_accessor :idx
-
-  has_rich_text :body
 end
