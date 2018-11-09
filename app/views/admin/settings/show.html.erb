@@ -1,0 +1,17 @@
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item">Settings</li>
+<% end %>
+
+<%= form_for(Setting.new, url: admin_settings_path) do |f| %>
+  <div class="form-group">
+    <label class="controler-label">Admin Emails</label>
+    <textarea class="form-control" style="height: 100px; min-height: 100px" name="admin_emails"><%= Setting.admin_emails %></textarea>
+    <div class="form-text">
+      Special account emails as admin with each line.
+    </div>
+  </div>
+
+  <div class="form-action">
+    <%= f.submit "Save", class: "btn btn-primary mr-1" %>
+  </div>
+<% end %>

@@ -10,12 +10,8 @@ class Ability
   def initialize(u)
     @user = u || User.new
 
-    if user.admin?
-      can :manage, :all
-    else
-      abilities_for_anonymous
-      abilities_for_sign_in_user
-    end
+    abilities_for_anonymous
+    abilities_for_sign_in_user
   end
 
   def abilities_for_sign_in_user

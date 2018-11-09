@@ -7,7 +7,7 @@ class AbilityTest < ActiveSupport::TestCase
     user = create(:user)
     user.stub(:admin?, true) do
       ability = Ability.new(user)
-      assert ability.can? :manage, :all
+      assert ability.cannot? :manage, :all
     end
   end
 
