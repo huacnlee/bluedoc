@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_071939) do
+ActiveRecord::Schema.define(version: 2018_11_12_054338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,21 @@ ActiveRecord::Schema.define(version: 2018_11_09_071939) do
     t.integer "members_count", default: 0, null: false
     t.index ["user_id", "slug"], name: "index_repositories_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
+  end
+
+  create_table "search_texts", force: :cascade do |t|
+    t.string "record_type", limit: 20
+    t.integer "record_id"
+    t.string "title"
+    t.string "slug"
+    t.text "body"
+    t.integer "repository_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id"], name: "index_search_texts_on_record_type_and_record_id"
+    t.index ["repository_id"], name: "index_search_texts_on_repository_id"
+    t.index ["user_id"], name: "index_search_texts_on_user_id"
   end
 
   create_table "settings", force: :cascade do |t|

@@ -14,6 +14,7 @@ require_relative "./support/groups/sign_in_helpers"
 DatabaseCleaner.strategy = :transaction
 DatabaseCleaner.orm = :active_record
 OmniAuth.config.test_mode = true
+Setting.default_local = "zh-CN"
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods

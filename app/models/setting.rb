@@ -34,6 +34,7 @@ class Setting < RailsSettings::Base
   end
 
   field :admin_emails, default: "admin@booklab.io", type: :array
+  field :default_locale, default: "en"
 
   class << self
     def has_admin?(email)

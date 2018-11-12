@@ -57,6 +57,11 @@ Rails.application.routes.draw do
     resource :group_settings, as: :settings, path: :settings
   end
   resources :versions
+  resource :search do
+    collection do
+      get :docs
+    end
+  end
 
   # NOTE! Keep :profile routes bottom of routes.rb
   resources :repositories, only: %i(index create)

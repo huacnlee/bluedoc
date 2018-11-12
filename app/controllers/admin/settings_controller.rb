@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SettingsController < Admin::ApplicationController
-  ALLOW_KEYS = %i[admin_emails]
+  ALLOW_KEYS = %i[admin_emails default_locale]
   def show
     @setting = Setting.unscoped.first || Setting.new
   end

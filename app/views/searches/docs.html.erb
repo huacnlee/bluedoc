@@ -1,0 +1,10 @@
+<form actio="" method="GET">
+  <input name="q" type="text" class="form-control" value="<%= params[:q] %>" />
+</form>
+
+<% @search_texts.each do |search_text| %>
+  <div class="title"><%= link_to search_text.title, search_text.record&.to_path %></div>
+  <div class="description">
+    <%= search_text.pg_search_highlight %>
+  </div>
+<% end %>
