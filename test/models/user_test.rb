@@ -172,11 +172,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "as_indexed_json" do
     user = create(:user, description: "Hello world")
-    data = { type: "User", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id }
+    data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id }
     assert_equal data, user.as_indexed_json
 
     group = create(:group)
-    data = { type: "Group", slug: group.slug, title: group.name, body: group.description, user_id: group.id }
+    data = { sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id }
     assert_equal data, group.as_indexed_json
   end
 

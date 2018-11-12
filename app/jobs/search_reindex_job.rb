@@ -2,7 +2,7 @@
 
 class SearchReindexJob < ApplicationJob
   def perform
-    User.find_each { |record| record.__elasticsearch__.index_document }
+    User.where(type: "User").find_each { |record| record.__elasticsearch__.index_document }
     Group.find_each { |record| record.__elasticsearch__.index_document }
     Repository.find_each { |record| record.__elasticsearch__.index_document }
     Doc.find_each { |record| record.__elasticsearch__.index_document }

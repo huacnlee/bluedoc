@@ -93,7 +93,7 @@ module BookLab
         q = {
           query_string: {
             fields: %w[slug title body],
-            query: "*#{self.query}*",
+            query: "#{self.query} or *#{self.query}*",
           }
         }
 
@@ -102,12 +102,12 @@ module BookLab
 
       def search_groups
         filter = []
-        filter << { term: { type: "Group" } }
+        filter << { term: { sub_type: "group" } }
 
         q = {
           query_string: {
             fields: %w[slug title body],
-            query: "*#{self.query}*",
+            query: "#{self.query} or *#{self.query}*",
           }
         }
 
@@ -116,12 +116,12 @@ module BookLab
 
       def search_users
         filter = []
-        filter << { term: { type: "User" } }
+        filter << { term: { sub_type: "user" } }
 
         q = {
           query_string: {
             fields: %w[slug title body],
-            query: "*#{self.query}*",
+            query: "#{self.query} or *#{self.query}*",
           }
         }
 

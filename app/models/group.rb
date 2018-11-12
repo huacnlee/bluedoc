@@ -3,6 +3,7 @@
 class Group < User
   include Memberable
   include Activityable
+  include Searchable
 
   depends_on :user_active
 

@@ -54,4 +54,19 @@ class SearchableTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "model reigstry" do
+    # Touch class first
+    Group.first
+    User.first
+    Doc.first
+    Repository.first
+
+    # check Elasticsearch::Model Registry
+    registry_names = Elasticsearch::Model::Registry.all.collect(&:index_name)
+    assert_equal true, registry_names.include?("test-groups")
+    assert_equal true, registry_names.include?("test-users")
+    assert_equal true, registry_names.include?("test-repositories")
+    assert_equal true, registry_names.include?("test-docs")
+  end
 end

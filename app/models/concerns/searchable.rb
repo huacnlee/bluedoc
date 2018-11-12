@@ -6,6 +6,10 @@ module Searchable
   included do
     include Elasticsearch::Model
 
+    index_name do
+      "#{Rails.env}-#{name.pluralize}".downcase
+    end
+
     mapping do
       indexes :title, term_vector: :yes
       indexes :body, term_vector: :yes
@@ -26,12 +30,6 @@ module Searchable
 
     after_commit on: :destroy do
       SearchIndexJob.perform_later("delete", self.class.name, self.id)
-    end
-  end
-
-  class_methods do
-    def index_name
-      @index_name ||= "#{Rails.env}-#{name.pluralize}".downcase
     end
   end
 
