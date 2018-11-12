@@ -2,13 +2,15 @@
 
 <div class="subnav">
   <nav class="subnav-links">
+    <% if params[:q] %>
+    <a href="<%%= <%= plural_file_name %>_path %>" class="subnav-item">All</a>
+    <% end %>
     <a href="<%%= new_<%= singular_table_name %>_path %>" class="subnav-item">New</a>
   </nav>
   <div class="subnav-search float-left">
     <form action="" method="GET">
       <input type="search" name="q" class="form-control subnav-search-input" value="<%%= params[:q] %>" aria-label="Search">
       <%%= octicon "search", class: "subnav-search-icon" %>
-      <button type="submit" class="btn">Search</button>
     </form>
   </div>
 </div>

@@ -8,6 +8,10 @@ class Admin::DocsController < Admin::ApplicationController
     if params[:repository_id]
       @docs = @docs.where(repository_id: params[:repository_id])
     end
+    if params[:q]
+      q = "%#{params[:q]}%"
+      @docs = @docs.where("title ilike ? or slug = ?", q, q)
+    end
     @docs = @docs.page(params[:page])
   end
 

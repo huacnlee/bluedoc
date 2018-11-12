@@ -4,7 +4,11 @@ class Admin::UsersController < Admin::ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.order("id desc")
+    @users = User.where(type: "User").order("id desc")
+    if params[:q]
+      q = "%#{params[:q]}%"
+      @users = @users.where("email ilike ? or slug ilike ? or name ilike ?", q, q, q)
+    end
     @users = @users.page(params[:page])
   end
 

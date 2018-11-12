@@ -5,6 +5,10 @@ class Admin::RepositoriesController < Admin::ApplicationController
 
   def index
     @repositories = Repository.includes(:user).order("id desc")
+    if params[:q]
+      q = "%#{params[:q]}%"
+      @repositories = @repositories.where("name ilike ? or slug = ? or description ilike ?", q, q, q)
+    end
     @repositories = @repositories.page(params[:page])
   end
 

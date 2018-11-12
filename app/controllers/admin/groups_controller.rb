@@ -5,6 +5,10 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def index
     @groups = Group.order("id desc")
+    if params[:q]
+      q = "%#{params[:q]}%"
+      @groups = @groups.where("email ilike ? or slug ilike ? or name ilike ?", q, q, q)
+    end
     @groups = @groups.page(params[:page])
   end
 
