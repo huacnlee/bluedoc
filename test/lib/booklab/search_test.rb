@@ -75,7 +75,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title^10 body],
+        fields: %w[slug title^10 body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
@@ -93,7 +93,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title^10 body],
+        fields: %w[slug title^10 body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
@@ -111,7 +111,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title^10 body],
+        fields: %w[slug title^10 body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
@@ -134,7 +134,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title body],
+        fields: %w[slug title body],
         query: "*foo*",
       }
     }, [
@@ -150,7 +150,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title body],
+        fields: %w[slug title body],
         query: "*foo*",
       }
     }, [
@@ -170,7 +170,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title body],
+        fields: %w[slug title body],
         query: "*foo*",
       }
     }, [
@@ -190,7 +190,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[title body],
+        fields: %w[slug title body],
         query: "*foo*",
       }
     }, [

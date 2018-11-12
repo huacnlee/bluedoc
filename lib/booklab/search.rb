@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module BookLab
+  # Global search with ElasticSearch
   class Search
     attr_accessor :type, :query, :user_id, :repository_id, :include_private, :client
 
@@ -64,7 +67,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[title^10 body],
+            fields: %w[slug title^10 body],
             query: (self.query || ""),
             default_operator: "AND",
             minimum_should_match: "70%",
@@ -89,7 +92,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[title body],
+            fields: %w[slug title body],
             query: "*#{self.query}*",
           }
         }
@@ -103,7 +106,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[title body],
+            fields: %w[slug title body],
             query: "*#{self.query}*",
           }
         }
@@ -117,7 +120,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[title body],
+            fields: %w[slug title body],
             query: "*#{self.query}*",
           }
         }

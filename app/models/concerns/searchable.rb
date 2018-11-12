@@ -29,6 +29,12 @@ module Searchable
     end
   end
 
+  class_methods do
+    def index_name
+      @index_name ||= "#{Rails.env}-#{name.pluralize}".downcase
+    end
+  end
+
   def reindex
     SearchIndexJob.perform_later("index", self.class.name, self.id)
   end
