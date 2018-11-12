@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   resource :search do
     collection do
       get :docs
+      get :repositories
+      get :groups
     end
   end
 

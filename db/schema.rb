@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_054338) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id"], name: "index_search_texts_on_record_type_and_record_id"
+    t.index ["record_type", "record_id"], name: "index_search_texts_on_record_type_and_record_id", unique: true
     t.index ["repository_id"], name: "index_search_texts_on_repository_id"
     t.index ["user_id"], name: "index_search_texts_on_user_id"
   end

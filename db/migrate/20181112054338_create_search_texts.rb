@@ -13,7 +13,7 @@ class CreateSearchTexts < ActiveRecord::Migration[5.2]
 
       t.timestamps
 
-      t.index [:record_type, :record_id]
+      t.index [:record_type, :record_id], unique: true
       t.index [:repository_id]
       t.index [:user_id]
     end

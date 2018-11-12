@@ -8,19 +8,29 @@ class SearchText < ApplicationRecord
   belongs_to :user, required: false
 
   pg_search_scope :fulltext_search,
-    against: { title: "A", slug: "A", body: "C" },
+    against: %i(body),
     using: {
       tsearch: {
-        dictionary: BookLab::Search.ts_config,
-        highlight: true
+        dictionary: :english,
+        highlight: {
+          StartSel: '{{b}}',
+          StopSel: '{{/b}}',
+          FragmentDelimiter: '&hellip;',
+          MaxWords: 10,
+          MinWords: 8
+        }
       }
     }
 
   def self.search(type, q)
-    items = self.fulltext_search(BookLab::Search.prepare_data(q, :mix))
+    q ||= BookLab::Search.prepare_data(q || "", :mix).strip
+    logger.info "[search] #{q.inspect}"
+    items = self.where(record_type: type.to_s.classify).fulltext_search(q)
 
     case type.to_sym
     when :docs
+      items = items.joins(:repository).where("repositories.privacy = ?", Repository.privacies[:public])
+    when :repositories
       items = items.joins(:repository).where("repositories.privacy = ?", Repository.privacies[:public])
     end
 
@@ -35,9 +45,18 @@ class SearchText < ApplicationRecord
   end
 
   def self.reindex(record)
-    item ||= self.find_or_create_by!(record: record)
+    record_type = record.class.name
+    record_id = record.id
 
-    case record.class.name
+    if record_type == "User"
+      if record.group?
+        record_type = "Group"
+      end
+    end
+
+    item ||= self.find_or_create_by!(record_type: record_type, record_id: record_id)
+
+    case record_type
     when "Doc"
       item.title = record.title
       item.slug = record.slug

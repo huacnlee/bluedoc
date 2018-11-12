@@ -2,19 +2,17 @@
   <%= render "menu" %>
 
   <div class="col-8 d-table-cell">
+
     <div class="search-results">
       <% if @search_texts.blank? %>
       <div class="blankslate">
-        Can't find any Doc like "<span class="text-red"><%= params[:q] %></span>" in our database.
+        Can't find any Group like "<span class="text-red"><%= params[:q] %></span>" in our database.
       </div>
       <% end %>
 
       <% @search_texts.each do |item| %>
         <div class="search-result">
-          <div class="title"><%= link_to item.record&.title, item.record&.to_path %></div>
-          <div class="description">
-            <%= highlight item.pg_search_highlight %>
-          </div>
+          <%= render "/users/card", user: item.record %>
         </div>
       <% end %>
       <%= paginate @search_texts %>

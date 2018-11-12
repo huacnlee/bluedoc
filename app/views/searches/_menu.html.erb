@@ -1,0 +1,9 @@
+<div class="col-2 d-table-cell pr-4 v-align-top">
+  <ul class="menu">
+    <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
+      li << link_to("Docs", docs_search_path(q: params[:q]), class: "menu-item")
+      li << link_to("Repositories", repositories_search_path(q: params[:q]), class: "menu-item")
+      li << link_to("Groups", groups_search_path(q: params[:q]), class: "menu-item")
+    end %>
+  </ul>
+</div>

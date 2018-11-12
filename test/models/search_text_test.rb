@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SearchTextTest < ActiveSupport::TestCase
-  test "reindex doc" do
+  test "index doc" do
     Setting.stub(:default_locale, "zh-CN") do
       # doc
       doc = create(:doc, title: "Hello world\n this is title", body: "Hello\n this is body 中文文本搜索演示")
@@ -47,7 +47,8 @@ class SearchTextTest < ActiveSupport::TestCase
 
       # group
       group = create(:group, name: "Simple 团队演示", description: "body 中文文本搜索演示")
-      item = SearchText.where(record: group).last
+      item = SearchText.where(record_type: "Group", record_id: group.id).last
+      assert_equal "Group", item.record_type
       assert_equal group, item.record
       assert_nil item.repository_id
       assert_equal group.id, item.user_id
@@ -56,7 +57,7 @@ class SearchTextTest < ActiveSupport::TestCase
       assert_equal "body 中文 文本 搜索 演示", item.body
 
       group.update(name: "团队演示Simple")
-      item1 = SearchText.where(record: group).last
+      item1 = SearchText.where(record_type: "Group", record_id: group.id).last
       assert_equal item.id, item1.id
       assert_equal "团队 演示 Simple", item1.title
 
@@ -65,6 +66,11 @@ class SearchTextTest < ActiveSupport::TestCase
       group.destroy
       assert_equal 0, SearchText.where(user_id: group.id).count
       assert_equal 0, SearchText.where(record: group).count
+
+      # user
+      user = create(:user, name: "Simple 团队演示", description: "body 中文文本搜索演示")
+      item = SearchText.where(record: user).last
+      assert_equal "User", item.record_type
     end
   end
 

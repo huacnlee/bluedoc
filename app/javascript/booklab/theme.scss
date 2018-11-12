@@ -86,6 +86,19 @@
   }
 }
 
+.form-search-control {
+  box-shadow: 0 0 0;
+  background: #fafafa;
+  border-color: #EAEAEA;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: #fff;
+    outline: none !important;
+  }
+}
+
 .flash-full {
   .flash {
     border-radius: 0;
