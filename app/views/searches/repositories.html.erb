@@ -4,19 +4,19 @@
   <div class="col-8 d-table-cell">
 
     <div class="search-results">
-      <% if @search_texts.blank? %>
+      <% if @result.records.blank? %>
       <div class="blankslate">
         Can't find any Repository like "<span class="text-red"><%= params[:q] %></span>" in our database.
       </div>
       <% end %>
 
-      <% @search_texts.each do |item| %>
+      <% @result.records.each_with_hit do |item, hit| %>
         <div class="search-result">
-          <%= render "/repositories/card", repository: item.record %>
+          <%= render "/repositories/card", repository: item %>
 
         </div>
       <% end %>
-      <%= paginate @search_texts %>
+      <%= paginate @result %>
     </div>
   </div>
 </div>

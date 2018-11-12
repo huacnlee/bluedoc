@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/Casecommons/pg_search.git
-  revision: 5538446b8ef70cb7725dd20ae5e98bedac5d540a
-  specs:
-    pg_search (2.1.2)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      arel (>= 6)
-
-GIT
   remote: https://github.com/rails/actiontext.git
   revision: dec130a80c4947f749782347d03469bd7358c43b
   specs:
@@ -108,7 +99,6 @@ GEM
     cancancan (2.3.0)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
-    cppjieba_rb (0.3.3)
     crass (1.0.4)
     database_cleaner (1.7.0)
     devise (4.5.0)
@@ -119,6 +109,19 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    elasticsearch (6.1.0)
+      elasticsearch-api (= 6.1.0)
+      elasticsearch-transport (= 6.1.0)
+    elasticsearch-api (6.1.0)
+      multi_json
+    elasticsearch-model (6.0.0)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (6.0.0)
+    elasticsearch-transport (6.1.0)
+      faraday
+      multi_json
     erubi (1.7.1)
     exception-track (0.5.1)
       exception_notification (~> 4)
@@ -356,9 +359,10 @@ DEPENDENCIES
   bulk_insert
   byebug
   cancancan
-  cppjieba_rb
   database_cleaner
   devise
+  elasticsearch-model
+  elasticsearch-rails
   exception-track
   factory_bot_rails
   file_validators
@@ -374,7 +378,6 @@ DEPENDENCIES
   octicons_helper
   omniauth-google-oauth2
   pg
-  pg_search!
   puma (~> 3.11)
   rails
   rails-i18n

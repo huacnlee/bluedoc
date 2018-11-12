@@ -5,11 +5,10 @@ class Repository < ApplicationRecord
   include Markdownable
   include Memberable
   include Activityable
-  include Searchable
 
   second_level_cache expires_in: 1.week
 
-  depends_on :preferences, :toc, :user_active, :watches, :privacy
+  depends_on :preferences, :toc, :user_active, :watches, :privacy, :search
 
   attr_accessor :gitbook_url, :last_editor_id
 

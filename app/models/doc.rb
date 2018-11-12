@@ -3,11 +3,10 @@
 class Doc < ApplicationRecord
   include Slugable
   include Activityable
-  include Searchable
 
   second_level_cache expires_in: 1.week
 
-  depends_on :contents, :actors, :body_touch, :user_active, :versions
+  depends_on :contents, :actors, :body_touch, :user_active, :versions, :search
 
   delegate :private?, :public?, to: :repository
 

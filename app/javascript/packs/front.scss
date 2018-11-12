@@ -364,6 +364,14 @@
     border-bottom: 1px solid #e0e0e0;
 
     .title {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .info {
+      color: #aaa;
+      a { color: #006b00;}
+      .slug { color: #666; }
       margin-bottom: 8px;
     }
   }

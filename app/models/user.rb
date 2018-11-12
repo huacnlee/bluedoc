@@ -3,7 +3,6 @@
 class User < ApplicationRecord
   include Slugable
   include Activityable
-  include Searchable
 
   second_level_cache expires_in: 1.week
 

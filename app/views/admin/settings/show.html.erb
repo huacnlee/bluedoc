@@ -4,11 +4,6 @@
 
 <%= form_for(Setting.new, url: admin_settings_path) do |f| %>
   <div class="form-group">
-    <label class="controler-label">Locale</label>
-    <input type="text" class="form-control" style="width: 150px" name="default_locale" value="<%= Setting.default_locale %>" />
-  </div>
-
-  <div class="form-group">
     <label class="controler-label">Admin Emails</label>
     <textarea class="form-control" style="height: 100px; min-height: 100px" name="admin_emails"><%= Setting.admin_emails %></textarea>
     <div class="form-text">

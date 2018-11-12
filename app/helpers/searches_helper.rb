@@ -1,5 +1,10 @@
 module SearchesHelper
   def highlight(body)
-    sanitize_html body.gsub(/([^a-z0-9])\s+([^a-z0-9])/, "\\1\\2").gsub("{{b}}", raw("<b>")).gsub("{{/b}}", raw("</b>"))
+    body ||= ""
+    if body.is_a?(String)
+      body = [body]
+    end
+
+    sanitize_html body.join("").gsub("[h]", raw("<b class='text-red'>")).gsub("[/h]", raw("</b>"))
   end
 end

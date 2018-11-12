@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       get :docs
       get :repositories
       get :groups
+      get :users
     end
   end
 

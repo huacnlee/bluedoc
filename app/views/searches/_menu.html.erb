@@ -1,9 +1,18 @@
 <div class="col-2 d-table-cell pr-4 v-align-top">
-  <ul class="menu">
+  <ul class="menu v-align-middle">
     <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
-      li << link_to("Docs", docs_search_path(q: params[:q]), class: "menu-item")
-      li << link_to("Repositories", repositories_search_path(q: params[:q]), class: "menu-item")
-      li << link_to("Groups", groups_search_path(q: params[:q]), class: "menu-item")
+      li << link_to(docs_search_path(q: params[:q]), class: "menu-item") do %>
+        <span class="Counter"><%= @totals[:docs] %></span>Docs
+      <% end
+      li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
+        <span class="Counter"><%= @totals[:repositories] %></span>Repositories
+      <% end
+      li << link_to(groups_search_path(q: params[:q]), class: "menu-item") do %>
+        <span class="Counter"><%= @totals[:groups] %></span>Groups
+      <% end
+      li << link_to(users_search_path(q: params[:q]), class: "menu-item") do %>
+        <span class="Counter"><%= @totals[:users] %></span>Users
+      <% end
     end %>
   </ul>
 </div>

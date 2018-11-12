@@ -26,8 +26,8 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "rails-i18n"
 gem "rails-settings-cached"
 
-gem "pg_search", github: "Casecommons/pg_search"
-gem 'cppjieba_rb', require: false
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
 
 gem "second_level_cache"
 

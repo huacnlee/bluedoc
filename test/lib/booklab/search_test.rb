@@ -3,56 +3,202 @@
 require "test_helper"
 
 class BookLab::SearchText < ActionView::TestCase
-  test "prepare_data" do
-    search_data = "Hello  this is  english  content"
-    assert_equal "Hello this is english content", BookLab::Search.prepare_data(search_data)
+  test "search_params" do
+    @search = BookLab::Search.new(:docs, "test")
 
-    locales = %w[zh-CN zh-TW ja]
-    locales.each do |locale|
-      Setting.stub(:default_locale, locale) do
-        search_data = "こんにちは、これは検索コンテンツです，你好，这是中文搜索文本"
-        assert_equal "こ ん に ち は こ れ は 検 索 コ ン テ ン ツ で す 你好 这是 中文 搜索 中文搜索 文本", BookLab::Search.prepare_data(search_data)
-      end
-    end
-
-    locales = %w[zh-CN zh-TW ja]
-    locales.each do |locale|
-      Setting.stub(:default_locale, locale) do
-        search_data = "こんにちは、これは検索コンテンツです，你好，这是中文搜索文本"
-        assert_equal "こ ん に ち は こ れ は 検 索 コ ン テ ン ツ で す 你好 这是 中文搜索 文本", BookLab::Search.prepare_data(search_data, :mix)
-      end
-    end
-  end
-
-  test "ts_config" do
-    locale_map = {
-      "da" => 'danish',
-      "de" => 'german',
-      "en" => 'english',
-      "es" => 'spanish',
-      "fr" => 'french',
-      "it" => 'italian',
-      "nl" => 'dutch',
-      "nb-NO" => 'norwegian',
-      "pt" => 'portuguese',
-      "pt-BR" => 'portuguese',
-      "sv" => 'swedish',
-      "ru" => 'russian',
-      "zh-CN" => 'simple',
-      "zh-TW" => 'simple',
-      "ja" => 'simple'
+    query = {
+      query_string: {
+        fields: %w[title^10 body],
+        query: "Hello world",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
     }
 
-    locale_map.each_key do |key|
-      assert_equal locale_map[key], BookLab::Search.ts_config(key)
-    end
+    filter = [ { a: 1 } ]
 
-    Setting.stub(:default_locale, "de") do
-      assert_equal "german", BookLab::Search.ts_config
-    end
+    expected = {
+      query: {
+        bool: {
+          must: [
+            { a: 1 },
+            {
+              query_string: {
+                fields: ["title^10", "body"],
+                query: "Hello world",
+                default_operator: "AND",
+                minimum_should_match: "70%"
+              }
+            }
+          ]
+        }
+      },
+      highlight: {
+        fields: { title: {}, body: {} },
+        pre_tags: ["[h]"],
+        post_tags: ["[/h]"]
+      }
+    }
 
-    Setting.stub(:default_locale, "zh-CN") do
-      assert_equal "simple", BookLab::Search.ts_config
-    end
+    assert_equal expected, @search.send(:search_params, query, filter, highlight: true)
+
+    query = {
+      term: {
+        type: "User",
+      }
+    }
+
+    filter = [ { b: 1 } ]
+
+    expected = {
+      query: {
+        bool: {
+          must: [
+            { b: 1 },
+            {
+              term: {
+                type: "User"
+              }
+            }
+          ]
+        }
+      }
+    }
+    assert_equal expected, @search.search_params(query, filter)
+  end
+
+  test "search docs" do
+    mock = MiniTest::Mock.new
+
+    # none
+    search = BookLab::Search.new(:docs, "foo")
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title^10 body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { "repository.public" => true } }
+    ], highlight: true)
+
+    mock.expect(:search, [], [search_params, Doc])
+    assert_equal [], search.execute
+    mock.verify
+
+    # with user_id and include_private
+    search = BookLab::Search.new(:docs, "foo", user_id: 2, include_private: true)
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title^10 body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { user_id: 2 } }
+    ], highlight: true)
+
+    mock.expect(:search, [], [search_params, Doc])
+    assert_equal [], search.execute
+    mock.verify
+
+    # with repository_id
+    search = BookLab::Search.new(:docs, "foo", repository_id: 2)
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title^10 body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { repository_id: 2 } },
+      { term: { "repository.public" => true } }
+    ], highlight: true)
+
+    mock.expect(:search, [], [search_params, Doc])
+    assert_equal [], search.execute
+    mock.verify
+  end
+
+  test "search_repositories" do
+    mock = MiniTest::Mock.new
+
+    # none
+    search = BookLab::Search.new(:repositories, "foo")
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title body],
+        query: "*foo*",
+      }
+    }, [
+      { term: { "repository.public" => true } }
+    ])
+
+    mock.expect(:search, [], [search_params, Repository])
+    assert_equal [], search.execute
+    mock.verify
+
+    # with user_id
+    search = BookLab::Search.new(:repositories, "foo", user_id: 123, include_private: true)
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title body],
+        query: "*foo*",
+      }
+    }, [
+      { term: { user_id: 123 } }
+    ])
+
+    mock.expect(:search, [], [search_params, Repository])
+    assert_equal [], search.execute
+    mock.verify
+  end
+
+  test "search_groups" do
+    mock = MiniTest::Mock.new
+
+    # none
+    search = BookLab::Search.new(:groups, "foo")
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title body],
+        query: "*foo*",
+      }
+    }, [
+      { term: { type: "Group" } }
+    ])
+
+    mock.expect(:search, [], [search_params, Group])
+    assert_equal [], search.execute
+    mock.verify
+  end
+
+  test "search_users" do
+    mock = MiniTest::Mock.new
+
+    # none
+    search = BookLab::Search.new(:users, "foo")
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[title body],
+        query: "*foo*",
+      }
+    }, [
+      { term: { type: "User" } }
+    ])
+
+    mock.expect(:search, [], [search_params, User])
+    assert_equal [], search.execute
+    mock.verify
   end
 end
