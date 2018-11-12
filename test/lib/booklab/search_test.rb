@@ -44,7 +44,7 @@ class BookLab::SearchText < ActionView::TestCase
 
     query = {
       term: {
-        type: "User",
+        sub_type: "user",
       }
     }
 
@@ -57,7 +57,7 @@ class BookLab::SearchText < ActionView::TestCase
             { b: 1 },
             {
               term: {
-                type: "User"
+                sub_type: "user"
               }
             }
           ]
@@ -135,7 +135,7 @@ class BookLab::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title body],
-        query: "*foo*",
+        query: "foo or *foo*",
       }
     }, [
       { term: { "repository.public" => true } }
@@ -151,7 +151,7 @@ class BookLab::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title body],
-        query: "*foo*",
+        query: "foo or *foo*",
       }
     }, [
       { term: { user_id: 123 } }
@@ -171,10 +171,10 @@ class BookLab::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title body],
-        query: "*foo*",
+        query: "foo or *foo*",
       }
     }, [
-      { term: { type: "Group" } }
+      { term: { sub_type: "group" } }
     ])
 
     mock.expect(:search, [], [search_params, Group])
@@ -191,10 +191,10 @@ class BookLab::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title body],
-        query: "*foo*",
+        query: "foo or *foo*",
       }
     }, [
-      { term: { type: "User" } }
+      { term: { sub_type: "user" } }
     ])
 
     mock.expect(:search, [], [search_params, User])

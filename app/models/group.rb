@@ -4,6 +4,9 @@ class Group < User
   include Memberable
   include Activityable
   include Searchable
+  include Elasticsearch::Model
+
+  index_name { "#{Rails.env}-groups" }
 
   depends_on :user_active
 
