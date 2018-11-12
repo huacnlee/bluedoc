@@ -6,6 +6,7 @@ class User
   def as_indexed_json(_options = {})
     {
       type: self.type,
+      slug: self.slug,
       title: self.name,
       body: self.description,
       user_id: self.id

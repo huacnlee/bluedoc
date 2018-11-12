@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class SearchIndexJob < ApplicationJob
+  queue_as :index
   delegate :client, to: Elasticsearch::Model
-
-  INDEX_NAME = "booklab-#{Rails.env}"
 
   def perform(operation, type, id)
     obj = nil

@@ -169,4 +169,44 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal [user.id], user1.follower_ids
   end
+
+  test "as_indexed_json" do
+    user = create(:user, description: "Hello world")
+    data = { type: "User", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id }
+    assert_equal data, user.as_indexed_json
+
+    group = create(:group)
+    data = { type: "Group", slug: group.slug, title: group.name, body: group.description, user_id: group.id }
+    assert_equal data, group.as_indexed_json
+  end
+
+  test "indexed_changed?" do
+    user = create(:user)
+    user = User.find(user.id)
+    assert_equal false, user.indexed_changed?
+    user.updated_at = Time.now
+    user.followers_count += 1
+    assert_equal false, user.indexed_changed?
+
+    user.stub(:saved_change_to_name?, true) do
+      assert_equal true, user.indexed_changed?
+    end
+    user.stub(:saved_change_to_description?, true) do
+      assert_equal true, user.indexed_changed?
+    end
+
+    group = create(:group)
+    group = Group.find(group.id)
+    assert_equal false, group.indexed_changed?
+    group.updated_at = Time.now
+    group.followers_count += 1
+    assert_equal false, group.indexed_changed?
+
+    group.stub(:saved_change_to_name?, true) do
+      assert_equal true, group.indexed_changed?
+    end
+    group.stub(:saved_change_to_description?, true) do
+      assert_equal true, group.indexed_changed?
+    end
+  end
 end

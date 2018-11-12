@@ -90,4 +90,36 @@ class DocTest < ActiveSupport::TestCase
     assert_equal repo.id, doc.repository_id
     assert_equal 123, doc.last_editor_id
   end
+
+  test "as_indexed_json" do
+    repo = create(:repository)
+    doc = create(:doc, repository: repo, body: "Hello world")
+
+    data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+    assert_equal data, doc.as_indexed_json
+
+    repo = create(:repository, privacy: :private)
+    doc = create(:doc, repository: repo, body: "Hello world")
+    data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+    assert_equal data, doc.as_indexed_json
+  end
+
+  test "indexed_changed?" do
+    doc = create(:doc)
+    assert_equal true, doc.indexed_changed?
+
+    doc = Doc.find(doc.id)
+    assert_equal false, doc.indexed_changed?
+    doc.updated_at = Time.now
+    doc.draft_title = "Draft title"
+    assert_equal false, doc.indexed_changed?
+
+    doc.stub(:saved_change_to_title?, true) do
+      assert_equal true, doc.indexed_changed?
+    end
+
+    doc = Doc.find(doc.id)
+    doc.body = "New Body"
+    assert_equal true, doc.indexed_changed?
+  end
 end

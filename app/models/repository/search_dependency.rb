@@ -3,6 +3,7 @@ class Repository
 
   def as_indexed_json(_options = {})
     {
+      slug: self.slug,
       title: self.name,
       body: self.description,
       repository_id: self.id,

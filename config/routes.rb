@@ -17,7 +17,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboards#show"
-    resource :dashboard
+    resource :dashboard do
+      collection do
+        post :reindex
+      end
+    end
     resource :settings
     resources :groups
     resources :users

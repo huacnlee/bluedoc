@@ -172,4 +172,35 @@ class RepositoryTest < ActiveSupport::TestCase
 
     assert_not_equal 0, Activity.where(action: :transfer_repo, target: repo).count
   end
+
+  test "as_indexed_json" do
+    repo = create(:repository, description: "Hello world")
+
+    data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+    assert_equal data, repo.as_indexed_json
+
+    repo = create(:repository, privacy: :private, description: "Hello world")
+    data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+    assert_equal data, repo.as_indexed_json
+  end
+
+  test "indexed_changed?" do
+    repo = create(:repository)
+
+    repo = Repository.find(repo.id)
+    assert_equal false, repo.indexed_changed?
+    repo.updated_at = Time.now
+    repo.stars_count += 1
+    assert_equal false, repo.indexed_changed?
+
+    repo.stub(:saved_change_to_privacy?, true) do
+      assert_equal true, repo.indexed_changed?
+    end
+    repo.stub(:saved_change_to_name?, true) do
+      assert_equal true, repo.indexed_changed?
+    end
+    repo.stub(:saved_change_to_description?, true) do
+      assert_equal true, repo.indexed_changed?
+    end
+  end
 end

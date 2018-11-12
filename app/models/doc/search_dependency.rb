@@ -3,13 +3,9 @@
 class Doc
   include Searchable
 
-  mapping do
-    indexes :title, term_vector: :yes
-    indexes :body, term_vector: :yes
-  end
-
   def as_indexed_json(_options = {})
     {
+      slug: self.slug,
       title: self.title,
       body: self.body_plain,
       repository_id: self.repository_id,
