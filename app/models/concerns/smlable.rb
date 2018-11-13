@@ -9,10 +9,10 @@ module Smlable
   end
 
   def body_plain
-    body&.body&.to_plain_text
+    body.to_s
   end
 
   def body_sml_plain
-    body_sml&.body&.to_plain_text
+    body_sml.to_s
   end
 end

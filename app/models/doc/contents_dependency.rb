@@ -12,10 +12,12 @@ class Doc
   end
 
   def draft_body_plain
-    self.draft_body&.body&.to_plain_text || self.body_plain
+    return self.body_plain if self.draft_body.blank?
+    self.draft_body.to_s
   end
 
   def draft_body_sml_plain
-    self.draft_body_sml&.body&.to_plain_text || self.body_sml_plain
+    return self.body_sml_plain if self.draft_body_sml.blank?
+    self.draft_body_sml.to_s
   end
 end
