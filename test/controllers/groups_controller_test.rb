@@ -15,6 +15,12 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_match /#{@group.name}/, response.body
     assert_select ".group-avatar-box"
     assert_select ".group-repositories"
+    assert_select "form.subnav-search-context" do
+      assert_select "[action=?]", search_group_path(@group)
+      assert_select "input.subnav-search-input" do
+        assert_select "[placeholder=?]", "Search in #{@group.name}"
+      end
+    end
 
     # validate repositories get
     create_list(:repository, 2, user: @group, privacy: :public)
@@ -67,5 +73,18 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     post "/groups", params: { group: group_params }
     assert_equal 200, response.status
     assert_match /Username has already been taken/, response.body
+  end
+
+  test "GET /groups/:username/search" do
+    @group = create(:group)
+
+    get search_group_path(@group)
+    assert_redirected_to @group.to_path
+
+    get search_group_path(@group), params: { q: "test" }
+    assert_equal 200, response.status
+    assert_select ".reponav-item.selected" do
+      assert_select "[href=?]", search_group_path(@group)
+    end
   end
 end

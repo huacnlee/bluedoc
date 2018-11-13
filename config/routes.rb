@@ -57,6 +57,9 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
+    member do
+      get :search
+    end
     resources :group_members, as: :members, path: :members
     resource :group_settings, as: :settings, path: :settings
   end

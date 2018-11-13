@@ -17,6 +17,16 @@ class GroupsController < Groups::ApplicationController
     end
   end
 
+  def search
+    if params[:q].blank?
+      return redirect_to @group.to_path
+    end
+
+    include_private = can? :create_repo, @group
+
+    @result = BookLab::Search.new(:docs, params[:q], user_id: @group.id, include_private: include_private).execute.page(params[:page])
+  end
+
   private
 
     def set_group
