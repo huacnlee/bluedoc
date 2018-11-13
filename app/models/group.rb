@@ -7,6 +7,7 @@ class Group < User
   include Elasticsearch::Model
 
   index_name { "#{Rails.env}-groups" }
+  document_type name.underscore
 
   depends_on :user_active
 

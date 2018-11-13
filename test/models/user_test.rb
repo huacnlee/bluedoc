@@ -15,6 +15,9 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, slug: "Jason-Lee_123", name: nil)
     assert_equal true, user.valid?
 
+    user = build(:user, slug: "admin", name: nil)
+    assert_equal true, user.valid?
+
     user = build(:user, slug: "Jason", name: nil)
     assert_equal true, user.valid?
 

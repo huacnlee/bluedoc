@@ -28,7 +28,6 @@ user:
   - autocomplete
   - upload
   - uploads
-  - admin
   - admins
   - version
   - versions

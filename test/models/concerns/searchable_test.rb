@@ -14,6 +14,13 @@ class SearchableTest < ActiveSupport::TestCase
     assert_equal "test-groups", Group.index_name
   end
 
+  test "document_type" do
+    assert_equal "doc", Doc.document_type
+    assert_equal "repository", Repository.document_type
+    assert_equal "user", User.document_type
+    assert_equal "group", Group.document_type
+  end
+
   test ".reindex" do
     TYPES.each do |type|
       item = create(type)
