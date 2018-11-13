@@ -4,6 +4,7 @@ AllCops:
     - 'vendor/**/*'
     - 'lib/templates/**/*'
     - 'lib/tasks/release.rake'
+    - 'node_modules/**/*'
     - 'app/models/cache_version.rb'
     - 'db/**/*'
     - 'bin/**/*'

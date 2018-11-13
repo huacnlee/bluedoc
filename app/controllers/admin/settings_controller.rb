@@ -12,6 +12,4 @@ class Admin::SettingsController < Admin::ApplicationController
     end
     redirect_to admin_settings_path
   end
-
-
 end
