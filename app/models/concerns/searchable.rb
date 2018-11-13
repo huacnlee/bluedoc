@@ -6,13 +6,14 @@ module Searchable
   included do
     include Elasticsearch::Model
 
-    index_name do
-      "#{Rails.env}-#{name.pluralize}".downcase
-    end
-
     mapping do
+      indexes :slug, term_vector: :yes
       indexes :title, term_vector: :yes
       indexes :body, term_vector: :yes
+    end
+
+    index_name do
+      "#{Rails.env}-#{name.pluralize}".downcase
     end
 
     after_commit on: :create do

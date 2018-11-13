@@ -36,3 +36,5 @@ class User < ApplicationRecord
     Repository.where(user_id: self.group_ids).order("updated_at desc")
   end
 end
+
+require_dependency "group"
