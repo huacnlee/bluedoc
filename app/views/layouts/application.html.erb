@@ -14,9 +14,7 @@
         <a class="navbar-brand" href="/"><%= icon_tag("book", label: "BookLab") %></a>
       </div>
       <div class="navbar d-lg-flex flex-justify-between flex-auto">
-        <form action="/search/docs" method="GET">
-          <input name="q" type="text" placeholder="Search" class="form-control form-search-control" value="<%= params[:q] %>" />
-        </form>
+        <%= render "/layouts/search_nav" %>
       </div>
       <div class="navbar">
         <details class="dropdown details-reset details-overlay d-inline-block mr-3">

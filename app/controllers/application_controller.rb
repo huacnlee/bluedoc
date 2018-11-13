@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
       format.html { render plain: "Access Denied", status: :forbidden }
     end
   end
+
+  def set_nav_search(url: request.fullpath)
+    @nav_search_path = url
+  end
 end
