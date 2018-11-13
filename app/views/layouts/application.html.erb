@@ -14,7 +14,7 @@
         <a class="navbar-brand" href="/"><%= icon_tag("book", label: "BookLab") %></a>
       </div>
       <div class="navbar d-lg-flex flex-justify-between flex-auto">
-        <%= render "/layouts/search_nav" %>
+        <%= content_for?(:nav_search) ? yield(:nav_search) : render("/layouts/search_nav") %>
       </div>
       <div class="navbar">
         <details class="dropdown details-reset details-overlay d-inline-block mr-3">

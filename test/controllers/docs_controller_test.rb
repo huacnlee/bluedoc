@@ -27,6 +27,28 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
   end
 
+  test "GET /:user/:repo/docs/search" do
+    get @repo.to_path("/docs/search"), params: { q: "test" }
+    assert_equal 200, response.status
+    assert_select ".reponav-item.selected" do
+      assert_select "[href=?]", @repo.to_path("/docs/search")
+    end
+
+    get @private_repo.to_path("/docs/search")
+    assert_redirected_to @private_repo.to_path("/docs/list")
+
+    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    assert_equal 403, response.status
+
+    sign_in @user
+    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    assert_equal 403, response.status
+
+    sign_in_role :reader, group: @group
+    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    assert_equal 200, response.status
+  end
+
   test "GET /:user/:repos/docs/new" do
     assert_require_user do
       get @repo.to_path("/docs/new")

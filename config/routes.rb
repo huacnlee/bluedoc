@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
       member do
         get :docs, path: "docs/list"
+        get :search, path: "docs/search"
         get :toc, path: "toc/edit"
         patch :toc, path: "toc/edit"
         post :action

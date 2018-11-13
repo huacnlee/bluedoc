@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_nav_search(url: request.fullpath)
+  def set_nav_search(url: request.fullpath, scope: nil)
     @nav_search_path = url
+    @nav_search_scope = scope
   end
 end

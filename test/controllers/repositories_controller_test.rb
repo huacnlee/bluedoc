@@ -77,6 +77,11 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".repo-toc"
     assert_select ".label-private", 0
 
+    # nav search
+    assert_select "form.subnav-search-context" do
+      assert_select "[action=?]", repo.to_path("/docs/search")
+    end
+
     assert_raise(ActiveRecord::RecordNotFound) do
       get "/foo/#{repo.slug}"
     end

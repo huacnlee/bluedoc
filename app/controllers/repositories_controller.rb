@@ -3,9 +3,8 @@
 class RepositoriesController < Users::ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy action toc]
 
-  before_action :set_user, only: %i(show edit update destroy docs action toc)
-  before_action :set_repository, only: %i(show edit update destroy docs action toc)
-
+  before_action :set_user, only: %i(show edit update destroy docs search action toc)
+  before_action :set_repository, only: %i(show edit update destroy docs search action toc)
 
   def index
     authorize! :read, @user
@@ -56,6 +55,17 @@ class RepositoriesController < Users::ApplicationController
     authorize! :read, @repository
 
     @docs = @repository.docs.includes(:last_editor).recent.page(params[:page]).per(50)
+  end
+
+  # GET /:user/:repo/docs/search
+  def search
+    if params[:q].blank?
+      return redirect_to docs_user_repository_path(@user, @repository)
+    end
+
+    authorize! :read, @repository
+
+    @result = BookLab::Search.new(:docs, params[:q], repository_id: @repository.id, include_private: true).execute.page(params[:page])
   end
 
   # GET /:user/:repo/toc/edit

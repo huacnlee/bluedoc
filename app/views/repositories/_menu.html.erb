@@ -39,11 +39,21 @@
       <nav class="reponav clearfix" role="navigation">
         <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
           item << link_to("Summary", @repository.to_path, class: "reponav-item")
-          item << link_to("Docs", docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc?
+          item << link_to("Docs", docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name != "search"
+          item << link_to("Docs", search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name == "search"
           item << link_to("Settings", user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
         end %>
       </nav>
     </div>
   </div>
 </div>
+<% end %>
+
+<% content_for :nav_search do %>
+<form action="<%= @repository.to_path("/docs/search") %>" class="subnav-search-context" method="GET">
+  <div class="subnav-search">
+    <input name="q" type="text" placeholder="<%= "Search in #{@repository.name}" %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
+    <%= octicon "search", :class => "subnav-search-icon" %>
+  </div>
+</form>
 <% end %>

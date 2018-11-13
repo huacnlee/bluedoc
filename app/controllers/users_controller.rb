@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     @repositories = @repositories.page(params[:page]).per(20)
 
     @group = @user
+
     render "groups/show"
   end
 
