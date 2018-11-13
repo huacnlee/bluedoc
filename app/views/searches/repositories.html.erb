@@ -2,6 +2,7 @@
   <%= render "menu" %>
 
   <div class="col-8 d-table-cell">
+    <%= render "search_info" %>
 
     <div class="search-results">
       <% if @result.records.blank? %>
@@ -13,7 +14,6 @@
       <% @result.records.each_with_hit do |item, hit| %>
         <div class="search-result">
           <%= render "/repositories/card", repository: item %>
-
         </div>
       <% end %>
       <%= paginate @result %>
