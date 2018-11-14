@@ -1,0 +1,10 @@
+<div class="info">
+  <%= user_name_tag(activity.actor) %> <span class="text-gray">has added</span> <%= user_name_tag(activity.target&.user) %> <span class="text-gray">to</span>
+  <% if activity.target&.subject_type == "User" %>
+    <%= user_name_tag(activity.target&.subject) %>
+  <% else %>
+    <%= repository_name_tag(activity.target&.subject) %>
+  <% end%>
+  <span class="role">as <strong><%= activity.target&.role %></strong></span>
+  <span class="time"><%= timeago activity.created_at %></span>
+</div>

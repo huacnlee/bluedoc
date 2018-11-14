@@ -25,7 +25,7 @@ module Memberable
   end
 
   def member_user_ids
-    @member_user_ids ||= self.members.pluck(:user_id)
+    self.members.pluck(:user_id)
   end
 
   def add_member(user, role)

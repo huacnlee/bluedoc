@@ -110,6 +110,51 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal repo.user_id, activity.group_id
   end
 
+  test "track_activity add_member" do
+    # Repository type Member
+    repo = create(:repository)
+    member = create(:member, subject: repo)
+    user = create(:user)
+
+    Activity.track_activity(:add_member, member, user: user)
+
+    assert_equal 0, @actor.actor_activities.where(action: :add_member).count
+    assert_equal 1, user.activities.where(action: :add_member, target: member).count
+    activity = user.activities.last
+    assert_equal "add_member", activity.action
+    assert_equal user.id, activity.user_id
+    assert_equal @actor.id, activity.actor_id
+    assert_equal repo.id, activity.repository_id
+    assert_equal repo.user_id, activity.group_id
+
+    member.destroy
+    assert_equal 0, user.activities.where(action: :add_member, target: member).count
+
+    # Group type Member
+    group = create(:group)
+    member = create(:member, subject: group)
+    user = create(:user)
+
+    Activity.track_activity(:add_member, member, user: user)
+
+    assert_equal 0, @actor.actor_activities.where(action: :add_member).count
+    assert_equal 1, user.activities.where(action: :add_member, target: member).count
+    activity = user.activities.last
+    assert_equal "add_member", activity.action
+    assert_equal user.id, activity.user_id
+    assert_equal @actor.id, activity.actor_id
+    assert_nil activity.repository_id
+    assert_equal group.id, activity.group_id
+
+
+  end
+
+  test "action_to_actor?" do
+    assert_equal true, Activity.action_to_actor?("create_repo")
+    assert_equal true, Activity.action_to_actor?("create_doc")
+    assert_equal false, Activity.action_to_actor?("add_member")
+  end
+
   test "fill_depend_id_for_target for Group" do
     group = create(:group)
     activity_params = { target: group }

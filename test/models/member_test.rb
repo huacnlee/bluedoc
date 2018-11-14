@@ -45,6 +45,19 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal 1, repo.members.count
   end
 
+  test "Track Activity" do
+    mock_current(user: @user)
+    group = create(:group)
+    user0 = create(:user)
+    user1 = create(:user)
+
+    group.add_member(user0, :editor)
+    group.add_member(user1, :editor)
+    assert_equal 0, @user.actor_activities.where(action: "add_member", target_type: "Member").count
+    assert_equal 1, user0.activities.where(action: "add_member").count
+    assert_equal 0, user1.activities.count
+  end
+
   test "Repository" do
     mock_current(user: @user)
     repo = create(:repository)
