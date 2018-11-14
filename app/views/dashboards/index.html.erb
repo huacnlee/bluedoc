@@ -1,7 +1,7 @@
 <div class="col-12 d-table">
   <%= render "menu" %>
 
-  <div class="col-6 bg-white d-table-cell pl-5 pb-8">
+  <div class="col-7 bg-white d-table-cell pl-5 pb-8">
     <div class="sub-title">Recent activity</div>
     <div class="mb-5">
       <% if @recent_docs.blank? %>
@@ -28,13 +28,13 @@
     </div>
   </div>
 
-  <div class="col-4 bg-white d-table-cell px-5">
+  <div class="col-3 bg-white d-table-cell px-5" style="max-width: ">
+    <div class="sub-title">My Groups</div>
     <div class="Box">
-      <div class="Box-header">My Groups</div>
       <div class="Box-body">
-        <div class="group-list d-flex">
+        <div class="group-list clearfix">
           <% @groups.each do |group| %>
-            <div class="group-item mx-1">
+            <div class="group-item my-2 float-left">
               <%= user_avatar_tag(group, style: :small) %>
               <%= user_display_name_tag(group) %>
             </div>

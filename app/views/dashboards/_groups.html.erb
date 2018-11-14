@@ -12,7 +12,7 @@
       <%= user_name_tag(item) %>
     </td>
     <td class="text-gray" style="max-width: 200px">
-      <%= item.description %>
+      <%= truncate item.description, length: 100 %>
     </td>
     <td class="text-gray">
       <%= item.members_count %>

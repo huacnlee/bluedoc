@@ -12,7 +12,7 @@
       <%= repository_path_tag(item) %>
     </td>
     <td style="max-width: 200px">
-      <%= item.description %>
+      <%= truncate item.description, length: 100 %>
     </td>
     <td>
       <%= item.stars_count %>

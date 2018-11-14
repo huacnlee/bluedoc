@@ -22,7 +22,6 @@
       <td><%= t("activerecord.attributes.repository.slug") %></td>
       <td><%= t("activerecord.attributes.repository.name") %></td>
       <td><%= t("activerecord.attributes.repository.user") %></td>
-      <td><%= t("activerecord.attributes.repository.description") %></td>
       <td>Created At</td>
       <td class="opts"></td>
     </tr>
@@ -32,7 +31,7 @@
       <td><%= item.slug %></td>
       <td><%= link_to item.name, admin_repository_path(item.id) %></td>
       <td><%= item.user&.slug %></td>
-      <td><%= l(item.created_at, format: :long) %></td>
+      <td><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to "Docs", admin_docs_path(repository_id: item.id) %>
         <%= link_to icon_tag("pencil-alt"), edit_admin_repository_path(item.id) %>

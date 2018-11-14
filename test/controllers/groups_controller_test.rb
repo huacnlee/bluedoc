@@ -36,7 +36,6 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     end
 
     # validate repositories get
-    @group = create(:group)
     create_list(:repository, 2, user: @group, privacy: :public)
     private_repo = create(:repository, user: @group, privacy: :private)
     get @group.to_path

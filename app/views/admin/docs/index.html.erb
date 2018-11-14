@@ -33,7 +33,7 @@
 
       <td><%= item.slug %></td>
 
-      <td><%= l(item.created_at, format: :long) %></td>
+      <td><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_doc_path(item.id) %>
         <%= link_to icon_tag("trash-alt"), admin_doc_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
