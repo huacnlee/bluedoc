@@ -1,0 +1,15 @@
+<div class="search-result search-result-repo">
+  <div class="title"><%= link_to highlight(hit.highlight.title || item.name), item.to_path, target: "_blank" %></div>
+  <div class="info clearfix">
+    <span class="parent-name">
+      <%= item.user&.name %>
+    </span>
+  </div>
+  <div class="description">
+    <% if hit.highlight.body&.present? %>
+      <%= highlight(hit.highlight.body) %>
+    <% else %>
+      <%= item.description %>
+    <% end %>
+  </div>
+</div>

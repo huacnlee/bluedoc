@@ -1,11 +1,11 @@
-<div class="search-result">
+<div class="search-result search-result-doc">
   <div class="title"><%= link_to highlight(hit.highlight.title || item.title), item.to_path, target: "_blank" %></div>
   <div class="info clearfix">
-    <%= user_name_tag(item.repository&.user) %>
-    <span class="divider">/</span>
-    <%= repository_name_tag(item.repository) %>
-    <span class="divider">/</span>
-    <span class="slug"><%= item.slug %></span>
+    <span class="parent-name">
+      <%= item.repository&.user&.name %>
+      <span class="divider">/</span>
+      <%= item.repository&.name %>
+    </span>
 
     <span class="date float-right">Updated at <%= timeago item.body_updated_at %></span>
   </div>

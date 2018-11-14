@@ -18,9 +18,9 @@ module ApplicationHelper
     raw %(<button type="button" class="flash-close js-flash-close">#{octicon "x"}</button>)
   end
 
-  def icon_tag(name, label: nil)
-    return octicon(name) if label.blank?
-    raw [octicon(name), "<span>#{label}</span>"].join(" ")
+  def icon_tag(name, opts = {})
+    return octicon(name, class: opts[:class]) if opts[:label].blank?
+    raw [octicon(name, class: opts[:class]), "<span>#{opts[:label]}</span>"].join(" ")
   end
 
   def notice_message

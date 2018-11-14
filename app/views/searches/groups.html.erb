@@ -2,21 +2,18 @@
   <%= render "menu" %>
 
   <div class="col-8 d-table-cell">
-    <%= render "search_info" %>
+    <div class="search-results Box">
+      <%= render "search_info" %>
+      <div class="Box-body">
+        <% if @result.records.blank? %>
+        <%= render "no_result" %>
+        <% end %>
 
-    <div class="search-results">
-      <% if @result.records.blank? %>
-      <div class="blankslate">
-        Can't find any Group like "<span class="text-red"><%= params[:q] %></span>" in our database.
+        <% @result.records.each_with_hit do |item, hit| %>
+          <%= render "user", item: item, hit: hit %>
+        <% end %>
+        <%= paginate @result %>
       </div>
-      <% end %>
-
-      <% @result.records.each_with_hit do |item, hit| %>
-        <div class="search-result">
-          <%= render "/users/card", user: item %>
-        </div>
-      <% end %>
-      <%= paginate @result %>
     </div>
   </div>
 </div>
