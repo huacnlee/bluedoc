@@ -7,7 +7,7 @@ class Repository
     {
       slug: self.slug,
       title: self.name,
-      body: self.description,
+      body: self._search_body,
       repository_id: self.id,
       user_id: self.user_id,
       repository: {
@@ -20,5 +20,9 @@ class Repository
     saved_change_to_privacy? ||
     saved_change_to_name? ||
     saved_change_to_description?
+  end
+
+  def _search_body
+    [self.user&.fullname, self.description, self.toc&.body.to_s].join("\n\n")
   end
 end

@@ -4,17 +4,22 @@ require "test_helper"
 
 class RepositoryTest < ActiveSupport::TestCase
   test "validation" do
-    repository = build(:repository, slug: "Hello")
-    assert_equal true, repository.valid?
+    repo = build(:repository, slug: "Hello")
+    assert_equal true, repo.valid?
 
-    repository.slug = "Hello-This_123"
-    assert_equal true, repository.valid?
+    repo.slug = "Hello-This_123"
+    assert_equal true, repo.valid?
 
-    repository.slug = "Hello This_123"
-    assert_equal false, repository.valid?
+    repo.slug = "Hello This_123"
+    assert_equal false, repo.valid?
 
-    repository.slug = "H"
-    assert_equal false, repository.valid?
+    repo.slug = "H"
+    assert_equal false, repo.valid?
+  end
+
+  test "fullname" do
+    repo = build(:repository, name: "BookLab Help", slug: "help")
+    assert_equal "BookLab Help (help)", repo.fullname
   end
 
   test "auto member watch" do
@@ -173,15 +178,32 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_not_equal 0, Activity.where(action: :transfer_repo, target: repo).count
   end
 
+  test "_search_body" do
+    user = create(:user)
+    toc = <<~TOC
+    - title: Hello
+      url: hello
+    TOC
+    repo = create(:repository, user: user, description: "Hello world", toc: toc)
+
+    expected = [user.fullname, repo.description, toc].join("\n\n")
+
+    assert_equal expected.strip, repo.send(:_search_body).strip
+  end
+
   test "as_indexed_json" do
-    repo = create(:repository, description: "Hello world")
+    repo = create(:repository)
+    repo.stub(:_search_body, "Hello world is search body") do
+      data = { slug: repo.slug, title: repo.name, body: "Hello world is search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+      assert_equal data, repo.as_indexed_json
+    end
 
-    data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
-    assert_equal data, repo.as_indexed_json
+    repo = create(:repository, privacy: :private)
 
-    repo = create(:repository, privacy: :private, description: "Hello world")
-    data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
-    assert_equal data, repo.as_indexed_json
+    repo.stub(:_search_body, "Hello world") do
+      data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+      assert_equal data, repo.as_indexed_json
+    end
   end
 
   test "indexed_changed?" do

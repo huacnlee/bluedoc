@@ -11,6 +11,10 @@ module Slugable
     end
   end
 
+  def fullname
+    @fullname ||= "#{self.name} (#{self.slug})"
+  end
+
   def to_param
     slug
   end

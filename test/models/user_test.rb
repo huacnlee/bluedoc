@@ -28,6 +28,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "jason", user.name
   end
 
+  test "fullname" do
+    u = build(:user, name: "Jason Lee", slug: "huacnlee")
+    assert_equal "Jason Lee (huacnlee)", u.fullname
+  end
+
   test "slug validation" do
     assert_equal true, build(:user, slug: "foo").valid?
 

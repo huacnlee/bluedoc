@@ -101,17 +101,31 @@ class DocTest < ActiveSupport::TestCase
     assert_equal 123, doc.last_editor_id
   end
 
+  test "_search_body" do
+    user = create(:user)
+    repo = create(:repository, user: user)
+    doc = create(:doc, repository: repo, body: "Hello world")
+
+    expected = [user.fullname, repo.fullname, doc.to_path, doc.body_plain].join("\n\n")
+    assert_equal expected, doc._search_body
+  end
+
   test "as_indexed_json" do
     repo = create(:repository)
-    doc = create(:doc, repository: repo, body: "Hello world")
+    doc = create(:doc, repository: repo)
 
-    data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
-    assert_equal data, doc.as_indexed_json
+    doc.stub(:_search_body, "Hello world") do
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+      assert_equal data, doc.as_indexed_json
+    end
 
     repo = create(:repository, privacy: :private)
-    doc = create(:doc, repository: repo, body: "Hello world")
-    data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
-    assert_equal data, doc.as_indexed_json
+    doc = create(:doc, repository: repo)
+
+    doc.stub(:_search_body, "Hello world") do
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+      assert_equal data, doc.as_indexed_json
+    end
   end
 
   test "indexed_changed?" do
