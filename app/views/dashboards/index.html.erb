@@ -29,14 +29,18 @@
   </div>
 
   <div class="col-4 bg-white d-table-cell px-5">
-    <div class="sub-title">My Groups</div>
-    <div class="group-list d-flex">
-      <% @groups.each do |group| %>
-        <div class="group-item mx-2">
-          <%= user_avatar_tag(group, style: :medium) %>
-          <%= user_name_tag(group) %>
+    <div class="Box">
+      <div class="Box-header">My Groups</div>
+      <div class="Box-body">
+        <div class="group-list d-flex">
+          <% @groups.each do |group| %>
+            <div class="group-item mx-1">
+              <%= user_avatar_tag(group, style: :small) %>
+              <%= user_display_name_tag(group) %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

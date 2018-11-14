@@ -48,8 +48,6 @@ gem "html-pipeline-rouge_filter"
 gem "redcarpet"
 gem "sanitize"
 
-gem "octicons_helper"
-
 gem "booklab-toc"
 
 group :development, :test do

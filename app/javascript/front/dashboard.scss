@@ -1,0 +1,118 @@
+.page-dashboards {
+  .main-container {
+    padding: 0 !important;
+    & > .container {
+      width: 100%;
+    }
+  }
+
+  .dashboard-menu {
+    border-right: 1px solid #e1e4e8;
+    padding: 24px;
+    min-width: 200px;
+    height: calc(100vh - 50px);
+    background: #fafbfc;
+
+    .dashboard-menu-divider {
+      border-top: 1px solid #e1e4e8;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-menu-item {
+      height: 38px;
+      line-height: 38px;
+      padding: 0 15px;
+      display: block;
+      color: #666;
+      background: transparent;
+      text-decoration: none;
+      font-size: 16px;
+
+      i.fas {
+        width: 17px;
+        height: 17px;
+        color: #666;
+        fill: #666;
+        margin-right: 3px;
+      }
+
+      &.selected {
+        color: $primary;
+
+        i.fas { fill: $primary; }
+      }
+
+      &:hover {
+        background: #fefefe;
+
+        i.fas { color: #888; }
+      }
+    }
+  }
+
+  .group-list {
+    .group-item {
+      width: 80px;
+      text-align: center;
+
+      .user-display-name { font-size: 14px; margin-top: 5px; color: #555; }
+      a { display: block; }
+    }
+  }
+
+  .dashboard-table {
+    width: 100%;
+    tr {
+      &:hover {
+        td {
+          background: #fafbfc;
+        }
+      }
+
+      &:first-child {
+        border-top: 1px solid #e1e4e8;
+        td {
+          background: #fafbfc;
+        }
+      }
+      td {
+        &:first-child {
+          border-left: 1px solid #e1e4e8;
+        }
+        &:last-child {
+          border-right: 1px solid #e1e4e8;
+        }
+        background: #fff; padding: 8px;
+        border-bottom: 1px solid #e1e4e8;
+      }
+    }
+  }
+
+  .recent-docs {
+    .recent-doc-item {
+      position: relative;
+      padding-left: 45px;
+      .icon-box {
+        position: absolute;
+        top: 14px;
+        left: 15px;
+        color: #e0e0e0;
+        font-size: 20px;
+      }
+
+      .title {
+        a { color: #333; }
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      .info {
+        font-size: 12px;
+        color: #a0a0a0;
+        a { color: #999; }
+
+        .timeago { color: #a0a0a0; }
+      }
+    }
+  }
+}

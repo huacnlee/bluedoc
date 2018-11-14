@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include OcticonsHelper
-
   def markdown(body)
     return nil if body.blank?
     Rails.cache.fetch(["markdown", "v1", Digest::MD5.hexdigest(body)]) do
@@ -15,12 +13,13 @@ module ApplicationHelper
   end
 
   def close_button
-    raw %(<button type="button" class="flash-close js-flash-close">#{octicon "x"}</button>)
+    raw %(<button type="button" class="flash-close js-flash-close"><i class="fas fa-times"></i></button>)
   end
 
   def icon_tag(name, opts = {})
-    return octicon(name, class: opts[:class]) if opts[:label].blank?
-    raw [octicon(name, class: opts[:class]), "<span>#{opts[:label]}</span>"].join(" ")
+    icon_html = content_tag(:i, "", class: "octicon fas fa-#{name} #{opts[:class]}")
+    return icon_html if opts[:label].blank?
+    raw [icon_html, "<span>#{opts[:label]}</span>"].join(" ")
   end
 
   def notice_message

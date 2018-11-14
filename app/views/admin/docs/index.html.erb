@@ -10,7 +10,7 @@
   <div class="subnav-search float-left">
     <form action="" method="GET">
       <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" aria-label="Search">
-      <%= octicon "search", class: "subnav-search-icon" %>
+      <%= icon_tag "search", class: "subnav-search-icon" %>
     </form>
   </div>
 </div>
@@ -33,12 +33,10 @@
 
       <td><%= item.slug %></td>
 
-
-
       <td><%= l(item.created_at, format: :long) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_doc_path(item.id) %>
-        <%= link_to icon_tag("trashcan"), admin_doc_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <%= link_to icon_tag("trash-alt"), admin_doc_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
       </td>
     </tr>
     <% end %>

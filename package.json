@@ -4,6 +4,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "@rails/webpacker": "https://github.com/rails/webpacker",
     "actiontext": "https://github.com/rails/actiontext",
     "babel-preset-react": "^6.24.1",

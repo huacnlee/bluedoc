@@ -5,6 +5,11 @@
   font-weight: normal;
   color: #4a4a4a;
 
+  i.fas {
+    opacity: 1;
+    vertical-align: text-bottom;
+  }
+
   &:hover {
     border-color: rgba(27, 31, 35, 0.3);
     color: #4a4a4a;

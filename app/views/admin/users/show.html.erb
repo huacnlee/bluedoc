@@ -3,7 +3,7 @@
 <div class="detail admin-edit-admin_user">
   <div class="detail-action">
     <%= link_to 'Back to list', admin_users_path, class: "btn" %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_admin_user_path(@user.id), class: "btn" %>
+    <%= link_to icon_tag("pencil-alt", label: "Edit"), edit_admin_user_path(@user.id), class: "btn" %>
   </div>
 
     <div class="detail-row">
@@ -15,7 +15,34 @@
     <div class="detail-value"><%= @user.name %></div>
   </div>
     <div class="detail-row">
+    <div class="detail-label">Email:</div>
+    <div class="detail-value"><%= @user.email %></div>
+  </div>
+  <div class="detail-row">
+    <div class="detail-label">Location:</div>
+    <div class="detail-value"><%= @user.location %></div>
+  </div>
+  <% if @user.url %>
+  <div class="detail-row">
+    <div class="detail-label">url:</div>
+    <div class="detail-value"><%= link_to @user.url, @user.url %></div>
+  </div>
+  <% end %>
+  <div class="detail-row">
+    <div class="detail-label">Description:</div>
+    <div class="detail-value"><%= @user.description %></div>
+  </div>
+
+    <div class="detail-row">
     <div class="detail-label">Followers count:</div>
     <div class="detail-value"><%= @user.followers_count %></div>
   </div>
+  <div class="detail-row">
+    <div class="detail-label">Following count:</div>
+    <div class="detail-value"><%= @user.following_count %></div>
   </div>
+  <div class="detail-row">
+    <div class="detail-label">Created At:</div>
+    <div class="detail-value"><%= @user.created_at %></div>
+  </div>
+</div>

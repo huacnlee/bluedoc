@@ -20,12 +20,12 @@
   <% if @doc %>
   <div class="navbar-buttons">
     <% if can? :update, @doc %>
-    <%= link_to "Edit", edit_user_repository_doc_path(@user, @repository, @doc), class: "btn px-4" %>
+    <%= link_to icon_tag("pen", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn px-4" %>
     <% end %>
 
     <details class="dropdown details-reset details-overlay d-inline-block">
       <summary class="btn px-2 ml-1" aria-haspopup="true">
-         <%= icon_tag("kebab-horizontal") %>
+         <%= icon_tag("ellipsis-h") %>
       </summary>
 
       <ul class="dropdown-menu dropdown-menu-sw">

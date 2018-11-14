@@ -1,7 +1,7 @@
 <% if can? :manage, @group %>
   <%= render layout: "shared/modal", locals: {
     title: "Add member",
-    button_text: "Add member",
+    button_text: icon_tag("user-plus", label: "Add"),
     button_class: "btn btn-primary"
   } do %>
     <div class="Box-body overflow-auto">

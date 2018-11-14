@@ -3,7 +3,7 @@
 <div class="detail admin-edit-<%= singular_table_name %>">
   <div class="detail-action">
     <%%= link_to 'Back to list', <%= index_helper %>_path, class: "btn" %>
-    <%%= link_to icon_tag("pencil", label: "Edit"), edit_<%= singular_table_name %>_path(@<%= file_name %>.id), class: "btn" %>
+    <%%= link_to icon_tag("pencil-alt", label: "Edit"), edit_<%= singular_table_name %>_path(@<%= file_name %>.id), class: "btn" %>
   </div>
 
   <% for attribute in attributes %>

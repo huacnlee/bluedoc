@@ -2,6 +2,7 @@
 @import "~primer-product/index.scss";
 @import "~vendor/styleguide";
 @import "~primer-booklab/index.scss";
+@import "./fontawesome.scss";
 @import "./mixin.scss";
 
 .turbolinks-progress-bar {
@@ -9,8 +10,8 @@
   background-color: $primary;
 }
 
-.octicon {
-  vertical-align: text-bottom !important;
+i.fas {
+  text-align: center;
 }
 
 .nav-header {
@@ -31,7 +32,8 @@
     color: #454545;
   }
 
-  .octicon {
+  i.fas {
+    color: #454545;
     fill: #454545;
   }
 
@@ -56,6 +58,10 @@
   }
 }
 
+.subnav-search {
+  .subnav-search-icon { top: 10px; color: #AAA !important; }
+}
+
 .navbar-brand {
   background: transparent !important;
 
@@ -70,10 +76,12 @@
   font-weight: 500;
   color: #3c6fe8 !important;
 
-  .octicon {
+  i.fas {
     width: 24px !important;
     height: 24px !important;
+    font-size: 22px;
     fill: #3c6fe8;
+    color: #3c6fe8;
     vertical-align: middle !important;
   }
 

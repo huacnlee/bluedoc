@@ -2,16 +2,16 @@
   <ul class="menu v-align-middle">
     <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
       li << link_to(docs_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:docs] %></span>Docs
+        <span class="Counter"><%= @totals[:docs] %></span><%= icon_tag("file-alt") %> Docs
       <% end
       li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:repositories] %></span>Repositories
+        <span class="Counter"><%= @totals[:repositories] %></span><%= icon_tag("book") %> Repositories
       <% end
       li << link_to(groups_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:groups] %></span>Groups
+        <span class="Counter"><%= @totals[:groups] %></span><%= icon_tag("users") %> Groups
       <% end
       li << link_to(users_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:users] %></span>Users
+        <span class="Counter"><%= @totals[:users] %></span><%= icon_tag("user") %> Users
       <% end
     end %>
   </ul>
