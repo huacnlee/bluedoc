@@ -29,7 +29,7 @@ module BookLab
       self.include_private == true
     end
 
-    def search_params(query, filter = [], highlight: false)
+    def search_params(query, filter = [])
       filter << query
       params = {
         query: {
@@ -37,16 +37,12 @@ module BookLab
             must: filter
           }
         },
-      }
-
-      if highlight
-        params[:highlight] = {
-          fields: { title: {}, body: {} },
+        highlight: {
+          fields: { title: {}, body: {}, search_body: {} },
           pre_tags: ["[h]"],
           post_tags: ["[/h]"],
         }
-      end
-
+      }
       params
     end
 
@@ -67,14 +63,14 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[slug title^10 body],
+            fields: %w[slug title^10 body search_body],
             query: (self.query || ""),
             default_operator: "AND",
             minimum_should_match: "70%",
           }
         }
 
-        params = search_params(q, filter, highlight: true)
+        params = search_params(q, filter)
 
         client.search(params, Doc)
       end
@@ -92,7 +88,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[slug title body],
+            fields: %w[slug title^10 body search_body],
             query: "#{self.query} or *#{self.query}*",
           }
         }
@@ -106,7 +102,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[slug title body],
+            fields: %w[slug title^10 body search_body],
             query: "#{self.query} or *#{self.query}*",
           }
         }
@@ -120,7 +116,7 @@ module BookLab
 
         q = {
           query_string: {
-            fields: %w[slug title body],
+            fields: %w[slug title^10 body search_body],
             query: "#{self.query} or *#{self.query}*",
           }
         }

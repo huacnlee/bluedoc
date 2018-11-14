@@ -7,7 +7,8 @@ class Doc
     {
       slug: self.slug,
       title: self.title,
-      body: self._search_body,
+      body: self.body_plain,
+      search_body: self._search_body,
       repository_id: self.repository_id,
       user_id: self.repository.user_id,
       repository: {

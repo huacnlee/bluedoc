@@ -112,18 +112,18 @@ class DocTest < ActiveSupport::TestCase
 
   test "as_indexed_json" do
     repo = create(:repository)
-    doc = create(:doc, repository: repo)
+    doc = create(:doc, repository: repo, body: "Hello world")
 
-    doc.stub(:_search_body, "Hello world") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+    doc.stub(:_search_body, "Search body") do
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
       assert_equal data, doc.as_indexed_json
     end
 
     repo = create(:repository, privacy: :private)
-    doc = create(:doc, repository: repo)
+    doc = create(:doc, repository: repo, body: "Hello world")
 
-    doc.stub(:_search_body, "Hello world") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+    doc.stub(:_search_body, "Search body") do
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
       assert_equal data, doc.as_indexed_json
     end
   end

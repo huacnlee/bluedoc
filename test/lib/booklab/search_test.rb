@@ -3,12 +3,30 @@
 require "test_helper"
 
 class BookLab::SearchText < ActionView::TestCase
+
+  def assert_search_params(filter, params)
+    expected = {
+      query: {
+        bool: {
+          must: filter
+        }
+      },
+      highlight: {
+        fields: { title: {}, body: {}, search_body: {} },
+        pre_tags: ["[h]"],
+        post_tags: ["[/h]"]
+      }
+    }
+
+    assert_equal expected, params
+  end
+
   test "search_params" do
     @search = BookLab::Search.new(:docs, "test")
 
     query = {
       query_string: {
-        fields: %w[title^10 body],
+        fields: %w[slug title^10 body search_body],
         query: "Hello world",
         default_operator: "AND",
         minimum_should_match: "70%",
@@ -17,30 +35,7 @@ class BookLab::SearchText < ActionView::TestCase
 
     filter = [ { a: 1 } ]
 
-    expected = {
-      query: {
-        bool: {
-          must: [
-            { a: 1 },
-            {
-              query_string: {
-                fields: ["title^10", "body"],
-                query: "Hello world",
-                default_operator: "AND",
-                minimum_should_match: "70%"
-              }
-            }
-          ]
-        }
-      },
-      highlight: {
-        fields: { title: {}, body: {} },
-        pre_tags: ["[h]"],
-        post_tags: ["[/h]"]
-      }
-    }
-
-    assert_equal expected, @search.send(:search_params, query, filter, highlight: true)
+    assert_search_params [ { a: 1 }, query ], @search.search_params(query, filter)
 
     query = {
       term: {
@@ -50,21 +45,7 @@ class BookLab::SearchText < ActionView::TestCase
 
     filter = [ { b: 1 } ]
 
-    expected = {
-      query: {
-        bool: {
-          must: [
-            { b: 1 },
-            {
-              term: {
-                sub_type: "user"
-              }
-            }
-          ]
-        }
-      }
-    }
-    assert_equal expected, @search.search_params(query, filter)
+    assert_search_params [ { b: 1 }, query ] , @search.search_params(query, filter)
   end
 
   test "search docs" do
@@ -75,14 +56,14 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title^10 body],
+        fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
       }
     }, [
       { term: { "repository.public" => true } }
-    ], highlight: true)
+    ])
 
     mock.expect(:search, [], [search_params, Doc])
     assert_equal [], search.execute
@@ -93,14 +74,14 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title^10 body],
+        fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
       }
     }, [
       { term: { user_id: 2 } }
-    ], highlight: true)
+    ])
 
     mock.expect(:search, [], [search_params, Doc])
     assert_equal [], search.execute
@@ -111,7 +92,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title^10 body],
+        fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
         minimum_should_match: "70%",
@@ -119,7 +100,7 @@ class BookLab::SearchText < ActionView::TestCase
     }, [
       { term: { repository_id: 2 } },
       { term: { "repository.public" => true } }
-    ], highlight: true)
+    ])
 
     mock.expect(:search, [], [search_params, Doc])
     assert_equal [], search.execute
@@ -134,7 +115,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title body],
+        fields: %w[slug title^10 body search_body],
         query: "foo or *foo*",
       }
     }, [
@@ -150,7 +131,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title body],
+        fields: %w[slug title^10 body search_body],
         query: "foo or *foo*",
       }
     }, [
@@ -170,7 +151,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title body],
+        fields: %w[slug title^10 body search_body],
         query: "foo or *foo*",
       }
     }, [
@@ -190,7 +171,7 @@ class BookLab::SearchText < ActionView::TestCase
     search.client = mock
     search_params = search.search_params({
       query_string: {
-        fields: %w[slug title body],
+        fields: %w[slug title^10 body search_body],
         query: "foo or *foo*",
       }
     }, [

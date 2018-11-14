@@ -7,7 +7,8 @@ class Repository
     {
       slug: self.slug,
       title: self.name,
-      body: self._search_body,
+      body: self.description,
+      search_body: self._search_body,
       repository_id: self.id,
       user_id: self.user_id,
       repository: {

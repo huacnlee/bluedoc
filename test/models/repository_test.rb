@@ -192,16 +192,16 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   test "as_indexed_json" do
-    repo = create(:repository)
-    repo.stub(:_search_body, "Hello world is search body") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world is search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+    repo = create(:repository, description: "Hello world")
+    repo.stub(:_search_body, "Search body") do
+      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
       assert_equal data, repo.as_indexed_json
     end
 
-    repo = create(:repository, privacy: :private)
+    repo = create(:repository, privacy: :private, description: "Hello world")
 
-    repo.stub(:_search_body, "Hello world") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+    repo.stub(:_search_body, "Search body") do
+      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
       assert_equal data, repo.as_indexed_json
     end
   end
