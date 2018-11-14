@@ -394,4 +394,15 @@
       color: #555;
     }
   }
+
+  .search-result-user {
+    padding-left: 60px;
+    position: relative;
+
+    .avatar-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 }

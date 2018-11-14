@@ -1,5 +1,14 @@
+<%
+  title = item.title
+  description = ""
+  if hit.respond_to?(:highlight)
+    title = hit.highlight.title if hit.highlight.title
+    description = hit.highlight.body if hit.highlight.body
+  end
+%>
+
 <div class="search-result search-result-doc">
-  <div class="title"><%= link_to highlight(hit.highlight.title || item.title), item.to_path, target: "_blank" %></div>
+  <div class="title"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
   <div class="info clearfix">
     <span class="parent-name">
       <%= item.repository&.user&.name %>
@@ -10,6 +19,6 @@
     <span class="date float-right">Updated at <%= timeago item.body_updated_at %></span>
   </div>
   <div class="description">
-    <%= highlight(hit.highlight.body) %>
+    <%= highlight(description) %>
   </div>
 </div>
