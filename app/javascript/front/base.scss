@@ -17,8 +17,6 @@
 
 .subnav {
   background: #FFF;
-  border-bottom: 1px solid $border-color;
-  padding-top: 20px;
 
   .nav-tabs:last-child {
     margin-bottom: -1px;
@@ -208,6 +206,16 @@
 }
 
 .repository-item {
+  position: relative;
+  padding-left: 45px;
+  .icon-box {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    color: #a0a0a0;
+    font-size: 20px;
+  }
+
   .counter {
     margin-right: 8px;
 

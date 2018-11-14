@@ -40,6 +40,10 @@ module ApplicationHelper
   end
 
   def timeago(t)
+    if t < 2.weeks.ago
+      return content_tag(:span, class: "time", title: t.iso8601) { l t, format: :short }
+    end
+
     content_tag(:span, class: "timeago", title: t.iso8601) { t.iso8601 }
   end
 

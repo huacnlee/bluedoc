@@ -1,4 +1,5 @@
 <div class="repository-item border-bottom py-3">
+  <div class="icon-box"><%= icon_tag("book") %></div>
   <div class="d-inline-block mb-1">
     <h4>
       <% if defined?(current_group) && current_group.id != repository.user_id %>
@@ -11,10 +12,7 @@
     </h4>
   </div>
   <div class="text-gray mb-2 pr-4">
-    <%= repository.description %>
-  </div>
-  <div class="f6 text-gray mt-2">
-    <%= l repository.updated_at, format: :short %>
+    <%= truncate repository.description, length: 150 %>
   </div>
   <div class="f6 text-gray mt-2">
     <span class="counter"><%= icon_tag("star") %> <%= repository.stars_count %></span>

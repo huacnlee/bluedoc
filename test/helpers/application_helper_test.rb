@@ -22,8 +22,8 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test "icon_tag" do
-    html = icon_tag("x", label: "Close")
-    assert_equal "<svg class=\"octicon octicon-x\" viewBox=\"0 0 12 16\" version=\"1.1\" width=\"12\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z\"/></svg> <span>Close</span>", html
+    html = icon_tag("times", label: "Close", class: "search")
+    assert_equal %(<i class="octicon fas fa-times search"></i> <span>Close</span>), html
   end
 
   test "timeago" do
@@ -31,6 +31,10 @@ class ApplicationHelperTest < ActionView::TestCase
 
     html = timeago(t)
     assert_equal %(<span class="timeago" title="#{t.iso8601}">#{t.iso8601}</span>), html
+
+    t = 1.month.ago
+    html = timeago(t)
+    assert_equal %(<span class="time" title="#{t.iso8601}">#{l t, format: :short}</span>), html
   end
 
   private

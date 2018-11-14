@@ -1,19 +1,22 @@
 <% content_for :subnav do %>
 <div class="pagehead repohead experiment-repo-nav">
   <div class="container-lg repohead-details-container px-3 clearfix">
-    <div class="repo-heading">
+    <div class="repo-heading group-heading">
       <div class="clearfix">
         <div class="group-avatar-box float-left pr-3 v-align-middle">
           <%= user_avatar_tag(@group, style: :medium, link: false) %>
         </div>
-        <div class="v-align-middle">
-          <div class="d-block"><%= @group.name %></div>
+        <div class="v-align-middle float-left">
+          <div class="group-title d-block"><%= @group.name %></div>
           <div class="pt-2">
-            <% if @group.location %>
+            <%= @group.description %>
+          </div>
+          <div class="pt-2">
+            <% if @group.location.present? %>
             <span class="group-location mr-3"><%= icon_tag("location") %> <%= @group.location %></span>
             <% end %>
 
-            <% if @group.url %>
+            <% if @group.url.present? %>
             <span class="group-url"><%= icon_tag("link") %> <%= link_to @group.url, @group.url %></span>
             <% end %>
           </div>

@@ -3,11 +3,11 @@
 <%= render "menu" %>
 
 <div class="group-members">
-  <div class="pagehead clearfix">
-    <ul class="pagehead-actions">
-      <li><%= render "add_member" %></li>
-    </ul>
-    <h1><%= @members.total_count %> Members</h1>
+  <div class="border-bottom pb-3 mb-3 clearfix">
+    <div class="float-right">
+      <%= render "add_member" %>
+    </div>
+    <h4><%= @members.total_count %> Members</h4>
   </div>
 
   <div class="member-list">

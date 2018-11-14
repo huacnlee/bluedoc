@@ -2,13 +2,34 @@
 
 <%= render "groups/menu" %>
 
-<div class="group-repositories">
-  <% if @repositories.blank? %>
-    <div class="blankslate">
-      <h3>There is no repository</h3>
-      <p>You can create first repository, <%= link_to "Create new", "/new" %>.</p>
+<div class="clearfix">
+  <div class="border-bottom pb-3 mb-3">
+    <form action="" class="subnav-search" method="GET">
+      <input type="text" name="q" class="form-control subnav-search-input" placeholder="Find a repository..." />
+      <%= icon_tag "search", class: "subnav-search-icon" %>
+    </form>
+  </div>
+
+  <div class="group-repositories col-9 float-left px-3">
+    <% if @repositories.blank? %>
+      <div class="blankslate">
+        <h3>There is no repository</h3>
+        <p>You can create first repository, <%= link_to "Create new", "/new" %>.</p>
+      </div>
+    <% else %>
+      <%= render @repositories %>
+    <% end %>
+  </div>
+  <div class="col-3 float-left">
+    <div class="group-members Box">
+      <div class="Box-body">
+        <div class="sub-title">Members</div>
+        <div class="list">
+          <% @group.members.limit(30).each do |member| %>
+            <span class="mx-1"><%= user_avatar_tag(member.user) %></span>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% else %>
-    <%= render @repositories %>
-  <% end %>
+  </div>
 </div>

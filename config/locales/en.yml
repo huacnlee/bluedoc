@@ -4,7 +4,7 @@ en:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
       long: "%Y-%m-%d %H:%M:%S %z"
-      short: "%Y-%m-%d %H:%M"
+      short: "%b %m %H:%M"
   activerecord:
     models:
     attributes:
