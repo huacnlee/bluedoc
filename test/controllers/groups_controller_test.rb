@@ -9,12 +9,15 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /:username" do
     @group = create(:group)
+    create(:repository, user: @group, name: "Test Foo")
+    create(:repository, user: @group, name: "Test Bar")
 
     get @group.to_path
     assert_equal 200, response.status
     assert_match /#{@group.name}/, response.body
     assert_select ".group-avatar-box"
     assert_select ".group-repositories"
+    assert_select ".group-repositories .repository-item", 2
     assert_select "form.subnav-search-context" do
       assert_select "[action=?]", search_group_path(@group)
       assert_select "input.subnav-search-input" do
@@ -22,7 +25,18 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
+    get @group.to_path, params: { q: "bar" }
+    assert_equal 200, response.status
+    assert_select ".group-repositories .repository-item", 1
+    assert_select ".subnav-search input.subnav-search-input" do
+      assert_select "[value=?]", "bar"
+    end
+    assert_select ".subnav-search a.link-cancel" do
+      assert_select "[href=?]", @group.to_path
+    end
+
     # validate repositories get
+    @group = create(:group)
     create_list(:repository, 2, user: @group, privacy: :public)
     private_repo = create(:repository, user: @group, privacy: :private)
     get @group.to_path

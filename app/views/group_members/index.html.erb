@@ -12,5 +12,6 @@
 
   <div class="member-list">
     <%= render partial: "member", collection: @members %>
+    <%= paginate @members %>
   </div>
 </div>

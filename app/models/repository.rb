@@ -20,6 +20,7 @@ class Repository < ApplicationRecord
   validates :slug, uniqueness: { scope: :user_id }
 
   scope :recent_updated, -> { order("updated_at desc") }
+  scope :with_query, -> (q) { where("name ilike ? or slug ilike ?", "%#{q}%", "%#{q}%") }
 
   def to_path(suffix = nil)
     "/#{self.user.slug}/#{self.slug}#{suffix}"

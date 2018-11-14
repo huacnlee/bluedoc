@@ -5,8 +5,11 @@
 <div class="clearfix">
   <div class="border-bottom pb-3 mb-3">
     <form action="" class="subnav-search" method="GET">
-      <input type="text" name="q" class="form-control subnav-search-input" placeholder="Find a repository..." />
+      <input type="text" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="Find a repository..." />
       <%= icon_tag "search", class: "subnav-search-icon" %>
+      <% if params[:q].present? %>
+        <a href="<%= @group.to_path %>" class="link-cancel ml-2">Show all</a>
+      <% end %>
     </form>
   </div>
 
@@ -18,6 +21,7 @@
       </div>
     <% else %>
       <%= render @repositories %>
+      <%= paginate @repositories %>
     <% end %>
   </div>
   <div class="col-3 float-left">
@@ -25,7 +29,7 @@
       <div class="Box-body">
         <div class="sub-title">Members</div>
         <div class="list">
-          <% @group.members.limit(30).each do |member| %>
+          <% @members.limit(30).each do |member| %>
             <span class="mx-1"><%= user_avatar_tag(member.user) %></span>
           <% end %>
         </div>
