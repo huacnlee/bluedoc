@@ -3,7 +3,6 @@
 require "test_helper"
 
 class BookLab::SearchText < ActionView::TestCase
-
   def assert_search_params(filter, params)
     expected = {
       query: {
@@ -45,7 +44,7 @@ class BookLab::SearchText < ActionView::TestCase
 
     filter = [ { b: 1 } ]
 
-    assert_search_params [ { b: 1 }, query ] , @search.search_params(query, filter)
+    assert_search_params [ { b: 1 }, query ], @search.search_params(query, filter)
   end
 
   test "search docs" do
