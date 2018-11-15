@@ -6,13 +6,24 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
     @group = create(:group)
-    @repo = create(:repository, user: @group)
+    @other_group = create(:group)
+    @other_repo = create(:repository, user: @other_group, slug: "rails")
+    @repo = create(:repository, user: @group, slug: "rails")
     @private_repo = create(:repository, user: @group, privacy: :private)
   end
 
   test "GET /:user/:repo/docs/list" do
     get @repo.to_path("/docs/list")
     assert_equal 200, response.status
+    assert_select "a.group-name" do
+      assert_select "[href=?]", @group.to_path
+    end
+
+    get @other_repo.to_path("/docs/list")
+    assert_equal 200, response.status
+    assert_select "a.group-name" do
+      assert_select "[href=?]", @other_group.to_path
+    end
 
     # private
     get @private_repo.to_path("/docs/list")
@@ -80,6 +91,9 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_match /#{doc.title}/, response.body
     assert_select ".markdown-body"
     assert_select ".label-private", 0
+    assert_select "a.group-name" do
+      assert_select "[href=?]", @group.to_path
+    end
 
     # private
     doc = create(:doc, repository: @private_repo)
