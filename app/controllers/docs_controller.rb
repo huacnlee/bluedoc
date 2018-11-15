@@ -96,6 +96,7 @@ class DocsController < Users::ApplicationController
     respond_to do |format|
       format.html { redirect_to @repository.to_path, notice: "Doc was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 

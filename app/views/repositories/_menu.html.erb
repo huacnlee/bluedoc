@@ -17,7 +17,7 @@
           <% if can? :create_doc, @repository %>
           <li>
             <div class="clearfix">
-            <%= link_to icon_tag("pen", label: "New Doc"), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary" %>
+            <%= link_to icon_tag("pen", label: "New Doc"), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary", data: { turbolinks: false } %>
             </div>
           </li>
           <% end %>

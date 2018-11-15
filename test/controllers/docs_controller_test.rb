@@ -204,6 +204,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     doc = Doc.find_by_id(doc.id)
     assert_nil doc
+
+    # format: js
+    doc = create(:doc, repository: @repo)
+    user = sign_in_role :editor, group: @group
+    delete doc.to_path, xhr: true
+    assert_equal 200, response.status
+    assert_match %($("#doc-#{doc.id}").remove()), response.body
   end
 
   test "GET /:user/:repo/:slug/raw" do
