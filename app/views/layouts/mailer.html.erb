@@ -4,10 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
       /* Email styles need to be inline */
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 15px; padding: 0; margin: 0; }
+      p { margin: 0; padding: 0; margin-bottom: 18px; }
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <div style="padding: 13px 15px">
+      <%= yield %>
+    </div>
+    <div style="border-top: 1px solid #f0f0f0; padding: 13px 15px; color: #aaa; font-size: 13px;">
+      This mail has sent from <%= link_to "BookLab", Setting.host %>.
+    </div>
   </body>
 </html>

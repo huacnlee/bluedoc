@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 2..20 }
   validates :slug, uniqueness: true
 
+  after_commit :send_welcome_mail, on: :create
+
   before_validation :check_slug_keywords
   def check_slug_keywords
     if !BookLab::Slug.valid_user?(self.slug)
@@ -34,6 +36,10 @@ class User < ApplicationRecord
 
   def repositories
     Repository.where(user_id: self.group_ids).order("updated_at desc")
+  end
+
+  def send_welcome_mail
+    UserMailer.with(user: self).welcome.deliver_later
   end
 end
 

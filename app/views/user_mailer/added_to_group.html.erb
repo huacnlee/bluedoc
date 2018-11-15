@@ -1,0 +1,6 @@
+<p>Hi, <%= @user.name %></p>
+<p>
+  <strong><%= link_to @actor.name, user_url(@actor) %></strong> has added you as  <%= link_to @group.name, user_url(@group) %>'s member.
+</p>
+<p>Group Name: <%= link_to @group.name, user_url(@group) %></p>
+<p>You can click the group name link to visit, now the private Repository in this Group you have permisson to visit.</p>

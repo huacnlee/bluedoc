@@ -12,6 +12,7 @@ class Member < ApplicationRecord
 
   after_commit :track_user_active, on: :create
   after_commit :track_activity, on: :create
+  after_commit :send_new_member_email, on: :create
 
   private
     def track_user_active
@@ -29,5 +30,9 @@ class Member < ApplicationRecord
       user_ids.delete(self.user_id)
 
       Activity.track_activity(:add_member, self, user_id: user_ids, unique: true)
+    end
+
+    def send_new_member_email
+      UserMailer.with(user: self.user, group: self.subject, actor: Current.user).added_to_group.deliver_later
     end
 end
