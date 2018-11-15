@@ -13,11 +13,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:user/:repo/docs/list" do
+    doc = create(:doc, repository: @repo)
     get @repo.to_path("/docs/list")
     assert_equal 200, response.status
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
+    assert_select "#doc-#{doc.id}"
+    assert_select ".btn-remove-doc", 0
 
     get @other_repo.to_path("/docs/list")
     assert_equal 200, response.status
@@ -30,12 +33,19 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 403, response.status
 
     sign_in @user
+    doc = create(:doc, repository: @private_repo)
     get @private_repo.to_path("/docs/list")
     assert_equal 403, response.status
 
     sign_in_role :reader, group: @group
     get @private_repo.to_path("/docs/list")
     assert_equal 200, response.status
+    assert_select "#doc-#{doc.id} .btn-remove-doc", 0
+
+    sign_in_role :editor, group: @group
+    get @private_repo.to_path("/docs/list")
+    assert_equal 200, response.status
+    assert_select "#doc-#{doc.id} .btn-remove-doc", 1
   end
 
   test "GET /:user/:repo/docs/search" do

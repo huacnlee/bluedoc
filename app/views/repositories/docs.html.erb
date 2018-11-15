@@ -17,7 +17,9 @@
           <div class="col-2 d-table-cell text-gray align-middle"><%= user_name_tag doc.last_editor %></div>
           <div class="col-2 d-table-cell text-gray align-middle"><%= timeago doc.body_updated_at %></div>
           <div class="col-1 d-table-cell align-right align-middle">
-            <%= link_to icon_tag("trash-alt"), doc.to_path, data: { method: :delete, remote: true, confirm: "Are you sure delete this Doc?" }, class: "btn btn-sm" %>
+            <% if can? :destroy, doc %>
+              <%= link_to icon_tag("trash-alt"), doc.to_path, data: { method: :delete, remote: true, confirm: "Are you sure delete this Doc?" }, class: "btn btn-sm btn-remove-doc" %>
+            <% end %>
           </div>
         </div>
       </li>
