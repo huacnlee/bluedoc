@@ -1,6 +1,14 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
-  host: "http://localhost:3000"
+  host: '<%= ENV['APP_HOST'] || "http://localhost:3000" %>'
+  mailer_options:
+    address: '<%= ENV['SMTP_ADDRESS'] %>'
+    port: <%= ENV['SMTP_PORT'] || 25 %>
+    domain: '<%= ENV['SMTP_DOMAIN'] %>'
+    user_name: '<%= ENV['SMTP_USERNAME'] %>'
+    password: '<%= ENV['SMTP_PASSWORD'] %>'
+    authentication: '<%= ENV['SMTP_AUTHENTICATION'] || "login" %>'
+    enable_starttls_auto: <%= ENV['SMTP_ENABLE_STARTTLS_AUTO'] || true %>
 
 development:
   <<: *defaults
