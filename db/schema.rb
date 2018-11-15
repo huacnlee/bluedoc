@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_071939) do
+ActiveRecord::Schema.define(version: 2018_11_15_063146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_071939) do
     t.datetime "body_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "editor_ids", default: [], null: false, array: true
     t.index ["repository_id", "slug"], name: "index_docs_on_repository_id_and_slug", unique: true
     t.index ["repository_id"], name: "index_docs_on_repository_id"
   end
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_071939) do
     t.datetime "updated_at", null: false
     t.text "preferences"
     t.integer "members_count", default: 0, null: false
+    t.integer "editor_ids", default: [], null: false, array: true
     t.index ["user_id", "slug"], name: "index_repositories_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end

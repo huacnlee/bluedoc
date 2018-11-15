@@ -8,7 +8,7 @@ class Repository < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :preferences, :toc, :user_active, :watches, :privacy, :search
+  depends_on :preferences, :toc, :editors, :user_active, :watches, :privacy, :search
 
   attr_accessor :gitbook_url, :last_editor_id
 

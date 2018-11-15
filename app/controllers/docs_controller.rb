@@ -24,8 +24,6 @@ class DocsController < Users::ApplicationController
       authorize! :read, @doc
     end
 
-    @editors = @doc.editors.with_attached_avatar if @doc
-
     render "show", layout: "reader"
   end
 

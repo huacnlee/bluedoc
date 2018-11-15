@@ -225,4 +225,24 @@ class RepositoryTest < ActiveSupport::TestCase
       assert_equal true, repo.indexed_changed?
     end
   end
+
+  test "editors" do
+    user0 = create(:user)
+    user1 = create(:user)
+    user2 = create(:user)
+
+    repo = create(:repository, editor_ids: [user1.id, user0.id])
+    assert_equal [user1.id, user0.id], repo.editor_ids
+
+    mock_current user: user2
+    toc = <<~TOC
+    - title: Hello
+      url: hello
+    TOC
+    repo.update!(toc: toc)
+    repo.reload
+
+    assert_equal [user1.id, user0.id, user2.id], repo.editor_ids
+    assert_equal [user1, user0, user2], repo.editors
+  end
 end

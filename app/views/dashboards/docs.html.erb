@@ -8,7 +8,7 @@
     <% if @user_actives.blank? %>
       <div class="blankslate">
         <h3>No recent docs</h3>
-        <p>You have no update Doc in recently.</p>
+        <p>You does not have updated Doc in recently.</p>
       </div>
     <% else %>
       <%= render partial: "docs", locals: { items: @user_actives } %>

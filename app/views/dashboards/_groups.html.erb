@@ -1,3 +1,8 @@
+<% if items.blank? %>
+<div class="blankslate">
+  <p>You does not have any groups.</p>
+</div>
+<% else %>
 <table class="dashboard-table">
   <tr>
     <td>Name</td>
@@ -23,3 +28,4 @@
   </tr>
   <% end %>
 </table>
+<% end %>

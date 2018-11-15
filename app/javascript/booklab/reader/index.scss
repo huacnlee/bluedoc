@@ -83,6 +83,10 @@
       overflow-wrap: break-word;
     }
 
+    .doc-info {
+      .editors { margin-right: 10px; }
+    }
+
     .version-sidebar {
       .pagination {
         .page-number { display: none; }

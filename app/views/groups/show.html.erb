@@ -3,7 +3,7 @@
 <%= render "groups/menu" %>
 
 <div class="clearfix">
-  <div class="border-bottom pb-3 mb-3">
+  <div class="border-bottom pb-3 px-1 mb-3">
     <form action="" class="subnav-search" method="GET">
       <input type="text" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="Find a repository..." />
       <%= icon_tag "search", class: "subnav-search-icon" %>
@@ -13,7 +13,7 @@
     </form>
   </div>
 
-  <div class="group-repositories col-9 float-left px-3">
+  <div class="group-repositories col-9 float-left pr-5">
     <% if @repositories.blank? %>
       <div class="blankslate">
         <h3>There is no repository</h3>
@@ -28,9 +28,9 @@
     <div class="group-members Box">
       <div class="Box-body">
         <div class="sub-title">Members</div>
-        <div class="list">
+        <div class="list clearfix">
           <% @members.limit(30).each do |member| %>
-            <span class="mx-1"><%= user_avatar_tag(member.user) %></span>
+            <div class="m-1 float-left"><%= user_avatar_tag(member.user) %></div>
           <% end %>
         </div>
       </div>

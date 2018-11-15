@@ -76,6 +76,12 @@
       <%= @doc.body_html %>
     </div>
     <div class="doc-info mt-5 py-2 border-top">
+      <span class="editors">
+        <% @doc.editors.each do |user| %>
+        <%= user_avatar_tag(user, style: :tiny) %>
+        <% end %>
+      </span>
+
       <% if @doc.last_editor %>
       Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
       <% else %>

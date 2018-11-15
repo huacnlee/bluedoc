@@ -1,3 +1,19 @@
 .group-heading {
   .group-title { font-size: 28px; }
 }
+
+.group-members {
+  .group-member {
+    position: relative;
+
+    .avatar-box {
+      width: 50px;
+    }
+
+    .member-actions {
+      position: absolute;
+      top: 2px;
+      right: 0px;
+    }
+  }
+}

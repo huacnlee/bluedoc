@@ -19,6 +19,11 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
       <% end %>
       <div class="title"><%= @repository.name %></div>
       <div class="description"><%= @repository.description %></div>
+      <div class="editors">
+        <% @repository.editors.each do |user| %>
+          <%= user_avatar_tag(user, style: :tiny) %>
+        <% end %>
+      </div>
     </div>
     <div class="toc-list">
       <%= sanitize_html toc_html %>

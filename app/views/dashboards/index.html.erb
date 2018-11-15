@@ -29,6 +29,7 @@
   </div>
 
   <div class="col-3 bg-white d-table-cell px-5" style="max-width: ">
+    <% if !@groups.blank? %>
     <div class="sub-title">My Groups</div>
     <div class="Box">
       <div class="Box-body">
@@ -42,5 +43,6 @@
         </div>
       </div>
     </div>
+    <% end %>
   </div>
 </div>

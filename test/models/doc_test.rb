@@ -48,16 +48,36 @@ class DocTest < ActiveSupport::TestCase
 
     assert_equal user.id, doc.creator_id
     assert_equal user.id, doc.last_editor_id
+    assert_equal [user.id], doc.editor_ids
 
-    doc = create(:doc, last_editor_id: 11, creator_id: 22)
+    other_u0 = create(:user)
+    other_u1 = create(:user)
+    repo_old_editor_ids = [other_u0.id, other_u1.id]
+    repo = create(:repository, editor_ids: repo_old_editor_ids)
+
+    doc = create(:doc, repository: repo, last_editor_id: 11, creator_id: 22)
     assert_equal user.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
+    assert_equal [user.id], doc.editor_ids
 
     user1 = create(:user)
     mock_current(user: user1)
     doc.save
     assert_equal user1.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
+    assert_equal [user.id, user1.id], doc.editor_ids
+    assert_equal [user, user1], doc.editors
+
+    doc.update(title: "New title")
+    assert_equal [user.id, user1.id], doc.editor_ids
+
+    user2 = create(:user)
+    doc1 = create(:doc, repository: repo, editor_ids: [user1.id, user2.id])
+
+    # check repo editor_ids will including doc.editor_ids, doc1.editor_ids
+    repo.reload
+    assert_equal (repo_old_editor_ids + doc.editor_ids + doc1.editor_ids).uniq, repo.editor_ids
+    assert_equal 5, repo.editor_ids.length
   end
 
   test ".draft_title" do
