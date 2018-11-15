@@ -3,13 +3,13 @@
   <p>You does not have any <%= action_name.singularize %> repositories.
 </div>
 <% else %>
-<table class="dashboard-table" data-action-button-reload>
+<table class="dashboard-table table table-striped" data-action-button-reload>
   <tr>
     <td>Name</td>
     <td>Description</td>
     <td>Stars</td>
     <td>Watches</td>
-    <td>Last visit</td>
+    <td></td>
   </tr>
   <% @repositories.each do |repo| %>
   <tr class="repo-item">

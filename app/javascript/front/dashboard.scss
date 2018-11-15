@@ -63,37 +63,11 @@
     .group-item {
       width: 80px;
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       .user-display-name { font-size: 14px; margin-top: 5px; color: #555; }
       a { display: block; }
-    }
-  }
-
-  .dashboard-table {
-    width: 100%;
-    tr {
-      &:hover {
-        td {
-          background: #fafbfc;
-        }
-      }
-
-      &:first-child {
-        border-top: 1px solid #e1e4e8;
-        td {
-          background: #fafbfc;
-        }
-      }
-      td {
-        &:first-child {
-          border-left: 1px solid #e1e4e8;
-        }
-        &:last-child {
-          border-right: 1px solid #e1e4e8;
-        }
-        background: #fff; padding: 8px;
-        border-bottom: 1px solid #e1e4e8;
-      }
     }
   }
 
