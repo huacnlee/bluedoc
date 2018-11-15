@@ -1,6 +1,7 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
   host: '<%= ENV['APP_HOST'] || "http://localhost:3000" %>'
+  mailer_from: <%= ENV["MAILER_FROM"] || "no-reply@booklab.io" %>
   mailer_options:
     address: '<%= ENV['SMTP_ADDRESS'] %>'
     port: <%= ENV['SMTP_PORT'] || 25 %>
