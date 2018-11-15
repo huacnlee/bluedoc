@@ -7614,6 +7614,11 @@ to-space-case@^1.0.0:
   dependencies:
     to-no-case "^1.0.0"
 
+tocbot@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.4.2.tgz#5c1ab4b38ee287a08b161f893de2982106cbdb26"
+  integrity sha512-WBf5KP1tOOPTfPb2EW/7JZRtVadNV1ilRV8t6ARj7Gb6DGyaW7rW0ju1UEOuj6/q1I2VoQjFZEky+66izO5z3A==
+
 toggle-selection@^1.0.3:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/toggle-selection/-/toggle-selection-1.0.6.tgz#6e45b1263f2017fa0acc7d89d78b15b8bf77da32"

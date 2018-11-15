@@ -7,6 +7,7 @@ import "primer-booklab"
 import "vendor/styleguide.js"
 import "vendor/jquery.timeago.js"
 import "vendor/jquery.timeago.settings.js"
+
 import MarkdownEditor from './editor/index'
 
 Turbolinks.start()
