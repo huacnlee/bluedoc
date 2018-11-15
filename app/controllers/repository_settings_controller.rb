@@ -29,6 +29,7 @@ class RepositorySettingsController < Users::ApplicationController
     new_slug = params.require(:repository).permit(:transfer_to_user)[:transfer_to_user]
 
     if @repository.transfer(new_slug)
+      @repository.reload
       redirect_to @repository.to_path, notice: "Repository has transfer successed"
     else
       redirect_to advanced_user_repository_settings_path(@user, @repository), alert: @repository.errors[:user_id].join("")
@@ -45,7 +46,7 @@ class RepositorySettingsController < Users::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository
-      @repository = @user.repositories.find_by_slug!(params[:repository_id])
+      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
     end
 
     def repository_params

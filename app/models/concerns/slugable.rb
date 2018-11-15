@@ -20,6 +20,6 @@ module Slugable
   end
 
   def find_by_slug!(slug)
-    self.fetch_by_uniq_keys(slug: slug) rescue ActiveRecord::RecordNotFound
+    find_by!(slug: slug) rescue ActiveRecord::RecordNotFound
   end
 end

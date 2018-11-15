@@ -101,7 +101,7 @@ class DocsController < Users::ApplicationController
 
   private
     def set_repository
-      @repository = @user.repositories.find_by_slug!(params[:repository_id])
+      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
