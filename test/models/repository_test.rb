@@ -174,8 +174,9 @@ class RepositoryTest < ActiveSupport::TestCase
   test "transfer" do
     repo = create(:repository)
     to_user = create(:user)
+    actor = create(:user)
 
-    mock_current(user: to_user)
+    mock_current(user: actor)
     assert_equal false, repo.transfer("not-exist")
     assert_equal ["Transfer target: [not-exist] does not exists, please check it."], repo.errors[:user_id]
 

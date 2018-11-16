@@ -24,6 +24,7 @@ class Activity < ApplicationRecord
     return false if actor_id.blank?
 
     user_ids = get_user_ids(user: user, user_id: user_id)
+    user_ids.delete actor_id
 
     activity_params = {
       action: action,

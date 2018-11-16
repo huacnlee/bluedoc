@@ -25,6 +25,9 @@ class Notification < ActiveRecord::Base
     return false if target.blank?
 
     user_ids = get_user_ids(user: user, user_id: user_id)
+    user_ids.delete actor_id
+
+    return false if user_ids.blank?
 
     notification_params = {
       notify_type: notify_type,

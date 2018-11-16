@@ -33,4 +33,16 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_tracked_notifications :add_member, target: member, user_id: @user.id, actor_id: @actor.id, meta: { foo: "bar" }
   end
+
+  test "cannot track with user, actor in same" do
+    user = create(:user)
+    member = create(:member)
+
+    Notification.track_notification(:add_member, member, user_id: user.id, actor_id: user.id)
+    assert_equal 0, Notification.where(user_id: user.id).count
+
+    mock_current user: user
+    Notification.track_notification(:add_member, member, user_id: user.id)
+    assert_equal 0, Notification.where(user_id: user.id).count
+  end
 end

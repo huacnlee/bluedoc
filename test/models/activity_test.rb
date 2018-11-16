@@ -51,6 +51,16 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal user2.id, activity.actor_id
   end
 
+  test "cannot track with actor, user in same" do
+    user = create(:user)
+    Activity.track_activity(:follow_user, user, user_id: user.id, actor_id: user.id)
+    assert_equal 0, Activity.where(user_id: user.id).count
+
+    mock_current user: user
+    Activity.track_activity(:follow_user, user, user_id: user.id)
+    assert_equal 0, Activity.where(user_id: user.id).count
+  end
+
   test "track_activity with meta" do
     user = create(:user)
     actor = create(:user)
