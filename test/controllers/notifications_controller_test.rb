@@ -39,4 +39,26 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     delete clean_notifications_path
     assert_equal 0, Notification.where(user_id: @user.id).count
   end
+
+  test "GET /:id" do
+    user = create(:user)
+    other_user = create(:user)
+    note = create(:notification, user: user)
+
+    assert_require_user do
+      get notification_path(note.id)
+    end
+
+    sign_in other_user
+    assert_raise(ActiveRecord::RecordNotFound) do
+      get notification_path(note.id)
+    end
+
+    sign_in user
+    get notification_path(note.id)
+    assert_redirected_to note.target_url
+
+    note.reload
+    assert_not_nil note.read_at
+  end
 end

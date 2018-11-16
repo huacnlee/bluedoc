@@ -12,6 +12,13 @@ module Notifications
       Notification.read!(unread_ids)
     end
 
+    def show
+      @notification = notifications.find_by!(id: params[:id])
+      Notification.read!([@notification.id])
+
+      redirect_to @notification.target_url
+    end
+
     def clean
       notifications.delete_all
       redirect_to notifications_path

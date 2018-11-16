@@ -5,6 +5,8 @@ class Notification < ActiveRecord::Base
   include NotifyTrackable
   include Notifications::Model
 
+  delegate :email, to: :user
+
   serialize :meta, Hash
 
   NOTIFY_TYPES = %w[add_member]
@@ -48,15 +50,29 @@ class Notification < ActiveRecord::Base
     end
   end
 
+  def target_url
+    case notify_type
+    when "add_member" then self.target&.subject&.to_url
+    else
+      return Setting.host
+    end
+  end
+
+  def html
+    html = ApplicationController.renderer.render "/notifications/text/#{notify_type}", layout: false, locals: { notification: self }
+    html.gsub(/\s+/, " ").strip
+  end
+
+  def text
+    html.gsub(/<.+?>/, "").gsub(/\s+/, " ").strip
+  end
+
   private
     def bind_relation_for_target
       self.class.fill_depend_id_for_target(self)
     end
 
     def create_email_notify
-      case self.notify_type
-      when "add_member"
-        UserMailer.with(user: self.user, member: self.target, actor: self.actor).add_member.deliver_later
-      end
+      NotificationMailer.with(notification: self).to_user.deliver_later
     end
 end

@@ -1,0 +1,7 @@
+<%
+target_name = notification.target&.subject.name
+if notification.target&.subject_type == "Repository"
+  target_name = [notification.target&.subject&.user&.name, notification.target&.subject.name].join(" / ")
+end
+%>
+<%= notification.actor&.name %> has added you as member of <strong><%= target_name %></strong>
