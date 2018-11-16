@@ -245,7 +245,6 @@
   .user-name { font-weight: normal; color: #666; }
 }
 
-
 .activity-item {
   position: relative;
 
@@ -267,3 +266,19 @@
   }
 }
 
+.doc-card {
+  padding: 15px;
+  a.doc-link { color: #444; font-size: 16px; }
+  .desc {
+    font-size: 13px;
+    a { color: #666; }
+  }
+
+  .counter {
+    margin-right: 15px;
+
+    .octicon {
+      fill: #666;
+    }
+  }
+}

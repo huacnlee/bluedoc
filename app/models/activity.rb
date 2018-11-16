@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
 
   serialize :meta, Hash
 
-  ACTIONS = %w[star_repo follow_user create_repo update_repo transfer_repo create_doc update_doc add_member]
+  ACTIONS = %w[star_repo star_doc follow_user create_repo update_repo transfer_repo create_doc update_doc add_member]
   NO_ACTOR_ACTIONS = %w[add_member]
 
   def self.action_to_actor?(action)

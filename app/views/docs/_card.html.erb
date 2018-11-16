@@ -1,0 +1,13 @@
+<% if doc %>
+  <div class="doc-card Box p-3">
+    <div class="d-inline-block mb-1">
+      <h4 class="doc-title f4 lh-condensed text-bold text-gray-dark">
+        <%= doc_title_tag(doc) %>
+      </h4>
+    </div>
+    <div class="desc text-gray pr-4">
+      <%= user_name_tag(doc.repository&.user) %> <span class="divider">/</span>
+      <%= repository_name_tag(doc.repository) %>
+    </div>
+  </div>
+<% end %>

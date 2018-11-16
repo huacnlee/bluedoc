@@ -92,6 +92,10 @@ class DocsController < Users::ApplicationController
 
     if request.post?
       User.create_action(params[:action_type], target: @doc, user: current_user)
+
+      if params[:action_type] == "star"
+        Activities::Doc.new(@doc).star
+      end
     else
       User.destroy_action(params[:action_type], target: @doc, user: current_user)
     end
