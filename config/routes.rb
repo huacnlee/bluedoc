@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :notifications, module: :notifications do
     collection do
       get :all
+      post :read
       delete :clean
     end
   end

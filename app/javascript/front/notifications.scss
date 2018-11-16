@@ -13,21 +13,34 @@
 
 .notification {
   position: relative;
+  border-bottom: 1px solid #e0e0e0;
 
   &:last-child {
-    padding-bottom: 0;
     border-bottom: 0;
   }
-  padding-bottom: 18px;
-  padding-left: 28px;
+  padding: 12px;
+  padding-left: 40px;
+
+  a {
+    color: #444;
+
+    &:hover {
+      color: #222;
+      text-decoration: none;
+    }
+  }
+
+  &.unread {
+    a { font-weight: bold; }
+  }
 
   .info { color: #999; }
 
   & > .avatar-box {
     position: absolute;
-    top: 0px;
-    left: 0;
+    top: 12px;
+    left: 12px;
   }
 
-  .time-box { color: #aaa; font-size: 12px; }
+  .time-box { float: right; color: #aaa; font-size: 12px; }
 }

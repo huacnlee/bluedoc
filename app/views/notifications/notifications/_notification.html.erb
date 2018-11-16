@@ -1,15 +1,13 @@
-<%#= cache(['notifications', Notifications::VERSION, notification]) do %>
 <div id="notification-<%= notification.id %>"
      data-id="<%= notification.id %>"
-     class="notification notification-<%= notification.notify_type %><%= ' unread' unless notification.read? %>">
+     class="notification clearfix notification-<%= notification.notify_type %><%= ' unread' unless notification.read? %>">
   <div class="avatar-box">
     <%= user_avatar_tag notification.actor, style: :tiny %>
   </div>
   <div class="infos">
-    <%= render partial: "/notifications/#{notification.notify_type}", locals: { notification: notification } %>
-  </div>
-  <div class="time-box mt-2 text-grady">
-    <%= l notification.created_at, format: :short %>
+    <%= link_to notification.text, notification_url(notification), target: "_blank" %>
+    <span class="time-box">
+      <%= l notification.created_at, format: :short %>
+    </span>
   </div>
 </div>
-<%# end %>

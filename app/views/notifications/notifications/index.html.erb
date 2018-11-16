@@ -16,6 +16,13 @@
         <span class="float-right">
           <% if params[:tab] == "all" %>
             <%= link_to "Clear all", main_app.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+          <% else %>
+            <%= form_with scope: :notification, url: main_app.read_notifications_path, method: :post do |form| %>
+              <% @notifications.each do |note| %>
+              <input type="hidden" name="ids[]" value="<%= note.id %>">
+              <% end %>
+              <button type="submit" class="btn btn-sm">Mark as read</button>
+            <% end %>
           <% end %>
         </span>
 
@@ -23,9 +30,9 @@
           <% if params[:tab] == "all" %>All<% else %>Unread<% end %> notifications
         </span>
       </div>
-      <div class="Box-body">
+      <div class="list">
         <% if @notifications.blank? %>
-          <div class="blankslate">
+          <div class="blankslate m-4">
             You does not have any <% if params[:tab] != "all" %>unread<% end %> notifications.
           </div>
         <% else %>
@@ -36,3 +43,10 @@
     <%= paginate @notifications %>
   </div>
 </div>
+
+<script>
+  $(".notifications .notification").on("click", "a", function(e) {
+    $note = $(e.delegateTarget);
+    $note.removeClass("unread");
+  })
+</script>
