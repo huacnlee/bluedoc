@@ -29,6 +29,10 @@ i.fas {
   @extend .py-3;
   font-size: 16px;
 
+  .dropdown-menu {
+    font-size: 14px;
+  }
+
   a {
     color: #454545;
   }
