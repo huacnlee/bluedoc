@@ -19,6 +19,8 @@
 
   <% if @doc %>
   <div class="navbar-buttons">
+    <%= action_button_tag(@doc, :star, class: "btn") %>
+
     <% if can? :update, @doc %>
     <%= link_to icon_tag("pen", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn px-4" %>
     <% end %>

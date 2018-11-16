@@ -113,6 +113,8 @@ Rails.application.routes.draw do
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do
           get :raw
+          post :action
+          delete :action
           get :versions
           patch :revert
         end

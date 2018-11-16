@@ -300,4 +300,30 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Hello world", doc.body_plain
     assert_equal u.id, doc.last_editor_id
   end
+
+  test "POST/DELETE /:user/:repo/:slug/action" do
+    private_repo = create(:repository, privacy: :private)
+    private_doc = create(:doc, repository: private_repo)
+
+    doc = create(:doc, repository: @repo, body: "Hello world")
+
+    post doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 200, response.status
+    assert_match /.doc-#{doc.id}-star-button/, response.body
+    assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
+    assert_equal true, @user.star_doc?(doc)
+
+    post private_doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 403, response.status
+
+    delete doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 200, response.status
+    assert_match /.doc-#{doc.id}-star-button/, response.body
+    assert_match /btn.attr\(\"data-label\"\)/, response.body
+    assert_equal false, @user.star_doc?(doc)
+  end
 end

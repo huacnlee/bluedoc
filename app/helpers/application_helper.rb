@@ -51,4 +51,47 @@ module ApplicationHelper
     text = texts.join(" - ")
     content_for :title, h("#{text} - BookLab")
   end
+
+  def action_button_tag(target, action_type, opts = {})
+    return "" if target.blank?
+
+    label      = opts[:label]
+    undo_label = opts[:undo_label]
+    icon       = opts[:icon]
+    undo       = opts[:undo]
+    with_count = opts[:with_count]
+
+    label ||= action_type.to_s.titleize
+    undo_label ||= "un#{action_type.to_s}".titleize
+    icon ||= label.downcase
+
+    action_type_pluralize = action_type.to_s.pluralize
+    action_count = "#{action_type_pluralize}_count"
+
+    url = target.to_path("/action?#{{ action_type: action_type }.to_query}")
+
+    data = { method: :post, label: label, undo_label: undo_label, remote: true }
+    class_names = opts[:class] || "btn btn-sm"
+    if with_count
+      class_names += " btn-with-count"
+    end
+    btn_label = label.dup
+
+    if undo.nil?
+      undo = current_user && User.find_action(action_type, target: target, user: current_user)
+    end
+
+    if undo
+      data[:method] = :delete
+      btn_label = undo_label.dup
+    end
+
+    out = []
+
+    out << link_to(icon_tag(icon, label: btn_label), url, data: data, class: class_names)
+    if with_count && target.respond_to?(action_count)
+      out << %(<button class="social-count" href="#url">#{target.send(action_count)}</button>)
+    end
+    content_tag(:span, raw(out.join("")), class: "#{target.class.name.underscore.singularize}-#{target.id}-#{action_type}-button")
+  end
 end

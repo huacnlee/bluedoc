@@ -1,0 +1,26 @@
+<% if @docs.blank? %>
+<div class="blankslate">
+  <p>You does not have any <%= action_name.singularize %> docs.
+</div>
+<% else %>
+<table class="dashboard-table table table-striped" data-action-button-reload>
+  <tr>
+    <td>Name</td>
+    <td>Repository</td>
+    <td></td>
+  </tr>
+  <% @docs.each do |doc| %>
+  <tr class="doc-item">
+    <td>
+      <%= doc_title_tag(doc) %>
+    </td>
+    <td>
+      <%= repository_name_tag(doc.repository) %>
+    </td>
+    <td>
+      <%= action_button_tag(doc, :star, undo: true) %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DocsController < Users::ApplicationController
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action]
 
   before_action :set_user
   before_action :set_repository
@@ -85,6 +85,17 @@ class DocsController < Users::ApplicationController
     else
       redirect_to @doc.to_path("/versions"), alert: "Revert failed, please check a exists version."
     end
+  end
+
+  def action
+    authorize! :read, @doc
+
+    if request.post?
+      User.create_action(params[:action_type], target: @doc, user: current_user)
+    else
+      User.destroy_action(params[:action_type], target: @doc, user: current_user)
+    end
+    @doc.reload
   end
 
   # DELETE /docs/1

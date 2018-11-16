@@ -136,25 +136,25 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 302, response.status
 
     sign_in @user
-    post "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :star, format: :js }
+    post "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :star }, xhr: true
     assert_equal 200, response.status
     assert_match /.repository-#{repo.id}-star-button/, response.body
     assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
     repo.reload
     assert_equal 1, repo.stars_count
 
-    post "/#{repo1.user.slug}/#{repo1.slug}/action", params: { action_type: :star, format: :js }
+    post "/#{repo1.user.slug}/#{repo1.slug}/action", params: { action_type: :star }, xhr: true
     repo1.reload
     assert_equal 1, repo1.stars_count
 
-    post "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :watch, format: :js }
+    post "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :watch }, xhr: true
     assert_equal 200, response.status
     assert_match /.repository-#{repo.id}-watch-button/, response.body
     repo.reload
     assert_equal 1, repo.stars_count
     assert_equal 1, repo.watches_count
 
-    delete "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :star, format: :js }
+    delete "/#{repo.user.slug}/#{repo.slug}/action", params: { action_type: :star }, xhr: true
     assert_equal 200, response.status
     assert_match /btn.attr\(\"data-label\"\)/, response.body
     repo.reload
