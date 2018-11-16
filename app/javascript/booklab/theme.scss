@@ -63,6 +63,18 @@ i.fas {
   }
 }
 
+.footer {
+  padding: 30px;
+  color: #999;
+  text-align: left;
+
+  .divider { color: #aaa; }
+
+  a {
+    color: #666;
+  }
+}
+
 .subnav-search {
   .subnav-search-icon { top: 10px; color: #AAA !important; }
 }

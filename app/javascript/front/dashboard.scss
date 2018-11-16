@@ -6,6 +6,10 @@
     }
   }
 
+  .footer {
+    padding-left: 230px;
+  }
+
   .sub-title {
     border-bottom: 0px;
     font-weight: 500;
@@ -17,8 +21,9 @@
   .dashboard-menu {
     border-right: 1px solid #e1e4e8;
     padding: 24px;
-    min-width: 200px;
+    width: 200px;
     height: calc(100vh - 50px);
+    position: fixed;
     background: #fafbfc;
 
     .dashboard-menu-divider {

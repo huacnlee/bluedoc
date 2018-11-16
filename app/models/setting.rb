@@ -34,6 +34,7 @@ class Setting < RailsSettings::Base
   end
 
   field :admin_emails, default: "admin@booklab.io", type: :array
+  field :application_footer_html, default: "", type: :string
 
   class << self
     def has_admin?(email)
