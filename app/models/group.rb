@@ -3,13 +3,8 @@
 class Group < User
   include Memberable
   include Activityable
-  include Searchable
-  include Elasticsearch::Model
 
-  index_name { "#{Rails.env}-groups" }
-  document_type name.underscore
-
-  depends_on :user_active
+  depends_on :user_actives, :search
 
   # Disable Devise user features
   def password_required?; false; end
