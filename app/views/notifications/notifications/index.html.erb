@@ -1,0 +1,38 @@
+<div class="col-12 d-table">
+  <div class="col-3 v-align-top d-table-cell pr-4">
+    <ul class="menu">
+      <%= render_list_items(class: "menu-item", type: :link, check_parameters: true) do |li|
+        li << link_to(main_app.notifications_path, class: "menu-item") do %>
+          Unread<span class="Counter"><%= unread_notifications_count %></span>
+        <% end
+        li << link_to("All", main_app.notifications_path(tab: "all"), class: "menu-item")
+      end %>
+    </ul>
+  </div>
+
+  <div class="col-9 v-align-top d-table-cell">
+    <div class="notifications Box">
+      <div class="Box-header clearfix">
+        <span class="float-right">
+          <% if params[:tab] == "all" %>
+            <%= link_to "Clear all", main_app.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+          <% end %>
+        </span>
+
+        <span class="title">
+          <% if params[:tab] == "all" %>All<% else %>Unread<% end %> notifications
+        </span>
+      </div>
+      <div class="Box-body">
+        <% if @notifications.blank? %>
+          <div class="blankslate">
+            You does not have any <% if params[:tab] != "all" %>unread<% end %> notifications.
+          </div>
+        <% else %>
+          <%= render @notifications %>
+        <% end %>
+      </div>
+    </div>
+    <%= paginate @notifications %>
+  </div>
+</div>

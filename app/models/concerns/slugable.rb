@@ -19,6 +19,10 @@ module Slugable
     slug
   end
 
+  def to_url
+    [Setting.host, self.to_path].join("")
+  end
+
   def find_by_slug!(slug)
     find_by!(slug: slug) rescue ActiveRecord::RecordNotFound
   end

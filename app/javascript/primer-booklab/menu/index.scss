@@ -1,16 +1,30 @@
 @import "../colors.scss";
 
+.menu {
+  border-color: #eaeaea;
+}
+
 .menu-item {
   padding: 8px 18px;
   color: #505050;
-  
+  border-color: #eaeaea;
+
+  &:hover {
+    background-color: #fafafc;
+  }
+
+  .Counter {
+    margin-top: 3px;
+  }
+
   &.selected {
     color: #505050;
+    background-color: #fafafc;
     font-weight: normal;
-    
+
     &:before {
       background-color: $primary;
-      width: 2px;
+      width: 3px;
       margin-left: -1px;
     }
   }

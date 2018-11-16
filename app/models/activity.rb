@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
+  include NotifyTrackable
+
   belongs_to :user, required: false
   belongs_to :actor, class_name: "User"
   belongs_to :target, polymorphic: true
@@ -21,23 +23,7 @@ class Activity < ApplicationRecord
     actor_id ||= Current.user&.id
     return false if actor_id.blank?
 
-    user_ids = []
-    if user_id.is_a?(Array)
-      user_ids = user_id
-    else
-      user_ids = [user_id] if !user_id.blank?
-    end
-
-    if user.is_a?(Array)
-      users = user
-    else
-      users = [user] if !user.blank?
-    end
-
-    if users.present?
-      user_ids = users.map(&:id)
-    end
-    user_ids.uniq!
+    user_ids = get_user_ids(user: user, user_id: user_id)
 
     activity_params = {
       action: action,
@@ -70,31 +56,6 @@ class Activity < ApplicationRecord
     Activity.bulk_insert(set_size: 100) do |worker|
       user_ids.each do |user_id|
         worker.add(activity_params.merge(user_id: user_id))
-      end
-    end
-  end
-
-  def self.fill_depend_id_for_target(activity_params)
-    target = activity_params[:target]
-
-    case target.class.name
-    when "Group"
-      activity_params[:group_id] = target.id
-    when "Repository"
-      activity_params[:group_id] = target.user_id
-      activity_params[:repository_id] = target.id
-    when "Doc"
-      activity_params[:repository_id] = target.repository_id
-      activity_params[:group_id] = target.repository&.user_id
-    when "Member"
-      subject = target.subject
-      case target.subject_type
-      when "Group"
-      when "User"
-        activity_params[:group_id] = subject.id
-      when "Repository"
-        activity_params[:group_id] = subject.user_id
-        activity_params[:repository_id] = subject.id
       end
     end
   end

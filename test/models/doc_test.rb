@@ -9,6 +9,7 @@ class DocTest < ActiveSupport::TestCase
     assert_equal "#{doc.repository.to_path}/#{doc.slug}", doc.to_path
 
     assert_equal doc, repo.docs.find_by_slug(doc.slug)
+    assert_equal [Setting.host, doc.to_path].join(""), doc.to_url
   end
 
   test "Markdownable" do

@@ -1,0 +1,12 @@
+<p>Hi, <%= @user.name %></p>
+<p>
+  <strong><%= link_to @actor.name, @actor.to_url %></strong> has added you as member of:
+</p>
+
+<% if @member.subject_type == "Repository" %>
+  <%= render "repository_card", repository: @member.subject %>
+<% else %>
+  <%= render "group_card", group: @member.subject %>
+<% end %>
+
+<p>You can click the group name link to visit, now the private Repository in this Group you have permisson to visit.</p>

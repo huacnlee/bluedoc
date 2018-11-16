@@ -5,14 +5,17 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "Welcome to use BookLab")
   end
 
-  def added_to_group
+  def add_member
     @user = params[:user]
     @actor = params[:actor]
-    @group = params[:group]
+    @member = params[:member]
 
     return false if @user.blank?
-    return false if @group.blank?
+    return false if @member.blank?
+    return false if @member.subject.blank?
 
-    mail(to: @user.email, subject: "#{@actor.name} has added you as #{@group.name}'s member")
+    target_name = @member.subject&.name
+
+    mail(to: @user.email, subject: "#{@actor.name} has added you as #{target_name}'s member")
   end
 end

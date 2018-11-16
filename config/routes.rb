@@ -32,6 +32,13 @@ Rails.application.routes.draw do
   # short attachment url
   get "/uploads/:id" => "blobs#show", as: :upload
 
+  resources :notifications, module: :notifications do
+    collection do
+      get :all
+      delete :clean
+    end
+  end
+
   resource :account_settings, as: :account_settings, path: "account/settings" do
     collection do
       get :account

@@ -1,0 +1,43 @@
+<% if current_user %>
+  <a href="<%= notifications_path %>" class="dropdown nav-link mr-2 active"><%= icon_tag "bell" %></a>
+
+  <details class="dropdown details-reset details-overlay d-inline-block mr-2">
+    <summary aria-haspopup="true">
+      <%= icon_tag("plus") %>
+      <div class="dropdown-caret"></div>
+    </summary>
+    <div class="dropdown-menu dropdown-menu-sw">
+      <ul>
+        <li><a class="dropdown-item" href="<%= main_app.new_repository_path %>">New Repository</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.new_group_path %>">New Group</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="dropdown details-reset details-overlay d-inline-block">
+    <summary aria-haspopup="true">
+      <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
+      <div class="dropdown-caret"></div>
+    </summary>
+    <div class="dropdown-menu dropdown-menu-sw">
+      <div class="dropdown-header">
+        Signed in as <strong><%= current_user.slug %></strong>
+      </div>
+      <ul>
+        <li><a class="dropdown-item" href="<%= current_user.to_path %>">Your profile</a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>">Your repositories</a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>">Your stars</a></li>
+        <% if current_user.admin? %>
+        <li class="dropdown-divider" role="separator"></li>
+        <li><a class="dropdown-item" data-turbolinks="false" href="<%= main_app.admin_root_path %>">Admin Panel</a></li>
+        <% end %>
+        <li class="dropdown-divider" role="separator"></li>
+        <li><a class="dropdown-item" href="<%= main_app.account_settings_path %>">Settings</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Sign out</a></li>
+      </ul>
+    </div>
+  </details>
+<% else %>
+  <%= link_to "Sign in", main_app.new_user_session_path, class: "nav-link" %>
+  <%= link_to "Sign up", main_app.new_user_registration_path, class: "nav-link" %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_063146) do
+ActiveRecord::Schema.define(version: 2018_11_16_024701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,24 @@ ActiveRecord::Schema.define(version: 2018_11_15_063146) do
     t.index ["subject_type", "subject_id"], name: "index_subject"
     t.index ["user_id", "subject_type", "subject_id"], name: "index_user_subject", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "notifications", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "actor_id"
+    t.string "notify_type", null: false
+    t.string "target_type"
+    t.integer "target_id"
+    t.integer "group_id"
+    t.integer "repository_id"
+    t.text "meta"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_notifications_on_group_id"
+    t.index ["repository_id"], name: "index_notifications_on_repository_id"
+    t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
+    t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
   end
 
   create_table "repositories", force: :cascade do |t|

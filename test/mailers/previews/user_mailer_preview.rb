@@ -4,7 +4,11 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(user: User.first).welcome
   end
 
-  def added_to_group
-    UserMailer.with(user: User.first, group: Group.first, actor: User.first).added_to_group
+  def add_member
+    UserMailer.with(user: User.first, member: Member.first, actor: User.first).add_member
+  end
+
+  def add_member_of_repo
+    UserMailer.with(user: User.first, member: Member.where(subject_type: "Repository").first, actor: User.first).add_member
   end
 end

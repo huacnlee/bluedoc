@@ -4,6 +4,6 @@ class Member
   private
 
     def send_new_member_email
-      UserMailer.with(user: self.user, group: self.subject, actor: Current.user).added_to_group.deliver_later
+      Notification.track_notification :add_member, self, user: self.user
     end
 end

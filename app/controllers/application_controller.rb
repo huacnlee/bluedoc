@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::Base
   depends_on :devise_parameters
 
+  helper_method :unread_notifications_count
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden }
@@ -13,5 +15,9 @@ class ApplicationController < ActionController::Base
   def set_nav_search(url: request.fullpath, scope: nil)
     @nav_search_path = url
     @nav_search_scope = scope
+  end
+
+  def unread_notifications_count
+    @unread_notifications_count ||= Notification.unread_count(current_user)
   end
 end

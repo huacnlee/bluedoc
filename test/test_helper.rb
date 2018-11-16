@@ -48,6 +48,18 @@ class ActiveSupport::TestCase
   def assert_html_equal(excepted, html)
     assert_equal excepted.gsub(/>[\s]+</, "><"), html.gsub(/>[\s]+</, "><")
   end
+
+  def assert_tracked_notifications(notify_type, target: nil, actor_id: nil, user_id: nil, meta: nil)
+    where_opts = { notify_type: notify_type }
+    where_opts[:actor_id] = actor_id
+    where_opts[:user_id] = user_id
+    where_opts[:target] = target
+
+    assert_equal true, Notification.where(where_opts).count > 0
+    if meta
+      assert_equal meta, Notification.where(where_opts).last.meta
+    end
+  end
 end
 
 class ActionView::TestCase

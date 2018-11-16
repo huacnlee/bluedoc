@@ -7,6 +7,12 @@ class GroupTest < ActiveSupport::TestCase
     @user = create(:user)
   end
 
+  test "slug" do
+    group = create(:group)
+    assert_equal "/#{group.slug}", group.to_path
+    assert_equal "#{Setting.host}/#{group.slug}", group.to_url
+  end
+
   test "destroy dependent :user_actives" do
     user0 = create(:user)
     user1 = create(:user)

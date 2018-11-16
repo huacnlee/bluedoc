@@ -1,0 +1,33 @@
+.notification-group {
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  .group-title {
+    font-size: 14px;
+    color: #a0a0a0;
+  }
+}
+
+.notification {
+  position: relative;
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  padding-bottom: 18px;
+  padding-left: 28px;
+
+  .info { color: #999; }
+
+  & > .avatar-box {
+    position: absolute;
+    top: 0px;
+    left: 0;
+  }
+
+  .time-box { color: #aaa; font-size: 12px; }
+}

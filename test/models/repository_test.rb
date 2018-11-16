@@ -17,6 +17,13 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal false, repo.valid?
   end
 
+  test "slug" do
+    group = create(:group)
+    repo = build(:repository, user: group, slug: "help")
+    assert_equal "/#{group.slug}/#{repo.slug}", repo.to_path
+    assert_equal "#{Setting.host}/#{group.slug}/#{repo.slug}", repo.to_url
+  end
+
   test "fullname" do
     repo = build(:repository, name: "BookLab Help", slug: "help")
     assert_equal "BookLab Help (help)", repo.fullname
