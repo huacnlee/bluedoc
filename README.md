@@ -10,11 +10,11 @@ $ brew install node imagemagic postgresql elasticearch redis
 
 Start development server:
 
-- `./bin/webpack-dev-server` - to start webpack dev server.
+- `yarn start` - to start webpack dev server.
 - `rails s` - to start rails
 
 ```bash
-$ ./bin/webpack-dev-server
+$ yarn start
 ```
 
 In other Termal tab:

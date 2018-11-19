@@ -1,6 +1,9 @@
 {
   "name": "booklab",
   "private": true,
+  "scripts": {
+    "start": "./bin/webpack-dev-server"
+  },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
