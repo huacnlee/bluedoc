@@ -15,7 +15,7 @@
         <%= form.label :slug, class: "control-label" %>
         <%= form.text_field :slug, class: "form-control" %>
         <div class="form-text">
-          <%= Setting.host %><%= @user.to_path %>/:slug
+          <%= Setting.host %><%= @user.to_path %>/:pathname
         </div>
       </div>
 

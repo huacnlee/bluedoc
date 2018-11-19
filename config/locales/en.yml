@@ -10,7 +10,10 @@ en:
     attributes:
       user:
         slug: "Username"
+        name: "Real name"
       group:
-        slug: "Username"
+        slug: "Path name"
+        name: "Display name"
       repository:
-        slug: "URL Path"
+        slug: "Path name"
+        name: "Display name"
