@@ -63,7 +63,7 @@ module BookLab
               doc.update!(doc_params)
             end
           rescue => e
-            logger.warn "doc #{doc.slug} save error: #{e.message}"
+            logger.warn "doc #{doc_params[:slug]} save error: #{e.message}"
             next
           end
 
@@ -99,7 +99,7 @@ module BookLab
       def parse_title(body)
         lines = body.split("\n")
 
-        first_line = lines[0]
+        first_line = lines[0] || ""
         if first_line.start_with? "#"
           body.gsub!(first_line, "")
           return first_line.gsub(/#[\s]?/, "")
