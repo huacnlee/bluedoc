@@ -303,5 +303,8 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.import_from_source
     assert_enqueued_jobs 2, only: RepositoryImportJob
     assert_not_equal old_job_id, repo.source_job_id
+
+    repo.destroy
+    assert_equal 0, RepositorySource.where(repository: repo).count
   end
 end
