@@ -3,5 +3,6 @@
 :logfile: log/sidekiq.log
 :queues:
   - [booklab_default, 10]
+  - [default, 10]
   - [booklab_mailers, 5]
   - [booklab_index, 3]
