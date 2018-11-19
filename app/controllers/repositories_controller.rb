@@ -17,6 +17,7 @@ class RepositoriesController < Users::ApplicationController
 
   # POST /repositories
   def create
+    repository_params[:slug].strip!
     @repository = Repository.new(repository_params)
 
     authorize! :create, @repository

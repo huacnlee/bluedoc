@@ -19,7 +19,7 @@ module BookLab
 
     def self.slugize(slug)
       return "" if slug.blank?
-      slug.underscore.gsub(/[^#{FORMAT}]+/, "-")
+      slug.strip.gsub(/[^#{FORMAT}]+/, "-")
     end
 
     # generate range of 1000 .. seed random number to 36 radix as slug

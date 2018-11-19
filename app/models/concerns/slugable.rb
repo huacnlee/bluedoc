@@ -7,9 +7,11 @@ module Slugable
     validates :slug, presence: true, format: { with: BookLab::Slug::REGEXP }, length: 2..128
 
     before_validation do
-      self.slug = self.slug.downcase if self.slug.present?
+      self.slug = BookLab::Slug.slugize(self.slug) unless self.is_a?(User)
     end
+
   end
+
 
   def fullname
     @fullname ||= "#{self.name} (#{self.slug})"
@@ -23,7 +25,15 @@ module Slugable
     [Setting.host, self.to_path].join("")
   end
 
-  def find_by_slug!(slug)
-    find_by!(slug: slug) rescue ActiveRecord::RecordNotFound
+  class_methods do
+    def find_by_slug(slug)
+      where("slug ilike ?", slug).take
+    end
+
+    def find_by_slug!(slug)
+      item = find_by_slug(slug)
+      return item if item.present?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end

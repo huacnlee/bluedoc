@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..20 }
-  validates :slug, uniqueness: true
+  validates :slug, uniqueness: { case_sensitive: false }
 
   after_commit :send_welcome_mail, on: :create
 
@@ -43,4 +43,4 @@ class User < ApplicationRecord
   end
 end
 
-require_dependency "group"
+# require_dependency "group"

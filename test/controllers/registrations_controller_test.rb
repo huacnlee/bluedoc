@@ -46,7 +46,7 @@ class RegistrationsController < ActionDispatch::IntegrationTest
       assert_select %([value=?]), "Fake Name"
     end
     assert_select %(input[name="user[slug]"]) do
-      assert_select %([value=?]), "fake-name"
+      assert_select %([value=?]), "Fake-Name"
     end
     assert_select %(input[name="user[email]"]) do
       assert_select %([value=?]), "fake@gmail.com"

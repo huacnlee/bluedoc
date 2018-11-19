@@ -5,15 +5,39 @@ require "test_helper"
 class RepositoryTest < ActiveSupport::TestCase
   include ActionMailer::TestHelper
 
+  test "Slugable" do
+    repo = create(:repository, slug: "FooBar")
+    assert_equal repo, Repository.where(user_id: repo.user_id).find_by_slug(repo.slug)
+    assert_equal repo, Repository.where(user_id: repo.user_id).find_by_slug(repo.slug.upcase)
+
+    assert_raise(ActiveRecord::RecordNotFound) { Repository.where(user_id: repo.user_id).find_by_slug!("not-exist-repo") }
+
+    assert_equal "/#{repo.user.slug}/#{repo.slug}", repo.to_path
+
+    # slug unique with case insensitive
+    repo1 = build(:repository, slug: "foobar")
+    assert_equal true, repo1.valid?
+    repo2 = build(:repository, user_id: repo.user_id, slug: "foobar")
+    assert_equal false, repo2.valid?
+    assert_equal ["has already been taken"], repo2.errors[:slug]
+
+    # auto format slug
+    repo3 = build(:repository, slug: " Ruby on Rails ")
+    assert_equal true, repo3.valid?
+    assert_equal "Ruby-on-Rails", repo3.slug
+  end
+
   test "validation" do
     repo = build(:repository, slug: "Hello")
     assert_equal true, repo.valid?
 
     repo.slug = "Hello-This_123"
     assert_equal true, repo.valid?
+    assert_equal "Hello-This_123", repo.slug
 
     repo.slug = "Hello This_123"
-    assert_equal false, repo.valid?
+    assert_equal true, repo.valid?
+    assert_equal "Hello-This_123", repo.slug
 
     repo.slug = "H"
     assert_equal false, repo.valid?
@@ -91,13 +115,6 @@ class RepositoryTest < ActiveSupport::TestCase
     repo = create(:repository)
     assert_equal 1, user.user_actives.where(subject: repo).count
     assert_equal 1, user.user_actives.where(subject: repo.user).count
-  end
-
-  test "find_by_slug" do
-    repository = create(:repository)
-    assert_equal repository, Repository.find_by_slug(repository.slug)
-
-    assert_equal "/#{repository.user.slug}/#{repository.slug}", repository.to_path
   end
 
   test "preferences" do

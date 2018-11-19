@@ -17,7 +17,7 @@ class Repository < ApplicationRecord
   has_many :docs, dependent: :destroy
 
   validates :name, presence: true
-  validates :slug, uniqueness: { scope: :user_id }
+  validates :slug, uniqueness: { scope: :user_id, case_sensitive: false }
 
   scope :recent_updated, -> { order("updated_at desc") }
   scope :with_query, -> (q) { where("name ilike ? or slug ilike ?", "%#{q}%", "%#{q}%") }

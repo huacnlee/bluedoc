@@ -28,7 +28,7 @@ class User
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    email = conditions.delete(:email).downcase
-    where(conditions.to_h).where(["(slug = :value OR lower(email) = :value)", { value: email }]).first
+    email = conditions.delete(:email)
+    where(conditions.to_h).where(["(slug ilike :value OR email ilike :value)", { value: email }]).first
   end
 end

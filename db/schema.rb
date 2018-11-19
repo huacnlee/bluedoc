@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_051746) do
+ActiveRecord::Schema.define(version: 2018_11_19_061627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_051746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "editor_ids", default: [], null: false, array: true
-    t.index ["repository_id", "slug"], name: "index_docs_on_repository_id_and_slug", unique: true
+    t.index "repository_id, lower((slug)::text)", name: "index_on_repository_and_slug", unique: true
     t.index ["repository_id"], name: "index_docs_on_repository_id"
   end
 
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_051746) do
     t.text "preferences"
     t.integer "members_count", default: 0, null: false
     t.integer "editor_ids", default: [], null: false, array: true
-    t.index ["user_id", "slug"], name: "index_repositories_on_user_id_and_slug", unique: true
+    t.index "user_id, lower((slug)::text)", name: "index_on_user_and_slug", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
@@ -211,9 +211,10 @@ ActiveRecord::Schema.define(version: 2018_11_19_051746) do
     t.string "location", limit: 50
     t.integer "followers_count", default: 0, null: false
     t.integer "following_count", default: 0, null: false
+    t.index "lower((slug)::text)", name: "index_on_slug", unique: true
+    t.index "type, lower((email)::text)", name: "index_on_type_and_email"
+    t.index "type, lower((email)::text)", name: "uk_on_type_and_email", unique: true, where: "((COALESCE(email, ''::character varying))::text <> ''::text)"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["slug"], name: "index_users_on_slug", unique: true
-    t.index ["type", "email"], name: "index_users_on_type_and_email"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 

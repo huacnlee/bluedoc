@@ -13,7 +13,7 @@ class Doc < ApplicationRecord
   belongs_to :repository, touch: true
 
   validates :title, presence: true
-  validates :slug, uniqueness: { scope: :repository_id }
+  validates :slug, uniqueness: { scope: :repository_id, case_sensitive: false }
 
   def to_path(suffix = nil)
     "#{repository.to_path}/#{self.slug}#{suffix}"

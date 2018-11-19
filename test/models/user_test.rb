@@ -21,11 +21,37 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, slug: "Jason", name: nil)
     assert_equal true, user.valid?
 
+    # slug unique with case insensitive
     user.save
     assert_equal false, user.new_record?
-    assert_equal "jason", user.slug
+    assert_equal "Jason", user.slug
     assert_equal user.slug, user.to_param
-    assert_equal "jason", user.name
+    assert_equal "Jason", user.name
+
+    # not auto format slug
+    user = build(:user, slug: "Ruby on Rails")
+    assert_equal false, user.valid?
+    assert_equal "Ruby on Rails", user.slug
+  end
+
+  test "Slugable" do
+    create(:user, slug: "huacnlee")
+
+    user = User.find_by_slug("huacnlee")
+    assert_not_nil user
+
+    assert_equal user, User.find_by_slug!("huacnlee")
+    assert_equal user, User.find_by_slug!("HuacnLee")
+
+    assert_nil User.find_by_slug("huacnlee1")
+    assert_raise(ActiveRecord::RecordNotFound) { User.find_by_slug!("huacnlee1") }
+
+    user = build(:user, slug: "HuacnLee")
+    assert_equal false, user.valid?
+    assert_equal ["has already been taken"], user.errors[:slug]
+
+    user = create(:user, slug: "JasonLee")
+    assert_equal "JasonLee", user.slug
   end
 
   test "fullname" do
@@ -55,18 +81,6 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal 3, user.repositories.count
     assert_equal [repo0.id, repo1.id, repo2.id], user.repositories.pluck(:id).sort
-  end
-
-  test "find_by_slug" do
-    create(:user, slug: "huacnlee")
-
-    user = User.find_by_slug("huacnlee")
-    assert_not_nil user
-
-    assert_equal user, User.find_by_slug!("huacnlee")
-
-    assert_nil User.find_by_slug("huacnlee1")
-    assert_raise(ActiveRecord::RecordNotFound) { User.find_by_slug!("huacnlee1") }
   end
 
   test "to_path" do
@@ -126,7 +140,9 @@ class UserTest < ActiveSupport::TestCase
   test ".find_for_database_authentication" do
     user = create(:user, slug: "huacnlee", email: "huacnlee@gmail.com")
     assert_equal user, User.find_for_database_authentication(email: "huacnlee")
+    assert_equal user, User.find_for_database_authentication(email: "HuacnLee")
     assert_equal user, User.find_for_database_authentication(email: "huacnlee@gmail.com")
+    assert_equal user, User.find_for_database_authentication(email: "Huacnlee@Gmail.com")
 
     user = create(:user, slug: "Jason", email: "JASON@Gmail.com")
     assert_equal user, User.find_for_database_authentication(email: "jason")

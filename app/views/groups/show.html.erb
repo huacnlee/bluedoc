@@ -17,7 +17,7 @@
     <% if @repositories.blank? %>
       <div class="blankslate">
         <h3>There is no repository</h3>
-        <p>You can create first repository, <%= link_to "Create new", "/new" %>.</p>
+        <p>You can create first repository, <%= link_to "Create new", new_repository_path(user_id: @user.id) %>.</p>
       </div>
     <% else %>
       <%= render @repositories %>

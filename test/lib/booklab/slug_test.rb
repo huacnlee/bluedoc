@@ -28,9 +28,10 @@ class BookLab::SlugTest < ActionView::TestCase
 
   test "slugize" do
     assert_equal "", BookLab::Slug.slugize(nil)
-    assert_equal "hello-world", BookLab::Slug.slugize("Hello World")
-    assert_equal "hello-world", BookLab::Slug.slugize("Hello@World")
-    assert_equal "-hello-world", BookLab::Slug.slugize("*Hello@World")
+    assert_equal "Hello-World", BookLab::Slug.slugize("Hello World")
+    assert_equal "Hello-World", BookLab::Slug.slugize("  Hello World   ")
+    assert_equal "Hello-World", BookLab::Slug.slugize("Hello@World")
+    assert_equal "-Hello-World", BookLab::Slug.slugize("*Hello@World")
   end
 
   test "random" do

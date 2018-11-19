@@ -5,11 +5,23 @@ require "test_helper"
 class DocTest < ActiveSupport::TestCase
   test "Slugable" do
     repo = create(:repository)
-    doc = create(:doc, repository: repo)
+    doc = create(:doc, repository: repo, slug: "FooBar")
     assert_equal "#{doc.repository.to_path}/#{doc.slug}", doc.to_path
+    assert_equal "FooBar", doc.slug
 
     assert_equal doc, repo.docs.find_by_slug(doc.slug)
+    assert_equal doc, repo.docs.find_by_slug!(doc.slug.upcase)
     assert_equal [Setting.host, doc.to_path].join(""), doc.to_url
+
+    # slug unique with case insensitive
+    doc = build(:doc, repository: repo, slug: "fooBar")
+    assert_equal false, doc.valid?
+    assert_equal ["has already been taken"], doc.errors[:slug]
+
+    # auto format slug
+    doc = build(:doc, slug: " Get started ")
+    assert_equal true, doc.valid?
+    assert_equal "Get-started", doc.slug
   end
 
   test "Markdownable" do
