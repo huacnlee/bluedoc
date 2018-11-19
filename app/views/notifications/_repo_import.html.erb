@@ -1,0 +1,13 @@
+<%
+  repo = notification.target
+%>
+
+<div class="info mb-2">
+  Repository <%= repository_name_tag(repo) %> import has been <strong><%= notification.meta[:success] %></strong>
+</div>
+
+<% if notification.meta[:success].to_s == "failed" %>
+<div class="description">
+  <%= notification.meta[:message] %>
+</div>
+<% end %>

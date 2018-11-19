@@ -9,7 +9,7 @@ class Notification < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  NOTIFY_TYPES = %w[add_member]
+  NOTIFY_TYPES = %w[add_member repo_import]
 
   before_create :bind_relation_for_target
   after_commit :create_email_notify, on: [:create]
@@ -53,6 +53,7 @@ class Notification < ActiveRecord::Base
   def target_url
     case notify_type
     when "add_member" then self.target&.subject&.to_url
+    when "repo_import" then self.target&.to_url
     else
       return Setting.host
     end

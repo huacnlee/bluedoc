@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require "sidekiq/api"
+
 class Repository
   has_one :source, class_name: "RepositorySource", autosave: true, dependent: :destroy
 

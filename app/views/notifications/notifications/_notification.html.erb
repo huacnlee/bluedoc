@@ -5,7 +5,7 @@
     <%= user_avatar_tag notification.actor, style: :tiny %>
   </div>
   <div class="infos">
-    <%= link_to notification.text, notification_url(notification), target: "_blank" %>
+    <%= link_to notification.text, main_app.notification_url(notification), target: "_blank" %>
     <span class="time-box">
       <%= l notification.created_at, format: :short %>
     </span>

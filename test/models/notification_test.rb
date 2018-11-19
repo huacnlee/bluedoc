@@ -71,4 +71,13 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal "#{note.actor.name} has added you as member of <strong>#{repo.user.name} / #{repo.name}</strong>", note.html
     assert_equal "#{note.actor.name} has added you as member of #{repo.user.name} / #{repo.name}", note.text
   end
+
+  test "repo_import" do
+    repo = create(:repository)
+    note = create(:notification, notify_type: :repo_import, target: repo, meta: { status: :success })
+
+    assert_equal repo.to_url, note.target_url
+    assert_equal "Repository <strong>#{repo.user.name} / #{repo.name}</strong> import has been <strong>success</strong>", note.html
+    assert_equal "Repository #{repo.user.name} / #{repo.name} import has been success", note.text
+  end
 end

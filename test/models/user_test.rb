@@ -233,4 +233,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal true, group.indexed_changed?
     end
   end
+
+  test "System user" do
+    assert_not_nil User.system
+    assert_equal -1, User.system.id
+    assert_equal "system", User.system.slug
+    assert_equal "System", User.system.name
+  end
 end
