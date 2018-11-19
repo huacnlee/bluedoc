@@ -70,7 +70,7 @@ module ApplicationHelper
 
     url = target.to_path("/action?#{{ action_type: action_type }.to_query}")
 
-    data = { method: :post, label: label, undo_label: undo_label, remote: true }
+    data = { method: :post, label: label, undo_label: undo_label, remote: true, disable: true }
     class_names = opts[:class] || "btn btn-sm"
     if with_count
       class_names += " btn-with-count"

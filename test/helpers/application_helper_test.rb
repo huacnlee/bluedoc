@@ -105,7 +105,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
       expected = <<~TEXT
         <span class="#{target.class.name.underscore}-#{target.id}-#{action_type}-button">
-        <a data-method="#{method}" data-label="#{label}" data-undo-label="#{undo_label}" data-remote="true" class="#{btn_class}" href="#{url}">
+        <a data-method="#{method}" data-label="#{label}" data-undo-label="#{undo_label}" data-remote="true" data-disable="true" class="#{btn_class}" href="#{url}">
         #{icon_html}
         </a>
         #{count_html}

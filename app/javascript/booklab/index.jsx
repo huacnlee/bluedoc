@@ -18,6 +18,7 @@ window.App = {
 
 import './reader/index.js'
 import './follow-user/index.js'
+import './rails-ujs-extends'
 
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago()
