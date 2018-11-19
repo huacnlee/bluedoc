@@ -12,7 +12,7 @@ class RepositoriesController < Users::ApplicationController
 
   #
   def new
-    @repository = Repository.new
+    @repository = Repository.new(user_id: params[:user_id])
   end
 
   # POST /repositories

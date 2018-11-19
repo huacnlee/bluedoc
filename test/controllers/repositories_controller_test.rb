@@ -16,6 +16,12 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/new"
     assert_equal 200, response.status
+
+    get "/new", params: { user_id: @user.id }
+    assert_equal 200, response.status
+    assert_select ".select-menu .select-menu-item.selected input[checked]" do
+      assert_select "[value=?]", "#{@user.id}"
+    end
   end
 
   test "POST /repositories" do

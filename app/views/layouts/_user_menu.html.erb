@@ -8,7 +8,12 @@
     </summary>
     <div class="dropdown-menu dropdown-menu-sw">
       <ul>
+        <% if @user %>
+        <li><a class="dropdown-item" href="<%= main_app.new_repository_path(user_id: @user.id) %>">New Repository</a></li>
+        <% else %>
         <li><a class="dropdown-item" href="<%= main_app.new_repository_path %>">New Repository</a></li>
+        <% end %>
+
         <li><a class="dropdown-item" href="<%= main_app.new_group_path %>">New Group</a></li>
       </ul>
     </div>
