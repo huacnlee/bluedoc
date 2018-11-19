@@ -9,7 +9,7 @@ module BookLab
 
       # git_url: Git Url of GitBook source
       # repository: Import destination of Repository
-      # user: importer user
+      # user: importer actor
       def initialize(repository:, user:, git_url:)
         @user = user
         @repository = repository

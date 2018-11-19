@@ -27,7 +27,6 @@ class RepositoriesController < Users::ApplicationController
 
         notice = "Repository was successfully created."
         if repository_params[:gitbook_url]
-          RepositoryImportJob.perform_later(@repository, type: "gitbook", user: current_user, url: repository_params[:gitbook_url])
           notice = "Repository as created, and runing import GitBook on background."
         end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_024701) do
+ActiveRecord::Schema.define(version: 2018_11_19_051746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_024701) do
     t.string "target_type"
     t.integer "target_id"
     t.integer "group_id"
-    t.integer "repository_id"
+    t.string "repository_id"
     t.text "meta"
     t.datetime "read_at"
     t.datetime "created_at", null: false
@@ -158,6 +158,16 @@ ActiveRecord::Schema.define(version: 2018_11_16_024701) do
     t.integer "editor_ids", default: [], null: false, array: true
     t.index ["user_id", "slug"], name: "index_repositories_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
+  end
+
+  create_table "repository_sources", force: :cascade do |t|
+    t.bigint "repository_id"
+    t.string "provider", limit: 20
+    t.string "url"
+    t.string "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_repository_sources_on_repository_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -221,4 +231,5 @@ ActiveRecord::Schema.define(version: 2018_11_16_024701) do
 
   add_foreign_key "docs", "repositories"
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_sources", "repositories"
 end
