@@ -4,7 +4,7 @@ class RepositoryImportJob < ApplicationJob
   def perform(repo, user:, type:, url:)
     importer = nil
     if type == "gitbook"
-      importer = BookLab::Import::GitBook.new(repository: repo, user: user, git_url: url)
+      importer = BookLab::Import::GitBook.new(repository: repo, user: user, url: url)
     end
 
     importer.perform

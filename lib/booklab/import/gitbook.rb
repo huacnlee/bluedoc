@@ -2,21 +2,17 @@
 
 module BookLab
   module Import
-    class GitBook
-      delegate :logger, to: Rails
+    class GitBook < Base
+      def git_url
+        self.url
+      end
 
-      attr_accessor :repository, :user, :git_url
-
-      # git_url: Git Url of GitBook source
-      # repository: Import destination of Repository
-      # user: importer actor
-      def initialize(repository:, user:, git_url:)
-        @user = user
-        @repository = repository
-        @git_url = git_url
+      def valid_url?
+        self.git_url&.start_with?("git@") || self.git_url&.start_with?("http")
       end
 
       def perform
+        raise "Invalid git url" if !valid_url?
         tmp_path = Rails.root.join("tmp", "import", "gitbook")
         dirname = Digest::MD5.hexdigest(self.git_url)
 
@@ -45,12 +41,14 @@ module BookLab
 
           body = File.open(f).read
 
+          title_res = self.parse_title(body)
+
           doc_params = {
-            title: self.parse_title(body),
+            title: title_res[:title],
             slug: slug,
             repository_id: repository.id,
             creator_id: user.id,
-            body: body
+            body: title_res[:body]
           }
 
           doc = self.repository.docs.find_by_slug(slug)
@@ -97,15 +95,16 @@ module BookLab
       end
 
       def parse_title(body)
+        body = body.dup
         lines = body.split("\n")
 
         first_line = lines[0] || ""
         if first_line.start_with? "#"
-          body.gsub!(first_line, "")
-          return first_line.gsub(/#[\s]?/, "")
+          body = body.gsub(first_line, "").strip
+          return { title: first_line.gsub(/#[\s]?/, ""), body: body }
         end
 
-        first_line
+        { title: first_line, body: body }
       end
     end
   end

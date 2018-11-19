@@ -9,7 +9,7 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
     repo = create(:repository)
     user = create(:user)
 
-    RepositoryImportJob.perform_now(repo, user: user, type: "gitbook", url: "")
+    RepositoryImportJob.perform_now(repo, user: user, type: "gitbook", url: "git@foo.com")
 
     assert_equal 1, Notification.where(notify_type: :repo_import, target: repo).count
     note = Notification.where(notify_type: :repo_import, target: repo).last
