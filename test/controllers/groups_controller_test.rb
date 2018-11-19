@@ -86,10 +86,10 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     post "/groups", params: { group: group_params }
     assert_equal 200, response.status
-    assert_match /Username has already been taken/, response.body
+    assert_match /Path name has already been taken/, response.body
   end
 
-  test "GET /groups/:username/search" do
+  test "GET /groups/:pathname/search" do
     @group = create(:group)
 
     get search_group_path(@group)
