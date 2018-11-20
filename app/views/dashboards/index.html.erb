@@ -1,48 +1,51 @@
-<div class="col-12 d-table">
+<div class="dashboard-main">
   <%= render "menu" %>
 
-  <div class="col-7 bg-white d-table-cell pl-5 py-5">
-    <div class="sub-title">Recent activity</div>
-    <div class="mb-5">
-      <% if @recent_docs.blank? %>
-        <div class="blankslate">
-          <h3>No recent docs</h3>
-          <p>You have no update Doc in recently.</p>
-        </div>
-      <% else %>
-        <%= render partial: "docs", locals: { items: @recent_docs } %>
-      <% end %>
-    </div>
+  <div class="dashboard-content clearfix">
+    <div class="col-9 float-left">
+      <div class="sub-title">Recent activity</div>
+      <div class="mb-5">
+        <% if @recent_docs.blank? %>
+          <div class="blankslate">
+            <h3>No recent docs</h3>
+            <p>You have no update Doc in recently.</p>
+          </div>
+        <% else %>
+          <%= render partial: "docs", locals: { items: @recent_docs } %>
+        <% end %>
+      </div>
 
-    <div class="activities">
-      <div class="sub-title">All activity</div>
-      <% if @activities.blank? %>
-        <div class="blankslate">
-          <h3>No activity</h3>
-          <p>You have no activity in recently.</p>
-        </div>
-      <% else %>
-        <%= render @activities %>
-        <%= render "/shared/more_button", url: activities_dashboard_path %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="col-3 bg-white d-table-cell px-5" style="max-width: ">
-    <% if !@groups.blank? %>
-    <div class="sub-title">My Groups</div>
-    <div class="Box">
-      <div class="Box-body">
-        <div class="group-list clearfix">
-          <% @groups.each do |group| %>
-            <div class="group-item my-2 float-left">
-              <%= user_avatar_tag(group, style: :small) %>
-              <%= user_display_name_tag(group) %>
-            </div>
-          <% end %>
-        </div>
+      <div class="activities">
+        <div class="sub-title">All activity</div>
+        <% if @activities.blank? %>
+          <div class="blankslate">
+            <h3>No activity</h3>
+            <p>You have no activity in recently.</p>
+          </div>
+        <% else %>
+          <%= render @activities %>
+          <%= render "/shared/more_button", url: activities_dashboard_path %>
+        <% end %>
       </div>
     </div>
-    <% end %>
+
+    <div class="col-3 float-left pl-5" style="max-width: ">
+      <% if !@groups.blank? %>
+      <div class="sub-title">Your Groups</div>
+      <div class="Box">
+        <div class="Box-body">
+          <div class="group-list clearfix">
+            <% @groups.each do |group| %>
+              <div class="group-item my-1">
+                <%= user_avatar_tag(group, style: :tiny) %>
+                <%= user_name_tag(group) %>
+              </div>
+            <% end %>
+            <%= link_to "All groups...", groups_dashboard_path, class: "more" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
   </div>
 </div>

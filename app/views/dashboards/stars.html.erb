@@ -1,9 +1,9 @@
 <% title_tag "Stars", "Dashboard" %>
 
-<div class="col-12 d-table">
+<div class="dashboard-main">
   <%= render "menu" %>
 
-  <div class="col-10 d-table-cell p-5">
+  <div class="dashboard-content clearfix">
     <nav class="UnderlineNav mb-4">
       <div class="UnderlineNav-body">
         <%= render_list_items(type: :link, class: "UnderlineNav-item", active_class: "selected", check_parameters: true) do |item|

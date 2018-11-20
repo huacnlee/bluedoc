@@ -1,9 +1,9 @@
 <% title_tag "Watches", "Dashboard" %>
 
-<div class="col-12 d-table">
+<div class="dashboard-main">
   <%= render "menu" %>
 
-  <div class="col-10 d-table-cell p-5">
+  <div class="dashboard-content clearfix">
     <div class="sub-title">All watches</div>
     <%= render "action_repositories" %>
     <%= paginate @repositories %>

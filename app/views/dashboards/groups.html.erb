@@ -1,10 +1,10 @@
 <% title_tag "Groups", "Dashboard" %>
 
-<div class="col-12 d-table">
+<div class="dashboard-main">
   <%= render "menu" %>
 
-  <div class="col-10 d-table-cell p-5">
-    <div class="sub-title">All groups of me</div>
+  <div class="dashboard-content clearfix">
+    <div class="sub-title">All groups of you</div>
     <%= render partial: "groups", locals: { items: @groups } %>
     <%= paginate @groups %>
   </div>

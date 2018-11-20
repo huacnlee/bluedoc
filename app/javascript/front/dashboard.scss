@@ -64,15 +64,24 @@
     }
   }
 
+  .dashboard-content {
+    padding: 20px 40px;
+    padding-left: 240px;
+  }
+
   .group-list {
     .group-item {
-      width: 80px;
-      text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
+      padding: 4px;
 
-      .user-display-name { font-size: 14px; margin-top: 5px; color: #555; }
-      a { display: block; }
+      &:first-child { padding-top: 0; }
+      &:last-child {
+        border-width: 0;
+        padding-bottom: 0;
+      }
+
+      .user-name { font-size: 14px; margin-top: 5px; color: #555; }
     }
   }
 
