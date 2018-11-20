@@ -23,7 +23,7 @@
   </div>
   <% end %>
 
-  <div class="border-top py-3 clearfix">
+  <div class="border-top user-groups py-3 clearfix">
     <h4 class="mb-2">Groups</h4>
     <% @user.groups.with_attached_avatar.each do |group| %>
       <%= user_avatar_tag(group) %>

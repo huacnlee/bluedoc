@@ -5787,7 +5787,7 @@ kbd {
 
 .repohead.experiment-repo-nav {
     padding-bottom: 0;
-    background-color: #fafbfc
+    background-color: rgba(182, 205, 252, 0.08);
 }
 
 .repohead .repohead-details-container {
@@ -5865,12 +5865,12 @@ kbd {
 
 .reponav-item {
     float: left;
-    padding: 7px 22px 8px;
+    padding: 8px 25px 7px;
     color: #586069;
     white-space: nowrap;
     border: solid transparent;
-    border-width: 2px 1px 1px;
-    border-radius: 3px 3px 0 0
+    border-width: 1px 1px 1px;
+    border-radius: 4px 4px 0 0
 }
 
 .reponav-item .octicon {
@@ -5887,9 +5887,9 @@ kbd {
 }
 
 .reponav-item.selected {
-    color: #24292e;
+    color: #333;
     background-color: #fff;
-    border-color: #548dfc #e1e4e8 transparent
+    border-color: #e1e4e8 #e1e4e8 transparent
 }
 
 .reponav-item.selected>.octicon {

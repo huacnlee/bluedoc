@@ -1,0 +1,14 @@
+.page-users {
+  .user-groups {
+    .user-avatar {
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+  }
+
+  .user-item {
+    .user-avatar { display: inline-block; }
+    .user-display-name { color: #333; font-weight: bold; }
+    .user-name { color: #666; }
+  }
+}

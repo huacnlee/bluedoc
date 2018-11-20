@@ -1,9 +1,13 @@
 @import "../colors.scss";
 
+
 .btn {
   @include btn-solid(#222, #FFF, #FFF);
+  border-color: $btn-border-color;
   font-weight: normal;
   color: #4a4a4a;
+  padding-left: 14px;
+  padding-right: 14px;
 
   i.fas {
     opacity: 1;
@@ -11,9 +15,19 @@
   }
 
   &:hover {
-    border-color: rgba(27, 31, 35, 0.3);
+    border-color: $btn-border-color;
     color: #4a4a4a;
   }
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 13px;
+}
+.social-count {
+  border-color: $btn-border-color;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .btn-primary {
