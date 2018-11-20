@@ -11,6 +11,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get new_user_session_path
     assert_equal 200, response.status
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      get new_user_session_path
+      assert_equal 200, response.status
+    end
+
     sign_in @user
     get new_user_session_path
     assert_redirected_to root_path

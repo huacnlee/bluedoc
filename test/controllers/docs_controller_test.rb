@@ -22,6 +22,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#doc-#{doc.id}"
     assert_select ".btn-remove-doc", 0
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get @repo.to_path("/docs/list")
+      end
+    end
+
     get @other_repo.to_path("/docs/list")
     assert_equal 200, response.status
     assert_select "a.group-name" do

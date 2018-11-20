@@ -3,17 +3,31 @@
 <% end %>
 
 <%= form_for(Setting.new, url: admin_settings_path) do |f| %>
+  <div class="sub-title">System setting</div>
+
+  <div class="form-checkbox">
+    <label>
+      <%= f.check_box :anonymous_enable, checked: Setting.anonymous_enable? %>
+      Enable anonymous visit public contents
+    </label>
+    <div class="form-text">
+      Disable this GitBook will requirement sign in for all pages.
+    </div>
+  </div>
+
   <div class="form-group">
     <label class="controler-label">Admin Emails</label>
-    <textarea class="form-control" style="height: 100px; min-height: 100px" name="admin_emails"><%= Setting.admin_emails %></textarea>
+    <%= f.text_area :admin_emails, value: Setting.admin_emails, class: "form-control", style: "height: 100px; min-height: 100px"  %>
     <div class="form-text">
       Special account emails as admin with each line.
     </div>
   </div>
 
+  <div class="sub-title">Customize UI</div>
+
   <div class="form-group">
     <label class="controler-label">Application Footer HTML</label>
-    <textarea class="form-control" style="height: 100px; min-height: 100px" name="application_footer_html"><%= Setting.application_footer_html %></textarea>
+    <%= f.text_area :application_footer_html, value: Setting.application_footer_html, class: "form-control", style: "height: 200px; min-height: 200px"  %>
     <div class="form-text">
       You can use HTML to customize the footer
     </div>

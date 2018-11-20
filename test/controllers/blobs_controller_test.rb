@@ -20,6 +20,13 @@ class BlobsControllerTest < ActionDispatch::IntegrationTest
     get upload_path(@blob.key)
     assert_equal 200, response.status
     assert_equal @blob.content_type, response.content_type
+
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get upload_path(@blob.key)
+      end
+    end
   end
 
   test "GET /uploads/:id?s=small" do

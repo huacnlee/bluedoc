@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GroupMembersController < Groups::ApplicationController
+  before_action :authenticate_anonymous!
   before_action :set_group
   before_action :set_member, only: [:edit, :update, :destroy]
 

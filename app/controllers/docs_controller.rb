@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class DocsController < Users::ApplicationController
+  before_action :authenticate_anonymous!
   before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action]
 
   before_action :set_user

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BlobsController < ApplicationController
+  before_action :authenticate_anonymous!
   before_action :set_blob
 
   # GET /uploads/:id

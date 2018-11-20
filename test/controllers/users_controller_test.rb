@@ -8,11 +8,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:slug" do
-
     get user_path(@user)
     assert_equal 200, response.status
     assert_match /#{@user.name}/, response.body
     assert_select ".user-overview"
+
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get user_path(@user)
+      end
+    end
 
     create_list(:activity, 5, actor_id: @user.id, user_id: nil)
 

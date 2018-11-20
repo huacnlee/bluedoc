@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AutocompletesController < ApplicationController
+  before_action :authenticate_anonymous!
   before_action :authenticate_user!, only: %i[users]
 
   # GET /autocomplete/users

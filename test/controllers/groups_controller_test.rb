@@ -25,6 +25,13 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get @group.to_path
+      end
+    end
+
     get @group.to_path, params: { q: "bar" }
     assert_equal 200, response.status
     assert_select ".group-repositories .repository-item", 1

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GroupsController < Groups::ApplicationController
+  before_action :authenticate_anonymous!
   before_action :set_group, except: %i[index new create]
   before_action :authenticate_user!, only: %i[new edit create update destroy]
 

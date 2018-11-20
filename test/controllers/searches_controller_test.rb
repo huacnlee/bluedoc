@@ -22,6 +22,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select %(.menu .menu-item.selected) do
       assert_select "[href=?]", "\/search\/docs?q=Hello"
     end
+
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get docs_search_path, params: { q: "Hello" }
+      end
+    end
   end
 
   test "GET /search/repositories" do

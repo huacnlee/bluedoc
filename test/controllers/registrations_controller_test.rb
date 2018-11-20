@@ -8,6 +8,12 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      get new_user_registration_path
+      assert_equal 200, response.status
+    end
+
     user = create(:user)
     sign_in user
 

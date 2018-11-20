@@ -13,6 +13,13 @@ class GroupMembersControllerTest < ActionDispatch::IntegrationTest
     assert_match /class="group-members"/, response.body
     assert_no_match "Add member", response.body
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get group_members_path(@group)
+      end
+    end
+
     sign_in_role :editor, group: @group
     get group_members_path(@group)
     assert_equal 200, response.status

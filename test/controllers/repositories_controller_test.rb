@@ -88,6 +88,13 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       assert_select "[action=?]", repo.to_path("/docs/search")
     end
 
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get "/#{repo.user.slug}/#{repo.slug}"
+      end
+    end
+
     assert_raise(ActiveRecord::RecordNotFound) do
       get "/foo/#{repo.slug}"
     end
