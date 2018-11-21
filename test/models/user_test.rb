@@ -240,4 +240,29 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "system", User.system.slug
     assert_equal "System", User.system.name
   end
+
+  test "actions" do
+    user = create(:user)
+    doc = create(:doc)
+    repo = create(:repository)
+
+    # watch repo
+    user.watch_repository(repo)
+    assert_equal true, user.watch_repository?(repo)
+    assert_equal [user.id], repo.watch_by_user_ids
+
+    # star repo
+    user.star_repository(repo)
+    assert_equal true, user.star_repository?(repo)
+    assert_equal [user.id], repo.star_by_user_ids
+
+    # star doc
+    user.star_doc(doc)
+    assert_equal true, user.star_doc?(doc)
+
+    # watch comment doc
+    user.watch_comment_doc(doc)
+    assert_equal true, user.watch_comment_doc?(doc)
+    assert_equal [user.id], doc.watch_comment_by_user_ids
+  end
 end

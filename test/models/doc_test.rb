@@ -53,6 +53,32 @@ class DocTest < ActiveSupport::TestCase
     assert_equal 0, UserActive.where(subject_type: "Doc").count
   end
 
+  test "Watches on create/update" do
+    user = create(:user)
+    user1 = create(:user)
+    user2 = create(:user)
+
+    mock_current user: user
+    doc = create(:doc, creator_id: user.id)
+    assert_equal [user.id], doc.watch_comment_by_user_ids
+
+    user2.watch_comment_doc(doc)
+
+    mock_current user: user1
+    doc.update(title: "New title")
+    doc.reload
+    assert_equal [user.id, user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
+
+    User.create_action(:watch_comment, target: doc, user: user, action_option: "ignore")
+    assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
+
+    mock_current user: user
+    doc.update(title: "New new title")
+    assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
+    action = User.find_action(:watch_comment, target: doc, user: user)
+    assert_equal "ignore", action.action_option
+  end
+
   test "actors" do
     user = create(:user)
 

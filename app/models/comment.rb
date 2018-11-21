@@ -3,6 +3,8 @@ class Comment < ApplicationRecord
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper
 
+  depends_on :watches, :notifications
+
   belongs_to :commentable, polymorphic: true, counter_cache: true
   belongs_to :user, required: false
   belongs_to :parent, class_name: "Comment", required: false

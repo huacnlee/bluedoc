@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
@@ -55,5 +57,43 @@ class CommentTest < ActiveSupport::TestCase
       c.reload
       assert_not_nil c.parent_id
     end
+  end
+
+  test "watches for doc" do
+    doc = create(:doc)
+    user1 = create(:user)
+    user2 = create(:user)
+    user3 = create(:user)
+
+    user1.watch_comment_doc(doc)
+    user2.watch_comment_doc(doc)
+    User.create_action(:watch_comment, target: doc, user: user3, action_option: "ignore")
+
+    comment = build(:comment, commentable: nil)
+    assert_equal [], comment.commentable_watch_by_user_ids
+
+    # commentable_watch_by_user_ids should not including ignore user
+    comment = build(:comment, commentable: doc)
+    assert_equal [user1.id, user2.id], comment.commentable_watch_by_user_ids
+
+    # auto watch_comment to doc on create
+    comment.save
+    assert_equal true, doc.watch_comment_by_user_ids.include?(comment.user_id)
+    assert_equal 3, comment.commentable_watch_by_user_ids.length
+    assert_equal true, comment.commentable_watch_by_user_ids.include?(comment.user_id)
+  end
+
+  test "notifications" do
+    doc = create(:doc)
+    user1 = create(:user)
+    user2 = create(:user)
+
+    comment = build(:comment, commentable: doc)
+    comment.stub(:commentable_watch_by_user_ids, [user1.id, user2.id]) do
+      comment.save
+    end
+
+    assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id).count
+    assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id, user_id: [user1.id, user2.id]).count
   end
 end

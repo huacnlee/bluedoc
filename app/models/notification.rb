@@ -9,7 +9,7 @@ class Notification < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  NOTIFY_TYPES = %w[add_member repo_import]
+  NOTIFY_TYPES = %w[add_member repo_import comment]
 
   before_create :bind_relation_for_target
   after_commit :create_email_notify, on: [:create]
