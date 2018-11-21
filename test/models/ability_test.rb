@@ -15,4 +15,12 @@ class AbilityTest < ActiveSupport::TestCase
     ability = Ability.new(nil)
     assert ability.cannot? :manage, :all
   end
+
+  test "other model" do
+    user = create(:user)
+    ability = Ability.new(user)
+
+    member = create(:member, user: user)
+    assert ability.can? :read, member
+  end
 end

@@ -5,6 +5,6 @@ class Comment
 
   private
     def track_notification_on_create
-      Notification.track_notification(:comment, self, user_id: self.commentable_watch_by_user_ids, actor_id: self.user_id)
+      NotificationJob.perform_later "comment", self, user_id: self.commentable_watch_by_user_ids, actor_id: self.user_id
     end
 end

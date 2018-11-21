@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
 
   depends_on :watches, :notifications
 
-  belongs_to :commentable, polymorphic: true, counter_cache: true
+  belongs_to :commentable, polymorphic: true, counter_cache: true, required: false
   belongs_to :user, required: false
   belongs_to :parent, class_name: "Comment", required: false
 
@@ -18,6 +18,22 @@ class Comment < ApplicationRecord
   def body_html
     Rails.cache.fetch([self.cache_key_with_version, "body_html"]) do
       markdown(self.body)
+    end
+  end
+
+  def commentable_title
+    case self.commentable_type
+    when "Doc" then self.commentable&.title || ""
+    else
+      ""
+    end
+  end
+
+  def to_url
+    case self.commentable_type
+    when "Doc" then self.commentable.to_url(anchor: "comment-#{self.id}")
+    else
+      ""
     end
   end
 

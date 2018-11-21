@@ -6,6 +6,7 @@ class Notification < ActiveRecord::Base
   include Notifications::Model
 
   delegate :email, to: :user
+  delegate :name, to: :actor, prefix: true, allow_nil: true
 
   serialize :meta, Hash
 
@@ -45,7 +46,14 @@ class Notification < ActiveRecord::Base
     # create Activity for receivers, for dashboard timeline
     Notification.transaction do
       user_ids.each do |user_id|
-        Notification.create!(notification_params.merge(user_id: user_id))
+        note = Notification.new(notification_params)
+        note.user_id = user_id
+
+        # ingore create, if user not has ability to read target
+        ability = Ability.new(User.new(id: user_id))
+        next if ability.cannot?(:read, note.target)
+
+        note.save!
       end
     end
   end
@@ -54,6 +62,7 @@ class Notification < ActiveRecord::Base
     case notify_type
     when "add_member" then self.target&.subject&.to_url
     when "repo_import" then self.target&.to_url
+    when "comment" then self.target&.to_url
     else
       return Setting.host
     end

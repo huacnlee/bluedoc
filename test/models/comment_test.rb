@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "base" do
     comment = build(:comment, commentable_type: "Doc")
     assert_equal true, comment.valid?
@@ -31,6 +33,23 @@ class CommentTest < ActiveSupport::TestCase
 
     comment.update(body: "world hello")
     assert_equal "<p>world hello</p>", comment.body_html
+  end
+
+  test "commentable_title" do
+    doc = create(:doc)
+    comment = create(:comment, commentable: doc)
+
+    assert_equal doc.title, comment.commentable_title
+
+    comment = create(:comment, commentable_type: "Doc", commentable_id: -1)
+    assert_equal "", comment.commentable_title
+  end
+
+  test "to_url" do
+    doc = create(:doc)
+    comment = create(:comment, commentable: doc)
+
+    assert_equal "#{doc.to_url}#comment-#{comment.id}", comment.to_url
   end
 
   test "destroy to clear relation parent_id" do
@@ -89,8 +108,10 @@ class CommentTest < ActiveSupport::TestCase
     user2 = create(:user)
 
     comment = build(:comment, commentable: doc)
-    comment.stub(:commentable_watch_by_user_ids, [user1.id, user2.id]) do
-      comment.save
+    perform_enqueued_jobs do
+      comment.stub(:commentable_watch_by_user_ids, [user1.id, user2.id]) do
+        comment.save
+      end
     end
 
     assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id).count

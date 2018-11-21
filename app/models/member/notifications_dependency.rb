@@ -4,6 +4,6 @@ class Member
   private
 
     def send_new_member_email
-      Notification.track_notification :add_member, self, user: self.user
+      NotificationJob.perform_later "add_member", self, user: self.user, actor_id: Current.user&.id
     end
 end

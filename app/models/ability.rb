@@ -20,6 +20,8 @@ class Ability
     abilities_for_repositories
     abilities_for_docs
     abilities_for_comments
+
+    can :read, Member, user_id: user.id
   end
 
   def abilities_for_anonymous

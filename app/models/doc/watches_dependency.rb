@@ -6,8 +6,6 @@ class Doc
   # watch comment user id list without `ignore` option
   def watch_comment_by_user_ids
     self.watch_comment_by_user_actions.where(action_option: nil).pluck(:user_id)
-
-    # FIXME: reject non member with Private Repository
   end
 
   private

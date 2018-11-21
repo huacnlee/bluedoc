@@ -26,10 +26,18 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal user.email, note.email
   end
 
+  test "actor_name" do
+    actor = create(:user)
+    note = Notification.new(actor: actor)
+    assert_equal actor.name, note.actor_name
+
+    assert_nil Notification.new(actor: nil).actor_name
+  end
+
   test "track_notification" do
     group = create(:group)
     repo = create(:repository, user: group)
-    member = create(:member, subject: repo)
+    member = create(:member, subject: repo, user: @user)
 
     mock_current user: @actor
 
@@ -38,6 +46,25 @@ class NotificationTest < ActiveSupport::TestCase
     end
 
     assert_tracked_notifications :add_member, target: member, user_id: @user.id, actor_id: @actor.id, meta: { foo: "bar" }
+  end
+
+  test "cannot track with user not ability to read target" do
+    # private repo
+    group = create(:group)
+    repo = create(:repository, user: group, privacy: :private)
+    user = create(:user)
+
+    # not member, not receive notifications for private repo
+    assert_no_changes -> { Notification.where(notify_type: :repo_import).count } do
+      Notification.track_notification(:repo_import, repo, user: user, actor_id: @actor.id)
+    end
+
+    # add user as group reader, to have ability to read repo
+    group.add_member(user, :reader)
+    assert_changes -> { Notification.where(notify_type: :repo_import).count } do
+      Notification.track_notification(:repo_import, repo, user_id: user.id, actor_id: @actor.id)
+    end
+    assert_tracked_notifications :repo_import, target: repo, user_id: user.id, actor_id: @actor.id
   end
 
   test "cannot track with user, actor in same" do
@@ -79,5 +106,16 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal repo.to_url, note.target_url
     assert_equal "Repository <strong>#{repo.user.name} / #{repo.name}</strong> import has been <strong>success</strong>", note.html
     assert_equal "Repository #{repo.user.name} / #{repo.name} import has been success", note.text
+  end
+
+  test "comment Doc" do
+    doc = create(:doc)
+    actor = create(:user)
+    comment = create(:comment, commentable: doc)
+    note = create(:notification, notify_type: :comment, target: comment, actor: actor)
+
+    assert_equal comment.to_url, note.target_url
+    assert_equal "<strong>#{note.actor_name}</strong> was posted a comment on <strong>#{doc.title}</strong>", note.html
+    assert_equal "#{note.actor_name} was posted a comment on #{doc.title}", note.text
   end
 end

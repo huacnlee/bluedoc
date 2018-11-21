@@ -21,8 +21,10 @@ module Slugable
     slug
   end
 
-  def to_url
-    [Setting.host, self.to_path].join("")
+  def to_url(anchor: nil)
+    url = [Setting.host, self.to_path].join("")
+    url += "##{anchor}" if anchor
+    url
   end
 
   class_methods do
