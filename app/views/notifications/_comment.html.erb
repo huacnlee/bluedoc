@@ -3,9 +3,10 @@
 %>
 
 <div class="info mb-2">
-  <%= user_name_tag(notification.actor) %> was posted a comment on:
+  <%= user_name_tag(notification.actor) %> was posted a comment on
+  <%= link_to comment.commentable_title, notification_url(notification.id) %>
 </div>
 
-<% if comment.commentable_type == "Doc" %>
-  <%= render "/docs/card", doc: comment.commentable %>
-<% end %>
+<div class="description">
+  <%= sanitize_html comment.body_html %>
+</div>

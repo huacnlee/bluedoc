@@ -1,5 +1,6 @@
 class NotificationMailer < ApplicationMailer
   helper ApplicationHelper
+  helper UsersHelper
 
   def to_user
     @notification = params[:notification]

@@ -1,5 +1,8 @@
-<p>Hi <%= @notification.user&.name %></p>
-<p><%= sanitize_html @notification.html %></p>
+<% if @notification.notify_type == "comment" %>
+  <p><%= sanitize_html @notification.target.body_html %></p>
+<% else %>
+  <%= sanitize_html @notification.html %>
+<% end %>
 <% content_for :footer do %>
 <p><a href="<%= notification_url(@notification) %>">View it on BookLab</a></p>
 <% end %>
