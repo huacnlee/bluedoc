@@ -19,7 +19,7 @@
   <table class="table table-striped">
     <tr class="head">
       <td>Id</td>
-      <td><%= t("activerecord.attributes.user.slug") %></td>
+      <td></td>
       <td><%= t("activerecord.attributes.user.name") %></td>
       <td><%= t("activerecord.attributes.user.followers_count") %></td>
       <td>Created At</td>
@@ -28,10 +28,13 @@
     <% @users.each do |item| %>
     <tr class="<%= cycle("","even") %>">
       <td><%= link_to item.id, admin_user_path(item.id) %></td>
-      <td><%= link_to item.slug, admin_user_path(item.id) %></td>
-      <td><%= link_to item.name, admin_user_path(item.id) %></td>
+      <td style="width: 32px"><%= user_avatar_tag(item, style: :small, link: false) %>
+      <td>
+        <div><%= link_to item.name, admin_user_path(item.id) %></div>
+        <div class="mt-1 text-gray"><%= item.slug %></div>
+      </td>
       <td><%= item.followers_count %></td>
-      <td><%= l(item.created_at) %></td>
+      <td class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil-alt"), edit_admin_user_path(item.id) %>
         <%= link_to icon_tag("trash-alt"), admin_user_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>

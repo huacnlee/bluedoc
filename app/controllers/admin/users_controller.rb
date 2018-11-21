@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.where(type: "User").order("id desc")
+    @users = User.where(type: "User").with_attached_avatar.order("id desc")
     if params[:q]
       q = "%#{params[:q]}%"
       @users = @users.where("email ilike ? or slug ilike ? or name ilike ?", q, q, q)

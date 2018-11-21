@@ -2,7 +2,7 @@
 
 <div class="subnav">
   <nav class="subnav-links">
-    <% if params[:q] %>
+    <% if params[:q] || params[:user_id] %>
     <a href="<%= admin_repositories_path %>" class="subnav-item">All</a>
     <% end %>
     <a href="<%= new_admin_repository_path %>" class="subnav-item">New</a>
@@ -19,19 +19,21 @@
   <table class="table table-striped">
     <tr class="head">
       <td>Id</td>
-      <td><%= t("activerecord.attributes.repository.slug") %></td>
       <td><%= t("activerecord.attributes.repository.name") %></td>
-      <td><%= t("activerecord.attributes.repository.user") %></td>
       <td>Created At</td>
       <td class="opts"></td>
     </tr>
     <% @repositories.each do |item| %>
     <tr class="<%= cycle("","even") %>">
       <td><%= link_to item.id, admin_repository_path(item.id) %></td>
-      <td><%= item.slug %></td>
-      <td><%= link_to item.name, admin_repository_path(item.id) %></td>
-      <td><%= item.user&.slug %></td>
-      <td><%= l(item.created_at) %></td>
+      <td>
+        <div><%= link_to item.name, admin_repository_path(item.id) %></div>
+        <div class="mt-1 text-gray">
+          <%= link_to item.user&.slug, admin_repositories_path(user_id: item.user_id), class: "link-gray" %> /
+          <%= item.slug %>
+        </div>
+      </td>
+      <td style="width: 200px;" class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to "Docs", admin_docs_path(repository_id: item.id) %>
         <%= link_to icon_tag("pencil-alt"), edit_admin_repository_path(item.id) %>

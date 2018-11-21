@@ -9,6 +9,9 @@ class Admin::RepositoriesController < Admin::ApplicationController
       q = "%#{params[:q]}%"
       @repositories = @repositories.where("name ilike ? or slug = ? or description ilike ?", q, q, q)
     end
+    if params[:user_id]
+      @repositories = @repositories.where(user_id: params[:user_id])
+    end
     @repositories = @repositories.page(params[:page])
   end
 

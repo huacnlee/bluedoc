@@ -20,8 +20,6 @@
     <tr class="head">
       <td>Id</td>
       <td><%= t("activerecord.attributes.group.name") %></td>
-      <td><%= t("activerecord.attributes.group.slug") %></td>
-      <td><%= t("activerecord.attributes.group.description") %></td>
       <td><%= t("activerecord.attributes.group.members_count") %></td>
       <td>Created At</td>
       <td class="opts"></td>
@@ -29,11 +27,13 @@
     <% @groups.each do |item| %>
     <tr class="<%= cycle("","even") %>">
       <td><%= link_to item.id, admin_group_path(item.id) %></td>
-      <td><%= item.name %></td>
-      <td><%= item.slug %></td>
-      <td><%= item.description %></td>
+      <td>
+        <div><%= link_to item.name, admin_group_path(item.id) %></div>
+        <div class="mt-1 text-gray-dark"><%= item.slug %></div>
+        <div class="mt-1 text-gray"><%= item.description %></div>
+      </td>
       <td><%= item.members_count %></td>
-      <td><%= l(item.created_at) %></td>
+      <td style="width: 200px" class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil-alt"), edit_admin_group_path(item.id) %>
         <%= link_to icon_tag("trash-alt"), admin_group_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
