@@ -77,6 +77,22 @@ class Notification < ActiveRecord::Base
     html.gsub(/<.+?>/, "").gsub(/\s+/, " ").strip
   end
 
+  # comment-doc-id
+  def mail_message_id
+    message_ids = [self.notify_type]
+
+    case notify_type
+    when "comment"
+      message_ids += [self.target&.commentable_type, self.target&.commentable_id]
+    when "add_member"
+      message_ids += [self.target&.subject_type, self.target&.subject_id]
+    else
+      message_ids += [self.target_type, self.target_id]
+    end
+
+    message_ids.join("-")
+  end
+
   private
     def bind_relation_for_target
       self.class.fill_depend_id_for_target(self)

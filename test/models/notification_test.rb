@@ -87,6 +87,7 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal "#{note.actor.name} has added you as member of <strong>#{group.name}</strong>", note.html
     assert_equal "#{note.actor.name} has added you as member of #{group.name}", note.text
+    assert_equal "add_member-User-#{group.id}", note.mail_message_id
   end
 
   test "type : add_member of Repository" do
@@ -97,6 +98,7 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal "#{note.actor.name} has added you as member of <strong>#{repo.user.name} / #{repo.name}</strong>", note.html
     assert_equal "#{note.actor.name} has added you as member of #{repo.user.name} / #{repo.name}", note.text
+    assert_equal "add_member-Repository-#{repo.id}", note.mail_message_id
   end
 
   test "repo_import" do
@@ -106,6 +108,7 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal repo.to_url, note.target_url
     assert_equal "Repository <strong>#{repo.user.name} / #{repo.name}</strong> import has been <strong>success</strong>", note.html
     assert_equal "Repository #{repo.user.name} / #{repo.name} import has been success", note.text
+    assert_equal "repo_import-Repository-#{repo.id}", note.mail_message_id
   end
 
   test "comment Doc" do
@@ -117,5 +120,6 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal comment.to_url, note.target_url
     assert_equal "<strong>#{note.actor_name}</strong> was posted a comment on <strong>#{doc.title}</strong>", note.html
     assert_equal "#{note.actor_name} was posted a comment on #{doc.title}", note.text
+    assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
   end
 end

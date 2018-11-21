@@ -18,6 +18,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     assert_equal note.text, mail.subject
     assert_match note.html, mail.body.to_s
     assert_match %(href="#{Setting.host}/notifications/#{note.id}"), mail.body.to_s
+    assert_equal note.mail_message_id, mail.message_id
   end
 
   test "comment" do
@@ -33,5 +34,6 @@ class NotificationMailerTest < ActionMailer::TestCase
     assert_equal note.text, mail.subject
     assert_match comment.body_html, mail.body.to_s
     assert_match %(href="#{Setting.host}/notifications/#{note.id}"), mail.body.to_s
+    assert_equal note.mail_message_id, mail.message_id
   end
 end

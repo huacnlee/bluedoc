@@ -5,6 +5,8 @@ class NotificationMailer < ApplicationMailer
   def to_user
     @notification = params[:notification]
 
+    headers["Message-ID"] = @notification.mail_message_id
+
     mail(to: @notification.email, subject: @notification.text)
   end
 end
