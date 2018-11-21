@@ -1,0 +1,84 @@
+.comments {
+  .sub-title {
+    font-size: 18px;
+  }
+  .comment {
+    margin-bottom: 15px;
+
+    .info {
+      margin-bottom: 8px;
+      .user-name { color: #333; }
+      .time a { color: #aaa; margin-left: 5px; }
+
+      .opts {
+        font-size: 13px;
+        a { color: #666; display: none; }
+      }
+    }
+
+    &:hover {
+      .opts {
+        a { display: inline-block; margin-left: 5px; }
+      }
+    }
+
+    .markdown-body {
+      .heading-anchor { display: none; }
+    }
+
+    .in-reply-to {
+      margin-bottom: 10px;
+      border-radius: 3px;
+      background: rgba(241, 245, 250, 0.68);
+      padding: 8px 15px;
+      font-size: 14px;
+
+      .in-reply-link {
+        color: #666;
+        display: block;
+
+        .user-name { color: #333; font-weight: bold; }
+        .comment-id { color: #333; }
+      }
+    }
+  }
+}
+
+.comments .comment,
+#new_comment {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 8px;
+  padding-left: 53px;
+
+  .avatar-box {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+  }
+}
+
+#new_comment {
+  margin-bottom: 20px;
+  textarea.form-control { height: 100px; min-height: 50px; }
+
+  .form-group { margin-top: 0; }
+  .form-actions {
+    .btn { float: left; }
+
+    .in-reply-info {
+      float: left;
+      margin-top: 6px;
+      margin-left: 10px;
+      color: #999;
+
+      .user-name { color: #333; font-weight: bold; }
+      .comment-id { color: #333; }
+
+      .close {
+        color: #333; margin-left: 6px;
+      }
+    }
+  }
+
+}

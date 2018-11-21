@@ -80,6 +80,12 @@ Rails.application.routes.draw do
       get :users
     end
   end
+  resources :comments do
+    member do
+      get :reply
+      get :in_reply
+    end
+  end
 
   # NOTE! Keep :profile routes bottom of routes.rb
   resources :repositories, only: %i(index create)

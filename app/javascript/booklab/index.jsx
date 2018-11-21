@@ -7,6 +7,7 @@ import "primer-booklab"
 import "vendor/styleguide.js"
 import "vendor/jquery.timeago.js"
 import "vendor/jquery.timeago.settings.js"
+import './rails-ujs-extends'
 
 import MarkdownEditor from './editor/index'
 
@@ -18,7 +19,8 @@ window.App = {
 
 import './reader/index.js'
 import './follow-user/index.js'
-import './rails-ujs-extends'
+import './comments/index.js'
+
 
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago()

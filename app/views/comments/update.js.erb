@@ -1,0 +1,3 @@
+<% if @success %>
+  $("#comment-<%= @comment.id %>").replaceWith('<%= j(render("comment", comment: @comment)) %>');
+<% end %>

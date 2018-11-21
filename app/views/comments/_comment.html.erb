@@ -1,0 +1,24 @@
+<div id="comment-<%= comment.id %>" class="comment" data-parent-id="<%= comment.parent_id %>">
+  <div class="avatar-box">
+    <%= user_avatar_tag(comment.user, style: :small) %>
+  </div>
+  <div class="comment-infos">
+    <div class="info clearfix">
+      <%= user_name_tag(comment.user) %>
+      <span class="time">
+        <%= link_to timeago(comment.created_at), "#comment-#{comment.id}" %>
+      </span>
+      <div class="opts float-right">
+        <%= link_to icon_tag("reply"), reply_comment_path(comment), data: { remote: true } %>
+
+        <% if can? :destroy, comment %>
+          <%= link_to icon_tag("trash-alt"), comment_path(comment), data: { method: 'delete', remote: true, confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="markdown-body">
+      <%= render "/comments/in_reply", comment: comment %>
+      <%= sanitize_html comment.body_html %>
+    </div>
+  </div>
+</div>

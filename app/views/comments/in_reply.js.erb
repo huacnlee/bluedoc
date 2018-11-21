@@ -1,0 +1,1 @@
+$("#comment-<%= @comment.id %> .in-reply-to").replaceWith("<%= j(render("/comments/in_reply", comment: @comment, show_body: true)) %>");

@@ -1,0 +1,19 @@
+<% if comment.parent %>
+<div class="in-reply-to">
+  <% if defined? show_body %>
+  <div class="in-reply-link">
+  <% else %>
+  <a href="<%= in_reply_comment_path(comment) %>" class="in-reply-link" data-remote="true">
+  <% end %>
+    In reply to <%= user_avatar_tag(comment.user, style: :tiny, link: false) %> <span class="user-name"><%= comment.user&.slug %></span> <span class="comment-id">#comment-<%= comment.parent_id %></a>
+    <% if defined? show_body %>
+    <div class="body"><%= sanitize_html(comment.parent.body_html) %></div>
+    <% end %>
+
+  <% if defined? show_body %>
+  </div>
+  <% else %>
+  </a>
+  <% end %>
+</div>
+<% end %>

@@ -96,6 +96,12 @@
       <p>Sorry, this Doc does not exists.</p>
     </div>
     <% end %>
+
+    <% if @comments %>
+    <div class="doc-comments mt-3 clearfix">
+      <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+    </div>
+    <% end %>
   </div>
   <div class="doc-body-toc" data-turbolinks="false">
   </div>

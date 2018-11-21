@@ -1,0 +1,5 @@
+var html = '<%= j(render("/comments/comment", comment: @comment )) %>';
+$('.comments').append(html);
+$('.new_comment [name="comment[body]"]').val('');
+$('.new_comment [name="comment[parent_id]"]').val('');
+$(".timeago").timeago();

@@ -1,0 +1,8 @@
+<div class="comments comments-<%= commentable.class.name.dasherize %>">
+  <div class="sub-title">Comments</div>
+  <div class="comments-list">
+    <%= render partial: "/comments/comment", collection: comments, as: :comment %>
+  </div>
+</div>
+
+<%= render partial: '/comments/form', locals: { comment: comments.new } %>

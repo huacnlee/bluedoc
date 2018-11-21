@@ -23,6 +23,7 @@ class DocsController < Users::ApplicationController
       authorize! :read, @repository
     else
       authorize! :read, @doc
+      @comments = @doc.comments.with_includes.order("id asc")
     end
 
     render "show", layout: "reader"
