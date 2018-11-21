@@ -29,7 +29,7 @@
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
         item << link_to(icon_tag("book", label: "Repositories"), @group.to_path, class: "reponav-item")
         item << link_to("Search", search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
-        item << link_to(icon_tag("users", label: "Pepole"), group_members_path(@group), class: "reponav-item")
+        item << link_to(icon_tag("users", label: "People"), group_members_path(@group), class: "reponav-item")
         item << link_to(icon_tag("cog", label: "Settings"), group_settings_path(@group), class: "reponav-item") if can? :update, @group
       end %>
     </nav>
