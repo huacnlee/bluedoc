@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
 
   validates :commentable_type, inclusion: { in: %w[Doc] }
 
-  scope :with_includes, -> { includes(:parent, user: { avatar_attachment: :blob }) }
+  scope :with_includes, -> { includes(:parent, :reactions, user: { avatar_attachment: :blob }) }
 
   after_destroy :clear_relation_parent_id
 

@@ -1,0 +1,1 @@
+$("#<%= @subject.class.name %>-<%= @subject.id %>-reaction-box").replaceWith('<%= j(render("/reactions/reactions", subject: @subject, reactions: @subject.reactions)) %>');

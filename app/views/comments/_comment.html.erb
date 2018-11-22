@@ -20,5 +20,8 @@
       <%= render "/comments/in_reply", comment: comment %>
       <%= sanitize_html comment.body_html %>
     </div>
+    <div class="mt-3 border-top py-2">
+      <%= render "/reactions/reactions", subject: comment, reactions: comment.reactions %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,27 @@
+<div id="<%= subject.class.name %>-<%= subject.id %>-reaction-box" class="reaction-box clearfix">
+  <%
+    @reaction = Reaction.new(subject: subject)
+  %>
+  <%= form_for @reaction, url: reactions_path, method: :post, remote: true, class: "reaction-form" do |f| %>
+    <%= f.hidden_field :subject_type %>
+    <%= f.hidden_field :subject_id %>
+    <div class="reaction-list">
+      <%= render partial: "/reactions/reaction_button", collection: reactions.grouped, as: :reaction, locals: { item_class: "reaction-summary-item" } %>
+    </div>
+  <% end %>
+
+  <details class="details-overlay details-reset position-relative float-left reaction-popover-container">
+    <summary class="btn-link reaction-summary-item add-reaction-btn"><%= icon_tag("plus") %> <%= icon_tag("grin") %></summary>
+    <div class="dropdown-menu dropdown-menu-ne add-reaction-popover anim-scale-in">
+      <%= form_for @reaction, url: reactions_path, method: :post, remote: true do |f| %>
+        <%= f.hidden_field :subject_type %>
+        <%= f.hidden_field :subject_id %>
+        <div class="text-gray mx-2 my-1">Pick your reaction</div>
+        <div class="dropdown-divider"></div>
+        <div class="add-reactions-options mx-1 mb-3">
+          <%= render partial: "/reactions/reaction_button", collection: Reaction.allow_reactions, as: :reaction, locals: { item_class: "add-reactions-options-item" } %>
+        </div>
+      <% end %>
+    </div>
+  </details>
+</div>

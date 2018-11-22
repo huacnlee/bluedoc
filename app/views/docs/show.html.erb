@@ -72,35 +72,38 @@
   </script>
   <div class="doc-main main-content py-4">
 
-    <% if @doc %>
-    <h1 class="doc-title"><%= @doc.title %></h1>
-    <div class="markdown-body markdown-with-toc" data-turbolinks="false">
-      <%= @doc.body_html %>
-    </div>
-    <div class="doc-info mt-5 py-2 border-top">
-      <span class="editors">
-        <% @doc.editors.each do |user| %>
-        <%= user_avatar_tag(user, style: :tiny) %>
-        <% end %>
-      </span>
-
-      <% if @doc.last_editor %>
-      Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
-      <% else %>
-      Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
-      <% end %>
-    </div>
+    <% if @doc.blank? %>
+      <div class="blankslate">
+        <h3>Doc not found</h3>
+        <p>Sorry, this Doc does not exists.</p>
+      </div>
     <% else %>
-    <div class="blankslate">
-      <h3>Doc not found</h3>
-      <p>Sorry, this Doc does not exists.</p>
-    </div>
-    <% end %>
+      <h1 class="doc-title"><%= @doc.title %></h1>
+      <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+        <%= @doc.body_html %>
+      </div>
+      <div class="mt-5">
+        <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+      </div>
+      <div class="doc-info mt-2 py-2 border-top">
+        <span class="editors">
+          <% @doc.editors.each do |user| %>
+          <%= user_avatar_tag(user, style: :tiny) %>
+          <% end %>
+        </span>
 
-    <% if @comments %>
-    <div class="doc-comments mt-3 clearfix">
-      <%= render "/comments/comments", commentable: @doc, comments: @comments %>
-    </div>
+        <% if @doc.last_editor %>
+        Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+        <% else %>
+        Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+        <% end %>
+      </div>
+
+      <% if @comments %>
+      <div class="doc-comments mt-3 clearfix">
+        <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+      </div>
+      <% end %>
     <% end %>
   </div>
   <div class="doc-body-toc" data-turbolinks="false">

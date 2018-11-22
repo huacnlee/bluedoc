@@ -1,0 +1,25 @@
+<%
+
+class_name = "btn-link #{item_class}"
+if reaction.group_user_slugs.include?(current_user&.slug)
+  class_name += " selected"
+end
+
+title = ""
+if reaction.group_user_slugs.length > 0
+  title = reaction.group_user_slugs.take(3).join(", ")
+  if reaction.group_user_slugs.length > 3
+    title += " ... and #{reaction.group_user_slugs.length} people"
+  end
+  title += " has reacted"
+end
+%>
+
+<button type="submit" class="<%= class_name %>"
+  name="reaction[content]" value="<%= reaction.name %>"
+  title="<%= title %>">
+  <%= image_tag reaction.url, class: "emoji" %>
+  <% if reaction.group_count > 0 %>
+    <%= reaction.group_count %>
+  <% end %>
+</button>

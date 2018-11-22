@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       delete :watch
     end
   end
+  resource :reactions, path: "user/reactions"
 
   # NOTE! Keep :profile routes bottom of routes.rb
   resources :repositories, only: %i(index create)
