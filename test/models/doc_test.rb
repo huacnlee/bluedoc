@@ -58,20 +58,27 @@ class DocTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
 
+    # user watch by create
     mock_current user: user
-    doc = create(:doc, creator_id: user.id)
+    doc = create(:doc)
     assert_equal [user.id], doc.watch_comment_by_user_ids
 
-    user2.watch_comment_doc(doc)
+    # user2 direct watch, with "watch" action_option
+    User.create_action(:watch_comment, target: doc, user: user2, action_option: "watch")
 
+    # user1 watch by update
     mock_current user: user1
     doc.update(title: "New title")
     doc.reload
+
+    # should user, user1, user2 in watching
     assert_equal [user.id, user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
 
+    # user to watch with "ignore" action_option
     User.create_action(:watch_comment, target: doc, user: user, action_option: "ignore")
     assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
 
+    # and then user to update again, it will not change action_option
     mock_current user: user
     doc.update(title: "New new title")
     assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
