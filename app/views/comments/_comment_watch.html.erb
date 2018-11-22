@@ -1,5 +1,5 @@
 <% if current_user %>
-<div id="comment-watch-box" class="border-bottom text-right text-gray mb-3 pb-3 v-align-middle clearfix">
+<div id="comment-watch-box" class="border-bottom mb-3 pb-3 clearfix">
   <%
   action = current_user.find_action(:watch_comment, target: commentable)
   url = watch_comments_path(commentable_type: commentable.class.name, commentable_id: commentable.id)

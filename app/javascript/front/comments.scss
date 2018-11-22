@@ -44,6 +44,17 @@
   }
 }
 
+#comment-watch-box {
+  .watch-button-group {
+    height: 30px;
+    line-height: 30px;
+    color: #999;
+
+    p { display: inline; }
+    .btn { margin-left: 5px; }
+  }
+}
+
 .comments .comment,
 #new_comment {
   position: relative;

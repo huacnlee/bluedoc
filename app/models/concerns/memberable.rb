@@ -8,7 +8,7 @@ module Memberable
 
     attr_accessor :creator_id
 
-    before_commit :add_creator_as_admin!, on: [:create]
+    after_commit :add_creator_as_admin!, on: [:create]
     before_create do
       self.creator_id ||= Current.user.id if Current.user.present?
     end
