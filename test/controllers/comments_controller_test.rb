@@ -175,6 +175,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
         assert_select "a.btn[href=?]", watch_comments_path(commentable_type: "Doc", commentable_id: doc.id)
         assert_select "a.btn[data-method=?]", "post"
         assert_select "a.btn", text: "Subscribe"
+        assert_select "a.btn i.fa-bell", 1
       end
     end
 
@@ -195,6 +196,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
         assert_select "p", text: "You’re receiving notifications because you’re subscribed."
         assert_select "a.btn[data-method=?]", "delete"
         assert_select "a.btn", text: "Unsubscribe"
+        assert_select "a.btn i.fa-bell-slash", 1
       end
     end
 
@@ -215,6 +217,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
         assert_select "p", text: "You’re ignoring this notifications."
         assert_select "a.btn[data-method=?]", "post"
         assert_select "a.btn", text: "Subscribe"
+        assert_select "a.btn i.fa-bell", 1
       end
     end
 

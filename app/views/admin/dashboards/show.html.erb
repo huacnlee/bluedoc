@@ -1,16 +1,53 @@
-<p>Welcome to Admin Dashboard.</p>
-
-
-<div class="Box box-shadow">
-  <div class="Box-row">
-    <h3>Tools</h3>
+<div class="Box mb-3">
+  <div class="Box-header">
+    <h3 class="Box-title">Tools</h3>
   </div>
   <div class="Box-row">
-    <a href="<%= admin_settings_path %>" target="_blank" class="btn">Settings</a>
-    <a href="/admin/exception-track" target="_blank" class="btn">Exception Tracks</a>
-    <a href="/admin/sidekiq" target="_blank" class="btn">Background Jobs</a>
+    <a href="<%= admin_settings_path %>" target="_blank" class="btn"><%= icon_tag("cog") %> Settings</a>
+    <a href="/admin/exception-track" target="_blank" class="btn"><%= icon_tag("exclamation-triangle") %> Exception Tracks</a>
+    <a href="/admin/sidekiq" target="_blank" class="btn"><%= icon_tag("server") %> Background Jobs</a>
   </div>
   <div class="Box-row">
     <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn">Rebuild Search Index</a>
+  </div>
+</div>
+
+<div class="Box mb-3">
+  <div class="Box-header">
+    <h3 class="Box-title">Statistics</h3>
+  </div>
+  <div class="Box-row clearfix">
+    <div class="clearfix border-bottom text-center">
+      <div class="col-4 float-left p-4">
+        <h2 class="text-blue"><%= User.where(type: "User").count %></h2>
+        <div class="text-gray-dark">Users</div>
+      </div>
+      <div class="col-4 float-left p-4">
+        <h2 class="text-blue"><%= Group.count %></h2>
+        <div class="text-gray-dark">Groups</div>
+      </div>
+      <div class="col-4 float-left p-4">
+        <h2 class="text-blue"><%= Repository.count %></h2>
+        <div class="text-gray-dark">Repositories</div>
+      </div>
+    </div>
+    <div class="clearfix text-center">
+      <div class="col-3 float-left p-4">
+        <h2 class="text-blue"><%= Doc.count %></h2>
+        <div class="text-gray-dark">Docs</div>
+      </div>
+      <div class="col-3 float-left p-4">
+        <h2 class="text-blue"><%= Comment.count %></h2>
+        <div class="text-gray-dark">Comments</div>
+      </div>
+      <div class="col-3 float-left p-4">
+        <h2 class="text-blue"><%= Notification.count %></h2>
+        <div class="text-gray-dark">Notifications</div>
+      </div>
+      <div class="col-3 float-left p-4">
+        <h2 class="text-blue"><%= Activity.count %></h2>
+        <div class="text-gray-dark">Activities</div>
+      </div>
+    </div>
   </div>
 </div>
