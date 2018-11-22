@@ -212,4 +212,11 @@ class DocTest < ActiveSupport::TestCase
     doc.body = "New Body"
     assert_equal true, doc.indexed_changed?
   end
+
+  test "reactions" do
+    doc = create(:doc)
+    create(:reaction, subject: doc)
+    assert_equal 1, doc.reactions.count
+    assert_equal doc, doc.reactions.first.subject
+  end
 end

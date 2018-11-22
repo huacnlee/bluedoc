@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
-  extend ActiveSupport::Concern
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper
+  include Reactionable
 
   depends_on :watches, :notifications
 

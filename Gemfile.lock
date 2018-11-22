@@ -324,6 +324,8 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    twemoji (3.1.4)
+      nokogiri (~> 1.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unf (0.1.4)
@@ -385,6 +387,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks
+  twemoji
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (>= 4.0.x)!

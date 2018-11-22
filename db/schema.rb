@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_061544) do
+ActiveRecord::Schema.define(version: 2018_11_22_060205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,18 @@ ActiveRecord::Schema.define(version: 2018_11_21_061544) do
     t.index ["repository_id"], name: "index_notifications_on_repository_id"
     t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
     t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.string "subject_type", limit: 20, null: false
+    t.integer "subject_id", null: false
+    t.string "name", limit: 100
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_type", "subject_id", "user_id", "name"], name: "subject_user_id_name", unique: true
+    t.index ["user_id", "name"], name: "index_reactions_on_user_id_and_name"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "repositories", force: :cascade do |t|

@@ -117,4 +117,11 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id).count
     assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id, user_id: [user1.id, user2.id]).count
   end
+
+  test "reactions" do
+    comment = create(:comment)
+    create(:reaction, subject: comment)
+    assert_equal 1, comment.reactions.count
+    assert_equal comment, comment.reactions.first.subject
+  end
 end
