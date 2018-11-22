@@ -145,4 +145,78 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_nil Comment.find_by_id(comment.id)
   end
+
+  test "POST/DELETE /comments/watch" do
+    group = create(:group)
+    repo = create(:repository, user: group, privacy: :private)
+    doc = create(:doc, repository: repo)
+
+    comment_params = {
+      commentable_type: "Doc",
+      commentable_id: doc.id
+    }
+
+    post watch_comments_path, params: comment_params, xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post watch_comments_path, params: comment_params, xhr: true
+    assert_equal 403, response.status
+
+    user = sign_in_role :reader, group: group
+
+    # to check comment-watch-box html render
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "#comment-watch-box" do
+      assert_select ".watch-button-group[watch-status=?]", "none"
+      assert_select ".watch-button-group" do
+        assert_select "p", text: "You’re not receiving notifications."
+        assert_select "a.btn[href=?]", watch_comments_path(commentable_type: "Doc", commentable_id: doc.id)
+        assert_select "a.btn[data-method=?]", "post"
+        assert_select "a.btn", text: "Subscribe"
+      end
+    end
+
+    # do watch
+    post watch_comments_path, params: comment_params, xhr: true
+    assert_equal 200, response.status
+    assert_match %($("#comment-watch-box").replaceWith), response.body
+
+    action = User.find_action(:watch_comment, target: doc, user: user)
+    assert_not_nil action
+    assert_equal "watch", action.action_option
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "#comment-watch-box" do
+      assert_select ".watch-button-group[watch-status=?]", "watched"
+      assert_select ".watch-button-group" do
+        assert_select "p", text: "You’re receiving notifications because you’re subscribed."
+        assert_select "a.btn[data-method=?]", "delete"
+        assert_select "a.btn", text: "Unsubscribe"
+      end
+    end
+
+    # do ignore watch
+    delete watch_comments_path, params: comment_params, xhr: true
+    assert_equal 200, response.status
+    assert_match %($("#comment-watch-box").replaceWith), response.body
+
+    action = User.find_action(:watch_comment, target: doc, user: user)
+    assert_not_nil action
+    assert_equal "ignore", action.action_option
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "#comment-watch-box" do
+      assert_select ".watch-button-group[watch-status=?]", "ignore"
+      assert_select ".watch-button-group" do
+        assert_select "p", text: "You’re ignoring this notifications."
+        assert_select "a.btn[data-method=?]", "post"
+        assert_select "a.btn", text: "Subscribe"
+      end
+    end
+
+  end
 end

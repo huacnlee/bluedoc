@@ -1,0 +1,26 @@
+<% if current_user %>
+<div id="comment-watch-box" class="border-bottom text-right text-gray mb-3 pb-3 v-align-middle clearfix">
+  <%
+  action = current_user.find_action(:watch_comment, target: commentable)
+  url = watch_comments_path(commentable_type: commentable.class.name, commentable_id: commentable.id)
+  %>
+  <% if action %>
+    <% if action.action_option == "ignore" %>
+      <div class="watch-button-group" watch-status="ignore">
+        <p>You’re ignoring this notifications.</p>
+        <%= link_to "Subscribe", url, class: "btn btn-sm", data: { method: :post, remote: true } %>
+      </div>
+    <% else %>
+      <div class="watch-button-group" watch-status="watched">
+        <p>You’re receiving notifications because you’re subscribed.</p>
+        <%= link_to "Unsubscribe", url, class: "btn btn-sm", data: { method: :delete, remote: true } %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="watch-button-group" watch-status="none">
+      <p>You’re not receiving notifications.</p>
+      <%= link_to "Subscribe", url, class: "btn btn-sm", data: { method: :post, remote: true } %>
+    </div>
+  <% end %>
+</div>
+<% end %>

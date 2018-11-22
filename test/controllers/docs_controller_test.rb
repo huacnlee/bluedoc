@@ -111,6 +111,20 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
+    assert_select "#comment-watch-box", 0
+    assert_select "#new_comment", 0
+    assert_select "#comment-form-blankslate" do
+      assert_select "h2", "Sign in to write comment"
+      assert_select "a.btn[href=?]", new_user_session_path
+    end
+
+    sign_in @user
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "#comment-watch-box", 1
+    assert_select "#new_comment" do
+      assert_select "textarea[name=?]", "comment[body]"
+    end
 
     # private
     doc = create(:doc, repository: @private_repo)

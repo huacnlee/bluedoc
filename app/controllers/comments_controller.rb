@@ -3,7 +3,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_anonymous!
   before_action :set_comment, only: [:show, :edit, :reply, :in_reply, :update, :destroy]
-  before_action :authenticate_user!, only: [:create, :reply, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :reply, :edit, :update, :destroy, :watch]
 
   def show
   end
@@ -37,6 +37,21 @@ class CommentsController < ApplicationController
     authorize! :destroy, @comment
 
     @comment.destroy
+  end
+
+  # POST /comments/watch?commentable_type=&commentable_id=
+  # DELETE /comments/watch?commentable_type=&commentable_id=
+  def watch
+    klass = params[:commentable_type].constantize
+    @commentable = klass.find(params[:commentable_id])
+
+    authorize! :read, @commentable
+
+    if request.post?
+      User.create_action(:watch_comment, target: @commentable, user: current_user, action_option: "watch")
+    else
+      User.create_action(:watch_comment, target: @commentable, user: current_user, action_option: "ignore")
+    end
   end
 
   private

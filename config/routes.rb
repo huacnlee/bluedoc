@@ -85,6 +85,10 @@ Rails.application.routes.draw do
       get :reply
       get :in_reply
     end
+    collection do
+      post :watch
+      delete :watch
+    end
   end
 
   # NOTE! Keep :profile routes bottom of routes.rb
