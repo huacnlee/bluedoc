@@ -81,7 +81,7 @@
             Once you delete a group, there is no going back. Please be certain.
           </div>
         </div>
-        <%= link_to "Delete this group", group_settings_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+        <%= render "destroy" %>
       </div>
     </div>
     <% end %>

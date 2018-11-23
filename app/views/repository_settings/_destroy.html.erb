@@ -1,0 +1,35 @@
+<%= render layout: "shared/modal", locals: {
+  title: "Delete repository",
+  button_text: "Delete this repository",
+  button_class: "btn btn-danger"
+} do %>
+  <div class="Box-body overflow-auto">
+    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :delete) do |form| %>
+      <p>
+        This action <strong>cannot</strong> be undone. This will permanently delete the <strong><%= @repository.user&.slug %>/<%= @repository.slug %></strong> repository, docs, versions and comments.
+      </p>
+      <div class="form-group">
+        <label class="control-label">Please type in the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
+        <input type="text" name="repository[delete_slug]" id="repository-delete-slug" autocomplete="off" class="form-control" />
+        <input type="hidden" id="repository-delete-slug-confirm" value="<%= @repository.slug %>" />
+      </div>
+
+      <div class="actions">
+        <button type="submit" disabled class="btn btn-delete btn-danger btn-block">I understand, delete this repository.</button>
+      </div>
+    <% end %>
+
+    <script type="text/javascript">
+      var slugInput = $("#repository-delete-slug");
+      var slugConfirmInput = $("#repository-delete-slug-confirm");
+      slugInput.on("keyup", (e) => {
+        var $btn = $(".btn-delete");
+        if (slugInput.val() == slugConfirmInput.val()) {
+          $btn.removeAttr("disabled");
+        } else {
+          $btn.attr("disabled", "");
+        }
+      });
+    </script>
+  </div>
+<% end %>

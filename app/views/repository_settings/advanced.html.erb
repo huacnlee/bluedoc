@@ -57,7 +57,7 @@
               Once you delete a repository, there is no going back. Please be certain.
             </div>
           </div>
-          <%= link_to "Delete this repository", user_repository_settings_path(@user, @repository), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+          <%= render "destroy" %>
         </div>
       </div>
     <% end %>
