@@ -61,13 +61,6 @@ class BookLab::Import::GitBookTest < ActiveSupport::TestCase
 
   test "execute" do
     importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")
-    assert_raise(Errno::ENOENT) do
-      importer.execute("not-exist-command")
-    end
-
-    assert_raise(RuntimeError) do
-      importer.execute("echo 'stderr' >&2 && exit 1")
-    end
 
     assert_equal "Hello", importer.execute("echo 'Hello'").strip
   end

@@ -24,13 +24,7 @@ module BookLab
       end
 
       def execute(script)
-        stdout, stderr, status = Open3.capture3(script)
-
-        if !status.success?
-          raise RuntimeError.new("execute error: #{stderr}")
-        end
-
-        stdout
+        `#{script}`
       end
     end
   end

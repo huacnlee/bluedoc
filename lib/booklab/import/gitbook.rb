@@ -47,8 +47,8 @@ module BookLab
           doc_params = {
             title: title_res[:title],
             slug: slug,
-            repository_id: repository.id,
-            creator_id: user.id,
+            repository_id: self.repository.id,
+            creator_id: self.user&.id,
             body: title_res[:body]
           }
 
