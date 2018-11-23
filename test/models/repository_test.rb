@@ -274,6 +274,13 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   test "source" do
+    repo = build(:repository, gitbook_url: nil)
+    assert_equal true, repo.valid?
+
+    repo = build(:repository, gitbook_url: "git://foo.com")
+    assert_equal false, repo.valid?
+    assert_equal ["is not a valid Git url, only support HTTP/HTTPS git url"], repo.errors[:gitbook_url]
+
     url = "https://hello"
     repo = create(:repository, gitbook_url: url)
     assert_enqueued_jobs 1, only: RepositoryImportJob

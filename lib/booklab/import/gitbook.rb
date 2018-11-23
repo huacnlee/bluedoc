@@ -118,7 +118,7 @@ module BookLab
           next if src.blank?
 
           src_path = src
-          unless self.url?(src_path)
+          unless BookLab::Validate.url?(src_path)
             src_path = File.join(self.repo_dir, src)
           end
 

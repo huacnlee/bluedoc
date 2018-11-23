@@ -11,6 +11,8 @@ class Repository
 
   attr_accessor :gitbook_url
 
+
+  before_validation :validate_gitbook_url
   after_save :save_source_url
   after_commit :import_from_source, on: [:create]
 
@@ -19,6 +21,12 @@ class Repository
     return nil if self.source_provider != "gitbook"
     @gitbook_url = self.source_url
     @gitbook_url
+  end
+
+  def validate_gitbook_url
+    if gitbook_url && !BookLab::Validate.url?(gitbook_url)
+      self.errors.add(:gitbook_url, "is not a valid Git url, only support HTTP/HTTPS git url")
+    end
   end
 
   def source?

@@ -72,13 +72,6 @@ class BookLab::Import::GitBookTest < ActiveSupport::TestCase
     assert_equal "Hello", importer.execute("echo 'Hello'").strip
   end
 
-  test "url?" do
-    importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")
-    assert_equal true, importer.url?("http://foo")
-    assert_equal true, importer.url?("https://foo")
-    assert_equal false, importer.url?("/http/bar")
-  end
-
   test "upload_images" do
     local_path = Rails.root.join("test/factories/blank.png")
     importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")

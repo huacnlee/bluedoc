@@ -19,10 +19,6 @@ module BookLab
         true
       end
 
-      def url?(src)
-        /^http[s]?:\/\//.match?(src)
-      end
-
       def execute(script)
         stdout, stderr, status = Open3.capture3(script)
 
