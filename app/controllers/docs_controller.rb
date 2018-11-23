@@ -24,6 +24,10 @@ class DocsController < Users::ApplicationController
     else
       authorize! :read, @doc
       @comments = @doc.comments.with_includes.order("id asc")
+      @reactions = @doc.reactions
+
+      if @reactions.blank?
+      end
     end
 
     render "show", layout: "reader"

@@ -13,7 +13,7 @@ class Reaction < ApplicationRecord
 
   def self.allow_reactions
     return @allow_reactions if defined? @allow_reactions
-    @allow_reactions ||= []
+    @allow_reactions = []
     ALLOW_NAMES.each do |name|
       @allow_reactions << Reaction.new(name: name)
     end

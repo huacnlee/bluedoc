@@ -87,6 +87,19 @@
       .editors { margin-right: 10px; }
     }
 
+    .doc-reaction {
+      .reaction-summary-item {
+        border: 1px solid #f0f0f0;
+        padding: 6px 10px;
+        margin-right: 4px;
+        .emoji { width: 22px; height: 22px; }
+        .fa-grin { font-size: 22px; }
+        &.selected {
+          border-color: rgba(148, 171, 240, 0.14);
+        }
+      }
+    }
+
     .version-sidebar {
       .pagination {
         .page-number { display: none; }

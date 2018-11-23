@@ -8,17 +8,42 @@
     .info {
       margin-bottom: 8px;
       .user-name { color: #333; }
-      .time a { color: #aaa; margin-left: 5px; }
+      .time a { color: #ccc; margin-left: 5px; }
 
       .opts {
-        font-size: 13px;
-        a { color: #666; display: none; }
+        font-size: 14px;
+        display: block;
+        & > a { margin-left: 8px; }
+        & > a:hover {
+          color: #555;
+        }
+        & > a,
+        & > .fas { color: #ccc; }
+
+        .add-reaction-popover.dropdown-menu-ne {
+          left: -2px;
+        }
+
+        .add-reaction-btn {
+          font-size: 14px;
+          padding: 0;
+          border: 0;
+          display: inline-block;
+          float: none;
+          margin-right: 0;
+
+          i.fas { color: #ccc; }
+          i.fa-grin { font-size: 14px; }
+          &:hover {
+            .fas { color: #555 !important; }
+          }
+        }
       }
     }
 
     &:hover {
       .opts {
-        a { display: inline-block; margin-left: 5px; }
+        display: block;
       }
     }
 
@@ -41,6 +66,8 @@
         .comment-id { color: #333; }
       }
     }
+
+    .reaction-box-empty { display: none; }
   }
 }
 
