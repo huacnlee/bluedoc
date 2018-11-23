@@ -8,6 +8,7 @@
   color: #4a4a4a;
   padding-left: 14px;
   padding-right: 14px;
+  box-shadow: 0 1px 2px 0px rgba(100, 100, 100, 0.08);
 
   i.fas {
     opacity: 1;
@@ -28,6 +29,7 @@
   border-color: $btn-border-color;
   padding-top: 4px;
   padding-bottom: 4px;
+  box-shadow: 0 1px 2px 0px rgba(100, 100, 100, 0.08);
 }
 
 .btn-primary {
