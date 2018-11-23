@@ -39,4 +39,26 @@ class BookLab::BlobTest < ActiveSupport::TestCase
     blob = create(:blob)
     assert_equal ActiveStorage::Blob.service.send(:path_for, blob.key), BookLab::Blob.path_for(blob.key)
   end
+
+  test "upload local file" do
+    assert_raise(BookLab::Blob::FileNotFoundError) do
+      BookLab::Blob.upload("/foo/bar")
+    end
+
+    assert_changes -> { ActiveStorage::Blob.where(filename: "blank.png").count }, 1 do
+      result = BookLab::Blob.upload(Rails.root.join("test/factories/blank.png"))
+      assert_match /\/uploads\/(\w+)/, result
+    end
+  end
+
+  test "upload remote url" do
+    assert_raise(BookLab::Blob::FileNotFoundError) do
+      BookLab::Blob.upload("https://images.apple.com/aajajajjajajaj.png")
+    end
+
+    assert_changes -> { ActiveStorage::Blob.where(filename: "32.png").count }, 1 do
+      result = BookLab::Blob.upload("https://images.apple.com/ac/flags/1/images/us/32.png")
+      assert_match /\/uploads\/(\w+)/, result
+    end
+  end
 end

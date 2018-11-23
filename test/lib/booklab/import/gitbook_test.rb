@@ -58,4 +58,38 @@ class BookLab::Import::GitBookTest < ActiveSupport::TestCase
     assert_equal "Hello world", res[:title]
     assert_equal body, res[:body]
   end
+
+  test "execute" do
+    importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")
+    assert_raise(Errno::ENOENT) do
+      importer.execute("not-exist-command")
+    end
+
+    assert_raise(RuntimeError) do
+      importer.execute("echo 'stderr' >&2")
+    end
+
+    assert_equal "Hello", importer.execute("echo 'Hello'").strip
+  end
+
+  test "url?" do
+    importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")
+    assert_equal true, importer.url?("http://foo")
+    assert_equal true, importer.url?("https://foo")
+    assert_equal false, importer.url?("/http/bar")
+  end
+
+  test "upload_images" do
+    local_path = Rails.root.join("test/factories/blank.png")
+    importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo")
+    importer.repo_dir = Rails.root.join("test").to_s
+
+    body = "# hello [world](http://github.com)\n <img src='/aaa/bbb.jpg' /> this is bad file: ![](/foo/notfound) this is body ![](https://www.apple.com/ac/flags/1/images/cn/32.png)\n![](#{local_path})"
+    BookLab::Blob.stub(:upload, "/uploads/foooo") do
+      body = importer.upload_images(body)
+      assert_match %([world](http://github.com)), body
+      assert_match /\(\/uploads\/foooo\)/, body
+      assert_match /<img src='\/uploads\/foooo' \/>/, body
+    end
+  end
 end

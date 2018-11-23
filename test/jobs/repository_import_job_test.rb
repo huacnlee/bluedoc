@@ -9,7 +9,12 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
     repo = create(:repository)
     user = create(:user)
 
-    RepositoryImportJob.perform_now(repo, user: user, type: "gitbook", url: "git@foo.com")
+    mock = Minitest::Mock.new
+    mock.expect(:perform, [], [])
+    BookLab::Import::GitBook.stub(:new, mock) do
+      RepositoryImportJob.perform_now(repo, user: user, type: "gitbook", url: "git@foo.com")
+    end
+    mock.verify
 
     assert_equal 1, Notification.where(notify_type: :repo_import, target: repo).count
     note = Notification.where(notify_type: :repo_import, target: repo).last

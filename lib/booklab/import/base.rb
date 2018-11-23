@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open3'
+
 module BookLab
   module Import
     class Base
@@ -15,6 +17,19 @@ module BookLab
 
       def valid_url?
         true
+      end
+
+      def url?(src)
+        /^http[s]?:\/\//.match?(src)
+      end
+
+      def execute(script)
+        stdout, stderr, status, thread = Open3.capture3(script)
+        if status != 0 || stderr.present?
+          raise RuntimeError.new("execute error: #{stderr}")
+        end
+
+        stdout
       end
     end
   end

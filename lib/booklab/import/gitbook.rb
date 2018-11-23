@@ -3,6 +3,8 @@
 module BookLab
   module Import
     class GitBook < Base
+      attr_accessor :repo_dir
+
       def git_url
         self.url
       end
@@ -17,18 +19,18 @@ module BookLab
         dirname = Digest::MD5.hexdigest(self.git_url)
 
         FileUtils.mkdir_p(tmp_path)
-        `git clone --depth 1 #{self.git_url} #{tmp_path}/#{dirname}`
+        self.execute("git clone --depth 1 #{self.git_url} #{tmp_path}/#{dirname}")
 
-        repo_dir = File.join(tmp_path, dirname)
+        @repo_dir = File.join(tmp_path, dirname)
 
         # import docs
-        doc_files = Dir.glob(File.join(repo_dir, "**", "*.{md, markdown}"))
+        doc_files = Dir.glob(File.join(self.repo_dir, "**", "*.{md, markdown}"))
         logger.info "Found #{doc_files.length} docs"
 
         slug_maps = {}
 
         doc_files.each do |f|
-          original_slug = f.gsub(repo_dir + "/", "").split(".").first
+          original_slug = f.gsub(self.repo_dir + "/", "").split(".").first
           slug = original_slug.gsub("/", "-").downcase
 
           next if slug == "summary"
@@ -39,8 +41,7 @@ module BookLab
 
           slug_maps[original_slug] = slug
 
-          body = File.open(f).read
-
+          body = self.upload_images(File.open(f).read)
           title_res = self.parse_title(body)
 
           doc_params = {
@@ -58,6 +59,7 @@ module BookLab
               doc = Doc.create!(doc_params)
             else
               doc_params.delete(:slug)
+              doc_params.delete(:creator_id)
               doc.update!(doc_params)
             end
           rescue => e
@@ -70,7 +72,7 @@ module BookLab
 
         # update Toc
         summary_filename = nil
-        Dir.glob(File.join(repo_dir, "{SUMMARY, summary}.{md, markdown}")) do |f|
+        Dir.glob(File.join(self.repo_dir, "{SUMMARY, summary}.{md, markdown}")) do |f|
           summary_filename = f
         end
 
@@ -105,6 +107,31 @@ module BookLab
         end
 
         { title: first_line, body: body }
+      end
+
+      # Upload images to BookLab storage and replace body url
+      def upload_images(body)
+        html = BookLab::Markdown.render(body)
+        doc = Nokogiri::HTML(html)
+        doc.css("img").each do |node|
+          src = node.attr("src")
+          next if src.blank?
+
+          src_path = src
+          unless self.url?(src_path)
+            src_path = File.join(self.repo_dir, src)
+          end
+
+          begin
+            url = BookLab::Blob.upload(src_path)
+
+            body = body.gsub(src, url)
+          rescue BookLab::Blob::FileNotFoundError => e
+            logger.warn "upload_attachments error: #{e}"
+          end
+        end
+
+        body
       end
     end
   end
