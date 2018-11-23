@@ -2,7 +2,7 @@
 
 <div class="detail admin-edit-admin_repository">
   <div class="detail-action">
-    <%= link_to 'Back to list', admin_repositories_path, class: "btn" %>
+    <%= link_to icon_tag("arrow-left", label: "Back"), admin_repositories_path, class: "btn" %>
     <%= link_to icon_tag("pencil-alt", label: "Edit"), edit_admin_repository_path(@repository.id), class: "btn" %>
     <%= link_to "All docs", admin_docs_path(repository_id: @repository.id), class: "btn" %>
   </div>

@@ -2,8 +2,7 @@
 
 <div class="detail admin-edit-admin_doc">
   <div class="detail-action">
-    <%= link_to 'Back to list', admin_docs_path, class: "btn" %>
-    <%= link_to icon_tag("pencil-alt", label: "Edit"), edit_admin_doc_path(@doc.id), class: "btn" %>
+    <%= link_to icon_tag("arrow-left", label: "Back"), admin_docs_path, class: "btn" %>
   </div>
 
 
@@ -13,13 +12,43 @@
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Slug:</div>
-    <div class="detail-value"><%= @doc.slug %></div>
+    <div class="detail-label">URL:</div>
+    <div class="detail-value"><%= link_to @doc.to_url, @doc.to_url, target: "_blank" %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Repository:</div>
-    <div class="detail-value"><%= @doc.repository&.name %></div>
+    <div class="detail-label">Owned for:</div>
+    <div class="detail-value"><%= group_name_tag(@doc.repository.user) %> / <%= repository_name_tag(@doc.repository) %></div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Editors:</div>
+    <div class="detail-value">
+      <% @doc.editors.each do |user| %>
+        <%= user_avatar_tag(user, style: :tiny) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Counts:</div>
+    <div class="detail-value">
+      <%= @doc.comments_count %> comments
+    </div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Created At:</div>
+    <div class="detail-value">
+      <%= l @doc.created_at, format: :long %>
+    </div>
+  </div>
+
+  <div class="detail-row">
+    <div class="detail-label">Updated At:</div>
+    <div class="detail-value">
+      <%= l @doc.updated_at, format: :long %>
+    </div>
   </div>
 
 </div>
