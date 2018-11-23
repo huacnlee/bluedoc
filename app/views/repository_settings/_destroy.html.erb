@@ -10,26 +10,12 @@
       </p>
       <div class="form-group">
         <label class="control-label">Please type in the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
-        <input type="text" name="repository[delete_slug]" id="repository-delete-slug" autocomplete="off" class="form-control" />
-        <input type="hidden" id="repository-delete-slug-confirm" value="<%= @repository.slug %>" />
+        <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
       </div>
 
       <div class="actions">
-        <button type="submit" disabled class="btn btn-delete btn-danger btn-block">I understand, delete this repository.</button>
+        <button type="submit" id="btn-confirm-delete" disabled class="btn btn-danger btn-block">I understand, delete this repository.</button>
       </div>
     <% end %>
-
-    <script type="text/javascript">
-      var slugInput = $("#repository-delete-slug");
-      var slugConfirmInput = $("#repository-delete-slug-confirm");
-      slugInput.on("keyup", (e) => {
-        var $btn = $(".btn-delete");
-        if (slugInput.val() == slugConfirmInput.val()) {
-          $btn.removeAttr("disabled");
-        } else {
-          $btn.attr("disabled", "");
-        }
-      });
-    </script>
   </div>
 <% end %>

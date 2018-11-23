@@ -7,8 +7,7 @@
     <%= form_with(model: @repository, url: transfer_user_repository_settings_path(@user, @repository), method: :patch) do |form| %>
       <div class="form-group">
         <label class="control-label">Type the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
-        <input type="text" name="repository[transfer_slug]" id="repository-transfer-slug" autocomplete="off" class="form-control" />
-        <input type="hidden" id="repository-transfer-slug-confirm" value="<%= @repository.slug %>" />
+        <input type="text" confirm-for="#btn-confirm-transfer" confirm-value="<%= @repository.slug %>" class="form-control" />
       </div>
 
       <div class="form-group">
@@ -17,21 +16,8 @@
       </div>
 
       <div class="actions">
-        <button type="submit" disabled class="btn btn-transfer btn-danger btn-block">I understand, transfer this repository.</button>
+        <button type="submit" id="btn-confirm-transfer" disabled class="btn btn-danger btn-block">I understand, transfer this repository.</button>
       </div>
     <% end %>
-
-    <script type="text/javascript">
-      var slugInput = $("#repository-transfer-slug");
-      var slugConfirmInput = $("#repository-transfer-slug-confirm");
-      slugInput.on("keyup", (e) => {
-        var $btn = $(".btn-transfer");
-        if (slugInput.val() == slugConfirmInput.val()) {
-          $btn.removeAttr("disabled");
-        } else {
-          $btn.attr("disabled", "");
-        }
-      });
-    </script>
   </div>
 <% end %>

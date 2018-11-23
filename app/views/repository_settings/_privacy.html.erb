@@ -1,0 +1,32 @@
+<%
+  value = @repository.private? ? "public" : "private"
+%>
+
+<%= render layout: "shared/modal", locals: {
+  title: "Make this repository #{value}",
+  button_text: "Make #{value}",
+  button_class: "btn btn-danger"
+} do %>
+  <div class="Box-body overflow-auto">
+    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :delete) do |form| %>
+      <p>
+        <% if @repository.private? %>
+          Public this repository from the private, this repository and docs will be visible to everyone who can visit  <%= Setting.host %>.
+        <% else %>
+          Private this repository from the public, this change will remove repository watchers, stars.
+        <% end %>
+      </p>
+
+      <%= form.hidden_field :privacy, value: value %>
+
+      <div class="form-group">
+        <label class="control-label">Please type in the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
+        <input type="text" confirm-for="#btn-confirm-change-private" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="btn-confirm-change-private" disabled class="btn btn-danger btn-block">I understand, <%= value %> this repository.</button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

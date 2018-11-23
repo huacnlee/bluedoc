@@ -1,47 +1,18 @@
 document.addEventListener("turbolinks:load", () => {
-  const $dialog = $(`
-  <details-dialog id="global-confirm-dialog" class="Box Box--overlay d-flex flex-column anim-fade-in fast">
-    <div class="Box-header">
-      <h3 class="Box-title">Confirm</h3>
-    </div>
-    <div class="Box-body overflow-auto">
-    </div>
-    <div class="Box-footer">
-      <button type="button" autofocus class="btn btn-ok primary">Ok</button>
-      <button type="button" data-close-dialog class="btn btn-cancel">Cancel</button>
-    </div>
-  </details>`);
-
-  $dialog.on("click", ".btn-cancel", (e) => {
-    e.preventDefault();
-    $dialog.remove();
-  });
-
-  function confirmAction(link) {
-    if (link.data("confirm") == undefined){
-      return true;
+  // confirm input form
+  $("input[confirm-for]").on("keyup", (e) => {
+    $input = $(e.currentTarget);
+    console.log($input);
+    let confirmForId = $input.attr("confirm-for");
+    if (confirmForId.indexOf("#") === -1) {
+      confirmForId = "#" + confirmForId;
     }
-
-    $dialog.remove();
-    $("body").append($dialog);
-    $($dialog, ".Box-body").html(link.data("confirm"));
-    $dialog.once("click", ".btn-ok", () => {
-      $dialog.hide();
-      Rails.fire(link, 'confirm:complete', [true]);
-      return false;
-    });
-  }
-
-  Rails.confirm = function(message, element) {
-    let $element = $(element)
-    confirmAction($element);
-    return false;
-  }
-
-  // Rails.handleConfirm = (e) => {
-  //   Rails.stopEverything(e);
-  //
-  //   confirmAction(link);
-  //   return false;
-  // }
+    $triggerButton = $(confirmForId);
+    $confirmValue = $input.attr("confirm-value").trim();
+    if ($input.val().trim() === $confirmValue) {
+      $triggerButton.removeAttr("disabled");
+    } else {
+      $triggerButton.attr("disabled", "");
+    }
+  })
 });

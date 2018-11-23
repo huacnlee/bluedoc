@@ -45,8 +45,7 @@
               <% end %>
             </div>
           </div>
-          <%= form.hidden_field :privacy, value: (@repository.private? ? "public" : "private") %>
-          <button type="submit" class="btn btn-danger btn-sm" data-confirm="Are you sure?"><%= @repository.private? ? "Make public" : "Make private" %></button>
+          <%= render "privacy" %>
         </div>
         <div class="Box-row d-flex flex-items-center">
           <div class="flex-auto mr-2">
