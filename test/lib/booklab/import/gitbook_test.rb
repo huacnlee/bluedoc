@@ -66,7 +66,7 @@ class BookLab::Import::GitBookTest < ActiveSupport::TestCase
     end
 
     assert_raise(RuntimeError) do
-      importer.execute("echo 'stderr' >&2")
+      importer.execute("echo 'stderr' >&2 && exit 1")
     end
 
     assert_equal "Hello", importer.execute("echo 'Hello'").strip

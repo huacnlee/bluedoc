@@ -11,6 +11,7 @@ class RepositoryImportJob < ApplicationJob
 
     Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :success })
   rescue => e
+    ExceptionTrack::Log.create(title: "RepositoryImportJob #{repo.slug} error", body: e)
     Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :failed, message: e.message })
   end
 end
