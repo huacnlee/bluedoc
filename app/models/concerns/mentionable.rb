@@ -57,8 +57,26 @@ module Mentionable
     end
 
     def send_mention_notification
-      user_ids = self.current_mention_user_ids - no_mention_user_ids
-      NotificationJob.perform_later("mention", self, user_id: user_ids, actor_id: self.mention_actor_id)
+      self.current_mention_user_ids = self.current_mention_user_ids - no_mention_user_ids
+      NotificationJob.perform_later("mention", self, user_id: self.current_mention_user_ids, actor_id: self.mention_actor_id)
+
+      watch_comments_for_mentioned_users
+    end
+
+    def watch_comments_for_mentioned_users
+      watch_target = nil
+      case self.class.name
+      when "Comment"
+        watch_target = self.commentable if self.commentable_type == "Doc"
+      when "Doc"
+        watch_target = self
+      end
+
+      return if watch_target.blank?
+
+      self.current_mention_user_ids.each do |user_id|
+        User.create_action(:watch_comment, target: watch_target, user_type: "User", user_id: user_id)
+      end
     end
 
     def save_mention_user_ids

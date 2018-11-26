@@ -130,8 +130,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :mention, target: comment, actor: actor)
 
     assert_equal comment.to_url, note.target_url
-    assert_equal doc.title, note.html
-    assert_equal doc.title, note.text
+    assert_equal "<strong>#{note.actor_name}</strong> was mentioned you in #{doc.title}", note.html
+    assert_equal "#{note.actor_name} was mentioned you in #{doc.title}", note.text
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
   end
 
@@ -141,8 +141,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :mention, target: doc, actor: actor)
 
     assert_equal doc.to_url, note.target_url
-    assert_equal doc.title, note.html
-    assert_equal doc.title, note.text
+    assert_equal "<strong>#{note.actor_name}</strong> was mentioned you in #{doc.title}", note.html
+    assert_equal "#{note.actor_name} was mentioned you in #{doc.title}", note.text
     assert_equal "comment-Doc-#{doc.id}", note.mail_message_id
   end
 end

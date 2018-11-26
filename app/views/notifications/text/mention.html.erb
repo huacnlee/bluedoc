@@ -2,6 +2,7 @@
 mentionable = notification.target
 %>
 
+<strong><%= notification.actor_name %></strong> was mentioned you in
 <% if mentionable.is_a?(Comment) %>
   <%= mentionable.commentable_title %>
 <% elsif mentionable.is_a?(Doc) %>
