@@ -28,7 +28,7 @@ module UsersHelper
 
     return "" if user.blank?
 
-    image_html = image_tag(user.avatar_url(style: opts[:style]), class: opts[:class], title: user.fullname)
+    image_html = image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
 
     return image_html if opts[:link] == false
 

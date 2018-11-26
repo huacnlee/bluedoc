@@ -266,13 +266,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal [user.id], doc.watch_comment_by_user_ids
   end
 
-  test "letter_avatar_url" do
+  test "avatar_url" do
     user = build(:user, slug: "Hello")
     assert_equal "#{Setting.host}/system/letter_avatars/2/H/69_208_226/240.png", user.letter_avatar_url
     assert_equal user.letter_avatar_url, user.avatar_url
 
     user = create(:user)
     user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
-    assert_match /\/uploads\/[\w]+/, user.avatar_url
+    assert_match /\/uploads\/[\w]+\?s=large/, user.avatar_url
   end
 end

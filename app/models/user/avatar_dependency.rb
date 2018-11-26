@@ -14,12 +14,9 @@ class User
     "#{Setting.host}#{path}"
   end
 
-  def avatar_url(style: :small)
+  def avatar_url
     return self.letter_avatar_url unless self.avatar.attached?
-
-    style = :small unless AVATAR_STYLES.include?(style)
-
-    "#{Setting.host}/uploads/#{self.avatar.blob.key}?s=#{style}"
+    "#{Setting.host}/uploads/#{self.avatar.blob.key}?s=large"
   rescue
     self.letter_avatar_url
   end
