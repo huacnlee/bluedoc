@@ -22,4 +22,18 @@ class AutocompletesControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  test "users.json" do
+    users = create_list(:user, 3)
+    user = users.first
+    sign_in user
+
+    User.stub(:prefix_search, users) do
+      get users_autocomplete_path, params: { q: "", format: :json }
+      assert_equal 200, response.status
+
+      json = JSON.parse(response.body)
+      assert_equal users.length, json["users"].length
+    end
+  end
 end

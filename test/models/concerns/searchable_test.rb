@@ -41,7 +41,7 @@ class SearchableTest < ActiveSupport::TestCase
   test "update hook" do
     TYPES.each do |type|
       item = create(type)
-      assert_no_enqueued_jobs do
+      assert_no_enqueued_jobs only: SearchIndexJob do
         item.save
       end
 

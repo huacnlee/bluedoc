@@ -23,11 +23,16 @@ class User
     term = "#{term}%"
     users = User.where(type: "User")
       .where("slug ilike ? or email ilike ? or name ilike ?", term, term, term)
-      .limit(limit).to_a
+    users = users.where("id != ?", user.id) if user
+    users = users.limit(limit).to_a
 
     following = []
     group_members = []
     repository_members = []
+
+    if user
+      following = user.follow_users.where("slug ilike ? or email ilike ? or name ilike ?", term, term, term)
+    end
 
     users.unshift(*Array(following))
     users.uniq!

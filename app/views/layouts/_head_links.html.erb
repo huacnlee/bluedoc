@@ -1,4 +1,8 @@
 <meta name="viewport" content="width=device-width">
+<% if current_user %>
+<meta name="current-user" value="<%= current_user.slug %>" />
+<% end %>
+
 <%= stylesheet_pack_tag 'app', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_pack_tag 'front', 'data-turbolinks-track': 'reload' %>
 <script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>

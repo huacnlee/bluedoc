@@ -108,9 +108,16 @@ class UserTest < ActiveSupport::TestCase
     u3 = create(:user, email: "Fooo@bar.com")
 
     users = User.prefix_search("ja")
-    assert_equal 3, users.length
-    ids = users.collect(&:id)
-    assert_equal [u0.id, u1.id, u2.id].sort, ids.sort
+    assert_equal [u0.slug, u1.slug, u2.slug].sort, users.collect(&:slug).sort
+
+    # should seach following user at top of results
+    u4 = create(:user, name: "Jack")
+    u5 = create(:user, name: "Nowa")
+    u3.follow_user(u4)
+    u3.follow_user(u5)
+    users = User.prefix_search("ja", user: u3)
+    assert_equal 4, users.length
+    assert_equal u4.slug, users[0].slug
   end
 
   test "destroy dependent :user_actives and :group_actives" do

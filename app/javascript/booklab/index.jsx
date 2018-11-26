@@ -20,7 +20,7 @@ window.App = {
 import './reader/index.js'
 import './follow-user/index.js'
 import './comments/index.js'
-
+import './mentionable/index.js'
 
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago()

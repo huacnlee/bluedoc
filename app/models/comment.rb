@@ -11,6 +11,7 @@ class Comment < ApplicationRecord
   belongs_to :reply_to, class_name: "Comment", required: false, foreign_key: :parent_id
 
   validates :commentable_type, inclusion: { in: %w[Doc] }
+  validates :body, presence: true, length: { minimum: 2 }
 
   scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
 
