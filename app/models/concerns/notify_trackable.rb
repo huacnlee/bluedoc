@@ -26,6 +26,13 @@ module NotifyTrackable
           notify_params[:group_id] = subject.user_id
           notify_params[:repository_id] = subject.id
         end
+      when "Comment"
+        commentable = target.commentable
+        case target.commentable_type
+        when "Doc"
+          notify_params[:group_id] = commentable.repository&.user_id
+          notify_params[:repository_id] = commentable.repository_id
+        end
       end
     end
 

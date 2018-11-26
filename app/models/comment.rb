@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
   include ApplicationHelper
   include Reactionable
   include Mentionable
+  include Activityable
 
   depends_on :watches, :notifications
 

@@ -6,8 +6,6 @@ module Mentionable
   included do
     before_save :extract_mentioned_users
     after_save :send_mention_notification
-
-    after_commit :delete_notification_mentions, on: :destroy
     after_commit :save_mention_user_ids, on: [:create, :update]
 
     has_one :mention, as: :mentionable, dependent: :destroy

@@ -127,6 +127,56 @@ class CommentTest < ActiveSupport::TestCase
     end
     assert_equal 1, Notification.where(notify_type: :comment, actor_id: comment.user_id).count
     assert_equal 1, Notification.where(notify_type: :comment, actor_id: comment.user_id, user_id: [user2.id]).count
+
+    # comment delete destroy notifications
+    comment.destroy
+    assert_equal 0, Notification.where(notify_type: :comment, target: comment).count
+  end
+
+  test "notifications destroy" do
+    doc = create(:doc)
+    user1 = create(:user)
+    comment = build(:comment, commentable: doc)
+    perform_enqueued_jobs do
+      comment.stub(:commentable_watch_by_user_ids, [user1.id]) do
+        comment.save
+      end
+    end
+
+    assert_not_equal 0, Notification.where(target: comment).count
+    # doc dependent: destroy comments to remove notifications
+    doc.destroy
+    assert_equal 0, Notification.where(target: comment).count
+
+    # repository destroy
+    doc = create(:doc)
+    user1 = create(:user)
+    comment = build(:comment, commentable: doc)
+    perform_enqueued_jobs do
+      comment.stub(:commentable_watch_by_user_ids, [user1.id]) do
+        comment.save
+      end
+    end
+
+    assert_not_equal 0, Notification.where(target: comment).count
+    # doc dependent: destroy comments to remove notifications
+    doc.repository.destroy
+    assert_equal 0, Notification.where(target: comment).count
+
+    # group destroy
+    doc = create(:doc)
+    user1 = create(:user)
+    comment = build(:comment, commentable: doc)
+    perform_enqueued_jobs do
+      comment.stub(:commentable_watch_by_user_ids, [user1.id]) do
+        comment.save
+      end
+    end
+
+    assert_not_equal 0, Notification.where(target: comment).count
+    # doc dependent: destroy comments to remove notifications
+    doc.repository.user.destroy
+    assert_equal 0, Notification.where(target: comment).count
   end
 
   test "reactions" do

@@ -13,7 +13,7 @@ class Doc < ApplicationRecord
   delegate :private?, :public?, to: :repository
 
   belongs_to :repository, touch: true
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :repository_id, case_sensitive: false }
