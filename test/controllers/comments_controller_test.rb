@@ -93,7 +93,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_match %($("#comment-#{comment.id} .in-reply-to")), response.body
     assert_no_match %(<div class="in-reply-link">), response.body
 
-    comment1 = create(:comment, parent: comment)
+    comment1 = create(:comment, reply_to: comment)
     get in_reply_comment_path(comment1.id), xhr: true
     assert_equal 200, response.status
     assert_match %($("#comment-#{comment1.id} .in-reply-to")), response.body

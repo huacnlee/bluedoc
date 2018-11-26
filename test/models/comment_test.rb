@@ -18,7 +18,7 @@ class CommentTest < ActiveSupport::TestCase
     comment0 = create(:comment)
     comment1 = create(:comment, parent_id: comment0.id)
 
-    assert_equal comment0, comment1.parent
+    assert_equal comment0, comment1.reply_to
   end
 
   test "with_includes" do
@@ -56,9 +56,9 @@ class CommentTest < ActiveSupport::TestCase
     doc = create(:doc)
     other_parent = create(:comment)
     parent = create(:comment, commentable: doc)
-    comments0 = create_list(:comment, 2, parent: other_parent)
+    comments0 = create_list(:comment, 2, reply_to: other_parent)
     comments1 = create_list(:comment, 2, commentable: doc, parent_id: parent.id)
-    comments2 = create_list(:comment, 2, commentable: doc, parent: other_parent)
+    comments2 = create_list(:comment, 2, commentable: doc, reply_to: other_parent)
 
     assert_equal 4, Comment.where(commentable: doc).where("parent_id is not null").count
     assert_equal 2, Comment.where(commentable: doc, parent_id: parent.id).count

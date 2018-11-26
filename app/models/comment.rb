@@ -7,11 +7,11 @@ class Comment < ApplicationRecord
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, required: false
   belongs_to :user, required: false
-  belongs_to :parent, class_name: "Comment", required: false
+  belongs_to :reply_to, class_name: "Comment", required: false, foreign_key: :parent_id
 
   validates :commentable_type, inclusion: { in: %w[Doc] }
 
-  scope :with_includes, -> { includes(:parent, :reactions, user: { avatar_attachment: :blob }) }
+  scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
 
   after_destroy :clear_relation_parent_id
 
