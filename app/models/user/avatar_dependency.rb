@@ -21,8 +21,14 @@ class User
     end
   end
 
+  def letter_avatar_url
+    path = LetterAvatar.generate(self.slug, 240).sub("public/", "/")
+
+    "#{Setting.host}#{path}"
+  end
+
   def avatar_url(style: :small)
-    return self.default_avatar unless self.avatar.attached?
+    return self.letter_avatar_url unless self.avatar.attached?
 
     style = :small unless AVATAR_STYLES.include?(style)
 

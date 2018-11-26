@@ -28,11 +28,7 @@ module UsersHelper
 
     return "" if user.blank?
 
-    if user.avatar.attached?
-      image_html = image_tag(user.avatar_url(style: opts[:style]), class: opts[:class], title: user.fullname)
-    else
-      image_html = letter_avatar_tag(user.slug, 400, class: opts[:class], title: user.fullname)
-    end
+    image_html = image_tag(user.avatar_url(style: opts[:style]), class: opts[:class], title: user.fullname)
 
     return image_html if opts[:link] == false
 

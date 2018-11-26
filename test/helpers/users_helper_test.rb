@@ -42,9 +42,9 @@ class UsersHelperTest < ActionView::TestCase
 
     # Latter Avatar
     user = create(:user, slug: "someone")
-    avatar_url = "/system/letter_avatars/2/S/162_136_126/240.png"
-    assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" alt="#{user.slug}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
-    assert_html_equal %(<img class="avatar avatar-tiny" title="#{user.fullname}" alt="#{user.slug}" src="#{avatar_url}" />), user_avatar_tag(user, style: :tiny, link: false)
+    avatar_url = "#{Setting.host}/system/letter_avatars/2/S/162_136_126/240.png"
+    assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
+    assert_html_equal %(<img class="avatar avatar-tiny" title="#{user.fullname}" src="#{avatar_url}" />), user_avatar_tag(user, style: :tiny, link: false)
   end
 
   test "follow_user_tag" do

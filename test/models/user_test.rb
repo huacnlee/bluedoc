@@ -88,13 +88,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "/#{user.slug}", user.to_path
   end
 
-  test "avatar_url" do
-    user = create(:user)
-    assert_match /\/images\/default-user-/, user.avatar_url
-    group = create(:group)
-    assert_match /\/images\/default-group-/, group.avatar_url
-  end
-
   test "Groupable" do
     user = User.new
     assert_equal true, user.user?
@@ -264,5 +257,15 @@ class UserTest < ActiveSupport::TestCase
     user.watch_comment_doc(doc)
     assert_equal true, user.watch_comment_doc?(doc)
     assert_equal [user.id], doc.watch_comment_by_user_ids
+  end
+
+  test "letter_avatar_url" do
+    user = build(:user, slug: "Hello")
+    assert_equal "#{Setting.host}/system/letter_avatars/2/H/69_208_226/240.png", user.letter_avatar_url
+    assert_equal user.letter_avatar_url, user.avatar_url
+
+    user = create(:user)
+    user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
+    assert_match /\/uploads\/[\w]+/, user.avatar_url
   end
 end
