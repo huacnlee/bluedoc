@@ -7,7 +7,7 @@ class BlobsController < ApplicationController
   # GET /uploads/:id
   # GET /uploads/:id?s=large
   def show
-    expires_in 3.days
+    expires_in 10.minutes
     send_file_by_disk_key @blob, content_type: @blob.content_type
   rescue ActionController::MissingFile
     head :not_found
