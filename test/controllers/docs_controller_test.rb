@@ -215,6 +215,28 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal user.id, doc.last_editor_id
   end
 
+  test "PUT /:user/:repo/:slug with publish" do
+    doc = create(:doc, repository: @repo)
+    user = sign_in_role :editor, group: @group
+    doc_params = {
+      title: "New title",
+      body: "New body",
+      body_sml: "Bla bla"
+    }
+    put doc.to_path, params: { doc: doc_params }
+    assert_redirected_to doc.to_path
+
+    doc.reload
+    assert_equal doc_params[:title], doc.title
+    assert_equal doc_params[:body], doc.body_plain
+    assert_equal doc_params[:body_sml], doc.body_sml_plain
+
+    # to check draft fields will equal with publish fields
+    assert_equal doc_params[:title], doc.draft_title
+    assert_equal doc_params[:body], doc.draft_body_plain
+    assert_equal doc_params[:body_sml], doc.draft_body_sml_plain
+  end
+
   test "DELETE /:user/:repo/:slug" do
     doc = create(:doc, repository: @repo)
     assert_require_user do
