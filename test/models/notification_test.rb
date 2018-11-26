@@ -122,4 +122,27 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal "#{note.actor_name} was posted a comment on #{doc.title}", note.text
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
   end
+
+  test "mention Comment" do
+    doc = create(:doc)
+    actor = create(:user)
+    comment = create(:comment, commentable: doc)
+    note = create(:notification, notify_type: :mention, target: comment, actor: actor)
+
+    assert_equal comment.to_url, note.target_url
+    assert_equal doc.title, note.html
+    assert_equal doc.title, note.text
+    assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
+  end
+
+  test "mention Doc" do
+    doc = create(:doc)
+    actor = create(:user)
+    note = create(:notification, notify_type: :mention, target: doc, actor: actor)
+
+    assert_equal doc.to_url, note.target_url
+    assert_equal doc.title, note.html
+    assert_equal doc.title, note.text
+    assert_equal "comment-Doc-#{doc.id}", note.mail_message_id
+  end
 end

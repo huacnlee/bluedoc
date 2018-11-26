@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_060205) do
+ActiveRecord::Schema.define(version: 2018_11_26_034520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,15 @@ ActiveRecord::Schema.define(version: 2018_11_22_060205) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "mentions", force: :cascade do |t|
+    t.string "mentionable_type", limit: 20
+    t.integer "mentionable_id"
+    t.integer "user_ids", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mentionable_type", "mentionable_id"], name: "index_mentions_on_mentionable_type_and_mentionable_id", unique: true
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "actor_id"
@@ -203,6 +212,14 @@ ActiveRecord::Schema.define(version: 2018_11_22_060205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  end
+
+  create_table "test_documents", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reply_to_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_actives", force: :cascade do |t|

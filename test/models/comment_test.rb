@@ -113,9 +113,20 @@ class CommentTest < ActiveSupport::TestCase
         comment.save
       end
     end
-
     assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id).count
     assert_equal 2, Notification.where(notify_type: :comment, actor_id: comment.user_id, user_id: [user1.id, user2.id]).count
+
+    # test ignore mentioned user_ids
+    comment = build(:comment, commentable: doc)
+    perform_enqueued_jobs do
+      comment.stub(:current_mention_user_ids, [user1.id]) do
+        comment.stub(:commentable_watch_by_user_ids, [user1.id, user2.id]) do
+          comment.save
+        end
+      end
+    end
+    assert_equal 1, Notification.where(notify_type: :comment, actor_id: comment.user_id).count
+    assert_equal 1, Notification.where(notify_type: :comment, actor_id: comment.user_id, user_id: [user2.id]).count
   end
 
   test "reactions" do

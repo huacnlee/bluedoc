@@ -2,6 +2,7 @@ class Comment < ApplicationRecord
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper
   include Reactionable
+  include Mentionable
 
   depends_on :watches, :notifications
 
@@ -14,6 +15,10 @@ class Comment < ApplicationRecord
   scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
 
   after_destroy :clear_relation_parent_id
+
+  def body_plain
+    self.body
+  end
 
   def body_html
     Rails.cache.fetch([self.cache_key_with_version, "body_html"]) do

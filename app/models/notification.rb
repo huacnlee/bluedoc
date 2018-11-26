@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  NOTIFY_TYPES = %w[add_member repo_import comment]
+  NOTIFY_TYPES = %w[add_member repo_import comment mention]
 
   before_create :bind_relation_for_target
   after_commit :create_email_notify, on: [:create]
@@ -63,6 +63,7 @@ class Notification < ActiveRecord::Base
     when "add_member" then self.target&.subject&.to_url
     when "repo_import" then self.target&.to_url
     when "comment" then self.target&.to_url
+    when "mention" then self.target&.to_url
     else
       return Setting.host
     end
@@ -81,11 +82,18 @@ class Notification < ActiveRecord::Base
   def mail_message_id
     message_ids = [self.notify_type]
 
-    case notify_type
+    case self.notify_type
     when "comment"
       message_ids += [self.target&.commentable_type, self.target&.commentable_id]
     when "add_member"
       message_ids += [self.target&.subject_type, self.target&.subject_id]
+    when "mention"
+      case self.target_type
+      when "Comment"
+        message_ids = ["comment", self.target&.commentable_type, self.target&.commentable_id]
+      else
+        message_ids = ["comment", self.target_type, self.target_id]
+      end
     else
       message_ids += [self.target_type, self.target_id]
     end

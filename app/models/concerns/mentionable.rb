@@ -5,38 +5,72 @@ module Mentionable
 
   included do
     before_save :extract_mentioned_users
-    after_create :send_mention_notification
-    after_destroy :delete_notification_mentions
+    after_save :send_mention_notification
+
+    after_commit :delete_notification_mentions, on: :destroy
+    after_commit :save_mention_user_ids, on: [:create, :update]
+
+    has_one :mention, as: :mentionable, dependent: :destroy
+
+    attr_accessor :current_mention_user_ids
   end
 
   def delete_notification_mentions
     Notification.where(notify_type: "mention", target: self).delete_all
   end
 
-  def mentioned_users
-    User.where(type: "User").where(id: mentioned_user_ids)
-  end
-
-  def mentioned_user_logins
-    ids_md5 = Digest::MD5.hexdigest(mentioned_user_ids.to_s)
-    Rails.cache.fetch("#{self.class.name.downcase}:#{id}:mentioned_user_slugs:#{ids_md5}") do
-      self.mentioned_users.pluck(:login)
-    end
+  def mention_user_ids
+    self.mention&.user_ids || []
   end
 
   def extract_mentioned_users
-    logins = body.scan(/@([#{BookLab::Slug::FORMAT}]{3,20})/).flatten.map(&:downcase)
-    if logins.any?
-      self.mentioned_user_ids = User.where(type: "User").where("lower(slug) IN (?) AND id != (?)", logins, user.id).limit(20).pluck(:id)
+    usernames = body_plain.scan(/@([#{BookLab::Slug::FORMAT}]{3,20})/).flatten.map(&:downcase)
+    self.current_mention_user_ids = []
+    if usernames.any?
+      self.current_mention_user_ids = User.where(type: "User")
+        .where("lower(slug) IN (?)", usernames)
+        .limit(20).pluck(:id)
     end
 
-    # add Reply to user_id
+    # add Reply to user_id for Comment
     if self.respond_to?(:reply_to)
       reply_to_user_id = self.reply_to&.user_id
       if reply_to_user_id
-        self.mentioned_user_ids << reply_to_user_id
+        self.current_mention_user_ids << reply_to_user_id
       end
     end
   end
 
+  def mention_actor_id
+    case self.class.name
+    when "Comment"
+      self.user_id
+    when "Doc"
+      self.last_editor_id
+    end
+  end
+
+  private
+
+    def no_mention_user_ids
+      self.mention_user_ids + [self.mention_actor_id]
+    end
+
+    def send_mention_notification
+      user_ids = self.current_mention_user_ids - no_mention_user_ids
+      NotificationJob.perform_later("mention", self, user_id: user_ids, actor_id: self.mention_actor_id)
+    end
+
+    def save_mention_user_ids
+      user_ids = self.mention_user_ids + self.current_mention_user_ids
+      user_ids.uniq!
+
+      return if user_ids.blank?
+
+      if self.mention
+        self.mention.update!(user_ids: user_ids)
+      else
+        self.create_mention!(user_ids: user_ids)
+      end
+    end
 end

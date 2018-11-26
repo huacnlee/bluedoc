@@ -1,0 +1,9 @@
+<%
+mentionable = notification.target
+%>
+
+<% if mentionable.is_a?(Comment) %>
+  <%= mentionable.commentable_title %>
+<% elsif mentionable.is_a?(Doc) %>
+  <%= mentionable.title %>
+<% end %>
