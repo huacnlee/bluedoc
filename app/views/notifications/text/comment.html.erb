@@ -1,7 +1,0 @@
-<%
-comment = notification.target
-%>
-
-<% if comment.is_a?(Comment) %>
-<strong><%= notification.actor_name %></strong> was posted a comment on <strong><%= comment.commentable_title %></strong>
-<% end %>

@@ -3,11 +3,13 @@
 %>
 
 <div class="info mb-2">
-  Repository <%= repository_name_tag(repo) %> import has been <strong><%= notification.meta[:success] %></strong>
+  Repository <%= repository_name_tag(repo) %> import has been <strong><%= notification.meta[:status] %></strong>
 </div>
 
-<% if notification.meta[:success].to_s == "failed" %>
-<div class="description">
-  <%= notification.meta[:message] %>
-</div>
+<% if notification.meta[:status].to_s == "failed" %>
+  <div class="description markdown-body"><pre class="hightlight"><code><%= notification.meta[:message] %></code></pre></div>
+<% else %>
+  <div class="description">
+    <%= render "/repositories/card", repository: repo %>
+  </div>
 <% end %>

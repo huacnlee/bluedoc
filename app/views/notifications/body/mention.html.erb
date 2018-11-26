@@ -1,0 +1,6 @@
+<% if notification.target_type == "Comment" %>
+  <p><strong><%= notification.actor_name %></strong> mentioned you:</p>
+  <%= sanitize_html notification.target.body_html %>
+<% elsif notification.target_type == "Doc" %>
+  <p><strong><%= notification.actor_name %></strong> has mentioned you in <strong><%= notification.target.title  %></strong></p>
+<% end %>

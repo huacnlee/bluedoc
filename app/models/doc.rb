@@ -22,6 +22,10 @@ class Doc < ApplicationRecord
     "#{repository.to_path}/#{self.slug}#{suffix}"
   end
 
+  def full_slug
+    [self.repository&.user&.slug, self.repository&.slug, self.slug].join("/")
+  end
+
   class << self
     def create_new(repo, user_id)
       doc = Doc.new

@@ -7,6 +7,6 @@ class NotificationMailer < ApplicationMailer
 
     headers["Message-ID"] = @notification.mail_message_id
 
-    mail(to: @notification.email, subject: @notification.text)
+    mail(to: @notification.email, subject: @notification.mail_title)
   end
 end

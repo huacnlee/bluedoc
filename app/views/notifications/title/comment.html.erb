@@ -1,0 +1,7 @@
+<%
+comment = notification.target
+%>
+
+<% if comment.is_a?(Comment) %>
+<strong><%= comment.commentable_title %></strong> got a comment
+<% end %>

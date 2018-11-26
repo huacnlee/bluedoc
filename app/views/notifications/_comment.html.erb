@@ -2,11 +2,15 @@
   comment = notification.target
 %>
 
+<% if comment %>
 <div class="info mb-2">
   <%= user_name_tag(notification.actor) %> was posted a comment on
   <%= link_to comment.commentable_title, notification_url(notification.id) %>
 </div>
 
-<div class="description">
+<div class="description markdown-body">
   <%= sanitize_html comment.body_html %>
 </div>
+<% else %>
+Notification trigger content has been deleted.
+<% end %>

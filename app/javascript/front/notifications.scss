@@ -30,6 +30,13 @@
     }
   }
 
+  color: #999;
+  cursor: pointer;
+
+  &:active {
+    background: #fefefe;
+  }
+
   &.unread {
     a { font-weight: bold; }
   }
@@ -43,4 +50,10 @@
   }
 
   .time-box { float: right; color: #aaa; font-size: 12px; }
+
+  .description {
+    margin-right: 32px;
+    margin-top: 8px;
+    font-size: 13px;
+  }
 }

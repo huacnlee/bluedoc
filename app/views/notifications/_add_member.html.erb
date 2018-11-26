@@ -6,8 +6,10 @@
   <%= user_name_tag(notification.actor) %> as added you as member of:
 </div>
 
-<% if member.subject_type == "Repository" %>
-  <%= render "/repositories/card", repository: member.subject %>
-<% else %>
-  <%= render "/users/card", user: member.subject %>
-<% end %>
+<div class="description">
+  <% if member.subject_type == "Repository" %>
+    <%= render "/repositories/card", repository: member.subject %>
+  <% else %>
+    <%= render "/users/card", user: member.subject %>
+  <% end %>
+</div>

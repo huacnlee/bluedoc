@@ -1,0 +1,6 @@
+<%
+comment = notification.target
+%>
+
+<p><strong><%= notification.actor_name %></strong> said:</p>
+<%= sanitize_html comment.body_html %>

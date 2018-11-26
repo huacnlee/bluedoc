@@ -219,4 +219,12 @@ class DocTest < ActiveSupport::TestCase
     assert_equal 1, doc.reactions.count
     assert_equal doc, doc.reactions.first.subject
   end
+
+  test "full_slug" do
+    group = create(:group)
+    repo = create(:repository, user: group)
+    doc = create(:doc, repository: repo)
+
+    assert_equal [group.slug, repo.slug, doc.slug].join("/"), doc.full_slug
+  end
 end

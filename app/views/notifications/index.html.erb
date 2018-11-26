@@ -1,5 +1,5 @@
-<div class="col-12 d-table">
-  <div class="col-3 v-align-top d-table-cell pr-4">
+<div class="col-12 clearfix">
+  <div class="col-3 v-align-top pr-4 float-left">
     <ul class="menu">
       <%= render_list_items(class: "menu-item", type: :link, check_parameters: true) do |li|
         li << link_to(main_app.notifications_path, class: "menu-item") do %>
@@ -10,7 +10,7 @@
     </ul>
   </div>
 
-  <div class="col-9 v-align-top d-table-cell">
+  <div class="col-9 v-align-top float-left">
     <div class="notifications Box">
       <div class="Box-header clearfix">
         <span class="float-right">
@@ -40,13 +40,16 @@
         <% end %>
       </div>
     </div>
-    <%= paginate @notifications %>
+    <%= paginate @notifications, params: { controller: "notifications", action: "index" } %>
   </div>
 </div>
 
 <script>
-  $(".notifications .notification").on("click", "a", function(e) {
-    $note = $(e.delegateTarget);
+  $(".notifications").on("click", ".notification", function(e) {
+    e.stopPropagation();
+    $note = $(e.currentTarget);
     $note.removeClass("unread");
+    Turbolinks.visit("/notifications/" + $note.attr('data-id'));
+    return false;
   })
 </script>

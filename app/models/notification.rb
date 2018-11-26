@@ -69,12 +69,14 @@ class Notification < ActiveRecord::Base
     end
   end
 
-  def html
-    html = ApplicationController.renderer.render "/notifications/text/#{notify_type}", layout: false, locals: { notification: self }
-    html.gsub(/\s+/, " ").strip
+  def mail_body
+    ApplicationController.renderer.render "/notifications/body/#{notify_type}", layout: false, locals: { notification: self }
+  rescue
+    ApplicationController.renderer.render "/notifications/title/#{notify_type}", layout: false, locals: { notification: self }
   end
 
-  def text
+  def mail_title
+    html = ApplicationController.renderer.render "/notifications/title/#{notify_type}", layout: false, locals: { notification: self }
     html.gsub(/<.+?>/, "").gsub(/\s+/, " ").strip
   end
 
