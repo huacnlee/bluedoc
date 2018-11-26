@@ -80,7 +80,7 @@ module Mentionable
     end
 
     def save_mention_user_ids
-      user_ids = self.mention_user_ids + self.current_mention_user_ids
+      user_ids = self.mention_user_ids + (self.current_mention_user_ids || [])
       user_ids.uniq!
 
       return if user_ids.blank?
