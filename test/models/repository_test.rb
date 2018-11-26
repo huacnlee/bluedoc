@@ -41,6 +41,9 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo.slug = "H"
     assert_equal false, repo.valid?
+
+    repo = build(:repository, gitbook_url: nil)
+    assert_equal true, repo.valid?
   end
 
   test "slug" do
