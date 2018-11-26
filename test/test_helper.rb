@@ -46,7 +46,7 @@ class ActiveSupport::TestCase
   end
 
   def assert_html_equal(excepted, html)
-    assert_equal excepted.gsub(/>[\s]+</, "><"), html.gsub(/>[\s]+</, "><")
+    assert_equal excepted.strip.gsub(/>[\s]+</, "><"), html.strip.gsub(/>[\s]+</, "><")
   end
 
   def assert_tracked_notifications(notify_type, target: nil, actor_id: nil, user_id: nil, meta: nil)

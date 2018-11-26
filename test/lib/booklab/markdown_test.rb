@@ -6,14 +6,37 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
   test "render" do
     raw = "# This is title\nhello **world**"
     out = BookLab::Markdown.render(raw)
-    assert_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>\n<p>hello <strong>world</strong></p>), out
+    assert_html_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>\n<p>hello <strong>world</strong></p>), out
   end
 
   test "heading" do
-    assert_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>), BookLab::Markdown.render("# This is **title**")
-    assert_equal %(<h1 id="this-is-"><a href="#this-is-" class="heading-anchor">#</a>This is 中文</h1>), BookLab::Markdown.render("# This is 中文")
-    assert_equal %(<h1 id="this-is"><a href="#this-is" class="heading-anchor">#</a>This_? is</h1>), BookLab::Markdown.render("# This_? is")
-    assert_equal %(<h1 id="a69b2addd"><a href="#a69b2addd" class="heading-anchor">#</a>全中文标题</h1>), BookLab::Markdown.render("# 全中文标题")
+    assert_html_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>), BookLab::Markdown.render("# This is **title**")
+    assert_html_equal %(<h1 id="this-is-"><a href="#this-is-" class="heading-anchor">#</a>This is 中文</h1>), BookLab::Markdown.render("# This is 中文")
+    assert_html_equal %(<h1 id="this-is"><a href="#this-is" class="heading-anchor">#</a>This_? is</h1>), BookLab::Markdown.render("# This_? is")
+    assert_html_equal %(<h1 id="a69b2addd"><a href="#a69b2addd" class="heading-anchor">#</a>全中文标题</h1>), BookLab::Markdown.render("# 全中文标题")
+  end
+
+  test "mention" do
+    raw = <<~MD
+    Hello @huacnlee this is a mention. `@title = "AAA"`
+
+    ```rb
+    @name = "Foo bar"
+    ```
+
+    @nowazhu bla bla.
+    MD
+
+    out = BookLab::Markdown.render(raw)
+
+    html = %(
+    <p>Hello <a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> this is a mention. <code>@title = "AAA"</code></p>
+    <div class="highlight">
+      <pre class="highlight ruby"><code><span class="vi">@name</span><span class="o">=</span><span class="s2">"Foo bar"</span></code></pre>
+    </div>
+    <p><a href="/nowazhu" class="user-mention" title="@nowazhu"><i>@</i>nowazhu</a> bla bla.</p>
+    )
+    assert_html_equal html, out
   end
 
   test "render full" do
@@ -21,10 +44,8 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
     out = BookLab::Markdown.render(raw)
     expected = read_file("sample.html")
 
-    if out != expected.strip
-      puts "\n--------------------------------------\n" + out
-      puts "\n--------------------------------------\n"
-      assert_equal expected.strip, out
-    end
+    # puts "\n--------------------------------------\n" + out
+    # puts "\n--------------------------------------\n"
+    assert_html_equal expected.strip, out
   end
 end
