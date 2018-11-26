@@ -7,7 +7,6 @@ class BlobsController < ApplicationController
   # GET /uploads/:id
   # GET /uploads/:id?s=large
   def show
-    expires_in 10.minutes
     send_file_by_disk_key @blob, content_type: @blob.content_type
   rescue ActionController::MissingFile
     head :not_found
@@ -18,15 +17,18 @@ class BlobsController < ApplicationController
     def send_file_by_disk_key(blob, content_type:)
       case BookLab::Blob.service_name
       when "Disk"
+        expires_in 2.weeks
         send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: :inline
       when "Aliyun"
+        expires_in 10.minutes
         if params[:s]
-          redirect_to blob.service_url(expires_in: 1.weeks, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(params[:s]) })
+          redirect_to blob.service_url(expires_in: 1.days, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(params[:s]) })
         else
-          redirect_to blob.service_url(expires_in: 1.weeks)
+          redirect_to blob.service_url(expires_in: 1.days)
         end
       else
-        redirect_to blob.service_url(expires_in: 1.weeks)
+        expires_in 10.minutes
+        redirect_to blob.service_url(expires_in: 1.days)
       end
     end
 
