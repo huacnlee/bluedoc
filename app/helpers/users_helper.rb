@@ -34,11 +34,10 @@ module UsersHelper
       image_html = letter_avatar_tag(user.slug, 400, class: opts[:class], title: user.fullname)
     end
 
-
-
     return image_html if opts[:link] == false
 
-    link_to user.to_path, class: "user-avatar" do
+    data = { name: user.name, slug: user.slug }
+    link_to user.to_path, class: "user-avatar", data: data do
       image_html
     end
   end
