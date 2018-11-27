@@ -52,7 +52,7 @@ module BookLab
           if link.include?("/uploads/")
             %(<a class="attachment-file" href="#{link}" title="#{title}" target="_blank">#{content}</a>)
           else
-            super(link, title, content)
+            %(<a href="#{link}">#{content}</a>)
           end
         end
 

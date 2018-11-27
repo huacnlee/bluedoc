@@ -13,7 +13,6 @@ module BookLab
       def render(body)
         result = MainPileline.call(body)[:output].inner_html
         result.strip!
-        result.gsub!(/>[\s]+</, "><")
         result
       end
     end

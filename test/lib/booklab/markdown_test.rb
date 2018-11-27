@@ -39,6 +39,15 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
     assert_html_equal html, out
   end
 
+  test "attachment-file" do
+    raw = <<~MD
+    [This is a attachment](/uploads/foobar)
+    MD
+
+    out = BookLab::Markdown.render(raw)
+    assert_html_equal %(<p><a class="attachment-file" href="/uploads/foobar" title="" target="_blank">This is a attachment</a></p>), out
+  end
+
   test "render full" do
     raw = read_file("sample.md")
     out = BookLab::Markdown.render(raw)
