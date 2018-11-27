@@ -1,5 +1,10 @@
 <% if current_user %>
-  <a href="<%= notifications_path %>" class="dropdown nav-link mr-2 active"><%= icon_tag "bell" %></a>
+  <a href="<%= notifications_path %>" class="dropdown nav-notifications nav-link mr-2 <%= unread_notifications_count > 0 ? "unread" : "" %>">
+    <%= icon_tag "bell" %>
+    <% if unread_notifications_count > 0 %>
+    <span class="Counter"><%= unread_notifications_count %></span>
+    <% end %>
+  </a>
 
   <details class="dropdown details-reset details-overlay d-inline-block mr-2">
     <summary aria-haspopup="true">

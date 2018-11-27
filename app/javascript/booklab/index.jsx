@@ -25,6 +25,11 @@ import './mentionable/index.js'
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago()
 
+  // clean auto save
+  if (window.editorAutosaveTimer) {
+    clearInterval(window.editorAutosaveTimer)
+  }
+
   const editorEls = document.getElementsByClassName("booklab-editor");
   if (editorEls.length > 0) {
     const editorInput = editorEls[0];
@@ -75,10 +80,6 @@ document.addEventListener("turbolinks:load", () => {
       return false;
     })
 
-    // auto save in 15s
-    if (window.editorAutosaveTimer) {
-      clearInterval(window.editorAutosaveTimer)
-    }
     window.editorAutosaveTimer = setInterval(() => {
       $(".btn-save").trigger("click")
     }, 15000);
