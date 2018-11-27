@@ -26,7 +26,11 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".Box-header .title", text: "Unread notifications"
     assert_select %(input[name="ids[]"]), 2
     assert_select ".Box-header form button", text: "Mark as read"
+
+    assert_select ".nav-notifications .Counter", text: "2"
+
     assert_select ".notification", 2
+    assert_select ".menu .menu-item .Counter", text: "2"
 
     get notifications_path, params: { tab: :all }
     assert_equal 200, response.status

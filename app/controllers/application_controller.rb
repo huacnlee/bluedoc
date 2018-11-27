@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   depends_on :devise_parameters
   helper_method :unread_notifications_count
+  before_action :unread_notifications_count
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
