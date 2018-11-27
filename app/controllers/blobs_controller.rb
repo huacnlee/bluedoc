@@ -7,6 +7,7 @@ class BlobsController < ApplicationController
   # GET /uploads/:id
   # GET /uploads/:id?s=large
   def show
+    expires_in 7.days
     send_file_by_disk_key @blob, content_type: @blob.content_type
   rescue ActionController::MissingFile
     head :not_found
@@ -17,18 +18,24 @@ class BlobsController < ApplicationController
     def send_file_by_disk_key(blob, content_type:)
       case BookLab::Blob.service_name
       when "Disk"
-        expires_in 2.weeks
         send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: blob_disposition, filename: @blob.filename
-      when "Aliyun"
-        expires_in 10.minutes
-        if params[:s]
-          redirect_to blob.service_url(disposition: blob_disposition, expires_in: 1.days, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(params[:s]) })
-        else
-          redirect_to blob.service_url(disposition: blob_disposition, expires_in: 1.days)
-        end
       else
-        expires_in 10.minutes
-        redirect_to blob.service_url(expires_in: 1.days)
+        redirect_to service_url(@blob, params[:s])
+      end
+    end
+
+    def service_url(blob, style = nil)
+      Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}", expires_in: 7.days) do
+        case BookLab::Blob.service_name
+        when "Aliyun"
+          if style
+            blob.service_url(disposition: blob_disposition, expires_in: 10.days, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(style) })
+          else
+            blob.service_url(disposition: blob_disposition, expires_in: 10.days)
+          end
+        else
+          blob.service_url(expires_in: 7.days)
+        end
       end
     end
 
