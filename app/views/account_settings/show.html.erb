@@ -1,9 +1,9 @@
 <% title_tag "Account Settings" %>
 
-<div class="d-table col-12">
+<div class="col-12 clearfix">
   <%= render "menu" %>
 
-  <div class="d-table-cell col-6">
+  <div class="col-6 float-left">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <div class="form-title"><h2>Public profile</h2></div>
       <%= render "/shared/error_messages", target: @user %>
@@ -36,7 +36,7 @@
     <% end %>
   </div>
 
-  <div class="d-table-cell pl-4 col-3">
+  <div class="pl-4 col-3 float-left">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
     <input type="hidden" name="_by" value="profile" />
     <div class="form-title"><h2>Avatar</h2></div>

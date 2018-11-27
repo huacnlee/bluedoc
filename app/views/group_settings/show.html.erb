@@ -1,11 +1,11 @@
 <% title_tag "Settings", @group.name %>
 
-<div class="col-12 d-table group-settings">
+<div class="col-12 clearfix group-settings">
   <%= render "menu" %>
 
-  <div class="col-8 d-table-cell">
-    <div class="col-12 d-table mb-4">
-      <div class="d-table-cell col-8">
+  <div class="col-9 float-left">
+    <div class="col-12 mb-4 clearfix">
+      <div class="col-8 float-left">
         <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
           <div class="form-title"><h2>Group profile</h2></div>
 
@@ -46,7 +46,7 @@
         <% end %>
       </div>
 
-      <div class="d-table-cell pl-4 col-3">
+      <div class="pl-4 col-4 float-left">
         <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
         <input type="hidden" name="_by" value="show" />
         <div class="form-title"><h2>Logo</h2></div>
