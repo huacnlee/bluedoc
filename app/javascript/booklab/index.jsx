@@ -22,13 +22,15 @@ import './follow-user/index.js'
 import './comments/index.js'
 import './mentionable/index.js'
 
-document.addEventListener("turbolinks:load", () => {
-  $(".timeago").timeago()
-
+document.addEventListener("turbolinks:before-cache", () => {
   // clean auto save
   if (window.editorAutosaveTimer) {
     clearInterval(window.editorAutosaveTimer)
   }
+})
+
+document.addEventListener("turbolinks:load", () => {
+  $(".timeago").timeago()
 
   const editorEls = document.getElementsByClassName("booklab-editor");
   if (editorEls.length > 0) {
