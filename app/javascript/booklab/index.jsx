@@ -12,6 +12,8 @@ import './rails-ujs-extends'
 import MarkdownEditor from './editor/index'
 
 Turbolinks.start()
+Turbolinks.setProgressBarDelay(150)
+
 window.$ = jQuery
 window.App = {
   locale: 'en'
