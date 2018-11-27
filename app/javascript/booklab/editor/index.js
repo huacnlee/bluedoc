@@ -82,6 +82,14 @@ class MarkdownEditor extends React.Component {
                 upload.start()
               })
             }}
+            uploadFile={async (file) => {
+              return new Promise(resolve => {
+                const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+                  return resolve(url)
+                })
+                upload.start()
+              })
+            }}
            />
         </div>
       </div>

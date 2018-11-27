@@ -48,6 +48,14 @@ module BookLab
           %(<h#{header_level} id="#{header_id}"><a href="##{header_id}" class="heading-anchor">#</a>#{raw_text}</h#{header_level}>)
         end
 
+        def link(link, title, content)
+          if link.include?("/uploads/")
+            %(<a class="attachment-file" href="#{link}" title="#{title}" target="_blank">#{content}</a>)
+          else
+            super(link, title, content)
+          end
+        end
+
         class << self
           def renderer
             @renderer ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)

@@ -2,7 +2,7 @@ import { BarButton } from "./bar-button"
 import styled from "styled-components";
 import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 import getDataTransferFiles from "rich-md-editor/lib/lib/getDataTransferFiles"
-import { insertImageFile } from "rich-md-editor/lib/changes"
+import { insertImageFile, insertFile } from "rich-md-editor/lib/changes"
 
 function getLinkInSelection(value) {
   try {
@@ -93,6 +93,10 @@ export class Toolbar extends React.Component {
 
   handleImageClick = () => {
     // simulate a click on the file upload input element
+    this.imageFile.click();
+  }
+
+  handleFileClick = () => {
     this.file.click();
   }
 
@@ -103,6 +107,16 @@ export class Toolbar extends React.Component {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       editor.change(change => change.call(insertImageFile, file, editor));
+    }
+  }
+
+  onFilePicked = async (ev) => {
+    const files = getDataTransferFiles(ev);
+    const { editor } = this.props;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      editor.change(change => change.call(insertFile, file, editor));
     }
   }
 
@@ -130,9 +144,15 @@ export class Toolbar extends React.Component {
       <div className="container">
         <HiddenInput
           type="file"
-          innerRef={ref => (this.file = ref)}
+          innerRef={ref => (this.imageFile = ref)}
           onChange={this.onImagePicked}
           accept="image/*"
+        />
+        <HiddenInput
+          type="file"
+          innerRef={ref => (this.file = ref)}
+          onChange={this.onFilePicked}
+          accept="*"
         />
         {this.renderMarkButton("bold", "format_bold")}
         {this.renderMarkButton("italic", "format_italic")}
@@ -146,8 +166,9 @@ export class Toolbar extends React.Component {
         {this.renderBlockButton("code", "code")}
         {this.renderBlockButton("horizontal-rule", "drag_handle")}
         <span className="bar-divider"></span>
-        <BarButton icon="insert_link" onMouseDown={this.handleCreateLink} />
-        <BarButton icon="insert_photo" onMouseDown={this.handleImageClick} />
+        <BarButton icon="insert_link" title="Insert Link" onMouseDown={this.handleCreateLink} />
+        <BarButton icon="insert_photo" title="Insert Image" onMouseDown={this.handleImageClick} />
+        <BarButton icon="attach_file" title="Upload File" onMouseDown={this.handleFileClick} />
       </div>
       {this.state.link && (
         <LinkToolbar link={this.state.link} onBlur={this.hideLinkToolbar} />

@@ -16,7 +16,7 @@
     "jquery.caret": "^0.3.1",
     "lodash": "^4.17.11",
     "primer": "^10.8.1",
-    "rich-md-editor": "^5.0.8",
+    "rich-md-editor": "5.1.3",
     "slate": "^0.34.5",
     "slate-react": "^0.12.3",
     "styled-components": "^3.2.3",
