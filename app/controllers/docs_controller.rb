@@ -24,6 +24,10 @@ class DocsController < Users::ApplicationController
     else
       authorize! :read, @doc
       @comments = @doc.comments.with_includes.order("id asc")
+
+      # mark notifications read
+      Notification.read_targets(current_user, target_type: "Comment", target_id: @comments.collect(&:id))
+
       @reactions = @doc.reactions
 
       if @reactions.blank?

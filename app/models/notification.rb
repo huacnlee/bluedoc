@@ -58,6 +58,12 @@ class Notification < ActiveRecord::Base
     end
   end
 
+  # mark target_type, target_ids as read
+  def self.read_targets(user, target_type:, target_id:)
+    return if user.blank?
+    Notification.where(user: user, target_type: target_type, target_id: target_id).update_all(read_at: Time.now)
+  end
+
   def target_url
     case notify_type
     when "add_member" then self.target&.subject&.to_url

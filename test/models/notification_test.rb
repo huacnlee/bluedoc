@@ -48,6 +48,25 @@ class NotificationTest < ActiveSupport::TestCase
     assert_tracked_notifications :add_member, target: member, user_id: @user.id, actor_id: @actor.id, meta: { foo: "bar" }
   end
 
+  test "read_targets" do
+    user = create(:user)
+    note0 = create(:notification, target_type: "Doc", target_id: 1, user: user)
+    note1 = create(:notification, target_type: "Doc", target_id: 2, user: user)
+    note2 = create(:notification, target_type: "Doc", target_id: 3)
+    note3 = create(:notification, target_type: "Comment", target_id: 2)
+
+    Notification.read_targets(nil, target_type: "Doc", target_id: [1, 2, 3])
+    Notification.read_targets(user, target_type: "Doc", target_id: [1, 2, 3])
+    note0.reload
+    assert_not_nil note0.read_at
+    note1.reload
+    assert_not_nil note1.read_at
+    note2.reload
+    assert_nil note2.read_at
+    note3.reload
+    assert_nil note3.read_at
+  end
+
   test "cannot track with user not ability to read target" do
     # private repo
     group = create(:group)
