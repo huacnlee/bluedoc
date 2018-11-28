@@ -273,6 +273,6 @@ class UserTest < ActiveSupport::TestCase
 
     user = create(:user)
     user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
-    assert_match /\/uploads\/[\w]+\?s=large/, user.avatar_url
+    assert_match /\/uploads\/[\w]+/, user.avatar_url
   end
 end

@@ -6685,10 +6685,10 @@ rgba-regex@^1.0.0:
   resolved "http://registry.npm.taobao.org/rgba-regex/download/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rich-md-editor@5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/rich-md-editor/-/rich-md-editor-5.1.3.tgz#2fc01d1494e460755fa3765241770a2b571a3b9f"
-  integrity sha512-F+OSHKqhYtBuN3cN1IxdbB0amxuVg7MnMFyqb93ChW8zkV9UHkOgqSovlwO6GdhtUtWMoaOCfJW0RyNRDvpwfg==
+rich-md-editor@5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/rich-md-editor/-/rich-md-editor-5.1.4.tgz#f88781ddce3fd4a397f2b3d078a4696c77dc76b9"
+  integrity sha512-zQeTqn21F5nZ+NdGm1jSj/pX/dgRh2tZZFDCf7B3FHrhdRBYZ15vOXnS3KWFtAOrehjeGc5KNtJ4kSgzv6JvIA==
   dependencies:
     "@tommoor/slate-drop-or-paste-images" "^0.8.1"
     babel-plugin-transform-async-to-generator "^6.24.1"
@@ -6704,7 +6704,7 @@ rich-md-editor@5.1.3:
     react-keydown "^1.9.7"
     react-medium-image-zoom "^3.0.10"
     react-portal "^4.1.4"
-    slate "^0.34.5"
+    slate "^0.35.0"
     slate-collapse-on-escape "^0.6.1"
     slate-edit-code "^0.15.5"
     slate-edit-list "^0.11.3"
@@ -6712,7 +6712,7 @@ rich-md-editor@5.1.3:
     slate-paste-linkify "^0.5.1"
     slate-plain-serializer "0.5.4"
     slate-prism "^0.5.0"
-    slate-react "^0.12.3"
+    slate-react "^0.14.3"
     slate-trailing-block "^0.5.0"
     slugify "^1.3.0"
     styled-components "^3.2.3"
@@ -6988,6 +6988,13 @@ slate-base64-serializer@^0.2.36:
   dependencies:
     isomorphic-base64 "^1.0.2"
 
+slate-base64-serializer@^0.2.45:
+  version "0.2.91"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.91.tgz#d66fe202288dedc6cf0189f20c36fce695d54580"
+  integrity sha512-kZIklWhDurFmFEWJjIao0rg3d+oDLhMqENne57lpYcKCM/DWAVK8Ohx9KlaamX87hEr6moUtkqbJ9PyTFXoZlg==
+  dependencies:
+    isomorphic-base64 "^1.0.2"
+
 slate-collapse-on-escape@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/slate-collapse-on-escape/-/slate-collapse-on-escape-0.6.1.tgz#404da2e2a1773fc140c7a8230e4ef50b0459d1ed"
@@ -7002,7 +7009,7 @@ slate-dev-environment@^0.1.2, slate-dev-environment@^0.1.4:
   dependencies:
     is-in-browser "^1.1.3"
 
-slate-dev-logger@^0.1.0, slate-dev-logger@^0.1.39, slate-dev-logger@^0.1.43:
+slate-dev-logger@^0.1.0, slate-dev-logger@^0.1.39, slate-dev-logger@^0.1.40, slate-dev-logger@^0.1.42, slate-dev-logger@^0.1.43:
   version "0.1.43"
   resolved "https://registry.yarnpkg.com/slate-dev-logger/-/slate-dev-logger-0.1.43.tgz#77f6ca7207fcbf453a5516f3aa8b19794d1d26dc"
   integrity sha512-GkcPMGzmPVm85AL+jaKnzhIA0UH9ktQDEIDM+FuQtz+TAPcpPCQiRAaZ6I2p2uD0Hq9bImhKSCtHIa0qRxiVGw==
@@ -7022,9 +7029,9 @@ slate-edit-list@^0.11.3:
   resolved "https://registry.yarnpkg.com/slate-edit-list/-/slate-edit-list-0.11.3.tgz#d27ff2ff93a83bef49131a6a44b87a9558c9d44c"
   integrity sha512-nqaiYYppezMmbsh+JN6vqZl2EexiUTJWwCzJVas8cv+WeRtRmuysn94LKF2VdLIxLmNAe/ZfliIkW9uC/NdO6w==
 
-slate-hotkeys@^0.1.2:
+slate-hotkeys@^0.1.2, slate-hotkeys@^0.1.4:
   version "0.1.4"
-  resolved "http://registry.npm.taobao.org/slate-hotkeys/download/slate-hotkeys-0.1.4.tgz#5b10b2a178affc60827f9284d4c0a5d7e5041ffe"
+  resolved "https://registry.yarnpkg.com/slate-hotkeys/-/slate-hotkeys-0.1.4.tgz#5b10b2a178affc60827f9284d4c0a5d7e5041ffe"
   integrity sha1-WxCyoXiv/GCCf5KE1MCl1+UEH/4=
   dependencies:
     is-hotkey "^0.1.1"
@@ -7050,10 +7057,10 @@ slate-plain-serializer@0.5.4:
   dependencies:
     slate-dev-logger "^0.1.39"
 
-slate-plain-serializer@^0.5.17:
+slate-plain-serializer@^0.5.17, slate-plain-serializer@^0.5.26:
   version "0.5.41"
-  resolved "http://registry.npm.taobao.org/slate-plain-serializer/download/slate-plain-serializer-0.5.41.tgz#dc2d219602c2cb8dc710ac660e108f3b3cc4dc80"
-  integrity sha1-3C0hlgLCy43HEKxmDhCPOzzE3IA=
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.41.tgz#dc2d219602c2cb8dc710ac660e108f3b3cc4dc80"
+  integrity sha512-KPC2T5PT29JN7uxpmpg/xIGO1YjNmpTfghkGsUKBx7HHYjGe5c9jEApolTvzNy3F3w+wGQNsiT+aN6dn9m6sFA==
   dependencies:
     slate-dev-logger "^0.1.43"
 
@@ -7064,10 +7071,10 @@ slate-prism@^0.5.0:
   dependencies:
     prismjs "^1.13.0"
 
-slate-prop-types@^0.4.34:
+slate-prop-types@^0.4.34, slate-prop-types@^0.4.43:
   version "0.4.67"
-  resolved "http://registry.npm.taobao.org/slate-prop-types/download/slate-prop-types-0.4.67.tgz#c6aa74195466546a44fcb85d1c7b15fefe36ce6b"
-  integrity sha1-xqp0GVRmVGpE/LhdHHsV/v42zms=
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.67.tgz#c6aa74195466546a44fcb85d1c7b15fefe36ce6b"
+  integrity sha512-FmdwitAw1Y69JHm326dfwP6Zd6R99jz1Im8jvKcnG2hytk72I1vIv6ct2CkNGwc3sg90+OIO/Rf18frYxxoTzw==
 
 slate-react@^0.12.3:
   version "0.12.11"
@@ -7090,10 +7097,31 @@ slate-react@^0.12.3:
     slate-plain-serializer "^0.5.17"
     slate-prop-types "^0.4.34"
 
-slate-schema-violations@^0.1.20:
+slate-react@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.14.3.tgz#0f91a6cb00895f5454fc2b3f92f2ad4bf9afe7ae"
+  integrity sha1-D5GmywCJX1RU/Cs/kvKtS/mv564=
+  dependencies:
+    debug "^3.1.0"
+    get-window "^1.1.1"
+    is-window "^1.0.2"
+    keycode "^2.1.2"
+    lodash "^4.1.1"
+    prop-types "^15.5.8"
+    react-immutable-proptypes "^2.1.0"
+    react-portal "^3.1.0"
+    selection-is-backward "^1.0.0"
+    slate-base64-serializer "^0.2.45"
+    slate-dev-environment "^0.1.4"
+    slate-dev-logger "^0.1.42"
+    slate-hotkeys "^0.1.4"
+    slate-plain-serializer "^0.5.26"
+    slate-prop-types "^0.4.43"
+
+slate-schema-violations@^0.1.20, slate-schema-violations@^0.1.21:
   version "0.1.39"
-  resolved "http://registry.npm.taobao.org/slate-schema-violations/download/slate-schema-violations-0.1.39.tgz#854ab5624136419cef4c803b1823acabe11f1c15"
-  integrity sha1-hUq1YkE2QZzvTIA7GCOsq+EfHBU=
+  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.39.tgz#854ab5624136419cef4c803b1823acabe11f1c15"
+  integrity sha512-SNRoV9Ii5UqjNqAKcIw7aAOMwgI45zsn86ue2n8NVLNOCe3fUI35cjq6l3fdvmRYw4X/GcZqzhpQsizHD3ts6A==
 
 slate-trailing-block@^0.5.0:
   version "0.5.0"
@@ -7113,6 +7141,21 @@ slate@^0.34.5:
     lodash "^4.17.4"
     slate-dev-logger "^0.1.39"
     slate-schema-violations "^0.1.20"
+    type-of "^2.0.1"
+
+slate@^0.35.0:
+  version "0.35.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.35.0.tgz#6d13146b21db9aa9fdbe9323198dc25a5d334ec0"
+  integrity sha1-bRMUayHbmqn9vpMjGY3CWl0zTsA=
+  dependencies:
+    debug "^3.1.0"
+    direction "^0.1.5"
+    esrever "^0.2.0"
+    is-empty "^1.0.0"
+    is-plain-object "^2.0.4"
+    lodash "^4.17.4"
+    slate-dev-logger "^0.1.40"
+    slate-schema-violations "^0.1.21"
     type-of "^2.0.1"
 
 slugify@^1.3.0:

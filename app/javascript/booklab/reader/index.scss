@@ -228,9 +228,31 @@
     }
   }
 
-  a.attachment-file {
+  .attachment-file {
     display: block;
     color: #444;
+
+    &.selected {
+      background: #f9f9f9;
+    }
+
+    a { color: #444; }
+
+    a.close {
+      float: right;
+      color: #aaa;
+      padding: 0 6px;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+
+    .text-gray {
+      color: rgba(88, 96, 105, 0.31) !important
+    }
+
     border-radius: 3px;
     background: #fafafa;
     border: 1px solid #e0e0e0;
