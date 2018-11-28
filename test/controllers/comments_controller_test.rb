@@ -10,10 +10,11 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /comments via Doc" do
     comments = create_list(:comment, 3, user: @user, commentable: @doc)
+    comment = create(:comment, commentable: @doc, reply_to: comments[0])
 
     get @doc.to_path
     assert_equal 200, response.status
-    assert_select ".doc-comments .comments .comment", 3
+    assert_select ".doc-comments .comments .comment", 4
     comments.each do |c|
       assert_select "#comment-#{c.id}" do
         assert_select ".markdown-body", html: c.body_html
@@ -26,6 +27,15 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".doc-comments .comments" do
       assert_select ".comment a[data-method=delete]", 3
+    end
+    assert_select ".comments .comment .in-reply-to", 1 do
+      assert_select "a.in-reply-link" do
+        assert_select "img.avatar.avatar-tiny" do
+          assert_select "[src=?]", comment.reply_to.user.avatar_url
+        end
+        assert_select ".user-name", text: comment.reply_to.user.slug
+        assert_select ".comment-id", text: "#comment-#{comment.parent_id}"
+      end
     end
   end
 
