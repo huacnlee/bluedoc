@@ -227,4 +227,30 @@ class DocTest < ActiveSupport::TestCase
 
     assert_equal [group.slug, repo.slug, doc.slug].join("/"), doc.full_slug
   end
+
+  test "locks" do
+    doc = create(:doc)
+    user1 = create(:user)
+    user2 = create(:user)
+
+    assert_equal "docs/#{doc.id}/write-lock", doc.send(:write_lock_key)
+
+    assert_equal false, doc.locked?
+
+    doc.lock!(user1)
+    assert_equal user1.id, Rails.cache.read(doc.send(:write_lock_key))
+    assert_equal true, doc.locked?
+    assert_equal user1, doc.locked_user
+
+    doc.unlock!
+    assert_equal false, doc.locked?
+
+    doc.lock!(user2)
+    assert_equal true, doc.locked?
+    assert_equal user2, doc.locked_user
+
+    doc.lock!(user1)
+    assert_equal true, doc.locked?
+    assert_equal user1, doc.locked_user
+  end
 end
