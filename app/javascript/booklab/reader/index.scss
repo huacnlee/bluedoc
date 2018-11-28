@@ -1,6 +1,48 @@
 @import "~booklab/mixin";
 
 .reader-body {
+  .reader-navbar {
+    height: 48px;
+    background: #f9f9f9;
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 9;
+    font-size: 14px;
+
+    .btn {
+      box-shadow : 0 0 0;
+      padding: 2px 8px;
+    }
+
+    .navbar-title {
+      line-height: 48px;
+      padding-left: 24px;
+
+      a { color: #333; }
+
+      .divide { color: #bbb; margin: 0 5px; }
+    }
+
+    .navbar-buttons {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 48px;
+      text-align: right;
+      padding-right: 15px;
+      padding-top: 11px;
+
+      .btn {
+        text-align: center;
+      }
+
+      .dropdown-menu {
+        text-align: left;
+      }
+    }
+  }
+
   .main-container {
     padding: 0 !important;
   }

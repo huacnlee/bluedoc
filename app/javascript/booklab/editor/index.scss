@@ -1,6 +1,42 @@
 @import "booklab/editor/icons";
 
 .editor-body {
+  .editor-navbar {
+    height: 64px;
+    background: #fff;
+    border: 0;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 9;
+
+    .navbar-title {
+      line-height: 64px;
+      padding-left: 24px;
+
+      a { color: #333; }
+
+      .divide { color: #bbb; margin: 0 5px; }
+    }
+
+    .navbar-buttons {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 64px;
+      text-align: right;
+      padding-right: 15px;
+      padding-top: 14px;
+
+      .btn {
+        text-align: center;
+      }
+
+      .dropdown-menu {
+        text-align: left;
+      }
+    }
+  }
+
   .main-container {
     padding: 0 !important;
   }
