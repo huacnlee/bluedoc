@@ -1,7 +1,7 @@
 module Editorable
   def editors
-    users = Rails.cache.fetch([self.cache_key, "editors", self.editor_ids]) do
-      users = User.where(id: self.editor_ids).with_attached_avatar
+    users = Rails.cache.fetch([self.cache_key, "editors/without-avatar", self.editor_ids]) do
+      users = User.where(id: self.editor_ids)
       users.sort { |a, b| self.editor_ids.index(a.id) <=> self.editor_ids.index(b.id) }
     end
   end
