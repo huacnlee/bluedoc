@@ -135,7 +135,12 @@ class DocsController < Users::ApplicationController
   def lock
     authorize! :update, @doc
 
-    @doc.lock!(current_user)
+    if params[:unlock]
+      @doc.unlock!
+    else
+      @doc.lock!(current_user)
+    end
+
     respond_to do |format|
       format.json do
         render json: { ok: true }
