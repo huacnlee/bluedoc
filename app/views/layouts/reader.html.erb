@@ -9,10 +9,10 @@
   </head>
 
   <body class="reader-body">
-
-    <%= notice_message %>
+    <%= render "/layouts/header" %>
     <%= yield :subnav %>
     <div class="main-container">
+      <%= notice_message %>
       <%= yield %>
     </div>
   </body>

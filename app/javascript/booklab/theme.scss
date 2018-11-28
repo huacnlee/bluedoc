@@ -197,15 +197,22 @@ form {
 }
 
 .reader-navbar {
-  height: 64px;
-  background: #fff;
+  height: 48px;
+  background: #f2f2f2;
   border: 0;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0px 1px 2px rgba(179, 179, 179, 0.34);
   position: relative;
   z-index: 9;
+  font-size: 14px;
+
+  .btn {
+    box-shadow : 0 0 0;
+    padding: 2px 8px;
+  }
 
   .navbar-title {
-    line-height: 64px;
+    line-height: 48px;
     padding-left: 24px;
 
     a { color: #333; }
@@ -217,10 +224,10 @@ form {
     position: absolute;
     top: 0;
     right: 0;
-    height: 64px;
+    height: 48px;
     text-align: right;
     padding-right: 15px;
-    padding-top: 14px;
+    padding-top: 11px;
 
     .btn {
       text-align: center;

@@ -3,7 +3,7 @@
 <% content_for :subnav do %>
 <div class="reader-navbar">
   <div class="navbar-title">
-    <a class="navbar-brand" href="<%= root_path %>" title="Back to list"><%= icon_tag("book") %> BookLab</a>
+    <a href="<%= root_path %>" title="Back to list">BookLab</a>
     <span class="hide-sm">
       <span class="divide">/</span>
       <%= group_name_tag @user %>
@@ -19,14 +19,14 @@
 
   <% if @doc %>
   <div class="navbar-buttons">
-    <%= action_button_tag(@doc, :star, class: "btn") %>
+    <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
 
     <% if can? :update, @doc %>
-    <%= link_to icon_tag("pen", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn px-4" %>
+    <%= link_to icon_tag("pen", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
     <% end %>
 
     <details class="dropdown details-reset details-overlay d-inline-block">
-      <summary class="btn px-2 ml-1" aria-haspopup="true">
+      <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
          <%= icon_tag("ellipsis-h") %>
       </summary>
 

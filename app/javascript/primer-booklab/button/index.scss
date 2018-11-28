@@ -56,3 +56,9 @@
   color: #999;
   border-color: #e0e0e0;
 }
+
+.btn-primary[disabled] {
+  color: rgba(32, 50, 85, 0.32);
+  background-color: rgba(80, 126, 215, 0.22);
+  border-color: rgba(34, 53, 90, 0.09);
+}

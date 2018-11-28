@@ -1,0 +1,11 @@
+<div class="nav-header">
+  <div class="navbar mr-4">
+    <a class="navbar-brand" href="/"><%= icon_tag("book", label: "BookLab") %></a>
+  </div>
+  <div class="navbar d-lg-flex flex-justify-between flex-auto">
+    <%= content_for?(:nav_search) ? yield(:nav_search) : render("/layouts/search_nav") %>
+  </div>
+  <div class="navbar">
+    <%= render "/layouts/user_menu" %>
+  </div>
+</div>
