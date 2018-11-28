@@ -6981,13 +6981,6 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-slate-base64-serializer@^0.2.36:
-  version "0.2.73"
-  resolved "http://registry.npm.taobao.org/slate-base64-serializer/download/slate-base64-serializer-0.2.73.tgz#5dbcc74978c4c348940df1e1052b75bf84e07cc6"
-  integrity sha1-XbzHSXjEw0iUDfHhBSt1v4TgfMY=
-  dependencies:
-    isomorphic-base64 "^1.0.2"
-
 slate-base64-serializer@^0.2.45:
   version "0.2.91"
   resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.91.tgz#d66fe202288dedc6cf0189f20c36fce695d54580"
@@ -7002,7 +6995,7 @@ slate-collapse-on-escape@^0.6.1:
   dependencies:
     to-pascal-case "^1.0.0"
 
-slate-dev-environment@^0.1.2, slate-dev-environment@^0.1.4:
+slate-dev-environment@^0.1.4:
   version "0.1.6"
   resolved "http://registry.npm.taobao.org/slate-dev-environment/download/slate-dev-environment-0.1.6.tgz#ff22b40ef4cc890ff7706b6b657abc276782424f"
   integrity sha1-/yK0DvTMiQ/3cGtrZXq8J2eCQk8=
@@ -7029,7 +7022,7 @@ slate-edit-list@^0.11.3:
   resolved "https://registry.yarnpkg.com/slate-edit-list/-/slate-edit-list-0.11.3.tgz#d27ff2ff93a83bef49131a6a44b87a9558c9d44c"
   integrity sha512-nqaiYYppezMmbsh+JN6vqZl2EexiUTJWwCzJVas8cv+WeRtRmuysn94LKF2VdLIxLmNAe/ZfliIkW9uC/NdO6w==
 
-slate-hotkeys@^0.1.2, slate-hotkeys@^0.1.4:
+slate-hotkeys@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/slate-hotkeys/-/slate-hotkeys-0.1.4.tgz#5b10b2a178affc60827f9284d4c0a5d7e5041ffe"
   integrity sha1-WxCyoXiv/GCCf5KE1MCl1+UEH/4=
@@ -7057,7 +7050,7 @@ slate-plain-serializer@0.5.4:
   dependencies:
     slate-dev-logger "^0.1.39"
 
-slate-plain-serializer@^0.5.17, slate-plain-serializer@^0.5.26:
+slate-plain-serializer@^0.5.26:
   version "0.5.41"
   resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.41.tgz#dc2d219602c2cb8dc710ac660e108f3b3cc4dc80"
   integrity sha512-KPC2T5PT29JN7uxpmpg/xIGO1YjNmpTfghkGsUKBx7HHYjGe5c9jEApolTvzNy3F3w+wGQNsiT+aN6dn9m6sFA==
@@ -7071,31 +7064,10 @@ slate-prism@^0.5.0:
   dependencies:
     prismjs "^1.13.0"
 
-slate-prop-types@^0.4.34, slate-prop-types@^0.4.43:
+slate-prop-types@^0.4.43:
   version "0.4.67"
   resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.67.tgz#c6aa74195466546a44fcb85d1c7b15fefe36ce6b"
   integrity sha512-FmdwitAw1Y69JHm326dfwP6Zd6R99jz1Im8jvKcnG2hytk72I1vIv6ct2CkNGwc3sg90+OIO/Rf18frYxxoTzw==
-
-slate-react@^0.12.3:
-  version "0.12.11"
-  resolved "http://registry.npm.taobao.org/slate-react/download/slate-react-0.12.11.tgz#6d83e604634704757690a57dbd6aab282a964ad3"
-  integrity sha1-bYPmBGNHBHV2kKV9vWqrKCqWStM=
-  dependencies:
-    debug "^3.1.0"
-    get-window "^1.1.1"
-    is-window "^1.0.2"
-    keycode "^2.1.2"
-    lodash "^4.1.1"
-    prop-types "^15.5.8"
-    react-immutable-proptypes "^2.1.0"
-    react-portal "^3.1.0"
-    selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.36"
-    slate-dev-environment "^0.1.2"
-    slate-dev-logger "^0.1.39"
-    slate-hotkeys "^0.1.2"
-    slate-plain-serializer "^0.5.17"
-    slate-prop-types "^0.4.34"
 
 slate-react@^0.14.3:
   version "0.14.3"
@@ -7118,7 +7090,7 @@ slate-react@^0.14.3:
     slate-plain-serializer "^0.5.26"
     slate-prop-types "^0.4.43"
 
-slate-schema-violations@^0.1.20, slate-schema-violations@^0.1.21:
+slate-schema-violations@^0.1.21:
   version "0.1.39"
   resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.39.tgz#854ab5624136419cef4c803b1823acabe11f1c15"
   integrity sha512-SNRoV9Ii5UqjNqAKcIw7aAOMwgI45zsn86ue2n8NVLNOCe3fUI35cjq6l3fdvmRYw4X/GcZqzhpQsizHD3ts6A==
@@ -7127,21 +7099,6 @@ slate-trailing-block@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/slate-trailing-block/-/slate-trailing-block-0.5.0.tgz#cedb4f2975f1167e0fb9d259ce1252b82f4d74ff"
   integrity sha512-CrN+bBzo//CRwcVyIBaWSKyi7yiYjcc8wIKoiqpIbXDEUHEF++NCO8zr/j5PzelzqltTj9tg4n18d/f1/SLfLQ==
-
-slate@^0.34.5:
-  version "0.34.7"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.34.7.tgz#5908e1d0fc092a2212488beca65671f01e0eb80a"
-  integrity sha1-WQjh0PwJKiISSIvsplZx8B4OuAo=
-  dependencies:
-    debug "^3.1.0"
-    direction "^0.1.5"
-    esrever "^0.2.0"
-    is-empty "^1.0.0"
-    is-plain-object "^2.0.4"
-    lodash "^4.17.4"
-    slate-dev-logger "^0.1.39"
-    slate-schema-violations "^0.1.20"
-    type-of "^2.0.1"
 
 slate@^0.35.0:
   version "0.35.0"
