@@ -11,9 +11,10 @@ class ReactionsController < ApplicationController
 
     contents = reaction_params[:content]&.split(" ") || []
     name = contents.first.strip
+    option = contents.last.strip
 
     @reaction = Reaction.where(subject: @subject, name: name, user: current_user).first
-    if @reaction
+    if @reaction && option == "unset"
       @reaction.destroy
     else
       @reaction = Reaction.create_reaction(name, @subject, user: current_user)

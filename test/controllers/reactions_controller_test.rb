@@ -33,14 +33,16 @@ class ReactionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     get doc.to_path
+    assert_equal 200, response.status
     assert_select "#Doc-#{doc.id}-reaction-box" do
       assert_select ".reaction-list button.btn-link" do
         assert_select "[name='reaction[content]']"
-        assert_select "[value=?]", "+1"
+        assert_select "[value=?]", "+1 unset"
         assert_select "img[src=?]", Reaction.new(name: "+1").url
       end
     end
 
+    reaction_params[:content] = "+1 unset"
     assert_changes -> { Reaction.where(subject: doc, name: "+1").count }, -1 do
       post reactions_path, params: { reaction: reaction_params }, xhr: true
       assert_equal 200, response.status
