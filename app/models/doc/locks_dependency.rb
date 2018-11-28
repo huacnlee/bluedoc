@@ -10,7 +10,7 @@ class Doc
   def locked_user
     user_id = Rails.cache.read(write_lock_key)
     return nil if user_id.blank?
-    User.find_by_id(user_id)
+    User.find(user_id) rescue nil
   end
 
   def locked?

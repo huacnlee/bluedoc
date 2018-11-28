@@ -201,9 +201,19 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     put doc.to_path, params: { doc: doc_params }
     assert_equal 403, response.status
 
+    # should not unlock with json update
+    user = sign_in_role :editor, group: @group
+    doc.lock!(user)
+    put doc.to_path, params: { doc: doc_params, format: :json }
+    doc.reload
+    assert_equal true, doc.locked?
+
     user = sign_in_role :editor, group: @group
     put doc.to_path, params: { doc: doc_params }
     assert_redirected_to @repo.to_path("/#{doc_params[:slug]}")
+    doc.reload
+    assert_equal false, doc.locked?
+    assert_nil doc.locked_user
 
     doc.reload
     assert_equal doc_params[:slug], doc.slug
@@ -218,6 +228,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
   test "PUT /:user/:repo/:slug with publish" do
     doc = create(:doc, repository: @repo)
     user = sign_in_role :editor, group: @group
+
     doc_params = {
       title: "New title",
       body: "New body",
@@ -368,5 +379,59 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_match /.doc-#{doc.id}-star-button/, response.body
     assert_match /btn.attr\(\"data-label\"\)/, response.body
     assert_equal false, @user.star_doc?(doc)
+  end
+
+  test "GET /:user/:repo/:slug/edit with lock check" do
+    private_repo = create(:repository, privacy: :private)
+    private_doc = create(:doc, repository: private_repo)
+    doc = create(:doc, repository: @repo, body: "Hello world")
+
+    user = sign_in_role :editor, group: @group
+    get doc.to_path("/edit")
+    assert_equal 200, response.status
+    assert_select "script#edit-doc-script-lock"
+    assert_select ".edit-doc-lock-overlay", 0
+
+    doc.lock!(user)
+    user1 = sign_in_role :editor, group: @group
+    get doc.to_path("/edit")
+    assert_equal 200, response.status
+
+    assert_select "script#edit-doc-script-lock", 0
+    assert_match /is current in editing this document/, response.body
+    assert_select ".edit-doc-lock-overlay" do
+      assert_select "form[action=?]", doc.to_path("/lock")
+      assert_select ".user-name", text: user.slug
+      assert_select ".avatar" do
+        assert_select "[src=?]", user.avatar_url
+      end
+    end
+  end
+
+  test "POST /:user/:repo/:slug/lock" do
+    private_repo = create(:repository, privacy: :private)
+    private_doc = create(:doc, repository: private_repo)
+
+    doc = create(:doc, repository: @repo, body: "Hello world")
+
+    post doc.to_path("/lock"), xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post doc.to_path("/lock"), xhr: true
+    assert_equal 403, response.status
+
+    u = sign_in_role :editor, group: @group
+    post doc.to_path("/lock"), xhr: true
+    assert_equal 200, response.status
+
+    assert_equal u, doc.locked_user
+
+    u1 = sign_in_role :editor, group: @group
+    post doc.to_path("/lock"), params: { format: :js }, xhr: true
+    assert_equal 200, response.status
+    assert_equal u1, doc.locked_user
+
+    assert_match %(Turbolinks.visit(location.href)), response.body
   end
 end

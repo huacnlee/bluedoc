@@ -2,7 +2,7 @@
 
 class DocsController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock]
 
   before_action :set_user
   before_action :set_repository
@@ -49,7 +49,8 @@ class DocsController < Users::ApplicationController
   # GET /docs/1/edit
   def edit
     authorize! :update, @doc
-    render :new, layout: "editor"
+
+    render :edit, layout: "editor"
   end
 
   # PATCH/PUT /docs/1
@@ -65,7 +66,10 @@ class DocsController < Users::ApplicationController
 
     respond_to do |format|
       if @doc.update(update_params)
-        format.html { redirect_to @doc.to_path, notice: "Doc was successfully updated." }
+        format.html {
+          @doc.unlock!
+          redirect_to @doc.to_path, notice: "Doc was successfully updated."
+        }
         format.json { render json: { ok: true } }
       else
         format.html { render :edit, layout: "editor" }
@@ -123,6 +127,19 @@ class DocsController < Users::ApplicationController
     respond_to do |format|
       format.html { redirect_to @repository.to_path, notice: "Doc was successfully destroyed." }
       format.json { head :no_content }
+      format.js
+    end
+  end
+
+  # POST /docs/1/lock
+  def lock
+    authorize! :update, @doc
+
+    @doc.lock!(current_user)
+    respond_to do |format|
+      format.json do
+        render json: { ok: true }
+      end
       format.js
     end
   end

@@ -1,3 +1,34 @@
 <% title_tag "Edit Doc" %>
 
 <%= render 'form', doc: @doc %>
+
+<%
+locked_user = @doc.locked_user
+%>
+
+<% if locked_user && locked_user != current_user %>
+  <details class="edit-doc-lock-overlay details-reset details-overlay details-overlay-dark" open>
+    <div class="summary-overlay"></div>
+    <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast">
+      <div class="Box-header">
+        <h3 class="Box-title">Doc current in locked</h3>
+      </div>
+      <div class="overflow-auto">
+        <%= form_for(@doc, url: @doc.to_path("/lock"), method: :post, remote: true) do %>
+          <div id="doc-lock-box" class="Box-body overflow-auto">
+            <p><strong class="text-red">Warning!</strong> <%= user_avatar_tag(locked_user, style: :tiny) %> <%= user_name_tag(locked_user) %> is current in editing this document.</p>
+            <p>Continue edit will make conflict, do you wants continue?</p>
+          </div>
+          <div class="Box-footer clearfix">
+            <button type="submit" class="btn btn-danger">Continue edit</button>
+            <a class="btn float-right" href="<%= @doc.to_path %>">Cancel</a>
+          </div>
+        <% end %>
+      </div>
+    </details-dialog>
+  </details>
+<% else %>
+  <script id="edit-doc-script-lock" type="text/javascript">
+    $.post("<%= @doc.to_path("/lock") %>");
+  </script>
+<% end %>

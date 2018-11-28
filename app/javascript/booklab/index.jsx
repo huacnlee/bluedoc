@@ -24,15 +24,13 @@ import './follow-user/index.js'
 import './comments/index.js'
 import './mentionable/index.js'
 
-document.addEventListener("turbolinks:before-cache", () => {
+document.addEventListener("turbolinks:load", () => {
+  $(".timeago").timeago()
+
   // clean auto save
   if (window.editorAutosaveTimer) {
     clearInterval(window.editorAutosaveTimer)
   }
-})
-
-document.addEventListener("turbolinks:load", () => {
-  $(".timeago").timeago()
 
   const editorEls = document.getElementsByClassName("booklab-editor");
   if (editorEls.length > 0) {
@@ -56,6 +54,10 @@ document.addEventListener("turbolinks:load", () => {
 
     const onChangeSlug = (value) => {
       slugInput.value = value
+    }
+
+    if ($("#doc-lock-box").length > 0) {
+      return;
     }
 
     // Save button
@@ -85,7 +87,11 @@ document.addEventListener("turbolinks:load", () => {
     })
 
     window.editorAutosaveTimer = setInterval(() => {
-      $(".btn-save").trigger("click")
+      const $btn = $(".btn-save");
+      const url = $btn.attr("data-url");
+
+      $.post(url + "/lock");
+      $btn.trigger("click");
     }, 15000);
 
     $("form").after(editorDiv);

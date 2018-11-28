@@ -124,6 +124,8 @@ Rails.application.routes.draw do
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do
           get :raw
+          get :lock
+          post :lock
           post :action
           delete :action
           get :versions
