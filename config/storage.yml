@@ -17,7 +17,7 @@ amazon:
 aliyun:
   service: Aliyun
   access_key_id: <%= ENV["ALIYUN_ACCESS_KEY_ID"]  || "need-access-key-id" %>
-  access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY"]  || "need-access-key-secret" %>
+  access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY_SECRET"]  || "need-access-key-secret" %>
   bucket: <%= ENV["ALIYUN_BUCKET"] || "booklab" %>
   endpoint: <%= ENV["ALIYUN_ENDPOINT"] || "https://oss-cn-beijing.aliyuncs.com" %>
   mode: private
