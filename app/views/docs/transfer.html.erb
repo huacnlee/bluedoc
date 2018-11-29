@@ -1,0 +1,39 @@
+<div class="Subhead">
+  <div class="Subhead-heading">Transfer docs</div>
+  <div class="Subhead-description">
+    When you wants move docs into other repository, you can choice them and select a destination repository to transfer.
+  </div>
+</div>
+
+<div class="mb-5">
+  <%= group_name_tag(@user) %>
+  <span class="divider">/</span>
+  <%= repository_name_tag(@repository) %>
+</div>
+
+<%= form_for(@repository, url: transfer_user_repository_docs_path(@user, @repository), method: :post) do |f| %>
+    <div class="Box">
+      <div class="Box-header">Select doc to transfer</div>
+      <ul style="max-height: 350px; overflow-y: scroll;">
+        <% @repository.docs.each do |doc| %>
+        <li class="Box-row">
+          <label for="doc-<%= doc.id %>-checkbox" style="font-weight: normal;" class="display-block clearfix">
+           <input id="doc-<%= doc.id %>-checkbox" type="checkbox" class="form-checkbox float-left mr-3 doc-checkbox" name="transfer[doc_ids][]" value="<%= doc.id %>" />
+           <div class="title"><%= doc.title %></div>
+           <div class="slug text-gray"><%= doc.slug %></div>
+          </label>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">To repository</label>
+      <%= render "/shared/user_repositories_select_menu", input_name: "transfer[repository_id]", value: params.dig(:transfer, :repository_id) %>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Transfer now!</button>
+    </div>
+  </div>
+<% end %>

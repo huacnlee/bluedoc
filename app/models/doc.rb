@@ -26,6 +26,15 @@ class Doc < ApplicationRecord
     [self.repository&.user&.slug, self.repository&.slug, self.slug].join("/")
   end
 
+  # transfer doc to repository, if slug exist, auto rename
+  def transfer_to(repo)
+    self.repository_id = repo.id
+    self.save!(validate: false)
+  rescue ActiveRecord::RecordNotUnique
+    self.slug = BookLab::Slug.random
+    retry
+  end
+
   class << self
     def create_new(repo, user_id)
       doc = Doc.new
@@ -38,6 +47,14 @@ class Doc < ApplicationRecord
       doc
     rescue ActiveRecord::RecordNotUnique
       retry
+    end
+
+    def transfer_docs(docs, repo)
+      Doc.transaction do
+        docs.each do |doc|
+          doc.transfer_to(repo)
+        end
+      end
     end
   end
 end

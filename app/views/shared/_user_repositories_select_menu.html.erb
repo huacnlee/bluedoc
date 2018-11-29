@@ -1,0 +1,27 @@
+<% if current_user %>
+  <%= render "/shared/select_menu", button_html: "" do %>
+    <%
+      repositories = current_user.repositories
+      value = nil if !defined? value
+      value = repositories.first.id if value.blank?
+
+      name = "repository_id"
+      name = input_name if defined? input_name
+    %>
+
+    <% repositories.each do |repo| %>
+    <%
+      checked = repo.id.to_s == value.to_s
+    %>
+      <label class="select-menu-item js-navigation-item<%= " selected" if checked %>" role="menuitemradio">
+        <input type="radio" name="<%= name %>" value="<%= repo.id %>" <%= "checked" if checked %> class="js-owner-radio-button">
+        <%= icon_tag("check", class: "octicon-check select-menu-item-icon") %>
+        <div class="select-menu-item-text js-select-button-text">
+          <%= user_avatar_tag(repo.user, style: :tiny) %>
+          <%= repo.user&.slug %> <span class="divider">/</span>
+          <%= repo.slug %>
+        </div>
+      </label>
+    <% end %>
+  <% end %>
+<% end %>
