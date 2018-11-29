@@ -8,16 +8,7 @@ class DocsController < Users::ApplicationController
   before_action :set_repository
   before_action :set_doc, except: %i[index new create]
 
-  # GET /docs
-  # GET /docs.json
-  def index
-    authorize! :read, @repository
-
-    @docs = Doc.all
-  end
-
-  # GET /docs/1
-  # GET /docs/1.json
+  # GET /:user/:repo/:slug
   def show
     if @doc.blank?
       authorize! :read, @repository
@@ -37,7 +28,7 @@ class DocsController < Users::ApplicationController
     render "show", layout: "reader"
   end
 
-  # GET /docs/new
+  # GET /:user/:repo/docs/new
   def new
     authorize! :create_doc, @repository
 
@@ -46,15 +37,14 @@ class DocsController < Users::ApplicationController
     redirect_to @doc.to_path("/edit")
   end
 
-  # GET /docs/1/edit
+  # GET /:user/:repo/:slug/edit
   def edit
     authorize! :update, @doc
 
     render :edit, layout: "editor"
   end
 
-  # PATCH/PUT /docs/1
-  # PATCH/PUT /docs/1.json
+  # PATCH/PUT /:user/:repo/:slug
   def update
     authorize! :update, @doc
     @doc.last_editor_id = current_user.id
@@ -78,12 +68,14 @@ class DocsController < Users::ApplicationController
     end
   end
 
+  # GET /:user/:repo/:slug/raw
   def raw
     authorize! :read, @doc
 
     render plain: @doc.body_plain
   end
 
+  # GET /:user/:repo/:slug/versions
   def versions
     authorize! :update, @doc
 
@@ -92,6 +84,7 @@ class DocsController < Users::ApplicationController
     render "versions", layout: "reader"
   end
 
+  # POST /:user/:repo/:slug/revert
   def revert
     authorize! :update, @doc
 
@@ -103,6 +96,8 @@ class DocsController < Users::ApplicationController
     end
   end
 
+  # POST /:user/:repo/:slug/action
+  # DELETE /:user/:repo/:slug/action
   def action
     authorize! :read, @doc
 
@@ -118,8 +113,7 @@ class DocsController < Users::ApplicationController
     @doc.reload
   end
 
-  # DELETE /docs/1
-  # DELETE /docs/1.json
+  # DELETE /:user/:repo/:slug
   def destroy
     authorize! :destroy, @doc
 
@@ -131,7 +125,7 @@ class DocsController < Users::ApplicationController
     end
   end
 
-  # POST /docs/1/lock
+  # POST /:user/:repo/:slug/lock
   def lock
     authorize! :update, @doc
 

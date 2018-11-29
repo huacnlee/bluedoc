@@ -253,4 +253,29 @@ class DocTest < ActiveSupport::TestCase
     assert_equal true, doc.locked?
     assert_equal user1, doc.locked_user
   end
+
+  test "transfer_to" do
+    doc = create(:doc, slug: "foo-bar")
+    repo = create(:repository)
+    create(:doc, slug: "foo-bar", repository_id: repo.id)
+
+    BookLab::Slug.stub(:random, "fake-new-slug") do
+      doc.transfer_to(repo)
+      doc.reload
+      assert_equal repo.id, doc.repository_id
+      assert_equal "fake-new-slug", doc.slug
+    end
+  end
+
+  test "transfer_docs" do
+    docs = create_list(:doc, 3)
+    repo = create(:repository)
+
+    Doc.transfer_docs(docs, repo)
+
+    docs.each do |doc|
+      doc.reload
+      assert_equal repo.id, doc.repository_id
+    end
+  end
 end

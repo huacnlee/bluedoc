@@ -111,4 +111,81 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_nil Repository.find_by_id(repo.id)
   end
+
+  test "GET /:user/:repo/settings/docs" do
+    repo = create(:repository, user: @group)
+    docs = create_list(:doc, 10, repository_id: repo.id)
+
+    assert_require_user do
+      get repo.to_path("/settings/docs")
+    end
+
+    sign_in @user
+    get repo.to_path("/settings/docs")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    get repo.to_path("/settings/docs")
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+    get repo.to_path("/settings/docs")
+    assert_equal 200, response.status
+
+    assert_select ".Box.transfer-docs" do
+      assert_select ".Box-header .title", text: "Transfer docs to other repository"
+      assert_select ".Box-row input[type=checkbox]", 10
+    end
+  end
+
+  test "POST /:user/:repo/settings/docs" do
+    repo = create(:repository, user: @group)
+    target_repo = create(:repository, user: @group)
+    other_repo = create(:repository)
+
+    docs0 = create_list(:doc, 3, repository_id: repo.id)
+    docs1 = create_list(:doc, 4, repository_id: repo.id)
+
+    doc_ids = docs1.collect(&:id)
+
+    assert_require_user do
+      post repo.to_path("/settings/docs"), params: { transfer: {} }
+    end
+
+    sign_in @user
+    post repo.to_path("/settings/docs"), params: { transfer: {} }
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post repo.to_path("/settings/docs"), params: { transfer: {} }
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+
+    # admin but traget repo not have permission
+    post repo.to_path("/settings/docs"), params: { transfer: { repository_id: other_repo.id } }
+    assert_equal 403, response.status
+
+    # target repo not found
+    assert_raise(ActiveRecord::RecordNotFound) do
+      post repo.to_path("/settings/docs"), params: { transfer: { repository_id: -1 } }
+    end
+
+    # transfer to repo have permisson
+    transfer_params = {
+      repository_id: target_repo.id,
+      doc_id: doc_ids,
+    }
+    post repo.to_path("/settings/docs"), params: { transfer: transfer_params }
+    assert_redirected_to repo.to_path("/settings/docs")
+
+    docs1.each do |doc|
+      doc.reload
+      assert_equal target_repo.id, doc.repository_id
+    end
+    docs0.each do |doc|
+      doc.reload
+      assert_equal repo.id, doc.repository_id
+    end
+  end
 end

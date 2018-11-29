@@ -117,6 +117,8 @@ Rails.application.routes.draw do
           delete :destroy, path: "profile"
           get :advanced
           patch :transfer
+          get :docs
+          post :docs
         end
       end
 

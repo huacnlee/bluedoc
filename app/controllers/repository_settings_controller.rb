@@ -44,6 +44,25 @@ class RepositorySettingsController < Users::ApplicationController
     redirect_to @user.to_path, notice: "Repository has destroyed"
   end
 
+  def docs
+    authorize! :update, @repository
+
+    @docs = @repository.docs.order("id desc")
+
+    if request.post?
+      transfer_params = params.require(:transfer).permit(:repository_id, doc_id: [])
+
+      @target_repository = Repository.find(transfer_params[:repository_id])
+      authorize! :update, @target_repository
+
+      transfer_docs = @docs.where(id: transfer_params[:doc_id])
+      Doc.transfer_docs(transfer_docs, @target_repository)
+
+      notice = "Successfully transfered #{transfer_docs.length} docs to #{@target_repository.user&.name} / #{@target_repository.name}."
+      redirect_to docs_user_repository_settings_path(@user, @repository), notice: notice
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository
@@ -53,4 +72,5 @@ class RepositorySettingsController < Users::ApplicationController
     def repository_params
       params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc)
     end
+
 end
