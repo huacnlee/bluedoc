@@ -16,7 +16,7 @@ class User
 
   def avatar_url
     return self.letter_avatar_url unless self.avatar.attached?
-    "#{Setting.host}/uploads/#{self.avatar.blob.key}"
+    "#{Setting.host}/uploads/#{self.avatar.blob.key}?s=large"
   rescue
     self.letter_avatar_url
   end
