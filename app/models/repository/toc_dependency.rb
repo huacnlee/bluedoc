@@ -32,6 +32,10 @@ class Repository
     end
   end
 
+  def toc_json
+    BookLab::Toc.parse(toc_text).to_json
+  end
+
   private
 
     def track_doc_version_on_create

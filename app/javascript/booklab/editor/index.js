@@ -190,4 +190,6 @@ class EditorBox {
   }
 }
 
-export default EditorBox
+document.addEventListener("turbolinks:load", () => {
+  EditorBox.init();
+});
