@@ -15,7 +15,7 @@ class Repository
   validate :lint_toc_format
 
   def toc_html(prefix: nil)
-    @toc_html ||= Rails.cache.fetch([cache_key_with_version, "toc_html", prefix]) do
+    @toc_html ||= Rails.cache.fetch([cache_key_with_version, "toc_html", "v1", prefix]) do
       BookLab::Toc.parse(toc_text).to_html(prefix: prefix)
     end
   end
