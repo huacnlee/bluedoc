@@ -62,6 +62,72 @@
     float: right;
     width: 70%;
   }
+
+  .doc-item-list {
+    float: left;
+    width: calc(30vw - 40px);
+    margin-right: 40px;
+    height: calc(100vh - 84px);
+    position: fixed;
+    overflow-y: scroll;
+  }
+}
+
+.doc-item-drageable {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  background: #FFF;
+  padding: 8px 13px;
+  line-height: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-right: 34px;
+  position: relative;
+
+  &:first-child { border-radius: 3px 3px 0 0; }
+  &:last-child { border-radius: 0 0 3px 3px; }
+
+  &.doc-item-new {
+    margin-bottom: 8px;
+    border-radius: 3px;
+    font-weight: bold;
+
+    .opts {
+      display: block;
+    }
+  }
+  &.doc-item-exist {
+    display: none;
+  }
+
+  .slug {
+    color: #aaa;
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .opts {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+    display: none;
+
+    a { color: #aaa; }
+    a:hover { color: #999; }
+  }
+
+  &:hover {
+    background: #fefef0;
+    .opts { display: block; }
+  }
 }
 
 .toc-item-drageable {
@@ -69,7 +135,7 @@
   line-height: 24px;
   overflow: hidden;
   background: #FFF;
-  padding: 13px;
+  padding: 6px 13px;
   border-bottom: 1px solid #f0f0f0;
   margin: 0;
   -webkit-touch-callout: none;
@@ -79,6 +145,8 @@
         -ms-user-select: none;
             user-select: none;
 
+  &:first-child { border-radius: 3px 3px 0 0; }
+  &:last-child { border-radius: 0 0 3px 3px; }
 
   .indent-buttons {
     font-size: 14px;
@@ -106,16 +174,30 @@
     }
   }
 
+  .form-inplace-edit,
   .item-editable {
-    padding: 6px 8px;
+    margin-top: 3px;
+    padding: 3px 8px;
     min-width: 60px;
-    border: 1px solid #fff;
-    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px solid #fff;
+
+
+    &.placeholder {
+      color: #eee;
+    }
 
     &:hover {
-      background: #FFFFe0;
-      border: 1px dashed #FEF4BF;
+      background: #fefef0;
     }
+  }
+
+  .form-inplace-edit {
+    outline: none;
+    padding: 3px 8px;
+    border-bottom: 1px dashed #ccc;
+    background: #fcfcfc !important;
+    display: inline;
   }
 
   .title { float: left;  }

@@ -1,27 +1,79 @@
 import React from "react";
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import TocItem from "./toc-item";
+import DocItem from "./doc-item";
+const _ = require("lodash");
 
-const TocItemList = SortableContainer(({ items, onChangeItem, onDeleteItem }) => {
+const TocItemList = SortableContainer(({ className, items, onChangeItem, onDeleteItem }) => {
   return (
     <div className="toc-item-list">
       {items.map((item, index) => (
-        <TocItem key={`item-${index}`} onChange={onChangeItem} onDelete={onDeleteItem} index={index} item={item} />
+        <TocItem key={`item-${index}`} onChangeItem={onChangeItem} onDelete={onDeleteItem} index={index} item={item} />
       ))}
     </div>
   );
 });
 
+class DocItemList extends React.Component {
+  render() {
+    const { items, onAddItem } = this.props;
+
+    return (
+      <div className="doc-item-list">
+        {items.map((item, index) => (
+          <DocItem key={`item-${index}`} onAddItem={onAddItem} index={index} item={item} />
+        ))}
+      </div>
+    );
+  }
+}
+
+
 class TocEditor extends React.Component {
   constructor(props) {
     super(props);
+
+    const docItems = JSON.parse(props.docsValue);
+
+    docItems.unshift({
+      isNew: true,
+      depth: 0
+    })
+
+    const items = JSON.parse(props.value);
+
+    this.filterDocItems(docItems, items);
+
     this.state = {
       value: props.value,
-      items: JSON.parse(props.value)
+      docItems: docItems,
+      items: items
     }
   }
 
+  filterDocItems = (docItems, newItems) => {
+    const newItemHash = {};
+    const newItemIdHash = {};
+    newItems.forEach((item) => {
+      newItemHash[item.url] = item;
+      newItemIdHash[item.id] = item;
+    });
+
+    docItems.forEach((item) => {
+      item.exist = false;
+
+      if (!item.url) return false;
+      if (newItemHash.hasOwnProperty(item.url) || newItemIdHash.hasOwnProperty(item.id)) {
+        item.exist = true;
+      }
+    });
+  }
+
   updateValue = (newItems) => {
+    const { docItems } = this.state;
+    this.filterDocItems(docItems, newItems);
+
+    this.setState({ docItems: docItems });
     this.props.onChange(JSON.stringify(newItems));
   }
 
@@ -46,9 +98,23 @@ class TocEditor extends React.Component {
     this.setState({ items: items });
   }
 
+  onAddItem = (index, item) => {
+    let { items, docItems } = this.state;
+    const newItem = Object.assign({}, item);
+    items.push(newItem);
+
+    this.updateValue(items);
+    this.setState({ items: items, docItems: docItems });
+  }
+
   render() {
     return (
       <div className="toc-editor">
+        <DocItemList
+          items={this.state.docItems}
+          onAddItem={this.onAddItem}
+        />
+
         <TocItemList
           items={this.state.items}
           onChangeItem={this.onChangeItem}
@@ -67,6 +133,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   const repositoryTocInput = document.getElementById("repository_toc");
+  const repositoryTocByDocsInput = document.getElementById("repository_toc_by_docs");
 
   const editorDiv = document.createElement("div");
   editorDiv.className = "toc-editor-container";
@@ -78,7 +145,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   ReactDOM.render(
-    <TocEditor value={repositoryTocInput.value} onChange={onChange} />,
+    <TocEditor value={repositoryTocInput.value} docsValue={repositoryTocByDocsInput.value} onChange={onChange} />,
     editorDiv,
   )
 });

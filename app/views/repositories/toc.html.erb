@@ -20,7 +20,6 @@
   <%= render "/shared/error_messages", target: @repository %>
 
   <input type="hidden" name="_by" value="toc">
-  <div class="form-group" style="display: none">
-    <%= form.text_area :toc, value: @repository.toc_json, class: "form-control", style: "min-height: 400px" %>
-  </div>
+  <textarea style="display: none" id="repository_toc_by_docs"><%= @repository.toc_by_docs_json %></textarea>
+  <%= form.text_area :toc, value: @repository.toc_json, class: "form-control", style: "min-height: 400px; display: none;" %>
 <% end %>

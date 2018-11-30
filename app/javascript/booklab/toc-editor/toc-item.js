@@ -9,12 +9,26 @@ const TocItemElement = SortableElement(({
   onIndent,
   onUnindent,
   onShowEditing,
-  onCancelEditing,
-  onChangeField,
   onDeleteItem,
-  titleInput,
-  urlInput
+  onKeyPressEdit,
+  onChangeField,
+  onChange,
+  onBlurEdit
 }) => {
+  let url = item.url || "";
+  let title = item.title || "";
+  let urlClass = "";
+  let titleClass = "";
+
+  if (url.trim().length === 0) {
+    url = "no-link";
+    urlClass = "placeholder";
+  }
+  if (title.trim().length === 0) {
+    title = "New item";
+    titleClass = "placeholder";
+  }
+
   return (
     <div className={`toc-item-drageable toc-item toc-item-d${item.depth}`}>
     <DragHandle />
@@ -22,30 +36,34 @@ const TocItemElement = SortableElement(({
       <a href="#" onClick={onUnindent} className="indent-left mr-2"><i class="fas fa-arrow-left"></i></a>
       <a href="#" onClick={onIndent} className="indent-right"><i class="fas fa-arrow-right"></i></a>
     </div>
-    <a href="#" onClick={onDeleteItem} className="btn-delete"><i class="fas fa-trash-alt"></i></a>
+    <a href="#" onClick={onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></a>
 
     {editing === "" && (
       <div>
-        <div className="title item-editable" data-field="title" onClick={onShowEditing}>{item.title}</div>
-        <div className="slug item-editable" data-field="url" onClick={onShowEditing}>{item.url}</div>
+        <div className={`title item-editable ${titleClass}`} data-field="title" onClick={onShowEditing}>{title}</div>
+        <div className={`slug item-editable ${urlClass}`} data-field="url" onClick={onShowEditing}>{url}</div>
       </div>
     )}
 
     {editing !== "" && (
       <div>
         <input type="text"
-            onBlur={onCancelEditing}
-            onChange={onChangeField}
+            onBlur={onBlurEdit}
+            onChange={onChange}
+            onKeyUp={onKeyPressEdit}
             data-field="title"
+            placeholder="title"
             ref={(input) => { input && editing === "title" && input.focus() }}
-            className="form-control title"
+            className="form-inplace-edit title"
             value={item.title} />
         <input type="text"
-            onBlur={onCancelEditing}
-            onChange={onChangeField}
+            onBlur={onBlurEdit}
+            onChange={onChange}
+            onKeyUp={onKeyPressEdit}
             data-field="url"
+            placeholder="url"
             ref={(input) => { input && editing === "url" && input.focus() }}
-            className="form-control slug"
+            className="form-inplace-edit slug"
             value={item.url} />
       </div>
     )}
@@ -55,11 +73,18 @@ const TocItemElement = SortableElement(({
 
 
 export default class TocItem extends React.Component {
-  state = {
-    item: {},
-    editing: "",
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      item: props.item,
+      // backup a item for cancel event
+      storedItem: Object.assign({}, props.item),
+      editing: (props.item.isNew == true ? "title" : ""),
+    };
   }
 
+  // indent
   indentItem = (depth) => {
     const item = this.state.item;
     if (!item.depth) {
@@ -75,37 +100,38 @@ export default class TocItem extends React.Component {
     item.depth += depth;
 
     this.setState({ item: item });
-    this.props.onChange(this.props.index, item);
+    this.saveChange(item);
   }
 
+  saveChange = (item) => {
+    this.setState({ storedItem: Object.assign({}, item) });
+    this.props.onChangeItem(this.props.index, item);
+  }
+
+  // indent
   onIndent = (e) => {
     e.preventDefault();
     this.indentItem(1);
-    return false;
   }
 
+  // unindent
   onUnindent = (e) => {
     e.preventDefault();
     this.indentItem(-1);
-    return false;
   }
 
+  // switch to editing mode
   onShowEditing = (e) => {
     e.preventDefault();
 
     const input = e.currentTarget;
     const field = input.getAttribute("data-field");
 
-
     this.setState({ editing: field });
   }
 
-  onCancelEditing = (e) => {
-    e.preventDefault();
-    this.setState({ editing: "" });
-  }
-
   onChangeField = (e) => {
+    e.preventDefault();
     const input = e.currentTarget;
     const field = input.getAttribute("data-field");
 
@@ -117,26 +143,55 @@ export default class TocItem extends React.Component {
     }
 
     this.setState({ item: item });
-    this.props.onChange(this.props.index, item);
   }
 
+  // remove item
   onDeleteItem = (e) => {
+    e.preventDefault();
     this.props.onDelete(this.props.index);
   }
 
-  render() {
-    this.state.item = this.props.item;
+  onBlurEdit = (e) => {
+    e.preventDefault();
+    this.onChangeField(e);
+    this.saveChange(this.state.item);
+    this.switchReadonly(e);
+  }
 
+  switchReadonly = (e) => {
+    e.preventDefault();
+    this.setState({ editing: "" });
+  }
+
+  onKeyPress = (e) => {
+    const input = e.currentTarget;
+    const field = input.getAttribute("data-field");
+
+    if (e.keyCode === 13) {
+      // enter
+      this.onChangeField(e);
+      this.saveChange(this.state.item);
+      this.switchReadonly(e);
+      return;
+    } else if (e.keyCode === 27) {
+      // esc
+      this.switchReadonly(e);
+      this.setState({ item: Object.assign({}, this.state.storedItem) });
+    }
+  }
+
+  render() {
     return (
       <TocItemElement
         {...this.props}
         item={this.state.item}
         editing={this.state.editing}
         onIndent={this.onIndent}
+        onChange={this.onChangeField}
         onUnindent={this.onUnindent}
         onShowEditing={this.onShowEditing}
-        onCancelEditing={this.onCancelEditing}
-        onChangeField={this.onChangeField}
+        onKeyPressEdit={this.onKeyPress}
+        onBlurEdit={this.onBlurEdit}
         onDeleteItem={this.onDeleteItem} />
     )
   }
