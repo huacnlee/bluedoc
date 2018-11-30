@@ -22,8 +22,11 @@ class Repository
 
   def toc_text
     return toc&.body&.to_plain_text if toc.present?
+    toc_by_docs_text
+  end
 
-    Rails.cache.fetch([cache_key_with_version, "toc_text"]) do
+  def toc_by_docs_text
+    Rails.cache.fetch([cache_key_with_version, "toc_by_docs_text"]) do
       lines = []
       docs.order("id asc").each do |doc|
         lines << { title: doc.title, depth: 0, id: doc.id, url: doc.slug }.as_json
@@ -34,6 +37,10 @@ class Repository
 
   def toc_json
     BookLab::Toc.parse(toc_text).to_json
+  end
+
+  def toc_by_docs_json
+    BookLab::Toc.parse(toc_by_docs_text).to_json
   end
 
   private

@@ -147,12 +147,15 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal({ "has_toc" => "0" }, repo.preferences)
   end
 
-  test "toc_text / toc_html" do
+  test "toc_text / toc_html / toc_json" do
     toc = [{ title: "Hello world", url: "/hello", id: nil, depth: 0 }.as_json].to_yaml.strip
     repo = create(:repository, toc: toc)
     assert_equal toc, repo.toc_text
+    assert_equal [].to_yaml, repo.toc_by_docs_text
     assert_html_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
     assert_html_equal BookLab::Toc.parse(toc).to_html(prefix: "/prefix"), repo.toc_html(prefix: "/prefix")
+    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_json
+    assert_html_equal BookLab::Toc.parse([].to_yaml).to_json, repo.toc_by_docs_json
 
     repo = create(:repository, toc: nil)
     assert_equal [].to_yaml, repo.toc_text
@@ -161,7 +164,10 @@ class RepositoryTest < ActiveSupport::TestCase
     toc_hash = [{ title: doc1.title, depth: 0, id: doc1.id, url: doc1.slug }.as_json]
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
+    assert_equal toc, repo.toc_by_docs_text
     assert_html_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
+    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_json
+    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_by_docs_json
 
     doc2 = create(:doc, repository: repo)
     toc_hash << { title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json
@@ -169,6 +175,14 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal toc, repo.toc_text
     repo = Repository.find(repo.id)
     assert_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
+
+    # override toc as custom yml
+    custom_toc = [{ title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json].to_yaml.strip
+    repo.update(toc: custom_toc)
+    assert_equal custom_toc, repo.toc_text
+    assert_equal toc, repo.toc_by_docs_text
+    assert_html_equal BookLab::Toc.parse(custom_toc).to_json, repo.toc_json
+    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_by_docs_json
   end
 
   test "validate toc" do
