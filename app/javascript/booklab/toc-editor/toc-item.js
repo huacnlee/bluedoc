@@ -78,8 +78,6 @@ export default class TocItem extends React.Component {
 
     this.state = {
       item: props.item,
-      // backup a item for cancel event
-      storedItem: Object.assign({}, props.item),
       editing: (props.item.isNew == true ? "title" : ""),
     };
   }
@@ -104,7 +102,6 @@ export default class TocItem extends React.Component {
   }
 
   saveChange = (item) => {
-    this.setState({ storedItem: Object.assign({}, item) });
     this.props.onChangeItem(this.props.index, item);
   }
 
@@ -176,11 +173,13 @@ export default class TocItem extends React.Component {
     } else if (e.keyCode === 27) {
       // esc
       this.switchReadonly(e);
-      this.setState({ item: Object.assign({}, this.state.storedItem) });
+      // FIXME: to cancel edit
     }
   }
 
   render() {
+    this.state.item = this.props.item;
+
     return (
       <TocItemElement
         {...this.props}

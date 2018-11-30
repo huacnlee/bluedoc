@@ -72,15 +72,13 @@ class TocEditor extends React.Component {
   updateValue = (newItems) => {
     const { docItems } = this.state;
     this.filterDocItems(docItems, newItems);
-
-    this.setState({ docItems: docItems });
+    this.setState({ docItems: docItems, items: newItems });
     this.props.onChange(JSON.stringify(newItems));
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     const newItems = arrayMove(this.state.items, oldIndex, newIndex);
     this.updateValue(newItems);
-    this.setState({ items: newItems });
   };
 
   onChangeItem = (index, item) => {
@@ -95,7 +93,6 @@ class TocEditor extends React.Component {
     items.splice(index, 1);
 
     this.updateValue(items);
-    this.setState({ items: items });
   }
 
   onAddItem = (index, item) => {
@@ -104,19 +101,20 @@ class TocEditor extends React.Component {
     items.push(newItem);
 
     this.updateValue(items);
-    this.setState({ items: items, docItems: docItems });
   }
 
   render() {
+    const { docItems, items } = this.state;
+
     return (
       <div className="toc-editor">
         <DocItemList
-          items={this.state.docItems}
+          items={docItems}
           onAddItem={this.onAddItem}
         />
 
         <TocItemList
-          items={this.state.items}
+          items={items}
           onChangeItem={this.onChangeItem}
           onDeleteItem={this.onDeleteItem}
           onSortEnd={this.onSortEnd}
