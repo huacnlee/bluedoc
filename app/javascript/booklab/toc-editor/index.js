@@ -4,18 +4,22 @@ import TocItem from "./toc-item";
 
 const TocItemList = SortableContainer(({ items, onChangeItem, onDeleteItem }) => {
   return (
-    <ul className="toc-item-list">
+    <div className="toc-item-list">
       {items.map((item, index) => (
         <TocItem key={`item-${index}`} onChange={onChangeItem} onDelete={onDeleteItem} index={index} item={item} />
       ))}
-    </ul>
+    </div>
   );
 });
 
 class TocEditor extends React.Component {
-  state = {
-    items: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.value,
+      items: JSON.parse(props.value)
+    }
+  }
 
   updateValue = (newItems) => {
     this.props.onChange(JSON.stringify(newItems));
@@ -23,34 +27,26 @@ class TocEditor extends React.Component {
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     const newItems = arrayMove(this.state.items, oldIndex, newIndex);
-    this.setState({
-      items: newItems,
-    });
-
     this.updateValue(newItems);
+    this.setState({ items: newItems });
   };
 
   onChangeItem = (index, item) => {
-    const newItems = this.state.items;
-    newItems[index] = item;
+    const { items } = this.state;
+    items[index] = item;
 
-    this.updateValue(newItems);
+    this.updateValue(items);
   }
 
   onDeleteItem = (index) => {
-    const newItems = this.state.items;
-    newItems.splice(index, 1);
+    const { items } = this.state;
+    items.splice(index, 1);
 
-    this.updateValue(newItems);
-    this.setState({
-      items: newItems,
-    });
+    this.updateValue(items);
+    this.setState({ items: items });
   }
 
   render() {
-    const value = this.props.value;
-    this.state.items = JSON.parse(value);
-
     return (
       <div className="toc-editor">
         <TocItemList
@@ -58,6 +54,7 @@ class TocEditor extends React.Component {
           onChangeItem={this.onChangeItem}
           onDeleteItem={this.onDeleteItem}
           onSortEnd={this.onSortEnd}
+          lockAxis="y"
           useDragHandle={true} />
       </div>
     )
@@ -65,7 +62,7 @@ class TocEditor extends React.Component {
 }
 
 document.addEventListener("turbolinks:load", () => {
-  if ($("form #repository_toc").length == 0) {
+  if ($("form textarea#repository_toc").length == 0) {
     return;
   }
 
