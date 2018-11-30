@@ -75,11 +75,15 @@ class RepositoriesController < Users::ApplicationController
 
     if request.get?
       @docs = @repository.docs.order("id desc")
+      render :toc, layout: "editor"
     else
-      if @repository.update(params.require(:repository).permit(:toc))
+      toc_json = params.require(:repository).permit(:toc)[:toc]
+      toc_yaml = BookLab::Toc.parse(toc_json, format: :json).to_yaml
+
+      if @repository.update(toc: toc_yaml)
         redirect_to @repository.to_path, notice: "Table of Contents has updated"
       else
-        render :toc
+        render :toc, layout: "editor"
       end
     end
   end

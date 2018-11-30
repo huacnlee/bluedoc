@@ -9,8 +9,6 @@ import "vendor/jquery.timeago.js"
 import "vendor/jquery.timeago.settings.js"
 import './rails-ujs-extends'
 
-import EditorBox from './editor/index'
-
 Turbolinks.start()
 Turbolinks.setProgressBarDelay(150)
 
@@ -19,13 +17,13 @@ window.App = {
   locale: 'en'
 }
 
+import './editor/index.js'
 import './reader/index.js'
 import './follow-user/index.js'
 import './comments/index.js'
 import './mentionable/index.js'
+import './toc-editor/index.js'
 
 document.addEventListener("turbolinks:load", () => {
   $(".timeago").timeago();
-
-  EditorBox.init();
 })

@@ -16,6 +16,7 @@
     "jquery.caret": "^0.3.1",
     "lodash": "^4.17.11",
     "primer": "^10.8.1",
+    "react-sortable-hoc": "^0.8.4",
     "rich-md-editor": "5.1.4",
     "slate": "^0.35.0",
     "slate-react": "^0.14.3",

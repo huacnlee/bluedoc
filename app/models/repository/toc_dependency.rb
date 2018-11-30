@@ -15,21 +15,32 @@ class Repository
   validate :lint_toc_format
 
   def toc_html(prefix: nil)
-    @toc_html ||= Rails.cache.fetch([cache_key_with_version, "toc_html", prefix]) do
+    @toc_html ||= Rails.cache.fetch([cache_key_with_version, "toc_html", "v1", prefix]) do
       BookLab::Toc.parse(toc_text).to_html(prefix: prefix)
     end
   end
 
   def toc_text
     return toc&.body&.to_plain_text if toc.present?
+    toc_by_docs_text
+  end
 
-    Rails.cache.fetch([cache_key_with_version, "toc_text"]) do
+  def toc_by_docs_text
+    Rails.cache.fetch([cache_key_with_version, "toc_by_docs_text"]) do
       lines = []
       docs.order("id asc").each do |doc|
         lines << { title: doc.title, depth: 0, id: doc.id, url: doc.slug }.as_json
       end
       lines.to_yaml
     end
+  end
+
+  def toc_json
+    BookLab::Toc.parse(toc_text).to_json
+  end
+
+  def toc_by_docs_json
+    BookLab::Toc.parse(toc_by_docs_text).to_json
   end
 
   private
