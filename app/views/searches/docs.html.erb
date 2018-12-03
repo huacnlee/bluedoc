@@ -1,7 +1,7 @@
-<div class="col-12 d-table">
+<div class="col-12 clearfix">
   <%= render "menu" %>
 
-  <div class="col-8 d-table-cell">
+  <div class="col-9 float-left">
     <div class="search-results Box">
       <%= render "search_info" %>
       <div class="Box-body">
@@ -12,8 +12,9 @@
         <% @result.records.each_with_hit do |item, hit| %>
           <%= render "doc", item: item, hit: hit %>
         <% end %>
-        <%= paginate @result %>
       </div>
     </div>
+
+    <%= paginate @result %>
   </div>
 </div>

@@ -70,7 +70,8 @@
   }
 
   .dashboard-table {
-    a.repository-path {
+    a.repository-path,
+    a.user-name {
       color: #444;
     }
   }
