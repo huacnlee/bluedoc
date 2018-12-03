@@ -5663,7 +5663,8 @@ kbd {
     position: relative;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    border-bottom:1px solid #e1e4e8;
 }
 
 @media (min-width: 1012px) {
@@ -5680,8 +5681,17 @@ kbd {
     position: relative;
     z-index: 31;
     float: right;
-    margin: 0
+    margin: 0;
+    display: none;
 }
+
+@media (min-width: 768px) {
+  .pagehead ul.pagehead-actions {
+    display: block;
+  }
+}
+
+
 
 .pagehead .path-divider {
     margin: 0 0.25em

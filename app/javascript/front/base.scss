@@ -89,9 +89,8 @@
 .repo-toc {
   font-size: 16px;
   text-align: center;
-  padding: 40px;
+  padding: 15px;
   background-color: #fff;
-  border: 1px solid rgba(225, 228, 232, 0.51);
   border-radius: 3px;
 
   .toc-header {
@@ -125,9 +124,7 @@
   }
 
   .toc-list {
-    width: 100%;
-    max-width: 700px;
-    margin: 30px auto;
+
     text-align: left;
 
     ul {
@@ -194,6 +191,20 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .repo-toc {
+    padding: 40px;
+    border: 1px solid rgba(225, 228, 232, 0.51);
+
+    .toc-list {
+      width: 100%;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+  }
+}
+
 
 .repository-card {
   padding: 15px;

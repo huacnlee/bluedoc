@@ -7,19 +7,19 @@
   <% if action %>
     <% if action.action_option == "ignore" %>
       <div class="watch-button-group" watch-status="ignore">
-        <p>You’re ignoring this notifications.</p>
-        <%= link_to icon_tag("bell", label: "Subscribe"), url, class: "btn btn-sm", data: { method: :post, remote: true } %>
+        <div xclass="float-left">You’re ignoring this notifications.</div>
+        <%= link_to icon_tag("bell", label: "Subscribe"), url, class: "btn btn-sm float-left", data: { method: :post, remote: true } %>
       </div>
     <% else %>
       <div class="watch-button-group" watch-status="watched">
-        <p>You’re receiving notifications because you’re subscribed.</p>
-        <%= link_to icon_tag("bell-slash", label: "Unsubscribe"), url, class: "btn btn-sm", data: { method: :delete, remote: true } %>
+        <div class="float-left">You’re receiving notifications because you’re subscribed.</div>
+        <%= link_to icon_tag("bell-slash", label: "Unsubscribe"), url, class: "btn btn-sm float-left", data: { method: :delete, remote: true } %>
       </div>
     <% end %>
   <% else %>
     <div class="watch-button-group" watch-status="none">
-      <p>You’re not receiving notifications.</p>
-      <%= link_to icon_tag("bell", label: "Subscribe"), url, class: "btn btn-sm", data: { method: :post, remote: true } %>
+      <div class="float-left">You’re not receiving notifications.</div>
+      <%= link_to icon_tag("bell", label: "Subscribe"), url, class: "btn btn-sm float-left", data: { method: :post, remote: true } %>
     </div>
   <% end %>
 </div>

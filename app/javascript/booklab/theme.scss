@@ -5,6 +5,29 @@
 @import "./fontawesome.scss";
 @import "./mixin.scss";
 
+
+.container {
+  width: auto;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: auto;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+}
+
+@media (min-width: 1012px) {
+  .container {
+    width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
 .turbolinks-progress-bar {
   height: 2px;
   background-color: $primary;
@@ -79,6 +102,18 @@ i.fas {
   .subnav-search-icon { top: 10px; color: #AAA !important; }
 }
 
+.nav-header {
+  .subnav-search-context {
+    display: none;
+  }
+
+   @media (min-width: 768px) {
+     .subnav-search-context {
+       display: block;
+     }
+   }
+}
+
 .navbar-brand {
   background: transparent !important;
 
@@ -115,6 +150,7 @@ i.fas {
   box-shadow: 0 0 0;
   background: #fafafa;
   border-color: #EAEAEA;
+  width: 280px;
 
   &:hover,
   &:active,
