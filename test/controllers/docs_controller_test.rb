@@ -226,14 +226,27 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "PUT /:user/:repo/:slug with publish" do
+    other_doc = create(:doc, repository: @repo, slug: "other-doc")
     doc = create(:doc, repository: @repo)
     user = sign_in_role :editor, group: @group
 
+    doc_path = user_repository_doc_path(@group.slug, @repo.slug, doc.slug)
+    old_doc_slug = doc.slug
+
     doc_params = {
       title: "New title",
+      slug: "other-doc",
       body: "New body",
       body_sml: "Bla bla"
     }
+    put doc.to_path, params: { doc: doc_params }
+    assert_equal 200, response.status
+    assert_select "form[action=?]", doc_path
+    assert_select "details.doc-validation-error" do
+      assert_select "li", text: "Slug has already been taken"
+    end
+
+    doc_params[:slug] = old_doc_slug
     put doc.to_path, params: { doc: doc_params }
     assert_redirected_to doc.to_path
 
