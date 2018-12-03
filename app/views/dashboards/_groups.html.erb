@@ -6,8 +6,8 @@
 <table class="dashboard-table table table-striped">
   <tr>
     <td>Name</td>
-    <td>Description</td>
-    <td>Members</td>
+    <td class="hide-sm hide-md">Description</td>
+    <td class="hide-sm">Members</td>
     <td>Last visit</td>
   </tr>
   <% items.each do |item| %>
@@ -16,13 +16,13 @@
       <%= user_avatar_tag(item, style: :tiny) %>
       <%= user_name_tag(item) %>
     </td>
-    <td class="text-gray" style="max-width: 200px">
+    <td class="hide-sm hide-md text-gray" style="max-width: 200px">
       <%= truncate item.description, length: 100 %>
     </td>
-    <td class="text-gray">
+    <td class="hide-sm text-gray">
       <%= item.members_count %>
     </td>
-    <td>
+    <td style="width: 150px">
       <%= timeago item.created_at %>
     </td>
   </tr>

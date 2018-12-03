@@ -6,9 +6,9 @@
 <table class="dashboard-table table table-striped" data-action-button-reload>
   <tr>
     <td>Name</td>
-    <td>Description</td>
-    <td>Stars</td>
-    <td>Watches</td>
+    <td class="hide-sm hide-md">Description</td>
+    <td class="hide-sm">Stars</td>
+    <td class="hide-sm">Watches</td>
     <td></td>
   </tr>
   <% @repositories.each do |repo| %>
@@ -16,13 +16,13 @@
     <td>
       <%= repository_path_tag(repo) %>
     </td>
-    <td>
+    <td class="hide-sm hide-md">
       <%= repo.description %>
     </td>
-    <td>
+    <td class="hide-sm">
       <%= repo.stars_count %>
     </td>
-    <td>
+    <td class="hide-sm">
       <%= repo.watches_count %>
     </td>
     <td>

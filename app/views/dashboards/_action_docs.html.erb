@@ -7,7 +7,7 @@
   <tr>
     <td>Name</td>
     <td>Repository</td>
-    <td></td>
+    <td class="hide-sm"></td>
   </tr>
   <% @docs.each do |doc| %>
   <tr class="doc-item">
@@ -17,7 +17,7 @@
     <td>
       <%= repository_name_tag(doc.repository) %>
     </td>
-    <td>
+    <td class="hide-sm">
       <%= action_button_tag(doc, :star, undo: true) %>
     </td>
   </tr>

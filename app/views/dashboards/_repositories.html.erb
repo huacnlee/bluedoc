@@ -6,9 +6,9 @@
 <table class="dashboard-table table table-striped">
   <tr>
     <td>Name</td>
-    <td>Description</td>
-    <td>Stars</td>
-    <td>Watches</td>
+    <td class="hide-sm hide-md">Description</td>
+    <td class="hide-sm">Stars</td>
+    <td class="hide-sm">Watches</td>
     <td>Last visit</td>
   </tr>
   <% items.each do |item| %>
@@ -16,16 +16,16 @@
     <td>
       <%= repository_path_tag(item) %>
     </td>
-    <td style="max-width: 200px">
+    <td class="hide-sm hide-md" style="max-width: 200px">
       <%= truncate item.description, length: 100 %>
     </td>
-    <td>
+    <td class="hide-sm">
       <%= item.stars_count %>
     </td>
-    <td>
+    <td class="hide-sm">
       <%= item.watches_count %>
     </td>
-    <td>
+    <td style="width: 150px">
       <%= timeago item.updated_at %>
     </td>
   </tr>

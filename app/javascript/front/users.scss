@@ -6,6 +6,35 @@
     }
   }
 
+  .user-title {
+    display: block;
+    padding: 15px;
+    line-height: 32px;
+    font-size: 18px;
+    margin-top: 15px;
+    padding-bottom: 0px;
+
+    text-align: center;
+
+    a { color: #333; }
+  }
+
+  @media (min-width: 1012px) {
+    .user-title {
+      display: none;
+    }
+  }
+
+  .user-sidebar {
+    display: none !important;
+  }
+
+  @media (min-width: 1012px) {
+    .user-sidebar {
+      display: table-cell !important;
+    }
+  }
+
   .user-item {
     .user-avatar { display: inline-block; }
     .user-display-name { color: #333; font-weight: bold; }

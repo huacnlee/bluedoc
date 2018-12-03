@@ -1,3 +1,10 @@
+<% content_for :subnav do %>
+<div class="user-title clearfix v-align-middle">
+  <%= user_avatar_tag(@user, style: :small) %>
+  <%= user_name_tag(@user) %>
+</div>
+<% end %>
+
 <div class="user-sidebar col-3 d-table-cell v-align-top pr-5 pt-3">
   <div class="user-avatar-box">
     <%= user_avatar_tag(@user, style: :large, link: false) %>

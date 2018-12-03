@@ -3,18 +3,20 @@
 <% content_for :subnav do %>
 <div class="reader-navbar">
   <div class="navbar-title">
+    <span class="hide-sm">
     <a href="<%= root_path %>" title="Back to list">BookLab</a>
+      <span class="divide">/</span>
+    </span>
+    <%= group_name_tag @user %>
+    <span class="divide">/</span>
+    <%= repository_name_tag @repository %>
     <span class="hide-sm">
       <span class="divide">/</span>
-      <%= group_name_tag @user %>
-      <span class="divide">/</span>
-      <%= repository_name_tag @repository %>
-      <span class="divide">/</span>
       <strong>Read</strong>
-      <% if @doc&.private? %>
-        <span class="label-private ml-2">Private</span>
-      <% end %>
     </span>
+    <% if @doc&.private? %>
+      <span class="label-private ml-2">Private</span>
+    <% end %>
   </div>
 
   <% if @doc %>

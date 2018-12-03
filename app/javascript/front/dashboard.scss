@@ -2,7 +2,7 @@
   .main-container {
     padding: 0 !important;
     & > .container {
-      width: 100%;
+      width: auto;
     }
   }
 
@@ -19,6 +19,9 @@
   }
 
   .dashboard-menu {
+    float: left;
+    left: 0;
+    display: none;
     border-right: 1px solid #e1e4e8;
     padding: 24px;
     width: 200px;
@@ -65,9 +68,42 @@
   }
 
   .dashboard-content {
-    padding: 20px 40px;
-    padding-left: 240px;
+    padding: 20px 0px;
+
+    .content-main {
+      width: auto;
+      float: none;
+    }
+
+    .sub-sidebar {
+      float: left;
+      display: none;
+    }
   }
+
+  @media (min-width: 768px) {
+    .dashboard-menu {
+      display: block;
+    }
+
+    .dashboard-content {
+      padding: 20px 40px;
+      padding-left: 240px;
+
+      .content-main {
+        width: 70%;
+        float: left;
+      }
+
+      .sub-sidebar {
+        display: block;
+        float: left;
+      }
+    }
+  }
+
+
+
 
   .dashboard-table {
     a.repository-path,

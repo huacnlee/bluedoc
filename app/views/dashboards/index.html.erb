@@ -2,7 +2,7 @@
   <%= render "menu" %>
 
   <div class="dashboard-content clearfix">
-    <div class="col-9 float-left">
+    <div class="content-main">
       <div class="sub-title">Recent activity</div>
       <div class="mb-5">
         <% if @recent_docs.blank? %>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="col-3 float-left pl-5" style="max-width: ">
+    <div class="col-3 sub-sidebar pl-5">
       <% if !@groups.blank? %>
       <div class="sub-title">Your Groups</div>
       <div class="Box">
