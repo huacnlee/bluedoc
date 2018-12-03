@@ -69,6 +69,12 @@
     padding-left: 240px;
   }
 
+  .dashboard-table {
+    a.repository-path {
+      color: #444;
+    }
+  }
+
   .group-list {
     .group-item {
       overflow: hidden;

@@ -11,8 +11,10 @@ module RepositoriesHelper
     return "" if repo.blank?
     return "" if repo.user.blank?
 
-    text = [repo.user.name, repo.name].join(" / ")
+    divider = %(<span class="divider">/</span>)
 
-    link_to text, repo.to_path, class: "repository-path"
+    text = safe_join([repo.user.name, repo.name], raw(divider))
+
+    link_to(text, repo.to_path, class: "repository-path")
   end
 end
