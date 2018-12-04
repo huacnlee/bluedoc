@@ -154,9 +154,11 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
+        {this.renderBlockButton("heading2", "heading")}
+        <span className="bar-divider"></span>
         {this.renderMarkButton("bold", "bold")}
         {this.renderMarkButton("italic", "italic")}
-        {this.renderMarkButton("strikethrough", "strikethrough")}
+        {this.renderMarkButton("deleted", "strikethrough")}
         {this.renderMarkButton("underlined", "underline")}
         <span className="bar-divider"></span>
         {this.renderBlockButton("bulleted-list", "bulleted-list")}
