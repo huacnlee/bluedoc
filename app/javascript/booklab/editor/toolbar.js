@@ -154,21 +154,21 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
-        {this.renderMarkButton("bold", "format_bold")}
-        {this.renderMarkButton("italic", "format_italic")}
-        {this.renderMarkButton("deleted", "format_strikethrough")}
-        {this.renderMarkButton("underlined", "format_underlined")}
+        {this.renderMarkButton("bold", "bold")}
+        {this.renderMarkButton("italic", "italic")}
+        {this.renderMarkButton("strikethrough", "strikethrough")}
+        {this.renderMarkButton("underlined", "underline")}
         <span className="bar-divider"></span>
-        {this.renderBlockButton("bulleted-list", "format_list_bulleted")}
-        {this.renderBlockButton("ordered-list", "format_list_numbered")}
+        {this.renderBlockButton("bulleted-list", "bulleted-list")}
+        {this.renderBlockButton("ordered-list", "numbered-list")}
         <span className="bar-divider"></span>
         {this.renderBlockButton("block-quote", "quote")}
         {this.renderBlockButton("code", "code")}
-        {this.renderBlockButton("horizontal-rule", "drag_handle")}
+        {this.renderBlockButton("horizontal-rule", "hr")}
         <span className="bar-divider"></span>
-        <BarButton icon="insert_link" title="Insert Link" onMouseDown={this.handleCreateLink} />
-        <BarButton icon="insert_photo" title="Insert Image" onMouseDown={this.handleImageClick} />
-        <BarButton icon="attach_file" title="Upload File" onMouseDown={this.handleFileClick} />
+        <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
+        <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
+        <BarButton icon="attachment" title="Upload File" onMouseDown={this.handleFileClick} />
       </div>
       {this.state.link && (
         <LinkToolbar link={this.state.link} onBlur={this.hideLinkToolbar} />

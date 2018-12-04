@@ -2,7 +2,7 @@ export class BarButton extends React.Component {
   render() {
     const { icon, title, onMouseDown, active } = this.props;
 
-    const iconClassName = "svg-ic-dims svg-ic_" + icon + "_24px";
+    const iconClassName = "fas fa-text-" + icon;
 
     let className = "bar-button";
     if (this.props.active) {
