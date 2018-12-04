@@ -193,7 +193,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     toc = <<~TOC
     - name: Hello
-      slug: hello
+     slug: hello
     TOC
     repo = build(:repository, toc: toc)
     assert_equal false, repo.valid?
