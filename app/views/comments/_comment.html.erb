@@ -17,6 +17,7 @@
           </summary>
           <div class="dropdown-menu dropdown-menu-sw">
             <ul>
+              <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text="<%= request.url %>#comment-<%= comment.id %>">Copy link</clipboard-copy></li>
               <li><%= link_to "Reply", reply_comment_path(comment), class: "dropdown-item", data: { remote: true, "close-dialog" => true } %></li>
               <% if can? :destroy, comment %>
               <li class="dropdown-divider"></li>

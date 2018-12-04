@@ -19,6 +19,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#comment-#{c.id}" do
         assert_select ".markdown-body", html: c.body_html
         assert_select "a[data-method=delete]", 0
+        assert_select "clipboard-copy[data-clipboard-text=?]", @doc.to_url(anchor: "comment-#{c.id}")
       end
     end
 
