@@ -31,3 +31,7 @@ user:
   - admins
   - version
   - versions
+  - share
+  - shares
+  - comments
+  - comment

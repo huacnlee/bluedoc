@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
-  <%= render "/reactions/new_button", reaction: @reaction %>
+  <% if current_user %>
+    <%= render "/reactions/new_button", reaction: @reaction %>
+  <% end %>
 </div>
 </div>

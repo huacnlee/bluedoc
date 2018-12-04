@@ -1,0 +1,25 @@
+<% if can? :update, doc %>
+<details class="dropdown details-reset details-overlay d-inline-block ml-1">
+  <summary class="btn btn-primary">Share</summary>
+  <div class="doc-share-button-box position-relative text-right">
+    <div class="Popover position-relative">
+      <div class="Popover-message Popover-message--large Popover-message--top-right p-4 mb-2 text-left Box box-shadow-large">
+        <h4 class="mb-2"><%= icon_tag("web") %> Share doc</h4>
+        <% if doc.share %>
+          <p>Anyone visit this share link can read doc</p>
+          <div class="form-group">
+            <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
+          </div>
+          <div class="action">
+            <%= link_to "Close share", doc.to_path("/share?unshare=1"), class: "btn", method: :post, remote: true %>
+            <clipboard-copy class="btn" data-clipboard-text="<%= doc.share.to_url %>">Copy Link</clipboard-copy>
+          </div>
+        <% else %>
+          <p>Create a share link to allow non-member visit this doc.</p>
+          <div class="action"><%= link_to "Open share", doc.to_path("/share"), class: "btn btn-primary", method: :post, remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</details>
+<% end %>

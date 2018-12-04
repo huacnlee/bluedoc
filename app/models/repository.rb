@@ -15,6 +15,7 @@ class Repository < ApplicationRecord
   belongs_to :user
   belongs_to :creator, class_name: "User", required: false
   has_many :docs, dependent: :destroy
+  has_many :shares, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, uniqueness: { scope: :user_id, case_sensitive: false }

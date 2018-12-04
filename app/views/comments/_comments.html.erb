@@ -7,7 +7,7 @@
 </div>
 
 <% if current_user %>
-<%= render partial: '/comments/form', locals: { comment: comments.new } %>
+  <%= render partial: '/comments/form', locals: { comment: comments.new } %>
 <% else %>
   <div id="comment-form-blankslate" class="blankslate">
     <h2>Sign in to write comment</h2>

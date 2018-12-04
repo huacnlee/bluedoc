@@ -14,6 +14,7 @@ class Doc < ApplicationRecord
 
   belongs_to :repository, touch: true
   has_many :comments, as: :commentable, dependent: :destroy
+  has_one :share, as: :shareable, dependent: :destroy
 
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :repository_id, case_sensitive: false }

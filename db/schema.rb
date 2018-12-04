@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_034520) do
+ActiveRecord::Schema.define(version: 2018_12_04_084803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,20 @@ ActiveRecord::Schema.define(version: 2018_11_26_034520) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
+  create_table "shares", force: :cascade do |t|
+    t.string "slug", limit: 128
+    t.string "shareable_type", limit: 20
+    t.integer "shareable_id"
+    t.integer "repository_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_shares_on_repository_id"
+    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id", unique: true
+    t.index ["slug"], name: "index_shares_on_slug", unique: true
+    t.index ["user_id"], name: "index_shares_on_user_id"
+  end
+
   create_table "test_documents", force: :cascade do |t|
     t.integer "user_id"
     t.integer "reply_to_id"
@@ -275,4 +289,5 @@ ActiveRecord::Schema.define(version: 2018_11_26_034520) do
   add_foreign_key "docs", "repositories"
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_sources", "repositories"
+  add_foreign_key "shares", "users"
 end

@@ -1,0 +1,84 @@
+<%
+  @doc = @share.shareable
+  @user = @doc.repository&.user
+  @repository = @doc.repository
+%>
+
+<% title_tag @doc.title %>
+
+<% content_for :subnav do %>
+<div class="reader-navbar">
+  <div class="navbar-title">
+    <span class="hide-sm">
+    <a href="<%= root_path %>" title="Back to list"><%= icon_tag("booklab") %> BookLab</a>
+      <span class="divide">/</span>
+    </span>
+    <strong><%= @doc.title %></strong>
+  </div>
+
+  <div class="navbar-buttons">
+    <% if current_user %>
+      <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
+    <% end %>
+
+    <% if can? :update, @doc %>
+      <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
+    <% end %>
+
+    <details class="dropdown details-reset details-overlay d-inline-block">
+      <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
+         <%= icon_tag("ellipsis-h") %>
+      </summary>
+
+      <ul class="dropdown-menu dropdown-menu-sw">
+        <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+        <% if can? :create_doc, @repository %>
+        <li><a class="dropdown-item" href="<%= new_user_repository_doc_path(@user, @repository) %>">Create new doc</a></li>
+        <% end %>
+        <li class="dropdown-divider" role="separator"></li>
+        <% if can? :update, @doc %>
+        <li><a class="dropdown-item" href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
+        <li class="dropdown-divider" role="separator"></li>
+        <li><a class="dropdown-item" href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
+        <% end %>
+        <% if can? :destroy, @doc %>
+        <li><a class="dropdown-item text-red" data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
+        <% end %>
+      </ul>
+    </details>
+  </div>
+</div>
+<% end %>
+
+<div class="doc-page doc-share-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-main main-content py-4">
+    <h1 class="doc-title"><%= @doc.title %></h1>
+    <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+      <%= @doc.body_html %>
+    </div>
+    <div class="doc-reaction mt-5">
+      <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+    </div>
+    <div class="doc-info mt-3 py-2 border-top">
+      <span class="editors">
+        <% @doc.editors.each do |user| %>
+          <%= user_avatar_tag(user, style: :tiny) %>
+        <% end %>
+      </span>
+
+      <% if @doc.last_editor %>
+      Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+      <% else %>
+      Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+      <% end %>
+    </div>
+
+    <% if @comments %>
+    <div class="doc-comments mt-3 clearfix">
+      <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+    </div>
+    <% end %>
+  </div>
+  <div class="doc-body-toc" data-turbolinks="false">
+  </div>
+</div>

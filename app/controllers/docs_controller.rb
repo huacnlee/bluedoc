@@ -143,6 +143,18 @@ class DocsController < Users::ApplicationController
     end
   end
 
+  # POST /:user/:repo/:slug/share
+  def share
+    authorize! :update, @doc
+
+    if params[:unshare]
+      @doc.share&.destroy
+      @doc.reload
+    else
+      Share.create_share(@doc, user: current_user)
+    end
+  end
+
   private
     def set_repository
       @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])

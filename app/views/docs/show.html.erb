@@ -21,7 +21,11 @@
 
   <% if @doc %>
   <div class="navbar-buttons">
-    <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
+    <% if current_user %>
+      <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
+    <% end %>
+
+    <%= render "share_button", doc: @doc %>
 
     <% if can? :update, @doc %>
     <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>

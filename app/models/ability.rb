@@ -12,6 +12,8 @@ class Ability
 
     abilities_for_anonymous
     abilities_for_sign_in_user
+
+    can :read, Share
   end
 
   def abilities_for_sign_in_user

@@ -91,6 +91,7 @@ Rails.application.routes.draw do
     end
   end
   resource :reactions, path: "user/reactions"
+  resources :shares
 
   # NOTE! Keep :profile routes bottom of routes.rb
   resources :repositories, only: %i(index create)
@@ -132,6 +133,7 @@ Rails.application.routes.draw do
           delete :action
           get :versions
           patch :revert
+          post :share
         end
       end
     end
