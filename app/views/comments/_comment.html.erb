@@ -11,11 +11,20 @@
       <div class="opts float-right">
         <%= render "/reactions/new_button", reaction: Reaction.new(subject: comment) %>
 
-        <%= link_to icon_tag("reply"), reply_comment_path(comment), data: { remote: true } %>
-
-        <% if can? :destroy, comment %>
-          <%= link_to icon_tag("trash"), comment_path(comment), data: { method: 'delete', remote: true, confirm: "Are you sure?" } %>
-        <% end %>
+        <details class="dropdown details-reset details-overlay d-inline-block ml-2">
+          <summary aria-haspopup="true">
+            <%= icon_tag("ellipsis-v") %>
+          </summary>
+          <div class="dropdown-menu dropdown-menu-sw">
+            <ul>
+              <li><%= link_to "Reply", reply_comment_path(comment), class: "dropdown-item", data: { remote: true, "close-dialog" => true } %></li>
+              <% if can? :destroy, comment %>
+              <li class="dropdown-divider"></li>
+              <li><%= link_to "Delete", comment_path(comment), class: "dropdown-item", data: { method: 'delete', remote: true, confirm: "Are you sure?", "close-dialog" => true } %></li>
+              <% end %>
+            </ul>
+          </div>
+        </details>
       </div>
     </div>
     <div class="markdown-body">

@@ -1,6 +1,7 @@
 .comments {
   .sub-title {
     font-size: 18px;
+    .fas { font-size: 28px; margin-right: 8px; }
   }
   .comment {
     margin-bottom: 15px;
@@ -13,11 +14,16 @@
       .opts {
         font-size: 14px;
         display: block;
+        color: #555;
+
         & > a { width: 20px; height: 20px; margin-left: 5px; display: inline-block; text-align: center; }
-        & > a:hover {
-          color: #555;
+        & > a:hover,
+        summary > .fas:hover
+        .details-overlay[open] .fas {
+          color: #555 !important;
         }
         & > a,
+        summary > .fas,
         & > .fas { color: #ccc; }
 
         .add-reaction-popover.dropdown-menu-ne {
