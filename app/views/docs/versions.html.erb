@@ -1,7 +1,7 @@
 <% content_for :subnav do %>
 <div class="reader-navbar">
   <div class="navbar-title">
-    <a href="<%= @doc.to_path %>" title="Back to Document"><%= icon_tag("book") %></a>
+    <a href="<%= @doc.to_path %>" title="Back to Document"><%= icon_tag("repository") %></a>
     <span class="hide-sm">
       <span class="divide">/</span>
       <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>

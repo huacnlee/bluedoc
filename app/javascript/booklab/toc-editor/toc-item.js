@@ -1,7 +1,7 @@
 import React from "react";
 import { SortableContainer, SortableHandle, SortableElement, arrayMove } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-bars"></i></span>); // This can be any component you want
+const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
 
 const TocItemElement = SortableElement(({
   item,
@@ -33,8 +33,8 @@ const TocItemElement = SortableElement(({
     <div className={`toc-item-drageable toc-item toc-item-d${item.depth}`}>
     <DragHandle />
     <div className="indent-buttons">
-      <a href="#" onClick={onUnindent} className="indent-left mr-2"><i class="fas fa-arrow-left"></i></a>
-      <a href="#" onClick={onIndent} className="indent-right"><i class="fas fa-arrow-right"></i></a>
+      <a href="#" onClick={onUnindent} className="indent-left mr-2"><i class="fas fa-left"></i></a>
+      <a href="#" onClick={onIndent} className="indent-right"><i class="fas fa-right"></i></a>
     </div>
     <a href="#" onClick={onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></a>
 

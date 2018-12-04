@@ -16,7 +16,7 @@
 
   <div class="nav-header">
     <div class="navbar flex-auto">
-      <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("book", label: "Admin") %></a>
+      <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("booklab", label: "Admin") %></a>
 
       <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
         li <<  link_to("Group", admin_groups_path, class: "nav-link")

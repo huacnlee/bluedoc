@@ -36,8 +36,8 @@
       <td><%= item.followers_count %></td>
       <td class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
-        <%= link_to icon_tag("pencil-alt"), edit_admin_user_path(item.id) %>
-        <%= link_to icon_tag("trash-alt"), admin_user_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <%= link_to icon_tag("pencil"), edit_admin_user_path(item.id) %>
+        <%= link_to icon_tag("trash"), admin_user_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
       </td>
     </tr>
     <% end %>

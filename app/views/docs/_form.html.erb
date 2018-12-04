@@ -12,7 +12,7 @@
         </button>
         <div class="mx-5 my-2">
           <div class="mb-4 text-center text-red">
-            <p style="font-size: 32px"><%= icon_tag("exclamation-triangle") %></p>
+            <p style="font-size: 32px"><%= icon_tag("error") %></p>
             <div class="mb-1 text-red">
               <strong>Doc publish failed, because there has <%= @doc.errors.count %> issues!</strong>
             </div>
@@ -32,7 +32,7 @@
   <div id="editor-form">
     <div class="editor-navbar">
       <div class="navbar-title">
-        <a class="navbar-brand" href="<%= @repository.to_path %>" title="Back to list"><%= icon_tag("book") %></a>
+        <a class="navbar-brand" href="<%= @repository.to_path %>" title="Back to list"><%= icon_tag("booklab") %></a>
         <span class="divide">/</span>
         <%= repository_name_tag @repository %>
         <span class="divide">/</span>
@@ -41,7 +41,7 @@
       </div>
       <div class="navbar-buttons">
         <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
-        <button type="submit" class="btn btn-primary">Publish</button>
+        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> Publish</button>
       </div>
     </div>
 

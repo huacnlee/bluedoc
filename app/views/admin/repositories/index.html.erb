@@ -36,8 +36,8 @@
       <td style="width: 200px;" class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("list-alt"), admin_docs_path(repository_id: item.id), title: "All docs" %>
-        <%= link_to icon_tag("pencil-alt"), edit_admin_repository_path(item.id) %>
-        <%= link_to icon_tag("trash-alt"), admin_repository_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <%= link_to icon_tag("pencil"), edit_admin_repository_path(item.id) %>
+        <%= link_to icon_tag("trash"), admin_repository_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
       </td>
     </tr>
     <% end %>

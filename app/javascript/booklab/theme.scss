@@ -2,7 +2,7 @@
 @import "~primer-product/index.scss";
 @import "~vendor/styleguide";
 @import "~primer-booklab/index.scss";
-@import "./fontawesome.scss";
+@import "./iconfont/index.scss";
 @import "./mixin.scss";
 
 
@@ -31,10 +31,6 @@
 .turbolinks-progress-bar {
   height: 2px;
   background-color: $primary;
-}
-
-i.fas {
-  text-align: center;
 }
 
 .nav-header {
@@ -99,7 +95,7 @@ i.fas {
 }
 
 .subnav-search {
-  .subnav-search-icon { top: 10px; color: #AAA !important; }
+  .subnav-search-icon { top: 8px; color: #AAA !important; }
 }
 
 .nav-header {
@@ -131,10 +127,11 @@ i.fas {
   i.fas {
     width: 24px !important;
     height: 24px !important;
-    font-size: 22px;
+    font-size: 28px;
+    margin-right: 2px;
     fill: #3c6fe8;
     color: #3c6fe8;
-    vertical-align: middle !important;
+    vertical-align: text-bottom !important;
   }
 
   &:hover {

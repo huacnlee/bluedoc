@@ -50,7 +50,7 @@
     .path-divider { color: #d0d0d0;}
 
     i.fas {
-      font-size: 16px;
+      font-size: 20px;
       color: #303030;
     }
   }
@@ -116,9 +116,10 @@
       vertical-align: bottom;
       font-size: 14px;
 
-      .octicon {
+      .fas {
         width: 14px;
         height: 14px;
+        font-size: 15px;
       }
     }
   }
@@ -227,15 +228,16 @@
     position: absolute;
     top: 14px;
     left: 15px;
-    color: #a0a0a0;
+    color: #666;
     font-size: 20px;
   }
 
   .counter {
     margin-right: 8px;
 
-    .octicon {
-      fill: #666;
+    .fas {
+      color: #666;
+      font-size: 14px;
     }
   }
 }

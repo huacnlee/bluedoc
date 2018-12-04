@@ -17,13 +17,13 @@
           <% if can? :create_doc, @repository %>
           <li>
             <div class="clearfix">
-            <%= link_to icon_tag("pen", label: "New Doc"), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary", data: { turbolinks: false } %>
+            <%= link_to icon_tag("pencil", label: "New Doc"), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary", data: { turbolinks: false } %>
             </div>
           </li>
           <% end %>
         </ul>
         <h1>
-          <%= icon_tag("book") %>
+          <%= icon_tag("repository") %>
           <span class="author url fn ml-2"><%= group_name_tag @user %></span>
           <span class="path-divider">/</span>
           <strong>
@@ -36,7 +36,7 @@
       </div>
       <% if @repository.source? %>
       <div class="source mt-2 mb-2 text-gray">
-        <%= icon_tag("code-branch") %> <span class="source-url" title="Import from this URL"><%= @repository.source_url %></span>
+        <%= icon_tag("code-fork") %> <span class="source-url" title="Import from this URL"><%= @repository.source_url %></span>
 
 
       </div>
@@ -47,10 +47,10 @@
   <div class="container-lg px-3">
     <nav class="reponav clearfix" role="navigation">
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        item << link_to(icon_tag("bars", label: "Summary"), @repository.to_path, class: "reponav-item")
-        item << link_to(icon_tag("list-alt", label: "Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name != "search"
-        item << link_to(icon_tag("list-alt", label: "Docs"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name == "search"
-        item << link_to(icon_tag("cog", label: "Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
+        item << link_to(icon_tag("toc", label: "Summary"), @repository.to_path, class: "reponav-item")
+        item << link_to(icon_tag("docs", label: "Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name != "search"
+        item << link_to(icon_tag("docs", label: "Docs"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name == "search"
+        item << link_to(icon_tag("gear", label: "Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
       end %>
     </nav>
   </div>

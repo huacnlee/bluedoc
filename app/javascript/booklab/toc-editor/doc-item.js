@@ -1,7 +1,7 @@
 import React from "react";
 import { SortableContainer, SortableHandle, SortableElement, arrayMove } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-bars"></i></span>); // This can be any component you want
+const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
 
 export default class DocItem extends React.Component {
   onAddClick = (e) => {
@@ -32,7 +32,7 @@ export default class DocItem extends React.Component {
       )}
         <div className="slug">{item.url}</div>
         <div className="opts">
-          <a href="#" className="btn-add" onClick={this.onAddClick}><i className="fas fa-plus"></i></a>
+          <a href="#" className="btn-add" onClick={this.onAddClick}><i className="fas fa-add"></i></a>
         </div>
       </div>
     );

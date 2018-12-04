@@ -26,14 +26,14 @@
   .emoji { vertical-align: middle; display: inline-block; width: 18px; height: 18px; margin-right: 3px; }
 }
 
+.reaction-box .add-reaction-btn {
+  i.fas { vertical-align: middle; font-size: 23px; }
+}
+
 .add-reaction-btn {
   color: #ccc;
   opacity: 1;
-  i.fas { vertical-align: middle; font-size: 18px; }
-  i.fa-plus {
-    font-size: 9px;
-    margin-right: -2px;
-  }
+  i.fas { vertical-align: middle; font-size: 22px; }
 
   &:hover {
     color: #555;

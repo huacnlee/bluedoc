@@ -24,7 +24,7 @@
     <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
 
     <% if can? :update, @doc %>
-    <%= link_to icon_tag("pen", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
+    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
     <% end %>
 
     <details class="dropdown details-reset details-overlay d-inline-block">

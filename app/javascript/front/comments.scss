@@ -13,7 +13,7 @@
       .opts {
         font-size: 14px;
         display: block;
-        & > a { margin-left: 8px; }
+        & > a { width: 20px; height: 20px; margin-left: 5px; display: inline-block; text-align: center; }
         & > a:hover {
           color: #555;
         }
@@ -25,7 +25,6 @@
         }
 
         .add-reaction-btn {
-          font-size: 14px;
           padding: 0;
           border: 0;
           display: inline-block;
@@ -33,7 +32,6 @@
           margin-right: 0;
 
           i.fas { color: #ccc; }
-          i.fa-grin { font-size: 14px; }
           &:hover {
             .fas { color: #555 !important; }
           }

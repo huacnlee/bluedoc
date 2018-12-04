@@ -148,7 +148,7 @@ class EditorBox {
     saveButton.click((e) => {
       const $btn = $(e.currentTarget)
       editorMessage.show()
-      editorMessage.text("saving...")
+      editorMessage.html("<i class='fas fa-clock'></i> saving...")
 
       $.ajax({
         method: "PUT",
@@ -161,7 +161,7 @@ class EditorBox {
           },
         },
         success: (res) => {
-          editorMessage.text("saved")
+          editorMessage.html("<i class='fas fa-check'></i> saved")
           setTimeout(() => editorMessage.fadeOut(), 3000)
         }
       })
