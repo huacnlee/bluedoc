@@ -1,19 +1,47 @@
 <% if can? :manage, @group %>
   <%= render layout: "shared/modal", locals: {
     title: "Add member",
-    button_text: icon_tag("user-plus", label: "Add"),
+    button_text: icon_tag("add-user", label: "Add"),
     button_class: "btn btn-primary"
   } do %>
     <div class="Box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>
+        <div class="flash">
+          Type username to match user and then add as member of this group.
+        </div>
+
         <div class="form-group">
-          <%= form.label :user, class: "control-label"  %>
+          <label class="control-label">Search user</label>
           <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
         </div>
 
         <div class="form-group">
           <%= form.label :role, class: "control-label" %>
-          <%= form.select :role, Member.roles.keys, {}, class: "form-select" %>
+
+          <div class="form-checkbox">
+            <label>
+              <input type="radio" name="member[role]" checked value="admin"> Admin
+              <div class="form-text">
+                All permission of this group
+              </div>
+            </label>
+          </div>
+          <div class="form-checkbox">
+            <label>
+              <input type="radio" name="member[role]" value="editor"> Editor
+              <div class="form-text">
+                Can create, update docs or repositories of this group.
+              </div>
+            </label>
+          </div>
+          <div class="form-checkbox">
+            <label>
+              <input type="radio" name="member[role]" value="reader"> Reader
+              <div class="form-text">
+                Readonly mode for all resources of this group.
+              </div>
+            </label>
+          </div>
         </div>
 
         <div class="form-group">
