@@ -40,7 +40,7 @@ class ActiveSupport::TestCase
   end
 
   def read_file(fname)
-    load_file(fname).read
+    load_file(fname).read.strip
   end
 
   def load_file(fname)

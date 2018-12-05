@@ -1,5 +1,9 @@
 <h1 id="markdown-sample">
-  <a href="#markdown-sample" class="heading-anchor">#</a>Markdown Sample</h1>
+<a href="#markdown-sample" class="heading-anchor">#</a>Markdown Sample</h1>
+<blockquote>
+<p>Welcome to use Markdown 🎉</p>
+</blockquote>
+
 <p><a href="http://github.com">GitHub</a></p>
 
 <p><img src="/images/logo.png" alt="GitHub Logo">
@@ -14,7 +18,8 @@ Format: <img src="https://github.com" alt="Alt Text"></p>
 </ol>
 
 <p><a href="/someone" class="user-mention" title="@someone"><i>@</i>someone</a> Hello there.</p>
-<h2 id="sometimes-you-want-bullet-points-"><a href="#sometimes-you-want-bullet-points-" class="heading-anchor">#</a>Sometimes you want bullet points:</h2>
+<h2 id="sometimes-you-want-bullet-points-">
+<a href="#sometimes-you-want-bullet-points-" class="heading-anchor">#</a>Sometimes you want bullet points:</h2>
 <ul>
 <li>Start a line with a star</li>
 <li>Profit!</li>
@@ -29,16 +34,28 @@ Format: <img src="https://github.com" alt="Alt Text"></p>
 <ul>
 <li>Like this</li>
 <li>And this</li>
-</ul></li>
 </ul>
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">BookLab</span><span class="o">::</span><span class="no">Markdown</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="s2">"Hello **world**"</span><span class="p">)</span>
-</code></pre></div><h3 id="some-"><a href="#some-" class="heading-anchor">#</a>Some 中文</h3><h3 id="89a8cd116"><a href="#89a8cd116" class="heading-anchor">#</a>全是中文</h3><h2 id="tables"><a href="#tables" class="heading-anchor">#</a>Tables</h2>
-<table><thead>
+</li>
+</ul>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">BookLab</span>
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+    <span class="k">def</span> <span class="nf">markdown</span>
+      <span class="no">BookLab</span><span class="o">::</span><span class="no">Markdown</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="s2">"Hello **world**"</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><h3 id="some-">
+<a href="#some-" class="heading-anchor">#</a>Some 中文</h3><h3 id="89a8cd116">
+<a href="#89a8cd116" class="heading-anchor">#</a>全是中文</h3><h2 id="tables">
+<a href="#tables" class="heading-anchor">#</a>Tables</h2>
+<table>
+<thead>
 <tr>
 <th>First Header</th>
 <th>Second Header</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td>Content from cell 1</td>
 <td>Content from cell 2</td>
@@ -47,4 +64,5 @@ Format: <img src="https://github.com" alt="Alt Text"></p>
 <td>Content in the first column</td>
 <td>Content in the second column</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>

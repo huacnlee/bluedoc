@@ -137,12 +137,13 @@ class DocTest < ActiveSupport::TestCase
   end
 
   test ".draft_body" do
-    doc = create(:doc, body: "AAA")
-    assert_equal "AAA", doc.body_plain
+    body = read_file("sample.md")
+    doc = create(:doc, body: body)
+    assert_equal body, doc.body_plain
     assert_equal doc.body_plain, doc.draft_body_plain
 
     doc.update(draft_body: "BBB")
-    assert_equal "AAA", doc.body_plain
+    assert_equal body, doc.body_plain
     assert_equal "BBB", doc.draft_body_plain
   end
 

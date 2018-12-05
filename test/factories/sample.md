@@ -1,5 +1,7 @@
 # Markdown Sample
 
+> Welcome to use Markdown 🎉
+
 [GitHub](http://github.com)
 
 ![GitHub Logo](/images/logo.png)
@@ -26,7 +28,13 @@ Sometimes you want numbered lists:
   - And this
 
 ```rb
-BookLab::Markdown.render("Hello **world**")
+class BookLab
+  class << self
+    def markdown
+      BookLab::Markdown.render("Hello **world**")
+    end
+  end
+end
 ```
 
 ### Some 中文
