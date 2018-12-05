@@ -22,6 +22,14 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
         assert_select ".comment", 2 do
           assert_select ".add-reaction-btn", 0
         end
+
+        comments.each do |comment|
+          assert_select "details#comment-#{comment.id}-menu-button"
+          assert_select "clipboard-copy" do
+            assert_select "[data-clipboard-text=?]", share.to_url + "#comment-#{comment.id}"
+            assert_select "[data-clipboard-tooltip-target=?]", "#comment-#{comment.id}-menu-button"
+          end
+        end
       end
       assert_select "form.new_comment", 0
       assert_select "#comment-form-blankslate" do
@@ -51,6 +59,12 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       assert_select "form.new_comment" do
         assert_select "textarea.form-control"
       end
+    end
+
+    # close share
+    share.destroy
+    assert_raise(ActiveRecord::RecordNotFound) do
+      get share.to_path
     end
   end
 end
