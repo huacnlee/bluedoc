@@ -12,7 +12,7 @@
       <div class="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left Box box-shadow-large" style="width: 420px">
         <h4 class="mb-2"><%= icon_tag("web") %> Share doc</h4>
         <% if doc.share %>
-          <p class="description">Anyone visit doc via the share link:</p>
+          <p class="description">Everyone can visits this doc with the share link:</p>
           <div class="form-group">
             <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
           </div>

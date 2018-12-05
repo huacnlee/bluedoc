@@ -169,7 +169,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "details.doc-share-button-box" do
       assert_select "summary .text", text: "Sharing"
       assert_select ".dropdown-menu" do
-        assert_select ".description", text: "Anyone visit doc via the share link:"
+        assert_select ".description", text: "Everyone can visits this doc with the share link:"
         assert_select "input[value=?]", share.to_url
         assert_select ".btn-cancel-share" do
           assert_select "[href=?]", doc.to_path("/share?unshare=1")
