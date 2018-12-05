@@ -5,7 +5,7 @@
 You need install depends softwares first:
 
 ```bash
-$ brew install node imagemagic postgresql elasticearch redis
+$ brew install node imagemagick postgresql elasticsearch redis
 ```
 
 Start development server:
