@@ -26,7 +26,7 @@
     <% end %>
 
     <% if can? :update, @doc %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 ml-1" %>
+    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
     <% end %>
 
     <%= render "share_button", doc: @doc %>
