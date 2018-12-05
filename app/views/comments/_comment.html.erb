@@ -13,13 +13,13 @@
           <%= render "/reactions/new_button", reaction: Reaction.new(subject: comment) %>
         <% end %>
 
-        <details class="dropdown details-reset details-overlay d-inline-block ml-2">
+        <details id="comment-<%= comment.id %>-menu-button" class="dropdown details-reset details-overlay d-inline-block ml-2">
           <summary aria-haspopup="true">
             <%= icon_tag("ellipsis-v") %>
           </summary>
           <div class="dropdown-menu dropdown-menu-sw">
             <ul>
-              <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text="<%= request.url %>#comment-<%= comment.id %>">Copy link</clipboard-copy></li>
+              <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text="<%= request.url %>#comment-<%= comment.id %>" data-clipboard-tooltip-target="#comment-<%= comment.id %>-menu-button">Copy link</clipboard-copy></li>
               <% if current_user %>
                 <li><%= link_to "Reply", reply_comment_path(comment), class: "dropdown-item", data: { remote: true, "close-dialog" => true } %></li>
               <% end %>

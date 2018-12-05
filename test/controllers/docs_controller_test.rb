@@ -111,12 +111,17 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
+
+    # comments
     assert_select "#comment-watch-box", 0
     assert_select "#new_comment", 0
     assert_select "#comment-form-blankslate" do
       assert_select "h2", "Sign in to write comment"
       assert_select "a.btn[href=?]", new_user_session_path
     end
+
+    # share
+    assert_select ".doc-share-button-box", 0
 
     sign_in @user
     get doc.to_path
@@ -125,6 +130,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#new_comment" do
       assert_select "textarea[name=?]", "comment[body]"
     end
+    assert_select ".doc-share-button-box", 0
 
     # private
     doc = create(:doc, repository: @private_repo)
@@ -140,6 +146,38 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_select ".label-private"
+    assert_select ".doc-share-button-box", 0
+
+    user = sign_in_role :editor, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "details.doc-share-button-box" do
+      assert_select "summary .text", text: "Share"
+      assert_select ".dropdown-menu" do
+        assert_select ".description", text: "Create a share link to allow non-member visit this doc."
+        assert_select ".btn-open-share" do
+          assert_select "[href=?]", doc.to_path("/share")
+          assert_select "[data-method=?]", "post"
+          assert_select "[data-remote=?]", "true"
+        end
+      end
+    end
+
+    share = Share.create_share(doc, user: user)
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select "details.doc-share-button-box" do
+      assert_select "summary .text", text: "Sharing"
+      assert_select ".dropdown-menu" do
+        assert_select ".description", text: "Anyone visit doc via the share link:"
+        assert_select "input[value=?]", share.to_url
+        assert_select ".btn-cancel-share" do
+          assert_select "[href=?]", doc.to_path("/share?unshare=1")
+          assert_select "[data-method=?]", "post"
+          assert_select "[data-remote=?]", "true"
+        end
+      end
+    end
   end
 
   test "GET /:user/:repo/:slug with doc not exist" do

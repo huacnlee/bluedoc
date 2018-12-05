@@ -21,15 +21,15 @@
 
   <% if @doc %>
   <div class="navbar-buttons">
-    <% if current_user %>
-      <%= action_button_tag(@doc, :star, class: "btn btn-sm") %>
+    <% if can? :read, @doc %>
+      <%= action_button_tag(@doc, :star, class: "btn btn-sm btn-star-doc") %>
+    <% end %>
+
+    <% if can? :update, @doc %>
+    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 ml-1" %>
     <% end %>
 
     <%= render "share_button", doc: @doc %>
-
-    <% if can? :update, @doc %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
-    <% end %>
 
     <details class="dropdown details-reset details-overlay d-inline-block">
       <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
@@ -38,16 +38,20 @@
 
       <ul class="dropdown-menu dropdown-menu-sw">
         <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+
         <% if can? :create_doc, @repository %>
         <li><a class="dropdown-item" href="<%= new_user_repository_doc_path(@user, @repository) %>">Create new doc</a></li>
         <% end %>
-        <li class="dropdown-divider" role="separator"></li>
+
         <% if can? :update, @doc %>
+         <li class="dropdown-divider" role="separator"></li>
         <li><a class="dropdown-item" href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
         <li class="dropdown-divider" role="separator"></li>
         <li><a class="dropdown-item" href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
         <% end %>
+
         <% if can? :destroy, @doc %>
+         <li class="dropdown-divider" role="separator"></li>
         <li><a class="dropdown-item text-red" data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
         <% end %>
       </ul>
