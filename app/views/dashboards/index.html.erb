@@ -32,7 +32,7 @@
     <div class="col-3 sub-sidebar pl-5">
       <% if !@groups.blank? %>
       <div class="sub-title">Your Groups</div>
-      <div class="Box">
+      <div class="Box mb-3">
         <div class="Box-body">
           <div class="group-list clearfix">
             <% @groups.each do |group| %>
@@ -46,6 +46,8 @@
         </div>
       </div>
       <% end %>
+
+      <%= raw Setting.dashboard_sidebar_html %>
     </div>
   </div>
 </div>

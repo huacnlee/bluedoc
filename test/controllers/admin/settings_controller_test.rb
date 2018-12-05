@@ -11,7 +11,8 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     setting_params = {
       anonymous_enable: "0",
       admin_emails: "foo@gmail.com\nbar@gmail.com",
-      application_footer_html: "<span>hello</span>"
+      application_footer_html: "<span>hello</span>",
+      dashboard_sidebar_html: "<span>world</span>"
     }
 
     sign_in_admin @user

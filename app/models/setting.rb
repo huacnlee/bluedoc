@@ -35,6 +35,7 @@ class Setting < RailsSettings::Base
 
   field :admin_emails, default: "admin@booklab.io", type: :array
   field :application_footer_html, default: "", type: :string
+  field :dashboard_sidebar_html, default: "", type: :string
   field :anonymous_enable, default: "1", type: :boolean
 
   class << self

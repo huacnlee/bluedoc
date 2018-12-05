@@ -33,6 +33,14 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label class="controler-label">Dashboard Sidebar HTML</label>
+    <%= f.text_area :dashboard_sidebar_html, value: Setting.dashboard_sidebar_html, class: "form-control", style: "height: 200px; min-height: 200px"  %>
+    <div class="form-text">
+      Customize the sidebar html in dashboard page for user signed in.
+    </div>
+  </div>
+
   <div class="form-action">
     <%= f.submit "Save", class: "btn btn-primary mr-1" %>
   </div>
