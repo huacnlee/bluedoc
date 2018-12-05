@@ -25,7 +25,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   test "sanitize markdown" do
     assert_sanitize_markdown "<p>alert() foo</p>", "<script>alert()</script> foo"
-    assert_sanitize_markdown "<p>.body {} foo</p>", "<style>.body {}</style> foo"
+    assert_sanitize_markdown "<p>.body {} foo</p>", " foo"
   end
 
   test "icon_tag" do

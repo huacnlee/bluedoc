@@ -13,8 +13,8 @@ class BookLab::SanitizeTest < ActionView::TestCase
 
   test "links" do
     assert_sanitize "<a>link</a>", '<a href="javascript:alert()">link</a>'
-    assert_sanitize "alert();", "<script>alert("");</script>"
-    assert_sanitize ".body{}", "<style>.body{}</style>"
+    assert_sanitize "foo", "<script>alert("");</script>foo"
+    assert_sanitize "foobar", "foo<style>.body{}</style>bar"
     assert_sanitize "", '<iframe src="https://foobar.com"></iframe>'
 
     html = '<a href="http://www.google.com" data-floor="100" target="_blank" rel="nofollow" class="btn btn-lg">111</a>'
