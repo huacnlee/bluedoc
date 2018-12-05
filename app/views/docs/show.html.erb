@@ -40,10 +40,6 @@
         <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
         <li><a class="dropdown-item" data-close-dialog href="javascript:window.print()">Print document...</a></li>
 
-        <% if can? :create_doc, @repository %>
-        <li><a class="dropdown-item" href="<%= new_user_repository_doc_path(@user, @repository) %>">Create new doc</a></li>
-        <% end %>
-
         <% if can? :update, @doc %>
          <li class="dropdown-divider" role="separator"></li>
         <li><a class="dropdown-item" href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>

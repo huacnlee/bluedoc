@@ -17,12 +17,12 @@
             <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
           </div>
           <div class="action mt-1 clearfix">
-            <%= link_to icon_tag("delete-link", label: "Unshare"), doc.to_path("/share?unshare=1"), class: "btn btn-sm btn-danger btn-cancel-share", method: :post, remote: true %>
+            <%= link_to icon_tag("delete-link", label: "Unshare"), doc.to_path("/share?unshare=1"), class: "btn btn-sm btn-danger btn-cancel-share", method: :post, remote: true, "disable-with": "Submiting..." %>
             <clipboard-copy class="btn btn-sm float-right" data-clipboard-text="<%= doc.share.to_url %>"><i class="fas fa-copy-link"></i> Copy Link</clipboard-copy>
           </div>
         <% else %>
           <p class="description">Create a share link to allow non-member visit this doc.</p>
-          <div class="action mt-1"><%= link_to "Open share", doc.to_path("/share"), class: "btn btn-open-share btn-sm btn-primary", method: :post, remote: true %>
+          <div class="action mt-1"><%= link_to "Open share", doc.to_path("/share"), class: "btn btn-open-share btn-sm btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
         <% end %>
       </div>
     </div>

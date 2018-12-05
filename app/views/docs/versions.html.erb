@@ -14,8 +14,8 @@
     <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
       local: true, remote: true) do |form| %>
       <input type="hidden" name="version_id">
-      <button type="submit" disabled class="btn btn-revert btn-primary px-5">Revert</button>
-      <%= link_to "Cancel", @doc.to_path, class: "btn" %>
+      <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5">Revert</button>
+      <%= link_to "Cancel", @doc.to_path, class: "btn btn-sm" %>
     <% end %>
   </div>
 </div>
