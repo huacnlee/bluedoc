@@ -40,7 +40,7 @@
         <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
         <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#">Print document...</a></li>
         <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> Wide mode</a></li>
+        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> Fullscreen</a></li>
 
         <% if can? :update, @doc %>
           <li class="dropdown-divider" role="separator"></li>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="navbar-wide-mode" style="display: none">
-  <a href="#" class="btn btn-wide-mode-exit"><i class="fas fa-exit-wide-mode"></i> Normal mode</a>
+  <a href="#" class="btn btn-wide-mode-exit">Exit</a>
 </div>
 <% end %>
 

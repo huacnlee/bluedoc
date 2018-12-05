@@ -13,16 +13,14 @@ document.addEventListener("turbolinks:load", () => {
   // wide mode
   $(".reader-body").on("click", ".btn-wide-mode", (e) => {
     e.preventDefault();
-    // GoInFullscreen($(".reader-body")[0]);
-    $(".reader-body").addClass("reader-wide-mode");
+    GoInFullscreen($(".reader-body")[0]);
   });
 
 
   // wide mode
   $(".reader-body").on("click", ".btn-wide-mode-exit", (e) => {
     e.preventDefault();
-    $(".reader-body").removeClass("reader-wide-mode");
-    // GoOutFullscreen();
+    GoOutFullscreen();
   });
 
   BodyToc.init();
