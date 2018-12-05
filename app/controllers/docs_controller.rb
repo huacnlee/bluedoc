@@ -2,7 +2,7 @@
 
 class DocsController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share]
 
   before_action :set_user
   before_action :set_repository

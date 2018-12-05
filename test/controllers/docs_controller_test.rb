@@ -485,4 +485,35 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     assert_match %(Turbolinks.visit(location.href)), response.body
   end
+
+  test "POST /:user/:repo/:slug/share" do
+    group = create(:group)
+    repo = create(:repository, user: group)
+    doc = create(:doc, repository: repo)
+
+    post doc.to_path("/share"), xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post doc.to_path("/share"), xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :reader, group: group
+    post doc.to_path("/share"), xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: group
+    post doc.to_path("/share"), xhr: true
+    assert_equal 200, response.status
+    assert_not_nil doc.share
+    assert_match /doc-share-button-box/, response.body
+    assert_match /open>/, response.body
+    assert_match %($(".doc-share-button-box").replaceWith), response.body
+
+    # Unshare
+    post doc.to_path("/share?unshare=1"), xhr: true
+    assert_equal 200, response.status
+    doc.reload
+    assert_nil doc.share
+  end
 end
