@@ -71,7 +71,7 @@ class Notification < ActiveRecord::Base
     when "comment" then self.target&.to_url
     when "mention" then self.target&.to_url
     else
-      return Setting.host
+      Setting.host
     end
   end
 

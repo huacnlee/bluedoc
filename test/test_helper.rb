@@ -11,7 +11,7 @@ require "rails/test_help"
 require "database_cleaner"
 require_relative "./support/groups/sign_in_helpers"
 
-DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.orm = :active_record
 OmniAuth.config.test_mode = true
 # Set Setting.host same as Rails integration test default host

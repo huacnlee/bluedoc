@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Doc
   def lock!(user)
     Rails.cache.write(write_lock_key, user.id, expires_in: 30.seconds)

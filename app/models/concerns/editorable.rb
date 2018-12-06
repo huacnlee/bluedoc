@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Editorable
   def editors
     users = Rails.cache.fetch([self.cache_key, "editors/without-avatar", self.editor_ids]) do

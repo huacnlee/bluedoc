@@ -4,7 +4,7 @@ require "open-uri"
 
 module BookLab
   class Blob
-    class FileNotFoundError < Exception; end;
+    class FileNotFoundError < Exception; end
 
     class << self
       IMAGE_SIZES = { tiny: 36, small: 64, medium: 96, large: 440, xlarge: 1600 }

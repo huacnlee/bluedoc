@@ -72,5 +72,4 @@ class RepositorySettingsController < Users::ApplicationController
     def repository_params
       params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc)
     end
-
 end

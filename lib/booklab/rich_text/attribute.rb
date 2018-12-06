@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab
   module RichText
     # Fork ActionText has_rich_text method from:
