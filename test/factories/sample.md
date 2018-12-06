@@ -37,7 +37,9 @@ class BookLab
 end
 ```
 
-### Some 中文
+### Test HTML chars
+
+The `<>`, `><`, `>` and `<` will keep, but <b>will</b> will render as html.
 
 ### 全是中文
 
