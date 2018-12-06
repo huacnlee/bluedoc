@@ -21,7 +21,7 @@ class Repository
   end
 
   def toc_text
-    return toc&.body&.to_plain_text if toc.present?
+    return toc&.body if toc.present?
     toc_by_docs_text
   end
 

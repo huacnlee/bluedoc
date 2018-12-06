@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/rails/actiontext.git
-  revision: 18974137be2c4027dfcf430668edd712e7ec011b
-  specs:
-    actiontext (0.1.0)
-      nokogiri
-      rails (>= 5.2.0)
-
-GIT
   remote: https://github.com/rails/webpacker.git
   revision: 99c0dd9a1e5fa9ca9ad840d7e308c12c4e8eb9ec
   specs:
@@ -348,7 +340,6 @@ PLATFORMS
 
 DEPENDENCIES
   action-store
-  actiontext!
   activestorage-aliyun
   aws-sdk-s3
   booklab-toc
