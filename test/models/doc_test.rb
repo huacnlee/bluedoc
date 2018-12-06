@@ -166,6 +166,16 @@ class DocTest < ActiveSupport::TestCase
     assert_equal "New Document", doc.draft_title
     assert_equal repo.id, doc.repository_id
     assert_equal 123, doc.last_editor_id
+
+    # with :slug
+    doc = Doc.create_new(repo, 123, slug: "new-doc-123")
+    assert_equal false, doc.new_record?
+    assert_equal "new-doc-123", doc.slug
+
+    # create same slug again will give a random slug
+    assert_raise(ActiveRecord::RecordInvalid) do
+      doc = Doc.create_new(repo, 123, slug: "new-doc-123")
+    end
   end
 
   test "_search_body" do

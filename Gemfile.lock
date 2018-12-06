@@ -61,7 +61,6 @@ GEM
     aliyun-sdk (0.7.0)
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
-    ansi (1.5.0)
     arel (9.0.0)
     ast (2.4.0)
     aws-eventstream (1.0.1)
@@ -107,9 +106,6 @@ GEM
       elasticsearch-transport (= 6.1.0)
     elasticsearch-api (6.1.0)
       multi_json
-    elasticsearch-extensions (0.0.30)
-      ansi
-      elasticsearch
     elasticsearch-model (6.0.0)
       activesupport (> 3)
       elasticsearch (> 1)
@@ -353,7 +349,6 @@ DEPENDENCIES
   cancancan
   database_cleaner
   devise
-  elasticsearch-extensions
   elasticsearch-model
   elasticsearch-rails
   exception-track

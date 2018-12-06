@@ -108,6 +108,20 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get @repo.to_path("/docs/new")
     doc = @repo.docs.last
     assert_redirected_to doc.to_path("/edit")
+
+    # with slug param
+    assert_changes -> { @repo.docs.count }, 1 do
+      get @repo.to_path("/docs/new"), params: { slug: "hello-world" }
+    end
+    doc = @repo.docs.last
+    assert_equal "hello-world", doc.slug
+    assert_redirected_to doc.to_path("/edit")
+
+    # with same slug
+    assert_no_changes -> { @repo.docs } do
+      get @repo.to_path("/docs/new"), params: { slug: "hello-world" }
+    end
+    assert_redirected_to doc.to_path
   end
 
   test "GET /:user/:repo/:slug" do
@@ -197,12 +211,24 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     # allow open page even doc not exist
     get @repo.to_path("/not-exist-doc")
     assert_equal 200, response.status
-    assert_select ".blankslate"
-    assert_match /Doc not found/, response.body
+    assert_select ".doc-not-found" do
+      assert_select ".title", text: "Doc not found"
+      assert_select ".actions", 0
+    end
 
     # but private repo still not allow
     get @private_repo.to_path("/not-exist-doc")
     assert_equal 403, response.status
+
+    sign_in_role :editor, group: @private_repo.user
+    get @private_repo.to_path("/not-exist-doc")
+    assert_equal 200, response.status
+    assert_select ".doc-not-found" do
+      assert_select ".title", text: "Doc not found"
+      assert_select ".actions" do
+        assert_select ".btn[href=?]", new_user_repository_doc_path(@private_repo.user, @private_repo, slug: "not-exist-doc")
+      end
+    end
   end
 
   test "GET /:user/:repo/:slug with Toc enable/disabled" do

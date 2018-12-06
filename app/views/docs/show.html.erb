@@ -87,9 +87,20 @@
   <div class="doc-main main-content py-4">
 
     <% if @doc.blank? %>
-      <div class="blankslate">
-        <h3>Doc not found</h3>
-        <p>Sorry, this Doc does not exists.</p>
+      <div class="doc-not-found text-center p-5">
+        <div class="icon-box text-center mb-2">
+          <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
+        </div>
+        <h3 class="title">Doc not found</h3>
+
+        <p>Sorry, this Doc does not exists, please checkout that URL is correct.</p>
+        <p class="text-red"><%= request.url %></p>
+
+        <% if can? :create_doc, @repository %>
+          <div class="actions mt-3" data-turbolinks="false">
+            <%= link_to "Create Doc for this URL", new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
+          </div>
+        <% end %>
       </div>
     <% else %>
       <h1 class="doc-title"><%= @doc.title %></h1>
