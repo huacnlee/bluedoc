@@ -1,9 +1,11 @@
 /data/
 /log/
+/logs/
 /tmp/
 /public/packs
 /public/packs-test
 /public/system/
+/public/storage/
 /storage/
 /public/uploads/
 /test/
