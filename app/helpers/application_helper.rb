@@ -44,7 +44,7 @@ module ApplicationHelper
       return content_tag(:span, class: "time", title: t.iso8601) { l t, format: :short }
     end
 
-    content_tag(:span, class: "timeago", title: t.iso8601) { t.iso8601 }
+    content_tag(:span, class: "timeago", datetime: t.iso8601, title: t.iso8601) { l t, format: :short }
   end
 
   def title_tag(*texts)

@@ -37,7 +37,7 @@ class ApplicationHelperTest < ActionView::TestCase
     t = Time.now
 
     html = timeago(t)
-    assert_equal %(<span class="timeago" title="#{t.iso8601}">#{t.iso8601}</span>), html
+    assert_equal %(<span class="timeago" datetime="#{t.iso8601}" title="#{t.iso8601}">#{l t, format: :short}</span>), html
 
     t = 1.month.ago
     html = timeago(t)
