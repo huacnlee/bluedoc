@@ -1,0 +1,38 @@
+<% if doc %>
+  <div class="doc-item clearfix" id="doc-<%= doc.id %>">
+    <div class="icon-box">
+      <%= icon_tag "doc" %>
+    </div>
+    <div class="infos">
+      <h4>
+        <%= doc_title_tag(doc) %>
+
+        <% if doc.share %>
+          <span class="doc-icon-share tooltipped tooltipped-ne" aria-label="Sharing"><i class="fas fa-share"></i></span>
+        <% end %>
+      </h4>
+      <div class="desc text-gray pr-4">
+        <% if @repository && doc.repository_id != @repository.id %>
+        <span class="repo mr-1">
+          <%= user_name_tag(doc.repository&.user) %> <span class="divider">/</span>
+          <%= repository_name_tag(doc.repository) %>
+        </span>
+        <% end %>
+
+        <span class="editor mr-1">
+          <%= user_name_tag(doc.last_editor) %>
+        </span>
+
+        <span class="time">
+          <span class="tooltipped tooltipped-ne" aria-label="Last updated at"><i class="fas fa-clock"></i></span>
+          <%= timeago doc.body_updated_at %>
+        </span>
+      </div>
+    </div>
+    <div class="actions hide-sm">
+      <% if can? :destroy, doc %>
+        <%= link_to icon_tag("trash"), doc.to_path, data: { method: :delete, remote: true, confirm: "Are you sure delete this Doc?" }, class: "btn-link btn-remove-doc" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

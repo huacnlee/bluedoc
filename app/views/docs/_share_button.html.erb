@@ -5,12 +5,12 @@
 <details
   class="doc-share-button-box position-relative details-overlay details-reset d-inline-block hide-sm ml-1" <%= open_attr %>>
   <summary class="btn btn-sm btn-primary">
-    <%= icon_tag("web") %> <span class="text"><% if doc.share %>Sharing<% else %>Share<% end %></span>
+    <%= icon_tag("share") %> <span class="text"><% if doc.share %>Sharing<% else %>Share<% end %></span>
   </summary>
   <div class="doc-share-button-box position-relative text-right">
     <div class="position-relative">
       <div class="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left Box box-shadow-large" style="width: 420px">
-        <h4 class="mb-2"><%= icon_tag("web") %> Share doc</h4>
+        <h4 class="mb-2"><%= icon_tag("share") %> Share doc</h4>
         <% if doc.share %>
           <p class="description">Everyone can visits this doc with the share link:</p>
           <div class="form-group">

@@ -55,7 +55,7 @@ class RepositoriesController < Users::ApplicationController
   def docs
     authorize! :read, @repository
 
-    @docs = @repository.docs.includes(:last_editor).recent.page(params[:page]).per(50)
+    @docs = @repository.docs.includes(:last_editor, :share).recent.page(params[:page]).per(50)
   end
 
   # GET /:user/:repo/docs/search

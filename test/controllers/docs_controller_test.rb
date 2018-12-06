@@ -53,6 +53,15 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get @private_repo.to_path("/docs/list")
     assert_equal 200, response.status
     assert_select "#doc-#{doc.id} .btn-remove-doc", 1
+
+    doc1 = create(:doc, repository: @private_repo)
+    share = create(:share, shareable: doc1)
+    get @private_repo.to_path("/docs/list")
+    assert_equal 200, response.status
+
+    assert_select "#doc-#{doc1.id}" do
+      assert_select ".doc-icon-share"
+    end
   end
 
   test "GET /:user/:repo/docs/search" do
