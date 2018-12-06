@@ -1,3 +1,5 @@
+@import './toc-item.scss';
+
 .toc-form {
   width: 100%;
   height: 70px;
@@ -130,111 +132,8 @@
   }
 }
 
-.toc-item-drageable {
-  list-style: none;
-  line-height: 24px;
-  overflow: hidden;
-  background: #FFF;
-  padding: 6px 13px;
-  border-bottom: 1px solid #f0f0f0;
-  margin: 0;
-  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-
-  &:first-child { border-radius: 3px 3px 0 0; }
-  &:last-child { border-radius: 0 0 3px 3px; }
-
-  .indent-buttons {
-    font-size: 14px;
-    float: left;
-    margin-right: 15px;
-    padding-top: 6px;
-
-    a {
-      color: #ccc;
-      &:hover { color: #666; }
-    }
-    .indent-right { margin-bottom: 8px; }
-  }
-
-  &.toc-item-d0 {
-    .indent-left { display: none; }
-  }
-  &.toc-item-d5 {
-    .indent-right { display: none; }
-  }
-
-  @for $i from 0 through 5 {
-    &.toc-item-d#{$i} {
-      margin-left: ($i * 20px) !important;
-    }
-  }
-
-  .form-inplace-edit,
-  .item-editable {
-    margin-top: 3px;
-    padding: 3px 8px;
-    min-width: 60px;
-    border: 0px;
-    border-bottom: 1px solid #fff;
-
-
-    &.placeholder {
-      color: #eee;
-    }
-
-    &:hover {
-      background: #fefef0;
-    }
-  }
-
-  .form-inplace-edit {
-    outline: none;
-    padding: 3px 8px;
-    border-bottom: 1px dashed #ccc;
-    background: #fcfcfc !important;
-    display: inline;
-  }
-
-  .title { float: left;  }
-  .slug { float: right; }
-
-  .draghandle {
-    float: left;
-    padding: 6px 10px;
-    margin-right: 10px;
-    cursor: move;
-    border-radius: 3px;
-    border: 1px solid #fefefe;
-    color: #aaa;
-    font-size: 12px;
-
-    &:active,
-    &:hover {
-      border: 1px solid #fefefe;
-    }
-  }
-
-  .btn-delete {
-    float: right;
-    opacity: 0;
-    color: #666;
-    margin-top: 8px;
-    margin-left: 15px;
-  }
-
-  &:hover {
-    .btn-delete { opacity: 1; }
-  }
-}
-
 .toc-editor {
   border-radius: 3px;
-
   .toc-item:last-child { border: 0; }
 }
 

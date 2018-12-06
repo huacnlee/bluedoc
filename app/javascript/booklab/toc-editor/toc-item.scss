@@ -1,0 +1,88 @@
+
+.toc-item-drageable {
+  list-style: none;
+  line-height: 24px;
+  overflow: hidden;
+  background: #FFF;
+  padding: 6px 13px;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0;
+  -webkit-touch-callout: none;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  &:first-child { border-radius: 3px 3px 0 0; }
+  &:last-child { border-radius: 0 0 3px 3px; }
+
+  .indent-left,
+  .indent-right {
+    font-size: 14px;
+    color: #ccc;
+    padding-top: 6px;
+    &:hover { color: #666; }
+  }
+
+  &.toc-item-d0 {
+    .indent-left { display: none; }
+  }
+  &.toc-item-d5 {
+    .indent-right { display: none; }
+  }
+
+  @for $i from 0 through 5 {
+    &.toc-item-d#{$i} {
+      margin-left: ($i * 20px) !important;
+    }
+  }
+
+  .cell-wrap {
+    flex: 1;
+    padding-left: 20px;
+    .form-edit:focus {
+      outline: none;
+      border-bottom: 1px dashed #ccc;
+      background: #fcfcfc !important;
+      display: inline-block;
+    }
+  }
+  .form-edit {
+    padding: 6px 8px;
+    min-width: 60px;
+    border: 0px;
+    border-bottom: 1px solid #fff;
+    &:hover {
+      background: #fefef0;
+    }
+  }
+
+  .title {
+    float: left;
+    text-align: left;
+  }
+  .slug { 
+    float: right;
+    text-align: right;
+  }
+
+  .draghandle {
+    padding: 6px 10px;
+    margin-right: 10px;
+    cursor: move;
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  .btn-delete {
+    order: 9;
+    opacity: 0;
+    color: #666;
+    margin-top: 8px;
+    margin-left: 15px;
+    transition: opacity .1s ease;
+  }
+
+  &:hover {
+    .btn-delete { opacity: 1; }
+  }
+}

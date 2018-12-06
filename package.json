@@ -2,7 +2,8 @@
   "name": "booklab",
   "private": true,
   "scripts": {
-    "start": "./bin/webpack-dev-server"
+    "start": "./bin/webpack-dev-server",
+    "build": "./bin/webpack"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -25,6 +26,7 @@
     "tocbot": "^4.4.2"
   },
   "devDependencies": {
+    "node-sass": "^4.10.0",
     "webpack-dev-server": "^3.1.9"
   }
 }
