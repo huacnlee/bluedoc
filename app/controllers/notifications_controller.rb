@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class NotificationsController < ::ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = notifications.includes(:actor).order('id desc').page(params[:page]).per(10)
+    @notifications = notifications.includes(:actor).order("id desc").page(params[:page]).per(10)
     if params[:tab] != "all"
       @notifications = @notifications.where(read_at: nil)
     end

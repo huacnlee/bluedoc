@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Repository
   include Editorable
 
@@ -10,5 +12,4 @@ class Repository
 
       self.add_editor(Current.user&.id)
     end
-
 end

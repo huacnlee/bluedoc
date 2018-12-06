@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reaction < ApplicationRecord
   belongs_to :subject, polymorphic: true, required: false
   belongs_to :user, required: false

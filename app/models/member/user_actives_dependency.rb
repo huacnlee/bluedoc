@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Member
   after_commit :track_user_active, on: :create
 

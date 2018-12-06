@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # notifications Config
 Notifications.configure do
   # Class name of you User model, default: 'User'

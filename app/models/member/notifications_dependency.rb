@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Member
   after_commit :send_new_member_email, on: :create
 

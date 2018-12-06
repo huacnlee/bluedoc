@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group
   include Searchable
   include Elasticsearch::Model
