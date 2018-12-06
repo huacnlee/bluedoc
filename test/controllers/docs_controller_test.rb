@@ -164,6 +164,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       assert_select "summary .text", text: "Share"
       assert_select ".dropdown-menu" do
         assert_select ".description", text: "Create a share link to allow non-member visit this doc."
+         assert_select ".share-user", 0
         assert_select ".btn-open-share" do
           assert_select "[href=?]", doc.to_path("/share")
           assert_select "[data-method=?]", "post"
@@ -184,6 +185,9 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
           assert_select "[href=?]", doc.to_path("/share?unshare=1")
           assert_select "[data-method=?]", "post"
           assert_select "[data-remote=?]", "true"
+        end
+        assert_select ".share-user" do
+          assert_select "a.user-name", text: share.user.slug
         end
       end
     end
