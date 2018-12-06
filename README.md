@@ -1,5 +1,7 @@
 # BookLab
 
+[![CircleCI](https://circleci.com/gh/huacnlee/booklab/tree/master.svg?style=shield)](https://circleci.com/gh/huacnlee/booklab/tree/master)
+
 ## Development
 
 You need install depends softwares first:
