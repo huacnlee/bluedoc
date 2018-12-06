@@ -48,6 +48,12 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
     assert_html_equal %(<p><a class="attachment-file" href="/uploads/foobar" title="" target="_blank">This is a attachment</a></p>), out
   end
 
+  test "html chars" do
+    raw = "The > or < will >< keep, and <b>will</b> strong."
+    out = BookLab::Markdown.render(raw)
+    assert_equal %(<p>The &gt; or &lt; will &gt;&lt; keep, and <b>will</b> strong.</p>), out
+  end
+
   test "render full" do
     raw = read_file("sample.md")
     out = BookLab::Markdown.render(raw)
