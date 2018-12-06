@@ -89,6 +89,12 @@ class BookLab::SanitizeTest < ActionView::TestCase
     assert_sanitize "", html
   end
 
+  test "html chars" do
+    raw = "The > or < will >< keep, and <b>will</b> strong."
+    out = sanitize_html(markdown(raw))
+    assert_equal "<p>The &gt; or &lt; will &gt;&lt; keep, and <b>will</b> strong.</p>", out
+  end
+
   private
 
     def assert_sanitize(expected, html)
