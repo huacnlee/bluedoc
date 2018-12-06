@@ -13,6 +13,6 @@ module Markdownable
   end
 
   def body_plain
-    body&.body&.to_plain_text
+    body&.body
   end
 end

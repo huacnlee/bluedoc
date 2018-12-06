@@ -41,7 +41,6 @@ gem "cancancan"
 gem "activestorage-aliyun"
 gem "notifications"
 gem "action-store"
-gem "actiontext", github: "rails/actiontext", require: "action_text"
 gem "exception-track"
 
 gem "html-pipeline"
