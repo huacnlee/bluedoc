@@ -54,7 +54,6 @@ jobs:
           name: install dependencies
           command: |
             curl -o- -L https://yarnpkg.com/install.sh | bash
-            yarn global add sass
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             yarn
 
