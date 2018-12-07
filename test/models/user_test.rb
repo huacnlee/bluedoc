@@ -69,6 +69,8 @@ class UserTest < ActiveSupport::TestCase
 
   test ".repositories" do
     user = create(:user)
+    repo_other = create(:repository)
+
     repo0 = create(:repository, user_id: user.id)
     repo1 = create(:repository, user_id: user.id)
 
@@ -79,8 +81,13 @@ class UserTest < ActiveSupport::TestCase
     group1 = create(:group)
     repo3 = create(:repository, user_id: group1.id)
 
-    assert_equal 3, user.repositories.count
-    assert_equal [repo0.id, repo1.id, repo2.id], user.repositories.pluck(:id).sort
+    repo4 = create(:repository)
+    repo4.add_member(user, :reader)
+    repo5 = create(:repository)
+    repo5.add_member(user, :editor)
+
+    assert_equal 5, user.repositories.count
+    assert_equal [repo0.id, repo1.id, repo2.id, repo4.id, repo5.id], user.repositories.pluck(:id).sort
   end
 
   test "to_path" do

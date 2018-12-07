@@ -388,5 +388,4 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     member0.reload
     assert_equal "admin", member0.role
   end
-
 end

@@ -34,10 +34,6 @@ class User < ApplicationRecord
     Setting.has_admin?(self.email)
   end
 
-  def repositories
-    Repository.where(user_id: self.group_ids).order("updated_at desc")
-  end
-
   def send_welcome_mail
     UserMailer.with(user: self).welcome.deliver_later
   end
