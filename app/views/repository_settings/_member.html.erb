@@ -9,7 +9,8 @@
   <div class="member-role">
     <% if can? :manage, @repository %>
       <% if member.user_id != current_user.id %>
-        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post) do |f| %>
+        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post, html: {
+        class: "edit-member" }) do |f| %>
           <%= f.hidden_field :id %>
           <details class="details-reset details-overlay d-inline-block">
             <summary class="btn btn-sm select-menu-button"><%= member.role %></summary>
@@ -34,7 +35,9 @@
   <div class="actions d-table-cell col-1">
     <% if can? :manage, @repository %>
       <% if member.user_id != current_user.id %>
-        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :delete) do |f| %>
+        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :delete, html: {
+          class: "delete-member"
+        }) do |f| %>
           <%= f.hidden_field :id %>
           <button type="submit" class="btn-link btn-danger" data-confirm="Are you sure to remove?"><%= icon_tag("delete") %></button>
         <% end %>

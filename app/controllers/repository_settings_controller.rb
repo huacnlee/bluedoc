@@ -73,7 +73,7 @@ class RepositorySettingsController < Users::ApplicationController
       user = User.find_by_slug!(member_params[:user_slug])
 
       # Avoid change self
-      if user == current_user
+      if user.id == current_user.id
         raise ActiveRecord::RecordNotFound
       end
 
@@ -90,6 +90,9 @@ class RepositorySettingsController < Users::ApplicationController
     member_params = params.require(:member).permit(:id, :role)
 
     @member = @repository.members.find(member_params[:id])
+    if @member.user_id == current_user.id
+      raise CanCan::AccessDenied
+    end
 
     if request.delete?
       @member.destroy

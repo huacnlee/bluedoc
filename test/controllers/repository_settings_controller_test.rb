@@ -188,4 +188,205 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_equal repo.id, doc.repository_id
     end
   end
+
+  test "GET /:user/:repo/settings/collaborators" do
+    repo = create(:repository, user: @group)
+    user1 = create(:user)
+    user2 = create(:user)
+    repo.add_member(user1, :reader)
+    repo.add_member(user2, :editor)
+
+    assert_require_user do
+      get repo.to_path("/settings/collaborators")
+    end
+
+    sign_in_role :reader, group: @group
+    get repo.to_path("/settings/collaborators")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    get repo.to_path("/settings/collaborators")
+    assert_equal 403, response.status
+
+    user0 = create(:user)
+    repo.add_member(user0, :admin)
+    sign_in user0
+    admin_member = repo.members.where(user_id: user0.id).take
+    reader_member = repo.members.where(user_id: user1.id).take
+    editor_member = repo.members.where(user_id: user2.id).take
+
+    get repo.to_path("/settings/collaborators")
+    assert_equal 200, response.status
+    assert_select "title", text: "Collaborators - #{repo.name} - BookLab"
+    assert_select "#repository-members" do
+      assert_select ".repository-member", 3
+      assert_select "#member-#{admin_member.id}" do
+        assert_select "form", 0
+      end
+      assert_select "#member-#{reader_member.id}" do
+        assert_select "form.edit-member" do
+          assert_select "[action=?]", repo.to_path("/settings/collaborator")
+          assert_select ".select-menu-button", text: reader_member.role
+          assert_select ".select-menu-list" do
+            assert_select "button.select-menu-item", 3 do
+              assert_select "[type=?]", "submit"
+              assert_select "[name=?]", "member[role]"
+            end
+            assert_select "button.select-menu-item[value=reader]" do
+              assert_select "[name=?]", "member[role]"
+              assert_select ".select-menu-item-icon .fa-check", 1
+              assert_select ".select-menu-item-text", text: "reader"
+            end
+            assert_select "button.select-menu-item[value=editor]" do
+              assert_select "[name=?]", "member[role]"
+              assert_select ".select-menu-item-icon .fa-check", 0
+              assert_select ".select-menu-item-text", text: "editor"
+            end
+            assert_select "button.select-menu-item[value=admin]" do
+              assert_select "[name=?]", "member[role]"
+              assert_select ".select-menu-item-icon .fa-check", 0
+              assert_select ".select-menu-item-text", text: "admin"
+            end
+          end
+        end
+        assert_select "form.delete-member" do
+          assert_select "[method=?]", "post"
+          assert_select "[action=?]", repo.to_path("/settings/collaborator")
+          assert_select "input[name=_method]", value: "delete"
+          assert_select "input[name='member[id]']", value: reader_member.id
+        end
+      end
+      assert_select "#member-#{editor_member.id}" do
+        assert_select "form.edit-member" do
+          assert_select "[action=?]", repo.to_path("/settings/collaborator")
+          assert_select ".select-menu-button", text: editor_member.role
+          assert_select ".select-menu-list" do
+            assert_select "button.select-menu-item[value=editor]" do
+              assert_select ".select-menu-item-icon .fa-check", 1
+            end
+          end
+        end
+      end
+    end
+
+    assert_select "form.add-repository-member[method=post]" do
+      assert_select "[action=?]", repo.to_path("/settings/collaborators")
+      assert_select "auto-complete" do
+        assert_select "[src=?]", "/autocomplete/users"
+        assert_select "input[name='member[user_slug]']"
+      end
+    end
+  end
+
+  test "POST /:user/:repo/settings/collaborators" do
+    repo = create(:repository, user: @group)
+    user = create(:user)
+    member_params = {
+      user_slug: user.slug
+    }
+
+    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    assert_equal 401, response.status
+
+    sign_in user
+    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    user1 = sign_in_role :admin, group: @group
+    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    assert_equal 200, response.status
+    assert_equal :editor, repo.user_role(user)
+    member = repo.members.last
+    assert_match %($("#member-#{member.id}").remove();), response.body
+    assert_match %($("#repository-members").append), response.body
+    assert_match %($("form.add-repository-member input").val("");), response.body
+
+    # should not add self
+    member_params[:user_slug] = user1.slug
+    assert_raise(ActiveRecord::RecordNotFound) do
+      post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+      assert_equal :admin, repo.user_role(user1)
+    end
+  end
+
+  test "POST /:user/:repo/settings/collaborator" do
+    repo = create(:repository, user: @group)
+    user = create(:user)
+    member = repo.add_member(user, :editor)
+    member_params = {
+      id: member.id,
+      role: "reader"
+    }
+
+    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 401, response.status
+
+    sign_in_role :reader, group: @group
+    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 200, response.status
+    member.reload
+    assert_equal "reader", member.role
+    assert_match %($("#member-#{member.id}").replaceWith), response.body
+
+    # not allow to change self
+    user0 = create(:user)
+    member0 = repo.add_member(user0, :admin)
+    sign_in user0
+    member_params[:id] = member0.id
+    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+    member0.reload
+    assert_equal "admin", member0.role
+  end
+
+  test "DELETE /:user/:repo/settings/collaborator" do
+    repo = create(:repository, user: @group)
+    user = create(:user)
+    member = repo.add_member(user, :editor)
+    member_params = {
+      id: member.id
+    }
+
+    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 401, response.status
+
+    sign_in_role :reader, group: @group
+    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+    assert_changes -> { repo.members.count }, -1 do
+      delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    end
+    assert_equal 200, response.status
+    assert_equal false, repo.has_member?(user)
+    assert_match %($("#member-#{member.id}").remove();), response.body
+
+    # not allow to change self
+    user0 = create(:user)
+    member0 = repo.add_member(user0, :admin)
+    sign_in user0
+    member_params[:id] = member0.id
+    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    assert_equal 403, response.status
+    member0.reload
+    assert_equal "admin", member0.role
+  end
+
 end
