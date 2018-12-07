@@ -120,6 +120,10 @@ Rails.application.routes.draw do
           patch :transfer
           get :docs
           post :docs
+          get :collaborators
+          post :collaborators
+          post :collaborator
+          delete :collaborator
         end
       end
 

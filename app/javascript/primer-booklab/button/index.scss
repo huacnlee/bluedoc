@@ -25,8 +25,18 @@
 
 
 .btn-link {
-  .fas { vertical-align: middle; }
+  .fas { font-size: 17px; vertical-align: middle; color: #333; }
+  &:hover {
+    .fas { color: $primary; }
+  }
 }
+.btn-link.btn-danger {
+  background: transparent !important;
+  &:hover {
+    .fas { color: #cb2431; }
+  }
+}
+
 .btn-sm {
   padding: 4px 8px;
   font-size: 13px;
@@ -38,7 +48,7 @@
   box-shadow: 0 1px 2px 0px rgba(100, 100, 100, 0.08);
 }
 
-.btn-primary {
+.btn.btn-primary {
   @include btn-solid(#fff, $primary-bg, $primary-bg);
   font-weight: normal;
   box-shadow: 0 1px 2px 0px rgba(100, 100, 100, 0.32);
@@ -49,7 +59,7 @@
   }
 }
 
-.btn-danger {
+.btn.btn-danger {
   color: #cb2431;
   background-color: #fafbfc;
 
@@ -64,7 +74,7 @@
   border-color: #e0e0e0;
 }
 
-.btn-primary[disabled] {
+.btn.btn-primary[disabled] {
   color: rgba(32, 50, 85, 0.32);
   background-color: rgba(80, 126, 215, 0.22);
   border-color: rgba(34, 53, 90, 0.09);

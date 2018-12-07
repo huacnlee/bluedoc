@@ -1,0 +1,41 @@
+.select-menu-list {
+  max-height: 400px;
+  overflow: auto;
+  position: relative;
+}
+
+.select-menu-item {
+  border: 0;
+  border-bottom: 1px solid #eaecef;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  padding: 8px 8px 8px 30px;
+  width: 100%;
+}
+
+.select-menu-item-icon {
+  .fas { font-size: 16px; }
+}
+
+.select-menu-text {
+  display: block;
+  text-align: left;
+
+  .select-menu-item-heading {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .description {
+    color: #586069;
+    display: block;
+    font-size: 12px;
+    max-width: 265px;
+  }
+}

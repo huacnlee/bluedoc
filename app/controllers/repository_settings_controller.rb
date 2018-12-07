@@ -63,6 +63,41 @@ class RepositorySettingsController < Users::ApplicationController
     end
   end
 
+  # GET /:user/:repo/settings/collaborators
+  def collaborators
+    authorize! :update, @repository
+
+    if request.post?
+      member_params = params.require(:member).permit(:user_slug)
+
+      user = User.find_by_slug!(member_params[:user_slug])
+
+      # Avoid change self
+      if user == current_user
+        raise ActiveRecord::RecordNotFound
+      end
+
+      @member = @repository.add_member(user, :editor)
+    else
+      @members = @repository.members.includes(user: { avatar_attachment: :blob }).order("id asc").page(params[:page]).per(20)
+    end
+  end
+
+  # POST/DELETE /:user/:repo/settings/collaborator
+  def collaborator
+    authorize! :update, @repository
+
+    member_params = params.require(:member).permit(:id, :role)
+
+    @member = @repository.members.find(member_params[:id])
+
+    if request.delete?
+      @member.destroy
+    else
+      @member.update(role: member_params[:role])
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository

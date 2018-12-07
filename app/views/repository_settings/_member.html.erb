@@ -1,0 +1,44 @@
+<li id="member-<%= member.id %>" class="repository-member d-table col-12">
+  <div class="infos d-table-cell col-7">
+    <div class="float-left mr-3 v-align-middle">
+      <%= user_avatar_tag(member.user, style: :medium) %>
+    </div>
+    <div class="member-name"><%= link_to member.user.name, member.user.to_path, class: "link-gray-dark text-bold" %></div>
+    <div class="member-slug"><%= user_name_tag(member.user) %></div>
+  </div>
+  <div class="member-role">
+    <% if can? :manage, @repository %>
+      <% if member.user_id != current_user.id %>
+        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post) do |f| %>
+          <%= f.hidden_field :id %>
+          <details class="details-reset details-overlay d-inline-block">
+            <summary class="btn btn-sm select-menu-button"><%= member.role %></summary>
+            <details-menu class="select-menu-modal">
+              <div class="select-menu-list">
+                <% ["admin", "editor", "reader"].each do |role| %>
+                <button class="select-menu-item" name="member[role]" value="<%= role %>" type="submit">
+                  <div class="select-menu-item-icon"><%= icon_tag("check") if member.role == role %></div>
+                  <div class="select-menu-item-text js-select-button-text">
+                    <%= role %>
+                  </div>
+                </button>
+                <% end %>
+              </div>
+            </details-menu>
+          </details>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions d-table-cell col-1">
+    <% if can? :manage, @repository %>
+      <% if member.user_id != current_user.id %>
+        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :delete) do |f| %>
+          <%= f.hidden_field :id %>
+          <button type="submit" class="btn-link btn-danger" data-confirm="Are you sure to remove?"><%= icon_tag("delete") %></button>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</li>

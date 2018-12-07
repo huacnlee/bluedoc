@@ -1,0 +1,5 @@
+<% if request.delete? %>
+$("#member-<%= @member.id %>").remove();
+<% else %>
+$("#member-<%= @member.id %>").replaceWith("<%= j(render('member', member: @member)) %>");
+<% end %>

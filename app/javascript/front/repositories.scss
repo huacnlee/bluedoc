@@ -246,3 +246,41 @@
     }
   }
 }
+
+#repository-members {
+  border-bottom: 0;
+
+  .repository-member {
+    border-bottom: 1px solid #e1e4e8;
+    padding: 20px 15px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .infos,
+    .member-role,
+    .actions {
+      vertical-align: middle !important;
+    }
+
+    .member-role {
+      .select-menu-modal {
+        position: absolute;
+        z-index: 99;
+        width: 200px;
+      }
+      summary.select-menu-button {
+        margin-top: 10px;
+        width: 80px;
+        text-align: left;
+
+        &:after {
+          position: absolute;
+          right: 10px;
+          top: 13px;
+        }
+      }
+    }
+  }
+}

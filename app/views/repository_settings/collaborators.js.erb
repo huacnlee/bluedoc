@@ -1,0 +1,3 @@
+$("#member-<%= @member.id %>").remove();
+$("#repository-members").append("<%= j(render('member', member: @member)) %>");
+$("form.add-repository-member input").val("");
