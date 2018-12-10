@@ -13,6 +13,7 @@ docker run --detach \
            --volume ${booklab_root}/data/redis:/var/lib/redis \
            --volume ${booklab_root}/data/elasticsearch:/usr/share/java/elasticsearch/data \
            --volume ${booklab_root}/data/storage:/home/app/booklab/storage \
+           --volume ${booklab_root}/fonts:/home/app/booklab/fonts \
            --volume ${booklab_root}/log:/home/app/booklab/log \
            --volume ${booklab_root}/tmp:/home/app/booklab/tmp \
            booklab:latest

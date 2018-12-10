@@ -61,6 +61,7 @@ $ docker run --detach \
              --volume ${booklab_root}/data/redis:/var/lib/redis \
              --volume ${booklab_root}/data/elasticsearch:/usr/share/java/elasticsearch/data \
              --volume ${booklab_root}/data/storage:/home/app/booklab/storage \
+             --volume ${booklab_root}/fonts:/home/app/booklab/fonts \
              --volume ${booklab_root}/log:/home/app/booklab/log \
              --volume ${booklab_root}/tmp:/home/app/booklab/tmp \
              booklab:latest
@@ -78,6 +79,27 @@ Or use `docker ps` to checkout processes:
 ```bash
 $ docker ps | grep booklab
 ```
+
+## Setup PDF generate font.
+
+By default, Docker Image only including English words font, if your want render PDF text for Simplified Chinese, Traditional Chinese, Japanese, or Korean ... you must dowload "Noto Sans CJK" from:
+
+https://www.google.com/get/noto/help/cjk/
+
+- OpenType (.otf)
+- Regular
+
+For example Simplified Chinese, we need a `noto.otf` put in `${booklab_root}/fonts/noto.otf`
+
+```bash
+$ cd /tmp
+$ wget https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+$ unzip NotoSansCJKsc-hinted.zip
+$ mv NotoSansCJKsc-hinted/NotoSansCJKsc-Regular.otf ${booklab_root}/fonts/noto.otf
+$ ls -lh ${booklab_root}/fonts/noto.otf
+```
+
+After that, the PDF generater will use `noto.otf` as font-family.
 
 ## Update BookLab
 
