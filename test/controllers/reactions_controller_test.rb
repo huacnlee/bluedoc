@@ -11,6 +11,7 @@ class ReactionsControllerTest < ActionDispatch::IntegrationTest
     group = create(:group)
     repo = create(:repository, user: group, privacy: :private)
     doc = create(:doc, repository: repo)
+    t = doc.updated_at
 
     reaction_params = {
       subject_type: "Doc",
@@ -30,6 +31,8 @@ class ReactionsControllerTest < ActionDispatch::IntegrationTest
       post reactions_path, params: { reaction: reaction_params }, xhr: true
       assert_equal 200, response.status
       assert_match %($("#Doc-#{doc.id}-reaction-box").replaceWith), response.body
+      doc.reload
+      assert_not_equal t, doc.updated_at
     end
 
     get doc.to_path
@@ -44,8 +47,11 @@ class ReactionsControllerTest < ActionDispatch::IntegrationTest
 
     reaction_params[:content] = "+1 unset"
     assert_changes -> { Reaction.where(subject: doc, name: "+1").count }, -1 do
+      t = doc.updated_at
       post reactions_path, params: { reaction: reaction_params }, xhr: true
       assert_equal 200, response.status
+      doc.reload
+      assert_not_equal t, doc.updated_at
     end
   end
 end

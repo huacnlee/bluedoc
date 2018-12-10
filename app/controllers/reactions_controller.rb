@@ -19,6 +19,7 @@ class ReactionsController < ApplicationController
     else
       @reaction = Reaction.create_reaction(name, @subject, user: current_user)
     end
+    @subject.reload
   end
 
   private
