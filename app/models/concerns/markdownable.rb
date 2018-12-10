@@ -12,6 +12,10 @@ module Markdownable
     markdown(body_plain)
   end
 
+  def body_public_html
+    markdown(body_plain, public: true)
+  end
+
   def body_plain
     body&.body
   end

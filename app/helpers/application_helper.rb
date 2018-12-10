@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def markdown(body)
+  def markdown(body, opts = {})
     return nil if body.blank?
-    Rails.cache.fetch(["markdown", "v1", Digest::MD5.hexdigest(body)]) do
-      sanitize_html(BookLab::Markdown.render(body))
+    Rails.cache.fetch(["markdown", "v2", Digest::MD5.hexdigest(body), opts]) do
+      sanitize_html(BookLab::Markdown.render(body, opts))
     end
   end
 

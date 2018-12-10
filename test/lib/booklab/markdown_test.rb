@@ -63,4 +63,48 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
     # puts "\n--------------------------------------\n"
     assert_html_equal expected.strip, out
   end
+
+  test "render_public" do
+    blob0 = create(:blob)
+    blob1 = create(:blob)
+
+    raw = <<~MD
+    ![](/uploads/#{blob0.key})
+
+    ## Hello world
+
+    ![](/uploads/#{blob1.key})
+    ![](/uploads/not-found-key)
+
+    ![](https://www.google.com.hk/test.png)
+    MD
+
+    fake_url0 = "https://foo.bar.com/aaa.jpg"
+    fake_url1 = "https://foo.bar.com/bbb.jpg"
+
+    html = <<~HTML
+    <p><img src="#{fake_url0}" alt=""></p>
+    <h2 id="hello-world">
+    <a href="#hello-world" class="heading-anchor">#</a>Hello world</h2>
+    <p><img src="#{fake_url1}" alt=""></p>
+    <p><img src="/uploads/not-found-key" alt=""></p>
+
+    <p><img src="https://www.google.com.hk/test.png" alt=""></p>
+    HTML
+
+    find_stub = Proc.new do |opts|
+      return blob0 if opts[:key] == blob0.key
+      return blob1 if opts[:key] == blob1.key
+      nil
+    end
+
+    ActiveStorage::Blob.stub(:find_by, find_stub) do
+      blob0.stub(:service_url, fake_url0) do
+        blob1.stub(:service_url, fake_url1) do
+          out = BookLab::Markdown.render(raw, public: true)
+          assert_html_equal html, out
+        end
+      end
+    end
+  end
 end
