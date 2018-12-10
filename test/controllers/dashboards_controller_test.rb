@@ -18,12 +18,16 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     group.add_member(@user, :editor)
     UserActive.track(doc0, user: @user)
     UserActive.track(doc1, user: @user)
+    UserActive.track(doc0.repository, user: @user)
 
     sign_in @user
     get "/"
     assert_equal 200, response.status
     assert_select ".recent-docs .recent-doc-item", 2
-    assert_select ".group-list .group-item", 1
+    assert_select ".group-list .group-item", 2
+    assert_select ".group-list .group-item.group-item-more", 1
+    assert_select ".repo-list .repo-item", 2
+    assert_select ".repo-list .repo-item.repo-item-more", 1
 
     get "/dashboard"
     assert_redirected_to "/"
