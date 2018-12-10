@@ -53,6 +53,7 @@ class Ability::DocsTest < ActiveSupport::TestCase
 
     # :reader
     group.add_member(@user, :reader)
+    @ability.reload
     assert @ability.can? :read, doc
     assert @ability.can? :read, private_doc
     assert @ability.cannot? :create, doc
@@ -61,6 +62,7 @@ class Ability::DocsTest < ActiveSupport::TestCase
 
     # :editor
     group.add_member(@user, :editor)
+    @ability.reload
     assert @ability.can? :read, doc
     assert @ability.can? :create, doc
     assert @ability.can? :update, doc
@@ -72,6 +74,7 @@ class Ability::DocsTest < ActiveSupport::TestCase
 
     # :admin
     group.add_member(@user, :admin)
+    @ability.reload
     assert @ability.can? :manage, doc
     assert @ability.can? :manage, private_doc
 

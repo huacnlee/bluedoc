@@ -3,7 +3,7 @@
 class Ability
   include CanCan::Ability
 
-  attr_reader :user
+  attr_reader :user, :cache
 
   depends_on :groups, :repositories, :docs, :comments
 
@@ -12,6 +12,8 @@ class Ability
 
     abilities_for_anonymous
     abilities_for_sign_in_user
+
+    @cache = {}
 
     can :read, Share
   end
@@ -29,5 +31,24 @@ class Ability
   def abilities_for_anonymous
     return unless user.new_record?
     cannot :manage, :all
+  end
+
+  def can?(action, obj)
+    if obj.respond_to?(:cache_key)
+      cache_key = "#{action}:#{obj.cache_key}"
+    else
+      cache_key = "#{action}:#{obj}"
+    end
+    res = self.cache[cache_key]
+    if res != nil
+      Rails.logger.debug "  CACHE CanCanCan load: #{cache_key} (#{res})"
+      return res
+    end
+    self.cache[cache_key] = super(action, obj)
+    self.cache[cache_key]
+  end
+
+  def reload
+    @cache = {}
   end
 end

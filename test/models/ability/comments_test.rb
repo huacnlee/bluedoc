@@ -43,11 +43,13 @@ class Ability::CommentsTest < ActiveSupport::TestCase
     assert @ability.cannot? :destroy, comment
 
     group.add_member(@user, :reader)
+    @ability.reload
     assert @ability.can? :read, comment
     assert @ability.cannot? :update, comment
     assert @ability.cannot? :destroy, comment
 
     group.add_member(@user, :editor)
+    @ability.reload
     assert @ability.can? :read, comment
     assert @ability.cannot? :update, comment
     assert @ability.can? :destroy, comment

@@ -41,6 +41,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :reader
     group.add_member(@user, :reader)
+    @ability.reload
     assert @ability.cannot? :manage, repo
     assert @ability.cannot? :create, repo
     assert @ability.cannot? :update, repo
@@ -55,6 +56,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :editor
     group.add_member(@user, :editor)
+    @ability.reload
     assert @ability.cannot? :manage, repo
     assert @ability.can? :create, repo
     assert @ability.cannot? :update, repo
@@ -69,6 +71,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :admin
     group.add_member(@user, :admin)
+    @ability.reload
     assert @ability.can? :manage, repo
     assert @ability.can? :manage, private_repo
 
@@ -95,6 +98,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :reader
     private_repo.add_member(@user, :reader)
+    @ability.reload
     assert @ability.cannot? :manage, repo
     assert @ability.cannot? :update, repo
     assert @ability.cannot? :create_doc, repo
@@ -107,6 +111,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :editor
     private_repo.add_member(@user, :editor)
+    @ability.reload
     assert @ability.cannot? :manage, private_repo
     assert @ability.cannot? :update, private_repo
     assert @ability.can? :create_doc, private_repo
@@ -114,6 +119,7 @@ class Ability::RepositoriesTest < ActiveSupport::TestCase
 
     # :admin
     private_repo.add_member(@user, :admin)
+    @ability.reload
     assert @ability.can? :manage, private_repo
 
     # other user

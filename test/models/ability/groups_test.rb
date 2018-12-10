@@ -26,7 +26,7 @@ class Ability::GroupsTest < ActiveSupport::TestCase
 
   test ":editor" do
     @group.add_member(@user, :editor)
-
+    @ability.reload
     assert @ability.can? :read, @group
     assert @ability.can? :create_repo, @group
     assert @ability.can? :read_repo, @group
@@ -36,7 +36,7 @@ class Ability::GroupsTest < ActiveSupport::TestCase
 
   test ":reader" do
     @group.add_member(@user, :reader)
-
+    @ability.reload
     assert @ability.can? :read, @group
     assert @ability.can? :read_repo, @group
     assert @ability.cannot? :create_repo, @group
