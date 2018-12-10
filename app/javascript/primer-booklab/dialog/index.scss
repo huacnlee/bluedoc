@@ -20,3 +20,13 @@
   }
 }
 
+summary {
+  outline: none !important;
+}
+
+
+details[open] {
+  summary {
+    opacity: 0.6;
+  }
+}
