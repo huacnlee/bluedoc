@@ -8,6 +8,7 @@ You need install depends softwares first:
 
 ```bash
 $ brew install node imagemagick postgresql elasticsearch redis
+$ brew cask install wkhtmltopdf
 ```
 
 Start development server:

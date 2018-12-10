@@ -76,6 +76,12 @@ class DocsController < Users::ApplicationController
     render plain: @doc.body_plain
   end
 
+  def pdf
+    authorize! :read, @doc
+
+    render pdf: "#{@doc.slug}.pdf", background: true, user_style_sheet: "URL", disposition: :attachment, layout: false
+  end
+
   # GET /:user/:repo/:slug/versions
   def versions
     authorize! :update, @doc
