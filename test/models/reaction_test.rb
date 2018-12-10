@@ -17,11 +17,16 @@ class ReactionTest < ActiveSupport::TestCase
     user = create(:user)
     user1 = create(:user)
 
+    t = doc.updated_at
+
     reaction = Reaction.create_reaction("smile", doc, user: user)
     assert_equal false, reaction.new_record?
     assert_equal "smile", reaction.name
     assert_equal user, reaction.user
     assert_equal doc, reaction.subject
+    # should touch doc
+    doc.reload
+    assert_not_equal t, doc.updated_at
 
     # same user, same reaction with same subject just once
     assert_no_changes -> { Reaction.count } do
@@ -37,8 +42,11 @@ class ReactionTest < ActiveSupport::TestCase
     end
 
     assert_changes -> { Reaction.count }, -1 do
+      t = doc.updated_at
       Reaction.destroy_reaction("+1", doc, user: user1)
       assert_equal 0, Reaction.where(name: "+1", subject: doc, user: user1).count
+      doc.reload
+      assert_not_equal t, doc.updated_at
     end
   end
 

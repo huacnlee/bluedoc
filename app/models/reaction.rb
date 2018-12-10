@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Reaction < ApplicationRecord
-  belongs_to :subject, polymorphic: true, required: false
+  belongs_to :subject, polymorphic: true, touch: true, required: false
   belongs_to :user, required: false
 
   ALLOW_NAMES = %w[+1 -1 grin confetti_ball confused heart bouquet]
@@ -30,7 +30,9 @@ class Reaction < ApplicationRecord
   end
 
   def self.destroy_reaction(name, subject, user:)
-    Reaction.where(subject: subject, name: name.strip, user: user).destroy_all
+    reaction = Reaction.where(subject: subject, name: name.strip, user: user).first
+    return false if reaction.blank?
+    reaction.destroy
   end
 
   def self.grouped
