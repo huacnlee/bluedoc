@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem "rails"
 gem "pg"
 gem "redis"
+gem "redis-objects"
 gem "puma", "~> 3.11"
 
 gem "sidekiq"

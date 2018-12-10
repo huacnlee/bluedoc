@@ -20,13 +20,19 @@
   }
 }
 
+details-dialog {
+  margin-top: 20vh;
+}
+
 summary {
   outline: none !important;
 }
 
 
-details[open] {
-  summary {
-    opacity: 0.6;
+.nav-header {
+  details[open] {
+    summary {
+      opacity: 0.6;
+    }
   }
 }

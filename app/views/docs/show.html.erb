@@ -41,21 +41,24 @@
       </summary>
 
       <ul class="dropdown-menu dropdown-menu-sw">
-        <li><a class="dropdown-item" target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+        <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+        <% if can? :update, @doc %>
+          <li><%= render "export_pdf", doc: @doc %></li>
+        <% end %>
         <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#">Print document...</a></li>
         <li class="dropdown-divider" role="separator"></li>
         <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> Fullscreen</a></li>
 
         <% if can? :update, @doc %>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
+          <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
+          <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
         <% end %>
 
         <% if can? :destroy, @doc %>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item text-red" data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
+          <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
         <% end %>
       </ul>
     </details>

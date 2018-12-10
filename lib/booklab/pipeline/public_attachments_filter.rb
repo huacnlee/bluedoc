@@ -5,7 +5,7 @@ module BookLab
     class PublicAttachmentsFilter < HTML::Pipeline::Filter
       def call
         doc.search("img").each do |node|
-          next if node['src'].blank?
+          next if node["src"].blank?
           key = find_blob_key(node["src"])
           next if key.blank?
 

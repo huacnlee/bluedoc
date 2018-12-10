@@ -1,0 +1,8 @@
+<% if !params[:check] || @doc.export_pdf_status != "running" %>
+var html = "<%= j(render('export_pdf', doc: @doc)) %>";
+var openStatus = $(".doc-export-pdf-box details[open]");
+if (openStatus) {
+  $(".doc-export-pdf-box").replaceWith(html);
+  $(".doc-export-pdf-box details").attr("open", "");
+}
+<% end %>

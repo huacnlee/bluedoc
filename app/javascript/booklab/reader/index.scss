@@ -378,3 +378,26 @@
     font-size: 22px;
   }
 }
+
+.doc-export-pdf-box {
+  .icon-box {
+    text-align: center;
+    .fas {
+      font-size: 60px;
+      color: #FF977E;
+    }
+  }
+
+  .loading-box {
+    text-align: center;
+  }
+  .loading {
+    margin: 10px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('~primer-booklab/loading.svg');
+    background-size: 40px;
+    width: 100px;
+    height: 50px;
+  }
+}

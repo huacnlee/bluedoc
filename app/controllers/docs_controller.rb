@@ -2,7 +2,7 @@
 
 class DocsController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share pdf]
 
   before_action :set_user
   before_action :set_repository
@@ -76,10 +76,13 @@ class DocsController < Users::ApplicationController
     render plain: @doc.body_plain
   end
 
+  # POST /:user/:repo/:slug/pdf
   def pdf
-    authorize! :read, @doc
+    authorize! :update, @doc
 
-    render pdf: "#{@doc.slug}.pdf", background: true, user_style_sheet: "URL", disposition: :attachment, layout: false
+    if params[:force]
+      @doc.export_pdf
+    end
   end
 
   # GET /:user/:repo/:slug/versions

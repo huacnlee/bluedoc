@@ -16,4 +16,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "BookLab"
   inflect.acronym "GitBook"
+  inflect.acronym "PDF"
 end
