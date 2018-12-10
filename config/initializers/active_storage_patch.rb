@@ -3,7 +3,7 @@
 # Override ActiveStorage DiskService service_url method to generate custom controller path
 module ActiveStorageDiskServiceURL
   def url(key, expires_in:, filename:, disposition:, content_type:)
-    "/uploads/#{key}"
+    "#{Setting.host}/uploads/#{key}"
   end
 end
 
