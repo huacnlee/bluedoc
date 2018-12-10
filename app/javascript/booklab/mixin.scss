@@ -2,3 +2,10 @@
 
 $primary: #5e94fc;
 $black: #282828;
+
+.text-overflow {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

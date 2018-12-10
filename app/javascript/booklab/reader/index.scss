@@ -22,6 +22,11 @@
       a { color: #333; }
 
       .divide { color: #bbb; margin: 0 5px; }
+
+      .doc-title {
+        max-width: 200px;
+        @extend .text-overflow;
+      }
     }
 
     .navbar-buttons {
