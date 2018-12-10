@@ -64,7 +64,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups do
+  resources :groups, only: %i[new create] do
     member do
       get :search
     end
