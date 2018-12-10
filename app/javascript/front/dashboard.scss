@@ -85,22 +85,35 @@
     }
 
     .dashboard-content {
-      padding: 20px 40px;
-      padding-left: 240px;
+      padding: 20px 0px;
+      padding-left: 200px;
 
       .content-main {
-        width: 70%;
+        width: 100%;
         float: left;
       }
 
       .sub-sidebar {
-        display: block;
+        display: none;
         float: left;
       }
     }
   }
 
+  @media (min-width: 1012px) {
+     .dashboard-content {
+       padding: 20px 40px;
+       padding-left: 240px;
 
+       .content-main {
+         width: 68%;
+       }
+       .sub-sidebar {
+         display: block;
+         width: 32%;
+       }
+     }
+  }
 
 
   .dashboard-table {
@@ -110,11 +123,63 @@
     }
   }
 
+  .repo-list {
+    .repo-item {
+      position: relative;
+      padding-bottom: 10px;
+      padding-left: 40px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      .icon-box {
+        position: absolute;
+        left: 0;
+        padding-top: 4px;
+
+        .fas {
+          font-size: 32px;
+          color: #aaa;
+        }
+      }
+
+      .title {
+        a { font-size: 15px; color: #333; }
+      }
+      .time {
+        color: #aaa;
+      }
+    }
+  }
+
   .group-list {
     .group-item {
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: 4px;
+      padding: 8px 4px;
+      position: relative;
+      padding-left: 40px;
+
+      .avatar-box {
+        position: absolute;
+        left: 0;
+        padding-top: 4px;
+
+        width: 32px;
+      }
+
+      .title {
+        font-size: 15px;
+        a {
+          color: #333;
+        }
+      }
+
+      .description {
+        color: #999;
+        font-size: 12px;
+      }
 
       &:first-child { padding-top: 0; }
       &:last-child {
