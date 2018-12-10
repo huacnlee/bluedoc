@@ -33,9 +33,9 @@
     <div class="editor-navbar">
       <div class="navbar-title">
         <a class="navbar-brand" href="<%= @repository.to_path %>" title="Back to list"><%= icon_tag("booklab") %></a>
-        <span class="divide">/</span>
+        <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
-        <span class="divide">/</span>
+        <span class= "divider">/</span>
         <%= doc.title || "New doc" %>
         <span class="editor-message"></span>
       </div>

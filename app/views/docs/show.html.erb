@@ -5,13 +5,13 @@
   <div class="navbar-title">
     <span class="hide-sm hide-md">
     <a href="<%= root_path %>" title="Back to list">BookLab</a>
-      <span class="divide">/</span>
+      <span class="divider">/</span>
     </span>
     <%= group_name_tag @user %>
-    <span class="divide">/</span>
+    <span class="divider">/</span>
     <%= repository_name_tag @repository %>
     <span class="hide-md hide-sm">
-      <span class="divide">/</span>
+      <span class="divider">/</span>
       <% if @doc %>
       <span class="doc-title"><%= @doc.title %></span>
       <% else %>

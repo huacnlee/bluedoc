@@ -3,9 +3,9 @@
   <div class="navbar-title">
     <a href="<%= @doc.to_path %>" title="Back to Document"><%= icon_tag("repository") %></a>
     <span class="hide-sm">
-      <span class="divide">/</span>
+      <span class= "divider">/</span>
       <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>
-      <span class="divide">/</span>
+      <span class= "divider">/</span>
       <strong>Versions</strong>
     </span>
   </div>
