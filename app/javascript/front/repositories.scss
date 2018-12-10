@@ -29,7 +29,7 @@
   @for $i from 0 through 4 {
     .toc-item-#{$i} {
       .item-title {
-        margin-left: ($i * 21px) !important;
+        margin-left: ($i * 14px) !important;
       }
     }
   }
