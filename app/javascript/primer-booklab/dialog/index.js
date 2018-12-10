@@ -3,8 +3,4 @@ document.addEventListener("turbolinks:load", () => {
     $container = $(e.delegateTarget);
     $container.removeAttr("open");
   });
-
-  $("details").on("mousedown", (e) => {
-    $("details").removeAttr("open");
-  })
 })
