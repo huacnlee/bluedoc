@@ -41,7 +41,7 @@ module BookLab
 
           slug_maps[original_slug] = slug
 
-          body = self.upload_images(File.open(f).read)
+          body = self.upload_images(f, File.open(f).read)
           title_res = self.parse_title(body)
 
           doc_params = {
@@ -110,16 +110,17 @@ module BookLab
       end
 
       # Upload images to BookLab storage and replace body url
-      def upload_images(body)
+      def upload_images(filepath, body)
         html = BookLab::Markdown.render(body)
         doc = Nokogiri::HTML(html)
+        filedir = File.dirname(filepath)
         doc.css("img").each do |node|
           src = node.attr("src")
           next if src.blank?
 
           src_path = src
           unless BookLab::Validate.url?(src_path)
-            src_path = File.join(self.repo_dir, src)
+            src_path = File.join(filedir, src)
           end
 
           begin

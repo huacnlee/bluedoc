@@ -79,7 +79,7 @@ class BookLab::Import::GitBookTest < ActiveSupport::TestCase
 
     body = "# hello [world](http://github.com)\n <img src='/aaa/bbb.jpg' /> this is bad file: ![](/foo/notfound) this is body ![](https://www.apple.com/ac/flags/1/images/cn/32.png)\n![](#{local_path})"
     BookLab::Blob.stub(:upload, "/uploads/foooo") do
-      body = importer.upload_images(body)
+      body = importer.upload_images(local_path, body)
       assert_match %([world](http://github.com)), body
       assert_match /\(\/uploads\/foooo\)/, body
       assert_match /<img src='\/uploads\/foooo' \/>/, body
