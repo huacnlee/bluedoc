@@ -10,6 +10,20 @@
   box-shadow: inset 0 1px 1px rgba(27, 31, 35, 0.02);
 }
 
+.form-group {
+  .form-control {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-group {
+    .form-control {
+      width: 400px;
+    }
+  }
+}
+
 /* Disable readonly focus style */
 .form-control[readonly] {
   background: #fafbfc !important;

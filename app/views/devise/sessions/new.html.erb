@@ -3,10 +3,11 @@ auth_session = session[:omniauth] || {}
 auth_info = auth_session.dig("info")
 %>
 
-<div class="columns">
-  <div class="column one-half">
+<div class="container-lg clearfix">
+  <div class="col-12 col-md-8 float-left">
     <div class="sub-title">
-      <div class="heading">Sign in</div>
+      <div class="heading"><%= icon_tag("profile") %> Sign in</div>
+      <div class="description">Input your username or email to sign in BookLab.</div>
     </div>
 
     <% if auth_info %>
@@ -42,7 +43,7 @@ auth_info = auth_session.dig("info")
       </div>
     <% end %>
   </div>
-  <div class="column one-third pt-8">
+  <div class="col-12 col-md-4 float-left mt-4 pl-md-4">
     <% if resource_class.omniauth_providers.any? && defined? omniauth_authorize_path %>
     <div class="Box">
       <div class="Box-body">

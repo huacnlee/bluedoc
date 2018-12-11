@@ -1,15 +1,4 @@
 /* https://styleguide.github.com/assets/custom.css */
-details-dialog {
-    position: fixed;
-    margin: 10vh auto;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    max-height: 80vh;
-    width: 448px;
-}
-
 .dropdown {
     position: relative;
 }

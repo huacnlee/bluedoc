@@ -21,7 +21,20 @@
 }
 
 details-dialog {
-  margin-top: 20vh;
+  position: fixed;
+  margin: 20vh auto;
+  width: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  max-height: 80vh;
+}
+
+@media (min-width: 768px) {
+  details-dialog {
+    width: 450px;
+  }
 }
 
 summary {

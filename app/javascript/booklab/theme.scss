@@ -82,7 +82,7 @@
 }
 
 .footer {
-  padding: 30px;
+  padding: 0px;
   color: #999;
   text-align: left;
 
@@ -90,6 +90,12 @@
 
   a {
     color: #666;
+  }
+}
+
+@media (min-width: 1021px) {
+  .footer {
+    padding: 30px;
   }
 }
 
@@ -211,6 +217,11 @@ form {
   @extend .Subhead;
 
   .heading {
+    font-size: 28px;
+    .fas {
+      font-size: 34px;
+    }
+
     @extend .Subhead-heading;
     display: block;
   }
