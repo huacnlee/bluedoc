@@ -17,7 +17,7 @@ class Repository < ApplicationRecord
   has_many :docs, dependent: :destroy
   has_many :shares, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { in: 2..50 }
   validates :slug, uniqueness: { scope: :user_id, case_sensitive: false }
 
   scope :recent_updated, -> { order("updated_at desc") }
