@@ -27,3 +27,18 @@ markdown-toolbar {
     }
   }
 }
+
+markdown-image-upload {
+  display: block;
+  background: #fbfbfb;
+  color: #666;
+  padding: 7px;
+  border-radius: 0px 0px 3px 3px;
+  margin-top: -1px;
+  border: 1px solid #e9e9e9;
+  cursor: pointer;
+
+  input {
+    outline: none !important;
+  }
+}

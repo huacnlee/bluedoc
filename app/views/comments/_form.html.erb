@@ -25,7 +25,11 @@
         <md-mention class="md-btn"><%= icon_tag("text-mention") %></md-mention>
       </div>
     </markdown-toolbar>
-    <%= f.text_area :body, class: 'form-control mentionable' %>
+    <%= f.text_area :body, class: 'form-control mentionable', data: {
+       direct_upload_url: rails_direct_uploads_url,
+       blob_url_template: upload_path(":id")
+      } %>
+    <markdown-image-upload for="comment_body"></markdown-image-upload>
   </div>
 
   <div class="form-actions clearfix">
