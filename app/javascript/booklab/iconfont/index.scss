@@ -59,6 +59,7 @@ http://fontello.com
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .fa-activity-feed:before {
   content: "\61";
 }
@@ -79,9 +80,6 @@ http://fontello.com
 }
 .fa-add-new:before {
   content: "\67";
-}
-.fa-add-smile:before {
-  content: "\e036";
 }
 .fa-add-tag:before {
   content: "\69";
@@ -350,9 +348,6 @@ http://fontello.com
 .fa-play:before {
   content: "\e003";
 }
-.fa-plus:before {
-  content: "\e004";
-}
 .fa-ppt:before {
   content: "\e005";
 }
@@ -491,11 +486,20 @@ http://fontello.com
 .fa-xls:before {
   content: "\e033";
 }
+.fa-plus:before {
+  content: "\e004";
+}
 .fa-toc:before {
   content: "\e034";
 }
 .fa-edit-toc:before {
   content: "\e035";
+}
+.fa-add-smile:before {
+  content: "\e036";
+}
+.fa-mail-reply:before {
+  content: "\68";
 }
 .fa-reply:before {
   content: "\e037";
@@ -514,6 +518,18 @@ http://fontello.com
 }
 .fa-ellipsis-v:before {
   content: "\e03a";
+}
+.fa-exit-wide-mode:before {
+  content: "\e06a";
+}
+.fa-wide-mode:before {
+  content: "\e06b";
+}
+.fa-google:before {
+  content: "\e06f";
+}
+.fa-share:before {
+  content: "\e06c";
 }
 .fa-text-align-center:before {
   content: "\e03b";
@@ -569,99 +585,25 @@ http://fontello.com
 .fa-text-italic:before {
   content: "\e04c";
 }
-.fa-text-numbered-list:before {
-  content: "\e04e";
-}
-.fa-text-outdent:before {
-  content: "\e04f";
-}
-.fa-text-quote:before {
-  content: "\e050";
-}
-.fa-text-strikethrough:before {
-  content: "\e051";
-}
-.fa-text-underline:before {
-  content: "\e052";
-}
-.fa-text-align-center-1:before {
+.fa-text-link:before {
   content: "\e04d";
 }
-.fa-text-align-justify-1:before {
+.fa-text-mention:before {
+  content: "\e04e";
+}
+.fa-text-numbered-list:before {
+  content: "\e04f";
+}
+.fa-text-outdent:before {
+  content: "\e050";
+}
+.fa-text-quote:before {
+  content: "\e051";
+}
+.fa-text-strikethrough:before {
+  content: "\e052";
+}
+.fa-text-underline:before {
   content: "\e053";
 }
-.fa-text-align-left-1:before {
-  content: "\e054";
-}
-.fa-text-align-right-1:before {
-  content: "\e055";
-}
-.fa-text-attachment-1:before {
-  content: "\e056";
-}
-.fa-text-bold-1:before {
-  content: "\e057";
-}
-.fa-text-bulleted-list-1:before {
-  content: "\e058";
-}
-.fa-text-code-1:before {
-  content: "\e059";
-}
-.fa-text-color-1:before {
-  content: "\e05a";
-}
-.fa-text-emoji-1:before {
-  content: "\e05b";
-}
-.fa-text-fill-color-1:before {
-  content: "\e05c";
-}
-.fa-text-font-1:before {
-  content: "\e05d";
-}
-.fa-text-font-size-1:before {
-  content: "\e05e";
-}
-.fa-text-heading-1:before {
-  content: "\e05f";
-}
-.fa-text-hr-1:before {
-  content: "\e060";
-}
-.fa-text-image-1:before {
-  content: "\e061";
-}
-.fa-text-indent-1:before {
-  content: "\e062";
-}
-.fa-text-italic-1:before {
-  content: "\e063";
-}
-.fa-text-link:before {
-  content: "\e064";
-}
-.fa-text-numbered-list-1:before {
-  content: "\e065";
-}
-.fa-text-outdent-1:before {
-  content: "\e066";
-}
-.fa-text-quote-1:before {
-  content: "\e067";
-}
-.fa-text-strikethrough-1:before {
-  content: "\e068";
-}
-.fa-text-underline-1:before {
-  content: "\e069";
-}
-.fa-exit-wide-mode:before {
-  content: "\e06a";
-}
-.fa-wide-mode:before {
-  content: "\e06b";
-}
-.fa-share:before {
-  content: "\e06c";
-}
+
