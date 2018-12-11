@@ -43,7 +43,7 @@
         </script>
       <% else %>
         <p class="description">Click button to genrate PDF file for this document.</p>
-        <div class="action mt-1"><%= link_to "Geneate PDF", doc.to_path("/pdf?force=1"), class: "btn btn-generate-pdf btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
+        <div class="action mt-1"><%= link_to "Generate PDF", doc.to_path("/pdf?force=1"), class: "btn btn-generate-pdf btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
       <% end %>
     </div>
   <% end %>
