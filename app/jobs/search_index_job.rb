@@ -27,14 +27,10 @@ class SearchIndexJob < ApplicationJob
       obj.__elasticsearch__.update_document
 
       if type == "repository"
-        invoke_client :update_by_query, index: "repositories,docs", body: {
+        invoke_client :update_by_query, index: "_all", body: {
           conflicts: "proceed",
-          query: {
-            term: { repository_id: obj.id },
-          },
-          script: {
-            inline: "ctx._source.repository.public = #{obj.public?}",
-          }
+          query: { term: { repository_id: obj.id } },
+          script: { inline: "ctx._source.repository.public = #{obj.public?}" }
         }
       end
     elsif operation == "delete"

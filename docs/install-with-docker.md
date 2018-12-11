@@ -92,10 +92,12 @@ https://www.google.com/get/noto/help/cjk/
 For example Simplified Chinese, we need a `noto.otf` put in `${booklab_root}/fonts/noto.otf`
 
 ```bash
+$ booklab_root=/var/booklab
 $ cd /tmp
-$ wget https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+$ curl -O https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
 $ unzip NotoSansCJKsc-hinted.zip
-$ mv NotoSansCJKsc-hinted/NotoSansCJKsc-Regular.otf ${booklab_root}/fonts/noto.otf
+$ mkdir -p ${booklab_root}/fonts
+$ mv NotoSansCJKsc-Regular.otf ${booklab_root}/fonts/noto.otf
 $ ls -lh ${booklab_root}/fonts/noto.otf
 ```
 
