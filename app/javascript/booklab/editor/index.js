@@ -57,6 +57,7 @@ class MarkdownEditor extends React.Component {
             <input
               type="text"
               value={title}
+              placeholder="Document title"
               onChange={this.onChangeTitle}
               className="editor-title-text" />
           </div>
@@ -64,7 +65,7 @@ class MarkdownEditor extends React.Component {
             <input
               type="text"
               value={slug}
-              placeholder="Set Doc slug in here..."
+              placeholder="set the URL path for this doc"
               onChange={this.onChangeSlug}
               className="editor-slug-text" />
           </div>
