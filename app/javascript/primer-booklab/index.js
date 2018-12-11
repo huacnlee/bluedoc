@@ -5,6 +5,5 @@ import "./flash/index";
 import "./confirm/index";
 import "./clipboard/index";
 
-document.addEventListener("turbolinks:before-cache", () => {
-  $("details").removeAttr("open");
-})
+import '@github/markdown-toolbar-element';
+

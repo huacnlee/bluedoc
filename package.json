@@ -8,6 +8,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@github/markdown-toolbar-element": "^0.1.1",
     "@rails/webpacker": "https://github.com/rails/webpacker",
     "actiontext": "https://github.com/rails/actiontext",
     "babel-preset-react": "^6.24.1",

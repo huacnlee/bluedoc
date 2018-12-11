@@ -706,6 +706,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@github/markdown-toolbar-element@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@github/markdown-toolbar-element/-/markdown-toolbar-element-0.1.1.tgz#2f4d82e40eefc8fe96de93868fe9db970a4b9a65"
+  integrity sha512-P+wEginh59MeqKwk7oBOsFotZ1cWGdafH+lcipbaBbGN2jS58vNvHJ9UMCOGlt049Xtl7Cm607+hH11dmoBinw==
+
 "@rails/webpacker@https://github.com/rails/webpacker":
   version "4.0.0-pre.3"
   resolved "https://github.com/rails/webpacker#99c0dd9a1e5fa9ca9ad840d7e308c12c4e8eb9ec"

@@ -4,3 +4,7 @@ document.addEventListener("turbolinks:load", () => {
     $container.removeAttr("open");
   });
 })
+
+document.addEventListener("turbolinks:before-cache", () => {
+  $("details").removeAttr("open");
+})
