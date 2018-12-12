@@ -2,48 +2,52 @@
 }
 
 .reponav {
-    position: relative;
-    top: 1px;
-    margin-top: -5px
+  position: relative;
+  top: 1px;
+  margin-top: -5px;
 }
 
 .reponav::before {
-    display: table;
-    content: ""
+  display: table;
+  content: ""
 }
 
 .reponav::after {
-    display: table;
-    clear: both;
-    content: ""
+  display: table;
+  clear: both;
+  content: ""
 }
 
 .reponav-dropdown {
-    position: relative;
-    float: left
+  position: relative;
+  float: left
 }
 
 .reponav-dropdown.active .dropdown-menu-content {
-    display: block
+  display: block
 }
 
 .reponav-item {
-    float: left;
-    padding: 8px 8px 7px;
-    color: #586069;
-    white-space: nowrap;
-    border: solid transparent;
-    border-width: 1px 1px 1px;
-    border-radius: 4px 4px 0 0;
+  float: left;
+  padding: 8px 8px 7px;
+  color: #586069;
+  white-space: nowrap;
+  border: solid transparent;
+  border-width: 1px 1px 1px;
+  border-radius: 4px 4px 0 0;
 
-    .fas {
-      color: rgba(27,31,35,0.3)
-    }
+  .fas {
+    color: rgba(27,31,35,0.3);
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
   .reponav-item {
     padding: 8px 25px 7px;
+    .fas {
+      display: inline-block;
+    }
   }
 }
 

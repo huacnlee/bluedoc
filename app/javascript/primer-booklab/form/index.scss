@@ -16,11 +16,19 @@
   }
 }
 
+.subnav-search-input {
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .form-group {
     .form-control {
       width: 400px;
     }
+  }
+
+  .subnav-search-input {
+    width: 320px;
   }
 }
 
