@@ -1,8 +1,8 @@
 <% title_tag "Settings", @repository.name %>
 
-<div class="col-12 clearfix">
+<div class="clearfix">
   <%= render "menu" %>
-  <div class="col-9 float-left">
+  <div class="col-12 col-md-9 float-left">
 
     <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
       <div class="Box transfer-docs">
@@ -24,13 +24,13 @@
           <% end %>
         </ul>
         <div class="flash flash-full flash-warn">
-          <span class="mr-2"><%= icon_tag("info-circle") %></span> If there has same doc slug exists in the destination repository, it will change it as a random slug.
+          <span class="mr-2"><%= icon_tag("info") %></span> If there has same doc slug exists in the destination repository, it will change it as a random slug.
         </div>
         <div class="Box-footer">
 
 
           <div class="clearfix">
-            <div class="float-left mr-3">
+            <div class="float-left mr-3 mb-3 mb-md-0">
               <%= render "/shared/user_repositories_select_menu", input_name: "transfer[repository_id]", value: params.dig(:transfer, :repository_id) %>
             </div>
 

@@ -1,8 +1,8 @@
 <% title_tag "Collaborators", @repository.name %>
 
-<div class="col-12 clearfix">
+<div class="clearfix">
   <%= render "menu" %>
-  <div class="col-9 float-left">
+  <div class="col-12 col-md-9 float-left">
     <div class="Box transfer-docs">
       <div class="Box-header">
         <h4 class="title mb-2">Collaborators</h4>
@@ -22,7 +22,7 @@
           <div class="input-group mt-2">
             <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
             <span class="input-group-button">
-              <button type="submit" class="btn">Add collaborator</button>
+              <button type="submit" class="btn">Add <span class="hide-sm">collaborator</span></button>
             </span>
           </div>
         <% end %>

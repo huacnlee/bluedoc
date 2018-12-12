@@ -1,12 +1,12 @@
 <% title_tag "Settings", @repository.name %>
 
-<div class="col-12 clearfix">
+<div class="clearfix">
   <%= render "menu" %>
-  <div class="col-9 float-left">
+  <div class="col-12 col-md-9 float-left">
      <div class="form-title"><h2>Transfer</h2></div>
      <div class="Box mb-3">
-       <div class="Box-row d-flex flex-items-center">
-         <div class="flex-auto mr-2">
+       <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+         <div class="flex-auto mr-2 mb-2 mb-md-0">
            <label class="form-check-label font-weight-bold">
              Transfer ownership
            </label>
@@ -28,8 +28,8 @@
       <input type="hidden" name="_by" value="danger-zone" />
 
       <div class="Box mb-3">
-        <div class="Box-row d-flex flex-items-center">
-          <div class="flex-auto mr-2">
+        <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+          <div class="flex-auto mr-2 mb-2 mb-md-0">
             <label class="form-check-label font-weight-bold">
               <% if @repository.private? %>
               Make this repository public
@@ -47,8 +47,8 @@
           </div>
           <%= render "privacy" %>
         </div>
-        <div class="Box-row d-flex flex-items-center">
-          <div class="flex-auto mr-2">
+        <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+          <div class="flex-auto mr-2 mb-2 mb-md-0">
             <label class="form-check-label font-weight-bold">
               Delete this repository
             </label>

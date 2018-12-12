@@ -1,8 +1,8 @@
 <% title_tag "Settings", @repository.name %>
 
-<div class="col-12 clearfix">
+<div class="clearfix">
   <%= render "menu" %>
-  <div class="col-9 float-left">
+  <div class="col-12 col-md-9 float-left">
     <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), local: true, remote: true) do |form| %>
       <div class="form-title"><h2>Repository profile</h2></div>
 
