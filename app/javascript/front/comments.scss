@@ -90,11 +90,19 @@
 #new_comment {
   position: relative;
   margin-bottom: 15px;
+  padding: 8px;
+  padding-left: 53px;
 
   .avatar-box {
     position: absolute;
     top: 10px;
     left: 8px;
+  }
+}
+
+#new_comment {
+  padding: 0px;
+  .avatar-box {
     display: none;
   }
 }
