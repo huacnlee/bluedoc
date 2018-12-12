@@ -7,8 +7,10 @@
     <a href="<%= root_path %>" title="Back to list">BookLab</a>
       <span class="divider">/</span>
     </span>
-    <%= group_name_tag @user %>
-    <span class="divider">/</span>
+    <span class="hide-sm">
+      <%= group_name_tag @user %>
+      <span class="divider">/</span>
+    </span>
     <%= repository_name_tag @repository %>
     <span class="hide-md hide-sm">
       <span class="divider">/</span>

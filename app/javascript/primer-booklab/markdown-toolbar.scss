@@ -9,7 +9,7 @@ markdown-toolbar {
 
   .toolbar-group {
     display: inline;
-    margin-left: 15px;
+    margin-left: 5px;
   }
 
   .md-btn {
@@ -24,6 +24,12 @@ markdown-toolbar {
     &:hover {
       background: #eee;
       border: 1px solid #e9e9e9;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .toolbar-group {
+      margin-left: 15px;
     }
   }
 }

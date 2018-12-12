@@ -90,13 +90,21 @@
 #new_comment {
   position: relative;
   margin-bottom: 15px;
-  padding: 8px;
-  padding-left: 53px;
 
   .avatar-box {
     position: absolute;
     top: 10px;
     left: 8px;
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #new_comment {
+    padding: 8px;
+    padding-left: 53px;
+
+    .avatar-box { display: block; }
   }
 }
 
