@@ -7,8 +7,10 @@ ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
 
 require_relative "../config/environment"
 require "minitest/autorun"
+require "mocha/minitest"
 require "rails/test_help"
 require "database_cleaner"
+require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
 
 DatabaseCleaner.strategy = :truncation
@@ -22,6 +24,7 @@ class ActiveSupport::TestCase
 
   setup do
     DatabaseCleaner.start
+    MockElasticSearch.start
   end
 
   teardown do

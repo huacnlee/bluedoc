@@ -38,24 +38,21 @@ class SearchIndexJob < ApplicationJob
     elsif operation == "index"
       obj.__elasticsearch__.index_document
     end
-  rescue => e
-    raise e unless Rails.env.test?
   end
 
   def perform_for_delete(type, id)
     klass = type.classify.constantize
-    obj = klass.new(id: id)
-    obj.__elasticsearch__.delete_document
+    invoke_client :delete, index: klass.index_name, type: klass.document_type, id: id
 
     if type == "repository"
       invoke_client :delete_by_query, index: "_all", body: {
         conflicts: "proceed",
-        query: { term: { repository_id: obj.id } }
+        query: { term: { repository_id: id } }
       }
-    elsif type == "user"
+    elsif type == "user" || type == "group"
       invoke_client :delete_by_query, index: "_all", body: {
         conflicts: "proceed",
-        query: { term: { user_id: obj.id } }
+        query: { term: { user_id: id } }
       }
     end
   end
