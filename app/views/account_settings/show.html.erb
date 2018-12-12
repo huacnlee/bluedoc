@@ -1,9 +1,9 @@
 <% title_tag "Account Settings" %>
 
-<div class="col-12 clearfix">
+<div class="clearfix">
   <%= render "menu" %>
 
-  <div class="col-6 float-left">
+  <div class="col-12 col-md-6 float-left">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <div class="form-title"><h2>Public profile</h2></div>
       <%= render "/shared/error_messages", target: @user %>
@@ -36,25 +36,25 @@
     <% end %>
   </div>
 
-  <div class="pl-4 col-3 float-left">
+  <div class="col-12 col-md-3 float-left pl-md-4">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-    <input type="hidden" name="_by" value="profile" />
-    <div class="form-title"><h2>Avatar</h2></div>
-    <div class="image-box width-full text-center">
-      <%= user_avatar_tag(current_user, style: :large, link: false) %>
-    </div>
-    <div class="form-group">
-      <label class="btn width-full text-center">
-         Upload new picture
-         <%= f.file_field :avatar, class: "btn js-manual-file-chooser manual-file-chooser width-full text-center"  %>
-       </label>
-    </div>
-    <script>
-      $("form").on("change", ".js-manual-file-chooser", (e) => {
-        $form = $(e.delegateTarget);
-        $form.submit();
-      });
-    </script>
+      <input type="hidden" name="_by" value="profile" />
+      <div class="form-title"><h2>Avatar</h2></div>
+      <div class="image-box width-full text-center">
+        <%= user_avatar_tag(current_user, style: :large, link: false) %>
+      </div>
+      <div class="form-group">
+        <label class="btn width-full text-center">
+           Upload new picture
+           <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
+         </label>
+      </div>
+      <script type="text/javascript">
+        $("form").on("change", ".js-manual-file-chooser", (e) => {
+          $form = $(e.delegateTarget);
+          $form.submit();
+        });
+      </script>
     <% end %>
   </div>
 </div>
