@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_084803) do
+ActiveRecord::Schema.define(version: 2018_12_12_084557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_084803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id"], name: "index_shares_on_repository_id"
-    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id", unique: true
+    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id"
     t.index ["slug"], name: "index_shares_on_slug", unique: true
     t.index ["user_id"], name: "index_shares_on_user_id"
   end
@@ -286,8 +286,5 @@ ActiveRecord::Schema.define(version: 2018_12_04_084803) do
     t.index ["user_id"], name: "index_versions_on_user_id"
   end
 
-  add_foreign_key "docs", "repositories"
-  add_foreign_key "repositories", "users"
-  add_foreign_key "repository_sources", "repositories"
   add_foreign_key "shares", "users"
 end

@@ -94,6 +94,16 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 0, UserActive.where(subject: repo).count
   end
 
+  test "destroy dependent :docs" do
+    repo = create(:repository)
+    docs = create_list(:doc, 2, repository: repo)
+
+    assert_changes -> { Doc.count }, -2 do
+      repo.destroy
+    end
+    assert_equal 0, Doc.where(id: docs.collect(&:id)).count
+  end
+
   test "private dependent :activites" do
     repo = create(:repository)
     doc = create(:doc)
