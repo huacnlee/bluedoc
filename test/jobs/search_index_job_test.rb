@@ -55,18 +55,14 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     @job.perform("update", "repository", repo.id)
     assert_performed_request method: "PUT", url: "test-repositories/repository/#{repo.id}", body: repo.as_indexed_json
     query_body = { conflicts: "proceed", query: { term: { repository_id: repo.id } }, script: { inline: "ctx._source.repository.public = true" } }
-    assert_performed_request method: "POST", url: "test-docs/_update_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-repositories/_update_by_query", body: query_body
+    assert_performed_request method: "POST", url: "_all/_update_by_query", body: query_body
 
     # delete
     @job.perform("delete", "repository", 123)
     assert_performed_request method: "DELETE", url: "test-repositories/repository/123"
 
     query_body = { conflicts: "proceed", query: { term: { repository_id: 123 } } }
-    assert_performed_request method: "POST", url: "test-users/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-groups/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-repositories/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-docs/_delete_by_query", body: query_body
+    assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
   test "perform with User" do
@@ -83,10 +79,7 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     @job.perform("delete", "user", 123)
     assert_performed_request method: "DELETE", url: "test-users/user/123"
     query_body = { conflicts: "proceed", query: { term: { user_id: 123 } } }
-    assert_performed_request method: "POST", url: "test-users/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-groups/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-repositories/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-docs/_delete_by_query", body: query_body
+    assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
   test "perform with Group" do
@@ -103,10 +96,7 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     @job.perform("delete", "group", 123)
     assert_performed_request method: "DELETE", url: "test-groups/group/123"
     query_body = { conflicts: "proceed", query: { term: { user_id: 123 } } }
-    assert_performed_request method: "POST", url: "test-users/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-groups/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-repositories/_delete_by_query", body: query_body
-    assert_performed_request method: "POST", url: "test-docs/_delete_by_query", body: query_body
+    assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
   private

@@ -57,40 +57,7 @@ class SearchIndexJob < ApplicationJob
     end
   end
 
-  def perform_for_delete(type, id)
-    klass = type.classify.constantize
-    obj = klass.new(id: id)
-    obj.__elasticsearch__.delete_document
-
-    if type == "repository"
-      invoke_client :delete_by_query, index: "_all", body: {
-        conflicts: "proceed",
-        query: { term: { repository_id: obj.id } }
-      }
-    elsif type == "user"
-      invoke_client :delete_by_query, index: "_all", body: {
-        conflicts: "proceed",
-        query: { term: { user_id: obj.id } }
-      }
-    end
-  end
-
   def invoke_client(method, opts = {})
-    index_name = opts[:index]
-    if index_name == "_all"
-      all_index_names.each do |name|
-        logger.info "invoke #{method} for index: #{name}, opts: #{opts}"
-        client.send(method, opts.merge(index: name))
-      end
-    else
-      logger.info "invoke #{method} for index: #{opts}"
-      client.send(method, opts)
-    end
+    client.send(method, opts)
   end
-
-  private
-
-    def all_index_names
-      [User, Group, Repository, Doc].collect { |klass| klass.index_name }
-    end
 end
