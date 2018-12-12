@@ -36,8 +36,31 @@
   }
 
   .user-item {
+    position: relative;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    .avatar-box {
+      display: none;
+      position: absolute;
+      top: 15px;
+      left: 0;
+    }
+
+    .actions {
+      float: right;
+    }
+
     .user-avatar { display: inline-block; }
     .user-display-name { color: #333; font-weight: bold; }
     .user-name { color: #666; }
+  }
+
+
+  @media (min-width: 768px) {
+    .user-item {
+      padding-left: 64px;
+      .avatar-box { display: block; }
+    }
   }
 }

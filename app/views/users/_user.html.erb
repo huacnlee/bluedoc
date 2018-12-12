@@ -1,12 +1,12 @@
-<div class="user-item d-table table-fixed col-12 width-full py-4 border-bottom border-gray-light">
-  <div class="d-table-cell col-1 v-align-top">
+<div class="user-item clearfix">
+  <div class="avatar-box">
     <%= user_avatar_tag(user, style: :medium) %>
   </div>
-  <div class="d-table-cell col-9 v-align-top pr-3">
+  <div class="infos">
     <div class="title"><%= user_display_name_tag(user) %> <span class="name ml-1 text-gray"><%= user_name_tag(user) %></span></div>
     <div class="description mt-1 text-gray"><%= user.description %></div>
   </div>
-  <div class="d-table-cell col-2 v-align-top text-right">
+  <div class="actions">
     <%= follow_user_tag(user, class: "btn btn-sm") %>
   </div>
 </div>

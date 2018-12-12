@@ -1,9 +1,9 @@
 <% title_tag "#{@user.name} (#{@user.slug})" %>
 
-<div class="col-12 d-table">
+<div class="clearfix">
   <%= render "sidebar" %>
 
-  <div class="col-9 d-table-cell v-align-top">
+  <div class="col-12 col-md-9 float-left">
     <%= render "menu" %>
 
     <%= render(params[:tab] || "overview")  %>

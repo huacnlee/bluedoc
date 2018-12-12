@@ -1,9 +1,17 @@
 @import "../colors.scss";
 
+.UnderlineNav {
+  overflow: hidden;
+  overflow-x: scroll;
+}
 .UnderlineNav-item {
   padding: 8px 6px;
   float: left;
   display: inline-block;
+
+  .Counter {
+    display: none;
+  }
 
   &.selected {
     border-bottom-color: $primary;
@@ -13,5 +21,8 @@
 @media (min-width: 768px) {
   .UnderlineNav-item {
     padding: 8px 16px;
+    .Counter {
+      display: inline-block;
+    }
   }
 }
