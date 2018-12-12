@@ -22,12 +22,14 @@ module Searchable
     end
 
     after_update do
-      need_update = false
+      @need_update_es = false
       if self.respond_to?(:indexed_changed?)
-        need_update = indexed_changed?
+        @need_update_es = indexed_changed?
       end
+    end
 
-      SearchIndexJob.perform_later("update", self.class.name, self.id) if need_update
+    after_commit on: :update do
+      SearchIndexJob.perform_later("update", self.class.name, self.id) if @need_update_es
     end
 
     after_commit on: :destroy do

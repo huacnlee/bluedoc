@@ -55,7 +55,7 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     @job.perform("update", "repository", repo.id)
     assert_performed_request method: "PUT", url: "test-repositories/repository/#{repo.id}", body: repo.as_indexed_json
     query_body = { conflicts: "proceed", query: { term: { repository_id: repo.id } }, script: { inline: "ctx._source.repository.public = true" } }
-    assert_performed_request method: "POST", url: "_all/_update_by_query", body: query_body
+    assert_performed_request method: "POST", url: "test-docs,test-repositories/_update_by_query", body: query_body
 
     # delete
     @job.perform("delete", "repository", 123)
