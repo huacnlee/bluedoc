@@ -6,8 +6,11 @@ class SearchIndexJob < ApplicationJob
 
   def perform(operation, type, id)
     obj = nil
-
     type = type.downcase
+
+    if operation == "delete"
+      return perform_for_delete(type, id)
+    end
 
     case type
     when "doc"
@@ -20,8 +23,7 @@ class SearchIndexJob < ApplicationJob
       obj = Group.find_by_id(id)
     end
 
-
-    return false unless obj
+    return false if obj.blank?
 
     if operation == "update"
       obj.__elasticsearch__.update_document
@@ -33,18 +35,6 @@ class SearchIndexJob < ApplicationJob
           script: { inline: "ctx._source.repository.public = #{obj.public?}" }
         }
       end
-    elsif operation == "delete"
-      obj.__elasticsearch__.delete_document
-
-      if type == "repository"
-        invoke_client :delete_by_query, index: "_all", body: {
-          query: { term: { repository_id: obj.id } }
-        }
-      elsif type == "user"
-        invoke_client :delete_by_query, index: "_all", body: {
-          query: { term: { user_id: obj.id } }
-        }
-      end
     elsif operation == "index"
       obj.__elasticsearch__.index_document
     end
@@ -52,7 +42,40 @@ class SearchIndexJob < ApplicationJob
     raise e unless Rails.env.test?
   end
 
-  def invoke_client(method, opts = {})
-    client.send(method, opts)
+  def perform_for_delete(type, id)
+    klass = type.classify.constantize
+    obj = klass.new(id: id)
+    obj.__elasticsearch__.delete_document
+
+    if type == "repository"
+      invoke_client :delete_by_query, index: "_all", body: {
+        conflicts: "proceed",
+        query: { term: { repository_id: obj.id } }
+      }
+    elsif type == "user"
+      invoke_client :delete_by_query, index: "_all", body: {
+        conflicts: "proceed",
+        query: { term: { user_id: obj.id } }
+      }
+    end
   end
+
+  def invoke_client(method, opts = {})
+    index_name = opts[:index]
+    if index_name == "_all"
+      all_index_names.each do |name|
+        logger.info "invoke #{method} for index: #{name}, opts: #{opts}"
+        client.send(method, opts.merge(index: name))
+      end
+    else
+      logger.info "invoke #{method} for index: #{opts}"
+      client.send(method, opts)
+    end
+  end
+
+  private
+
+    def all_index_names
+      [User, Group, Repository, Doc].collect { |klass| klass.index_name }
+    end
 end
