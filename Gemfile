@@ -54,6 +54,7 @@ gem "booklab-toc"
 gem "wicked_pdf"
 
 group :development, :test do
+  gem "mocha"
   gem "letter_opener"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
