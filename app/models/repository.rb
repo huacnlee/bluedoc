@@ -5,6 +5,7 @@ class Repository < ApplicationRecord
   include Markdownable
   include Memberable
   include Activityable
+  include Exportable
 
   second_level_cache expires_in: 1.week
 

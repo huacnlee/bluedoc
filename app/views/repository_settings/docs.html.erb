@@ -3,11 +3,12 @@
 <div class="clearfix">
   <%= render "menu" %>
   <div class="col-12 col-md-9 float-left">
+    <%= render "repository_settings/exports/pdf", repository: @repository %>
 
     <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
       <div class="Box transfer-docs">
         <div class="Box-header">
-          <h4 class="title mb-2">Transfer docs to other repository</h4>
+          <h4 class="title mb-2"><%= icon_tag("transfer") %> Transfer docs to other repository</h4>
           <div class="text-gray">
             Choise doc in list, you can move them into the other repository.
           </div>
