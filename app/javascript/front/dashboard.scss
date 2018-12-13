@@ -133,11 +133,12 @@
 
       .icon-box {
         position: absolute;
-        left: 0;
+        left: 2px;
         padding-top: 4px;
+        text-align: center;
 
         .fas {
-          font-size: 32px;
+          font-size: 26px;
           color: #e0e0e0;
         }
       }
