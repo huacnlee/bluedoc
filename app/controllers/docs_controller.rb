@@ -48,9 +48,10 @@ class DocsController < Users::ApplicationController
   # PATCH/PUT /:user/:repo/:slug
   def update
     authorize! :update, @doc
-    @doc.last_editor_id = current_user.id
 
     update_params = doc_params.to_hash.deep_symbolize_keys
+    update_params[:last_editor_id] = current_user.id
+    update_params[:current_editor_id] = current_user.id
     update_params[:draft_title] ||= update_params[:title]
     update_params[:draft_body] ||= update_params[:body]
     update_params[:draft_body_sml] ||= update_params[:body_sml]

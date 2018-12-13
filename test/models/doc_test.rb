@@ -39,11 +39,16 @@ class DocTest < ActiveSupport::TestCase
 
   test "User Active" do
     user = create(:user)
+    user1 = create(:user)
 
-    doc0 = create(:doc, last_editor_id: user.id)
-    doc1 = create(:doc, last_editor_id: user.id)
+    doc0 = create(:doc, current_editor_id: user.id, last_editor_id: user1.id)
+    doc0.update(current_editor_id: user1.id)
+    doc1 = create(:doc, current_editor_id: user.id)
 
     assert_equal 1, user.user_actives.where(subject: doc0).count
+    assert_equal 1, user.user_actives.where(subject: doc1).count
+    assert_equal 1, user1.user_actives.where(subject: doc0).count
+
     assert_equal 1, user.user_actives.where(subject: doc0.repository).count
     assert_equal 1, user.user_actives.where(subject: doc0.repository.user).count
 

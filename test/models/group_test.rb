@@ -26,10 +26,18 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal 0, UserActive.where(subject: group).count
   end
 
-  test "track user active" do
+  test "track user active on create" do
     mock_current(user: @user)
 
     group = create(:group)
     assert_equal 1, @user.user_actives.where(subject: group).count
+
+    # update should not track
+    user = create(:user)
+    mock_current(user: user)
+    assert_no_changes -> { UserActive.count } do
+      group.update(updated_at: Time.now)
+    end
+    assert_equal 0, user.user_actives.where(subject: group).count
   end
 end

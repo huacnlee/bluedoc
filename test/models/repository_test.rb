@@ -122,12 +122,20 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 0, Activity.where(repository_id: repo.id).count
   end
 
-  test "track user active" do
+  test "track user active on create" do
     user = create(:user)
     mock_current(user: user)
     repo = create(:repository)
     assert_equal 1, user.user_actives.where(subject: repo).count
     assert_equal 1, user.user_actives.where(subject: repo.user).count
+
+    # update should not track
+    user1 = create(:user)
+    mock_current(user: user1)
+    assert_no_changes -> { UserActive.count } do
+      repo.update(updated_at: Time.now)
+    end
+    assert_equal 0, user1.user_actives.where(subject: repo).count
   end
 
   test "preferences" do
