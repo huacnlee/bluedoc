@@ -1,4 +1,5 @@
 import BodyToc from "./body_toc";
+import mediumZoom from "medium-zoom";
 
 document.addEventListener("turbolinks:load", () => {
   if ($(".doc-page").length == 0) {
@@ -16,12 +17,14 @@ document.addEventListener("turbolinks:load", () => {
     GoInFullscreen($(".reader-body")[0]);
   });
 
-
   // wide mode
   $(".reader-body").on("click", ".btn-wide-mode-exit", (e) => {
     e.preventDefault();
     GoOutFullscreen();
   });
+
+  // zoom markdown-body img
+  mediumZoom('.markdown-body img');
 
   BodyToc.init();
 });

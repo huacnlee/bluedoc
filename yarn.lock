@@ -4451,6 +4451,11 @@ media-typer@0.3.0:
   resolved "http://registry.npm.taobao.org/media-typer/download/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
+medium-zoom@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/medium-zoom/-/medium-zoom-1.0.2.tgz#a154f7814e2999811a1d9218ea8aadab5bda90e4"
+  integrity sha512-rSNfTb1XY1nsb6sUA2v30PlsVO20qknzGHevfCviPVOWhfG3C2fkhhybydepeS2Jw+EwcbBJY/xRI1ckZBjEXw==
+
 mem@^4.0.0:
   version "4.0.0"
   resolved "http://registry.npm.taobao.org/mem/download/mem-4.0.0.tgz#6437690d9471678f6cc83659c00cbafcd6b0cdaf"

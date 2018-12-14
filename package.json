@@ -17,6 +17,7 @@
     "immutable": "^3.8.2",
     "jquery.caret": "^0.3.1",
     "lodash": "^4.17.11",
+    "medium-zoom": "^1.0.2",
     "primer": "^10.8.1",
     "react-dropzone": "^8.0.0",
     "react-sortable-hoc": "^0.8.4",
