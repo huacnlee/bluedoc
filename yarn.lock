@@ -6251,7 +6251,7 @@ primer@^10.8.1:
     primer-truncate "1.4.9"
     primer-utilities "4.12.0"
 
-prismjs@^1.13.0:
+prismjs@^1.13.0, prismjs@^1.15.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.15.0.tgz#8801d332e472091ba8def94976c8877ad60398d9"
   integrity sha512-Lf2JrFYx8FanHrjoV5oL8YHCclLQgbJcVZR+gikGGMqz6ub5QVWDTM6YIwm3BuPxM/LOV+rKns3LssXNLIf+DA==
@@ -6754,10 +6754,10 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rich-md-editor@5.1.4:
-  version "5.1.4"
-  resolved "https://registry.yarnpkg.com/rich-md-editor/-/rich-md-editor-5.1.4.tgz#f88781ddce3fd4a397f2b3d078a4696c77dc76b9"
-  integrity sha512-zQeTqn21F5nZ+NdGm1jSj/pX/dgRh2tZZFDCf7B3FHrhdRBYZ15vOXnS3KWFtAOrehjeGc5KNtJ4kSgzv6JvIA==
+rich-md-editor@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/rich-md-editor/-/rich-md-editor-5.2.0.tgz#011e159ac8bb3001d9a60b18f54ab849deeffd75"
+  integrity sha512-MrsPNi92ghThOsQmrwAaX+QyA8Hm4Qwonx5Ey8cdaiQxmjKfc9yXiPq4ktoHN+A1YmW6b0aztkKTuMvyEKcepA==
   dependencies:
     "@tommoor/slate-drop-or-paste-images" "^0.8.1"
     babel-plugin-transform-async-to-generator "^6.24.1"
@@ -6768,6 +6768,7 @@ rich-md-editor@5.1.4:
     eslint-plugin-prettier "^2.6.0"
     immutable "^3.8.2"
     outline-icons "^1.0.0"
+    prismjs "^1.15.0"
     react "^16.2.0"
     react-dom "^16.2.0"
     react-keydown "^1.9.7"
