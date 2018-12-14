@@ -225,6 +225,26 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal true, repo.valid?
   end
 
+  test "toc_ordered_docs" do
+    repo = create(:repository)
+    docs = create_list(:doc, 5, repository: repo)
+    toc = <<~TOC
+    - url: #{docs[2].slug}
+    - url: #{docs[1].slug}
+    - url: #{docs[4].slug}
+    - url: #{docs[0].slug}
+    - url: http://foobar.com
+    TOC
+    repo.update!(toc: toc)
+
+    # Only including doc in Toc
+    assert_equal [docs[2].slug, docs[1].slug, docs[4].slug, docs[0].slug], repo.toc_ordered_docs.collect(&:slug)
+    assert_equal docs[2], repo.toc_ordered_docs[0]
+    assert_equal docs[1], repo.toc_ordered_docs[1]
+    assert_equal docs[4], repo.toc_ordered_docs[2]
+    assert_equal docs[0], repo.toc_ordered_docs[3]
+  end
+
   test "transfer" do
     repo = create(:repository)
     to_user = create(:user)

@@ -43,6 +43,27 @@ class Repository
     BookLab::Toc.parse(toc_by_docs_text).to_json
   end
 
+  # sort docs as Toc order
+  def toc_ordered_docs
+    return @toc_ordered_docs if defined? @toc_ordered_docs
+
+    # parse Toc and collect urls
+    ordered_urls = BookLab::Toc.parse(toc_text).items.collect(&:url)
+    ordered_urls.compact!
+    ordered_urls.map { |url| url.strip! }
+
+    # pickup docs as a slug key hash
+    doc_hash = {}
+    self.docs.map { |doc| doc_hash[doc.slug] = doc }
+
+    # pickup docs by Toc ordered, and ignore it not exist in Toc
+    ordered_docs = []
+    ordered_urls.each do |toc_url|
+      ordered_docs << doc_hash[toc_url] if doc_hash.has_key?(toc_url)
+    end
+    @toc_ordered_docs = ordered_docs
+  end
+
   private
 
     def track_doc_version_on_create
