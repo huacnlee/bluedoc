@@ -11,9 +11,13 @@ en:
       user:
         slug: "Username"
         name: "Real name"
+        url: "Homepage URL"
+        description: "Bio"
       group:
         slug: "Path name"
         name: "Display name"
+        url: "URL"
+        description: "Description"
       repository:
         slug: "Path name"
         name: "Display name"

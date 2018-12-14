@@ -25,6 +25,8 @@
 
 
 .btn-link {
+  color: #222;
+
   .fas { font-size: 17px; vertical-align: middle; color: #333; }
   &:hover {
     .fas { color: $primary; }
