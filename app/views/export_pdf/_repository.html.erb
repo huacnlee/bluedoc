@@ -1,8 +1,10 @@
 <%
   @title = subject.name
+
+  docs = subject.has_toc? ? subject.toc_ordered_docs : subject.docs.recent
 %>
 
-<% subject.docs.recent.each do |doc| %>
+<% docs.each do |doc| %>
 <div class="doc-section" id="doc-<%= doc.id %>">
   <h1 class="doc-title"><%= doc.title %></h1>
   <div class="section-body">
