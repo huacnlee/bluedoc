@@ -13,18 +13,37 @@
     <% if repository.export_pdf_status == "running" %>
       <div class="pdf-export-running">
         <p><%= icon_tag("loading") %>  PDF of this repository has in generating, please wait ...</p>
-        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
+        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/settings/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
       </div>
+      <script type="text/javascript">
+        // sleep 5s to check status
+        window.checkPDFExportStatus = setInterval(function() {
+          $.post("<%= repository.to_path("/settings/pdf?check=1") %>");
+        }, 5000);
+
+        // timeout in 25s showup retry message.
+        setTimeout(function() {
+          $(".pdf-export-retry-message").fadeIn();
+        }, 25000);
+
+        // clean timer after page exit
+        document.addEventListener("turbolinks:before-cache", () => {
+          clearInterval(window.checkPDFExportStatus);
+        });
+      </script>
     <% elsif repository.pdf.attached? %>
       <div class="pdf-export-exist">
         <p>PDF of this repository was generated.</p>
         <p>Click the button to download it.</p>
         <div class="form-group">
-          <%= link_to "Download PDF", repository.pdf_url, target: "_blank", class: "btn btn-download-pdf btn-primary" %>
+          <%= link_to "Download", repository.pdf_url, target: "_blank", class: "btn btn-download-pdf btn-primary" %>
 
           <%= link_to "Generate Again!", repository.to_path("/settings/pdf?force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
         </div>
       </div>
+      <script type="text/javascript">
+        clearInterval(window.checkPDFExportStatus);
+      </script>
     <% else %>
       <div class="pdf-export-generate">
         <div class="form-group">

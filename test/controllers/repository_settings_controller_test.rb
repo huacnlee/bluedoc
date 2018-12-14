@@ -3,6 +3,8 @@
 require "test_helper"
 
 class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   setup do
     @user = create(:user)
     @group = create(:group)
@@ -387,5 +389,129 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 403, response.status
     member0.reload
     assert_equal "admin", member0.role
+  end
+
+  test "GET /:user/:repo/settings/docs with Repository Export" do
+    repo = create(:repository, user: @group)
+    docs = create_list(:doc, 10, repository_id: repo.id)
+
+    assert_require_user do
+      get repo.to_path("/settings/docs")
+    end
+
+    sign_in @user
+    get repo.to_path("/settings/docs")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    get repo.to_path("/settings/docs")
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+
+    # non exist
+    get repo.to_path("/settings/docs")
+    assert_equal 200, response.status
+
+    assert_select ".Box.export-repository-pdf" do
+      assert_select ".Box-header .title", text: "Export as PDF"
+      assert_select ".pdf-export-generate" do
+        assert_select ".btn-generate-pdf", text: "Generate PDF" do
+          assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+          assert_select "[data-remote=?]", "true"
+          assert_select "[data-method=?]", "post"
+        end
+      end
+    end
+
+    # has attached pdf
+    repo.pdf.attach(io: load_file("blank.png"), filename: "foobar.pdf")
+    get repo.to_path("/settings/docs")
+    assert_equal 200, response.status
+
+    assert_select ".Box.export-repository-pdf" do
+      assert_select ".Box-header .title", text: "Export as PDF"
+      assert_select ".pdf-export-exist" do
+        assert_select ".btn-download-pdf", text: "Download" do
+          assert_select "[href=?]", repo.pdf_url
+        end
+        assert_select ".btn-regenerate-pdf", text: "Generate Again!" do
+          assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+          assert_select "[data-remote=?]", "true"
+          assert_select "[data-method=?]", "post"
+        end
+      end
+    end
+
+    # running
+    repo.export_pdf_status = "running"
+    get repo.to_path("/settings/docs")
+    assert_equal 200, response.status
+
+    assert_select ".Box.export-repository-pdf" do
+      assert_select ".Box-header .title", text: "Export as PDF"
+      assert_select ".pdf-export-running" do
+        assert_select ".pdf-export-retry-message" do
+          assert_select "a", text: "retry" do
+            assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+            assert_select "[data-remote=?]", "true"
+            assert_select "[data-method=?]", "post"
+          end
+        end
+      end
+    end
+  end
+
+  test "POST /:user/:repo/settings/pdf" do
+    repo = create(:repository, user: @group)
+    assert_require_user do
+      post repo.to_path("/settings/pdf")
+    end
+
+    sign_in @user
+    post repo.to_path("/settings/pdf")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post repo.to_path("/settings/pdf")
+    assert_equal 403, response.status
+
+    def assert_has_pdf_js(response)
+      assert_match %($(".export-repository-pdf").replaceWith(html);), response.body
+    end
+
+    sign_in_role :admin, group: @group
+    assert_enqueued_with job: PDFExportJob do
+      post repo.to_path("/settings/pdf?force=1"), xhr: true
+    end
+    assert_equal 200, response.status
+    assert_equal "running", repo.export_pdf_status.value
+    assert_has_pdf_js response
+    assert_match %(pdf-export-running), response.body
+    assert_match %(pdf-export-retry-message), response.body
+
+    # check status
+    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_equal "", response.body.strip
+
+    repo.export_pdf_status = "done"
+    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-generate-pdf), response.body
+
+    repo.pdf.attach(io: load_file("blank.png"), filename: "blank.pdf")
+    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
+
+    post repo.to_path("/settings/pdf"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
   end
 end

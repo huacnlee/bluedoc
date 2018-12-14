@@ -17,7 +17,7 @@
         <script type="text/javascript">
           // sleep 5s to check status
           window.checkPDFExportStatus = setInterval(function() {
-            $.post("<%= doc.to_path("/pdf?check=1&format=js") %>");
+            $.post("<%= doc.to_path("/pdf?check=1") %>");
           }, 5000);
 
           // timeout in 25s showup retry message.
