@@ -46,6 +46,14 @@ class BookLab::MarkdownTest < ActiveSupport::TestCase
 
     out = BookLab::Markdown.render(raw)
     assert_html_equal %(<p><a class="attachment-file" href="/uploads/foobar" title="" target="_blank">This is a attachment</a></p>), out
+
+    # empty link should work
+    raw = <<~MD
+    [This is a attachment]()
+    MD
+    out = BookLab::Markdown.render(raw)
+    assert_html_equal %(<p><a href="">This is a attachment</a></p>), out
+
   end
 
   test "html chars" do

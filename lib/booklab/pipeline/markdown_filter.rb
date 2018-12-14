@@ -49,6 +49,7 @@ module BookLab
         end
 
         def link(link, title, content)
+          link ||= ""
           if link.include?("/uploads/")
             %(<a class="attachment-file" href="#{link}" title="#{title}" target="_blank">#{content}</a>)
           else
