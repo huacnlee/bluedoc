@@ -175,6 +175,10 @@
     &>div{
       min-height: 800px;
     }
+
+    p, blockquote, hr, pre, table {
+      margin-bottom: 0px !important;
+    }
   }
 
   /* HOTFIX */
