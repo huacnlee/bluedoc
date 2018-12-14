@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web, at: "/admin/sidekiq"
     mount ExceptionTrack::Engine, at: "/admin/exception-track"
+    mount PgHero::Engine, at: "/admin/pghero"
   end
 
   namespace :admin do

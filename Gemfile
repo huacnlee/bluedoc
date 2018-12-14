@@ -53,6 +53,8 @@ gem "booklab-toc"
 
 gem "wicked_pdf"
 
+gem "pghero"
+
 group :development, :test do
   gem "mocha"
   gem "letter_opener"

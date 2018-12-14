@@ -4,8 +4,9 @@
   </div>
   <div class="Box-row">
     <a href="<%= admin_settings_path %>" target="_blank" class="btn"><%= icon_tag("gear") %> Settings</a>
-    <a href="/admin/exception-track" target="_blank" class="btn"><%= icon_tag("error") %> Exception Tracks</a>
+    <a href="/admin/exception-track" target="_blank" class="btn"><%= icon_tag("error") %> Exceptions</a>
     <a href="/admin/sidekiq" target="_blank" class="btn"><%= icon_tag("server") %> Background Jobs</a>
+    <a href="/admin/pghero" target="_blank" class="btn"><%= icon_tag("dashboard") %> Database Stats</a>
   </div>
   <div class="Box-row">
     <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn">Rebuild Search Index</a>
