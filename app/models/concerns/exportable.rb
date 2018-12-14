@@ -19,4 +19,16 @@ module Exportable
     return nil unless self.pdf.attached?
     "#{Setting.host}/uploads/#{self.pdf.blob.key}"
   end
+
+  def pdf_filename
+    fname = case self.class.name
+            when "Doc"
+              self.title
+            when "Repository"
+              self.name
+            else
+              "booklab-export"
+            end
+    "#{fname}.pdf"
+  end
 end

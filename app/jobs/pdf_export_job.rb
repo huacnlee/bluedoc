@@ -6,10 +6,12 @@ class PDFExportJob < ApplicationJob
 
     if subject.is_a?(Doc)
       pdf_file = render("doc", subject)
+    elsif subject.is_a?(Repository)
+      pdf_file = render("repository", subject)
     end
 
     if pdf_file
-      subject.pdf.attach(io: pdf_file, filename: "#{subject.title}.pdf")
+      subject.pdf.attach(io: pdf_file, filename: subject.pdf_filename)
       subject.save!
     end
   rescue => e

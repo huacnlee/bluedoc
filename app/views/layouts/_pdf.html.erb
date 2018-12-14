@@ -28,30 +28,6 @@
       code,pre,tt{font-family:Consolas,Menlo,Monaco,Courier,monospace;font-size:12px}
       pre{margin-top:0;margin-bottom:0}
 
-      /* pdf.css */
-      @font-face {
-        font-family: "Noto";
-        src: url('file:///<%= Rails.root.join("fonts/noto.otf") %>');
-        font-weight: normal;
-      }
-      .pdf-content {
-        font-family: -apple-system, BlinkMacSystemFont, Helvetica, "Noto", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        margin: 20px;
-        color: #222;
-        line-height: 160%;
-      }
-
-      .pdf-content .doc-title {
-        font-size: 28px;
-        text-align: center;
-        margin: 60px auto;
-      }
-      .pdf-content a {
-        color: #3c6fe8;
-        text-decoration: none;
-      }
-      .heading-anchor { display: none; }
-
       /* markdown-body.css */
       a.user-mention{font-weight:600;color:#24292e !important;white-space:nowrap}
       .markdown-body{font-size:17px;line-height:1.5;word-wrap:break-word}
@@ -193,11 +169,39 @@
       .highlight .bp{color:#999}
       .highlight .vc,.highlight .vg,.highlight .vi{color:teal}
       .highlight .il{color:#099}
+
+      /* pdf.css */
+      @font-face {
+        font-family: "Noto";
+        src: url('file:///<%= Rails.root.join("fonts/noto.otf") %>');
+        font-weight: normal;
+      }
+      .pdf-content {
+        font-family: -apple-system, BlinkMacSystemFont, Helvetica, "Noto", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        margin: 20px;
+        color: #222;
+        line-height: 160%;
+      }
+
+      .pdf-content .pdf-title {
+        font-size: 30px;
+        font-weight: bold;
+        color: #3c6fe8;
+        text-align: center;
+        margin: 60px auto;
+      }
+      .doc-title { text-align: center; color: #000; margin: 20px auto; border: 0 !important; }
+      .section-body { padding-bottom: 80px; }
+      .pdf-content a {
+        color: #3c6fe8;
+        text-decoration: none;
+      }
+      .heading-anchor { display: none; }
     </style>
   </head>
   <body>
     <div class="pdf-content">
-      <h1 class="doc-title"><%= @title %></h1>
+      <div class="pdf-title"><%= @title %></div>
       <div class="markdown-body">
         <%= yield %>
       </div>

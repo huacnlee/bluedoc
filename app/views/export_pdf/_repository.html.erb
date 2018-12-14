@@ -1,0 +1,12 @@
+<%
+  @title = subject.name
+%>
+
+<% subject.docs.recent.each do |doc| %>
+<div class="doc-section" id="doc-<%= doc.id %>">
+  <h1 class="doc-title"><%= doc.title %></h1>
+  <div class="section-body">
+    <%= doc.body_public_html %>
+  </div>
+</div>
+<% end %>

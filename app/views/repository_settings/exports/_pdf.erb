@@ -13,7 +13,7 @@
     <% if repository.export_pdf_status == "running" %>
       <div class="pdf-export-running">
         <p><%= icon_tag("loading") %>  PDF of this repository has in generating, please wait ...</p>
-        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", doc.to_path("/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
+        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
       </div>
     <% elsif repository.pdf.attached? %>
       <div class="pdf-export-exist">
