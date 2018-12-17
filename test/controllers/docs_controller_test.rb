@@ -363,7 +363,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select "form[action=?]", doc_path
     assert_select "details.doc-validation-error" do
-      assert_select "li", text: "Slug has already been taken"
+      assert_select "li", text: "Doc path has already been taken"
     end
 
     doc_params[:slug] = old_doc_slug
