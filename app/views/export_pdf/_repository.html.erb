@@ -2,11 +2,20 @@
   @title = subject.name
 
   docs = subject.has_toc? ? subject.toc_ordered_docs : subject.docs.recent
+
+  toc_html = subject.toc_html(prefix: "#")
 %>
+
+<div class="doc-section" id="doc-table-of-contents">
+  <h1 class="doc-title">Table of contents</h1>
+  <div class="section-body">
+    <%= raw toc_html %>
+  </div>
+</div>
 
 <% docs.each do |doc| %>
 <div class="doc-section" id="doc-<%= doc.id %>">
-  <h1 class="doc-title"><%= doc.title %></h1>
+  <h1 class="doc-title" id="<%= doc.slug %>"><%= doc.title %></h1>
   <div class="section-body">
     <%= doc.body_public_html %>
   </div>

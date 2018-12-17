@@ -76,14 +76,14 @@ class PDFExportJobTest < ActiveSupport::TestCase
     assert_equal repo.name, html_node.css("title")[0].inner_text.strip
     assert_equal repo.name, html_node.css(".pdf-title")[0].inner_text.strip
 
-    assert_equal 5, html_node.css(".markdown-body .doc-section").size
-    assert_equal 5, html_node.css(".markdown-body .doc-title").size
-    assert_equal 5, html_node.css(".markdown-body .section-body").size
-    assert_html_equal doc3.title, html_node.css(".markdown-body .doc-section:first-child .doc-title").inner_text
-    assert_html_equal doc3.body_html, html_node.css(".markdown-body .doc-section:first-child .section-body").inner_html
+    assert_equal 6, html_node.css(".markdown-body .doc-section").size
+    assert_equal 6, html_node.css(".markdown-body .doc-title").size
+    assert_equal 6, html_node.css(".markdown-body .section-body").size
+    assert_html_equal doc3.title, html_node.css(".markdown-body .doc-section .doc-title")[1].inner_text
+    assert_html_equal doc3.body_html, html_node.css(".markdown-body .doc-section .section-body")[1].inner_html
 
-    assert_html_equal doc0.title, html_node.css(".markdown-body .doc-section:last-child .doc-title").inner_text
-    assert_html_equal doc0.body_html, html_node.css(".markdown-body .doc-section:last-child .section-body").inner_html
+    assert_html_equal doc0.title, html_node.css(".markdown-body .doc-section .doc-title")[5].inner_text
+    assert_html_equal doc0.body_html, html_node.css(".markdown-body .doc-section .section-body")[5].inner_html
 
     assert_equal "done", repo.export_pdf_status.value
     assert_equal true, repo.pdf.attached?
@@ -137,15 +137,17 @@ class PDFExportJobTest < ActiveSupport::TestCase
     assert_equal repo.name, html_node.css("title")[0].inner_text.strip
     assert_equal repo.name, html_node.css(".pdf-title")[0].inner_text.strip
 
-    assert_equal 4, html_node.css(".markdown-body .doc-section").size
-    assert_equal 4, html_node.css(".markdown-body .doc-title").size
-    assert_equal 4, html_node.css(".markdown-body .section-body").size
-    assert_html_equal doc4.title, html_node.css(".markdown-body .doc-section .doc-title")[0].inner_text
-    assert_html_equal doc4.body_html, html_node.css(".markdown-body .doc-section .section-body")[0].inner_html
-    assert_html_equal doc3.title, html_node.css(".markdown-body .doc-section .doc-title")[1].inner_text
-    assert_html_equal doc3.body_html, html_node.css(".markdown-body .doc-section .section-body")[1].inner_html
-    assert_html_equal doc0.title, html_node.css(".markdown-body .doc-section .doc-title")[2].inner_text
-    assert_html_equal doc0.body_html, html_node.css(".markdown-body .doc-section .section-body")[2].inner_html
+    assert_equal 5, html_node.css(".markdown-body .doc-section").size
+    assert_equal 5, html_node.css(".markdown-body .doc-title").size
+    assert_equal 5, html_node.css(".markdown-body .section-body").size
+
+    assert_html_equal "Table of contents", html_node.css(".markdown-body .doc-section .doc-title")[0].inner_text
+    assert_html_equal doc4.title, html_node.css(".markdown-body .doc-section .doc-title")[1].inner_text
+    assert_html_equal doc4.body_html, html_node.css(".markdown-body .doc-section .section-body")[1].inner_html
+    assert_html_equal doc3.title, html_node.css(".markdown-body .doc-section .doc-title")[2].inner_text
+    assert_html_equal doc3.body_html, html_node.css(".markdown-body .doc-section .section-body")[2].inner_html
+    assert_html_equal doc0.title, html_node.css(".markdown-body .doc-section .doc-title")[3].inner_text
+    assert_html_equal doc0.body_html, html_node.css(".markdown-body .doc-section .section-body")[3].inner_html
     assert_html_equal doc2.title, html_node.css(".markdown-body .doc-section:last-child .doc-title").inner_text
     assert_html_equal doc2.body_html, html_node.css(".markdown-body .doc-section:last-child .section-body").inner_html
 

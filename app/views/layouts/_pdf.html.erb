@@ -198,6 +198,17 @@
         text-decoration: none;
       }
       .heading-anchor { display: none; }
+
+      .toc-items { margin: 0 !important; padding: 0 !important; }
+      .toc-items .toc-item{margin:0;list-style:none;line-height:18px;padding:10px 0;position:relative;display:flex;justify-content:space-between;}
+      .toc-items .toc-item:after{display:table;clear:both;content:" ";width:100%;border-bottom:1px dashed #e8e8e8;position:absolute;top:50%;right:0;}
+      .toc-items .toc-item .item-slug{position:relative;background:#fff;z-index:1;float:right;color:#999;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+      .toc-items .toc-item .item-title{position:relative;background:#fff;z-index:1;color:#333;max-width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+      .toc-items .toc-item-0 .item-title{padding-left:0 !important}
+      .toc-items .toc-item-1 .item-title{padding-left:14px !important}
+      .toc-items .toc-item-2 .item-title{padding-left:28px !important}
+      .toc-items .toc-item-3 .item-title{padding-left:42px !important}
+      .toc-items .toc-item-4 .item-title{padding-left:56px !important}
     </style>
   </head>
   <body>

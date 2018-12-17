@@ -6,6 +6,12 @@
     </div>
   </div>
   <div class="Box-body">
+    <% if Rails.env.development? %>
+    <div class="mb-3">
+      <%= link_to icon_tag("pdf", label: "Preview PDF HTML"), repository.to_path("/settings/pdf"), class: "btn-link", target: "_blank" %>
+    </div>
+    <% end %>
+
     <div class="text-gray mb-2">
       Exporter will use the Table of Contents ordered for generate the PDF file. If you was not enable that, docs order will following as the updated at same like the <%= link_to "Docs page", repository.to_path("/docs"), target: "_blank" %>.
     </div>

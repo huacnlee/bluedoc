@@ -122,6 +122,7 @@ Rails.application.routes.draw do
           get :docs
           post :docs
           post :pdf
+          get :pdf
           get :collaborators
           post :collaborators
           post :collaborator
