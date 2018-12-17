@@ -33,6 +33,13 @@ server {
     add_header  Cache-Control public;
   }
 
+  location /plantuml {
+    proxy_redirect     off;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_pass         http://127.0.0.1:1608/;
+    gzip on;
+  }
+
   location / {
     proxy_redirect     off;
     proxy_set_header   Host $http_host;

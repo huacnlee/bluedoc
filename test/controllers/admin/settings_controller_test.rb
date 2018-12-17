@@ -12,7 +12,8 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       anonymous_enable: "0",
       admin_emails: "foo@gmail.com\nbar@gmail.com",
       application_footer_html: "<span>hello</span>",
-      dashboard_sidebar_html: "<span>world</span>"
+      dashboard_sidebar_html: "<span>world</span>",
+      plantuml_servie_host: "http://my-host.com"
     }
 
     sign_in_admin @user

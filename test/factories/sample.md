@@ -37,6 +37,18 @@ class BookLab
 end
 ```
 
+## PlantUML
+
+```plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
+```
+
 ### Test HTML chars
 
 The `<>`, `><`, `>` and `<` will keep, but <b>will</b> will render as html.

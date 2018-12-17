@@ -26,6 +26,17 @@ In other Termal tab:
 $ rails s
 ```
 
+## Install plantuml-service
+
+plantuml-service for generate PlantUML image
+
+https://github.com/bitjourney/plantuml-service
+
+```bash
+$ brew install bitjourney/self/plantuml-service
+$ brew services start bitjourney/self/plantuml-service
+```
+
 ### Generate Admin
 
 ```bash

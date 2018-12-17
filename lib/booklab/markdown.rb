@@ -4,7 +4,7 @@ require "html/pipeline"
 
 module BookLab
   class Markdown
-    pipelines = %i{normalize_mention markdown mention}
+    pipelines = %i{normalize_mention markdown mention plantuml}
     public_pipelines = pipelines + [:public_attachments]
 
     pipelineClasses = pipelines.map { |name| "BookLab::Pipeline::#{name.to_s.camelize}Filter".constantize }

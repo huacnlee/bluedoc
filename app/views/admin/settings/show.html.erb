@@ -16,6 +16,14 @@
   </div>
 
   <div class="form-group">
+    <label class="controler-label">PlantUML Service Host</label>
+    <%= f.text_field :plantuml_service_host, value: Setting.plantuml_service_host, class: "form-control", placeholder: "http://localhost:1608"  %>
+    <div class="form-text">
+      BookLab use <a href="https://github.com/bitjourney/plantuml-service" target="_blank">plantuml-service</a> for generate PlantUML SVG image, change this config to can use a custom service of your deployment.
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="controler-label">Admin Emails</label>
     <%= f.text_area :admin_emails, value: Setting.admin_emails, class: "form-control", style: "height: 100px; min-height: 100px"  %>
     <div class="form-text">

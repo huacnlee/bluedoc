@@ -10,6 +10,7 @@ defaults: &defaults
     password: '<%= ENV['SMTP_PASSWORD'] %>'
     authentication: '<%= ENV['SMTP_AUTHENTICATION'] || "login" %>'
     enable_starttls_auto: <%= ENV['SMTP_ENABLE_STARTTLS_AUTO'] || true %>
+  plantuml_service_host: <%= ENV['PLANTUML_SERVICE_HOST'] || 'http://localhost:1608' %>
 
 development:
   <<: *defaults
