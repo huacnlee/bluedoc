@@ -14,10 +14,13 @@ en:
         url: "Homepage URL"
         description: "Bio"
       group:
-        slug: "Path name"
-        name: "Display name"
+        slug: "Group name"
+        name: "Title"
         url: "URL"
         description: "Description"
       repository:
-        slug: "Path name"
-        name: "Display name"
+        slug: "Repository name"
+        name: "Title"
+      doc:
+        slug: "Doc path"
+        title: "Title"

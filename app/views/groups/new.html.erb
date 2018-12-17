@@ -15,7 +15,7 @@
         <%= form.label :slug, class: "control-label" %>
         <%= form.text_field :slug, class: "form-control" %>
         <div class="form-text">
-          <p>Great group path names are short and memorable, <%= Setting.host %>/:pathname</p>
+          <p>Great group path names are short and memorable, <%= Setting.host %>/:group-name</p>
           <p>The letters, numbers or dash is allow, for example: <strong class="text-blue">booklab-help</strong></p>
         </div>
       </div>
@@ -24,7 +24,7 @@
         <%= form.label :name, class: "control-label" %>
         <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
         <div class="form-text">
-          Display name of this Group
+          Display title of this Group
         </div>
       </div>
 
