@@ -24,7 +24,7 @@ class DashboardsController < ApplicationController
   end
 
   def repositories
-    @repositories = current_user.repositories.includes(:user).page(params[:page]).per(10)
+    @repositories = current_user.user_actives.repositories.includes(:user).page(params[:page]).per(10)
   end
 
   def docs

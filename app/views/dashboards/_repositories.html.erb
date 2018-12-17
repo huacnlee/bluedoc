@@ -3,32 +3,30 @@
   <p>You does not have any repositories.</p>
 </div>
 <% else %>
-<table class="dashboard-table table table-striped">
-  <tr>
-    <td>Name</td>
-    <td class="hide-sm hide-md">Description</td>
-    <td class="hide-sm">Stars</td>
-    <td class="hide-sm">Watches</td>
-    <td>Last visit</td>
-  </tr>
+
+<div class="dashboard-repos d-flex d-flex-column flex-wrap">
   <% items.each do |item| %>
-  <tr class="recent-repo-item">
-    <td>
-      <%= repository_path_tag(item) %>
-    </td>
-    <td class="hide-sm hide-md" style="max-width: 200px">
-      <%= truncate item.description, length: 100 %>
-    </td>
-    <td class="hide-sm">
-      <%= item.stars_count %>
-    </td>
-    <td class="hide-sm">
-      <%= item.watches_count %>
-    </td>
-    <td style="width: 150px">
-      <%= timeago item.updated_at %>
-    </td>
-  </tr>
+  <div class="recent-repo-item Box">
+    <div class="Box-body">
+      <div class="infos">
+        <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(item.subject) %></div>
+        <div class="description text-gray py-2">
+          <%= truncate item.subject.description, length: 100 %>
+        </div>
+        <div class="info">
+          <span class="stars">
+            <%= icon_tag("star") %> <%= item.subject.stars_count %>
+          </span>
+          <span class="watches">
+            <%= icon_tag("eye") %> <%= item.subject.watches_count %>
+          </span>
+          <span class="time">
+            <%= timeago item.updated_at %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
-</table>
+</div>
 <% end %>

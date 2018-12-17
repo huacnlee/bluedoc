@@ -121,6 +121,56 @@
     }
   }
 
+  .dashboard-repos {
+    .recent-repo-item {
+      height: 134px;
+      width: 100%;
+      min-width: 300px;
+      overflow: hidden;
+      margin-bottom: 15px;
+
+      .Box-body {
+        border: 0;
+      }
+
+      .title {
+        height: 22px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 15px;
+
+        .fas { color: #999; }
+        a { color: #555; font-weight: bold; }
+      }
+
+      .description {
+        height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        margin-bottom: 10px;
+      }
+
+      .info { color: #aaa; }
+      .info span { margin-right: 5px; }
+      .info span.time { margin-right: 0; float: right;}
+    }
+
+    @media (min-width: 768px) {
+      .recent-repo-item {
+        width: 47%;
+        margin-right: 15px;
+      }
+    }
+
+    @media (min-width: 1012px) {
+      .recent-repo-item {
+        width: 32%;
+      }
+    }
+  }
+
   .repo-list {
     .repo-item {
       position: relative;
