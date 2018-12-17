@@ -3,29 +3,23 @@
   <p>You does not have any groups.</p>
 </div>
 <% else %>
-<table class="dashboard-table table table-striped">
-  <tr>
-    <td>Name</td>
-    <td class="hide-sm hide-md">Description</td>
-    <td class="hide-sm">Members</td>
-    <td>Last visit</td>
-  </tr>
+<div class="dashboard-groups d-flex d-flex-column flex-wrap">
   <% items.each do |item| %>
-  <tr class="recent-group-item Box-row">
-    <td>
-      <%= user_avatar_tag(item, style: :tiny) %>
-      <%= group_name_tag(item) %>
-    </td>
-    <td class="hide-sm hide-md text-gray" style="max-width: 200px">
-      <%= truncate item.description, length: 100 %>
-    </td>
-    <td class="hide-sm text-gray">
-      <%= item.members_count %>
-    </td>
-    <td style="width: 150px">
-      <%= timeago item.created_at %>
-    </td>
-  </tr>
+  <div class="recent-group-item Box">
+    <div class="Box-body">
+      <div class="title">
+        <%= user_avatar_tag(item, style: :tiny) %>
+        <%= group_name_tag(item) %>
+      </div>
+      <div class="description">
+        <%= truncate item.description, length: 100 %>
+      </div>
+      <div class="info text-gray">
+        <span class="members"><%= icon_tag("users") %> <%= item.members_count %></span>
+        <span class="time"><%= timeago item.created_at %></span>
+      </div>
+    </div>
+  </div>
   <% end %>
-</table>
+</div>
 <% end %>

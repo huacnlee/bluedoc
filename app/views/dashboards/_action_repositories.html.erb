@@ -3,36 +3,26 @@
   <p>You does not have any <%= action_name.singularize %> repositories.
 </div>
 <% else %>
-<table class="dashboard-table table table-striped" data-action-button-reload>
-  <tr>
-    <td>Name</td>
-    <td class="hide-sm hide-md">Description</td>
-    <td class="hide-sm">Stars</td>
-    <td class="hide-sm">Watches</td>
-    <td></td>
-  </tr>
+
+<div class="dashboard-repos d-flex d-flex-column flex-wrap" data-action-button-reload>
   <% @repositories.each do |repo| %>
-  <tr class="repo-item">
-    <td>
-      <%= repository_path_tag(repo) %>
-    </td>
-    <td class="hide-sm hide-md">
-      <%= repo.description %>
-    </td>
-    <td class="hide-sm">
-      <%= repo.stars_count %>
-    </td>
-    <td class="hide-sm">
-      <%= repo.watches_count %>
-    </td>
-    <td>
-      <% if action_name == "stars" %>
-        <%= action_button_tag(repo, :star, undo: true) %>
-      <% else %>
-        <%= action_button_tag(repo, :watch, icon: :eye, undo: true) %>
-      <% end %>
-    </td>
-  </tr>
+  <div class="recent-repo-item Box">
+    <div class="Box-body">
+      <div class="infos">
+        <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(repo) %></div>
+        <div class="description">
+          <%= truncate repo.description, length: 100 %>
+        </div>
+        <div class="info">
+          <% if action_name == "stars" %>
+            <%= action_button_tag(repo, :star, undo: true) %>
+          <% else %>
+            <%= action_button_tag(repo, :watch, icon: :eye, undo: true) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
-</table>
+</div>
 <% end %>

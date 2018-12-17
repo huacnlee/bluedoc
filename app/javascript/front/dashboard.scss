@@ -121,9 +121,10 @@
     }
   }
 
-  .dashboard-repos {
-    .recent-repo-item {
-      height: 134px;
+  .dashboard-repos,
+  .dashboard-groups {
+    .recent-repo-item,
+    .recent-group-item {
       width: 100%;
       min-width: 300px;
       overflow: hidden;
@@ -139,6 +140,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         font-size: 15px;
+        margin-bottom: 10px;
 
         .fas { color: #999; }
         a { color: #555; font-weight: bold; }
@@ -149,7 +151,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         word-break: break-all;
-        margin-bottom: 10px;
       }
 
       .info { color: #aaa; }
@@ -158,14 +159,16 @@
     }
 
     @media (min-width: 768px) {
-      .recent-repo-item {
+      .recent-repo-item,
+      .recent-group-item {
         width: 47%;
         margin-right: 15px;
       }
     }
 
     @media (min-width: 1012px) {
-      .recent-repo-item {
+      .recent-repo-item,
+      .recent-group-item {
         width: 32%;
       }
     }

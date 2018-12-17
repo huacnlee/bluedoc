@@ -10,7 +10,7 @@
     <div class="Box-body">
       <div class="infos">
         <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(item.subject) %></div>
-        <div class="description text-gray py-2">
+        <div class="description">
           <%= truncate item.subject.description, length: 100 %>
         </div>
         <div class="info">

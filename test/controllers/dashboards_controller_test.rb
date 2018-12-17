@@ -64,7 +64,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/repositories"
     assert_equal 200, response.status
-    assert_select ".dashboard-table .recent-repo-item", 2
+    assert_select ".dashboard-repos .recent-repo-item", 2
   end
 
   test "GET /dashboard/groups" do
@@ -82,7 +82,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/groups"
     assert_equal 200, response.status
-    assert_select ".dashboard-table .recent-group-item", 2
+    assert_select ".dashboard-groups .recent-group-item", 2
   end
 
   test "GET /dashboard/stars" do
@@ -99,7 +99,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/stars"
     assert_equal 200, response.status
-    assert_select ".dashboard-table .repo-item", 2
+    assert_select ".dashboard-repos .recent-repo-item", 2
     assert_select ".UnderlineNav-item.selected", text: "Repositories"
   end
 
@@ -117,7 +117,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/stars?tab=docs"
     assert_equal 200, response.status
-    assert_select ".dashboard-table .doc-item", 2
+    assert_select ".recent-docs .recent-doc-item", 2
     assert_select ".UnderlineNav-item.selected", text: "Docs"
   end
 
@@ -135,6 +135,6 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/dashboard/watches"
     assert_equal 200, response.status
-    assert_select ".dashboard-table .repo-item", 2
+    assert_select ".dashboard-repos .recent-repo-item", 2
   end
 end
