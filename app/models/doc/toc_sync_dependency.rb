@@ -2,7 +2,6 @@
 
 # Sync update TOC after doc update
 class Doc
-
   after_update :sync_update_toc_after_update
 
   private
