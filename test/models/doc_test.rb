@@ -294,4 +294,40 @@ class DocTest < ActiveSupport::TestCase
       assert_equal repo.id, doc.repository_id
     end
   end
+
+  test "toc_sync" do
+    toc = <<~TOC
+    - title: Hello
+      url: hello
+      depth: 0
+    - title: Getting Started
+      url: getting-started
+      depth: 1
+    - title: Database setup
+      url: database-setup
+      depth: 1
+    TOC
+    repo = create(:repository, toc: toc)
+    doc = create(:doc, repository: repo, slug: "getting-started")
+
+    doc.update(slug: "started-getting")
+    assert_equal "started-getting", doc.slug
+
+    repo.reload
+    assert_match "started-getting", repo.toc_text
+
+    doc.update(slug: "started-getting1", title: "Started Getting")
+    repo.reload
+    assert_match "started-getting1", repo.toc_text
+    assert_match "Started Getting", repo.toc_text
+    content = BookLab::Toc.parse(repo.toc_text)
+    item = content.find_by_url("started-getting1")
+    assert_equal "Started Getting", item.title
+    assert_equal 1, item.depth
+
+    doc.update(title: "Started Getting1")
+    repo.reload
+    assert_match "started-getting1", repo.toc_text
+    assert_match "Started Getting1", repo.toc_text
+  end
 end

@@ -203,6 +203,64 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_by_docs_json
   end
 
+  test "update_toc_by_url" do
+    toc = <<~TOC
+    - title: Hello
+      url: hello
+      depth: 0
+    - title: Getting Started
+      url: getting-started
+      depth: 1
+    - title: Database setup
+      url: database-setup
+      depth: 1
+    TOC
+    repo = create(:repository, toc: toc)
+
+    assert_equal false, repo.update_toc_by_url("not-exist", title: "Setup database", url: "setup-database")
+    assert_equal true, repo.update_toc_by_url("database-setup", title: "Setup database", url: "setup-database")
+
+    repo.reload
+    assert_match "setup-database", repo.toc_text
+    content = BookLab::Toc.parse(repo.toc_text, format: :yml)
+    item = content.find_by_url("setup-database")
+    assert_not_nil item
+    assert_equal "setup-database", item.url
+    assert_equal "Setup database", item.title
+    assert_equal 1, item.depth
+
+    # Test parallel update
+    threads = []
+    threads << Thread.new do
+      repo.update_toc_by_url("setup-database", title: "Update by Thread 1", url: "update-by-thread-1")
+    end
+    threads << Thread.new do
+      repo.update_toc_by_url("getting-started", title: "Update by Thread 2", url: "update-by-thread-2")
+    end
+    threads << Thread.new do
+      repo.update_toc_by_url("hello", title: "Update by Thread 3", url: "update-by-thread-3")
+    end
+    threads.each(&:join)
+
+    repo.reload
+    new_toc = <<~TOC
+    ---
+    - title: Update by Thread 3
+      url: update-by-thread-3
+      depth: 0
+      id:
+    - title: Update by Thread 2
+      url: update-by-thread-2
+      depth: 1
+      id:
+    - title: Update by Thread 1
+      url: update-by-thread-1
+      depth: 1
+      id:
+    TOC
+    assert_equal YAML.dump(YAML.load(new_toc)), repo.toc_text
+  end
+
   test "validate toc" do
     toc = "foo\"\"\nsdk"
     repo = build(:repository, toc: toc)

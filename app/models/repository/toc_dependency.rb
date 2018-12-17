@@ -64,6 +64,25 @@ class Repository
     @toc_ordered_docs = ordered_docs
   end
 
+  # update title by slug
+  #
+  #   repo.update_toc_by_url("hello", title: "New title", url: "new-slug")
+  #
+  def update_toc_by_url(url, params = {})
+    # lock toc before update
+    locker = Redis::Lock.new("#{self.cache_key}/update-toc", expiration: 2, timeout: 5)
+    locker.lock do
+      content = BookLab::Toc.parse(toc_text)
+      item = content.find_by_url(url)
+      return false if item.blank?
+
+      item.title = params[:title] if params[:title]
+      item.url = params[:url] if params[:url]
+
+      self.update!(toc: content.to_yaml)
+    end
+  end
+
   private
 
     def track_doc_version_on_create
