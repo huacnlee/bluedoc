@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  second_level_cache expires_in: 1.week
+
+  include SoftDelete
   include Slugable
   include Activityable
 
-  second_level_cache expires_in: 1.week
-
-  depends_on :devise, :avatar, :system_user, :actions, :membership, :search, :activities, :follows
+  depends_on :soft_delete, :devise, :avatar, :system_user, :actions, :membership, :search, :activities, :follows
 
   has_many :owned_repositories, class_name: "Repository", dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy

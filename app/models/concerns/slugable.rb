@@ -9,9 +9,7 @@ module Slugable
     before_validation do
       self.slug = BookLab::Slug.slugize(self.slug) unless self.is_a?(User)
     end
-
   end
-
 
   def fullname
     @fullname ||= "#{self.name} (#{self.slug})"
@@ -25,6 +23,14 @@ module Slugable
     url = [Setting.host, self.to_path].join("")
     url += "##{anchor}" if anchor
     url
+  end
+
+  def soft_delete_restore_attributes
+    { deleted_at: nil, updated_at: Time.now.utc, slug: self.deleted_slug, deleted_slug: nil }
+  end
+
+  def soft_delete_destroy_attributes
+    { deleted_at: Time.now.utc, updated_at: Time.now.utc, slug: "deleted-#{BookLab::Slug.random}", deleted_slug: self.slug }
   end
 
   class_methods do

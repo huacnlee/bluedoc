@@ -25,7 +25,7 @@
       <td class="opts"></td>
     </tr>
     <% @groups.each do |item| %>
-    <tr class="<%= cycle("","even") %>">
+    <tr class="<%= cycle("","even") %> <%= "deleted" if item.deleted? %>">
       <td><%= link_to item.id, admin_group_path(item.id) %></td>
       <td>
         <div><%= link_to item.name, admin_group_path(item.id) %></div>
@@ -37,6 +37,9 @@
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_group_path(item.id) %>
         <%= link_to icon_tag("trash"), admin_group_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <% if item.deleted? %>
+          <%= link_to icon_tag("restore"), restore_admin_group_path(item.id), method: :post, 'data-confirm' => 'Are you sure restore this item?' %>
+        <% end %>
       </td>
     </tr>
     <% end %>

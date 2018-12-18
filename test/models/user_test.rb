@@ -203,11 +203,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "as_indexed_json" do
     user = create(:user, description: "Hello world")
-    data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id }
+    data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false }
     assert_equal data, user.as_indexed_json
 
-    group = create(:group)
-    data = { sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id }
+    group = create(:group, deleted_at: Time.now)
+    data = { sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id, deleted: true }
     assert_equal data, group.as_indexed_json
   end
 
@@ -223,6 +223,9 @@ class UserTest < ActiveSupport::TestCase
       assert_equal true, user.indexed_changed?
     end
     user.stub(:saved_change_to_description?, true) do
+      assert_equal true, user.indexed_changed?
+    end
+    user.stub(:saved_change_to_deleted_at?, true) do
       assert_equal true, user.indexed_changed?
     end
 

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class Admin::DocsController < Admin::ApplicationController
-  before_action :set_doc, only: [:show, :edit, :update, :destroy]
+  before_action :set_doc, only: [:show, :edit, :update, :destroy, :restore]
 
   def index
-    @docs = Doc.includes(:repository).order("id desc")
+    @docs = Doc.unscoped.includes(:repository).order("id desc")
     if params[:repository_id]
       @docs = @docs.where(repository_id: params[:repository_id])
     end
     if params[:q]
       q = "%#{params[:q]}%"
-      @docs = @docs.where("title ilike ? or slug = ?", q, q)
+      @docs = @docs.where("title ilike ? or slug ilike ?", q, q)
     end
     @docs = @docs.page(params[:page])
   end
@@ -45,13 +45,18 @@ class Admin::DocsController < Admin::ApplicationController
 
   def destroy
     @doc.destroy
-    redirect_to admin_docs_path, notice: "Doc was successfully deleted."
+    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: "Doc was successfully deleted."
+  end
+
+  def restore
+    @doc.restore
+    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: "Doc was successfully restored."
   end
 
   private
 
     def set_doc
-      @doc = Doc.find(params[:id])
+      @doc = Doc.unscoped.find(params[:id])
     end
 
     def doc_params

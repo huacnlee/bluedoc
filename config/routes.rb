@@ -24,10 +24,26 @@ Rails.application.routes.draw do
       end
     end
     resource :settings
-    resources :groups
-    resources :users
-    resources :repositories
-    resources :docs
+    resources :groups do
+      member do
+        post :restore
+      end
+    end
+    resources :users do
+      member do
+        post :restore
+      end
+    end
+    resources :repositories do
+      member do
+        post :restore
+      end
+    end
+    resources :docs do
+      member do
+        post :restore
+      end
+    end
   end
 
   # short attachment url

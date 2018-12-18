@@ -32,6 +32,11 @@ module Searchable
       SearchIndexJob.perform_later("update", self.class.name, self.id) if @need_update_es
     end
 
+    # after soft_delete
+    set_callback :soft_delete, :after do
+      SearchIndexJob.perform_later("update", self.class.name, self.id)
+    end
+
     after_commit on: :destroy do
       SearchIndexJob.perform_later("delete", self.class.name, self.id)
     end

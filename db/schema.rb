@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_084557) do
+ActiveRecord::Schema.define(version: 2018_12_18_031612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,9 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -106,14 +108,15 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.integer "last_editor_id"
     t.integer "comments_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
-    t.datetime "deleted_at"
-    t.string "deleted_slug"
     t.datetime "body_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "editor_ids", default: [], null: false, array: true
+    t.datetime "deleted_at"
+    t.string "deleted_slug"
     t.index "repository_id, lower((slug)::text)", name: "index_on_repository_and_slug", unique: true
-    t.index ["repository_id"], name: "index_docs_on_repository_id"
+    t.index ["deleted_at"], name: "index_docs_on_deleted_at"
+    t.index ["repository_id"], name: "index_docs_on_repository_id", where: "(deleted_at IS NULL)"
   end
 
   create_table "exception_tracks", id: :serial, force: :cascade do |t|
@@ -130,9 +133,11 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_type", "subject_id"], name: "index_subject"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_members_on_deleted_at"
+    t.index ["subject_type", "subject_id"], name: "index_members_on_subject_type_and_subject_id", where: "(deleted_at IS NULL)"
     t.index ["user_id", "subject_type", "subject_id"], name: "index_user_subject", unique: true
-    t.index ["user_id"], name: "index_members_on_user_id"
+    t.index ["user_id"], name: "index_members_on_user_id", where: "(deleted_at IS NULL)"
   end
 
   create_table "mentions", force: :cascade do |t|
@@ -180,8 +185,6 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.bigint "user_id"
     t.integer "creator_id"
     t.string "description"
-    t.datetime "deleted_at"
-    t.string "deleted_slug"
     t.integer "privacy", default: 1, null: false
     t.integer "watches_count", default: 0, null: false
     t.integer "stars_count", default: 0, null: false
@@ -190,8 +193,11 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.text "preferences"
     t.integer "members_count", default: 0, null: false
     t.integer "editor_ids", default: [], null: false, array: true
+    t.datetime "deleted_at"
+    t.string "deleted_slug"
     t.index "user_id, lower((slug)::text)", name: "index_on_user_and_slug", unique: true
-    t.index ["user_id"], name: "index_repositories_on_user_id"
+    t.index ["deleted_at"], name: "index_repositories_on_deleted_at"
+    t.index ["user_id"], name: "index_repositories_on_user_id", where: "(deleted_at IS NULL)"
   end
 
   create_table "repository_sources", force: :cascade do |t|
@@ -258,7 +264,6 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "members_count", default: 0, null: false
@@ -267,9 +272,12 @@ ActiveRecord::Schema.define(version: 2018_12_12_084557) do
     t.string "location", limit: 50
     t.integer "followers_count", default: 0, null: false
     t.integer "following_count", default: 0, null: false
+    t.datetime "deleted_at"
+    t.string "deleted_slug"
     t.index "lower((slug)::text)", name: "index_on_slug", unique: true
     t.index "type, lower((email)::text)", name: "index_on_type_and_email"
     t.index "type, lower((email)::text)", name: "uk_on_type_and_email", unique: true, where: "((COALESCE(email, ''::character varying))::text <> ''::text)"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end

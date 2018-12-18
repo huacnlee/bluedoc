@@ -9,11 +9,13 @@ class User
       slug: self.slug,
       title: self.name,
       body: self.description,
-      user_id: self.id
+      user_id: self.id,
+      deleted: self.deleted?
     }
   end
 
   def indexed_changed?
+    saved_change_to_deleted_at? ||
     saved_change_to_name? ||
     saved_change_to_description?
   end

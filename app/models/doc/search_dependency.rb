@@ -13,12 +13,15 @@ class Doc
       user_id: self.repository.user_id,
       repository: {
         public: self.repository.public?,
-      }
+      },
+      deleted: self.deleted?
     }
   end
 
   def indexed_changed?
-    saved_change_to_title? || body.changed?
+    saved_change_to_deleted_at? ||
+    saved_change_to_title? ||
+    body.changed?
   end
 
   def _search_body

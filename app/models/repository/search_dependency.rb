@@ -13,11 +13,13 @@ class Repository
       user_id: self.user_id,
       repository: {
         public: self.public?,
-      }
+      },
+      deleted: self.deleted?
     }
   end
 
   def indexed_changed?
+    saved_change_to_deleted_at? ||
     saved_change_to_privacy? ||
     saved_change_to_name? ||
     saved_change_to_description?

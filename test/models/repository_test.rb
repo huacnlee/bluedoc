@@ -334,14 +334,14 @@ class RepositoryTest < ActiveSupport::TestCase
   test "as_indexed_json" do
     repo = create(:repository, description: "Hello world")
     repo.stub(:_search_body, "Search body") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true }, deleted: false }
       assert_equal data, repo.as_indexed_json
     end
 
-    repo = create(:repository, privacy: :private, description: "Hello world")
+    repo = create(:repository, privacy: :private, description: "Hello world", deleted_at: Time.now)
 
     repo.stub(:_search_body, "Search body") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false }, deleted: true }
       assert_equal data, repo.as_indexed_json
     end
   end
@@ -362,6 +362,9 @@ class RepositoryTest < ActiveSupport::TestCase
       assert_equal true, repo.indexed_changed?
     end
     repo.stub(:saved_change_to_description?, true) do
+      assert_equal true, repo.indexed_changed?
+    end
+    repo.stub(:saved_change_to_deleted_at?, true) do
       assert_equal true, repo.indexed_changed?
     end
   end

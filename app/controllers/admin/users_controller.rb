@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Admin::UsersController < Admin::ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :restore]
 
   def index
-    @users = User.where(type: "User").with_attached_avatar.order("id desc")
+    @users = User.unscoped.where(type: "User").with_attached_avatar.order("id desc")
     if params[:q]
       q = "%#{params[:q]}%"
       @users = @users.where("email ilike ? or slug ilike ? or name ilike ?", q, q, q)
@@ -42,13 +42,18 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, notice: "User was successfully deleted."
+    redirect_to admin_users_path(q: @user.slug), notice: "User was successfully deleted."
+  end
+
+  def restore
+    @user.restore
+    redirect_to admin_users_path(q: @user.slug), notice: "User was successfully restored."
   end
 
   private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.unscoped.find(params[:id])
     end
 
     def user_params

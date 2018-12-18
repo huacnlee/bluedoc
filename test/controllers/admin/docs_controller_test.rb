@@ -38,6 +38,19 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
       delete admin_doc_path(@doc.id)
     end
 
-    assert_redirected_to admin_docs_path
+    @doc.reload
+    assert_redirected_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug)
+  end
+
+  test "should restore admin_doc" do
+    @doc.destroy
+    assert_difference("Doc.count", +1) do
+      post restore_admin_doc_path(@doc.id)
+    end
+    @doc.reload
+    assert_redirected_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug)
+
+    doc = Doc.find(@doc.id)
+    assert_equal false, doc.deleted?
   end
 end

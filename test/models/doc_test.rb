@@ -197,15 +197,15 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, repository: repo, body: "Hello world")
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true } }
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true }, deleted: false }
       assert_equal data, doc.as_indexed_json
     end
 
     repo = create(:repository, privacy: :private)
-    doc = create(:doc, repository: repo, body: "Hello world")
+    doc = create(:doc, repository: repo, body: "Hello world", deleted_at: Time.now)
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false } }
+      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false }, deleted: true }
       assert_equal data, doc.as_indexed_json
     end
   end
@@ -221,6 +221,10 @@ class DocTest < ActiveSupport::TestCase
     assert_equal false, doc.indexed_changed?
 
     doc.stub(:saved_change_to_title?, true) do
+      assert_equal true, doc.indexed_changed?
+    end
+
+    doc.stub(:saved_change_to_deleted_at?, true) do
       assert_equal true, doc.indexed_changed?
     end
 

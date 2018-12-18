@@ -12,6 +12,12 @@
   .opts {
     a { margin-left: 5px; color: #999; }
   }
+  tr.deleted {
+    td { text-decoration: line-through; }
+    .opts {
+      text-decoration: none !important;
+    }
+  }
 }
 
 .detail {

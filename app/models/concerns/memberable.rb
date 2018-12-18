@@ -12,6 +12,10 @@ module Memberable
     before_create do
       self.creator_id ||= Current.user.id if Current.user.present?
     end
+
+    set_callback :restore, :before do
+      self.restore_dependents(:members)
+    end
   end
 
   def user_role(user)
@@ -38,7 +42,7 @@ module Memberable
   end
 
   def update_member(user, role)
-    self.members.where(user: user, subject: self).update_all(role: role)
+    self.members.unscoped.where(user: user, subject: self).update_all(role: role, deleted_at: nil)
   end
 
   def remove_member(user)

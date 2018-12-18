@@ -56,7 +56,7 @@ class SearchableTest < ActiveSupport::TestCase
   test "destroy hook" do
     TYPES.each do |type|
       item = create(type)
-      assert_enqueued_with job: SearchIndexJob, args: ["delete", type.to_s.classify, item.id] do
+      assert_enqueued_with job: SearchIndexJob, args: ["update", type.to_s.classify, item.id] do
         item.destroy
       end
     end

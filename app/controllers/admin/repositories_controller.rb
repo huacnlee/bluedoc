@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Admin::RepositoriesController < Admin::ApplicationController
-  before_action :set_repository, only: [:show, :edit, :update, :destroy]
+  before_action :set_repository, only: [:show, :edit, :update, :destroy, :restore]
 
   def index
-    @repositories = Repository.includes(:user).order("id desc")
+    @repositories = Repository.unscoped.includes(:user).order("id desc")
     if params[:q]
       q = "%#{params[:q]}%"
-      @repositories = @repositories.where("name ilike ? or slug = ? or description ilike ?", q, q, q)
+      @repositories = @repositories.where("name ilike ? or slug ilike ? or description ilike ?", q, q, q)
     end
     if params[:user_id]
       @repositories = @repositories.where(user_id: params[:user_id])
@@ -45,13 +45,18 @@ class Admin::RepositoriesController < Admin::ApplicationController
 
   def destroy
     @repository.destroy
-    redirect_to admin_repositories_path, notice: "Repository was successfully deleted."
+    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully deleted."
+  end
+
+  def restore
+    @repository.restore
+    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully restored."
   end
 
   private
 
     def set_repository
-      @repository = Repository.find(params[:id])
+      @repository = Repository.unscoped.find(params[:id])
     end
 
     def repository_params

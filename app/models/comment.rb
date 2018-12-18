@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  include SoftDelete
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper
   include Reactionable

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
+  include SoftDelete
   include Slugable
   include Markdownable
   include Memberable
@@ -9,7 +10,7 @@ class Repository < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :source, :preferences, :toc, :editors, :user_actives, :watches, :privacy, :search
+  depends_on :soft_delete, :source, :preferences, :toc, :editors, :user_actives, :watches, :privacy, :search
 
   attr_accessor :last_editor_id
 

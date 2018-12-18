@@ -38,6 +38,19 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
       delete admin_user_path(@user.id)
     end
 
-    assert_redirected_to admin_users_path
+    @user.reload
+    assert_redirected_to admin_users_path(q: @user.slug)
+  end
+
+  test "should restore admin_user" do
+    @user.destroy
+    assert_difference("User.count", +1) do
+      post restore_admin_user_path(@user.id)
+    end
+    @user.reload
+    assert_redirected_to admin_users_path(q: @user.slug)
+
+    user = User.find(@user.id)
+    assert_equal false, user.deleted?
   end
 end

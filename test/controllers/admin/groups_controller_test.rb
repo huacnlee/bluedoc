@@ -38,6 +38,19 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
       delete admin_group_path(@group.id)
     end
 
-    assert_redirected_to admin_groups_path
+    @group.reload
+    assert_redirected_to admin_groups_path(q: @group.slug)
+  end
+
+  test "should restore admin_group" do
+    @group.destroy
+    assert_difference("Group.count", +1) do
+      post restore_admin_group_path(@group.id)
+    end
+    @group.reload
+    assert_redirected_to admin_groups_path(q: @group.slug)
+
+    group = Group.find(@group.id)
+    assert_equal false, group.deleted?
   end
 end

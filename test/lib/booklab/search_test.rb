@@ -7,7 +7,8 @@ class BookLab::SearchText < ActionView::TestCase
     expected = {
       query: {
         bool: {
-          must: filter
+          must: filter,
+          must_not: { term: { deleted: true } }
         }
       },
       highlight: {

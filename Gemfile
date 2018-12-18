@@ -32,7 +32,6 @@ gem "elasticsearch-model"
 gem "elasticsearch-rails"
 
 gem "second_level_cache"
-
 gem "bulk_insert"
 
 gem "devise"

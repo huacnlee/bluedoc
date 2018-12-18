@@ -34,7 +34,8 @@ module BookLab
       params = {
         query: {
           bool: {
-            must: filter
+            must: filter,
+            must_not: { term: { deleted: true } }
           }
         },
         highlight: {
@@ -60,6 +61,8 @@ module BookLab
         if !self.private?
           filter << { term: { "repository.public" => true } }
         end
+
+
 
         q = {
           query_string: {

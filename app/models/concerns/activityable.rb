@@ -4,7 +4,7 @@ module Activityable
   extend ActiveSupport::Concern
 
   included do
-    after_commit :destroy_depend_activities, on: [:destroy]
+    after_destroy :destroy_depend_activities
   end
 
   def destroy_depend_activities

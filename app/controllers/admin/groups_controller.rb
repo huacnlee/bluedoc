@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Admin::GroupsController < Admin::ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :restore]
 
   def index
-    @groups = Group.order("id desc")
+    @groups = Group.unscoped.order("id desc")
     if params[:q]
       q = "%#{params[:q]}%"
       @groups = @groups.where("email ilike ? or slug ilike ? or name ilike ?", q, q, q)
@@ -42,13 +42,18 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to admin_groups_path, notice: "Group was successfully deleted."
+    redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully deleted."
+  end
+
+  def restore
+    @group.restore
+    redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully restored."
   end
 
   private
 
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.unscoped.find(params[:id])
     end
 
     def group_params
