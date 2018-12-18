@@ -29,6 +29,13 @@
     "tocbot": "^4.4.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
     "node-sass": "^4.10.0",
     "webpack-dev-server": "^3.1.9"
   }

@@ -14,7 +14,9 @@
   justify-items: center;
   &:first-child { border-radius: 3px 3px 0 0; }
   &:last-child { border-radius: 0 0 3px 3px; }
-
+  &.active {
+    background: #f9f9f9;
+  }
   .indent-left,
   .indent-right {
     font-size: 14px;
@@ -51,6 +53,7 @@
     min-width: 60px;
     border: 0px;
     border-bottom: 1px solid #fff;
+    background: transparent;
     &:hover {
       background: #fefef0;
     }

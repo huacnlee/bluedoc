@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "globals": {
+    "$": true,
+    "process": true,
+    "__dirname": true,
+    "React": true
+  },
+  "parser": "babel-eslint",
+  "extends": ["airbnb-base", "react-app"],
+  "plugins": [
+    "react",
+    "import",
+    "jsx-a11y"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "sourceType": "module",
+    "ecmaVersion": 7
+  }
+}

@@ -1,18 +1,22 @@
-import React from "react";
-import { SortableContainer, SortableHandle, SortableElement, arrayMove } from 'react-sortable-hoc';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import React from 'react';
+import {
+  SortableHandle, SortableElement,
+} from 'react-sortable-hoc';
 
 const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
 
 const TocItemElement = SortableElement(({
-  item: {url = '', title = '', depth },
+  item: { url = '', title = '', depth },
   onIndent,
   onUnindent,
   onDeleteItem,
   onKeyPressEdit,
   onChange,
-}) => {
-  return (
-    <div className={`toc-item-drageable toc-item toc-item-d${depth}`}>
+  onSelectItem,
+  active,
+}) => (
+    <div className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={onSelectItem}>
       {/* drag */}
       <DragHandle />
       {/* indentation */}
@@ -38,30 +42,19 @@ const TocItemElement = SortableElement(({
           value={url} />
       </form>
     </div>
-  );
-});
+));
 
 
 export default class TocItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   // indent
+  // eslint-disable-next-line consistent-return
   indentItem = (step) => {
     const { item } = this.props;
-    let depth = item.depth;
-    if (!depth) {
-      depth = 0;
-    }
-    if (depth == 1 && depth >= 5) {
+    const { depth = 0 } = item;
+    if ((step === 1 && depth >= 5) || (step === -1 && depth === 0)) {
       return false;
     }
-    if (depth == -1 && depth == 0) {
-      return false;
-    }
-    depth += step;
-    this.saveChange({...item, depth});
+    this.saveChange({ ...item, depth: depth + step });
   }
 
   saveChange = (item = this.props.item) => {
@@ -69,20 +62,20 @@ export default class TocItem extends React.PureComponent {
   }
 
   // indent
-  onIndent = (e) => this.indentItem(1)
+  onIndent = e => this.indentItem(1)
 
   // unindent
-  onUnindent = (e) => this.indentItem(-1)
+  onUnindent = e => this.indentItem(-1)
 
   // sync
   onChangeField = (e) => {
     e.preventDefault();
     const input = e.currentTarget;
-    const field = input.getAttribute("data-field");
+    const field = input.getAttribute('data-field');
     this.saveChange({
       ...this.props.item,
-      [field]: input.value
-    })
+      [field]: input.value,
+    });
   }
 
   // remove item
@@ -99,17 +92,22 @@ export default class TocItem extends React.PureComponent {
     }
   }
 
+  onSelectItem = () => this.props.onSelectItem(this.props.index)
+
   render() {
-    const {index, item} = this.props;
+    const { index, item, active } = this.props;
     return (
       <TocItemElement
+        active={active}
         index={index}
         item={item}
         onIndent={this.onIndent}
         onChange={this.onChangeField}
         onUnindent={this.onUnindent}
         onKeyPressEdit={this.onKeyPress}
-        onDeleteItem={this.onDeleteItem} />
-    )
+        onDeleteItem={this.onDeleteItem}
+        onSelectItem={this.onSelectItem}
+      />
+    );
   }
 }
