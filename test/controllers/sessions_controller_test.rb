@@ -109,7 +109,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     create(:authorization, provider: "google_oauth2", uid: "123", user: @user)
 
     get "/account/auth/google_oauth2/callback"
-    assert_redirected_to root_path
+    assert_redirected_to new_user_registration_path
 
     # make sure sign in will bind
     post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }

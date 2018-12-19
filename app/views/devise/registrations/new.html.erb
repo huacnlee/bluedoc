@@ -1,14 +1,14 @@
 <%
 auth_session = session[:omniauth] || {}
-auth_info = auth_session.dig("info")
+auth_info = auth_session["info"] || {}
 if auth_info
-  resource.omniauth_provider = auth_session.dig("provider")
-  resource.omniauth_uid = auth_session.dig("uid")
+  resource.omniauth_provider = auth_session["provider"]
+  resource.omniauth_uid = auth_session["uid"]
 
-  resource.email = auth_info.dig("email") if resource.email.blank?
-  resource.name = auth_info.dig("name") if resource.name.blank?
+  resource.email = auth_info["email"] if resource.email.blank?
+  resource.name = auth_info["name"] if resource.name.blank?
   if resource.slug.blank?
-    resource.slug = auth_info.dig("login") || BookLab::Slug.slugize(auth_info.dig("name"))
+    resource.slug = auth_info["login"] || auth_info["name"]
   end
 end
 %>
@@ -23,7 +23,7 @@ end
     <% if auth_info %>
     <div class="flash flash-warn mt-5">
       <strong>Complete your account info</strong>
-      <p>You must complete the below form for sign up with <b><%= session[:omniauth]["provider"].humanize %></b></p>
+      <p>You must complete the below form for sign up with <b><%= resource.omniauth_provider&.humanize %></b></p>
       <p>Or if you had a exists BookLab account, you can <%= link_to "Sign in", new_session_path(resource_name) %> to bind account.</p>
     </div>
     <% end %>

@@ -39,6 +39,16 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     get "/account/auth/google_oauth2/callback"
     assert_redirected_to new_user_registration_path
 
+    omniauth = session[:omniauth]
+    assert_not_nil omniauth
+    assert_equal "google_oauth2", omniauth["provider"]
+    assert_equal "123", omniauth["uid"]
+    omniauth_info = omniauth["info"]
+    assert_not_nil omniauth_info
+    assert_equal "Fake Name", omniauth_info["name"]
+    assert_equal "fake", omniauth_info["login"]
+    assert_equal "fake@gmail.com", omniauth_info["email"]
+
     get new_user_registration_path
     assert_equal 200, response.status
 
@@ -52,7 +62,7 @@ class RegistrationsController < ActionDispatch::IntegrationTest
       assert_select %([value=?]), "Fake Name"
     end
     assert_select %(input[name="user[slug]"]) do
-      assert_select %([value=?]), "Fake-Name"
+      assert_select %([value=?]), "fake"
     end
     assert_select %(input[name="user[email]"]) do
       assert_select %([value=?]), "fake@gmail.com"
@@ -69,6 +79,8 @@ class RegistrationsController < ActionDispatch::IntegrationTest
 
     post user_registration_path, params: { user: user_params }
     assert_equal 200, response.status
+
+    assert_not_nil session[:omniauth]
 
     assert_select %(input[name="user[omniauth_provider]"]) do
       assert_select %([value=?]), "google_oauth2"
@@ -100,6 +112,8 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
 
     assert_signed_in
+
+    assert_nil session[:omniauth]
 
     # check authorizations bind
     user = User.find_by_slug(user_params[:slug])

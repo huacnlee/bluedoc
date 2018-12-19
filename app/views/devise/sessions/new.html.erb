@@ -1,6 +1,6 @@
 <%
 auth_session = session[:omniauth] || {}
-auth_info = auth_session.dig("info")
+auth_info = auth_session["info"]
 %>
 
 <div class="container-lg clearfix">
@@ -12,8 +12,8 @@ auth_info = auth_session.dig("info")
 
     <% if auth_info %>
     <div class="flash flash-warn mt-5">
-      <p>You have signed in with <b><%= session[:omniauth]["provider"].humanize %></b></p>
-      <p>Input your exists BookLab account to bind with <b><%= session[:omniauth]["provider"].humanize %></b></p>
+      <p>You have signed in with <b><%= auth_session["provider"].humanize %></b></p>
+      <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
     </div>
     <% end %>
 
