@@ -132,7 +132,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
   end
 
   test "Soft Delete doc with restore dependents" do
-    doc = create(:doc)
+    doc = create(:doc, body: "Hello world")
     comment0 = create(:comment, commentable: doc)
     comment1 = create(:comment, commentable: doc)
     comment2 = create(:comment, commentable: doc)
@@ -147,10 +147,13 @@ class SoftDeleteTest < ActiveSupport::TestCase
     assert_soft_deleted Doc, doc
     assert_soft_deleted Comment, comment0
     assert_soft_deleted Comment, comment1
+    assert_equal "Hello world", RichText.where(record: doc).first&.body
 
     doc = Doc.unscoped.find(doc.id)
     doc.restore
     assert_no_soft_delete Doc, doc
+    assert_equal "Hello world", doc.body_plain
+    assert_not_nil RichText.where(record: doc).first
     assert_no_soft_delete Comment, comment0
     assert_no_soft_delete Comment, comment1
     # comment2 has deleted before doc destroy, so it will not restore

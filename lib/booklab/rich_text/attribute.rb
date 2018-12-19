@@ -19,7 +19,7 @@ module BookLab
             end
           CODE
 
-          has_one :"rich_text_#{name}", -> { where(name: name) }, class_name: "::RichText", as: :record, inverse_of: :record, dependent: :destroy
+          has_one :"rich_text_#{name}", -> { where(name: name) }, class_name: "::RichText", as: :record, inverse_of: :record
           scope :"with_rich_text_#{name}", -> { includes("rich_text_#{name}") }
 
           after_save do
