@@ -2,7 +2,7 @@ import Turbolinks from "turbolinks"
 import ReactDOM from "react-dom"
 import React from "react"
 import "@babel/polyfill"
-import "actiontext"
+import "activestorage"
 import "primer-booklab"
 import "vendor/styleguide.js"
 import timeago from 'timeago.js';
