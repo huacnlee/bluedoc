@@ -5,10 +5,8 @@ import "@babel/polyfill"
 import "activestorage"
 import "primer-booklab"
 import "vendor/styleguide.js"
-import timeago from 'timeago.js';
+import { render as timeagoRender } from 'timeago.js';
 import './rails-ujs-extends'
-
-const timeagoInstance = timeago();
 
 Turbolinks.start()
 Turbolinks.setProgressBarDelay(150)
@@ -26,6 +24,6 @@ import './mentionable/index.js'
 import './toc-editor/index.js'
 
 document.addEventListener("turbolinks:load", () => {
-  timeagoInstance.render($('.timeago'));
+  timeagoRender($('.timeago'));
 })
 
