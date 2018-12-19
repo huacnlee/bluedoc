@@ -8,7 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     session[:omniauth] = omniauth_auth
 
-    @user = Authorization.find_user_by_provider(omniauth_auth[:provider], omniauth_auth[:uid])
+    @user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
     if @user
       sign_in_and_redirect @user, event: :authentication
     else
