@@ -1,6 +1,8 @@
 $(".version-preview .markdown-body").html("<%= j(raw(@version.body_html)) %>");
+$("#previus-version-content").html("<%= j(raw(@previous_version&.body_html || "")) %>");
 $("input[name=version_id]").val("<%= @version.id %>");
 $(".version-item").removeClass("selected");
 $(".version-item-<%= @version.id %>").addClass("selected");
 $(".version-items").data("selected-id", '<%= @version.id %>');
 $(".btn-revert").removeAttr("disabled");
+$(".version-preview").trigger("render:diff");

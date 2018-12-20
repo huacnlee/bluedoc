@@ -260,6 +260,9 @@
 
 .markdown-body {
   position: relative;
+  .markdown-body > h1:first-child {
+    margin-top: 0 !important;
+  }
 
   h1,
   h2,
@@ -291,6 +294,9 @@
       }
     }
   }
+
+  del { background: #FFCFD2; text-decoration: none; }
+  ins { background: #D6FFCB; text-decoration: none; }
 
   .attachment-file {
     display: block;

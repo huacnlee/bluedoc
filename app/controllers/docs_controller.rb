@@ -91,6 +91,7 @@ class DocsController < Users::ApplicationController
     authorize! :update, @doc
 
     @current_version = @doc.versions.includes(:user).first
+    @previous_version = @doc.versions.second
     @versions = @doc.versions.where("id <> ?", @current_version.id).includes(:user).page(params[:page]).per(7)
     render "versions", layout: "reader"
   end

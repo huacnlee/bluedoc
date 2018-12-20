@@ -453,13 +453,17 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path("/versions")
     assert_equal 200, response.status
 
+    previous_version = create(:version, type: "DocVersion", subject: doc)
     last_version = create(:version, type: "DocVersion", subject: doc)
+    get doc.to_path("/versions")
+    assert_equal 200, response.status
     assert_select ".version-item", 8
     assert_select ".version-item label.current", 1
     assert_select ".version-item.selected", 1
     assert_select ".version-items .version-item", 7
     assert_select ".version-items .version-item label.current", 0
-    assert_select ".markdown-body"
+    assert_select ".version-preview .markdown-body", html: last_version.body_html
+    assert_select "#previus-version-content", html: previous_version.body_html
 
     # paginate with remote: true
     get doc.to_path("/versions"), xhr: true, params: { page: 2 }
