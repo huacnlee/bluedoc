@@ -357,7 +357,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       title: "New title",
       slug: "other-doc",
       body: "New body",
-      body_sml: "Bla bla"
+      body_sml: "Bla bla",
+      format: "sml"
     }
     put doc.to_path, params: { doc: doc_params }
     assert_equal 200, response.status
@@ -374,6 +375,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal doc_params[:title], doc.title
     assert_equal doc_params[:body], doc.body_plain
     assert_equal doc_params[:body_sml], doc.body_sml_plain
+    assert_equal doc_params[:format], doc.format
 
     # to check draft fields will equal with publish fields
     assert_equal doc_params[:title], doc.draft_title
