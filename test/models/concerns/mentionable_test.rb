@@ -18,8 +18,8 @@ class MentionableTest < ActiveSupport::TestCase
     perform_enqueued_jobs do
       comment = create(:comment, commentable: doc, body: "@#{user0.slug} @#{user1.slug}", user: @actor)
       assert_not_nil comment.mention
-      assert_equal [user0.id, user1.id], comment.mention.user_ids
-      assert_equal [user0.id, user1.id], comment.mention_user_ids
+      assert_equal [user0.id, user1.id].sort, comment.mention.user_ids.sort
+      assert_equal [user0.id, user1.id].sort, comment.mention_user_ids.sort
       assert_equal 2, Notification.where(notify_type: "mention", target: comment).count
       assert_equal [user0.id, user1.id].sort, Notification.where(notify_type: "mention", target: comment).pluck(:user_id).sort
 
@@ -28,15 +28,15 @@ class MentionableTest < ActiveSupport::TestCase
       assert_equal [user0.id, user1.id, @actor.id].sort, doc.watch_comment_by_user_ids.sort
 
       comment.update(body: "@#{user2.slug} ha ha")
-      assert_equal [user0.id, user1.id, user2.id], comment.mention.user_ids
-      assert_equal [user0.id, user1.id, user2.id], comment.mention_user_ids
+      assert_equal [user0.id, user1.id, user2.id].sort, comment.mention.user_ids.sort
+      assert_equal [user0.id, user1.id, user2.id].sort, comment.mention_user_ids.sort
       assert_equal 3, Notification.where(notify_type: "mention", target: comment).count
       assert_equal [user0.id, user1.id, user2.id].sort, Notification.where(notify_type: "mention", target: comment).pluck(:user_id).sort
     end
 
     comment = create(:comment, body: "@#{user0.slug.upcase} @#{user1.slug.downcase}", user: @actor)
     assert_not_nil comment.mention
-    assert_equal [user0.id, user1.id], comment.mention.user_ids
+    assert_equal [user0.id, user1.id].sort, comment.mention.user_ids.sort
   end
 
   test "should not create mention when not mention anyone" do
@@ -52,10 +52,10 @@ class MentionableTest < ActiveSupport::TestCase
 
     doc = create(:doc, body: "hhhhh @#{user0.slug} @#{user1.slug}")
     assert_not_nil doc.mention
-    assert_equal [user0.id, user1.id], doc.mention.user_ids
+    assert_equal [user0.id, user1.id].sort, doc.mention.user_ids.sort
 
     doc.update(body: "@#{user2.slug} hello")
     assert_not_nil doc.mention
-    assert_equal [user0.id, user1.id, user2.id], doc.mention.user_ids
+    assert_equal [user0.id, user1.id, user2.id].sort, doc.mention.user_ids.sort
   end
 end
