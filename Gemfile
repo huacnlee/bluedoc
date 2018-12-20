@@ -49,6 +49,7 @@ gem "redcarpet"
 gem "sanitize"
 
 gem "booklab-toc"
+gem "booklab-sml"
 
 gem "wicked_pdf"
 

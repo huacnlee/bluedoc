@@ -2,7 +2,7 @@
 
 module BookLab
   class Pipeline
-    class MentionFilter < HTML::Pipeline::Filter
+    class MentionFilter < ::HTML::Pipeline::Filter
       MENTION_REGEXP = /#{NormalizeMentionFilter::PREFIX_REGEXP}@(user[0-9]{1,6})/io
       MENTION_REGEXP_IN_CODE = /#{NormalizeMentionFilter::PREFIX_REGEXP}@\z/i
 

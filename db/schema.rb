@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_031612) do
+ActiveRecord::Schema.define(version: 2018_12_20_034000) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -103,7 +104,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_031612) do
     t.string "title", null: false
     t.string "draft_title"
     t.string "slug", limit: 200, null: false
-    t.bigint "repository_id"
+    t.integer "repository_id"
     t.integer "creator_id"
     t.integer "last_editor_id"
     t.integer "comments_count", default: 0, null: false
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_031612) do
     t.integer "editor_ids", default: [], null: false, array: true
     t.datetime "deleted_at"
     t.string "deleted_slug"
+    t.string "format", limit: 20, default: "markdown"
     t.index "repository_id, lower((slug)::text)", name: "index_on_repository_and_slug", unique: true
     t.index ["deleted_at"], name: "index_docs_on_deleted_at"
     t.index ["repository_id"], name: "index_docs_on_repository_id", where: "(deleted_at IS NULL)"
@@ -229,7 +231,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_031612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id"], name: "index_shares_on_repository_id"
-    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id"
+    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id", unique: true
     t.index ["slug"], name: "index_shares_on_slug", unique: true
     t.index ["user_id"], name: "index_shares_on_user_id"
   end
@@ -289,6 +291,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_031612) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "format", limit: 20, default: "markdown"
     t.index ["subject_type", "subject_id"], name: "index_versions_on_subject_type_and_subject_id"
     t.index ["type"], name: "index_versions_on_type"
     t.index ["user_id"], name: "index_versions_on_user_id"

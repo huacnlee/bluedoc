@@ -31,7 +31,7 @@ Sometimes you want numbered lists:
 class BookLab
   class << self
     def markdown
-      BookLab::Markdown.render("Hello **world**")
+      BookLab::HTML.render("Hello **world**")
     end
   end
 end

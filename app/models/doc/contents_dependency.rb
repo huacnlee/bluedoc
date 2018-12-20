@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Doc
-  include Markdownable
   include Smlable
 
   has_rich_text :draft_body

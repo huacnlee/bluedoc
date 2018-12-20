@@ -2,8 +2,6 @@
 
 class Comment < ApplicationRecord
   include SoftDelete
-  include ActionView::Helpers::OutputSafetyHelper
-  include ApplicationHelper
   include Reactionable
   include Mentionable
   include Activityable
@@ -26,9 +24,7 @@ class Comment < ApplicationRecord
   end
 
   def body_html
-    Rails.cache.fetch([self.cache_key_with_version, "body_html"]) do
-      markdown(self.body)
-    end
+    BookLab::HTML.render(self.body, format: :markdown)
   end
 
   def commentable_title

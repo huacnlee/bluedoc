@@ -2,10 +2,8 @@
 
 module ApplicationHelper
   def markdown(body, opts = {})
-    return nil if body.blank?
-    Rails.cache.fetch(["markdown", "v2", Digest::MD5.hexdigest(body), opts]) do
-      sanitize_html(BookLab::Markdown.render(body, opts))
-    end
+    opts[:format] = "markdown"
+    raw BookLab::HTML.render(body, opts)
   end
 
   def sanitize_html(html)

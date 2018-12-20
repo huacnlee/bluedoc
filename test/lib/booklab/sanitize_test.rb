@@ -91,13 +91,14 @@ class BookLab::SanitizeTest < ActionView::TestCase
 
   test "html chars" do
     raw = "The > or < will >< keep, and <b>will</b> strong."
-    out = sanitize_html(markdown(raw))
+    out = BookLab::HTML.render_without_cache(raw, format: :markdown)
     assert_equal "<p>The &gt; or &lt; will &gt;&lt; keep, and <b>will</b> strong.</p>", out
   end
 
   private
 
     def assert_sanitize(expected, html)
+      assert_equal expected, BookLab::HTML.render_without_cache(html, format: :html)
       assert_equal expected, sanitize_html(html)
     end
 

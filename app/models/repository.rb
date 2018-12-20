@@ -3,7 +3,6 @@
 class Repository < ApplicationRecord
   include SoftDelete
   include Slugable
-  include Markdownable
   include Memberable
   include Activityable
   include Exportable

@@ -14,13 +14,6 @@ class ApplicationHelperTest < ActionView::TestCase
     raw = "Hello **world**, this is a __test__."
     html = "<p>Hello <strong>world</strong>, this is a <strong>test</strong>.</p>"
     assert_equal html, markdown(raw)
-
-    cache_key = ["markdown", "v2", Digest::MD5.hexdigest(raw), {}]
-    Rails.cache.write(cache_key, "A cache value")
-    assert_equal "A cache value", markdown(raw)
-
-    Rails.cache.delete(cache_key)
-    assert_equal html, markdown(raw)
   end
 
   test "markdown with :public" do
@@ -28,7 +21,7 @@ class ApplicationHelperTest < ActionView::TestCase
       opts[:public] ? "Render public" : body
     end
 
-    BookLab::Markdown.stub(:render, stub_method) do
+    BookLab::HTML.stub(:render, stub_method) do
       assert_equal "Render public", markdown("Hello world", public: true)
       assert_equal "Hello world", markdown("Hello world")
     end

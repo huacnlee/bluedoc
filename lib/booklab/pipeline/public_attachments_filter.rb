@@ -2,7 +2,7 @@
 
 module BookLab
   class Pipeline
-    class PublicAttachmentsFilter < HTML::Pipeline::Filter
+    class PublicAttachmentsFilter < ::HTML::Pipeline::Filter
       def call
         doc.search("img").each do |node|
           next if node["src"].blank?

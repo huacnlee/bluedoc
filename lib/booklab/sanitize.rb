@@ -53,14 +53,21 @@ module BookLab
 
     DEFAULT = ::Sanitize::Config.freeze_config(
       elements: %w[
-        p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
-        strong em table tr td tbody th strike del u a ul ol li span hr
+        div p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
+        strong em strike del u a ul ol li span hr
+        table tr th td tbody thead tfoot
       ],
       attributes: ::Sanitize::Config.merge({},
-                                           # 这里要确保是 :all, 而不是 'all'
-                                           { :all => %w[class id lang style tabindex title translate],
-                                           "a"   => %w[href rel data-floor target],
-                                           "img" => %w[alt src width height] }),
+       {
+         # Here must use :all not "all"
+         :all  => ["class", "id", "lang", "style", "title", "width", "height", :data],
+         "a"   => ["href", "rel", "target"],
+         "img" => ["alt", "src"],
+       }
+      ),
+      css: {
+        properties: %w[width height text-align color background background-color],
+      },
       protocols: {
         "a" => { "href" => ["http", "https", "mailto", :relative] },
         "img" => { "src" => ["http", "https", :relative] }

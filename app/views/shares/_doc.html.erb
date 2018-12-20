@@ -28,7 +28,7 @@
   <div class="doc-main main-content py-4">
     <h1 class="doc-title"><%= @doc.title %></h1>
     <div class="markdown-body markdown-with-toc" data-turbolinks="false">
-      <%= @doc.body_html %>
+      <%= raw @doc.body_html %>
     </div>
     <div class="doc-reaction mt-5">
       <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>

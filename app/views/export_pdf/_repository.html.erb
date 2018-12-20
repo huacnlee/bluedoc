@@ -17,7 +17,7 @@
 <div class="doc-section" id="doc-<%= doc.id %>">
   <h1 class="doc-title" id="<%= doc.slug %>"><%= doc.title %></h1>
   <div class="section-body">
-    <%= doc.body_public_html %>
+    <%= raw doc.body_public_html %>
   </div>
 </div>
 <% end %>

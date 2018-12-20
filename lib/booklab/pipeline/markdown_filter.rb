@@ -6,7 +6,7 @@ require "nokogiri"
 
 module BookLab
   class Pipeline
-    class MarkdownFilter < HTML::Pipeline::TextFilter
+    class MarkdownFilter < ::HTML::Pipeline::TextFilter
       DEFAULT_OPTIONS = {
         no_styles: true,
         hard_wrap: true,

@@ -1,4 +1,4 @@
-$(".version-preview .markdown-body").html("<%= escape_javascript @version.body_html %>");
+$(".version-preview .markdown-body").html("<%= j(raw(@version.body_html)) %>");
 $("input[name=version_id]").val("<%= @version.id %>");
 $(".version-item").removeClass("selected");
 $(".version-item-<%= @version.id %>").addClass("selected");

@@ -2,7 +2,7 @@
 
 module BookLab
   class Pipeline
-    class NormalizeMentionFilter < HTML::Pipeline::TextFilter
+    class NormalizeMentionFilter < ::HTML::Pipeline::TextFilter
       PREFIX_REGEXP = %r{(^|[^#{BookLab::Slug::FORMAT}!#/\$%&*@＠])}
       USER_REGEXP   = /#{PREFIX_REGEXP}@([#{BookLab::Slug::FORMAT}]{1,30})/io
 

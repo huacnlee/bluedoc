@@ -27,12 +27,17 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal 5, doc.comments.with_includes.count
   end
 
+  test "body_plain" do
+    comment = create(:comment, body: "Hello world")
+    assert_equal "Hello world", comment.body_plain
+  end
+
   test "body_html" do
     comment = create(:comment, body: "hello world")
-    assert_equal "<p>hello world</p>", comment.body_html
+    assert_html_equal "<p>hello world</p>", comment.body_html
 
     comment.update(body: "world hello")
-    assert_equal "<p>world hello</p>", comment.body_html
+    assert_html_equal "<p>world hello</p>", comment.body_html
   end
 
   test "commentable_title" do

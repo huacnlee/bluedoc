@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Version < ApplicationRecord
-  include Markdownable
   include Smlable
   include Activityable
 

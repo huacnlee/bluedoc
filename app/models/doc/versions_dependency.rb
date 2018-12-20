@@ -14,7 +14,7 @@ class Doc
       return false
     end
 
-    self.update(body: version.body_plain, body_sml: version.body_sml, last_editor_id: user_id)
+    self.update(body: version.body_plain, body_sml: version.body_sml, format: version.format, last_editor_id: user_id)
   end
 
   private
@@ -30,6 +30,6 @@ class Doc
     end
 
     def _track_doc_version
-      self.versions.create!(user_id: self.last_editor_id, body: self.body, body_sml: self.body_sml)
+      self.versions.create!(user_id: self.last_editor_id, body: self.body, body_sml: self.body_sml, format: self.format)
     end
 end

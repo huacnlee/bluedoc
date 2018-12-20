@@ -4,7 +4,7 @@ require "uri"
 
 module BookLab
   class Pipeline
-    class PlantumlFilter < HTML::Pipeline::Filter
+    class PlantumlFilter < ::HTML::Pipeline::Filter
       def call
         doc.search("pre").each do |node|
           text = node.css("code").first&.inner_text || ""

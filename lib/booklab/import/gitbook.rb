@@ -111,7 +111,7 @@ module BookLab
 
       # Upload images to BookLab storage and replace body url
       def upload_images(filepath, body)
-        html = BookLab::Markdown.render(body)
+        html = BookLab::HTML.render(body, format: :markdown)
         doc = Nokogiri::HTML(html)
         filedir = File.dirname(filepath)
         doc.css("img").each do |node|

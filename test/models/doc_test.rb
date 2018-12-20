@@ -24,9 +24,19 @@ class DocTest < ActiveSupport::TestCase
     assert_equal "Get-started", doc.slug
   end
 
-  test "Markdownable" do
-    doc = create(:doc, body: "Hello **world**")
+  test "Smlable" do
+    doc = build(:doc, format: "foo")
+    assert_equal false, doc.valid?
+    assert_equal ["is not included in the list"], doc.errors[:format]
+
+    doc = create(:doc, body: "Hello **world**", format: :markdown)
     assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
+
+    doc = create(:doc, body: "<p>Hello <strong>world</strong></p>", format: :html)
+    assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
+
+    doc = create(:doc, body_sml: %(["div", ["span",{"title":"BookLab"},"BookLab SML"]]), format: :sml)
+    assert_equal %(<div><span title="BookLab">BookLab SML</span></div>), doc.body_html
   end
 
   test "Body touch" do
