@@ -1,8 +1,7 @@
 import { BarButton } from "./bar-button"
 import styled from "styled-components";
-import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
-import getDataTransferFiles from "rich-md-editor/lib/lib/getDataTransferFiles"
-import { insertImageFile, insertFile } from "rich-md-editor/lib/changes"
+// import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
+import { insertImageFile, insertFile } from "./changes"
 
 function getLinkInSelection(value) {
   try {
@@ -17,6 +16,25 @@ function getLinkInSelection(value) {
   } catch (err) {
     // It's okay.
   }
+}
+
+function getDataTransferFiles(event) {
+  let dataTransferItemsList = [];
+
+  if (event.dataTransfer) {
+    const dt = event.dataTransfer;
+    if (dt.files && dt.files.length) {
+      dataTransferItemsList = dt.files;
+    } else if (dt.items && dt.items.length) {
+      // During the drag even the dataTransfer.files is null
+      // but Chrome implements some drag store, which is accesible via dataTransfer.items
+      dataTransferItemsList = dt.items;
+    }
+  } else if (event.target && event.target.files) {
+    dataTransferItemsList = event.target.files;
+  }
+  // Convert from DataTransferItemsList to the native Array
+  return Array.prototype.slice.call(dataTransferItemsList);
 }
 
 export class Toolbar extends React.Component {
@@ -172,9 +190,6 @@ export class Toolbar extends React.Component {
         <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
         <BarButton icon="attachment" title="Upload File" onMouseDown={this.handleFileClick} />
       </div>
-      {this.state.link && (
-        <LinkToolbar link={this.state.link} onBlur={this.hideLinkToolbar} />
-      )}
     </div>
   }
 }

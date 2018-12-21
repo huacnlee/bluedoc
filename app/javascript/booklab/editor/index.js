@@ -1,14 +1,14 @@
 import React from "react"
 import CoreEditor from "slate-react";
-import Editor from "rich-md-editor"
+import { Container, serializer, UI } from 'typine'
 import { AttachmentUpload } from "./attachment_upload"
 import { Toolbar } from "./toolbar"
 
-class MarkdownEditor extends React.Component {
+class RichEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
+      value: serializer.parserToValue(serializer.parserMarkdown(props.value)),
       directUploadURL: props.directUploadURL,
       blobURLTemplate: props.blobURLTemplate,
       title: props.title,
@@ -16,17 +16,25 @@ class MarkdownEditor extends React.Component {
     }
 
     this.editor = null;
+    this.contianer = null;
+    this.containerRef = React.createRef();
   }
 
-  setEditorRef = (ref) => {
-    this.editor = ref;
-    // Force re-render to show ToC (<Content />)
+  componentDidMount() {
+    debugger
+    this.container = ReactDOM.findDOMNode(this.containerRef.current)
+  }
+
+  setEditor = editor => {
+    debugger
+    this.editor = editor
     this.setState({ editorLoaded: true });
   }
 
-  onChange = (value) => {
-    this.props.onChange(value())
-    this.setState({ value })
+  onChange = (change) => {
+    debugger
+    this.props.onChange(change.value)
+    this.setState({ value: change.value })
   }
 
   onChangeTitle = (e) => {
@@ -36,22 +44,61 @@ class MarkdownEditor extends React.Component {
   }
 
   onChangeSlug = (e) => {
+    debugger
     const newSlug = e.target.value
     this.props.onChangeSlug(newSlug)
     this.setState({ slug: newSlug })
+  }
+
+  onMarkupChange = markups => {
+    debugger
+    this.setState({
+      activeMarkups: markups,
+    })
+  }
+
+  isActiveMarkup = type => {
+    debugger
+    const { activeMarkups } = this.state
+    return activeMarkups.indexOf(type) >= 0
+  }
+
+  getEditorContainer = () => {
+    debugger
+    return this.container
   }
 
   // Render the editor.
   render() {
     const { value, title, slug } = this.state;
     const { directUploadURL, blobURLTemplate } = this.state;
-
+    debugger
     const slugPrefix = window.location.href.split("/docs")[0] + "/docs/";
+
+    const service = {
+      imageUpload(file) {
+        return new Promise((resolve, reject) => {
+          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+            return resolve(url)
+          })
+          upload.start()
+        })
+      },
+      attachmentUpload(file) {
+        return new Promise((resolve, reject) => {
+          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+            return resolve(url)
+          })
+          upload.start()
+        })
+      },
+    }
+
     return <div>
       {this.editor && (
-        <Toolbar value={this.state.editorValue} editor={this.editor} />
+        <Toolbar value={this.state.value} editor={this.editor} />
       )}
-      <div className="editor-bg">
+      <div className="editor-bg" ref={this.containerRef}>
         <div className="editor-box">
           <div className="editor-title">
             <input
@@ -69,28 +116,13 @@ class MarkdownEditor extends React.Component {
               onChange={this.onChangeSlug}
               className="editor-slug-text" />
           </div>
-          <Editor
-            innerRef={this.setEditorRef}
-            readOnly={false}
-            defaultValue={value}
-            className="editor-text markdown-body"
+          <Container
+            value={this.state.value}
             onChange={this.onChange}
-            uploadImage={async (file) => {
-              return new Promise(resolve => {
-                const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
-                  return resolve(url)
-                })
-                upload.start()
-              })
-            }}
-            uploadFile={async (file) => {
-              return new Promise(resolve => {
-                const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
-                  return resolve(url)
-                })
-                upload.start()
-              })
-            }}
+            getActiveMarkups={this.onMarkupChange}
+            getEditor={this.setEditor}
+            getEditorContainer={this.getEditorContainer}
+            service={service}
            />
         </div>
       </div>
@@ -177,7 +209,7 @@ class EditorBox {
 
     $("form").after(editorDiv);
     ReactDOM.render(
-      <MarkdownEditor name="MarkdownEditor"
+      <RichEditor
         onChange={onChange}
         onChangeTitle={onChangeTitle}
         onChangeSlug={onChangeSlug}
