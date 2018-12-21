@@ -1,22 +1,6 @@
 import { BarButton } from "./bar-button"
 import styled from "styled-components";
 // import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
-import { insertImageFile, insertFile } from "./changes"
-
-function getLinkInSelection(value) {
-  try {
-    const selectedLinks = value.document
-      .getInlinesAtRange(value.selection)
-      .filter(node => node.type === "link");
-
-    if (selectedLinks.size) {
-      const link = selectedLinks.first();
-      if (value.selection.hasEdgeIn(link)) return link;
-    }
-  } catch (err) {
-    // It's okay.
-  }
-}
 
 function getDataTransferFiles(event) {
   let dataTransferItemsList = [];
@@ -38,9 +22,7 @@ function getDataTransferFiles(event) {
 }
 
 export class Toolbar extends React.Component {
-  state = {
-    link: undefined
-  }
+  state = { }
 
   hasMark = (type) => {
     try {
@@ -65,49 +47,37 @@ export class Toolbar extends React.Component {
     ev.preventDefault();
     ev.stopPropagation();
 
-    this.props.editor.change(change => {
-      change.toggleMark(type);
-
-      // ensure we remove any other marks on inline code
-      // we don't allow bold / italic / strikethrough code.
-      const isInlineCode = this.hasMark("code") || type === "code";
-      if (isInlineCode) {
-        change.value.marks.forEach(mark => {
-          if (mark.type !== "code") change.removeMark(mark);
-        });
-      }
-    });
+    this.props.editor._toggleMarkAtRanges(type);
   };
 
   onClickBlock = (ev, type) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    this.props.editor.change(change => change.setBlocks(type));
+    const { editor } = this.props;
+
+    switch (type) {
+    case "bulleted-list":
+      editor._toggleListAtRanges("bulleted");
+      break;
+    case "ordered-list":
+      editor._toggleListAtRanges("ordered");
+      break;
+    case "todo-list":
+      editor._toggleListAtRanges("todo");
+      break;
+    default:
+      editor.change(change => change.setBlocks(type));
+      break;
+    }
   };
 
   handleCreateLink = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    const data = { href: "" };
-    this.props.editor.change(change => {
-      change.wrapInline({ type: "link", data });
-      this.showLinkToolbar(ev);
-    });
+    this.props.editor._wrapLinkAtRange("", { autoFocus: true });
   };
-
-  showLinkToolbar = (ev) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    const link = getLinkInSelection(this.props.value);
-    this.setState({ link: link })
-  }
-
-  hideLinkToolbar = () => {
-    this.setState({ link: undefined })
-  }
 
   handleImageClick = () => {
     // simulate a click on the file upload input element
@@ -119,13 +89,7 @@ export class Toolbar extends React.Component {
   }
 
   onImagePicked = async (ev) => {
-    const files = getDataTransferFiles(ev);
-    const { editor } = this.props;
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      editor.change(change => change.call(insertImageFile, file, editor));
-    }
+    this.props.editor._uploadImageEvent(ev, () => {});
   }
 
   onFilePicked = async (ev) => {
@@ -176,11 +140,12 @@ export class Toolbar extends React.Component {
         <span className="bar-divider"></span>
         {this.renderMarkButton("bold", "bold")}
         {this.renderMarkButton("italic", "italic")}
-        {this.renderMarkButton("deleted", "strikethrough")}
-        {this.renderMarkButton("underlined", "underline")}
+        {this.renderMarkButton("strike", "strikethrough")}
+        {this.renderMarkButton("underline", "underline")}
         <span className="bar-divider"></span>
         {this.renderBlockButton("bulleted-list", "bulleted-list")}
         {this.renderBlockButton("ordered-list", "numbered-list")}
+        {this.renderBlockButton("todo-list", "todo-list")}
         <span className="bar-divider"></span>
         {this.renderBlockButton("block-quote", "quote")}
         {this.renderBlockButton("code", "code")}

@@ -1,5 +1,3 @@
-import React from "react"
-import CoreEditor from "slate-react";
 import { Container, serializer, UI } from 'typine'
 import { AttachmentUpload } from "./attachment_upload"
 import { Toolbar } from "./toolbar"
@@ -7,8 +5,17 @@ import { Toolbar } from "./toolbar"
 class RichEditor extends React.Component {
   constructor(props) {
     super(props);
+
+    if (props.value.trim() === "") {
+      props.value = "empty doc";
+    }
+    debugger
+
+    let value = serializer.parserToValue(serializer.parserMarkdown(props.value));
+
     this.state = {
-      value: serializer.parserToValue(serializer.parserMarkdown(props.value)),
+      value: value,
+      activeMarkups: [],
       directUploadURL: props.directUploadURL,
       blobURLTemplate: props.blobURLTemplate,
       title: props.title,
@@ -16,25 +23,33 @@ class RichEditor extends React.Component {
     }
 
     this.editor = null;
-    this.contianer = null;
-    this.containerRef = React.createRef();
   }
 
+  container = null
+  containerRef = React.createRef()
+
   componentDidMount() {
-    debugger
     this.container = ReactDOM.findDOMNode(this.containerRef.current)
   }
 
   setEditor = editor => {
-    debugger
     this.editor = editor
-    this.setState({ editorLoaded: true });
   }
 
   onChange = (change) => {
-    debugger
-    this.props.onChange(change.value)
+    const { format } = this.props;
+
     this.setState({ value: change.value })
+
+    const xslValue = serializer.parserToXSL(change.value);
+    const markdownValue = serializer.parserToMarkdown(xslValue);
+
+    if (format === "markdown") {
+      this.props.onChange(markdownValue, null);
+    } else {
+      const smlValue = JSON.stringify(xslValue)
+      this.props.onChange(markdownValue, smlValue);
+    }
   }
 
   onChangeTitle = (e) => {
@@ -44,27 +59,23 @@ class RichEditor extends React.Component {
   }
 
   onChangeSlug = (e) => {
-    debugger
     const newSlug = e.target.value
     this.props.onChangeSlug(newSlug)
     this.setState({ slug: newSlug })
   }
 
   onMarkupChange = markups => {
-    debugger
     this.setState({
       activeMarkups: markups,
     })
   }
 
   isActiveMarkup = type => {
-    debugger
     const { activeMarkups } = this.state
     return activeMarkups.indexOf(type) >= 0
   }
 
   getEditorContainer = () => {
-    debugger
     return this.container
   }
 
@@ -72,12 +83,12 @@ class RichEditor extends React.Component {
   render() {
     const { value, title, slug } = this.state;
     const { directUploadURL, blobURLTemplate } = this.state;
-    debugger
     const slugPrefix = window.location.href.split("/docs")[0] + "/docs/";
 
     const service = {
       imageUpload(file) {
         return new Promise((resolve, reject) => {
+          debugger
           const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
             return resolve(url)
           })
@@ -98,7 +109,7 @@ class RichEditor extends React.Component {
       {this.editor && (
         <Toolbar value={this.state.value} editor={this.editor} />
       )}
-      <div className="editor-bg" ref={this.containerRef}>
+      <div className="editor-bg">
         <div className="editor-box">
           <div className="editor-title">
             <input
@@ -116,14 +127,16 @@ class RichEditor extends React.Component {
               onChange={this.onChangeSlug}
               className="editor-slug-text" />
           </div>
-          <Container
-            value={this.state.value}
-            onChange={this.onChange}
-            getActiveMarkups={this.onMarkupChange}
-            getEditor={this.setEditor}
-            getEditorContainer={this.getEditorContainer}
-            service={service}
-           />
+          <div className="editor-text markdown-body" ref={this.containerRef}>
+            <Container
+              value={this.state.value}
+              onChange={this.onChange}
+              getActiveMarkups={this.onMarkupChange}
+              getEditor={this.setEditor}
+              getEditorContainer={this.getEditorContainer}
+              service={service}
+             />
+          </div>
         </div>
       </div>
     </div>
@@ -151,18 +164,22 @@ class EditorBox {
       $.post(lockURL + "?unlock=true");
     })
 
-    const editorInput = editorEls[0];
-    editorInput.hidden = true;
+    const bodyInput = document.getElementsByName("doc[body]")[0];
+    const bodySMLInput = document.getElementsByName("doc[body_sml]")[0];
     const editorMessage = $(".editor-message");
 
     const titleInput = document.getElementsByName("doc[title]")[0];
     const slugInput = document.getElementsByName("doc[slug]")[0];
+    const formatInput = document.getElementsByName("doc[format]")[0];
 
     const editorDiv = document.createElement("div");
     editorDiv.className = "editor-container";
 
-    const onChange = (value) => {
-      editorInput.value = value
+    const onChange = (markdownValue, smlValue) => {
+      bodyInput.value = markdownValue;
+      if (smlValue) {
+        bodySMLInput.value = smlValue;
+      }
     }
 
     const onChangeTitle = (value) => {
@@ -190,7 +207,7 @@ class EditorBox {
         data: {
           doc: {
             draft_title: titleInput.value,
-            draft_body: editorInput.value,
+            draft_body: bodyInput.value,
           },
         },
         success: (res) => {
@@ -213,11 +230,12 @@ class EditorBox {
         onChange={onChange}
         onChangeTitle={onChangeTitle}
         onChangeSlug={onChangeSlug}
-        directUploadURL={editorInput.attributes["data-direct-upload-url"].value}
-        blobURLTemplate={editorInput.attributes["data-blob-url-template"].value}
+        directUploadURL={bodyInput.attributes["data-direct-upload-url"].value}
+        blobURLTemplate={bodyInput.attributes["data-blob-url-template"].value}
         title={titleInput.value}
         slug={slugInput.value}
-        value={editorInput.value} />,
+        format={formatInput.value}
+        value={bodyInput.value} />,
       editorDiv,
     )
   }

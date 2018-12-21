@@ -2,7 +2,11 @@ export class BarButton extends React.Component {
   render() {
     const { icon, title, onMouseDown, active } = this.props;
 
-    const iconClassName = "fas fa-text-" + icon;
+    let iconClassName = "fas fa-text-" + icon;
+
+    if (icon == "todo-list") {
+      iconClassName = "fas fa-todo";
+    }
 
     let className = "bar-button";
     if (this.props.active) {

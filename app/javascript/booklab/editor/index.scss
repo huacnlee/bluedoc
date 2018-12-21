@@ -176,8 +176,12 @@
       min-height: 800px;
     }
 
-    p, blockquote, hr, pre, table {
+    p, hr, pre, table {
       margin-bottom: 0px !important;
+    }
+
+    [data-slate-editor] > * + * {
+      margin-bottom: 16px;
     }
 
     // Prism highlight
