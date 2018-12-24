@@ -100,6 +100,20 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
   end
 
+  test "markdown image" do
+    out = BookLab::HTML.render("![Hello](/uploads/aa.jpg)", format: :markdown)
+    assert_equal %(<p><img src="/uploads/aa.jpg" title="" alt="Hello"></p>), out
+
+    out = BookLab::HTML.render("![](/uploads/aa.jpg =300x200)", format: :markdown)
+    assert_equal %(<p><img src="/uploads/aa.jpg" width="300" height="200" alt=""></p>), out
+
+    out = BookLab::HTML.render("![](/uploads/aa.jpg | width=300)", format: :markdown)
+    assert_equal %(<p><img src="/uploads/aa.jpg" width="300" alt=""></p>), out
+
+    out = BookLab::HTML.render("![](/uploads/aa.jpg | height=300)", format: :markdown)
+    assert_equal %(<p><img src="/uploads/aa.jpg" height="300" alt=""></p>), out
+  end
+
   test "markdown html chars" do
     raw = "The > or < will >< keep, and <b>will</b> strong."
     out = BookLab::HTML.render(raw, format: :markdown)

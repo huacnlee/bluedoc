@@ -57,6 +57,32 @@ module BookLab
           end
         end
 
+        # Extend to support img width
+        # ![](foo.jpg | width=300)
+        # ![](foo.jpg | height=300)
+        # ![](foo.jpg =300x200)
+        # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
+        def image(link, title, alt_text)
+          link ||= ""
+          links = link.split(" ")
+          link = links[0]
+          if links.count > 1
+            # Original markdown title part need "": ![](foo.jpg "Title")
+            # ![](foo.jpg =300x)
+            title = links.last
+          end
+
+          if title =~ /width=(\d+)/
+            %(<img src="#{link}" width="#{Regexp.last_match(1)}" alt="#{alt_text}">)
+          elsif title =~ /height=(\d+)/
+            %(<img src="#{link}" height="#{Regexp.last_match(1)}" alt="#{alt_text}">)
+          elsif title =~ /=(\d+)x(\d+)/
+            %(<img src="#{link}" width="#{Regexp.last_match(1)}" height="#{Regexp.last_match(2)}" alt="#{alt_text}">)
+          else
+            %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
+          end
+        end
+
         class << self
           def renderer
             @renderer ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)

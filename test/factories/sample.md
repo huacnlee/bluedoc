@@ -49,6 +49,13 @@ Alice <-- Bob: another authentication Response
 @enduml
 ```
 
+## Image
+
+![This is Image](/uploads/foo.jpg)
+![This is Image 1](/uploads/foo.jpg =300x200)
+![](/uploads/foo.jpg | width=300)
+![](/uploads/foo.jpg | height=200)
+
 ### Test HTML chars
 
 The `<>`, `><`, `>` and `<` will keep, but <b>will</b> will render as html.
