@@ -85,11 +85,35 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
   test "markdown attachment-file" do
     raw = <<~MD
-    [This is a attachment](/uploads/foobar)
+    [This is a attachment](/uploads/foobar "size:12872363")
     MD
-
+    html = <<~HTML
+    <p>
+      <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
+        <span class="icon-box"><i class="fas fa-file"></i></span>
+        <span class="filename">This is a attachment</span>
+        <span class="filesize">12.3 MB</span>
+      </a>
+    </p>
+    HTML
     out = BookLab::HTML.render(raw, format: :markdown)
-    assert_html_equal %(<p><a class="attachment-file" href="/uploads/foobar" title="" target="_blank">This is a attachment</a></p>), out
+    assert_html_equal html, out
+
+    raw = <<~MD
+    [download: This is a attachment](/uploads/foobar)
+    MD
+    html = <<~HTML
+    <p>
+      <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
+        <span class="icon-box"><i class="fas fa-file"></i></span>
+        <span class="filename">This is a attachment</span>
+        <span class="filesize">unknow size</span>
+      </a>
+    </p>
+    HTML
+    out = BookLab::HTML.render(raw, format: :markdown)
+    assert_html_equal html, out
+
 
     # empty link should work
     raw = <<~MD
@@ -97,7 +121,6 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     MD
     out = BookLab::HTML.render(raw, format: :markdown)
     assert_html_equal %(<p><a href="">This is a attachment</a></p>), out
-
   end
 
   test "markdown image" do

@@ -32,6 +32,7 @@ module BookLab
 
       class Render < Redcarpet::Render::HTML
         include Rouge::Plugins::Redcarpet
+        include ActionView::Helpers::NumberHelper
 
         def header(text, header_level)
           raw_text = Nokogiri::HTML(text).xpath("//text()").to_s
@@ -50,8 +51,19 @@ module BookLab
 
         def link(link, title, content)
           link ||= ""
-          if link.include?("/uploads/")
-            %(<a class="attachment-file" href="#{link}" title="#{title}" target="_blank">#{content}</a>)
+          if link.include?("/uploads/") || content.include?("download:")
+            content = content.gsub("download:", "").strip
+
+            size = "unknow size"
+            if title && title =~ /size:(\d+)/
+              size = number_to_human_size(Regexp.last_match(1) || 0)
+            end
+
+            %(<a class="attachment-file" title="#{content}" target="_blank" href="#{link}">
+                <span class="icon-box"><i class="fas fa-file"></i></span>
+                <span class="filename">#{content}</span>
+                <span class="filesize">#{size}</span>
+            </a>)
           else
             %(<a href="#{link}">#{content}</a>)
           end
@@ -79,7 +91,7 @@ module BookLab
           elsif title =~ /=(\d+)x(\d+)/
             %(<img src="#{link}" width="#{Regexp.last_match(1)}" height="#{Regexp.last_match(2)}" alt="#{alt_text}">)
           else
-            %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
+            %(<img src="#{link}" alt="#{alt_text}">)
           end
         end
 
