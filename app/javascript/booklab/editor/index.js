@@ -9,7 +9,6 @@ class RichEditor extends React.Component {
     if (props.value.trim() === "") {
       props.value = "empty doc";
     }
-    debugger
 
     let value = serializer.parserToValue(serializer.parserMarkdown(props.value));
 
@@ -88,7 +87,6 @@ class RichEditor extends React.Component {
     const service = {
       imageUpload(file) {
         return new Promise((resolve, reject) => {
-          debugger
           const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
             return resolve(url)
           })

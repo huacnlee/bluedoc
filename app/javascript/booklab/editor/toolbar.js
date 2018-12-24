@@ -2,25 +2,6 @@ import { BarButton } from "./bar-button"
 import styled from "styled-components";
 // import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 
-function getDataTransferFiles(event) {
-  let dataTransferItemsList = [];
-
-  if (event.dataTransfer) {
-    const dt = event.dataTransfer;
-    if (dt.files && dt.files.length) {
-      dataTransferItemsList = dt.files;
-    } else if (dt.items && dt.items.length) {
-      // During the drag even the dataTransfer.files is null
-      // but Chrome implements some drag store, which is accesible via dataTransfer.items
-      dataTransferItemsList = dt.items;
-    }
-  } else if (event.target && event.target.files) {
-    dataTransferItemsList = event.target.files;
-  }
-  // Convert from DataTransferItemsList to the native Array
-  return Array.prototype.slice.call(dataTransferItemsList);
-}
-
 export class Toolbar extends React.Component {
   state = { }
 
@@ -88,26 +69,35 @@ export class Toolbar extends React.Component {
     this.file.click();
   }
 
-  onImagePicked = async (ev) => {
-    this.props.editor._uploadImageEvent(ev, () => {});
-  }
-
-  onFilePicked = async (ev) => {
-    const files = getDataTransferFiles(ev);
+  handleIndent = (ev, increase) => {
+    ev.preventDefault()
     const { editor } = this.props;
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      editor.change(change => change.call(insertFile, file, editor));
-    }
+    editor._setIndentAtRanges(4, increase)
   }
 
-  renderMarkButton = (type, icon) => {
+  toggleList = (ev, type) => {
+    ev.preventDefault()
+    const { editor } = this.props;
+    editor._toggleListAtRanges(type)
+  }
+
+  onImagePicked = async (ev) => {
+    const { editor } = this.props;
+    editor._uploadImageEvent(ev, () => {});
+  }
+
+  onFilePicked = (ev) => {
+    const { editor } = this.props;
+    editor._uploadFileEvent(ev, () => {});
+  }
+
+  renderMarkButton = (type, icon, title) => {
     const isActive = this.hasMark(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
+    title = title || type;
 
     return (
-      <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
+      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
     );
   }
 
@@ -138,18 +128,20 @@ export class Toolbar extends React.Component {
         />
         {this.renderBlockButton("heading2", "heading")}
         <span className="bar-divider"></span>
-        {this.renderMarkButton("bold", "bold")}
-        {this.renderMarkButton("italic", "italic")}
-        {this.renderMarkButton("strike", "strikethrough")}
-        {this.renderMarkButton("underline", "underline")}
+        {this.renderMarkButton("bold", "bold", "Bold ⌘-b")}
+        {this.renderMarkButton("italic", "italic", "Italic ⌘-i")}
+        {this.renderMarkButton("strike", "strikethrough", "Strike Through")}
+        {this.renderMarkButton("underline", "underline", "Underline ⌘-u")}
         <span className="bar-divider"></span>
-        {this.renderBlockButton("bulleted-list", "bulleted-list")}
-        {this.renderBlockButton("ordered-list", "numbered-list")}
-        {this.renderBlockButton("todo-list", "todo-list")}
+        <BarButton icon="bulleted-list" title="Bulleted list" onMouseDown={e => this.toggleList(e, "bulleted")} />
+        <BarButton icon="numbered-list" title="Numbered list" onMouseDown={e => this.toggleList(e, "ordered")} />
         <span className="bar-divider"></span>
-        {this.renderBlockButton("block-quote", "quote")}
-        {this.renderBlockButton("code", "code")}
-        {this.renderBlockButton("horizontal-rule", "hr")}
+        <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
+        <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
+        <span className="bar-divider"></span>
+        {this.renderBlockButton("block-quote", "quote", "Quote")}
+        {this.renderBlockButton("code", "code", "Insert Code block")}
+        {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
         <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />

@@ -204,6 +204,22 @@
         right: 10px;
       }
     }
+
+    ul, ol {
+      margin-bottom: 0.25em !important;
+    }
+
+    .attachment-file {
+      cursor: pointer;
+
+    }
+
+    [data-active=true] {
+      background: rgba(4, 85, 221, 0.04);
+      hr {
+        background: $primary;
+      }
+    }
   }
 
   /* HOTFIX */

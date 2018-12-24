@@ -264,6 +264,10 @@
     margin-top: 0 !important;
   }
 
+  img {
+    height: auto;
+  }
+
   h1,
   h2,
   h3,
@@ -300,6 +304,7 @@
 
   .attachment-file {
     display: block;
+    position: relative;
     color: #444;
 
     &.selected {
@@ -308,8 +313,17 @@
 
     a { color: #444; }
 
+    .icon-box {
+      position: absolute;
+      top: 17px;
+      left: 11px;
+      width: 30px;
+      .fas { font-size: 28px; color: #d5d5d5; }
+    }
     a.close {
-      float: right;
+      position: absolute;
+      top: 17px;
+      right: 4px;
       color: #aaa;
       padding: 0 6px;
       cursor: pointer;
@@ -318,6 +332,15 @@
         color: #333;
       }
     }
+
+    .filename,
+    .filesize { display: block; margin-left: 34px; margin-right: 24px; }
+
+    .filename {
+      @extend .text-overflow;
+    }
+    .filesize { color: rgba(88, 96, 105, 0.31) !important }
+
 
     .text-gray {
       color: rgba(88, 96, 105, 0.31) !important
