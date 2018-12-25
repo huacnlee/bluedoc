@@ -46,8 +46,22 @@ export class Toolbar extends React.Component {
         editor._wrapBlockquoteAtRanges();
       }
       break;
+    case "horizontal-rule":
+      editor._insertHorizontalRule();
+      break;
+    case "codeblock":
+      if (this.isActiveMarkup("codeblock")) {
+        editor.setBlocks("paragraph");
+      } else {
+        editor._insertCodeblock();
+      }
+      break;
     default:
-      editor.change(change => change.setBlocks(type));
+      if (this.isActiveMarkup(type)) {
+        editor.setBlocks("paragraph");
+      } else {
+        editor.setBlocks(type);
+      }
       break;
     }
   };
@@ -132,14 +146,14 @@ export class Toolbar extends React.Component {
         {this.renderMarkButton("strike", "strikethrough", "Strike Through")}
         {this.renderMarkButton("underline", "underline", "Underline ⌘-u")}
         <span className="bar-divider"></span>
-        <BarButton icon="bulleted-list" title="Bulleted list" onMouseDown={e => this.toggleList(e, "bulleted")} />
-        <BarButton icon="numbered-list" title="Numbered list" onMouseDown={e => this.toggleList(e, "ordered")} />
+        {this.renderBlockButton("bulleted-list", "bulleted-list", "Bulleted list")}
+        {this.renderBlockButton("ordered-list", "numbered-list", "Numbered list")}
         <span className="bar-divider"></span>
         <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <span className="bar-divider"></span>
         {this.renderBlockButton("blockquote", "quote", "Quote")}
-        {this.renderBlockButton("code", "code", "Insert Code block")}
+        {this.renderBlockButton("codeblock", "code", "Insert Code block")}
         {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
