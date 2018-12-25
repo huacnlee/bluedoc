@@ -58,7 +58,7 @@ class TocItem extends React.PureComponent {
   render() {
     const {
       item: {
-        url, title, depth, showfolder = false, maxDepth, index, folder, id,
+        url, title, depth, showFolder = false, maxDepth, index, folder, id,
       }, active, onIndent,
     } = this.props;
     return (
@@ -66,7 +66,7 @@ class TocItem extends React.PureComponent {
         {/* drag */}
         <DragHandle />
         {/* folder */}
-        {showfolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
+        {showFolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
           <i class="fas fa-sort-down"></i>
         </div>}
         {/* indentation */}
