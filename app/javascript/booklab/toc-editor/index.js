@@ -76,7 +76,7 @@ class TocEditor extends React.Component {
       index, showFolder, maxDepth, folder: showFolder ? folder : false,
     };
     if (depth > 0) {
-      const prev = acc[acc.length - 1];
+      const prev = acc[acc.length - 1] || {};
       if (prev.depth < depth && prev.folder) {
         return acc;
       }
@@ -153,7 +153,6 @@ class TocEditor extends React.Component {
   // sort Toc Node
   onSortEnd = ({ oldIndex, newIndex }) => {
     const { items, activeIndex } = this.state;
-    const activeEle = items[activeIndex];
     const array = items.slice(0);
     const length = getFolderLength(oldIndex, items);
     let tempIndex = newIndex;
@@ -164,10 +163,20 @@ class TocEditor extends React.Component {
     if (direction === 'down') {
       tempIndex -= length;
     }
-
-    array.splice(tempIndex, 0, ...array.splice(oldIndex, length + 1));
-    const newActiveIndex = array.findIndex(({ key }) => key === activeEle.key);
-    this.setState({ activeIndex: newActiveIndex });
+    // change activeIndex
+    if (activeIndex !== -1) {
+      const activeEle = items[activeIndex];
+      this.setState({ activeIndex: array.findIndex(({ key }) => key === activeEle.key) });
+    }
+    let tempArr = array.splice(oldIndex, length + 1);
+    const curDepth = items[oldIndex].depth;
+    if (tempIndex === 0 && curDepth > 0) {
+      tempArr = tempArr.map(v => ({
+        ...v,
+        depth: v.depth - curDepth,
+      }));
+    }
+    array.splice(tempIndex, 0, ...tempArr);
     this.updateValue(array);
   };
 
