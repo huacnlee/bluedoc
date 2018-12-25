@@ -163,6 +163,8 @@ export class Toolbar extends React.Component {
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading4")}>Heading 4</a></li>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading5")}>Heading 5</a></li>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading6")}>Heading 6</a></li>
+              <li className="dropdown-divider"></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "paragraph")}>Paragraph</a></li>
             </ul>
           </div>
         </details>
