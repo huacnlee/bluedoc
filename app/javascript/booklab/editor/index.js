@@ -15,10 +15,29 @@ class RichEditor extends React.Component {
     this.state = {
       value: value,
       activeMarkups: [],
-      directUploadURL: props.directUploadURL,
-      blobURLTemplate: props.blobURLTemplate,
       title: props.title,
       slug: props.slug,
+    }
+
+    const { directUploadURL, blobURLTemplate } = this.props;
+
+    this.attachmentService = {
+      imageUpload(file) {
+        return new Promise((resolve, reject) => {
+          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+            return resolve(url)
+          })
+          upload.start()
+        })
+      },
+      attachmentUpload(file) {
+        return new Promise((resolve, reject) => {
+          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+            return resolve(url)
+          })
+          upload.start()
+        })
+      },
     }
 
     this.editor = null;
@@ -79,27 +98,7 @@ class RichEditor extends React.Component {
   // Render the editor.
   render() {
     const { value, title, slug } = this.state;
-    const { directUploadURL, blobURLTemplate } = this.state;
-    const slugPrefix = window.location.href.split("/docs")[0] + "/docs/";
 
-    const service = {
-      imageUpload(file) {
-        return new Promise((resolve, reject) => {
-          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
-            return resolve(url)
-          })
-          upload.start()
-        })
-      },
-      attachmentUpload(file) {
-        return new Promise((resolve, reject) => {
-          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
-            return resolve(url)
-          })
-          upload.start()
-        })
-      },
-    }
 
     return <div>
       <Toolbar value={this.state.value} editor={this.editor} container={this} />
@@ -128,7 +127,7 @@ class RichEditor extends React.Component {
               getActiveMarkups={this.onMarkupChange}
               getEditor={this.setEditor}
               getEditorContainer={this.getEditorContainer}
-              service={service}
+              service={this.attachmentService}
              />
           </div>
         </div>
