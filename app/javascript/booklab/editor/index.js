@@ -31,6 +31,10 @@ class RichEditor extends React.Component {
     this.container = ReactDOM.findDOMNode(this.containerRef.current)
   }
 
+  getEditorContainer = () => {
+    return this.container
+  }
+
   setEditor = editor => {
     this.editor = editor
   }
@@ -72,10 +76,6 @@ class RichEditor extends React.Component {
     return activeMarkups.indexOf(type) >= 0
   }
 
-  getEditorContainer = () => {
-    return this.container
-  }
-
   // Render the editor.
   render() {
     const { value, title, slug } = this.state;
@@ -102,10 +102,8 @@ class RichEditor extends React.Component {
     }
 
     return <div>
-      {this.editor && (
-        <Toolbar value={this.state.value} editor={this.editor} container={this} />
-      )}
-      <div className="editor-bg">
+      <Toolbar value={this.state.value} editor={this.editor} container={this} />
+      <div className="editor-bg" ref={this.containerRef}>
         <div className="editor-box">
           <div className="editor-title">
             <input
@@ -123,7 +121,7 @@ class RichEditor extends React.Component {
               onChange={this.onChangeSlug}
               className="editor-slug-text" />
           </div>
-          <div className="editor-text markdown-body" ref={this.containerRef}>
+          <div className="editor-text markdown-body">
             <Container
               value={this.state.value}
               onChange={this.onChange}
@@ -147,8 +145,8 @@ class EditorBox {
     }
 
     // clean auto save
-    if (window.editorAutosaveTimer) {
-      clearInterval(window.editorAutosaveTimer)
+    if (window.editorAutoLockTimer) {
+      clearInterval(window.editorAutoLockTimer)
     }
 
     const saveButton = $(".btn-save");
@@ -176,6 +174,13 @@ class EditorBox {
       if (smlValue) {
         bodySMLInput.value = smlValue;
       }
+
+      if (window.editorAutoSaveTimer) {
+        clearTimeout(window.editorAutoSaveTimer);
+      }
+      window.editorAutoSaveTimer = setTimeout(() => {
+        saveButton.trigger("click");
+      }, 5000);
     }
 
     const onChangeTitle = (value) => {
@@ -195,6 +200,8 @@ class EditorBox {
       const $btn = $(e.currentTarget)
       editorMessage.show()
       editorMessage.html("<i class='fas fa-clock'></i> saving...")
+      const titleInput = document.getElementsByName("doc[title]")[0];
+      const bodyInput = document.getElementsByName("doc[body]")[0];
 
       $.ajax({
         method: "PUT",
@@ -215,9 +222,8 @@ class EditorBox {
       return false;
     });
 
-    window.editorAutosaveTimer = setInterval(() => {
+    window.editorAutoLockTimer = setInterval(() => {
       $.post(lockURL);
-      saveButton.trigger("click");
     }, 15000);
 
     $("form").after(editorDiv);

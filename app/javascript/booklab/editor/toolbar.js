@@ -5,6 +5,8 @@ import styled from "styled-components";
 export class Toolbar extends React.Component {
   state = { }
 
+  headingDropdown = React.createRef()
+
   isActiveMarkup = (type) => {
     const { container } = this.props;
     return container.isActiveMarkup(type);
@@ -66,11 +68,24 @@ export class Toolbar extends React.Component {
     }
   };
 
-  handleCreateLink = (ev) => {
+  handleHeading = (ev, type) => {
     ev.preventDefault();
     ev.stopPropagation();
+    const { editor } = this.props;
 
-    this.props.editor._wrapLinkAtRange("", { autoFocus: true });
+    this.headingDropdown.current.removeAttribute("open")
+
+    if (this.isActiveMarkup(type)) {
+      editor.setBlocks("paragraph");
+    } else {
+      editor.setBlocks(type);
+    }
+  }
+
+  handleCreateLink = (ev) => {
+    ev.preventDefault();
+
+    this.props.editor._wrapLinkAtRange("http://", { autoFocus: true });
   };
 
   handleImageClick = () => {
@@ -139,7 +154,18 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
-        {this.renderBlockButton("heading2", "heading")}
+        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay d-inline-block">
+          <summary><BarButton icon="heading" title="Heading" /></summary>
+          <div className="dropdown-menu dropdown-menu-se">
+            <ul>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading2")}>Heading 2</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading3")}>Heading 3</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading4")}>Heading 4</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading5")}>Heading 5</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading6")}>Heading 6</a></li>
+            </ul>
+          </div>
+        </details>
         <span className="bar-divider"></span>
         {this.renderMarkButton("bold", "bold", "Bold ⌘-b")}
         {this.renderMarkButton("italic", "italic", "Italic ⌘-i")}

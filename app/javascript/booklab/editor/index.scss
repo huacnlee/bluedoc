@@ -1,10 +1,17 @@
 .editor-body {
+  overflow-y: scroll;
+
+  form { margin: 0; }
+
   .editor-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 64px;
     background: #fff;
     border: 0;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
-    position: relative;
     z-index: 9;
 
     .navbar-title {
@@ -46,7 +53,6 @@
       width: auto;
     }
   }
-  overflow: hidden;
 }
 
 .editor-lock-window {
@@ -64,38 +70,25 @@
   padding: 0px;
 }
 
-.editor-container {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 64px);
-  overflow: hidden;
-  margin: 0;
-}
-
-.editor-bg {
-  padding: 50px 20px;
-  background: #f9f9f9;
-  text-align: center;
-  overflow-y: scroll;
-  height: calc(100vh - 113px);
-}
-
-.editor-message {
-  color: rgb(128, 125, 45);
-  margin-left: 10px;
-
-  .fas { font-size: 15px; vertical-align: middle; }
-}
-
-
 .editor-toolbar {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  width: 100%;
+  z-index: 8;
   padding: 10px;
   padding-left: 40px;
   border-bottom: 1px solid #e9e9e9;
   background: #fbfbfb;
   text-align: center;
+
+  details {
+    z-index: 9;
+  }
+
+  .dropdown-item {
+    text-align: left;
+  }
 
   .bar-button {
     cursor: pointer;
@@ -126,6 +119,30 @@
     margin-left: 6px;
     padding-right: 6px;
   }
+}
+
+.editor-container {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  padding-top: 64px;
+  width: 100%;
+  min-height: calc(100vh);
+  margin: 0;
+}
+
+.editor-bg {
+  padding: 100px 20px 50px 20px;
+  background: #f9f9f9;
+  text-align: center;
+  min-height: calc(100vh - 113px);
+}
+
+.editor-message {
+  color: rgb(128, 125, 45);
+  margin-left: 10px;
+
+  .fas { font-size: 15px; vertical-align: middle; }
 }
 
 
@@ -176,14 +193,6 @@
       min-height: 800px;
     }
 
-    p, hr, pre, table {
-      margin-bottom: 0px !important;
-    }
-
-    [data-slate-editor] > * + * {
-      margin-bottom: 16px;
-    }
-
     // Prism highlight
     pre {
       .token.comment,.token.prolog,.token.doctype,.token.cdata{color:#969896;}
@@ -214,9 +223,16 @@
     }
 
     [data-active=true] {
-      background: rgba(4, 85, 221, 0.04);
+      background: rgba(84, 141, 252, 0.07) !important;
       hr {
         background: $primary;
+      }
+    }
+    h2, h3, h4, h5, h6 {
+      &[data-active=true] {
+        background: #FFF !important;
+        border-color: rgba(84, 141, 252, 0.27) !important;
+        box-shadow: 0 0 0px 2px rgba(84, 141, 252, 0.07);
       }
     }
 
@@ -280,6 +296,10 @@
     a:not([href]) {
       color: #3c6fe8;
       text-decoration: underline;
+    }
+
+    .paragraph {
+      margin-bottom: 16px;
     }
 
     p:empty {

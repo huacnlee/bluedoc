@@ -36,7 +36,7 @@
         <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
         <span class= "divider">/</span>
-        <%= doc.title || "New doc" %>
+        <a href="<%= doc.to_path %>"><%= doc.title || "New doc" %></a>
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">

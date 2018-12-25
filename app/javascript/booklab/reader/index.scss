@@ -354,6 +354,10 @@
     margin: 10px 0;
   }
 
+  blockquote {
+    p { margin-bottom: 0; }
+  }
+
   .plantuml-image {
     margin-bottom: 15px;
   }
