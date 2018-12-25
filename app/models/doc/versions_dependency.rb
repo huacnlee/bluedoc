@@ -14,7 +14,7 @@ class Doc
       return false
     end
 
-    self.update(body: version.body_plain, body_sml: version.body_sml, format: version.format, last_editor_id: user_id)
+    self.update(body: version.body_plain, draft_body: version.body_plain, body_sml: version.body_sml, draft_body_sml: version.body_sml, format: version.format, last_editor_id: user_id)
   end
 
   private
