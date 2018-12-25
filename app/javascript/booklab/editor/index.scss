@@ -90,13 +90,16 @@
     text-align: left;
   }
 
+  .dropdown-caret {
+    border-top-color: #777;
+  }
   .bar-button {
     cursor: pointer;
     background: transparent;
     border: 0;
     color: #666;
     padding: 4px;
-    line-height: 0px;
+    line-height: 100%;
     border-radius: 2px;
     margin: 0 1px;
     border: 1px solid transparent;
@@ -104,6 +107,7 @@
 
     i {
       color: #777;
+      line-height: 0px;
       font-size: 18px;
     }
 

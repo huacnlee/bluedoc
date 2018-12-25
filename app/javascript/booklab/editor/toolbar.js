@@ -154,8 +154,8 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
-        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay d-inline-block">
-          <summary><BarButton icon="heading" title="Heading" /></summary>
+        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay bar-button">
+          <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
             <ul>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading2")}>Heading 2</a></li>
