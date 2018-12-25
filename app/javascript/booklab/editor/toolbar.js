@@ -5,17 +5,9 @@ import styled from "styled-components";
 export class Toolbar extends React.Component {
   state = { }
 
-  hasMark = (type) => {
-    try {
-      return this.props.editor.value.marks.some(mark => mark.type === type);
-    } catch (_err) {
-      return false;
-    }
-  }
-
-  isBlock = (type) => {
-    const startBlock = this.props.editor.value.startBlock;
-    return startBlock && startBlock.type === type;
+  isActiveMarkup = (type) => {
+    const { container } = this.props;
+    return container.isActiveMarkup(type);
   }
 
   /**
@@ -46,6 +38,13 @@ export class Toolbar extends React.Component {
       break;
     case "todo-list":
       editor._toggleListAtRanges("todo");
+      break;
+    case "blockquote":
+      if (this.isActiveMarkup("blockquote")) {
+        editor._unwrapBlockquoteAtRanges();
+      } else {
+        editor._wrapBlockquoteAtRanges();
+      }
       break;
     default:
       editor.change(change => change.setBlocks(type));
@@ -92,7 +91,7 @@ export class Toolbar extends React.Component {
   }
 
   renderMarkButton = (type, icon, title) => {
-    const isActive = this.hasMark(type);
+    const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
     title = title || type;
 
@@ -102,9 +101,9 @@ export class Toolbar extends React.Component {
   }
 
   renderBlockButton = (type, icon) => {
-    const isActive = this.isBlock(type);
+    const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev =>
-      this.onClickBlock(ev, isActive ? "paragraph" : type);
+      this.onClickBlock(ev, type);
 
     return (
       <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
@@ -139,7 +138,7 @@ export class Toolbar extends React.Component {
         <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <span className="bar-divider"></span>
-        {this.renderBlockButton("block-quote", "quote", "Quote")}
+        {this.renderBlockButton("blockquote", "quote", "Quote")}
         {this.renderBlockButton("code", "code", "Insert Code block")}
         {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
         <span className="bar-divider"></span>

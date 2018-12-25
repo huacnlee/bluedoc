@@ -64,9 +64,7 @@ class RichEditor extends React.Component {
   }
 
   onMarkupChange = markups => {
-    this.setState({
-      activeMarkups: markups,
-    })
+    this.setState({ activeMarkups: markups })
   }
 
   isActiveMarkup = type => {
@@ -105,7 +103,7 @@ class RichEditor extends React.Component {
 
     return <div>
       {this.editor && (
-        <Toolbar value={this.state.value} editor={this.editor} />
+        <Toolbar value={this.state.value} editor={this.editor} container={this} />
       )}
       <div className="editor-bg">
         <div className="editor-box">

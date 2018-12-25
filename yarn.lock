@@ -4862,6 +4862,11 @@ markdown-it-sup@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-it-sup/-/markdown-it-sup-1.0.0.tgz#cb9c9ff91a5255ac08f3fd3d63286e15df0a1fc3"
   integrity sha1-y5yf+RpSVawI8/09YyhuFd8KH8M=
 
+markdown-it-underline@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/markdown-it-underline/-/markdown-it-underline-1.0.1.tgz#43a54a541d95d739b43157701f1da306d7c300b2"
+  integrity sha1-Q6VKVB2V1zm0MVdwHx2jBtfDALI=
+
 markdown-it@^8.4.2:
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
@@ -8249,10 +8254,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typine@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.1.tgz#69e46dcb0887cc6ba26c490499c86170e9737ec3"
-  integrity sha512-7xEKwPBXmomTeKA9OV8Ht1jjp/3fBO1V1URxld1+9aAxO6RoTb9KdTN3WGkEIyu2odnAJQb9ssHKoRVaU8/N2w==
+typine@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.3.tgz#ca0e655e25ceda27db55b1faf17e1364a287ebc8"
+  integrity sha512-barcGLEZOQiAnldHP0E/tvW88H1wfz1bnISDP+oFt5JAq2HA2DM4iAQe5izTr/PSa+X+naljJSfgiv+8pMKdlw==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"
@@ -8272,6 +8277,7 @@ typine@^0.0.1:
     markdown-it-mark "^2.0.0"
     markdown-it-sub "^1.0.0"
     markdown-it-sup "^1.0.0"
+    markdown-it-underline "^1.0.1"
     prop-types "^15.6.2"
     react "^16.6.0"
     react-codemirror "^1.0.0"
