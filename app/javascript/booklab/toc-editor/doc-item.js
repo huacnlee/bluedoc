@@ -1,5 +1,8 @@
-import React from "react";
-import { SortableContainer, SortableHandle, SortableElement, arrayMove } from 'react-sortable-hoc';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import React from 'react';
+import {
+  SortableHandle,
+} from 'react-sortable-hoc';
 
 const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
 
@@ -13,21 +16,21 @@ export default class DocItem extends React.Component {
   render() {
     const { item } = this.props;
 
-    let className = "doc-item-drageable doc-item clearfix";
+    let className = 'doc-item-drageable doc-item clearfix';
     if (item.isNew) {
-      className += " doc-item-new";
+      className += ' doc-item-new';
     }
     if (item.exist) {
-      className += " doc-item-exist"
+      className += ' doc-item-exist';
     }
 
     return (
       <div className={className}>
-      { item.isNew == true && (
+      { item.isNew === true && (
         <div className="title">Add a custom item</div>
       )}
 
-      { item.isNew != true && (
+      { item.isNew !== true && (
         <div className="title">{item.title}</div>
       )}
         <div className="slug">{item.url}</div>

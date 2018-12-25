@@ -1,8 +1,8 @@
 
 .toc-item-drageable {
+  position: relative;
   list-style: none;
   line-height: 24px;
-  overflow: hidden;
   background: #FFF;
   padding: 6px 13px;
   border-bottom: 1px solid #f0f0f0;
@@ -16,20 +16,29 @@
   &:last-child { border-radius: 0 0 3px 3px; }
   &.active {
     background: #f9f9f9;
+    .form-edit {
+      pointer-events: auto;
+    }
   }
-  .indent-left,
-  .indent-right {
+  .icon,
+  .icon {
     font-size: 14px;
     color: #ccc;
     padding-top: 6px;
     &:hover { color: #666; }
   }
 
-  &.toc-item-d0 {
-    .indent-left { display: none; }
-  }
-  &.toc-item-d5 {
-    .indent-right { display: none; }
+  .folder {
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    color: #333;
+    padding: 6px 2px;
+    transition: all .2s ease;
+    transform-origin: center;
+    &.rotate {
+      transform: rotate(-90deg);
+    }
   }
 
   @for $i from 0 through 5 {
@@ -54,8 +63,9 @@
     border: 0px;
     border-bottom: 1px solid #fff;
     background: transparent;
+    pointer-events: none;
     &:hover {
-      background: #fefef0;
+      background: transparent;
     }
   }
 

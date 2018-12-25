@@ -6,66 +6,22 @@ import {
 
 const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
 
-const TocItemElement = SortableElement(({
-  item: { url = '', title = '', depth },
-  onIndent,
-  onUnindent,
-  onDeleteItem,
-  onKeyPressEdit,
-  onChange,
-  onSelectItem,
-  active,
-}) => (
-    <div className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={onSelectItem}>
-      {/* drag */}
-      <DragHandle />
-      {/* indentation */}
-      <div onClick={onUnindent} className="indent-left mr-2"><i class="fas fa-left"></i></div>
-      <div onClick={onIndent} className="indent-right"><i class="fas fa-right"></i></div>
-      {/* delete */}
-      <div onClick={onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
-      {/* show && edit */}
-      <form className={'cell-wrap'}>
-        <input type="text"
-          onChange={onChange}
-          onKeyUp={onKeyPressEdit}
-          data-field="title"
-          placeholder="title"
-          className="form-edit title"
-          value={title} />
-        <input type="text"
-          onChange={onChange}
-          onKeyUp={onKeyPressEdit}
-          data-field="url"
-          placeholder="url"
-          className="form-edit slug"
-          value={url} />
-      </form>
-    </div>
-));
+class TocItem extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
 
-
-export default class TocItem extends React.PureComponent {
-  // indent
-  // eslint-disable-next-line consistent-return
-  indentItem = (step) => {
-    const { item } = this.props;
-    const { depth = 0 } = item;
-    if ((step === 1 && depth >= 5) || (step === -1 && depth === 0)) {
-      return false;
+  componentDidUpdate(prev) {
+    const { active, autoFocus } = this.props;
+    if (active && autoFocus !== prev.autoFocus) {
+      this.inputRef && this.inputRef.current.focus();
     }
-    this.saveChange({ ...item, depth: depth + step });
   }
 
   saveChange = (item = this.props.item) => {
-    this.props.onChangeItem(this.props.index, item);
+    this.props.onChangeItem(this.props.item.index, item);
   }
-
-  // indent
-  onIndent = e => this.indentItem(1)
-
-  // unindent
-  onUnindent = e => this.indentItem(-1)
 
   // sync
   onChangeField = (e) => {
@@ -79,35 +35,71 @@ export default class TocItem extends React.PureComponent {
   }
 
   // remove item
-  onDeleteItem = () => this.props.onDelete(this.props.index)
+  onDeleteItem = () => this.props.onDelete(this.props.item.index)
 
   onKeyPress = (e) => {
     const input = e.currentTarget;
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 || e.keyCode === 27) {
       // enter
+      e.preventDefault();
       input.blur();
-    } else if (e.keyCode === 27) {
-      // esc
-      // FIXME: to cancel edit
     }
   }
 
-  onSelectItem = () => this.props.onSelectItem(this.props.index)
+  onSelectItem = () => {
+    this.props.onSelectItem(this.props.item.index);
+  }
+
+  handelFolder = () => {
+    const { item } = this.props;
+    this.saveChange({ ...item, folder: !item.folder });
+  }
 
   render() {
-    const { index, item, active } = this.props;
+    const {
+      item: {
+        url, title, depth, showfolder = false, maxDepth, index, folder, id,
+      }, active, onIndent,
+    } = this.props;
     return (
-      <TocItemElement
-        active={active}
-        index={index}
-        item={item}
-        onIndent={this.onIndent}
-        onChange={this.onChangeField}
-        onUnindent={this.onUnindent}
-        onKeyPressEdit={this.onKeyPress}
-        onDeleteItem={this.onDeleteItem}
-        onSelectItem={this.onSelectItem}
-      />
+      <div index={index} className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={this.onSelectItem}>
+        {/* drag */}
+        <DragHandle />
+        {/* folder */}
+        {showfolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
+          <i class="fas fa-sort-down"></i>
+        </div>}
+        {/* indentation */}
+        {depth > 0 && <div onClick={() => onIndent(index, -1)} className="icon"><i class="fas fa-left"></i></div>}
+        {depth < maxDepth && <div onClick={() => onIndent(index, 1)} className="icon"><i class="fas fa-right"></i></div>}
+        {/* delete */}
+        <div onClick={this.onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
+        {/* show && edit */}
+        <form className={'cell-wrap'}>
+          <input
+            type="text"
+            ref={this.inputRef}
+            onChange={this.onChangeField}
+            onKeyDown={this.onKeyPress}
+            data-field="title"
+            placeholder="title"
+            className="form-edit title"
+            value={title}
+          />
+          <input
+            type="text"
+            onChange={this.onChangeField}
+            onKeyDown={this.onKeyPress}
+            data-field="url"
+            placeholder="url"
+            className="form-edit slug"
+            value={url}
+            readOnly={!!id}
+          />
+        </form>
+      </div>
     );
   }
 }
+
+export default SortableElement(TocItem);
