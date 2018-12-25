@@ -220,14 +220,53 @@
       }
     }
 
+    .codeblock-box {
+      position: relative;
+      overflow: hidden;
+
+      .title-bar {
+        display: block;
+        border-radius: 3px 3px 0 0;
+        padding: 7px 8px;
+        height: 38px;
+        overflow: hidden;
+        border: 2px solid #f6f8fa;
+        border-bottom: 0px;
+        cursor: default;
+        @extend .clearfix;
+
+        &:hover {
+          .close {
+            display: inline-block;
+          }
+        }
+      }
+
+      .select-language {
+        float: left;
+      }
+      .close {
+        float: right;
+        color: #999;
+        margin-top: -3px;
+        display: none;
+      }
+
+    }
+
     .CodeMirror {
+      background-color: #f6f8fa;
+      border-radius: 0 0 3px 3px;
       padding: 16px;
       overflow: auto;
       font-size: 85%;
       line-height: 1.45;
-      background-color: #f6f8fa;
-      border-radius: 3px;
       font-family: Monaco, monospace;
+
+      .CodeMirror-hscrollbar,
+      .CodeMirror-vscrollbar {
+        display: none !important;
+      }
     }
   }
 

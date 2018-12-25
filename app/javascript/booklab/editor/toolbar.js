@@ -145,6 +145,7 @@ export class Toolbar extends React.Component {
         {this.renderMarkButton("italic", "italic", "Italic ⌘-i")}
         {this.renderMarkButton("strike", "strikethrough", "Strike Through")}
         {this.renderMarkButton("underline", "underline", "Underline ⌘-u")}
+        {this.renderMarkButton("code", "code", "Inline Code ⌘-`")}
         <span className="bar-divider"></span>
         {this.renderBlockButton("bulleted-list", "bulleted-list", "Bulleted list")}
         {this.renderBlockButton("ordered-list", "numbered-list", "Numbered list")}
@@ -153,7 +154,7 @@ export class Toolbar extends React.Component {
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <span className="bar-divider"></span>
         {this.renderBlockButton("blockquote", "quote", "Quote")}
-        {this.renderBlockButton("codeblock", "code", "Insert Code block")}
+        {this.renderBlockButton("codeblock", "codeblock", "Insert Code block")}
         {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
