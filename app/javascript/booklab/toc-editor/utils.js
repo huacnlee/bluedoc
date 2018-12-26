@@ -16,7 +16,6 @@ export const getNextNodeIndex = (curIndex, items) => {
 // get folderList length
 export const getFolderLength = (curIndex, items) => {
   const curEle = items[curIndex];
-  if (!curEle.folder) return 0;
   const otherArr = items.slice(curIndex + 1);
   const idx = otherArr.findIndex(v => v.depth <= curEle.depth);
   return idx === -1 ? otherArr.length : idx;

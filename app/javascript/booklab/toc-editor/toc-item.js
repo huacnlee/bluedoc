@@ -1,10 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
-import {
-  SortableHandle, SortableElement,
-} from 'react-sortable-hoc';
-
-const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
+import { SortableElement } from 'react-sortable-hoc';
 
 class TocItem extends React.PureComponent {
   constructor(props) {
@@ -58,21 +54,14 @@ class TocItem extends React.PureComponent {
   render() {
     const {
       item: {
-        url, title, depth, showFolder = false, maxDepth, index, folder, id,
-      }, active, onIndent,
+        url, title, depth, showFolder = false, index, folder, id,
+      }, active,
     } = this.props;
     return (
       <div index={index} className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={this.onSelectItem}>
-        {/* drag */}
-        <DragHandle />
-        {/* folder */}
         {showFolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
           <i class="fas fa-sort-down"></i>
         </div>}
-        {/* indentation */}
-        {depth > 0 && <div onClick={() => onIndent(index, -1)} className="icon"><i class="fas fa-left"></i></div>}
-        {depth < maxDepth && <div onClick={() => onIndent(index, 1)} className="icon"><i class="fas fa-right"></i></div>}
-        {/* delete */}
         <div onClick={this.onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
         {/* show && edit */}
         <form className={'cell-wrap'}>

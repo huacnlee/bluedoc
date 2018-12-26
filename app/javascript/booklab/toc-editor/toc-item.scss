@@ -1,4 +1,8 @@
 
+.sorting .folder {
+  transform: rotate(-90deg);
+}
+
 .toc-item-drageable {
   position: relative;
   list-style: none;
@@ -20,17 +24,17 @@
       pointer-events: auto;
     }
   }
-  .icon,
-  .icon {
-    font-size: 14px;
-    color: #ccc;
-    padding-top: 6px;
-    &:hover { color: #666; }
-  }
+  // .icon,
+  // .icon {
+  //   font-size: 14px;
+  //   color: #ccc;
+  //   padding-top: 6px;
+  //   &:hover { color: #666; }
+  // }
 
   .folder {
     position: absolute;
-    left: 0;
+    left: 10px;
     font-size: 14px;
     color: #333;
     padding: 6px 2px;

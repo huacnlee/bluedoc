@@ -43,6 +43,7 @@ class TocEditor extends React.Component {
       autoFocus: 1,
     };
     this.formatTocList = this.formatList();
+    this.sorting = false;
   }
 
   componentDidMount() {
@@ -69,11 +70,19 @@ class TocEditor extends React.Component {
   }
 
   formatList = (items = []) => items.reduce((acc, cur, index, arr) => {
-    const { depth, folder } = cur;
+    const { activeIndex } = this.state;
+    const { depth } = cur;
+    let { folder } = cur;
     const showFolder = arr[index + 1] ? depth < arr[index + 1].depth : false;
     const maxDepth = arr[index - 1] ? arr[index - 1].depth + 1 : depth;
+    if (index === activeIndex && this.sorting) {
+      folder = true;
+    }
+    if (!showFolder) {
+      folder = false;
+    }
     const curItem = {
-      index, showFolder, maxDepth, folder: showFolder ? folder : false,
+      index, showFolder, maxDepth, folder,
     };
     if (depth > 0) {
       const prev = acc[acc.length - 1] || {};
@@ -114,20 +123,6 @@ class TocEditor extends React.Component {
       const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
       if (activeIndex < items.length - 1) this.onSelectItem(nextIndex);
     }
-    // shift + up
-    if (keyCode === 38 && shiftKey) {
-      e.preventDefault();
-      const newIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
-      if (newIndex === -1) return;
-      this.onSortEnd({ oldIndex: activeIndex, newIndex });
-    }
-    // shift + down
-    if (keyCode === 40 && shiftKey) {
-      e.preventDefault();
-      const newIndex = getNextNodeIndex(activeIndex, this.formatTocList);
-      if (newIndex === -1) return;
-      this.onSortEnd({ oldIndex: activeIndex, newIndex });
-    }
     // enter
     if (keyCode === 13 && activeIndex !== -1) {
       this.setState({ autoFocus: this.state.autoFocus + 1 });
@@ -152,6 +147,7 @@ class TocEditor extends React.Component {
 
   // sort Toc Node
   onSortEnd = ({ oldIndex, newIndex }) => {
+    this.sorting = false;
     const { items, activeIndex } = this.state;
     const array = items.slice(0);
     const length = getFolderLength(oldIndex, items);
@@ -163,11 +159,6 @@ class TocEditor extends React.Component {
     if (direction === 'down') {
       tempIndex -= length;
     }
-    // change activeIndex
-    if (activeIndex !== -1) {
-      const activeEle = items[activeIndex];
-      this.setState({ activeIndex: array.findIndex(({ key }) => key === activeEle.key) });
-    }
     let tempArr = array.splice(oldIndex, length + 1);
     const curDepth = items[oldIndex].depth;
     if (tempIndex === 0 && curDepth > 0) {
@@ -177,8 +168,22 @@ class TocEditor extends React.Component {
       }));
     }
     array.splice(tempIndex, 0, ...tempArr);
+    // change activeIndex
+    if (activeIndex !== -1) {
+      const activeEle = items[activeIndex];
+      const arr = this.formatList(array);
+      const nextActiveIndex = array.findIndex(({ key }) => key === activeEle.key);
+      const isShow = arr.findIndex(v => v.index === nextActiveIndex);
+      this.setState({ activeIndex: isShow ? nextActiveIndex : -1 });
+    }
     this.updateValue(array);
   };
+
+  // sort start Toc
+  onSortStart = ({ index }) => {
+    this.sorting = true;
+    this.setState({ activeIndex: index });
+  }
 
   // update TocNode Content
   onChangeItem = (index, item) => {
@@ -198,24 +203,23 @@ class TocEditor extends React.Component {
   // add a TocNode
   onAddItem = (index, item) => {
     const { items, activeIndex } = this.state;
-    const newItem = Object.assign({}, item);
+    // eslint-disable-next-line no-undef
+    const newItem = { ...item, key: _.uniqueId(), folder: false };
     const nextIdx = getNextNodeIndex(activeIndex, this.formatTocList);
     if (nextIdx === -1) {
-      // eslint-disable-next-line no-undef
-      items.push({ ...newItem, key: _.uniqueId(), folder: false });
+      items.push(newItem);
     } else {
-      const { depth } = items[activeIndex];
-      // eslint-disable-next-line no-undef
-      items.splice(nextIdx, 0, {
-        ...newItem, depth, key: _.uniqueId(), folder: false,
-      });
+      const { depth, folder, showFolder } = this.formatTocList.find(v => v.index === activeIndex);
+      items.splice(nextIdx, 0, { ...newItem, depth: (showFolder && !folder) ? depth + 1 : depth });
     }
     this.updateValue(items);
   }
 
   // change TocNode depth
   changeItemIndent = (index, direction) => {
-    const { depth, maxDepth } = this.formatTocList.find(v => v.index === index);
+    const curItem = this.formatTocList.find(v => v.index === index);
+    if (!curItem) return;
+    const { depth, maxDepth } = curItem;
     const nextDepth = depth + direction;
     if (nextDepth < 0 || nextDepth > maxDepth) return;
     const { items } = this.state;
@@ -240,16 +244,18 @@ class TocEditor extends React.Component {
           onAddItem={this.onAddItem}
         />
         <TocItemList
+          helperClass="sorting active"
+          distance={5}
           autoFocus={autoFocus}
           items={this.formatTocList}
           activeIndex={activeIndex}
           onChangeItem={this.onChangeItem}
           onDeleteItem={this.onDeleteItem}
+          onSortStart={this.onSortStart}
           onSortEnd={this.onSortEnd}
           onSelectItem={this.onSelectItem}
           lockAxis="y"
           onIndent={this.changeItemIndent}
-          useDragHandle={true}
         />
       </div>
     );
