@@ -1,3 +1,4 @@
+@import "../mixin";
 
 .sorting .folder {
   transform: rotate(-90deg);
@@ -60,16 +61,19 @@
     padding-left: 20px;
     .form-edit:focus {
       outline: none;
-      border-bottom: 1px dashed #ccc;
-      background: #fcfcfc !important;
+      border-radius: 3;
+      border-bottom: 1px solid #f0f0f0;
+      background: #fff !important;
       display: inline-block;
     }
   }
   .form-edit {
-    padding: 6px 8px;
+    padding: 3px 8px;
     min-width: 60px;
+    width: 45%;
     border: 0px;
-    border-bottom: 1px solid #fff;
+    @extend .text-overflow;
+    border-bottom: 1px solid transparent;
     background: transparent;
     pointer-events: none;
     &:hover {
