@@ -54,14 +54,18 @@ class TocItem extends React.PureComponent {
   render() {
     const {
       item: {
-        url, title, depth, showFolder = false, index, folder, id,
+        url, title, depth, showFolder = false, folder, id,
       }, active,
     } = this.props;
     return (
-      <div index={index} className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={this.onSelectItem}>
-        {showFolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
+      <div
+        className={`toc-item-drageable toc-item ${active ? 'active' : ''}`}
+        onClick={this.onSelectItem}
+        style={{ marginLeft: `${20 * depth}px` }}
+      >
+        <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''} ${showFolder ? '' : 'hide'}`}>
           <i class="fas fa-caret"></i>
-        </div>}
+        </div>
         <div onClick={this.onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
         {/* show && edit */}
         <form className={'cell-wrap'}>

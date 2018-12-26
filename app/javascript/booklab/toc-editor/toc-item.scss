@@ -46,14 +46,11 @@
     padding: 6px 2px;
     transition: all .2s ease;
     transform-origin: center;
+    &.hide {
+      display: none;
+    }
     &.rotate {
       transform: rotate(-90deg);
-    }
-  }
-
-  @for $i from 0 through 5 {
-    &.toc-item-d#{$i} {
-      margin-left: ($i * 20px) !important;
     }
   }
 
