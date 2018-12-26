@@ -1,3 +1,10 @@
+
+// find visible cur node's sort index
+export const getCurNode = (curIndex, items) => {
+  if (curIndex === -1) return -1;
+  return items.find(v => v.index === curIndex);
+};
+
 // find visible prev node's sort index
 export const getPrevNodeIndex = (curIndex, items) => {
   if (curIndex === -1) return -1;

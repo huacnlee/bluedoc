@@ -1,7 +1,9 @@
 import { SortableContainer } from 'react-sortable-hoc';
 import TocItem from './toc-item';
 import DocItem from './doc-item';
-import { getFolderLength, getNextNodeIndex, getPrevNodeIndex } from './utils';
+import {
+  getFolderLength, getNextNodeIndex, getPrevNodeIndex, getCurNode,
+} from './utils';
 
 const TocItemList = SortableContainer(({
   items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
@@ -206,20 +208,23 @@ class TocEditor extends React.Component {
     // eslint-disable-next-line no-undef
     const newItem = { ...item, key: _.uniqueId(), folder: false };
     const nextIdx = getNextNodeIndex(activeIndex, this.formatTocList);
-    if (nextIdx === -1) {
+    const curNode = getCurNode(activeIndex, this.formatTocList);
+    let nextActive = items.length;
+    if (nextIdx === -1 || !curNode) {
       items.push(newItem);
     } else {
-      const { depth, folder, showFolder } = this.formatTocList.find(v => v.index === activeIndex);
+      const { depth, folder, showFolder } = curNode;
       items.splice(nextIdx, 0, { ...newItem, depth: (showFolder && !folder) ? depth + 1 : depth });
+      nextActive = nextIdx;
     }
-    this.updateValue(items);
+    this.updateValue(items, nextActive);
   }
 
   // change TocNode depth
   changeItemIndent = (index, direction) => {
-    const curItem = this.formatTocList.find(v => v.index === index);
-    if (!curItem) return;
-    const { depth, maxDepth } = curItem;
+    const curNode = getCurNode(index, this.formatTocList);
+    if (!curNode) return;
+    const { depth, maxDepth } = curNode;
     const nextDepth = depth + direction;
     if (nextDepth < 0 || nextDepth > maxDepth) return;
     const { items } = this.state;
