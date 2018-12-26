@@ -42,7 +42,9 @@ class VersionTest < ActiveSupport::TestCase
     assert_equal true, doc.revert(version0.id, user_id: user.id)
     doc.reload
     assert_equal version0.body_plain, doc.body_plain
+    assert_equal version0.body_plain, doc.draft_body_plain
     assert_equal version0.body_sml_plain, doc.body_sml_plain
+    assert_equal version0.body_sml_plain, doc.draft_body_sml_plain
     assert_equal version0.format, doc.format
     assert_equal user.id, doc.last_editor_id
     assert_equal 3, doc.versions.count

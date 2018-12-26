@@ -32,6 +32,7 @@ module BookLab
 
       class Render < Redcarpet::Render::HTML
         include Rouge::Plugins::Redcarpet
+        include ActionView::Helpers::NumberHelper
 
         def header(text, header_level)
           raw_text = Nokogiri::HTML(text).xpath("//text()").to_s
@@ -50,10 +51,47 @@ module BookLab
 
         def link(link, title, content)
           link ||= ""
-          if link.include?("/uploads/")
-            %(<a class="attachment-file" href="#{link}" title="#{title}" target="_blank">#{content}</a>)
+          if link.include?("/uploads/") || content.include?("download:")
+            content = content.gsub("download:", "").strip
+
+            size = "unknow size"
+            if title && title =~ /size:(\d+)/
+              size = number_to_human_size(Regexp.last_match(1) || 0)
+            end
+
+            %(<a class="attachment-file" title="#{content}" target="_blank" href="#{link}">
+                <span class="icon-box"><i class="fas fa-file"></i></span>
+                <span class="filename">#{content}</span>
+                <span class="filesize">#{size}</span>
+            </a>)
           else
             %(<a href="#{link}">#{content}</a>)
+          end
+        end
+
+        # Extend to support img width
+        # ![](foo.jpg | width=300)
+        # ![](foo.jpg | height=300)
+        # ![](foo.jpg =300x200)
+        # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
+        def image(link, title, alt_text)
+          link ||= ""
+          links = link.split(" ")
+          link = links[0]
+          if links.count > 1
+            # Original markdown title part need "": ![](foo.jpg "Title")
+            # ![](foo.jpg =300x)
+            title = links.last
+          end
+
+          if title =~ /width=(\d+)/
+            %(<img src="#{link}" width="#{Regexp.last_match(1)}" alt="#{alt_text}">)
+          elsif title =~ /height=(\d+)/
+            %(<img src="#{link}" height="#{Regexp.last_match(1)}" alt="#{alt_text}">)
+          elsif title =~ /=(\d+)x(\d+)/
+            %(<img src="#{link}" width="#{Regexp.last_match(1)}" height="#{Regexp.last_match(2)}" alt="#{alt_text}">)
+          else
+            %(<img src="#{link}" alt="#{alt_text}">)
           end
         end
 

@@ -52,9 +52,9 @@ class DocsController < Users::ApplicationController
     update_params = doc_params.to_hash.deep_symbolize_keys
     update_params[:last_editor_id] = current_user.id
     update_params[:current_editor_id] = current_user.id
-    update_params[:draft_title] ||= update_params[:title]
-    update_params[:draft_body] ||= update_params[:body]
-    update_params[:draft_body_sml] ||= update_params[:body_sml]
+    update_params[:draft_title] = update_params[:title] if update_params[:title].present?
+    update_params[:draft_body] = update_params[:body] if update_params[:body].present?
+    update_params[:draft_body_sml] = update_params[:body_sml] if update_params[:body_sml].present?
 
     respond_to do |format|
       if @doc.update(update_params)

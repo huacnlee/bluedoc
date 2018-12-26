@@ -1,40 +1,15 @@
 import { BarButton } from "./bar-button"
 import styled from "styled-components";
-import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
-import getDataTransferFiles from "rich-md-editor/lib/lib/getDataTransferFiles"
-import { insertImageFile, insertFile } from "rich-md-editor/lib/changes"
-
-function getLinkInSelection(value) {
-  try {
-    const selectedLinks = value.document
-      .getInlinesAtRange(value.selection)
-      .filter(node => node.type === "link");
-
-    if (selectedLinks.size) {
-      const link = selectedLinks.first();
-      if (value.selection.hasEdgeIn(link)) return link;
-    }
-  } catch (err) {
-    // It's okay.
-  }
-}
+// import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 
 export class Toolbar extends React.Component {
-  state = {
-    link: undefined
-  }
+  state = { }
 
-  hasMark = (type) => {
-    try {
-      return this.props.editor.value.marks.some(mark => mark.type === type);
-    } catch (_err) {
-      return false;
-    }
-  }
+  headingDropdown = React.createRef()
 
-  isBlock = (type) => {
-    const startBlock = this.props.editor.value.startBlock;
-    return startBlock && startBlock.type === type;
+  isActiveMarkup = (type) => {
+    const { container } = this.props;
+    return container.isActiveMarkup(type);
   }
 
   /**
@@ -47,49 +22,71 @@ export class Toolbar extends React.Component {
     ev.preventDefault();
     ev.stopPropagation();
 
-    this.props.editor.change(change => {
-      change.toggleMark(type);
-
-      // ensure we remove any other marks on inline code
-      // we don't allow bold / italic / strikethrough code.
-      const isInlineCode = this.hasMark("code") || type === "code";
-      if (isInlineCode) {
-        change.value.marks.forEach(mark => {
-          if (mark.type !== "code") change.removeMark(mark);
-        });
-      }
-    });
+    this.props.editor._toggleMarkAtRanges(type);
   };
 
   onClickBlock = (ev, type) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    this.props.editor.change(change => change.setBlocks(type));
+    const { editor } = this.props;
+
+    switch (type) {
+    case "bulleted-list":
+      editor._toggleListAtRanges("bulleted");
+      break;
+    case "ordered-list":
+      editor._toggleListAtRanges("ordered");
+      break;
+    case "todo-list":
+      editor._toggleListAtRanges("todo");
+      break;
+    case "blockquote":
+      if (this.isActiveMarkup("blockquote")) {
+        editor._unwrapBlockquoteAtRanges();
+      } else {
+        editor._wrapBlockquoteAtRanges();
+      }
+      break;
+    case "horizontal-rule":
+      editor._insertHorizontalRule();
+      break;
+    case "codeblock":
+      if (this.isActiveMarkup("codeblock")) {
+        editor.setBlocks("paragraph");
+      } else {
+        editor._insertCodeblock();
+      }
+      break;
+    default:
+      if (this.isActiveMarkup(type)) {
+        editor.setBlocks("paragraph");
+      } else {
+        editor.setBlocks(type);
+      }
+      break;
+    }
   };
+
+  handleHeading = (ev, type) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    const { editor } = this.props;
+
+    this.headingDropdown.current.removeAttribute("open")
+
+    if (this.isActiveMarkup(type)) {
+      editor.setBlocks("paragraph");
+    } else {
+      editor.setBlocks(type);
+    }
+  }
 
   handleCreateLink = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation();
 
-    const data = { href: "" };
-    this.props.editor.change(change => {
-      change.wrapInline({ type: "link", data });
-      this.showLinkToolbar(ev);
-    });
+    this.props.editor._wrapLinkAtRange("http://", { autoFocus: true });
   };
-
-  showLinkToolbar = (ev) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    const link = getLinkInSelection(this.props.value);
-    this.setState({ link: link })
-  }
-
-  hideLinkToolbar = () => {
-    this.setState({ link: undefined })
-  }
 
   handleImageClick = () => {
     // simulate a click on the file upload input element
@@ -100,39 +97,42 @@ export class Toolbar extends React.Component {
     this.file.click();
   }
 
+  handleIndent = (ev, increase) => {
+    ev.preventDefault()
+    const { editor } = this.props;
+    editor._setIndentAtRanges(4, increase)
+  }
+
+  toggleList = (ev, type) => {
+    ev.preventDefault()
+    const { editor } = this.props;
+    editor._toggleListAtRanges(type)
+  }
+
   onImagePicked = async (ev) => {
-    const files = getDataTransferFiles(ev);
     const { editor } = this.props;
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      editor.change(change => change.call(insertImageFile, file, editor));
-    }
+    editor._uploadImageEvent(ev, () => {});
   }
 
-  onFilePicked = async (ev) => {
-    const files = getDataTransferFiles(ev);
+  onFilePicked = (ev) => {
     const { editor } = this.props;
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      editor.change(change => change.call(insertFile, file, editor));
-    }
+    editor._uploadFileEvent(ev, () => {});
   }
 
-  renderMarkButton = (type, icon) => {
-    const isActive = this.hasMark(type);
+  renderMarkButton = (type, icon, title) => {
+    const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
+    title = title || type;
 
     return (
-      <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
+      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
     );
   }
 
   renderBlockButton = (type, icon) => {
-    const isActive = this.isBlock(type);
+    const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev =>
-      this.onClickBlock(ev, isActive ? "paragraph" : type);
+      this.onClickBlock(ev, type);
 
     return (
       <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
@@ -154,27 +154,41 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
-        {this.renderBlockButton("heading2", "heading")}
+        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay bar-button">
+          <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
+          <div className="dropdown-menu dropdown-menu-se">
+            <ul>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading2")}>Heading 2</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading3")}>Heading 3</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading4")}>Heading 4</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading5")}>Heading 5</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading6")}>Heading 6</a></li>
+              <li className="dropdown-divider"></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "paragraph")}>Paragraph</a></li>
+            </ul>
+          </div>
+        </details>
         <span className="bar-divider"></span>
-        {this.renderMarkButton("bold", "bold")}
-        {this.renderMarkButton("italic", "italic")}
-        {this.renderMarkButton("deleted", "strikethrough")}
-        {this.renderMarkButton("underlined", "underline")}
+        {this.renderMarkButton("bold", "bold", "Bold ⌘-b")}
+        {this.renderMarkButton("italic", "italic", "Italic ⌘-i")}
+        {this.renderMarkButton("strike", "strikethrough", "Strike Through")}
+        {this.renderMarkButton("underline", "underline", "Underline ⌘-u")}
+        {this.renderMarkButton("code", "code", "Inline Code ⌘-`")}
         <span className="bar-divider"></span>
-        {this.renderBlockButton("bulleted-list", "bulleted-list")}
-        {this.renderBlockButton("ordered-list", "numbered-list")}
+        {this.renderBlockButton("bulleted-list", "bulleted-list", "Bulleted list")}
+        {this.renderBlockButton("ordered-list", "numbered-list", "Numbered list")}
         <span className="bar-divider"></span>
-        {this.renderBlockButton("block-quote", "quote")}
-        {this.renderBlockButton("code", "code")}
-        {this.renderBlockButton("horizontal-rule", "hr")}
+        <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
+        <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
+        <span className="bar-divider"></span>
+        {this.renderBlockButton("blockquote", "quote", "Quote")}
+        {this.renderBlockButton("codeblock", "codeblock", "Insert Code block")}
+        {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
         <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
         <BarButton icon="attachment" title="Upload File" onMouseDown={this.handleFileClick} />
       </div>
-      {this.state.link && (
-        <LinkToolbar link={this.state.link} onBlur={this.hideLinkToolbar} />
-      )}
     </div>
   }
 }

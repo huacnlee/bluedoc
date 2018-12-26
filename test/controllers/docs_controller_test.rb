@@ -297,13 +297,16 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
   end
 
-  test "PUT /:user/:repo/:slug" do
+  test "PUT /:user/:repo/:slug with draft" do
     doc = create(:doc, repository: @repo)
+    old_params = {
+      body: doc.body_plain,
+      body_sml: doc.body_sml_plain
+    }
+
     doc_params = {
       title: "New #{doc.title}",
       draft_title: "Draft New #{doc.title}",
-      body: "New body",
-      body_sml: "New body sml",
       draft_body: "Draft New body",
       draft_body_sml: "Draft New body sml",
       slug: "new-#{doc.slug}"
@@ -337,8 +340,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     doc.reload
     assert_equal doc_params[:slug], doc.slug
-    assert_equal doc_params[:body], doc.body_plain
-    assert_equal doc_params[:body_sml], doc.body_sml_plain
+    assert_equal old_params[:body], doc.body_plain
+    assert_equal old_params[:body_sml], doc.body_sml_plain
     assert_equal doc_params[:draft_body], doc.draft_body_plain
     assert_equal doc_params[:draft_body_sml], doc.draft_body_sml_plain
     assert_equal doc_params[:title], doc.title

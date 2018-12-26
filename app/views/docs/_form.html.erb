@@ -36,7 +36,7 @@
         <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
         <span class= "divider">/</span>
-        <%= doc.title || "New doc" %>
+        <a href="<%= doc.to_path %>"><%= doc.title || "New doc" %></a>
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
@@ -51,7 +51,7 @@
     <%= form.text_area :body, class: "booklab-editor", value: doc.draft_body_plain, data: {
        direct_upload_url: rails_direct_uploads_url,
        blob_url_template: upload_path(":id")
-      } %>
+      }, style: "display: none" %>
     <%= form.text_area :body_sml, value: doc.draft_body_sml_plain, style: "display: none" %>
   </div>
 <% end %>

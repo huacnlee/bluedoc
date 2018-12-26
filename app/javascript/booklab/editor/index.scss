@@ -1,10 +1,17 @@
 .editor-body {
+  overflow-y: scroll;
+
+  form { margin: 0; }
+
   .editor-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 64px;
     background: #fff;
     border: 0;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
-    position: relative;
     z-index: 9;
 
     .navbar-title {
@@ -46,7 +53,6 @@
       width: auto;
     }
   }
-  overflow: hidden;
 }
 
 .editor-lock-window {
@@ -64,46 +70,36 @@
   padding: 0px;
 }
 
-.editor-container {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 64px);
-  overflow: hidden;
-  margin: 0;
-}
-
-.editor-bg {
-  padding: 50px 20px;
-  background: #f9f9f9;
-  text-align: center;
-  overflow-y: scroll;
-  height: calc(100vh - 113px);
-}
-
-.editor-message {
-  color: rgb(128, 125, 45);
-  margin-left: 10px;
-
-  .fas { font-size: 15px; vertical-align: middle; }
-}
-
-
 .editor-toolbar {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  width: 100%;
+  z-index: 8;
   padding: 10px;
   padding-left: 40px;
   border-bottom: 1px solid #e9e9e9;
   background: #fbfbfb;
   text-align: center;
 
+  details {
+    z-index: 9;
+  }
+
+  .dropdown-item {
+    text-align: left;
+  }
+
+  .dropdown-caret {
+    border-top-color: #777;
+  }
   .bar-button {
     cursor: pointer;
     background: transparent;
     border: 0;
     color: #666;
     padding: 4px;
-    line-height: 0px;
+    line-height: 100%;
     border-radius: 2px;
     margin: 0 1px;
     border: 1px solid transparent;
@@ -111,6 +107,7 @@
 
     i {
       color: #777;
+      line-height: 0px;
       font-size: 18px;
     }
 
@@ -126,6 +123,30 @@
     margin-left: 6px;
     padding-right: 6px;
   }
+}
+
+.editor-container {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  padding-top: 64px;
+  width: 100%;
+  min-height: calc(100vh);
+  margin: 0;
+}
+
+.editor-bg {
+  padding: 100px 20px 50px 20px;
+  background: #f9f9f9;
+  text-align: center;
+  min-height: calc(100vh - 113px);
+}
+
+.editor-message {
+  color: rgb(128, 125, 45);
+  margin-left: 10px;
+
+  .fas { font-size: 15px; vertical-align: middle; }
 }
 
 
@@ -176,10 +197,6 @@
       min-height: 800px;
     }
 
-    p, blockquote, hr, pre, table {
-      margin-bottom: 0px !important;
-    }
-
     // Prism highlight
     pre {
       .token.comment,.token.prolog,.token.doctype,.token.cdata{color:#969896;}
@@ -200,6 +217,106 @@
         right: 10px;
       }
     }
+
+    ul, ol {
+      margin-bottom: 0.25em !important;
+    }
+
+    .attachment-file {
+      cursor: pointer;
+    }
+
+    [data-active=true] {
+      position: relative;
+      &:before {
+        content: "⇢";
+        position: absolute;
+        color: rgba(0, 0, 0, 0.3);
+        left: -32px;
+        font-size: 20px;
+        display: block;
+      }
+
+      hr {
+        background: $primary;
+      }
+    }
+
+    .attachment-file[data-active=true] {
+      background: rgba(84, 141, 252, 0.07) !important;
+    }
+
+    blockquote {
+      .paragraph[data-active=true] {
+        &:before {
+          left: -48px;
+        }
+      }
+    }
+
+    .codeblock-box {
+      position: relative;
+
+      .title-bar {
+        display: block;
+        border-radius: 3px 3px 0 0;
+        padding: 4px 8px;
+        height: 35px;
+        overflow: hidden;
+        background: rgba(241, 242, 246, 0.85);
+        border-bottom: 1px solid #e5e5ec;
+        cursor: default;
+        @extend .clearfix;
+
+        &:hover {
+          .close {
+            display: inline-block;
+          }
+        }
+      }
+
+      .select-language {
+        float: left;
+        -webkit-appearance: none;
+        background: transparent;
+        border: 0;
+        outline: none;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        font-size: 13px;
+        color: #555;
+        padding: 0px 4px;
+        margin: 0;
+        position: relative;
+
+        &:hover {
+          border-color: #e5e5ec;
+        }
+      }
+      .close {
+        float: right;
+        color: #999;
+        margin-top: -3px;
+        display: none;
+      }
+
+    }
+
+    .CodeMirror {
+      background-color: #f6f8fa;
+      border-radius: 0 0 3px 3px;
+      padding: 16px;
+      margin-bottom: 18px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      font-family: Monaco, monospace;
+
+      .CodeMirror-hscrollbar,
+      .CodeMirror-vscrollbar {
+        display: none !important;
+      }
+    }
   }
 
   /* HOTFIX */
@@ -212,6 +329,10 @@
     a:not([href]) {
       color: #3c6fe8;
       text-decoration: underline;
+    }
+
+    .paragraph {
+      margin-bottom: 16px;
     }
 
     p:empty {
