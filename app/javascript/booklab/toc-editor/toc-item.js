@@ -60,7 +60,7 @@ class TocItem extends React.PureComponent {
     return (
       <div index={index} className={`toc-item-drageable toc-item toc-item-d${depth} ${active ? 'active' : ''}`} onClick={this.onSelectItem}>
         {showFolder && <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''}`}>
-          <i class="fas fa-sort-down"></i>
+          <i class="fas fa-caret"></i>
         </div>}
         <div onClick={this.onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
         {/* show && edit */}

@@ -32,6 +32,10 @@
   //   &:hover { color: #666; }
   // }
 
+  .fa-caret {
+    font-size: 12px;
+  }
+
   .folder {
     position: absolute;
     left: 10px;
@@ -77,7 +81,7 @@
     float: left;
     text-align: left;
   }
-  .slug { 
+  .slug {
     float: right;
     text-align: right;
   }
