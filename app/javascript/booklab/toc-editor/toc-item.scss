@@ -64,6 +64,7 @@
       border-radius: 3;
       border-bottom: 1px solid #f0f0f0;
       background: #fff !important;
+      color: #333;
       display: inline-block;
     }
   }
@@ -82,12 +83,14 @@
   }
 
   .title {
+    color: #555;
     float: left;
     text-align: left;
   }
   .slug {
     float: right;
     text-align: right;
+    color: #999;
   }
 
   .draghandle {
