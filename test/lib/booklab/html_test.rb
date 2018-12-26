@@ -125,7 +125,7 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
   test "markdown image" do
     out = BookLab::HTML.render("![Hello](/uploads/aa.jpg)", format: :markdown)
-    assert_equal %(<p><img src="/uploads/aa.jpg" title="" alt="Hello"></p>), out
+    assert_equal %(<p><img src="/uploads/aa.jpg" alt="Hello"></p>), out
 
     out = BookLab::HTML.render("![](/uploads/aa.jpg =300x200)", format: :markdown)
     assert_equal %(<p><img src="/uploads/aa.jpg" width="300" height="200" alt=""></p>), out

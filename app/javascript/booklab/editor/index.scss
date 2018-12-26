@@ -229,10 +229,11 @@
     [data-active=true] {
       position: relative;
       &:before {
-        content: " ";
+        content: "⇢";
         position: absolute;
-        background: rgba(94, 148, 252, 0.32);
+        color: rgba(0, 0, 0, 0.3);
         left: -32px;
+        font-size: 20px;
         display: block;
       }
 
@@ -245,18 +246,25 @@
       background: rgba(84, 141, 252, 0.07) !important;
     }
 
+    blockquote {
+      .paragraph[data-active=true] {
+        &:before {
+          left: -48px;
+        }
+      }
+    }
+
     .codeblock-box {
       position: relative;
-      overflow: hidden;
 
       .title-bar {
         display: block;
         border-radius: 3px 3px 0 0;
-        padding: 7px 8px;
-        height: 38px;
+        padding: 4px 8px;
+        height: 35px;
         overflow: hidden;
-        border: 2px solid #f6f8fa;
-        border-bottom: 0px;
+        background: rgba(241, 242, 246, 0.85);
+        border-bottom: 1px solid #e5e5ec;
         cursor: default;
         @extend .clearfix;
 
@@ -269,6 +277,21 @@
 
       .select-language {
         float: left;
+        -webkit-appearance: none;
+        background: transparent;
+        border: 0;
+        outline: none;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        font-size: 13px;
+        color: #555;
+        padding: 0px 4px;
+        margin: 0;
+        position: relative;
+
+        &:hover {
+          border-color: #e5e5ec;
+        }
       }
       .close {
         float: right;
@@ -283,6 +306,7 @@
       background-color: #f6f8fa;
       border-radius: 0 0 3px 3px;
       padding: 16px;
+      margin-bottom: 18px;
       overflow: auto;
       font-size: 85%;
       line-height: 1.45;

@@ -835,10 +835,10 @@
   resolved "https://registry.yarnpkg.com/@royie/slate-react-placeholder/-/slate-react-placeholder-0.1.12.tgz#6297327f02c0aeef3c5ddc053c0286415b3be6a9"
   integrity sha512-2Inv0C2bk7JnXH6nmDlfuxENE0TKzhYy97KNBoSDfmAAoVxhL/zIK4vtbSPsfHjeYHrd0hw5T8dsaDNDQpJT0A==
 
-"@royie/slate-react@^0.21.15":
-  version "0.21.15"
-  resolved "https://registry.yarnpkg.com/@royie/slate-react/-/slate-react-0.21.15.tgz#2ddd1d4001efaf281823b381ceda2c1127750bd2"
-  integrity sha512-bHNk8zm1OXNJ82S7EoqzDVBCarNj8aR0qXTxKQT71biCu9t/muuWiEEdQaRXnrChCgRRy+Q1ySpgeM3B4Nmg7w==
+"@royie/slate-react@^0.21.16":
+  version "0.21.16"
+  resolved "https://registry.yarnpkg.com/@royie/slate-react/-/slate-react-0.21.16.tgz#4f25ea35e6abd50ec9eb7f6bc7fcb4d076d8715e"
+  integrity sha512-kGjZgWfVXrVDu8gRHcb3+l+VD0Nx64IegKJuhU8EULV1EkmjiumcuExkxyKgrXYadhM77v/mAznleRSejYH6Uw==
   dependencies:
     "@royie/slate-base64-serializer" "^0.2.94"
     "@royie/slate-dev-environment" "^0.2.3"
@@ -1098,10 +1098,20 @@ ajv-keywords@^3.1.0:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   integrity sha1-6GuBnGAs+IIa1jdBNpjx3sAhhHo=
 
-ajv@^6.1.0, ajv@^6.5.3, ajv@^6.5.5, ajv@^6.6.1:
+ajv@^6.1.0, ajv@^6.5.3, ajv@^6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.1.tgz#6360f5ed0d80f232cc2b294c362d5dc2e538dd61"
   integrity sha512-ZoJjft5B+EJBjUyu9C9Hc0OZyPZSSlOF+plzouTrg6UlA8f+e/n8NIgBFG/9tppJtpPWfthHakK7juJdNDODww==
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^6.5.5:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.2.tgz#caceccf474bf3fc3ce3b147443711a24063cc30d"
+  integrity sha512-FBHEW6Jf5TB9MGBgUUA9XHkTbjXYfAUjY43ACMfmdMRHniyoMHjHjzD50OK8LGDWQwp4rWEsIq5kEqq7rvIM1g==
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -2012,9 +2022,9 @@ code-point-at@^1.0.0:
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
 codemirror@^5.18.2:
-  version "5.42.0"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.42.0.tgz#2d5b640ed009e89dee9ed8a2a778e2a25b65f9eb"
-  integrity sha512-pbApC8zDzItP3HRphD6kQVwS976qB5Qi0hU3MZMixLk+AyugOW1RF+8XJEjeyl5yWsHNe88tDUxzeRh5AOxPRw==
+  version "5.42.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.42.2.tgz#801ab715a7a7e1c7ed4162b78e9d8138b98de8f0"
+  integrity sha512-Tkv6im39VuhduFMsDA3MlXcC/kKas3Z0PI1/8N88QvFQbtOeiiwnfFJE4juGyC8/a4sb1BSxQlzsil8XLQdxRw==
 
 coffee-script@*:
   version "1.12.7"
@@ -7065,9 +7075,9 @@ read-pkg@^2.0.0:
     util-deprecate "~1.0.1"
 
 readable-stream@^3.0.6:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.1.0.tgz#19c2e9c1ce43507c53f6eefbcf1ee3d4aaa786f5"
-  integrity sha512-vpydAvIJvPODZNagCPuHG87O9JNPtvFEtjHHRVwNVsVVRBqemvPJkc2SYbxJsiZXawJdtZNmkmnsPuE3IgsG0A==
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.1.1.tgz#ed6bbc6c5ba58b090039ff18ce670515795aeb06"
+  integrity sha512-DkN66hPyqDhnIQ6Jcsvx9bFjhw214O4poMBcIMgPVpQvNy9a0e0Uhg5SqySyDKAmUlwt8LonTBz1ezOnM8pUdA==
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
@@ -7747,9 +7757,9 @@ sprintf-js@~1.0.2:
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
 sshpk@^1.7.0:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.15.2.tgz#c946d6bd9b1a39d0e8635763f5242d6ed6dcb629"
-  integrity sha512-Ra/OXQtuh0/enyl4ETZAfTaeksa6BXks5ZcjpSUNrjBr0DvrJKX+1fsKDPpT9TBXgHAFsa4510aNVgI8g/+SzA==
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.16.0.tgz#1d4963a2fbffe58050aa9084ca20be81741c07de"
+  integrity sha512-Zhev35/y7hRMcID/upReIvRse+I9SVhyVre/KTJSJQWMz3C3+G+HpO7m1wK/yckEtujKZ7dS4hkVxAnmHaIGVQ==
   dependencies:
     asn1 "~0.2.3"
     assert-plus "^1.0.0"
@@ -8254,14 +8264,14 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typine@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.3.tgz#ca0e655e25ceda27db55b1faf17e1364a287ebc8"
-  integrity sha512-barcGLEZOQiAnldHP0E/tvW88H1wfz1bnISDP+oFt5JAq2HA2DM4iAQe5izTr/PSa+X+naljJSfgiv+8pMKdlw==
+typine@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.4.tgz#42c858a24664bb03415d1eaddd6d9480e3127027"
+  integrity sha512-vt7/MGvFM+1JPmtAQrQWtPE7lf3ZO+NY2madZWHfZWQdAN0PjTHVqaPI7v+fnbzYgem3ZqQmv4Sd0SoxOMGsXQ==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"
-    "@royie/slate-react" "^0.21.15"
+    "@royie/slate-react" "^0.21.16"
     fast-deep-equal "^2.0.1"
     filesize "^3.6.1"
     htmlparser2 "^3.10.0"
