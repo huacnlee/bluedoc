@@ -96,7 +96,7 @@ class TocEditor extends React.Component {
   }, []);
 
   handleHotKey = (e) => {
-    const { keyCode, shiftKey } = e;
+    const { keyCode, shiftKey, metaKey } = e;
     const { activeIndex, items } = this.state;
     const inputs = ['input', 'select', 'button', 'textarea'];
     const { activeElement } = document;
@@ -107,11 +107,32 @@ class TocEditor extends React.Component {
     // Tab && Tab + Shift
     if (keyCode === 9) {
       e.preventDefault();
-      if (shiftKey) {
-        this.changeItemIndent(activeIndex, -1);
-      } else {
-        this.changeItemIndent(activeIndex, 1);
-      }
+      const direction = shiftKey ? -1 : 1;
+      this.changeItemIndent(activeIndex, direction);
+    }
+    // command + [ || command + left arrow
+    if ((metaKey && keyCode === 219) || (metaKey && keyCode === 37)) {
+      e.preventDefault();
+      // e.returnValue = false;
+      this.changeItemIndent(activeIndex, -1);
+    }
+    // command + ] || command + right arrow
+    if ((metaKey && keyCode === 221) || (metaKey && keyCode === 39)) {
+      e.preventDefault();
+      this.changeItemIndent(activeIndex, 1);
+      // e.returnValue = false;
+    }
+    // command + up
+    if (keyCode === 38 && metaKey) {
+      e.preventDefault();
+      const prevIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
+      if (activeIndex > 0) this.onSelectItem(prevIndex);
+    }
+    // command + down
+    if (keyCode === 40 && metaKey) {
+      e.preventDefault();
+      const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
+      if (activeIndex < items.length - 1) this.onSelectItem(nextIndex);
     }
     // up
     if (keyCode === 38 && !shiftKey) {
@@ -127,7 +148,14 @@ class TocEditor extends React.Component {
     }
     // enter
     if (keyCode === 13 && activeIndex !== -1) {
+      e.preventDefault();
       this.setState({ autoFocus: this.state.autoFocus + 1 });
+    }
+
+    // delete
+    if (metaKey && keyCode === 8 && activeIndex !== -1) {
+      e.preventDefault();
+      this.onDeleteItem(activeIndex);
     }
   }
 
