@@ -5,28 +5,41 @@ require "test_helper"
 class RepositoryImportJobTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
-  test "perform" do
-    repo = create(:repository)
-    user = create(:user)
+  setup do
+    @repo = create(:repository)
+    @user = create(:user)
+  end
 
+  test "perform with gitbook" do
     mock = Minitest::Mock.new
-    mock.expect(:perform, [], [])
+    mock.expect(:perform, true, [])
     BookLab::Import::GitBook.stub(:new, mock) do
-      RepositoryImportJob.perform_now(repo, user: user, type: "gitbook", url: "git@foo.com")
+      RepositoryImportJob.perform_now(@repo, user: @user, type: "gitbook", url: "git@foo.com")
     end
     mock.verify
 
-    assert_equal 1, Notification.where(notify_type: :repo_import, target: repo).count
-    note = Notification.where(notify_type: :repo_import, target: repo).last
+    assert_equal 1, Notification.where(notify_type: :repo_import, target: @repo).count
+    note = Notification.where(notify_type: :repo_import, target: @repo).last
     assert_equal User.system.id, note.actor_id
-    assert_equal user.id, note.user_id
+    assert_equal @user.id, note.user_id
     assert_equal :success, note.meta[:status]
 
-    RepositoryImportJob.perform_now(repo, user: user, type: "gitbook1", url: "")
-    note = Notification.where(notify_type: :repo_import, target: repo).last
+    assert_equal false, RepositoryImportJob.perform_now(@repo, user: @user, type: "gitbook1", url: "")
+  end
+
+  test "perform with archive" do
+    mock = Minitest::Mock.new
+    @repo.import_archive.attach(io: load_file("archive.zip"), filename: "test.zip")
+    mock.expect(:perform, true, [])
+    BookLab::Import::Archive.stub(:new, mock) do
+      RepositoryImportJob.perform_now(@repo, user: @user, type: "archive", url: nil)
+    end
+    mock.verify
+
+    assert_equal 1, Notification.where(notify_type: :repo_import, target: @repo).count
+    note = Notification.where(notify_type: :repo_import, target: @repo).last
     assert_equal User.system.id, note.actor_id
-    assert_equal user.id, note.user_id
-    assert_equal :failed, note.meta[:status]
-    assert_not_nil note.meta[:message]
+    assert_equal @user.id, note.user_id
+    assert_equal :success, note.meta[:status]
   end
 end

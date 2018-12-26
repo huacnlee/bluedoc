@@ -3,25 +3,22 @@
 module BookLab
   module Import
     class GitBook < Base
-      attr_accessor :repo_dir
-
       def git_url
         self.url
       end
 
       def valid_url?
-        self.git_url&.start_with?("git@") || self.git_url&.start_with?("http")
+        self.url&.start_with?("git@") || self.url&.start_with?("http")
+      end
+
+      def download
+        self.execute("git clone --depth 1 #{self.url} #{self.repo_dir}")
       end
 
       def perform
         raise "Invalid git url" if !valid_url?
-        tmp_path = Rails.root.join("tmp", "import", "gitbook")
-        dirname = Digest::MD5.hexdigest(self.git_url)
 
-        FileUtils.mkdir_p(tmp_path)
-        self.execute("git clone --depth 1 #{self.git_url} #{tmp_path}/#{dirname}")
-
-        @repo_dir = File.join(tmp_path, dirname)
+        self.download
 
         # import docs
         doc_files = Dir.glob(File.join(self.repo_dir, "**", "*.{md, markdown}"))
@@ -79,6 +76,8 @@ module BookLab
         if summary_filename
           toc = File.open(summary_filename).read
           toc.gsub!(/#([\s]?)Summary([\n]?)/, "")
+          # ](./hello-world) -> ](hello-world)
+          toc.gsub!(/\]\(\.\//, "](")
 
           slug_maps.each_key do |original_slug|
             slug = slug_maps[original_slug]
@@ -93,7 +92,7 @@ module BookLab
           end
         end
       ensure
-        FileUtils.rm_rf(File.join(tmp_path, dirname))
+        FileUtils.rm_rf(self.repo_dir)
       end
 
       def parse_title(body)

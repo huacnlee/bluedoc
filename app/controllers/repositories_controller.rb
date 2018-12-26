@@ -2,7 +2,7 @@
 
 class RepositoriesController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy action toc]
+  before_action :authenticate_user!, only: %i[new import edit create update destroy action toc]
 
   before_action :set_user, only: %i(show edit update destroy docs search action toc)
   before_action :set_repository, only: %i(show edit update destroy docs search action toc)
@@ -11,9 +11,15 @@ class RepositoriesController < Users::ApplicationController
     authorize! :read, @user
   end
 
-  #
+  # /new
   def new
     @repository = Repository.new(user_id: params[:user_id])
+  end
+
+  # /new/import
+  def import
+    @repository = Repository.new(user_id: params[:user_id])
+    render :new
   end
 
   # POST /repositories
@@ -111,6 +117,6 @@ class RepositoriesController < Users::ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repository_params
-      params.require(:repository).permit(:user_id, :slug, :name, :description, :privacy, :gitbook_url)
+      params.require(:repository).permit(:user_id, :slug, :name, :description, :privacy, :gitbook_url, :import_archive)
     end
 end

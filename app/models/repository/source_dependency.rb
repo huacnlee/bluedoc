@@ -9,8 +9,9 @@ class Repository
   delegate :url, to: :source, allow_nil: true, prefix: true
   delegate :job_id, to: :source, allow_nil: true, prefix: true
 
-  attr_accessor :gitbook_url
+  has_one_attached :import_archive
 
+  attr_accessor :gitbook_url
 
   before_validation :validate_gitbook_url
   after_save :save_source_url
@@ -34,12 +35,9 @@ class Repository
   end
 
   def import_from_source
-    job = nil
-    case self.source_provider
-    when "gitbook"
-      job = RepositoryImportJob.perform_later(self, type: "gitbook", user: Current.user, url: self.source_url)
-    end
+    return if self.source.blank?
 
+    job = RepositoryImportJob.perform_later(self, type: self.source_provider, user: Current.user, url: self.source_url)
     self.source.update(job_id: job.job_id) if job
   end
 
@@ -50,6 +48,11 @@ class Repository
         self.source ||= RepositorySource.new(repository: self)
         self.source.provider = "gitbook"
         self.source.url = self.gitbook_url
+        self.source.save!
+      elsif self.import_archive.attached?
+        self.source ||= RepositorySource.new(repository: self)
+        self.source.provider = "archive"
+        self.source.url = self.import_archive.blob.key
         self.source.save!
       end
     end

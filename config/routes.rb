@@ -75,6 +75,7 @@ Rails.application.routes.draw do
     end
   end
   get "new", to: "repositories#new", as: :new_repository
+  get "new/import", to: "repositories#import", as: :import_repository
   resource :autocomplete do
     collection do
       get :users

@@ -22,6 +22,37 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".select-menu .select-menu-item.selected input[checked]" do
       assert_select "[value=?]", "#{@user.id}"
     end
+    assert_select ".import-box", 0
+  end
+
+  test "GET /new/import" do
+    assert_require_user do
+      get "/new/import"
+    end
+
+    sign_in @user
+    get "/new/import"
+    assert_equal 200, response.status
+    assert_select ".import-box", 1 do
+      assert_select ".form-group" do
+        assert_select "label.control-label", text: "Import from Archive"
+        assert_select "input[type=file]" do
+          assert_select "[name=?]", "repository[import_archive]"
+        end
+        assert_select "a[href=?]", import_repository_path(provider: :gitbook)
+      end
+    end
+
+    get "/new/import", params: { provider: :gitbook }
+    assert_equal 200, response.status
+    assert_select ".import-box", 1 do
+      assert_select ".form-group" do
+        assert_select "label.control-label", text: "Import from Git"
+        assert_select "input.form-control" do
+          assert_select "[name=?]", "repository[gitbook_url]"
+        end
+      end
+    end
   end
 
   test "POST /repositories" do
@@ -68,6 +99,37 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :editor, group: @group
     post "/repositories", params: { repository: repo_params }
     assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+
+    # create with gitbook
+    repo = build(:repository)
+    repo_params = {
+      name: repo.name,
+      slug: repo.slug,
+      user_id: @group.id,
+      gitbook_url: "https://foo.com/gitbook.git"
+    }
+    post "/repositories", params: { repository: repo_params }
+    assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+    created_repo = @group.repositories.find_by_slug!(repo.slug)
+    assert_equal repo_params[:slug], created_repo.slug
+    assert_equal repo_params[:gitbook_url], created_repo.source&.url
+    assert_equal "gitbook", created_repo.source&.provider
+
+    # create with import_archive
+    repo = build(:repository)
+    repo_params = {
+      name: repo.name,
+      slug: repo.slug,
+      user_id: @group.id,
+      import_archive: fixture_file_upload(Rails.root.join("test", "factories", "archive.zip"))
+    }
+    post "/repositories", params: { repository: repo_params }
+    assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+    created_repo = @group.repositories.find_by_slug!(repo.slug)
+    assert_equal repo_params[:slug], created_repo.slug
+    assert_equal true, created_repo.import_archive.attached?
+    assert_equal created_repo.import_archive.blob.key, created_repo.source&.url
+    assert_equal "archive", created_repo.source&.provider
   end
 
   test "GET /:user/:repo" do

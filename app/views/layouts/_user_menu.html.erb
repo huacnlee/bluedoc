@@ -19,6 +19,12 @@
         <li><a class="dropdown-item" href="<%= main_app.new_repository_path %>">New Repository</a></li>
         <% end %>
 
+        <% if @user %>
+        <li><a class="dropdown-item" href="<%= main_app.import_repository_path(user_id: @user.id) %>">Import Repository</a></li>
+        <% else %>
+        <li><a class="dropdown-item" href="<%= main_app.import_repository_path %>">Import Repository</a></li>
+        <% end %>
+
         <li><a class="dropdown-item" href="<%= main_app.new_group_path %>">New Group</a></li>
       </ul>
     </div>

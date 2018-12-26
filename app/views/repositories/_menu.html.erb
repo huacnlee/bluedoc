@@ -34,11 +34,9 @@
           </strong>
         </h1>
       </div>
-      <% if @repository.source? %>
+      <% if @repository.source? && @repository.source.provider == "gitbook" %>
       <div class="source mt-2 mb-2 text-gray">
         <%= icon_tag("code-fork") %> <span class="source-url" title="Import from this URL"><%= @repository.source_url %></span>
-
-
       </div>
       <% end %>
     </div>
