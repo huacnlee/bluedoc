@@ -56,3 +56,35 @@
 .highlight .vg { color: #008080 } /* Name.Variable.Global */
 .highlight .vi { color: #008080 } /* Name.Variable.Instance */
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+
+/*!
+ * GitHub Light v0.4.2
+ * Copyright (c) 2012 - 2017 GitHub, Inc.
+ * Licensed under MIT (https://github.com/primer/github-syntax-theme-generator/blob/master/LICENSE)
+ */
+.markdown-body .cm-s-default.CodeMirror{ color:#24292e;}
+.markdown-body .cm-s-default .CodeMirror-gutters{ border-right-width:0;}
+.markdown-body .cm-s-default .CodeMirror-guttermarker{color:white;}
+.markdown-body .cm-s-default .CodeMirror-guttermarker-subtle{color:#d0d0d0;}
+.markdown-body .cm-s-default .CodeMirror-linenumber{color:#959da5;padding:0 16px 0 16px;}
+.markdown-body .cm-s-default .CodeMirror-cursor{border-left:1px solid #24292e;}
+.markdown-body .cm-s-default div.CodeMirror-selected,
+.markdown-body .cm-s-default .CodeMirror-line::selection,
+.markdown-body .cm-s-default .CodeMirror-line > span::selection,
+.markdown-body .cm-s-default .CodeMirror-line > span > span::selection,
+.markdown-body .cm-s-default .CodeMirror-line::-moz-selection,
+.markdown-body .cm-s-default .CodeMirror-line > span::-moz-selection,
+.markdown-body .cm-s-default .CodeMirror-line > span > span::-moz-selection{background:#c8c8fa;}
+.markdown-body .cm-s-default .CodeMirror-activeline-background{}
+.markdown-body .cm-s-default .CodeMirror-matchingbracket{text-decoration:underline;color:#24292e !important;}
+.markdown-body .cm-s-default .cm-comment{color:#6a737d;}
+.markdown-body .cm-s-default .cm-constant{color:#005cc5;}
+.markdown-body .cm-s-default .cm-entity{font-weight:normal;font-style:normal;text-decoration:none;color:#6f42c1;}
+.markdown-body .cm-s-default .cm-keyword{ font-weight: bold; color:#333;}
+.markdown-body .cm-s-default .cm-storage{color:#d73a49;}
+.markdown-body .cm-s-default .cm-string{font-weight:normal;font-style:normal;text-decoration:none;color:#032f62;}
+.markdown-body .cm-s-default .cm-support{font-weight:normal;font-style:normal;text-decoration:none;color:#005cc5;}
+.markdown-body .cm-s-default .cm-variable{ color:#008080;}
+.markdown-body .cm-s-default .cm-tag{ color: #445588; }
+.markdown-body .cm-s-default .cm-def{ color: #990000; font-weight: bold; }
