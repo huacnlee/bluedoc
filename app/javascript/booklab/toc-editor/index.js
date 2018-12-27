@@ -126,13 +126,19 @@ class TocEditor extends React.Component {
     if (keyCode === 38 && metaKey) {
       e.preventDefault();
       const prevIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex > 0) this.onSelectItem(prevIndex);
+      if (activeIndex > 0) {
+        this.onSortStart({ index: activeIndex });
+        this.onSortEnd({ oldIndex: activeIndex, newIndex: prevIndex });
+      }
     }
     // command + down
     if (keyCode === 40 && metaKey) {
       e.preventDefault();
       const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex < items.length - 1) this.onSelectItem(nextIndex);
+      if (activeIndex < items.length - 1) {
+        this.onSortStart({ index: activeIndex });
+        this.onSortEnd({ oldIndex: activeIndex, newIndex: nextIndex });
+      }
     }
     // up
     if (keyCode === 38 && !shiftKey) {
