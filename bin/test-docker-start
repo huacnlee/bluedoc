@@ -11,7 +11,7 @@ docker run --detach \
            --volume ${booklab_root}/public/system:/home/app/booklab/public/system \
            --volume ${booklab_root}/data/postgresql:/var/lib/postgresql \
            --volume ${booklab_root}/data/redis:/var/lib/redis \
-           --volume ${booklab_root}/data/elasticsearch:/usr/share/java/elasticsearch/data \
+           --volume ${booklab_root}/data/elasticsearch:/usr/share/elasticsearch/data \
            --volume ${booklab_root}/data/storage:/home/app/booklab/storage \
            --volume ${booklab_root}/fonts:/home/app/booklab/fonts \
            --volume ${booklab_root}/log:/home/app/booklab/log \
