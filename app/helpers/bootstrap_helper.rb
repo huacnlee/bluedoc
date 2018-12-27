@@ -9,6 +9,7 @@ module BootstrapHelper
   end
 
   def render_list_items(opts = {}, list = [])
+    opts ||= {}
     opts[:type] ||= :li
     opts[:class] ||= "nav-link"
     opts[:active_class] ||= "selected"
@@ -24,7 +25,7 @@ module BootstrapHelper
       controller_names = link.match(/data-controller=(["'])(.*?)(\1)/) || []
       c_name = controller_names.length > 2 ? controller_names[2] : nil
 
-      if url && current_page?(url, check_parameters: opts[:check_parameters])
+      if url && current_page?("#{url}", check_parameters: opts[:check_parameters])
         link = link.gsub(opts[:class], "#{opts[:class]} #{opts[:active_class]}")
       end
 
