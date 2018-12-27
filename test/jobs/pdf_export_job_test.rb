@@ -141,7 +141,7 @@ class PDFExportJobTest < ActiveSupport::TestCase
     assert_equal 5, html_node.css(".markdown-body .doc-title").size
     assert_equal 5, html_node.css(".markdown-body .section-body").size
 
-    assert_html_equal "Table of contents", html_node.css(".markdown-body .doc-section .doc-title")[0].inner_text
+    assert_html_equal "", html_node.css(".markdown-body .doc-section .doc-title")[0].inner_text
     assert_html_equal doc4.title, html_node.css(".markdown-body .doc-section .doc-title")[1].inner_text
     assert_html_equal doc4.body_html, html_node.css(".markdown-body .doc-section .section-body")[1].inner_html
     assert_html_equal doc3.title, html_node.css(".markdown-body .doc-section .doc-title")[2].inner_text

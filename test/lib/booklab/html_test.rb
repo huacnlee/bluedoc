@@ -107,7 +107,7 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
       <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
         <span class="icon-box"><i class="fas fa-file"></i></span>
         <span class="filename">This is a attachment</span>
-        <span class="filesize">unknow size</span>
+        <span class="filesize"></span>
       </a>
     </p>
     HTML
