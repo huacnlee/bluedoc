@@ -54,7 +54,7 @@ module BookLab
           if link.include?("/uploads/") || content.include?("download:")
             content = content.gsub("download:", "").strip
 
-            size = "unknow size"
+            size = ""
             if title && title =~ /size:(\d+)/
               size = number_to_human_size(Regexp.last_match(1) || 0)
             end

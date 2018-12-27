@@ -160,12 +160,17 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     raw = <<~MD
     ![](/uploads/#{blob0.key})
 
+    [Download File](/uploads/foobar)
+
     ## Hello world
 
     ![](/uploads/#{blob1.key})
+
     ![](/uploads/not-found-key)
 
     ![](https://www.google.com.hk/test.png)
+
+    [download: The File](https://www.google.com.hk/test.zip)
     MD
 
     fake_url0 = "https://foo.bar.com/aaa.jpg"
@@ -173,27 +178,44 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
     html = <<~HTML
     <p><img src="#{fake_url0}" alt=""></p>
+    <p>
+      <a class="attachment-file" title="Download File" target="_blank" href="#{Setting.host}/uploads/foobar">
+        <span class="icon-box"><i class="fas fa-file"></i></span>
+        <span class="filename">Download File</span>
+        <span class="filesize"></span>
+      </a>
+    </p>
     <h2 id="hello-world">
     <a href="#hello-world" class="heading-anchor">#</a>Hello world</h2>
     <p><img src="#{fake_url1}" alt=""></p>
     <p><img src="/uploads/not-found-key" alt=""></p>
 
     <p><img src="https://www.google.com.hk/test.png" alt=""></p>
+    <p>
+      <a class="attachment-file" title="The File" target="_blank" href="https://www.google.com.hk/test.zip">
+        <span class="icon-box"><i class="fas fa-file"></i></span>
+        <span class="filename">The File</span>
+        <span class="filesize"></span>
+      </a>
+    </p>
     HTML
 
-    find_stub = Proc.new do |opts|
+    find_stub = lambda do |opts|
       return blob0 if opts[:key] == blob0.key
       return blob1 if opts[:key] == blob1.key
-      nil
+      return nil
     end
+
+    out = nil
 
     ActiveStorage::Blob.stub(:find_by, find_stub) do
       blob0.stub(:service_url, fake_url0) do
         blob1.stub(:service_url, fake_url1) do
           out = BookLab::HTML.render(raw, format: :markdown, public: true)
-          assert_html_equal html, out
         end
       end
     end
+
+    assert_html_equal html, out
   end
 end
