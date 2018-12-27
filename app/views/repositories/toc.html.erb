@@ -12,6 +12,41 @@
       Edit Table of contents
     </div>
     <div class="navbar-buttons">
+      <details class="dropdown toc-keyboard-tip details-reset details-overlay d-inline-block">
+        <summary class="btn"><i class="fas fa-keyboard"></i></summary>
+        <div class="dropdown-menu dropdown-menu-sw py-3 px-4" style="width: 320px">
+          <table style="width: 100%">
+            <tr>
+              <td><code>▲</code></td>
+              <td>Move cursor up</td>
+            </tr>
+            <tr>
+              <td><code>▼</code></td>
+              <td>Move cursor down</td>
+            </tr>
+            <tr>
+              <td><code>⌘</code> + <code>▶︎</code></td>
+              <td>Indent</td>
+            </tr>
+            <tr>
+              <td><code>⌘</code> + <code>◀︎</code></td>
+              <td>Outdent</td>
+            </tr>
+            <tr>
+              <td><code>⌘</code> + <code>▲</code></td>
+              <td>Move up</td>
+            </tr>
+            <tr>
+              <td><code>⌘</code> + <code>▼</code></td>
+              <td>Move down</td>
+            </tr>
+            <tr>
+              <td><code>⌘</code> + <code>⌫</code></td>
+              <td>Remove item</td>
+            </tr>
+          </table>
+        </div>
+      </details>
       <button type="submit" class="btn btn-primary">Save</button>
       <a href="<%= @repository.to_path %>" type="submit" class="btn">Cancel</a>
     </div>
