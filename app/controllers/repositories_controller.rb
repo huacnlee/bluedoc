@@ -19,6 +19,7 @@ class RepositoriesController < Users::ApplicationController
   # /new/import
   def import
     @repository = Repository.new(user_id: params[:user_id])
+    params[:_by] = "import"
     render :new
   end
 

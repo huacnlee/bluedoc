@@ -10,8 +10,8 @@
 
     <%= form_with(model: [@user, @repository], local: true) do |form| %>
       <%= render "/shared/error_messages", target: @repository %>
-
-      <% if action_name == "import" %>
+      <input type="hidden" name="_by" value="<%= params[:_by] %>" />
+      <% if params[:_by] == "import" %>
       <div class="import-box markdown-body clearfix">
         <% if params[:provider] == "gitbook" %>
           <div class="form-group">
