@@ -122,12 +122,16 @@
       .markdown-body h1:hover a.heading-anchor,.markdown-body h2:hover a.heading-anchor,
       .markdown-body h3:hover a.heading-anchor,.markdown-body h4:hover a.heading-anchor,
       .markdown-body h5:hover a.heading-anchor,.markdown-body h6:hover a.heading-anchor{display:inline-block}
-      .markdown-body .attachment-file{display:block;color:#444;border-radius:3px;background:#fafafa;border:1px solid #e0e0e0;padding:8px 10px;text-decoration:none;margin:10px 0}
+      .markdown-body .attachment-file{display:block;position:relative;color:#444;border-radius:3px;background:#fafafa;border:1px solid #e0e0e0;padding:8px 10px;text-decoration:none;margin:10px 0}
       .markdown-body .attachment-file.selected{background:#f9f9f9}
       .markdown-body .attachment-file a{color:#444}
-      .markdown-body .attachment-file a.close{float:right;color:#aaa;padding:0 6px;cursor:pointer}
+      .markdown-body .attachment-file .icon-box{position:absolute;top:17px;left:11px;width:30px}
+      .markdown-body .attachment-file .icon-box .fas{font-size:28px;color:#d5d5d5}
+      .markdown-body .attachment-file a.close{position:absolute;top:17px;right:4px;color:#aaa;padding:0 6px;cursor:pointer}
       .markdown-body .attachment-file a.close:hover{color:#333}
-      .markdown-body .attachment-file .text-gray{color:rgba(88,96,105,.31) !important}
+      .markdown-body .attachment-file .filename,.markdown-body .attachment-file .filesize{display:block;margin-left:34px;margin-right:24px}
+      .markdown-body .attachment-file .filesize,.markdown-body .attachment-file .text-gray{color:rgba(88,96,105,.31) !important}
+
       .highlight{background:#fff}
       .highlight .c{color:#998;font-style:italic}
       .highlight .err{color:#a61717;background-color:#e3d2d2}
