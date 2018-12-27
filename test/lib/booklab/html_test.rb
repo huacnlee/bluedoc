@@ -153,6 +153,10 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     assert_html_equal expected.strip, out
   end
 
+  test "markdown with bad link" do
+    assert_equal %(<p><a href=""></a></p>), BookLab::HTML.render("[]()", format: :markdown)
+  end
+
   test "markdown render_public" do
     blob0 = create(:blob)
     blob1 = create(:blob)

@@ -51,6 +51,7 @@ module BookLab
 
         def link(link, title, content)
           link ||= ""
+          content ||= ""
           if link.include?("/uploads/") || content.include?("download:")
             content = content.gsub("download:", "").strip
 
