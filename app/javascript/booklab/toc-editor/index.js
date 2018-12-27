@@ -1,37 +1,27 @@
-import { SortableContainer } from 'react-sortable-hoc';
-import TocItem from './toc-item';
-import DocItem from './doc-item';
+import TocList from './toc-list';
+import DocList from './doc-list';
+import Hotkeys from './HotKeys';
 import {
-  getFolderLength, getNextNodeIndex, getPrevNodeIndex, getCurNode,
+  getFolderLength,
+  getNextNodeIndex,
+  getPrevNodeIndex,
+  getCurNode,
+  isFocusInput,
+  getIndexSameDepth,
 } from './utils';
 
-const TocItemList = SortableContainer(({
-  items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
-}) => (
-  <div className="toc-item-list" >
-    {items.map(item => (
-      <TocItem
-        key={`item-${item.key}`}
-        autoFocus={autoFocus}
-        onChangeItem={onChangeItem}
-        onIndent={onIndent}
-        onDelete={onDeleteItem}
-        index={item.index}
-        item={item}
-        active={activeIndex === item.index}
-        onSelectItem={onSelectItem}
-      />
-    ))}
-  </div>
-));
-
-const DocItemList = ({ items, onAddItem }) => (
-  <div className="doc-item-list">
-    {items.map((item, index) => (
-      <DocItem key={`item-${index}`} onAddItem={onAddItem} index={index} item={item} />
-    ))}
-  </div>
-);
+const hotKeyMap = [
+  'up',
+  'down',
+  'tab',
+  'shift+tab',
+  'command+up',
+  'command+down',
+  'command+left',
+  'command+right',
+  'command+backspace',
+  'enter'
+];
 
 class TocEditor extends React.Component {
   constructor(props) {
@@ -48,28 +38,14 @@ class TocEditor extends React.Component {
     this.sorting = false;
   }
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleHotKey, true);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleHotKey, true);
-  }
-
   // init Toc List
   initTocList = () => {
     const items = JSON.parse(this.props.value);
     // eslint-disable-next-line no-undef
     return items.map(v => ({ ...v, folder: false, key: _.uniqueId() }));
   }
-
   // init Doc List
-  initDocList = () => {
-    const docItems = JSON.parse(this.props.docsValue);
-    const items = JSON.parse(this.props.value);
-    docItems.unshift({ isNew: true, depth: 0 });
-    return this.filterDocItems(docItems, items);
-  }
+  initDocList = () => JSON.parse(this.props.docsValue);
 
   formatList = (items = []) => items.reduce((acc, cur, index, arr) => {
     const { activeIndex } = this.state;
@@ -95,122 +71,120 @@ class TocEditor extends React.Component {
     return [...acc, { ...cur, ...curItem }];
   }, []);
 
-  handleHotKey = (e) => {
-    const { keyCode, shiftKey, metaKey } = e;
-    const { activeIndex, items } = this.state;
-    const inputs = ['input', 'select', 'button', 'textarea'];
-    const { activeElement } = document;
-    if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1) {
-      return;
-    }
-    if (activeIndex === -1) return;
-    // Tab && Tab + Shift
-    if (keyCode === 9) {
-      e.preventDefault();
-      const direction = shiftKey ? -1 : 1;
-      this.changeItemIndent(activeIndex, direction);
-    }
-    // command + [ || command + left arrow
-    if ((metaKey && keyCode === 219) || (metaKey && keyCode === 37)) {
-      e.preventDefault();
-      // e.returnValue = false;
-      this.changeItemIndent(activeIndex, -1);
-    }
-    // command + ] || command + right arrow
-    if ((metaKey && keyCode === 221) || (metaKey && keyCode === 39)) {
-      e.preventDefault();
-      this.changeItemIndent(activeIndex, 1);
-      // e.returnValue = false;
-    }
-    // command + up
-    if (keyCode === 38 && metaKey) {
-      e.preventDefault();
-      const prevIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex > 0) {
-        this.onSortStart({ index: activeIndex });
-        this.onSortEnd({ oldIndex: activeIndex, newIndex: prevIndex });
-      }
-    }
-    // command + down
-    if (keyCode === 40 && metaKey) {
-      e.preventDefault();
-      const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex < items.length - 1) {
-        this.onSortStart({ index: activeIndex });
-        this.onSortEnd({ oldIndex: activeIndex, newIndex: nextIndex });
-      }
-    }
-    // up
-    if (keyCode === 38 && !shiftKey) {
-      e.preventDefault();
-      const prevIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex > 0) this.onSelectItem(prevIndex);
-    }
-    // down
-    if (keyCode === 40 && !shiftKey) {
-      e.preventDefault();
-      const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
-      if (activeIndex < items.length - 1) this.onSelectItem(nextIndex);
-    }
-    // enter
-    if (keyCode === 13 && activeIndex !== -1) {
-      e.preventDefault();
-      this.setState({ autoFocus: this.state.autoFocus + 1 });
-    }
-
-    // delete
-    if (metaKey && keyCode === 8 && activeIndex !== -1) {
-      e.preventDefault();
-      this.onDeleteItem(activeIndex);
+  handleHotKey = (key, event) => {
+    if (isFocusInput()) return;
+    const { activeIndex } = this.state;
+    event.preventDefault();
+    switch (key) {
+      case 'up':
+        this.handleHotKeySelect(-1);
+        break;
+      case 'down':
+        this.handleHotKeySelect(1);
+        break;
+      case 'tab':
+        this.changeItemIndent(activeIndex, 1);
+        break;
+      case 'shift+tab':
+        this.changeItemIndent(activeIndex, -1);
+        break;
+      case 'command+right':
+        this.changeItemIndent(activeIndex, 1);
+        break;
+      case 'command+left':
+        this.changeItemIndent(activeIndex, -1);
+        break;
+      case 'command+up':
+        this.handleHotKeySort(-1);
+        break;
+      case 'command+down':
+        this.handleHotKeySort(1);
+        break;
+      case 'enter':
+        this.setState({ autoFocus: this.state.autoFocus + 1 });
+        break;
+      case 'command+backspace':
+        this.onDeleteItem(activeIndex);
+        break;
+      default:
+        break;
     }
   }
 
-  filterDocItems = (docItems, newItems) => docItems.map((item) => {
-    const exist = newItems.findIndex(({ url = '', id = '' }) => (url === item.url || id === item.id)) !== -1;
-    return {
-      ...item,
-      exist,
-    };
-  })
+  // hotkey to sort
+  handleHotKeySort = (direction) => {
+    const { items, activeIndex } = this.state;
+    if (direction !== 1 && direction !== -1) {
+      return;
+    }
+    const tempIndex = getIndexSameDepth(activeIndex, this.formatTocList, direction);
+    const { depth = -1 } = items[tempIndex] || {};
+    if (depth === items[activeIndex].depth) {
+      this.onSortEnd({ oldIndex: activeIndex, newIndex: tempIndex });
+    }
+  }
+
+  // hotkey to select
+  handleHotKeySelect = (direction) => {
+    const { activeIndex } = this.state;
+    if (direction === 1) {
+      const nextIndex = getNextNodeIndex(activeIndex, this.formatTocList);
+      nextIndex > -1 && this.onSelectItem(nextIndex);
+    }
+    if (direction === -1) {
+      const prevIndex = getPrevNodeIndex(activeIndex, this.formatTocList);
+      prevIndex > -1 && this.onSelectItem(prevIndex);
+    }
+  }
 
   // Update TocList
   updateValue = (newItems, nextActiveIndex = this.state.activeIndex) => {
-    const docItems = this.filterDocItems(this.state.docItems, newItems);
-    this.setState({ docItems, items: [...newItems], activeIndex: nextActiveIndex }, () => {
+    this.setState({ items: [...newItems], activeIndex: nextActiveIndex }, () => {
       this.props.onChange(newItems);
     });
   }
 
   // sort Toc Node
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.sorting = false;
+    const isDrag = this.sorting;
     const { items, activeIndex } = this.state;
     const array = items.slice(0);
     const length = getFolderLength(oldIndex, items);
-    let tempIndex = newIndex;
     const direction = oldIndex > newIndex ? 'up' : 'down';
-    if (direction === 'down') {
-      tempIndex += getFolderLength(newIndex, items);
+    const oldDepth = items[oldIndex].depth;
+    let targetIndex = newIndex;
+    let tempIndex = newIndex;
+    this.sorting = false;
+    if (direction === 'up') {
+      targetIndex = getPrevNodeIndex(newIndex, this.formatTocList);
     }
     if (direction === 'down') {
+      const { showFolder = false, folder = false } = getCurNode(oldIndex, this.formatTocList) || {};
+      if (showFolder && folder) {
+        tempIndex += getFolderLength(newIndex, items);
+      }
+      if (!isDrag) {
+        tempIndex += getFolderLength(newIndex, items);
+      }
       tempIndex -= length;
     }
-    let tempArr = array.splice(oldIndex, length + 1);
-    const curDepth = items[oldIndex].depth;
-    if (tempIndex === 0 && curDepth > 0) {
-      tempArr = tempArr.map(v => ({
-        ...v,
-        depth: v.depth - curDepth,
-      }));
-    }
+    const {
+      depth = 0,
+      showFolder = false,
+      folder = false,
+    } = getCurNode(targetIndex, this.formatTocList) || {};
+    const targetDepth = showFolder && !folder ? depth + 1 : depth;
+    const disDepth = isDrag ? oldDepth - targetDepth : 0;
+    const tempArr = array.splice(oldIndex, length + 1).map(v => ({
+      ...v,
+      depth: v.depth - disDepth,
+    }));
     array.splice(tempIndex, 0, ...tempArr);
     // change activeIndex
     if (activeIndex !== -1) {
       const activeEle = items[activeIndex];
-      const arr = this.formatList(array);
       const nextActiveIndex = array.findIndex(({ key }) => key === activeEle.key);
-      const isShow = arr.findIndex(v => v.index === nextActiveIndex);
-      this.setState({ activeIndex: isShow ? nextActiveIndex : -1 });
+      this.setState({ activeIndex: nextActiveIndex });
     }
     this.updateValue(array);
   };
@@ -233,11 +207,15 @@ class TocEditor extends React.Component {
     const { items } = this.state;
     const length = getFolderLength(index, items) + 1;
     items.splice(index, length);
-    this.updateValue(items);
+    let nextActive = index;
+    if(index > items.length - length) {
+      nextActive = items.length - length;
+    }
+    this.updateValue(items, nextActive);
   }
 
   // add a TocNode
-  onAddItem = (index, item) => {
+  onAddItem = (item) => {
     const { items, activeIndex } = this.state;
     // eslint-disable-next-line no-undef
     const newItem = { ...item, key: _.uniqueId(), folder: false };
@@ -278,24 +256,24 @@ class TocEditor extends React.Component {
     this.formatTocList = this.formatList(items);
     return (
       <div className="toc-editor">
-        <DocItemList
-          items={docItems}
+        <DocList
+          docItems={docItems}
+          tocItems={items}
           onAddItem={this.onAddItem}
         />
-        <TocItemList
+        <TocList
           helperClass="sorting active"
           distance={5}
           autoFocus={autoFocus}
           items={this.formatTocList}
           activeIndex={activeIndex}
           onChangeItem={this.onChangeItem}
-          onDeleteItem={this.onDeleteItem}
           onSortStart={this.onSortStart}
           onSortEnd={this.onSortEnd}
           onSelectItem={this.onSelectItem}
-          lockAxis="y"
           onIndent={this.changeItemIndent}
         />
+        <Hotkeys keyName={hotKeyMap.join(',')} onKeyDown={this.handleHotKey}></Hotkeys>
       </div>
     );
   }
@@ -316,17 +294,9 @@ document.addEventListener('turbolinks:load', () => {
 
   const onChange = (items) => {
     items.map(({
-      depth,
-      id,
-      index,
-      title,
-      url,
+      depth, id, index, title, url,
     }) => ({
-      depth,
-      id,
-      index,
-      title,
-      url,
+      depth, id, index, title, url,
     }));
     const value = JSON.stringify(items);
     repositoryTocInput.value = value;

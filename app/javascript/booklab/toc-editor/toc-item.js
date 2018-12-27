@@ -30,9 +30,6 @@ class TocItem extends React.PureComponent {
     });
   }
 
-  // remove item
-  onDeleteItem = () => this.props.onDelete(this.props.item.index)
-
   onKeyPress = (e) => {
     const input = e.currentTarget;
     if (e.keyCode === 13 || e.keyCode === 27) {

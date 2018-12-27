@@ -1,0 +1,54 @@
+
+.doc-item-drageable {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  background: #FFF;
+  padding: 8px 13px;
+  line-height: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-right: 34px;
+  position: relative;
+
+  &:first-child { border-radius: 3px 3px 0 0; }
+  &:last-child { border-radius: 0 0 3px 3px; }
+
+  &.new {
+    margin-bottom: 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    .opts {
+      display: block;
+    }
+  }
+
+  .slug {
+    color: #aaa;
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .opts {
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    transform: translateY(-50%);
+    display: none;
+    color: #aaa;
+    cursor: pointer;
+    &:hover { color: #999; }
+  }
+
+  &:hover {
+    background: #fefef0;
+    .opts { display: block; }
+  }
+}
