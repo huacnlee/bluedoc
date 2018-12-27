@@ -24,11 +24,32 @@ module BookLab
         doc_files = Dir.glob(File.join(self.repo_dir, "**", "*.{md, markdown}"), File::FNM_CASEFOLD)
         logger.info "Found #{doc_files.length} docs"
 
+        # update Toc
+        summary_filenames = Dir.glob(File.join(self.repo_dir, "**", "summary.{md, markdown}"), File::FNM_CASEFOLD)
+        # take first (parent dir first) summary.md
+        summary_filename = summary_filenames.first
+
         slug_maps = {}
 
+        # root dir
+        root_dir = self.repo_dir + "/"
+        first_file = doc_files.first
+        if first_file
+          # use first file path as root dir for slug
+          root_dir = File.dirname(first_file) + "/"
+        end
+        if summary_filename
+          # use summary.md path as root dir if it exist
+          root_dir = File.dirname(summary_filename) + "/"
+        end
+
         doc_files.each do |f|
-          original_slug = f.gsub(self.repo_dir + "/", "").split(".").first
-          slug = original_slug.gsub("/", "-").downcase
+          fname = f.gsub(root_dir, "")
+          # remove self.repo_dir + "/" again, if summary.md in sub dir
+          fname = fname.gsub(self.repo_dir + "/", "")
+
+          original_slug = fname.split(".").first
+          slug = BookLab::Slug.slugize(original_slug).downcase
 
           next if slug == "summary"
 
@@ -36,7 +57,7 @@ module BookLab
             slug = Digest::MD5.hexdigest(slug)[0..8]
           end
 
-          slug_maps[original_slug] = slug
+          slug_maps[fname] = slug
 
           body = self.upload_images(f, File.open(f).read)
           title_res = self.parse_title(body)
@@ -67,22 +88,15 @@ module BookLab
           logger.info "doc:#{doc.id} #{doc.slug} created"
         end
 
-        # update Toc
-        summary_filenames = Dir.glob(File.join(self.repo_dir, "**", "summary.{md, markdown}"), File::FNM_CASEFOLD)
-        # take first (parent dir first) summary.md
-        summary_filename = summary_filenames.first
-
         if summary_filename
           toc = File.open(summary_filename).read
           toc.gsub!(/#([\s]?)Summary([\n]?)/, "")
           # ](./hello-world) -> ](hello-world)
           toc.gsub!(/\]\(\.\//, "](")
 
-          slug_maps.each_key do |original_slug|
-            slug = slug_maps[original_slug]
-            toc.gsub!("#{original_slug}.md", slug)
-            toc.gsub!("#{original_slug}.markdown", slug)
-            toc.gsub!("#{original_slug}", slug)
+          slug_maps.each_key do |fname|
+            slug = slug_maps[fname]
+            toc.gsub!("](#{fname}", "](#{slug}")
           end
 
           toc_content = ::BookLab::Toc.parse(toc, format: :markdown)
