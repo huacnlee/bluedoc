@@ -66,7 +66,6 @@ class TocItem extends React.PureComponent {
         <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''} ${showFolder ? '' : 'hide'}`}>
           <i class="fas fa-caret"></i>
         </div>
-        <div onClick={this.onDeleteItem} className="btn-delete"><i class="fas fa-minus"></i></div>
         {/* show && edit */}
         <form className={'cell-wrap'}>
           <input

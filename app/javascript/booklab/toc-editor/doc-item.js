@@ -4,8 +4,6 @@ import {
   SortableHandle,
 } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => <span className="draghandle"><i className="fas fa-news-feed"></i></span>); // This can be any component you want
-
 export default class DocItem extends React.Component {
   onAddClick = (e) => {
     e.preventDefault();
