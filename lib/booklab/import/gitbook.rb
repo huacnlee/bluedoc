@@ -21,7 +21,7 @@ module BookLab
         self.download
 
         # import docs
-        doc_files = Dir.glob(File.join(self.repo_dir, "**", "*.{md, markdown}"))
+        doc_files = Dir.glob(File.join(self.repo_dir, "**", "*.{md, markdown}"), File::FNM_CASEFOLD)
         logger.info "Found #{doc_files.length} docs"
 
         slug_maps = {}
@@ -68,10 +68,9 @@ module BookLab
         end
 
         # update Toc
-        summary_filename = nil
-        Dir.glob(File.join(self.repo_dir, "{SUMMARY, summary}.{md, markdown}")) do |f|
-          summary_filename = f
-        end
+        summary_filenames = Dir.glob(File.join(self.repo_dir, "**", "summary.{md, markdown}"), File::FNM_CASEFOLD)
+        # take first (parent dir first) summary.md
+        summary_filename = summary_filenames.first
 
         if summary_filename
           toc = File.open(summary_filename).read
