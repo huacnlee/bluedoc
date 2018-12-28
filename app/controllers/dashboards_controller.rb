@@ -20,26 +20,26 @@ class DashboardsController < ApplicationController
   end
 
   def groups
-    @groups = current_user.groups.with_attached_avatar.page(params[:page]).per(10)
+    @groups = current_user.groups.with_attached_avatar.page(params[:page]).per(12)
   end
 
   def repositories
-    @repositories = current_user.user_actives.repositories.includes(:user).page(params[:page]).per(10)
+    @repositories = current_user.user_actives.repositories.includes(:user).page(params[:page]).per(12)
   end
 
   def docs
-    @user_actives = current_user.user_actives.docs.page(params[:page]).per(10)
+    @user_actives = current_user.user_actives.docs.page(params[:page]).per(12)
   end
 
   def stars
     if params[:tab] == "docs"
-      @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(10)
+      @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(12)
     else
-      @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(10)
+      @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
     end
   end
 
   def watches
-    @repositories = current_user.watch_repositories.includes(:user).page(params[:page]).per(10)
+    @repositories = current_user.watch_repositories.includes(:user).page(params[:page]).per(12)
   end
 end

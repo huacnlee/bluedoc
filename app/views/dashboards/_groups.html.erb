@@ -5,7 +5,7 @@
 <% else %>
 <div class="dashboard-groups d-flex d-flex-column flex-wrap">
   <% items.each do |item| %>
-  <div class="recent-group-item Box">
+  <div class="recent-group-item Box flex-auto">
     <div class="Box-body">
       <div class="title">
         <%= user_avatar_tag(item, style: :tiny) %>

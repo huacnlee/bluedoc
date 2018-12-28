@@ -6,7 +6,7 @@
 
 <div class="dashboard-repos d-flex d-flex-column flex-wrap" data-action-button-reload>
   <% @repositories.each do |repo| %>
-  <div class="recent-repo-item Box">
+  <div class="recent-repo-item Box flex-auto">
     <div class="Box-body">
       <div class="infos">
         <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(repo) %></div>

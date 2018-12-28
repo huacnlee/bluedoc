@@ -4,9 +4,9 @@
 </div>
 <% else %>
 
-<div class="dashboard-repos d-flex d-flex-column flex-wrap">
+<div class="dashboard-repos d-flex d-flex-column flex-wrap flex-justify-center">
   <% items.each do |item| %>
-  <div class="recent-repo-item Box">
+  <div class="recent-repo-item Box flex-auto">
     <div class="Box-body">
       <div class="infos">
         <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(item.subject) %></div>
