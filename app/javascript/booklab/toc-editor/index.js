@@ -209,7 +209,7 @@ class TocEditor extends React.Component {
     items.splice(index, length);
     let nextActive = index;
     if(index > items.length - length) {
-      nextActive = items.length - length;
+      nextActive = index - 1;
     }
     this.updateValue(items, nextActive);
   }
@@ -217,19 +217,16 @@ class TocEditor extends React.Component {
   // add a TocNode
   onAddItem = (item) => {
     const { items, activeIndex } = this.state;
+    let nextIdx = getNextNodeIndex(activeIndex, this.formatTocList);
+    const curNode = getCurNode(activeIndex, this.formatTocList) || {};
+    const { depth = 0, folder = false, showFolder = false } = curNode;
     // eslint-disable-next-line no-undef
-    const newItem = { ...item, key: _.uniqueId(), folder: false };
-    const nextIdx = getNextNodeIndex(activeIndex, this.formatTocList);
-    const curNode = getCurNode(activeIndex, this.formatTocList);
-    let nextActive = items.length;
-    if (nextIdx === -1 || !curNode) {
-      items.push(newItem);
-    } else {
-      const { depth, folder, showFolder } = curNode;
-      items.splice(nextIdx, 0, { ...newItem, depth: (showFolder && !folder) ? depth + 1 : depth });
-      nextActive = nextIdx;
-    }
-    this.updateValue(items, nextActive);
+    const newItem = { ...item, key: _.uniqueId(), folder: false, depth: (showFolder && !folder) ? depth + 1 : depth };
+    if (nextIdx === -1) {
+      nextIdx = items.length;
+    } 
+    items.splice(nextIdx, 0, newItem);
+    this.updateValue(items, nextIdx);
   }
 
   // change TocNode depth
