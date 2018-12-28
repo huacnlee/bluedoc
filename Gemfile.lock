@@ -208,6 +208,12 @@ GEM
     omniauth (1.9.0)
       hashie (>= 3.4.6, < 3.7.0)
       rack (>= 1.6.2, < 3)
+    omniauth-github (1.3.0)
+      omniauth (~> 1.5)
+      omniauth-oauth2 (>= 1.4.0, < 2.0)
+    omniauth-gitlab (2.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-google-oauth2 (0.5.4)
       jwt (>= 1.5)
       omniauth (>= 1.1.1)
@@ -370,6 +376,8 @@ DEPENDENCIES
   mini_magick
   mocha
   notifications
+  omniauth-github
+  omniauth-gitlab
   omniauth-google-oauth2
   pg
   pghero

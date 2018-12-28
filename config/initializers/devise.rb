@@ -260,6 +260,15 @@ Devise.setup do |config|
   if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present?
     config.omniauth :google_oauth2, ENV["OMNIAUTH_GOOGLE_CLIENT_ID"], ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"]
   end
+  if ENV["OMNIAUTH_GITHUB_CLIENT_ID"].present?
+    config.omniauth :github, ENV["OMNIAUTH_GITHUB_CLIENT_ID"], ENV["OMNIAUTH_GITHUB_CLIENT_SECRET"]
+  end
+  if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present?
+    config.omniauth :gitlab, ENV["OMNIAUTH_GITLAB_CLIENT_ID"], ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"],
+      client_options: {
+        site: ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"
+      }
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

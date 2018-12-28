@@ -47,19 +47,31 @@ auth_info = auth_session["info"]
       </div>
     <% end %>
   </div>
+
   <div class="col-12 col-md-4 float-left mt-4 pl-md-4">
-    <% if resource_class.omniauth_providers.any? && defined? omniauth_authorize_path %>
+    <% if User.omniauth_providers.any? %>
     <div class="Box">
-      <div class="Box-body">
-        <%- resource_class.omniauth_providers.each do |provider| %>
-        <%
-        provider_name = OmniAuth::Utils.camelize(provider)
-        if provider.to_s == "google_oauth2"
-          provider_name = "Google"
-        end
-        %>
-          <%= link_to "Sign in with #{provider_name}", omniauth_authorize_path(resource_name, provider), class: "btn btn-block" %>
-        <% end -%>
+      <div class="Box-header">
+        <h3 class="Box-title">Sign in with</h3>
+      </div>
+      <ul>
+        <% if User.omniauth_providers.include?(:google_oauth2) %>
+        <div class="Box-row">
+          <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), class: "btn btn-block" %>
+        </div>
+        <% end %>
+
+        <% if User.omniauth_providers.include?(:github) %>
+        <div class="Box-row">
+        <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), class: "btn btn-block" %>
+        </div>
+        <% end %>
+
+        <% if User.omniauth_providers.include?(:gitlab) %>
+        <div class="Box-row">
+        <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "btn btn-block" %>
+        </div>
+        <% end %>
       </div>
     </div>
     <% end %>

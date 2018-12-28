@@ -2,18 +2,15 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    if omniauth_auth.blank?
-      redirect_to(new_user_session_path) && (return)
-    end
+    process_callback
+  end
 
-    session[:omniauth] = omniauth_auth
+  def github
+    process_callback
+  end
 
-    @user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
-    if @user
-      sign_in_and_redirect @user, event: :authentication
-    else
-      redirect_to new_user_registration_path
-    end
+  def gitlab
+    process_callback
   end
 
   def failure
@@ -21,6 +18,21 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
+    def process_callback
+      if omniauth_auth.blank?
+        redirect_to(new_user_session_path) && (return)
+      end
+
+      session[:omniauth] = omniauth_auth
+
+      @user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
+      if @user
+        sign_in_and_redirect @user, event: :authentication
+      else
+        redirect_to new_user_registration_path
+      end
+    end
+
     def omniauth_auth
       return @omniauth_auth if defined? @omniauth_auth
       auth = request.env["omniauth.auth"]

@@ -36,6 +36,8 @@ gem "bulk_insert"
 
 gem "devise"
 gem "omniauth-google-oauth2"
+gem "omniauth-github"
+gem "omniauth-gitlab"
 gem "cancancan"
 
 gem "activestorage-aliyun"

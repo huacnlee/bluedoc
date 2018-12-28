@@ -22,8 +22,8 @@ To enable Google Plus API.
 You need custom two environment:
 
 ```
-omniauth_google_client_id=xxxx
-omniauth_google_client_secret=xxxx
+OMNIAUTH_GOOGLE_CLIENT_ID=xxxx
+OMNIAUTH_GOOGLE_CLIENT_SECRET=xxxx
 ```
 
 when you setup that and start BookLab, you will see the "Sign in with Google" button, on Sign in page.
