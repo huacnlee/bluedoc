@@ -97,8 +97,14 @@ class RichEditor extends React.Component {
 
   // Render the editor.
   render() {
-    const { value, title, slug } = this.state;
+    let { value, title, slug } = this.state;
 
+    // change "New Document" as placeholder
+    let placeholder = "Document title";
+    if (title.trim() === "New Document") {
+      placeholder = "New Document";
+      title = "";
+    }
 
     return <div>
       <Toolbar value={this.state.value} editor={this.editor} container={this} />
@@ -108,7 +114,7 @@ class RichEditor extends React.Component {
             <input
               type="text"
               value={title}
-              placeholder="Document title"
+              placeholder={placeholder}
               onChange={this.onChangeTitle}
               className="editor-title-text" />
           </div>
