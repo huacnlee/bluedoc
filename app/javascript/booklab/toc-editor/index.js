@@ -9,6 +9,7 @@ import {
   isFocusInput,
   getIndexSameDepth,
 } from './utils';
+import Memory from './memory';
 
 const hotKeyMap = [
   'up',
@@ -20,8 +21,12 @@ const hotKeyMap = [
   'command+left',
   'command+right',
   'command+backspace',
-  'enter'
+  'command+z',
+  'command+shift+z',
+  'enter',
 ];
+
+const TocMemory = new Memory();
 
 class TocEditor extends React.Component {
   constructor(props) {
@@ -36,16 +41,33 @@ class TocEditor extends React.Component {
     };
     this.formatTocList = this.formatList();
     this.sorting = false;
+    this.memoryUpdate();
   }
 
   // init Toc List
-  initTocList = () => {
-    const items = JSON.parse(this.props.value);
+  initTocList = () => JSON.parse(this.props.value).map(
     // eslint-disable-next-line no-undef
-    return items.map(v => ({ ...v, folder: false, key: _.uniqueId() }));
-  }
+    v => ({ ...v, folder: false, key: _.uniqueId() }),
+  )
+
+
   // init Doc List
   initDocList = () => JSON.parse(this.props.docsValue);
+
+  memoryUpdate = () => {
+    const { items, activeIndex } = this.state;
+    TocMemory.push({ items, activeIndex });
+  }
+
+  memoryRedo = () => {
+    const memoryInfo = TocMemory.redo();
+    memoryInfo && this.setState({ ...memoryInfo });
+  }
+
+  memoryUndo = () => {
+    const memoryInfo = TocMemory.undo();
+    memoryInfo && this.setState({ ...memoryInfo });
+  }
 
   formatList = (items = []) => items.reduce((acc, cur, index, arr) => {
     const { activeIndex } = this.state;
@@ -106,6 +128,12 @@ class TocEditor extends React.Component {
       case 'command+backspace':
         this.onDeleteItem(activeIndex);
         break;
+      case 'command+z':
+        this.memoryUndo();
+        break;
+      case 'command+shift+z':
+        this.memoryRedo();
+        break;
       default:
         break;
     }
@@ -140,6 +168,7 @@ class TocEditor extends React.Component {
   // Update TocList
   updateValue = (newItems, nextActiveIndex = this.state.activeIndex) => {
     this.setState({ items: [...newItems], activeIndex: nextActiveIndex }, () => {
+      this.memoryUpdate();
       this.props.onChange(newItems);
     });
   }
@@ -196,10 +225,14 @@ class TocEditor extends React.Component {
   }
 
   // update TocNode Content
-  onChangeItem = (index, item) => {
+  onChangeItem = (index, item, needMemory) => {
     const { items } = this.state;
     items[index] = item;
-    this.updateValue(items);
+    if (needMemory) {
+      this.updateValue(items);
+    } else {
+      this.setState({ items: [...items] });
+    }
   }
 
   // delete a TocNode
@@ -208,7 +241,7 @@ class TocEditor extends React.Component {
     const length = getFolderLength(index, items) + 1;
     items.splice(index, length);
     let nextActive = index;
-    if(index > items.length - length) {
+    if (index > items.length - length) {
       nextActive = index - 1;
     }
     this.updateValue(items, nextActive);
@@ -220,11 +253,13 @@ class TocEditor extends React.Component {
     let nextIdx = getNextNodeIndex(activeIndex, this.formatTocList);
     const curNode = getCurNode(activeIndex, this.formatTocList) || {};
     const { depth = 0, folder = false, showFolder = false } = curNode;
-    // eslint-disable-next-line no-undef
-    const newItem = { ...item, key: _.uniqueId(), folder: false, depth: (showFolder && !folder) ? depth + 1 : depth };
+    const newItem = {
+      // eslint-disable-next-line no-undef
+      ...item, key: _.uniqueId(), folder: false, depth: (showFolder && !folder) ? depth + 1 : depth,
+    };
     if (nextIdx === -1) {
       nextIdx = items.length;
-    } 
+    }
     items.splice(nextIdx, 0, newItem);
     this.updateValue(items, nextIdx);
   }
