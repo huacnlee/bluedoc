@@ -184,6 +184,10 @@ class TocEditor extends React.Component {
     let targetIndex = newIndex;
     let tempIndex = newIndex;
     this.sorting = false;
+    if (oldIndex === newIndex) {
+      this.forceUpdate();
+      return;
+    }
     if (direction === 'up') {
       targetIndex = getPrevNodeIndex(newIndex, this.formatTocList);
     }
