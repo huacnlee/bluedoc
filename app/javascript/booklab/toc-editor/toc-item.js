@@ -15,19 +15,16 @@ class TocItem extends React.PureComponent {
     }
   }
 
-  saveChange = (item = this.props.item) => {
-    this.props.onChangeItem(this.props.item.index, item);
-  }
-
   // sync
   onChangeField = (e) => {
     e.preventDefault();
     const input = e.currentTarget;
     const field = input.getAttribute('data-field');
-    this.saveChange({
-      ...this.props.item,
+    const { item } = this.props;
+    this.props.onChangeItem(item.index, {
+      ...item,
       [field]: input.value,
-    });
+    }, false);
   }
 
   onKeyPress = (e) => {
@@ -44,8 +41,8 @@ class TocItem extends React.PureComponent {
   }
 
   handelFolder = () => {
-    const { item } = this.props;
-    this.saveChange({ ...item, folder: !item.folder });
+    const { item, onChangeItem } = this.props;
+    onChangeItem(item.index, { ...item, folder: !item.folder });
   }
 
   render() {
