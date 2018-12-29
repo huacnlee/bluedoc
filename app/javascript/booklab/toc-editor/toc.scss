@@ -3,13 +3,17 @@
 .sorting .folder {
   transform: rotate(-90deg);
 }
+.sorting .cell-wrap {
+  pointer-events: none;
+}
 
-.toc-item-drageable {
+.toc-edit-item {
   position: relative;
   list-style: none;
-  line-height: 24px;
+  line-height: 40px;
+  height: 40px;
   background: #FFF;
-  padding: 4px 13px;
+  padding: 0 20px;
   border-bottom: 1px solid #f0f0f0;
   margin: 0;
   -webkit-touch-callout: none;
@@ -17,6 +21,7 @@
   display: flex;
   justify-content: space-between;
   justify-items: center;
+  cursor: move;
   &:first-child { border-radius: 3px 3px 0 0; }
   &:last-child { border-radius: 0 0 3px 3px; }
   &.active {
@@ -36,11 +41,11 @@
     left: 10px;
     font-size: 14px;
     color: #333;
-    padding: 4px 2px;
     transition: all .2s ease;
     transform-origin: center;
-    &.hide {
-      display: none;
+    display: none;
+    &.show {
+      display: block;
     }
     &.rotate {
       transform: rotate(-90deg);
@@ -50,27 +55,28 @@
   .cell-wrap {
     flex: 1;
     padding-left: 10px;
-    .form-edit:focus {
-      outline: none;
-      border-radius: 3;
-      border-bottom: 1px solid #f0f0f0;
-      background: #fff !important;
-      color: #333;
-      display: inline-block;
+
+    &:hover {
+      span.slug {
+        visibility: hidden;
+      }
+      .pen {
+        visibility: visible;
+        z-index: 2;
+      }
     }
   }
 
   .form-edit {
-    padding: 3px 8px;
     min-width: 60px;
     width: 45%;
     border: 0px;
     @extend .text-overflow;
     border-bottom: 1px solid transparent;
     background: transparent;
-    pointer-events: none;
-    &:hover {
-      background: transparent;
+    &:focus {
+      outline: none;
+      color: #333;
     }
   }
 
@@ -83,5 +89,14 @@
     float: right;
     text-align: right;
     color: #999;
+  }
+  .pen {
+    visibility: hidden;
+    position: absolute;
+    color: #666;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
   }
 }

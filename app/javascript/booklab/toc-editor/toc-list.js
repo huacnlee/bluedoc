@@ -1,10 +1,12 @@
 import { SortableContainer } from 'react-sortable-hoc';
+import cn from 'classnames';
 import TocItem from './toc-item';
 
+
 export default SortableContainer(({
-  items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
+  items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent, sorting,
 }) => (
-  <div className="toc-list col-8">
+  <div className={cn('toc-list', 'col-8', { sorting })}>
     {items.map(item => (
       <TocItem
         key={`item-${item.key}`}
