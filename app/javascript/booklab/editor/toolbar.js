@@ -178,8 +178,8 @@ export class Toolbar extends React.Component {
         {this.renderBlockButton("bulleted-list", "bulleted-list", "Bulleted list")}
         {this.renderBlockButton("ordered-list", "numbered-list", "Numbered list")}
         <span className="bar-divider"></span>
-        <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
+        <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <span className="bar-divider"></span>
         {this.renderBlockButton("blockquote", "quote", "Quote")}
         {this.renderBlockButton("codeblock", "codeblock", "Insert Code block")}
