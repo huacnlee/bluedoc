@@ -16,8 +16,6 @@ require_relative "./support/groups/sign_in_helpers"
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.orm = :active_record
 OmniAuth.config.test_mode = true
-# Set Setting.host same as Rails integration test default host
-Setting.host = "http://www.example.com"
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
