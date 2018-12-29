@@ -291,7 +291,7 @@ class TocEditor extends React.Component {
     } = this.state;
     this.formatTocList = this.formatList(items);
     return (
-      <div className="toc-editor">
+      <div className="toc-editor d-flex">
         <DocList
           docItems={docItems}
           tocItems={items}

@@ -59,6 +59,7 @@
       display: inline-block;
     }
   }
+
   .form-edit {
     padding: 3px 8px;
     min-width: 60px;
@@ -82,26 +83,5 @@
     float: right;
     text-align: right;
     color: #999;
-  }
-
-  .draghandle {
-    padding: 6px 10px;
-    margin-right: 10px;
-    cursor: move;
-    color: #aaa;
-    font-size: 12px;
-  }
-
-  .btn-delete {
-    order: 9;
-    opacity: 0;
-    color: #666;
-    margin-top: 8px;
-    margin-left: 15px;
-    transition: opacity .1s ease;
-  }
-
-  &:hover {
-    .btn-delete { opacity: 1; }
   }
 }
