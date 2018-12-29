@@ -254,6 +254,16 @@
       }
     }
 
+    table tr,
+    table td {
+      &[data-active=true],
+      [data-active=true] {
+         &:before {
+           content: "";
+         }
+      }
+    }
+
     .codeblock-box {
       position: relative;
 
