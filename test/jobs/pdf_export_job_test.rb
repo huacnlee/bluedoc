@@ -30,12 +30,12 @@ class PDFExportJobTest < ActiveSupport::TestCase
 
     assert_equal "done", doc.export_pdf_status.value
     assert_equal true, doc.pdf.attached?
-    assert_equal doc.pdf_filename, doc.pdf.blob.filename.to_s
+    assert_equal doc.export_filename(:pdf), doc.pdf.blob.filename.to_s
 
     wicked.expect(:pdf_from_string, f) do |args|
       raise "Error"
     end
-    doc.export_pdf_status = "running"
+    doc.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
       WickedPdf.stub(:new, wicked) do
         PDFExportJob.perform_now(doc)
@@ -87,12 +87,12 @@ class PDFExportJobTest < ActiveSupport::TestCase
 
     assert_equal "done", repo.export_pdf_status.value
     assert_equal true, repo.pdf.attached?
-    assert_equal repo.pdf_filename, repo.pdf.blob.filename.to_s
+    assert_equal repo.export_filename(:pdf), repo.pdf.blob.filename.to_s
 
     wicked.expect(:pdf_from_string, f) do |args|
       raise "Error"
     end
-    repo.export_pdf_status = "running"
+    repo.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
       WickedPdf.stub(:new, wicked) do
         PDFExportJob.perform_now(repo)
@@ -153,12 +153,12 @@ class PDFExportJobTest < ActiveSupport::TestCase
 
     assert_equal "done", repo.export_pdf_status.value
     assert_equal true, repo.pdf.attached?
-    assert_equal repo.pdf_filename, repo.pdf.blob.filename.to_s
+    assert_equal repo.export_filename(:pdf), repo.pdf.blob.filename.to_s
 
     wicked.expect(:pdf_from_string, f) do |args|
       raise "Error"
     end
-    repo.export_pdf_status = "running"
+    repo.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
       WickedPdf.stub(:new, wicked) do
         PDFExportJob.perform_now(repo)

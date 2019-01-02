@@ -10,15 +10,12 @@ class PDFExportJob < ApplicationJob
       pdf_file = render("repository", subject)
     end
 
-    if pdf_file
-      subject.pdf.attach(io: pdf_file, filename: subject.pdf_filename)
-      subject.save!
-    end
+    subject.update_export!(:pdf, pdf_file)
   rescue => e
     BookLab::Error.track(e, title: "PDFExportJob [#{subject.class} #{subject.slug}] error")
   ensure
     pdf_file.close! if pdf_file
-    subject.export_pdf_status = "done"
+    subject.set_export_status(:pdf, "done")
   end
 
   def render(name, subject)

@@ -109,7 +109,7 @@ class RepositorySettingsController < Users::ApplicationController
       render partial: "/export_pdf/repository", layout: "pdf", locals: { subject: @repository }
     else
       if params[:force]
-        @repository.export_pdf
+        @repository.export(:pdf)
       end
     end
   end

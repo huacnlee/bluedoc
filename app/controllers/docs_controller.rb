@@ -82,7 +82,7 @@ class DocsController < Users::ApplicationController
     authorize! :update, @doc
 
     if params[:force]
-      @doc.export_pdf
+      @doc.export(:pdf)
     end
   end
 

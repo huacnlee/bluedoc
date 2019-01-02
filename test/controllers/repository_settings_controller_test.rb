@@ -433,7 +433,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select ".Box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-exist" do
         assert_select ".btn-download-pdf", text: "Download" do
-          assert_select "[href=?]", repo.pdf_url
+          assert_select "[href=?]", repo.export_url(:pdf)
         end
         assert_select ".btn-regenerate-pdf", text: "Generate Again!" do
           assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
@@ -444,7 +444,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     # running
-    repo.export_pdf_status = "running"
+    repo.set_export_status(:pdf, "running")
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
@@ -495,7 +495,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal "", response.body.strip
 
-    repo.export_pdf_status = "done"
+    repo.set_export_status(:pdf, "done")
     post repo.to_path("/settings/pdf?check=1"), xhr: true
     assert_equal 200, response.status
     assert_has_pdf_js response

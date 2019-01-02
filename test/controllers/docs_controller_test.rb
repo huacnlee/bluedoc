@@ -217,7 +217,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
 
     # pdf in running
-    doc.export_pdf_status = "running"
+    doc.set_export_status(:pdf, "running")
     get doc.to_path
     assert_equal 200, response.status
     assert_select ".doc-export-pdf-box details" do
@@ -233,14 +233,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
 
     # pdf has done
-    doc.export_pdf_status = "done"
+    doc.set_export_status(:pdf, "done")
     doc.pdf.attach(io: load_file("blank.png"), filename: "foobar.pdf")
     get doc.to_path
     assert_equal 200, response.status
     assert_select ".doc-export-pdf-box details" do
       assert_select ".description", text: "PDF of this document page has generated."
       assert_select ".btn-download-pdf" do
-        assert_select "[href=?]", doc.pdf_url
+        assert_select "[href=?]", doc.export_url(:pdf)
       end
       assert_select ".btn-regenerate-pdf" do
         assert_select "[href=?]", doc.to_path("/pdf?force=1")
@@ -653,7 +653,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal "", response.body.strip
 
-    doc.export_pdf_status = "done"
+    doc.set_export_status(:pdf, "done")
     post doc.to_path("/pdf?check=1"), xhr: true
     assert_equal 200, response.status
     assert_has_pdf_js response

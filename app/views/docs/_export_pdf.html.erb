@@ -34,7 +34,7 @@
         <p class="description">PDF of this document page has generated.</p>
         <p class="description">Click the button to download it.</p>
         <div class="form-group">
-          <%= link_to "Download PDF", doc.pdf_url, target: "_blank", class: "btn btn-download-pdf btn-primary" %>
+          <%= link_to "Download PDF", doc.export_url(:pdf), target: "_blank", class: "btn btn-download-pdf btn-primary" %>
 
           <%= link_to "Generate Again!", doc.to_path("/pdf?force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
         </div>
