@@ -55,12 +55,10 @@
   .cell-wrap {
     flex: 1;
     padding-left: 10px;
+    padding-right: 10px;
 
     &:hover {
-      span.slug {
-        visibility: hidden;
-      }
-      .pen {
+      .btn-action {
         visibility: visible;
         z-index: 2;
       }
@@ -72,8 +70,19 @@
     width: 45%;
     border: 0px;
     @extend .text-overflow;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 8px;
+    height: 26px;
+    padding: 0;
+    line-height: 26px;
     background: transparent;
+    &[readonly] {
+      border-color: transparent;
+      color: #999;
+      &:focus {
+        color: #999;
+      }
+    }
     &:focus {
       outline: none;
       color: #333;
@@ -90,13 +99,22 @@
     text-align: right;
     color: #999;
   }
-  .pen {
-    visibility: hidden;
+  .btn-action {
     position: absolute;
-    color: #666;
-    right: 15px;
+    color: #777;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    font-size: 16px;
+    &:hover {
+      color: #333;
+    }
+    &:active {
+      color: #000;
+    }
+  }
+  .btn-edit {
+    visibility: hidden;
   }
 }
