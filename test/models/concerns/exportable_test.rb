@@ -20,7 +20,7 @@ class ExportableTest < ActiveSupport::TestCase
     assert_equal "#{doc.title}.pdf", doc.pdf.blob.filename.to_s
   end
 
-  test "Repository" do
+  test "Repository with PDF" do
     repo = create(:repository)
     assert_nil repo.export_url(:pdf)
     assert_equal "#{repo.name}.pdf", repo.export_filename(:pdf)
@@ -33,5 +33,20 @@ class ExportableTest < ActiveSupport::TestCase
     repo.update_export!(:pdf, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{repo.pdf.blob.key}", repo.export_url(:pdf)
     assert_equal "#{repo.name}.pdf", repo.pdf.blob.filename.to_s
+  end
+
+  test "Repository with Archive" do
+    repo = create(:repository)
+    assert_nil repo.export_url(:archive)
+    assert_equal "#{repo.name}.zip", repo.export_filename(:archive)
+
+    assert_enqueued_with job: ArchiveExportJob do
+      repo.export(:archive)
+    end
+    assert_equal "running", repo.export_archive_status.value
+
+    repo.update_export!(:archive, load_file("blank.png"))
+    assert_equal "#{Setting.host}/uploads/#{repo.archive.blob.key}", repo.export_url(:archive)
+    assert_equal "#{repo.name}.zip", repo.archive.blob.filename.to_s
   end
 end

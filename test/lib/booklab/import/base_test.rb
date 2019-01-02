@@ -11,7 +11,7 @@ class BookLab::Import::BaseTest < ActiveSupport::TestCase
   test "Base" do
     importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "foo bar")
     assert_equal "foobar", importer.url
-    assert_equal Rails.root.join("tmp", "import", "GitBook"), importer.tmp_path
+    assert_equal Rails.root.join("tmp", "BookLab::Import::GitBook"), importer.tmp_path
     assert_equal true, Dir.exists?(importer.tmp_path)
     assert_equal File.join(importer.tmp_path, Digest::MD5.hexdigest(importer.url)), importer.repo_dir
     assert_equal @repo, importer.repository
@@ -20,7 +20,7 @@ class BookLab::Import::BaseTest < ActiveSupport::TestCase
     assert_equal Rails.logger, importer.logger
 
     importer = BookLab::Import::Archive.new(repository: @repo, user: @user, url: "foo bar")
-    assert_equal Rails.root.join("tmp", "import", "Archive"), importer.tmp_path
+    assert_equal Rails.root.join("tmp", "BookLab::Import::Archive"), importer.tmp_path
 
     importer = BookLab::Import::GitBook.new(repository: @repo, user: @user, url: "'rm -rf /'")
     assert_equal "rm-rf/", importer.url

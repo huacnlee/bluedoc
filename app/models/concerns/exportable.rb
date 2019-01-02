@@ -19,6 +19,7 @@ module Exportable
     if type == :pdf
       PDFExportJob.perform_later(self)
     elsif type == :archive
+      ArchiveExportJob.perform_later(self)
     end
   end
 
