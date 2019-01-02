@@ -100,7 +100,11 @@
 }
 
 .subnav-search {
-  .subnav-search-icon { top: 8px; color: #AAA !important; }
+  .subnav-search-icon {
+    top: 10px;
+    color: #aaa !important;
+    font-size: 18px;
+  }
 }
 
 .nav-header {
