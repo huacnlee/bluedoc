@@ -36,10 +36,14 @@
 
 .toc-keyboard-tip {
   table {
-    td { 
+    td {
       padding: 4px;
       line-height: 1.5;
     }
+  }
+
+  .fas {
+    font-size: 14px;
   }
 
   code {
