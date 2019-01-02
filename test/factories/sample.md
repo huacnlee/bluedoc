@@ -23,6 +23,9 @@ Sometimes you want numbered lists:
 **Alternatively,**
 
 - Dashes work just as well
+    - The indent first
+        - The indent second
+            - The indent third
 - And if you have sub points, put two spaces before the dash or star:
   - Like this
   - And this
