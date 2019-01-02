@@ -101,15 +101,16 @@ class RepositorySettingsController < Users::ApplicationController
     end
   end
 
-  # POST /:user/:repo/settings/pdf
-  def pdf
+  # POST /:user/:repo/settings/export
+  # - type: pdf|archive
+  def export
     authorize! :update, @repository
 
-    if request.get?
+    if request.get? && params[:type] == "pdf"
       render partial: "/export_pdf/repository", layout: "pdf", locals: { subject: @repository }
     else
       if params[:force]
-        @repository.export(:pdf)
+        @repository.export(params[:type])
       end
     end
   end

@@ -1,0 +1,4 @@
+<% if !params[:check] || @repository.export_status(params[:type]) != "running" %>
+var html = "<%= j(render("/repository_settings/exports/#{params[:type]}", repository: @repository)) %>";
+$(".export-repository-<%= params[:type] %>").replaceWith(html);
+<% end %>

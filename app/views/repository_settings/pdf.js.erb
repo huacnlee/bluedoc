@@ -1,4 +1,0 @@
-<% if !params[:check] || @repository.export_pdf_status != "running" %>
-var html = "<%= j(render('/repository_settings/exports/pdf', repository: @repository)) %>";
-$(".export-repository-pdf").replaceWith(html);
-<% end %>

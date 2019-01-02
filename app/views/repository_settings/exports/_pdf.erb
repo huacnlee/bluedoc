@@ -8,7 +8,7 @@
   <div class="Box-body">
     <% if Rails.env.development? %>
     <div class="mb-3">
-      <%= link_to icon_tag("pdf", label: "Preview PDF HTML"), repository.to_path("/settings/pdf"), class: "btn-link", target: "_blank" %>
+      <%= link_to icon_tag("pdf", label: "Preview PDF HTML"), repository.to_path("/settings/export?type=pdf"), class: "btn-link", target: "_blank" %>
     </div>
     <% end %>
 
@@ -19,12 +19,12 @@
     <% if repository.export_pdf_status == "running" %>
       <div class="pdf-export-running">
         <p><%= icon_tag("loading") %>  PDF of this repository has in generating, please wait ...</p>
-        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/settings/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
+        <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/settings/export?type=pdf&force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
       </div>
       <script type="text/javascript">
         // sleep 5s to check status
         window.checkPDFExportStatus = setInterval(function() {
-          $.post("<%= repository.to_path("/settings/pdf?check=1") %>");
+          $.post("<%= repository.to_path("/settings/export?type=pdf&check=1") %>");
         }, 5000);
 
         // timeout in 25s showup retry message.
@@ -44,7 +44,7 @@
         <div class="form-group">
           <%= link_to "Download", repository.export_url(:pdf), target: "_blank", class: "btn btn-download-pdf btn-primary" %>
 
-          <%= link_to "Generate Again!", repository.to_path("/settings/pdf?force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to "Generate Again!", repository.to_path("/settings/export?type=pdf&force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
         </div>
       </div>
       <script type="text/javascript">
@@ -53,7 +53,7 @@
     <% else %>
       <div class="pdf-export-generate">
         <div class="form-group">
-          <%= link_to "Generate PDF", repository.to_path("/settings/pdf?force=1"), class: "btn btn-primary btn-generate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to "Generate PDF", repository.to_path("/settings/export?type=pdf&force=1"), class: "btn btn-primary btn-generate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
         </div>
         <div class="text-orange"><%= icon_tag("idea") %> Generate PDF will take a long time in backgroud task, you can continue the other other works, then check it after a moment.</div>
       </div>

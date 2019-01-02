@@ -138,8 +138,8 @@ Rails.application.routes.draw do
           patch :transfer
           get :docs
           post :docs
-          post :pdf
-          get :pdf
+          post :export
+          get :export
           get :collaborators
           post :collaborators
           post :collaborator

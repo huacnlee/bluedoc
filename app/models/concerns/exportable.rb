@@ -14,6 +14,7 @@ module Exportable
   end
 
   def export(type)
+    type = type.to_sym
     self.set_export_status(type, "running")
 
     if type == :pdf
@@ -58,6 +59,15 @@ module Exportable
       self.export_pdf_status = value
     elsif type == :archive
       self.export_archive_status = value
+    end
+  end
+
+  def export_status(type)
+    type = type.to_sym
+    if type == :pdf
+      self.export_pdf_status
+    elsif type == :archive
+      self.export_archive_status
     end
   end
 

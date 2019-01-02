@@ -29,6 +29,7 @@ class ExportableTest < ActiveSupport::TestCase
       repo.export(:pdf)
     end
     assert_equal "running", repo.export_pdf_status.value
+    assert_equal "running", repo.export_status(:pdf).value
 
     repo.update_export!(:pdf, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{repo.pdf.blob.key}", repo.export_url(:pdf)
@@ -44,6 +45,7 @@ class ExportableTest < ActiveSupport::TestCase
       repo.export(:archive)
     end
     assert_equal "running", repo.export_archive_status.value
+    assert_equal "running", repo.export_status(:archive).value
 
     repo.update_export!(:archive, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{repo.archive.blob.key}", repo.export_url(:archive)

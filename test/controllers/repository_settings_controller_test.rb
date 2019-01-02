@@ -417,7 +417,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select ".Box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-generate" do
         assert_select ".btn-generate-pdf", text: "Generate PDF" do
-          assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+          assert_select "[href=?]", repo.to_path("/settings/export?type=pdf&force=1")
           assert_select "[data-remote=?]", "true"
           assert_select "[data-method=?]", "post"
         end
@@ -436,7 +436,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
           assert_select "[href=?]", repo.export_url(:pdf)
         end
         assert_select ".btn-regenerate-pdf", text: "Generate Again!" do
-          assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+          assert_select "[href=?]", repo.to_path("/settings/export?type=pdf&force=1")
           assert_select "[data-remote=?]", "true"
           assert_select "[data-method=?]", "post"
         end
@@ -453,7 +453,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select ".pdf-export-running" do
         assert_select ".pdf-export-retry-message" do
           assert_select "a", text: "retry" do
-            assert_select "[href=?]", repo.to_path("/settings/pdf?force=1")
+            assert_select "[href=?]", repo.to_path("/settings/export?type=pdf&force=1")
             assert_select "[data-remote=?]", "true"
             assert_select "[data-method=?]", "post"
           end
@@ -462,18 +462,18 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "POST /:user/:repo/settings/pdf" do
+  test "POST /:user/:repo/settings/export?type=pdf" do
     repo = create(:repository, user: @group)
     assert_require_user do
-      post repo.to_path("/settings/pdf")
+      post repo.to_path("/settings/export?type=pdf")
     end
 
     sign_in @user
-    post repo.to_path("/settings/pdf")
+    post repo.to_path("/settings/export?type=pdf")
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post repo.to_path("/settings/pdf")
+    post repo.to_path("/settings/export?type=pdf")
     assert_equal 403, response.status
 
     def assert_has_pdf_js(response)
@@ -482,7 +482,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in_role :admin, group: @group
     assert_enqueued_with job: PDFExportJob do
-      post repo.to_path("/settings/pdf?force=1"), xhr: true
+      post repo.to_path("/settings/export?type=pdf&force=1"), xhr: true
     end
     assert_equal 200, response.status
     assert_equal "running", repo.export_pdf_status.value
@@ -491,27 +491,80 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_match %(pdf-export-retry-message), response.body
 
     # check status
-    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    post repo.to_path("/settings/export?type=pdf&check=1"), xhr: true
     assert_equal 200, response.status
     assert_equal "", response.body.strip
 
     repo.set_export_status(:pdf, "done")
-    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    post repo.to_path("/settings/export?type=pdf&check=1"), xhr: true
     assert_equal 200, response.status
     assert_has_pdf_js response
     assert_match %(btn-generate-pdf), response.body
 
     repo.pdf.attach(io: load_file("blank.png"), filename: "blank.pdf")
-    post repo.to_path("/settings/pdf?check=1"), xhr: true
+    post repo.to_path("/settings/export?type=pdf&check=1"), xhr: true
     assert_equal 200, response.status
     assert_has_pdf_js response
     assert_match %(btn-regenerate-pdf), response.body
     assert_match %(btn-download-pdf), response.body
 
-    post repo.to_path("/settings/pdf"), xhr: true
+    post repo.to_path("/settings/export?type=pdf"), xhr: true
     assert_equal 200, response.status
     assert_has_pdf_js response
     assert_match %(btn-regenerate-pdf), response.body
     assert_match %(btn-download-pdf), response.body
+  end
+
+  test "POST /:user/:repo/settings/export?type=archive" do
+    repo = create(:repository, user: @group)
+    assert_require_user do
+      post repo.to_path("/settings/export?type=archive")
+    end
+
+    sign_in @user
+    post repo.to_path("/settings/export?type=archive")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post repo.to_path("/settings/export?type=archive")
+    assert_equal 403, response.status
+
+    def assert_has_archive_js(response)
+      assert_match %($(".export-repository-archive").replaceWith(html);), response.body
+    end
+
+    sign_in_role :admin, group: @group
+    assert_enqueued_with job: ArchiveExportJob do
+      post repo.to_path("/settings/export?type=archive&force=1"), xhr: true
+    end
+    assert_equal 200, response.status
+    assert_equal "running", repo.export_archive_status.value
+    assert_has_archive_js response
+    assert_match %(archive-export-running), response.body
+    assert_match %(archive-export-retry-message), response.body
+
+    # check status
+    post repo.to_path("/settings/export?type=archive&check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_equal "", response.body.strip
+
+    repo.set_export_status(:archive, "done")
+    post repo.to_path("/settings/export?type=archive&check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_archive_js response
+    assert_match %(btn-generate-archive), response.body
+
+    repo.archive.attach(io: load_file("blank.png"), filename: "blank.zip")
+    post repo.to_path("/settings/export?type=archive&check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_archive_js response
+    assert_match %(btn-regenerate-archive), response.body
+    assert_match %(btn-download-archive), response.body
+
+    post repo.to_path("/settings/export?type=archive"), xhr: true
+    assert_equal 200, response.status
+    assert_has_archive_js response
+    assert_match %(btn-regenerate-archive), response.body
+    assert_match %(btn-download-archive), response.body
   end
 end

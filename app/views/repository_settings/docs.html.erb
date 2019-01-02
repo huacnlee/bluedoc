@@ -5,6 +5,8 @@
   <div class="col-12 col-md-9 float-left">
     <%= render "repository_settings/exports/pdf", repository: @repository %>
 
+    <%= render "repository_settings/exports/archive", repository: @repository %>
+
     <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
       <div class="Box transfer-docs">
         <div class="Box-header">
