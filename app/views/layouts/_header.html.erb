@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="/"><%= icon_tag("booklab", label: "BookLab") %></a>
   </div>
   <div class="navbar d-lg-flex flex-justify-between flex-auto">
-    <%= content_for?(:nav_search) ? yield(:nav_search) : render("/layouts/search_nav") %>
+    <%= content_for?(:nav_search) ? yield(:nav_search) : render(partial: "/layouts/search_nav", locals: { props: { action: @nav_search_path, scope: @nav_search_scope, value: params[:q] } }) %>
   </div>
   <div class="navbar">
     <%= render "/layouts/user_menu" %>

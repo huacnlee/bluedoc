@@ -56,9 +56,5 @@
 <% end %>
 
 <% content_for :nav_search do %>
- <%= react_component("navbar/Search", {
-   action: @repository.to_path("/docs/search"),
-   scope: @repository.name,
-   value: params[:q],
- }) %>
+<%= render partial: "/layouts/search_nav", locals: { props: { action: @repository.to_path("/docs/search"), scope: @repository.name, value: params[:q] } } %>
 <% end %>

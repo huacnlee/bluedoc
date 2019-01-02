@@ -20,6 +20,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_react_component "navbar/Search" do |props|
       assert_equal "/search/docs", props[:action]
+
+      assert_select "form.subnav-search-context" do
+        assert_select "input.form-control"
+      end
     end
 
     assert_select %(.menu .menu-item.selected) do
