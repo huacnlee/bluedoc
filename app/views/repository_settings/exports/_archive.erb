@@ -45,7 +45,7 @@
     <% else %>
       <div class="pdf-export-generate">
         <div class="form-group">
-          <%= link_to "Generate PDF", repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-generate-archive", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to "Archive as zip", repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-generate-archive", method: :post, remote: true, "disable-with": "Submiting..." %>
         </div>
         <div class="text-orange"><%= icon_tag("idea") %> Generate Archive will take a long time in backgroud task, you can continue the other other works, then check it after a moment.</div>
       </div>
