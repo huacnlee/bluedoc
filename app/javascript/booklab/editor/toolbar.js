@@ -1,5 +1,6 @@
-import { BarButton } from "./bar-button"
-import styled from "styled-components";
+import styled from 'styled-components';
+import { BarButton } from './bar-button';
+
 // import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 
 export class Toolbar extends React.Component {
@@ -32,39 +33,39 @@ export class Toolbar extends React.Component {
     const { editor } = this.props;
 
     switch (type) {
-    case "bulleted-list":
-      editor._toggleListAtRanges("bulleted");
-      break;
-    case "ordered-list":
-      editor._toggleListAtRanges("ordered");
-      break;
-    case "todo-list":
-      editor._toggleListAtRanges("todo");
-      break;
-    case "blockquote":
-      if (this.isActiveMarkup("blockquote")) {
-        editor._unwrapBlockquoteAtRanges();
-      } else {
-        editor._wrapBlockquoteAtRanges();
-      }
-      break;
-    case "horizontal-rule":
-      editor._insertHorizontalRule();
-      break;
-    case "codeblock":
-      if (this.isActiveMarkup("codeblock")) {
-        editor.setBlocks("paragraph");
-      } else {
-        editor._insertCodeblock();
-      }
-      break;
-    default:
-      if (this.isActiveMarkup(type)) {
-        editor.setBlocks("paragraph");
-      } else {
-        editor.setBlocks(type);
-      }
-      break;
+      case 'bulleted-list':
+        editor._toggleListAtRanges('bulleted');
+        break;
+      case 'ordered-list':
+        editor._toggleListAtRanges('ordered');
+        break;
+      case 'todo-list':
+        editor._toggleListAtRanges('todo');
+        break;
+      case 'blockquote':
+        if (this.isActiveMarkup('blockquote')) {
+          editor._unwrapBlockquoteAtRanges();
+        } else {
+          editor._wrapBlockquoteAtRanges();
+        }
+        break;
+      case 'horizontal-rule':
+        editor._insertHorizontalRule();
+        break;
+      case 'codeblock':
+        if (this.isActiveMarkup('codeblock')) {
+          editor.setBlocks('paragraph');
+        } else {
+          editor._insertCodeblock();
+        }
+        break;
+      default:
+        if (this.isActiveMarkup(type)) {
+          editor.setBlocks('paragraph');
+        } else {
+          editor.setBlocks(type);
+        }
+        break;
     }
   };
 
@@ -73,10 +74,10 @@ export class Toolbar extends React.Component {
     ev.stopPropagation();
     const { editor } = this.props;
 
-    this.headingDropdown.current.removeAttribute("open")
+    this.headingDropdown.current.removeAttribute('open');
 
     if (this.isActiveMarkup(type)) {
-      editor.setBlocks("paragraph");
+      editor.setBlocks('paragraph');
     } else {
       editor.setBlocks(type);
     }
@@ -85,7 +86,7 @@ export class Toolbar extends React.Component {
   handleCreateLink = (ev) => {
     ev.preventDefault();
 
-    this.props.editor._wrapLinkAtRange("http://", { autoFocus: true });
+    this.props.editor._wrapLinkAtRange('http://', { autoFocus: true });
   };
 
   handleImageClick = () => {
@@ -98,15 +99,19 @@ export class Toolbar extends React.Component {
   }
 
   handleIndent = (ev, increase) => {
-    ev.preventDefault()
+    ev.preventDefault();
     const { editor } = this.props;
-    editor._setIndentAtRanges(4, increase)
+    if (editor._isRangeInList()) {
+      editor._setListLevelAtRanges(increase);
+    } else {
+      editor._setIndentAtRanges(4, increase);
+    }
   }
 
   toggleList = (ev, type) => {
-    ev.preventDefault()
+    ev.preventDefault();
     const { editor } = this.props;
-    editor._toggleListAtRanges(type)
+    editor._toggleListAtRanges(type);
   }
 
   onImagePicked = async (ev) => {
@@ -131,8 +136,7 @@ export class Toolbar extends React.Component {
 
   renderBlockButton = (type, icon) => {
     const isActive = this.isActiveMarkup(type);
-    const onMouseDown = ev =>
-      this.onClickBlock(ev, type);
+    const onMouseDown = ev => this.onClickBlock(ev, type);
 
     return (
       <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
@@ -158,38 +162,38 @@ export class Toolbar extends React.Component {
           <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
             <ul>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading2")}>Heading 2</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading3")}>Heading 3</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading4")}>Heading 4</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading5")}>Heading 5</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "heading6")}>Heading 6</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading2')}>Heading 2</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading3')}>Heading 3</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading4')}>Heading 4</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading5')}>Heading 5</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading6')}>Heading 6</a></li>
               <li className="dropdown-divider"></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, "paragraph")}>Paragraph</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>Paragraph</a></li>
             </ul>
           </div>
         </details>
         <span className="bar-divider"></span>
-        {this.renderMarkButton("bold", "bold", "Bold ⌘-b")}
-        {this.renderMarkButton("italic", "italic", "Italic ⌘-i")}
-        {this.renderMarkButton("strike", "strikethrough", "Strike Through")}
-        {this.renderMarkButton("underline", "underline", "Underline ⌘-u")}
-        {this.renderMarkButton("code", "code", "Inline Code ⌘-`")}
+        {this.renderMarkButton('bold', 'bold', 'Bold ⌘-b')}
+        {this.renderMarkButton('italic', 'italic', 'Italic ⌘-i')}
+        {this.renderMarkButton('strike', 'strikethrough', 'Strike Through')}
+        {this.renderMarkButton('underline', 'underline', 'Underline ⌘-u')}
+        {this.renderMarkButton('code', 'code', 'Inline Code ⌘-`')}
         <span className="bar-divider"></span>
-        {this.renderBlockButton("bulleted-list", "bulleted-list", "Bulleted list")}
-        {this.renderBlockButton("ordered-list", "numbered-list", "Numbered list")}
+        {this.renderBlockButton('bulleted-list', 'bulleted-list', 'Bulleted list')}
+        {this.renderBlockButton('ordered-list', 'numbered-list', 'Numbered list')}
         <span className="bar-divider"></span>
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <span className="bar-divider"></span>
-        {this.renderBlockButton("blockquote", "quote", "Quote")}
-        {this.renderBlockButton("codeblock", "codeblock", "Insert Code block")}
-        {this.renderBlockButton("horizontal-rule", "hr", "Insert Horizontal line")}
+        {this.renderBlockButton('blockquote', 'quote', 'Quote')}
+        {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
+        {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
         <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
         <BarButton icon="attachment" title="Upload File" onMouseDown={this.handleFileClick} />
       </div>
-    </div>
+    </div>;
   }
 }
 
