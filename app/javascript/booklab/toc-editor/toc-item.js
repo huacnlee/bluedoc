@@ -1,17 +1,22 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
+import cn from 'classnames';
 
 class TocItem extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.inputRef = React.createRef();
+    this.state = {
+      canEdit: false,
+    };
   }
 
-  componentDidUpdate(prev) {
-    const { active, autoFocus } = this.props;
-    if (active && autoFocus !== prev.autoFocus) {
-      this.inputRef && this.inputRef.current.focus();
+  componentWillReceiveProps(nextProps) {
+    const { autoFocus, active } = nextProps;
+    if (active && autoFocus !== this.props.autoFocus) {
+      this.setState({ canEdit: true, autoFocus });
+    } if (!active) {
+      this.setState({ canEdit: false });
     }
   }
 
@@ -27,12 +32,11 @@ class TocItem extends React.PureComponent {
     }, false);
   }
 
-  onKeyPress = (e) => {
-    const input = e.currentTarget;
+  onKeyDown = (e) => {
     if (e.keyCode === 13 || e.keyCode === 27) {
       // enter
       e.preventDefault();
-      input.blur();
+      this.setState({ canEdit: false });
     }
   }
 
@@ -45,6 +49,9 @@ class TocItem extends React.PureComponent {
     onChangeItem(item.index, { ...item, folder: !item.folder });
   }
 
+  handleEdit = () => this.setState({ canEdit: true })
+  handelDoneEdit = () => this.setState({ canEdit: false })
+
   render() {
     const {
       item: {
@@ -53,36 +60,45 @@ class TocItem extends React.PureComponent {
     } = this.props;
     return (
       <div
-        className={`toc-item-drageable toc-item ${active ? 'active' : ''}`}
+        className={cn('toc-edit-item', { active })}
         onClick={this.onSelectItem}
         style={{ marginLeft: `${20 * depth}px` }}
       >
-        <div onClick={this.handelFolder} className={`folder ${folder ? 'rotate' : ''} ${showFolder ? '' : 'hide'}`}>
+        <div onClick={this.handelFolder} className={cn('folder', { rotate: folder }, { show: showFolder })}>
           <i class="fas fa-caret"></i>
         </div>
         {/* show && edit */}
-        <form className={'cell-wrap'}>
-          <input
-            type="text"
-            ref={this.inputRef}
-            onChange={this.onChangeField}
-            onKeyDown={this.onKeyPress}
-            data-field="title"
-            placeholder="title"
-            className="form-edit title"
-            value={title}
-          />
-          <input
-            type="text"
-            onChange={this.onChangeField}
-            onKeyDown={this.onKeyPress}
-            data-field="url"
-            placeholder="url"
-            className="form-edit slug"
-            value={url}
-            readOnly={!!id}
-          />
-        </form>
+        {this.state.canEdit ? (
+          <form className={'cell-wrap'}>
+            <input
+              type="text"
+              onChange={this.onChangeField}
+              onKeyDown={this.onKeyDown}
+              data-field="title"
+              placeholder="title"
+              className="form-edit title"
+              value={title}
+              autoFocus
+            />
+            <input
+              type="text"
+              onChange={this.onChangeField}
+              onKeyDown={this.onKeyDown}
+              data-field="url"
+              placeholder="url"
+              className="form-edit slug"
+              value={url}
+              readOnly={!!id}
+            />
+            <i className="fas fa-check btn-action btn-ok" onClick={this.handelDoneEdit}></i>
+          </form>
+        ) : (
+          <div className="cell-wrap">
+            <span className="title">{title || 'title'}</span>
+            <span className="slug">{url || 'url'}</span>
+            <i className="fas fa-pencil btn-action btn-edit" onClick={this.handleEdit}></i>
+          </div>
+        )}
       </div>
     );
   }

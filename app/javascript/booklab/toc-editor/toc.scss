@@ -3,13 +3,17 @@
 .sorting .folder {
   transform: rotate(-90deg);
 }
+.sorting .cell-wrap {
+  pointer-events: none;
+}
 
-.toc-item-drageable {
+.toc-edit-item {
   position: relative;
   list-style: none;
-  line-height: 24px;
+  line-height: 40px;
+  height: 40px;
   background: #FFF;
-  padding: 4px 13px;
+  padding: 0 20px;
   border-bottom: 1px solid #f0f0f0;
   margin: 0;
   -webkit-touch-callout: none;
@@ -17,6 +21,7 @@
   display: flex;
   justify-content: space-between;
   justify-items: center;
+  cursor: move;
   &:first-child { border-radius: 3px 3px 0 0; }
   &:last-child { border-radius: 0 0 3px 3px; }
   &.active {
@@ -36,11 +41,11 @@
     left: 10px;
     font-size: 14px;
     color: #333;
-    padding: 4px 2px;
     transition: all .2s ease;
     transform-origin: center;
-    &.hide {
-      display: none;
+    display: none;
+    &.show {
+      display: block;
     }
     &.rotate {
       transform: rotate(-90deg);
@@ -50,26 +55,37 @@
   .cell-wrap {
     flex: 1;
     padding-left: 10px;
-    .form-edit:focus {
-      outline: none;
-      border-radius: 3;
-      border-bottom: 1px solid #f0f0f0;
-      background: #fff !important;
-      color: #333;
-      display: inline-block;
+    padding-right: 10px;
+
+    &:hover {
+      .btn-action {
+        visibility: visible;
+        z-index: 2;
+      }
     }
   }
+
   .form-edit {
-    padding: 3px 8px;
     min-width: 60px;
     width: 45%;
     border: 0px;
     @extend .text-overflow;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 8px;
+    height: 26px;
+    padding: 0;
+    line-height: 26px;
     background: transparent;
-    pointer-events: none;
-    &:hover {
-      background: transparent;
+    &[readonly] {
+      border-color: transparent;
+      color: #999;
+      &:focus {
+        color: #999;
+      }
+    }
+    &:focus {
+      outline: none;
+      color: #333;
     }
   }
 
@@ -83,25 +99,22 @@
     text-align: right;
     color: #999;
   }
-
-  .draghandle {
-    padding: 6px 10px;
-    margin-right: 10px;
-    cursor: move;
-    color: #aaa;
-    font-size: 12px;
+  .btn-action {
+    position: absolute;
+    color: #777;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    &:hover {
+      color: #333;
+    }
+    &:active {
+      color: #000;
+    }
   }
-
-  .btn-delete {
-    order: 9;
-    opacity: 0;
-    color: #666;
-    margin-top: 8px;
-    margin-left: 15px;
-    transition: opacity .1s ease;
-  }
-
-  &:hover {
-    .btn-delete { opacity: 1; }
+  .btn-edit {
+    visibility: hidden;
   }
 }
