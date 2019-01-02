@@ -88,4 +88,19 @@ class ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /Signed in as/, response.body
   end
+
+  # assert react_component render
+  #
+  # assert_react_component("HelloWorld") do |props|
+  #   assert_equal "Hello world", props[:message]
+  # end
+  def assert_react_component(name)
+    assert_select "div[data-react-class]" do |el|
+      assert_select "[data-react-class=?]", name
+      props = JSON.parse(el.attr("data-react-props"))
+      props.deep_symbolize_keys!
+
+      yield(props) if block_given?
+    end
+  end
 end

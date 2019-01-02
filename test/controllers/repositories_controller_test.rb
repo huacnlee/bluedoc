@@ -146,8 +146,10 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".label-private", 0
 
     # nav search
-    assert_select "form.subnav-search-context" do
-      assert_select "[action=?]", repo.to_path("/docs/search")
+    assert_react_component "navbar/Search" do |props|
+      assert_equal repo.to_path("/docs/search"), props[:action]
+      assert_equal repo.name, props[:scope]
+      assert_nil props[:value]
     end
 
     # with anonymous disable

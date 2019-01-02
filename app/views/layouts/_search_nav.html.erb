@@ -1,6 +1,5 @@
-<form action="<%= @nav_search_path || "/search/docs" %>" class="subnav-search-context" method="GET">
-  <div class="subnav-search">
-    <input name="q" type="text" placeholder="<%= @nav_search_scope ? "Search in #{@nav_search_scope}" : "Search BookLab" %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
-    <%= icon_tag "search", class: "subnav-search-icon" %>
-  </div>
-</form>
+ <%= react_component("navbar/Search", {
+   action: @nav_search_path,
+   scope: @nav_search_scope,
+   value: params[:q],
+ }) %>

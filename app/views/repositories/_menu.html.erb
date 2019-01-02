@@ -56,10 +56,9 @@
 <% end %>
 
 <% content_for :nav_search do %>
-<form action="<%= @repository.to_path("/docs/search") %>" class="subnav-search-context" method="GET">
-  <div class="subnav-search">
-    <input name="q" type="text" placeholder="<%= "Search in #{@repository.name}" %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
-    <%= icon_tag "search", class: "subnav-search-icon" %>
-  </div>
-</form>
+ <%= react_component("navbar/Search", {
+   action: @repository.to_path("/docs/search"),
+   scope: @repository.name,
+   value: params[:q],
+ }) %>
 <% end %>

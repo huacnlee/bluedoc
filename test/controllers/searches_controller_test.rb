@@ -18,7 +18,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get docs_search_path, params: { q: "Hello" }
     assert_equal 200, response.status
 
-    assert_select %(form[action="/search/docs"])
+    assert_react_component "navbar/Search" do |props|
+      assert_equal "/search/docs", props[:action]
+    end
+
     assert_select %(.menu .menu-item.selected) do
       assert_select "[href=?]", "\/search\/docs?q=Hello"
     end
@@ -35,7 +38,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get repositories_search_path, params: { q: "Hello" }
     assert_equal 200, response.status
 
-    assert_select %(form[action="/search/repositories"])
+    assert_react_component "navbar/Search" do |props|
+      assert_equal "/search/repositories", props[:action]
+    end
+
     assert_select %(.menu .menu-item.selected) do
       assert_select "[href=?]", "\/search\/repositories?q=Hello"
     end
@@ -45,7 +51,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get groups_search_path, params: { q: "Hello" }
     assert_equal 200, response.status
 
-    assert_select %(form[action="/search/groups"])
+    assert_react_component "navbar/Search" do |props|
+      assert_equal "/search/groups", props[:action]
+    end
+
     assert_select %(.menu .menu-item.selected) do
       assert_select "[href=?]", "\/search\/groups?q=Hello"
     end
@@ -55,7 +64,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get users_search_path, params: { q: "Hello" }
     assert_equal 200, response.status
 
-    assert_select %(form[action="/search/users"])
+    assert_react_component "navbar/Search" do |props|
+      assert_equal "/search/users", props[:action]
+    end
+
     assert_select %(.menu .menu-item.selected) do
       assert_select "[href=?]", "\/search\/users?q=Hello"
     end

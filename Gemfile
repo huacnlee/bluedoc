@@ -8,6 +8,7 @@ gem "pg"
 gem "redis"
 gem "redis-objects"
 gem "puma", "~> 3.11"
+gem "react-rails"
 
 gem "sidekiq"
 
