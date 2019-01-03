@@ -1,7 +1,7 @@
 user nginx;
 worker_processes auto;
 pid /home/app/booklab/tmp/nginx.pid;
-daemon off;
+daemon on;
 
 events {
   worker_connections <%= ENV["NGINX_WORKER_CONNECTIONS"] || "65535" %>;
