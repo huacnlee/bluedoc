@@ -4,9 +4,18 @@ require "test_helper"
 
 class BookLab::HTMLTest < ActiveSupport::TestCase
   test "render markdown" do
-    raw = "# This is title\nhello **world**"
+    raw = <<~RAW
+    # This is **title**
+
+    hello **world**
+    RAW
     out = BookLab::HTML.render(raw, format: :markdown)
-    html = %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>\n<p>hello <strong>world</strong></p>)
+    html = <<~HTML
+    <h1 id="this-is-title">
+      <a href="#this-is-title" class="heading-anchor">#</a>This is <strong>title</strong>
+    </h1>
+    <p>hello <strong>world</strong></p>
+    HTML
 
     assert_equal out, BookLab::HTML.render_without_cache(raw, format: :markdown)
     assert_html_equal html, out
@@ -54,10 +63,11 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
   end
 
   test "markdown heading" do
-    assert_html_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is title</h1>), BookLab::HTML.render("# This is **title**", format: :markdown)
-    assert_html_equal %(<h1 id="this-is-"><a href="#this-is-" class="heading-anchor">#</a>This is 中文</h1>), BookLab::HTML.render("# This is 中文", format: :markdown)
+    assert_html_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is <strong>title</strong></h1>), BookLab::HTML.render("# This is **title**", format: :markdown)
+    assert_html_equal %(<h1 id="this-is-title"><a href="#this-is-title" class="heading-anchor">#</a>This is 中文 title</h1>), BookLab::HTML.render("# This is 中文 title", format: :markdown)
     assert_html_equal %(<h1 id="this-is"><a href="#this-is" class="heading-anchor">#</a>This_? is</h1>), BookLab::HTML.render("# This_? is", format: :markdown)
     assert_html_equal %(<h1 id="a69b2addd"><a href="#a69b2addd" class="heading-anchor">#</a>全中文标题</h1>), BookLab::HTML.render("# 全中文标题", format: :markdown)
+    assert_html_equal %(<h1 id="583a03ad8"><a href="#583a03ad8" class="heading-anchor">#</a>确保 id 生成是固定的编号</h1>), BookLab::HTML.render("# 确保 id 生成是固定的编号", format: :markdown)
   end
 
   test "markdown mention" do
@@ -100,7 +110,7 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     assert_html_equal html, out
 
     raw = <<~MD
-    [download: This is a attachment](/uploads/foobar)
+    [download: This is a attachment <script>](/uploads/foobar)
     MD
     html = <<~HTML
     <p>
@@ -127,14 +137,8 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     out = BookLab::HTML.render("![Hello](/uploads/aa.jpg)", format: :markdown)
     assert_equal %(<p><img src="/uploads/aa.jpg" alt="Hello"></p>), out
 
-    out = BookLab::HTML.render("![](/uploads/aa.jpg =300x200)", format: :markdown)
-    assert_equal %(<p><img src="/uploads/aa.jpg" width="300" height="200" alt=""></p>), out
-
-    out = BookLab::HTML.render("![](/uploads/aa.jpg | width=300)", format: :markdown)
-    assert_equal %(<p><img src="/uploads/aa.jpg" width="300" alt=""></p>), out
-
-    out = BookLab::HTML.render("![](/uploads/aa.jpg | height=300)", format: :markdown)
-    assert_equal %(<p><img src="/uploads/aa.jpg" height="300" alt=""></p>), out
+    html = %(<img src="/uploads/aa.jpg" alt="Hello" width="300" height="200" style="width:300px; height:200px;">)
+    assert_equal html, BookLab::HTML.render(html, format: :markdown)
   end
 
   test "markdown html chars" do

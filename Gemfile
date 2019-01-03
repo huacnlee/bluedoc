@@ -48,7 +48,7 @@ gem "exception-track"
 
 gem "html-pipeline"
 gem "html-pipeline-rouge_filter"
-gem "redcarpet"
+gem "commonmarker"
 gem "sanitize"
 
 gem "booklab-toc"
