@@ -1,57 +1,55 @@
 # frozen_string_literal: true
 
-require "redcarpet"
-require "rouge/plugins/redcarpet"
+require "commonmarker"
 require "nokogiri"
+require "rouge"
 
 module BookLab
   class Pipeline
     class MarkdownFilter < ::HTML::Pipeline::TextFilter
-      DEFAULT_OPTIONS = {
-        no_styles: true,
-        hard_wrap: true,
-        autolink: false,
-        fenced_code_blocks: true,
-        strikethrough: true,
-        underline: true,
-        superscript: true,
-        footnotes: true,
-        highlight: false,
-        tables: true,
-        lax_spacing: true,
-        space_after_headers: true,
-        disable_indented_code_blocks: true,
-        no_intra_emphasis: true
-      }
-
       def call
-        html = Render.renderer.render(@text)
+        doc = CommonMarker.render_doc(@text, [:DEFAULT, :UNSAFE], [:tagfilter, :autolink, :table, :strikethrough])
+        html = Render.new(options: [:DEFAULT, :UNSAFE]).render(doc)
         html.strip!
         html
       end
 
-      class Render < Redcarpet::Render::HTML
-        include Rouge::Plugins::Redcarpet
+      class Render < CommonMarker::HtmlRenderer
         include ActionView::Helpers::NumberHelper
 
-        def header(text, header_level)
-          raw_text = Nokogiri::HTML(text).xpath("//text()").to_s
+        class << self
+          def renderer
+            @renderer ||= self.new
+          end
+        end
+
+        def header(node)
+          raw_text = node.to_plaintext
 
           title_length = raw_text.length
           min_length = title_length * 0.3
           words_length = /[a-z0-9]/i.match(raw_text)&.length || 0
 
-          header_id = raw_text.gsub(/[^a-z0-9]+/i, "-").downcase
+          header_id = raw_text.gsub(/[^a-z0-9]+/i, "-").downcase.gsub(/^\-|\-$/, "")
           if title_length - header_id.length > min_length
-            header_id = Digest::MD5.hexdigest(raw_text)[0..8]
+            header_id = Digest::MD5.hexdigest(raw_text.strip)[0..8]
           end
 
-          %(<h#{header_level} id="#{header_id}"><a href="##{header_id}" class="heading-anchor">#</a>#{raw_text}</h#{header_level}>)
+          block do
+            out(
+              %(<h#{node.header_level} id="#{header_id}">),
+              %(<a href="##{header_id}" class="heading-anchor">#</a>),
+              :children,
+              %(</h#{node.header_level}>)
+            )
+          end
         end
 
-        def link(link, title, content)
-          link ||= ""
-          content ||= ""
+        def link(node)
+          link = node.url || ""
+          content = node.to_plaintext || ""
+          title = node.title || ""
+
           if link.include?("/uploads/") || content.include?("download:")
             content = content.gsub("download:", "").strip
 
@@ -60,45 +58,26 @@ module BookLab
               size = number_to_human_size(Regexp.last_match(1) || 0)
             end
 
-            %(<a class="attachment-file" title="#{content}" target="_blank" href="#{link}">
+            out(%(<a class="attachment-file" title="#{escape_html(content)}" target="_blank" href="#{escape_href(link)}">
                 <span class="icon-box"><i class="fas fa-file"></i></span>
-                <span class="filename">#{content}</span>
-                <span class="filesize">#{size}</span>
-            </a>)
+                <span class="filename">#{escape_html(content)}</span>
+                <span class="filesize">#{escape_html(size)}</span>
+            </a>))
           else
-            %(<a href="#{link}">#{content}</a>)
+            out(%(<a href="#{escape_href(link)}">), :children, "</a>")
           end
         end
 
-        # Extend to support img width
-        # ![](foo.jpg | width=300)
-        # ![](foo.jpg | height=300)
-        # ![](foo.jpg =300x200)
-        # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
-        def image(link, title, alt_text)
-          link ||= ""
-          links = link.split(" ")
-          link = links[0]
-          if links.count > 1
-            # Original markdown title part need "": ![](foo.jpg "Title")
-            # ![](foo.jpg =300x)
-            title = links.last
-          end
+        def code_block(node)
+          lexer = Rouge::Lexer.find_fancy(node.fence_info) || Rouge::Lexers::PlainText.new
+          source = node.string_content
+          formatter = Rouge::Formatters::HTML.new
 
-          if title =~ /width=(\d+)/
-            %(<img src="#{link}" width="#{Regexp.last_match(1)}" alt="#{alt_text}">)
-          elsif title =~ /height=(\d+)/
-            %(<img src="#{link}" height="#{Regexp.last_match(1)}" alt="#{alt_text}">)
-          elsif title =~ /=(\d+)x(\d+)/
-            %(<img src="#{link}" width="#{Regexp.last_match(1)}" height="#{Regexp.last_match(2)}" alt="#{alt_text}">)
-          else
-            %(<img src="#{link}" alt="#{alt_text}">)
-          end
-        end
-
-        class << self
-          def renderer
-            @renderer ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)
+          block do
+            out(%(<div class="highlight">))
+            out(%(<pre class="highlight #{escape_html(lexer.tag)}"><code>))
+            out(formatter.format(lexer.lex(source)))
+            out("</code></pre></div>")
           end
         end
       end

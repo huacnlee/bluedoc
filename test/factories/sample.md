@@ -23,9 +23,9 @@ Sometimes you want numbered lists:
 **Alternatively,**
 
 - Dashes work just as well
-    - The indent first
-        - The indent second
-            - The indent third
+  - The indent first
+    - The indent second
+      - The indent third
 - And if you have sub points, put two spaces before the dash or star:
   - Like this
   - And this
@@ -55,9 +55,10 @@ Alice <-- Bob: another authentication Response
 ## Image
 
 ![This is Image](/uploads/foo.jpg)
-![This is Image 1](/uploads/foo.jpg =300x200)
-![](/uploads/foo.jpg | width=300)
-![](/uploads/foo.jpg | height=200)
+
+<img src="/uploads/foo.jpg" width="300" height="200" alt="This is Image 1">
+<img src="/uploads/foo.jpg" width="300">
+<img src="/uploads/foo.jpg" height="300">
 
 ### Test HTML chars
 
