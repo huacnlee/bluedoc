@@ -79,6 +79,8 @@
   .dropdown-caret {
     border-top-color: #8e8e8e;
   }
+
+  .avatar { vertical-align: middle; width: 20px !important; height: 20px !important; }
 }
 
 .footer {
@@ -156,7 +158,9 @@
   box-shadow: 0 0 0;
   background: #fafafa;
   border-color: #EAEAEA;
-  width: 280px;
+  width: 240px;
+  min-height: 32px;
+  padding: 5px 8px 5px 30px;
 
   &:hover,
   &:active,
