@@ -61,7 +61,7 @@ class TocItem extends React.PureComponent {
   handleEdit = () => this.setState({ canEdit: true })
 
   handelDoneEdit = () => this.setState({
-    anEdit: false,
+    canEdit: false,
   }, () => this.props.onChangeItem({ memory: true }))
 
   render() {
