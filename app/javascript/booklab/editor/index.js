@@ -6,10 +6,6 @@ class RichEditor extends React.Component {
   constructor(props) {
     super(props);
 
-    if (props.value.trim() === "") {
-      props.value = "empty doc";
-    }
-
     let value = serializer.parserToValue(serializer.parserMarkdown(props.value));
 
     this.state = {
