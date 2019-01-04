@@ -1,11 +1,11 @@
 <% title_tag "Watches", "Dashboard" %>
-
-<div class="dashboard-main">
-  <%= render "menu" %>
-
-  <div class="dashboard-content clearfix">
-    <div class="sub-title">All watches</div>
-    <%= render "action_repositories" %>
-    <%= paginate @repositories %>
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content clearfix">
+      <div class="sub-title">All watches</div>
+      <%= render "action_repositories" %>
+      <%= paginate @repositories %>
+    </div>
   </div>
 </div>

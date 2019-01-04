@@ -3,7 +3,7 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_anonymous!
   before_action :authenticate_user!
-
+  layout "dashboard"
   def index
     @groups = current_user.groups.with_attached_avatar.limit(10)
     @recent_docs = current_user.user_actives.docs.limit(5)

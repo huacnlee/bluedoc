@@ -1,11 +1,7 @@
 .page-dashboards {
   .main-container {
     padding: 0 !important;
-    & > .container {
-      width: auto;
-    }
   }
-
   .footer {
     display: none;
   }
@@ -18,23 +14,59 @@
     color: #999;
   }
 
-  .dashboard-menu {
+  // card common style
+  .cards-container {
+    margin: -10px;
+    @extend .clearfix;
+  }
+
+  .card {
     float: left;
-    left: 0;
-    display: none;
-    border-right: 1px solid #e1e4e8;
-    padding: 24px 0px;
-    width: 200px;
-    height: calc(100vh - 50px);
-    position: fixed;
-    background: #fafbfc;
-
-    .dashboard-menu-divider {
-      border-top: 1px solid #e1e4e8;
-      margin-top: 10px;
-      margin-bottom: 10px;
+    margin: 10px;    
+    list-style: none;
+    width: calc(50% - 20px);
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    @extend .py-2;
+    @extend .px-3;
+    @extend .box-shadow;
+    &:hover {
+      @extend .box-shadow-large;
     }
+    .path {
+      a { color: #999; }
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+    .title {
+      a { color: #222; }
+      font-size: 20px;
+      margin-bottom: 5px;
+      padding-right: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .info {
+      font-size: 12px;
+      color: #a0a0a0;
+    }
+  }
 
+  // left menu
+  .dashboard-menu {
+    display: none;
+    padding: 24px 0px;
+    width: 100%;
+    height: 100%;
+    .divider {
+      height: 1px;
+      background: #e1e4e8;
+      width: 100%;
+      margin: 10px 0;
+    }
     .dashboard-menu-item {
       height: 38px;
       line-height: 38px;
@@ -44,7 +76,6 @@
       background: transparent;
       text-decoration: none;
       font-size: 15px;
-
       i.fas {
         color: #666;
         width: 24px;
@@ -64,61 +95,16 @@
   }
 
   .dashboard-content {
-    padding: 30px 0px;
-
-    .content-main {
-      width: auto;
-      float: none;
-    }
-
-    .sub-sidebar {
-      float: left;
-      display: none;
-    }
+    padding: 30px 20px;
   }
 
   @media (min-width: 768px) {
     .dashboard-menu {
       display: block;
     }
-
-    .dashboard-content {
-      padding: 20px 0px;
-      padding-left: 200px;
-
-      .content-main {
-        width: 100%;
-        float: left;
-      }
-
-      .sub-sidebar {
-        display: none;
-        float: left;
-      }
-    }
   }
 
   @media (min-width: 1012px) {
-     .dashboard-content {
-       padding: 20px 30px;
-       padding-left: 230px;
-
-       .content-main {
-         width: 68%;
-       }
-       .sub-sidebar {
-         display: block;
-         width: 32%;
-       }
-     }
-  }
-
-
-  .dashboard-table {
-    a.repository-path,
-    a.user-name {
-      color: #444;
-    }
   }
 
   .dashboard-repos,
@@ -170,107 +156,6 @@
       .recent-repo-item,
       .recent-group-item {
         width: 32%;
-      }
-    }
-  }
-
-  .repo-list {
-    .repo-item {
-      position: relative;
-      padding-bottom: 10px;
-      padding-left: 40px;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      .icon-box {
-        position: absolute;
-        left: 2px;
-        padding-top: 4px;
-        text-align: center;
-
-        .fas {
-          font-size: 26px;
-          color: #e0e0e0;
-        }
-      }
-
-      .title {
-        a { font-size: 14px; color: #333; }
-      }
-      .time {
-        color: #aaa;
-      }
-    }
-  }
-
-  .group-list {
-    .group-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 8px 4px;
-      position: relative;
-      padding-left: 40px;
-
-      .avatar-box {
-        position: absolute;
-        left: 0;
-        padding-top: 4px;
-
-        width: 32px;
-      }
-
-      .title {
-        font-size: 14px;
-        a {
-          color: #333;
-        }
-      }
-
-      .description {
-        color: #999;
-        font-size: 12px;
-      }
-
-      &:first-child { padding-top: 0; }
-      &:last-child {
-        border-width: 0;
-        padding-bottom: 0;
-      }
-
-      .user-name { font-size: 14px; margin-top: 5px; color: #555; }
-    }
-
-    a.more {
-      margin-top: 10px;
-      color: #666;
-    }
-  }
-
-  .recent-docs {
-    .recent-doc-item {
-      position: relative;
-      padding-left: 45px;
-      .icon-box {
-        position: absolute;
-        top: 14px;
-        left: 15px;
-        color: #e0e0e0;
-        font-size: 20px;
-      }
-
-      .title {
-        a { color: #333; }
-        font-size: 15px;
-        margin-bottom: 5px;
-      }
-      .info {
-        font-size: 12px;
-        color: #a0a0a0;
-        a { color: #999; }
-
-        .timeago { color: #a0a0a0; }
       }
     }
   }

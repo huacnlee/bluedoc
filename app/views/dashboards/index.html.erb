@@ -1,13 +1,12 @@
-<div class="dashboard-main">
-  <%= render "menu" %>
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content">
 
-  <div class="dashboard-content clearfix">
-    <div class="content-main">
-      <div class="sub-title">Recent activity</div>
       <div class="mb-5">
+        <div class="sub-title">Recent activity</div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
-            <h3>No recent docs</h3>
             <p>You have no update Doc in recently.</p>
           </div>
         <% else %>
@@ -15,7 +14,54 @@
         <% end %>
       </div>
 
-      <div class="activities">
+      <div class="mb-5">
+        <div class="sub-title">Recent Repositories</div>
+        <% if @recent_repos.blank? %>
+          <div class="blankslate">
+            <p>You have no update Repositories in recently.</p>
+          </div>
+        <% else %>
+        <ul class="cards-container repo-list">
+          <% @recent_repos.each do |repo| %>
+            <li class="card Box repo-item">
+              <div class="title">
+                <%= repository_path_tag(repo.subject) %>
+              </div>
+              <div class="info">
+                <%= timeago repo.updated_at %>
+              </div>
+            </li>
+          <% end %>
+            <li class="card Box repo-item repo-item-more">
+              <div class="title"> <%= link_to "More ...", repositories_dashboard_path %></div>
+            </li>
+        </ul>
+        <% end %>
+      </div>
+
+      <% if !@groups.blank? %>
+      <div class="mb-5">
+        <div class="sub-title">Your Groups</div>
+        <ul class="cards-container group-list">
+          <% @groups.each do |group| %>
+            <li class="card Box group-item">
+              <div class="title">
+                <%= group_name_tag(group) %>
+              </div>
+              <div class="info">
+                <%= group.description || group.slug %>
+              </div>
+            </li>
+          <% end %>
+            <li class="card Box group-item group-item-more">
+              <div class="title"> <%= link_to "More ...", groups_dashboard_path %></div>
+            </li>
+        </ul>
+        <%= raw Setting.dashboard_sidebar_html %>
+      </div>
+      <% end %>
+      
+      <div class="mb-5">
         <div class="sub-title">All activity</div>
         <% if @activities.blank? %>
           <div class="blankslate">
@@ -27,60 +73,7 @@
           <%= render "/shared/more_button", url: activities_dashboard_path %>
         <% end %>
       </div>
-    </div>
 
-    <div class="sub-sidebar pl-4">
-      <% if !@recent_repos.blank? %>
-      <div class="sub-title">Recent Repositories</div>
-      <div class="Box mb-3">
-        <div class="Box-body">
-          <div class="repo-list clearfix">
-            <% @recent_repos.each do |repo| %>
-              <div class="repo-item">
-                <div class="icon-box">
-                  <%= icon_tag("repository") %>
-                </div>
-                <div class="title"><%= repository_path_tag(repo.subject) %></div>
-                <div class="time"><%= timeago repo.created_at %></div>
-              </div>
-            <% end %>
-            <div class="repo-item repo-item-more">
-              <div class="title"> <%= link_to "More ...", repositories_dashboard_path %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-      <% if !@groups.blank? %>
-      <div class="sub-title">Your Groups</div>
-      <div class="Box mb-3">
-        <div class="Box-body">
-          <div class="group-list clearfix">
-            <% @groups.each do |group| %>
-              <div class="group-item">
-                <div class="avatar-box">
-                  <%= user_avatar_tag(group, style: :small) %>
-                </div>
-                <div class="infos">
-                  <div class="title"><%= group_name_tag(group) %></div>
-                  <div class="description"><%= group.description || group.slug %></div>
-                </div>
-              </div>
-            <% end %>
-            <div class="group-item group-item-more">
-              <div class="infos">
-                <div class="title">
-                  <%= link_to "More ...", groups_dashboard_path %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-      <%= raw Setting.dashboard_sidebar_html %>
     </div>
   </div>
 </div>

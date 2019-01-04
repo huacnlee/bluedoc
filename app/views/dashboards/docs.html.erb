@@ -1,18 +1,18 @@
 <% title_tag "Docs", "Dashboard" %>
-
-<div class="dashboard-main">
-  <%= render "menu" %>
-
-  <div class="dashboard-content clearfix">
-    <div class="sub-title">Recent docs</div>
-    <% if @user_actives.blank? %>
-      <div class="blankslate">
-        <h3>No recent docs</h3>
-        <p>You does not have updated Doc in recently.</p>
-      </div>
-    <% else %>
-      <%= render partial: "docs", locals: { items: @user_actives } %>
-      <%= paginate @user_actives %>
-    <% end %>
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content clearfix">
+      <div class="sub-title">Recent docs</div>
+      <% if @user_actives.blank? %>
+        <div class="blankslate">
+          <h3>No recent docs</h3>
+          <p>You does not have updated Doc in recently.</p>
+        </div>
+      <% else %>
+        <%= render partial: "docs", locals: { items: @user_actives } %>
+        <%= paginate @user_actives %>
+      <% end %>
+    </div>
   </div>
 </div>
