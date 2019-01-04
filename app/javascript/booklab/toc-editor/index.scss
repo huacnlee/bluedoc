@@ -76,9 +76,17 @@
   margin: auto;
   .doc-list {
     position: sticky;
-    top: 94px
+    top: 94px;
+    padding: 14px;
+    background: rgba(252, 252, 252, 0.73);
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
   }
   .toc-list {
-    padding-left: 40px;
+    margin-left: 20px;
+    padding: 14px;
+    background: rgba(252, 252, 252, 0.73);
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
   }
 }
