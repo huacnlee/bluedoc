@@ -59,6 +59,9 @@ export class Toolbar extends React.Component {
           editor._insertCodeblock();
         }
         break;
+      case 'plantuml':
+        editor._insertPlantUML();
+        break;
       default:
         if (this.isActiveMarkup(type)) {
           editor.setBlocks('paragraph');
@@ -187,6 +190,7 @@ export class Toolbar extends React.Component {
         <span className="bar-divider"></span>
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
+        {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
         {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />

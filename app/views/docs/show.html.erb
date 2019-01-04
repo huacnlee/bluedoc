@@ -17,7 +17,9 @@
       <% if @doc %>
       <span class="doc-title"><%= @doc.title %></span>
       <% else %>
-      <strong>Not found</strong>
+      <span class="doc-title">
+        <strong>Not found</strong>
+      </span>
       <% end %>
     </span>
     <% if @doc&.private? %>
