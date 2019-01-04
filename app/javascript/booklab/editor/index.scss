@@ -327,6 +327,23 @@
         display: none !important;
       }
     }
+
+    .plantuml-box {
+      .actions {
+        button {
+          margin-left: 5px;
+          .fas { font-size: 15px; }
+        }
+      }
+
+      .plantuml-image {
+        margin-bottom: 0 !important;
+      }
+
+      textarea {
+        margin-bottom: 8px;
+      }
+    }
   }
 
   /* HOTFIX */

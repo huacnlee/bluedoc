@@ -50,7 +50,8 @@
     <%= form.hidden_field :format, value: @doc.format %>
     <%= form.text_area :body, class: "booklab-editor", value: doc.draft_body_plain, data: {
        direct_upload_url: rails_direct_uploads_url,
-       blob_url_template: upload_path(":id")
+       blob_url_template: upload_path(":id"),
+       plantuml_service_host: Setting.plantuml_service_host
       }, style: "display: none" %>
     <%= form.text_area :body_sml, value: doc.draft_body_sml_plain, style: "display: none" %>
   </div>
