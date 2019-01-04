@@ -150,10 +150,6 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       assert_equal repo.to_path("/docs/search"), props[:action]
       assert_equal repo.name, props[:scope]
       assert_nil props[:value]
-
-      assert_select "form.subnav-search-context" do
-        assert_select "input.form-control"
-      end
     end
 
     # with anonymous disable
