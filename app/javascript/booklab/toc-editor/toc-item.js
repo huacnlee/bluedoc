@@ -26,17 +26,20 @@ class TocItem extends React.PureComponent {
     const input = e.currentTarget;
     const field = input.getAttribute('data-field');
     const { item } = this.props;
-    this.props.onChangeItem(item.index, {
-      ...item,
-      [field]: input.value,
-    }, false);
+    this.props.onChangeItem({
+      index: item.index,
+      item: {
+        ...item,
+        [field]: input.value,
+      },
+    });
   }
 
   onKeyDown = (e) => {
     if (e.keyCode === 13 || e.keyCode === 27) {
       // enter
       e.preventDefault();
-      this.setState({ canEdit: false });
+      this.setState({ canEdit: false }, () => this.props.onChangeItem({ memory: true }));
     }
   }
 
@@ -46,11 +49,20 @@ class TocItem extends React.PureComponent {
 
   handelFolder = () => {
     const { item, onChangeItem } = this.props;
-    onChangeItem(item.index, { ...item, folder: !item.folder });
+    onChangeItem({
+      index: item.index,
+      item: {
+        ...item,
+        folder: !item.folder,
+      },
+    });
   }
 
   handleEdit = () => this.setState({ canEdit: true })
-  handelDoneEdit = () => this.setState({ canEdit: false })
+
+  handelDoneEdit = () => this.setState({
+    anEdit: false,
+  }, () => this.props.onChangeItem({ memory: true }))
 
   render() {
     const {
