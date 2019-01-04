@@ -141,6 +141,24 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     assert_equal html, BookLab::HTML.render(html, format: :markdown)
   end
 
+  test "markdown plantuml" do
+    code = <<~CODE
+    @startuml
+    Alice -> Bob: test
+    @enduml
+    CODE
+
+    raw = <<~MD
+    ```
+    #{code}
+    ```
+    MD
+
+    out = BookLab::HTML.render(raw, format: :markdown)
+    svg_code = URI::encode(code.strip)
+    assert_equal %(<div class="highlight"><img src="#{Setting.plantuml_service_host}/svg/#{svg_code}" class="plantuml-image"></div>), out
+  end
+
   test "markdown html chars" do
     raw = "The > or < will >< keep, and <b>will</b> strong."
     out = BookLab::HTML.render(raw, format: :markdown)
