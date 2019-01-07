@@ -209,11 +209,11 @@ class TocEditor extends React.Component {
     const length = getFolderLength(oldIndex, items);
     const direction = oldIndex > newIndex ? 'up' : 'down';
     const oldDepth = items[oldIndex].depth;
-    const offsetX = e.clientX - this.clientX || 0;
     let targetIndex = newIndex;
     let tempIndex = newIndex;
     this.sorting = false;
     if (oldIndex === newIndex) {
+      const offsetX = e.clientX - this.clientX || 0;
       this.changeItemIndent(oldIndex, Math.floor(offsetX / 20));
       return;
     }
@@ -235,6 +235,7 @@ class TocEditor extends React.Component {
     } = getCurNode(targetIndex, this.formatTocList) || {};
     let disDepth = 0;
     if (isDrag) {
+      const offsetX = e.clientX - this.clientX || 0;
       const tempDepth = oldDepth + Math.floor(offsetX / 20);
       if (tempDepth > depth + 1) {
         disDepth = oldDepth - depth - 1;
