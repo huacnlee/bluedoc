@@ -31,7 +31,7 @@
     "styled-components": "^3.2.3",
     "timeago.js": "^4.0.0-beta.1",
     "tocbot": "^4.4.2",
-    "typine": "^0.0.17"
+    "typine": "^0.0.18"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

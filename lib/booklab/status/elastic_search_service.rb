@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab::Status
   class ElasticSearchService < BaseService
     def check!

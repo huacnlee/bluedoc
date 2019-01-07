@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab::Status
   class BaseService < StatusPage::Services::Base
     def check_tcp!(host, timeout: 0.2)

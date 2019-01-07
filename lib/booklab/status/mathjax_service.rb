@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab::Status
   class MathjaxService < BaseService
     def check!
