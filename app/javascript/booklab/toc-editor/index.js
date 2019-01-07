@@ -17,12 +17,19 @@ const hotKeyMap = [
   'tab',
   'shift+tab',
   'command+up',
+  'ctrl+up',
   'command+down',
+  'ctrl+down',
   'command+left',
+  'ctrl+left',
   'command+right',
+  'ctrl+right',
   'command+backspace',
+  'ctrl+backspace',
   'command+z',
+  'ctrl+z',
   'command+shift+z',
+  'ctrl+shift+z',
   'enter',
 ];
 
@@ -113,13 +120,25 @@ class TocEditor extends React.Component {
       case 'command+right':
         this.changeItemIndent(activeIndex, 1);
         break;
+      case 'ctrl+right':
+        this.changeItemIndent(activeIndex, 1);
+        break;
       case 'command+left':
+        this.changeItemIndent(activeIndex, -1);
+        break;
+      case 'ctrl+left':
         this.changeItemIndent(activeIndex, -1);
         break;
       case 'command+up':
         this.handleHotKeySort(-1);
         break;
+      case 'ctrl+up':
+        this.handleHotKeySort(-1);
+        break;
       case 'command+down':
+        this.handleHotKeySort(1);
+        break;
+      case 'ctrl+down':
         this.handleHotKeySort(1);
         break;
       case 'enter':
@@ -128,10 +147,19 @@ class TocEditor extends React.Component {
       case 'command+backspace':
         this.onDeleteItem(activeIndex);
         break;
+      case 'ctrl+backspace':
+        this.onDeleteItem(activeIndex);
+        break;
       case 'command+z':
         this.memoryUndo();
         break;
+      case 'ctrl+z':
+        this.memoryUndo();
+        break;
       case 'command+shift+z':
+        this.memoryRedo();
+        break;
+      case 'ctrl+shift+z':
         this.memoryRedo();
         break;
       default:
