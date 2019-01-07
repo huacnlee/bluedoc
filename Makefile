@@ -1,6 +1,6 @@
 docker\:build:
 	docker build . -t booklab:latest
-	docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi
+	docker image prune -a
 docker\:test:
 	./bin/test-docker-start
 docker\:test\:boot:
