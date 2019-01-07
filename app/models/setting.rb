@@ -57,6 +57,7 @@ class Setting < RailsSettings::Base
   field :dashboard_sidebar_html, default: "", type: :string
   field :anonymous_enable, default: "1", type: :boolean
   field :plantuml_service_host, default: "http://localhost:1608", type: :string
+  field :mathjax_service_host, default: "http://localhost:4010", type: :string
 
   # Readonly setting keys, no cache, only load from yml file
   field :host, :mailer_from, :mailer_options, readonly: true

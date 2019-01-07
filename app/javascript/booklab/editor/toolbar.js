@@ -111,6 +111,13 @@ export class Toolbar extends React.Component {
     }
   }
 
+  handleAddTex = ev => {
+    ev.preventDefault();
+    const { editor } = this.props;
+    editor._insertMath();
+    return false;
+  }
+
   toggleList = (ev, type) => {
     ev.preventDefault();
     const { editor } = this.props;
@@ -191,6 +198,7 @@ export class Toolbar extends React.Component {
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
         {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
+        <BarButton icon="tex" title="Insert TeX" onMouseDown={e => this.handleAddTex(e)} />
         {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />

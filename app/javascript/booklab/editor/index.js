@@ -131,6 +131,7 @@ class RichEditor extends React.Component {
               getEditorContainer={this.getEditorContainer}
               service={this.attachmentService}
               plantumlServiceHost={this.props.plantumlServiceHost}
+              mathJaxServiceHost={this.props.mathJaxServiceHost}
              />
           </div>
         </div>
@@ -237,6 +238,7 @@ class EditorBox {
         directUploadURL={bodyInput.attributes["data-direct-upload-url"].value}
         blobURLTemplate={bodyInput.attributes["data-blob-url-template"].value}
         plantumlServiceHost={bodyInput.attributes["data-plantuml-service-host"].value}
+        mathJaxServiceHost={bodyInput.attributes["data-mathjax-service-host"].value}
         title={titleInput.value}
         slug={slugInput.value}
         format={formatInput.value}

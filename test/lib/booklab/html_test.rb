@@ -159,6 +159,29 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     assert_equal %(<div class="highlight"><img src="#{Setting.plantuml_service_host}/svg/#{svg_code}" class="plantuml-image"></div>), out
   end
 
+  test "markdown mathjax" do
+    code = "x^2 * y = z\\\\n * 10 = u"
+    # puts "--- raw code:\n#{code}"
+    raw = <<~CODE
+    Hello world: $#{code}$ test, this `$name$` will not convert
+
+    ```rb
+    $name = $foo
+    ```
+    CODE
+    svg_code = URI::encode(code)
+
+    html = <<~HTML
+    <p>Hello world: <img class="tex-image" src="http://localhost:4010/svg?tex=#{svg_code}"> test, this <code>$name$</code> will not convert</p>
+    <div class="highlight">
+      <pre class="highlight ruby"><code><span class="vg">$name</span> <span class="o">=</span> <span class="vg">$foo</span></code></pre>
+    </div>
+    HTML
+
+    out = BookLab::HTML.render(raw, format: :markdown)
+    assert_html_equal html, out
+  end
+
   test "markdown html chars" do
     raw = "The > or < will >< keep, and <b>will</b> strong."
     out = BookLab::HTML.render(raw, format: :markdown)

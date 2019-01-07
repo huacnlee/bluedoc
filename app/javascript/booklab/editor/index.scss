@@ -255,7 +255,8 @@
     }
 
     table tr,
-    table td {
+    table td,
+    .math-box {
       &[data-active=true],
       [data-active=true] {
          &:before {
@@ -328,16 +329,27 @@
       }
     }
 
+    .math-box {
+      &[data-active=true] {
+        .tex-image {
+          background: rgba(187, 201, 255, 0.18) !important;
+        }
+      }
+    }
+
     .plantuml-box {
-      .actions {
-        button {
-          margin-left: 5px;
-          .fas { font-size: 15px; }
+      &[data-active=true] {
+        .plantuml-image {
+          background: rgba(187, 201, 255, 0.18) !important;
         }
       }
 
       .plantuml-image {
         margin-bottom: 0 !important;
+      }
+
+      .actions {
+        bottom: -38px;
       }
 
       textarea {
