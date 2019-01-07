@@ -13,10 +13,6 @@ module BookLab
           next if has_ancestor?(node, %w[pre code])
           content.gsub!(/\$(.+?)\$/) do
             code = Regexp.last_match(1)
-            # revert \ into \\, because Markdown render will convert \\ to \
-            # puts "------ before code:\n#{code}"
-            code = code.gsub("\\", "\\\\\\\\")
-            # puts "------ code:\n#{code.inspect}"
             svg_code = URI::encode(code)
             image_url = "#{Setting.mathjax_service_host}/svg?tex=#{svg_code}"
 
