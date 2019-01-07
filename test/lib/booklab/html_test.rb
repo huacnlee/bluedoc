@@ -160,7 +160,8 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
   end
 
   test "markdown mathjax" do
-    code = '\int _{a}^{b}f(x)\,dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\\\\\n * 10 = u'
+    code = '\int _{a}^{b}f(x)dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\\\\\n * 10 = u'
+    code_1 = '\int _{a}^{b}f(x)dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\n * 10 = u'
     # puts "--- raw code:\n#{code}"
     raw = <<~CODE
     Hello world: $#{code}$ test, this `$name$` will not convert
@@ -169,10 +170,10 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     $name = $foo
     ```
     CODE
-    svg_code = URI::encode(code)
+    svg_code = URI::encode(code_1)
 
     svg_url = "http://localhost:4010/svg?tex=#{svg_code}"
-    puts "svg_url: #{svg_url}"
+    # puts "svg_url: #{svg_url}"
 
     html = <<~HTML
     <p>Hello world: <img class="tex-image" src="#{svg_url}"> test, this <code>$name$</code> will not convert</p>
