@@ -268,24 +268,6 @@
     .codeblock-box {
       position: relative;
 
-      .title-bar {
-        display: block;
-        border-radius: 3px 3px 0 0;
-        padding: 4px 8px;
-        height: 35px;
-        overflow: hidden;
-        background: rgba(241, 242, 246, 0.85);
-        border-bottom: 1px solid #e5e5ec;
-        cursor: default;
-        @extend .clearfix;
-
-        &:hover {
-          .close {
-            display: inline-block;
-          }
-        }
-      }
-
       .select-language {
         float: left;
         -webkit-appearance: none;
@@ -293,21 +275,20 @@
         border: 0;
         outline: none;
         border-radius: 3px;
-        border: 1px solid transparent;
+        cursor: pointer;
         font-size: 13px;
         color: #555;
-        padding: 0px 4px;
+        padding: 1px 5px;
         margin: 0;
         position: relative;
 
         &:hover {
-          border-color: #e5e5ec;
+          background: #f4f4f4;
         }
       }
       .close {
         float: right;
         color: #999;
-        margin-top: -3px;
         display: none;
       }
 
@@ -315,7 +296,7 @@
 
     .CodeMirror {
       background-color: #f6f8fa;
-      border-radius: 0 0 3px 3px;
+      border-radius: 3px;
       padding: 16px;
       margin-bottom: 18px;
       overflow: auto;
