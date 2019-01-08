@@ -3,6 +3,14 @@
 <%= render "menu" %>
 
 <div class="repository-docs">
+  <div class="subnav">
+    <div class="float-right subnav-sorting">
+      <span class="text-gray">Sort by:</span>
+      <%= link_to("Updated","?sort=recent", class: "btn-link #{'selected' if params[:sort] != 'created'}") %>
+      <span class="divider">/</span>
+      <%= link_to("Created", "?sort=created", class: "btn-link #{'selected' if params[:sort] == 'created'}") %>
+    </div>
+  </div>
   <% if @docs.blank? %>
     <%= render "empty_docs" %>
   <% else %>
