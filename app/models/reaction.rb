@@ -35,6 +35,10 @@ class Reaction < ApplicationRecord
     reaction.destroy
   end
 
+  def self.default_reactions
+    @default_reactions ||= [Reaction.new(name: "+1")]
+  end
+
   def self.grouped
     joins(:user)
       .group(:name)

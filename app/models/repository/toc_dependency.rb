@@ -83,6 +83,17 @@ class Repository
     end
   end
 
+  # Ordered docs list for read way
+  # when has toc?
+  #  => return docs by toc ordered
+  # otherwise
+  #  => return by id asc
+  def read_ordered_docs
+    return @read_ordered_docs if defined? @read_ordered_docs
+    @read_ordered_docs = has_toc? ? toc_ordered_docs : self.docs.order("id asc").all
+    @read_ordered_docs
+  end
+
   private
 
     def track_doc_version_on_create

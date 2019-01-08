@@ -303,6 +303,27 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal docs[0], repo.toc_ordered_docs[3]
   end
 
+  test "read_ordered_docs" do
+    repo0 = create(:repository)
+    docs = create_list(:doc, 4, repository: repo0)
+
+    # enable toc, should return same as toc_ordered_docs
+    repo0.stub(:has_toc?, true) do
+      repo0.stub(:toc_ordered_docs, docs) do
+        assert_equal docs, repo0.read_ordered_docs
+      end
+    end
+
+    # disabled toc, return with id asc
+    repo1 = create(:repository)
+    doc10 = create(:doc, repository: repo1)
+    doc11 = create(:doc, repository: repo1)
+    doc12 = create(:doc, repository: repo1)
+    repo1.stub(:has_toc?, false) do
+      assert_equal [doc10, doc11, doc12], repo1.read_ordered_docs
+    end
+  end
+
   test "transfer" do
     repo = create(:repository)
     to_user = create(:user)

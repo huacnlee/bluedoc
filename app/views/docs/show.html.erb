@@ -120,6 +120,19 @@
       <div class="markdown-body markdown-with-toc" data-turbolinks="false">
         <%= raw @doc.body_html %>
       </div>
+
+      <% if @between_docs %>
+      <div class="between-docs my-4 clearfix">
+        <% if @between_docs[:prev] %>
+          <%= link_to @between_docs[:prev].title, @between_docs[:prev].to_path, class: "btn-link btn-prev" %>
+        <% end %>
+
+        <% if @between_docs[:next] %>
+          <%= link_to @between_docs[:next].title, @between_docs[:next].to_path, class: "btn-link btn-next" %>
+        <% end %>
+      </div>
+      <% end %>
+
       <div class="doc-reaction mt-5">
         <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
       </div>

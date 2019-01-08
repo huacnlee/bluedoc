@@ -21,8 +21,7 @@ class DocsController < Users::ApplicationController
 
       @reactions = @doc.reactions
 
-      if @reactions.blank?
-      end
+      @between_docs = @doc.prev_and_next_of_docs
     end
 
     render "show", layout: "reader"
