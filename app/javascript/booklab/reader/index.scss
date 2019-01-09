@@ -348,7 +348,7 @@
     }
   }
 
-  del { background: #FFCFD2; text-decoration: none; }
+  del { background: transparent; text-decoration: line-through; }
   ins { background: #D6FFCB; text-decoration: none; }
 
   .attachment-file {
