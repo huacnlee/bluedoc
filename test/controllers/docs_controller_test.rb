@@ -386,7 +386,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       draft_title: "Draft New #{doc.title}",
       draft_body: "Draft New body",
       draft_body_sml: "Draft New body sml",
-      slug: "new-#{doc.slug}"
+      slug: "new-#{doc.slug}",
+      format: "sml"
     }
 
     assert_require_user do
@@ -422,6 +423,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal doc_params[:draft_body], doc.draft_body_plain
     assert_equal doc_params[:draft_body_sml], doc.draft_body_sml_plain
     assert_equal doc_params[:title], doc.title
+    assert_not_equal doc_params[:format], doc.format
     assert_equal user.id, doc.last_editor_id
   end
 
