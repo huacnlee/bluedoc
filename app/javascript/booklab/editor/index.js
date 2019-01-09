@@ -2,11 +2,18 @@ import { Container, serializer, UI } from 'typine'
 import { AttachmentUpload } from "./attachment_upload"
 import { Toolbar } from "./toolbar"
 
+const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
+
 class RichEditor extends React.Component {
   constructor(props) {
     super(props);
+    let value;
 
-    let value = serializer.parserToValue(serializer.parserMarkdown(props.value));
+    if (props.format === "markdown") {
+      value = serializer.parserToValue(serializer.parserMarkdown(props.value));
+    } else {
+      value = serializer.parserToValue(JSON.parse(props.value || defaultSML));
+    }
 
     this.state = {
       value: value,
@@ -168,6 +175,7 @@ class EditorBox {
     const titleInput = document.getElementsByName("doc[title]")[0];
     const slugInput = document.getElementsByName("doc[slug]")[0];
     const formatInput = document.getElementsByName("doc[format]")[0];
+    const format = formatInput.value;
 
     const editorDiv = document.createElement("div");
     editorDiv.className = "editor-container";
@@ -206,15 +214,20 @@ class EditorBox {
       const titleInput = document.getElementsByName("doc[title]")[0];
       const bodyInput = document.getElementsByName("doc[body]")[0];
 
+      const docParam = {
+        draft_title: titleInput.value,
+        draft_body: bodyInput.value,
+      }
+      if (format === "sml") {
+        docParam["draft_body_sml"] = bodySMLInput.value
+      }
+
       $.ajax({
         method: "PUT",
         url: saveURL,
         dataType: "JSON",
         data: {
-          doc: {
-            draft_title: titleInput.value,
-            draft_body: bodyInput.value,
-          },
+          doc: docParam,
         },
         success: (res) => {
           editorMessage.html("<i class='fas fa-check'></i> saved")
@@ -229,6 +242,8 @@ class EditorBox {
       $.post(lockURL);
     }, 15000);
 
+    const value = format === "markdown" ? bodyInput.value : bodySMLInput.value;
+
     $("form").after(editorDiv);
     ReactDOM.render(
       <RichEditor
@@ -241,8 +256,8 @@ class EditorBox {
         mathJaxServiceHost={bodyInput.attributes["data-mathjax-service-host"].value}
         title={titleInput.value}
         slug={slugInput.value}
-        format={formatInput.value}
-        value={bodyInput.value} />,
+        format={format}
+        value={value} />,
       editorDiv,
     )
   }

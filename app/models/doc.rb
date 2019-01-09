@@ -58,6 +58,7 @@ class Doc < ApplicationRecord
   class << self
     def create_new(repo, user_id, slug: nil)
       doc = Doc.new
+      doc.format = "sml"
       doc.repository_id = repo.id
       doc.last_editor_id = user_id
       doc.title = "New Document"
