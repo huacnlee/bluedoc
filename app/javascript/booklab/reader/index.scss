@@ -424,13 +424,15 @@
 
 .reader-body:fullscreen {
   height: auto;
-  width: auto;
+  width: 100%;
   overflow: scroll;
 
   .nav-header,
   .doc-sidebar,
   .reader-navbar,
-  .doc-body-toc {
+  .doc-body-toc,
+  .between-docs,
+  .unpublished-draft-tip {
     display: none !important;
   }
   .doc-main {
