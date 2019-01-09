@@ -141,17 +141,21 @@
     .doc-title {
       text-align: left;
       line-height: 54px;
-      margin-bottom: 40px;
+      margin-bottom: 15px;
       word-break: break-word;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
 
     .doc-info {
+      color: #999;
+      margin-bottom: 50px;
       .editors { margin-right: 10px; }
     }
 
     .doc-reaction {
+      margin: 30px 0;
+
       .reaction-summary-item {
         border: 1px solid #f0f0f0;
         padding: 6px 10px;
@@ -463,7 +467,7 @@
   }
 
   .doc-title {
-    padding: 50px 0;
+    padding: 50px 0 10px 0;
     margin: 0;
     text-align: center;
     font-size: 45px;

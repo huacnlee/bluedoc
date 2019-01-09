@@ -116,9 +116,23 @@
         <% end %>
       </div>
     <% else %>
+      <%= render "draft_tip" %>
+
       <h1 class="doc-title"><%= @doc.title %></h1>
 
-      <%= render "draft_tip" %>
+      <div class="doc-info">
+        <span class="editors">
+          <% @doc.editors.each do |user| %>
+          <%= user_avatar_tag(user, style: :tiny) %>
+          <% end %>
+        </span>
+
+        <% if @doc.last_editor %>
+        Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+        <% else %>
+        Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+        <% end %>
+      </div>
 
       <div class="markdown-body markdown-with-toc" data-turbolinks="false">
         <% if params[:mode] == "draft" %>
@@ -126,6 +140,10 @@
         <% else %>
           <%= raw @doc.body_html %>
         <% end %>
+      </div>
+
+      <div class="doc-reaction">
+        <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
       </div>
 
       <% if @between_docs %>
@@ -139,23 +157,6 @@
         <% end %>
       </div>
       <% end %>
-
-      <div class="doc-reaction mt-5">
-        <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
-      </div>
-      <div class="doc-info mt-3 py-2 border-top">
-        <span class="editors">
-          <% @doc.editors.each do |user| %>
-          <%= user_avatar_tag(user, style: :tiny) %>
-          <% end %>
-        </span>
-
-        <% if @doc.last_editor %>
-        Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
-        <% else %>
-        Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
-        <% end %>
-      </div>
 
       <% if @comments %>
       <div class="doc-comments mt-3 clearfix">
