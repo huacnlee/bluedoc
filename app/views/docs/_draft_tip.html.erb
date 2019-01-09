@@ -1,0 +1,23 @@
+<% if can? :update, @doc %>
+  <% if @doc.draft_unpublished? %>
+    <div class="unpublished-draft-tip">
+      <% if params[:mode] == "draft" %>
+        <div class="flash flash-error flash-block">
+          <p>You are on the draft preview page, the contents has saved at: <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
+          <p>
+            <%= link_to "View Published", @doc.to_path, class: "btn-view" %> <span class="divider">/</span>
+            <%= link_to "Continue edit", edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit" %>
+          </p>
+        </div>
+      <% else %>
+        <div class="flash flash-block">
+          <p><%= icon_tag("idea") %> There have the unpublished content saved at <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
+          <p>
+            <%= link_to "Preview the draft", @doc.to_path("?mode=draft"), class: "btn-preview" %> <span class="divider">/</span>
+            <%= link_to "Continue edit", edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

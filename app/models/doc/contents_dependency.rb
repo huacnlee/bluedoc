@@ -19,4 +19,9 @@ class Doc
     return self.body_sml_plain if self.draft_body_sml.blank?
     self.draft_body_sml.to_s
   end
+
+  # Check this doc has unpublished draft
+  def draft_unpublished?
+    self.draft_body_plain != self.body_plain || self.draft_body_sml_plain != self.body_sml_plain
+  end
 end

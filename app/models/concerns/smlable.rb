@@ -27,6 +27,15 @@ module Smlable
     end
   end
 
+  def draft_body_html
+    case self.format
+    when "sml"
+      BookLab::HTML.render(self.draft_body_sml_plain, format: :sml)
+    else
+      BookLab::HTML.render(self.draft_body_plain, format: self.format)
+    end
+  end
+
   def body_public_html
     case self.format
     when "sml"

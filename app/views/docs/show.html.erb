@@ -117,8 +117,15 @@
       </div>
     <% else %>
       <h1 class="doc-title"><%= @doc.title %></h1>
+
+      <%= render "draft_tip" %>
+
       <div class="markdown-body markdown-with-toc" data-turbolinks="false">
-        <%= raw @doc.body_html %>
+        <% if params[:mode] == "draft" %>
+          <%= raw @doc.draft_body_html %>
+        <% else %>
+          <%= raw @doc.body_html %>
+        <% end %>
       </div>
 
       <% if @between_docs %>

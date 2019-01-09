@@ -283,6 +283,50 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "GET /:user/:repo/:slug with draft unpublished" do
+    doc = create(:doc, body: "Hello world", repository: @repo)
+    doc.update(draft_body: "Hello **World**")
+    assert_equal true, doc.draft_unpublished?
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip", 0
+
+    sign_in_role :reader, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip", 0
+
+    sign_in_role :editor, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip" do
+      assert_select ".flash" do
+        assert_select "a.btn-preview" do
+          assert_select "[href=?]", doc.to_path("?mode=draft")
+        end
+        assert_select "a.btn-edit" do
+          assert_select "[href=?]", doc.to_path("/edit")
+        end
+      end
+    end
+    assert_select ".markdown-body", html: doc.body_html
+
+    get doc.to_path("?mode=draft")
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip" do
+      assert_select ".flash.flash-error" do
+        assert_select "a.btn-view" do
+          assert_select "[href=?]", doc.to_path
+        end
+        assert_select "a.btn-edit" do
+          assert_select "[href=?]", doc.to_path("/edit")
+        end
+      end
+    end
+    assert_select ".markdown-body", html: doc.draft_body_html
+  end
+
   test "GET /:user/:repo/:slug with doc not exist" do
     # allow open page even doc not exist
     get @repo.to_path("/not-exist-doc")

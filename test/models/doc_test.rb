@@ -156,20 +156,24 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, body: body)
     assert_equal body, doc.body_plain
     assert_equal doc.body_plain, doc.draft_body_plain
+    assert_equal false, doc.draft_unpublished?
 
     doc.update(draft_body: "BBB")
     assert_equal body, doc.body_plain
     assert_equal "BBB", doc.draft_body_plain
+    assert_equal true, doc.draft_unpublished?
   end
 
   test ".draft_body_sml" do
     doc = create(:doc, body_sml: "AAA")
     assert_equal "AAA", doc.body_sml_plain
     assert_equal doc.body_sml_plain, doc.draft_body_sml_plain
+    assert_equal false, doc.draft_unpublished?
 
     doc.update(draft_body_sml: "BBB")
     assert_equal "AAA", doc.body_sml_plain
     assert_equal "BBB", doc.draft_body_sml_plain
+    assert_equal true, doc.draft_unpublished?
   end
 
   test "create_new" do
