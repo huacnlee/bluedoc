@@ -3,7 +3,7 @@
   <div class="main-content">
     <div class="dashboard-content">
 
-      <div class="mb-5">
+      <div class="mb-5 dashboard-section">
         <div class="sub-title">Recent activity</div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
@@ -14,7 +14,7 @@
         <% end %>
       </div>
 
-      <div class="mb-5">
+      <div class="mb-5 dashboard-section">
         <div class="sub-title">Recent Repositories</div>
         <% if @recent_repos.blank? %>
           <div class="blankslate">
@@ -40,7 +40,7 @@
       </div>
 
       <% if !@groups.blank? %>
-      <div class="mb-5">
+      <div class="mb-5 dashboard-section">
         <div class="sub-title">Your Groups</div>
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
@@ -58,11 +58,10 @@
       </div>
       <% end %>
 
-      <div class="mb-5 activities">
+      <div class="mb-5 dashboard-section activities">
         <div class="sub-title">All activity</div>
         <% if @activities.blank? %>
           <div class="blankslate">
-            <h3>No activity</h3>
             <p>You have no activity in recently.</p>
           </div>
         <% else %>

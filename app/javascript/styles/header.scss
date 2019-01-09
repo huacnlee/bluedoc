@@ -1,0 +1,38 @@
+
+.nav-header {
+  height: 50px;
+  width: 1000px;
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  .logo {
+    font-size: 15px;
+    color: #111;
+    a {
+      color: inherit;
+    }
+  }
+  .dropdown {
+    margin-right: 20px;
+  }
+  .dropdown-menu {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .avatar { vertical-align: middle; width: 20px !important; height: 20px !important; }
+}
+
+.footer {
+  padding: 0px;
+  color: #999;
+  text-align: left;
+
+  .divider { color: #aaa; }
+
+  a {
+    color: #666;
+  }
+}
