@@ -1,0 +1,26 @@
+@font-face {
+  font-family: solRegular;
+  src: url('~styles/themefont/Soleil.otf') format('truetype');
+}
+
+@font-face {
+  font-family: solBold;
+  src: url('~styles/themefont/Soleil-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: solLight;
+  src: url('~styles/themefont/Soleil-Light.otf') format('truetype');
+}
+
+/* 匹英文 */
+@font-face {
+  font-family: 'themefont';
+  src: url('~styles/themefont/Soleil.otf');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+body {
+  font-family: 'themefont', 'PingFang SC', 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica,
+  'Hiragino Sans GB', Arial, sans-serif;
+}
