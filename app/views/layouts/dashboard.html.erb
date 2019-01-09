@@ -5,8 +5,19 @@
     <title><%= content_for?(:title) ? yield(:title) : "BookLab" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= render "/layouts/head_links" %>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1005258_9mh77abmy4.css">
+    <meta name="viewport" content="width=device-width">
+    <% if current_user %>
+    <meta name="current-user" value="<%= current_user.slug %>" />
+    <% end %>
+    <%= stylesheet_pack_tag 'booklab', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="/js/jquery@3.3.1.js"></script>
+    <script type="text/javascript" src="/js/rails-ujs@5.2.1.js"></script>
+    <script type="text/javascript" src="/js/turbolinks@5.2.0.js"></script>
+    <script type="text/javascript" src="/js/react.production.min@16.6.1.js"></script>
+    <script type="text/javascript" src="/js/react-dom.production.min@16.6.1.js"></script>
+    <script type="text/javascript" src="/js/react-dom-server.browser.production.min@16.6.1.js"></script>
+    <%= javascript_pack_tag 'vendors', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class="page-<%= controller_name %> d-flex flex-column">
