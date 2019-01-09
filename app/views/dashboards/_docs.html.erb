@@ -1,6 +1,7 @@
 <ul class="cards-container recent-docs">
   <% items.each do |item| %>
-    <li class="card Box recent-doc-item">
+    <li class="card avatar-card recent-doc-item">
+      <%= user_avatar_tag(current_user, style: :small, link: false) %>
       <div class="path">
         <%= repository_path_tag(item.subject&.repository) %>
       </div>
