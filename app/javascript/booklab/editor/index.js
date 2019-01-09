@@ -69,12 +69,8 @@ class RichEditor extends React.Component {
     const xslValue = serializer.parserToXSL(change.value);
     const markdownValue = serializer.parserToMarkdown(xslValue);
 
-    if (format === "markdown") {
-      this.props.onChange(markdownValue, null);
-    } else {
-      const smlValue = JSON.stringify(xslValue)
-      this.props.onChange(markdownValue, smlValue);
-    }
+    const smlValue = JSON.stringify(xslValue)
+    this.props.onChange(markdownValue, smlValue);
   }
 
   onChangeTitle = (e) => {
@@ -175,7 +171,6 @@ class EditorBox {
     const titleInput = document.getElementsByName("doc[title]")[0];
     const slugInput = document.getElementsByName("doc[slug]")[0];
     const formatInput = document.getElementsByName("doc[format]")[0];
-    const format = formatInput.value;
 
     const editorDiv = document.createElement("div");
     editorDiv.className = "editor-container";
@@ -183,6 +178,8 @@ class EditorBox {
     const onChange = (markdownValue, smlValue) => {
       bodyInput.value = markdownValue;
       if (smlValue) {
+        // just change format to sml for publish
+        formatInput.value = "sml";
         bodySMLInput.value = smlValue;
       }
 
@@ -218,8 +215,9 @@ class EditorBox {
         draft_title: titleInput.value,
         draft_body: bodyInput.value,
       }
-      if (format === "sml") {
-        docParam["draft_body_sml"] = bodySMLInput.value
+
+      if (formatInput.value === "sml") {
+        docParam["draft_body_sml"] = bodySMLInput.value;
       }
 
       $.ajax({
@@ -242,7 +240,7 @@ class EditorBox {
       $.post(lockURL);
     }, 15000);
 
-    const value = format === "markdown" ? bodyInput.value : bodySMLInput.value;
+    const value = formatInput.value === "markdown" ? bodyInput.value : bodySMLInput.value;
 
     $("form").after(editorDiv);
     ReactDOM.render(
@@ -256,7 +254,7 @@ class EditorBox {
         mathJaxServiceHost={bodyInput.attributes["data-mathjax-service-host"].value}
         title={titleInput.value}
         slug={slugInput.value}
-        format={format}
+        format={formatInput.value}
         value={value} />,
       editorDiv,
     )
