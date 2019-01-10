@@ -19,23 +19,20 @@
     margin-bottom: 40px;
   }
 
-  // hack card style
+  // card layout style
   .cards-container {
     margin-left: -20px;
     .card {
       float: left;
       margin: 0 30px 20px 0;
       width: calc(50% - 30px);
-      &.card-avatar {
-        padding-left: 67px;
-      }
-    }
-
-    .list-container {
-      width: 550px;
     }
   }
 
+  // list layout style
+  .list-container {
+    width: 550px;
+  }
 
   // left menu
   .dashboard-menu {
@@ -57,7 +54,7 @@
         margin-right: 5px;
       }
       &.selected, &:hover {
-        color: $themeColor;
+        color: $ThemeColor;
         i.fas {
           color: inherit;
         }
@@ -68,59 +65,6 @@
   @media (min-width: 768px) {
     .dashboard-menu {
       display: block;
-    }
-  }
-
-  .dashboard-repos,
-  .dashboard-groups {
-    .recent-repo-item,
-    .recent-group-item {
-      width: 100%;
-      min-width: 300px;
-      overflow: hidden;
-      margin-bottom: 15px;
-
-      .Box-body {
-        border: 0;
-      }
-
-      .title {
-        height: 22px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-size: 15px;
-        margin-bottom: 10px;
-
-        .fas { color: #999; }
-        a { color: #555; font-weight: bold; }
-      }
-
-      .description {
-        height: 50px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: break-all;
-      }
-
-      .info { color: #aaa; }
-      .info span { margin-right: 5px; }
-      .info span.time { margin-right: 0; float: right;}
-    }
-
-    @media (min-width: 768px) {
-      .recent-repo-item,
-      .recent-group-item {
-        width: 47%;
-        margin-right: 15px;
-      }
-    }
-
-    @media (min-width: 1012px) {
-      .recent-repo-item,
-      .recent-group-item {
-        width: 32%;
-      }
     }
   }
 }

@@ -1,28 +1,31 @@
-.cards-container {
-  @extend .clearfix;
+.list-container {
+  
 }
 
-.card {
-  padding: 12px 20px;
+.list-item {
+  width: 100%;
+  padding: 15px 0;
   line-height: 1.4;
   list-style: none;
-  &.card-avatar {
-    position: relative;
-    padding-left: 67px;
+  border-bottom: 1px solid #E6E6E6;
+  position: relative;
+  &.list-avatar {
+    padding-left: 47px;
   }
   .avatar {
     position: absolute;
-    top: 15px;
-    left: 20px;
+    top: 20px;
+    left: 0;
     width: 32px;
     height: 32px;
     border-radius: 50%;
   }
   &:hover {
-    background: #F7F7F7;
+    border-bottom: 1px solid $ThemeColor;
   }
-  .path {
-    a { color: #777; }
+  .description, .path {
+    color: #777;
+    a { color: inherit; }
     font-size: 12px;
     margin-bottom: 5px;
   }
@@ -37,6 +40,12 @@
     flex: auto;
   }
   .info {
+    
+  }
+  .time {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
     font-size: 12px;
     color: #777;
   }
