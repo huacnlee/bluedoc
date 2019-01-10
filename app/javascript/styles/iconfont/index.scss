@@ -37,3 +37,8 @@ a[data-method=delete] {
     @extend .fa-star_fill;
   }
 }
+a[data-method=post] {
+  .fa-watch {
+    @extend .fa-watch_fill;
+  }
+}

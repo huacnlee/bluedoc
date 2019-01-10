@@ -5,9 +5,11 @@
   <div class="main-content">
     <div class="dashboard-content clearfix">
       <% if params[:tab] == "docs" %>
+        <div class="sub-title">Docs</div>
         <%= render "action_docs" %>
         <%= paginate @docs %>
       <% else %>
+        <div class="sub-title">Repositories</div>
         <%= render "action_repositories" %>
         <%= paginate @repositories %>
       <% end %>

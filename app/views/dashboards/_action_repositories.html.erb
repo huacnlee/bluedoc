@@ -4,23 +4,24 @@
 </div>
 <% else %>
 
-<div class="dashboard-repos d-flex d-flex-column flex-wrap" data-action-button-reload>
+<div class="dashboard-repos list-container" data-action-button-reload>
   <% @repositories.each do |repo| %>
-  <div class="recent-repo-item Box flex-auto">
-    <div class="Box-body">
-      <div class="infos">
-        <div class="title"><%= icon_tag("repository") %> <%= repository_path_tag(repo) %></div>
-        <div class="description">
-          <%= truncate repo.description, length: 100 %>
-        </div>
-        <div class="info">
-          <% if action_name == "stars" %>
-            <%= action_button_tag(repo, :star, undo: true) %>
-          <% else %>
-            <%= action_button_tag(repo, :watch, icon: :eye, undo: true) %>
-          <% end %>
-        </div>
-      </div>
+  <div class="recent-repo-item list-item">
+    <div class="title"><%= repository_name_tag(repo) %></div>
+    <div class="description">
+      <%= truncate repo.description, length: 100 %>
+    </div>
+    <div class="info">
+      <span class="user">
+        <%= icon_tag("user") %> <%= user_name_tag(repo&.user) %>
+      </span>
+    </div>
+    <div class="action">
+      <% if action_name == "stars" %>
+        <%= action_button_tag(repo, :star, undo: true) %>
+      <% else %>
+        <%= action_button_tag(repo, :watch, icon: :watch, undo: true) %>
+      <% end %>
     </div>
   </div>
   <% end %>
