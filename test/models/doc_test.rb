@@ -35,8 +35,8 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, body: "<p>Hello <strong>world</strong></p>", format: :html)
     assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
 
-    doc = create(:doc, body_sml: %(["div", ["span",{"title":"BookLab"},"BookLab SML"]]), format: :sml)
-    assert_equal %(<div><span title="BookLab">BookLab SML</span></div>), doc.body_html
+    doc = create(:doc, body_sml: %(["div", ["span",{},"BookLab SML"]]), format: :sml)
+    assert_equal %(<div><span>BookLab SML</span></div>), doc.body_html
   end
 
   test "Body touch" do

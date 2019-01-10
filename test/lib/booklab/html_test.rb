@@ -41,25 +41,12 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
   end
 
   test "render sml" do
-    raw = <<~SML
-    ["div",
-      ["span",{"data-type":"color", "style": "color:green"},"",
-        ["a",{"title":"Ruby on Rails","href":"https://rubyonrails.org"},"Ruby on Rails"]
-      ]
-    ]
-    SML
-    out = BookLab::HTML.render_without_cache(raw, format: :sml)
-
-    html = <<~HTML
-    <div>
-      <span data-type="color" style="color:green">
-      <a title="Ruby on Rails" href="https://rubyonrails.org">Ruby on Rails</a>
-      </span>
-    </div>
-    HTML
+    sml = %(["p", { align: "center", indent: 1 }, "Hello world"])
+    html = %(<p style="text-align: center; text-indent: 32px;">Hello world</p>)
+    out = BookLab::HTML.render_without_cache(sml, format: :sml)
 
     assert_html_equal html, out
-    assert_html_equal out, BookLab::HTML.render_without_cache(raw, format: :sml)
+    assert_html_equal out, BookLab::HTML.render_without_cache(sml, format: :sml)
   end
 
   test "markdown heading" do

@@ -247,6 +247,10 @@
     }
 
     blockquote {
+      .paragraph {
+        margin-bottom: 0px;
+      }
+
       .paragraph[data-active=true] {
         &:before {
           left: -48px;

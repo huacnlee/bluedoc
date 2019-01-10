@@ -111,6 +111,13 @@ export class Toolbar extends React.Component {
     }
   }
 
+  handleAlign = (ev, align) => {
+    ev.preventDefault();
+    const { editor } = this.props;
+
+    editor._setTextAlignAtRanges(align);
+  }
+
   handleAddTex = ev => {
     ev.preventDefault();
     const { editor } = this.props;
@@ -137,6 +144,16 @@ export class Toolbar extends React.Component {
   renderMarkButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
+    title = title || type;
+
+    return (
+      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
+    );
+  }
+
+  renderAlignButton = (type, icon, title) => {
+    const isActive = this.isActiveMarkup("align-" + type);
+    const onMouseDown = ev => this.handleAlign(ev, type);
     title = title || type;
 
     return (
@@ -194,6 +211,11 @@ export class Toolbar extends React.Component {
         <span className="bar-divider"></span>
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
+        <span className="bar-divider"></span>
+        {this.renderAlignButton("left", "align-left", "Align Left")}
+        {this.renderAlignButton("center", "align-center", "Align center")}
+        {this.renderAlignButton("right", "align-right", "Align right")}
+        {this.renderAlignButton("justify", "align-justify", "Align justify")}
         <span className="bar-divider"></span>
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}

@@ -66,7 +66,7 @@ module BookLab
        }
       ),
       css: {
-        properties: %w[width height text-align color background background-color],
+        properties: %w[width height text-align text-indent color background background-color],
       },
       protocols: {
         "a" => { "href" => ["http", "https", "mailto", :relative] },
