@@ -9,6 +9,9 @@
   list-style: none;
   border-bottom: 1px solid #E6E6E6;
   position: relative;
+  &:hover {
+    border-bottom: 1px solid $ThemeColor;
+  }
   &.list-avatar {
     padding-left: 47px;
   }
@@ -19,9 +22,6 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-  }
-  &:hover {
-    border-bottom: 1px solid $ThemeColor;
   }
   .description, .path {
     color: #777;
@@ -39,8 +39,13 @@
     white-space: nowrap;
     flex: auto;
   }
-  .info {
-    
+  .info > span {
+    display: inline-block;
+    min-width: 120px;
+    margin-right: 20px;
+    .fas {
+      margin-right: 5px;
+    }
   }
   .time {
     position: absolute;

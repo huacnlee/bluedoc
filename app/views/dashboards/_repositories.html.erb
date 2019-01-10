@@ -12,6 +12,9 @@
       <%= truncate item.subject.description, length: 100 %>
     </div>
     <div class="info">
+      <span class="user">
+        <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>
+      </span>
       <span class="stars">
         <%= icon_tag("star") %> <%= item.subject.stars_count %>
       </span>

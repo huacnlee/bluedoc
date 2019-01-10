@@ -32,6 +32,11 @@
   // list layout style
   .list-container {
     width: 550px;
+    .list-item {
+      .info {
+        margin-top: 15px;
+      }
+    }
   }
 
   // left menu

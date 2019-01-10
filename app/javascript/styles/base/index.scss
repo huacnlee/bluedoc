@@ -1,4 +1,8 @@
 @import "primer-base/index.scss";
+// cover primer normalize.scss a tag color
+a {
+  color: inherit;
+}
 
 @import "./utils.scss";
 @import "./theme.scss";
