@@ -21,23 +21,24 @@
 
   .cards-container {
     @extend .clearfix;
+    margin-left: -20px;
   }
 
   .card {
     float: left;
-    margin: 0 20px 20px 0;
-    width: calc(50% - 20px);
-    padding: 10px 20px;
+    margin: 0 30px 20px 0;
+    width: calc(50% - 30px);
+    padding: 12px 20px;
     line-height: 1.4;
     list-style: none;
-    &.avatar-card {
-      padding-left: 55px;
+    &.card-avatar {
+      padding-left: 67px;
       position: relative;
     }
     .avatar {
       position: absolute;
       top: 15px;
-      left: 10px;
+      left: 20px;
       width: 32px;
       height: 32px;
       border-radius: 50%;
