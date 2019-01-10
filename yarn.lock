@@ -8329,10 +8329,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typine@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.23.tgz#ec984995c1cc74303e4bf5ff0d1ce78865c8003c"
-  integrity sha512-HQUGUyDLEutnRYKWr5PNlN1nOfkO7gTMa7aXI3AzKslCA2KxX5pZYTpr/wQKv+Zl2cMkCheuYf//lBL2qCWQKA==
+typine@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.24.tgz#2096598fce7308b9cf19b65a4711793e36f963f3"
+  integrity sha512-w7p8fK0z8nMBPhNw+qRaUnqCciSojOWc5CQMg/a2a08Q0BxoF87VraU7PK2KLD3s9WVERrf2VEW42VJuQPl8AA==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"

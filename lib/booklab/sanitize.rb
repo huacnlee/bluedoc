@@ -55,7 +55,7 @@ module BookLab
       elements: %w[
         div p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
         strong em strike del u a ul ol li span hr
-        table tr th td tbody thead tfoot
+        table tr th td tbody thead tfoot video source
       ],
       attributes: ::Sanitize::Config.merge({},
        {
@@ -63,6 +63,8 @@ module BookLab
          :all  => ["class", "id", "lang", "style", "title", "width", "height", :data],
          "a"   => ["href", "rel", "target"],
          "img" => ["alt", "src"],
+         "source" => ["src", "type"],
+         "video" => ["controls", "preload"]
        }
       ),
       css: {
@@ -70,7 +72,8 @@ module BookLab
       },
       protocols: {
         "a" => { "href" => ["http", "https", "mailto", :relative] },
-        "img" => { "src" => ["http", "https", :relative] }
+        "img" => { "src" => ["http", "https", :relative] },
+        "source" => { "src" => ["http", "https", :relative] }
       },
       transformers: [EMBED_VIDEO_TRANSFORMER]
     )

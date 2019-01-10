@@ -41,6 +41,14 @@ class RichEditor extends React.Component {
           upload.start()
         })
       },
+      videoUpload(file) {
+        return new Promise((resolve, reject) => {
+          const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
+            return resolve(url)
+          })
+          upload.start()
+        })
+      },
     }
 
     this.editor = null;
