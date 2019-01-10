@@ -1,0 +1,42 @@
+.cards-container {
+  @extend .clearfix;
+}
+
+.card {
+  padding: 12px 20px;
+  line-height: 1.4;
+  list-style: none;
+  &.card-avatar {
+    position: relative;
+  }
+  .avatar {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  &:hover {
+    background: #F7F7F7;
+  }
+  .path {
+    a { color: #777; }
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  .title {
+    a { color: #000; }
+    font-size: 15px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: auto;
+  }
+  .info {
+    font-size: 12px;
+    color: #777;
+  }
+}

@@ -2,10 +2,33 @@
 @import 'iconfont.scss';
 
 .fas {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 0;
+  width: 1em;
+}
+// hack
+.selected {
+  .fa-dashboard {
+    @extend .fa-dashboard_fill;
+  }
+  .fa-docs {
+    @extend .fa-docs_fill;
+  }
+  .fa-rep {
+    @extend .fa-rep_fill;
+  }
+  // .fa-group {
+  //   @extend .fa-group_fill;
+  // }
+  .fa-star {
+    @extend .fa-star_fill;
+  }
+  .fa-watch {
+    @extend .fa-watch_fill;
+  }
 }
