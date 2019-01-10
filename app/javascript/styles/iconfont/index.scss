@@ -32,3 +32,8 @@
     @extend .fa-watch_fill;
   }
 }
+a[data-method=delete] {
+  .fa-star {
+    @extend .fa-star_fill;
+  }
+}

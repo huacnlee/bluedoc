@@ -4,15 +4,6 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <nav class="UnderlineNav mb-4">
-        <div class="UnderlineNav-body">
-          <%= render_list_items(type: :link, class: "UnderlineNav-item", active_class: "selected", check_parameters: true) do |item|
-            item << link_to("Repositories", "/dashboard/stars", class: "UnderlineNav-item")
-            item << link_to("Docs", "/dashboard/stars?tab=docs", class: "UnderlineNav-item")
-          end %>
-        </div>
-      </nav>
-
       <% if params[:tab] == "docs" %>
         <%= render "action_docs" %>
         <%= paginate @docs %>

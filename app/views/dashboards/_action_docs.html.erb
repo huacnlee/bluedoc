@@ -3,19 +3,22 @@
   <p>You does not have any <%= action_name.singularize %> docs.
 </div>
 <% else %>
-
-<ul class="cards-container recent-docs">
+<div class="sub-title">Docs</div>
+<ul class="list-container recent-docs">
   <% @docs.each do |doc| %>
-    <li class="card Box recent-doc-item">
+    <li class="list-item list-avatar recent-doc-item">
+      <%= user_avatar_tag(current_user, style: :small, link: false) %>
+      <div class="title">
+        <%= doc_title_tag(doc) %>
+      </div>
       <div class="path">
         <%= repository_path_tag(doc.repository) %>
       </div>
-      <div class="float-right"><%= action_button_tag(doc, :star, undo: true) %></div>
-      <div class="title">
-        <%= doc_title_tag(doc) %>
+      <div class="action"><%= action_button_tag(doc, :star, undo: true) %></div>
+      <div class="time">
+        <%= timeago doc.updated_at %>
       </div>
     </li>
   <% end %>
 </ul>
-
 <% end %>
