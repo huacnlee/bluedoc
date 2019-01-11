@@ -41,25 +41,12 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
   end
 
   test "render sml" do
-    raw = <<~SML
-    ["div",
-      ["span",{"data-type":"color", "style": "color:green"},"",
-        ["a",{"title":"Ruby on Rails","href":"https://rubyonrails.org"},"Ruby on Rails"]
-      ]
-    ]
-    SML
-    out = BookLab::HTML.render_without_cache(raw, format: :sml)
-
-    html = <<~HTML
-    <div>
-      <span data-type="color" style="color:green">
-      <a title="Ruby on Rails" href="https://rubyonrails.org">Ruby on Rails</a>
-      </span>
-    </div>
-    HTML
+    sml = %(["p", { align: "center", indent: 1 }, "Hello world"])
+    html = %(<p style="text-align: center; text-indent: 32px;">Hello world</p>)
+    out = BookLab::HTML.render_without_cache(sml, format: :sml)
 
     assert_html_equal html, out
-    assert_html_equal out, BookLab::HTML.render_without_cache(raw, format: :sml)
+    assert_html_equal out, BookLab::HTML.render_without_cache(sml, format: :sml)
   end
 
   test "markdown heading" do
@@ -157,6 +144,33 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     out = BookLab::HTML.render(raw, format: :markdown)
     svg_code = URI::encode(code.strip)
     assert_equal %(<div class="highlight"><img src="#{Setting.plantuml_service_host}/svg/#{svg_code}" class="plantuml-image"></div>), out
+  end
+
+  test "markdown mathjax" do
+    code = '\int _{a}^{b}f(x)dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\\\\\n * 10 = u'
+    code_1 = '\int _{a}^{b}f(x)dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\n * 10 = u'
+    # puts "--- raw code:\n#{code}"
+    raw = <<~CODE
+    Hello world: $#{code}$ test, this `$name$` will not convert
+
+    ```rb
+    $name = $foo
+    ```
+    CODE
+    svg_code = URI::encode(code_1)
+
+    svg_url = "http://localhost:4010/svg?tex=#{svg_code}"
+    # puts "svg_url: #{svg_url}"
+
+    html = <<~HTML
+    <p>Hello world: <img class="tex-image" src="#{svg_url}"> test, this <code>$name$</code> will not convert</p>
+    <div class="highlight">
+      <pre class="highlight ruby"><code><span class="vg">$name</span> <span class="o">=</span> <span class="vg">$foo</span></code></pre>
+    </div>
+    HTML
+
+    out = BookLab::HTML.render(raw, format: :markdown)
+    assert_html_equal html, out
   end
 
   test "markdown html chars" do

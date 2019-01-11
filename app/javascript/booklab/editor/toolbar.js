@@ -101,6 +101,10 @@ export class Toolbar extends React.Component {
     this.file.click();
   }
 
+  handleVideoClick = () => {
+    this.videoFile.click();
+  }
+
   handleIndent = (ev, increase) => {
     ev.preventDefault();
     const { editor } = this.props;
@@ -109,6 +113,20 @@ export class Toolbar extends React.Component {
     } else {
       editor._setIndentAtRanges(4, increase);
     }
+  }
+
+  handleAlign = (ev, align) => {
+    ev.preventDefault();
+    const { editor } = this.props;
+
+    editor._setTextAlignAtRanges(align);
+  }
+
+  handleAddTex = ev => {
+    ev.preventDefault();
+    const { editor } = this.props;
+    editor._insertMath();
+    return false;
   }
 
   toggleList = (ev, type) => {
@@ -127,9 +145,24 @@ export class Toolbar extends React.Component {
     editor._uploadFileEvent(ev, () => {});
   }
 
+  onVideoPicked = (ev) => {
+    const { editor } = this.props;
+    editor._uploadVideoEvent(ev, () => {});
+  }
+
   renderMarkButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev => this.onClickMark(ev, type);
+    title = title || type;
+
+    return (
+      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
+    );
+  }
+
+  renderAlignButton = (type, icon, title) => {
+    const isActive = this.isActiveMarkup("align-" + type);
+    const onMouseDown = ev => this.handleAlign(ev, type);
     title = title || type;
 
     return (
@@ -161,6 +194,12 @@ export class Toolbar extends React.Component {
           onChange={this.onFilePicked}
           accept="*"
         />
+        <HiddenInput
+          type="file"
+          innerRef={ref => (this.videoFile = ref)}
+          onChange={this.onVideoPicked}
+          accept="video/*"
+        />
         <details ref={this.headingDropdown} className="dropdown details-reset details-overlay bar-button">
           <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
@@ -188,14 +227,21 @@ export class Toolbar extends React.Component {
         <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
         <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
         <span className="bar-divider"></span>
+        {this.renderAlignButton("left", "align-left", "Align Left")}
+        {this.renderAlignButton("center", "align-center", "Align center")}
+        {this.renderAlignButton("right", "align-right", "Align right")}
+        {this.renderAlignButton("justify", "align-justify", "Align justify")}
+        <span className="bar-divider"></span>
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
-        {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
+        {this.renderBlockButton('plantuml', 'Insert PlantUML', 'Insert PlantUML')}
+        <BarButton icon="tex" title="Insert TeX" onMouseDown={e => this.handleAddTex(e)} />
         {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         <span className="bar-divider"></span>
         <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
         <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
-        <BarButton icon="attachment" title="Upload File" onMouseDown={this.handleFileClick} />
+        <BarButton icon="attachment" title="Insert File" onMouseDown={this.handleFileClick} />
+        <BarButton icon="video" title="Insert Video" onMouseDown={this.handleVideoClick} />
       </div>
     </div>;
   }

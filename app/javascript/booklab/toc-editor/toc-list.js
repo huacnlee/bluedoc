@@ -4,9 +4,9 @@ import TocItem from './toc-item';
 
 
 export default SortableContainer(({
-  items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent, sorting,
+  items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
 }) => (
-  <div className={cn('toc-list', 'col-8', { sorting })}>
+  <div className={cn('toc-list', 'col-8')}>
     {items.map(item => (
       <TocItem
         key={`item-${item.key}`}

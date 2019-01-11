@@ -48,6 +48,21 @@ server {
 		gzip on;
 	}
 
+	location /mathjax {
+    rewrite /mathjax/(.*) /$1  break;
+
+		proxy_redirect		 off;
+		proxy_set_header	 X-Forwarded-Proto $scheme;
+		proxy_pass				 http://127.0.0.1:4010/;
+		proxy_cache booklab_cache;
+		proxy_cache_valid 200 300d;
+		proxy_cache_background_update on;
+
+		add_header	Cache-Control public;
+		expires 300d;
+		gzip on;
+	}
+
 	location / {
 		gzip											 on;
 		proxy_redirect						 off;

@@ -141,17 +141,21 @@
     .doc-title {
       text-align: left;
       line-height: 54px;
-      margin-bottom: 40px;
+      margin-bottom: 15px;
       word-break: break-word;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
 
     .doc-info {
+      color: #999;
+      margin-bottom: 50px;
       .editors { margin-right: 10px; }
     }
 
     .doc-reaction {
+      margin: 30px 0;
+
       .reaction-summary-item {
         border: 1px solid #f0f0f0;
         padding: 6px 10px;
@@ -198,6 +202,51 @@
       }
     }
   }
+
+  .between-docs {
+    .btn-link {
+      @extend .btn;
+      padding: 8px 15px;
+      max-width: 40%;
+      @extend .text-overflow;
+      background: #FFF;
+      box-shadow: 0 0 0;
+
+      &:hover {
+        .fas { color: #333; }
+      }
+    }
+
+    .btn-prev {
+      float: left;
+      position: relative;
+      padding-left: 38px;
+
+      &:before {
+        content: "←";
+        color: #aaa;
+        font-size: 18px;
+        position: absolute;
+        display: inline-block;
+        top: 8px;
+        left: 15px;
+      }
+    }
+    .btn-next {
+      float: right;
+      position: relative;
+      padding-right: 38px;
+      &:after {
+        content: "→";
+        color: #aaa;
+        font-size: 18px;
+        position: absolute;
+        display: inline-block;
+        top: 8px;
+        right: 15px;
+      }
+    }
+  }
 }
 
 .doc-body-toc {
@@ -214,6 +263,7 @@
     position: sticky;
     position: -webkit-sticky;
     top: 90px;
+    width: 250px;
     border: 1px solid #e8ebef;
     border-radius: 3px;
     background: #fdfeff;
@@ -299,7 +349,7 @@
     }
   }
 
-  del { background: #FFCFD2; text-decoration: none; }
+  del { background: transparent; text-decoration: line-through; }
   ins { background: #D6FFCB; text-decoration: none; }
 
   .attachment-file {
@@ -360,19 +410,30 @@
 
   .plantuml-image {
     margin-bottom: 15px;
+    background: transparent !important;
+  }
+
+  .tex-image {
+    vertical-align: middle;
+    background: transparent !important;
+    margin-bottom: 0;
+    display: inline-block;
+    padding: 5px;
   }
 }
 
 
 .reader-body:fullscreen {
   height: auto;
-  width: auto;
+  width: 100%;
   overflow: scroll;
 
   .nav-header,
   .doc-sidebar,
   .reader-navbar,
-  .doc-body-toc {
+  .doc-body-toc,
+  .between-docs,
+  .unpublished-draft-tip {
     display: none !important;
   }
   .doc-main {
@@ -409,7 +470,7 @@
   }
 
   .doc-title {
-    padding: 50px 0;
+    padding: 50px 0 10px 0;
     margin: 0;
     text-align: center;
     font-size: 45px;

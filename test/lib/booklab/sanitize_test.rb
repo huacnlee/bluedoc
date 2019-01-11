@@ -95,6 +95,15 @@ class BookLab::SanitizeTest < ActionView::TestCase
     assert_equal "<p>The &gt; or &lt; will &gt;&lt; keep, and <b>will</b> strong.</p>", out
   end
 
+  test "video" do
+    raw = <<~VIDEO
+    <video controls="controls" preload="no" width="300" height="200">
+      <source src="/uploads/foo" type="video/mov">
+    </video>
+    VIDEO
+    assert_sanitize raw, raw
+  end
+
   private
 
     def assert_sanitize(expected, html)

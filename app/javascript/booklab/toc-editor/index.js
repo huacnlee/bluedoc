@@ -17,12 +17,19 @@ const hotKeyMap = [
   'tab',
   'shift+tab',
   'command+up',
+  'ctrl+up',
   'command+down',
+  'ctrl+down',
   'command+left',
+  'ctrl+left',
   'command+right',
+  'ctrl+right',
   'command+backspace',
+  'ctrl+backspace',
   'command+z',
+  'ctrl+z',
   'command+shift+z',
+  'ctrl+shift+z',
   'enter',
 ];
 
@@ -113,13 +120,25 @@ class TocEditor extends React.Component {
       case 'command+right':
         this.changeItemIndent(activeIndex, 1);
         break;
+      case 'ctrl+right':
+        this.changeItemIndent(activeIndex, 1);
+        break;
       case 'command+left':
+        this.changeItemIndent(activeIndex, -1);
+        break;
+      case 'ctrl+left':
         this.changeItemIndent(activeIndex, -1);
         break;
       case 'command+up':
         this.handleHotKeySort(-1);
         break;
+      case 'ctrl+up':
+        this.handleHotKeySort(-1);
+        break;
       case 'command+down':
+        this.handleHotKeySort(1);
+        break;
+      case 'ctrl+down':
         this.handleHotKeySort(1);
         break;
       case 'enter':
@@ -128,10 +147,19 @@ class TocEditor extends React.Component {
       case 'command+backspace':
         this.onDeleteItem(activeIndex);
         break;
+      case 'ctrl+backspace':
+        this.onDeleteItem(activeIndex);
+        break;
       case 'command+z':
         this.memoryUndo();
         break;
+      case 'ctrl+z':
+        this.memoryUndo();
+        break;
       case 'command+shift+z':
+        this.memoryRedo();
+        break;
+      case 'ctrl+shift+z':
         this.memoryRedo();
         break;
       default:
@@ -174,7 +202,7 @@ class TocEditor extends React.Component {
   }
 
   // sort Toc Node
-  onSortEnd = ({ oldIndex, newIndex }) => {
+  onSortEnd = ({ oldIndex, newIndex }, e) => {
     const isDrag = this.sorting;
     const { items, activeIndex } = this.state;
     const array = items.slice(0);
@@ -185,7 +213,8 @@ class TocEditor extends React.Component {
     let tempIndex = newIndex;
     this.sorting = false;
     if (oldIndex === newIndex) {
-      this.forceUpdate();
+      const offsetX = e.clientX - this.clientX || 0;
+      this.changeItemIndent(oldIndex, Math.floor(offsetX / 20));
       return;
     }
     if (direction === 'up') {
@@ -203,11 +232,19 @@ class TocEditor extends React.Component {
     }
     const {
       depth = 0,
-      showFolder = false,
-      folder = false,
     } = getCurNode(targetIndex, this.formatTocList) || {};
-    const targetDepth = showFolder && !folder ? depth + 1 : depth;
-    const disDepth = isDrag ? oldDepth - targetDepth : 0;
+    let disDepth = 0;
+    if (isDrag) {
+      const offsetX = e.clientX - this.clientX || 0;
+      const tempDepth = oldDepth + Math.floor(offsetX / 20);
+      if (tempDepth > depth + 1) {
+        disDepth = oldDepth - depth - 1;
+      } else if (tempDepth < 0) {
+        disDepth = oldDepth;
+      } else {
+        disDepth = oldDepth - tempDepth;
+      }
+    }
     const tempArr = array.splice(oldIndex, length + 1).map(v => ({
       ...v,
       depth: v.depth - disDepth,
@@ -223,16 +260,19 @@ class TocEditor extends React.Component {
   };
 
   // sort start Toc
-  onSortStart = ({ index }) => {
+  onSortStart = ({ index }, e) => {
+    this.clientX = e.clientX;
     this.sorting = true;
     this.setState({ activeIndex: index });
   }
 
   // update TocNode Content
-  onChangeItem = (index, item, needMemory) => {
+  onChangeItem = ({ index, item, memory }) => {
     const { items } = this.state;
-    items[index] = item;
-    if (needMemory) {
+    if (item && index) {
+      items[index] = item;
+    }
+    if (memory) {
       this.updateValue(items);
     } else {
       this.setState({ items: [...items] });
@@ -273,12 +313,17 @@ class TocEditor extends React.Component {
     const curNode = getCurNode(index, this.formatTocList);
     if (!curNode) return;
     const { depth, maxDepth } = curNode;
+    let tempDirection = direction;
     const nextDepth = depth + direction;
-    if (nextDepth < 0 || nextDepth > maxDepth) return;
+    if (nextDepth < 0) {
+      tempDirection = -depth;
+    } else if (nextDepth > maxDepth) {
+      tempDirection = maxDepth - depth;
+    }
     const { items } = this.state;
     const length = getFolderLength(index, items);
     let folderArr = items.slice(index, index + length + 1);
-    folderArr = folderArr.map(v => ({ ...v, depth: v.depth + direction }));
+    folderArr = folderArr.map(v => ({ ...v, depth: v.depth + tempDirection }));
     items.splice(index, length + 1, ...folderArr);
     this.updateValue(items);
   }
@@ -306,9 +351,9 @@ class TocEditor extends React.Component {
           onChangeItem={this.onChangeItem}
           onSortStart={this.onSortStart}
           onSortEnd={this.onSortEnd}
+          onSortMove={this.onSortMove}
           onSelectItem={this.onSelectItem}
           onIndent={this.changeItemIndent}
-          sorting={this.sorting}
         />
         <Hotkeys keyName={hotKeyMap.join(',')} onKeyDown={this.handleHotKey}></Hotkeys>
       </div>

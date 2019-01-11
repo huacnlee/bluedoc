@@ -35,8 +35,8 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, body: "<p>Hello <strong>world</strong></p>", format: :html)
     assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
 
-    doc = create(:doc, body_sml: %(["div", ["span",{"title":"BookLab"},"BookLab SML"]]), format: :sml)
-    assert_equal %(<div><span title="BookLab">BookLab SML</span></div>), doc.body_html
+    doc = create(:doc, body_sml: %(["div", ["span",{},"BookLab SML"]]), format: :sml)
+    assert_equal %(<div><span>BookLab SML</span></div>), doc.body_html
   end
 
   test "Body touch" do
@@ -156,20 +156,24 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, body: body)
     assert_equal body, doc.body_plain
     assert_equal doc.body_plain, doc.draft_body_plain
+    assert_equal false, doc.draft_unpublished?
 
     doc.update(draft_body: "BBB")
     assert_equal body, doc.body_plain
     assert_equal "BBB", doc.draft_body_plain
+    assert_equal true, doc.draft_unpublished?
   end
 
   test ".draft_body_sml" do
     doc = create(:doc, body_sml: "AAA")
     assert_equal "AAA", doc.body_sml_plain
     assert_equal doc.body_sml_plain, doc.draft_body_sml_plain
+    assert_equal false, doc.draft_unpublished?
 
     doc.update(draft_body_sml: "BBB")
     assert_equal "AAA", doc.body_sml_plain
     assert_equal "BBB", doc.draft_body_sml_plain
+    assert_equal true, doc.draft_unpublished?
   end
 
   test "create_new" do
@@ -343,5 +347,27 @@ class DocTest < ActiveSupport::TestCase
     repo.reload
     assert_match "started-getting1", repo.toc_text
     assert_match "Started Getting1", repo.toc_text
+  end
+
+  test "prev_and_next_of_docs" do
+    repo = create(:repository)
+    docs = create_list(:doc, 5, repository: repo)
+
+    repo.stub(:read_ordered_docs, docs) do
+      # with first
+      result = docs[0].prev_and_next_of_docs
+      assert_nil result[:prev]
+      assert_equal docs[1], result[:next]
+
+      # with normal
+      result = docs[2].prev_and_next_of_docs
+      assert_equal docs[1], result[:prev]
+      assert_equal docs[3], result[:next]
+
+      # with last
+      result = docs[4].prev_and_next_of_docs
+      assert_equal docs[3], result[:prev]
+      assert_nil result[:next]
+    end
   end
 end

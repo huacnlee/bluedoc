@@ -45,6 +45,7 @@ gem "activestorage-aliyun"
 gem "notifications"
 gem "action-store"
 gem "exception-track"
+gem "status-page"
 
 gem "html-pipeline"
 gem "html-pipeline-rouge_filter"

@@ -37,9 +37,28 @@ class Doc < ApplicationRecord
     retry
   end
 
+  # return next and prev of docs in same repository
+  # { next: Doc, prev: Doc }
+  def prev_and_next_of_docs
+    return @prev_and_next_of_docs if defined? @prev_and_next_of_docs
+    result = { next: nil, prev: nil }
+    ordered_docs = self.repository.read_ordered_docs
+    idx = ordered_docs.find_index { |doc| doc.id == self.id }
+    return nil if idx.nil?
+    if idx < ordered_docs.length
+      result[:next] = ordered_docs[idx + 1]
+    end
+    if idx > 0
+      result[:prev] = ordered_docs[idx - 1]
+    end
+    @prev_and_next_of_docs = result
+    @prev_and_next_of_docs
+  end
+
   class << self
     def create_new(repo, user_id, slug: nil)
       doc = Doc.new
+      doc.format = "sml"
       doc.repository_id = repo.id
       doc.last_editor_id = user_id
       doc.title = "New Document"

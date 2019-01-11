@@ -13,7 +13,8 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       admin_emails: "foo@gmail.com\nbar@gmail.com",
       application_footer_html: "<span>hello</span>",
       dashboard_sidebar_html: "<span>world</span>",
-      plantuml_service_host: "http://my-host.com"
+      plantuml_service_host: "http://my-plantuml.com",
+      mathjax_service_host: "http://my-mathjax.com",
     }
 
     sign_in_admin @user

@@ -62,7 +62,16 @@ class RepositoriesController < Users::ApplicationController
   def docs
     authorize! :read, @repository
 
-    @docs = @repository.docs.includes(:last_editor, :share).recent.page(params[:page]).per(50)
+
+    @docs = @repository.docs.includes(:last_editor, :share)
+
+    if params[:sort] == "created"
+      @docs = @docs.order("id asc")
+    else
+      @docs = @docs.recent
+    end
+
+    @docs = @docs.page(params[:page]).per(50)
   end
 
   # GET /:user/:repo/docs/search

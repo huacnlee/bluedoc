@@ -9,7 +9,7 @@ module BookLab
       ::HTML::Pipeline.new(pipelineClasses)
     end
 
-    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml)
+    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax)
     SmlPileline = constantizePilelines(:sml, :plantuml)
     PublicAttachmentPipeline = constantizePilelines(:public_attachments)
 

@@ -3,6 +3,7 @@
 module Admin
   class DashboardsController < Admin::ApplicationController
     def show
+      @statuses = StatusPage.check(request: request)
     end
 
     def reindex

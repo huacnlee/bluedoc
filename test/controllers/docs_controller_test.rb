@@ -250,6 +250,83 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "GET /:user/:repo/:slug with check prev / next link" do
+    docs = create_list(:doc, 4, repository: @repo)
+
+    get docs[0].to_path
+    assert_equal 200, response.status
+    assert_select ".between-docs" do
+      assert_select "a.btn-prev", 0
+      assert_select "a.btn-next", text: docs[1].title do
+        assert_select "[href=?]", docs[1].to_path
+      end
+    end
+
+    get docs[1].to_path
+    assert_equal 200, response.status
+    assert_select ".between-docs" do
+      assert_select "a.btn-prev", text: docs[0].title do
+        assert_select "[href=?]", docs[0].to_path
+      end
+      assert_select "a.btn-next", text: docs[2].title do
+        assert_select "[href=?]", docs[2].to_path
+      end
+    end
+
+    get docs[3].to_path
+    assert_equal 200, response.status
+    assert_select ".between-docs" do
+      assert_select "a.btn-prev", text: docs[2].title do
+        assert_select "[href=?]", docs[2].to_path
+      end
+      assert_select "a.btn-next", 0
+    end
+  end
+
+  test "GET /:user/:repo/:slug with draft unpublished" do
+    doc = create(:doc, body: "Hello world", repository: @repo)
+    doc.update(draft_body: "Hello **World**")
+    assert_equal true, doc.draft_unpublished?
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip", 0
+
+    sign_in_role :reader, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip", 0
+
+    sign_in_role :editor, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip" do
+      assert_select ".flash" do
+        assert_select "a.btn-preview" do
+          assert_select "[href=?]", doc.to_path("?mode=draft")
+        end
+        assert_select "a.btn-edit" do
+          assert_select "[href=?]", doc.to_path("/edit")
+        end
+      end
+    end
+    assert_select ".markdown-body", html: doc.body_html
+
+    get doc.to_path("?mode=draft")
+    assert_equal 200, response.status
+    assert_select ".unpublished-draft-tip" do
+      assert_select ".flash.flash-error" do
+        assert_select "a.btn-view" do
+          assert_select "[href=?]", doc.to_path
+        end
+        assert_select "a.btn-edit" do
+          assert_select "[href=?]", doc.to_path("/edit")
+        end
+      end
+    end
+    assert_select ".markdown-body", html: doc.draft_body_html
+  end
+
   test "GET /:user/:repo/:slug with doc not exist" do
     # allow open page even doc not exist
     get @repo.to_path("/not-exist-doc")
@@ -309,7 +386,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       draft_title: "Draft New #{doc.title}",
       draft_body: "Draft New body",
       draft_body_sml: "Draft New body sml",
-      slug: "new-#{doc.slug}"
+      slug: "new-#{doc.slug}",
+      format: "sml"
     }
 
     assert_require_user do
@@ -345,6 +423,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal doc_params[:draft_body], doc.draft_body_plain
     assert_equal doc_params[:draft_body_sml], doc.draft_body_sml_plain
     assert_equal doc_params[:title], doc.title
+    assert_not_equal doc_params[:format], doc.format
     assert_equal user.id, doc.last_editor_id
   end
 
