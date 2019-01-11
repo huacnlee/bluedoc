@@ -234,7 +234,7 @@ export class Toolbar extends React.Component {
         <span className="bar-divider"></span>
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
-        {this.renderBlockButton('plantuml', 'Insert PlantUML', 'Insert PlantUML')}
+        {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
         <BarButton icon="tex" title="Insert TeX" onMouseDown={e => this.handleAddTex(e)} />
         {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         <span className="bar-divider"></span>
