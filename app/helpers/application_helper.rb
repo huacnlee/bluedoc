@@ -38,6 +38,8 @@ module ApplicationHelper
   end
 
   def timeago(t)
+    return "" if t.blank?
+
     if t < 2.weeks.ago
       return content_tag(:span, class: "time", title: t.iso8601) { l t, format: :short }
     end
