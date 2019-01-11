@@ -42,6 +42,17 @@ class SmlableTest < ActiveSupport::TestCase
     BookLab::HTML.stub(:render, stub_method) do
       assert_equal "Render public", doc.body_public_html
     end
+
+    # fallback to markdown
+    doc = create(:doc, body: "Hello **world**", body_sml: "[invalid {} sml format", format: :sml)
+    assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
+    exception = ExceptionTrack::Log.last
+    assert_equal "doc:#{doc.id} body_html with SML render faield, fallback to markdown", exception.title
+    assert_match doc.body_sml_plain, exception.body
+    assert_match "Psych::SyntaxError", exception.body
+    assert_equal "<p>Hello <strong>world</strong></p>", doc.body_public_html
+    doc = create(:doc, draft_body: "Hello **world**", draft_body_sml: "[invalid {} sml format", format: :sml)
+    assert_equal "<p>Hello <strong>world</strong></p>", doc.draft_body_html
   end
 
   test "Version" do

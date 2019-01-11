@@ -20,7 +20,7 @@ end
       <div class="description">Welcome to use BookLab</div>
     </div>
 
-    <% if auth_info %>
+    <% if auth_info.present? %>
     <div class="flash flash-warn mt-5">
       <strong>Complete your account info</strong>
       <p>You must complete the below form for sign up with <b><%= resource.omniauth_provider&.humanize %></b></p>
@@ -31,7 +31,7 @@ end
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "/shared/error_messages", target: resource %>
 
-      <% if auth_info %>
+      <% if auth_info.present? %>
         <%= f.hidden_field :omniauth_provider %>
         <%= f.hidden_field :omniauth_uid %>
         <%= f.hidden_field :name %>

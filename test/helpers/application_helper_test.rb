@@ -46,6 +46,8 @@ class ApplicationHelperTest < ActionView::TestCase
     t = 1.month.ago
     html = timeago(t)
     assert_equal %(<span class="time" title="#{t.iso8601}">#{l t, format: :short}</span>), html
+
+    assert_equal "", timeago(nil)
   end
 
   test "action_button_tag with Repository" do

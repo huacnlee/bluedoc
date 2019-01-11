@@ -19,29 +19,31 @@ module Smlable
   end
 
   def body_html
-    case self.format
-    when "sml"
-      BookLab::HTML.render(self.body_sml_plain, format: :sml)
-    else
-      BookLab::HTML.render(self.body_plain, format: self.format)
-    end
-  end
-
-  def draft_body_html
-    case self.format
-    when "sml"
-      BookLab::HTML.render(self.draft_body_sml_plain, format: :sml)
-    else
-      BookLab::HTML.render(self.draft_body_plain, format: self.format)
-    end
+    render_body_html(self.body_sml_plain, self.body_plain, format: self.format)
   end
 
   def body_public_html
-    case self.format
-    when "sml"
-      BookLab::HTML.render(self.body_sml_plain, format: :sml, public: true)
-    else
-      BookLab::HTML.render(self.body_plain, format: self.format, public: true)
-    end
+    render_body_html(self.body_sml_plain, self.body_plain, format: self.format, public: true)
   end
+
+  def draft_body_html
+    render_body_html(self.draft_body_sml_plain, self.draft_body_plain, format: self.format)
+  end
+
+  private
+    def render_body_html(sml, markdown, opts = {})
+      if opts[:format].to_sym == :sml
+        begin
+          return BookLab::HTML.render(sml, format: :sml, public: opts[:public])
+        rescue => e
+          error_body = sml
+          BookLab::Error.track(e,
+            title: "doc:#{self.id} body_html with SML render faield, fallback to markdown",
+            body: sml)
+          return BookLab::HTML.render(markdown, format: :markdown, public: opts[:public])
+        end
+      end
+
+      BookLab::HTML.render(markdown, format: :markdown, public: opts[:public])
+    end
 end
