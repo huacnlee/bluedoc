@@ -8,6 +8,10 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
 
+    assert_no_match "Complete your account info", response.body
+    assert_select %(input[name="user[omniauth_provider]"]), 0
+    assert_select %(input[name="user[omniauth_uid]"]), 0
+
     # with anonymous disable
     Setting.stub(:anonymous_enable?, false) do
       get new_user_registration_path
