@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         post :restore
       end
     end
+    resources :comments
   end
 
   # short attachment url

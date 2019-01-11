@@ -1,0 +1,42 @@
+<%= render 'base' %>
+
+<div class="subnav">
+  <nav class="subnav-links">
+    <% if params[:q] %>
+    <a href="<%= comments_path %>" class="subnav-item">All</a>
+    <% end %>
+    <a href="<%= new_admin_comment_path %>" class="subnav-item">New</a>
+  </nav>
+  <div class="subnav-search float-left">
+    <form action="" method="GET">
+      <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" aria-label="Search">
+      <%= icon_tag "search", class: "subnav-search-icon" %>
+    </form>
+  </div>
+</div>
+
+<div class="admin-admin_comments">
+  <table class="table table-striped">
+    <tr class="head">
+      <td></td>
+    </tr>
+    <% @comments.each do |item| %>
+    <tr id="comment-<%= item.id %>" class="<%= cycle("","even") %>">
+      <td>
+        <div class="mb-2"><%= link_to item.commentable_title, item.to_url, class: "link-gray" %></div>
+        <div class="markdown-body my-4"><%= item.body_plain %></div>
+        <div class="info text-gray clearfix">
+          <span class="mr-2">#<%= item.id %></span>
+          <%= user_avatar_tag(item.user, style: :tiny) %> <%= user_name_tag(item.user) %> created at <%= timeago(item.created_at) %>
+
+          <div class="opts float-right">
+            <%= link_to icon_tag("pencil"), edit_admin_comment_path(item.id) %>
+            <%= link_to icon_tag("trash"), admin_comment_path(item.id), method: :delete, remote: true, 'data-confirm' => 'Are you sure delete this item?' %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @comments %>
+</div>

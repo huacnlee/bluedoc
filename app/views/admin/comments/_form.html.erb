@@ -1,0 +1,13 @@
+
+<%= form_for([:admin,@comment]) do |f| %>
+  <%= render "/shared/error_messages", target: @comment  %>
+
+  <div class="form-group">
+    <%= f.label :body, class: "control-label" %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-action">
+    <%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%= link_to "Cancel", admin_comments_path %>
+  </div>
+<% end %>
