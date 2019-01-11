@@ -13,7 +13,7 @@
           <ul class="cards-container recent-docs">
             <% @recent_docs.each do |item| %>
               <li class="card card-avatar recent-doc-item">
-                <%= user_avatar_tag(current_user, style: :small, link: false) %>
+                <%= user_avatar_tag(item.subject&.repository&.user, style: :small, link: false) %>
                 <div class="path">
                   <%= repository_path_tag(item.subject&.repository) %>
                 </div>
