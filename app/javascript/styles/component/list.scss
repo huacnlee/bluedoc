@@ -1,5 +1,5 @@
 .list-container {
-  
+
 }
 
 .list-item {
@@ -10,7 +10,6 @@
   border-bottom: 1px solid #E6E6E6;
   position: relative;
   &:hover {
-    border-bottom: 1px solid $ThemeColor;
   }
   &.list-avatar {
     padding-left: 47px;
@@ -44,10 +43,11 @@
     min-width: 120px;
     margin-right: 20px;
     .fas {
+      font-size: 16px;
       margin-right: 5px;
     }
   }
-  .time {
+  .time-box {
     position: absolute;
     right: 0;
     bottom: 15px;
@@ -59,6 +59,14 @@
     right: 0;
     top: 20px;
     font-size: 18px;
+
+    a {
+      .fas {
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
     a span {
       display: none;
     }

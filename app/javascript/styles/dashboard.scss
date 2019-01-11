@@ -14,7 +14,7 @@
     margin-bottom: 20px;
     color: #111;
   }
-  
+
   .dashboard-section {
     margin-bottom: 40px;
   }
@@ -55,17 +55,25 @@
         margin-bottom: 30px;
       }
       i.fas {
+        font-size: 16px;
         color: #979797;
         margin-right: 5px;
       }
       &.selected, &:hover {
-        color: $ThemeColor;
+        color: $primary;
         i.fas {
           color: inherit;
         }
       }
       &.depth-1 {
-        text-indent: 15px;
+        color: #999;
+        text-indent: 10px;
+        .fas { opacity: 0; }
+
+        &.selected {
+          color: $primary;
+          .fas { opacity: 1; }
+        }
       }
     }
   }

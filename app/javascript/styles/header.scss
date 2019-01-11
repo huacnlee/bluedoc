@@ -20,7 +20,7 @@
       color: inherit;
     }
   }
-  
+
   .dropdown {
     margin-right: 20px;
   }
@@ -33,7 +33,7 @@
   .dropdown-menu {
     font-size: 14px;
     line-height: 1.5;
-    color: $TextMain;
+    color: $body-color;
   }
   .avatar { vertical-align: middle; width: 20px !important; height: 20px !important; }
 }

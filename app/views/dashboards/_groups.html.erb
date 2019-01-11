@@ -16,7 +16,7 @@
     <div class="info">
       <span class="members"><%= icon_tag("user") %> <%= item.members_count %></span>
     </div>
-    <span class="time"><%= timeago item.created_at %></span>
+    <div class="time-box"><%= timeago item.created_at %></div>
   </li>
   <% end %>
 </ul>

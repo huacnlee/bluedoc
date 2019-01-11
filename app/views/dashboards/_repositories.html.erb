@@ -22,9 +22,9 @@
         <%= icon_tag("watches") %> <%= item.subject.watches_count %>
       </span>
     </div>
-    <span class="time">
-        <%= timeago item.updated_at %>
-    </span>
+    <div class="time-box">
+      <%= timeago item.updated_at %>
+    </div>
   </li>
   <% end %>
 </ul>
