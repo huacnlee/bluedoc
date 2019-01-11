@@ -8,11 +8,11 @@ ExceptionTrack.configure do
   # self.environments = %i(development production)
 end
 
-# ExceptionNotification.configure do |config|
-#   config.ignored_exceptions += %w(ActionView::TemplateError
-#                                   ActionController::InvalidAuthenticityToken
-#                                   ActionController::BadRequest
-#                                   ActionView::MissingTemplate
-#                                   ActionController::UrlGenerationError
-#                                   ActionController::UnknownFormat)
-# end
+ExceptionNotification.configure do |config|
+  config.ignored_exceptions += %w(ActionView::TemplateError
+                                  ActionController::InvalidAuthenticityToken
+                                  ActionController::BadRequest
+                                  ActionView::MissingTemplate
+                                  ActionController::UrlGenerationError
+                                  ActionController::UnknownFormat)
+end
