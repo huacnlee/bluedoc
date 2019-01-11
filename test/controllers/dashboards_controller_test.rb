@@ -100,12 +100,12 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     get "/dashboard/stars"
     assert_equal 200, response.status
     assert_select ".dashboard-repos .recent-repo-item", 2
-    # assert_select ".UnderlineNav-item.selected", text: "Repositories"
+    assert_select ".dashboard-menu-item.selected", text: "Repositories"
   end
 
-  test "GET /dashboard/stars?tab=docs" do
+  test "GET /dashboard/stars/docs" do
     assert_require_user do
-      get "/dashboard/stars?tab=docs"
+      get "/dashboard/stars/docs"
     end
 
     doc0 = create(:doc)
@@ -115,10 +115,10 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     @user.star_doc(doc1)
 
     sign_in @user
-    get "/dashboard/stars?tab=docs"
+    get "/dashboard/stars/docs"
     assert_equal 200, response.status
     assert_select ".recent-docs .recent-doc-item", 2
-    # assert_select ".UnderlineNav-item.selected", text: "Docs"
+    assert_select ".dashboard-menu-item.selected", text: "Docs"
   end
 
   test "GET /dashboard/watches" do

@@ -4,7 +4,7 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <% if params[:tab] == "docs" %>
+      <% if action_name == "stars_docs" %>
         <div class="sub-title">Docs</div>
         <%= render "action_docs" %>
         <%= paginate @docs %>

@@ -31,12 +31,15 @@ class DashboardsController < ApplicationController
     @user_actives = current_user.user_actives.docs.page(params[:page]).per(12)
   end
 
+  # GET /dashboard/stars
   def stars
-    if params[:tab] == "docs"
-      @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(12)
-    else
-      @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
-    end
+    @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
+  end
+
+  # GET /dashboard/stars/docs
+  def stars_docs
+    @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(12)
+    render "stars"
   end
 
   def watches
