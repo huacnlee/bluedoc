@@ -260,7 +260,8 @@
 
     table tr,
     table td,
-    .math-box {
+    .math-box,
+    .image {
       &[data-active=true],
       [data-active=true] {
          &:before {
