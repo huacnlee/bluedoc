@@ -1,8 +1,8 @@
 <% if activity.target && activity.target.is_a?(Repository) %>
 <div class="info">
   <%= user_name_tag(activity.actor) %> <span class="text-gray">starred</span> <%= repository_path_tag(activity.target) %>
-  <span class="time"><%= timeago activity.created_at %></span>
 </div>
+<span class="time"><%= timeago activity.created_at %></span>
 <div class="detail">
   <%= render "/repositories/card", repository: activity.target %>
 </div>

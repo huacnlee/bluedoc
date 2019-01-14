@@ -6,5 +6,5 @@
     <%= repository_name_tag(activity.target&.subject) %>
   <% end%>
   <span class="role">as <strong><%= activity.target&.role %></strong></span>
-  <span class="time"><%= timeago activity.created_at %></span>
 </div>
+<span class="time"><%= timeago activity.created_at %></span>

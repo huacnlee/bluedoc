@@ -12,7 +12,7 @@
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 20px;
-    color: #111;
+    color: $text-main;
   }
 
   .dashboard-section {
@@ -48,7 +48,7 @@
     .dashboard-menu-item {
       line-height: 20px;
       display: block;
-      color: #111;
+      color: $text-main;
       text-decoration: none;
       margin-bottom: 10px;
       &.last {
@@ -66,7 +66,7 @@
         }
       }
       &.depth-1 {
-        color: #999;
+        color: $text-gray-light;
         text-indent: 10px;
         .fas { opacity: 0; }
 
@@ -82,5 +82,58 @@
     .dashboard-menu {
       display: block;
     }
+  }
+}
+
+// activity styles
+.activity-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 47px;
+  .avatar-box {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+  .infos {
+    font-size: 14px;
+    color: $text-gray-light;
+    a { 
+      color: $text-main
+    }
+    .time {
+      font-size: 12px;
+    }
+  }
+  .detail {
+    padding-top: 10px;
+  }
+}
+
+.more-button {
+  button {
+    font-size: 14px;
+    color: $text-main;
+    border: none;
+    padding: 5px 0;
+    box-shadow: none;
+  }
+}
+
+.user-card {
+  position: relative;
+  padding-left: 47px;
+  font-size: 13px;
+  .user-display-name {
+    color: $text-main;
+    margin-right: 5px;
+  }
+  .user-name {
+    color: $text-gray;
   }
 }

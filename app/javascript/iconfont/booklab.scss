@@ -5,28 +5,13 @@ http://fontello.com
 */
 @font-face {
   font-family: 'booklab';
-  src: url(~booklab/iconfont/booklab.eot);
-  src: url(~booklab/iconfont/booklab.eot#iefix) format('embedded-opentype'),
-       url(~booklab/iconfont/booklab.woff) format('woff'),
-       url(~booklab/iconfont/booklab.ttf) format('truetype'),
-       url(~booklab/iconfont/booklab.svg#booklab) format('svg');
+  src: url(~iconfont/booklab.eot);
+  src: url(~iconfont/booklab.eot#iefix) format('embedded-opentype'),
+       url(~iconfont/booklab.woff) format('woff'),
+       url(~iconfont/booklab.ttf) format('truetype'),
+       url(~iconfont/booklab.svg#booklab) format('svg');
   font-weight: normal;
   font-style: normal;
-}
-
-.fas {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  -webkit-font-feature-settings: normal;
-  font-feature-settings: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 0;
-  font-size: 20px;
-  text-align: center;
-  vertical-align: middle;
 }
 
 .btn-sm .fas {
@@ -34,7 +19,6 @@ http://fontello.com
 }
 
 [data-icon]:before {
-  font-family: "booklab" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -48,7 +32,6 @@ http://fontello.com
 
 [class^="fa-"]:before,
 [class*=" fa-"]:before {
-  font-family: "booklab" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;

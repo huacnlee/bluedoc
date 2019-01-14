@@ -15,7 +15,7 @@
   }
   .logo {
     font-size: 15px;
-    color: #111;
+    color: $text-main;
     a {
       color: inherit;
     }
@@ -33,7 +33,12 @@
   .dropdown-menu {
     font-size: 14px;
     line-height: 1.5;
-    color: $body-color;
+    color: $text-main;
   }
-  .avatar { vertical-align: middle; width: 20px !important; height: 20px !important; }
+  .avatar { 
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
 }

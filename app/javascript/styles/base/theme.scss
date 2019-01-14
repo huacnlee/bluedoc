@@ -1,7 +1,9 @@
-$body-color: #111;
-$gray: #777;
-$primary: #2F70FF;
+// text color
+$text-main: #111;
+$text-white: #FFF;
+$text-gray: #777;
+$text-gray-light: #999;
 
-[data-text-main] {
-  color: $body-color;
-}
+// theme color
+$primary: #2F70FF;
+$white: #FFF;

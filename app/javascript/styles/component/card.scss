@@ -6,8 +6,14 @@
   padding: 12px 20px;
   line-height: 1.4;
   list-style: none;
+  position: relative;
+  &:hover {
+    background: #F7F7F7;
+    .action {
+      visibility: visible;
+    }
+  }
   &.card-avatar {
-    position: relative;
     padding-left: 67px;
   }
   .avatar {
@@ -18,16 +24,13 @@
     height: 32px;
     border-radius: 50%;
   }
-  &:hover {
-    background: #F7F7F7;
-  }
   .path {
-    a { color: #777; }
+    color: $text-gray;
     font-size: 12px;
     margin-bottom: 5px;
   }
   .title {
-    a { color: #000; }
+    color: #000;
     font-size: 15px;
     padding-right: 20px;
     padding-bottom: 10px;
@@ -38,6 +41,16 @@
   }
   .info {
     font-size: 12px;
-    color: #777;
+    color: $text-gray;
+  }
+  .action {
+    visibility: hidden;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    color: #979797;
+    .fas {
+      cursor: pointer;
+    }
   }
 }

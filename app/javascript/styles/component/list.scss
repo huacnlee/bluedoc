@@ -23,7 +23,7 @@
     border-radius: 50%;
   }
   .description, .path {
-    color: #777;
+    color: $text-gray;
     a { color: inherit; }
     font-size: 12px;
     margin-bottom: 5px;
@@ -52,7 +52,7 @@
     right: 0;
     bottom: 15px;
     font-size: 12px;
-    color: #777;
+    color: $text-gray;
   }
   .action {
     position: absolute;

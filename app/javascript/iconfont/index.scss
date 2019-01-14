@@ -1,6 +1,9 @@
+@import './booklab.scss';
 @import './iconfont.scss';
 
 .fas {
+  font-family: 'iconfont', 'booklab';
+  vertical-align: middle;
   text-align: center;
   display: inline-block;
   -webkit-font-feature-settings: normal;
@@ -10,6 +13,7 @@
   line-height: 0;
   font-size: 1em;
 }
+
 // hack
 .selected {
   .fa-dashboard {

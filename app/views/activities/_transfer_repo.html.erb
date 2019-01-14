@@ -1,5 +1,5 @@
 <div class="info">
   <%= user_name_tag(activity.actor) %> <span class="text-gray">transfer</span> <%= repository_name_tag(activity.target) %>
   <span class="text-gray">to <%= user_name_tag(activity.target&.user) %></span>
-  <span class="time"><%= timeago activity.created_at %></span>
 </div>
+<span class="time"><%= timeago activity.created_at %></span>

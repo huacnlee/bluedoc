@@ -1,5 +1,5 @@
 <form class="more-button mt-3" action="<%= (defined?(url) ? url : request.fullpath )%>" data-remote="true" method="GET">
   <input type="hidden" name="page" value="<%= (params[:page] || 1).to_i + 1 %>" >
   <input type="hidden" name="format" value="js" >
-  <button type="submit" class="btn btn-block">More</button>
+  <button type="submit" class="btn btn-block">More...</button>
 </form>
