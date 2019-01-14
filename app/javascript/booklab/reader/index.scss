@@ -149,7 +149,7 @@
 
     .doc-info {
       color: #999;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       .editors { margin-right: 10px; }
     }
 
@@ -367,6 +367,15 @@
 
   img {
     height: auto;
+  }
+
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child,
+  & > h4:first-child,
+  & > h5:first-child,
+  & > h6:first-child {
+    padding-top: 0px !important;
   }
 
   h1,
