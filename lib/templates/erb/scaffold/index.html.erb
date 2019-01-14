@@ -2,9 +2,9 @@
 
 <div class="subnav">
   <nav class="subnav-links">
-    <% if params[:q] %>
+    <%% if params[:q] %>
     <a href="<%%= <%= plural_file_name %>_path %>" class="subnav-item">All</a>
-    <% end %>
+    <%% end %>
     <a href="<%%= new_<%= singular_table_name %>_path %>" class="subnav-item">New</a>
   </nav>
   <div class="subnav-search float-left">

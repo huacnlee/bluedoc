@@ -29,7 +29,9 @@
       <td>
         <div><%= link_to item.name, admin_repository_path(item.id) %></div>
         <div class="mt-1 text-gray">
-          <%= link_to item.user&.slug, admin_repositories_path(user_id: item.user_id), class: "link-gray" %> /
+          <% if item.user %>
+            <%= link_to item.user&.slug, admin_repositories_path(user_id: item.user_id), class: "link-gray" %> /
+          <% end %>
           <%= item.slug %>
         </div>
       </td>

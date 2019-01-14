@@ -30,8 +30,12 @@
         <div><%= link_to item.title, admin_doc_path(item.id) %></div>
         <div class="mt-1 text-gray"><%= item.slug %></div>
         <div class="mt-1">
-          <%= link_to item.repository&.user&.name, admin_user_path(item.repository&.user_id), class: "link-gray-dark" %> /
-          <%= link_to item.repository&.name, admin_docs_path(repository_id: item.repository_id), class: "link-gray-dark" %>
+          <% if item.repository&.user %>
+            <%= link_to item.repository&.user&.name, admin_user_path(item.repository&.user_id), class: "link-gray-dark" %> /
+          <% end %>
+          <% if item.repository %>
+            <%= link_to item.repository&.name, admin_docs_path(repository_id: item.repository_id), class: "link-gray-dark" %>
+          <% end %>
         </div>
       </td>
 
