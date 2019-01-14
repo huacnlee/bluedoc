@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CommentsController < Admin::ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
