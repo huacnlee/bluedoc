@@ -46,4 +46,10 @@
       display: block;
     }
   }
+  .search {
+    display: none;
+    @include breakpoint(sm) {
+      display: block;
+    }
+  }
 }
