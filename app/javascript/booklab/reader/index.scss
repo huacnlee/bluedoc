@@ -247,6 +247,57 @@
       }
     }
   }
+
+  .doc-readers {
+    padding: 8px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+
+    .readers-link {
+      text-decoration: none;
+      color: #666;
+
+      &:hover {
+        color: #444;
+      }
+
+      .avatars {
+        margin-right: 5px;
+        .avatar {
+          width: 16px;
+          height: 16px;
+          vertical-align: text-bottom;
+        }
+      }
+    }
+
+    .user-list {
+      max-height: 450px;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    .user-item {
+      @extend .clearfix;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0px;
+      }
+
+      a { color: #444; }
+
+      .time-box {
+        color: #a0a0a0;
+        font-size: 13px;
+        float: right;
+      }
+    }
+  }
 }
 
 .doc-body-toc {
