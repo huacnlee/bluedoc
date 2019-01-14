@@ -1,0 +1,67 @@
+.pagination {
+  margin-top: 15px;
+}
+
+.pagination:after, .pagination:before {
+    display: table;
+    content: ""
+}
+
+.pagination:after {
+    clear: both
+}
+
+.pagination a, .pagination em, .pagination span {
+    position: relative;
+    float: left;
+    padding: 5px 12px;
+    margin-left: -1px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    color: $text-main;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.pagination a:first-child, .pagination em:first-child, .pagination span:first-child {
+    margin-left: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+
+.pagination a:last-child, .pagination em:last-child, .pagination span:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.pagination a:focus, .pagination a:hover, .pagination em:focus, .pagination em:hover,
+.pagination span:focus, .pagination span:hover {
+    z-index: 2;
+    text-decoration: underline;
+    color: #111;
+}
+
+.pagination .selected {
+    z-index: 3;
+    text-decoration: none !important;
+    color: $primary !important;
+}
+
+.pagination .current, .pagination .current:hover {
+    z-index: 3;
+    text-decoration: underline;
+    color: #111;
+}
+
+.pagination .disabled, .pagination .disabled:hover, .pagination .gap,
+.pagination .gap:hover {
+    color: #d0d0d0;
+    text-decoration: none;
+    cursor: default;
+}
