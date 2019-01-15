@@ -7,7 +7,7 @@
     <div class="member-slug"><%= user_name_tag(member.user) %></div>
   </div>
   <div class="d-table-cell col-1 v-align-middle">
-    <span class="text-gray"><%= member.role %></span>
+    <span class="text-gray"><%= member.role_name %></span>
   </div>
 
 
@@ -22,7 +22,7 @@
 
           <ul class="dropdown-menu dropdown-menu-sw">
             <li><%= render "update_member", member: member %></li>
-            <li><a class="dropdown-item" href="<%= group_member_path(@group, member) %>" data-method="delete">Remove</a></li>
+            <li><a class="dropdown-item" href="<%= group_member_path(@group, member) %>" data-method="delete"><%= t(".Remove") %></a></li>
           </ul>
         </details>
       <% end %>

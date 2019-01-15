@@ -1,108 +1,4 @@
 zh-CN:
-  activerecord:
-    models:
-      doc: 文档
-      user: 用户
-      group: 团队
-      repository: 知识库
-      comment: 评论
-    attributes:
-      doc:
-        title: 文档标题
-        slug: 文档路径
-      user:
-        slug: 用户名
-        name: 姓名
-        email: Email
-        url: '个人主页 '
-        description: 个人介绍
-        locale: 默认语言
-        password: 密码
-        password_confirmation: 确认密码
-        current_password: 旧密码
-        location: 地址 / 办公点
-        remember_me: 记住登录状态
-      group:
-        avatar: Logo
-        slug: 团队路径
-        name: 团队名称
-        url: URL
-        description: 介绍
-        members_count: 成员数量
-      repository:
-        slug: 知识库路径
-        name: 知识库名称
-      comment:
-        body: 评论内容
-    errors:
-      messages:
-        record_invalid: '验证失败: %{errors}'
-        restrict_dependent_destroy:
-          has_one: 由于 %{record} 需要此数据，所以无法删除
-          has_many: 由于 %{record} 需要此数据，所以无法删除
-  errors:
-    messages:
-      already_confirmed: 已经确认。
-      confirmation_period_expired:
-      expired: 已过期，请重试
-      not_found: 没有找到。
-      not_locked: 没有锁定。
-      not_saved:
-        one: 1 个错误导致 %{resource} 未能保存：
-        other: "%{count} 错误导致 %{resource} 未能保存："
-      model_invalid: '验证失败: %{errors}'
-      inclusion: 不包含于列表中
-      exclusion: 是保留关键字
-      invalid: 是无效的
-      confirmation: 与 %{attribute} 不匹配
-      accepted: 必须是可被接受的
-      empty: 不能留空
-      blank: 不能为空字符
-      present: 必须是空白
-      too_long:
-        one: 过长（最大为1个字符）
-        other: 过长（最大为 %{count} 字符）
-      too_short:
-        one: 过短（最短为 1 个字符）
-        other: 过短（最短为 %{count} 字符）
-      wrong_length:
-        one: 长度错误（应该是 1 个字符）
-        other: 长度错误（应该是 %{count} 字符）
-      not_a_number: 不是数字
-      not_an_integer: 必须是整数
-      greater_than: 必须大于 %{count}
-      greater_than_or_equal_to: 必须大于或等于 %{count}
-      equal_to: 必须等于 %{count}
-      less_than: 必须小于 %{count}
-      less_than_or_equal_to: 必须小于或等于 %{count}
-      other_than: 长度非法（不可为 %{count} 个字符
-      odd: 必须为单数
-      even: 必须为双数
-      required: 必须存在
-      taken: 已经被使用
-      file_size_is_in: 文件大小必须在 %{min} 和 %{max} 之间
-      file_size_is_less_than: 文件大小必须小于 %{count}
-      file_size_is_less_than_or_equal_to: 文件大小必须小于或等于 %{count}
-      file_size_is_greater_than: 文件大小必须大于 %{count}
-      file_size_is_greater_than_or_equal_to: 文件大小必须大于等于 %{count}
-      allowed_file_content_types: 文件必须是 %{types} 类型
-      excluded_file_content_types: 文件不能是 %{types} 类型
-    unavailable_session:
-    unacceptable_request:
-    connection_refused:
-    format: "%{attribute}%{message}"
-    template:
-      body: 如下字段出现错误：
-      header:
-        one: 1 错误导致 %{model} 未能验证通过
-        other: "%{count} 个错误导致 %{model} 未能验证通过"
-  views:
-    pagination:
-      first: "&laquo; 第一页"
-      last: 最后一页 &raquo;
-      previous: "&lsaquo; 上一页"
-      next: 下一页 &rsaquo;
-      truncate: "&hellip;"
   created_at: 创建时间
   updated_at: 更新时间
   created at: 创建于
@@ -452,3 +348,23 @@ zh-CN:
       Diff mode: 显示修改差异
       Revert: 回滚到此版本
       Cancel: 退出
+  group_members:
+    add_member:
+      Add member: 添加成员
+      Type username to match user and then add as member of this group: 输入需要添加的成员的用户名/姓名来匹配，并从结果中选择需要添加的成员。
+      Search user: 搜索用户：
+      Admin: 管理员
+      Editor: 编辑者
+      Reader: 只读者
+      All permission of this group: 管理员拥有此团队的最高权限。
+      Can create, update docs or repositories of this group: 可以在此团队下创建/修改文档或知识库，用于参与内容的场景。
+      Readonly mode for all resources of this group: 赋予只读权限，可以阅读团队下所有公开、私密的内容。
+    update_member:
+      Change member role: 变更成员角色
+      Change role: 变更成员角色...
+      Update Role: 修改角色
+    member:
+      Remove: 移除
+    index:
+      Members: 团队成员
+      Number of Members: 个成员

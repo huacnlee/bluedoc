@@ -7,6 +7,19 @@ class MemberTest < ActiveSupport::TestCase
     @user = create(:user)
   end
 
+  test "role_options" do
+    assert_equal [[I18n.t("member_role.admin"), "admin"], [I18n.t("member_role.editor"), "editor"], [I18n.t("member_role.reader"), "reader"]], Member.role_options
+  end
+
+  test "role_name" do
+    member = Member.new(role: :editor)
+    assert_equal I18n.t("member_role.editor"), member.role_name
+    member.role = :reader
+    assert_equal I18n.t("member_role.reader"), member.role_name
+    member.role = :admin
+    assert_equal I18n.t("member_role.admin"), member.role_name
+  end
+
   test "Memberable base" do
     mock_current(user: @user)
     repo = create(:repository)

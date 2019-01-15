@@ -59,8 +59,6 @@ gem "wicked_pdf"
 
 gem "pghero"
 
-gem "translation"
-
 group :development, :test do
   gem "mocha"
   gem "letter_opener"

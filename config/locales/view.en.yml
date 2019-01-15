@@ -295,3 +295,23 @@ en:
       Diff mode: Diff mode
       Revert: Revert
       Cancel: Cancel
+  group_members:
+    add_member:
+      Add member: Add member
+      Type username to match user and then add as member of this group: Type Username or Real name to match user and then add as member of this group.
+      Search user: "Search user:"
+      Admin: Admin
+      Editor: Editor
+      Reader: Reader
+      All permission of this group: All permission of this group.
+      Can create, update docs or repositories of this group: Can create, update docs or repositories of this group.
+      Readonly mode for all resources of this group: Readonly mode for all resources of this group.
+    update_member:
+      Change member role: Change member role
+      Change role: Change role...
+      Update Role: Update Role
+    member:
+      Remove: Remove
+    index:
+      Members: Members
+      Number of Members: Members
