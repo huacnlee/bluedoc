@@ -1,13 +1,13 @@
-<% title_tag "Docs", "Dashboard" %>
+<% title_tag t(".Dashboard Docs") %>
 <%= render "menu" %>
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <div class="sub-title">Recent docs</div>
+      <div class="sub-title"><%= t(".Recent docs") %></div>
       <% if @user_actives.blank? %>
         <div class="blankslate">
-          <h3>No recent docs</h3>
-          <p>You does not have updated Doc in recently.</p>
+          <h3><%= t(".No docs") %></h3>
+          <p><%= t(".You does not have any updated docs") %></p>
         </div>
       <% else %>
         <%= render partial: "docs", locals: { items: @user_actives } %>

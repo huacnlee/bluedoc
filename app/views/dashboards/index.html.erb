@@ -4,10 +4,10 @@
     <div class="dashboard-content">
 
       <div class="mb-5 dashboard-section">
-        <div class="sub-title">Recent activity</div>
+        <div class="sub-title"><%= t(".Recent edited docs") %></div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
-            <p>You have no update Doc in recently.</p>
+            <p><%= t(".You have no update Doc in recently") %></p>
           </div>
         <% else %>
           <ul class="cards-container recent-docs">
@@ -32,10 +32,10 @@
       </div>
 
       <div class="mb-5 dashboard-section">
-        <div class="sub-title">Recent Repositories</div>
+        <div class="sub-title"><%= t(".Recent contributed repositories") %></div>
         <% if @recent_repos.blank? %>
           <div class="blankslate">
-            <p>You have no update Repositories in recently.</p>
+            <p><%= t(".You have no update Repositories in recently") %></p>
           </div>
         <% else %>
         <ul class="cards-container repo-list">
@@ -58,7 +58,7 @@
 
       <% if !@groups.blank? %>
       <div class="mb-5 dashboard-section">
-        <div class="sub-title">Your Groups</div>
+        <div class="sub-title"><%= t(".Your Groups") %></div>
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
             <li class="card card-avatar group-item">
@@ -72,15 +72,14 @@
             </li>
           <% end %>
         </ul>
-        <%= raw Setting.dashboard_sidebar_html %>
       </div>
       <% end %>
 
       <div class="mb-5 dashboard-section activities">
-        <div class="sub-title">All activity</div>
+        <div class="sub-title"><%= t(".All activity") %></div>
         <% if @activities.blank? %>
           <div class="blankslate">
-            <p>You have no activity in recently.</p>
+            <p><%= t(".You have no activity in recently") %></p>
           </div>
         <% else %>
           <%= render @activities %>

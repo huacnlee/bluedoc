@@ -13,6 +13,9 @@
 en:
   created at: created at
   updated at: updated at
+  shared:
+    more_button:
+      More: "More ..."
   devise:
     sessions:
       new:
@@ -135,38 +138,70 @@ en:
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
         Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
         Save: Save
+  comments:
+    Comment was successfully updated: Comment was successfully updated.
+  activities:
+    has added: has added
+    to: to
+    as: as
+    created: created
+    has followed: has followed
+    starred Doc: starred a Doc
+    starred: starred
+    transfer: transfer
+  comments:
+    comment_watch:
+      Subscribe: Subscribe
+      Unsubscribe: Unsubscribe
+      You’re ignoring this notifications: "You’re ignoring this notifications."
+      You’re not receiving notifications: "You’re not receiving notifications."
+      You’re receiving notifications because you’re subscribed: "You’re receiving notifications because you’re subscribed."
+    comment:
+      Delete: Delete
+      Reply: Reply
+      Copy link: Copy link
+      Are you sure?: Are you sure?
     comments:
-      Comment was successfully updated: Comment was successfully updated.
-    activities:
-      has added: has added
-      to: to
-      as: as
-      created: created
-      has followed: has followed
-      starred Doc: starred a Doc
-      starred: starred
-      transfer: transfer
-    comments:
-      comment_watch:
-        Subscribe: Subscribe
-        Unsubscribe: Unsubscribe
-        You’re ignoring this notifications: "You’re ignoring this notifications."
-        You’re not receiving notifications: "You’re not receiving notifications."
-        You’re receiving notifications because you’re subscribed: "You’re receiving notifications because you’re subscribed."
-      comment:
-        Delete: Delete
-        Reply: Reply
-        Copy link: Copy link
-        Are you sure?: Are you sure?
-      comments:
-        Comments: Comments
-        Sign in to write comment: Sign in to write comment
-        You must sign in first: "You want write comment? you must sign in first."
-        Sign in now: Sign in now
-      form:
-        Submit: Comment
-      in_reply:
-        In reply to: In reply to
-      reply_info:
-        In reply to: In reply to
-
+      Comments: Comments
+      Sign in to write comment: Sign in to write comment
+      You must sign in first: "You want write comment? you must sign in first."
+      Sign in now: Sign in now
+    form:
+      Submit: Comment
+    in_reply:
+      In reply to: In reply to
+    reply_info:
+      In reply to: In reply to
+  dashboards:
+    action_docs:
+      You does not have any action_name docs: You does not have any %{action} docs.
+    action_repositories:
+      You does not have any action_name repositories: You does not have any %{action} repositories.
+    groups:
+      You does not have any groups: You does not have any groups.
+    menu:
+      Dashboard: Dashboard
+      Doc: Docs
+      Repository: Repositories
+      Group: Groups
+      Star: Stars
+      Watch: Watches
+    docs:
+      Dashboard Docs: Dashboard - Docs
+      Recent docs: Recent edited docs
+      No docs: No docs
+      You does not have any updated docs: You does not have any updated docs.
+    groups:
+      Dashboard Groups: Dashboard - Groups
+      All groups of you: All groups of you
+    repositories:
+      All repositories: Recent contributed repositories
+      Dashboard Repositories: Dashboard - Repositories
+    index:
+      Recent edited docs: Recent edited docs
+      Recent contributed repositories: Recent contributed repositories
+      You have no update Doc in recently: You have no update Doc in recently.
+      You have no update Repositories in recently: You have no update Repositories in recently.
+      Your Groups: Your Groups
+      All activity: All activity
+      You have no activity in recently: You have no activity in recently.

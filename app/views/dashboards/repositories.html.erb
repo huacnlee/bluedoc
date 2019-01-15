@@ -1,10 +1,10 @@
-<% title_tag "Repositories", "Dashboard" %>
+<% title_tag t(".Dashboard Repositories") %>
 
 <%= render "menu" %>
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <div class="sub-title">All repositories of you</div>
+      <div class="sub-title"><%= t(".All repositories") %></div>
       <%= render partial: "repositories", locals: { items: @repositories } %>
       <%= paginate @repositories %>
     </div>

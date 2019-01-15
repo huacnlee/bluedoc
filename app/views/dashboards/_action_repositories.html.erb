@@ -1,6 +1,6 @@
 <% if @repositories.blank? %>
 <div class="blankslate">
-  <p>You does not have any <%= action_name.singularize %> repositories.
+  <p><%= t(".You does not have any action_name repositories",  action_name.singularize) %></p>
 </div>
 <% else %>
 

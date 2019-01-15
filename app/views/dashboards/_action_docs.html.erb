@@ -1,6 +1,6 @@
 <% if @docs.blank? %>
 <div class="blankslate">
-  <p>You does not have any <%= action_name.singularize %> docs.
+  <p><%= t(".You does not have any action_name docs", action: action_name.singularize) %></p>
 </div>
 <% else %>
 
