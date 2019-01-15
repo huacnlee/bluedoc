@@ -35,7 +35,6 @@
 
   // list layout style
   .list-container {
-    width: 550px;
     .list-item {
       .description {
         margin-bottom: 15px;
@@ -98,7 +97,6 @@
     .avatar {
       width: 32px;
       height: 32px;
-      border-radius: 50%;
     }
   }
   .infos {
@@ -137,4 +135,13 @@
   .user-name {
     color: $text-gray;
   }
+}
+.doc-card {
+  .doc-title {
+    color: $text-main;
+    margin-right: 5px;
+  }
+}
+.repository-card {
+
 }
