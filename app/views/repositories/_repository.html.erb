@@ -7,7 +7,7 @@
       <% end %>
       <%= repository_name_tag(repository) %>
       <% if repository.private? %>
-        <span class="label-private ml-2">Private</span>
+        <span class="label-private ml-2"><%= t(".Private") %></span>
       <% end %>
     </h4>
   </div>
@@ -16,6 +16,6 @@
   </div>
   <div class="f6 text-gray mt-2">
     <span class="counter"><%= icon_tag("star") %> <%= repository.stars_count %></span>
-    <span class="updated">Update <%= timeago repository.updated_at %></span>
+    <span class="updated"><%= t("updated at") %> <%= timeago repository.updated_at %></span>
   </div>
 </div>

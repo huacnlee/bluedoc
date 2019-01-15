@@ -395,3 +395,68 @@ en:
       notifications: notifications
       You does not have any notifications: You does not have any notifications.
       You does not have any unread notifications: You does not have any unread notifications.
+  reactions:
+    new_button:
+      Select a item: Pick a reaction
+  repositories:
+    doc:
+      Sharing: Sharing
+      Last updated at: Last updated at
+      Are you sure delete this Doc?: Are you sure delete this Doc?
+    empty_docs:
+      There is no documents: There is no documents
+      You can create first document: "You can create first document,"
+      Create doc: Create doc
+    menu:
+      New Doc: New Doc
+      Private: Private
+      Import from this URL: Import from this URL
+      Summary: Summary
+      Docs: Docs
+      Settings: Settings
+    repository:
+      Private: Private
+    docs:
+      Docs: Docs
+      Sort by: "Sort by:"
+      Sort by Updated: Updated
+      Sort by Created: Created
+    new:
+      New Repository: New Repository
+      A repository contains all the documents for your project: A repository contains all the documents for your project.
+      Import from Git: Import from Git
+      Put a Git repository URL, BookLab will import all of the markdown files as a Doc: Put a Git repository URL, BookLab will import all of the <code>.md, .markdown</code> files as a Doc.
+      This feature is best compatible with: 'This feature is best compatible with <a href="https://gitbook.io">GitBook</a> format (including a <code>SUMMARY.md</code> to describe of the Table of Contents).'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import: You can archive multiple <code>.md, .markdown</code> files as a zip file, and then choice the zip file for import.
+      Or you have a GitBook source, you can use: Or you have a GitBook source, you can use
+      Great repository names are short and memorable: Great repository names are short and memorable.
+      Anyone can see this repository: Anyone can see this repository.
+      You choose who can see and edit to this repository: You choose who can see and edit to this repository.
+      Public: Public
+      Private: Private
+      Create Repository: Create Repository
+    search:
+      Search Docs: Search Docs
+      Can not find any Doc like: "Can't find any Doc like"
+      in this Repository: in this Repository.
+    show:
+      Edit TOC: Edit
+    toc:
+      Edit TOC: Edit TOC
+      Back to Repository: Back to Repository
+      Edit Table of contents: Edit Table of contents
+      Move cursor Up: Move cursor up
+      Move cursor Down: Move cursor down
+      Move Up: Move Up
+      Move Down: Move Down
+      Edit or Confirm edit: Edit / Confirm edit
+      Enter: Enter
+      Tab: Tab
+      Shift: Shift
+      Outdent: Outdent
+      Indent: Indent
+      Delete: Delte
+      or: or
+      Remove item: Remove item
+      Save: Save
+      Cancel: Cancel

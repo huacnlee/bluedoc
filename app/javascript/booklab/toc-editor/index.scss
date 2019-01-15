@@ -54,7 +54,8 @@
     display: inline-block;
     border-radius: 3px;
     text-align: center;
-    width: 48px;
+    min-width: 48px;
+    padding: 0px 8px;
     height: 25px;
     line-height: 26px;
     overflow: hidden;

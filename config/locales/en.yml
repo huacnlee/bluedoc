@@ -30,6 +30,9 @@ en:
       repository:
         slug: Repository name
         name: Title
+        user: Owner
+        user_id: Owner
+        description: Description
       doc:
         slug: Doc path
         title: Title

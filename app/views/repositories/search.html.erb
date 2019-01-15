@@ -1,4 +1,4 @@
-<% title_tag "Search Docs", @repository.name %>
+<% title_tag t(".Search Docs"), @repository.name %>
 
 <%= render "menu" %>
 
@@ -7,7 +7,7 @@
     <div class="search-results">
       <% if @result.records.blank? %>
       <div class="blankslate">
-        Can't find any Doc like "<span class="text-red"><%= params[:q] %></span>" in this Repository.
+        <%= t(".Can not find any Doc like") %> "<span class="text-red"><%= params[:q] %></span>" <%= t(".in this Repository") %>
       </div>
       <% end %>
 
