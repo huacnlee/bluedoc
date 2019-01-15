@@ -17,6 +17,7 @@ zh-CN:
         email: Email
         url: '个人主页 '
         description: 个人介绍
+        locale: 默认语言
         password: 密码
         password_confirmation: 确认密码
         current_password: 旧密码
@@ -34,8 +35,8 @@ zh-CN:
       messages:
         record_invalid: '验证失败: %{errors}'
         restrict_dependent_destroy:
-          has_one: 由于 %{record} 需要此记录，所以无法移除记录
-          has_many: 由于 %{record} 需要此记录，所以无法移除记录
+          has_one: 由于 %{record} 需要此数据，所以无法删除
+          has_many: 由于 %{record} 需要此数据，所以无法删除
   devise:
     confirmations:
       send_instructions: 稍后，您将收到帐号激活的电子邮件。
@@ -177,11 +178,14 @@ zh-CN:
         other: "%{count} 个错误导致 %{model} 未能验证通过"
   hello:
   account_settings:
+    Password has change successed: 密码已经修改成功。
+    Profile has change successed: 个人资料已经更新成功。
     show:
       Upload new picture: 选择一张图片上传
       Profile: 个人资料
       Avatar: 头像
       Update profile: 更新个人资料
+      System default: "BookLab 默认语言：%{locale_name}"
     menu:
       Profile: 个人资料
       Account: 帐号

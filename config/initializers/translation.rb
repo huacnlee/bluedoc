@@ -4,7 +4,7 @@ TranslationIO.configure do |config|
   config.target_locales = ['zh-CN']
 
   # Uncomment this if you don't want to use gettext
-  # config.disable_gettext = true
+  config.disable_gettext = true
 
   # Uncomment this if you already use gettext or fast_gettext
   # config.locales_path = File.join('path', 'to', 'gettext_locale')

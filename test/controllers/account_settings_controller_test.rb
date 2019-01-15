@@ -34,7 +34,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       email: "new-#{@user.email}",
       description: "new #{@user.description}",
       location: "new #{@user.location}",
-      url: "http://foo.com"
+      url: "http://foo.com",
+      locale: "en"
     }
 
     assert_require_user do
@@ -55,6 +56,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal account_params[:description], @user.description
     assert_equal account_params[:location], @user.location
     assert_equal account_params[:url], @user.url
+    assert_equal account_params[:locale], @user.locale
   end
 
   test "PUT /account/settings with password" do

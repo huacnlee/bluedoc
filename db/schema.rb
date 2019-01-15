@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_072042) do
+ActiveRecord::Schema.define(version: 2019_01_15_044356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2019_01_14_072042) do
     t.integer "following_count", default: 0, null: false
     t.datetime "deleted_at"
     t.string "deleted_slug"
+    t.string "locale"
     t.index "lower((slug)::text)", name: "index_on_slug", unique: true
     t.index "type, lower((email)::text)", name: "index_on_type_and_email"
     t.index "type, lower((email)::text)", name: "uk_on_type_and_email", unique: true, where: "((COALESCE(email, ''::character varying))::text <> ''::text)"

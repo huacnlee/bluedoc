@@ -1,6 +1,7 @@
+<meta name="locale" content="<%= I18n.locale %>">
 <meta name="viewport" content="width=device-width">
 <% if current_user %>
-<meta name="current-user" value="<%= current_user.slug %>" />
+<meta name="current-user" value="<%= current_user.slug %>">
 <% end %>
 
 <%= stylesheet_pack_tag 'app', 'data-turbolinks-track': 'reload' %>

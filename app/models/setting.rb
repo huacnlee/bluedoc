@@ -52,6 +52,7 @@ class Setting < RailsSettings::Base
       end
   end
 
+  field :default_locale, default: "en", type: :string
   field :admin_emails, default: "admin@booklab.io", type: :array
   field :application_footer_html, default: "", type: :string
   field :dashboard_sidebar_html, default: "", type: :string
@@ -63,9 +64,22 @@ class Setting < RailsSettings::Base
   field :host, :mailer_from, :mailer_options, readonly: true
 
   class << self
+    LOCALES = {
+      "en": "English (US)",
+      "zh-CN": "简体中文"
+    }
+
     def has_admin?(email)
       return false if self.admin_email_list.blank?
       self.admin_email_list.include?(email.downcase)
+    end
+
+    def locale_options
+      LOCALES.map { |k, v| [v, k.to_s] }
+    end
+
+    def default_locale_name
+      LOCALES[Setting.default_locale.to_sym] || LOCALES[I18n.default_locale]
     end
   end
 end

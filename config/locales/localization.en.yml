@@ -49,6 +49,8 @@ en:
         "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
         "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
   account_settings:
+    Password has change successed: Password has change successed.
+    Profile has change successed: Profile has change successed.
     menu:
       "Profile": Profile
       "Account": Account
@@ -62,7 +64,31 @@ en:
       "Once you delete your account, there is no going back": Once you delete your account, there is no going back. Please be certain.
       "Are you sure?": "Danger! Once you delete your account, there is no going back, are you sure?"
     show:
-      "Profile": Profile
-      "Avatar": Avatar
-      "Update profile": Update profile
-      "Upload new picture": "Upload new picture"
+      Profile: Profile
+      Avatar: Avatar
+      Update profile: Update profile
+      Upload new picture: Upload new picture
+      System default: "System default [%{locale_name}]"
+  admin:
+    settings:
+      show:
+        Settings: Settings
+        System settings: System settings
+        Default language: "Default language:"
+        Setup default language for BookLab: Setup default language for BookLab.
+        Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Disable this BookLab will requirement sign in for all pages: Disable this BookLab will requirement sign in for all pages.
+        PlantUML Service Host: "PlantUML Service Host:"
+        BookLab use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BookLab use %{link} for generate PlantUML SVG image, change this config to can use a custom service of your deployment.
+        MathJax Service Host: "MathJax Service Host:"
+        If you wants customize MaxJax SVG service: If you want's customize MaxJax SVG service, you can implement that a http server to serve <code>${mathjax_service_host}/svg?tex={tex}</code> to result svg contents
+        Admin Emails: "Admin Emails:"
+        Special account emails as admin with each line: "Special account emails as admin with each line."
+        Customize UI: Customize UI
+        Application Footer HTML: "Application Footer HTML:"
+        You can use HTML to customize the footer: "You can use HTML to customize the footer, including Stylesheet and JavaScript."
+        Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
+        Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
+        Save: Save
+
+

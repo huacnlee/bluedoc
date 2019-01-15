@@ -31,6 +31,13 @@
       </div>
 
       <div class="form-group">
+        <%= f.label :locale, class: "control-label" %>
+        <%= f.select :locale, Setting.locale_options,
+          { include_blank: t(".System default", locale_name: Setting.default_locale_name) },
+          { class: "form-control" } %>
+      </div>
+
+      <div class="form-group">
         <%= f.submit t(".Update profile"), class: "btn btn-primary" %>
       </div>
     <% end %>

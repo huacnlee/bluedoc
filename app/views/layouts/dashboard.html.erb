@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "BookLab" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="locale" content="<%= I18n.locale %>">
     <meta name="viewport" content="width=device-width">
     <% if current_user %>
     <meta name="current-user" value="<%= current_user.slug %>" />
