@@ -11,17 +11,17 @@ locked_user = @doc.locked_user
     <div class="summary-overlay"></div>
     <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast">
       <div class="Box-header">
-        <h3 class="Box-title">Doc current in locked</h3>
+        <h3 class="Box-title"><%= t(".Doc current in locked") %></h3>
       </div>
       <div class="overflow-auto">
         <%= form_for(@doc, url: @doc.to_path("/lock"), method: :post, remote: true) do %>
           <div id="doc-lock-box" class="Box-body overflow-auto">
-            <p><strong class="text-red">Warning!</strong> <%= user_avatar_tag(locked_user, style: :tiny) %> <%= user_name_tag(locked_user) %> is current in editing this document.</p>
-            <p>Continue edit will make conflict, do you wants continue?</p>
+            <p><strong class="text-red"><%= t(".Warning") %></strong> <%= user_avatar_tag(locked_user, style: :tiny) %> <%= user_name_tag(locked_user) %> <%= t(".is current in editing this document") %></p>
+            <p><%= t(".Continue edit will make conflict, do you wants continue?") %></p>
           </div>
           <div class="Box-footer clearfix">
-            <button type="submit" class="btn btn-danger">Continue edit</button>
-            <a class="btn float-right" href="<%= @doc.to_path %>">Cancel</a>
+            <button type="submit" class="btn btn-danger"><%= t(".Continue edit") %></button>
+            <a class="btn float-right" href="<%= @doc.to_path %>"><%= t(".Cancel") %></a>
           </div>
         <% end %>
       </div>

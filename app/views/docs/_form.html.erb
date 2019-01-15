@@ -14,7 +14,7 @@
           <div class="mb-4 text-center text-red">
             <p style="font-size: 32px"><%= icon_tag("error") %></p>
             <div class="mb-1 text-red">
-              <strong>Doc publish failed, because there has <%= @doc.errors.count %> issues!</strong>
+              <strong><%= t(".Doc publish failed, because there has count issues", count: @doc.errors.count) %></strong>
             </div>
           </div>
           <ul class="ml-3">
@@ -36,12 +36,12 @@
         <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
         <span class= "divider">/</span>
-        <a href="<%= doc.to_path %>"><%= doc.title || "New doc" %></a>
+        <a href="<%= doc.to_path %>"><%= doc.title || t(".New doc") %></a>
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
-        <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
-        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> Publish</button>
+        <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save"><%= t(".Save Draft") %></button>
+        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
       </div>
     </div>
 

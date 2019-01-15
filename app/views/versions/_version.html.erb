@@ -6,7 +6,7 @@
     <span class="user-name" title="<%= version.user&.name %>"><%= version.user&.slug %></span>
     <% end %>
     <% if defined? current %>
-    <label class="Label current Label--outline v-align-middle float-right">Current</label>
+    <label class="Label current Label--outline v-align-middle float-right"><%= t(".Current") %></label>
     <% end %>
   </div>
 </a>

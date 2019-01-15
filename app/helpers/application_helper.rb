@@ -61,9 +61,9 @@ module ApplicationHelper
     undo       = opts[:undo]
     with_count = opts[:with_count]
 
-    label ||= action_type.to_s.titleize
-    undo_label ||= "un#{action_type.to_s}".titleize
-    icon ||= label.downcase
+    label ||= t("shared.action_button.#{action_type}")
+    undo_label ||= t("shared.action_button.un#{action_type}")
+    icon ||= action_type.downcase
 
     action_type_pluralize = action_type.to_s.pluralize
     action_count = "#{action_type_pluralize}_count"

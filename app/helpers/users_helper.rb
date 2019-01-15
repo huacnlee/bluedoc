@@ -48,10 +48,13 @@ module UsersHelper
     class_names = "btn-follow-user #{opts[:class]}"
     slug        = user.slug
 
-    if followed
-      link_to raw("<span>Unfollow</span>"), "#", data: { id: slug }, class: "#{class_names} active"
-    else
-      link_to raw("<span>Follow</span>"), "#", data: { id: slug }, class: class_names
-    end
+    label = t("shared.follow_button.follow")
+    undo_label = t("shared.follow_button.unfollow")
+    btn_label = followed ? undo_label : label
+
+    data = { id: slug, label: label, undo_label: undo_label }
+    class_names += " active" if followed
+
+    link_to raw("<span>#{btn_label}</span>"), "#", data: data, class: class_names
   end
 end

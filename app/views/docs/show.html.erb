@@ -4,7 +4,7 @@
 <div class="reader-navbar">
   <div class="navbar-title">
     <span class="hide-sm hide-md">
-    <a href="<%= root_path %>" title="Back to list">BookLab</a>
+    <a href="<%= root_path %>" title="<%= t(".Back to list") %>">BookLab</a>
       <span class="divider">/</span>
     </span>
     <span class="hide-sm">
@@ -18,13 +18,13 @@
       <span class="doc-title"><%= @doc.title %></span>
       <% else %>
       <span class="doc-title">
-        <strong>Not found</strong>
+        <strong><%= t(".Not found") %></strong>
       </span>
       <% end %>
     </span>
     <% if @doc&.private? %>
       <span class="doc-title">
-        <span class="label-private ml-2">Private</span>
+        <span class="label-private ml-2"><%= t(".Private") %></span>
       </span>
     <% end %>
   </div>
@@ -36,7 +36,7 @@
     <% end %>
 
     <% if can? :update, @doc %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
+    <%= link_to icon_tag("pencil", label: t(".Edit")), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
     <% end %>
 
     <%= render "share_button", doc: @doc %>
@@ -47,24 +47,24 @@
       </summary>
 
       <ul class="dropdown-menu dropdown-menu-sw">
-        <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
+        <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
         <% if can? :update, @doc %>
           <li><%= render "export_pdf", doc: @doc %></li>
         <% end %>
-        <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#">Print document...</a></li>
+        <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
         <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> Fullscreen</a></li>
+        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
 
         <% if can? :update, @doc %>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
+          <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Versions") %></a></li>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
+          <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Edit") %></a></li>
         <% end %>
 
         <% if can? :destroy, @doc %>
           <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
+          <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
         <% end %>
       </ul>
     </details>
@@ -73,7 +73,7 @@
 </div>
 
 <div class="navbar-wide-mode" style="display: none">
-  <a href="#" class="btn btn-wide-mode-exit">Exit</a>
+  <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>
 </div>
 <% end %>
 
@@ -104,14 +104,14 @@
         <div class="icon-box text-center mb-2">
           <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
         </div>
-        <h3 class="title">Doc not found</h3>
+        <h3 class="title"><%= t(".Doc not found") %></h3>
 
-        <p>Sorry, this Doc does not exists, please checkout that URL is correct.</p>
+        <p><%= t(".Sorry, this Doc does not exists") %></p>
         <p class="text-red"><%= request.url %></p>
 
         <% if can? :create_doc, @repository %>
           <div class="actions mt-3" data-turbolinks="false">
-            <%= link_to "Create Doc for this URL", new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
+            <%= link_to t(".Create Doc for this URL"), new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -128,9 +128,9 @@
         </span>
 
         <% if @doc.last_editor %>
-        Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+        <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= t(".edited at") %> <%= timeago @doc.body_updated_at %>
         <% else %>
-        Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+        <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= t(".created at") %> <%= timeago @doc.created_at %>
         <% end %>
       </div>
 

@@ -1,21 +1,19 @@
-# THIS FILE CONTAINS LOCALIZATION KEYS : date and number formats, number precisions,
-# number separators and all non-textual values depending on the language.
-# These values must not reach the translator, so they are separated in this file.
-#
-# More info here: https://translation.io/blog/gettext-is-better-than-rails-i18n#localization
-#
-# You can edit and/or add new localization keys here, they won't be touched by Translation.io.
-#
-# If you want to add a new localization key prefix, use the option described here:
-# https://github.com/translation/rails#custom-localization-key-prefixes
-#
----
 en:
   created at: created at
   updated at: updated at
   shared:
     more_button:
       More: "More ..."
+    action_button:
+      star: Star
+      unstar: Unstar
+      follow: Follow
+      unfollow: Unfollow
+      watch: Watch
+      unwatch: Unwatch
+    follow_button:
+      follow: Follow
+      unfollow: Unfollow
   layouts:
     user_menu:
       New Repository: New Repository
@@ -218,3 +216,82 @@ en:
       Your Groups: Your Groups
       All activity: All activity
       You have no activity in recently: You have no activity in recently.
+  versions:
+    version:
+      Current: Current
+  docs:
+    draft_tip:
+      You are on the draft preview page, the contents has saved at: You are on the draft preview page, the contents has saved at
+      View Published: View Published
+      Continue edit: Continue edit
+      There have the unpublished content saved at: There have the unpublished content saved at
+      Preview the draft: Preview the draft
+    export_pdf:
+      Export: Export
+      Export PDF: Export PDF
+      PDF of this document page has in generating, please wait: "PDF of this document page has in generating, please wait ..."
+      If you are waiting a long time, and still no response, then you can retry: If you are waiting a long time, and still no response, then you can %{link} it to generate a PDF export task again.
+      PDF of this document page has generated: PDF of this document page has generated.
+      Click the button to download it: Click the button to download it.
+      Download PDF: Download PDF
+      Generate Again: Generate Again!
+      Submiting: "Submiting..."
+      Click button to genrate PDF file for this document: Click button to genrate PDF file for this document.
+      Generate PDF: Generate PDF
+    form:
+      Doc publish failed, because there has count issues: Doc publish failed, because there has %{count} issues.
+      New doc: New doc
+      Save Draft: Save Draft
+      Publish: Publish
+    readers:
+      people: people
+      has read: has read this Doc.
+      Reader list: Reader list
+    share_button:
+      Share: Share
+      Unshare: Unshare
+      Sharing: Sharing
+      Submiting: Submiting...
+      Copy Link: Copy Link
+      Open share: Open share
+      Share doc: Share doc
+      Everyone can visits this doc with the share link: "Everyone can visits this doc with the share link:"
+      opened share at: opened share at
+      Create a share link to allow non-member visit this doc: Create a share link to allow non-member visit this doc.
+    edit:
+      Doc current in locked: Doc current in locked.
+      Warning: Warning!
+      is current in editing this document: is current in editing this document.
+      Continue edit will make conflict, do you wants continue?: Continue edit will make conflict, do you wants continue?
+      Continue edit: Continue edit
+      Cancel: Cancel
+    show:
+      Back to list: Back to list
+      Not found: Not found
+      Private: Private
+      Edit: Edit
+      Markdown: Markdown
+      Print document: Print document...
+      Fullscreen: Fullscreen
+      Versions: Versions...
+      Delete: Delete
+      Are you sure delete?: Are you sure delete this Doc?
+      Exit Fullscreen: Exit
+      Doc not found: Doc not found
+      Sorry, this Doc does not exists: Sorry, this Doc does not exists, please checkout that URL is correct.
+      Create Doc for this URL: Create Doc for this URL
+      Last edit by: Last edit by
+      edited at: at
+      Created by: Created by
+      created at: at
+    transfer:
+      Transfer docs: Transfer docs
+      When you wants move docs into other repository: When you wants move docs into other repository, you can choice them and select a destination repository to transfer.
+      Select doc to transfer: Select doc to transfer
+      To repository: To repository
+      Transfer now: Transfer now!
+    versions:
+      Versions: Versions
+      Diff mode: Diff mode
+      Revert: Revert
+      Cancel: Cancel

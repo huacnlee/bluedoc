@@ -6,7 +6,7 @@
       <span class= "divider">/</span>
       <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>
       <span class= "divider">/</span>
-      <span class="doc-title">Versions</span>
+      <span class="doc-title"><%= t(".Versions") %></span>
     </span>
   </div>
 
@@ -14,15 +14,15 @@
     <span class="mr-3 float-left">
       <label for="version-diff-toggle">
         <input type="checkbox" id="version-diff-toggle">
-        Diff mode
+        <%= t(".Diff mode") %>
       </label>
     </span>
 
     <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
       local: true, remote: true, class: "float-right") do |form| %>
       <input type="hidden" name="version_id">
-      <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5">Revert</button>
-      <%= link_to "Cancel", @doc.to_path, class: "btn btn-sm" %>
+      <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5"><%= t(".Revert") %></button>
+      <%= link_to t(".Cancel"), @doc.to_path, class: "btn btn-sm" %>
     <% end %>
   </div>
 </div>

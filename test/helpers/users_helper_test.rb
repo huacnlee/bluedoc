@@ -52,10 +52,10 @@ class UsersHelperTest < ActionView::TestCase
 
     user = create(:user)
 
-    assert_equal %(<a data-id="#{user.slug}" class="btn-follow-user btn btn-block" href="#"><span>Follow</span></a>), follow_user_tag(user)
+    assert_equal %(<a data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block" href="#"><span>Follow</span></a>), follow_user_tag(user)
 
     @user.stub(:follow_user_ids, [user.id]) do
-      assert_equal %(<a data-id="#{user.slug}" class="btn-follow-user btn btn-block active" href="#"><span>Unfollow</span></a>), follow_user_tag(user)
+      assert_equal %(<a data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block active" href="#"><span>Unfollow</span></a>), follow_user_tag(user)
     end
   end
 end
