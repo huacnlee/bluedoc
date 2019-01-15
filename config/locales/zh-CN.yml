@@ -1,0 +1,21 @@
+en:
+  hello: "Hello world"
+  activerecord:
+    models:
+    attributes:
+      user:
+        slug: "用户名"
+        name: "姓名"
+        url: "个人主页"
+        description: "介绍"
+      group:
+        slug: "团队路径"
+        name: "团队名称"
+        url: "URL"
+        description: "介绍"
+      repository:
+        slug: "知识库路径"
+        name: "知识库名称"
+      doc:
+        slug: "文档路径"
+        title: "文档标题"
