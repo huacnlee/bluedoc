@@ -14,6 +14,7 @@
   color: #444;
   display: inline-block;
   border-radius: 3px;
+  border: 1px solid #f0f0f0;
 
   .emoji { vertical-align: middle; display: inline-block; width: 18px; height: 18px; margin-right: 3px; }
 
@@ -27,6 +28,7 @@
 }
 
 .reaction-box .add-reaction-btn {
+  padding: 4px 10px;
   i.fas { vertical-align: middle; font-size: 23px; }
 }
 
