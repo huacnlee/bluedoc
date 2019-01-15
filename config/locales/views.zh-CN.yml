@@ -400,3 +400,50 @@ zh-CN:
       The letters, numbers or dash is allow, for example: "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:"
       Display title of this Group: 用于各种地方显示团队的名称
       Create Group: 创建团队
+    search:
+      Can't find any Doc like: "无法找到任何与"
+      in this Group: "相关的内容。"
+    show:
+      Show all: 查看所有知识库
+      Find a repository: 查找知识库...
+      There is no repository: 暂无知识库
+      You can create first repository: 此团队下还未创建任何知识库，你可以现在就
+      Create new: 创建一个新知识库
+      Members: 团队成员
+  notification_mailer:
+    to_user:
+      View it on BookLab: 在 BookLab 上查看
+  notifications:
+    Notification been deleted: 触发通知的相关数据已删除。
+    body:
+      comment:
+        said: 说
+      mention:
+        mentioned you: 提及了你
+        has mentioned you in subject: "在 “%{subject}” 里提及了你。"
+    title:
+      add_member:
+        has added you as member of: "将你添加为 [%{subject}] 的成员。"
+      comment:
+        got a comment: 收到了一条新的评论。
+      mention:
+        got a comment: 收到了一条新的评论。
+        got a mention: 里面提及了你。
+      repo_import:
+        Repository name import has been status: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+    add_member:
+      has added you as member of: "将你添加为成员："
+    comment:
+      was posted a comment on: "评论了"
+    mention:
+      was mentioned you in: "提及了你"
+    repo_import:
+      Repository: 知识库
+      import has been: "导入任务已经执行完成，结果："
+    index:
+      Unread: 未读通知
+      All: 全部通知
+      Clear all: 清空
+      Mark as read: 全部设为已读
+      You does not have any notifications: 你目前没有通知。
+      You does not have any unread notifications: 你目前没有未读通知。

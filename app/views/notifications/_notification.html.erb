@@ -8,6 +8,6 @@
     <span class="time-box">
       <%= l notification.created_at, format: :short %>
     </span>
-    <%= render "/notifications/#{notification.notify_type}", notification: notification rescue "notification has been deleted" %>
+    <%= render "/notifications/#{notification.notify_type}", notification: notification rescue t("notifications.Notification been deleted") %>
   </div>
 </div>

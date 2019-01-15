@@ -347,3 +347,51 @@ en:
       The letters, numbers or dash is allow, for example: "The letters, numbers or dash is allow, and we will keep the letter case, for example:"
       Display title of this Group: Display title of this Group
       Create Group: Create Group
+    search:
+      Can't find any Doc like: "Can't find any Doc like"
+      in this Group: "in this Group."
+    show:
+      Show all: Show all
+      Find a repository: Find a repository...
+      There is no repository: There is no repository.
+      You can create first repository: You can create first repository,
+      Create new: Create new
+      Members: Members
+  notification_mailer:
+    to_user:
+      View it on BookLab: View it on BookLab
+  notifications:
+    Notification been deleted: Notification trigger content has been deleted.
+    body:
+      comment:
+        said: said
+      mention:
+        mentioned you: mentioned you
+        has mentioned you in subject: "has mentioned you in [%{subject}]."
+    title:
+      add_member:
+        has added you as member of: "has added you as member of [%{subject}]"
+      comment:
+        got a comment: got a comment.
+      mention:
+        got a comment: got a comment.
+        got a mention: content has mentioned you.
+      repo_import:
+        Repository name import has been status: "Repository [%{name}] import has been %{status}."
+    add_member:
+      has added you as member of: "has added you as member of:"
+    comment:
+      was posted a comment on: "was posted a comment on"
+    mention:
+      was mentioned you in: "was mentioned you in"
+    repo_import:
+      Repository: Repository
+      import has been: import has been
+    index:
+      Unread: Unread
+      All: All
+      Clear all: Clear all
+      Mark as read: Mark as read
+      notifications: notifications
+      You does not have any notifications: You does not have any notifications.
+      You does not have any unread notifications: You does not have any unread notifications.

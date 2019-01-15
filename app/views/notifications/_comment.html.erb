@@ -4,7 +4,7 @@
 
 <% if comment %>
 <div class="info mb-2">
-  <%= user_name_tag(notification.actor) %> was posted a comment on
+  <%= user_name_tag(notification.actor) %> <%= t(".was posted a comment on") %>
   <%= link_to comment.commentable_title, notification_url(notification.id) %>
 </div>
 
@@ -12,5 +12,5 @@
   <%= sanitize_html comment.body_html %>
 </div>
 <% else %>
-Notification trigger content has been deleted.
+<%= t("notifications.Notification been deleted") %>
 <% end %>
