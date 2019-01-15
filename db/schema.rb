@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_034000) do
+ActiveRecord::Schema.define(version: 2019_01_14_072042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_034000) do
     t.datetime "deleted_at"
     t.string "deleted_slug"
     t.string "format", limit: 20, default: "markdown"
+    t.integer "reads_count", default: 0, null: false
     t.index "repository_id, lower((slug)::text)", name: "index_on_repository_and_slug", unique: true
     t.index ["deleted_at"], name: "index_docs_on_deleted_at"
     t.index ["repository_id"], name: "index_docs_on_repository_id", where: "(deleted_at IS NULL)"
@@ -234,14 +235,6 @@ ActiveRecord::Schema.define(version: 2018_12_20_034000) do
     t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id", unique: true
     t.index ["slug"], name: "index_shares_on_slug", unique: true
     t.index ["user_id"], name: "index_shares_on_user_id"
-  end
-
-  create_table "test_documents", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "reply_to_id"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_actives", force: :cascade do |t|

@@ -41,7 +41,7 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
   end
 
   test "render sml" do
-    sml = %(["p", { align: "center", indent: 1 }, "Hello world"])
+    sml = %(["p", { align: "center", indent: { firstline: 1 } }, "Hello world"])
     html = %(<p style="text-align: center; text-indent: 32px;">Hello world</p>)
     out = BookLab::HTML.render_without_cache(sml, format: :sml)
 

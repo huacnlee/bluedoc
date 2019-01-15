@@ -1,0 +1,37 @@
+<div class="doc-readers">
+  <a href="<%= doc.to_path("/readers") %>" class="readers-link" data-remote="true">
+    <span class="avatars">
+      <% readers.take(5).map do |action| %>
+        <%= user_avatar_tag(action.user, style: :tiny, link: false)%>
+      <% end %>
+    </span>
+    <% if doc.reads_count > 5 %>
+    ... <%= doc.reads_count %> people
+    <% end %>
+    has read.
+  </a>
+
+  <% if action_name == "readers" %>
+  <details class="details-reset details-overlay details-overlay-dark" open>
+    <summary></summary>
+    <details-dialog class="Box d-flex flex-column anim-fade-in fast">
+     <div class="Box-header">
+       <h3 class="Box-title">Reader list</h3>
+     </div>
+      <div class="Box-body user-list">
+        <% readers.each do |action| %>
+          <div class="user-item">
+            <%= user_avatar_tag(action.user, style: :tiny) %>
+            <%= user_display_name_tag(action.user) %>
+
+            <span class="time-box">
+              <%= timeago action.updated_at %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </details-dialog>
+  </details>
+  <% end %>
+</div>
+

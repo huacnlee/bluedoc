@@ -260,7 +260,8 @@
 
     table tr,
     table td,
-    .math-box {
+    .math-box,
+    .image {
       &[data-active=true],
       [data-active=true] {
          &:before {
@@ -348,6 +349,16 @@
     ol > li > p,
     ul > li > p {
       margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 0px;
+      padding-top: 0px;
     }
 
     a:not([href]) {

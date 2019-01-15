@@ -161,6 +161,7 @@ Rails.application.routes.draw do
           get :versions
           patch :revert
           post :share
+          get :readers
         end
       end
     end

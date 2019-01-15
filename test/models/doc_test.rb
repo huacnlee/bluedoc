@@ -370,4 +370,19 @@ class DocTest < ActiveSupport::TestCase
       assert_nil result[:next]
     end
   end
+
+  test "read doc" do
+    doc = create(:doc)
+    user1 = create(:user)
+    user2 = create(:user)
+
+    user1.read_doc(doc)
+    assert_equal 1, doc.reads_count
+    user2.read_doc(doc)
+    assert_equal 2, doc.reads_count
+
+    assert_equal true, user1.read_doc?(doc)
+    assert_equal true, user2.read_doc?(doc)
+    assert_equal [user1, user2].sort, doc.read_by_users.sort
+  end
 end

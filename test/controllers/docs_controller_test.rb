@@ -176,6 +176,9 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     user = sign_in_role :editor, group: @group
     get doc.to_path
     assert_equal 200, response.status
+
+    assert_equal true, user.read_doc?(doc)
+
     assert_select "details.doc-share-button-box" do
       assert_select "summary .text", text: "Share"
       assert_select ".dropdown-menu" do
@@ -325,6 +328,34 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       end
     end
     assert_select ".markdown-body", html: doc.draft_body_html
+  end
+
+  test "GET /:user/:repo/:slug with readers" do
+    doc = create(:doc)
+
+    user = create(:user)
+    users = create_list(:user, 8)
+
+    users.map { |u| u.read_doc(doc) }
+
+    sign_in user
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-readers" do
+      assert_select "a.readers-link .avatar", 5
+    end
+  end
+
+  test "GET /:user/:repo/:slug/readers" do
+    doc = create(:doc)
+    users = create_list(:user, 8)
+    users.map { |u| u.read_doc(doc) }
+
+    get doc.to_path("/readers"), xhr: true
+    assert_equal 200, response.status
+
+    assert_match %(document.querySelector(".doc-readers").outerHTML = ), response.body
   end
 
   test "GET /:user/:repo/:slug with doc not exist" do

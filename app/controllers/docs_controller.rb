@@ -14,6 +14,11 @@ class DocsController < Users::ApplicationController
       authorize! :read, @repository
     else
       authorize! :read, @doc
+
+      # mark user to read this doc
+      current_user&.read_doc(@doc)
+      @readers = @doc.read_by_user_actions.order("updated_at desc").limit(5)
+
       @comments = @doc.comments.with_includes.order("id asc")
 
       # mark notifications read
@@ -169,6 +174,12 @@ class DocsController < Users::ApplicationController
     else
       Share.create_share(@doc, user: current_user)
     end
+  end
+
+  # POST /:user/:repo/:slug/readers
+  def readers
+    authorize! :read, @doc
+    @readers = @doc.read_by_user_actions.order("updated_at desc").all
   end
 
   private

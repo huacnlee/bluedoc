@@ -149,7 +149,7 @@
 
     .doc-info {
       color: #999;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       .editors { margin-right: 10px; }
     }
 
@@ -247,6 +247,57 @@
       }
     }
   }
+
+  .doc-readers {
+    padding: 8px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+
+    .readers-link {
+      text-decoration: none;
+      color: #666;
+
+      &:hover {
+        color: #444;
+      }
+
+      .avatars {
+        margin-right: 5px;
+        .avatar {
+          width: 16px;
+          height: 16px;
+          vertical-align: text-bottom;
+        }
+      }
+    }
+
+    .user-list {
+      max-height: 450px;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    .user-item {
+      @extend .clearfix;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0px;
+      }
+
+      a { color: #444; }
+
+      .time-box {
+        color: #a0a0a0;
+        font-size: 13px;
+        float: right;
+      }
+    }
+  }
 }
 
 .doc-body-toc {
@@ -318,6 +369,15 @@
     height: auto;
   }
 
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child,
+  & > h4:first-child,
+  & > h5:first-child,
+  & > h6:first-child {
+    padding-top: 0px !important;
+  }
+
   h1,
   h2,
   h3,
@@ -325,12 +385,14 @@
   h5,
   h6 {
     position: relative;
+    margin-top: -80px;
+    padding-top: 80px;
 
     a.heading-anchor {
       display: none;
       position: absolute;
       left: -35px;
-      top: 1px;
+      top: 80px;
       padding-right: 0;
       text-decoration: none;
       color: #999;
