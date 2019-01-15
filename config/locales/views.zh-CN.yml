@@ -368,3 +368,35 @@ zh-CN:
     index:
       Members: 团队成员
       Number of Members: 个成员
+  group_settings:
+    menu:
+      Profile: 团队信息
+    destroy:
+      Delete group: 删除团队
+      Delete this group: 删除此团队
+      This action cannot be undone: 注意！此动作 <strong>无法</strong> 撤销。
+      This will delete all contents: 执行此动作将会直接删除 <strong>%{slug}</strong> 团队下的所有知识库、团队成员、文档、修改历史以及评论等内容。
+      Please type the path slug of group to confirm: 请输入团队的路径 <strong class="text-red">%{slug}</strong> 以确认：
+      I understand, delete this group: 我清楚理解，确定删除此团队！
+    show:
+      Settings: 团队设置
+      Group profile: 基本信息
+      Update profile: 更新团队信息
+      Danger to change slug: "注意！当你修改了团队路径，之前指向到此团队（包括团队下的文档）将会无法打开，请谨慎使用。"
+      Danger zone: 危险操作
+      Delete this group: 删除此团队
+      Once you delete a group, there is no going back: 当你删除了团队，你将无法找回来，请考虑清楚。
+  groups:
+    menu:
+      Repository: 知识库
+      Search: 搜索
+      Member: 成员
+      Settings: 设置
+      Search in group: 搜索 %{name} 的内容
+    new:
+      New Group: 新建团队
+      Group accounts allow your team to plan, build, review, and ship documents: 团队用将一个项目组或做相同工作的一群人拉到一起，大家可以在同一个团队下组织内容。
+      Great group path names are short and memorable: 一个简单好记的团队路径有助于传播，创建以后将会是这样的路径访问：<code>%{host}/your-group-path</code>
+      The letters, numbers or dash is allow, for example: "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:"
+      Display title of this Group: 用于各种地方显示团队的名称
+      Create Group: 创建团队

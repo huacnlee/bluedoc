@@ -4,8 +4,8 @@
   <div class="col-2"></div>
   <div class="col-8">
     <div class="sub-title">
-      <div class="heading">New Group</div>
-      <div class="description">Group accounts allow your team to plan, build, review, and ship documents...</div>
+      <div class="heading"><%= t(".New Group") %></div>
+      <div class="description"><%= t(".Group accounts allow your team to plan, build, review, and ship documents") %></div>
     </div>
 
     <%= form_with(model: @group, local: true) do |form| %>
@@ -15,8 +15,8 @@
         <%= form.label :slug, class: "control-label" %>
         <%= form.text_field :slug, class: "form-control" %>
         <div class="form-text">
-          <p>Great group path names are short and memorable, <%= Setting.host %>/:group-name</p>
-          <p>The letters, numbers or dash is allow, for example: <strong class="text-blue">booklab-help</strong></p>
+          <p><%= raw t(".Great group path names are short and memorable", host: Setting.host) %></p>
+          <p><%= t(".The letters, numbers or dash is allow, for example") %> <strong class="text-blue">BookLab-Help</strong></p>
         </div>
       </div>
 
@@ -24,12 +24,12 @@
         <%= form.label :name, class: "control-label" %>
         <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
         <div class="form-text">
-          Display title of this Group
+          <%= t(".Display title of this Group") %>
         </div>
       </div>
 
       <div class="actions">
-        <%= form.submit class: "btn btn-primary" %>
+        <%= form.submit t(".Create Group"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

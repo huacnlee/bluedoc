@@ -1,20 +1,21 @@
 <%= render layout: "shared/modal", locals: {
-  title: "Delete group",
-  button_text: "Delete this group",
+  title: t("group_settings.destroy.Delete group"),
+  button_text: t("group_settings.destroy.Delete this group"),
   button_class: "btn btn-danger"
 } do %>
   <div class="Box-body overflow-auto">
     <%= form_with(model: @group, url: group_settings_path(@group), method: :delete) do |form| %>
       <p>
-        This action <strong>cannot</strong> be undone. This will permanently delete the <strong><%= @group.slug %> repositories, members, docs, versions and comments.
+        <%= raw t("group_settings.destroy.This action cannot be undone") %>
+        <%= raw t("group_settings.destroy.This will delete all contents", slug: @group.slug) %>
       </p>
       <div class="form-group">
-        <label class="control-label">Please type in the path <strong class="text-red"><%= @group.slug %></strong> to confirm</label>
+        <label class="control-label"><%= raw t("group_settings.destroy.Please type the path slug of group to confirm", slug: @group.slug) %></label>
         <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @group.slug %>" autocomplete="off" class="form-control" />
       </div>
 
       <div class="actions">
-        <button type="submit" disabled id="btn-confirm-delete" class="btn btn-danger btn-block">I understand, delete this group.</button>
+        <button type="submit" disabled id="btn-confirm-delete" class="btn btn-danger btn-block"><%= t("group_settings.destroy..I understand, delete this group") %></button>
       </div>
     <% end %>
   </div>

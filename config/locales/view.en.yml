@@ -315,3 +315,35 @@ en:
     index:
       Members: Members
       Number of Members: Members
+  group_settings:
+    menu:
+      Profile: Profile
+    destroy:
+      Delete group: Delete group
+      Delete this group: Delete this group
+      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
+      Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
+      I understand, delete this group: I understand, delete this group!
+    show:
+      Settings: Settings
+      Group profile: Group profile
+      Update profile: Update profile
+      Danger to change slug: "Danger! When you change the group name, the links to this group's contents will can not open."
+      Danger zone: Danger zone
+      Delete this group: Delete this group
+      Once you delete a group, there is no going back: Once you delete a group, there is no going back. Please be certain.
+  groups:
+    menu:
+      Repository: Repositories
+      Search: Search
+      Member: People
+      Settings: Settings
+      Search in group: Search in %{name}
+    new:
+      New Group: New Group
+      Group accounts allow your team to plan, build, review, and ship documents: Group accounts allow your team to plan, build, review, and ship documents...
+      Great group path names are short and memorable: Great group path names are short and memorable, <code>%{host}/group-name</code>.
+      The letters, numbers or dash is allow, for example: "The letters, numbers or dash is allow, and we will keep the letter case, for example:"
+      Display title of this Group: Display title of this Group
+      Create Group: Create Group

@@ -1,4 +1,4 @@
-<% title_tag "Settings", @group.name %>
+<% title_tag t(".Settings"), @group.name %>
 
 <div class="clearfix group-settings">
   <%= render "menu" %>
@@ -7,7 +7,7 @@
     <div class="mb-4 clearfix">
       <div class="col-12 col-md-8 float-left pr-md-4 mb-4 mb-md-0">
         <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
-          <div class="form-title"><h2>Group profile</h2></div>
+          <div class="form-title"><h2><%= t(".Group profile") %></h2></div>
 
           <input type="hidden" name="_by" value="show" />
           <%= render "/shared/error_messages", target: @group %>
@@ -36,12 +36,12 @@
             <%= form.label :slug, class: "control-label" %>
             <%= form.text_field :slug, class: "form-control" %>
             <div class="form-text">
-              <%= Setting.host %>/:pathname
+              <%= t(".Danger to change slug", host: Setting.host) %>
             </div>
           </div>
 
           <div class="actions">
-            <%= form.submit "Update profile", class: "btn btn-primary" %>
+            <%= form.submit t(".Update profile"), class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -70,15 +70,15 @@
     </div>
 
     <% if can? :manage, @group %>
-    <div class="form-title"><h2>Danger zone</h2></div>
+    <div class="form-title"><h2><%= t(".Danger zone") %></h2></div>
     <div class="Box mb-3">
       <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
         <div class="flex-auto mr-md-2 mb-2 mb-md-0">
           <label class="form-check-label font-weight-bold">
-            Delete this group
+            <%= t(".Delete this group") %>
           </label>
           <div class="form-text d-table-cell">
-            Once you delete a group, there is no going back. Please be certain.
+            <%= t(".Once you delete a group, there is no going back") %>
           </div>
         </div>
         <%= render "destroy" %>

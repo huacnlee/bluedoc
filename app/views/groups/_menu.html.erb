@@ -27,10 +27,10 @@
   <div class="container-lg px-3">
     <nav class="reponav clearfix" role="navigation">
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        item << link_to(icon_tag("repositories", label: "Repositories"), @group.to_path, class: "reponav-item")
-        item << link_to("Search", search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
-        item << link_to(icon_tag("users", label: "People"), group_members_path(@group), class: "reponav-item")
-        item << link_to(icon_tag("gear", label: "Settings"), group_settings_path(@group), class: "reponav-item") if can? :update, @group
+        item << link_to(icon_tag("repositories", label: t(".Repository")), @group.to_path, class: "reponav-item")
+        item << link_to(icon_tag("search", label: t(".Search")), search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
+        item << link_to(icon_tag("users", label: t(".Member")), group_members_path(@group), class: "reponav-item")
+        item << link_to(icon_tag("gear", label: t(".Settings")), group_settings_path(@group), class: "reponav-item") if can? :update, @group
       end %>
     </nav>
   </div>
@@ -40,7 +40,7 @@
 <% content_for :nav_search do %>
 <form action="<%= search_group_path(@group) %>" class="subnav-search-context" method="GET">
   <div class="subnav-search">
-    <input name="q" type="text" placeholder="<%= "Search in #{@group.name}" %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
+    <input name="q" type="text" placeholder="<%= t(".Search in group", name: @group.name) %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
     <%= icon_tag "search", :class => "subnav-search-icon" %>
   </div>
 </form>
