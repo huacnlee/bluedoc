@@ -16,15 +16,15 @@ end
 <div class="container-lg clearfix">
   <div class="col-12 col-md-7">
     <div class="sub-title">
-      <div class="heading"><%= icon_tag("user") %> Sign up</div>
-      <div class="description">Welcome to use BookLab</div>
+      <div class="heading"><%= icon_tag("user") %> <%= t(".Sign up") %></div>
+      <div class="description"><%= t(".Welcome to use BookLab") %></div>
     </div>
 
     <% if auth_info.present? %>
     <div class="flash flash-warn mt-5">
-      <strong>Complete your account info</strong>
-      <p>You must complete the below form for sign up with <b><%= resource.omniauth_provider&.humanize %></b></p>
-      <p>Or if you had a exists BookLab account, you can <%= link_to "Sign in", new_session_path(resource_name) %> to bind account.</p>
+      <strong><%= t(".Complete your account info") %></strong>
+      <p><%= t(".You must complete the below form for sign up with") %> <b><%= resource.omniauth_provider&.humanize %></b></p>
+      <p><%= raw t(".If you had an exists BookLab account, you can sign in to bind account", link: link_to("Sign in", new_session_path(resource_name))) %></p>
     </div>
     <% end %>
 
@@ -58,9 +58,9 @@ end
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary mr-2" %>
+        <%= f.submit t(".Sign up"), class: "btn btn-primary mr-2" %>
 
-        <%= link_to "Already have a account", new_session_path(resource_name) %>
+        <%= link_to t(".Already have a account"), new_session_path(resource_name) %>
       </div>
     <% end %>
   </div>

@@ -6,13 +6,13 @@ auth_info = auth_session["info"]
 <div class="container-lg clearfix">
   <div class="col-12 col-md-8 float-left">
     <div class="sub-title">
-      <div class="heading"><%= icon_tag("profile") %> Sign in</div>
-      <div class="description">Input your username or email to sign in BookLab.</div>
+      <div class="heading"><%= icon_tag("profile") %> <%= t(".Sign in") %></div>
+      <div class="description"><%= t(".Input your username or email to sign in BookLab") %></div>
     </div>
 
     <% if auth_info %>
     <div class="flash flash-warn mt-5">
-      <p>You have signed in with <b><%= auth_session["provider"].humanize %></b></p>
+      <p><%= t(".You have signed in with") %> <b><%= auth_session["provider"].humanize %></b></p>
       <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
     </div>
     <% end %>
@@ -21,7 +21,7 @@ auth_info = auth_session["info"]
       <%= render "/shared/error_messages", target: resource %>
 
       <div class="form-group">
-        <%= f.label :email, "Username / Email" %>
+        <%= f.label :email, t(".email") %>
         <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
@@ -38,12 +38,12 @@ auth_info = auth_session["info"]
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in", class: "btn btn-primary" %>
-        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "btn" %>
+        <%= f.submit t(".Sign in"), class: "btn btn-primary" %>
+        <%= link_to t(".forget_password"), new_password_path(resource_name), class: "btn" %>
       </div>
 
       <div class="py-3 mt-5 border-top">
-        <%= link_to "Didn't receive unlock instructions?", new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
+        <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
       </div>
     <% end %>
   </div>
@@ -52,7 +52,7 @@ auth_info = auth_session["info"]
     <% if defined? omniauth_authorize_path %>
     <div class="Box">
       <div class="Box-header">
-        <h3 class="Box-title">Sign in with</h3>
+        <h3 class="Box-title"><%= t(".Sign in with") %></h3>
       </div>
       <ul>
         <% if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present? %>

@@ -1,26 +1,27 @@
+---
 en:
-  hello: "Hello world"
+  hello: Hello world
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
       long: "%Y-%m-%d %H:%M:%S %z"
       short: "%b %m %H:%M"
   activerecord:
-    models:
+    models: 
     attributes:
       user:
-        slug: "Username"
-        name: "Real name"
-        url: "Homepage URL"
-        description: "Bio"
+        slug: Username
+        name: Real name
+        url: Homepage URL
+        description: Bio
       group:
-        slug: "Group name"
-        name: "Title"
-        url: "URL"
-        description: "Description"
+        slug: Group name
+        name: Title
+        url: URL
+        description: Description
       repository:
-        slug: "Repository name"
-        name: "Title"
+        slug: Repository name
+        name: Title
       doc:
-        slug: "Doc path"
-        title: "Title"
+        slug: Doc path
+        title: Title

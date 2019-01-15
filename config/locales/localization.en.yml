@@ -1,0 +1,50 @@
+# THIS FILE CONTAINS LOCALIZATION KEYS : date and number formats, number precisions,
+# number separators and all non-textual values depending on the language.
+# These values must not reach the translator, so they are separated in this file.
+#
+# More info here: https://translation.io/blog/gettext-is-better-than-rails-i18n#localization
+#
+# You can edit and/or add new localization keys here, they won't be touched by Translation.io.
+#
+# If you want to add a new localization key prefix, use the option described here:
+# https://github.com/translation/rails#custom-localization-key-prefixes
+#
+---
+en:
+  devise:
+    sessions:
+      new:
+        "Sign in": Sign in
+        "Sign in with": Sign in with
+        "Input your username or email to sign in BookLab": Input your username or email to sign in BookLab
+        "You have signed in with": You have signed in with
+        "Username / Email": Username / Email
+        "Forgot your password?": Forgot your password?
+        "Didn't receive unlock instructions?": Didn't receive unlock instructions?
+    registrations:
+      new:
+        "Sign up": Sign up
+        "Already have a account": Already have a account
+        "Welcome to use BookLab": Welcome to use BookLab
+        "Complete your account info": Complete your account info
+        "You must complete the below form for sign up with": You must complete the below form for sign up with
+        "If you had an exists BookLab account, you can sign in to bind account": If you had an exists BookLab account, you can %{link} to bind account.
+    passwords:
+      new:
+        "Reset password": Reset password
+        "Input your account Email address, we will send a reset password link to you Email": Input your account Email address, we will send a reset password link to you Email.
+        "Submit": Send me reset password instructions
+    mailer:
+      confirmation_instructions:
+        "Welcome": Welcome
+        "You can confirm your account email through the link below": "You can confirm your account email through the link below:"
+        "Confirm my account": Confirm my account
+      email_changed:
+        "Your email is being changed to": We're contacting you to notify you that your email is being changed to
+      password_change:
+        "Password has changed": We're contacting you to notify you that your password has been changed.
+      reset_password_instructions:
+        "Someone has requested a link to change your password. You can do this through the link below": Someone has requested a link to change your password. You can do this through the link below.
+        "Change my password": Change my password
+        "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
+        "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
