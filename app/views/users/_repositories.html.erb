@@ -4,7 +4,9 @@
       <p><strong><%= @user.name %></strong> was not have any repositories</p>
     </div>
   <% else %>
-    <%= render partial: "/repositories/repository", locals: { current_group: @user, items: @repositories } %>
+    <ul class="list-container repository-list">
+      <%= render partial: "/repositories/repository", collection: @repositories, locals: { current_group: @user } %>
+    </ul>
     <%= paginate @repositories %>
   <% end %>
 </div>
