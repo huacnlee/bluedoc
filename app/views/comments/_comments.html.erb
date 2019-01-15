@@ -1,5 +1,5 @@
 <div class="comments comments-<%= commentable.class.name.dasherize %>">
-  <div class="sub-title"><%= icon_tag("comments") %> Comments</div>
+  <div class="sub-title"><%= icon_tag("comments") %> <%= t(".Comments") %></div>
   <%= render "/comments/comment_watch", commentable: commentable %>
   <div class="comments-list">
     <%= render partial: "/comments/comment", collection: comments, as: :comment %>
@@ -10,8 +10,8 @@
   <%= render partial: '/comments/form', locals: { comment: comments.new } %>
 <% else %>
   <div id="comment-form-blankslate" class="blankslate">
-    <h2>Sign in to write comment</h2>
-    <p>You want write comment? you must sign in first.</p>
-    <p><%= link_to "Sign in now", new_user_session_path, class: "btn" %></p>
+    <h2><%= t(".Sign in to write comment") %></h2>
+    <p><%= t(".You must sign in first") %></p>
+    <p><%= link_to t(".Sign in now"), new_user_session_path, class: "btn" %></p>
   </div>
 <% end %>

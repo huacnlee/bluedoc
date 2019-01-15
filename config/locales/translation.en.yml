@@ -12,6 +12,7 @@
 ---
 en:
   created at: created at
+  updated at: updated at
   devise:
     sessions:
       new:
@@ -136,5 +137,36 @@ en:
         Save: Save
     comments:
       Comment was successfully updated: Comment was successfully updated.
-
+    activities:
+      has added: has added
+      to: to
+      as: as
+      created: created
+      has followed: has followed
+      starred Doc: starred a Doc
+      starred: starred
+      transfer: transfer
+    comments:
+      comment_watch:
+        Subscribe: Subscribe
+        Unsubscribe: Unsubscribe
+        You’re ignoring this notifications: "You’re ignoring this notifications."
+        You’re not receiving notifications: "You’re not receiving notifications."
+        You’re receiving notifications because you’re subscribed: "You’re receiving notifications because you’re subscribed."
+      comment:
+        Delete: Delete
+        Reply: Reply
+        Copy link: Copy link
+        Are you sure?: Are you sure?
+      comments:
+        Comments: Comments
+        Sign in to write comment: Sign in to write comment
+        You must sign in first: "You want write comment? you must sign in first."
+        Sign in now: Sign in now
+      form:
+        Submit: Comment
+      in_reply:
+        In reply to: In reply to
+      reply_info:
+        In reply to: In reply to
 

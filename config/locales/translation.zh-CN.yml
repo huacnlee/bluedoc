@@ -47,9 +47,73 @@ zh-CN:
         restrict_dependent_destroy:
           has_one: 由于 %{record} 需要此数据，所以无法删除
           has_many: 由于 %{record} 需要此数据，所以无法删除
+  errors:
+    messages:
+      already_confirmed: 已经确认。
+      confirmation_period_expired:
+      expired: 已过期，请重试
+      not_found: 没有找到。
+      not_locked: 没有锁定。
+      not_saved:
+        one: 1 个错误导致 %{resource} 未能保存：
+        other: "%{count} 错误导致 %{resource} 未能保存："
+      model_invalid: '验证失败: %{errors}'
+      inclusion: 不包含于列表中
+      exclusion: 是保留关键字
+      invalid: 是无效的
+      confirmation: 与 %{attribute} 不匹配
+      accepted: 必须是可被接受的
+      empty: 不能留空
+      blank: 不能为空字符
+      present: 必须是空白
+      too_long:
+        one: 过长（最大为1个字符）
+        other: 过长（最大为 %{count} 字符）
+      too_short:
+        one: 过短（最短为 1 个字符）
+        other: 过短（最短为 %{count} 字符）
+      wrong_length:
+        one: 长度错误（应该是 1 个字符）
+        other: 长度错误（应该是 %{count} 字符）
+      not_a_number: 不是数字
+      not_an_integer: 必须是整数
+      greater_than: 必须大于 %{count}
+      greater_than_or_equal_to: 必须大于或等于 %{count}
+      equal_to: 必须等于 %{count}
+      less_than: 必须小于 %{count}
+      less_than_or_equal_to: 必须小于或等于 %{count}
+      other_than: 长度非法（不可为 %{count} 个字符
+      odd: 必须为单数
+      even: 必须为双数
+      required: 必须存在
+      taken: 已经被使用
+      file_size_is_in: 文件大小必须在 %{min} 和 %{max} 之间
+      file_size_is_less_than: 文件大小必须小于 %{count}
+      file_size_is_less_than_or_equal_to: 文件大小必须小于或等于 %{count}
+      file_size_is_greater_than: 文件大小必须大于 %{count}
+      file_size_is_greater_than_or_equal_to: 文件大小必须大于等于 %{count}
+      allowed_file_content_types: 文件必须是 %{types} 类型
+      excluded_file_content_types: 文件不能是 %{types} 类型
+    unavailable_session:
+    unacceptable_request:
+    connection_refused:
+    format: "%{attribute}%{message}"
+    template:
+      body: 如下字段出现错误：
+      header:
+        one: 1 错误导致 %{model} 未能验证通过
+        other: "%{count} 个错误导致 %{model} 未能验证通过"
+  views:
+    pagination:
+      first: "&laquo; 第一页"
+      last: 最后一页 &raquo;
+      previous: "&lsaquo; 上一页"
+      next: 下一页 &rsaquo;
+      truncate: "&hellip;"
   created_at: 创建时间
   updated_at: 更新时间
   created at: 创建于
+  updated at: 更新于
   devise:
     confirmations:
       send_instructions: 稍后，您将收到帐号激活的电子邮件。
@@ -133,63 +197,6 @@ zh-CN:
       send_instructions: 稍后，您将收到一封帐号解锁的邮件。
       send_paranoid_instructions: 如果你已有账号，你将会收到一封用于解锁的邮件。
       unlocked: 您的帐号已成功解锁，请登录。
-  errors:
-    messages:
-      already_confirmed: 已经确认。
-      confirmation_period_expired:
-      expired: 已过期，请重试
-      not_found: 没有找到。
-      not_locked: 没有锁定。
-      not_saved:
-        one: 1 个错误导致 %{resource} 未能保存：
-        other: "%{count} 错误导致 %{resource} 未能保存："
-      model_invalid: '验证失败: %{errors}'
-      inclusion: 不包含于列表中
-      exclusion: 是保留关键字
-      invalid: 是无效的
-      confirmation: 与 %{attribute} 不匹配
-      accepted: 必须是可被接受的
-      empty: 不能留空
-      blank: 不能为空字符
-      present: 必须是空白
-      too_long:
-        one: 过长（最大为1个字符）
-        other: 过长（最大为 %{count} 字符）
-      too_short:
-        one: 过短（最短为 1 个字符）
-        other: 过短（最短为 %{count} 字符）
-      wrong_length:
-        one: 长度错误（应该是 1 个字符）
-        other: 长度错误（应该是 %{count} 字符）
-      not_a_number: 不是数字
-      not_an_integer: 必须是整数
-      greater_than: 必须大于 %{count}
-      greater_than_or_equal_to: 必须大于或等于 %{count}
-      equal_to: 必须等于 %{count}
-      less_than: 必须小于 %{count}
-      less_than_or_equal_to: 必须小于或等于 %{count}
-      other_than: 长度非法（不可为 %{count} 个字符
-      odd: 必须为单数
-      even: 必须为双数
-      required: 必须存在
-      taken: 已经被使用
-      file_size_is_in: 文件大小必须在 %{min} 和 %{max} 之间
-      file_size_is_less_than: 文件大小必须小于 %{count}
-      file_size_is_less_than_or_equal_to: 文件大小必须小于或等于 %{count}
-      file_size_is_greater_than: 文件大小必须大于 %{count}
-      file_size_is_greater_than_or_equal_to: 文件大小必须大于等于 %{count}
-      allowed_file_content_types: 文件必须是 %{types} 类型
-      excluded_file_content_types: 文件不能是 %{types} 类型
-    unavailable_session:
-    unacceptable_request:
-    connection_refused:
-    format: "%{attribute}%{message}"
-    template:
-      body: 如下字段出现错误：
-      header:
-        one: 1 错误导致 %{model} 未能验证通过
-        other: "%{count} 个错误导致 %{model} 未能验证通过"
-  hello:
   admin:
     BookLab Admin: BookLab 管理后台
     Admin: 管理后台
@@ -276,172 +283,39 @@ zh-CN:
       Delete my account: 删除我的账号
       Once you delete your account, there is no going back: 账号删除以后将无法恢复，请谨慎使用。
       Are you sure?: 警告！账号删除以后将无法恢复，你确定要这么做吗？
-  date:
-    day_names:
-    - 星期日
-    - 星期一
-    - 星期二
-    - 星期三
-    - 星期四
-    - 星期五
-    - 星期六
-    abbr_day_names:
-    - 周日
-    - 周一
-    - 周二
-    - 周三
-    - 周四
-    - 周五
-    - 周六
-    month_names:
-    -
-    - 一月
-    - 二月
-    - 三月
-    - 四月
-    - 五月
-    - 六月
-    - 七月
-    - 八月
-    - 九月
-    - 十月
-    - 十一月
-    - 十二月
-    abbr_month_names:
-    -
-    - 1月
-    - 2月
-    - 3月
-    - 4月
-    - 5月
-    - 6月
-    - 7月
-    - 8月
-    - 9月
-    - 10月
-    - 11月
-    - 12月
-  time:
-    am: 上午
-    pm: 下午
-  number:
-    human:
-      storage_units:
-        units:
-          byte:
-            one: 字节
-            other: 字节
-          kb: KB
-          mb: MB
-          gb: GB
-          tb: TB
-          pb: PB
-          eb: EB
-      decimal_units:
-        units:
-          thousand: 千
-          million: 百万
-          billion: 十亿
-          trillion: 兆
-          quadrillion: 千兆
-  datetime:
-    distance_in_words:
-      half_a_minute: 半分钟
-      less_than_x_seconds:
-        one:
-        other:
-      x_seconds:
-        one:
-        other:
-      less_than_x_minutes:
-        one:
-        other:
-      x_minutes:
-        one:
-        other:
-      about_x_hours:
-        one:
-        other:
-      x_days:
-        one:
-        other:
-      about_x_months:
-        one:
-        other:
-      x_months:
-        one:
-        other:
-      about_x_years:
-        one:
-        other:
-      over_x_years:
-        one:
-        other:
-      almost_x_years:
-        one:
-        other:
-      x_years:
-        one:
-        other:
-    prompts:
-      year: 年
-      month: 月
-      day: 日
-      hour: 时
-      minute: 分
-      second: 秒
-  helpers:
-    select:
-      prompt: 请选择
-    submit:
-      create: 创建 %{model}
-      update: 保存 %{model}
-      submit: 保存 %{model}
-    page_entries_info:
-      entry:
-        zero:
-        one:
-        other:
-      one_page:
-        display_entries:
-          zero: "%{entry_name} 无法找到"
-          one: 显示<b>1</b> %{entry_name}
-          other: 显示<b>全部%{count}</b> %{entry_name}
-      more_pages:
-        display_entries: '显示 %{entry_name} <b>%{first} - %{last}</b>  共<b>%{total}</b> '
-  flash:
-    actions:
-      create:
-        notice: "%{resource_name} 已创建成功。"
-      update:
-        notice: "%{resource_name} 已更新成功。"
-      destroy:
-        notice: "%{resource_name} 已删除成功。"
-        alert: "%{resource_name} 无法删除。"
-  ruby:
-    enum:
-      errors:
-        messages:
-          uninitialized_constant:
-            message:
-            summary:
-            resolution:
-          duplicate_key:
-            message:
-            summary:
-            resolution:
-          duplicate_value:
-            message:
-            summary:
-            resolution:
-  views:
-    pagination:
-      first: "&laquo; 第一页"
-      last: 最后一页 &raquo;
-      previous: "&lsaquo; 上一页"
-      next: 下一页 &rsaquo;
-      truncate: "&hellip;"
+  activities:
+    has added: 添加
+    to: 到
+    as: 成为
+    created: 创建了
+    has followed: 关注了
+    starred Doc: 收藏了文档
+    starred: 收藏了
+    transfer: 移动
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知
     no_records: 暂无通知
+  comments:
+    comment_watch:
+      Subscribe: 订阅新评论
+      Unsubscribe: 取消订阅
+      You’re ignoring this notifications: 你禁用此文档的通知。
+      You’re not receiving notifications: 你未订阅评论的通知。
+      You’re receiving notifications because you’re subscribed: 目前你已订阅，将会收到新评论的通知。
+    comment:
+      Delete: 删除评论
+      Reply: 回复
+      Copy link: 复制评论链接
+      Are you sure?: 确定要删除吗？
+    comments:
+      Comments: 评论
+      Sign in to write comment: 登录以后可以评论
+      You must sign in first: "你需要先登录以后才能发布评论。"
+      Sign in now: 现在登录
+    form:
+      Submit: 发布评论
+    in_reply:
+      In reply to: 回复
+    reply_info:
+      In reply to: 回复

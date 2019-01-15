@@ -19,13 +19,13 @@
           </summary>
           <div class="dropdown-menu dropdown-menu-sw">
             <ul>
-              <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text="<%= request.url %>#comment-<%= comment.id %>" data-clipboard-tooltip-target="#comment-<%= comment.id %>-menu-button">Copy link</clipboard-copy></li>
+              <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text="<%= request.url %>#comment-<%= comment.id %>" data-clipboard-tooltip-target="#comment-<%= comment.id %>-menu-button"><%= t(".Copy link") %></clipboard-copy></li>
               <% if current_user %>
-                <li><%= link_to "Reply", reply_comment_path(comment), class: "dropdown-item", data: { remote: true, "close-dialog" => true } %></li>
+                <li><%= link_to t(".Reply"), reply_comment_path(comment), class: "dropdown-item", data: { remote: true, "close-dialog" => true } %></li>
               <% end %>
               <% if can? :destroy, comment %>
                 <li class="dropdown-divider"></li>
-                <li><%= link_to "Delete", comment_path(comment), class: "dropdown-item", data: { method: 'delete', remote: true, confirm: "Are you sure?", "close-dialog" => true } %></li>
+                <li><%= link_to t(".Delete"), comment_path(comment), class: "dropdown-item", data: { method: 'delete', remote: true, confirm: t(".Are you sure?"), "close-dialog" => true } %></li>
               <% end %>
             </ul>
           </div>
