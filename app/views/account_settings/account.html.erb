@@ -5,7 +5,7 @@
 
   <div class="col-12 col-md-9 float-left">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <div class="form-title"><h2>Change password</h2></div>
+      <div class="form-title"><h2><%= t(".Change password") %></h2></div>
       <%= render "/shared/error_messages", target: @user %>
 
       <input type="hidden" name="_by" value="password" />
@@ -15,7 +15,7 @@
         <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
         <% if @minimum_password_length %>
           <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
+          <em><%= t(".Minimum characters", length: @minimum_password_length) %></em>
         <% end %>
       </div>
 
@@ -28,27 +28,27 @@
         <%= f.label :current_password, class: "control-label" %>
         <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
         <div class="form-text">
-          We need your current password to confirm your changes.
+          <%= t(".We need your current password to confirm your changes")  %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.submit "Update password", class: "btn btn-primary" %>
+        <%= f.submit t(".Update password"), class: "btn btn-primary" %>
       </div>
     <% end %>
 
-   <div class="form-title"><h2>Danger zone</h2></div>
+   <div class="form-title"><h2><%= t(".Danger zone") %></h2></div>
     <div class="Box mb-3">
       <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
         <div class="flex-auto pr-md-2 mb-2 mb-md-0">
           <label class="form-check-label font-weight-bold">
-            Delete my account
+            <%= t(".Delete my account") %>
           </label>
           <div class="form-text">
-            Once you delete your account, there is no going back. Please be certain.
+            <%= t(".Once you delete your account, there is no going back") %>
           </div>
         </div>
-        <%= button_to "Delete my account", account_settings_path, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure?" }, method: :delete %>
+        <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-sm btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
       </div>
     </div>
   </div>

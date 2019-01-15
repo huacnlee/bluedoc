@@ -12,7 +12,7 @@ auth_info = auth_session["info"]
 
     <% if auth_info %>
     <div class="flash flash-warn mt-5">
-      <p><%= t(".You have signed in with") %> <b><%= auth_session["provider"].humanize %></b></p>
+      <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
       <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
     </div>
     <% end %>
