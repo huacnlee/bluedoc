@@ -3,9 +3,10 @@
     <div class="blankslate">
       <p><%= @user.name %> not has following any one</p>
     </div>
-  </div>
   <% else %>
-    <%= render @users %>
+    <ul class="list-container">
+      <%= render @users %>
+    </ul>
     <%= paginate @users %>
   <% end %>
 </div>

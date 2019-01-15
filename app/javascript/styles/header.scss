@@ -7,7 +7,10 @@
   background: #fff;
   box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
   .header-content {
-    max-width: 1000px;
+    width: 100%;
+    @include breakpoint(md) {
+      width: 1000px;
+    }
     padding: 0 25px;
     height: 100%;
     margin: auto;
@@ -39,12 +42,6 @@
     vertical-align: middle;
     width: 20px;
     height: 20px;
-  }
-  .search {
-    display: none;
-    @include breakpoint(sm) {
-      display: block;
-    }
   }
   .search {
     display: none;
