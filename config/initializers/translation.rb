@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 TranslationIO.configure do |config|
-  config.api_key        = 'e6d189c3fc1047e084f2db76cafd4d9e'
-  config.source_locale  = 'en'
-  config.target_locales = ['zh-CN']
+  config.api_key        = "e6d189c3fc1047e084f2db76cafd4d9e"
+  config.source_locale  = "en"
+  config.target_locales = ["zh-CN"]
 
   # Uncomment this if you don't want to use gettext
   config.disable_gettext = true

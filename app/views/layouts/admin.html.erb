@@ -17,14 +17,14 @@
 
   <div class="nav-header">
     <div class="navbar flex-auto">
-      <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("booklab", label: "Admin") %></a>
+      <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("booklab", label: t("admin.BookLab Admin")) %></a>
 
       <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
-        li <<  link_to("Group", admin_groups_path, class: "nav-link")
-        li <<  link_to("User", admin_users_path, class: "nav-link")
-        li <<  link_to("Repository", admin_repositories_path, class: "nav-link")
-        li <<  link_to("Doc", admin_docs_path, class: "nav-link")
-        li <<  link_to("Comment", admin_comments_path, class: "nav-link")
+        li <<  link_to(t("admin.Group"), admin_groups_path, class: "nav-link")
+        li <<  link_to(t("admin.User"), admin_users_path, class: "nav-link")
+        li <<  link_to(t("admin.Repository"), admin_repositories_path, class: "nav-link")
+        li <<  link_to(t("admin.Doc"), admin_docs_path, class: "nav-link")
+        li <<  link_to(t("admin.Comment"), admin_comments_path, class: "nav-link")
       end %>
     </div>
     <div class="navbar">
@@ -35,12 +35,12 @@
         </summary>
         <div class="dropdown-menu dropdown-menu-sw">
           <div class="dropdown-header">
-            Signed in as <strong><%= current_user.slug %></strong>
+            <%= current_user.slug %>
           </div>
           <ul>
-            <li><a class="dropdown-item" data-turbolinks="false" href="<%= root_path %>">Back to Front</a></li>
+            <li><a class="dropdown-item" data-turbolinks="false" href="<%= root_path %>"><%= t("admin.Back to Front") %></a></li>
             <li class="dropdown-divider" role="separator"></li>
-            <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">Sign out</a></li>
+            <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete"><%= t("admin.Sign out") %></a></li>
           </ul>
         </div>
       </details>
@@ -53,9 +53,9 @@
       <div class="container">
         <nav class="Breadcrumb mb-3">
           <ol>
-            <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+            <li class="breadcrumb-item"><%= link_to t("admin.Admin"), admin_root_path %></li>
             <%= yield :breadcrumb %>
-            <li class="breadcrumb-item text-small breadcrumb-item-selected"><%= action_name %></li>
+            <li class="breadcrumb-item text-small breadcrumb-item-selected"><%= t("admin.#{action_name}") %></li>
           </ol>
         </nav>
         <%= yield %>

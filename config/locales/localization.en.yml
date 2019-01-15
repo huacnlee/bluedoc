@@ -11,6 +11,7 @@
 #
 ---
 en:
+  created at: created at
   devise:
     sessions:
       new:
@@ -70,6 +71,49 @@ en:
       Upload new picture: Upload new picture
       System default: "System default [%{locale_name}]"
   admin:
+    BookLab Admin: BookLab Admin
+    Admin: Admin
+    All: All
+    Are you sure delete this item?: Are you sure delete this item?
+    Are you sure restore this item?: Are you sure restore this item?
+    Save: Save
+    Cancel: Cancel
+    index: Index
+    edit: Edit
+    new: New
+    show: View
+    Group: Group
+    User: User
+    Repository: Repository
+    Comment: Comment
+    Doc: Doc
+    Notification: Notification
+    Activity: Activity
+    Back to Front: Back to Front
+    Sign out: Sign out
+    View: View
+    Edit: Edit
+    Back: Back
+    dashboards:
+      show:
+        Tools: Tools
+        Settings: System Settings
+        Exceptions: Exceptions
+        Background Jobs: Background Jobs
+        Database Stats: Database Stats
+        Rebuild Search Index: Rebuild Search Index
+        Service statuses: Service statuses
+        Service:
+          Database: Database
+          Cache: Cache (Redis)
+          Sidekiq: Queue
+          PlantumlService: UML Graph Service
+          MathjaxService: Math Graph Service
+          ElasticSearchService: Fulltext Search Service
+        Statistics: Statistics
+    reposiories:
+      show:
+        All doc: All doc
     settings:
       show:
         Settings: Settings
@@ -90,5 +134,7 @@ en:
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
         Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
         Save: Save
+    comments:
+      Comment was successfully updated: Comment was successfully updated.
 
 

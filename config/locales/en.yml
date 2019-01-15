@@ -7,7 +7,7 @@ en:
       long: "%Y-%m-%d %H:%M:%S %z"
       short: "%b %m %H:%M"
   activerecord:
-    models: 
+    models:
     attributes:
       user:
         slug: Username
@@ -16,9 +16,13 @@ en:
         description: Bio
       group:
         slug: Group name
+        avatar: Avatar
         name: Title
         url: URL
         description: Description
+        members_count: Members Count
+        created_at: Created At
+        updated_at: Updated At
       repository:
         slug: Repository name
         name: Title

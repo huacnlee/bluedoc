@@ -7,22 +7,22 @@
 
 
   <div class="detail-row">
-    <div class="detail-label">Title:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.title") %>:</div>
     <div class="detail-value"><%= @doc.title %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">URL:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.url") %>:</div>
     <div class="detail-value"><%= link_to @doc.to_url, @doc.to_url, target: "_blank" %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Owned for:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.repository") %>:</div>
     <div class="detail-value"><%= group_name_tag(@doc.repository.user) %> / <%= repository_name_tag(@doc.repository) %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Editors:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.editors") %>:</div>
     <div class="detail-value">
       <% @doc.editors.each do |user| %>
         <%= user_avatar_tag(user, style: :tiny) %>
@@ -31,21 +31,21 @@
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Counts:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.comments_count") %>:</div>
     <div class="detail-value">
       <%= @doc.comments_count %> comments
     </div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Created At:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.created_at") %>:</div>
     <div class="detail-value">
       <%= l @doc.created_at, format: :long %>
     </div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Updated At:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.doc.updated_at") %>:</div>
     <div class="detail-value">
       <%= l @doc.updated_at, format: :long %>
     </div>

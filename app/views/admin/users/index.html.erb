@@ -2,14 +2,11 @@
 
 <div class="subnav">
   <nav class="subnav-links">
-    <% if params[:q] %>
-    <a href="<%= admin_users_path %>" class="subnav-item">All</a>
-    <% end %>
-    <a href="<%= new_admin_user_path %>" class="subnav-item">New</a>
+    <a href="<%= admin_users_path %>" class="subnav-item"><%= t("admin.All") %></a>
   </nav>
   <div class="subnav-search float-left">
     <form action="" method="GET">
-      <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" aria-label="Search">
+      <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>">
       <%= icon_tag "search", class: "subnav-search-icon" %>
     </form>
   </div>
@@ -22,7 +19,7 @@
       <td></td>
       <td><%= t("activerecord.attributes.user.name") %></td>
       <td><%= t("activerecord.attributes.user.followers_count") %></td>
-      <td>Created At</td>
+      <td><%= t("created_at") %></td>
       <td class="opts"></td>
     </tr>
     <% @users.each do |item| %>
@@ -37,9 +34,9 @@
       <td class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_user_path(item.id) %>
-        <%= link_to icon_tag("trash"), admin_user_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <%= link_to icon_tag("trash"), admin_user_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
         <% if item.deleted? %>
-          <%= link_to icon_tag("restore"), restore_admin_user_path(item.id), method: :post, 'data-confirm' => 'Are you sure restore this item?' %>
+          <%= link_to icon_tag("restore"), restore_admin_user_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
         <% end %>
       </td>
     </tr>

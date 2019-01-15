@@ -62,7 +62,7 @@ zh-CN:
       words_connector: "、"
   time:
     formats:
-      default: "%Y年%m月%d日 %A %H:%M:%S %Z"
+      default: "%Y年%m月%d日 %H:%M:%S"
       long: "%Y年%m月%d日 %H:%M"
       short: "%m月%d日 %H:%M"
   spree:

@@ -7,6 +7,12 @@
 ---
 zh-CN:
   activerecord:
+    models:
+      doc: 文档
+      user: 用户
+      group: 团队
+      repository: 知识库
+      comment: 评论
     attributes:
       doc:
         title: 文档标题
@@ -24,19 +30,26 @@ zh-CN:
         location: 地址 / 办公点
         remember_me: 记住登录状态
       group:
+        avatar: Logo
         slug: 团队路径
         name: 团队名称
         url: URL
-        description: 团队介绍
+        description: 介绍
+        members_count: 成员数量
       repository:
         slug: 知识库路径
         name: 知识库名称
+      comment:
+        body: 评论内容
     errors:
       messages:
         record_invalid: '验证失败: %{errors}'
         restrict_dependent_destroy:
           has_one: 由于 %{record} 需要此数据，所以无法删除
           has_many: 由于 %{record} 需要此数据，所以无法删除
+  created_at: 创建时间
+  updated_at: 更新时间
+  created at: 创建于
   devise:
     confirmations:
       send_instructions: 稍后，您将收到帐号激活的电子邮件。
@@ -177,6 +190,71 @@ zh-CN:
         one: 1 错误导致 %{model} 未能验证通过
         other: "%{count} 个错误导致 %{model} 未能验证通过"
   hello:
+  admin:
+    BookLab Admin: BookLab 管理后台
+    Admin: 管理后台
+    All: 所有数据
+    Save: 保存
+    Cancel: 取消
+    Are you sure delete this item?: 你确定要删除此项吗？
+    Are you sure restore this item?: 你确定要恢复这个已经删除的数据吗？
+    index: 列表
+    edit: 编辑
+    new: 新建
+    show: 查看详情
+    View: 查看
+    Edit: 编辑
+    Back: 返回
+    Group: 团队
+    User: 用户
+    Repository: 知识库
+    Comment: 评论
+    Doc: 文档
+    Notification: 通知
+    Activity: 动态
+    Back to Front: 回到前台
+    Sign out: 登出
+    dashboards:
+      show:
+        Tools: 工具
+        Settings: 系统设置
+        Exceptions: 异常记录
+        Background Jobs: 后台异步队列
+        Database Stats: 数据库状态
+        Rebuild Search Index: 重新搜索索引（耗费性能）
+        Service statuses: 服务健康状态
+        Service:
+          Database: 数据库
+          Cache: 缓存 (Redis)
+          Sidekiq: 队列
+          PlantumlService: UML 预览服务
+          MathjaxService: 数学公式服务
+          ElasticSearchService: 全文搜索服务
+    repositories:
+      show:
+        All docs: 所有文档
+    settings:
+      show:
+        Settings: 系统设置
+        System settings: 系统设置
+        Default language: "默认语言:"
+        Setup default language for BookLab: 设置 BookLab 所有用户的默认语言。
+        Enable anonymous visit public contents: 允许未登录用户访问 BookLab 上的公开内容。
+        Disable this BookLab will requirement sign in for all pages: 关闭此功能，BookLab 将要求所有内容页面必须登录。
+        PlantUML Service Host: "UML 图像服务:"
+        BookLab use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BookLab 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。
+        MathJax Service Host: "数学公式服务:"
+        If you wants customize MaxJax SVG service: 如果你希望部署一套自己的数学公式图像生成服务，你可以修改这里，你的服务需要兼容这样的路径 <code>${mathjax_service_host}/svg?tex={tex}</code> 来生成 SVG 图像。
+        Admin Emails: "管理员 Email 列表:"
+        Special account emails as admin with each line: "添加 Email 到这个列表（一行一个），用这些 Email 注册的账号将会获得 BookLab 管理后台的权限（请小心，别把自己删掉了）。"
+        Customize UI: UI 定制
+        Application Footer HTML: "全局页脚 HTML:"
+        You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
+        Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
+        Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
+        Save: 保存
+    comments:
+      Comment was successfully updated: Comment was successfully updated.
   account_settings:
     Password has change successed: 密码已经修改成功。
     Profile has change successed: 个人资料已经更新成功。

@@ -20,7 +20,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
     @<%= file_name %> = <%= orm_class.build(file_name.camelize, "#{file_name}_params") %>
 
     if @<%= file_name %>.save
-      redirect_to(<%= index_helper %>_path, notice: "<%= human_name %> was successfully created.")
+      redirect_to(<%= index_helper %>_path, notice: t(".<%= human_name %> was successfully created."))
     else
       render :new
     end
@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
 
   def update
     if @<%= file_name %>.update(<%= file_name %>_params)
-      redirect_to <%= index_helper %>_path, notice: "<%= human_name %> was successfully updated."
+      redirect_to <%= index_helper %>_path, notice: t(".<%= human_name %> was successfully updated.")
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
 
   def destroy
     @<%= file_name %>.destroy
-    redirect_to <%= index_helper %>_path, notice: "<%= human_name %> was successfully deleted."
+    redirect_to <%= index_helper %>_path, notice: t(".<%= human_name %> was successfully deleted.")
   end
 
   private

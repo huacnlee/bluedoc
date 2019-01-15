@@ -2,29 +2,29 @@
 
 <div class="detail admin-edit-admin_repository">
   <div class="detail-action">
-    <%= link_to icon_tag("arrow-left", label: "Back"), admin_repositories_path, class: "btn" %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_admin_repository_path(@repository.id), class: "btn" %>
-    <%= link_to "All docs", admin_docs_path(repository_id: @repository.id), class: "btn" %>
+    <%= link_to icon_tag("arrow-left", label: t("admin.Back")), admin_repositories_path, class: "btn" %>
+    <%= link_to icon_tag("pencil", label: t("admin.Edit")), edit_admin_repository_path(@repository.id), class: "btn" %>
+    <%= link_to t(".All docs"), admin_docs_path(repository_id: @repository.id), class: "btn" %>
   </div>
 
 
   <div class="detail-row">
-    <div class="detail-label">Repository name:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.repository.slug") %>:</div>
     <div class="detail-value"><%= @repository.slug %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Title:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.repository.name") %>:</div>
     <div class="detail-value"><%= @repository.name %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">User:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.repository.user") %>:</div>
     <div class="detail-value"><%= @repository.user&.slug %></div>
   </div>
 
   <div class="detail-row">
-    <div class="detail-label">Description:</div>
+    <div class="detail-label"><%= t("activerecord.attributes.repository.description") %>:</div>
     <div class="detail-value"><%= @repository.description %></div>
   </div>
 </div>
