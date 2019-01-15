@@ -16,6 +16,19 @@ en:
   shared:
     more_button:
       More: "More ..."
+  layouts:
+    user_menu:
+      New Repository: New Repository
+      Import Repository: Import Repository
+      New Group: New Group
+      Your profile: Your profile
+      Your repositories: Your repositories
+      Your stars: Your stars
+      Admin Panel: Admin Panel
+      Settings: Settings
+      Sign out: Sign out
+    mailer:
+      This mail has sent from: This mail has sent from
   devise:
     sessions:
       new:

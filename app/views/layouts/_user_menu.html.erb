@@ -13,18 +13,18 @@
     <div class="dropdown-menu dropdown-menu-sw">
       <ul>
         <% if @user %>
-        <li><a class="dropdown-item" href="<%= main_app.new_repository_path(user_id: @user.id) %>">New Repository</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.new_repository_path(user_id: @user.id) %>"><%= t(".New Repository") %></a></li>
         <% else %>
-        <li><a class="dropdown-item" href="<%= main_app.new_repository_path %>">New Repository</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.new_repository_path %>"><%= t(".New Repository") %></a></li>
         <% end %>
 
         <% if @user %>
-        <li><a class="dropdown-item" href="<%= main_app.import_repository_path(user_id: @user.id) %>">Import Repository</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.import_repository_path(user_id: @user.id) %>"><%= t(".Import Repository") %></a></li>
         <% else %>
-        <li><a class="dropdown-item" href="<%= main_app.import_repository_path %>">Import Repository</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.import_repository_path %>"><%= t(".Import Repository") %></a></li>
         <% end %>
 
-        <li><a class="dropdown-item" href="<%= main_app.new_group_path %>">New Group</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.new_group_path %>"><%= t(".New Group") %></a></li>
       </ul>
     </div>
   </details>
@@ -35,19 +35,19 @@
     </summary>
     <div class="dropdown-menu dropdown-menu-sw">
       <div class="dropdown-header">
-        Signed in as <strong><%= current_user.slug %></strong>
+        <%= current_user.slug %>
       </div>
       <ul>
-        <li><a class="dropdown-item" href="<%= current_user.to_path %>">Your profile</a></li>
-        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>">Your repositories</a></li>
-        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>">Your stars</a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path %>"><%= t(".Your profile") %></a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>"><%= t(".Your repositories") %></a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>"><%= t(".Your stars") %></a></li>
         <% if current_user.admin? %>
         <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item" data-turbolinks="false" href="<%= main_app.admin_root_path %>">Admin Panel</a></li>
+        <li><a class="dropdown-item" data-turbolinks="false" href="<%= main_app.admin_root_path %>"><%= t(".Admin Panel") %></a></li>
         <% end %>
         <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item" href="<%= main_app.account_settings_path %>">Settings</a></li>
-        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Sign out</a></li>
+        <li><a class="dropdown-item" href="<%= main_app.account_settings_path %>"><%= t(".Settings") %></a></li>
+        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete"><%= t(".Sign out") %></a></li>
       </ul>
     </div>
   </details>

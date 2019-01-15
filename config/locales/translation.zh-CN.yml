@@ -117,6 +117,19 @@ zh-CN:
   shared:
     more_button:
       More: "加载更多 ..."
+  layouts:
+    user_menu:
+      New Repository: 新建知识库
+      Import Repository: 导入知识库
+      New Group: 新建团队
+      Your profile: 个人页面
+      Your repositories: 你的知识库
+      Your stars: 你的收藏
+      Admin Panel: 管理后台
+      Settings: 设置
+      Sign out: 登出
+    mailer:
+      This mail has sent from: 这封邮件发送自
   devise:
     confirmations:
       send_instructions: 稍后，您将收到帐号激活的电子邮件。
