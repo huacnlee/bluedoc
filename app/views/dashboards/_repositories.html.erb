@@ -8,9 +8,11 @@
   <% items.each do |item| %>
   <li class="list-item recent-repo-item">
     <div class="title"><%= repository_name_tag(item.subject) %></div>
+    <% if item.subject.description.present? %>
     <div class="description">
       <%= truncate item.subject.description, length: 100 %>
     </div>
+    <% end %>
     <div class="info">
       <span class="user">
         <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>

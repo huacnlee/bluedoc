@@ -33,8 +33,8 @@
   .list-container {
     width: 550px;
     .list-item {
-      .info {
-        margin-top: 15px;
+      .description {
+        margin-bottom: 15px;
       }
     }
   }
@@ -103,7 +103,7 @@
   .infos {
     font-size: 14px;
     color: $text-gray-light;
-    a { 
+    a {
       color: $text-main
     }
     .time {
