@@ -1,21 +1,30 @@
-<%= render layout: "shared/modal", locals: {
-  title: "Delete repository",
-  button_text: "Delete this repository",
-  button_class: "btn btn-danger"
-} do %>
-  <div class="Box-body overflow-auto">
-    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :delete) do |form| %>
-      <p>
-        This action <strong>cannot</strong> be undone. This will permanently delete the <strong><%= @repository.user&.slug %>/<%= @repository.slug %></strong> repository, docs, versions and comments.
-      </p>
-      <div class="form-group">
-        <label class="control-label">Please type in the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
-        <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
-      </div>
+<details class="details-reset details-overlay details-overlay-dark">
+  <summary class="btn btn-danger" aria-haspopup="dialog"><%= t(".Delete this repository") %></summary>
+  <details-dialog class="Box d-flex flex-column anim-fade-in fast">
+    <div class="Box-header">
+      <button class="Box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
+        <%= icon_tag "times" %>
+      </button>
+      <h3 class="Box-title"><%= t(".Delete repository") %></h3>
+    </div>
 
-      <div class="actions">
-        <button type="submit" id="btn-confirm-delete" disabled class="btn btn-danger btn-block">I understand, delete this repository.</button>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+    <div class="Box-body overflow-auto">
+      <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :delete) do |form| %>
+        <p>
+          <%= raw t(".This action cannot be undone") %>
+          <%= t(".This will permanently delete the") %>
+          <strong><%= @repository.user&.slug %>/<%= @repository.slug %></strong>
+          <%= t(".all of contents") %>
+        </p>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="btn-confirm-delete" disabled class="btn btn-danger btn-block"><%= t(".I understand, delete this repository") %></button>
+        </div>
+      <% end %>
+    </div>
+  </details-dialog>
+</details>

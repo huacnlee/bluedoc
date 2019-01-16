@@ -460,3 +460,99 @@ en:
       Remove item: Remove item
       Save: Save
       Cancel: Cancel
+  repository_settings:
+    exports:
+      archive:
+        Export as Archive: Export as Archive
+        Export all docs as markdown files, and archive them into a zip file: Export all docs as markdown files, and archive them into a zip file.
+        This will including a SUMMARY for describe of the Table of contents: This will including a <code>SUMMARY.md</code> for describe of the Table of contents.
+        After that you can use many Markdown tools: After that you can use many Markdown tools
+        to genrate it to other format: to genrate it to other format.
+        Archive of this repository has in generating: Archive of this repository has in generating, please wait ...
+        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a Archive export task again.
+        Archive of this repository was generated: Archive of this repository was generated.
+        Click the button to download it: Click the button to download it.
+        Download: Download
+        Generate Again: Generate Again!
+        Submiting: Submiting...
+        Archive as zip: Archive as zip
+        Generate Archive will take a long time: Generate Archive will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+      pdf:
+        Export as PDF: Export as PDF
+        You can export all docs as a PDF file: You can export all docs in this Repository as a PDF file.
+        Preview PDF HTML: Preview PDF HTML
+        Exporter will use the TOC ordered, otherwice same as the: Exporter will use the Table of Contents ordered for generate the PDF file. If you was not enable that, docs order will following as the updated at same like the
+        Doc list: Docs page
+        PDF has in generating, please wait: PDF of this repository has in generating, please wait ...
+        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a PDF export task again.
+        PDF of this repository was generated: PDF of this repository was generated.
+        Click the button to download it: Click the button to download it.
+        Download: Download PDF
+        Generate Again: Generate Again!
+        Submiting: Submiting...
+        Generate PDF: Generate PDF
+        Generate PDF will take a long time: Generate PDF will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+    destroy:
+      Delete repository: Delete repository
+      Delete this repository: Delete this repository
+      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This will permanently delete the: This will permanently delete the
+      all of contents: repository, docs, versions and comments.
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      I understand, delete this repository: I understand, delete this repository
+    member:
+      Are you sure to remove?: Are you sure to remove?
+    menu:
+      Options: Options
+      Manage docs: Manage docs
+      Collaborators: Collaborators
+      Advanced: Advanced
+    privacy:
+      public: public
+      private: private
+      Make privacy: Make %{privacy}
+      Make this repository privacy: Make this repository %{privacy}
+      Public this repository from the private, this repository and docs will be visible to everyone who can visit: Public this repository from the private, this repository and docs will be visible to everyone who can visit
+      Private this repository from the public, this change will remove repository watchers, stars: Private this repository from the public, this change will remove repository watchers, stars.
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      Confirm and submit: I understand, %{privacy} this repository.
+    transfer:
+      Transfer: Transfer
+      Transfer repository: Transfer repository
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      Target username or group path: New owner’s BookLab username or group path
+      Confirm and transfer: Transfer this repository
+    advanced:
+      Settings: Settings
+      Transfer: Transfer
+      Transfer ownership: Transfer ownership
+      Transfer this repository to another user or to an group: Transfer this repository to another user or to an group where you have the ability to create repositories.
+      Danger Zone: Danger Zone
+      Make this repository public: Make this repository public
+      Make this repository private: Make this repository private
+      Public this repository from the private: Public this repository from the private.
+      Private this repository from the public: Private this repository from the public.
+      Delete this repository: Delete this repository
+      Once you delete a repository, there is no going back: Once you delete a repository, there is no going back. Please be certain.
+    collaborators:
+      Collaborators: Collaborators
+      Push access to the repository: Push access to the repository
+      Search by username, full name or email address: Search by username, full name or email address
+      By default, will add user as :role role: By default, will add user as <strong>%{role}</strong> role.
+      Add: Add
+    docs:
+      Transfer docs to other repository: Transfer docs to other repository
+      Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
+      If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
+      Transfer now: Transfer now!
+    show:
+      Settings: Settings
+      Repository profile: Repository profile
+      Repository slug help: "%{host}%{user_path}/repository-name"
+      Update: Update
+      Features: Features
+      Table of Contents: Table of Contents
+      Enable to use Table of Contents style for Repository index: Enable to use Table of Contents style for Repository index.

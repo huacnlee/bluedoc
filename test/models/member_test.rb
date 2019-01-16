@@ -12,6 +12,10 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "role_name" do
+    assert_equal I18n.t("member_role.editor"), Member.role_name("editor")
+    assert_equal I18n.t("member_role.admin"), Member.role_name("admin")
+    assert_equal I18n.t("member_role.reader"), Member.role_name("reader")
+
     member = Member.new(role: :editor)
     assert_equal I18n.t("member_role.editor"), member.role_name
     member.role = :reader
@@ -19,6 +23,7 @@ class MemberTest < ActiveSupport::TestCase
     member.role = :admin
     assert_equal I18n.t("member_role.admin"), member.role_name
   end
+
 
   test "Memberable base" do
     mock_current(user: @user)

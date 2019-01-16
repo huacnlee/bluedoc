@@ -1,32 +1,42 @@
 <%
+  privacy_name = @repository.private? ? t(".public") : t(".private")
   value = @repository.private? ? "public" : "private"
 %>
 
-<%= render layout: "shared/modal", locals: {
-  title: "Make this repository #{value}",
-  button_text: "Make #{value}",
-  button_class: "btn btn-danger"
-} do %>
-  <div class="Box-body overflow-auto">
-    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :put) do |form| %>
-      <p>
-        <% if @repository.private? %>
-          Public this repository from the private, this repository and docs will be visible to everyone who can visit  <%= Setting.host %>.
-        <% else %>
-          Private this repository from the public, this change will remove repository watchers, stars.
-        <% end %>
-      </p>
+<details class="details-reset details-overlay details-overlay-dark">
+  <summary class="btn btn-danger" aria-haspopup="dialog"><%= t(".Make privacy", privacy: privacy_name) %></summary>
+  <details-dialog class="Box d-flex flex-column anim-fade-in fast">
+    <div class="Box-header">
+      <button class="Box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
+        <%= icon_tag "times" %>
+      </button>
+      <h3 class="Box-title"><%= t(".Make this repository privacy", privacy: privacy_name) %></h3>
+    </div>
 
-      <%= form.hidden_field :privacy, value: value %>
+    <div class="Box-body overflow-auto">
+      <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :put) do |form| %>
+        <p>
+          <% if @repository.private? %>
+            <%= t(".Public this repository from the private, this repository and docs will be visible to everyone who can visit") %> <%= Setting.host %>.
+          <% else %>
+            <%= t(".Private this repository from the public, this change will remove repository watchers, stars") %>
+          <% end %>
+        </p>
 
-      <div class="form-group">
-        <label class="control-label">Please type in the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
-        <input type="text" confirm-for="#btn-confirm-change-private" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
-      </div>
+        <%= form.hidden_field :privacy, value: value %>
 
-      <div class="actions">
-        <button type="submit" id="btn-confirm-change-private" disabled class="btn btn-danger btn-block">I understand, <%= value %> this repository.</button>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <input type="text" confirm-for="#btn-confirm-change-private" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="btn-confirm-change-private" disabled class="btn btn-danger btn-block">
+            <%= t(".Confirm and submit", privacy: privacy_name) %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+  </details-dialog>
+</details>

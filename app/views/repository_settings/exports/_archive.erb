@@ -1,17 +1,19 @@
 <div class="Box export-repository-archive mb-4">
   <div class="Box-header">
-    <h4 class="title mb-2"><%= icon_tag("zip") %> Export as Archive</h4>
+    <h4 class="title mb-2"><%= icon_tag("zip") %> <%= t(".Export as Archive") %></h4>
     <div class="text-gray">
-      <p>Export all docs as markdown files, and archive them into a zip file.</p>
-      <p>This will including a <code>SUMMARY.md</code> for describe of the Table of contents.</p>
-      <p>After that you can use many Markdown tools (<a href="https://toolchain.gitbook.com/setup.html" target="_blank">GitBook</a>, <a href="https://github.com/rust-lang-nursery/mdBook" target="_blank">mdBook</a>) to genrate it to other format.</p>
+      <p><%= t(".Export all docs as markdown files, and archive them into a zip file") %></p>
+      <p><%= raw t(".This will including a SUMMARY for describe of the Table of contents") %></p>
+      <p><%= t(".After that you can use many Markdown tools") %> (<a href="https://toolchain.gitbook.com/setup.html" target="_blank">GitBook</a>, <a href="https://github.com/rust-lang-nursery/mdBook" target="_blank">mdBook</a>) <%= t(".to genrate it to other format") %></p>
     </div>
   </div>
   <div class="Box-body">
     <% if repository.export_archive_status == "running" %>
       <div class="archive-export-running">
-        <p><%= icon_tag("loading") %> Archive of this repository has in generating, please wait ...</p>
-        <p style="display: none" class="archive-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", repository.to_path("/settings/export?type=archive&force=1"), method: "post", remote: true %> it to generate a Archive export task again.</p>
+        <p><%= icon_tag("loading") %> <%= t(".Archive of this repository has in generating") %></p>
+        <p style="display: none" class="archive-export-retry-message text-gray">
+          <%= t(".If you are waiting a long time, you can retry", retry: link_to("retry", repository.to_path("/settings/export?type=archive&force=1"), method: "post", remote: true)) %>
+        </p>
       </div>
       <script type="text/javascript">
         // sleep 5s to check status
@@ -31,12 +33,12 @@
       </script>
     <% elsif repository.archive.attached? %>
       <div class="archive-export-exist">
-        <p>Archive of this repository was generated.</p>
-        <p>Click the button to download it.</p>
+        <p><%= t(".Archive of this repository was generated") %></p>
+        <p><%= t(".Click the button to download it") %></p>
         <div class="form-group">
-          <%= link_to "Download", repository.export_url(:archive), target: "_blank", class: "btn btn-download-archive btn-primary" %>
+          <%= link_to t(".Download"), repository.export_url(:archive), target: "_blank", class: "btn btn-download-archive btn-primary" %>
 
-          <%= link_to "Generate Again!", repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-regenerate-archive", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to t(".Generate Again"), repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-regenerate-archive", method: :post, remote: true, "disable-with": t(".Submiting") %>
         </div>
       </div>
       <script type="text/javascript">
@@ -45,9 +47,9 @@
     <% else %>
       <div class="pdf-export-generate">
         <div class="form-group">
-          <%= link_to "Archive as zip", repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-generate-archive", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to t(".Archive as zip"), repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-generate-archive", method: :post, remote: true, "disable-with": t(".Submiting") %>
         </div>
-        <div class="text-orange"><%= icon_tag("idea") %> Generate Archive will take a long time in backgroud task, you can continue the other other works, then check it after a moment.</div>
+        <div class="text-orange"><%= icon_tag("idea") %> <%= t(".Generate Archive will take a long time") %></div>
       </div>
     <% end %>
   </div>

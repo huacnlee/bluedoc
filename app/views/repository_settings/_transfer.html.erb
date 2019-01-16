@@ -1,23 +1,32 @@
-<%= render layout: "shared/modal", locals: {
-  title: "Transfer repository",
-  button_text: "Transfer",
-  button_class: "btn btn-danger"
-} do %>
-  <div class="Box-body overflow-auto">
-    <%= form_with(model: @repository, url: transfer_user_repository_settings_path(@user, @repository), method: :patch) do |form| %>
-      <div class="form-group">
-        <label class="control-label">Type the path <strong class="text-red"><%= @repository.slug %></strong> to confirm</label>
-        <input type="text" confirm-for="#btn-confirm-transfer" confirm-value="<%= @repository.slug %>" class="form-control" />
-      </div>
+<details class="details-reset details-overlay details-overlay-dark">
+  <summary class="btn btn-danger" aria-haspopup="dialog"><%= t(".Transfer") %></summary>
+  <details-dialog class="Box d-flex flex-column anim-fade-in fast">
+    <div class="Box-header">
+      <button class="Box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
+        <%= icon_tag "times" %>
+      </button>
+      <h3 class="Box-title"><%= t(".Transfer repository") %></h3>
+    </div>
 
-      <div class="form-group">
-        <label class="control-label">New owner’s BookLab username or group path</label>
-        <input type="text" name="repository[transfer_to_user]" class="form-control" />
-      </div>
+    <div class="Box-body overflow-auto">
+      <%= form_with(model: @repository, url: transfer_user_repository_settings_path(@user, @repository), method: :patch) do |form| %>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <input type="text" confirm-for="#btn-confirm-transfer" confirm-value="<%= @repository.slug %>" class="form-control" />
+        </div>
 
-      <div class="actions">
-        <button type="submit" id="btn-confirm-transfer" disabled class="btn btn-danger btn-block">I understand, transfer this repository.</button>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Target username or group path") %></label>
+          <input type="text" name="repository[transfer_to_user]" class="form-control" />
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="btn-confirm-transfer" disabled class="btn btn-danger btn-block">
+            <%= t(".Confirm and transfer") %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+  </details-dialog>
+</details>

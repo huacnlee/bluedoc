@@ -512,3 +512,99 @@ zh-CN:
       Remove item: 从目录中移除选中项
       Save: 保存目录
       Cancel: 取消
+  repository_settings:
+    exports:
+      archive:
+        Export as Archive: 导出 Zip 包
+        Export all docs as markdown files, and archive them into a zip file: 知识库下的所有文档以 Markdown 格式导出，并打包在一个 Zip 文件里面。
+        This will including a SUMMARY for describe of the Table of contents: 导出的包内将会包含一个 <code>SUMMARY.md</code> 来描述知识库的目录结构。
+        After that you can use many Markdown tools: 你可以使用一些三方工具来，例如
+        to genrate it to other format: 来生成静态网站之类的形式，或者用来生成 Ebook，当然你也可以用来做为备份。
+        Archive of this repository has in generating: 知识库打包任务正在后台执行中，请稍后 ...
+        If you are waiting a long time, you can retry: 如果你等待了很久，导出任务依然没有任何响应，你可以 %{retry}，以重新触发一次 Zip 导出任务。
+        Archive of this repository was generated: 知识库 Zip 包已经生成。
+        Click the button to download it: 你可以点击下面的下载按钮下载，如果内容有更新，也可以重新生成。
+        Download: 下载 Zip 包
+        Generate Again: 重新生成!
+        Submiting: 提交中...
+        Archive as zip: 导出 Zip 包
+        Generate Archive will take a long time: 导出 Zip 包将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
+      pdf:
+        Export as PDF: 导出 PDF
+        You can export all docs as a PDF file: 你可以将整个知识库导出成一个 PDF 文件，所有文档会整合在一起。
+        Preview PDF HTML: 预览 PDF HTML
+        Exporter will use the TOC ordered, otherwice same as the: 导出程序将会采用知识库的目录顺序来生成 PDF，如果你未开启此功能（自定义目录），那会按照文档的最后更新时间来排序，类似
+        Doc list: 文档列表页面
+        PDF has in generating, please wait: PDF 导出任务正在执行，请稍后 ...
+        If you are waiting a long time, you can retry: 如果你等待了很久，导出任务依然没有任何响应，你可以 %{retry}，以重新触发一次 PDF 导出任务。
+        PDF of this repository was generated: 此知识库的 PDF 已生成。
+        Click the button to download it: 点击下面的下载按钮下载 PDF 文件。
+        Download: 下载 PDF
+        Generate Again: 重新生成!
+        Submiting: 提交中...
+        Generate PDF: 导出 PDF
+        Generate PDF will take a long time: 导出 PDF 将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
+    destroy:
+      Delete repository: 删除知识库
+      Delete this repository: 删除知识库
+      This action cannot be undone: 此功能 <strong>无法</strong> 撤销！
+      This will permanently delete the: 继续操作将会删除
+      all of contents: ，知识库，以及知识库下面的文档、修改历史、评论等所有有关内容都会同时删除。
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      I understand, delete this repository: 我明白，确定删除知识库
+    member:
+      Are you sure to remove?: 确定要移除他/她吗？
+    menu:
+      Options: 设置
+      Manage docs: 管理文档
+      Collaborators: 协作者
+      Advanced: 高级设置
+    privacy:
+      public: 公开
+      private: 私密
+      Make privacy: 设置为%{privacy}
+      Make this repository privacy: 设置知识库为%{privacy}模式
+      Public this repository from the private, this repository and docs will be visible to everyone who can visit: 将知识库从私密切换到公开，你需要知道知识库下面的文档将会被任何能访问，如果他们能打开
+      Private this repository from the public, this change will remove repository watchers, stars: 将知识库从公开切换到私密，将会清除知识库已有的订阅者、收藏，以确保知识库的内容不会被外部人员看到。
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      Confirm and submit: 我明白，确定设置为%{privacy}
+    transfer:
+      Transfer: 转移知识库
+      Transfer repository: 转移知识库到其他团队/个人
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      Target username or group path: 目标团队路径/个人用户名
+      Confirm and transfer: 确定转移知识库
+    advanced:
+      Settings: 高级设置
+      Transfer: 转移知识库
+      Transfer ownership: 转移知识库的所有者
+      Transfer this repository to another user or to an group: 转移此知识库到个人或团队下，此动作要求你对目标团队/个人有创建知识库的权限。
+      Danger Zone: 危险操作
+      Make this repository public: 将知识库设置公开
+      Make this repository private: 将知识库设置私密
+      Public this repository from the private: 将知识库从私密切换成公开模式。
+      Private this repository from the public: 将知识库从公开切换成私密模式。
+      Delete this repository: 删除知识库
+      Once you delete a repository, there is no going back: 知识库删除后，将无法撤销。请谨慎考虑。
+    collaborators:
+      Collaborators: 协作者
+      Push access to the repository: 直接给其他人指定知识库的访问权限，无需添加到团队成员。
+      Search by username, full name or email address: 输入用户名、姓名或 Email 找到你需要添加的协作者
+      By default, will add user as :role role: 默认添加为 <strong>%{role}</strong> 角色，添加后可修改。
+      Add: 添加协作者
+    docs:
+      Transfer docs to other repository: 转移文档到其他知识库
+      Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
+      If there has same doc slug exists in the destination repository, it will change it as a random slug: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
+      Transfer now: 执行文档转移
+    show:
+      Settings: 设置
+      Repository profile: 知识库资料
+      Repository slug help: "%{host}%{user_path}/知识库路径 (只允许字母、数字、中横行作为知识库路径)"
+      Update: 更新
+      Features: 功能开关
+      Table of Contents: 自定义目录
+      Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
