@@ -156,6 +156,8 @@ zh-CN:
           PlantumlService: UML 预览服务
           MathjaxService: 数学公式服务
           ElasticSearchService: 全文搜索服务
+      reindex:
+        Search indexes has running reindex with async: 重建搜索索引的任务已经后台异步执行，你可以到“后台异步队列”功能里面查看进度。
     repositories:
       show:
         All docs: 所有文档

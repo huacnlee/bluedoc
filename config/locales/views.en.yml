@@ -130,6 +130,8 @@ en:
           MathjaxService: Math Graph Service
           ElasticSearchService: Fulltext Search Service
         Statistics: Statistics
+      reindex:
+        Search indexes has running reindex with async: Search indexes has running reindex with async.
     reposiories:
       show:
         All doc: All doc
