@@ -228,7 +228,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#member-#{reader_member.id}" do
         assert_select "form.edit-member" do
           assert_select "[action=?]", repo.to_path("/settings/collaborator")
-          assert_select ".select-menu-button", text: reader_member.role
+          assert_select ".select-menu-button", text: reader_member.role_name
           assert_select ".select-menu-list" do
             assert_select "button.select-menu-item", 3 do
               assert_select "[type=?]", "submit"
@@ -237,17 +237,17 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
             assert_select "button.select-menu-item[value=reader]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 1
-              assert_select ".select-menu-item-text", text: "reader"
+              assert_select ".select-menu-item-text", text: Member.role_name("reader")
             end
             assert_select "button.select-menu-item[value=editor]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 0
-              assert_select ".select-menu-item-text", text: "editor"
+              assert_select ".select-menu-item-text", text: Member.role_name("editor")
             end
             assert_select "button.select-menu-item[value=admin]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 0
-              assert_select ".select-menu-item-text", text: "admin"
+              assert_select ".select-menu-item-text", text: Member.role_name("admin")
             end
           end
         end
@@ -261,7 +261,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#member-#{editor_member.id}" do
         assert_select "form.edit-member" do
           assert_select "[action=?]", repo.to_path("/settings/collaborator")
-          assert_select ".select-menu-button", text: editor_member.role
+          assert_select ".select-menu-button", text: editor_member.role_name
           assert_select ".select-menu-list" do
             assert_select "button.select-menu-item[value=editor]" do
               assert_select ".select-menu-item-icon .fa-check", 1
@@ -432,7 +432,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".Box.export-repository-pdf" do
       assert_select ".Box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-exist" do
-        assert_select ".btn-download-pdf", text: "Download" do
+        assert_select ".btn-download-pdf", text: "Download PDF" do
           assert_select "[href=?]", repo.export_url(:pdf)
         end
         assert_select ".btn-regenerate-pdf", text: "Generate Again!" do

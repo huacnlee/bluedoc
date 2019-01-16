@@ -283,7 +283,7 @@ zh-CN:
       Export: 导出
       Export PDF: 导出 PDF
       PDF of this document page has in generating, please wait: "正在后台生成此文档的 PDF 文档，请稍后 ..."
-      If you are waiting a long time, and still no response, then you can retry: 如果你等待了很长一段时间这里依然没响应，你可以点击 %{link}，重新触发一个 PDF 生成任务。
+      If you are waiting a long time, and still no response, then you can retry: 如果你等待了很长一段时间这里依然没响应，你可以点击 %{retry}，重新触发一个 PDF 生成任务。
       PDF of this document page has generated: 已有生成好的 PDF 文件。
       Click the button to download it: 你可以点击下面的按钮下载 PDF 文件。
       Download PDF: 下载 PDF 文件
@@ -477,6 +477,7 @@ zh-CN:
       New Repository: 新建知识库
       A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
       Import from Git: 从 Git 导入知识库
+      Import from Archive: 从 Zip 包导入知识库
       Put a Git repository URL, BookLab will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BookLab 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
       This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
       You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。

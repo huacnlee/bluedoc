@@ -13,7 +13,7 @@
           <div class="loading-box"><div class="loading"></div></div>
           <p><%= t("docs.export_pdf.PDF of this document page has in generating, please wait") %></p>
           <p style="display: none" class="pdf-export-retry-message text-gray">
-            <%= t("docs.export_pdf.If you are waiting a long time, and still no response, then you can retry", retry: link_to("retry", doc.to_path("/pdf?force=1"), method: "post", remote: true)) %>
+            <%= raw t("docs.export_pdf.If you are waiting a long time, and still no response, then you can retry", retry: link_to("retry", doc.to_path("/pdf?force=1"), method: "post", remote: true)) %>
           </p>
         </div>
         <script type="text/javascript">
