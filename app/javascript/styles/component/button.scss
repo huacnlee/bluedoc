@@ -1,7 +1,20 @@
 .btn {
+  width: 310px;
   padding: 5px 15px;
   background: #fff;
   text-align: center;
+}
+
+.btn-primary {
+  border: 1px solid #9BBAFF;
+  background: #F3F7FF;
+  color: $primary;
+}
+
+.btn-danger {
+  border: 1px solid #FFC1BE;
+  background: #FFF3F3;
+  color: #EE4343;
 }
 
 .btn-block {

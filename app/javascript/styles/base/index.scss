@@ -2,6 +2,11 @@
 // cover primer normalize.scss a tag color
 a {
   color: inherit;
+  display: inline-block;
+}
+
+textarea {
+  display: block;
 }
 
 @import "./utils.scss";
