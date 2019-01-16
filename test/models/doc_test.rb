@@ -72,30 +72,34 @@ class DocTest < ActiveSupport::TestCase
     user = create(:user)
     user1 = create(:user)
     user2 = create(:user)
+    user3 = create(:user)
 
     # user watch by create
-    mock_current user: user
-    doc = create(:doc)
+    doc = create(:doc, creator_id: user.id)
     assert_equal [user.id], doc.watch_comment_by_user_ids
 
     # user2 direct watch, with "watch" action_option
     User.create_action(:watch_comment, target: doc, user: user2, action_option: "watch")
 
     # user1 watch by update
-    mock_current user: user1
-    doc.update(title: "New title")
+    doc.update(title: "New title", current_editor_id: user1.id)
     doc.reload
 
     # should user, user1, user2 in watching
     assert_equal [user.id, user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
+
+    # should not watch current_user on update
+    mock_current user: user3
+    doc.update(title: "New title1")
+    doc.reload
+    assert_equal false, doc.watch_comment_by_user_ids.include?(user3.id)
 
     # user to watch with "ignore" action_option
     User.create_action(:watch_comment, target: doc, user: user, action_option: "ignore")
     assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
 
     # and then user to update again, it will not change action_option
-    mock_current user: user
-    doc.update(title: "New new title")
+    doc.update(title: "New new title", current_editor_id: user.id)
     assert_equal [user1.id, user2.id].sort, doc.watch_comment_by_user_ids.sort
     action = User.find_action(:watch_comment, target: doc, user: user)
     assert_equal "ignore", action.action_option
@@ -116,14 +120,13 @@ class DocTest < ActiveSupport::TestCase
     repo_old_editor_ids = [other_u0.id, other_u1.id]
     repo = create(:repository, editor_ids: repo_old_editor_ids)
 
-    doc = create(:doc, repository: repo, last_editor_id: 11, creator_id: 22)
+    doc = create(:doc, repository: repo, creator_id: 22)
     assert_equal user.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
     assert_equal [user.id], doc.editor_ids
 
     user1 = create(:user)
-    mock_current(user: user1)
-    doc.save
+    doc.update(current_editor_id: user1.id)
     assert_equal user1.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
     assert_equal [user.id, user1.id], doc.editor_ids
@@ -184,6 +187,7 @@ class DocTest < ActiveSupport::TestCase
     assert_equal "New Document", doc.title
     assert_equal "New Document", doc.draft_title
     assert_equal repo.id, doc.repository_id
+    assert_equal 123, doc.creator_id
     assert_equal 123, doc.last_editor_id
 
     # with :slug

@@ -1,7 +1,6 @@
 @import "~booklab/mixin";
+@import "./medium-zoom";
 
-.medium-zoom-overlay { z-index: 99998; }
-.medium-zoom-image--opened { z-index: 99999; }
 
 .reader-body {
   .reader-navbar {
