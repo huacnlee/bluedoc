@@ -80,7 +80,6 @@
         color: $text-gray-light;
         text-indent: 10px;
         .fas { opacity: 0; }
-
         &.selected {
           color: $primary;
           .fas { opacity: 1; }

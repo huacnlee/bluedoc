@@ -54,8 +54,17 @@
     margin-bottom: 12px;
     font-size: 14px;
     text-decoration: none;
-    &.selected {
+    &.selected, &:hover {
       color: $primary;
+      i.fas {
+        color: inherit;
+      }
+    }
+    &.depth-1 {
+      .fas { opacity: 0; }
+      &.selected {
+        .fas { opacity: 1; }
+      }
     }
   }
   .user-groups {
