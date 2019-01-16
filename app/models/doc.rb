@@ -60,6 +60,7 @@ class Doc < ApplicationRecord
       doc = Doc.new
       doc.format = "sml"
       doc.repository_id = repo.id
+      doc.creator_id = user_id
       doc.last_editor_id = user_id
       doc.title = "New Document"
       doc.draft_title = doc.title
