@@ -15,15 +15,19 @@ class UsersHelperTest < ActionView::TestCase
   test "user_name_tag" do
     assert_equal "", user_name_tag(nil)
     user = build(:user)
+    assert_html_equal %(<a class="user-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.slug}</a>), user_name_tag(user)
 
-    assert_html_equal %(<a class="user-name" title="#{user.fullname}" href="/#{user.slug}">#{user.slug}</a>), user_name_tag(user)
+    group = build(:group)
+    assert_html_equal %(<a class="user-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.slug}</a>), user_name_tag(group)
   end
 
   test "user_display_name_tag" do
     assert_equal "", user_display_name_tag(nil)
     user = build(:user)
+    assert_html_equal %(<a class="user-display-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.name}</a>), user_display_name_tag(user)
 
-    assert_html_equal %(<a class="user-display-name" title="#{user.fullname}" href="/#{user.slug}">#{user.name}</a>), user_display_name_tag(user)
+    group = build(:group)
+    assert_html_equal %(<a class="user-display-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_display_name_tag(group)
   end
 
   test "user_avatar_tag" do
@@ -36,14 +40,14 @@ class UsersHelperTest < ActionView::TestCase
     avatar_url = "https://bar.com/foo.jpg"
 
     user.stub(:avatar_url, avatar_url) do
-      assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
+      assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" data-type="user" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
       assert_html_equal %(<img class="avatar avatar-tiny" title="#{user.fullname}" src="#{avatar_url}" />), user_avatar_tag(user, style: :tiny, link: false)
     end
 
     # Latter Avatar
     user = create(:user, slug: "someone")
     avatar_url = "#{Setting.host}/system/letter_avatars/2/S/162_136_126/240.png"
-    assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
+    assert_html_equal %(<a class="user-avatar" data-name="#{user.name}" data-slug="#{user.slug}" data-type="user" href="/#{user.slug}"><img class="avatar avatar-small" title="#{user.fullname}" src="#{avatar_url}" /></a>), user_avatar_tag(user, style: :small)
     assert_html_equal %(<img class="avatar avatar-tiny" title="#{user.fullname}" src="#{avatar_url}" />), user_avatar_tag(user, style: :tiny, link: false)
   end
 

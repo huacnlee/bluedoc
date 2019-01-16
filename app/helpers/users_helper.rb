@@ -6,19 +6,19 @@ module UsersHelper
   def user_name_tag(user)
     return "" if user.blank?
 
-    link_to user.slug, user.to_path, class: "user-name", title: user.fullname
+    link_to user.slug, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
   end
 
   def user_display_name_tag(user)
     return "" if user.blank?
 
-    link_to user.name, user.to_path, class: "user-display-name", title: user.fullname
+    link_to user.name, user.to_path, class: "user-display-name", title: user.fullname, data: { type: user.type.downcase }
   end
 
   def group_name_tag(group)
     return "" if group.blank?
 
-    link_to group.name, group.to_path, class: "group-name", title: group.fullname
+    link_to group.name, group.to_path, class: "group-name", title: group.fullname, data: { type: group.type.downcase }
   end
 
   def user_avatar_tag(user, opts = {})
@@ -32,7 +32,7 @@ module UsersHelper
 
     return image_html if opts[:link] == false
 
-    data = { name: user.name, slug: user.slug }
+    data = { name: user.name, slug: user.slug, type: user.type.downcase }
     link_to user.to_path, class: "user-avatar", data: data do
       image_html
     end
