@@ -3,7 +3,7 @@ mentionable = notification.target
 %>
 
 <% if mentionable.is_a?(Comment) %>
-  <%= mentionable.commentable_title %> got a comment
+  <%= mentionable.commentable_title %> <%= t(".got a comment") %>
 <% elsif mentionable.is_a?(Doc) %>
-  <%= mentionable.title %> got a mention
+  <%= mentionable.title %> <%= t(".got a mention") %>
 <% end %>

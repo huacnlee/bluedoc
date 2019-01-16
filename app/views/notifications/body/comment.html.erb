@@ -2,5 +2,5 @@
 comment = notification.target
 %>
 
-<p><strong><%= notification.actor_name %></strong> said:</p>
+<p><strong><%= notification.actor_name %></strong> <%= t(".said") %>:</p>
 <%= sanitize_html comment.body_html %>

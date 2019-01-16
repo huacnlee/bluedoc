@@ -400,3 +400,115 @@ zh-CN:
       The letters, numbers or dash is allow, for example: "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:"
       Display title of this Group: 用于各种地方显示团队的名称
       Create Group: 创建团队
+    search:
+      Can't find any Doc like: "无法找到任何与"
+      in this Group: "相关的内容。"
+    show:
+      Show all: 查看所有知识库
+      Find a repository: 查找知识库...
+      There is no repository: 暂无知识库
+      You can create first repository: 此团队下还未创建任何知识库，你可以现在就
+      Create new: 创建一个新知识库
+      Members: 团队成员
+  notification_mailer:
+    to_user:
+      View it on BookLab: 在 BookLab 上查看
+  notifications:
+    Notification been deleted: 触发通知的相关数据已删除。
+    body:
+      comment:
+        said: 说
+      mention:
+        mentioned you: 提及了你
+        has mentioned you in subject: "在 “%{subject}” 里提及了你。"
+    title:
+      add_member:
+        has added you as member of: "将你添加为 [%{subject}] 的成员。"
+      comment:
+        got a comment: 收到了一条新的评论。
+      mention:
+        got a comment: 收到了一条新的评论。
+        got a mention: 里面提及了你。
+      repo_import:
+        Repository name import has been status: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+    add_member:
+      has added you as member of: "将你添加为成员："
+    comment:
+      was posted a comment on: "评论了"
+    mention:
+      was mentioned you in: "提及了你"
+    repo_import:
+      Repository: 知识库
+      import has been: "导入任务已经执行完成，结果："
+    index:
+      Unread: 未读通知
+      All: 全部通知
+      Clear all: 清空
+      Mark as read: 全部设为已读
+      You does not have any notifications: 你目前没有通知。
+      You does not have any unread notifications: 你目前没有未读通知。
+  reactions:
+    new_button:
+      Select a item: "用表情来表达你的想法"
+  repositories:
+    doc:
+      Sharing: 分享中
+      Last updated at: 最后更新时间
+      Are you sure delete this Doc?: 确定要删除这篇文档吗？
+    empty_docs:
+      There is no documents: 此知识库暂无文档
+      You can create first document: 你可以现在创建第一篇文档，
+      Create doc: 创建文档
+    menu:
+      New Doc: 新建文档
+      Private: 私密
+      Import from this URL: 导入来源
+      Summary: 目录
+      Docs: 文档列表
+      Settings: 设置
+    repository:
+      Private: 私密
+    docs:
+      Docs: 文档列表
+      Sort by: "排序方式:"
+      Sort by Updated: 最近更新
+      Sort by Created: 创建时间
+    new:
+      New Repository: 新建知识库
+      A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
+      Import from Git: 从 Git 导入知识库
+      Put a Git repository URL, BookLab will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BookLab 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
+      This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
+      Or you have a GitBook source, you can use: 或者也可以通过 Git 的方式导入。
+      Great repository names are short and memorable: 知识库路径用于 URL 里面，简单好记的名称能更好的使用和传播（只允许用字母、数字、中横行）。
+      Anyone can see this repository: 任何人（如果全站要求登录，也是需要登录的）可以访问此知识库下的内容。
+      You choose who can see and edit to this repository: 团队意外的人保密，除非你将他们加到团队成员或知识库协作者列表。
+      Public: 完全公开
+      Private: 私密
+      Create Repository: 创建知识库
+    search:
+      Search Docs: 搜索文档
+      Can not find any Doc like: 知识库下没有找到有关于
+      in this Repository: 的文档内容。
+    show:
+      Edit TOC: 编辑目录
+    toc:
+      Edit TOC: 编辑目录
+      Back to Repository: 返回知识库
+      Edit Table of contents: 编辑知识库目录
+      Move cursor Up: 光标向上移动
+      Move cursor Down: 光标向下移动
+      Move Up: 向上切换
+      Move Down: 向下切换
+      Edit or Confirm edit: 编辑和确认编辑
+      Enter: Enter
+      Tab: Tab
+      Shift: Shift
+      Outdent: 减少缩进
+      Indent: 增加缩进
+      Delete: Delte
+      or: 或
+      Remove item: 从目录中移除选中项
+      Save: 保存目录
+      Cancel: 取消

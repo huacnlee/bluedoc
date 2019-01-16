@@ -37,6 +37,9 @@ zh-CN:
       repository:
         slug: 知识库路径
         name: 知识库名称
+        user: 所属团队/个人
+        user_id: 所属团队/个人
+        description: 简介
       comment:
         body: 评论内容
       member:

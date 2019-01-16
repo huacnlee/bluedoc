@@ -1,15 +1,15 @@
-<% title_tag @repository.name, "Edit TOC" %>
+<% title_tag @repository.name, t(".Edit TOC") %>
 
 <%= form_with(model: @repository, url: toc_user_repository_path(@user, @repository), class: "toc-form", local: true, remote: true) do |form| %>
   <div class="toc-navbar">
     <div class="navbar-title">
-      <a class="navbar-brand" href="<%= @repository.to_path %>" title="Back to list"><%= icon_tag("repositories") %></a>
+      <a class="navbar-brand" href="<%= @repository.to_path %>" title="<%= t(".Back to Repository") %>"><%= icon_tag("repositories") %></a>
       <span class= "divider">/</span>
       <%= group_name_tag @user %>
       <span class= "divider">/</span>
       <%= repository_name_tag @repository %>
       <span class= "divider">/</span>
-      Edit Table of contents
+      <%= t(".Edit Table of contents") %>
     </div>
     <div class="navbar-buttons">
       <details class="dropdown toc-keyboard-tip details-reset details-overlay d-inline-block">
@@ -18,49 +18,49 @@
           <table style="width: 100%">
             <tr>
               <td><code>▲</code></td>
-              <td>Move cursor up</td>
+              <td><%= t(".Move cursor Up") %></td>
             </tr>
             <tr>
               <td><code>▼</code></td>
-              <td>Move cursor down</td>
+              <td><%= t(".Move cursor Down") %></td>
             </tr>
             <tr>
-              <td><code>Enter</code></td>
-              <td>Edit / Confirm edit</td>
+              <td><code><%= t(".Enter") %></code></td>
+              <td><%= t(".Edit or Confirm edit") %></td>
             </tr>
             <tr>
-              <td><code>Tab</code></td>
-              <td>Indent</td>
+              <td><code><%= t(".Tab") %></code></td>
+              <td><%= t(".Indent") %></td>
             </tr>
             <tr>
-              <td><code>Shift</code> + <code>Tab</code></td>
-              <td>Outdent</td>
+              <td><code><%= t(".Shift") %></code> + <code><%= t(".Tab") %></code></td>
+              <td><%= t(".Outdent") %></td>
             </tr>
             <tr>
               <td><code>⌘</code> + <code>▶︎</code></td>
-              <td>Indent</td>
+              <td><%= t(".Indent") %></td>
             </tr>
             <tr>
               <td><code>⌘</code> + <code>◀︎</code></td>
-              <td>Outdent</td>
+              <td><%= t(".Outdent") %></td>
             </tr>
             <tr>
               <td><code>⌘</code> + <code>▲</code></td>
-              <td>Move up</td>
+              <td><%= t(".Move Up") %></td>
             </tr>
             <tr>
               <td><code>⌘</code> + <code>▼</code></td>
-              <td>Move down</td>
+              <td><%= t(".Move Down") %></td>
             </tr>
             <tr>
-              <td><code>Delete</code> or <code>⌘</code> + <code>⌫</code></td>
-              <td>Remove item</td>
+              <td><code><%= t(".Delete") %></code> <%= t(".or") %> <code>⌘</code> + <code>⌫</code></td>
+              <td><%= t(".Remove item") %></td>
             </tr>
           </table>
         </div>
       </details>
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="<%= @repository.to_path %>" type="submit" class="btn">Cancel</a>
+      <button type="submit" class="btn btn-primary"><%= t(".Save") %></button>
+      <a href="<%= @repository.to_path %>" type="submit" class="btn"><%= t(".Cancel") %></a>
     </div>
   </div>
 
