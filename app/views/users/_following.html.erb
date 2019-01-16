@@ -1,7 +1,7 @@
 <div class="user-following">
   <% if @users.blank? %>
     <div class="blankslate">
-      <p><%= @user.name %> not has following any one</p>
+      <p><%= @user.name %> <%= t(".no following") %></p>
     </div>
   <% else %>
     <ul class="list-container">

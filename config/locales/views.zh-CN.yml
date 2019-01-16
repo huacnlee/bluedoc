@@ -16,6 +16,10 @@ zh-CN:
     follow_button:
       follow: 关注
       unfollow: 取消关注
+    error_messages:
+      There has count issues: 发现有 %{count} 问题无法通过表单验证：
+    select_menu:
+      Choose an item: 选择一个
   layouts:
     user_menu:
       New Repository: 新建知识库
@@ -609,3 +613,46 @@ zh-CN:
       Features: 功能开关
       Table of Contents: 自定义目录
       Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
+  searches:
+    menu:
+      Docs: 文档
+      Repositories: 知识库
+      Groups: 团队
+      Users: 用户
+    no_result:
+      No result: 没有查询到结果
+      Can not find any contents like: "BookLab 无法找到任何有关于"
+      in BookLab: 的内容。
+    search_info:
+      About: 关于
+      there have count results: 我们找到 %{count} 个结果。
+  shares:
+    doc:
+      Last edit by: 由
+      Created by: 由
+      Last edit by at: 最后修改于
+      Created by at: 创建于
+  user_mailer:
+    welcome:
+      You have successfully signed up to: 你已经成功的注册成功了 BookLab 账号，网站地址为：
+      Your username is: "你注册的用户名:"
+      Thanks for joining and have a great day: 欢迎你的使用。
+  users:
+    card:
+      followers: 关注者
+    followers:
+      no followers: 目前还没有人关注他/她。
+    following:
+      no following: 目前还未关注过任何人。
+    overview:
+      no activities: 暂时还没有动态。
+    repositories:
+      no repositories: 暂时没有任何知识库（或者用户没有公开知识库）。
+    sidebar:
+      Followers: 关注者
+      Following: 正在关注
+      Overview: 动态
+      Repositories: 知识库
+      Stars: 收藏
+    stars:
+      no star repositories: 还未收藏过知识库。

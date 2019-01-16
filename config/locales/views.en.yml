@@ -14,6 +14,10 @@ en:
     follow_button:
       follow: Follow
       unfollow: Unfollow
+    error_messages:
+      There has count issues: "There has %{count} issues:"
+    select_menu:
+      Choose an item: Choose an item
   layouts:
     user_menu:
       New Repository: New Repository
@@ -557,3 +561,46 @@ en:
       Features: Features
       Table of Contents: Table of Contents
       Enable to use Table of Contents style for Repository index: Enable to use Table of Contents style for Repository index.
+  searches:
+    menu:
+      Docs: Docs
+      Repositories: Repositories
+      Groups: Groups
+      Users: Users
+    no_result:
+      No result: No result
+      Can not find any contents like: "Can't find any contents like"
+      in BookLab: in BookLab.
+    search_info:
+      About: About
+      there have count results: there have %{count} results.
+  shares:
+    doc:
+      Last edit by: Last edit by
+      Created by: Created by
+      Last edit by at: at
+      Created by at: at
+  user_mailer:
+    welcome:
+      You have successfully signed up to: You have successfully signed up to
+      Your username is: "Your username is:"
+      Thanks for joining and have a great day: Thanks for joining and have a great day!
+  users:
+    card:
+      followers: followers
+    followers:
+      no followers: not has followers.
+    following:
+      no following: not has following any one.
+    overview:
+      no activities: was not have any activities.
+    repositories:
+      no repositories: was not have any repositories.
+    sidebar:
+      Followers: Followers
+      Following: Following
+      Overview: Overview
+      Repositories: Repositories
+      Stars: Stars
+    stars:
+      no star repositories: was not star any repositories.

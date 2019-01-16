@@ -1,7 +1,7 @@
 <div class="user-repositories">
   <% if @repositories.blank? %>
     <div class="blankslate">
-      <p><strong><%= @user.name %></strong> was not have any repositories</p>
+      <p><strong><%= @user.name %></strong> <%= t(".no repositories") %></p>
     </div>
   <% else %>
     <ul class="list-container repository-list">

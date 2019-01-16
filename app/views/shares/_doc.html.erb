@@ -41,9 +41,9 @@
       </span>
 
       <% if @doc.last_editor %>
-      Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
+      <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= ".Last edit by at" %> <%= timeago @doc.body_updated_at %>
       <% else %>
-      Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+        <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= ".Created by at" %> <%= timeago @doc.created_at %>
       <% end %>
     </div>
 

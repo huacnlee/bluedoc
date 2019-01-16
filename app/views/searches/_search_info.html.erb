@@ -1,5 +1,5 @@
 <div class="Box-header">
   <h3 class="Box-title">
-    About "<strong class="text-red"><%= params[:q] %></strong>" there have <strong><%= @result.total_count %></strong> results.
+    <%= t(".About") %> "<strong class="text-red"><%= params[:q] %></strong>" <%= raw t(".there have count results", count: @result.total_count) %> <strong><%= @result.total_count %></strong>
   </h3>
 </div>
