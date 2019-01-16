@@ -1,8 +1,0 @@
-<div class="col-12 col-md-3 float-left pr-md-4">
-  <ul class="menu">
-    <%= render_list_items(class: "menu-item", type: :link) do |li|
-      li << link_to(t(".Profile"), account_settings_path, class: "menu-item")
-      li << link_to(t(".Account"), account_account_settings_path, class: "menu-item")
-    end %>
-  </ul>
-</div>
