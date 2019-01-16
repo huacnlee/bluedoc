@@ -10,18 +10,18 @@ const extendConfig = {
     'rails-ujs': 'Rails',
     turbolinks: 'Turbolinks'
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /node_modules|vendor/,
-          name: 'vendors',
-          enforce: true,
-          chunks: 'initial'
-        }
-      }
-    }
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendors: {
+  //         test: /node_modules|vendor/,
+  //         name: 'vendors',
+  //         enforce: true,
+  //         chunks: 'initial'
+  //       }
+  //     }
+  //   }
+  // },
 }
 
 environment.config.merge(extendConfig)

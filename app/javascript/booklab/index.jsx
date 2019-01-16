@@ -16,7 +16,6 @@ window.App = {
   locale: 'en'
 }
 
-import './editor/index.js'
 import './reader/index.js'
 import './versions/index.js'
 import './follow-user/index.js'

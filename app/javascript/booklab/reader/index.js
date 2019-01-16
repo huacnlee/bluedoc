@@ -1,5 +1,5 @@
 import BodyToc from "./body_toc";
-import mediumZoom from "medium-zoom";
+import mediumZoom from "./medium-zoom";
 
 document.addEventListener("turbolinks:load", () => {
   if ($(".doc-page").length == 0) {

@@ -1,0 +1,1 @@
+import 'booklab/editor/index.js'
