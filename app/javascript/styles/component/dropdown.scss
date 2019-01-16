@@ -1,7 +1,12 @@
 @import "primer-support/index.scss";
 .dropdown {
   position: relative;
-
+  cursor: pointer;
+  &:hover {
+    .dropdown-menu {
+      display: block;
+    }
+  }
   &.active {
     .dropdown-menu-content {
       display: block;
@@ -39,7 +44,7 @@
   border: 1px solid $black-fade-15;
   border-radius: $border-radius;
   box-shadow: 0 3px 12px $black-fade-15;
-
+  display: none;
   &::before,
   &::after {
     position: absolute;

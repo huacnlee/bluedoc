@@ -12,6 +12,7 @@
   text-rendering: auto;
   line-height: 0;
   font-size: 1em;
+  transform: translateY(-5%);
 }
 
 // hack
@@ -25,9 +26,9 @@
   .fa-rep {
     @extend .fa-rep_fill;
   }
-  // .fa-group {
-  //   @extend .fa-group_fill;
-  // }
+  .fa-group {
+    @extend .fa-group_fill;
+  }
   .fa-star {
     @extend .fa-star_fill;
   }

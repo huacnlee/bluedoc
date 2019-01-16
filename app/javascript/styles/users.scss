@@ -1,0 +1,42 @@
+.page-users {
+  .main-container {
+    padding-top: 30px;
+  }
+  .user-title {
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+  .user-follow {
+
+  }
+  .user-avatar-box {
+
+  }
+  .user-name-box {
+    .real-name {
+
+    }
+    .user-name {
+
+    }
+    .user-bio {
+
+    }
+    .location {
+
+    }
+    .created-on {
+
+    }
+  }
+  .user-groups {
+
+  }
+  .menu-item {
+    display: block;
+    &.selected {
+      color: $primary;
+    }
+  }
+}

@@ -39,16 +39,19 @@
           </div>
         <% else %>
         <ul class="cards-container repo-list">
-          <% @recent_repos.each do |repo| %>
+          <% @recent_repos.each do |item| %>
             <li class="card repo-item">
               <div class="path">
-                <%= user_name_tag(repo.user) %>
+                <%= user_name_tag(item.user) %>
               </div>
               <div class="title">
-                <%= repository_name_tag(repo.subject) %>
+                <%= repository_name_tag(item.subject) %>
               </div>
               <div class="info">
-                <%= timeago repo.updated_at %>
+                <%= timeago item.updated_at %>
+              </div>
+              <div class="action">
+                <%= icon_tag("add_docs") %>
               </div>
             </li>
           <% end %>
@@ -62,7 +65,7 @@
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
             <li class="card card-avatar group-item">
-              <%= user_avatar_tag(group, style: :tiny) %>
+              <%= user_avatar_tag(group, style: :medium) %>
               <div class="title">
                 <%= group_name_tag(group) %>
               </div>

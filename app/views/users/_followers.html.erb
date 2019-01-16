@@ -4,7 +4,9 @@
       <p><%= @user.name %> not has followers</p>
     </div>
   <% else %>
-    <%= render @users %>
+    <ul class="list-container">
+      <%= render @users %>
+    </ul>
     <%= paginate @users %>
   <% end %>
 </div>

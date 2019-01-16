@@ -7,7 +7,11 @@
   background: #fff;
   box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
   .header-content {
-    width: 1000px;
+    width: 100%;
+    @include breakpoint(md) {
+      width: 1000px;
+    }
+    padding: 0 25px;
     height: 100%;
     margin: auto;
     display: flex;
@@ -20,9 +24,8 @@
       color: inherit;
     }
   }
-
   .dropdown {
-    margin-right: 20px;
+    margin-left: 20px;
   }
   .nav-notifications {
     color: inherit;
@@ -39,6 +42,11 @@
     vertical-align: middle;
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+  }
+  .search {
+    display: none;
+    @include breakpoint(sm) {
+      display: block;
+    }
   }
 }

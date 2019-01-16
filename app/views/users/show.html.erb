@@ -1,11 +1,9 @@
 <% title_tag "#{@user.name} (#{@user.slug})" %>
-
-<div class="clearfix">
+<div class="aside-wrap">
   <%= render "sidebar" %>
-
-  <div class="col-12 col-md-9 float-left">
-    <%= render "menu" %>
-
+</div>
+<div class="main-wrap">
+  <div class="main-content">
     <%= render(params[:tab] || "overview")  %>
   </div>
 </div>
