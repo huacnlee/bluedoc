@@ -1,8 +1,9 @@
 <% title_tag "Account Settings" %>
-
-<div class="clearfix">
-  <%= render "menu" %>
-
+<div class="aside-wrap">
+  <%= render "/users/sidebar" %>
+</div>
+<div class="main-wrap">
+  <div class="main-content">
   <div class="col-12 col-md-6 float-left">
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <div class="form-title"><h2><%= t(".Profile") %></h2></div>
