@@ -1,21 +1,22 @@
-<div class="repository-item border-bottom py-3">
-  <div class="icon-box"><%= icon_tag("repository") %></div>
-  <div class="d-inline-block mb-1">
-    <h4>
-      <% if defined?(current_group) && current_group.id != repository.user_id %>
-      <%= user_name_tag(repository.user) %> <span class="divider">/</span>
-      <% end %>
-      <%= repository_name_tag(repository) %>
-      <% if repository.private? %>
-        <span class="label-private ml-2"><%= t(".Private") %></span>
-      <% end %>
-    </h4>
+<li class="list-item repository-item">
+  <div class="title">
+    <% if defined?(current_group) && current_group.id != repository.user_id %>
+    <%= user_name_tag(repository.user) %> <span class="divider">/</span>
+    <% end %>
+    <%= repository_name_tag(repository) %>
+    <% if repository.private? %>
+      <span class="label-private ml-2"><%= t(".Private") %></span>
+    <% end %>
   </div>
-  <div class="text-gray mb-2 pr-4">
+  <div class="description">
     <%= truncate repository.description, length: 150 %>
   </div>
-  <div class="f6 text-gray mt-2">
-    <span class="counter"><%= icon_tag("star") %> <%= repository.stars_count %></span>
-    <span class="updated"><%= t("updated at") %> <%= timeago repository.updated_at %></span>
+  <div class="info">
+    <span class="stars">
+      <%= icon_tag("star") %> <%= repository.stars_count %>
+    </span>
   </div>
-</div>
+  <div class="time-box">
+    <%= timeago repository.updated_at %>
+  </div>
+</li>

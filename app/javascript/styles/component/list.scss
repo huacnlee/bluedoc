@@ -1,5 +1,5 @@
 .list-container {
-
+  width: 550px;
 }
 
 .list-item {
@@ -20,7 +20,6 @@
     left: 0;
     width: 32px;
     height: 32px;
-    border-radius: 50%;
   }
   .description, .path {
     color: $text-gray;
@@ -59,16 +58,12 @@
     right: 0;
     top: 20px;
     font-size: 18px;
-
     a {
       .fas {
         &:hover {
           color: $primary;
         }
       }
-    }
-    a span {
-      display: none;
     }
   }
 }

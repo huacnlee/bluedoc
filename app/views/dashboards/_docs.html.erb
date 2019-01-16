@@ -1,7 +1,6 @@
 <ul class="list-container recent-docs">
   <% items.each do |item| %>
-    <li class="list-item list-avatar recent-doc-item">
-      <%= user_avatar_tag(item.subject&.repository&.user, style: :small, link: false) %>
+    <li class="list-item recent-doc-item">
       <div class="title">
         <%= doc_title_tag(item.subject) %>
       </div>
@@ -10,6 +9,9 @@
       </div>
       <div class="time-box">
         <%= timeago item.updated_at %>
+      </div>
+      <div class="action">
+        <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
       </div>
     </li>
   <% end %>
