@@ -12,8 +12,11 @@ Turbolinks.start()
 Turbolinks.setProgressBarDelay(150)
 
 window.$ = jQuery
+
+const metaLocale = document.querySelector("meta[name=locale]");
 window.App = {
-  locale: 'en'
+  // en, zh_CN
+  locale: (metaLocale && metaLocale.content || "en").replace("-", "_")
 }
 
 import './reader/index.js'
@@ -24,6 +27,6 @@ import './mentionable/index.js'
 import './toc-editor/index.js'
 
 document.addEventListener("turbolinks:load", () => {
-  timeagoRender($('.timeago'));
+  timeagoRender(document.querySelectorAll('.timeago'), App.locale);
 })
 
