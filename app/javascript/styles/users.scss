@@ -2,11 +2,14 @@
   .main-container {
     padding-top: 30px;
   }
+
   .user-title {
+    text-align: center;
     @include breakpoint(md) {
       display: none;
     }
   }
+  
   .user-sidebar {
     padding-right: 30px;
     color: $text-main;
@@ -57,8 +60,11 @@
   }
   .user-groups {
     line-height: 1;
-    display: flex;
+    display: none;
     margin-bottom: 30px;
+    @include breakpoint(md) {
+      display: flex;
+    }
     .label {
       margin-right: 20px;
     }
@@ -68,6 +74,18 @@
         display: inline-block;
         margin: 0 4px 8px 0;
       }
+    }
+  }
+
+  .user-follow,
+  .user-avatar-box,
+  .user-name-box,
+  .followers,
+  .following,
+  {
+    display: none;
+    @include breakpoint(md) {
+      display: block;
     }
   }
 }
