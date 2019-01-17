@@ -1,9 +1,7 @@
 .btn {
   position: relative;
   display: inline-block;
-  padding: 5px 15px;
-  line-height: 100%;
-  background: #fff;
+  padding: 6px 15px;
   text-align: center;
   border: 1px solid #e0e0e0;
   background: #fff;
@@ -11,15 +9,8 @@
   text-decoration: none;
   white-space: nowrap;
   vertical-align: middle;
-
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 
   .fas  {
