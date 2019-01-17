@@ -9,9 +9,8 @@
   <div class="user-avatar-box">
     <%= user_avatar_tag(@user, style: :large, link: false) %>
   </div>
-
   <div class="user-name-box">
-    <div class="real-name"><%= @user.name %></div>
+    <b class="real-name"><%= @user.name %></b>
     <div class="user-name"><%= @user.slug %></div>
     <% if @user.description.present? %>
     <div class="user-bio">
@@ -29,20 +28,25 @@
   </div>
 
   <%= render_list_items(type: :link, class: "menu-item", check_parameters: true) do |item|
-    item << link_to("#{t(".Followers")} #{@user.followers_count}", @user.to_path("?tab=followers"), class: "menu-item")
-    item << link_to("#{t(".Following")} #{@user.following_count}", @user.to_path("?tab=following"), class: "menu-item")
+    item << link_to(raw("#{t(".Followers")} <b>#{@user.followers_count}</b>"), @user.to_path("?tab=followers"), class: "menu-item followers") 
+    item << link_to(raw("#{t(".Following")} <b>#{@user.following_count}</b>"), @user.to_path("?tab=following"), class: "menu-item following") 
   end %>
 
-  <div class="user-groups">
-    <h4 class="mb-2">Groups</h4>
-    <% @user.groups.with_attached_avatar.each do |group| %>
-      <%= user_avatar_tag(group) %>
-    <% end %>
+  <div class="user-groups menu-item">
+    <span class="label">Groups</span>
+    <div class="groups-box">
+      <% @user.groups.with_attached_avatar.each do |group| %>
+        <%= user_avatar_tag(group) %>
+      <% end %>
+    </div>
   </div>
 
   <%= render_list_items(type: :link, class: "menu-item", check_parameters: true) do |item|
     item << link_to(t(".Overview"), @user.to_path, class: "menu-item")
     item << link_to(t(".Repositories"), @user.to_path("?tab=repositories"), class: "menu-item")
     item << link_to(t(".Stars"), @user.to_path("?tab=stars"), class: "menu-item")
+    item << content_tag(:span, t(".Settings"), class: "menu-item")
+    item << link_to(icon_tag("arrow", label: t(".Profile")), account_settings_path, class: "menu-item text-gray depth-1")
+    item << link_to(icon_tag("arrow", label: t(".Account")), account_account_settings_path, class: "menu-item text-gray depth-1")
   end %>
 </div>

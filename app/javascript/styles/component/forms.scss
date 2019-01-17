@@ -1,0 +1,32 @@
+.form-group {
+  margin-bottom: 20px;
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 12px;
+  }
+  .form-control {
+    width: 100%;
+    border: 1px solid #D9D9D9;
+    padding: 9px 15px;
+    font-size: 13px;
+    border-radius: 2px;
+    outline-color: $primary;
+    outline-width: 1px;
+  }
+  textarea.form-control {
+    resize: vertical;
+  }
+  select.form-control {
+    appearance: none;
+    background: transparent;
+  }
+  .form-text {
+    font-size: 12px;
+    color: $text-gray-light;
+  }
+  .form-control + .form-text {
+    padding-top: 10px;
+  }
+}

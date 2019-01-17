@@ -1,23 +1,43 @@
 <% title_tag "Account Settings" %>
-
-<div class="clearfix">
-  <%= render "menu" %>
-
-  <div class="col-12 col-md-6 float-left">
+<div class="aside-wrap">
+  <%= render "/users/sidebar" %>
+</div>
+<div class="main-wrap">
+  <div class="main-content">
+    <h1 class="title"><%= t(".Public Profile") %><h1>
+    <h2 class="sub-title"><%= t(".Avatar") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <div class="form-title"><h2><%= t(".Profile") %></h2></div>
+      <input type="hidden" name="_by" value="profile" />
+      <div class="image-box width-full text-center">
+        <%= user_avatar_tag(current_user, style: :large, link: false) %>
+      </div>
+      <div class="form-group">
+        <label class="btn width-full text-center">
+          <%= t(".Upload new picture") %>
+          <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
+        </label>
+      </div>
+      <script type="text/javascript">
+        $("form").on("change", ".js-manual-file-chooser", (e) => {
+          $form = $(e.delegateTarget);
+          $form.submit();
+        });
+      </script>
+    <% end %>
+    <h2 class="sub-title"><%= t(".Profile") %></h2>
+    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <%= render "/shared/error_messages", target: @user %>
 
       <input type="hidden" name="_by" value="profile" />
 
       <div class="form-group">
         <%= f.label :name, class: "control-label" %>
-        <%= f.text_field :name, class: "form-control", style: "width: 200px" %>
+        <%= f.text_field :name, class: "form-control"%>
       </div>
 
       <div class="form-group">
         <%= f.label :description, class: "control-label" %>
-        <%= f.text_area :description, class: "form-control short", style: "width: 400px" %>
+        <%= f.text_area :description, class: "form-control"%>
       </div>
 
       <div class="form-group">
@@ -40,28 +60,6 @@
       <div class="form-group">
         <%= f.submit t(".Update profile"), class: "btn btn-primary" %>
       </div>
-    <% end %>
-  </div>
-
-  <div class="col-12 col-md-3 float-left pl-md-4">
-    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <input type="hidden" name="_by" value="profile" />
-      <div class="form-title"><h2><%= t(".Avatar") %></h2></div>
-      <div class="image-box width-full text-center">
-        <%= user_avatar_tag(current_user, style: :large, link: false) %>
-      </div>
-      <div class="form-group">
-        <label class="btn width-full text-center">
-           <%= t(".Upload new picture") %>
-           <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
-         </label>
-      </div>
-      <script type="text/javascript">
-        $("form").on("change", ".js-manual-file-chooser", (e) => {
-          $form = $(e.delegateTarget);
-          $form.submit();
-        });
-      </script>
     <% end %>
   </div>
 </div>

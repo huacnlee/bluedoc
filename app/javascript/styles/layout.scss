@@ -8,6 +8,7 @@
 // left aside layout
 .aside-wrap {
   width: 100%;
+  padding: 0 25px;
   @include breakpoint(lg) {
     width: auto;
     flex: auto;

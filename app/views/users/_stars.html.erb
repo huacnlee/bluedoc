@@ -1,4 +1,5 @@
 <div class="user-stars">
+  <h2 class="sub-title"><%= t(".Stars") %></h2>
   <% if @repositories.blank? %>
     <div class="blankslate">
       <p><strong><%= @user.name %></strong> <%= t(".no star repositories") %></p>

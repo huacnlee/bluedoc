@@ -1,42 +1,100 @@
-.page-users {
+.page-users, .page-account_settings {
   .main-container {
     padding-top: 30px;
   }
+
   .user-title {
+    text-align: center;
     @include breakpoint(md) {
       display: none;
     }
   }
+  
+  .user-sidebar {
+    padding-right: 30px;
+    color: $text-main;
+  }
+  // todo
   .user-follow {
-
+    display: none;
   }
   .user-avatar-box {
-
+    line-height: 1;
+    margin-bottom: 10px;
   }
   .user-name-box {
     .real-name {
-
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
     }
+    // todo
     .user-name {
-
+      display: none;
     }
+    // todo
     .user-bio {
-
+      display: none;
+    }
+    .location, .created-on {
+      display: inline-block;
+      font-size: 13px;
+      color: $text-gray;
     }
     .location {
-
+      margin-right: 30px;
+      margin-bottom: 5px;
     }
     .created-on {
-
+      margin-bottom: 40px;
     }
-  }
-  .user-groups {
-
   }
   .menu-item {
     display: block;
-    &.selected {
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-decoration: none;
+    &.selected, &:hover {
       color: $primary;
+      i.fas {
+        color: inherit;
+      }
+    }
+    &.depth-1 {
+      .fas { opacity: 0; }
+      &.selected {
+        .fas { opacity: 1; }
+      }
+    }
+  }
+  .user-groups {
+    line-height: 1;
+    display: none;
+    margin-bottom: 30px;
+    @include breakpoint(md) {
+      display: flex;
+    }
+    .label {
+      margin-right: 20px;
+    }
+    .groups-box {
+      flex: auto;
+      .user-avatar {
+        display: inline-block;
+        margin: 0 4px 8px 0;
+      }
+    }
+  }
+
+  .user-follow,
+  .user-avatar-box,
+  .user-name-box,
+  .followers,
+  .following,
+  {
+    display: none;
+    @include breakpoint(md) {
+      display: block;
     }
   }
 }

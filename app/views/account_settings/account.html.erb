@@ -1,11 +1,12 @@
 <% title_tag "Account Settings" %>
-
-<div class="clearfix">
-  <%= render "menu" %>
-
-  <div class="col-12 col-md-9 float-left">
+<div class="aside-wrap">
+  <%= render "/users/sidebar" %>
+</div>
+<div class="main-wrap">
+  <div class="main-content">
+    <h1 class="title"><%= t(".Account") %><h1>
+    <h2 class="sub-title"><%= t(".Change password") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <div class="form-title"><h2><%= t(".Change password") %></h2></div>
       <%= render "/shared/error_messages", target: @user %>
 
       <input type="hidden" name="_by" value="password" />
@@ -32,24 +33,20 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <%= f.submit t(".Update password"), class: "btn btn-primary" %>
+      <div class="form-group" style="margin-bottom: 110px" >
+        <%= f.submit t(".Update password"), class: "btn btn-primary"%>
       </div>
     <% end %>
-
-   <div class="form-title"><h2><%= t(".Danger zone") %></h2></div>
-    <div class="Box mb-3">
-      <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
-        <div class="flex-auto pr-md-2 mb-2 mb-md-0">
-          <label class="form-check-label font-weight-bold">
-            <%= t(".Delete my account") %>
-          </label>
-          <div class="form-text">
-            <%= t(".Once you delete your account, there is no going back") %>
-          </div>
-        </div>
-        <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-sm btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
+    <h2 class="sub-title"><%= t(".Danger zone") %></h2>
+    <div class="form-group">
+      <div class="text-main" style="font-size: 15px">
+        <%= t(".Delete my account") %>
+      </div>
+      <div class="form-text">
+        <%= t(".Once you delete your account, there is no going back") %>
       </div>
     </div>
+    <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
   </div>
 </div>
+
