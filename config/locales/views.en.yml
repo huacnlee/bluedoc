@@ -71,9 +71,6 @@ en:
   account_settings:
     Password has change successed: Password has change successed.
     Profile has change successed: Profile has change successed.
-    menu:
-      "Profile": Profile
-      "Account": Account
     account:
       "Change password": Change password
       "Minimum characters": characters minimum %{length}
@@ -591,18 +588,27 @@ en:
     card:
       followers: followers
     followers:
+      Followers: Followers
       no followers: not has followers.
     following:
+      Following: Following
       no following: not has following any one.
     overview:
+      Overview: Overview
       no activities: was not have any activities.
     repositories:
+      Repositories: Repositories
       no repositories: was not have any repositories.
     sidebar:
       Followers: Followers
       Following: Following
+      Groups: Groups
       Overview: Overview
       Repositories: Repositories
       Stars: Stars
+      Settings: Settings
+      Profile: Profile
+      Account: Account
     stars:
+      Stars: Stared Repositories
       no star repositories: was not star any repositories.

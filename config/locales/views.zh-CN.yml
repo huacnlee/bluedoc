@@ -192,9 +192,6 @@ zh-CN:
       Avatar: 头像
       Update profile: 更新个人资料
       System default: "BookLab 默认语言：%{locale_name}"
-    menu:
-      Profile: 个人资料
-      Account: 帐号
     account:
       Change password: 修改密码
       Minimum characters: 最少要求 %{length} 个字符
@@ -643,18 +640,27 @@ zh-CN:
     card:
       followers: 关注者
     followers:
+      Followers: 关注者
       no followers: 目前还没有人关注他/她。
     following:
+      Following: 正在关注
       no following: 目前还未关注过任何人。
     overview:
+      Overview: 动态
       no activities: 暂时还没有动态。
     repositories:
+      Repositories: 创建于参与的知识库
       no repositories: 暂时没有任何知识库（或者用户没有公开知识库）。
     sidebar:
       Followers: 关注者
       Following: 正在关注
+      Groups: 团队
       Overview: 动态
       Repositories: 知识库
       Stars: 收藏
+      Settings: 设置
+      Profile: 个人资料
+      Account: 账号
     stars:
+      Stars: 收藏的知识库
       no star repositories: 还未收藏过知识库。
