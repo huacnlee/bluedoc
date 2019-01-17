@@ -8,13 +8,11 @@
     <h2 class="sub-title"><%= t(".Avatar") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <input type="hidden" name="_by" value="profile" />
-      <div class="image-box width-full text-center">
-        <%= user_avatar_tag(current_user, style: :large, link: false) %>
-      </div>
+      <%= user_avatar_tag(current_user, style: :large, link: false) %>
       <div class="form-group">
         <label class="btn width-full text-center">
           <%= t(".Upload new picture") %>
-          <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
+          <%= f.file_field :avatar, class: "js-manual-file-chooser manual-file-chooser", style: "display: none"  %>
         </label>
       </div>
       <script type="text/javascript">
