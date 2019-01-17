@@ -1,7 +1,7 @@
 <% content_for :subnav do %>
-<div class="pagehead repohead experiment-repo-nav">
-  <div class="container-lg repohead-details-container px-3 clearfix">
-    <div class="repo-heading group-heading">
+<div class="group-heading">
+  <div class="container clearfix">
+    <div class="heading">
       <div class="clearfix">
         <div class="group-avatar-box float-left pr-3 v-align-middle">
           <%= user_avatar_tag(@group, style: :medium, link: false) %>
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="container-lg px-3">
+  <div class="container px-3">
     <nav class="reponav clearfix" role="navigation">
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
         item << link_to(icon_tag("repositories", label: t(".Repository")), @group.to_path, class: "reponav-item")
