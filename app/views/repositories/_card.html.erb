@@ -1,12 +1,10 @@
-<div class="repository-card box p-3">
-  <div class="d-inline-block mb-1">
-    <h4 class="f4 lh-condensed text-bold text-gray-dark">
-      <% if defined?(current_group) && current_group.id != repository.user_id %>
-      <%= user_name_tag(repository.user) %> <span class="divider">/</span>
-      <% end %>
-      <%= repository_name_tag(repository) %>
-    </h4>
-  </div>
+<div class="repository-card">
+  <span class="f4 lh-condensed text-gray-dark">
+    <% if defined?(current_group) && current_group.id != repository.user_id %>
+    <%= user_name_tag(repository.user) %> <span class="divider">/</span>
+    <% end %>
+    <%= repository_name_tag(repository) %>
+  </span>
   <div class="desc text-gray mb-2 pr-4">
     <%= repository.description %>
   </div>

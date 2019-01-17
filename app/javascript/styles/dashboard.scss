@@ -129,6 +129,13 @@
     margin-right: 5px;
   }
 }
-.repository-card {
 
+.repository-card {
+  .desc { font-size: 13px; }
+  .counter {
+    margin-right: 15px;
+    .octicon {
+      fill: #666;
+    }
+  }
 }
