@@ -1,5 +1,13 @@
 @import './toc.scss';
 @import './doc.scss';
+
+.editor-body {
+  .main-container {
+    display: block;
+    flex: none;
+  }
+}
+
 .toc-form {
   width: 100%;
   background: #FFF;
@@ -77,6 +85,7 @@
   margin: auto;
   height: 100%;
   .doc-list {
+    overflow-y: scroll;
     position: sticky;
     top: 94px;
     padding: 14px;
