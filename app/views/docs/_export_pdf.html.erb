@@ -5,7 +5,7 @@
     button_text: t("docs.export_pdf..Export PDF"),
     button_class: "dropdown-item"
   } do %>
-    <div class="Box-body overflow-auto">
+    <div class="box-body overflow-auto">
       <h4 class="mb-2"><%= icon_tag("pdf") %> <%= t("docs.export_pdf.Export PDF") %></h4>
 
       <% if doc.export_pdf_status == "running" %>

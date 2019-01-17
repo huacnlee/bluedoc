@@ -4,7 +4,7 @@
     button_text: icon_tag("add-user", label: "Add"),
     button_class: "btn btn-primary"
   } do %>
-    <div class="Box-body overflow-auto">
+    <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>
         <div class="flash">
           <%= t("group_members.add_member.Type username to match user and then add as member of this group") %>

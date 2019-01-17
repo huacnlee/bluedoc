@@ -3,7 +3,7 @@
   button_text: t("group_settings.destroy.Delete this group"),
   button_class: "btn btn-danger"
 } do %>
-  <div class="Box-body overflow-auto">
+  <div class="box-body overflow-auto">
     <%= form_with(model: @group, url: group_settings_path(@group), method: :delete) do |form| %>
       <p>
         <%= raw t("group_settings.destroy.This action cannot be undone") %>

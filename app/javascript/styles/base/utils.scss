@@ -21,7 +21,9 @@
 .float-left { float: left; }
 .border-bottom { border-bottom: 1px solid #eee; }
 .border-top { border-top: 1px solid #eee; }
-
+.position-relative {
+  position: relative;
+}
 
 // Responsive padding spacer utilities
 @each $breakpoint, $variant in $responsive-variants {

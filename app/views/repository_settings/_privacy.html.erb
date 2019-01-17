@@ -5,15 +5,15 @@
 
 <details class="details-reset details-overlay details-overlay-dark">
   <summary class="btn btn-danger" aria-haspopup="dialog"><%= t(".Make privacy", privacy: privacy_name) %></summary>
-  <details-dialog class="Box d-flex flex-column anim-fade-in fast">
-    <div class="Box-header">
-      <button class="Box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
+  <details-dialog class="box d-flex flex-column anim-fade-in fast">
+    <div class="box-header">
+      <button class="box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
         <%= icon_tag "times" %>
       </button>
-      <h3 class="Box-title"><%= t(".Make this repository privacy", privacy: privacy_name) %></h3>
+      <h3 class="box-title"><%= t(".Make this repository privacy", privacy: privacy_name) %></h3>
     </div>
 
-    <div class="Box-body overflow-auto">
+    <div class="box-body overflow-auto">
       <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :put) do |form| %>
         <p>
           <% if @repository.private? %>

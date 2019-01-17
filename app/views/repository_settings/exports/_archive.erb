@@ -1,5 +1,5 @@
-<div class="Box export-repository-archive mb-4">
-  <div class="Box-header">
+<div class="box export-repository-archive mb-4">
+  <div class="box-header">
     <h4 class="title mb-2"><%= icon_tag("zip") %> <%= t(".Export as Archive") %></h4>
     <div class="text-gray">
       <p><%= t(".Export all docs as markdown files, and archive them into a zip file") %></p>
@@ -7,7 +7,7 @@
       <p><%= t(".After that you can use many Markdown tools") %> (<a href="https://toolchain.gitbook.com/setup.html" target="_blank">GitBook</a>, <a href="https://github.com/rust-lang-nursery/mdBook" target="_blank">mdBook</a>) <%= t(".to genrate it to other format") %></p>
     </div>
   </div>
-  <div class="Box-body">
+  <div class="box-body">
     <% if repository.export_archive_status == "running" %>
       <div class="archive-export-running">
         <p><%= icon_tag("loading") %> <%= t(".Archive of this repository has in generating") %></p>

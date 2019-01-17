@@ -14,11 +14,11 @@
   <% if action_name == "readers" %>
   <details class="details-reset details-overlay details-overlay-dark" open>
     <summary></summary>
-    <details-dialog class="Box d-flex flex-column anim-fade-in fast">
-     <div class="Box-header">
-       <h3 class="Box-title"><%= t(".Reader list") %></h3>
+    <details-dialog class="box d-flex flex-column anim-fade-in fast">
+     <div class="box-header">
+       <h3 class="box-title"><%= t(".Reader list") %></h3>
      </div>
-      <div class="Box-body user-list">
+      <div class="box-body user-list">
         <% readers.each do |action| %>
           <div class="user-item">
             <%= user_avatar_tag(action.user, style: :tiny) %>

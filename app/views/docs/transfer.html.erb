@@ -12,11 +12,11 @@
 </div>
 
 <%= form_for(@repository, url: transfer_user_repository_docs_path(@user, @repository), method: :post) do |f| %>
-    <div class="Box">
-      <div class="Box-header"><%= t(".Select doc to transfer") %></div>
+    <div class="box">
+      <div class="box-header"><%= t(".Select doc to transfer") %></div>
       <ul style="max-height: 350px; overflow-y: scroll;">
         <% @repository.docs.each do |doc| %>
-        <li class="Box-row">
+        <li class="box-row">
           <label for="doc-<%= doc.id %>-checkbox" style="font-weight: normal;" class="display-block clearfix">
            <input id="doc-<%= doc.id %>-checkbox" type="checkbox" class="form-checkbox float-left mr-3 doc-checkbox" name="transfer[doc_ids][]" value="<%= doc.id %>" />
            <div class="title"><%= doc.title %></div>

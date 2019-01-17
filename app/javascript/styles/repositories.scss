@@ -1,0 +1,302 @@
+.page-repositories {
+}
+
+.repo-heading {
+  .heading {
+    margin: 50px 0 20px 0;
+  }
+
+  h1 {
+    font-size: 20px;
+    a { color: #303030; }
+    .divider {
+      font-size: 18px;
+      color: $text-gray-light;
+    }
+
+    i.fas {
+      font-size: 20px;
+      color: #303030;
+    }
+  }
+}
+
+.repo-description {
+  margin-bottom: 20px;
+  font-size: 16px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.toc-items {
+  .toc-item {
+  }
+
+  @for $i from 0 through 4 {
+    .toc-item-#{$i} {
+      .item-title {
+        margin-left: ($i * 14px) !important;
+      }
+    }
+  }
+}
+
+
+.repo-toc {
+  font-size: 16px;
+  text-align: center;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+
+  .toc-header {
+    position: relative;
+
+    .title {
+      padding-bottom: 12px;
+      text-align: center;
+      color: #252525;
+      font-size: 24px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: #8a8a8a;
+    }
+
+    .edit-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #505050;
+      vertical-align: bottom;
+      font-size: 14px;
+
+      .fas {
+        width: 14px;
+        height: 14px;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .toc-list {
+
+    text-align: left;
+
+    ul {
+      li {
+        list-style: none;
+        line-height: 18px;
+        padding: 10px 0;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        @extend .clearfix;
+
+        &:after {
+          content: " ";
+          width: 100%;
+          border-bottom: 1px dashed #e8e8e8;
+          position: absolute;
+          top: 50%;
+          right: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        .item-slug,
+        .item-link {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          height: 18px;
+        }
+
+        .item-link {
+          position: absolute;
+          background: #FFF;
+          padding-right: 15px;
+          font-size: 15px;
+          z-index: 1;
+          min-width: 0;
+          max-width: 70%;
+          color: #555;
+          &:hover {
+            color: #222;
+          }
+        }
+
+        .item-slug {
+          position: relative;
+          background: #fff;
+          padding-left: 15px;
+          z-index: 1;
+          min-width: 0;
+          max-width: 30%;
+          font-size: 13px;
+          color: #aaa;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .repo-toc {
+    .toc-list {
+      width: 100%;
+      margin: 30px auto;
+    }
+  }
+}
+
+
+.repository-card {
+  padding: 15px;
+  a.repository-name { color: #444; font-size: 16px; }
+  .desc { font-size: 13px; }
+
+  .counter {
+    margin-right: 15px;
+
+    .octicon {
+      fill: #666;
+    }
+  }
+}
+
+.repository-item {
+  position: relative;
+  padding-left: 45px;
+  .icon-box {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    color: #666;
+    font-size: 20px;
+  }
+
+  .counter {
+    margin-right: 8px;
+
+    .fas {
+      color: #666;
+      font-size: 14px;
+    }
+  }
+}
+
+.repository-docs {
+  .doc-item {
+    position: relative;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    .icon-box {
+      display: none;
+      position: absolute;
+      top: 14px;
+      left: 15px;
+      color: #e0e0e0;
+      font-size: 20px;
+    }
+
+    a {
+      color: #777;
+    }
+
+    .infos {
+      float: left;
+
+      h4 {
+        font-size: 15px;
+        a { color: #333; }
+
+        .doc-icon-share {
+          display: inline-block;
+          margin-left: 5px;
+          color: #999;
+        }
+      }
+
+      .desc {
+        display: block;
+        a { color: #777; }
+
+        .fas { font-size: 16px; }
+
+        .time { color: #aaa; }
+      }
+    }
+
+    .actions {
+      float: right;
+      opacity: 0;
+    }
+
+    &:hover {
+      .actions {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .doc-item {
+      padding: 15px;
+      padding-left: 45px;
+      .icon-box { display: block; }
+    }
+  }
+}
+
+
+
+#repository-members {
+  border-bottom: 0;
+
+  .repository-member {
+    border-bottom: 1px solid #e1e4e8;
+    padding: 20px 15px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .infos,
+    .member-role,
+    .actions {
+      vertical-align: middle !important;
+    }
+
+    .member-role {
+      .select-menu-modal {
+        position: absolute;
+        z-index: 99;
+        width: 200px;
+      }
+      summary.select-menu-button {
+        margin-top: 10px;
+        width: 80px;
+        text-align: left;
+
+        &:after {
+          position: absolute;
+          right: 10px;
+          top: 13px;
+        }
+      }
+    }
+  }
+}
+
+.export-repository-pdf {
+}

@@ -1,6 +1,6 @@
 <% title_tag "Settings", @repository.name %>
 
-<div class="clearfix">
+<div class="container">
   <%= render "menu" %>
   <div class="col-12 col-md-9 float-left">
     <%= render "repository_settings/exports/pdf", repository: @repository %>
@@ -8,8 +8,8 @@
     <%= render "repository_settings/exports/archive", repository: @repository %>
 
     <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
-      <div class="Box transfer-docs">
-        <div class="Box-header">
+      <div class="box transfer-docs">
+        <div class="box-header">
           <h4 class="title mb-2"><%= icon_tag("transfer") %> <%= t(".Transfer docs to other repository") %></h4>
           <div class="text-gray">
             <%= t(".Choise doc in list, you can move them into the other repository") %>
@@ -17,7 +17,7 @@
         </div>
         <ul style="max-height: 350px; overflow-y: scroll;">
           <% @repository.docs.each do |doc| %>
-          <li class="Box-row">
+          <li class="box-row">
             <label for="doc-<%= doc.id %>-checkbox" style="font-weight: normal;" class="display-block clearfix">
              <input id="doc-<%= doc.id %>-checkbox" type="checkbox" class="form-checkbox float-left mr-3 doc-checkbox" name="transfer[doc_id][]" value="<%= doc.id %>" />
              <div class="title"><%= doc.title %></div>
@@ -29,7 +29,7 @@
         <div class="flash flash-full flash-warn">
           <span class="mr-2"><%= icon_tag("info") %></span> <%= t(".If there has same doc slug exists in the destination repository, it will change it as a random slug") %>
         </div>
-        <div class="Box-footer">
+        <div class="box-footer">
           <div class="clearfix">
             <div class="float-left mr-3 mb-3 mb-md-0">
               <%= render "/shared/user_repositories_select_menu", input_name: "transfer[repository_id]", value: params.dig(:transfer, :repository_id) %>

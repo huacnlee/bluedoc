@@ -1,0 +1,432 @@
+// All of our block level items should have the same margin
+// stylelint-disable selector-max-type
+
+// This is styling for generic markdownized text. Anything you put in a
+// container with .markdown-body on it should render generally well. It also
+// includes some GitHub Flavored Markdown specific styling (like @mentions)
+.markdown-body {
+  font-family: $body-font;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+
+  // Clearfix on the markdown body
+  &::before {
+    display: table;
+    content: "";
+  }
+
+  &::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  // Anchors like <a name="examples">. These sometimes end up wrapped around
+  // text when users mistakenly forget to close the tag or use self-closing tag
+  // syntax. We don't want them to appear like links.
+  // FIXME: a:not(:link):not(:visited) would be a little clearer here (and
+  // possibly faster to match), but it breaks styling of <a href> elements due
+  // to https://bugs.webkit.org/show_bug.cgi?id=142737.
+  a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  // Link Colors
+  .absent {
+    color: $primary;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  table,
+  pre {
+    margin-top: 0;
+    margin-bottom: $spacer-3;
+  }
+
+  hr {
+    height: $spacer-3;
+    padding: 0;
+    margin: $spacer-4 0;
+    border: 0;
+  }
+
+  blockquote {
+    padding: 0 1em;
+    color: $text-gray-light;
+    border-left: 0.25em solid #eee;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 10px;
+    color: $text-gray;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    border: solid 1px darken(#f0f0f0, 4%);
+    border-bottom-color: #f0f0f0;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #f0f0f0;
+  }
+
+  code,
+  tt {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba($black, 0.05);
+    border-radius: 1px;
+
+    br { display: none; }
+  }
+
+  del code { text-decoration: inherit; }
+
+  pre {
+    word-wrap: normal;
+
+    // Code tags within code blocks (<pre>s)
+    > code {
+      padding: 0;
+      margin: 0;
+      font-size: 100%;
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+      border: 0;
+    }
+  }
+
+  .highlight {
+    margin-bottom: $spacer-3;
+
+    pre {
+      margin-bottom: 0;
+      word-break: normal;
+    }
+  }
+
+  .highlight pre,
+  pre {
+    padding: $spacer-3;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: $gray-100;
+    border-radius: $border-radius;
+  }
+
+  pre code,
+  pre tt {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: $spacer-4;
+    margin-bottom: $spacer-3;
+    font-weight: bold;
+    line-height: 180%;
+
+    .octicon-link {
+      color: $black;
+      vertical-align: middle;
+      visibility: hidden;
+    }
+
+    &:hover .anchor {
+      text-decoration: none;
+
+      .octicon-link {
+        visibility: visible;
+      }
+    }
+
+    tt,
+    code {
+      font-size: inherit;
+    }
+  }
+
+  h1 {
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    border-bottom: 1px solid #ddd;
+  }
+
+  h2 {
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #ddd;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-size: 1em;
+  }
+
+  h5 {
+    font-size: 0.875em;
+  }
+
+  h6 {
+    font-size: 0.85em;
+    color: $text-gray-dark;
+  }
+
+  // Images & Stuff
+  img {
+    max-width: 100%;
+    // because we put padding on the images to hide header lines, and some people
+    // specify the width of their images in their markdown.
+    box-sizing: content-box;
+    background-color: #fff;
+
+    &[align=right] {
+      padding-left: 20px;
+    }
+
+    &[align=left] {
+      padding-right: 20px;
+    }
+  }
+
+  .emoji {
+    max-width: none;
+    vertical-align: text-top;
+    // Override `<img>` styles so Emjois don't clash with zebra striping in our tables
+    background-color: transparent;
+  }
+
+  // Lists, Blockquotes & Such
+  ul,
+  ol {
+    padding-left: 2em;
+
+    &.no-list {
+      padding: 0;
+      list-style-type: none;
+    }
+  }
+
+  // Did someone complain about list spacing? Encourage them
+  // to create the spacing with their markdown formatting.
+  // List behavior should be controled by the markup, not the css.
+  //
+  // For lists with padding between items, use blank
+  // lines between items. This will generate paragraphs with
+  // padding to space things out.
+  //
+  // - item
+  //
+  // - item
+  //
+  // - item
+  //
+  // For list without padding, don't use blank lines.
+  //
+  // - item
+  // - item
+  // - item
+  //
+  // Modifying the css to emulate these behaviors merely brakes
+  // one case in the process of solving another. Don't change
+  // this unless it's really really a bug.
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  li {
+    word-wrap: break-all;
+  }
+
+  li > p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  li + li {
+    margin-top: $spacer-3;
+  }
+
+  dl {
+    padding: 0;
+
+    dt {
+      padding: 0;
+      margin-top: $spacer-3;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    dd {
+      padding: 0 $spacer-3;
+      margin-bottom: $spacer-3;
+    }
+  }
+
+  // Tables
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+
+    th {
+      font-weight: bold;
+    }
+
+    th,
+    td {
+      padding: 6px 13px;
+      border: 1px solid #eee;
+    }
+
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #eee;
+
+      &:nth-child(2n) {
+        background-color: #f7f7f7;
+      }
+    }
+
+    img {
+      background-color: transparent;
+    }
+  }
+}
+
+.highlight  { background: #ffffff; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { font-weight: bold } /* Keyword */
+.highlight .o { font-weight: bold } /* Operator */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #d14 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d14 } /* Literal.String.Backtick */
+.highlight .sc { color: #d14 } /* Literal.String.Char */
+.highlight .sd { color: #d14 } /* Literal.String.Doc */
+.highlight .s2 { color: #d14 } /* Literal.String.Double */
+.highlight .se { color: #d14 } /* Literal.String.Escape */
+.highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+.highlight .si { color: #d14 } /* Literal.String.Interpol */
+.highlight .sx { color: #d14 } /* Literal.String.Other */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+
+/*!
+ * GitHub Light v0.4.2
+ * Copyright (c) 2012 - 2017 GitHub, Inc.
+ * Licensed under MIT (https://github.com/primer/github-syntax-theme-generator/blob/master/LICENSE)
+ */
+.markdown-body .cm-s-default.CodeMirror{ color:#24292e;}
+.markdown-body .cm-s-default .CodeMirror-gutters{ border-right-width:0;}
+.markdown-body .cm-s-default .CodeMirror-guttermarker{color:white;}
+.markdown-body .cm-s-default .CodeMirror-guttermarker-subtle{color:#d0d0d0;}
+.markdown-body .cm-s-default .CodeMirror-linenumber{color:#959da5;padding:0 16px 0 16px;}
+.markdown-body .cm-s-default .CodeMirror-cursor{border-left:1px solid #24292e;}
+.markdown-body .cm-s-default div.CodeMirror-selected,
+.markdown-body .cm-s-default .CodeMirror-line::selection,
+.markdown-body .cm-s-default .CodeMirror-line > span::selection,
+.markdown-body .cm-s-default .CodeMirror-line > span > span::selection,
+.markdown-body .cm-s-default .CodeMirror-line::-moz-selection,
+.markdown-body .cm-s-default .CodeMirror-line > span::-moz-selection,
+.markdown-body .cm-s-default .CodeMirror-line > span > span::-moz-selection{background:#c8c8fa;}
+.markdown-body .cm-s-default .CodeMirror-activeline-background{}
+.markdown-body .cm-s-default .CodeMirror-matchingbracket{text-decoration:underline;color:#24292e !important;}
+.markdown-body .cm-s-default .cm-comment{color:#6a737d;}
+.markdown-body .cm-s-default .cm-constant{color:#005cc5;}
+.markdown-body .cm-s-default .cm-entity{font-weight:normal;font-style:normal;text-decoration:none;color:#6f42c1;}
+.markdown-body .cm-s-default .cm-keyword{ font-weight: bold; color:#333;}
+.markdown-body .cm-s-default .cm-storage{color:#d73a49;}
+.markdown-body .cm-s-default .cm-string{font-weight:normal;font-style:normal;text-decoration:none;color:#032f62;}
+.markdown-body .cm-s-default .cm-support{font-weight:normal;font-style:normal;text-decoration:none;color:#005cc5;}
+.markdown-body .cm-s-default .cm-variable{ color:#008080;}
+.markdown-body .cm-s-default .cm-tag{ color: #445588; }
+.markdown-body .cm-s-default .cm-def{ color: #990000; font-weight: bold; }

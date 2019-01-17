@@ -1,11 +1,11 @@
 <% title_tag t(".Settings"), @repository.name %>
 
-<div class="clearfix">
+<div class="container">
   <%= render "menu" %>
   <div class="col-12 col-md-9 float-left">
      <div class="form-title"><h2><%= t(".Transfer") %></h2></div>
-     <div class="Box mb-3">
-       <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+     <div class="box mb-3">
+       <div class="box-row d-flex flex-column flex-md-row flex-items-center">
          <div class="flex-auto mr-2 mb-2 mb-md-0">
            <label class="form-check-label font-weight-bold">
              <%= t(".Transfer ownership") %>
@@ -27,8 +27,8 @@
       <input type="hidden" name="_action" value="advanced" />
       <input type="hidden" name="_by" value="danger-zone" />
 
-      <div class="Box mb-3">
-        <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+      <div class="box mb-3">
+        <div class="box-row d-flex flex-column flex-md-row flex-items-center">
           <div class="flex-auto mr-2 mb-2 mb-md-0">
             <label class="form-check-label font-weight-bold">
               <% if @repository.private? %>
@@ -47,7 +47,7 @@
           </div>
           <%= render "privacy" %>
         </div>
-        <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
+        <div class="box-row d-flex flex-column flex-md-row flex-items-center">
           <div class="flex-auto mr-2 mb-2 mb-md-0">
             <label class="form-check-label font-weight-bold">
               <%= t(".Delete this repository") %>

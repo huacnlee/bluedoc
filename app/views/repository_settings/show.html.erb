@@ -1,7 +1,8 @@
 <% title_tag t(".Settings"), @repository.name %>
 
-<div class="clearfix">
+<div class="container">
   <%= render "menu" %>
+
   <div class="col-12 col-md-9 float-left">
     <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), local: true, remote: true) do |form| %>
       <div class="form-title"><h2><%= t(".Repository profile") %></h2></div>
@@ -43,8 +44,8 @@
       <input type="hidden" name="action" value="show" />
       <input type="hidden" name="_by" value="features" />
 
-      <div class="Box mb-3">
-        <div class="Box-row d-flex flex-items-center">
+      <div class="box mb-3">
+        <div class="box-row d-flex flex-items-center">
           <div class="form-check">
             <%= form.check_box :has_toc, class: "form-check-input form-check-submit" %>
             <%= form.label :has_toc, t(".Table of Contents"), class: "form-check-label font-weight-bold" %>

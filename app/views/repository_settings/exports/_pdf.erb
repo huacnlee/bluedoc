@@ -1,11 +1,11 @@
-<div class="Box export-repository-pdf mb-4">
-  <div class="Box-header">
+<div class="box export-repository-pdf mb-4">
+  <div class="box-header">
     <h4 class="title mb-2"><%= icon_tag("pdf") %> <%= t(".Export as PDF") %></h4>
     <div class="text-gray">
       <%= t(".You can export all docs as a PDF file") %>
     </div>
   </div>
-  <div class="Box-body">
+  <div class="box-body">
     <% if Rails.env.development? %>
     <div class="mb-3">
       <%= link_to icon_tag("pdf", label: t(".Preview PDF HTML")), repository.to_path("/settings/export?type=pdf"), class: "btn-link", target: "_blank" %>
