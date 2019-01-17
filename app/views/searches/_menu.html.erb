@@ -1,18 +1,20 @@
-<div class="col-3 float-left pr-4 v-align-top">
-  <ul class="menu v-align-middle">
-    <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
-      li << link_to(docs_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:docs] %></span><%= icon_tag("docs", label: t(".Docs")) %>
-      <% end
-      li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:repositories] %></span><%= icon_tag("repositories", label: t(".Repositories")) %>
-      <% end
-      li << link_to(groups_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:groups] %></span><%= icon_tag("users", label: t(".Groups")) %>
-      <% end
-      li << link_to(users_search_path(q: params[:q]), class: "menu-item") do %>
-        <span class="Counter"><%= @totals[:users] %></span><%= icon_tag("user", label: t(".Users")) %>
-      <% end
-    end %>
-  </ul>
+<div class="aside-wrap">
+  <div class="aside-content">
+    <nav class="menu v-align-middle">
+      <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
+        li << link_to(docs_search_path(q: params[:q]), class: "menu-item") do %>
+          <%= icon_tag("docs", label: t(".Docs")) %><span class="counter"><%= @totals[:docs] %></span>
+        <% end
+        li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
+          <%= icon_tag("rep", label: t(".Repositories")) %><span class="counter"><%= @totals[:repositories] %></span>
+        <% end
+        li << link_to(groups_search_path(q: params[:q]), class: "menu-item") do %>
+          <%= icon_tag("group", label: t(".Groups")) %><span class="counter"><%= @totals[:groups] %></span>
+        <% end
+        li << link_to(users_search_path(q: params[:q]), class: "menu-item") do %>
+          <%= icon_tag("user", label: t(".Users")) %><span class="counter"><%= @totals[:users] %></span>
+        <% end
+      end %>
+    </nav>
+  </div>
 </div>
