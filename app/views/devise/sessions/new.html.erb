@@ -3,7 +3,7 @@ auth_session = session[:omniauth] || {}
 auth_info = auth_session["info"]
 %>
 
-<div class="container-lg clearfix">
+<div class="container clearfix">
   <div class="col-12 col-md-8 float-left">
     <div class="sub-title">
       <div class="heading"><%= icon_tag("profile") %> <%= t(".Sign in") %></div>
@@ -50,25 +50,24 @@ auth_info = auth_session["info"]
 
   <div class="col-12 col-md-4 float-left mt-4 pl-md-4">
     <% if defined? omniauth_authorize_path %>
-    <div class="Box">
-      <div class="Box-header">
-        <h3 class="Box-title"><%= t(".Sign in with") %></h3>
-      </div>
-      <ul>
+    <div class="subhead">
+      <h2><%= t(".Sign in with") %></h2>
+    </div>
+    <div class="list-group">
         <% if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present? %>
-        <div class="Box-row">
+        <div class="list-group-item">
           <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), class: "btn btn-block" %>
         </div>
         <% end %>
 
         <% if ENV["OMNIAUTH_GITHUB_CLIENT_ID"].present? %>
-        <div class="Box-row">
+        <div class="list-group-item">
         <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), class: "btn btn-block" %>
         </div>
         <% end %>
 
         <% if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present? %>
-        <div class="Box-row">
+        <div class="list-group-item">
         <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "btn btn-block" %>
         </div>
         <% end %>

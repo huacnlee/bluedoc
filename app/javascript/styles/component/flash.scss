@@ -1,0 +1,47 @@
+.flash {
+  padding: 10px;
+
+  &.flash-error {
+    color: $danger;
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    float: right;
+    margin-top: -2px;
+  }
+}
+
+.flash-block {
+  padding: 0;
+  display: block;
+  margin-bottom: 18px;
+
+  ul, ol {
+    margin-left: 24px;
+  }
+}
+
+.flash-full {
+  .flash-block {
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+    z-index: 999;
+    text-align: center;
+
+    .container {
+      background: #fff;
+      border: 1px solid #eee;
+      border-top-color: #f7f7f7;
+      box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.05);
+      text-align: center;
+      margin: 0 auto;
+      width: 300px;
+      padding: 10px;
+    }
+  }
+}
+

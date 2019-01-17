@@ -62,6 +62,9 @@
     width: 20px;
     height: 20px;
   }
+  .nav-link {
+    margin-left: 8px;
+  }
   .search {
     display: none;
     @include breakpoint(sm) {

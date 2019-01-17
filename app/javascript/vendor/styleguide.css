@@ -3179,7 +3179,7 @@ tr:not(.blob-expanded)+.blob-expanded .blob-num,tr:not(.blob-expanded)+.blob-exp
     display: block
 }
 
-body.split-diff .container,body.split-diff .container-lg,body.full-width .container,body.full-width .container-lg {
+body.split-diff .container,body.split-diff .container,body.full-width .container,body.full-width .container {
     width: 100%;
     max-width: none;
     padding-right: 20px;

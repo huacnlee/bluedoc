@@ -35,7 +35,7 @@
       </div>
       <div class="list">
         <% if @notifications.blank? %>
-          <div class="blankslate m-4">
+          <div class="blankslate">
             <% if params[:tab] == "all" %>
               <%= t(".You does not have any notifications") %>
             <% else %>

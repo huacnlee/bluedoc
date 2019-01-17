@@ -2,16 +2,19 @@
 
 <%= render "menu" %>
 
-<div class="group-members">
-  <div class="border-bottom pb-3 mb-3 clearfix">
-    <div class="float-right">
-      <%= render "add_member" %>
-    </div>
-    <h4><%= @members.total_count %> <%= t(".Number of Members") %></h4>
-  </div>
+<div class="container">
 
-  <div class="member-list">
-    <%= render partial: "member", collection: @members %>
-    <%= paginate @members %>
+  <div class="group-members">
+    <div class="subhead">
+      <div class="float-right">
+        <%= render "add_member" %>
+      </div>
+      <h2><%= @members.total_count %> <%= t(".Number of Members") %></h2>
+    </div>
+
+    <div class="member-list">
+      <%= render partial: "member", collection: @members %>
+      <%= paginate @members %>
+    </div>
   </div>
 </div>
