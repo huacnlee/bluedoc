@@ -1,18 +1,21 @@
-<div class="col-12 clearfix">
-  <div class="col-3 v-align-top pr-4 float-left">
-    <ul class="menu">
+<div class="aside-wrap">
+  <div class="aside-content">
+    <nav class="menu">
       <%= render_list_items(class: "menu-item", type: :link, check_parameters: true) do |li|
         li << link_to(main_app.notifications_path, class: "menu-item") do %>
-          <%= t(".Unread") %> <span class="Counter"><%= unread_notifications_count %></span>
+          <%= t(".Unread") %> <span class="counter"><%= unread_notifications_count %></span>
         <% end
         li << link_to(t(".All"), main_app.notifications_path(tab: "all"), class: "menu-item")
       end %>
     </ul>
   </div>
+</div>
 
-  <div class="col-9 v-align-top float-left">
+<div class="main-wrap">
+  <div class="main-content">
+
     <div class="notifications Box">
-      <div class="Box-header clearfix">
+      <div class="subhead clearfix">
         <span class="float-right">
           <% if params[:tab] == "all" %>
             <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
@@ -26,9 +29,9 @@
           <% end %>
         </span>
 
-        <span class="title">
+        <h2>
           <% if params[:tab] == "all" %><%= t(".All") %><% else %><%= t(".Unread") %><% end %>
-        </span>
+        </h2>
       </div>
       <div class="list">
         <% if @notifications.blank? %>

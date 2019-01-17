@@ -4,7 +4,7 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <div class="sub-title"><%= t(".All groups of you") %></div>
+      <div class="subhead"><h2><%= t(".All groups of you") %></h2></div>
       <%= render partial: "groups", locals: { items: @groups } %>
       <%= paginate @groups %>
     </div>

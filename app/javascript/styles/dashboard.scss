@@ -1,8 +1,4 @@
 .page-dashboards {
-  .main-container {
-    padding: 30px 0;
-  }
-
   .footer {
     display: none;
   }
@@ -86,6 +82,13 @@
           .fas { opacity: 1; }
         }
       }
+    }
+  }
+
+  .list-item {
+    .btn {
+      border: 0;
+      background: transparent;
     }
   }
 }

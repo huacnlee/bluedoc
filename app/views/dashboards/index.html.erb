@@ -4,7 +4,7 @@
     <div class="dashboard-content">
 
       <div class="mb-5 dashboard-section">
-        <div class="sub-title"><%= t(".Recent edited docs") %></div>
+        <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
             <p><%= t(".You have no update Doc in recently") %></p>
@@ -32,7 +32,7 @@
       </div>
 
       <div class="mb-5 dashboard-section">
-        <div class="sub-title"><%= t(".Recent contributed repositories") %></div>
+        <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
         <% if @recent_repos.blank? %>
           <div class="blankslate">
             <p><%= t(".You have no update Repositories in recently") %></p>
@@ -61,7 +61,7 @@
 
       <% if !@groups.blank? %>
       <div class="mb-5 dashboard-section">
-        <div class="sub-title"><%= t(".Your Groups") %></div>
+        <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
             <li class="card card-avatar group-item">

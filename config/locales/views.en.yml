@@ -219,6 +219,11 @@ en:
       Your Groups: Your Groups
       All activity: All activity
       You have no activity in recently: You have no activity in recently.
+    stars:
+      Stared Docs: Stared Docs
+      Stared Repositories: Stared Repositories
+    watches:
+      All Watches: All watches
   versions:
     version:
       Current: Current

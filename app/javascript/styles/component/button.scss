@@ -1,22 +1,48 @@
 .btn {
-  width: 310px;
   padding: 5px 15px;
   background: #fff;
   text-align: center;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: $primary;
+  }
+}
+
+.btn-link {
+  border: 0px;
+  background: transparent;
 }
 
 .btn-primary {
   border: 1px solid #9BBAFF;
   background: #F3F7FF;
   color: $primary;
+
+  &:hover {
+    border-color: #8EAAEE;
+  }
 }
 
 .btn-danger {
   border: 1px solid #FFC1BE;
   background: #FFF3F3;
   color: #EE4343;
+
+  &:hover {
+    border-color: #F3B7B7;
+    color: #AA2528;
+    background: #FFF3F3;
+  }
 }
 
 .btn-block {
   display: block;
+}
+
+.btn-submit {
+  width: 340px;
 }

@@ -5,11 +5,11 @@
   <div class="main-content">
     <div class="dashboard-content clearfix">
       <% if action_name == "stars_docs" %>
-        <div class="sub-title">Docs</div>
+        <div class="subhead"><h2><%= t(".Stared Docs") %></div></div>
         <%= render "action_docs" %>
         <%= paginate @docs %>
       <% else %>
-        <div class="sub-title">Repositories</div>
+        <div class="subhead"><h2><%= t(".Stared Repositories") %></h2></div>
         <%= render "action_repositories" %>
         <%= paginate @repositories %>
       <% end %>

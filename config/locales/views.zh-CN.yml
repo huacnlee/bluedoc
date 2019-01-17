@@ -272,6 +272,11 @@ zh-CN:
       Your Groups: 你的团队
       All activity: 动态
       You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
+    stars:
+      Stared Docs: 我收藏的文档
+      Stared Repositories: 我收藏的知识库
+    watches:
+      All Watches: 我订阅的知识库
   versions:
     version:
       Current: 当前版本
