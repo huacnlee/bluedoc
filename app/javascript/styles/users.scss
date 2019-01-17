@@ -14,6 +14,7 @@
     padding-right: 30px;
     color: $text-main;
   }
+
   // todo
   .user-follow {
     display: none;
@@ -22,6 +23,7 @@
     line-height: 1;
     margin-bottom: 10px;
   }
+
   .user-name-box {
     .real-name {
       display: block;
@@ -78,6 +80,25 @@
     display: none;
     @include breakpoint(md) {
       display: block;
+    }
+  }
+
+  .avatar-wrap {
+    display: flex;
+    .image-box {
+      width: 100px;
+      height: 100px;
+      margin-right: 40px;
+    }
+    .description {
+      margin-bottom: 20px;
+    }
+    .btn-upload{
+      cursor: pointer;
+      .fas {
+        font-size: 1.5em;
+        margin-right: 5px;
+      }
     }
   }
 }
