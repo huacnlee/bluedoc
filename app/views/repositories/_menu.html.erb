@@ -4,7 +4,7 @@
     <div class="heading clearfix">
       <div class="row clearfix">
         <div class="repo-actions float-right">
-          <%= action_button_tag(@repository, :watch, icon: "eye", with_count: true) %>
+          <%= action_button_tag(@repository, :watch, icon: "watch", with_count: true) %>
           <%= action_button_tag(@repository, :star, with_count: true) %>
           <% if can? :create_doc, @repository %>
             <%= link_to icon_tag("create", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary", data: { turbolinks: false } %>
