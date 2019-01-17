@@ -49,24 +49,6 @@
       margin-bottom: 40px;
     }
   }
-  .menu-item {
-    display: block;
-    margin-bottom: 12px;
-    font-size: 14px;
-    text-decoration: none;
-    &.selected, &:hover {
-      color: $primary;
-      i.fas {
-        color: inherit;
-      }
-    }
-    &.depth-1 {
-      .fas { opacity: 0; }
-      &.selected {
-        .fas { opacity: 1; }
-      }
-    }
-  }
   .user-groups {
     line-height: 1;
     display: none;
@@ -76,6 +58,7 @@
     }
     .label {
       margin-right: 20px;
+      line-height: 20px;
     }
     .groups-box {
       flex: auto;

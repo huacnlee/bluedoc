@@ -52,37 +52,6 @@
     @include breakpoint(lg) {
       display: block;
     }
-    .dashboard-menu-item {
-      line-height: 20px;
-      display: block;
-      color: $text-main;
-      text-decoration: none;
-      margin-bottom: 10px;
-      &.last {
-        margin-bottom: 30px;
-      }
-      i.fas {
-        font-size: 16px;
-        color: #979797;
-        margin-top: -3px;
-        margin-right: 5px;
-      }
-      &.selected, &:hover {
-        color: $primary;
-        i.fas {
-          color: inherit;
-        }
-      }
-      &.depth-1 {
-        color: $text-gray-light;
-        text-indent: 10px;
-        .fas { opacity: 0; }
-        &.selected {
-          color: $primary;
-          .fas { opacity: 1; }
-        }
-      }
-    }
   }
 
   .list-item {

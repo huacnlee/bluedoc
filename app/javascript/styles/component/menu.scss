@@ -13,7 +13,6 @@
     color: $text-main;
     text-decoration: none;
     margin-bottom: 10px;
-
     .Counter,
     .counter {
       font-size: 0.8em;
@@ -29,7 +28,6 @@
     i.fas {
       font-size: 16px;
       color: #979797;
-      margin-top: -3px;
       margin-right: 5px;
     }
     &.selected, &:hover {
@@ -38,14 +36,16 @@
         color: inherit;
       }
     }
-    &.depth-1 {
+    &.menu-sub-item {
       color: $text-gray-light;
-      text-indent: 10px;
       .fas { opacity: 0; }
       &.selected {
         color: $primary;
         .fas { opacity: 1; }
       }
+    }
+    &.depth-1 {
+      text-indent: 1em;
     }
   }
 }
