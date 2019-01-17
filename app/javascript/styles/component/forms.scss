@@ -1,6 +1,6 @@
 .form-group {
   margin-bottom: 20px;
-  label {
+  .control-label {
     display: block;
     margin-bottom: 10px;
     color: #666;
@@ -28,5 +28,14 @@
   }
   .form-control + .form-text {
     padding-top: 10px;
+  }
+  .form-checkbox {
+    input[type=checkbox],
+    input[type=radio] {
+      margin-right: 5px;
+    }
+    .form-text {
+      margin-top: 5px;
+    }
   }
 }

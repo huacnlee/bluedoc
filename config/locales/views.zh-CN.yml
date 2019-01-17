@@ -493,8 +493,8 @@ zh-CN:
       Great repository names are short and memorable: 知识库路径用于 URL 里面，简单好记的名称能更好的使用和传播（只允许用字母、数字、中横行）。
       Anyone can see this repository: 任何人（如果全站要求登录，也是需要登录的）可以访问此知识库下的内容。
       You choose who can see and edit to this repository: 团队意外的人保密，除非你将他们加到团队成员或知识库协作者列表。
-      Public: 完全公开
-      Private: 私密
+      Public: "完全公开"
+      Private: "私密"
       Create Repository: 创建知识库
     search:
       Search Docs: 搜索文档

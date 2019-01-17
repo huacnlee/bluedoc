@@ -3,7 +3,7 @@
   <div class="main-content">
     <div class="dashboard-content">
 
-      <div class="mb-5 dashboard-section">
+      <div class="dashboard-section">
         <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
@@ -31,7 +31,7 @@
         <% end %>
       </div>
 
-      <div class="mb-5 dashboard-section">
+      <div class="dashboard-section">
         <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
         <% if @recent_repos.blank? %>
           <div class="blankslate">
@@ -60,7 +60,7 @@
       </div>
 
       <% if !@groups.blank? %>
-      <div class="mb-5 dashboard-section">
+      <div class="dashboard-section">
         <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
@@ -78,7 +78,7 @@
       </div>
       <% end %>
 
-      <div class="mb-5 dashboard-section activities">
+      <div class="dashboard-section activities">
         <div class="sub-title"><%= t(".All activity") %></div>
         <% if @activities.blank? %>
           <div class="blankslate">

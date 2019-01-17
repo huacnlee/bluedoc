@@ -47,3 +47,14 @@ $responsive-variants: ("": "");
     }
   }
 }
+
+$spacer: 8px !default;
+$spacers: (
+  0,
+  round($spacer / 2),
+  $spacer,
+  $spacer * 2,
+  $spacer * 3,
+  $spacer * 4,
+  $spacer * 5
+) !default;
