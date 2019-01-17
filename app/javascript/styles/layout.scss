@@ -34,3 +34,15 @@
     }
   }
 }
+
+.footer {
+  .container {
+    width: 100%;
+    padding: 0 25px;
+
+    @include breakpoint(md) {
+      width: 1000px;
+    }
+    margin: 0 auto;
+  }
+}

@@ -27,6 +27,14 @@
     color: $text-gray-light;
 
     a { color: $text-gray-dark; }
+    code {
+      color: $text-main;
+      background: #f7f7f7;
+      padding: 1px 4px;
+    }
+    strong {
+      color: $text-gray-dark;
+    }
   }
   .form-control + .form-text {
     padding-top: 10px;
