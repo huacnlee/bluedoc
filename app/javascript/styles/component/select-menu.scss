@@ -1,9 +1,7 @@
 
 .select-menu-button {
-  border-radius: 2px;
-  padding: 9px 15px;
-  font-size: 13px;
-  height: 39px;
+  padding: 4px 15px;
+  line-height: 100%;
 }
 
 .select-menu-button::after {
@@ -276,6 +274,9 @@
 
 .select-menu-item {
     display: block;
+    background: transparent;
+    border: 0;
+    width: 100%;
     padding: 8px 8px 8px 30px;
     overflow: hidden;
     color: inherit;

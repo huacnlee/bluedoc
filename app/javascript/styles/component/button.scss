@@ -1,4 +1,6 @@
 .btn {
+  position: relative;
+  display: inline-block;
   padding: 5px 15px;
   line-height: 100%;
   background: #fff;
@@ -7,6 +9,18 @@
   background: #fff;
   font-size: 14px;
   text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 
   .fas  {
     font-size: 16px;

@@ -24,6 +24,8 @@
 .position-relative {
   position: relative;
 }
+.d-block { display: block; }
+.font-weight-bold { font-weight: bold; }
 
 // Responsive padding spacer utilities
 @each $breakpoint, $variant in $responsive-variants {
