@@ -8,7 +8,7 @@ a {
 textarea {
   display: block;
 }
-
+@import "mixins.scss";
 @import "./theme.scss";
 @import "./utils.scss";
 @import "./colors.scss";

@@ -17,13 +17,15 @@
 
   // card layout style
   .cards-container {
-    margin-left: -20px;
-    margin-right: -20px;
     .card {
       float: left;
       width: 100%;
-      @include breakpoint(md) {
-        margin: 0 30px 20px 0;
+      margin-bottom: 30px;
+    }
+    @include breakpoint(md) {
+      margin-right: -30px;
+      .card {
+        margin-right: 30px;
         width: calc(50% - 30px);
       }
     }
@@ -49,7 +51,8 @@
     width: 100%;
     height: 100%;
     font-size: 14px;
-    @include breakpoint(lg) {
+    @include breakpoint(md) {
+      position: fixed;
       display: block;
     }
   }
