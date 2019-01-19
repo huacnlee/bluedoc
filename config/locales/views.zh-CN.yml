@@ -181,6 +181,7 @@ zh-CN:
         Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
         Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
         Save: 保存
+        Setting was successfully updated: 系统设置更新成功。
     comments:
       Comment was successfully updated: Comment was successfully updated.
   account_settings:
