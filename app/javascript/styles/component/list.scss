@@ -59,12 +59,20 @@
     right: 0;
     top: 20px;
     font-size: 18px;
+    opacity: 0;
+
     a {
       .fas {
         &:hover {
           color: $primary;
         }
       }
+    }
+  }
+
+  &:hover {
+    .action {
+      opacity: 1;
     }
   }
 }
