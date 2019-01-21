@@ -29,6 +29,8 @@ en:
       Admin Panel: Admin Panel
       Settings: Settings
       Sign out: Sign out
+      Sign in: Sign in
+      Sign up: Sign up
     mailer:
       This mail has sent from: This mail has sent from
   devise:
@@ -152,6 +154,7 @@ en:
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
         Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
         Save: Save
+      create:
         Setting was successfully updated: Setting was successfully updated.
   comments:
     Comment was successfully updated: Comment was successfully updated.

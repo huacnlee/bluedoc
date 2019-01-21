@@ -48,6 +48,6 @@
     </div>
   </div>
 <% else %>
-  <%= link_to "Sign in", main_app.new_user_session_path, class: "nav-link" %>
-  <%= link_to "Sign up", main_app.new_user_registration_path, class: "nav-link" %>
+  <%= link_to t(".Sign in"), main_app.new_user_session_path, class: "nav-link" %>
+  <%= link_to t(".Sign up"), main_app.new_user_registration_path, class: "nav-link" %>
 <% end %>

@@ -52,6 +52,9 @@ zh-CN:
         body: 评论内容
       member:
         role: 角色
+    errors:
+      messages:
+        invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。
   views:
     pagination:
       first: "&laquo; 第一页"
