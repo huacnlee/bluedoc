@@ -27,20 +27,13 @@
   .flash-block {
     padding: 0;
     width: 100%;
-    position: fixed;
     overflow: hidden;
-    z-index: 999;
     text-align: center;
 
     .container {
       background: #fff;
-      border: 1px solid #eee;
-      border-top-color: #f7f7f7;
-      box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.05);
-      text-align: center;
-      margin: 0 auto;
-      max-width: 420px;
-      padding: 10px;
+      text-align: left;
+      display: block;
     }
   }
 }

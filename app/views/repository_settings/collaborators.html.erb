@@ -1,32 +1,30 @@
 <% title_tag t(".Collaborators"), @repository.name %>
 
-<div class="container">
-  <%= render "menu" %>
-  <div class="col-12 col-md-9 float-left">
-    <div class="box transfer-docs">
-      <div class="box-header">
-        <h4 class="title mb-2"><%= t(".Collaborators") %></h4>
-        <div class="text-gray">
-          <%= t(".Push access to the repository") %>
+<%= render "menu" %>
+<div class="col-12 col-md-9 float-left">
+  <div class="box transfer-docs">
+    <div class="box-header">
+      <h4 class="title mb-2"><%= t(".Collaborators") %></h4>
+      <div class="text-gray">
+        <%= t(".Push access to the repository") %>
+      </div>
+    </div>
+    <ul id="repository-members" class="table-list members">
+      <% @members.each do |member| %>
+        <%= render "member", member: member %>
+      <% end %>
+    </ul>
+    <div class="box-footer">
+      <%= form_with(model: Member.new, url: collaborators_user_repository_settings_path(@repository.user, @repository), method: :post, class: "add-repository-member") do |form| %>
+        <h4 class="text-gray"><%= t(".Search by username, full name or email address") %></h4>
+        <p class="text-gray"><%= raw t(".By default, will add user as :role role", role: Member.role_name("editor")) %></p>
+        <div class="input-group mt-2">
+          <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
+          <span class="input-group-button">
+            <button type="submit" class="btn"><%= t(".Add") %></button>
+          </span>
         </div>
-      </div>
-      <ul id="repository-members" class="table-list members">
-        <% @members.each do |member| %>
-          <%= render "member", member: member %>
-        <% end %>
-      </ul>
-      <div class="box-footer">
-        <%= form_with(model: Member.new, url: collaborators_user_repository_settings_path(@repository.user, @repository), method: :post, class: "add-repository-member") do |form| %>
-          <h4 class="text-gray"><%= t(".Search by username, full name or email address") %></h4>
-          <p class="text-gray"><%= raw t(".By default, will add user as :role role", role: Member.role_name("editor")) %></p>
-          <div class="input-group mt-2">
-            <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
-            <span class="input-group-button">
-              <button type="submit" class="btn"><%= t(".Add") %></button>
-            </span>
-          </div>
-        <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

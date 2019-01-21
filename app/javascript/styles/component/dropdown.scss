@@ -1,4 +1,3 @@
-@import "primer-support/index.scss";
 .dropdown {
   position: relative;
   cursor: pointer;
@@ -34,7 +33,7 @@
 // way the menu should render from the element triggering it.
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% - 2px);
   left: 0;
   z-index: 100;
   width: 160px;
@@ -42,11 +41,11 @@
   padding-bottom: $spacer-1;
   margin-top: $spacer-2;
   list-style: none;
-  background-color: $bg-white;
+  background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid $black-fade-15;
-  border-radius: $border-radius;
-  box-shadow: 0 3px 12px $black-fade-15;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  box-shadow: 0 3px 12px rgba(27, 31, 35, 0.06);
   &::before,
   &::after {
     position: absolute;
@@ -56,12 +55,12 @@
 
   &::before {
     border: $spacer-2 solid transparent;
-    border-bottom-color: $black-fade-15;
+    border-bottom-color: #ddd;
   }
 
   &::after {
     border: $spacer-2 solid transparent;
-    border-bottom-color: $white;
+    border-bottom-color: #fff;
   }
 
   // stylelint-disable-next-line selector-max-type
@@ -91,9 +90,9 @@
 
   &:hover,
   &.zeroclipboard-is-hover {
-    color: $text-white;
+    color: #fff !important;
     text-decoration: none;
-    background-color: $bg-blue;
+    background-color: $primary;
 
     > .octicon {
       color: inherit;
@@ -117,12 +116,12 @@
 .dropdown-divider {
   height: 1px;
   margin: $spacer-1 1px;
-  background-color: $gray-200;
+  background-color: #e0e0e0;
 }
 
 .dropdown-header {
   padding: $spacer-1 $spacer-2 $spacer-1 $spacer-3;
-  font-size: $h6-size;
+  font-size: 14px;
   color: $text-gray;
 }
 
@@ -159,12 +158,12 @@
 
   &::before {
     right: -$spacer-3 - 1;
-    border-left-color: $black-fade-15;
+    border-left-color: #ddd;
   }
 
   &::after {
     right: -$spacer-3;
-    border-left-color: $white;
+    border-left-color: #FFF;
   }
 }
 
@@ -183,12 +182,12 @@
 
   &::before {
     left: -$spacer-3 - 1;
-    border-right-color: $black-fade-15;
+    border-right-color: #ddd;
   }
 
   &::after {
     left: -$spacer-3;
-    border-right-color: $white;
+    border-right-color: #FFF;
   }
 }
 
@@ -208,12 +207,12 @@
 
   &::before {
     bottom: -$spacer-3;
-    border-top-color: $black-fade-15;
+    border-top-color: #ddd;
   }
 
   &::after {
     bottom: -$spacer-3 + 1;
-    border-top-color: $white;
+    border-top-color: #FFF;
   }
 }
 

@@ -2,6 +2,15 @@
 @import "./medium-zoom";
 
 .reader-body {
+  .nav-header .header-content,
+  .main-container {
+    max-width: 1200px;
+  }
+  .container {
+    @include breakpoint(md) {
+      width: 1200px;
+    }
+  }
   .nav-header {
     .header-content {
       width: auto;
@@ -14,8 +23,8 @@
     border: 0;
     border-bottom: 1px solid #e0e0e0;
     position: relative;
-    z-index: 9;
     font-size: 14px;
+    margin-bottom: 20px;
 
     .btn-sm {
       box-shadow : 0 0 0;
@@ -24,7 +33,6 @@
 
     .navbar-title {
       line-height: 48px;
-      padding-left: 24px;
 
       a { color: #333; }
 
@@ -50,7 +58,6 @@
       top: 0;
       right: 0;
       text-align: right;
-      padding-right: 15px;
       padding-top: 11px;
 
       .btn {
@@ -81,9 +88,11 @@
     .doc-sidebar {
       display: none;
       padding: 24px;
+      min-width: 200px;
+      max-width: 260px;
 
       ul {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 100%;
         @extend .pt-2;
         @extend .list-style-none;
@@ -96,7 +105,7 @@
         }
 
         li {
-          padding: 6px 0;
+          padding: 8px 0;
           overflow: hidden;
           text-overflow: ellipsis;
         }
@@ -114,11 +123,9 @@
     @media (min-width: 1100px) {
       .doc-sidebar {
         display: block;
-        width: 24%;
+        width: 250px;
         padding-top: 0;
         min-height: 100vh;
-        min-width: 200px;
-        max-width: 250px;
       }
     }
 
@@ -126,17 +133,34 @@
       order:1;
       width: 100%;
       padding: 15px 15px;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     @media (min-width: 768px) {
       .doc-main {
-        padding: 32px 64px;
+        width: 100%;
+        padding: 32px 32px;
+        margin-left: 0px;
+        margin-right: 0px;
       }
     }
 
     @media (min-width: 1012px) {
       .doc-main {
-        max-width: 850px;
+        width: 100%;
+        margin-right: 32px;
+        margin-right: 20px;
+        top: 88px;
+        left: 30%;
+      }
+    }
+
+    @media (min-width: 1330px) {
+      .doc-main {
+        width: 750px;
+        margin-right: 32px;
+        margin-right: 32pxpx;
         top: 88px;
         left: 30%;
       }
@@ -318,10 +342,9 @@
     position: sticky;
     position: -webkit-sticky;
     top: 90px;
-    width: 250px;
-    border: 1px solid #e8ebef;
+    width: 200px;
+    border-left: 1px solid #e8ebef;
     border-radius: 3px;
-    background: #fdfeff;
     font-size: 13px;
     margin-right: 25px;
     display: block;
@@ -339,7 +362,7 @@
 
     li {
       color: #888;
-      list-style-type: square;
+      list-style-type: none;
       list-style-position: inside;
       word-break: break-word;
       word-wrap: break-word;

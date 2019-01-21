@@ -1,9 +1,6 @@
 .main-container {
-  width: 100%;
   flex: auto;
   margin: auto;
-  max-width: 1080px;
-  padding: 30px 25px;
   @include breakpoint(md) {
     display: flex;
     justify-content: center;
@@ -33,9 +30,13 @@
 
 .container {
   width: 100%;
-  padding: 0 25px;
+  position: relative;
+
+  padding: 0 15px;
   @include breakpoint(md) {
-    width: 1000px;
+    display: flex;
+    padding: 0 25px;
+    width: 1080px;
   }
   margin: 0 auto;
 }

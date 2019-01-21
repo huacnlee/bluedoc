@@ -1,84 +1,13 @@
 <% title_tag @doc ? @doc.title : "Not found" %>
 
 <% content_for :subnav do %>
-<div class="reader-navbar">
-  <div class="navbar-title">
-    <span class="hide-sm hide-md">
-    <a href="<%= root_path %>" title="<%= t(".Back to list") %>">BookLab</a>
-      <span class="divider">/</span>
-    </span>
-    <span class="hide-sm">
-      <%= group_name_tag @user %>
-      <span class="divider">/</span>
-    </span>
-    <%= repository_name_tag @repository %>
-    <span class="hide-md hide-sm">
-      <span class="divider">/</span>
-      <% if @doc %>
-      <span class="doc-title"><%= @doc.title %></span>
-      <% else %>
-      <span class="doc-title">
-        <strong><%= t(".Not found") %></strong>
-      </span>
-      <% end %>
-    </span>
-    <% if @doc&.private? %>
-      <span class="doc-title">
-        <span class="label-private ml-2"><%= t(".Private") %></span>
-      </span>
-    <% end %>
-  </div>
-
-  <% if @doc %>
-  <div class="navbar-buttons">
-    <% if can? :read, @doc %>
-      <%= action_button_tag(@doc, :star, class: "btn btn-sm btn-star-doc") %>
-    <% end %>
-
-    <% if can? :update, @doc %>
-    <%= link_to icon_tag("pencil", label: t(".Edit")), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
-    <% end %>
-
-    <%= render "share_button", doc: @doc %>
-
-    <details class="dropdown details-reset details-overlay d-inline-block">
-      <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
-         <%= icon_tag("ellipsis-h") %>
-      </summary>
-
-      <ul class="dropdown-menu dropdown-menu-sw">
-        <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
-        <% if can? :update, @doc %>
-          <li><%= render "export_pdf", doc: @doc %></li>
-        <% end %>
-        <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
-        <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
-
-        <% if can? :update, @doc %>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Versions") %></a></li>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Edit") %></a></li>
-        <% end %>
-
-        <% if can? :destroy, @doc %>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
-        <% end %>
-      </ul>
-    </details>
-  </div>
-  <% end %>
-</div>
-
 <div class="navbar-wide-mode" style="display: none">
   <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>
 </div>
 <% end %>
 
 <div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-sidebar py-4 flex-justify-start overflow-auto border-right bg-gray-light">
+  <div class="doc-sidebar py-4 flex-justify-start overflow-auto">
     <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
       <% if @repository.has_toc? %>
         <%= sanitize_html @repository.toc_html(prefix: nil) %>
@@ -98,6 +27,73 @@
     $(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']").addClass("active");
   </script>
   <div class="doc-main main-content py-4">
+
+  <div class="reader-navbar">
+    <div class="navbar-title">
+      <span class="hide-sm">
+        <%= group_name_tag @user %>
+        <span class="divider">/</span>
+      </span>
+      <%= repository_name_tag @repository %>
+      <span class="hide-md hide-sm">
+        <span class="divider">/</span>
+        <% if @doc %>
+        <span class="doc-title"><%= @doc.title %></span>
+        <% else %>
+        <span class="doc-title">
+          <strong><%= t(".Not found") %></strong>
+        </span>
+        <% end %>
+      </span>
+      <% if @doc&.private? %>
+        <span class="doc-title">
+          <span class="label-private ml-2"><%= t(".Private") %></span>
+        </span>
+      <% end %>
+    </div>
+
+    <% if @doc %>
+    <div class="navbar-buttons">
+      <% if can? :read, @doc %>
+        <%= action_button_tag(@doc, :star, label: "", class: "btn btn-sm btn-star-doc") %>
+      <% end %>
+
+      <% if can? :update, @doc %>
+      <%= link_to icon_tag("pencil"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
+      <% end %>
+
+      <%= render "share_button", doc: @doc %>
+
+      <details class="dropdown details-reset details-overlay d-inline-block">
+        <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
+           <%= icon_tag("ellipsis-h") %>
+        </summary>
+
+        <ul class="dropdown-menu dropdown-menu-sw">
+          <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
+          <% if can? :update, @doc %>
+            <li><%= render "export_pdf", doc: @doc %></li>
+          <% end %>
+          <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
+          <li class="dropdown-divider" role="separator"></li>
+          <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
+
+          <% if can? :update, @doc %>
+            <li class="dropdown-divider" role="separator"></li>
+            <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Versions") %></a></li>
+            <li class="dropdown-divider" role="separator"></li>
+            <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Edit") %></a></li>
+          <% end %>
+
+          <% if can? :destroy, @doc %>
+            <li class="dropdown-divider" role="separator"></li>
+            <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+          <% end %>
+        </ul>
+      </details>
+    </div>
+    <% end %>
+  </div>
 
     <% if @doc.blank? %>
       <div class="doc-not-found text-center p-5">
