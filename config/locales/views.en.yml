@@ -74,6 +74,7 @@ en:
     Password has change successed: Password has change successed.
     Profile has change successed: Profile has change successed.
     account:
+      Account: Account
       "Change password": Change password
       "Minimum characters": characters minimum %{length}
       "We need your current password to confirm your changes": We need your current password to confirm your changes.

@@ -199,6 +199,7 @@ zh-CN:
       This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
       Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
     account:
+      Account: 账号
       Change password: 修改密码
       Minimum characters: 最少要求 %{length} 个字符
       We need your current password to confirm your changes: 需要你的旧密码。
