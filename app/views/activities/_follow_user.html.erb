@@ -1,5 +1,7 @@
 <div class="info">
-  <%= user_name_tag(activity.actor) %> <span class="text-gray"><%= t("activities.has followed") %></span> <%= user_name_tag(activity.target) %>
+  <%= user_name_tag(activity.actor) %>
+  <%= t("activities.has followed") %>
+  <%= user_name_tag(activity.target) %>
 </div>
 <span class="time"><%= timeago activity.created_at %></span>
 <div class="detail">

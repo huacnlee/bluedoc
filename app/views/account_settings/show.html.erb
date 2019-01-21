@@ -10,10 +10,10 @@
       <input type="hidden" name="_by" value="profile" />
       <div class="avatar-wrap">
         <div class="image-box">
-          <%= user_avatar_tag(current_user, style: :custom, link: false) %>
+          <%= user_avatar_tag(current_user, style: :large, link: false) %>
         </div>
         <div class="form-group flex-auto">
-          <p class="description text-gray" style="font-size: 12px;">
+          <p class="description text-gray">
             <%= t(".This photo will be used to identify you in BOOK LAB") %>.
             <%= t(".It will be visible to anyone") %>.
             <br>
@@ -22,7 +22,7 @@
           <label class="btn-upload">
             <%= icon_tag("photo") %> 
             <%= t(".Upload new picture") %>
-            <%= f.file_field :avatar, class: "js-manual-file-chooser", style: "display: none" %>
+            <%= f.file_field :avatar, class: "js-manual-file-chooser" %>
           </label>
         </div>
       </div>

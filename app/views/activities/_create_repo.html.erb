@@ -1,4 +1,6 @@
 <div class="info">
-  <%= user_name_tag(activity.actor) %> <span class="text-gray"><%= t("activities.created") %></span> <%= repository_path_tag(activity.target) %>
+  <%= user_name_tag(activity.actor) %>
+  <%= t("activities.created") %>
+  <%= repository_path_tag(activity.target) %>
 </div>
 <span class="time"><%= timeago activity.created_at %></span>

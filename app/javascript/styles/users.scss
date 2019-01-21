@@ -1,4 +1,8 @@
 .page-users, .page-account_settings {
+  // upload file btn
+  .js-manual-file-chooser {
+    display: none;
+  }
   .main-container {
     padding-top: 30px;
   }
@@ -86,11 +90,14 @@
   .avatar-wrap {
     display: flex;
     .image-box {
-      width: 100px;
-      height: 100px;
       margin-right: 40px;
+      .avatar-large {
+        width: 100px;
+        height: 100px;
+      }
     }
     .description {
+      font-size: 12px;
       margin-bottom: 20px;
     }
     .btn-upload{
