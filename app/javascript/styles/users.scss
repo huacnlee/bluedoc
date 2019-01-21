@@ -13,7 +13,7 @@
       display: none;
     }
   }
-  
+
   .user-sidebar {
     padding-right: 30px;
     color: $text-main;
@@ -73,6 +73,10 @@
         margin: 0 4px 8px 0;
       }
     }
+  }
+
+  .user-follow {
+    margin-bottom: 25px;
   }
 
   .user-follow,

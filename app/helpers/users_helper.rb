@@ -28,7 +28,11 @@ module UsersHelper
 
     return "" if user.blank?
 
-    image_html = image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
+    if user.avatar.attached?
+      image_html = image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
+    else
+      image_html = default_avatar_tag(user, class: opts[:class])
+    end
 
     return image_html if opts[:link] == false
 
@@ -36,6 +40,15 @@ module UsersHelper
     link_to user.to_path, class: "user-avatar", data: data do
       image_html
     end
+  end
+
+  def default_avatar_tag(user, opts = {})
+    opts[:class] ||= ""
+
+    first_char = user.slug[0].upcase
+    idx = first_char.bytes.first % 5
+    class_name = "default-avatar #{opts[:class]} default-avatar-#{idx}"
+    content_tag(:span, first_char, class: class_name)
   end
 
   def follow_user_tag(user, opts = {})
