@@ -35,3 +35,5 @@ user:
   - shares
   - comments
   - comment
+  - notes
+  - note
