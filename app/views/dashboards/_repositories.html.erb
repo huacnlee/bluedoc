@@ -27,7 +27,7 @@
     <div class="time-box">
       <%= timeago item.updated_at %>
     </div>
-    <div class="action">
+    <div class="action text-gray">
       <% if can? :create_doc, item.subject %>
         <%= link_to icon_tag("add_docs"), item.subject.to_path("/docs/new"), target: "_blank" %>
       <% end %>
