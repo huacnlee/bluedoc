@@ -88,6 +88,8 @@ en:
       Update profile: Update profile
       Upload new picture: Upload new picture
       System default: "System default [%{locale_name}]"
+      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify you in BookLab It will be visible to anyone.
+      Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
   admin:
     BookLab Admin: BookLab Admin
     Admin: Admin

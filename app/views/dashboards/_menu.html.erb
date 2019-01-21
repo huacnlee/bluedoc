@@ -11,7 +11,8 @@
         item << link_to(icon_tag("arrow", label: t(".Doc")), "/dashboard/stars/docs", class: "menu-item menu-sub-item depth-1")
         item << link_to(icon_tag("watch", label: t(".Watch")), "/dashboard/watches", class: "menu-item")
       end %>
+
+      <%= raw Setting.dashboard_sidebar_html %>
     </nav>
-     <%= raw Setting.dashboard_sidebar_html %>
   </div>
 </div>
