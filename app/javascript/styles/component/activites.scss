@@ -10,15 +10,20 @@
     top: 6px;
     left: 0;
   }
+
   .infos {
     color: $text-gray-light;
     a {
-      color: $text-main
+      color: $text-main;
+      &:hover {
+        color: $primary;
+      }
     }
     .time {
       font-size: 12px;
     }
   }
+  
   .detail {
     margin-top: 10px;
     padding: 12px 20px;
@@ -26,41 +31,40 @@
   }
 }
 
-.more-button {
-  button {
-    font-size: 14px;
-    color: $text-main;
-    border: none;
-    padding: 5px 0;
-    box-shadow: none;
-  }
+
+.more-button button{
+  font-size: 14px;
+  color: $text-main;
+  border: none;
+  padding: 5px 0;
+  box-shadow: none;
 }
 
 .user-card {
   position: relative;
   padding-left: 45px;
-  color: $text-gray-light;
   a.user-display-name {
     font-size: 14px;
     margin-right: 5px;
   }
   a.user-name {
     font-size: 13px;
+    color: $text-gray-light;
   }
 }
+
 .doc-card {
-  .doc-title {
-    color: $text-main;
-    margin-right: 5px;
+  .path {
+    font-size: 12px;
+    a {
+      color: $text-gray-light;
+      &:hover {
+        color: $primary;
+      }
+    }
   }
 }
 
 .repository-card {
   .desc { font-size: 13px; }
-  .counter {
-    margin-right: 15px;
-    .octicon {
-      fill: #666;
-    }
-  }
 }
