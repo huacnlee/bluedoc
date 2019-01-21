@@ -7,8 +7,10 @@
   line-height: 1.4;
   list-style: none;
   position: relative;
+  border: 1px solid $border-gray;
   &:hover {
-    background: #F7F7F7;
+    border-color: #EBEBEB;
+    box-shadow: 0 4px 7px 0 rgba(190, 190, 190, .1);
     .action {
       visibility: visible;
     }

@@ -5,17 +5,15 @@
   top: 0;
   z-index: 99;
   background: #fff;
-  box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
-
+  .header-shadow {
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
+  }
   .fas {
     font-size: 1.25em;
   }
-
   .header-content {
     width: 100%;
-    @include breakpoint(md) {
-      width: 1000px;
-    }
+    max-width: $width-max;
     padding: 0 25px;
     height: 100%;
     margin: auto;

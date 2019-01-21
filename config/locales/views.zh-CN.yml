@@ -673,3 +673,6 @@ zh-CN:
     stars:
       Stars: 收藏的知识库
       no star repositories: 还未收藏过知识库。
+    profile:
+      This photo will be used to identify you in BookLab It will be visible to anyone: 此照片将用于在BookLab中识别您的身份。任何人都可以看到它
+      Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像

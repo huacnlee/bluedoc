@@ -3,6 +3,10 @@
 @import "./themefont/index.scss";
 @import "./layout.scss";
 
+
+// base component styles
+@import "./component/index.scss";
+
 // Page or section styles
 @import "./dashboard.scss";
 @import "./header.scss";
@@ -11,6 +15,3 @@
 @import "./searches.scss";
 @import "./groups.scss";
 @import "./repositories.scss";
-
-// base component styles
-@import "./component/index.scss";

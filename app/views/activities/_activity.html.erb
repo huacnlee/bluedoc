@@ -1,7 +1,7 @@
 <% if activity.target.present? || activity.actor.present? %>
 <div class="activity-item clearfix">
   <div class="avatar-box">
-    <%= user_avatar_tag(activity.actor, style: :small) %>
+    <%= user_avatar_tag(activity.actor, style: :medium) %>
   </div>
   <div class="infos">
     <%= render partial: "activities/#{activity.action}", locals: { activity: activity } %>
