@@ -384,14 +384,20 @@
   h5,
   h6 {
     position: relative;
-    margin-top: -80px;
-    padding-top: 80px;
+
+    &:target {
+      margin-top: -80px;
+      padding-top: 80px;
+
+      a.heading-anchor {
+        top: 80px;
+      }
+    }
 
     a.heading-anchor {
       display: none;
       position: absolute;
       left: -35px;
-      top: 80px;
       padding-right: 0;
       text-decoration: none;
       color: #999;
