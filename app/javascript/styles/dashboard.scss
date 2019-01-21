@@ -120,6 +120,20 @@
   .detail {
     padding-top: 10px;
   }
+
+  .doc-card {
+    .doc-title {
+      font-weight: normal;
+    }
+    .desc {
+      font-weight: normal;
+      color: $text-gray;
+
+      a {
+        color: $text-gray-dark;
+      }
+    }
+  }
 }
 
 .more-button {

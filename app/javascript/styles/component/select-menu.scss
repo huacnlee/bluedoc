@@ -1,7 +1,9 @@
 
 .select-menu-button {
-  padding: 4px 15px;
+  @extend .form-control;
   line-height: 100%;
+  padding: 8px 15px;
+  font-size: 14px;
 }
 
 .select-menu-button::after {
