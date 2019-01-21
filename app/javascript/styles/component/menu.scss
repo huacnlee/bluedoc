@@ -49,4 +49,14 @@
       text-indent: 1em;
     }
   }
+
+  span.menu-item {
+    cursor: default;
+    &:hover {
+      color: $text-main;
+      .fas {
+        color: #979797;
+      }
+    }
+  }
 }
