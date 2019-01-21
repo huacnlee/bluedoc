@@ -42,8 +42,16 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.slug = "H"
     assert_equal false, repo.valid?
 
-    repo = build(:repository, gitbook_url: nil)
+    repo = build(:repository, slug: "foo", gitbook_url: nil)
     assert_equal true, repo.valid?
+  end
+
+  test "slug validation" do
+    assert_equal true, build(:repository, slug: "foo").valid?
+
+    repo = build(:repository, slug: "notes")
+    assert_equal false, repo.valid?
+    assert_equal ["invalid or [#{repo.slug}] is a keyword"], repo.errors[:slug]
   end
 
   test "slug" do

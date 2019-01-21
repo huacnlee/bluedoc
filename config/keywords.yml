@@ -35,5 +35,8 @@ user:
   - shares
   - comments
   - comment
+repository:
   - notes
   - note
+  - repositories
+  - repository

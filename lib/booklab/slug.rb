@@ -6,6 +6,7 @@ module BookLab
     REGEXP = /\A[#{Slug::FORMAT}]+\z/
 
     USER_KEYWORDS = YAML.load(File.open(Rails.root.join("config/keywords.yml")).read)["user"]
+    REPOSITORY_KEYWORDS = YAML.load(File.open(Rails.root.join("config/keywords.yml")).read)["repository"]
 
     def self.valid?(slug)
       REGEXP.match? slug
@@ -14,6 +15,12 @@ module BookLab
     def self.valid_user?(slug)
       return false if !self.valid?(slug)
       return false if USER_KEYWORDS.include?(slug.downcase)
+      true
+    end
+
+    def self.valid_repo?(slug)
+      return false if !self.valid?(slug)
+      return false if REPOSITORY_KEYWORDS.include?(slug.downcase)
       true
     end
 
