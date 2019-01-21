@@ -1,4 +1,6 @@
 <% title_tag "#{@user.name} (#{@user.slug})" %>
+
+<div class="flex-wrap">
 <div class="aside-wrap">
   <%= render "sidebar" %>
 </div>
@@ -6,4 +8,5 @@
   <div class="main-content">
     <%= render(params[:tab] || "overview")  %>
   </div>
+</div>
 </div>

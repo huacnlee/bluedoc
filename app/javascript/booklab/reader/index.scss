@@ -4,16 +4,10 @@
 .reader-body {
   .nav-header .header-content,
   .main-container {
-    max-width: 1200px;
   }
   .container {
     @include breakpoint(md) {
       width: 1200px;
-    }
-  }
-  .nav-header {
-    .header-content {
-      width: auto;
     }
   }
 

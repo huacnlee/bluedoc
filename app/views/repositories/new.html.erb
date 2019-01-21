@@ -1,92 +1,90 @@
 <% title_tag t(".New Repository") %>
 
-<div class="main-wrap">
-  <div class="main-content">
-    <div class="sub-title">
-      <div class="heading"><%= t(".New Repository") %></div>
-      <div class="description"><%= raw t(".A repository contains all the documents for your project") %></div>
+<div class="main-content">
+  <div class="sub-title">
+    <div class="heading"><%= t(".New Repository") %></div>
+    <div class="description"><%= raw t(".A repository contains all the documents for your project") %></div>
+  </div>
+
+  <%= form_with(model: [@user, @repository], local: true) do |form| %>
+    <%= render "/shared/error_messages", target: @repository %>
+    <input type="hidden" name="_by" value="<%= params[:_by] %>" />
+    <% if params[:_by] == "import" %>
+    <div class="import-box markdown-body clearfix">
+      <% if params[:provider] == "gitbook" %>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Import from Git") %></label>
+          <%= form.text_field :gitbook_url, class: "form-control", placeholder: "https://github.com/somewhere/gitbook.git" %>
+          <div class="form-text">
+            <p><%= raw t(".Put a Git repository URL, BookLab will import all of the markdown files as a Doc") %></p>
+            <p><%= raw t(".This feature is best compatible with") %></p>
+          </div>
+        </div>
+      <% else %>
+        <div class="form-group">
+          <label class="control-label"><%= t(".Import from Archive") %></label>
+          <%= form.file_field :import_archive, direct_upload: true, class: "form-control", accept: "application/zip" %>
+          <div class="form-text">
+            <p><%= raw t(".You can archive multiple markdown files as a zip file, and then choice the zip file for import") %></p>
+            <p><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook) %>.
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="clearfix">
+        <div class="form-group float-left">
+          <%= form.label :user_id, class: "control-label" %>
+          <%= render partial: "/shared/user_groups_select_menu", locals: { input_name: "repository[user_id]", value: @repository.user_id } %>
+        </div>
+        <div class="form-group float-left">
+          <span class="pl-1"></span>
+        </div>
+        <div class="form-group float-left">
+          <%= form.label :slug, class: "control-label" %>
+          <%= form.text_field :slug, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-text">
+        <%= t(".Great repository names are short and memorable") %>
+      </div>
     </div>
 
-    <%= form_with(model: [@user, @repository], local: true) do |form| %>
-      <%= render "/shared/error_messages", target: @repository %>
-      <input type="hidden" name="_by" value="<%= params[:_by] %>" />
-      <% if params[:_by] == "import" %>
-      <div class="import-box markdown-body clearfix">
-        <% if params[:provider] == "gitbook" %>
-          <div class="form-group">
-            <label class="control-label"><%= t(".Import from Git") %></label>
-            <%= form.text_field :gitbook_url, class: "form-control", placeholder: "https://github.com/somewhere/gitbook.git" %>
-            <div class="form-text">
-              <p><%= raw t(".Put a Git repository URL, BookLab will import all of the markdown files as a Doc") %></p>
-              <p><%= raw t(".This feature is best compatible with") %></p>
-            </div>
+    <div class="form-group">
+      <%= form.label :name, class: "control-label" %>
+      <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :privacy, class: "control-label" %>
+
+      <div class="form-checkbox">
+        <label>
+          <input type="radio" name="repository[privacy]" checked value="public"> <%= t(".Public") %>
+          <div class="form-text">
+            <%= t(".Anyone can see this repository") %>
           </div>
-        <% else %>
-          <div class="form-group">
-            <label class="control-label"><%= t(".Import from Archive") %></label>
-            <%= form.file_field :import_archive, direct_upload: true, class: "form-control", accept: "application/zip" %>
-            <div class="form-text">
-              <p><%= raw t(".You can archive multiple markdown files as a zip file, and then choice the zip file for import") %></p>
-              <p><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook) %>.
-            </div>
+        </label>
+      </div>
+      <div class="form-checkbox">
+        <label>
+          <input type="radio" name="repository[privacy]" value="private"> <%= t(".Private") %>
+          <div class="form-text">
+            <%= t(".You choose who can see and edit to this repository") %>
           </div>
-        <% end %>
+        </label>
       </div>
-      <% end %>
+    </div>
 
-      <div class="form-group">
-        <div class="clearfix">
-          <div class="form-group float-left">
-            <%= form.label :user_id, class: "control-label" %>
-            <%= render partial: "/shared/user_groups_select_menu", locals: { input_name: "repository[user_id]", value: @repository.user_id } %>
-          </div>
-          <div class="form-group float-left">
-            <span class="pl-1"></span>
-          </div>
-          <div class="form-group float-left">
-            <%= form.label :slug, class: "control-label" %>
-            <%= form.text_field :slug, class: "form-control" %>
-          </div>
-        </div>
-        <div class="form-text">
-          <%= t(".Great repository names are short and memorable") %>
-        </div>
-      </div>
+    <div class="form-group">
+      <%= form.label :description, class: "control-label" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
 
-      <div class="form-group">
-        <%= form.label :name, class: "control-label" %>
-        <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :privacy, class: "control-label" %>
-
-        <div class="form-checkbox">
-          <label>
-            <input type="radio" name="repository[privacy]" checked value="public"> <%= t(".Public") %>
-            <div class="form-text">
-              <%= t(".Anyone can see this repository") %>
-            </div>
-          </label>
-        </div>
-        <div class="form-checkbox">
-          <label>
-            <input type="radio" name="repository[privacy]" value="private"> <%= t(".Private") %>
-            <div class="form-text">
-              <%= t(".You choose who can see and edit to this repository") %>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :description, class: "control-label" %>
-        <%= form.text_field :description, class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit t(".Create Repository"), class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
+    <div class="actions">
+      <%= form.submit t(".Create Repository"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

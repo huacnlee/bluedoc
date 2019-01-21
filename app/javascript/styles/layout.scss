@@ -1,10 +1,4 @@
 .main-container {
-  flex: auto;
-  margin: auto;
-  @include breakpoint(md) {
-    display: flex;
-    justify-content: center;
-  }
 }
 // left aside layout
 .aside-wrap {
@@ -34,9 +28,17 @@
 
   padding: 0 15px;
   @include breakpoint(md) {
-    display: flex;
     padding: 0 25px;
     width: 1080px;
   }
   margin: 0 auto;
+}
+
+.flex-wrap {
+  flex: auto;
+  margin: auto;
+  @include breakpoint(md) {
+    display: flex;
+    justify-content: center;
+  }
 }

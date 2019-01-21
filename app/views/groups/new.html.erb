@@ -1,35 +1,33 @@
 <% title_tag "New Group" %>
 
-<div class="main-wrap">
-  <div class="main-content">
-    <div class="sub-title">
-      <div class="heading"><%= t(".New Group") %></div>
-      <div class="description"><%= t(".Group accounts allow your team to plan, build, review, and ship documents") %></div>
+<div class="main-content">
+  <div class="sub-title">
+    <div class="heading"><%= t(".New Group") %></div>
+    <div class="description"><%= t(".Group accounts allow your team to plan, build, review, and ship documents") %></div>
+  </div>
+
+  <%= form_with(model: @group, local: true) do |form| %>
+    <%= render "/shared/error_messages", target: @group %>
+
+    <div class="form-group" style="width: 500px">
+      <%= form.label :slug, class: "control-label" %>
+      <%= form.text_field :slug, class: "form-control" %>
+      <div class="form-text">
+        <p><%= raw t(".Great group path names are short and memorable", host: Setting.host) %></p>
+        <p><%= t(".The letters, numbers or dash is allow, for example") %> <strong class="text-blue">BookLab-Help</strong></p>
+      </div>
     </div>
 
-    <%= form_with(model: @group, local: true) do |form| %>
-      <%= render "/shared/error_messages", target: @group %>
-
-      <div class="form-group" style="width: 500px">
-        <%= form.label :slug, class: "control-label" %>
-        <%= form.text_field :slug, class: "form-control" %>
-        <div class="form-text">
-          <p><%= raw t(".Great group path names are short and memorable", host: Setting.host) %></p>
-          <p><%= t(".The letters, numbers or dash is allow, for example") %> <strong class="text-blue">BookLab-Help</strong></p>
-        </div>
+    <div class="form-group">
+      <%= form.label :name, class: "control-label" %>
+      <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
+      <div class="form-text">
+        <%= t(".Display title of this Group") %>
       </div>
+    </div>
 
-      <div class="form-group">
-        <%= form.label :name, class: "control-label" %>
-        <%= form.text_field :name, class: "form-control", style: "width: 250px" %>
-        <div class="form-text">
-          <%= t(".Display title of this Group") %>
-        </div>
-      </div>
-
-      <div class="actions">
-        <%= form.submit t(".Create Group"), class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
+    <div class="actions">
+      <%= form.submit t(".Create Group"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

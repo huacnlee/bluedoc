@@ -1,4 +1,6 @@
 <% title_tag "Account Settings" %>
+
+<div class="flex-wrap">
 <div class="aside-wrap">
   <%= render "/users/sidebar" %>
 </div>
@@ -48,5 +50,6 @@
     </div>
     <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
   </div>
+</div>
 </div>
 

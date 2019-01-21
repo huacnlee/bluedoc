@@ -160,7 +160,6 @@
 
 .repository-item {
   position: relative;
-  padding-left: 45px;
   .icon-box {
     position: absolute;
     top: 14px;
@@ -237,7 +236,6 @@
   @media (min-width: 768px) {
     .doc-item {
       padding: 15px;
-      padding-left: 45px;
       .icon-box { display: block; }
     }
   }

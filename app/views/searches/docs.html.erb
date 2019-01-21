@@ -1,21 +1,21 @@
+<div class="flex-wrap">
 <%= render "menu" %>
 
-<div class="main-wrap">
-  <div class="main-content">
-    <div class="search-results">
-      <%= render "search_info" %>
-      <div class="items">
-        <% if @result.records.blank? %>
-        <%= render "no_result" %>
-        <% end %>
+<div class="main-content">
+  <div class="search-results">
+    <%= render "search_info" %>
+    <div class="items">
+      <% if @result.records.blank? %>
+      <%= render "no_result" %>
+      <% end %>
 
-        <% @result.records.each_with_hit do |item, hit| %>
-          <%= render "doc", item: item, hit: hit %>
-        <% end %>
-      </div>
-    </div>
-
-    <%= paginate @result %>
+      <% @result.records.each_with_hit do |item, hit| %>
+        <%= render "doc", item: item, hit: hit %>
+      <% end %>
     </div>
   </div>
+
+  <%= paginate @result %>
+  </div>
+</div>
 </div>
