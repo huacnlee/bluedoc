@@ -1,4 +1,9 @@
 zh-CN:
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      long: "%Y-%m-%d %H:%M:%S"
+      short: "%m月%d日 %H:%M"
   member_role:
     admin: 管理员
     editor: 编辑者

@@ -1,10 +1,9 @@
 @import "~booklab/mixin";
 
-.navbar-brand {
-  color: #333 !important;
-
-  .octicon {
-    fill: #333;
+.nav-header {
+  .nav-link.selected {
+    color: #000;
+    font-weight: bold;
   }
 }
 
