@@ -24,6 +24,19 @@ class BookLab::SlugTest < ActionView::TestCase
     assert_equal false, BookLab::Slug.valid_user?("accounts")
     assert_equal false, BookLab::Slug.valid_user?("dashboard")
     assert_equal false, BookLab::Slug.valid_user?("settings")
+
+    assert_equal true, BookLab::Slug.valid_user?("notes")
+  end
+
+  test ".valid_repo?" do
+    assert_equal true, BookLab::Slug.valid_repo?("user1")
+    assert_equal true, BookLab::Slug.valid_repo?("foo")
+
+    # keywords
+    assert_equal false, BookLab::Slug.valid_repo?("note")
+    assert_equal false, BookLab::Slug.valid_repo?("repositories")
+    assert_equal false, BookLab::Slug.valid_repo?("notes")
+    assert_equal false, BookLab::Slug.valid_repo?("NOTE")
   end
 
   test "slugize" do

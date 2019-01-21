@@ -11,8 +11,24 @@ class Admin::CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
+    @doc = create(:doc)
+    comments = create_list(:comment, 3, user: @admin, commentable: @doc)
+
+    private_repo = create(:repository, privacy: :private)
+    private_doc = create(:doc, repository: private_repo)
+    private_comment = create(:comment, commentable: private_doc)
+
     get admin_comments_path
     assert_equal 200, response.status
+
+    assert_select ".comments" do
+      assert_select ".comment", 5
+      assert_select ".comment.hide-comment" do
+        assert_select ".markdown-body", text: "Private contents, hide comment."
+        assert_select ".opts a", 0
+      end
+      assert_select ".comment .opts a.btn-edit", 4
+    end
   end
 
   test "should get edit" do

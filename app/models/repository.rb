@@ -24,6 +24,13 @@ class Repository < ApplicationRecord
   scope :recent_updated, -> { order("updated_at desc") }
   scope :with_query, -> (q) { where("name ilike ? or slug ilike ?", "%#{q}%", "%#{q}%") }
 
+  before_validation :check_slug_keywords
+  def check_slug_keywords
+    if !BookLab::Slug.valid_repo?(self.slug)
+      self.errors.add(:slug, t(".invalid, slug is a keyword", slug: self.slug))
+    end
+  end
+
   def to_path(suffix = nil)
     "/#{self.user.slug}/#{self.slug}#{suffix}"
   end
