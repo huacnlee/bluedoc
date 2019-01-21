@@ -23,6 +23,7 @@ class ActiveSupport::TestCase
   setup do
     DatabaseCleaner.start
     MockElasticSearch.start
+    I18n.locale = "en"
   end
 
   teardown do

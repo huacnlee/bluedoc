@@ -100,7 +100,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     get "/dashboard/stars"
     assert_equal 200, response.status
     assert_select ".dashboard-repos .recent-repo-item", 2
-    assert_select ".dashboard-menu-item.selected", text: "Repositories"
+    assert_select ".menu-item.selected", text: "Repositories"
   end
 
   test "GET /dashboard/stars/docs" do
@@ -118,7 +118,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     get "/dashboard/stars/docs"
     assert_equal 200, response.status
     assert_select ".recent-docs .recent-doc-item", 2
-    assert_select ".dashboard-menu-item.selected", text: "Docs"
+    assert_select ".menu-item.selected", text: "Docs"
   end
 
   test "GET /dashboard/watches" do

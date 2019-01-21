@@ -64,7 +64,7 @@ class UserTest < ActiveSupport::TestCase
 
     u = build(:user, slug: "new")
     assert_equal false, u.valid?
-    assert_equal ["invalid or [#{u.slug}] is a keyword"], u.errors[:slug]
+    assert_equal ["invalid, [#{u.slug}] is a keyword."], u.errors[:slug]
   end
 
   test ".repositories" do

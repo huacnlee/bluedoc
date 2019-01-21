@@ -134,9 +134,9 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.transfer-docs" do
-      assert_select ".Box-header .title", text: "Transfer docs to other repository"
-      assert_select ".Box-row input[type=checkbox]", 10
+    assert_select ".box.transfer-docs" do
+      assert_select ".box-header .title", text: "Transfer docs to other repository"
+      assert_select ".box-row input[type=checkbox]", 10
     end
   end
 
@@ -413,8 +413,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-generate" do
         assert_select ".btn-generate-pdf", text: "Generate PDF" do
           assert_select "[href=?]", repo.to_path("/settings/export?type=pdf&force=1")
@@ -429,8 +429,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-exist" do
         assert_select ".btn-download-pdf", text: "Download PDF" do
           assert_select "[href=?]", repo.export_url(:pdf)
@@ -448,8 +448,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-running" do
         assert_select ".pdf-export-retry-message" do
           assert_select "a", text: "retry" do
