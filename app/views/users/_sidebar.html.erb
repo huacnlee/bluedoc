@@ -5,7 +5,7 @@
 </div>
 <% end %>
 
-<div class="user-sidebar aside-content">
+<div class="user-sidebar aside-content menu">
   <div class="user-avatar-box">
     <%= user_avatar_tag(@user, style: :large, link: false) %>
   </div>
@@ -28,8 +28,8 @@
   </div>
 
   <%= render_list_items(type: :link, class: "menu-item", check_parameters: true) do |item|
-    item << link_to(raw("#{t(".Followers")} <b>#{@user.followers_count}</b>"), @user.to_path("?tab=followers"), class: "menu-item followers")
-    item << link_to(raw("#{t(".Following")} <b>#{@user.following_count}</b>"), @user.to_path("?tab=following"), class: "menu-item following")
+    item << link_to(raw(%(<span style="display:inline-block; min-width: 6em">#{t(".Followers")}</span><b>#{@user.followers_count}</b>)), @user.to_path("?tab=followers"), class: "menu-item followers")
+    item << link_to(raw(%(<span style="display:inline-block; min-width: 6em">#{t(".Following")}</span><b>#{@user.following_count}</b>)), @user.to_path("?tab=following"), class: "menu-item following")
   end %>
 
   <div class="user-groups menu-item">
@@ -46,7 +46,7 @@
     item << link_to(t(".Repositories"), @user.to_path("?tab=repositories"), class: "menu-item")
     item << link_to(t(".Stars"), @user.to_path("?tab=stars"), class: "menu-item")
     item << content_tag(:span, t(".Settings"), class: "menu-item")
-    item << link_to(icon_tag("arrow", label: t(".Profile")), account_settings_path, class: "menu-item text-gray depth-1")
-    item << link_to(icon_tag("arrow", label: t(".Account")), account_account_settings_path, class: "menu-item text-gray depth-1")
+    item << link_to(icon_tag("arrow", label: t(".Profile")), account_settings_path, class: "menu-item menu-sub-item")
+    item << link_to(icon_tag("arrow", label: t(".Account")), account_account_settings_path, class: "menu-item menu-sub-item")
   end %>
 </div>

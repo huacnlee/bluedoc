@@ -1,18 +1,17 @@
 <div class="aside-wrap">
   <div class="aside-content">
-    <nav class="dashboard-menu">
-      <%= render_list_items(type: :link, class: "dashboard-menu-item", active_class: "selected", check_parameters: true) do |item|
-        item << link_to(icon_tag("dashboard", label: t(".Dashboard")), "/", class: "dashboard-menu-item last")
-        item << link_to(icon_tag("docs", label: t(".Doc")), "/dashboard/docs", class: "dashboard-menu-item")
-        item << link_to(icon_tag("rep", label: t(".Repository")), "/dashboard/repositories", class: "dashboard-menu-item")
-        item << link_to(icon_tag("group", label: t(".Group")), "/dashboard/groups", class: "dashboard-menu-item last")
-        item << content_tag(:span, icon_tag("star", label: t(".Star")), class: "dashboard-menu-item")
-        item << link_to(icon_tag("arrow", label: t(".Repository")), "/dashboard/stars", class: "dashboard-menu-item depth-1")
-        item << link_to(icon_tag("arrow", label: t(".Doc")), "/dashboard/stars/docs", class: "dashboard-menu-item depth-1")
-        item << link_to(icon_tag("watch", label: t(".Watch")), "/dashboard/watches", class: "dashboard-menu-item")
+    <nav class="dashboard-menu menu">
+      <%= render_list_items(type: :link, class: "menu-item", active_class: "selected", check_parameters: true) do |item|
+        item << link_to(icon_tag("dashboard", label: t(".Dashboard")), "/", class: "menu-item last")
+        item << link_to(icon_tag("docs", label: t(".Doc")), "/dashboard/docs", class: "menu-item")
+        item << link_to(icon_tag("rep", label: t(".Repository")), "/dashboard/repositories", class: "menu-item")
+        item << link_to(icon_tag("group", label: t(".Group")), "/dashboard/groups", class: "menu-item last")
+        item << content_tag(:span, icon_tag("star", label: t(".Star")), class: "menu-item")
+        item << link_to(icon_tag("arrow", label: t(".Repository")), "/dashboard/stars", class: "menu-item menu-sub-item depth-1")
+        item << link_to(icon_tag("arrow", label: t(".Doc")), "/dashboard/stars/docs", class: "menu-item menu-sub-item depth-1")
+        item << link_to(icon_tag("watch", label: t(".Watch")), "/dashboard/watches", class: "menu-item")
       end %>
     </nav>
-
      <%= raw Setting.dashboard_sidebar_html %>
   </div>
 </div>

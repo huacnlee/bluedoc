@@ -8,14 +8,22 @@
     <h2 class="sub-title"><%= t(".Avatar") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <input type="hidden" name="_by" value="profile" />
-      <div class="image-box width-full text-center">
-        <%= user_avatar_tag(current_user, style: :large, link: false) %>
-      </div>
-      <div class="form-group">
-        <label class="btn width-full text-center">
-          <%= t(".Upload new picture") %>
-          <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
-        </label>
+      <div class="avatar-wrap">
+        <div class="image-box">
+          <%= user_avatar_tag(current_user, style: :large, link: false) %>
+        </div>
+        <div class="form-group flex-auto">
+          <p class="description text-gray">
+            <%= t(".This photo will be used to identify you in BookLab It will be visible to anyone") %>
+            <br>
+            <%= t(".Use a photo or image rather than text and upload an image that is 132px square or larger") %>
+          </p>
+          <label class="btn-upload">
+            <%= icon_tag("photo") %> 
+            <%= t(".Upload new picture") %>
+            <%= f.file_field :avatar, class: "js-manual-file-chooser" %>
+          </label>
+        </div>
       </div>
       <script type="text/javascript">
         $("form").on("change", ".js-manual-file-chooser", (e) => {
@@ -24,6 +32,7 @@
         });
       </script>
     <% end %>
+    
     <h2 class="sub-title"><%= t(".Profile") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <%= render "/shared/error_messages", target: @user %>

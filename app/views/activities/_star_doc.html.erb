@@ -1,6 +1,7 @@
 <% if activity.target && activity.target.is_a?(Doc) %>
 <div class="info">
-  <%= user_name_tag(activity.actor) %> <span class="text-gray"><%= t("activities.starred Doc") %></span>
+  <%= user_name_tag(activity.actor) %>
+  <%= t("activities.starred Doc") %>
 </div>
 <span class="time"><%= timeago activity.created_at %></span>
 <div class="detail">
