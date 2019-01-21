@@ -1,7 +1,7 @@
 <div class="repository-card">
   <span class="f4 lh-condensed text-gray-dark">
     <% if defined?(current_group) && current_group.id != repository.user_id %>
-    <%= user_name_tag(repository.user) %> <span class="divider">/</span>
+    <%= user_display_name_tag(repository.user) %> /
     <% end %>
     <%= repository_name_tag(repository) %>
   </span>
