@@ -39,7 +39,8 @@
     }
   }
   .dropdown {
-    margin-left: 20px;
+    margin-left: 10px;
+    padding: 10px 5px;
   }
   .nav-notifications {
     color: inherit;
@@ -51,6 +52,7 @@
     font-size: 14px;
     line-height: 1.5;
     color: $text-main;
+    margin-top: 2px;
   }
   .avatar {
     vertical-align: middle;

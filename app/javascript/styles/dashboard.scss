@@ -1,8 +1,11 @@
 .page-dashboards {
+
+  .main-container {
+    padding: 30px 0;
+  }
   .footer {
     display: none;
   }
-
   .sub-title {
     border-bottom: 0;
     font-weight: bold;
@@ -48,9 +51,10 @@
   // left menu
   .dashboard-menu {
     display: none;
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: calc(100% - 80px);
     font-size: 14px;
+    overflow-y: auto;
     @include breakpoint(md) {
       position: fixed;
       display: block;
