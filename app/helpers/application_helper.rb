@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def icon_tag(name, opts = {})
-    icon_html = content_tag(:i, "", class: "octicon fas fa-#{name} #{opts[:class]}")
+    icon_html = content_tag(:i, "", class: "fas fa-#{name} #{opts[:class]}")
     return icon_html if opts[:label].blank?
     raw [icon_html, "<span>#{opts[:label]}</span>"].join(" ")
   end

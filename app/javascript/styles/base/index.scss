@@ -1,15 +1,18 @@
+@import "./colors.scss";
 @import "primer-base/index.scss";
 // cover primer normalize.scss a tag color
 a {
   color: inherit;
   display: inline-block;
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
 }
 
 textarea {
   display: block;
 }
 @import "mixins.scss";
-@import "./theme.scss";
-@import "./utils.scss";
-@import "./colors.scss";
 @import "./grid.scss";
+@import "./utils.scss";

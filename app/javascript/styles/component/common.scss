@@ -13,3 +13,19 @@ h2.sub-title {
   color: $text-main;
   margin-bottom: 30px;
 }
+
+.path {
+  a::before {
+    @extend .fas;
+    margin-right: 3px;
+  }
+  .user-display-name[data-type="user"] {
+    @extend .fa-user;
+  }
+  .user-display-name[data-type="group"] {
+    @extend .fa-group;
+  }
+  .repository-name {
+    @extend .fa-rep;
+  }
+}

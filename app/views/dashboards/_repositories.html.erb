@@ -15,7 +15,7 @@
     <% end %>
     <div class="info">
       <span class="user">
-        <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>
+        <%= icon_tag("user_fill") %> <%= user_name_tag(item.subject&.user) %>
       </span>
       <span class="stars">
         <%= icon_tag("star") %> <%= item.subject.stars_count %>
@@ -27,7 +27,7 @@
     <div class="time-box">
       <%= timeago item.updated_at %>
     </div>
-    <div class="action">
+    <div class="action text-gray">
       <% if can? :create_doc, item.subject %>
         <%= link_to icon_tag("add_docs"), item.subject.to_path("/docs/new"), target: "_blank" %>
       <% end %>
