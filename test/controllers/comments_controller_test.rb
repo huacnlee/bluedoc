@@ -31,9 +31,6 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select ".comments .comment .in-reply-to", 1 do
       assert_select "a.in-reply-link" do
-        assert_select "img.avatar.avatar-tiny" do
-          assert_select "[src=?]", comment.reply_to.user.avatar_url
-        end
         assert_select ".user-name", text: comment.reply_to.user.slug
         assert_select ".comment-id", text: "#comment-#{comment.parent_id}"
       end
