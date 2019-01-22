@@ -81,12 +81,29 @@
     width: 100%;
     .doc-sidebar {
       display: none;
-      padding: 24px;
       min-width: 200px;
       max-width: 260px;
 
+      .doc-parents {
+        .link-group {
+          display: block;
+          color: $text-gray;
+          &:hover {
+            color: $text-gray-dark;
+          }
+        }
+        .link-back {
+          display: block;
+          text-align: left;
+          padding: 0px 0 10px 0;
+          font-size: 18px;
+          font-weight: bold;
+          @extend .text-overflow;
+        }
+      }
+
       ul {
-        font-size: 14px;
+        font-size: 13px;
         line-height: 100%;
         @extend .pt-2;
         @extend .list-style-none;
@@ -100,11 +117,11 @@
 
         li {
           padding: 8px 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          @extend .text-overflow;
         }
         a {
           color: #555;
+          @extend .text-overflow;
           &.active {
             color: $primary;
           }
@@ -118,7 +135,7 @@
       .doc-sidebar {
         display: block;
         width: 250px;
-        padding-top: 0;
+        padding-top: 30px;
         min-height: 100vh;
       }
     }
@@ -126,7 +143,7 @@
     .doc-main {
       order:1;
       width: 100%;
-      padding: 15px 15px;
+      padding: 15px 0px;
       margin-left: 0;
       margin-right: 0;
     }
@@ -154,7 +171,6 @@
       .doc-main {
         width: 750px;
         margin-right: 32px;
-        margin-right: 32pxpx;
         top: 88px;
         left: 30%;
       }
@@ -325,25 +341,23 @@
 .doc-body-toc {
   order: 2;
   display: none;
-  width: 24%;
 
   @media (min-width: 1330px) {
     display: block;
-    padding-top: 50px;
+    padding-top: 80px;
   }
 
   &>.toc-list {
     position: sticky;
     position: -webkit-sticky;
     top: 90px;
-    width: 200px;
+    max-width: 200px;
+    width: auto;
     border-left: 1px solid #e8ebef;
-    border-radius: 3px;
     font-size: 13px;
-    margin-right: 25px;
     display: block;
     padding-top: 0;
-    padding: 20px;
+    padding-left: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

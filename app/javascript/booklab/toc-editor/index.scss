@@ -2,9 +2,13 @@
 @import './doc.scss';
 
 .editor-body {
-  .main-container {
+  .main-container,
+  .container {
     display: block;
     flex: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -99,7 +103,6 @@
     background: rgba(252, 252, 252, 0.73);
     border: 1px solid #e8e8e8;
     border-radius: 3px;
-    padding-left: 40px;
     height: 100%;
     overflow-y: scroll;
   }

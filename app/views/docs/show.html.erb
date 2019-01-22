@@ -7,7 +7,12 @@
 <% end %>
 
 <div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-sidebar py-4 flex-justify-start overflow-auto">
+  <div class="doc-sidebar flex-justify-start overflow-auto">
+    <div class="doc-parents">
+      <a href="<%= @user.to_path %>" class="link-group" title="<%= @user.name %>"><%= @user.name %></a>
+      <a href="<%= @repository.to_path %>" class="link-back" title="<%= @repository.name %>"><%= @repository.name %> Guides Guides Guides</a>
+    </div>
+
     <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
       <% if @repository.has_toc? %>
         <%= sanitize_html @repository.toc_html(prefix: nil) %>
