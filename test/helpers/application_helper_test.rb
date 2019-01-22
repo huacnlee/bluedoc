@@ -34,7 +34,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   test "icon_tag" do
     html = icon_tag("times", label: "Close", class: "search")
-    assert_equal %(<i class="octicon fas fa-times search"></i> <span>Close</span>), html
+    assert_equal %(<i class="fas fa-times search"></i> <span>Close</span>), html
   end
 
   test "timeago" do
