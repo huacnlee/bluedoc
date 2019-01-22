@@ -41,9 +41,6 @@
     color: $text-gray;
     a { 
       color: inherit;
-      &:hover {
-        color: $primary;
-      } 
     }
     font-size: 12px;
     margin-bottom: 5px;
@@ -51,9 +48,6 @@
   .title {
     a {
       color: #000;
-      &:hover {
-        color: $primary;
-      }
     }
     font-size: 15px;
     padding-right: 20px;
@@ -93,13 +87,6 @@
     &:hover {
       border-radius: 50%;
       background: #f7f7f7;
-    }
-    a {
-      .fas {
-        &:hover {
-          color: $primary;
-        }
-      }
     }
   }
 

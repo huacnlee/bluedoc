@@ -1,11 +1,11 @@
 @import "./colors.scss";
-@import "./base.scss";
+@import "./normalize.scss";
 // cover primer normalize.scss a tag color
 a {
   color: inherit;
   display: inline-block;
   &:hover {
-    color: $primary;
+    color: $primary!important;
     text-decoration: none;
   }
 }
