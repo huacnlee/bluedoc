@@ -6,10 +6,10 @@
 <ul class="dashboard-groups list-container">
   <% items.each do |item| %>
   <li class="recent-group-item list-item list-avatar">
+    <div class="avatar-box">
+      <%= user_avatar_tag(item, style: :medium) %>
+    </div>
     <div class="title">
-      <div class="avatar-box">
-        <%= user_avatar_tag(item, style: :medium) %>
-      </div>
       <%= group_name_tag(item) %>
     </div>
     <div class="description">

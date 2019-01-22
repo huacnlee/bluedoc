@@ -29,6 +29,13 @@
     position: absolute;
     top: 20px;
     left: 0;
+    line-height: 0;
+  }
+  .icon-box {
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 50%;
+    color: $white;
   }
   .description, .path {
     color: $text-gray;
@@ -58,8 +65,10 @@
   }
   .info > span {
     display: inline-block;
-    min-width: 120px;
+    min-width: 140px;
     margin-right: 20px;
+    color: #333;
+    @extend .text-overflow;
     .fas {
       font-size: 16px;
       margin-top: -3px;
@@ -76,9 +85,15 @@
   .action {
     position: absolute;
     right: 0;
-    top: 20px;
+    top: 12px;
     font-size: 18px;
     opacity: 0;
+    padding: 8px;
+    line-height: 1;
+    &:hover {
+      border-radius: 50%;
+      background: #f7f7f7;
+    }
     a {
       .fas {
         &:hover {
@@ -98,5 +113,16 @@
 .list-group {
   .list-group-item {
     padding: 10px 0;
+  }
+}
+
+.icon-box {
+  &.icon-doc {
+    background: #3BB46E;
+  }
+  &.icon-rep {
+    padding: 6px;
+    font-size: 18px;
+    background: #FCBA00;
   }
 }
