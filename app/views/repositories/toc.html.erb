@@ -3,8 +3,7 @@
 <%= form_with(model: @repository, url: toc_user_repository_path(@user, @repository), class: "toc-form", local: true, remote: true) do |form| %>
   <div class="toc-navbar">
     <div class="navbar-title">
-      <a class="navbar-brand" href="<%= @repository.to_path %>" title="<%= t(".Back to Repository") %>"><%= icon_tag("repositories") %></a>
-      <span class= "divider">/</span>
+      <a class="navbar-brand" href="/"><%= icon_tag("booklab") %></a>
       <%= group_name_tag @user %>
       <span class= "divider">/</span>
       <%= repository_name_tag @repository %>
@@ -12,8 +11,8 @@
       <%= t(".Edit Table of contents") %>
     </div>
     <div class="navbar-buttons">
-      <details class="dropdown toc-keyboard-tip details-reset details-overlay d-inline-block">
-        <summary class="btn"><i class="fas fa-keyboard"></i></summary>
+      <div class="dropdown toc-keyboard-tip d-inline-block">
+        <button class="btn"><i class="fas fa-keyboard"></i></button>
         <div class="dropdown-menu dropdown-menu-sw py-3 px-4" style="width: 420px">
           <table style="width: 100%">
             <tr>
@@ -58,7 +57,7 @@
             </tr>
           </table>
         </div>
-      </details>
+      </div>
       <button type="submit" class="btn btn-primary"><%= t(".Save") %></button>
       <a href="<%= @repository.to_path %>" type="submit" class="btn"><%= t(".Cancel") %></a>
     </div>

@@ -26,6 +26,13 @@
     position: relative;
     z-index: 9;
 
+    .navbar-brand {
+      font-size: 24px;
+      margin-right: 10px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
     .navbar-title {
       padding-left: 24px;
       a { color: #333; }
@@ -39,6 +46,7 @@
       text-align: right;
       transform: translateY(-50%);
       text-align: center;
+      line-height: 100%;
       .dropdown-menu {
         text-align: left;
       }

@@ -70,7 +70,7 @@
       <%= render "share_button", doc: @doc %>
 
       <details class="dropdown details-overlay details-reset d-inline-block">
-        <summary class="btn btn-sm"><%= icon_tag("ellipsis-h") %></summary>
+        <summary class="btn btn-sm ml-1"><%= icon_tag("ellipsis-h") %></summary>
         <ul class="dropdown-menu dropdown-menu-sw">
           <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
           <% if can? :update, @doc %>

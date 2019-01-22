@@ -24,15 +24,17 @@
 }
 
 .social-count {
-   padding: 6px 5px;
-   background: #fff;
-   border: 1px solid #e0e0e0;
-   border-left: 0px;
-   line-height: 100%;
-   font-size: 14px;
-   position: relative;
-   top: 1px;
-   margin-right: 15px;
+  @extend .btn;
+  padding-left: 4px;
+  padding-right: 4px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-left: 0px;
+  line-height: 100%;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin-right: 15px;
 }
 
 .btn-link {
