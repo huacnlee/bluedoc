@@ -187,6 +187,8 @@ zh-CN:
         Setting was successfully updated: 系统设置更新成功。
     comments:
       Comment was successfully updated: Comment was successfully updated.
+      index:
+        Private contents, hide comment: 私密内容，无法查阅评论。
   account_settings:
     Password has change successed: 密码已经修改成功。
     Profile has change successed: 个人资料已经更新成功。

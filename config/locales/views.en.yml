@@ -161,6 +161,8 @@ en:
         Setting was successfully updated: Setting was successfully updated.
   comments:
     Comment was successfully updated: Comment was successfully updated.
+    index:
+      Private contents, hide comment: Private contents, hide comment.
   activities:
     has added: has added
     to: to

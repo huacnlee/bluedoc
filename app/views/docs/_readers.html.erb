@@ -25,7 +25,7 @@
             <%= user_display_name_tag(action.user) %>
 
             <span class="time-box">
-              <%= timeago action.updated_at %>
+              <%= timeago action.updated_at.to_date %>
             </span>
           </div>
         <% end %>
