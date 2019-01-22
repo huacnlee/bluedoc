@@ -17,6 +17,17 @@
     font-size: 18px;
     line-height: 100%;
   }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: $primary;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .flash-block {
