@@ -39,8 +39,10 @@
 .flex-wrap {
   flex: auto;
   margin: auto;
+
   @include breakpoint(md) {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
   }
 }

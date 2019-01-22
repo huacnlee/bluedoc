@@ -1,35 +1,35 @@
 <% content_for :subnav do %>
 <div class="reader-navbar">
-  <div class="navbar-title">
-    <a href="<%= @doc.to_path %>" title="Back to Document"><%= icon_tag("repository") %></a>
-    <span class="hide-sm">
-      <span class= "divider">/</span>
-      <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>
-      <span class= "divider">/</span>
-      <span class="doc-title"><%= t(".Versions") %></span>
-    </span>
-  </div>
+  <div class="container">
+    <div class="navbar-title">
+      <span class="hide-sm">
+        <a href="<%= @doc.to_path %>" title="<%= @doc.title %>"><%= truncate @doc.title, length: 25 %></a>
+        <span class= "divider">/</span>
+        <span class="doc-title"><%= t(".Versions") %></span>
+      </span>
+    </div>
 
-  <div class="navbar-buttons">
-    <span class="mr-3 float-left">
-      <label for="version-diff-toggle">
-        <input type="checkbox" id="version-diff-toggle">
-        <%= t(".Diff mode") %>
-      </label>
-    </span>
+    <div class="navbar-buttons">
+      <span class="mr-3 float-left">
+        <label for="version-diff-toggle">
+          <input type="checkbox" id="version-diff-toggle">
+          <%= t(".Diff mode") %>
+        </label>
+      </span>
 
-    <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
-      local: true, remote: true, class: "float-right") do |form| %>
-      <input type="hidden" name="version_id">
-      <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5"><%= t(".Revert") %></button>
-      <%= link_to t(".Cancel"), @doc.to_path, class: "btn btn-sm" %>
-    <% end %>
+      <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
+        local: true, remote: true, class: "float-right") do |form| %>
+        <input type="hidden" name="version_id">
+        <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5"><%= t(".Revert") %></button>
+        <%= link_to t(".Cancel"), @doc.to_path, class: "btn btn-sm" %>
+      <% end %>
+    </div>
   </div>
 </div>
 <% end %>
 
-<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right bg-gray-light">
+<div class="doc-page flex-wrap">
+  <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right">
     <%= render partial: "versions/version", locals: { version: @current_version, current: true } %>
     <div class="version-items" data-selected-id="<%= @current_version.id %>">
       <%= render "versions" %>

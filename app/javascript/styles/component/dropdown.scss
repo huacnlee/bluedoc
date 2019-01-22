@@ -4,9 +4,15 @@
   .dropdown-menu {
     display: none;
   }
+
+  &[open],
   &:hover {
     .dropdown-menu {
       display: block;
+      cursor: auto;
+      p:last-child {
+        margin-bottom: 0px;
+      }
     }
   }
   &.active {
@@ -39,7 +45,7 @@
   width: 160px;
   padding-top: $spacer-1;
   padding-bottom: $spacer-1;
-  margin-top: $spacer-2;
+  margin-top: 0px;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
@@ -242,7 +248,7 @@
 }
 
 .dropdown-menu-sw {
-  right: -8px;
+  right: -4px;
   left: auto;
 
   &::before,

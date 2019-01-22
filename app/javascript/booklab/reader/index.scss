@@ -137,6 +137,7 @@
         width: 250px;
         padding-top: 30px;
         min-height: 100vh;
+        margin-right: 30px;
       }
     }
 
@@ -207,6 +208,7 @@
     }
 
     .version-sidebar {
+      padding-right: 20px;
       .pagination {
         .page-number { display: none; }
       }
@@ -215,12 +217,9 @@
     .version-item {
       display: block;
       text-decoration: none;
-      color: #505050;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 10px;
-      border-left: 3px solid transparent;
+      padding: 10px 0;
 
-      .Label { background: #fff;}
+      .label { background: #fff; border:1px solid #eee; color: #666; border-radius: 2px; padding: 2px 4px; }
 
       &:last-child {
         border-bottom: 0px;
@@ -228,14 +227,14 @@
 
       .title { font-size: 15px; margin-bottom: 5px; }
       .info { font-size: 13px; }
-      .user-name { color: #333; font-weight: bold; }
+      .user-name { font-weight: bold; }
 
       &:hover {
         background: #fff;
       }
 
       &.selected {
-        border-left-color: $primary;
+        color: $primary !important;
         background: #fff;
       }
     }
