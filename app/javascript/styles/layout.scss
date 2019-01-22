@@ -46,3 +46,12 @@
     justify-content: flex-start;
   }
 }
+
+
+// sign up page 
+.page-registrations, .page-sessions {
+  .main-container .container {
+    max-width: 360px;
+    margin-top: 70px;
+  }
+}
