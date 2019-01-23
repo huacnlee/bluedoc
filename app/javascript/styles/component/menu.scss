@@ -27,7 +27,7 @@
       margin-right: 5px;
       transform: translateY(-5%);
     }
-    &.selected, &:hover {
+    &.selected {
       color: $primary;
       i.fas {
         color: inherit;
@@ -46,12 +46,11 @@
     }
   }
 
-  span.menu-item {
-    cursor: default;
+  a.menu-item {
     &:hover {
-      color: $text-main;
+      color: $primary;
       .fas {
-        color: #979797;
+        color: inherit;
       }
     }
   }

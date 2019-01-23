@@ -60,6 +60,7 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
         assert_select "textarea.form-control"
       end
     end
+    assert_equal true, user.read_doc?(share.shareable)
 
     # close share
     share.destroy

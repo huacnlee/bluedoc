@@ -33,7 +33,7 @@
   end %>
 
   <div class="user-groups menu-item">
-    <span class="label"><%= t(".Groups") %></span>
+    <span class="group-label"><%= t(".Groups") %></span>
     <div class="groups-box">
       <% @user.groups.with_attached_avatar.each do |group| %>
         <%= user_avatar_tag(group) %>
