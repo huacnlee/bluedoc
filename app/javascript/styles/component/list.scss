@@ -38,6 +38,7 @@
     color: $white;
   }
   .description, .path {
+    display: block;
     color: $text-gray;
     a { 
       color: inherit;
@@ -46,15 +47,13 @@
     margin-bottom: 5px;
   }
   .title {
+    display: block;
     a {
       color: #000;
     }
     font-size: 15px;
     padding-right: 20px;
     padding-bottom: 7px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     flex: auto;
   }
   .info > span {
@@ -62,7 +61,6 @@
     min-width: 140px;
     margin-right: 20px;
     color: #333;
-    @extend .text-overflow;
     .fas {
       font-size: 16px;
       margin-top: -3px;

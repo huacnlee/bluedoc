@@ -10,9 +10,9 @@
     <div class="avatar-box icon-box icon-rep">
       <%= icon_tag('rep') %>
     </div>
-    <div class="title"><%= repository_name_tag(item.subject) %></div>
+    <div class="title text-overflow"><%= repository_name_tag(item.subject) %></div>
     <% if item.subject.description.present? %>
-    <div class="description">
+    <div class="description text-overflow">
       <%= truncate item.subject.description, length: 100 %>
     </div>
     <% end %>

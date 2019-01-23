@@ -9,10 +9,10 @@
     <div class="avatar-box">
       <%= user_avatar_tag(item, style: :medium) %>
     </div>
-    <div class="title">
+    <div class="title text-overflow">
       <%= group_name_tag(item) %>
     </div>
-    <div class="description">
+    <div class="description text-overflow">
       <%= truncate item.description, length: 100 %>
     </div>
     <div class="info">
