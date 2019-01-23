@@ -4,7 +4,7 @@ module Slugable
   extend ActiveSupport::Concern
 
   included do
-    validates :slug, presence: true, format: { with: BookLab::Slug::REGEXP }, length: 2..128
+    validates :slug, format: { with: BookLab::Slug::REGEXP }, length: 2..128
 
     before_validation do
       self.slug = BookLab::Slug.slugize(self.slug) unless self.is_a?(User)
