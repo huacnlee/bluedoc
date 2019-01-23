@@ -1,6 +1,7 @@
 import { Container, serializer, UI } from 'typine'
-import { AttachmentUpload } from "./attachment_upload"
+import { AttachmentUpload } from "./attachment-upload"
 import { Toolbar } from "./toolbar"
+import { DocSetting } from "./doc-setting"
 
 const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
 
@@ -19,7 +20,6 @@ class RichEditor extends React.Component {
       value: value,
       activeMarkups: [],
       title: props.title,
-      slug: props.slug,
     }
 
     const { directUploadURL, blobURLTemplate } = this.props;
@@ -87,12 +87,6 @@ class RichEditor extends React.Component {
     this.setState({ title: newTitle })
   }
 
-  onChangeSlug = (e) => {
-    const newSlug = e.target.value
-    this.props.onChangeSlug(newSlug)
-    this.setState({ slug: newSlug })
-  }
-
   onMarkupChange = markups => {
     this.setState({ activeMarkups: markups })
   }
@@ -104,7 +98,7 @@ class RichEditor extends React.Component {
 
   // Render the editor.
   render() {
-    let { value, title, slug } = this.state;
+    let { value, title } = this.state;
 
     // change "New Document" as placeholder
     let placeholder = "Document title";
@@ -124,14 +118,6 @@ class RichEditor extends React.Component {
               placeholder={placeholder}
               onChange={this.onChangeTitle}
               className="editor-title-text" />
-          </div>
-          <div className="editor-slug">
-            <input
-              type="text"
-              value={slug}
-              placeholder="set the URL path for this doc"
-              onChange={this.onChangeSlug}
-              className="editor-slug-text" />
           </div>
           <div className="editor-text markdown-body">
             <Container
@@ -164,8 +150,8 @@ class EditorBox {
     }
 
     const saveButton = $(".btn-save");
-    const saveURL = saveButton.attr("data-url");
-    const lockURL = saveURL + "/lock";
+    let saveURL = saveButton.attr("data-url");
+    let lockURL = saveURL + "/lock";
 
     // unload to unlock doc
     window.addEventListener("beforeunload", () => {
@@ -177,7 +163,6 @@ class EditorBox {
     const editorMessage = $(".editor-message");
 
     const titleInput = document.getElementsByName("doc[title]")[0];
-    const slugInput = document.getElementsByName("doc[slug]")[0];
     const formatInput = document.getElementsByName("doc[format]")[0];
 
     const editorDiv = document.createElement("div");
@@ -203,8 +188,13 @@ class EditorBox {
       titleInput.value = value
     }
 
-    const onChangeSlug = (value) => {
-      slugInput.value = value
+    const onChangeSettings = (res) => {
+      saveURL = res.saveURL;
+      lockURL = saveURL + "/lock";
+      const pageURL = saveURL + "/edit";
+      window.history.pushState({}, titleInput.value, pageURL);
+      document.getElementById("doc-form").setAttribute("action", saveURL);
+      $(".doc-link").attr("href", saveURL);
     }
 
     if ($("#doc-lock-box").length > 0) {
@@ -255,16 +245,23 @@ class EditorBox {
       <RichEditor
         onChange={onChange}
         onChangeTitle={onChangeTitle}
-        onChangeSlug={onChangeSlug}
         directUploadURL={bodyInput.attributes["data-direct-upload-url"].value}
         blobURLTemplate={bodyInput.attributes["data-blob-url-template"].value}
         plantumlServiceHost={bodyInput.attributes["data-plantuml-service-host"].value}
         mathJaxServiceHost={bodyInput.attributes["data-mathjax-service-host"].value}
         title={titleInput.value}
-        slug={slugInput.value}
         format={formatInput.value}
         value={value} />,
       editorDiv,
+    )
+
+    ReactDOM.render(
+      <DocSetting
+        saveURL={saveURL}
+        onChange={onChangeSettings}
+        repositoryURL={bodyInput.attributes["data-repository-url"].value}
+        slug={bodyInput.attributes["data-slug"].value} />,
+      document.querySelector(".btn-doc-info-box")
     )
   }
 }

@@ -71,10 +71,10 @@ class DocsController < Users::ApplicationController
           @doc.unlock!
           redirect_to @doc.to_path, notice: "Doc was successfully updated."
         }
-        format.json { render json: { ok: true } }
+        format.json { render json: { ok: true, doc: { slug: @doc.slug } } }
       else
         format.html { render :edit, layout: "editor" }
-        format.json { render json: { ok: false } }
+        format.json { render json: { ok: false, messages: @doc.errors.full_messages } }
       end
     end
   end

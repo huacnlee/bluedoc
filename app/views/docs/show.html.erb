@@ -43,16 +43,16 @@
       <span class="hide-md hide-sm">
         <span class="divider">/</span>
         <% if @doc %>
-        <span class="doc-title"><%= @doc.title %></span>
+        <span class="doc-name"><%= @doc.title %></span>
         <% else %>
-        <span class="doc-title">
+        <span class="doc-name">
           <strong><%= t(".Not found") %></strong>
         </span>
         <% end %>
       </span>
       <% if @doc&.private? %>
-        <span class="doc-title">
-          <span class="label-private ml-2"><%= t(".Private") %></span>
+        <span class="doc-name">
+          <span class="label label-private ml-2"><%= t(".Private") %></span>
         </span>
       <% end %>
     </div>

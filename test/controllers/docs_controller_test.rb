@@ -456,6 +456,23 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal doc_params[:title], doc.title
     assert_not_equal doc_params[:format], doc.format
     assert_equal user.id, doc.last_editor_id
+
+    # shoud save slug, and validation
+    put doc.to_path, params: { doc: { slug: "" }, format: :json }
+    assert_equal 200, response.status
+    res = JSON.parse(response.body)
+    assert_equal false, res["ok"]
+    assert_equal true, res["messages"].is_a?(Array)
+    assert_equal true, res["messages"].length > 0
+
+    put doc.to_path, params: { doc: { slug: "Hello world" }, format: :json }
+    assert_equal 200, response.status
+    res = JSON.parse(response.body)
+    assert_equal true, res["ok"]
+    assert_equal "Hello-world", res["doc"]["slug"]
+
+    doc.reload
+    assert_equal "Hello-world", doc.slug
   end
 
   test "PUT /:user/:repo/:slug with publish" do
