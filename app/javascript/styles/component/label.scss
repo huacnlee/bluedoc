@@ -1,0 +1,16 @@
+.label {
+  padding: 1px 3px;
+  border-radius: 1px;
+  border: 1px solid #e0e0e0;
+  color: #777;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.label-private {
+  color: $danger;
+  border-color: rgba(238, 67, 67, 0.68);
+  background-color: rgba(238, 67, 67, 0.1);
+}

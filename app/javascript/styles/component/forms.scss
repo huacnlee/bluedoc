@@ -87,6 +87,36 @@ textarea.form-control {
     }
   }
 
+  .input-group-prepend {
+    margin-right: -1px;
+    vertical-align: middle;
+    display: table-cell;
+
+    .input-group-text {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 9px 15px;
+      margin-bottom: 0;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #f0f0f0;
+      border: 1px solid #D9D9D9;
+      border-right: 0;
+      border-radius: 2px 0 0 2px;
+      font-size: 13px;
+    }
+  }
+
+  .form-control {
+    display: table-cell;
+    margin-bottom: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
 
 input[type=checkbox],

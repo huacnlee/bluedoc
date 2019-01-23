@@ -132,7 +132,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /#{doc.title}/, response.body
     assert_select ".markdown-body"
-    assert_select ".label-private", 0
+    assert_select ".label.label-private", 0
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
