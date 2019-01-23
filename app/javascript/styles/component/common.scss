@@ -25,6 +25,12 @@ h2.sub-title {
   .user-display-name[data-type="group"] {
     @extend .fa-group;
   }
+  .user-name[data-type="user"] {
+    @extend .fa-user;
+  }
+  .user-name[data-type="group"] {
+    @extend .fa-group;
+  }
   .repository-name {
     @extend .fa-rep;
   }

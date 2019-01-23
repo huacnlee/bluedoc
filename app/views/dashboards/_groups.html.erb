@@ -16,7 +16,9 @@
       <%= truncate item.description, length: 100 %>
     </div>
     <div class="info">
-      <span class="members"><%= icon_tag("user") %> <%= item.members_count %></span>
+      <span class="members">
+        <%= icon_tag("group") %> <span><%= item.members_count %></span>
+      </span>
     </div>
     <div class="time-box"><%= timeago item.created_at %></div>
   </li>

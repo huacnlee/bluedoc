@@ -17,14 +17,14 @@
     </div>
     <% end %>
     <div class="info">
-      <span class="user">
+      <span class="user text-overflow">
         <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>
       </span>
       <span class="stars">
-        <%= icon_tag("star_fill") %> <%= item.subject.stars_count %>
+        <%= icon_tag("star_fill") %> <span><%= item.subject.stars_count %></span>
       </span>
       <span class="watches">
-        <%= icon_tag("watches") %> <%= item.subject.watches_count %>
+        <%= icon_tag("watches") %> <span><%= item.subject.watches_count %></span>
       </span>
     </div>
     <div class="time-box">

@@ -27,7 +27,7 @@
   }
   .avatar-box {
     position: absolute;
-    top: 20px;
+    top: 21.5px;
     left: 0;
     line-height: 0;
   }
@@ -40,11 +40,7 @@
   .description, .path {
     display: block;
     color: $text-gray;
-    a { 
-      color: inherit;
-    }
     font-size: 12px;
-    margin-bottom: 5px;
   }
   .title {
     display: block;
@@ -53,18 +49,24 @@
     }
     font-size: 15px;
     padding-right: 20px;
-    padding-bottom: 7px;
+    margin-bottom: 4px;
     flex: auto;
   }
-  .info > span {
-    display: inline-block;
-    min-width: 140px;
-    margin-right: 20px;
-    color: #333;
-    .fas {
-      font-size: 16px;
-      margin-top: -3px;
-      margin-right: 5px;
+  .info {
+    margin-top: 17px;
+    span {
+      display: inline-block;
+      min-width: 60px;
+      margin-right: 20px;
+      color: #333;
+      vertical-align: middle;
+      &.user {
+        min-width: 140px;
+      }
+      .fas {
+        font-size: 16px;
+        margin-right: 5px;
+      }
     }
   }
   .time-box {
@@ -80,11 +82,17 @@
     top: 12px;
     font-size: 18px;
     opacity: 0;
-    padding: 8px;
-    line-height: 1;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
     &:hover {
       border-radius: 50%;
       background: #f7f7f7;
+    }
+    .btn {
+      padding: 0;
+      line-height: 1;
     }
   }
 

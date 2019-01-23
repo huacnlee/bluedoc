@@ -10,18 +10,12 @@
       <% end %>
     </div>
     <span class="time-box tooltipped tooltipped-ne" aria-label="<%= t(".Last updated at") %>"><i class="fas fa-clock"></i> <%= timeago doc.body_updated_at %></span>
-    <div class="info">
-      <div class="desc text-gray pr-4">
-        <% if @repository && doc.repository_id != @repository.id %>
-        <span class="repo mr-1">
-          <%= user_name_tag(doc.repository&.user) %> <span class="divider">/</span>
-          <%= repository_name_tag(doc.repository) %>
-        </span>
-        <% end %>
-        <span class="editor mr-1">
-          <%= user_name_tag(doc.last_editor) %>
-        </span>
-      </div>
+    <div class="path">
+      <% if @repository && doc.repository_id != @repository.id %>
+      <%= user_name_tag(doc.repository&.user) %> / 
+      <%= repository_name_tag(doc.repository) %>
+      <% end %>
+      <%= user_name_tag(doc.last_editor) %>
     </div>
     <div class="action text-gray">
       <% if can? :destroy, doc %>
