@@ -118,6 +118,7 @@
         li {
           padding: 8px 0;
           @extend .text-overflow;
+          display: block;
         }
         a {
           color: #555;
