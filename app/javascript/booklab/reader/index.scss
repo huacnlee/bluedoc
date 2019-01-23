@@ -338,6 +338,21 @@
   }
 }
 
+.reader-body {
+  .doc-share-page {
+    .doc-main {
+      padding: 0;
+    }
+
+    @media (min-width: 768px) {
+      .doc-main {
+        padding: 0;
+      }
+    }
+  }
+}
+
+
 .doc-body-toc {
   order: 2;
   display: none;

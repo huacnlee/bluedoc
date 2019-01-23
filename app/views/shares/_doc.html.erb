@@ -13,7 +13,7 @@
 
   <div class="navbar-buttons">
     <% if can? :update, @doc %>
-      <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
+      <%= link_to icon_tag("pencil"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
     <% end %>
   </div>
 </div>
@@ -31,9 +31,9 @@
       </span>
 
       <% if @doc.last_editor %>
-      <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= ".Last edit by at" %> <%= timeago @doc.body_updated_at %>
+      <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= t(".Last edit by at") %> <%= timeago @doc.body_updated_at %>
       <% else %>
-        <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= ".Created by at" %> <%= timeago @doc.created_at %>
+        <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= t(".Created by at") %> <%= timeago @doc.created_at %>
       <% end %>
     </div>
     <div class="markdown-body markdown-with-toc" data-turbolinks="false">
