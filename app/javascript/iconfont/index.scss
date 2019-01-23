@@ -33,6 +33,12 @@
   .fa-watch {
     @extend .fa-watch_fill;
   }
+  .fa-star-rep {
+    @extend .fa-star-rep_fill;
+  }
+  .fa-star-docs {
+    @extend .fa-star-docs_fill;
+  }
 }
 a[data-method=delete] {
   .fa-star {

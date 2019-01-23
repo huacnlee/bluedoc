@@ -21,9 +21,9 @@
       margin-bottom: 30px;
     }
     i.fas {
-      font-size: 16px;
       color: #979797;
-      margin-right: 5px;
+      margin: 0 3px;
+      transform: scale(1.2);
     }
     &.selected {
       color: $primary;
@@ -33,14 +33,12 @@
     }
     &.menu-sub-item {
       color: $text-gray-light;
-      .fas { opacity: 0; }
       &.selected {
         color: $primary;
-        .fas { opacity: 1; }
       }
     }
     &.depth-1 {
-      text-indent: 1em;
+      text-indent: 0.8em;
     }
   }
 
