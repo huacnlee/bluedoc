@@ -1776,10 +1776,6 @@ codemirror@^5.18.2:
   version "5.42.2"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.42.2.tgz#801ab715a7a7e1c7ed4162b78e9d8138b98de8f0"
 
-coffee-script@*:
-  version "1.12.7"
-  resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.7.tgz#c05dae0cb79591d05b3070a8433a98c9a89ccc53"
-
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
@@ -3383,12 +3379,6 @@ html-comment-regex@^1.1.0:
 html-entities@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
-
-htmldiff@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/htmldiff/-/htmldiff-0.0.4.tgz#c202e6fd1411621ce0446a8836719de5eaefb6f9"
-  dependencies:
-    coffee-script "*"
 
 htmlminiiiiii@^3.5.21:
   version "3.5.21"

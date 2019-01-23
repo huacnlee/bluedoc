@@ -1,4 +1,4 @@
-const htmlDiff = require("htmldiff/src/htmldiff.js");
+const htmlDiff = require("./html-diff");
 
 document.addEventListener('turbolinks:load', () => {
   if ($(".version-sidebar").length === 0) {
@@ -21,9 +21,9 @@ document.addEventListener('turbolinks:load', () => {
   // Toggle Diff mode
   $("#version-diff-toggle").on("click", (e) => {
     if (toggleInput.checked) {
+      renderDiff();
       contentView.hide();
       diffView.show();
-      renderDiff();
     } else {
       contentView.show();
       diffView.hide();
@@ -32,5 +32,4 @@ document.addEventListener('turbolinks:load', () => {
 
   // listen diff render event
   $(".version-preview").on("render:diff", renderDiff);
-  $(".version-preview").trigger("diff");
 })
