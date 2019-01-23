@@ -7,7 +7,7 @@
   }
   .container {
     @include breakpoint(md) {
-      width: 1200px;
+      width: auto;
     }
   }
 
@@ -107,7 +107,6 @@
         line-height: 100%;
         @extend .pt-2;
         @extend .list-style-none;
-        overflow: hidden;
 
         .item-title {
           overflow: hidden;
@@ -117,12 +116,11 @@
 
         li {
           padding: 8px 0;
-          @extend .text-overflow;
-          display: block;
         }
         a {
           color: #555;
           @extend .text-overflow;
+
           &.active {
             color: $primary;
           }
@@ -135,46 +133,47 @@
     @media (min-width: 1100px) {
       .doc-sidebar {
         display: block;
-        width: 250px;
-        padding-top: 30px;
+        width: 300px;
+        padding-top: 0px;
         min-height: 100vh;
         margin-right: 30px;
       }
     }
 
-    .doc-main {
+    .doc-center {
       order:1;
       width: 100%;
-      padding: 15px 0px;
-      margin-left: 0;
-      margin-right: 0;
+      text-align: center;
+    }
+
+    @media (min-width: 1330px) {
+      .doc-center {
+        width: 100%;
+      }
+    }
+
+    .doc-main {
+      margin: 0 auto;
+      text-align: left;
+      width: auto;
+      padding: 0px 0px;
     }
 
     @media (min-width: 768px) {
       .doc-main {
-        width: 100%;
-        padding: 32px 32px;
-        margin-left: 0px;
-        margin-right: 0px;
+        width: 750px;
       }
     }
 
     @media (min-width: 1012px) {
       .doc-main {
-        width: 100%;
-        margin-right: 32px;
-        margin-right: 20px;
-        top: 88px;
-        left: 30%;
+        width: 750px;
       }
     }
 
     @media (min-width: 1330px) {
       .doc-main {
         width: 750px;
-        margin-right: 32px;
-        top: 88px;
-        left: 30%;
       }
     }
 
@@ -352,22 +351,28 @@
   }
 }
 
+.doc-body-toc-holder {
+  order: 2;
+  width: 230px;
+  display: none;
+  @media (min-width: 1330px) {
+    display: block;
+  }
+}
 
 .doc-body-toc {
-  order: 2;
   display: none;
 
   @media (min-width: 1330px) {
     display: block;
-    padding-top: 80px;
   }
 
   &>.toc-list {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 90px;
-    max-width: 200px;
-    width: auto;
+    position: fixed;
+    margin-left: 30px;
+    padding-top: 48px;
+    right: 32px;
+    width: 230px;
     border-left: 1px solid #e8ebef;
     font-size: 13px;
     display: block;
@@ -387,14 +392,11 @@
       color: #888;
       list-style-type: none;
       list-style-position: inside;
-      word-break: break-word;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      overflow: hidden;
-      text-overflow: ellipsis;
       padding: 3px 0;
+      display: block;
 
       a {
+        @extend .text-overflow;
         color: #696969;
       }
 

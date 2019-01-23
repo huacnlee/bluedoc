@@ -1,5 +1,7 @@
 <div class="user-item list-item list-avatar">
-  <%= user_avatar_tag(user, style: :medium) %>
+  <div class="avatar-box">
+    <%= user_avatar_tag(user, style: :medium) %>
+  </div>
   <div class="infos">
     <div class="title"><%= user_display_name_tag(user) %> <span class="name ml-1 text-gray"><%= user_name_tag(user) %></span></div>
     <div class="description mt-1 text-gray"><%= user.description %></div>
