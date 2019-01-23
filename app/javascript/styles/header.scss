@@ -40,12 +40,21 @@
   }
   .dropdown {
     margin-left: 10px;
-    padding: 10px 5px;
+    padding: 5px;
   }
   .nav-notifications {
-    color: inherit;
-    &:hover {
-      text-decoration: none;
+    position: relative;
+    &.unread {
+      &::after {
+        position: absolute;
+        content: '';
+        top: 2px;
+        right: 1px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #FF4B4B;
+      }
     }
   }
   .dropdown-menu {
