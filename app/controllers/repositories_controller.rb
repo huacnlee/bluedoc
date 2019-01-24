@@ -35,8 +35,8 @@ class RepositoriesController < Users::ApplicationController
         Activities::Repository.new(@repository).create
 
         notice = "Repository was successfully created."
-        if repository_params[:gitbook_url]
-          notice = "Repository as created, and runing import GitBook on background."
+        if @repository.source?
+          notice = "Repository was successfully created, and executed importing in background, wait a moment you will see the import result."
         end
 
         format.html { redirect_to @repository.to_path, notice: notice }

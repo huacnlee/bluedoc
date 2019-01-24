@@ -9,7 +9,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@github/markdown-toolbar-element": "^0.1.1",
-    "@rails/webpacker": "4.0.0-rc.2",
+    "@rails/webpacker": "4.0.0-rc.5",
     "@royie/slate": "^0.44.9",
     "@royie/slate-plain-serializer": "^0.6.32",
     "@royie/slate-react": "^0.21.17",

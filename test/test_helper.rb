@@ -103,4 +103,18 @@ class ActionDispatch::IntegrationTest
       yield(props) if block_given?
     end
   end
+
+  # assert_flash rendered
+  # assert_flash notice: "Repository was successfully created."
+  # assert_flash alert: "Repository was successfully created."
+  def assert_flash(flash)
+    get "/"
+    assert_equal 200, response.status
+    flash.each_key do |key|
+      type = :success if key == :notice
+      type = :error if key == :alert
+
+      assert_select ".flash.flash-#{type}", text: flash[key]
+    end
+  end
 end

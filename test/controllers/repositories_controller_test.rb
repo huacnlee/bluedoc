@@ -99,6 +99,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :editor, group: @group
     post "/repositories", params: { repository: repo_params }
     assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+    assert_flash notice: "Repository was successfully created."
 
     # create with gitbook
     repo = build(:repository)
@@ -110,6 +111,8 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     }
     post "/repositories", params: { repository: repo_params }
     assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+    assert_flash notice: "Repository was successfully created, and executed importing in background, wait a moment you will see the import result."
+
     created_repo = @group.repositories.find_by_slug!(repo.slug)
     assert_equal repo_params[:slug], created_repo.slug
     assert_equal repo_params[:gitbook_url], created_repo.source&.url
@@ -125,6 +128,8 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     }
     post "/repositories", params: { repository: repo_params }
     assert_redirected_to "/#{@group.slug}/#{repo.slug}"
+    assert_flash notice: "Repository was successfully created, and executed importing in background, wait a moment you will see the import result."
+
     created_repo = @group.repositories.find_by_slug!(repo.slug)
     assert_equal repo_params[:slug], created_repo.slug
     assert_equal true, created_repo.import_archive.attached?
