@@ -36,72 +36,6 @@ zh-CN:
     mailer:
       This mail has sent from: 这封邮件发送自
   devise:
-    confirmations:
-      send_instructions: 稍后，您将收到帐号激活的电子邮件。
-      send_paranoid_instructions: 如果你输入的 Email 地址在我们系统中，几分钟后你将会收到一份确认账号的邮件。
-      confirmed: 您的帐号已经激活，请登录。
-    failure:
-      already_authenticated: 登录成功。
-      inactive: 您还没有激活帐户。
-      invalid: 帐号或密码错误。
-      locked: 由于多次密码错误，您的帐号已被暂时锁定，一小时后将自动解锁，或者你可以通过邮件手动解锁。
-      last_attempt: 你还有最后次尝试机会，如果依然不正确，账号将会暂时锁定。
-      not_found_in_database: 无效的 %{authentication_keys} 或密码不正确。
-      timeout: 您已登录超时，请重新登录。
-      unauthenticated: 继续操作前请注册或者登录。
-      unconfirmed: 请先激活您的帐号。
-    mailer:
-      confirmation_instructions:
-        subject: 确认信息
-        Welcome: 欢迎
-        You can confirm your account email through the link below: 你可以通过下面的链接来验证 Email
-          地址。
-        Confirm my account: 确认我的账号
-      reset_password_instructions:
-        subject: 重置密码信息
-        Someone has requested a link to change your password:
-          " You can do this through the link below": 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
-        Change my password: 修改我的密码
-        If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
-        Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
-      unlock_instructions:
-        subject: 解锁信息
-      email_changed:
-        subject: 邮件地址已修改
-        Your email is being changed to: 我们联系你，因为你的 Email 地址已更改。
-      password_change:
-        subject: 密码已修改
-        Password has changed: 我们联系你，是因为你的密码已被修改。
-    omniauth_callbacks:
-      failure: 无法通过 %{kind} 登录，因为 "%{reason}"。
-      success: 成功通过%{kind} 登录账号.
-    passwords:
-      no_token: 此页面必须通过找回密码链接打开，如果你是通过这种方式，请检查 URL 和邮件里面的 URL 是否一致。
-      send_instructions: 稍后，您将收到重置密码的电子邮件。
-      send_paranoid_instructions: 如果你输入的 Email 地址在我们系统中，几分钟后你将会收到一份恢复账号的邮件。
-      updated: 密码已修改成功。
-      updated_not_active: 密码修改成功。
-      new:
-        Reset password: 找回密码
-        Input your account Email address, we will send a reset password link to you Email: 输入你的
-          Email 地址，我们将会给你发送一封找回密码的邮件。
-        Submit: 发送找回密码邮件
-    registrations:
-      destroyed: 再见！你的账号已经成功注销。我们依然期待你再次回来使用。
-      signed_up: 欢迎！你的账号已经成功注册。
-      signed_up_but_inactive: 你已经成功注册账号。不过因为你的账号还未激活，所以暂时无法登录使用。
-      signed_up_but_locked: 你已经成功注册账号。不过因为你的账号已被锁定，无法登录。
-      signed_up_but_unconfirmed: 一封带有确认链接的邮件已经发送到了你的邮箱，请按照邮件内容的链接流程完成账号激活。
-      update_needs_confirmation: 你的账号更新成功，不过你必须验证新的邮件地址。请打开你的邮箱，找到我们发送的确认邮件并点击确认链接来完成确认。
-      updated: 你的账号更新成功。
-      new:
-        Sign up: 注册
-        Already have a account: 已经有一个帐户
-        Welcome to use BookLab: 欢迎使用 BookLab
-        Complete your account info: 完善您的帐号信息
-        You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
-        If you had an exists BookLab account, you can sign in to bind account: 如果你已经有
-          BookLab 账号，你可以通过 %{link} 来绑定账号。
     sessions:
       signed_in: 登录成功。
       signed_out: 退出成功。
@@ -114,10 +48,69 @@ zh-CN:
         email: 用户名 / Email
         forget_password: 密码忘记了？
         Didn't receive unlock instructions?: 没有收到解锁账号的邮件？
-    unlocks:
-      send_instructions: 稍后，您将收到一封帐号解锁的邮件。
-      send_paranoid_instructions: 如果你已有账号，你将会收到一封用于解锁的邮件。
-      unlocked: 您的帐号已成功解锁，请登录。
+    registrations:
+      new:
+        Sign up: 注册
+        Already have a account: 已经有一个帐户
+        Welcome to use BookLab: 欢迎使用 BookLab
+        Complete your account info: 完善您的帐号信息
+        You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
+        If you had an exists BookLab account, you can sign in to bind account: 如果你已经有 BookLab 账号，你可以通过 %{link} 来绑定账号。
+    passwords:
+      new:
+        Reset password: 找回密码
+        Input your account Email address, we will send a reset password link to you Email: 输入你的 Email 地址，我们将会给你发送一封找回密码的邮件。
+        Submit: 发送找回密码邮件
+    mailer:
+      confirmation_instructions:
+        subject: 确认信息
+        Welcome: 欢迎
+        You can confirm your account email through the link below: 你可以通过下面的链接来验证 Email 地址。
+        Confirm my account: 确认我的账号
+      unlock_instructions:
+        subject: 解锁信息
+      email_changed:
+        subject: 邮件地址已修改
+        Your email is being changed to: 我们联系你，因为你的 Email 地址已更改。
+      password_change:
+        subject: 密码已修改
+        Password has changed: 我们联系你，是因为你的密码已被修改。
+      reset_password_instructions:
+        subject: 重置密码信息
+        "Someone has requested a link to change your password. You can do this through the link below": 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
+        Change my password: 修改我的密码
+        If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
+        Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
+  account_settings:
+    Password has change successed: 密码已经修改成功。
+    Profile has change successed: 个人资料已经更新成功。
+    account:
+      Account: 账号
+      Change password: 修改密码
+      Minimum characters: 最少要求 %{length} 个字符
+      We need your current password to confirm your changes: 需要你的旧密码。
+      Update password: 修改密码
+      Danger zone: 高级功能
+      Delete my account: 删除我的账号
+      Once you delete your account, there is no going back: 账号删除以后将无法恢复，请谨慎使用。
+      Are you sure?: 警告！账号删除以后将无法恢复，你确定要这么做吗？
+    show:
+      Avatar: 头像
+      Profile: 个人资料
+      Update profile: 更新个人资料
+      Upload new picture: 选择一张图片上传
+      System default: "BookLab 默认语言：%{locale_name}"
+      This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+  activities:
+    has added: 添加
+    to: 到
+    as: 成为
+    created: 创建了
+    has followed: 关注了
+    starred Doc: 收藏了文档
+    starred: 收藏了
+    transfer: 移动
   admin:
     BookLab Admin: BookLab 管理后台
     Admin: 管理后台
@@ -189,36 +182,6 @@ zh-CN:
       Comment was successfully updated: Comment was successfully updated.
       index:
         Private contents, hide comment: 私密内容，无法查阅评论。
-  account_settings:
-    Password has change successed: 密码已经修改成功。
-    Profile has change successed: 个人资料已经更新成功。
-    show:
-      Upload new picture: 选择一张图片上传
-      Profile: 个人资料
-      Avatar: 头像
-      Update profile: 更新个人资料
-      System default: "BookLab 默认语言：%{locale_name}"
-      This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
-      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
-    account:
-      Account: 账号
-      Change password: 修改密码
-      Minimum characters: 最少要求 %{length} 个字符
-      We need your current password to confirm your changes: 需要你的旧密码。
-      Update password: 修改密码
-      Danger zone: 高级功能
-      Delete my account: 删除我的账号
-      Once you delete your account, there is no going back: 账号删除以后将无法恢复，请谨慎使用。
-      Are you sure?: 警告！账号删除以后将无法恢复，你确定要这么做吗？
-  activities:
-    has added: 添加
-    to: 到
-    as: 成为
-    created: 创建了
-    has followed: 关注了
-    starred Doc: 收藏了文档
-    starred: 收藏了
-    transfer: 移动
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知
@@ -530,6 +493,9 @@ zh-CN:
       Remove item: 从目录中移除选中项
       Save: 保存目录
       Cancel: 取消
+    create:
+      Repository was successfully created: 知识库创建成功。
+      Repository was successfully created, and executed importing in background: 知识库创建成功，导入任务已经在后台执行，我们会通过邮件通知导入结果。
   repository_settings:
     exports:
       archive:

@@ -1,4 +1,6 @@
 en:
+  created_at: Created at
+  updated_at: Updated at
   created at: created at
   updated at: updated at
   shared:
@@ -35,6 +37,9 @@ en:
       This mail has sent from: This mail has sent from
   devise:
     sessions:
+      signed_in: Signed in.
+      signed_out: Signed out.
+      already_signed_out: Alredy signed out.
       new:
         "Sign in": Sign in
         "Sign in with": Sign in with
@@ -58,14 +63,20 @@ en:
         "Submit": Send me reset password instructions
     mailer:
       confirmation_instructions:
+        subject: Confirmation
         "Welcome": Welcome
         "You can confirm your account email through the link below": "You can confirm your account email through the link below:"
         "Confirm my account": Confirm my account
+      unlock_instructions:
+        subject: Unlock instructions
       email_changed:
+        subject: Email has changed
         "Your email is being changed to": We're contacting you to notify you that your email is being changed to
       password_change:
+        subject: Password has changed
         "Password has changed": We're contacting you to notify you that your password has been changed.
       reset_password_instructions:
+        subject: Reset password instructions
         "Someone has requested a link to change your password. You can do this through the link below": Someone has requested a link to change your password. You can do this through the link below.
         "Change my password": Change my password
         "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
@@ -84,13 +95,22 @@ en:
       "Once you delete your account, there is no going back": Once you delete your account, there is no going back. Please be certain.
       "Are you sure?": "Danger! Once you delete your account, there is no going back, are you sure?"
     show:
-      Profile: Profile
       Avatar: Avatar
+      Profile: Profile
       Update profile: Update profile
       Upload new picture: Upload new picture
       System default: "System default [%{locale_name}]"
       This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify you in BookLab It will be visible to anyone.
       Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+  activities:
+    has added: has added
+    to: to
+    as: as
+    created: created
+    has followed: has followed
+    starred Doc: starred a Doc
+    starred: starred
+    transfer: transfer
   admin:
     BookLab Admin: BookLab Admin
     Admin: Admin
@@ -163,15 +183,6 @@ en:
     Comment was successfully updated: Comment was successfully updated.
     index:
       Private contents, hide comment: Private contents, hide comment.
-  activities:
-    has added: has added
-    to: to
-    as: as
-    created: created
-    has followed: has followed
-    starred Doc: starred a Doc
-    starred: starred
-    transfer: transfer
   comments:
     comment_watch:
       Subscribe: Subscribe
@@ -478,6 +489,9 @@ en:
       Remove item: Remove item
       Save: Save
       Cancel: Cancel
+    create:
+      Repository was successfully created: Repository was successfully created.
+      Repository was successfully created, and executed importing in background: Repository was successfully created, and executed importing in background, wait a moment you will see the import result.
   repository_settings:
     exports:
       archive:
