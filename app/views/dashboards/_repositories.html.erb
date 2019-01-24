@@ -7,8 +7,8 @@
 <ul class="list-container dashboard-repos">
   <% items.each do |item| %>
   <li class="list-item list-avatar recent-repo-item">
-    <div class="avatar-box icon-box icon-rep">
-      <%= icon_tag('rep') %>
+    <div class="avatar-box icon-box icon-repo">
+      <%= icon_tag("repo") %>
     </div>
     <div class="title text-overflow"><%= repository_name_tag(item.subject) %></div>
     <% if item.subject.description.present? %>
@@ -21,7 +21,7 @@
         <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>
       </span>
       <span class="stars">
-        <%= icon_tag("star_fill") %> <span><%= item.subject.stars_count %></span>
+        <%= icon_tag("star-fill") %> <span><%= item.subject.stars_count %></span>
       </span>
       <span class="watches">
         <%= icon_tag("watches") %> <span><%= item.subject.watches_count %></span>

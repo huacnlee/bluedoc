@@ -16,37 +16,37 @@
 // hack
 .selected {
   .fa-dashboard {
-    @extend .fa-dashboard_fill;
+    @extend .fa-dashboard-fill;
   }
-  .fa-docs {
-    @extend .fa-docs_fill;
+  .fa-doc {
+    @extend .fa-doc-fill;
   }
-  .fa-rep {
-    @extend .fa-rep_fill;
+  .fa-repo {
+    @extend .fa-repo-fill;
   }
   .fa-group {
-    @extend .fa-group_fill;
+    @extend .fa-group-fill;
   }
   .fa-star {
-    @extend .fa-star_fill;
+    @extend .fa-star-fill;
   }
   .fa-watch {
-    @extend .fa-watch_fill;
+    @extend .fa-watch-fill;
   }
-  .fa-star-rep {
-    @extend .fa-star-rep_fill;
+  .fa-star-repo {
+    @extend .fa-star-repo-fill;
   }
-  .fa-star-docs {
-    @extend .fa-star-docs_fill;
+  .fa-star-doc {
+    @extend .fa-star-doc-fill;
   }
 }
 a[data-method=delete] {
   .fa-star {
-    @extend .fa-star_fill;
+    @extend .fa-star-fill;
   }
 }
 a[data-method=post] {
   .fa-watch {
-    @extend .fa-watch_fill;
+    @extend .fa-watch-fill;
   }
 }
