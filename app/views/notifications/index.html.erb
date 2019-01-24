@@ -4,7 +4,8 @@
     <nav class="menu">
       <%= render_list_items(class: "menu-item", type: :link, check_parameters: true) do |li|
         li << link_to(main_app.notifications_path, class: "menu-item") do %>
-          <span class="mr-3"><%= t(".Unread") %></span><%= unread_notifications_count %>
+          <span class="mr-3"><%= t(".Unread") %></span>
+          <b class="counter"><%= unread_notifications_count %></b>
         <% end
         li << link_to(t(".All"), main_app.notifications_path(tab: "all"), class: "menu-item")
       end %>

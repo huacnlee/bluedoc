@@ -33,7 +33,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     get notifications_path, params: { tab: :all }
     assert_equal 200, response.status
     assert_select ".notifications"
-    assert_select ".subhead h2", text: "All"
+    assert_select ".subhead h2 span", text: "All"
     assert_select ".notification", 4
 
     ids = unread_notes.collect(&:id)
