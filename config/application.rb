@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Booklab
   class Application < Rails::Application
-    config.load_defaults 5.2
+    config.load_defaults 6.0
 
     config.autoload_paths += [
       Rails.root.join("lib")

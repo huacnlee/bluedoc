@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails"
+gem "rails", "6.0.0.beta1"
 gem "pg"
 gem "redis"
 gem "redis-objects"
@@ -35,7 +35,7 @@ gem "elasticsearch-rails"
 gem "second_level_cache"
 gem "bulk_insert"
 
-gem "devise"
+gem "devise", github: "plataformatec/devise"
 gem "omniauth-google-oauth2"
 gem "omniauth-github"
 gem "omniauth-gitlab"
