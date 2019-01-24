@@ -6,17 +6,19 @@
 <ul class="dashboard-groups list-container">
   <% items.each do |item| %>
   <li class="recent-group-item list-item list-avatar">
-    <div class="title">
-      <div class="avatar-box">
-        <%= user_avatar_tag(item, style: :medium) %>
-      </div>
+    <div class="avatar-box">
+      <%= user_avatar_tag(item, style: :medium) %>
+    </div>
+    <div class="title text-overflow">
       <%= group_name_tag(item) %>
     </div>
-    <div class="description">
+    <div class="description text-overflow">
       <%= truncate item.description, length: 100 %>
     </div>
     <div class="info">
-      <span class="members"><%= icon_tag("user") %> <%= item.members_count %></span>
+      <span class="members">
+        <%= icon_tag("group") %> <span><%= item.members_count %></span>
+      </span>
     </div>
     <div class="time-box"><%= timeago item.created_at %></div>
   </li>

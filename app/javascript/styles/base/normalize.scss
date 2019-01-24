@@ -1,5 +1,3 @@
-@import "primer-support/index.scss";
-
 // stylelint-disable
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -445,12 +443,7 @@ body {
 }
 
 a {
-  color: $text-blue;
   text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 b,

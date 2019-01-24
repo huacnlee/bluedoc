@@ -1,9 +1,6 @@
 <% if current_user %>
   <a href="<%= notifications_path %>" class="dropdown nav-notifications nav-link mr-2 <%= unread_notifications_count > 0 ? "unread" : "" %>">
     <%= icon_tag "bell" %>
-    <% if unread_notifications_count > 0 %>
-    <span class="Counter"><%= unread_notifications_count %></span>
-    <% end %>
   </a>
 
   <div class="dropdown">
@@ -48,6 +45,6 @@
     </div>
   </div>
 <% else %>
-  <%= link_to t(".Sign in"), main_app.new_user_session_path, class: "nav-link" %>
+  <%= link_to t(".Sign in"), main_app.new_user_session_path, class: "nav-link mr-3" %>
   <%= link_to t(".Sign up"), main_app.new_user_registration_path, class: "nav-link" %>
 <% end %>

@@ -1,7 +1,10 @@
 <ul class="list-container recent-docs">
   <% items.each do |item| %>
-    <li class="list-item recent-doc-item">
-      <div class="title">
+    <li class="list-item list-avatar recent-doc-item">
+      <div class="avatar-box icon-box icon-doc">
+        <%= icon_tag('docs') %>
+      </div>
+      <div class="title text-overflow">
         <%= doc_title_tag(item.subject) %>
       </div>
       <div class="path">

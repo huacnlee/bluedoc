@@ -8,24 +8,17 @@
     display: block;
   }
   .menu-item {
-    line-height: 20px;
     display: block;
     color: $text-main;
     text-decoration: none;
     margin-bottom: 10px;
-    .Counter,
-    .counter {
-      margin-left: 4px;
-      color: #999 !important;
-    }
     &.last {
       margin-bottom: 30px;
     }
     i.fas {
-      font-size: 16px;
       color: #979797;
-      margin-right: 5px;
-      transform: translateY(-5%);
+      margin: 0 3px;
+      transform: scale(1.2);
     }
     &.selected {
       color: $primary;
@@ -35,14 +28,12 @@
     }
     &.menu-sub-item {
       color: $text-gray-light;
-      .fas { opacity: 0; }
       &.selected {
         color: $primary;
-        .fas { opacity: 1; }
       }
     }
     &.depth-1 {
-      text-indent: 1em;
+      text-indent: 0.8em;
     }
   }
 

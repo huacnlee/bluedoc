@@ -3,76 +3,62 @@ auth_session = session[:omniauth] || {}
 auth_info = auth_session["info"]
 %>
 
-<div class="col-12 clearfix">
-  <div class="col-12 col-md-8 float-left">
-    <div class="sub-title">
-      <div class="heading"><%= icon_tag("profile") %> <%= t(".Sign in") %></div>
-      <div class="description"><%= t(".Input your username or email to sign in BookLab") %></div>
-    </div>
-
-    <% if auth_info %>
-    <div class="flash flash-warn mt-5">
-      <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
-      <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
-    </div>
-    <% end %>
-
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= render "/shared/error_messages", target: resource %>
-
-      <div class="form-group">
-        <%= f.label :email, t(".email") %>
-        <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-      </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="form-group form-check">
-          <%= f.check_box :remember_me, checked: true, class: "form-check-input" %>
-          <%= f.label :remember_me, class: "form-check-label" %>
-        </div>
-      <% end -%>
-
-      <div class="actions">
-        <%= f.submit t(".Sign in"), class: "btn btn-primary" %>
-        <%= link_to t(".forget_password"), new_password_path(resource_name), class: "btn" %>
-      </div>
-
-      <div class="py-3 mt-5 border-top">
-        <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
-      </div>
-    <% end %>
+<div class="col-12 mb-5">
+  <div class="text-center mb-4">
+    <div class="f1 mb-2"><%= t(".Sign in") %></div>
+    <div class="description f6 text-gray-light"><%= t(".Input your username or email to sign in BookLab") %></div>
   </div>
 
-  <div class="col-12 col-md-4 float-left mt-4 pl-md-4">
-    <% if defined? omniauth_authorize_path %>
-    <div class="subhead">
-      <h2><%= t(".Sign in with") %></h2>
+  <% if auth_info %>
+  <div class="flash flash-warn mt-5">
+    <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
+    <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
+  </div>
+  <% end %>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render "/shared/error_messages", target: resource %>
+
+    <div class="form-group">
+      <%= f.label :email, t(".email"), class: "control-label"  %>
+      <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
     </div>
-    <div class="list-group">
-        <% if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present? %>
-        <div class="list-group-item">
-          <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), class: "btn btn-block" %>
-        </div>
-        <% end %>
 
-        <% if ENV["OMNIAUTH_GITHUB_CLIENT_ID"].present? %>
-        <div class="list-group-item">
-        <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), class: "btn btn-block" %>
-        </div>
-        <% end %>
+    <div class="form-group">
+      <%= f.label :password, class: "control-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <%= link_to t(".forget_password"), new_password_path(resource_name), class: "float-right mt-2 f6 text-gray-light" %>
+    </div>
 
-        <% if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present? %>
-        <div class="list-group-item">
-        <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "btn btn-block" %>
-        </div>
-        <% end %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="form-group form-check">
+        <%= f.check_box :remember_me, checked: true, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "form-check-label" %>
       </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.submit t(".Sign in"), class: "btn btn-primary btn-full" %>
     </div>
+
+    <div class="border-bottom text-center pt-3 pb-5 f6 text-gray-light">
+      <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
+    </div>
+  <% end %>
+</div>
+<% if defined? omniauth_authorize_path %>
+<div class="col-12">
+  <div class="text-center f6 text-gray-light mb-3"><%= t(".Sign in with") %></div>
+  <div class="d-flex text-center text-gray">
+    <% if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present? %>
+      <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), class: "" %>
+    <% end %>
+    <% if ENV["OMNIAUTH_GITHUB_CLIENT_ID"].present? %>
+      <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), class: "flex-auto" %>
+    <% end %>
+    <% if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present? %>
+      <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "" %>
     <% end %>
   </div>
 </div>
+<% end %>

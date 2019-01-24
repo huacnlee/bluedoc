@@ -6,7 +6,10 @@
 
 <div class="dashboard-repos list-container" data-action-button-reload>
   <% @repositories.each do |repo| %>
-  <div class="recent-repo-item list-item">
+  <div class="recent-repo-item list-item list-avatar">
+    <div class="avatar-box icon-box icon-rep">
+      <%= icon_tag('rep') %>
+    </div>
     <div class="title"><%= repository_name_tag(repo) %></div>
     <div class="description">
       <%= truncate repo.description, length: 100 %>

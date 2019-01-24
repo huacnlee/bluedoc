@@ -7,8 +7,8 @@
         item << link_to(icon_tag("rep", label: t(".Repository")), "/dashboard/repositories", class: "menu-item")
         item << link_to(icon_tag("group", label: t(".Group")), "/dashboard/groups", class: "menu-item last")
         item << content_tag(:span, icon_tag("star", label: t(".Star")), class: "menu-item")
-        item << link_to(icon_tag("arrow", label: t(".Repository")), "/dashboard/stars", class: "menu-item menu-sub-item depth-1")
-        item << link_to(icon_tag("arrow", label: t(".Doc")), "/dashboard/stars/docs", class: "menu-item menu-sub-item depth-1")
+        item << link_to(icon_tag("star-rep", label: t(".Repository")), "/dashboard/stars", class: "menu-item menu-sub-item depth-1")
+        item << link_to(icon_tag("star-docs", label: t(".Doc")), "/dashboard/stars/docs", class: "menu-item menu-sub-item depth-1")
         item << link_to(icon_tag("watch", label: t(".Watch")), "/dashboard/watches", class: "menu-item")
       end %>
 

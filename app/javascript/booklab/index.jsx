@@ -1,32 +1,31 @@
-import Turbolinks from "turbolinks"
-import ReactDOM from "react-dom"
-import React from "react"
-import "@babel/polyfill"
-import "activestorage"
-import "primer-booklab"
-import "vendor/styleguide.js"
+import Turbolinks from 'turbolinks';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import '@babel/polyfill';
+import 'activestorage';
+import 'styles/event';
+import 'vendor/styleguide.js';
 import { render as timeagoRender } from 'timeago.js';
-import './rails-ujs-extends'
+import './rails-ujs-extends';
 
-Turbolinks.start()
-Turbolinks.setProgressBarDelay(150)
+import './reader/index.js';
+import './versions/index.js';
+import './follow-user/index.js';
+import './comments/index.js';
+import './mentionable/index.js';
+import './toc-editor/index.js';
 
-window.$ = jQuery
+Turbolinks.start();
+Turbolinks.setProgressBarDelay(150);
 
-const metaLocale = document.querySelector("meta[name=locale]");
+window.$ = jQuery;
+
+const metaLocale = document.querySelector('meta[name=locale]');
 window.App = {
   // en, zh_CN
-  locale: (metaLocale && metaLocale.content || "en").replace("-", "_")
-}
+  locale: (metaLocale && metaLocale.content || 'en').replace('-', '_'),
+};
 
-import './reader/index.js'
-import './versions/index.js'
-import './follow-user/index.js'
-import './comments/index.js'
-import './mentionable/index.js'
-import './toc-editor/index.js'
-
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener('turbolinks:load', () => {
   timeagoRender(document.querySelectorAll('.timeago'), App.locale);
-})
-
+});

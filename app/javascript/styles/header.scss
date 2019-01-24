@@ -43,9 +43,18 @@
     padding: 10px 5px;
   }
   .nav-notifications {
-    color: inherit;
-    &:hover {
-      text-decoration: none;
+    position: relative;
+    &.unread {
+      &::after {
+        position: absolute;
+        content: '';
+        top: 6px;
+        right: 1px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #FF4B4B;
+      }
     }
   }
   .dropdown-menu {

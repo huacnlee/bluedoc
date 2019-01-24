@@ -2,6 +2,7 @@
 }
 
 .repo-heading {
+  background: #F9F9F9;
   .heading {
     margin: 50px 0 20px 0;
   }
@@ -177,71 +178,6 @@
     }
   }
 }
-
-.repository-docs {
-  .doc-item {
-    position: relative;
-    padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0;
-
-    .icon-box {
-      display: none;
-      position: absolute;
-      top: 14px;
-      left: 15px;
-      color: #e0e0e0;
-      font-size: 20px;
-    }
-
-    a {
-      color: #777;
-    }
-
-    .infos {
-      float: left;
-
-      h4 {
-        font-size: 15px;
-        a { color: #333; }
-
-        .doc-icon-share {
-          display: inline-block;
-          margin-left: 5px;
-          color: #999;
-        }
-      }
-
-      .desc {
-        display: block;
-        a { color: #777; }
-
-        .fas { font-size: 16px; }
-
-        .time { color: #aaa; }
-      }
-    }
-
-    .actions {
-      float: right;
-      opacity: 0;
-    }
-
-    &:hover {
-      .actions {
-        opacity: 1;
-      }
-    }
-  }
-
-  @media (min-width: 768px) {
-    .doc-item {
-      padding: 15px;
-      .icon-box { display: block; }
-    }
-  }
-}
-
-
 
 #repository-members {
   border-bottom: 0;
