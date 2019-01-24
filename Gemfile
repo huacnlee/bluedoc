@@ -12,7 +12,7 @@ gem "react-rails"
 
 gem "sidekiq"
 
-gem "webpacker", "4.0.0.rc2"
+gem "webpacker", "4.0.0.rc5"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
