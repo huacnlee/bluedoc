@@ -25,7 +25,7 @@ class BlobsController < ApplicationController
     end
 
     def service_url(blob, style = nil)
-      Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}/v2", expires_in: 11.hours) do
+      Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}/v3", expires_in: 11.hours) do
         case BookLab::Blob.service_name
         when "Aliyun"
           # Aliyun OSS limit that url max age: 64800s
