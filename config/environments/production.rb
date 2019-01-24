@@ -26,14 +26,11 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
-  # Compress JavaScripts and CSS.
-  # config.assets.js_compressor = :uglifier
+  # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
-
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -42,10 +39,10 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
-  # Store uploaded files on the local file system (see config/storage.yml for options)
+  # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = (ENV["STORAGE_SERVICE"] || "local")
 
-  # Mount Action Cable outside main process or domain
+  # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
@@ -63,7 +60,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  # Use a real queuing backend for Active Job (and separate queues per environment)
+  # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter     = :sidekiq
   config.active_job.queue_name_prefix = "booklab"
 

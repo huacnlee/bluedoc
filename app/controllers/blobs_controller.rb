@@ -17,10 +17,10 @@ class BlobsController < ApplicationController
       case BookLab::Blob.service_name
       when "Disk"
         expires_in 100.days
-        send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: blob_disposition, filename: @blob.filename
+        send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: blob_disposition, filename: @blob.filename.to_s
       else
         expires_in 10.hours
-        redirect_to service_url(@blob, params[:s])
+        redirect_to service_url(@blob, params[:s]), allow_other_host: true
       end
     end
 
