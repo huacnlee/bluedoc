@@ -104,8 +104,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :add_member, target: member)
     assert_equal group.to_url, note.target_url
 
-    assert_equal "#{note.actor.name} has added you as member of <strong>#{group.name}</strong>", note.mail_body
-    assert_equal "#{note.actor.name} has added you as member of #{group.name}", note.mail_title
+    assert_equal "#{note.actor.name} has added you as member of [#{group.name}]", note.mail_body
+    assert_equal "#{note.actor.name} has added you as member of [#{group.name}]", note.mail_title
     assert_equal "add_member-User-#{group.id}", note.mail_message_id
   end
 
@@ -115,8 +115,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :add_member, target: member)
     assert_equal repo.to_url, note.target_url
 
-    assert_equal "#{note.actor.name} has added you as member of <strong>#{repo.user.name} / #{repo.name}</strong>", note.mail_body
-    assert_equal "#{note.actor.name} has added you as member of #{repo.user.name} / #{repo.name}", note.mail_title
+    assert_equal "#{note.actor.name} has added you as member of [#{repo.user.name} / #{repo.name}]", note.mail_body
+    assert_equal "#{note.actor.name} has added you as member of [#{repo.user.name} / #{repo.name}]", note.mail_title
     assert_equal "add_member-Repository-#{repo.id}", note.mail_message_id
   end
 
@@ -125,8 +125,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :repo_import, target: repo, meta: { status: :success })
 
     assert_equal repo.to_url, note.target_url
-    assert_equal "Repository <strong>#{repo.user.name} / #{repo.name}</strong> import has been <strong>success</strong>", note.mail_body
-    assert_equal "Repository #{repo.user.name} / #{repo.name} import has been success", note.mail_title
+    assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_body.strip
+    assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_title.strip
     assert_equal "repo_import-Repository-#{repo.id}", note.mail_message_id
   end
 
@@ -138,7 +138,7 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal comment.to_url, note.target_url
     assert_html_equal "<p><strong>#{note.actor_name}</strong> said:</p> #{comment.body_html}", note.mail_body
-    assert_equal "#{doc.title} got a comment", note.mail_title
+    assert_equal "#{doc.title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
   end
 
@@ -150,7 +150,7 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal comment.to_url, note.target_url
     assert_html_equal "<p><strong>#{note.actor_name}</strong> mentioned you:</p> #{comment.body_html}", note.mail_body
-    assert_equal "#{doc.title} got a comment", note.mail_title
+    assert_equal "#{doc.title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
   end
 
@@ -160,8 +160,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :mention, target: doc, actor: actor)
 
     assert_equal doc.to_url, note.target_url
-    assert_html_equal "<p><strong>#{note.actor_name}</strong> has mentioned you in <strong>#{doc.title}</strong></p>", note.mail_body
-    assert_equal "#{doc.title} got a mention", note.mail_title
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has mentioned you in [#{doc.title}].</p>", note.mail_body
+    assert_equal "#{doc.title} content has mentioned you.", note.mail_title
     assert_equal "comment-Doc-#{doc.id}", note.mail_message_id
   end
 end

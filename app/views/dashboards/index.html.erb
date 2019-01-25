@@ -1,26 +1,91 @@
-<div class="dashboard-main">
-  <%= render "menu" %>
+<div class="flex-wrap">
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content">
 
-  <div class="dashboard-content clearfix">
-    <div class="content-main">
-      <div class="sub-title">Recent activity</div>
-      <div class="mb-5">
+      <div class="dashboard-section">
+        <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
         <% if @recent_docs.blank? %>
           <div class="blankslate">
-            <h3>No recent docs</h3>
-            <p>You have no update Doc in recently.</p>
+            <p><%= t(".You have no update Doc in recently") %></p>
           </div>
         <% else %>
-          <%= render partial: "docs", locals: { items: @recent_docs } %>
+          <ul class="cards-container recent-docs">
+            <% @recent_docs.each do |item| %>
+              <li class="card recent-doc-item">
+                <div class="path">
+                  <%= user_display_name_tag(item.subject.repository.user) %> / <%= repository_name_tag(item.subject&.repository) %>
+                </div>
+                <div class="title">
+                  <%= doc_title_tag(item.subject) %>
+                </div>
+                <div class="info">
+                  <%= timeago item.updated_at %>
+                </div>
+                <div class="action">
+                  <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
       </div>
 
-      <div class="activities">
-        <div class="sub-title">All activity</div>
+      <div class="dashboard-section">
+        <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
+        <% if @recent_repos.blank? %>
+          <div class="blankslate">
+            <p><%= t(".You have no update Repositories in recently") %></p>
+          </div>
+        <% else %>
+        <ul class="cards-container repo-list">
+          <% @recent_repos.each do |item| %>
+            <li class="card repo-item">
+              <div class="path">
+                <%= user_display_name_tag(item.subject.user) %>
+              </div>
+              <div class="title">
+                <%= repository_name_tag(item.subject) %>
+              </div>
+              <div class="info">
+                <%= timeago item.updated_at %>
+              </div>
+              <div class="action">
+              <% if can? :create_doc, item.subject %>
+                <%= link_to icon_tag("add-doc"), item.subject.to_path("/docs/new"), target: "_blank" %>
+              <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+
+      <% if !@groups.blank? %>
+      <div class="dashboard-section">
+        <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
+        <ul class="cards-container group-list">
+          <% @groups.each do |group| %>
+            <li class="card card-avatar group-item">
+              <%= user_avatar_tag(group, style: :medium) %>
+              <div class="title">
+                <%= group_name_tag(group) %>
+              </div>
+              <div class="info">
+                <%= group.description || group.slug %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <div class="dashboard-section activities">
+        <div class="sub-title"><%= t(".All activity") %></div>
         <% if @activities.blank? %>
           <div class="blankslate">
-            <h3>No activity</h3>
-            <p>You have no activity in recently.</p>
+            <p><%= t(".You have no activity in recently") %></p>
           </div>
         <% else %>
           <%= render @activities %>
@@ -28,59 +93,6 @@
         <% end %>
       </div>
     </div>
-
-    <div class="sub-sidebar pl-4">
-      <% if !@recent_repos.blank? %>
-      <div class="sub-title">Recent Repositories</div>
-      <div class="Box mb-3">
-        <div class="Box-body">
-          <div class="repo-list clearfix">
-            <% @recent_repos.each do |repo| %>
-              <div class="repo-item">
-                <div class="icon-box">
-                  <%= icon_tag("repository") %>
-                </div>
-                <div class="title"><%= repository_path_tag(repo.subject) %></div>
-                <div class="time"><%= timeago repo.created_at %></div>
-              </div>
-            <% end %>
-            <div class="repo-item repo-item-more">
-              <div class="title"> <%= link_to "More ...", repositories_dashboard_path %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-      <% if !@groups.blank? %>
-      <div class="sub-title">Your Groups</div>
-      <div class="Box mb-3">
-        <div class="Box-body">
-          <div class="group-list clearfix">
-            <% @groups.each do |group| %>
-              <div class="group-item">
-                <div class="avatar-box">
-                  <%= user_avatar_tag(group, style: :small) %>
-                </div>
-                <div class="infos">
-                  <div class="title"><%= group_name_tag(group) %></div>
-                  <div class="description"><%= group.description || group.slug %></div>
-                </div>
-              </div>
-            <% end %>
-            <div class="group-item group-item-more">
-              <div class="infos">
-                <div class="title">
-                  <%= link_to "More ...", groups_dashboard_path %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-      <%= raw Setting.dashboard_sidebar_html %>
-    </div>
   </div>
+</div>
 </div>

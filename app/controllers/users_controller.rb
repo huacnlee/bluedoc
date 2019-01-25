@@ -56,8 +56,7 @@ class UsersController < ApplicationController
     @repositories = @repositories.page(params[:page]).per(20)
 
     @members = @group.members.includes(:user).limit(30)
-
-    render "groups/show"
+    render "groups/show", layout: "application"
   end
 
   def _followers

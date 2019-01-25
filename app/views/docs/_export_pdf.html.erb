@@ -1,18 +1,20 @@
 <% if can? :update, doc %>
 <div class="doc-export-pdf-box">
   <%= render layout: "shared/modal", locals: {
-    title: "Export",
-    button_text: "Export PDF",
+    title: t("docs.export_pdf..Export"),
+    button_text: t("docs.export_pdf..Export PDF"),
     button_class: "dropdown-item"
   } do %>
-    <div class="Box-body overflow-auto">
-      <h4 class="mb-2"><%= icon_tag("pdf") %> Export PDF</h4>
+    <div class="box-body overflow-auto">
+      <h4 class="mb-2"><%= icon_tag("pdf") %> <%= t("docs.export_pdf.Export PDF") %></h4>
 
       <% if doc.export_pdf_status == "running" %>
         <div class="description pdf-export-running">
           <div class="loading-box"><div class="loading"></div></div>
-          <p>PDF of this document page has in generating, please wait ...</p>
-          <p style="display: none" class="pdf-export-retry-message text-gray">If you are waiting a long time, and still no response, then you can <%= link_to "retry", doc.to_path("/pdf?force=1"), method: "post", remote: true %> it to generate a PDF export task again.</p>
+          <p><%= t("docs.export_pdf.PDF of this document page has in generating, please wait") %></p>
+          <p style="display: none" class="pdf-export-retry-message text-gray">
+            <%= raw t("docs.export_pdf.If you are waiting a long time, and still no response, then you can retry", retry: link_to("retry", doc.to_path("/pdf?force=1"), method: "post", remote: true)) %>
+          </p>
         </div>
         <script type="text/javascript">
           // sleep 5s to check status
@@ -31,19 +33,19 @@
           });
         </script>
       <% elsif doc.pdf.attached? %>
-        <p class="description">PDF of this document page has generated.</p>
-        <p class="description">Click the button to download it.</p>
+        <p class="description"><%= t("docs.export_pdf.PDF of this document page has generated") %></p>
+        <p class="description"><%= t("docs.export_pdf.Click the button to download it") %></p>
         <div class="form-group">
-          <%= link_to "Download PDF", doc.export_url(:pdf), target: "_blank", class: "btn btn-download-pdf btn-primary" %>
+          <%= link_to t("docs.export_pdf.Download PDF"), doc.export_url(:pdf), target: "_blank", class: "btn btn-download-pdf btn-primary" %>
 
-          <%= link_to "Generate Again!", doc.to_path("/pdf?force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": "Submiting..." %>
+          <%= link_to t("docs.export_pdf.Generate Again"), doc.to_path("/pdf?force=1"), class: "btn btn-regenerate-pdf", method: :post, remote: true, "disable-with": t("docs.export_pdf.Submiting") %>
         </div>
         <script type="text/javascript">
           clearInterval(window.checkPDFExportStatus);
         </script>
       <% else %>
-        <p class="description">Click button to genrate PDF file for this document.</p>
-        <div class="action mt-1"><%= link_to "Generate PDF", doc.to_path("/pdf?force=1"), class: "btn btn-generate-pdf btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
+        <p class="description"><%= t("docs.export_pdf.Click button to genrate PDF file for this document") %></p>
+        <div class="action mt-1"><%= link_to t("docs.export_pdf.Generate PDF"), doc.to_path("/pdf?force=1"), class: "btn btn-generate-pdf btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
       <% end %>
     </div>
   <% end %>

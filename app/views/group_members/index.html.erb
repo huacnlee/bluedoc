@@ -1,13 +1,13 @@
-<% title_tag "Members", @group.name %>
+<% title_tag t(".Members"), @group.name %>
 
 <%= render "menu" %>
 
 <div class="group-members">
-  <div class="border-bottom pb-3 mb-3 clearfix">
+  <div class="subhead">
     <div class="float-right">
       <%= render "add_member" %>
     </div>
-    <h4><%= @members.total_count %> Members</h4>
+    <h2><%= @members.total_count %> <%= t(".Number of Members") %></h2>
   </div>
 
   <div class="member-list">

@@ -1,16 +1,21 @@
-<ul class="recent-docs Box">
+<ul class="list-container recent-docs">
   <% items.each do |item| %>
-    <li class="recent-doc-item Box-row py-2">
-      <div class="icon-box">
-        <%= icon_tag "doc" %>
+    <li class="list-item list-avatar recent-doc-item">
+      <div class="avatar-box icon-box icon-doc">
+        <%= icon_tag("avatar-doc") %>
       </div>
-      <div class="title">
+      <div class="title text-overflow">
         <%= doc_title_tag(item.subject) %>
       </div>
-      <div class="info clearfix">
-        <%= repository_path_tag(item.subject&.repository) %>
-
-        <span class="ml-1 hide-sm float-right"><%= timeago item.updated_at %></span>
+      <div class="path">
+        <%= user_display_name_tag(item.subject.repository.user) %> / 
+        <%= repository_name_tag(item.subject&.repository) %>
+      </div>
+      <div class="time-box">
+        <%= timeago item.updated_at %>
+      </div>
+      <div class="action text-gray">
+        <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
       </div>
     </li>
   <% end %>

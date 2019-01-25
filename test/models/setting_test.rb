@@ -42,4 +42,17 @@ class SettingTest < ActiveSupport::TestCase
       assert_equal default[field], Setting.send(field), "Setting.#{field.to_s} should be #{default[field]}"
     end
   end
+
+  test "default_locale" do
+    assert_equal [["English (US)", "en"], ["简体中文", "zh-CN"]], Setting.locale_options
+    Setting.stub(:default_locale, "zh-CN") do
+      assert_equal "简体中文", Setting.default_locale_name
+    end
+    Setting.stub(:default_locale, "en") do
+      assert_equal "English (US)", Setting.default_locale_name
+    end
+    Setting.stub(:default_locale, "foo") do
+      assert_equal "English (US)", Setting.default_locale_name
+    end
+  end
 end

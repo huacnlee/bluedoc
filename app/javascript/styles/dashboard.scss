@@ -1,0 +1,51 @@
+.page-dashboards {
+  .footer {
+    display: none;
+  }
+  .sub-title {
+    border-bottom: 0;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: $text-main;
+  }
+
+  .dashboard-section {
+    margin-bottom: 40px;
+  }
+
+  // card layout style
+  .cards-container {
+    .card {
+      float: left;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    @include breakpoint(md) {
+      margin-right: -30px;
+      .card {
+        margin-right: 30px;
+        width: calc(50% - 30px);
+      }
+    }
+  }
+
+  // left menu
+  .dashboard-menu {
+    display: none;
+    width: inherit;
+    height: calc(100% - 80px);
+    font-size: 14px;
+    overflow-y: auto;
+    @include breakpoint(md) {
+      position: fixed;
+      display: block;
+    }
+  }
+  .list-item {
+    .btn {
+      border: 0;
+      background: transparent;
+    }
+  }
+}

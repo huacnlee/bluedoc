@@ -34,9 +34,9 @@ class RepositoriesController < Users::ApplicationController
       if @repository.save
         Activities::Repository.new(@repository).create
 
-        notice = "Repository was successfully created."
+        notice = t(".Repository was successfully created")
         if @repository.source?
-          notice = "Repository was successfully created, and executed importing in background, wait a moment you will see the import result."
+          notice = t(".Repository was successfully created, and executed importing in background")
         end
 
         format.html { redirect_to @repository.to_path, notice: notice }

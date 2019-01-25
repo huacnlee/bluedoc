@@ -1,0 +1,90 @@
+.user-avatar {
+  display: inline-block;
+  line-height: 1;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  line-height: calc(100vh);
+  border-radius: 50%;
+  vertical-align: middle;
+
+  &.avatar-tiny {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 12px;
+    vertical-align: middle;
+  }
+  &.avatar-small {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 13px;
+  }
+  &.avatar-medium {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+  }
+  &.avatar-large {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 42px;
+  }
+}
+
+
+
+.default-avatar {
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'themefont', 'PingFang SC', 'Microsoft YaHei';
+  font-size: 20px;
+  border-radius: 120px;
+  color: $white;
+  /* Black */
+  background-color: #414656;
+
+  /* Yellow */
+  &.default-avatar-0 { background-color: #F6C100; }
+  /* Purple */
+  &.default-avatar-1 { background-color: #BD66CC; }
+  /* Red */
+  &.default-avatar-2 { background-color: #FF4B4B; }
+  /* Blue */
+  &.default-avatar-3 { background-color: #2F70FF; }
+  /* Green */
+  &.default-avatar-4 { background-color: #3BB46E; }
+}
+// user/group setting page common styles
+.avatar-wrap {
+  display: flex;
+  // upload file btn
+  .js-manual-file-chooser {
+    display: none;
+  }
+  .image-box {
+    margin-right: 40px;
+    .avatar-large {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      font-size: 60px;
+    }
+  }
+  .description {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .btn-upload{
+    cursor: pointer;
+    .fas {
+      font-size: 1.5em;
+      margin-right: 5px;
+    }
+  }
+}

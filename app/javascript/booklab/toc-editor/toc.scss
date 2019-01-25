@@ -22,7 +22,7 @@
   &:first-child { border-radius: 3px 3px 0 0; }
   &:last-child { border-radius: 0 0 3px 3px; }
   &.active {
-    background: #f9f9f9;
+    background: rgba(255, 255, 214, 0.95);
     .form-edit {
       pointer-events: auto;
     }

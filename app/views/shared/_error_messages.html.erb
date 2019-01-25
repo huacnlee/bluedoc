@@ -1,7 +1,7 @@
 <% if target.errors.any? %>
   <div class="flash flash-block flash-error">
     <%= close_button %>
-    <div class="mb-1"><strong>There has <%= target.errors.count %> issues:</strong></div>
+    <div class="mb-1"><strong><%= t(".There has count issues", count: target.errors.count) %></strong></div>
     <ul class="list-style-none">
       <% target.errors.full_messages.each do |msg| %>
        <li><%= msg %></li>

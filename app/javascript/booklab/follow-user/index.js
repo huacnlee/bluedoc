@@ -10,6 +10,8 @@ document.addEventListener("turbolinks:load", () => {
     const btn = $(e.currentTarget)
     const userId = btn.data("id")
     const span = btn.find("span")
+    const label = btn.data("label");
+    const undoLabel = btn.data("undo-label");
     const followerCounter = $(".followers-count[data-login='"+ userId +"']")
 
     if (btn.hasClass("active")) {
@@ -18,7 +20,7 @@ document.addEventListener("turbolinks:load", () => {
         type: "DELETE",
         success: (res) => {
           btn.removeClass('active')
-          span.text("Follow")
+          span.text(label)
           followerCounter.text(res.count)
 
         }
@@ -29,7 +31,7 @@ document.addEventListener("turbolinks:load", () => {
         type: 'POST',
         success: (res) => {
           btn.addClass('active').attr("title", "")
-          span.text("Unfollow")
+          span.text(undoLabel)
           followerCounter.text(res.count)
         }
       })

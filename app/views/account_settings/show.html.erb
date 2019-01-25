@@ -1,23 +1,52 @@
 <% title_tag "Account Settings" %>
-
-<div class="clearfix">
-  <%= render "menu" %>
-
-  <div class="col-12 col-md-6 float-left">
+<div class="flex-wrap">
+<div class="aside-wrap">
+  <%= render "/users/sidebar" %>
+</div>
+<div class="main-wrap">
+  <div class="main-content">
+    <h1 class="title"><%= t(".Profile") %></h1>
+    <h2 class="sub-title"><%= t(".Avatar") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <div class="form-title"><h2>Public profile</h2></div>
+      <input type="hidden" name="_by" value="profile" />
+      <div class="avatar-wrap">
+        <div class="image-box">
+          <%= user_avatar_tag(current_user, style: :large, link: false) %>
+        </div>
+        <div class="form-group flex-auto">
+          <p class="description text-gray">
+            <%= t(".This photo will be used to identify you in BookLab It will be visible to anyone") %>
+            <br>
+            <%= t(".Use a photo or image rather than text and upload an image that is 200px square or larger") %>
+          </p>
+          <label class="btn-upload">
+            <%= icon_tag("photo") %>
+            <%= t(".Upload new picture") %>
+            <%= f.file_field :avatar, class: "js-manual-file-chooser" %>
+          </label>
+        </div>
+      </div>
+      <script type="text/javascript">
+        $("form").on("change", ".js-manual-file-chooser", (e) => {
+          $form = $(e.delegateTarget);
+          $form.submit();
+        });
+      </script>
+    <% end %>
+
+    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <%= render "/shared/error_messages", target: @user %>
 
       <input type="hidden" name="_by" value="profile" />
 
       <div class="form-group">
         <%= f.label :name, class: "control-label" %>
-        <%= f.text_field :name, class: "form-control", style: "width: 200px" %>
+        <%= f.text_field :name, class: "form-control"%>
       </div>
 
       <div class="form-group">
         <%= f.label :description, class: "control-label" %>
-        <%= f.text_area :description, class: "form-control short", style: "width: 400px" %>
+        <%= f.text_area :description, class: "form-control"%>
       </div>
 
       <div class="form-group">
@@ -31,30 +60,16 @@
       </div>
 
       <div class="form-group">
-        <%= f.submit "Update profile", class: "btn btn-primary" %>
+        <%= f.label :locale, class: "control-label" %>
+        <%= f.select :locale, Setting.locale_options,
+          { include_blank: t(".System default", locale_name: Setting.default_locale_name) },
+          { class: "form-control" } %>
       </div>
-    <% end %>
-  </div>
 
-  <div class="col-12 col-md-3 float-left pl-md-4">
-    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <input type="hidden" name="_by" value="profile" />
-      <div class="form-title"><h2>Avatar</h2></div>
-      <div class="image-box width-full text-center">
-        <%= user_avatar_tag(current_user, style: :large, link: false) %>
-      </div>
       <div class="form-group">
-        <label class="btn width-full text-center">
-           Upload new picture
-           <%= f.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
-         </label>
+        <%= f.submit t(".Update profile"), class: "btn btn-primary btn-submit" %>
       </div>
-      <script type="text/javascript">
-        $("form").on("change", ".js-manual-file-chooser", (e) => {
-          $form = $(e.delegateTarget);
-          $form.submit();
-        });
-      </script>
     <% end %>
   </div>
+</div>
 </div>

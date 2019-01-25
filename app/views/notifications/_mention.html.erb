@@ -3,7 +3,7 @@ mentionable = notification.target
 %>
 
 <% if mentionable %>
-  <strong><%= notification.actor_name %></strong> was mentioned you in
+  <strong><%= notification.actor_name %></strong> <%= t(".was mentioned you in") %>
   <strong>
     <% if mentionable.is_a?(Comment) %>
       <%= mentionable.commentable_title %>

@@ -34,7 +34,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   test "icon_tag" do
     html = icon_tag("times", label: "Close", class: "search")
-    assert_equal %(<i class="octicon fas fa-times search"></i> <span>Close</span>), html
+    assert_equal %(<i class="fas fa-times search"></i> <span>Close</span>), html
   end
 
   test "timeago" do
@@ -102,7 +102,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
       count_html = ""
       if with_count
-        count_html = raw(%(<button class="social-count" href="#url">#{target.send(action_count)}</button>))
+        count_html = raw(%(<span class="social-count" >#{target.send(action_count)}</span>))
       end
       btn_class = opts[:class] || "btn btn-sm"
       btn_class += " btn-with-count" if with_count

@@ -51,7 +51,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo = build(:repository, slug: "notes")
     assert_equal false, repo.valid?
-    assert_equal ["invalid or [#{repo.slug}] is a keyword"], repo.errors[:slug]
+    assert_equal ["invalid, [#{repo.slug}] is a keyword."], repo.errors[:slug]
   end
 
   test "slug" do

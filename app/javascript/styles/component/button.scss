@@ -1,0 +1,67 @@
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 6px 15px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  .fas {
+    transform: scale(1.2);
+  }
+  &:hover {
+    text-decoration: none;
+    color: $primary;
+  }
+}
+
+.social-count {
+  @extend .btn;
+  border-left: 0px;
+  margin-right: 15px;
+}
+
+.btn-link {
+  border: 0px;
+  background: transparent;
+}
+
+.btn-primary {
+  border: 1px solid #9BBAFF;
+  background: #F3F7FF;
+  color: $primary;
+
+  &:hover {
+    border-color: #8EAAEE;
+  }
+}
+
+.btn-danger {
+  border: 1px solid #FFC1BE;
+  background: #FFF3F3;
+  color: #EE4343;
+
+  &:hover {
+    border-color: #F3B7B7;
+    color: #AA2528;
+    background: #FFF3F3;
+  }
+}
+
+.btn-block {
+  display: block;
+}
+
+.btn-submit {
+  width: 340px;
+}
+
+.btn-full {
+  width: 100%;
+}

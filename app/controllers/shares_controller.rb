@@ -10,6 +10,7 @@ class SharesController < ApplicationController
         raise ActiveRecord::RecordNotFound
       end
 
+      current_user&.read_doc(@doc)
       @comments = @doc.comments.with_includes.order("id asc")
     end
 

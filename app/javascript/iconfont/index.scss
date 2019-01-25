@@ -1,0 +1,52 @@
+@import './booklab.scss';
+@import './iconfont.scss';
+
+.fas {
+  font-family: 'iconfont', 'booklab';
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+// hack
+.selected {
+  .fa-dashboard {
+    @extend .fa-dashboard-fill;
+  }
+  .fa-doc {
+    @extend .fa-doc-fill;
+  }
+  .fa-repo {
+    @extend .fa-repo-fill;
+  }
+  .fa-group {
+    @extend .fa-group-fill;
+  }
+  .fa-star {
+    @extend .fa-star-fill;
+  }
+  .fa-watch {
+    @extend .fa-watch-fill;
+  }
+  .fa-star-repo {
+    @extend .fa-star-repo-fill;
+  }
+  .fa-star-doc {
+    @extend .fa-star-doc-fill;
+  }
+}
+a[data-method=delete] {
+  .fa-star {
+    @extend .fa-star-fill;
+  }
+}
+a[data-method=post] {
+  .fa-watch {
+    @extend .fa-unwatch;
+  }
+}

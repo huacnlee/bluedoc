@@ -16,7 +16,7 @@
       <%= item.repository&.name %>
     </span>
 
-    <span class="date float-right">Updated at <%= timeago item.body_updated_at %></span>
+    <span class="date float-right"><%= t("updated at") %> <%= timeago item.body_updated_at %></span>
   </div>
   <div class="description">
     <%= highlight(description) %>

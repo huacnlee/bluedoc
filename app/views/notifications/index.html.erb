@@ -1,39 +1,46 @@
-<div class="col-12 clearfix">
-  <div class="col-3 v-align-top pr-4 float-left">
-    <ul class="menu">
+<div class="flex-wrap">
+<div class="aside-wrap">
+  <div class="aside-content">
+    <nav class="menu">
       <%= render_list_items(class: "menu-item", type: :link, check_parameters: true) do |li|
         li << link_to(main_app.notifications_path, class: "menu-item") do %>
-          Unread<span class="Counter"><%= unread_notifications_count %></span>
+          <span class="mr-3"><%= t(".Unread") %></span>
+          <b class="counter"><%= unread_notifications_count %></b>
         <% end
-        li << link_to("All", main_app.notifications_path(tab: "all"), class: "menu-item")
+        li << link_to(t(".All"), main_app.notifications_path(tab: "all"), class: "menu-item")
       end %>
     </ul>
   </div>
+</div>
 
-  <div class="col-9 v-align-top float-left">
-    <div class="notifications Box">
-      <div class="Box-header clearfix">
-        <span class="float-right">
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="notifications box">
+      <div class="subhead clearfix">
+        <h2>
+          <span class="mr-5">
+            <% if params[:tab] == "all" %><%= t(".All") %><% else %><%= t(".Unread") %><% end %>
+          </span>
           <% if params[:tab] == "all" %>
-            <%= link_to "Clear all", main_app.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+            <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
           <% else %>
-            <%= form_with scope: :notification, url: main_app.read_notifications_path, method: :post do |form| %>
+            <%= form_with scope: :notification, class: "d-inline-block", url: main_app.read_notifications_path, method: :post do |form| %>
               <% @notifications.each do |note| %>
               <input type="hidden" name="ids[]" value="<%= note.id %>">
               <% end %>
-              <button type="submit" class="btn btn-sm">Mark as read</button>
+              <button type="submit" class="btn btn-sm"><%= t(".Mark as read") %></button>
             <% end %>
           <% end %>
-        </span>
-
-        <span class="title">
-          <% if params[:tab] == "all" %>All<% else %>Unread<% end %> notifications
-        </span>
+        </h2>
       </div>
       <div class="list">
         <% if @notifications.blank? %>
-          <div class="blankslate m-4">
-            You does not have any <% if params[:tab] != "all" %>unread<% end %> notifications.
+          <div class="blankslate">
+            <% if params[:tab] == "all" %>
+              <%= t(".You does not have any notifications") %>
+            <% else %>
+              <%= t(".You does not have any unread notifications") %>
+            <% end %>
           </div>
         <% else %>
           <%= render @notifications %>
@@ -42,6 +49,7 @@
     </div>
     <%= paginate @notifications, params: { controller: "notifications", action: "index" } %>
   </div>
+</div>
 </div>
 
 <script>

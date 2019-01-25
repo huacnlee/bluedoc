@@ -1,0 +1,56 @@
+.autocomplete-results {
+    position: absolute;
+    z-index: 99;
+    max-height: 20em;
+    overflow-y: auto;
+    font-size: 13px;
+    list-style: none;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 9px rgba(27, 31, 35, .2)
+}
+
+.autocomplete-results .no-results {
+    display: none
+}
+
+.autocomplete-group {
+    width: 100%;
+    overflow: hidden
+}
+
+.autocomplete-item {
+    display: block;
+    padding: 5px;
+    overflow: hidden;
+    font-weight: 600;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer
+}
+
+.autocomplete-item.navigation-focus, .autocomplete-item.selected,
+.autocomplete-item:hover, .autocomplete-item[aria-selected=true] {
+    color: $text-main;
+    text-decoration: none;
+    background-color: #f1f8ff
+}
+
+.autocomplete-item.navigation-focus .ldap-group-dn, .autocomplete-item.navigation-focus .organization-member,
+.autocomplete-item.selected .ldap-group-dn, .autocomplete-item.selected .organization-member,
+.autocomplete-item:hover .ldap-group-dn, .autocomplete-item:hover .organization-member,
+.autocomplete-item[aria-selected=true] .ldap-group-dn, .autocomplete-item[aria-selected=true] .organization-member {
+    color: #f6f8fa
+}
+
+.autocomplete-item .secondary-label {
+    font-weight: 400
+}
+
+.autocomplete-item .organization-member {
+    float: right;
+    padding-top: 1px;
+    color: #6a737d
+}
+

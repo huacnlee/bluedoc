@@ -1,14 +1,14 @@
-<% title_tag "Docs", @repository.name %>
+<% title_tag t(".Docs"), @repository.name %>
 
 <%= render "menu" %>
 
 <div class="repository-docs">
   <div class="subnav">
     <div class="float-right subnav-sorting">
-      <span class="text-gray">Sort by:</span>
-      <%= link_to("Updated","?sort=recent", class: "btn-link #{'selected' if params[:sort] != 'created'}") %>
+      <span class="text-gray"><%= t(".Sort by") %></span>
+      <%= link_to(t(".Sort by Updated"),"?sort=recent", class: "btn-link #{'selected' if params[:sort] != 'created'}") %>
       <span class="divider">/</span>
-      <%= link_to("Created", "?sort=created", class: "btn-link #{'selected' if params[:sort] == 'created'}") %>
+      <%= link_to(t(".Sort by Created"), "?sort=created", class: "btn-link #{'selected' if params[:sort] == 'created'}") %>
     </div>
   </div>
   <% if @docs.blank? %>
@@ -17,7 +17,6 @@
     <div class="docs">
       <%= render partial: "doc", collection: @docs %>
     </div>
-
     <%= paginate @docs %>
   <% end %>
 </div>

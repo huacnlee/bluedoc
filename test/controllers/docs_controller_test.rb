@@ -132,7 +132,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /#{doc.title}/, response.body
     assert_select ".markdown-body"
-    assert_select ".label-private", 0
+    assert_select ".label.label-private", 0
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
@@ -180,7 +180,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal true, user.read_doc?(doc)
 
     assert_select "details.doc-share-button-box" do
-      assert_select "summary .text", text: "Share"
+      # assert_select "summary .text", text: "Share"
       assert_select ".dropdown-menu" do
         assert_select ".description", text: "Create a share link to allow non-member visit this doc."
         assert_select ".share-user", 0
@@ -204,7 +204,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_select "details.doc-share-button-box" do
-      assert_select "summary .text", text: "Sharing"
+      # assert_select "summary .text", text: "Sharing"
       assert_select ".dropdown-menu" do
         assert_select ".description", text: "Everyone can visits this doc with the share link:"
         assert_select "input[value=?]", share.to_url
@@ -671,9 +671,6 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".edit-doc-lock-overlay" do
       assert_select "form[action=?]", doc.to_path("/lock")
       assert_select ".user-name", text: user.slug
-      assert_select ".avatar" do
-        assert_select "[src=?]", user.avatar_url
-      end
     end
   end
 

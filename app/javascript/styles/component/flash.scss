@@ -1,0 +1,54 @@
+.flash {
+  padding: 10px;
+  border: 1px solid rgba(47, 112, 255, 0.19);
+  background: rgba(47, 112, 255, 0.06);
+
+  &.flash-error {
+    color: $danger;
+    border-color: rgba(238, 67, 67, 0.68);
+    background-color: rgba(238, 67, 67, 0.1);
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    float: right;
+    margin-top: -2px;
+    font-size: 18px;
+    line-height: 100%;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: $primary;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.flash-block {
+  padding: 10px;
+  margin-bottom: 20px;
+  display: block;
+  ul, ol {
+    margin-left: 15px;
+  }
+}
+
+.flash-full {
+  .flash-block {
+    padding: 5px 10px;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    .container {
+      text-align: left;
+      display: block;
+    }
+  }
+}
+

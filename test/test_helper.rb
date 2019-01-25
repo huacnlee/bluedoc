@@ -23,6 +23,7 @@ class ActiveSupport::TestCase
   setup do
     DatabaseCleaner.start
     MockElasticSearch.start
+    I18n.locale = "en"
   end
 
   teardown do
@@ -86,7 +87,7 @@ class ActionDispatch::IntegrationTest
   def assert_signed_in
     get account_settings_path
     assert_equal 200, response.status
-    assert_match /Signed in as/, response.body
+    assert_select "a[href='/account/sign_out']"
   end
 
   # assert react_component render

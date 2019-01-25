@@ -1,36 +1,35 @@
 <% content_for :subnav do %>
-<div class="pagehead repohead experiment-repo-nav">
-  <div class="container-lg repohead-details-container px-3 clearfix">
-    <div class="repo-heading group-heading">
+<div class="group-heading">
+  <div class="container clearfix">
+    <div class="heading">
       <div class="clearfix">
         <div class="group-avatar-box float-left pr-3 v-align-middle">
-          <%= user_avatar_tag(@group, style: :medium, link: false) %>
+          <%= user_avatar_tag(@group, style: :large, link: false) %>
         </div>
         <div class="v-align-middle float-left">
           <div class="group-title d-block"><%= @group.name %></div>
-          <div class="pt-2">
+          <div class="pt-2 text-gray-light">
             <%= @group.description %>
           </div>
-          <div class="pt-2">
+          <div class="pt-2 text-gray-light">
             <% if @group.location.present? %>
             <span class="group-location mr-3"><%= icon_tag("location") %> <%= @group.location %></span>
             <% end %>
-
             <% if @group.url.present? %>
-            <span class="group-url"><%= icon_tag("link") %> <%= link_to @group.url, @group.url %></span>
+            <span class="group-url"><%= link_to icon_tag("link", label: @group.url), @group.url %></span>
             <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-lg px-3">
+  <div class="container px-3">
     <nav class="reponav clearfix" role="navigation">
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        item << link_to(icon_tag("repositories", label: "Repositories"), @group.to_path, class: "reponav-item")
-        item << link_to("Search", search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
-        item << link_to(icon_tag("users", label: "People"), group_members_path(@group), class: "reponav-item")
-        item << link_to(icon_tag("gear", label: "Settings"), group_settings_path(@group), class: "reponav-item") if can? :update, @group
+        item << link_to(t(".Repository"), @group.to_path, class: "reponav-item")
+        item << link_to(t(".Search"), search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
+        item << link_to(t(".Member"), group_members_path(@group), class: "reponav-item")
+        item << link_to(t(".Settings"), group_settings_path(@group), class: "reponav-item") if can? :update, @group
       end %>
     </nav>
   </div>
@@ -39,5 +38,5 @@
 
 
 <% content_for :nav_search do %>
-  <%= render partial: "/layouts/search_nav", locals: { props: { action: search_group_path(@group), scope: "Group", value: params[:q] } } %>
+  <%= render partial: "/layouts/search_nav", locals: { props: { action: search_group_path(@group), scope: t(".Group"), value: params[:q] } } %>
 <% end %>

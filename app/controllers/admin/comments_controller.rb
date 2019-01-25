@@ -13,7 +13,7 @@ class Admin::CommentsController < Admin::ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to admin_comments_path, notice: "Comment was successfully updated."
+      redirect_to admin_comments_path, notice: t(".Comment was successfully updated")
     else
       render :edit
     end

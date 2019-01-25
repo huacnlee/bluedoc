@@ -1,0 +1,66 @@
+// Breakpoint widths
+
+$width-xs: 0;
+$width-sm: 544px;
+$width-md: 768px;
+$width-lg: 1080px;
+$width-xl: 1280px;
+
+$width-max: 1080px;
+
+$breakpoints: (
+  // Small screen / phone
+  sm: $width-sm,
+  // Medium screen / tablet
+  md: $width-md,
+  // Large screen / desktop (980 + (16 * 2)) <= container + gutters
+  lg: $width-lg,
+  // Extra large screen / wide desktop
+  xl: $width-xl
+) !default;
+
+$responsive-variants: ("": "");
+@each $key in map-keys($breakpoints) {
+  $responsive-variants: map-merge($responsive-variants, ($key: "-#{$key}"));
+}
+
+// Responsive media queries
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == "" {
+    @content;
+  }
+
+  @else {
+    // Retrieves the value from the key
+    $value: map-get($breakpoints, $breakpoint);
+
+    // If the key exists in the map
+    @if $value != null {
+      // Prints a media query based on the value
+      @media (min-width: $value) {
+        @content;
+      }
+    }
+
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+    }
+  }
+}
+
+$spacer: 20px !default;
+$spacers: (
+  0,
+  round($spacer / 2),
+  $spacer,
+  $spacer * 2,
+  $spacer * 3,
+  $spacer * 4,
+  $spacer * 5,
+  $spacer * 6
+) !default;
+
+$body-font: 'themefont', 'PingFang SC', 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica,
+  'Hiragino Sans GB', Arial, sans-serif;

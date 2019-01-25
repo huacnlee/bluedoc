@@ -1,0 +1,122 @@
+.nav-header {
+  width: 100%;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: #fff;
+  .header-shadow {
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
+  }
+  .fas {
+    font-size: 1.25em;
+  }
+  .header-content {
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand {
+    font-size: 18px;
+    .fas {
+      font-size: 22px;
+      margin-bottom: -3px;
+    }
+    color: #333;
+    text-decoration: none !important;
+
+    &:hover {
+      color: #111 !important;
+    }
+  }
+  .logo {
+    font-size: 15px;
+    color: $text-main;
+    a {
+      color: inherit;
+    }
+  }
+  .dropdown {
+    margin-left: 10px;
+    padding: 10px 5px;
+  }
+  .nav-notifications {
+    position: relative;
+    &.unread {
+      &::after {
+        position: absolute;
+        content: '';
+        top: 6px;
+        right: 1px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #FF4B4B;
+      }
+    }
+  }
+  .dropdown-menu {
+    font-size: 14px;
+    line-height: 1.5;
+    color: $text-main;
+    margin-top: 2px;
+  }
+  .avatar {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 11px;
+  }
+  .nav-link {
+    margin-left: 8px;
+  }
+  .search {
+    display: none;
+    @include breakpoint(sm) {
+      display: block;
+    }
+  }
+}
+
+.subnav-search-context {
+  .autocomplete-results {
+    margin-top: 3px;
+    width: 320px;
+    padding: 8px;
+    border-radius: 5px;
+
+    .autocomplete-item {
+      display: inline;
+      padding: 0;
+      a {
+        border-radius: 3px;
+        padding: 5px;
+        text-decoration: none;
+        font-weight: normal;
+        display: block;
+        @extend .clearfix;
+
+        .scope-name {
+          color: #aaa;
+          background: #f7f7f7;
+          border-radius: 3px;
+          padding: 2px 4px;
+        }
+      }
+
+      &:hover {
+        a {
+          color: #fff !important;
+          background: $primary;
+          .scope-name {
+            color: #f0f0f0;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

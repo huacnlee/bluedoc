@@ -1,0 +1,114 @@
+.clearfix::before, .clearfix::after {
+	display: table;
+	clear: both;
+	content: '';
+}
+
+.flex-auto {
+  width: 0;
+  height: 0;
+	flex: auto;
+}
+
+.details-reset {
+  // Remove marker added by the display: list-item browser default
+  > summary { list-style: none; outline: none; }
+  // Remove marker added by details polyfill
+  > summary::before { display: none; }
+  // Remove marker added by Chrome
+  > summary::-webkit-details-marker { display: none; }
+}
+
+.float-right { float: right; }
+.float-left { float: left; }
+.border-bottom { border-bottom: 1px solid #eee; }
+.border-top { border-top: 1px solid #eee; }
+.position-relative {
+  position: relative;
+}
+.d-block { display: block; }
+.font-weight-bold { font-weight: bold; }
+
+// Responsive padding spacer utilities
+@each $breakpoint, $variant in $responsive-variants {
+  @include breakpoint($breakpoint) {
+    // Loop through the spacer values
+    @for $i from 1 through length($spacers) {
+      $size: nth($spacers, $i); // xs, sm, md, lg, xl
+      $scale: $i - 1;  // 0, 1, 2, 3, 4, 5, 6
+
+      /* Set a $size padding to all sides at $breakpoint */
+      .p#{$variant}-#{$scale}  { padding: $size !important; }
+      /* Set a $size padding to the top at $breakpoint */
+      .pt#{$variant}-#{$scale} { padding-top: $size !important; }
+      /* Set a $size padding to the right at $breakpoint */
+      .pr#{$variant}-#{$scale} { padding-right: $size !important; }
+      /* Set a $size padding to the bottom at $breakpoint */
+      .pb#{$variant}-#{$scale} { padding-bottom: $size !important; }
+      /* Set a $size padding to the left at $breakpoint */
+      .pl#{$variant}-#{$scale} { padding-left: $size !important; }
+
+      /* Set a $size padding to the left & right at $breakpoint */
+      .px#{$variant}-#{$scale} {
+        padding-right: $size !important;
+        padding-left: $size !important;
+      }
+
+      /* Set a $size padding to the top & bottom at $breakpoint */
+      .py#{$variant}-#{$scale} {
+        padding-top: $size !important;
+        padding-bottom: $size !important;
+      }
+    }
+  }
+}
+
+@each $breakpoint, $variant in $responsive-variants {
+  @include breakpoint($breakpoint) {
+    // Loop through the spacer values
+    @for $i from 1 through length($spacers) {
+      $size: nth($spacers, $i); // sm, md, lg, xl
+      $scale: $i - 1;  // 0, 1, 2, 3, 4, 5, 6
+
+      /* Set a $size margin to all sides at $breakpoint */
+      .m#{$variant}-#{$scale}  { margin: $size !important; }
+      /* Set a $size margin on the top at $breakpoint */
+      .mt#{$variant}-#{$scale} { margin-top: $size !important; }
+      /* Set a $size margin on the right at $breakpoint */
+      .mr#{$variant}-#{$scale} { margin-right: $size !important; }
+      /* Set a $size margin on the bottom at $breakpoint */
+      .mb#{$variant}-#{$scale} { margin-bottom: $size !important; }
+      /* Set a $size margin on the left at $breakpoint */
+      .ml#{$variant}-#{$scale} { margin-left: $size !important; }
+
+      @if ($size != 0) {
+        /* Set a negative $size margin on top at $breakpoint */
+        .mt#{$variant}-n#{$scale} { margin-top   : -$size !important; }
+        /* Set a negative $size margin on the right at $breakpoint */
+        .mr#{$variant}-n#{$scale} { margin-right : -$size !important; }
+        /* Set a negative $size margin on the bottom at $breakpoint */
+        .mb#{$variant}-n#{$scale} { margin-bottom: -$size !important; }
+        /* Set a negative $size margin on the left at $breakpoint */
+        .ml#{$variant}-n#{$scale} { margin-left  : -$size !important; }
+      }
+
+      /* Set a $size margin on the left & right at $breakpoint */
+      .mx#{$variant}-#{$scale} {
+        margin-right: $size !important;
+        margin-left: $size !important;
+      }
+
+      /* Set a $size margin on the top & bottom at $breakpoint */
+      .my#{$variant}-#{$scale} {
+        margin-top: $size !important;
+        margin-bottom: $size !important;
+      }
+    }
+
+    /* responsive horizontal auto margins */
+    .mx#{$variant}-auto {
+      margin-right: auto !important;
+      margin-left: auto !important;
+    }
+  }
+}

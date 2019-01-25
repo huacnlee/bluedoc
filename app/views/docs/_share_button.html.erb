@@ -3,33 +3,27 @@
   open_attr = action_name == "share" ? " open" : ""
 %>
 <details
-  class="doc-share-button-box position-relative details-overlay details-reset d-inline-block hide-sm ml-1" <%= open_attr %>>
-  <summary class="btn btn-sm btn-primary">
-    <%= icon_tag("share") %> <span class="text"><% if doc.share %>Sharing<% else %>Share<% end %></span>
-  </summary>
-  <div class="doc-share-button-box position-relative text-right">
-    <div class="position-relative">
-      <div class="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left Box box-shadow-large" style="width: 420px">
-        <h4 class="mb-2"><%= icon_tag("share") %> Share doc</h4>
-        <% if doc.share %>
-          <p class="description">Everyone can visits this doc with the share link:</p>
-          <div class="form-group">
-            <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
-          </div>
-          <div class="action mt-1 clearfix">
-            <%= link_to icon_tag("delete-link", label: "Unshare"), doc.to_path("/share?unshare=1"), class: "btn btn-sm btn-danger btn-cancel-share", method: :post, remote: true, "disable-with": "Submiting..." %>
-            <clipboard-copy class="btn btn-sm float-right" data-clipboard-text="<%= doc.share.to_url %>"><i class="fas fa-copy-link"></i> Copy Link</clipboard-copy>
-          </div>
-
-          <div class="share-user pt-3">
-            <%= user_name_tag(doc.share&.user) %> <span class="text-gray">opened share at <%= timeago doc.share.created_at %></span>
-          </div>
-        <% else %>
-          <p class="description">Create a share link to allow non-member visit this doc.</p>
-          <div class="action mt-1"><%= link_to "Open share", doc.to_path("/share"), class: "btn btn-open-share btn-sm btn-primary", method: :post, remote: true, "disable-with": "Submiting..." %>
-        <% end %>
+  class="doc-share-button-box dropdown details-overlay details-reset d-inline-block hide-sm ml-1" <%= open_attr %>>
+  <summary class="btn btn-sm"><%= icon_tag("share") %></summary>
+  <div class="doc-share-button-box dropdown-menu dropdown-menu-sw p-4" style="width: 420px">
+    <h4 class="mb-2"><%= icon_tag("share") %> <%= t(".Share doc") %></h4>
+    <% if doc.share %>
+      <p class="description"><%= t(".Everyone can visits this doc with the share link") %></p>
+      <div class="form-group">
+        <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
       </div>
-    </div>
+      <div class="action mt-1 clearfix">
+        <%= link_to icon_tag("delete-link", label: t(".Unshare")), doc.to_path("/share?unshare=1"), class: "btn btn-sm btn-danger btn-cancel-share", method: :post, remote: true, "disable-with": t(".Submiting") %>
+        <clipboard-copy class="btn btn-sm float-right" data-clipboard-text="<%= doc.share.to_url %>"><i class="fas fa-copy-link"></i> <%= t(".Copy Link") %></clipboard-copy>
+      </div>
+
+      <div class="share-user pt-3">
+        <%= user_name_tag(doc.share&.user) %> <span class="text-gray"><%= t(".opened share at") %> <%= timeago doc.share.created_at %></span>
+      </div>
+    <% else %>
+      <p class="description"><%= t(".Create a share link to allow non-member visit this doc") %></p>
+      <div class="action mt-1"><%= link_to t(".Open share"), doc.to_path("/share"), class: "btn btn-open-share btn-sm btn-primary", method: :post, remote: true, "disable-with": t(".Submiting") %></div>
+    <% end %>
   </div>
 </details>
 <% end %>

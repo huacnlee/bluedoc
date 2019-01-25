@@ -13,8 +13,10 @@
     <%= render "/layouts/header" %>
     <%= yield :subnav %>
     <div class="main-container">
-      <%= notice_message %>
-      <%= yield %>
+      <div class="container">
+        <%= notice_message %>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

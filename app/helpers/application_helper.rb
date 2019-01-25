@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def icon_tag(name, opts = {})
-    icon_html = content_tag(:i, "", class: "octicon fas fa-#{name} #{opts[:class]}")
+    icon_html = content_tag(:i, "", class: "fas fa-#{name} #{opts[:class]}")
     return icon_html if opts[:label].blank?
     raw [icon_html, "<span>#{opts[:label]}</span>"].join(" ")
   end
@@ -61,9 +61,9 @@ module ApplicationHelper
     undo       = opts[:undo]
     with_count = opts[:with_count]
 
-    label ||= action_type.to_s.titleize
-    undo_label ||= "un#{action_type.to_s}".titleize
-    icon ||= label.downcase
+    label ||= t("shared.action_button.#{action_type}")
+    undo_label ||= t("shared.action_button.un#{action_type}")
+    icon ||= action_type.downcase
 
     action_type_pluralize = action_type.to_s.pluralize
     action_count = "#{action_type_pluralize}_count"
@@ -90,7 +90,7 @@ module ApplicationHelper
 
     out << link_to(icon_tag(icon, label: btn_label), url, data: data, class: class_names)
     if with_count && target.respond_to?(action_count)
-      out << %(<button class="social-count" href="#url">#{target.send(action_count)}</button>)
+      out << %(<span class="social-count" >#{target.send(action_count)}</span>)
     end
     content_tag(:span, raw(out.join("")), class: "#{target.class.name.underscore.singularize}-#{target.id}-#{action_type}-button")
   end

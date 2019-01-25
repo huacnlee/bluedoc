@@ -1,5 +1,5 @@
 <div class="blankslate blankslate-clean-background">
   <%= icon_tag("sticky-note", class: "blankslate-icon") %>
-  <h3>No result</h3>
-  <p>Can't find any contents like "<span class="text-red"><%= params[:q] %></span>" in our database.</p>
+  <h3><%= t(".No result") %></h3>
+  <p><%= t(".Can not find any contents like") %> "<span class="text-red"><%= params[:q] %></span>" <%= t(".in BookLab") %></p>
 </div>

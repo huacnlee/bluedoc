@@ -5,84 +5,18 @@
 <% end %>
 
 <% content_for :subnav do %>
-<div class="reader-navbar">
-  <div class="navbar-title">
-    <span class="hide-sm hide-md">
-    <a href="<%= root_path %>" title="Back to list">BookLab</a>
-      <span class="divider">/</span>
-    </span>
-    <span class="hide-sm">
-      <%= group_name_tag @user %>
-      <span class="divider">/</span>
-    </span>
-    <%= repository_name_tag @repository %>
-    <span class="hide-md hide-sm">
-      <span class="divider">/</span>
-      <% if @doc %>
-      <span class="doc-title"><%= @doc.title %></span>
-      <% else %>
-      <span class="doc-title">
-        <strong>Not found</strong>
-      </span>
-      <% end %>
-    </span>
-    <% if @doc&.private? %>
-      <span class="doc-title">
-        <span class="label-private ml-2">Private</span>
-      </span>
-    <% end %>
-  </div>
-
-  <% if @doc %>
-  <div class="navbar-buttons">
-    <% if can? :read, @doc %>
-      <%= action_button_tag(@doc, :star, class: "btn btn-sm btn-star-doc") %>
-    <% end %>
-
-    <% if can? :update, @doc %>
-    <%= link_to icon_tag("pencil", label: "Edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc px-2 hide-sm ml-1" %>
-    <% end %>
-
-    <%= render "share_button", doc: @doc %>
-
-    <details class="dropdown details-reset details-overlay d-inline-block">
-      <summary class="btn btn-sm px-2 ml-1" aria-haspopup="true">
-         <%= icon_tag("ellipsis-h") %>
-      </summary>
-
-      <ul class="dropdown-menu dropdown-menu-sw">
-        <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>">Raw</a></li>
-        <% if can? :update, @doc %>
-          <li><%= render "export_pdf", doc: @doc %></li>
-        <% end %>
-        <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#">Print document...</a></li>
-        <li class="dropdown-divider" role="separator"></li>
-        <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> Fullscreen</a></li>
-
-        <% if can? :update, @doc %>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>">Versions...</a></li>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>">Edit</a></li>
-        <% end %>
-
-        <% if can? :destroy, @doc %>
-          <li class="dropdown-divider" role="separator"></li>
-          <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>">Delete</a></li>
-        <% end %>
-      </ul>
-    </details>
-  </div>
-  <% end %>
-</div>
-
 <div class="navbar-wide-mode" style="display: none">
-  <a href="#" class="btn btn-wide-mode-exit">Exit</a>
+  <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>
 </div>
 <% end %>
 
 <div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-sidebar py-4 flex-justify-start overflow-auto border-right bg-gray-light">
+  <div class="doc-sidebar flex-justify-start overflow-auto">
+    <div class="doc-parents">
+      <a href="<%= @user.to_path %>" class="link-group" title="<%= @user.name %>"><%= @user.name %></a>
+      <a href="<%= @repository.to_path %>" class="link-back" title="<%= @repository.name %>"><%= @repository.name %> Guides Guides Guides</a>
+    </div>
+
     <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
       <% if @repository.has_toc? %>
         <%= sanitize_html @repository.toc_html(prefix: nil) %>
@@ -101,76 +35,143 @@
   <script type="text/javascript">
     $(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']").addClass("active");
   </script>
-  <div class="doc-main main-content py-4">
+  <div class="doc-center">
+    <div class="doc-main">
 
-    <% if @doc.blank? %>
-      <div class="doc-not-found text-center p-5">
-        <div class="icon-box text-center mb-2">
-          <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
-        </div>
-        <h3 class="title">Doc not found</h3>
-
-        <p>Sorry, this Doc does not exists, please checkout that URL is correct.</p>
-        <p class="text-red"><%= request.url %></p>
-
-        <% if can? :create_doc, @repository %>
-          <div class="actions mt-3" data-turbolinks="false">
-            <%= link_to "Create Doc for this URL", new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <%= render "draft_tip" %>
-
-      <h1 class="doc-title"><%= @doc.title %></h1>
-
-      <div class="doc-info">
-        <span class="editors">
-          <% @doc.editors.each do |user| %>
-          <%= user_avatar_tag(user, style: :tiny) %>
+    <div class="reader-navbar">
+      <div class="navbar-title">
+        <span class="hide-sm">
+          <%= group_name_tag @user %>
+          <span class="divider">/</span>
+        </span>
+        <%= repository_name_tag @repository %>
+        <span class="hide-md hide-sm">
+          <span class="divider">/</span>
+          <% if @doc %>
+          <span class="doc-name"><%= @doc.title %></span>
+          <% else %>
+          <span class="doc-name">
+            <strong><%= t(".Not found") %></strong>
+          </span>
           <% end %>
         </span>
-
-        <% if @doc.last_editor %>
-        Last edit by <%= user_name_tag(@doc.last_editor) %> at <%= timeago @doc.body_updated_at %>
-        <% else %>
-        Created by <%= user_name_tag(@doc.creator) %> at <%= timeago @doc.created_at %>
+        <% if @doc&.private? %>
+          <span class="doc-name">
+            <span class="label label-private ml-2"><%= t(".Private") %></span>
+          </span>
         <% end %>
       </div>
 
-      <div class="markdown-body markdown-with-toc" data-turbolinks="false">
-        <% if params[:mode] == "draft" %>
-          <%= raw @doc.draft_body_html %>
-        <% else %>
-          <%= raw @doc.body_html %>
-        <% end %>
-      </div>
-
-      <div class="doc-reaction">
-        <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
-      </div>
-
-      <%= render "readers", doc: @doc, readers: @readers %>
-
-      <% if @between_docs %>
-      <div class="between-docs my-4 clearfix">
-        <% if @between_docs[:prev] %>
-          <%= link_to @between_docs[:prev].title, @between_docs[:prev].to_path, class: "btn-link btn-prev" %>
+      <% if @doc %>
+      <div class="navbar-buttons">
+        <% if can? :read, @doc %>
+          <%= action_button_tag(@doc, :star, label: "", class: "btn btn-sm btn-star-doc") %>
         <% end %>
 
-        <% if @between_docs[:next] %>
-          <%= link_to @between_docs[:next].title, @between_docs[:next].to_path, class: "btn-link btn-next" %>
+        <% if can? :update, @doc %>
+        <%= link_to icon_tag("edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc hide-sm ml-1" %>
         <% end %>
+
+        <%= render "share_button", doc: @doc %>
+
+        <details class="dropdown details-overlay details-reset d-inline-block">
+          <summary class="btn btn-sm ml-1"><%= icon_tag("ellipsis") %></summary>
+          <ul class="dropdown-menu dropdown-menu-sw">
+            <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
+            <% if can? :update, @doc %>
+              <li><%= render "export_pdf", doc: @doc %></li>
+            <% end %>
+            <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
+            <li class="dropdown-divider" role="separator"></li>
+            <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
+
+            <% if can? :update, @doc %>
+              <li class="dropdown-divider" role="separator"></li>
+              <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Versions") %></a></li>
+              <li class="dropdown-divider" role="separator"></li>
+              <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Edit") %></a></li>
+            <% end %>
+
+            <% if can? :destroy, @doc %>
+              <li class="dropdown-divider" role="separator"></li>
+              <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+            <% end %>
+          </ul>
+        </details>
       </div>
       <% end %>
+    </div>
 
-      <% if @comments %>
-      <div class="doc-comments mt-3 clearfix">
-        <%= render "/comments/comments", commentable: @doc, comments: @comments %>
-      </div>
+      <% if @doc.blank? %>
+        <div class="doc-not-found text-center p-5">
+          <div class="icon-box text-center mb-2">
+            <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
+          </div>
+          <h3 class="title"><%= t(".Doc not found") %></h3>
+
+          <p><%= t(".Sorry, this Doc does not exists") %></p>
+          <p class="text-red"><%= request.url %></p>
+
+          <% if can? :create_doc, @repository %>
+            <div class="actions mt-3" data-turbolinks="false">
+              <%= link_to t(".Create Doc for this URL"), new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render "draft_tip" %>
+
+        <h1 class="doc-title"><%= @doc.title %></h1>
+
+        <div class="doc-info">
+          <span class="editors">
+            <% @doc.editors.each do |user| %>
+            <%= user_avatar_tag(user, style: :tiny) %>
+            <% end %>
+          </span>
+
+          <% if @doc.last_editor %>
+          <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= t(".edited at") %> <%= timeago @doc.body_updated_at %>
+          <% else %>
+          <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= t(".created at") %> <%= timeago @doc.created_at %>
+          <% end %>
+        </div>
+
+        <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+          <% if params[:mode] == "draft" %>
+            <%= raw @doc.draft_body_html %>
+          <% else %>
+            <%= raw @doc.body_html %>
+          <% end %>
+        </div>
+
+        <div class="doc-reaction">
+          <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+        </div>
+
+        <%= render "readers", doc: @doc, readers: @readers %>
+
+        <% if @between_docs %>
+        <div class="between-docs my-4 clearfix">
+          <% if @between_docs[:prev] %>
+            <%= link_to @between_docs[:prev].title, @between_docs[:prev].to_path, class: "btn-link btn-prev" %>
+          <% end %>
+
+          <% if @between_docs[:next] %>
+            <%= link_to @between_docs[:next].title, @between_docs[:next].to_path, class: "btn-link btn-next" %>
+          <% end %>
+        </div>
+        <% end %>
+
+        <% if @comments %>
+        <div class="doc-comments mt-3 clearfix">
+          <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
+  <div class="doc-body-toc-holder"></div>
   <div class="doc-body-toc" data-turbolinks="false">
   </div>
 </div>

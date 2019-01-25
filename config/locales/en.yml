@@ -1,26 +1,41 @@
+---
 en:
-  hello: "Hello world"
+  hello: Hello world
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
       long: "%Y-%m-%d %H:%M:%S %z"
       short: "%b %m %H:%M"
+  member_role:
+    admin: Admin
+    editor: Editor
+    reader: Reader
   activerecord:
     models:
     attributes:
       user:
-        slug: "Username"
-        name: "Real name"
-        url: "Homepage URL"
-        description: "Bio"
+        slug: Username
+        name: Real name
+        url: Homepage URL
+        description: Bio
       group:
-        slug: "Group name"
-        name: "Title"
-        url: "URL"
-        description: "Description"
+        slug: Group name
+        avatar: Avatar
+        name: Title
+        url: URL
+        description: Description
+        members_count: Members Count
+        created_at: Created At
+        updated_at: Updated At
       repository:
-        slug: "Repository name"
-        name: "Title"
+        slug: Repository name
+        name: Title
+        user: Owner
+        user_id: Owner
+        description: Description
       doc:
-        slug: "Doc path"
-        title: "Title"
+        slug: Doc path
+        title: Title
+    errors:
+      messages:
+        invalid, slug is a keyword: invalid, [%{slug}] is a keyword.

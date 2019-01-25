@@ -2,12 +2,12 @@
 
 <%= render "groups/menu" %>
 
-<div class="repository-docs Box">
-  <div class="Box-body">
+<div class="repository-docs box">
+  <div class="box-body">
     <div class="search-results">
       <% if @result.records.blank? %>
       <div class="blankslate">
-        Can't find any Doc like "<span class="text-red"><%= params[:q] %></span>" in this Repository.
+        <%= t(".Can't find any Doc like")%> "<span class="text-red"><%= params[:q] %></span>" <%= t(".in this Group") %>
       </div>
       <% end %>
 

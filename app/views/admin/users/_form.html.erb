@@ -1,5 +1,5 @@
 
-<%= form_for([:admin,@user]) do |f| %>
+<%= form_for([:admin, @user], url: admin_user_path(@user.id)) do |f| %>
   <%= render "/shared/error_messages", target: @user  %>
 
     <div class="form-group">
@@ -14,8 +14,8 @@
     <%= f.label :followers_count, class: "control-label" %>
     <%= f.text_field :followers_count, class: "form-control" %>
   </div>
-  
+
   <div class="form-action">
-    <%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%= link_to "Cancel", admin_users_path %>
+    <%= f.submit t("admin.Save"), class: "btn btn-primary mr-1" %> <%= link_to t("admin.Cancel"), admin_comments_path %>
   </div>
 <% end %>

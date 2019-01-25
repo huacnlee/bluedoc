@@ -1,0 +1,13 @@
+.reponav {
+  .reponav-item {
+    padding-bottom: 15px;
+    font-size: 14px;
+    margin-right: 40px;
+    text-decoration: none;
+    color: $text-gray;
+    &.selected {
+      color: $text-main;
+      border-bottom: 1px solid $black;
+    }
+  }
+}

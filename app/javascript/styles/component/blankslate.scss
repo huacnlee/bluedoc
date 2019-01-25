@@ -1,0 +1,16 @@
+.blankslate {
+  color: $text-gray;
+  font-size: 12px;
+  text-align: left;
+
+  padding: 10px 0;
+
+  h2, h3 {
+    font-size: 15px;
+    color: $text-gray;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  a { color: $text-gray-dark; font-weight: bold;  }
+}

@@ -72,6 +72,7 @@ Rails.application.routes.draw do
       get :repositories
       get :docs
       get :stars
+      get :stars_docs, path: "stars/docs"
       get :watches
     end
   end

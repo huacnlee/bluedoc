@@ -5,24 +5,38 @@ require "test_helper"
 class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
+    sign_in_admin @user
+  end
+
+  test "GET /admin/settings" do
+    get admin_settings_path
+    assert_equal 200, response.status
   end
 
   test "POST /admin/settings" do
     setting_params = {
       anonymous_enable: "0",
-      admin_emails: "foo@gmail.com\nbar@gmail.com",
+      admin_emails: "foo@gmail.com\nbar@gmail.com\n#{@user.email}",
       application_footer_html: "<span>hello</span>",
       dashboard_sidebar_html: "<span>world</span>",
       plantuml_service_host: "http://my-plantuml.com",
       mathjax_service_host: "http://my-mathjax.com",
+      default_locale: "zh-CN",
     }
 
-    sign_in_admin @user
     post admin_settings_path, params: { setting: setting_params }
     assert_redirected_to admin_settings_path
 
     setting_params.each_key do |key|
       assert_equal setting_params[key], Setting.send(key)
+    end
+
+    get admin_settings_path
+    assert_equal 200, response.status
+    assert_select "select[name='setting[default_locale]']" do
+      assert_select "option[selected]" do
+        assert_select "[value=?]", "zh-CN"
+      end
     end
   end
 end

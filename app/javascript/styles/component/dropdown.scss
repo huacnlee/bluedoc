@@ -1,0 +1,267 @@
+.dropdown {
+  position: relative;
+  cursor: pointer;
+  line-height: 1;
+  .dropdown-menu {
+    display: none;
+  }
+
+  &[open],
+  &:hover {
+    .dropdown-menu {
+      display: block;
+      cursor: auto;
+      p:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+  &.active {
+    .dropdown-menu-content {
+      display: block;
+      pointer-events: all;
+    }
+  }
+}
+
+.dropdown-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border: $spacer-1 solid;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+// Requires a positioning class (e.g., `.dropdown-menu-w`) to determine which
+// way the menu should render from the element triggering it.
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  z-index: 100;
+  width: 160px;
+  padding-top: $spacer-1;
+  padding-bottom: $spacer-1;
+  margin-top: 0px;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  box-shadow: 0 3px 12px rgba(27, 31, 35, 0.06);
+  &::before,
+  &::after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+  }
+
+  &::before {
+    border: $spacer-2 solid transparent;
+    border-bottom-color: #ddd;
+  }
+
+  &::after {
+    border: $spacer-2 solid transparent;
+    border-bottom-color: #fff;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  > ul {
+    list-style: none;
+  }
+}
+
+.dropdown-menu-no-overflow {
+  width: auto;
+
+  .dropdown-item {
+    padding: $spacer-1 $spacer-3;
+    overflow: visible;
+    text-overflow: inherit;
+  }
+}
+
+// Dropdown items (can be links or buttons)
+.dropdown-item {
+  display: block;
+  padding: $spacer-1 $spacer-2 $spacer-1 $spacer-3;
+  overflow: hidden;
+  color: $text-gray-dark;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover,
+  &.zeroclipboard-is-hover {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: $primary;
+
+    > .octicon {
+      color: inherit;
+      opacity: 1;
+    }
+  }
+
+  &.btn-link {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.dropdown-signout {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: $spacer-1 1px;
+  background-color: #e0e0e0;
+}
+
+.dropdown-header {
+  padding: $spacer-1 $spacer-2 $spacer-1 $spacer-3;
+  font-size: 14px;
+  color: $text-gray;
+}
+
+.dropdown-menu-content {
+  display: none;
+
+  // stylelint-disable primer/selector-no-utility
+  &.anim-scale-in {
+    position: relative;
+    z-index: 100;
+    pointer-events: none;
+  }
+}
+
+// Directional classes
+//
+// Move the menu and the caret attached to it. Requires at least one of these on
+// the `.dropdown-menu` element.
+
+.dropdown-menu-w {
+  top: 0;
+  right: 100%;
+  left: auto;
+  width: auto;
+  margin-top: 0;
+  margin-right: $spacer-2 + 1;
+
+  &::before,
+  &::after {
+    top: $spacer-2;
+    left: auto;
+    border-color: transparent;
+  }
+
+  &::before {
+    right: -$spacer-3 - 1;
+    border-left-color: #ddd;
+  }
+
+  &::after {
+    right: -$spacer-3;
+    border-left-color: #FFF;
+  }
+}
+
+.dropdown-menu-e {
+  top: 0;
+  left: 100%;
+  width: auto;
+  margin-top: 0;
+  margin-left: $spacer-2 + 1;
+
+  &::before,
+  &::after {
+    top: $spacer-2;
+    border-color: transparent;
+  }
+
+  &::before {
+    left: -$spacer-3 - 1;
+    border-right-color: #ddd;
+  }
+
+  &::after {
+    left: -$spacer-3;
+    border-right-color: #FFF;
+  }
+}
+
+.dropdown-menu-ne {
+  top: auto;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: $spacer-2;
+
+  &::before,
+  &::after {
+    top: auto;
+    right: auto;
+    left: $spacer-2;
+    border-color: transparent;
+  }
+
+  &::before {
+    bottom: -$spacer-3;
+    border-top-color: #ddd;
+  }
+
+  &::after {
+    bottom: -$spacer-3 + 1;
+    border-top-color: #FFF;
+  }
+}
+
+// South carets
+.dropdown-menu-s,
+.dropdown-menu-se,
+.dropdown-menu-sw {
+  &::before {
+    top: -$spacer-3;
+  }
+
+  &::after {
+    top: -$spacer-3 + 1;
+  }
+}
+
+.dropdown-menu-s {
+  right: 50%;
+  left: auto;
+  transform: translateX(50%);
+
+  &::before,
+  &::after {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.dropdown-menu-sw {
+  right: -4px;
+  left: auto;
+
+  &::before,
+  &::after {
+    right: $spacer-2;
+    left: auto;
+  }
+}
+
+.dropdown-menu-se {
+  &::before,
+  &::after {
+    left: $spacer-2;
+  }
+}

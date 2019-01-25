@@ -1,11 +1,13 @@
-<% title_tag "Groups", "Dashboard" %>
-
-<div class="dashboard-main">
-  <%= render "menu" %>
-
-  <div class="dashboard-content clearfix">
-    <div class="sub-title">All groups of you</div>
-    <%= render partial: "groups", locals: { items: @groups } %>
-    <%= paginate @groups %>
+<% title_tag t(".Dashboard Groups") %>
+<div class="flex-wrap">
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content clearfix">
+      <div class="subhead"><h2><%= t(".All groups of you") %></h2></div>
+      <%= render partial: "groups", locals: { items: @groups } %>
+      <%= paginate @groups %>
+    </div>
   </div>
+</div>
 </div>

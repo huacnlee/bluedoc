@@ -7,16 +7,16 @@
   <% if @doc.errors.any? %>
   <details class="doc-validation-error details-reset details-overlay" open>
     <summary></summary>
-    <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast">
-      <div class="Box-body overflow-auto">
-        <button class="Box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog>
+    <details-dialog class="box box--overlay d-flex flex-column anim-fade-in fast">
+      <div class="box-body overflow-auto">
+        <button class="box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog>
           <%= icon_tag "times" %>
         </button>
         <div class="mx-5 my-2">
           <div class="mb-4 text-center text-red">
             <p style="font-size: 32px"><%= icon_tag("error") %></p>
             <div class="mb-1 text-red">
-              <strong>Doc publish failed, because there has <%= @doc.errors.count %> issues!</strong>
+              <strong><%= t(".Doc publish failed, because there has count issues", count: @doc.errors.count) %></strong>
             </div>
           </div>
           <ul class="ml-3">
@@ -34,17 +34,17 @@
   <div id="editor-form">
     <div class="editor-navbar">
       <div class="navbar-title">
-        <a class="navbar-brand" href="<%= @repository.to_path %>" title="Back to list"><%= icon_tag("booklab") %></a>
+        <a class="navbar-brand" href="<%= @repository.to_path %>"><%= icon_tag("booklab") %></a>
         <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
         <span class= "divider">/</span>
-        <a href="<%= doc.to_path %>" class="doc-link"><%= doc.title || "New doc" %></a>
+        <a href="<%= doc.to_path %>" class="doc-link"><%= doc.title || t(".New doc") %></a>
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
         <span class="btn-doc-info-box"></span>
-        <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save">Save</button>
-        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> Publish</button>
+        <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save"><%= t(".Save Draft") %></button>
+        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
       </div>
     </div>
 

@@ -1,10 +1,13 @@
 <div class="user-followers">
+  <h2 class="sub-title"><%= t(".Followers") %></h2>
   <% if @users.blank? %>
     <div class="blankslate">
-      <p><%= @user.name %> not has followers</p>
+      <p><%= @user.name %> <%= t(".no followers") %></p>
     </div>
   <% else %>
-    <%= render @users %>
+    <ul class="list-container">
+      <%= render @users %>
+    </ul>
     <%= paginate @users %>
   <% end %>
 </div>

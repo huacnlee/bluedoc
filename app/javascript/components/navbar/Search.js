@@ -60,8 +60,7 @@ class Search extends React.PureComponent {
             {focused && value && (
             <ul className="autocomplete-results"
               onMouseOver={this.onHoverDropdown}
-              onMouseOut={this.onHoverOutDropdown}
-              style={{ width: "100%" }}>
+              onMouseOut={this.onHoverOutDropdown}>
               {scope && (
               <li className="autocomplete-item">
                 <a href={`${action}?q=${escapedValue}`}>

@@ -2,8 +2,8 @@
   repo = notification.target
 %>
 
-<div class="info mb-2">
-  Repository <%= repository_name_tag(repo) %> import has been <strong><%= notification.meta[:status] %></strong>
+<div class="info">
+  <%= t(".Repository") %> <%= repository_name_tag(repo) %> <%= t(".import has been") %> <strong><%= notification.meta[:status] %></strong>
 </div>
 
 <% if notification.meta[:status].to_s == "failed" %>

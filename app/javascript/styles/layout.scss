@@ -1,0 +1,57 @@
+.main-container {
+  flex: auto;
+  margin: 30px 0;
+}
+// left aside layout
+.aside-wrap {
+  width: 100%;
+  .aside-content {
+    width: inherit;
+  }
+  @include breakpoint(md) {
+    width: 255px;
+  }
+}
+// right main layout
+.main-wrap {
+  width: 100%;
+  @include breakpoint(md) {
+    width: 0;
+    flex: auto;
+    .main-content {
+      width: 100%;
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  position: relative;
+
+  padding: 0 15px;
+  @include breakpoint(md) {
+    padding: 0 25px;
+    width: 1080px;
+  }
+  margin: 0 auto;
+}
+
+.flex-wrap {
+  flex: auto;
+  margin: auto;
+
+  @include breakpoint(md) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+
+// sign up page 
+.page-registrations, .page-sessions {
+  .main-container .container {
+    max-width: 360px;
+    margin-top: 70px;
+  }
+}

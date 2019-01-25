@@ -1,20 +1,18 @@
-<% title_tag "Search Docs", @repository.name %>
+<% title_tag t(".Search Docs"), @repository.name %>
 
 <%= render "menu" %>
 
-<div class="repository-docs Box">
-  <div class="Box-body">
-    <div class="search-results">
-      <% if @result.records.blank? %>
-      <div class="blankslate">
-        Can't find any Doc like "<span class="text-red"><%= params[:q] %></span>" in this Repository.
-      </div>
-      <% end %>
-
-      <% @result.records.each_with_hit do |item, hit| %>
-        <%= render "/searches/doc", item: item, hit: hit %>
-      <% end %>
-      <%= paginate @result %>
+<div class="repository-docs">
+  <div class="search-results">
+    <% if @result.records.blank? %>
+    <div class="blankslate">
+      <%= t(".Can not find any Doc like") %> "<span class="text-red"><%= params[:q] %></span>" <%= t(".in this Repository") %>
     </div>
+    <% end %>
+
+    <% @result.records.each_with_hit do |item, hit| %>
+      <%= render "/searches/doc", item: item, hit: hit %>
+    <% end %>
+    <%= paginate @result %>
   </div>
 </div>

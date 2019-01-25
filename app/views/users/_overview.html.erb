@@ -1,8 +1,9 @@
 <div class="user-overview">
+  <h1 class="title"><%= t(".Overview") %></h1>
   <div class="user-activities mt-4">
     <% if @activities.blank? %>
       <div class="blankslate">
-        <p><strong><%= @user.name %></strong> was not have any activities</p>
+        <p><strong><%= @user.name %></strong> <%= t(".no activities") %></p>
       </div>
     <% else %>
       <%= render @activities %>

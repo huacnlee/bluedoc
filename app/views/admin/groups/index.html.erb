@@ -21,7 +21,7 @@
       <td>Id</td>
       <td><%= t("activerecord.attributes.group.name") %></td>
       <td><%= t("activerecord.attributes.group.members_count") %></td>
-      <td>Created At</td>
+      <td><%= t("created_at") %></td>
       <td class="opts"></td>
     </tr>
     <% @groups.each do |item| %>
@@ -36,9 +36,9 @@
       <td style="width: 200px" class="text-gray"><%= l(item.created_at) %></td>
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_group_path(item.id) %>
-        <%= link_to icon_tag("trash"), admin_group_path(item.id), method: :delete, 'data-confirm' => 'Are you sure delete this item?' %>
+        <%= link_to icon_tag("trash"), admin_group_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
         <% if item.deleted? %>
-          <%= link_to icon_tag("restore"), restore_admin_group_path(item.id), method: :post, 'data-confirm' => 'Are you sure restore this item?' %>
+          <%= link_to icon_tag("restore"), restore_admin_group_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
         <% end %>
       </td>
     </tr>

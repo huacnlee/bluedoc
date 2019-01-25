@@ -13,57 +13,54 @@ if auth_info
 end
 %>
 
-<div class="container-lg clearfix">
-  <div class="col-12 col-md-7">
-    <div class="sub-title">
-      <div class="heading"><%= icon_tag("user") %> Sign up</div>
-      <div class="description">Welcome to use BookLab</div>
-    </div>
+<div class="col-12">
+  <div class="text-center mb-4">
+    <div class="f1 mb-2"><%= t(".Sign up") %></div>
+    <div class="description text-gray-light f6"><%= t(".Welcome to use BookLab") %></div>
+  </div>
+
+  <% if auth_info.present? %>
+  <div class="flash flash-warn mt-5">
+    <strong><%= t(".Complete your account info") %></strong>
+    <p><%= t(".You must complete the below form for sign up with") %> <b><%= resource.omniauth_provider&.humanize %></b></p>
+    <p><%= raw t(".If you had an exists BookLab account, you can sign in to bind account", link: link_to("Sign in", new_session_path(resource_name))) %></p>
+  </div>
+  <% end %>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "/shared/error_messages", target: resource %>
 
     <% if auth_info.present? %>
-    <div class="flash flash-warn mt-5">
-      <strong>Complete your account info</strong>
-      <p>You must complete the below form for sign up with <b><%= resource.omniauth_provider&.humanize %></b></p>
-      <p>Or if you had a exists BookLab account, you can <%= link_to "Sign in", new_session_path(resource_name) %> to bind account.</p>
+      <%= f.hidden_field :omniauth_provider %>
+      <%= f.hidden_field :omniauth_uid %>
+      <%= f.hidden_field :name %>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :slug, class: "control-label" %>
+      <%= f.text_field :slug, autofocus: true, autocomplete: "username", class: "form-control" %>
     </div>
-    <% end %>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "/shared/error_messages", target: resource %>
+    <div class="form-group">
+      <%= f.label :email, class: "control-label" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+    </div>
 
-      <% if auth_info.present? %>
-        <%= f.hidden_field :omniauth_provider %>
-        <%= f.hidden_field :omniauth_uid %>
-        <%= f.hidden_field :name %>
-      <% end %>
+    <div class="form-group">
+      <%= f.label :password, class: "control-label"%>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :slug %>
-        <%= f.text_field :slug, autofocus: true, autocomplete: "username", class: "form-control" %>
-      </div>
+    <div class="form-group mb-6">
+      <%= f.label :password_confirmation, class: "control-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary mr-2" %>
-
-        <%= link_to "Already have a account", new_session_path(resource_name) %>
-      </div>
-    <% end %>
-  </div>
+    <div class="actions text-center">
+      <%= f.submit t(".Sign up"), class: "btn btn-primary btn-full mb-3" %>
+      <%= link_to t(".Already have a account"), new_session_path(resource_name), class: "f6 text-gray-light" %>
+    </div>
+  <% end %>
 </div>
 
 

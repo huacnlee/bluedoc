@@ -1,30 +1,30 @@
 <div class="col-12 clearfix">
   <div class="col-12 col-md-5 float-left pr-md-3">
-    <div class="Box mb-3">
-      <div class="Box-header">
-        <h3 class="Box-title">Tools</h3>
+    <div class="box mb-3">
+      <div class="box-header">
+        <h3 class="box-title"><%= t(".Tools") %></h3>
       </div>
-      <div class="Box-row">
-        <a href="<%= admin_settings_path %>" target="_blank" class="btn mb-2"><%= icon_tag("gear") %> Settings</a>
-        <a href="/admin/exception-track" target="_blank" class="btn mb-2"><%= icon_tag("error") %> Exceptions</a>
-        <a href="/admin/sidekiq" target="_blank" class="btn mb-2"><%= icon_tag("server") %> Background Jobs</a>
-        <a href="/admin/pghero" target="_blank" class="btn mb-2"><%= icon_tag("dashboard") %> Database Stats</a>
+      <div class="box-row">
+        <a href="<%= admin_settings_path %>" target="_blank" class="btn mb-2"><%= icon_tag("gear") %> <%= t(".Settings") %></a>
+        <a href="/admin/exception-track" target="_blank" class="btn mb-2"><%= icon_tag("error") %> <%= t(".Exceptions") %></a>
+        <a href="/admin/sidekiq" target="_blank" class="btn mb-2"><%= icon_tag("server") %> <%= t(".Background Jobs") %></a>
+        <a href="/admin/pghero" target="_blank" class="btn mb-2"><%= icon_tag("dashboard") %> <%= t(".Database Stats") %></a>
       </div>
-      <div class="Box-row">
-        <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn">Rebuild Search Index</a>
+      <div class="box-row">
+        <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn"><%= t(".Rebuild Search Index") %></a>
       </div>
     </div>
   </div>
 
   <div class="col-12 col-md-7 float-left">
-    <div class="Box mb-3">
-      <div class="Box-header">
-        <h3 class="Box-title">Service statuses</h3>
+    <div class="box mb-3">
+      <div class="box-header">
+        <h3 class="box-title"><%= t(".Service statuses") %></h3>
       </div>
       <ul>
         <% @statuses[:results].each do |status| %>
-         <li class="Box-row clearfix">
-           <div><span class="name"><%= status[:name]  %></span>
+         <li class="box-row clearfix">
+           <div><span class="name"><%= t(".Service.#{status[:name]}")  %></span>
            <span class="float-right <%= status[:status].downcase == "error" ? "text-red" : "text-green" %>"><%= status[:status] %></span></div>
            <div class="message text-red">
              <%= status[:message] %>
@@ -36,42 +36,42 @@
   </div>
 </div>
 
-<div class="Box mb-3">
-  <div class="Box-header">
-    <h3 class="Box-title">Statistics</h3>
+<div class="box mb-3">
+  <div class="box-header">
+    <h3 class="box-title"><%= t(".Statistics") %></h3>
   </div>
 
-  <div class="Box-row clearfix">
+  <div class="box-row clearfix">
     <div class="clearfix border-bottom text-center">
       <div class="col-4 float-left p-4">
         <h2 class="text-blue"><%= User.where(type: "User").count %></h2>
-        <div class="text-gray-dark">Users</div>
+        <div class="text-gray-dark"><%= t("admin.User") %></div>
       </div>
       <div class="col-4 float-left p-4">
         <h2 class="text-blue"><%= Group.count %></h2>
-        <div class="text-gray-dark">Groups</div>
+        <div class="text-gray-dark"><%= t("admin.Group") %></div>
       </div>
       <div class="col-4 float-left p-4">
         <h2 class="text-blue"><%= Repository.count %></h2>
-        <div class="text-gray-dark">Repositories</div>
+        <div class="text-gray-dark"><%= t("admin.Repository") %></div>
       </div>
     </div>
     <div class="clearfix text-center">
       <div class="col-3 float-left p-4">
         <h2 class="text-blue"><%= Doc.count %></h2>
-        <div class="text-gray-dark">Docs</div>
+        <div class="text-gray-dark"><%= t("admin.Doc") %></div>
       </div>
       <div class="col-3 float-left p-4">
         <h2 class="text-blue"><%= Comment.count %></h2>
-        <div class="text-gray-dark">Comments</div>
+        <div class="text-gray-dark"><%= t("admin.Comment") %></div>
       </div>
       <div class="col-3 float-left p-4">
         <h2 class="text-blue"><%= Notification.count %></h2>
-        <div class="text-gray-dark">Notifications</div>
+        <div class="text-gray-dark"><%= t("admin.Notification") %></div>
       </div>
       <div class="col-3 float-left p-4">
         <h2 class="text-blue"><%= Activity.count %></h2>
-        <div class="text-gray-dark">Activities</div>
+        <div class="text-gray-dark"><%= t("admin.Activity") %></div>
       </div>
     </div>
   </div>

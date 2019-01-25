@@ -1,0 +1,660 @@
+zh-CN:
+  created_at: 创建时间
+  updated_at: 更新时间
+  created at: 创建于
+  updated at: 更新于
+  shared:
+    more_button:
+      More: "加载更多 ..."
+    action_button:
+      star: 收藏
+      unstar: 取消收藏
+      follow: 关注
+      unfollow: 取消关注
+      watch: 订阅
+      unwatch: 取消订阅
+    follow_button:
+      follow: 关注
+      unfollow: 取消关注
+    error_messages:
+      There has count issues: 发现有 %{count} 问题无法通过表单验证：
+    select_menu:
+      Choose an item: 选择一个
+  layouts:
+    user_menu:
+      New Repository: 新建知识库
+      Import Repository: 导入知识库
+      New Group: 新建团队
+      Your profile: 个人页面
+      Your repositories: 你的知识库
+      Your stars: 你的收藏
+      Admin Panel: 管理后台
+      Settings: 设置
+      Sign out: 登出
+      Sign in: 登录
+      Sign up: 注册
+    mailer:
+      This mail has sent from: 这封邮件发送自
+  devise:
+    sessions:
+      signed_in: 登录成功。
+      signed_out: 退出成功。
+      already_signed_out: 退出成功。
+      new:
+        Sign in: 登录
+        Sign in with: 通过下面的方式登录
+        Input your username or email to sign in BookLab: 输入你的用户名或 Email 来登录 BookLab
+        You have signed in with:
+        email: 用户名 / Email
+        forget_password: 密码忘记了？
+        Didn't receive unlock instructions?: 没有收到解锁账号的邮件？
+    registrations:
+      new:
+        Sign up: 注册
+        Already have a account: 已经有一个帐户
+        Welcome to use BookLab: 欢迎使用 BookLab
+        Complete your account info: 完善您的帐号信息
+        You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
+        If you had an exists BookLab account, you can sign in to bind account: 如果你已经有 BookLab 账号，你可以通过 %{link} 来绑定账号。
+    passwords:
+      new:
+        Reset password: 找回密码
+        Input your account Email address, we will send a reset password link to you Email: 输入你的 Email 地址，我们将会给你发送一封找回密码的邮件。
+        Submit: 发送找回密码邮件
+    mailer:
+      confirmation_instructions:
+        subject: 确认信息
+        Welcome: 欢迎
+        You can confirm your account email through the link below: 你可以通过下面的链接来验证 Email 地址。
+        Confirm my account: 确认我的账号
+      unlock_instructions:
+        subject: 解锁信息
+      email_changed:
+        subject: 邮件地址已修改
+        Your email is being changed to: 我们联系你，因为你的 Email 地址已更改。
+      password_change:
+        subject: 密码已修改
+        Password has changed: 我们联系你，是因为你的密码已被修改。
+      reset_password_instructions:
+        subject: 重置密码信息
+        "Someone has requested a link to change your password. You can do this through the link below": 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
+        Change my password: 修改我的密码
+        If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
+        Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
+  account_settings:
+    Password has change successed: 密码已经修改成功。
+    Profile has change successed: 个人资料已经更新成功。
+    account:
+      Account: 账号
+      Change password: 修改密码
+      Minimum characters: 最少要求 %{length} 个字符
+      We need your current password to confirm your changes: 需要你的旧密码。
+      Update password: 修改密码
+      Danger zone: 高级功能
+      Delete my account: 删除我的账号
+      Once you delete your account, there is no going back: 账号删除以后将无法恢复，请谨慎使用。
+      Are you sure?: 警告！账号删除以后将无法恢复，你确定要这么做吗？
+      Change username: 更改用户名
+      Update: 修改
+      Unless you really need it, we recommended that you do not change your username: 修改用户名将会导致链接到你个人下的知识库、文档、以及提及到你的链接等内容再也无法打开，除非必要，建议不要修改用户名。
+    show:
+      Avatar: 头像
+      Profile: 个人资料
+      Update profile: 更新个人资料
+      Upload new picture: 选择一张图片上传
+      System default: "BookLab 默认语言：%{locale_name}"
+      This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+  activities:
+    has added: 添加
+    to: 到
+    as: 成为
+    created: 创建了
+    has followed: 关注了
+    starred Doc: 收藏了文档
+    starred: 收藏了
+    transfer: 移动
+  admin:
+    BookLab Admin: BookLab 管理后台
+    Admin: 管理后台
+    All: 所有数据
+    Save: 保存
+    Cancel: 取消
+    Are you sure delete this item?: 你确定要删除此项吗？
+    Are you sure restore this item?: 你确定要恢复这个已经删除的数据吗？
+    index: 列表
+    edit: 编辑
+    new: 新建
+    show: 查看详情
+    View: 查看
+    Edit: 编辑
+    Back: 返回
+    Group: 团队
+    User: 用户
+    Repository: 知识库
+    Comment: 评论
+    Doc: 文档
+    Notification: 通知
+    Activity: 动态
+    Back to Front: 回到前台
+    Sign out: 登出
+    comments:
+      Comment was successfully updated: 评论修改成功。
+      index:
+        Private contents, hide comment: 私密内容，无法查阅评论。
+    dashboards:
+      show:
+        Tools: 工具
+        Settings: 系统设置
+        Exceptions: 异常记录
+        Background Jobs: 后台异步队列
+        Database Stats: 数据库状态
+        Rebuild Search Index: 重新搜索索引（耗费性能）
+        Service statuses: 服务健康状态
+        Service:
+          Database: 数据库
+          Cache: 缓存 (Redis)
+          Sidekiq: 队列
+          PlantumlService: UML 预览服务
+          MathjaxService: 数学公式服务
+          ElasticSearchService: 全文搜索服务
+      reindex:
+        Search indexes has running reindex with async: 重建搜索索引的任务已经后台异步执行，你可以到“后台异步队列”功能里面查看进度。
+    repositories:
+      show:
+        All docs: 所有文档
+    settings:
+      show:
+        Settings: 系统设置
+        System settings: 系统设置
+        Default language: "默认语言:"
+        Setup default language for BookLab: 设置 BookLab 所有用户的默认语言。
+        Enable anonymous visit public contents: 允许未登录用户访问 BookLab 上的公开内容。
+        Disable this BookLab will requirement sign in for all pages: 关闭此功能，BookLab 将要求所有内容页面必须登录。
+        PlantUML Service Host: "UML 图像服务:"
+        BookLab use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BookLab 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。
+        MathJax Service Host: "数学公式服务:"
+        If you wants customize MaxJax SVG service: 如果你希望部署一套自己的数学公式图像生成服务，你可以修改这里，你的服务需要兼容这样的路径 <code>${mathjax_service_host}/svg?tex={tex}</code> 来生成 SVG 图像。
+        Admin Emails: "管理员 Email 列表:"
+        Special account emails as admin with each line: "添加 Email 到这个列表（一行一个），用这些 Email 注册的账号将会获得 BookLab 管理后台的权限（请小心，别把自己删掉了）。"
+        Customize UI: UI 定制
+        Application Footer HTML: "全局页脚 HTML:"
+        You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
+        Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
+        Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
+        Save: 保存
+      create:
+        Setting was successfully updated: 系统设置更新成功。
+  notifications:
+    all_notifications: 所有通知
+    clean_all: 清空所有通知
+    no_records: 暂无通知
+  comments:
+    comment_watch:
+      Subscribe: 订阅新评论
+      Unsubscribe: 取消订阅
+      You’re ignoring this notifications: 你禁用此文档的通知。
+      You’re not receiving notifications: 你未订阅评论的通知。
+      You’re receiving notifications because you’re subscribed: 目前你已订阅，将会收到新评论的通知。
+    comment:
+      Delete: 删除评论
+      Reply: 回复
+      Copy link: 复制评论链接
+      Are you sure?: 确定要删除吗？
+    comments:
+      Comments: 评论
+      Sign in to write comment: 登录以后可以评论
+      You must sign in first: "你需要先登录以后才能发布评论。"
+      Sign in now: 现在登录
+    form:
+      Submit: 发布评论
+    in_reply:
+      In reply to: 回复
+    reply_info:
+      In reply to: 回复
+  dashboards:
+    action_docs:
+      You does not have any action_name docs: 你还未 %{action} 过任何文档。
+    action_repositories:
+      You does not have any action_name repositories: 你还未 %{action} 过任何知识库。
+    groups:
+      You does not have any groups: 你还没有任何团队。
+    menu:
+      Dashboard: 工作台
+      Doc: 文档
+      Repository: 知识库
+      Group: 团队
+      Star: 收藏
+      Watch: 订阅
+    repositories:
+      You does not have any repositories: 你没有任何的知识库。
+    docs:
+      Dashboard Docs: 工作台 - 我的文档
+      Recent docs: 最近修改过的文档
+      No docs: 没有文档
+      You does not have any updated docs: 你还未创建或参与修改过任何文档。
+    groups:
+      Dashboard Groups: 工作台 - 我的团队
+      All groups of you: 你的团队
+    repositories:
+      All repositories: 最近参与过的知识库
+      Dashboard Repositories: 工作台 - 知识库
+    index:
+      Recent edited docs: 最近修改过的文档
+      Recent contributed repositories: 最近参与过的知识库
+      You have no update Doc in recently: 你还未创建或修改过文档。
+      You have no update Repositories in recently: 你还未创建或修改过任文档，这里将罗列你最近参与过的文档所在的知识库。
+      Your Groups: 你的团队
+      All activity: 动态
+      You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
+    stars:
+      Stared Docs: 我收藏的文档
+      Stared Repositories: 我收藏的知识库
+    watches:
+      All Watches: 我订阅的知识库
+  versions:
+    version:
+      Current: 当前版本
+  docs:
+    draft_tip:
+      You are on the draft preview page, the contents has saved at: 当前处于草稿预览界面，草稿内容保存于
+      View Published: 查看已发布内容
+      Continue edit: 继续编辑
+      There have the unpublished content saved at: 当前还有未发布的草稿内容，保存于
+      Preview the draft: 预览草稿
+    export_pdf:
+      Export: 导出
+      Export PDF: 导出 PDF
+      PDF of this document page has in generating, please wait: "正在后台生成此文档的 PDF 文档，请稍后 ..."
+      If you are waiting a long time, and still no response, then you can retry: 如果你等待了很长一段时间这里依然没响应，你可以点击 %{retry}，重新触发一个 PDF 生成任务。
+      PDF of this document page has generated: 已有生成好的 PDF 文件。
+      Click the button to download it: 你可以点击下面的按钮下载 PDF 文件。
+      Download PDF: 下载 PDF 文件
+      Generate Again: 重新生成
+      Submiting: "生成中..."
+      Click button to genrate PDF file for this document: 点击生成按钮将此文档生成 PDF。
+      Generate PDF: 生成 PDF
+    form:
+      Doc publish failed, because there has count issues: 文档验证失败，存在 %{count} 处问题。
+      New doc: 空白文档
+      Save Draft: 保存草稿
+      Publish: 发布
+    readers:
+      people: 个人
+      has read: 阅读过此文档。
+      Reader list: 阅读过此文档的人
+    share_button:
+      Share: 分享
+      Unshare: 取消分享
+      Sharing: 分享中
+      Submiting: 提交中...
+      Copy Link: 复制分享链接
+      Share doc: 分享文档
+      Open share: 开启分享
+      Everyone can visits this doc with the share link: "任何人都可以通过此分享链接阅读这篇文档："
+      opened share at: 分享于
+      Create a share link to allow non-member visit this doc: 创建分享链接，任何人（不需要登录）可以通过这个链接来访问此文档。
+    edit:
+      Doc current in locked: 此文档目前有其他人在编辑。
+      Warning: 警告！
+      is current in editing this document: 目前正在编辑此文档。
+      Continue edit will make conflict, do you wants continue?: 继续编辑将会产生冲突，建议你联系他/她，然后在编辑。是否要继续编辑？
+      Continue edit: 继续编辑
+      Cancel: 放弃
+    show:
+      Back to list: 返回知识库
+      Not found: 未找到
+      Private: 私密
+      Edit: 编辑
+      Markdown: 查看 Markdown
+      Print document: 打印文档...
+      Fullscreen: 全屏模式
+      Versions: 修改历史...
+      Delete: 删除文档
+      Are you sure delete?: 确定要删除这篇文档吗？
+      Exit Fullscreen: 退出
+      Doc not found: 文档未能找到
+      Sorry, this Doc does not exists: 抱歉，当前 URL 地址未能找到相应的文档，请检查 URL 地址是否正确。
+      Create Doc for this URL: 基于此路径创建文档
+      Last edit by: 最后由
+      edited at: 修改于
+      Created by: ""
+      created at: 创建于
+    transfer:
+      Transfer docs: 移动文档
+      When you wants move docs into other repository: 当你想将文档移动到其他的知识库，请在下面选择它们，并选择目标知识库。
+      Select doc to transfer: 选择需要移动的文档
+      To repository: 目标知识库
+      Transfer now: 移动
+    versions:
+      Versions: 修改历史
+      Diff mode: 显示修改差异
+      Revert: 回滚到此版本
+      Cancel: 退出
+  group_members:
+    add_member:
+      Add member: 添加成员
+      Type username to match user and then add as member of this group: 输入需要添加的成员的用户名/姓名来匹配，并从结果中选择需要添加的成员。
+      Search user: 搜索用户：
+      Admin: 管理员
+      Editor: 编辑者
+      Reader: 只读者
+      All permission of this group: 管理员拥有此团队的最高权限。
+      Can create, update docs or repositories of this group: 可以在此团队下创建/修改文档或知识库，用于参与内容的场景。
+      Readonly mode for all resources of this group: 赋予只读权限，可以阅读团队下所有公开、私密的内容。
+    update_member:
+      Change member role: 变更成员角色
+      Change role: 变更成员角色...
+      Update Role: 修改角色
+    member:
+      Remove: 移除
+    index:
+      Members: 团队成员
+      Number of Members: 个成员
+  group_settings:
+    menu:
+      Profile: 团队信息
+    destroy:
+      Delete group: 删除团队
+      Delete this group: 删除此团队
+      This action cannot be undone: 注意！此动作 <strong>无法</strong> 撤销。
+      This will delete all contents: 执行此动作将会直接删除 <strong>%{slug}</strong> 团队下的所有知识库、团队成员、文档、修改历史以及评论等内容。
+      Please type the path slug of group to confirm: 请输入团队的路径 <strong class="text-red">%{slug}</strong> 以确认：
+      I understand, delete this group: 我清楚理解，确定删除此团队！
+    show:
+      Photo: 团队 Logo
+      Settings: 团队设置
+      Group profile: 基本信息
+      Update profile: 更新团队信息
+      Danger to change slug: "注意！当你修改了团队路径，之前指向到此团队（包括团队下的文档）将会无法打开，请谨慎使用。"
+      Danger zone: 危险操作
+      Delete this group: 删除此团队
+      Once you delete a group, there is no going back: 当你删除了团队，你将无法找回来，请考虑清楚。
+      Upload new picture: 选择一张图片上传
+      This photo will be used to identify you in BookLab It will be visible to anyone: 给团队设置一个 Logo 以便于快速辨识。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为 Logo，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+    update:
+      Group update successed: 团队资料更新成功。
+  groups:
+    menu:
+      Repository: 知识库
+      Search: 搜索
+      Member: 成员
+      Settings: 设置
+      Search in group: 搜索 %{name} 的内容
+      Group: 团队
+    new:
+      New Group: 新建团队
+      Group accounts allow your team to plan, build, review, and ship documents: 团队用将一个项目组或做相同工作的一群人拉到一起，大家可以在同一个团队下组织内容。
+      Great group path names are short and memorable: 一个简单好记的团队路径有助于传播，创建以后将会是这样的路径访问：<code>%{host}/your-group-path</code>
+      The letters, numbers or dash is allow, for example: "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:"
+      Display title of this Group: 用于各种地方显示团队的名称
+      Create Group: 创建团队
+    search:
+      Can't find any Doc like: "无法找到任何与"
+      in this Group: "相关的内容。"
+    show:
+      Show all: 查看所有知识库
+      Find a repository: 查找知识库...
+      There is no repository: 暂无知识库
+      You can create first repository: 此团队下还未创建任何知识库，你可以现在就
+      Create new: 创建一个新知识库
+      Members: 团队成员
+  notification_mailer:
+    to_user:
+      View it on BookLab: 在 BookLab 上查看
+  notifications:
+    Notification been deleted: 触发通知的相关数据已删除。
+    body:
+      comment:
+        said: 说
+      mention:
+        mentioned you: 提及了你
+        has mentioned you in subject: "在 “%{subject}” 里提及了你。"
+    title:
+      add_member:
+        has added you as member of: "将你添加为 [%{subject}] 的成员。"
+      comment:
+        got a comment: 收到了一条新的评论。
+      mention:
+        got a comment: 收到了一条新的评论。
+        got a mention: 里面提及了你。
+      repo_import:
+        Repository name import has been status: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+    add_member:
+      has added you as member of: "将你添加为成员："
+    comment:
+      was posted a comment on: "评论了"
+    mention:
+      was mentioned you in: "提及了你"
+    repo_import:
+      Repository: 知识库
+      import has been: "导入任务已经执行完成，结果："
+    index:
+      Unread: 未读通知
+      All: 全部通知
+      Clear all: 清空
+      Mark as read: 全部设为已读
+      You does not have any notifications: 你目前没有通知。
+      You does not have any unread notifications: 你目前没有未读通知。
+  reactions:
+    new_button:
+      Select a item: "用表情来表达你的想法"
+  repositories:
+    doc:
+      Sharing: 分享中
+      Last updated at: 最后更新时间
+      Are you sure delete this Doc?: 确定要删除这篇文档吗？
+    empty_docs:
+      There is no documents: 此知识库暂无文档
+      You can create first document: 你可以现在创建第一篇文档，
+      Create doc: 创建文档
+    menu:
+      New Doc: 新建文档
+      Private: 私密
+      Import from this URL: 导入来源
+      Summary: 目录
+      Docs: 文档列表
+      Settings: 设置
+      Repository: 知识库
+    repository:
+      Private: 私密
+    docs:
+      Docs: 文档列表
+      Sort by: "排序方式:"
+      Sort by Updated: 最近更新
+      Sort by Created: 创建时间
+    new:
+      New Repository: 新建知识库
+      A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
+      Import from Git: 从 Git 导入知识库
+      Import from Archive: 从 Zip 包导入知识库
+      Put a Git repository URL, BookLab will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BookLab 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
+      This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
+      Or you have a GitBook source, you can use: 或者也可以通过 Git 的方式导入。
+      Great repository names are short and memorable: 知识库路径用于 URL 里面，简单好记的名称能更好的使用和传播（只允许用字母、数字、中横行）。
+      Anyone can see this repository: 任何人（如果全站要求登录，也是需要登录的）可以访问此知识库下的内容。
+      You choose who can see and edit to this repository: 团队意外的人保密，除非你将他们加到团队成员或知识库协作者列表。
+      Public: "完全公开"
+      Private: "私密"
+      Create Repository: 创建知识库
+    search:
+      Search Docs: 搜索文档
+      Can not find any Doc like: 知识库下没有找到有关于
+      in this Repository: 的文档内容。
+    show:
+      Edit TOC: 编辑目录
+    toc:
+      Edit TOC: 编辑目录
+      Back to Repository: 返回知识库
+      Edit Table of contents: 编辑知识库目录
+      Move cursor Up: 光标向上移动
+      Move cursor Down: 光标向下移动
+      Move Up: 向上切换
+      Move Down: 向下切换
+      Edit or Confirm edit: 编辑和确认编辑
+      Enter: Enter
+      Tab: Tab
+      Shift: Shift
+      Outdent: 减少缩进
+      Indent: 增加缩进
+      Delete: Delte
+      or: 或
+      Remove item: 从目录中移除选中项
+      Save: 保存目录
+      Cancel: 取消
+    create:
+      Repository was successfully created: 知识库创建成功。
+      Repository was successfully created, and executed importing in background: 知识库创建成功，导入任务已经在后台执行，我们会通过邮件通知导入结果。
+  repository_settings:
+    exports:
+      archive:
+        Export as Archive: 导出 Zip 包
+        Export all docs as markdown files, and archive them into a zip file: 知识库下的所有文档以 Markdown 格式导出，并打包在一个 Zip 文件里面。
+        This will including a SUMMARY for describe of the Table of contents: 导出的包内将会包含一个 <code>SUMMARY.md</code> 来描述知识库的目录结构。
+        After that you can use many Markdown tools: 你可以使用一些三方工具来，例如
+        to genrate it to other format: 来生成静态网站之类的形式，或者用来生成 Ebook，当然你也可以用来做为备份。
+        Archive of this repository has in generating: 知识库打包任务正在后台执行中，请稍后 ...
+        If you are waiting a long time, you can retry: 如果你等待了很久，导出任务依然没有任何响应，你可以 %{retry}，以重新触发一次 Zip 导出任务。
+        Archive of this repository was generated: 知识库 Zip 包已经生成。
+        Click the button to download it: 你可以点击下面的下载按钮下载，如果内容有更新，也可以重新生成。
+        Download: 下载 Zip 包
+        Generate Again: 重新生成!
+        Submiting: 提交中...
+        Archive as zip: 导出 Zip 包
+        Generate Archive will take a long time: 导出 Zip 包将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
+      pdf:
+        Export as PDF: 导出 PDF
+        You can export all docs as a PDF file: 你可以将整个知识库导出成一个 PDF 文件，所有文档会整合在一起。
+        Preview PDF HTML: 预览 PDF HTML
+        Exporter will use the TOC ordered, otherwice same as the: 导出程序将会采用知识库的目录顺序来生成 PDF，如果你未开启此功能（自定义目录），那会按照文档的最后更新时间来排序，类似
+        Doc list: 文档列表页面
+        PDF has in generating, please wait: PDF 导出任务正在执行，请稍后 ...
+        If you are waiting a long time, you can retry: 如果你等待了很久，导出任务依然没有任何响应，你可以 %{retry}，以重新触发一次 PDF 导出任务。
+        PDF of this repository was generated: 此知识库的 PDF 已生成。
+        Click the button to download it: 点击下面的下载按钮下载 PDF 文件。
+        Download: 下载 PDF
+        Generate Again: 重新生成!
+        Submiting: 提交中...
+        Generate PDF: 导出 PDF
+        Generate PDF will take a long time: 导出 PDF 将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
+    destroy:
+      Delete repository: 删除知识库
+      Delete this repository: 删除知识库
+      This action cannot be undone: 此功能 <strong>无法</strong> 撤销！
+      This will permanently delete the: 继续操作将会删除
+      all of contents: ，知识库，以及知识库下面的文档、修改历史、评论等所有有关内容都会同时删除。
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      I understand, delete this repository: 我明白，确定删除知识库
+    member:
+      Are you sure to remove?: 确定要移除他/她吗？
+    menu:
+      Options: 设置
+      Manage docs: 管理文档
+      Collaborators: 协作者
+      Advanced: 高级设置
+    privacy:
+      public: 公开
+      private: 私密
+      Make privacy: 设置为%{privacy}
+      Make this repository privacy: 设置知识库为%{privacy}模式
+      Public this repository from the private, this repository and docs will be visible to everyone who can visit: 将知识库从私密切换到公开，你需要知道知识库下面的文档将会被任何能访问，如果他们能打开
+      Private this repository from the public, this change will remove repository watchers, stars: 将知识库从公开切换到私密，将会清除知识库已有的订阅者、收藏，以确保知识库的内容不会被外部人员看到。
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      Confirm and submit: 我明白，确定设置为%{privacy}
+    transfer:
+      Transfer: 转移知识库
+      Transfer repository: 转移知识库到其他团队/个人
+      Please type in the path: 请输入知识库路径
+      to confirm: 以确认
+      Target username or group path: 目标团队路径/个人用户名
+      Confirm and transfer: 确定转移知识库
+    advanced:
+      Settings: 高级设置
+      Transfer: 转移知识库
+      Transfer ownership: 转移知识库的所有者
+      Transfer this repository to another user or to an group: 转移此知识库到个人或团队下，此动作要求你对目标团队/个人有创建知识库的权限。
+      Danger Zone: 危险操作
+      Make this repository public: 将知识库设置公开
+      Make this repository private: 将知识库设置私密
+      Public this repository from the private: 将知识库从私密切换成公开模式。
+      Private this repository from the public: 将知识库从公开切换成私密模式。
+      Delete this repository: 删除知识库
+      Once you delete a repository, there is no going back: 知识库删除后，将无法撤销。请谨慎考虑。
+    collaborators:
+      Collaborators: 协作者
+      Push access to the repository: 直接给其他人指定知识库的访问权限，无需添加到团队成员。
+      Search by username, full name or email address: 输入用户名、姓名或 Email 找到你需要添加的协作者
+      By default, will add user as :role role: 默认添加为 <strong>%{role}</strong> 角色，添加后可修改。
+      Add: 添加协作者
+    docs:
+      Transfer docs to other repository: 转移文档到其他知识库
+      Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
+      If there has same doc slug exists in the destination repository, it will change it as a random slug: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
+      Transfer now: 执行文档转移
+    show:
+      Settings: 设置
+      Repository profile: 知识库资料
+      Repository slug help: "%{host}%{user_path}/知识库路径 (只允许字母、数字、中横行作为知识库路径)"
+      Update: 更新
+      Features: 功能开关
+      Table of Contents: 自定义目录
+      Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
+  searches:
+    menu:
+      Docs: 文档
+      Repositories: 知识库
+      Groups: 团队
+      Users: 用户
+    no_result:
+      No result: 没有查询到结果
+      Can not find any contents like: "BookLab 无法找到任何有关于"
+      in BookLab: 的内容。
+    search_info:
+      About: 关于
+      there have count results: 我们找到 %{count} 个结果。
+  shares:
+    doc:
+      Last edit by: 由
+      Created by: 由
+      Last edit by at: 最后修改于
+      Created by at: 创建于
+  user_mailer:
+    welcome:
+      You have successfully signed up to: 你已经成功的注册成功了 BookLab 账号，网站地址为：
+      Your username is: "你注册的用户名:"
+      Thanks for joining and have a great day: 欢迎你的使用。
+  users:
+    card:
+      followers: 关注者
+    followers:
+      Followers: 关注者
+      no followers: 目前还没有人关注他/她。
+    following:
+      Following: 正在关注
+      no following: 目前还未关注过任何人。
+    overview:
+      Overview: 动态
+      no activities: 暂时还没有动态。
+    repositories:
+      Repositories: 创建于参与的知识库
+      no repositories: 暂时没有任何知识库（或者用户没有公开知识库）。
+    sidebar:
+      Followers: 关注者
+      Following: 正在关注
+      Groups: 团队
+      Overview: 动态
+      Repositories: 知识库
+      Stars: 收藏
+      Settings: 设置
+      Profile: 个人资料
+      Account: 账号
+    stars:
+      Stars: 收藏的知识库
+      no star repositories: 还未收藏过知识库。
+    profile:
+      This photo will be used to identify you in BookLab It will be visible to anyone: 此照片将用于在BookLab中识别您的身份。任何人都可以看到它
+      Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像

@@ -1,17 +1,17 @@
 <% if can? :manage, @group %>
   <%= render layout: "shared/modal", locals: {
-    title: "Add member",
+    title: t("group_members.add_member.Add member"),
     button_text: icon_tag("add-user", label: "Add"),
     button_class: "btn btn-primary"
   } do %>
-    <div class="Box-body overflow-auto">
+    <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>
         <div class="flash">
-          Type username to match user and then add as member of this group.
+          <%= t("group_members.add_member.Type username to match user and then add as member of this group") %>
         </div>
 
         <div class="form-group">
-          <label class="control-label">Search user</label>
+          <label class="control-label"><%= t("group_members.add_member.Search user") %></label>
           <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
         </div>
 
@@ -20,32 +20,32 @@
 
           <div class="form-checkbox">
             <label>
-              <input type="radio" name="member[role]" checked value="admin"> Admin
+              <input type="radio" name="member[role]" checked value="admin"> <%= t("group_members.add_member..Admin") %>
               <div class="form-text">
-                All permission of this group
+                <%= t("group_members.add_member..All permission of this group") %>
               </div>
             </label>
           </div>
           <div class="form-checkbox">
             <label>
-              <input type="radio" name="member[role]" value="editor"> Editor
+              <input type="radio" name="member[role]" value="editor"> <%= t("group_members.add_member..Editor") %>
               <div class="form-text">
-                Can create, update docs or repositories of this group.
+                <%= t("group_members.add_member..Can create, update docs or repositories of this group") %>
               </div>
             </label>
           </div>
           <div class="form-checkbox">
             <label>
-              <input type="radio" name="member[role]" value="reader"> Reader
+              <input type="radio" name="member[role]" value="reader"> <%= t("group_members.add_member..Reader") %>
               <div class="form-text">
-                Readonly mode for all resources of this group.
+                <%= t("group_members.add_member.Readonly mode for all resources of this group") %>
               </div>
             </label>
           </div>
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary">Add member</button>
+          <button class="btn btn-primary"><%= t("group_members.add_member.Add member") %></button>
         </div>
       <% end %>
     </div>

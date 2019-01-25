@@ -1,0 +1,76 @@
+
+// activity styles
+.activity-item {
+  position: relative;
+  margin-bottom: 24px;
+  padding-left: 45px;
+  font-size: 14px;
+  .avatar-box {
+    position: absolute;
+    top: 6px;
+    left: 0;
+  }
+
+  .infos {
+    color: $text-gray-light;
+    a {
+      color: $text-main;
+      &:hover {
+        color: $primary;
+      }
+    }
+    .time {
+      font-size: 12px;
+    }
+  }
+  
+  .detail {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: 1px solid $border-gray;
+  }
+}
+
+
+.more-button button{
+  font-size: 14px;
+  color: $text-main;
+  border: none;
+  padding: 5px 0;
+  box-shadow: none;
+}
+
+.user-card {
+  position: relative;
+  padding-left: 45px;
+  a.user-display-name {
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  a.user-name {
+    font-size: 13px;
+    color: $text-gray-light;
+  }
+}
+
+.doc-card {
+  .path {
+    font-size: 12px;
+    a {
+      color: $text-gray-light;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}
+
+.repository-card {
+  .desc { 
+    font-size: 13px;
+  }
+  .counter {
+    display: inline-block;
+    min-width: 100px;
+  }
+}

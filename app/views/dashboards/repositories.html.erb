@@ -1,11 +1,14 @@
-<% title_tag "Repositories", "Dashboard" %>
+<% title_tag t(".Dashboard Repositories") %>
 
-<div class="dashboard-main">
-  <%= render "menu" %>
-
-  <div class="dashboard-content clearfix">
-    <div class="sub-title">All repositories of you</div>
-    <%= render partial: "repositories", locals: { items: @repositories } %>
-    <%= paginate @repositories %>
+<div class="flex-wrap">
+<%= render "menu" %>
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="dashboard-content clearfix">
+      <div class="subhead"><h2><%= t(".All repositories") %></h2></div>
+      <%= render partial: "repositories", locals: { items: @repositories } %>
+      <%= paginate @repositories %>
+    </div>
   </div>
+</div>
 </div>

@@ -1,0 +1,44 @@
+.table {
+  width: 100%;
+  margin-top: $spacer-3;
+  border-collapse: collapse;
+  border: 1px solid $border-color;
+
+  th {
+    font-weight: normal;
+    text-align: left;
+  }
+
+  td,
+  th {
+    padding: $spacer-1 $spacer-3;
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+  }
+
+  tbody {
+    th {
+      width: 25%;
+    }
+
+    th,
+    td {
+      border-bottom-color: 1px solid $border-color;
+    }
+
+    tr:last-child {
+      th,
+      td {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+  }
+}
+
+.table-striped {
+  tr:nth-of-type(odd) {
+    th, td {
+      background-color: #f7f7f7;
+    }
+  }
+}

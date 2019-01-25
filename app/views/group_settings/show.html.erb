@@ -1,89 +1,90 @@
-<% title_tag "Settings", @group.name %>
+<% title_tag t(".Settings"), @group.name %>
 
 <div class="clearfix group-settings">
-  <%= render "menu" %>
-
-  <div class="col-12 col-md-9 float-left">
-    <div class="mb-4 clearfix">
-      <div class="col-12 col-md-8 float-left pr-md-4 mb-4 mb-md-0">
-        <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
-          <div class="form-title"><h2>Group profile</h2></div>
-
-          <input type="hidden" name="_by" value="show" />
-          <%= render "/shared/error_messages", target: @group %>
-
-          <div class="form-group">
-            <%= form.label :name, class: "control-label" %>
-            <%= form.text_field :name, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :url, class: "control-label" %>
-            <%= form.url_field :url, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :location, class: "control-label" %>
-            <%= form.text_field :location, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :description, class: "control-label" %>
-            <%= form.text_field :description, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :slug, class: "control-label" %>
-            <%= form.text_field :slug, class: "form-control" %>
-            <div class="form-text">
-              <%= Setting.host %>/:pathname
-            </div>
-          </div>
-
-          <div class="actions">
-            <%= form.submit "Update profile", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="col-12 col-md-4 float-left">
-        <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
-        <input type="hidden" name="_by" value="show" />
-        <div class="form-title"><h2>Logo</h2></div>
-        <div class="image-box width-full text-center">
-          <%= user_avatar_tag(@group, style: :large, link: false) %>
-        </div>
-        <div class="form-group">
-          <label class="btn width-full text-center">
-             Upload new logo
-             <%= form.file_field :avatar, class: "btn btn-block js-manual-file-chooser manual-file-chooser text-center"  %>
-           </label>
-        </div>
-        <script>
-          $("form").on("change", ".js-manual-file-chooser", (e) => {
-            $form = $(e.delegateTarget);
-            $form.submit();
-          });
-        </script>
-        <% end %>
-      </div>
+  <%= render "groups/menu" %>
+  <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
+  <input type="hidden" name="_by" value="show" />
+  <h1 class="title"><%= t(".Settings") %></h1>
+  <h2 class="sub-title"><%= t(".Photo") %></h2>
+  <div class="avatar-wrap">
+    <div class="image-box">
+      <%= user_avatar_tag(@group, style: :large, link: false) %>
     </div>
-
-    <% if can? :manage, @group %>
-    <div class="form-title"><h2>Danger zone</h2></div>
-    <div class="Box mb-3">
-      <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
-        <div class="flex-auto mr-md-2 mb-2 mb-md-0">
-          <label class="form-check-label font-weight-bold">
-            Delete this group
-          </label>
-          <div class="form-text d-table-cell">
-            Once you delete a group, there is no going back. Please be certain.
-          </div>
-        </div>
-        <%= render "destroy" %>
-      </div>
+    <div class="form-group flex-auto">
+      <p class="description text-gray">
+        <%= t(".This photo will be used to identify you in BookLab It will be visible to anyone") %>
+        <br>
+        <%= t(".Use a photo or image rather than text and upload an image that is 200px square or larger") %>
+      </p>
+      <label class="btn-upload">
+        <%= icon_tag("photo") %>
+        <%= t(".Upload new picture") %>
+        <%= form.file_field :avatar, class: "js-manual-file-chooser" %>
+      </label>
     </div>
-    <% end %>
   </div>
+  <script>
+    $("form").on("change", ".js-manual-file-chooser", (e) => {
+      $form = $(e.delegateTarget);
+      $form.submit();
+    });
+  </script>
+  <% end %>
+
+  <%= form_with(model: @group, url: group_settings_path(@group), local: true, remote: true) do |form| %>
+    <h2 class="sub-title"><%= t(".Group profile") %></h2>
+
+    <input type="hidden" name="_by" value="show" />
+    <%= render "/shared/error_messages", target: @group %>
+
+    <div class="form-group">
+      <%= form.label :name, class: "control-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :url, class: "control-label" %>
+      <%= form.url_field :url, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :location, class: "control-label" %>
+      <%= form.text_field :location, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description, class: "control-label" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :slug, class: "control-label" %>
+      <%= form.text_field :slug, class: "form-control" %>
+      <div class="form-text">
+        <%= t(".Danger to change slug", host: Setting.host) %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t(".Update profile"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+
+  <% if can? :manage, @group %>
+  <h2 class="sub-title"><%= t(".Danger zone") %></h2>
+  <div class="box mb-3">
+    <div class="box-row d-flex flex-column flex-md-row flex-items-top pb-4">
+      <div class="flex-auto mr-md-2 mb-2 mb-md-0">
+        <label class="form-check-label font-weight-bold">
+          <%= t(".Delete this group") %>
+        </label>
+        <div class="form-text d-table-cell">
+          <%= t(".Once you delete a group, there is no going back") %>
+        </div>
+      </div>
+      <%= render "destroy" %>
+    </div>
+  </div>
+  <% end %>
 </div>

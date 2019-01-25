@@ -13,7 +13,7 @@ class GroupSettingsController < Groups::ApplicationController
 
     params[:_by] ||= "show"
     if @group.update(group_params)
-      redirect_to group_settings_path(@group), notice: "Group update successed"
+      redirect_to group_settings_path(@group), notice: t(".Group update successed")
     else
       render params[:_by]
     end

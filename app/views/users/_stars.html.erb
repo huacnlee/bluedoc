@@ -1,10 +1,13 @@
 <div class="user-stars">
+  <h2 class="sub-title"><%= t(".Stars") %></h2>
   <% if @repositories.blank? %>
     <div class="blankslate">
-      <p><strong><%= @user.name %></strong> was not star any repositories</p>
+      <p><strong><%= @user.name %></strong> <%= t(".no star repositories") %></p>
     </p>
   <% else %>
-    <%= render partial: "/repositories/repository", collection: @repositories, locals: { current_group: @user } %>
+    <ul class="list-container repository-list">
+      <%= render partial: "/repositories/repository", collection: @repositories, locals: { current_group: @user } %>
+    </ul>
     <%= paginate @repositories %>
   <% end %>
 </div>

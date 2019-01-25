@@ -1,0 +1,139 @@
+.list-item {
+  width: 100%;
+  padding: 15px 0;
+  line-height: 1.4;
+  list-style: none;
+  border-bottom: 1px solid #E6E6E6;
+  position: relative;
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 1px);
+    display: block;
+    content: '';
+    width: 0;
+    background: $primary;
+    height: 1px;
+    transition: .4s;
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+  &.list-avatar {
+    padding-left: 47px;
+  }
+  .avatar-box {
+    position: absolute;
+    top: 21.5px;
+    left: 0;
+    line-height: 0;
+  }
+  .icon-box {
+    font-size: 30px;
+    border-radius: 50%;
+  }
+  .description, .path {
+    display: block;
+    color: $text-gray;
+    font-size: 12px;
+  }
+  .title {
+    display: block;
+    a {
+      color: #000;
+    }
+    font-size: 15px;
+    padding-right: 20px;
+    margin-bottom: 4px;
+    flex: auto;
+  }
+  .info {
+    margin-top: 17px;
+    span {
+      display: inline-block;
+      min-width: 60px;
+      margin-right: 20px;
+      color: #333;
+      vertical-align: middle;
+      &.user {
+        min-width: 160px;
+      }
+      .fas {
+        margin-right: 5px;
+      }
+    }
+  }
+  .time-box {
+    position: absolute;
+    right: 0;
+    bottom: 14.5px;
+    font-size: 12px;
+    color: $text-gray;
+  }
+  .action {
+    position: absolute;
+    right: 0;
+    top: 11.5px;
+    font-size: 14px;
+    opacity: 0;
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    a:hover {
+      border-radius: 15px;
+      background: #f7f7f7;
+      // star、unstar、watch、unwatch
+      &.btn span {
+        opacity: 1;
+        max-width: 10em;
+        padding-left: 15px;
+      }
+    }
+    .fas {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+    // star、unstar、watch、unwatch
+    .btn {
+      padding: 0;
+      height: 100%;
+      .fas {
+        float: right;
+      }
+      span {
+        font-size: 12px;
+        display: inline-block;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-width .4s linear, padding .4s linear, opacity 1s ease;
+      }
+    }
+  }
+
+  &:hover {
+    .action {
+      opacity: 1;
+    }
+  }
+}
+
+.list-group {
+  .list-group-item {
+    padding: 10px 0;
+  }
+}
+
+.icon-box {
+  &.icon-doc {
+    color: #3BB46E;
+  }
+  &.icon-repo {
+    color: #FCBA00;
+  }
+}

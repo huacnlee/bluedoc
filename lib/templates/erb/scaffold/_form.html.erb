@@ -14,6 +14,6 @@
   </div>
   <% end %>
   <div class="form-action">
-    <%%= f.submit "Save", class: "btn btn-primary mr-1" %> or <%%= link_to "Cancel", <%= index_helper %>_path %>
+    <%%= f.submit t("admin.Save"), class: "btn btn-primary mr-1" %> <%%= link_to t("admin.Cancel"), admin_comments_path %>
   </div>
 <%% end %>

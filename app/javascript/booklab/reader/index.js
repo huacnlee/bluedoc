@@ -24,7 +24,7 @@ document.addEventListener("turbolinks:load", () => {
   });
 
   // zoom markdown-body img
-  mediumZoom('.markdown-body img:not(.plantuml-image,.tex-image)');
+  mediumZoom($('.markdown-body img:not(.plantuml-image,.tex-image)'));
 
   BodyToc.init();
 });

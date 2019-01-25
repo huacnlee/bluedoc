@@ -1,0 +1,18 @@
+@import "./base/index.scss";
+@import "./themefont/index.scss";
+@import "~iconfont/index.scss";
+@import "./layout.scss";
+
+
+// base component styles
+@import "./component/index.scss";
+
+// Page or section styles
+@import "./comments.scss";
+@import "./dashboard.scss";
+@import "./header.scss";
+@import "./users.scss";
+@import "./notifications.scss";
+@import "./searches.scss";
+@import "./groups.scss";
+@import "./repositories.scss";

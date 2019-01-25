@@ -1,0 +1,37 @@
+// title
+h1.title {
+  font-size: 20px;
+  color: $text-main;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+// sub title 
+h2.sub-title {
+  font-size: 20px;
+  color: $text-main;
+  margin-bottom: 30px;
+}
+
+.path {
+  a::before {
+    @extend .fas;
+    margin-right: 3px;
+  }
+  .user-display-name[data-type="user"] {
+    @extend .fa-user;
+  }
+  .user-display-name[data-type="group"] {
+    @extend .fa-group;
+  }
+  .user-name[data-type="user"] {
+    @extend .fa-user;
+  }
+  .user-name[data-type="group"] {
+    @extend .fa-group;
+  }
+  .repository-name {
+    @extend .fa-repo;
+  }
+}

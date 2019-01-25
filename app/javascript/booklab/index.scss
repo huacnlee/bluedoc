@@ -1,4 +1,4 @@
-@import "~booklab/theme";
+@import "~styles/index";
 @import "~booklab/editor/index";
 @import "~booklab/toc-editor/index";
 @import "~booklab/reader/index";
@@ -10,10 +10,7 @@ body {
   font-size : 14px;
   color: #222;
   background: #FFF;
-}
-
-.main-container {
-  @extend .py-4;
+  min-height: 100vh;
 }
 
 .pagehead {
@@ -25,42 +22,5 @@ form {
 
   &:last-child {
     margin-bottom: 0px;
-  }
-}
-
-
-.subnav-search-context {
-  .autocomplete-results {
-    width: 100%;
-
-    .autocomplete-item {
-      display: inline;
-      padding: 0;
-      a {
-        padding: 5px;
-        text-decoration: none;
-        font-weight: normal;
-        display: block;
-        @extend .clearfix;
-
-        .scope-name {
-          color: #aaa;
-          background: #f7f7f7;
-          border-radius: 3px;
-          padding: 2px 4px;
-        }
-      }
-
-      &:hover {
-        a {
-          color: #fff;
-          background: $primary;
-          .scope-name {
-            color: #f0f0f0;
-            background: transparent;
-          }
-        }
-      }
-    }
   }
 }

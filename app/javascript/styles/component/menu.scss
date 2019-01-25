@@ -1,0 +1,48 @@
+// left menu
+.menu {
+  display: none;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  @include breakpoint(lg) {
+    display: block;
+  }
+  .menu-item {
+    display: block;
+    color: $text-main;
+    text-decoration: none;
+    margin-bottom: 10px;
+    &.last {
+      margin-bottom: 30px;
+    }
+    i.fas {
+      color: #979797;
+      margin: 0 3px;
+      transform: scale(1.2);
+    }
+    &.selected {
+      color: $primary;
+      i.fas {
+        color: inherit;
+      }
+    }
+    &.menu-sub-item {
+      color: $text-gray-light;
+      &.selected {
+        color: $primary;
+      }
+    }
+    &.depth-1 {
+      text-indent: 0.8em;
+    }
+  }
+
+  a.menu-item {
+    &:hover {
+      color: $primary;
+      .fas {
+        color: inherit;
+      }
+    }
+  }
+}

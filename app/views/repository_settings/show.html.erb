@@ -1,61 +1,61 @@
-<% title_tag "Settings", @repository.name %>
+<% title_tag t(".Settings"), @repository.name %>
 
-<div class="clearfix">
-  <%= render "menu" %>
-  <div class="col-12 col-md-9 float-left">
-    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), local: true, remote: true) do |form| %>
-      <div class="form-title"><h2>Repository profile</h2></div>
 
-      <input type="hidden" name="_action" value="show" />
-      <% if params[:_by].blank? %>
-        <%= render "/shared/error_messages", target: @repository %>
-      <% end %>
+<%= render "menu" %>
 
-      <div class="form-group">
-        <%= form.label :slug, class: "control-label" %>
-        <%= form.text_field :slug, class: "form-control" %>
-        <div class="form-text">
-          <%= Setting.host %><%= @user.to_path %>/:repository-name
-        </div>
-      </div>
+<div class="col-12 col-md-9 float-left">
+  <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), local: true, remote: true) do |form| %>
+    <h2 class="sub-title"><%= t(".Repository profile") %></h2>
 
-      <div class="form-group">
-        <%= form.label :name, class: "control-label" %>
-        <%= form.text_field :name, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :description, class: "control-label" %>
-        <%= form.text_field :description, class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit "Update", class: "btn btn-primary" %>
-      </div>
+    <input type="hidden" name="_action" value="show" />
+    <% if params[:_by].blank? %>
+      <%= render "/shared/error_messages", target: @repository %>
     <% end %>
 
-    <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository),  remote: true, method: :patch) do |form| %>
-      <div class="form-title"><h2>Features</h2></div>
+    <div class="form-group">
+      <%= form.label :slug, class: "control-label" %>
+      <%= form.text_field :slug, class: "form-control" %>
+      <div class="form-text">
+        <%= t(".Repository slug help", host: Setting.host, user_path: @user.to_path) %>
+      </div>
+    </div>
 
-      <% if params[:_by] == "features" %>
-        <%= render "/shared/error_messages", target: @repository %>
-      <% end %>
-      <input type="hidden" name="action" value="show" />
-      <input type="hidden" name="_by" value="features" />
+    <div class="form-group">
+      <%= form.label :name, class: "control-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
 
-      <div class="Box mb-3">
-        <div class="Box-row d-flex flex-items-center">
-          <div class="form-check">
-            <%= form.check_box :has_toc, class: "form-check-input form-check-submit" %>
-            <%= form.label :has_toc, "Table of Contents", class: "form-check-label font-weight-bold" %>
-            <div class="form-text">
-              Enable to use Table of Contents style for Repository index.
-            </div>
+    <div class="form-group">
+      <%= form.label :description, class: "control-label" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t(".Update"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository),  remote: true, method: :patch) do |form| %>
+    <h2 class="sub-title"><%= t(".Features") %></h2>
+
+    <% if params[:_by] == "features" %>
+      <%= render "/shared/error_messages", target: @repository %>
+    <% end %>
+    <input type="hidden" name="action" value="show" />
+    <input type="hidden" name="_by" value="features" />
+
+    <div class="box mb-3">
+      <div class="box-row d-flex flex-items-center pb-3">
+        <div class="form-check">
+          <%= form.check_box :has_toc, class: "form-check-input form-check-submit" %>
+          <%= form.label :has_toc, t(".Table of Contents"), class: "form-check-label font-weight-bold" %>
+          <div class="form-text mt-1">
+            <%= t(".Enable to use Table of Contents style for Repository index") %>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 
 <script type="text/javascript">

@@ -1,10 +1,11 @@
-<div class="col-12 clearfix">
-  <%= render "menu" %>
+<div class="flex-wrap">
+<%= render "menu" %>
 
-  <div class="col-9 float-left">
-    <div class="search-results Box">
+<div class="main-wrap">
+  <div class="main-content">
+    <div class="search-results">
       <%= render "search_info" %>
-      <div class="Box-body">
+      <div class="items">
         <% if @result.records.blank? %>
         <%= render "no_result" %>
         <% end %>
@@ -17,4 +18,5 @@
 
     <%= paginate @result %>
   </div>
+</div>
 </div>

@@ -1,5 +1,17 @@
 @import './toc.scss';
 @import './doc.scss';
+
+.editor-body {
+  .main-container,
+  .container {
+    display: block;
+    flex: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .toc-form {
   width: 100%;
   background: #FFF;
@@ -14,6 +26,13 @@
     position: relative;
     z-index: 9;
 
+    .navbar-brand {
+      font-size: 24px;
+      margin-right: 10px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
     .navbar-title {
       padding-left: 24px;
       a { color: #333; }
@@ -27,6 +46,7 @@
       text-align: right;
       transform: translateY(-50%);
       text-align: center;
+      line-height: 100%;
       .dropdown-menu {
         text-align: left;
       }
@@ -54,7 +74,8 @@
     display: inline-block;
     border-radius: 3px;
     text-align: center;
-    width: 48px;
+    min-width: 48px;
+    padding: 0px 8px;
     height: 25px;
     line-height: 26px;
     overflow: hidden;
@@ -76,11 +97,20 @@
   margin: auto;
   height: 100%;
   .doc-list {
+    overflow-y: scroll;
     position: sticky;
-    top: 94px
+    top: 94px;
+    padding: 14px;
+    background: rgba(252, 252, 252, 0.73);
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
   }
   .toc-list {
-    padding-left: 40px;
+    margin-left: 20px;
+    padding: 14px;
+    background: rgba(252, 252, 252, 0.73);
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
     height: 100%;
     overflow-y: scroll;
   }

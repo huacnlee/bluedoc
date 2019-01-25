@@ -1,0 +1,656 @@
+en:
+  created_at: Created at
+  updated_at: Updated at
+  created at: created at
+  updated at: updated at
+  shared:
+    more_button:
+      More: "More ..."
+    action_button:
+      star: Star
+      unstar: Unstar
+      follow: Follow
+      unfollow: Unfollow
+      watch: Watch
+      unwatch: Unwatch
+    follow_button:
+      follow: Follow
+      unfollow: Unfollow
+    error_messages:
+      There has count issues: "There has %{count} issues:"
+    select_menu:
+      Choose an item: Choose an item
+  layouts:
+    user_menu:
+      New Repository: New Repository
+      Import Repository: Import Repository
+      New Group: New Group
+      Your profile: Your profile
+      Your repositories: Your repositories
+      Your stars: Your stars
+      Admin Panel: Admin Panel
+      Settings: Settings
+      Sign out: Sign out
+      Sign in: Sign in
+      Sign up: Sign up
+    mailer:
+      This mail has sent from: This mail has sent from
+  devise:
+    sessions:
+      signed_in: Signed in.
+      signed_out: Signed out.
+      already_signed_out: Alredy signed out.
+      new:
+        "Sign in": Sign in
+        "Sign in with": Sign in with
+        "Input your username or email to sign in BookLab": Input your username or email to sign in BookLab
+        "You have signed in with": You have signed in with <b>%{type}</b>
+        "email": Username / Email
+        forget_password: Forgot your password?
+        "Didn't receive unlock instructions?": Didn't receive unlock instructions?
+    registrations:
+      new:
+        "Sign up": Sign up
+        "Already have a account": Already have a account
+        "Welcome to use BookLab": Welcome to use BookLab
+        "Complete your account info": Complete your account info
+        "You must complete the below form for sign up with": You must complete the below form for sign up with
+        "If you had an exists BookLab account, you can sign in to bind account": If you had an exists BookLab account, you can %{link} to bind account.
+    passwords:
+      new:
+        "Reset password": Reset password
+        "Input your account Email address, we will send a reset password link to you Email": Input your account Email address, we will send a reset password link to you Email.
+        "Submit": Send me reset password instructions
+    mailer:
+      confirmation_instructions:
+        subject: Confirmation
+        "Welcome": Welcome
+        "You can confirm your account email through the link below": "You can confirm your account email through the link below:"
+        "Confirm my account": Confirm my account
+      unlock_instructions:
+        subject: Unlock instructions
+      email_changed:
+        subject: Email has changed
+        "Your email is being changed to": We're contacting you to notify you that your email is being changed to
+      password_change:
+        subject: Password has changed
+        "Password has changed": We're contacting you to notify you that your password has been changed.
+      reset_password_instructions:
+        subject: Reset password instructions
+        "Someone has requested a link to change your password. You can do this through the link below": Someone has requested a link to change your password. You can do this through the link below.
+        "Change my password": Change my password
+        "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
+        "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
+  account_settings:
+    Password has change successed: Password has change successed.
+    Profile has change successed: Profile has change successed.
+    account:
+      Account: Account
+      "Change password": Change password
+      "Minimum characters": characters minimum %{length}
+      "We need your current password to confirm your changes": We need your current password to confirm your changes.
+      "Update password": Update password
+      "Danger zone": Danger zone
+      "Delete my account": Delete my account
+      "Once you delete your account, there is no going back": Once you delete your account, there is no going back. Please be certain.
+      "Are you sure?": "Danger! Once you delete your account, there is no going back, are you sure?"
+      Change username:  Change username
+      Update: Update
+      Unless you really need it, we recommended that you do not change your username: Unless you really need it, we recommended that you don't change your username. This will cause the related links, such as the Repositories, Docs, Mentions, etc. that were linked to you before to be opened.
+    show:
+      Avatar: Avatar
+      Profile: Profile
+      Update profile: Update profile
+      Upload new picture: Upload new picture
+      System default: "System default [%{locale_name}]"
+      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify you in BookLab It will be visible to anyone.
+      Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+  activities:
+    has added: has added
+    to: to
+    as: as
+    created: created
+    has followed: has followed
+    starred Doc: starred a Doc
+    starred: starred
+    transfer: transfer
+  admin:
+    BookLab Admin: BookLab Admin
+    Admin: Admin
+    All: All
+    Are you sure delete this item?: Are you sure delete this item?
+    Are you sure restore this item?: Are you sure restore this item?
+    Save: Save
+    Cancel: Cancel
+    index: Index
+    edit: Edit
+    new: New
+    show: View
+    Group: Group
+    User: User
+    Repository: Repository
+    Comment: Comment
+    Doc: Doc
+    Notification: Notification
+    Activity: Activity
+    Back to Front: Back to Front
+    Sign out: Sign out
+    View: View
+    Edit: Edit
+    Back: Back
+    comments:
+      Comment was successfully updated: Comment was successfully updated.
+      index:
+        Private contents, hide comment: Private contents, hide comment.
+    dashboards:
+      show:
+        Tools: Tools
+        Settings: System Settings
+        Exceptions: Exceptions
+        Background Jobs: Background Jobs
+        Database Stats: Database Stats
+        Rebuild Search Index: Rebuild Search Index
+        Service statuses: Service statuses
+        Service:
+          Database: Database
+          Cache: Cache (Redis)
+          Sidekiq: Queue
+          PlantumlService: UML Graph Service
+          MathjaxService: Math Graph Service
+          ElasticSearchService: Fulltext Search Service
+        Statistics: Statistics
+      reindex:
+        Search indexes has running reindex with async: Search indexes has running reindex with async.
+    reposiories:
+      show:
+        All doc: All doc
+    settings:
+      show:
+        Settings: Settings
+        System settings: System settings
+        Default language: "Default language:"
+        Setup default language for BookLab: Setup default language for BookLab.
+        Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Disable this BookLab will requirement sign in for all pages: Disable this BookLab will requirement sign in for all pages.
+        PlantUML Service Host: "PlantUML Service Host:"
+        BookLab use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BookLab use %{link} for generate PlantUML SVG image, change this config to can use a custom service of your deployment.
+        MathJax Service Host: "MathJax Service Host:"
+        If you wants customize MaxJax SVG service: If you want's customize MaxJax SVG service, you can implement that a http server to serve <code>${mathjax_service_host}/svg?tex={tex}</code> to result svg contents
+        Admin Emails: "Admin Emails:"
+        Special account emails as admin with each line: "Special account emails as admin with each line."
+        Customize UI: Customize UI
+        Application Footer HTML: "Application Footer HTML:"
+        You can use HTML to customize the footer: "You can use HTML to customize the footer, including Stylesheet and JavaScript."
+        Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
+        Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
+        Save: Save
+      create:
+        Setting was successfully updated: Setting was successfully updated.
+  comments:
+    comment_watch:
+      Subscribe: Subscribe
+      Unsubscribe: Unsubscribe
+      You’re ignoring this notifications: "You’re ignoring this notifications."
+      You’re not receiving notifications: "You’re not receiving notifications."
+      You’re receiving notifications because you’re subscribed: "You’re receiving notifications because you’re subscribed."
+    comment:
+      Delete: Delete
+      Reply: Reply
+      Copy link: Copy link
+      Are you sure?: Are you sure?
+    comments:
+      Comments: Comments
+      Sign in to write comment: Sign in to write comment
+      You must sign in first: "You want write comment? you must sign in first."
+      Sign in now: Sign in now
+    form:
+      Submit: Comment
+    in_reply:
+      In reply to: In reply to
+    reply_info:
+      In reply to: In reply to
+  dashboards:
+    action_docs:
+      You does not have any action_name docs: You does not have any %{action} docs.
+    action_repositories:
+      You does not have any action_name repositories: You does not have any %{action} repositories.
+    groups:
+      You does not have any groups: You does not have any groups.
+    menu:
+      Dashboard: Dashboard
+      Doc: Docs
+      Repository: Repositories
+      Group: Groups
+      Star: Stars
+      Watch: Watches
+    docs:
+      Dashboard Docs: Dashboard - Docs
+      Recent docs: Recent edited docs
+      No docs: No docs
+      You does not have any updated docs: You does not have any updated docs.
+    groups:
+      Dashboard Groups: Dashboard - Groups
+      All groups of you: All groups of you
+    repositories:
+      All repositories: Recent contributed repositories
+      Dashboard Repositories: Dashboard - Repositories
+    index:
+      Recent edited docs: Recent edited docs
+      Recent contributed repositories: Recent contributed repositories
+      You have no update Doc in recently: You have no update Doc in recently.
+      You have no update Repositories in recently: You have no update Repositories in recently.
+      Your Groups: Your Groups
+      All activity: All activity
+      You have no activity in recently: You have no activity in recently.
+    stars:
+      Stared Docs: Stared Docs
+      Stared Repositories: Stared Repositories
+    watches:
+      All Watches: All watches
+  versions:
+    version:
+      Current: Current
+  docs:
+    draft_tip:
+      You are on the draft preview page, the contents has saved at: You are on the draft preview page, the contents has saved at
+      View Published: View Published
+      Continue edit: Continue edit
+      There have the unpublished content saved at: There have the unpublished content saved at
+      Preview the draft: Preview the draft
+    export_pdf:
+      Export: Export
+      Export PDF: Export PDF
+      PDF of this document page has in generating, please wait: "PDF of this document page has in generating, please wait ..."
+      If you are waiting a long time, and still no response, then you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a PDF export task again.
+      PDF of this document page has generated: PDF of this document page has generated.
+      Click the button to download it: Click the button to download it.
+      Download PDF: Download PDF
+      Generate Again: Generate Again!
+      Submiting: "Submiting..."
+      Click button to genrate PDF file for this document: Click button to genrate PDF file for this document.
+      Generate PDF: Generate PDF
+    form:
+      Doc publish failed, because there has count issues: Doc publish failed, because there has %{count} issues.
+      New doc: New doc
+      Save Draft: Save Draft
+      Publish: Publish
+    readers:
+      people: people
+      has read: has read this Doc.
+      Reader list: Reader list
+    share_button:
+      Share: Share
+      Unshare: Unshare
+      Sharing: Sharing
+      Submiting: Submiting...
+      Copy Link: Copy Link
+      Open share: Open share
+      Share doc: Share doc
+      Everyone can visits this doc with the share link: "Everyone can visits this doc with the share link:"
+      opened share at: opened share at
+      Create a share link to allow non-member visit this doc: Create a share link to allow non-member visit this doc.
+    edit:
+      Doc current in locked: Doc current in locked.
+      Warning: Warning!
+      is current in editing this document: is current in editing this document.
+      Continue edit will make conflict, do you wants continue?: Continue edit will make conflict, do you wants continue?
+      Continue edit: Continue edit
+      Cancel: Cancel
+    show:
+      Back to list: Back to list
+      Not found: Not found
+      Private: Private
+      Edit: Edit
+      Markdown: Markdown
+      Print document: Print document...
+      Fullscreen: Fullscreen
+      Versions: Versions...
+      Delete: Delete
+      Are you sure delete?: Are you sure delete this Doc?
+      Exit Fullscreen: Exit
+      Doc not found: Doc not found
+      Sorry, this Doc does not exists: Sorry, this Doc does not exists, please checkout that URL is correct.
+      Create Doc for this URL: Create Doc for this URL
+      Last edit by: Last edit by
+      edited at: at
+      Created by: Created by
+      created at: at
+    transfer:
+      Transfer docs: Transfer docs
+      When you wants move docs into other repository: When you wants move docs into other repository, you can choice them and select a destination repository to transfer.
+      Select doc to transfer: Select doc to transfer
+      To repository: To repository
+      Transfer now: Transfer now!
+    versions:
+      Versions: Versions
+      Diff mode: Diff mode
+      Revert: Revert
+      Cancel: Cancel
+  group_members:
+    add_member:
+      Add member: Add member
+      Type username to match user and then add as member of this group: Type Username or Real name to match user and then add as member of this group.
+      Search user: "Search user:"
+      Admin: Admin
+      Editor: Editor
+      Reader: Reader
+      All permission of this group: All permission of this group.
+      Can create, update docs or repositories of this group: Can create, update docs or repositories of this group.
+      Readonly mode for all resources of this group: Readonly mode for all resources of this group.
+    update_member:
+      Change member role: Change member role
+      Change role: Change role...
+      Update Role: Update Role
+    member:
+      Remove: Remove
+    index:
+      Members: Members
+      Number of Members: Members
+  group_settings:
+    menu:
+      Profile: Profile
+    destroy:
+      Delete group: Delete group
+      Delete this group: Delete this group
+      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
+      Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
+      I understand, delete this group: I understand, delete this group!
+    show:
+      Photo: Logo
+      Settings: Settings
+      Group profile: Group profile
+      Update profile: Update profile
+      Danger to change slug: "Danger! When you change the group name, the links to this group's contents will can not open."
+      Danger zone: Danger zone
+      Delete this group: Delete this group
+      Once you delete a group, there is no going back: Once you delete a group, there is no going back. Please be certain.
+      Upload new picture: Upload new picture
+      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify group in BookLab It will be visible to anyone.
+      Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+    update:
+      Group update successed: Group update successed.
+  groups:
+    menu:
+      Repository: Repositories
+      Search: Search
+      Member: People
+      Settings: Settings
+      Search in group: Search in %{name}
+      Group: Group
+    new:
+      New Group: New Group
+      Group accounts allow your team to plan, build, review, and ship documents: Group accounts allow your team to plan, build, review, and ship documents...
+      Great group path names are short and memorable: Great group path names are short and memorable, <code>%{host}/group-name</code>.
+      The letters, numbers or dash is allow, for example: "The letters, numbers or dash is allow, and we will keep the letter case, for example:"
+      Display title of this Group: Display title of this Group
+      Create Group: Create Group
+    search:
+      Can't find any Doc like: "Can't find any Doc like"
+      in this Group: "in this Group."
+    show:
+      Show all: Show all
+      Find a repository: Find a repository...
+      There is no repository: There is no repository.
+      You can create first repository: You can create first repository,
+      Create new: Create new
+      Members: Members
+  notification_mailer:
+    to_user:
+      View it on BookLab: View it on BookLab
+  notifications:
+    Notification been deleted: Notification trigger content has been deleted.
+    body:
+      comment:
+        said: said
+      mention:
+        mentioned you: mentioned you
+        has mentioned you in subject: "has mentioned you in [%{subject}]."
+    title:
+      add_member:
+        has added you as member of: "has added you as member of [%{subject}]"
+      comment:
+        got a comment: got a comment.
+      mention:
+        got a comment: got a comment.
+        got a mention: content has mentioned you.
+      repo_import:
+        Repository name import has been status: "Repository [%{name}] import has been %{status}."
+    add_member:
+      has added you as member of: "has added you as member of:"
+    comment:
+      was posted a comment on: "was posted a comment on"
+    mention:
+      was mentioned you in: "was mentioned you in"
+    repo_import:
+      Repository: Repository
+      import has been: import has been
+    index:
+      Unread: Unread
+      All: All
+      Clear all: Clear all
+      Mark as read: Mark as read
+      notifications: notifications
+      You does not have any notifications: You does not have any notifications.
+      You does not have any unread notifications: You does not have any unread notifications.
+  reactions:
+    new_button:
+      Select a item: Pick a reaction
+  repositories:
+    doc:
+      Sharing: Sharing
+      Last updated at: Last updated at
+      Are you sure delete this Doc?: Are you sure delete this Doc?
+    empty_docs:
+      There is no documents: There is no documents
+      You can create first document: "You can create first document,"
+      Create doc: Create doc
+    menu:
+      New Doc: New Doc
+      Private: Private
+      Import from this URL: Import from this URL
+      Summary: Summary
+      Docs: Docs
+      Settings: Settings
+      Repository: Repository
+    repository:
+      Private: Private
+    docs:
+      Docs: Docs
+      Sort by: "Sort by:"
+      Sort by Updated: Updated
+      Sort by Created: Created
+    new:
+      New Repository: New Repository
+      A repository contains all the documents for your project: A repository contains all the documents for your project.
+      Import from Archive: Import from Archive
+      Import from Git: Import from Git
+      Put a Git repository URL, BookLab will import all of the markdown files as a Doc: Put a Git repository URL, BookLab will import all of the <code>.md, .markdown</code> files as a Doc.
+      This feature is best compatible with: 'This feature is best compatible with <a href="https://gitbook.io">GitBook</a> format (including a <code>SUMMARY.md</code> to describe of the Table of Contents).'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import: You can archive multiple <code>.md, .markdown</code> files as a zip file, and then choice the zip file for import.
+      Or you have a GitBook source, you can use: Or you have a GitBook source, you can use
+      Great repository names are short and memorable: Great repository names are short and memorable.
+      Anyone can see this repository: Anyone can see this repository.
+      You choose who can see and edit to this repository: You choose who can see and edit to this repository.
+      Public: Public
+      Private: Private
+      Create Repository: Create Repository
+    search:
+      Search Docs: Search Docs
+      Can not find any Doc like: "Can't find any Doc like"
+      in this Repository: in this Repository.
+    show:
+      Edit TOC: Edit
+    toc:
+      Edit TOC: Edit TOC
+      Back to Repository: Back to Repository
+      Edit Table of contents: Edit Table of contents
+      Move cursor Up: Move cursor up
+      Move cursor Down: Move cursor down
+      Move Up: Move Up
+      Move Down: Move Down
+      Edit or Confirm edit: Edit / Confirm edit
+      Enter: Enter
+      Tab: Tab
+      Shift: Shift
+      Outdent: Outdent
+      Indent: Indent
+      Delete: Delte
+      or: or
+      Remove item: Remove item
+      Save: Save
+      Cancel: Cancel
+    create:
+      Repository was successfully created: Repository was successfully created.
+      Repository was successfully created, and executed importing in background: Repository was successfully created, and executed importing in background, wait a moment you will see the import result.
+  repository_settings:
+    exports:
+      archive:
+        Export as Archive: Export as Archive
+        Export all docs as markdown files, and archive them into a zip file: Export all docs as markdown files, and archive them into a zip file.
+        This will including a SUMMARY for describe of the Table of contents: This will including a <code>SUMMARY.md</code> for describe of the Table of contents.
+        After that you can use many Markdown tools: After that you can use many Markdown tools
+        to genrate it to other format: to genrate it to other format.
+        Archive of this repository has in generating: Archive of this repository has in generating, please wait ...
+        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a Archive export task again.
+        Archive of this repository was generated: Archive of this repository was generated.
+        Click the button to download it: Click the button to download it.
+        Download: Download
+        Generate Again: Generate Again!
+        Submiting: Submiting...
+        Archive as zip: Archive as zip
+        Generate Archive will take a long time: Generate Archive will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+      pdf:
+        Export as PDF: Export as PDF
+        You can export all docs as a PDF file: You can export all docs in this Repository as a PDF file.
+        Preview PDF HTML: Preview PDF HTML
+        Exporter will use the TOC ordered, otherwice same as the: Exporter will use the Table of Contents ordered for generate the PDF file. If you was not enable that, docs order will following as the updated at same like the
+        Doc list: Docs page
+        PDF has in generating, please wait: PDF of this repository has in generating, please wait ...
+        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a PDF export task again.
+        PDF of this repository was generated: PDF of this repository was generated.
+        Click the button to download it: Click the button to download it.
+        Download: Download PDF
+        Generate Again: Generate Again!
+        Submiting: Submiting...
+        Generate PDF: Generate PDF
+        Generate PDF will take a long time: Generate PDF will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+    destroy:
+      Delete repository: Delete repository
+      Delete this repository: Delete this repository
+      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This will permanently delete the: This will permanently delete the
+      all of contents: repository, docs, versions and comments.
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      I understand, delete this repository: I understand, delete this repository
+    member:
+      Are you sure to remove?: Are you sure to remove?
+    menu:
+      Options: Options
+      Manage docs: Manage docs
+      Collaborators: Collaborators
+      Advanced: Advanced
+    privacy:
+      public: public
+      private: private
+      Make privacy: Make %{privacy}
+      Make this repository privacy: Make this repository %{privacy}
+      Public this repository from the private, this repository and docs will be visible to everyone who can visit: Public this repository from the private, this repository and docs will be visible to everyone who can visit
+      Private this repository from the public, this change will remove repository watchers, stars: Private this repository from the public, this change will remove repository watchers, stars.
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      Confirm and submit: I understand, %{privacy} this repository.
+    transfer:
+      Transfer: Transfer
+      Transfer repository: Transfer repository
+      Please type in the path: Please type in the path
+      to confirm: to confirm.
+      Target username or group path: New owner’s BookLab username or group path
+      Confirm and transfer: Transfer this repository
+    advanced:
+      Settings: Settings
+      Transfer: Transfer
+      Transfer ownership: Transfer ownership
+      Transfer this repository to another user or to an group: Transfer this repository to another user or to an group where you have the ability to create repositories.
+      Danger Zone: Danger Zone
+      Make this repository public: Make this repository public
+      Make this repository private: Make this repository private
+      Public this repository from the private: Public this repository from the private.
+      Private this repository from the public: Private this repository from the public.
+      Delete this repository: Delete this repository
+      Once you delete a repository, there is no going back: Once you delete a repository, there is no going back. Please be certain.
+    collaborators:
+      Collaborators: Collaborators
+      Push access to the repository: Push access to the repository
+      Search by username, full name or email address: Search by username, full name or email address
+      By default, will add user as :role role: By default, will add user as <strong>%{role}</strong> role.
+      Add: Add
+    docs:
+      Transfer docs to other repository: Transfer docs to other repository
+      Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
+      If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
+      Transfer now: Transfer now!
+    show:
+      Settings: Settings
+      Repository profile: Repository profile
+      Repository slug help: "%{host}%{user_path}/repository-name"
+      Update: Update
+      Features: Features
+      Table of Contents: Table of Contents
+      Enable to use Table of Contents style for Repository index: Enable to use Table of Contents style for Repository index.
+  searches:
+    menu:
+      Docs: Docs
+      Repositories: Repositories
+      Groups: Groups
+      Users: Users
+    no_result:
+      No result: No result
+      Can not find any contents like: "Can't find any contents like"
+      in BookLab: in BookLab.
+    search_info:
+      About: About
+      there have count results: there have %{count} results.
+  shares:
+    doc:
+      Last edit by: Last edit by
+      Created by: Created by
+      Last edit by at: at
+      Created by at: at
+  user_mailer:
+    welcome:
+      You have successfully signed up to: You have successfully signed up to
+      Your username is: "Your username is:"
+      Thanks for joining and have a great day: Thanks for joining and have a great day!
+  users:
+    card:
+      followers: followers
+    followers:
+      Followers: Followers
+      no followers: not has followers.
+    following:
+      Following: Following
+      no following: not has following any one.
+    overview:
+      Overview: Overview
+      no activities: was not have any activities.
+    repositories:
+      Repositories: Repositories
+      no repositories: was not have any repositories.
+    sidebar:
+      Followers: Followers
+      Following: Following
+      Groups: Groups
+      Overview: Overview
+      Repositories: Repositories
+      Stars: Stars
+      Settings: Settings
+      Profile: Profile
+      Account: Account
+    stars:
+      Stars: Stared Repositories
+      no star repositories: was not star any repositories.
+    profile:
+      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify you in BookLab. It will be visible to anyone
+      Use a photo or image rather than text and upload an image that is 132px square or larger: Use a photo or image rather than text and upload an image that is 132px square or larger

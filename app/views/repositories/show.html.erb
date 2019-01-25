@@ -2,9 +2,6 @@
 
 <%= render "menu" %>
 
-<div class="mb-4">
-</div>
-
 <%
 toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
 %>
@@ -15,7 +12,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
   <div class="repo-toc">
     <div class="toc-header">
       <% if can? :create_doc, @repository %>
-        <%= link_to icon_tag("edit-toc", label: "Edit"), toc_user_repository_path(@user, @repository), class: "float-right edit-link" %>
+        <%= link_to icon_tag("edit-toc", label: t(".Edit TOC")), toc_user_repository_path(@user, @repository), class: "float-right edit-link" %>
       <% end %>
       <div class="title"><%= @repository.name %></div>
       <div class="description"><%= @repository.description %></div>

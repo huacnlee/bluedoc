@@ -134,9 +134,9 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.transfer-docs" do
-      assert_select ".Box-header .title", text: "Transfer docs to other repository"
-      assert_select ".Box-row input[type=checkbox]", 10
+    assert_select ".box.transfer-docs" do
+      assert_select ".box-header .title", text: "Transfer docs to other repository"
+      assert_select ".box-row input[type=checkbox]", 10
     end
   end
 
@@ -228,7 +228,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#member-#{reader_member.id}" do
         assert_select "form.edit-member" do
           assert_select "[action=?]", repo.to_path("/settings/collaborator")
-          assert_select ".select-menu-button", text: reader_member.role
+          assert_select ".select-menu-button", text: reader_member.role_name
           assert_select ".select-menu-list" do
             assert_select "button.select-menu-item", 3 do
               assert_select "[type=?]", "submit"
@@ -237,17 +237,17 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
             assert_select "button.select-menu-item[value=reader]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 1
-              assert_select ".select-menu-item-text", text: "reader"
+              assert_select ".select-menu-item-text", text: Member.role_name("reader")
             end
             assert_select "button.select-menu-item[value=editor]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 0
-              assert_select ".select-menu-item-text", text: "editor"
+              assert_select ".select-menu-item-text", text: Member.role_name("editor")
             end
             assert_select "button.select-menu-item[value=admin]" do
               assert_select "[name=?]", "member[role]"
               assert_select ".select-menu-item-icon .fa-check", 0
-              assert_select ".select-menu-item-text", text: "admin"
+              assert_select ".select-menu-item-text", text: Member.role_name("admin")
             end
           end
         end
@@ -261,7 +261,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#member-#{editor_member.id}" do
         assert_select "form.edit-member" do
           assert_select "[action=?]", repo.to_path("/settings/collaborator")
-          assert_select ".select-menu-button", text: editor_member.role
+          assert_select ".select-menu-button", text: editor_member.role_name
           assert_select ".select-menu-list" do
             assert_select "button.select-menu-item[value=editor]" do
               assert_select ".select-menu-item-icon .fa-check", 1
@@ -413,8 +413,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-generate" do
         assert_select ".btn-generate-pdf", text: "Generate PDF" do
           assert_select "[href=?]", repo.to_path("/settings/export?type=pdf&force=1")
@@ -429,10 +429,10 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-exist" do
-        assert_select ".btn-download-pdf", text: "Download" do
+        assert_select ".btn-download-pdf", text: "Download PDF" do
           assert_select "[href=?]", repo.export_url(:pdf)
         end
         assert_select ".btn-regenerate-pdf", text: "Generate Again!" do
@@ -448,8 +448,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path("/settings/docs")
     assert_equal 200, response.status
 
-    assert_select ".Box.export-repository-pdf" do
-      assert_select ".Box-header .title", text: "Export as PDF"
+    assert_select ".box.export-repository-pdf" do
+      assert_select ".box-header .title", text: "Export as PDF"
       assert_select ".pdf-export-running" do
         assert_select ".pdf-export-retry-message" do
           assert_select "a", text: "retry" do
