@@ -4,9 +4,11 @@
   <%= render "menu" %>
 
   <div class="col-12 col-md-9 float-left">
-    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
+    <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password" }) do |f| %>
       <div class="form-title"><h2>Change password</h2></div>
+      <% if params[:_by] == "password" %>
       <%= render "/shared/error_messages", target: @user %>
+      <% end %>
 
       <input type="hidden" name="_by" value="password" />
 
@@ -37,7 +39,26 @@
       </div>
     <% end %>
 
-   <div class="form-title"><h2>Danger zone</h2></div>
+    <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-username" }) do |f| %>
+      <div class="form-title"><h2>Change username</h2></div>
+      <% if params[:_by] == "username" %>
+      <%= render "/shared/error_messages", target: @user %>
+      <% end %>
+
+      <input type="hidden" name="_by" value="username" />
+
+      <div class="form-group">
+        <p>Unless you really need it, we recommended that you don't change your username. This will cause the related links, such as the Repositories, Docs, Mentions, etc. that were linked to you before to be opened.</p>
+        <div class="input-group">
+          <%= f.text_field :slug, class: "form-control", autocomplete: "username" %>
+          <span class="input-group-button">
+            <%= f.submit "Update", class: "btn" %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-title"><h2>Danger zone</h2></div>
     <div class="Box mb-3">
       <div class="Box-row d-flex flex-column flex-md-row flex-items-center">
         <div class="flex-auto pr-md-2 mb-2 mb-md-0">

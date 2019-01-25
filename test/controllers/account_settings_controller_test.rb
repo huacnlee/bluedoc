@@ -70,13 +70,38 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
     put account_settings_path, params: { user: { password: "123", password_confirmation: "321" }, _by: :password }
     assert_equal 200, response.status
-    assert_match /Password confirmation doesn&#39;t match Password/, response.body
+    assert_select "#account-change-password" do
+      assert_select ".flash.flash-error" do
+        assert_select "li", text: "Password confirmation doesn't match Password"
+      end
+    end
 
     put account_settings_path, params: { user: account_params, _by: :password }
     assert_redirected_to account_account_settings_path
 
     user.reload
     assert_equal true, user.valid_password?(new_password)
+  end
+
+  test "PUT /account/settings with username" do
+    user0 = create(:user)
+    user = create(:user, name: "Jason Lee")
+
+    sign_in user
+    put account_settings_path, params: { user: { slug: user0.slug }, _by: :username }
+    assert_equal 200, response.status
+    assert_select "#account-change-username" do
+      assert_select ".flash.flash-error" do
+        assert_select "li", text: "Username has already been taken"
+      end
+    end
+
+    old_username = user.slug
+    put account_settings_path, params: { user: { slug: "#{old_username}-new", name: "Hello" }, _by: :username }
+    assert_redirected_to account_account_settings_path
+    user.reload
+    assert_equal "#{old_username}-new", user.slug
+    assert_equal "Jason Lee", user.name
   end
 
   test "DELETE /account/settings" do
