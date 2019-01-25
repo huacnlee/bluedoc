@@ -1,8 +1,8 @@
 .reponav {
+  margin: 0 5px;
   .reponav-item {
-    padding-bottom: 15px;
     font-size: 14px;
-    margin-right: 40px;
+    padding: 0 20px 15px 20px;
     text-decoration: none;
     color: $text-gray;
     &.selected {
