@@ -90,7 +90,7 @@ module ApplicationHelper
 
     out << link_to(icon_tag(icon, label: btn_label), url, data: data, class: class_names)
     if with_count && target.respond_to?(action_count)
-      out << %(<button class="social-count" href="#url">#{target.send(action_count)}</button>)
+      out << %(<span class="social-count" >#{target.send(action_count)}</span>)
     end
     content_tag(:span, raw(out.join("")), class: "#{target.class.name.underscore.singularize}-#{target.id}-#{action_type}-button")
   end

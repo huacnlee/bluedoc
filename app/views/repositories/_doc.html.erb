@@ -1,7 +1,7 @@
 <% if doc %>
   <div class="doc-item list-item list-avatar" id="doc-<%= doc.id %>">
     <div class="avatar-box icon-box icon-doc">
-      <%= icon_tag("doc") %>
+      <%= icon_tag("avatar-doc") %>
     </div>
     <div class="title">
       <%= doc_title_tag(doc) %>
@@ -18,6 +18,7 @@
       <%= user_name_tag(doc.last_editor) %>
     </div>
     <div class="action text-gray">
+      <%= link_to icon_tag("edit"), doc.to_path("/edit") %>
       <% if can? :destroy, doc %>
         <%= link_to icon_tag("trash"), doc.to_path, data: { method: :delete, remote: true, confirm: t(".Are you sure delete this Doc?") }, class: "btn-link btn-remove-doc" %>
       <% end %>

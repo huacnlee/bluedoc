@@ -5,7 +5,7 @@
 </div>
 <div class="main-wrap">
   <div class="main-content">
-    <h1 class="title"><%= t(".Profile") %><h1>
+    <h1 class="title"><%= t(".Profile") %></h1>
     <h2 class="sub-title"><%= t(".Avatar") %></h2>
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
       <input type="hidden" name="_by" value="profile" />

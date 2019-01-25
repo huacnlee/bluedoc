@@ -7,7 +7,7 @@
   </div>
   <div class="main-wrap">
     <div class="main-content">
-      <h1 class="title"><%= t(".Account") %><h1>
+      <h1 class="title"><%= t(".Account") %></h1>
       <h2 class="sub-title"><%= t(".Change password") %></h2>
       <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password", class: "mb-6" }) do |f| %>
         <% if params[:_by] == "password" %>
