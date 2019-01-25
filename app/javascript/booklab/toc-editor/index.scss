@@ -47,6 +47,15 @@
       transform: translateY(-50%);
       text-align: center;
       line-height: 100%;
+
+      .dropdown {
+        display: flex;
+      }
+
+      .btn {
+        margin-left: 5px;
+      }
+
       .dropdown-menu {
         text-align: left;
       }
