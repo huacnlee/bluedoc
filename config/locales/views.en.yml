@@ -371,6 +371,7 @@ en:
       Member: People
       Settings: Settings
       Search in group: Search in %{name}
+      Group: Group
     new:
       New Group: New Group
       Group accounts allow your team to plan, build, review, and ship documents: Group accounts allow your team to plan, build, review, and ship documents...
@@ -445,6 +446,7 @@ en:
       Summary: Summary
       Docs: Docs
       Settings: Settings
+      Repository: Repository
     repository:
       Private: Private
     docs:

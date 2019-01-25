@@ -58,6 +58,7 @@ export class DocSetting extends React.Component {
     const { repositoryURL } = this.props;
 
     return (
+      <React.Fragment>
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
         <summary className="btn"><i className="fas fa-info"></i></summary>
         <div className="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left">
@@ -78,6 +79,7 @@ export class DocSetting extends React.Component {
           </div>
         </div>
       </details>
+      </React.Fragment>
     )
   }
 }

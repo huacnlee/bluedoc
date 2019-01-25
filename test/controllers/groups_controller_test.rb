@@ -18,11 +18,10 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".group-avatar-box"
     assert_select ".group-repositories"
     assert_select ".group-repositories .repository-item", 2
-    assert_select "form.subnav-search-context" do
-      assert_select "[action=?]", search_group_path(@group)
-      assert_select "input.subnav-search-input" do
-        assert_select "[placeholder=?]", "Search in #{@group.name}"
-      end
+    assert_react_component "navbar/Search" do |props|
+      assert_equal search_group_path(@group), props[:action]
+      assert_equal "Group", props[:scope]
+      assert_nil props[:value]
     end
 
     # with anonymous disable

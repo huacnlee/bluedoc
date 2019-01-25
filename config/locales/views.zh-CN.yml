@@ -376,6 +376,7 @@ zh-CN:
       Member: 成员
       Settings: 设置
       Search in group: 搜索 %{name} 的内容
+      Group: 团队
     new:
       New Group: 新建团队
       Group accounts allow your team to plan, build, review, and ship documents: 团队用将一个项目组或做相同工作的一群人拉到一起，大家可以在同一个团队下组织内容。
@@ -449,6 +450,7 @@ zh-CN:
       Summary: 目录
       Docs: 文档列表
       Settings: 设置
+      Repository: 知识库
     repository:
       Private: 私密
     docs:

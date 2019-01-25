@@ -80,3 +80,43 @@
     }
   }
 }
+
+.subnav-search-context {
+  .autocomplete-results {
+    margin-top: 3px;
+    width: 320px;
+    padding: 8px;
+    border-radius: 5px;
+
+    .autocomplete-item {
+      display: inline;
+      padding: 0;
+      a {
+        border-radius: 3px;
+        padding: 5px;
+        text-decoration: none;
+        font-weight: normal;
+        display: block;
+        @extend .clearfix;
+
+        .scope-name {
+          color: #aaa;
+          background: #f7f7f7;
+          border-radius: 3px;
+          padding: 2px 4px;
+        }
+      }
+
+      &:hover {
+        a {
+          color: #fff !important;
+          background: $primary;
+          .scope-name {
+            color: #f0f0f0;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

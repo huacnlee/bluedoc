@@ -37,11 +37,7 @@
 </div>
 <% end %>
 
+
 <% content_for :nav_search do %>
-<form action="<%= search_group_path(@group) %>" class="subnav-search-context" method="GET">
-  <div class="subnav-search">
-    <input name="q" type="text" placeholder="<%= t(".Search in group", name: @group.name) %>" autocomplete="off" class="form-control form-search-control subnav-search-input" value="<%= params[:q] %>" />
-    <%= icon_tag "search", :class => "subnav-search-icon" %>
-  </div>
-</form>
+  <%= render partial: "/layouts/search_nav", locals: { props: { action: search_group_path(@group), scope: t(".Group"), value: params[:q] } } %>
 <% end %>

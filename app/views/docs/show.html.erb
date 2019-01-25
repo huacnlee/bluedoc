@@ -1,5 +1,9 @@
 <% title_tag @doc ? @doc.title : "Not found" %>
 
+<% content_for :nav_search do %>
+  <%= render partial: "/layouts/search_nav", locals: { props: { action: @repository.to_path("/docs/search"), scope: "Repository", value: params[:q] } } %>
+<% end %>
+
 <% content_for :subnav do %>
 <div class="navbar-wide-mode" style="display: none">
   <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>

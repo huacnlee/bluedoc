@@ -153,7 +153,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     # nav search
     assert_react_component "navbar/Search" do |props|
       assert_equal repo.to_path("/docs/search"), props[:action]
-      assert_equal repo.name, props[:scope]
+      assert_equal "Repository", props[:scope]
       assert_nil props[:value]
     end
 
