@@ -135,6 +135,10 @@ en:
     View: View
     Edit: Edit
     Back: Back
+    comments:
+      Comment was successfully updated: Comment was successfully updated.
+      index:
+        Private contents, hide comment: Private contents, hide comment.
     dashboards:
       show:
         Tools: Tools
@@ -179,10 +183,6 @@ en:
         Save: Save
       create:
         Setting was successfully updated: Setting was successfully updated.
-  comments:
-    Comment was successfully updated: Comment was successfully updated.
-    index:
-      Private contents, hide comment: Private contents, hide comment.
   comments:
     comment_watch:
       Subscribe: Subscribe

@@ -135,6 +135,10 @@ zh-CN:
     Activity: 动态
     Back to Front: 回到前台
     Sign out: 登出
+    comments:
+      Comment was successfully updated: 评论修改成功。
+      index:
+        Private contents, hide comment: 私密内容，无法查阅评论。
     dashboards:
       show:
         Tools: 工具
@@ -178,10 +182,6 @@ zh-CN:
         Save: 保存
       create:
         Setting was successfully updated: 系统设置更新成功。
-    comments:
-      Comment was successfully updated: Comment was successfully updated.
-      index:
-        Private contents, hide comment: 私密内容，无法查阅评论。
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知
