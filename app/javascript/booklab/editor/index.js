@@ -107,7 +107,7 @@ class RichEditor extends React.Component {
       title = "";
     }
 
-    return <div>
+    return <React.Fragment>
       <Toolbar value={this.state.value} editor={this.editor} container={this} />
       <div className="editor-bg" ref={this.containerRef}>
         <div className="editor-box">
@@ -133,7 +133,7 @@ class RichEditor extends React.Component {
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   }
 }
 
@@ -164,9 +164,6 @@ class EditorBox {
 
     const titleInput = document.getElementsByName("doc[title]")[0];
     const formatInput = document.getElementsByName("doc[format]")[0];
-
-    const editorDiv = document.createElement("div");
-    editorDiv.className = "editor-container";
 
     const onChange = (markdownValue, smlValue) => {
       bodyInput.value = markdownValue;
@@ -240,7 +237,6 @@ class EditorBox {
 
     const value = formatInput.value === "markdown" ? bodyInput.value : bodySMLInput.value;
 
-    $("form").after(editorDiv);
     ReactDOM.render(
       <RichEditor
         onChange={onChange}
@@ -252,7 +248,7 @@ class EditorBox {
         title={titleInput.value}
         format={formatInput.value}
         value={value} />,
-      editorDiv,
+      document.querySelector(".editor-container")
     )
 
     ReactDOM.render(
