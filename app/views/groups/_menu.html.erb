@@ -36,3 +36,8 @@
   </div>
 </div>
 <% end %>
+
+
+<% content_for :nav_search do %>
+  <%= render partial: "/layouts/search_nav", locals: { props: { action: search_group_path(@group), scope: "Group", value: params[:q] } } %>
+<% end %>
