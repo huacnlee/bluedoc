@@ -1,24 +1,27 @@
 .page-repositories {
+
 }
 
 .repo-heading {
   background: #F9F9F9;
   .heading {
-    margin: 50px 0 20px 0;
+    margin: 40px 0 10px 0;
   }
-
   h1 {
     font-size: 20px;
-    a { color: #303030; }
-    .divider {
-      font-size: 18px;
-      color: $text-gray-light;
-    }
-
     i.fas {
       font-size: 20px;
       color: #303030;
     }
+  }
+  .btn {
+    padding: 4px 8px; 
+  }
+}
+
+.repo-actions {
+  .btn, .social-count {
+    padding: 3px 5px;
   }
 }
 

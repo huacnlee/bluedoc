@@ -15,9 +15,6 @@ textarea {
   display: block;
 }
 
-* {
-  vertical-align: inherit;
-}
 @import "mixins.scss";
 @import "./grid.scss";
 @import "./utils.scss";

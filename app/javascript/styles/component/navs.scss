@@ -1,21 +1,13 @@
 .reponav {
   .reponav-item {
-    font-size: 16px;
-    margin-right: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    margin-right: 40px;
     text-decoration: none;
-
-    .fas {
-      font-size: 18px;
-      margin-top: 2px;
-    }
-
-    &:hover {
-      text-decoration: none;
-      color: $primary;
-    }
-
+    color: $text-gray;
     &.selected {
-      color: $primary;
+      color: $text-main;
+      border-bottom: 1px solid $black;
     }
   }
 }

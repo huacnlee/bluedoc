@@ -12,11 +12,9 @@
   cursor: pointer;
   user-select: none;
   appearance: none;
-
-  .fas  {
-    font-size: 16px;
+  .fas {
+    transform: scale(1.2);
   }
-
   &:hover {
     text-decoration: none;
     color: $primary;
@@ -25,15 +23,7 @@
 
 .social-count {
   @extend .btn;
-  padding-left: 4px;
-  padding-right: 4px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
   border-left: 0px;
-  line-height: 100%;
-  font-size: 14px;
-  position: relative;
-  top: 1px;
   margin-right: 15px;
 }
 
