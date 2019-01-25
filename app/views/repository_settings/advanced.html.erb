@@ -4,12 +4,12 @@
 <%= render "menu" %>
 <div class="col-12 col-md-9 float-left">
    <div class="form-title"><h2><%= t(".Transfer") %></h2></div>
-   <div class="box mb-3">
-     <div class="box-row d-flex flex-column flex-md-row flex-items-center">
+   <div class="box mb-6">
+     <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
        <div class="flex-auto mr-2 mb-2 mb-md-0">
-         <label class="form-check-label font-weight-bold">
+         <div class="font-weight-bold">
            <%= t(".Transfer ownership") %>
-         </label>
+         </div>
          <div class="form-text">
            <%= t(".Transfer this repository to another user or to an group") %>
          </div>
@@ -27,8 +27,8 @@
     <input type="hidden" name="_action" value="advanced" />
     <input type="hidden" name="_by" value="danger-zone" />
 
-    <div class="box mb-3">
-      <div class="box-row d-flex flex-column flex-md-row flex-items-center">
+    <div class="box mb-6">
+      <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
         <div class="flex-auto mr-2 mb-2 mb-md-0">
           <label class="form-check-label font-weight-bold">
             <% if @repository.private? %>
@@ -47,7 +47,7 @@
         </div>
         <%= render "privacy" %>
       </div>
-      <div class="box-row d-flex flex-column flex-md-row flex-items-center">
+      <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
         <div class="flex-auto mr-2 mb-2 mb-md-0">
           <label class="form-check-label font-weight-bold">
             <%= t(".Delete this repository") %>
