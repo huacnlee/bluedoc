@@ -23,7 +23,7 @@
                 <div class="info">
                   <%= timeago item.updated_at %>
                 </div>
-                <div class="action">
+                <div class="action action-icon">
                   <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
                 </div>
               </li>
@@ -51,7 +51,7 @@
               <div class="info">
                 <%= timeago item.updated_at %>
               </div>
-              <div class="action">
+              <div class="action action-icon">
               <% if can? :create_doc, item.subject %>
                 <%= link_to icon_tag("add-doc"), item.subject.to_path("/docs/new"), target: "_blank" %>
               <% end %>

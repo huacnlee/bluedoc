@@ -17,7 +17,7 @@
         <%= user_display_name_tag(doc.repository.user) %> / 
         <%= repository_name_tag(doc.repository) %>
       </div>
-      <div class="action"><%= action_button_tag(doc, :star, undo: true) %></div>
+      <div class="action action-icon text-gray"><%= action_button_tag(doc, :star, undo: true) %></div>
       <div class="time-box">
         <%= timeago doc.updated_at %>
       </div>
