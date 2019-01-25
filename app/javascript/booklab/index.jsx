@@ -5,8 +5,10 @@ import "@babel/polyfill"
 import "activestorage"
 import "primer-booklab"
 import "vendor/styleguide.js"
+import "vendor/turbo-react.min.js"
 import { render as timeagoRender } from 'timeago.js';
 import './rails-ujs-extends'
+
 
 Turbolinks.start()
 Turbolinks.setProgressBarDelay(150)
