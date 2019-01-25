@@ -53,12 +53,26 @@ textarea.form-control {
 }
 
 .input-group {
-  display: table;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+
+  .field_with_errors {
+    display: -ms-flexbox;
+    display: flex;
+  }
 
   .form-control {
-    display: table-cell;
+    width: auto;
+    min-width: 300px;
     position: relative;
-    width: 100%;
+    margin-bottom: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 
     &:first-child {
       border-top-right-radius: 0;
@@ -79,7 +93,7 @@ textarea.form-control {
 
     &:last-child {
       .btn {
-        margin-left: -1px;
+        border-left: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
@@ -102,8 +116,8 @@ textarea.form-control {
       color: #495057;
       text-align: center;
       white-space: nowrap;
-      background-color: #f0f0f0;
-      border: 1px solid #D9D9D9;
+      background-color: #f7f7f7;
+      border: 1px solid #f0f0f0;
       border-right: 0;
       border-radius: 2px 0 0 2px;
       font-size: 13px;
@@ -138,56 +152,5 @@ input[type=radio] {
   input.form-control,
   textarea.form-control {
     border-color: $danger;
-  }
-}
-
-.input-group {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  width: 100%;
-
-  .form-control {
-    width: auto;
-    min-width: 300px;
-  }
-
-  .input-group-prepend {
-    margin-right: -1px;
-    display: flex;
-
-    .input-group-text {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding: .375rem .75rem;
-      margin-bottom: 0;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #495057;
-      text-align: center;
-      white-space: nowrap;
-      background-color: #f0f0f0;
-      border: 1px solid #eee;
-      border-radius: 2px;
-    }
-
-    .form-control {
-      position: relative;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      width: 1%;
-      margin-bottom: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
   }
 }

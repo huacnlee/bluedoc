@@ -1,9 +1,10 @@
 
 .select-menu-button {
   @extend .form-control;
-  line-height: 100%;
-  padding: 8px 15px;
-  font-size: 14px;
+
+  .avatar {
+    margin-top: -1px;
+  }
 }
 
 .select-menu-button::after {
