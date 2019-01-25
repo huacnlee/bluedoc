@@ -50,7 +50,7 @@ $responsive-variants: ("": "");
   }
 }
 
-$spacer: 8px !default;
+$spacer: 20px !default;
 $spacers: (
   0,
   round($spacer / 2),
@@ -58,7 +58,8 @@ $spacers: (
   $spacer * 2,
   $spacer * 3,
   $spacer * 4,
-  $spacer * 5
+  $spacer * 5,
+  $spacer * 6
 ) !default;
 
 $body-font: 'themefont', 'PingFang SC', 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica,

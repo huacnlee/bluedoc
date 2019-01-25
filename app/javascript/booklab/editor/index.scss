@@ -373,3 +373,20 @@
     width: 200px;
   }
 }
+
+.video-uploading {
+  position: absolute;
+  top: 35%;
+  padding: 64px;
+  width: 100%;
+  text-align: center;
+
+  .progress {
+    text-align: left;
+    margin: 0 auto;
+    width: 400px;
+    border-radius: 3px;
+    height: 12px;
+    background: #FFF;
+  }
+}

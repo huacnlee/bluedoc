@@ -16,6 +16,8 @@ class AccountSettingsController < ApplicationController
       update_password
     when "profile"
       update_profile
+    when "username"
+      update_username
     end
   end
 
@@ -45,6 +47,18 @@ class AccountSettingsController < ApplicationController
         redirect_to account_settings_path, notice: t(".Profile has change successed")
       else
         render :show
+      end
+    end
+
+    def update_username
+      if user_params[:slug] == @user.slug
+        return render :account
+      end
+
+      if @user.update(slug: user_params[:slug])
+        redirect_to account_account_settings_path, notice: "Username has change successed"
+      else
+        render :account
       end
     end
 

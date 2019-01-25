@@ -94,6 +94,9 @@ en:
       "Delete my account": Delete my account
       "Once you delete your account, there is no going back": Once you delete your account, there is no going back. Please be certain.
       "Are you sure?": "Danger! Once you delete your account, there is no going back, are you sure?"
+      Change username:  Change username
+      Update: Update
+      Unless you really need it, we recommended that you do not change your username: Unless you really need it, we recommended that you don't change your username. This will cause the related links, such as the Repositories, Docs, Mentions, etc. that were linked to you before to be opened.
     show:
       Avatar: Avatar
       Profile: Profile

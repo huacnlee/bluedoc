@@ -1,55 +1,78 @@
 <% title_tag "Account Settings" %>
 
+
 <div class="flex-wrap">
-<div class="aside-wrap">
-  <%= render "/users/sidebar" %>
-</div>
-<div class="main-wrap">
-  <div class="main-content">
-    <h1 class="title"><%= t(".Account") %><h1>
-    <h2 class="sub-title"><%= t(".Change password") %></h2>
-    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <%= render "/shared/error_messages", target: @user %>
-
-      <input type="hidden" name="_by" value="password" />
-
-      <div class="form-group">
-        <%= f.label :password, class: "control-label" %>
-        <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
-        <% if @minimum_password_length %>
-          <br />
-          <em><%= t(".Minimum characters", length: @minimum_password_length) %></em>
+  <div class="aside-wrap">
+    <%= render "/users/sidebar" %>
+  </div>
+  <div class="main-wrap">
+    <div class="main-content">
+      <h1 class="title"><%= t(".Account") %><h1>
+      <h2 class="sub-title"><%= t(".Change password") %></h2>
+      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password", class: "mb-6" }) do |f| %>
+        <% if params[:_by] == "password" %>
+        <%= render "/shared/error_messages", target: @user %>
         <% end %>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :password_confirmation, class: "control-label" %>
-        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-      </div>
+        <input type="hidden" name="_by" value="password" />
 
+        <div class="form-group">
+          <%= f.label :password, class: "control-label" %>
+          <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <br />
+            <em><%= t(".Minimum characters", length: @minimum_password_length) %></em>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: "control-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :current_password, class: "control-label" %>
+          <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+          <div class="form-text">
+            <%= t(".We need your current password to confirm your changes")  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit t(".Update password"), class: "btn btn-primary btn-submit"%>
+        </div>
+      <% end %>
+
+      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-username", class: "mb-6" }) do |f| %>
+        <h2 class="sub-title"><%= t(".Change username") %></h2>
+        <% if params[:_by] == "username" %>
+        <%= render "/shared/error_messages", target: @user %>
+        <% end %>
+
+        <input type="hidden" name="_by" value="username" />
+
+        <div class="form-group">
+          <p><%= t(".Unless you really need it, we recommended that you do not change your username") %></p>
+          <div class="input-group">
+            <%= f.text_field :slug, class: "form-control", autocomplete: "username" %>
+            <span class="input-group-button">
+              <%= f.submit t(".Update"), class: "btn" %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+
+      <h2 class="sub-title"><%= t(".Danger zone") %></h2>
       <div class="form-group">
-        <%= f.label :current_password, class: "control-label" %>
-        <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+        <div class="text-main" style="font-size: 15px">
+          <%= t(".Delete my account") %>
+        </div>
         <div class="form-text">
-          <%= t(".We need your current password to confirm your changes")  %>
+          <%= t(".Once you delete your account, there is no going back") %>
         </div>
       </div>
-
-      <div class="form-group" style="margin-bottom: 110px" >
-        <%= f.submit t(".Update password"), class: "btn btn-primary btn-submit"%>
-      </div>
-    <% end %>
-    <h2 class="sub-title"><%= t(".Danger zone") %></h2>
-    <div class="form-group">
-      <div class="text-main" style="font-size: 15px">
-        <%= t(".Delete my account") %>
-      </div>
-      <div class="form-text">
-        <%= t(".Once you delete your account, there is no going back") %>
-      </div>
+      <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
     </div>
-    <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
   </div>
-</div>
 </div>
 

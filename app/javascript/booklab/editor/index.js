@@ -25,27 +25,27 @@ class RichEditor extends React.Component {
     const { directUploadURL, blobURLTemplate } = this.props;
 
     this.attachmentService = {
-      imageUpload(file) {
+      imageUpload(file, onProgress) {
         return new Promise((resolve, reject) => {
           const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
             return resolve(url)
-          })
+          }, onProgress)
           upload.start()
         })
       },
-      attachmentUpload(file) {
+      attachmentUpload(file, onProgress) {
         return new Promise((resolve, reject) => {
           const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
             return resolve(url)
-          })
+          }, onProgress)
           upload.start()
         })
       },
-      videoUpload(file) {
+      videoUpload(file, onProgress) {
         return new Promise((resolve, reject) => {
           const upload = new AttachmentUpload(file, directUploadURL, blobURLTemplate, (url) => {
             return resolve(url)
-          })
+          }, onProgress)
           upload.start()
         })
       },

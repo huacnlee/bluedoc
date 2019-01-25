@@ -1,11 +1,12 @@
 import { DirectUpload } from "activestorage"
 
 export class AttachmentUpload {
-  constructor(file, directUploadUrl, blobUrlTemplate, callback) {
+  constructor(file, directUploadUrl, blobUrlTemplate, callback, progress) {
     this.file = file
     this.directUploadUrl = directUploadUrl
     this.blobUrlTemplate = blobUrlTemplate
     this.callback = callback
+    this.progress = progress
     this.directUpload = new DirectUpload(file, this.directUploadUrl, this)
   }
 
@@ -15,8 +16,10 @@ export class AttachmentUpload {
 
   directUploadWillStoreFileWithXHR(xhr) {
     xhr.upload.addEventListener("progress", event => {
-      const progress = event.loaded / event.total * 100
-      // this.attachment.setUploadProgress(progress)
+      if (this.progress) {
+        const percent = event.loaded / event.total * 100
+        this.progress(percent);
+      }
     })
   }
 

@@ -94,6 +94,9 @@ zh-CN:
       Delete my account: 删除我的账号
       Once you delete your account, there is no going back: 账号删除以后将无法恢复，请谨慎使用。
       Are you sure?: 警告！账号删除以后将无法恢复，你确定要这么做吗？
+      Change username: 更改用户名
+      Update: 修改
+      Unless you really need it, we recommended that you do not change your username: 修改用户名将会导致链接到你个人下的知识库、文档、以及提及到你的链接等内容再也无法打开，除非必要，建议不要修改用户名。
     show:
       Avatar: 头像
       Profile: 个人资料
