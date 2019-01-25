@@ -102,7 +102,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
       count_html = ""
       if with_count
-        count_html = raw(%(<button class="social-count" href="#url">#{target.send(action_count)}</button>))
+        count_html = raw(%(<span class="social-count" >#{target.send(action_count)}</span>))
       end
       btn_class = opts[:class] || "btn btn-sm"
       btn_class += " btn-with-count" if with_count

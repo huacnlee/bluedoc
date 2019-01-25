@@ -362,7 +362,7 @@ zh-CN:
       Please type the path slug of group to confirm: 请输入团队的路径 <strong class="text-red">%{slug}</strong> 以确认：
       I understand, delete this group: 我清楚理解，确定删除此团队！
     show:
-      Photo: 头像
+      Photo: 团队 Logo
       Settings: 团队设置
       Group profile: 基本信息
       Update profile: 更新团队信息
@@ -371,8 +371,10 @@ zh-CN:
       Delete this group: 删除此团队
       Once you delete a group, there is no going back: 当你删除了团队，你将无法找回来，请考虑清楚。
       Upload new picture: 选择一张图片上传
-      This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
-      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+      This photo will be used to identify you in BookLab It will be visible to anyone: 给团队设置一个 Logo 以便于快速辨识。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为 Logo，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+    update:
+      Group update successed: 团队资料更新成功。
   groups:
     menu:
       Repository: 知识库

@@ -357,7 +357,7 @@ en:
       Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
       I understand, delete this group: I understand, delete this group!
     show:
-      Photo: Photo
+      Photo: Logo
       Settings: Settings
       Group profile: Group profile
       Update profile: Update profile
@@ -366,8 +366,10 @@ en:
       Delete this group: Delete this group
       Once you delete a group, there is no going back: Once you delete a group, there is no going back. Please be certain.
       Upload new picture: Upload new picture
-      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify you in BookLab It will be visible to anyone.
+      This photo will be used to identify you in BookLab It will be visible to anyone: This photo will be used to identify group in BookLab It will be visible to anyone.
       Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+    update:
+      Group update successed: Group update successed.
   groups:
     menu:
       Repository: Repositories

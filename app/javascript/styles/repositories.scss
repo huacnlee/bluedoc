@@ -15,7 +15,7 @@
     }
   }
   .btn {
-    padding: 4px 8px; 
+    padding: 4px 8px;
   }
 }
 
@@ -201,4 +201,21 @@
 }
 
 .export-repository-pdf {
+}
+
+
+.transfer-docs {
+  border: 1px solid #e0e0e0;
+  .box-header,
+  .box-footer { padding: 15px;  }
+  .box-header {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .flash-full {
+    border-left: 0;
+    border-right: 0;
+  }
+  .box-row {
+    padding: 0 15px;
+  }
 }

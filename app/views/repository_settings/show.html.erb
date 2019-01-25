@@ -5,7 +5,7 @@
 
 <div class="col-12 col-md-9 float-left">
   <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), local: true, remote: true) do |form| %>
-    <div class="form-title"><h2><%= t(".Repository profile") %></h2></div>
+    <h2 class="sub-title"><%= t(".Repository profile") %></h2>
 
     <input type="hidden" name="_action" value="show" />
     <% if params[:_by].blank? %>
@@ -36,7 +36,7 @@
   <% end %>
 
   <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository),  remote: true, method: :patch) do |form| %>
-    <div class="form-title"><h2><%= t(".Features") %></h2></div>
+    <h2 class="sub-title"><%= t(".Features") %></h2>
 
     <% if params[:_by] == "features" %>
       <%= render "/shared/error_messages", target: @repository %>
@@ -45,11 +45,11 @@
     <input type="hidden" name="_by" value="features" />
 
     <div class="box mb-3">
-      <div class="box-row d-flex flex-items-center">
+      <div class="box-row d-flex flex-items-center pb-3">
         <div class="form-check">
           <%= form.check_box :has_toc, class: "form-check-input form-check-submit" %>
           <%= form.label :has_toc, t(".Table of Contents"), class: "form-check-label font-weight-bold" %>
-          <div class="form-text">
+          <div class="form-text mt-1">
             <%= t(".Enable to use Table of Contents style for Repository index") %>
           </div>
         </div>
