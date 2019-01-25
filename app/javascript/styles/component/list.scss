@@ -83,18 +83,19 @@
     height: 30px;
     line-height: 30px;
     text-align: center;
-    .fas {
-      width: 30px;
-      height: 30px;
-    }
-    &:hover {
+    a:hover {
       border-radius: 15px;
       background: #f7f7f7;
       // star、unstar、watch、unwatch
-      .btn span {
+      &.btn span {
         opacity: 1;
         max-width: 10em;
+        padding-left: 15px;
       }
+    }
+    .fas {
+      width: 30px;
+      height: 30px;
     }
     // star、unstar、watch、unwatch
     .btn {
@@ -107,7 +108,6 @@
         font-size: 12px;
         display: inline-block;
         max-width: 0;
-        padding-left: 15px;
         opacity: 0;
         overflow: hidden;
         transition: max-width .4s linear, padding .4s linear, opacity 1s ease;
