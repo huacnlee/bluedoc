@@ -66,5 +66,11 @@
 }
 
 .repository-card {
-  .desc { font-size: 13px; }
+  .desc { 
+    font-size: 13px;
+  }
+  .counter {
+    display: inline-block;
+    min-width: 100px;
+  }
 }

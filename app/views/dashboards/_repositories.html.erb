@@ -8,7 +8,7 @@
   <% items.each do |item| %>
   <li class="list-item list-avatar recent-repo-item">
     <div class="avatar-box icon-box icon-repo">
-      <%= icon_tag("repo") %>
+      <%= icon_tag("avatar-repo") %>
     </div>
     <div class="title text-overflow"><%= repository_name_tag(item.subject) %></div>
     <% if item.subject.description.present? %>
@@ -32,7 +32,7 @@
     </div>
     <div class="action text-gray">
       <% if can? :create_doc, item.subject %>
-        <%= link_to icon_tag("add_docs"), item.subject.to_path("/docs/new"), target: "_blank" %>
+        <%= link_to icon_tag("add-doc"), item.subject.to_path("/docs/new"), target: "_blank" %>
       <% end %>
     </div>
   </li>
