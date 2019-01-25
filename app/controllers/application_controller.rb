@@ -12,9 +12,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_nav_search(url: request.fullpath, scope: nil)
+  def set_nav_search(url: request.fullpath)
     @nav_search_path = url
-    @nav_search_scope = scope
   end
 
   def unread_notifications_count

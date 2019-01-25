@@ -27,3 +27,40 @@ form {
     margin-bottom: 0px;
   }
 }
+
+
+.subnav-search-context {
+  .autocomplete-results {
+    width: 100%;
+
+    .autocomplete-item {
+      display: inline;
+      padding: 0;
+      a {
+        padding: 5px;
+        text-decoration: none;
+        font-weight: normal;
+        display: block;
+        @extend .clearfix;
+
+        .scope-name {
+          color: #aaa;
+          background: #f7f7f7;
+          border-radius: 3px;
+          padding: 2px 4px;
+        }
+      }
+
+      &:hover {
+        a {
+          color: #fff;
+          background: $primary;
+          .scope-name {
+            color: #f0f0f0;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}
