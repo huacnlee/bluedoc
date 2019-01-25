@@ -96,11 +96,12 @@
     .fas {
       width: 30px;
       height: 30px;
+      line-height: 30px;
     }
     // star、unstar、watch、unwatch
     .btn {
       padding: 0;
-      line-height: 30px;
+      height: 100%;
       .fas {
         float: right;
       }

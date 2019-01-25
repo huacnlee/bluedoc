@@ -60,3 +60,31 @@
   /* Green */
   &.default-avatar-4 { background-color: #3BB46E; }
 }
+// user/group setting page common styles
+.avatar-wrap {
+  display: flex;
+  // upload file btn
+  .js-manual-file-chooser {
+    display: none;
+  }
+  .image-box {
+    margin-right: 40px;
+    .avatar-large {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      font-size: 60px;
+    }
+  }
+  .description {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .btn-upload{
+    cursor: pointer;
+    .fas {
+      font-size: 1.5em;
+      margin-right: 5px;
+    }
+  }
+}

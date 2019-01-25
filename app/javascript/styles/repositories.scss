@@ -162,26 +162,6 @@
   }
 }
 
-.repository-item {
-  position: relative;
-  .icon-box {
-    position: absolute;
-    top: 14px;
-    left: 15px;
-    color: #666;
-    font-size: 20px;
-  }
-
-  .counter {
-    margin-right: 8px;
-
-    .fas {
-      color: #666;
-      font-size: 14px;
-    }
-  }
-}
-
 #repository-members {
   border-bottom: 0;
 

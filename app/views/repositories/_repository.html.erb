@@ -1,5 +1,8 @@
-<li class="list-item repository-item">
-  <div class="title">
+<li class="list-item list-avatar repository-item">
+  <div class="avatar-box icon-box icon-repo">
+    <%= icon_tag("avatar-repo") %>
+  </div>
+  <div class="title text-overflow">
     <% if defined?(current_group) && current_group.id != repository.user_id %>
     <%= user_name_tag(repository.user) %> <span class="divider">/</span>
     <% end %>
@@ -8,12 +11,12 @@
       <span class="label label-private ml-2"><%= t(".Private") %></span>
     <% end %>
   </div>
-  <div class="description">
+  <div class="description text-overflow">
     <%= truncate repository.description, length: 150 %>
   </div>
   <div class="info">
     <span class="stars">
-      <%= icon_tag("star") %> <%= repository.stars_count %>
+      <%= icon_tag("star-fill") %> <%= repository.stars_count %>
     </span>
   </div>
   <div class="time-box">

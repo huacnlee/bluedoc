@@ -1,26 +1,26 @@
-.page-users {
-  .group-heading {
-    .heading {
-      margin: 50px 0 20px 0;
-      .group-title { font-size: 25px; }
-      .avatar-medium { width: 38px; height: 38px; line-height: 37px; }
+.page-users, .page-group_members, .page-group_settings, .page-groups {
+
+}
+.group-heading {
+  background: #F9F9F9;
+  .heading {
+    margin: 40px 0 20px 0;
+    .group-title { font-size: 20px; }
+  }
+}
+
+.group-members {
+  .group-member {
+    position: relative;
+
+    .avatar-box {
+      width: 50px;
+    }
+
+    .member-actions {
+      position: absolute;
+      top: 2px;
+      right: 0px;
     }
   }
-
-  .group-members {
-    .group-member {
-      position: relative;
-
-      .avatar-box {
-        width: 50px;
-      }
-
-      .member-actions {
-        position: absolute;
-        top: 2px;
-        right: 0px;
-      }
-    }
-  }
-
 }
