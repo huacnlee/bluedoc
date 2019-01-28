@@ -1,4 +1,5 @@
-.page-repositories {
+.page-repositories,
+.page-repository_settings {
   .repo-heading {
     background: #F9F9F9;
     .heading {
@@ -15,24 +16,24 @@
       padding: 4px 8px;
     }
   }
-  
+
   .repo-actions {
     .btn, .social-count {
       padding: 3px 5px;
     }
   }
-  
+
   .repo-description {
     margin-bottom: 20px;
     font-size: 16px;
     height: 24px;
     overflow: hidden;
   }
-  
+
   .toc-items {
     .toc-item {
     }
-  
+
     @for $i from 0 through 4 {
       .toc-item-#{$i} {
         .item-title {
@@ -41,30 +42,30 @@
       }
     }
   }
-  
-  
+
+
   .repo-toc {
     font-size: 16px;
     text-align: center;
     padding: 15px;
     background-color: #fff;
     border-radius: 3px;
-  
+
     .toc-header {
       position: relative;
-  
+
       .title {
         padding-bottom: 12px;
         text-align: center;
         color: #252525;
         font-size: 24px;
       }
-  
+
       .description {
         font-size: 13px;
         color: #8a8a8a;
       }
-  
+
       .edit-link {
         position: absolute;
         top: 0;
@@ -72,7 +73,7 @@
         color: #505050;
         vertical-align: bottom;
         font-size: 14px;
-  
+
         .fas {
           width: 14px;
           height: 14px;
@@ -80,11 +81,11 @@
         }
       }
     }
-  
+
     .toc-list {
-  
+
       text-align: left;
-  
+
       ul {
         li {
           list-style: none;
@@ -93,9 +94,9 @@
           position: relative;
           display: flex;
           justify-content: space-between;
-  
+
           @extend .clearfix;
-  
+
           &:after {
             content: " ";
             width: 100%;
@@ -104,11 +105,11 @@
             top: 50%;
             right: 0;
           }
-  
+
           a {
             text-decoration: none;
           }
-  
+
           .item-slug,
           .item-link {
             overflow: hidden;
@@ -116,7 +117,7 @@
             white-space: nowrap;
             height: 18px;
           }
-  
+
           .item-link {
             position: absolute;
             background: #FFF;
@@ -130,7 +131,7 @@
               color: #222;
             }
           }
-  
+
           .item-slug {
             position: relative;
             background: #fff;
@@ -140,7 +141,7 @@
             max-width: 30%;
             font-size: 13px;
             color: #aaa;
-  
+
             &:hover {
               text-decoration: none;
             }
@@ -149,7 +150,7 @@
       }
     }
   }
-  
+
   @media (min-width: 768px) {
     .repo-toc {
       .toc-list {
@@ -158,24 +159,24 @@
       }
     }
   }
-  
+
   #repository-members {
     border-bottom: 0;
-  
+
     .repository-member {
       border-bottom: 1px solid #e1e4e8;
       padding: 20px 15px;
-  
+
       &:last-child {
         border-bottom: 0;
       }
-  
+
       .infos,
       .member-role,
       .actions {
         vertical-align: middle !important;
       }
-  
+
       .member-role {
         .select-menu-modal {
           position: absolute;
@@ -186,7 +187,7 @@
           margin-top: 10px;
           width: 80px;
           text-align: left;
-  
+
           &:after {
             position: absolute;
             right: 10px;
@@ -196,11 +197,11 @@
       }
     }
   }
-  
+
   .export-repository-pdf {
   }
-  
-  
+
+
   .transfer-docs {
     border: 1px solid #e0e0e0;
     .box-header,
