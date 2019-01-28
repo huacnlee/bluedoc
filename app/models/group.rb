@@ -11,4 +11,11 @@ class Group < User
   def email_required?; false; end
   def group?; true; end
   def user?; false; end
+
+  # Group public owned repositories and user membered in this Group
+  def owned_repositories_with_user(user)
+    repos = self.owned_repositories.publics
+    repos = repos.or(user.membered_repositories.where(user_id: self.id)) if user
+    repos
+  end
 end

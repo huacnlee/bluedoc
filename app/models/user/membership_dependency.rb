@@ -20,8 +20,11 @@ class User
   # - membered Group repositories
   # - collaboration repositories
   def repositories
+    Repository.where(user_id: self.group_ids).or(membered_repositories).order("updated_at desc")
+  end
+
+  def membered_repositories
     membered_repo_ids = self.memberships.where(subject_type: "Repository", user_id: self.id).pluck(:subject_id)
-    membered_repos = Repository.where(id: membered_repo_ids)
-    Repository.where(user_id: self.group_ids).or(membered_repos).order("updated_at desc")
+    Repository.where(id: membered_repo_ids)
   end
 end

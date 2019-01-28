@@ -40,4 +40,34 @@ class GroupTest < ActiveSupport::TestCase
     end
     assert_equal 0, user.user_actives.where(subject: group).count
   end
+
+  test "owned_repositories_with_user" do
+    user = create(:user)
+    user1 = create(:user)
+
+    repo0 = create(:repository, privacy: :private)
+    repo0.add_member(user, :reader)
+
+    group = create(:group)
+    repo1 = create(:repository, privacy: :private, user_id: group.id)
+    repo2 = create(:repository, privacy: :private, user_id: group.id)
+    repo2.add_member(user, :reader)
+    repo3 = create(:repository, user_id: group.id)
+    repo4 = create(:repository, user_id: group.id)
+
+    # with nil will returns public repos in Group
+    repos = group.owned_repositories_with_user(nil)
+    assert_equal 2, repos.length
+    assert_equal [repo3.id, repo4.id], repos.pluck(:id).sort
+
+    # with user1 (non member), will old returns public repositories in Group
+    repos = group.owned_repositories_with_user(user1)
+    assert_equal 2, repos.length
+    assert_equal [repo3.id, repo4.id], repos.pluck(:id).sort
+
+    # with user will including repo2
+    repos = group.owned_repositories_with_user(user)
+    assert_equal 3, repos.length
+    assert_equal [repo2.id, repo3.id, repo4.id], repos.pluck(:id).sort
+  end
 end

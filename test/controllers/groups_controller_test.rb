@@ -52,6 +52,13 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     get @group.to_path
     assert_select ".repository-item", 2
 
+    # Add @user as reader of the private_repo in Group
+    private_repo.add_member(@user, :reader)
+    get @group.to_path
+    assert_select ".repository-item", 3
+    assert_match /#{private_repo.name}/, response.body
+
+    # sign in with other user as reader in Group
     sign_in_role :reader, group: @group
     get @group.to_path
     assert_select ".repository-item", 3

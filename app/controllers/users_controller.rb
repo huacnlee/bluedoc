@@ -42,18 +42,18 @@ class UsersController < ApplicationController
 
   def _group_show
     @group = @user
-    @repositories = @group.repositories.recent_updated
+    @repositories = @group.owned_repositories
     # Only get then public repositories unless has permisson
     # Same behivers for other tab
     if cannot? :read_repo, @group
-      @repositories = @repositories.publics
+      @repositories = @group.owned_repositories_with_user(current_user)
     end
 
     if params[:q]
       @repositories = @repositories.with_query(params[:q])
     end
 
-    @repositories = @repositories.page(params[:page]).per(20)
+    @repositories = @repositories.recent_updated.page(params[:page]).per(20)
 
     @members = @group.members.includes(:user).limit(30)
     render "groups/show", layout: "application"
