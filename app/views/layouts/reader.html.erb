@@ -11,11 +11,16 @@
 
   <body class="reader-body">
     <%= render "/layouts/header" %>
+    <%= notice_message %>
     <%= yield :subnav %>
     <div class="main-container">
       <div class="container">
-        <%= notice_message %>
         <%= yield %>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <%= raw Setting.application_footer_html %>
       </div>
     </div>
   </body>

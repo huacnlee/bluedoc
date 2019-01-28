@@ -49,7 +49,7 @@
 
   &:hover {
     border-color: #F3B7B7;
-    color: #AA2528;
+    color: #AA2528 !important;
     background: #FFF3F3;
   }
 }
@@ -64,4 +64,8 @@
 
 .btn-full {
   width: 100%;
+}
+
+.btn-sm {
+  padding: 3px 8px;
 }

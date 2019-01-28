@@ -47,5 +47,21 @@
 }
 
 .add-reaction-popover.dropdown-menu {
-  width: 260px;
+  padding: 13px;
+  width: 320px;
+
+  .dropdown-divider {
+    margin: 15px 0;
+    background: #f0f0f0;
+  }
+
+  .btn-link {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+    &:hover {
+      background: #f7f7f7;
+    }
+  }
 }
