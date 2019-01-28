@@ -58,10 +58,11 @@
   }
 
   hr {
-    height: $spacer-3;
+    height: 4px;
     padding: 0;
     margin: $spacer-4 0;
     border: 0;
+    background: #e0e0e0;
   }
 
   blockquote {
