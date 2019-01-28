@@ -20,7 +20,8 @@
   }
   .user-avatar {
     position: absolute;
-    top: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 20px;
   }
   .path {

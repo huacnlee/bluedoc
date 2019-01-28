@@ -39,7 +39,7 @@ form {
 .form-control {
   width: 100%;
   border: 1px solid #D9D9D9;
-  padding: 9px 15px;
+  padding: 8px 15px;
   font-size: 13px;
   vertical-align: middle;
   outline: none;
@@ -51,6 +51,7 @@ form {
 textarea.form-control {
   resize: vertical;
 }
+
 
 .input-group {
   position: relative;
@@ -77,26 +78,6 @@ textarea.form-control {
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-    }
-  }
-
-  .input-group-button {
-    width: 2%;
-    vertical-align: middle;
-    display: table-cell;
-
-    .btn {
-      padding: 10px 15px;
-      outline-width: 1px;
-      font-size: 13px;
-    }
-
-    &:last-child {
-      .btn {
-        border-left: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
     }
   }
 
@@ -129,6 +110,13 @@ textarea.form-control {
     margin-bottom: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+  }
+}
+
+.input-button-group {
+  .form-control {
+    width: 310px;
+    margin-right: 10px;
   }
 }
 
