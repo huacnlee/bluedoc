@@ -20,6 +20,9 @@
     color: $primary;
   }
 }
+.btn.btn-sm {
+  padding: 3px 15px;
+}
 
 .social-count {
   @extend .btn;

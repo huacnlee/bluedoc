@@ -1,13 +1,24 @@
 .reponav {
   margin: 0 5px;
   .reponav-item {
+    padding: 10px 10px 15px;
     font-size: 14px;
-    padding: 0 20px 15px 20px;
+    margin-right: 30px;
     text-decoration: none;
     color: $text-gray;
+    position: relative;
     &.selected {
       color: $text-main;
-      border-bottom: 1px solid $black;
+      &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 0;
+        height: 1px;
+        background: $black
+      }
     }
   }
 }

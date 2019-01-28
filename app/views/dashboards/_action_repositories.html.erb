@@ -21,7 +21,7 @@
         <%= icon_tag("user") %> <%= user_name_tag(repo&.user) %>
       </span>
     </div>
-    <div class="action">
+    <div class="action action-icon text-gray">
       <% if action_name == "stars" %>
         <%= action_button_tag(repo, :star, undo: true) %>
       <% else %>

@@ -51,3 +51,11 @@
     }
   }
 }
+.page-searches {
+  .menu-item {
+    span:first-child {
+      min-width: 5em;
+      display: inline-block;
+    }
+  }
+}
