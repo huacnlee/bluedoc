@@ -1,6 +1,7 @@
 .page-repositories,
 .page-repository_settings {
   .repo-heading {
+    padding-top: 30px;
     background: #F9F9F9;
     .heading {
       margin: 40px 0 10px 0;
@@ -31,9 +32,6 @@
   }
 
   .toc-items {
-    .toc-item {
-    }
-
     @for $i from 0 through 4 {
       .toc-item-#{$i} {
         .item-title {

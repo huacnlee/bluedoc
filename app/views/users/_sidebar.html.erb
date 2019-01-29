@@ -9,31 +9,30 @@
   <div class="user-avatar-box">
     <%= user_avatar_tag(@user, style: :large, link: false) %>
   </div>
-  <div class="user-name-box">
+  <div class="user-name-box text-gray">
     <b class="real-name"><%= @user.name %></b>
     <div class="user-name"><%= @user.slug %></div>
-    <% if @user.description.present? %>
-    <div class="user-bio">
-      <%= @user.description %>
+    <div class="user-follow">
+      <%= follow_user_tag(@user) %>
     </div>
+    <% if @user.description.present? %>
+      <div class="user-bio">
+        <%= @user.description %>
+      </div>
     <% end %>
     <% if @user.location.present? %>
-    <div class="location"><%= @user.location %></div>
+    <div class="location"><%= icon_tag('location') %><%= @user.location %></div>
     <% end %>
-    <div class="created-on"><%= @user.created_at.to_date %></div>
-  </div>
-
-  <div class="user-follow">
-    <%= follow_user_tag(@user) %>
+    <div class="created-on"><%= icon_tag('time') %><%= @user.created_at.to_date %></div>
   </div>
 
   <%= render_list_items(type: :link, class: "menu-item", check_parameters: true) do |item|
-    item << link_to(raw(%(<span style="display:inline-block; min-width: 6em">#{t(".Followers")}</span><b>#{@user.followers_count}</b>)), @user.to_path("?tab=followers"), class: "menu-item followers")
-    item << link_to(raw(%(<span style="display:inline-block; min-width: 6em">#{t(".Following")}</span><b>#{@user.following_count}</b>)), @user.to_path("?tab=following"), class: "menu-item following")
+    item << link_to(raw(%(<span style="display:inline-block; min-width: 5em">#{t(".Followers")}</span><b>#{@user.followers_count}</b>)), @user.to_path("?tab=followers"), class: "menu-item followers")
+    item << link_to(raw(%(<span style="display:inline-block; min-width: 5em">#{t(".Following")}</span><b>#{@user.following_count}</b>)), @user.to_path("?tab=following"), class: "menu-item following")
   end %>
 
   <div class="user-groups menu-item">
-    <span class="group-label"><%= t(".Groups") %></span>
+    <span class="group-label" style="display:inline-block; min-width: 5em"><%= t(".Groups") %></span>
     <div class="groups-box">
       <% @user.groups.with_attached_avatar.each do |group| %>
         <%= user_avatar_tag(group) %>
@@ -46,7 +45,7 @@
     item << link_to(t(".Repositories"), @user.to_path("?tab=repositories"), class: "menu-item")
     item << link_to(t(".Stars"), @user.to_path("?tab=stars"), class: "menu-item")
     item << content_tag(:span, t(".Settings"), class: "menu-item")
-    item << link_to(icon_tag("arrow", label: t(".Profile")), account_settings_path, class: "menu-item menu-sub-item")
-    item << link_to(icon_tag("arrow", label: t(".Account")), account_account_settings_path, class: "menu-item menu-sub-item")
+    item << link_to(t(".Profile"), account_settings_path, class: "menu-item menu-sub-item depth-1")
+    item << link_to(t(".Account"), account_account_settings_path, class: "menu-item menu-sub-item depth-1")
   end %>
 </div>

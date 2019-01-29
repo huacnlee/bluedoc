@@ -53,12 +53,11 @@
 
         <div class="form-group">
           <p><%= t(".Unless you really need it, we recommended that you do not change your username") %></p>
-          <div class="input-group">
+          <div class="input-group input-button-group">
             <%= f.text_field :slug, class: "form-control", autocomplete: "username" %>
-            <span class="input-group-button">
-              <%= f.submit t(".Update"), class: "btn" %>
-            </span>
+            <%= f.submit t(".Update"), class: "btn" %>
           </div>
+          
         </div>
       <% end %>
 

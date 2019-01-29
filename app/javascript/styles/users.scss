@@ -1,8 +1,4 @@
 .page-users, .page-account_settings {
-  .main-container {
-    padding-top: 30px;
-  }
-
   .user-title {
     text-align: center;
     @include breakpoint(md) {
@@ -10,45 +6,56 @@
     }
   }
 
-  .user-sidebar {
-    padding-right: 30px;
-    color: $text-main;
+  .aside-wrap {
+    @include breakpoint(md) {
+      width: 290px;
+      margin-right: 50px;
+    }
   }
 
-  // todo
-  .user-follow {
-    display: none;
+  .user-sidebar {
+    padding: 30px 20px;
+    background: #F9F9F9;
+  }
+
+  .user-follow .btn {
+    width: 110px;
+    background: transparent;
+    margin: 0 auto 20px;
   }
   .user-avatar-box {
+    text-align: center;
     line-height: 1;
     margin-bottom: 10px;
   }
 
   .user-name-box {
+    font-size: 12px;
     .real-name {
+      text-align: center;
       display: block;
       font-size: 20px;
-      margin-bottom: 5px;
+      color: $text-main;
     }
-    // todo
     .user-name {
-      color: $text-gray-dark;
+      text-align: center;
+      margin-bottom: 20px;
     }
-    // todo
     .user-bio {
-      display: none;
+      margin-bottom: 10px;
     }
     .location, .created-on {
-      display: inline-block;
-      font-size: 13px;
-      color: $text-gray;
+      .fas {
+        vertical-align: baseline;
+        margin-right: 3px;
+        transform: scale(1.2);
+      }
     }
     .location {
-      margin-right: 30px;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
     .created-on {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
   }
   .user-groups {
@@ -59,7 +66,6 @@
       display: flex;
     }
     .group-label {
-      margin-right: 20px;
       line-height: 20px;
     }
     .groups-box {
@@ -71,11 +77,6 @@
     }
   }
 
-  .user-follow {
-    margin-bottom: 25px;
-  }
-
-  .user-follow,
   .user-avatar-box,
   .user-name-box,
   .followers,
@@ -84,6 +85,47 @@
     display: none;
     @include breakpoint(md) {
       display: block;
+    }
+  }
+
+
+  .user-followers, .user-following {
+    .user-item .info {
+      padding-right: 150px;
+      width: 100%;
+      font-size: 12px;
+    }
+    .action {
+      opacity: 1;
+      top: auto;
+      bottom: 19.5px;
+      .btn {
+        min-width: 7em;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .dashboard-section {
+    margin-bottom: 40px;
+  }
+
+  .user-overview {
+    // card layout style
+    .cards-container {
+      margin-bottom: 40px;
+      .card {
+        float: left;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      @include breakpoint(md) {
+        margin-right: -30px;
+        .card {
+          margin-right: 30px;
+          width: calc(50% - 30px);
+        }
+      }
     }
   }
 }
