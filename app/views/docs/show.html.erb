@@ -14,7 +14,7 @@
   <div class="doc-sidebar flex-justify-start">
     <div class="doc-parents">
       <a href="<%= @user.to_path %>" class="link-group" title="<%= @user.name %>"><%= @user.name %></a>
-      <a href="<%= @repository.to_path %>" class="link-back" title="<%= @repository.name %>"><%= @repository.name %> Guides Guides Guides</a>
+      <a href="<%= @repository.to_path %>" class="link-back" title="<%= @repository.name %>"><%= @repository.name %></a>
     </div>
 
     <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
@@ -46,16 +46,6 @@
           <span class="divider">/</span>
         </span>
         <%= repository_name_tag @repository %>
-        <span class="hide-md hide-sm">
-          <span class="divider">/</span>
-          <% if @doc %>
-          <span class="doc-name"><%= @doc.title %></span>
-          <% else %>
-          <span class="doc-name">
-            <strong><%= t(".Not found") %></strong>
-          </span>
-          <% end %>
-        </span>
         <% if @doc&.private? %>
           <span class="doc-name">
             <span class="label label-private ml-2"><%= t(".Private") %></span>
