@@ -254,13 +254,13 @@
       padding-left: 38px;
 
       &:before {
-        font-family: -apple-system;
+        font-family: -apple-system, Helvetica, Arial;
         content: "←";
         color: #aaa;
         font-size: 18px;
         position: absolute;
         display: inline-block;
-        top: 5px;
+        top: 9px;
         left: 15px;
       }
     }
@@ -269,13 +269,13 @@
       position: relative;
       padding-right: 38px;
       &:after {
-        font-family: -apple-system;
+        font-family: -apple-system, Helvetica, Arial;
         content: "→";
         color: #aaa;
         font-size: 18px;
         position: absolute;
         display: inline-block;
-        top: 5px;
+        top: 9px;
         right: 15px;
       }
     }
