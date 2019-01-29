@@ -54,8 +54,9 @@
       text-align: right;
       padding-top: 11px;
 
-      .btn {
+      .btn-link {
         text-align: center;
+        border: 0;
       }
 
       .dropdown-menu {
@@ -119,7 +120,7 @@
           color: #555;
 
           &.active {
-            color: $primary;
+            color: darken($primary, 20%);
           }
         }
 
@@ -149,6 +150,7 @@
     }
 
     .doc-main {
+      flex: none;
       margin: 0 auto;
       text-align: left;
       width: auto;
@@ -415,8 +417,13 @@
   .reader-navbar,
   .doc-body-toc,
   .between-docs,
+  .footer,
   .unpublished-draft-tip {
     display: none !important;
+  }
+
+  .doc-center {
+    flex: none;
   }
   .doc-main {
     margin-left: auto;

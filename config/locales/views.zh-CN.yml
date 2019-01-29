@@ -152,6 +152,7 @@ zh-CN:
         Database Stats: 数据库状态
         Rebuild Search Index: 重新搜索索引（耗费性能）
         Service statuses: 服务健康状态
+        Statistics: 统计信息
         Service:
           Database: 数据库
           Cache: 缓存 (Redis)

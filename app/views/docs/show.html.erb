@@ -56,17 +56,17 @@
       <% if @doc %>
       <div class="navbar-buttons">
         <% if can? :read, @doc %>
-          <%= action_button_tag(@doc, :star, label: "", class: "btn btn-sm btn-star-doc") %>
+          <%= action_button_tag(@doc, :star, icon: "star-doc", class: "btn btn-sm btn-link btn-star-doc") %>
         <% end %>
 
         <% if can? :update, @doc %>
-        <%= link_to icon_tag("edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-edit-doc hide-sm ml-1" %>
+        <%= link_to icon_tag("edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn btn-sm btn-link btn-edit-doc hide-sm ml-1" %>
         <% end %>
 
         <%= render "share_button", doc: @doc %>
 
         <details class="dropdown details-overlay details-reset d-inline-block">
-          <summary class="btn btn-sm ml-1"><%= icon_tag("ellipsis") %></summary>
+          <summary class="btn btn-sm btn-link ml-1"><%= icon_tag("ellipsis") %></summary>
           <ul class="dropdown-menu dropdown-menu-sw">
             <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
             <% if can? :update, @doc %>
