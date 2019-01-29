@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-sidebar flex-justify-start overflow-auto">
+  <div class="doc-sidebar flex-justify-start">
     <div class="doc-parents">
       <a href="<%= @user.to_path %>" class="link-group" title="<%= @user.name %>"><%= @user.name %></a>
       <a href="<%= @repository.to_path %>" class="link-back" title="<%= @repository.name %>"><%= @repository.name %> Guides Guides Guides</a>
@@ -33,7 +33,8 @@
     <% end %>
   </div>
   <script type="text/javascript">
-    $(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']").addClass("active");
+    var currentItem = document.querySelector(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']");
+    if (currentItem) currentItem.classList.add("active");
   </script>
   <div class="doc-center">
     <div class="doc-main">

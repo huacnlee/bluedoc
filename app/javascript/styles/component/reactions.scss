@@ -1,6 +1,6 @@
 .reaction-box {
   form { margin-bottom: 0; }
-  .new_reaction { float: left; }
+  .new_reaction { float: left; margin-right: 2px; }
   .dropdown-menu {
     .new_reaction { float: none; }
   }
@@ -10,6 +10,9 @@
 .reaction-summary-item {
   border: 0;
   padding: 6px 6px;
+  height: 36px;
+  overflow: hidden;
+  line-height: 100%;
   margin-right: 2px;
   color: #444;
   display: inline-block;
@@ -28,8 +31,7 @@
 }
 
 .reaction-box .add-reaction-btn {
-  padding: 4px 10px;
-  i.fas { vertical-align: middle; font-size: 23px; }
+  i.fas { margin-top: 3px; vertical-align: middle; font-size: 23px; }
 }
 
 .add-reaction-btn {

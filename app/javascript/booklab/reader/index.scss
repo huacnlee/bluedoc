@@ -22,7 +22,7 @@
 
     .btn-sm {
       box-shadow : 0 0 0;
-      padding: 2px 8px;
+      padding: 6px 8px;
     }
 
     .navbar-title {
@@ -80,6 +80,7 @@
     position: relative;
     width: 100%;
     .doc-sidebar {
+      flex: none;
       display: none;
       min-width: 200px;
       max-width: 260px;
@@ -109,9 +110,6 @@
         @extend .list-style-none;
 
         .item-title {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
         }
 
         li {
@@ -119,7 +117,6 @@
         }
         a {
           color: #555;
-          @extend .text-overflow;
 
           &.active {
             color: $primary;
@@ -133,10 +130,9 @@
     @media (min-width: 1100px) {
       .doc-sidebar {
         display: block;
-        width: 300px;
+        width: 260px;
         padding-top: 0px;
         min-height: 100vh;
-        margin-right: 30px;
       }
     }
 
@@ -258,12 +254,13 @@
       padding-left: 38px;
 
       &:before {
+        font-family: -apple-system;
         content: "←";
         color: #aaa;
         font-size: 18px;
         position: absolute;
         display: inline-block;
-        top: 8px;
+        top: 5px;
         left: 15px;
       }
     }
@@ -272,12 +269,13 @@
       position: relative;
       padding-right: 38px;
       &:after {
+        font-family: -apple-system;
         content: "→";
         color: #aaa;
         font-size: 18px;
         position: absolute;
         display: inline-block;
-        top: 8px;
+        top: 5px;
         right: 15px;
       }
     }
@@ -351,7 +349,7 @@
 
 .doc-body-toc-holder {
   order: 2;
-  width: 230px;
+  width: 350px;
   display: none;
   @media (min-width: 1330px) {
     display: block;
@@ -367,7 +365,6 @@
 
   &>.toc-list {
     position: fixed;
-    margin-left: 30px;
     padding-top: 48px;
     right: 32px;
     width: 230px;
@@ -376,9 +373,7 @@
     display: block;
     padding-top: 0;
     padding-left: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    flex: none;
 
     .toc-list {
       padding-left: 11px !important;
@@ -392,10 +387,11 @@
       list-style-position: inside;
       padding: 3px 0;
       display: block;
+      @extend .text-overflow;
 
       a {
-        @extend .text-overflow;
         color: #696969;
+        @extend .text-overflow;
       }
 
       .heading-anchor { display:none; }

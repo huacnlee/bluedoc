@@ -1,7 +1,9 @@
 .btn {
   position: relative;
   display: inline-block;
-  padding: 6px 15px;
+  padding: 9px 15px;
+  height: 38px;
+  line-height: 18px;
   text-align: center;
   border: 1px solid #999999;
   background: #fff;
@@ -28,7 +30,9 @@
   }
 }
 .btn.btn-sm {
-  padding: 3px 15px;
+  height: 30px;
+  padding: 7px 15px;
+  line-height: 100%;
 }
 
 .social-count {

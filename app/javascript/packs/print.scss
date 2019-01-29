@@ -16,21 +16,33 @@ section {
   .doc-reaction,
   .doc-info,
   .doc-comments,
+  .doc-readers,
+  .between-docs,
   .atwho-container,
   .flash-full,
+  .footer,
   .heading-anchor { display: none !important; }
   h1.doc-title { text-align: center; }
 
   .markdown-body {
     font-size: 15px;
 
+    a {
+      text-decoration: none;
+    }
+
     a[href^="http"]:after {
         content: " (" attr(href) ")";
+        color: #ccc;
     }
 
     pre {
       padding: 16px 25px;
       color: #444;
+    }
+
+    hr {
+      border: 2px solid #ddd;
     }
 
     table {

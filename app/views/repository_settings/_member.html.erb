@@ -12,7 +12,7 @@
         <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post, html: {
         class: "edit-member" }) do |f| %>
           <%= f.hidden_field :id %>
-          <details class="details-reset details-overlay d-inline-block">
+          <details class="details-reset details-overlay d-inline-block position-relative">
             <summary class="btn btn-sm select-menu-button"><%= member.role_name %></summary>
             <details-menu class="select-menu-modal">
               <div class="select-menu-list">

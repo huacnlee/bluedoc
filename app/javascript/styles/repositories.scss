@@ -13,14 +13,24 @@
         color: #303030;
       }
     }
-    .btn {
-      padding: 4px 8px;
-    }
   }
 
   .repo-actions {
     .btn, .social-count {
-      padding: 3px 5px;
+      height: auto;
+      line-height: 1.5;
+      padding: 4px 7px;
+
+      .fas {
+        margin-top: -3px;
+      }
+    }
+
+    .social-count {
+      &:hover {
+        cursor: default;
+        border-color: #999999;
+      }
     }
   }
 
@@ -178,6 +188,8 @@
       .member-role {
         .select-menu-modal {
           position: absolute;
+          left: 0;
+          top: 39px;
           z-index: 99;
           width: 200px;
         }

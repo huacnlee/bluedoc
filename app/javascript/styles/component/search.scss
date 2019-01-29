@@ -12,6 +12,9 @@
       border: 1px solid #D9D9D9;
       outline: none;
       color: $text-main;
+      height: auto;
+      line-height: 1.5;
+
       &::placeholder {
         color: inherit;
       }

@@ -39,7 +39,9 @@ form {
 .form-control {
   width: 100%;
   border: 1px solid #D9D9D9;
-  padding: 8px 15px;
+  padding: 9px 15px;
+  height: 38px;
+  line-height: 1.5;
   font-size: 13px;
   vertical-align: middle;
   outline: none;
@@ -50,6 +52,7 @@ form {
 }
 textarea.form-control {
   resize: vertical;
+  height: auto;
 }
 
 
