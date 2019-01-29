@@ -19,7 +19,9 @@
   <div class="time-box">
     <%= timeago item.body_updated_at %>
   </div>
-  <div class="description">
-    <%= highlight(description) %>
-  </div>
+  <% if description.present? %>
+    <div class="description mt-3">
+      <%= highlight(description) %>
+    </div>
+  <% end %>
 </div>

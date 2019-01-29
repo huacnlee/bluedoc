@@ -4,34 +4,12 @@
     border-color: #fff;
   }
   .list-item {
-    .path {
-      margin-bottom: 12px;
-    }
     .time-box {
       top: 40px;
     }
     .description img{
       width: 100% !important;
       height: auto !important;
-    }
-  }
-
-  .search-result-user {
-    padding-left: 45px;
-    position: relative;
-
-    .avatar-box {
-      position: absolute;
-      top: auto;
-      left: 0;
-    }
-  }
-}
-.page-searches {
-  .menu-item {
-    span:first-child {
-      min-width: 5em;
-      display: inline-block;
     }
   }
 }
