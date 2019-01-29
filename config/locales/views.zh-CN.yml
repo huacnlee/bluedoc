@@ -134,6 +134,7 @@ zh-CN:
     Repository: 知识库
     Comment: 评论
     Doc: 文档
+    Share: 分享
     Notification: 通知
     Activity: 动态
     Back to Front: 回到前台
@@ -185,6 +186,9 @@ zh-CN:
         Save: 保存
       create:
         Setting was successfully updated: 系统设置更新成功。
+    shares:
+      destroy:
+        Share was successfully deleted: 分享删除成功。
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知

@@ -1,0 +1,20 @@
+<%= render 'base' %>
+
+<div class="detail admin-edit-admin_share">
+  <div class="detail-action">
+    <%= link_to icon_tag("arrow-left", label: t("admin.Back")), admin_shares_path, class: "btn" %>
+    <%= link_to icon_tag("pencil", label: t("admin.Edit")), edit_admin_share_path(@share.id), class: "btn" %>
+  </div>
+
+  
+  <div class="detail-row">
+    <div class="detail-label"><%= t("activerecord.attributes.admin_share.shareable") %>:</div>
+    <div class="detail-value"><%= @share.shareable %></div>
+  </div>
+  
+  <div class="detail-row">
+    <div class="detail-label"><%= t("activerecord.attributes.admin_share.user") %>:</div>
+    <div class="detail-value"><%= @share.user %></div>
+  </div>
+  
+</div>

@@ -16,7 +16,7 @@
 
   <div class="nav-header">
     <div class="header-content container">
-      <div class="navbar flex-auto">
+      <div class="navbar flex-none">
         <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("booklab", label: t("admin.BookLab Admin")) %></a>
 
         <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
@@ -25,8 +25,10 @@
           li <<  link_to(t("admin.Repository"), admin_repositories_path, class: "nav-link")
           li <<  link_to(t("admin.Doc"), admin_docs_path, class: "nav-link")
           li <<  link_to(t("admin.Comment"), admin_comments_path, class: "nav-link")
+          li <<  link_to(t("admin.Share"), admin_shares_path, class: "nav-link")
         end %>
       </div>
+      <div class="flex-auto"></div>
       <div class="navbar">
         <details class="dropdown details-reset details-overlay d-inline-block">
           <summary aria-haspopup="true">

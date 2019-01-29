@@ -1,0 +1,29 @@
+<%= render 'base' %>
+
+<div class="admin-admin_shares">
+  <table class="table table-striped">
+    <tr class="head">
+      <td>Id</td>
+      <td><%= t("activerecord.attributes.share.shareable") %></td>
+      <td><%= t("activerecord.attributes.share.user") %></td>
+
+      <td><%= t("created at") %></td>
+      <td class="opts"></td>
+    </tr>
+    <% @shares.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+
+      <td><%= link_to item.shareable&.title, item.to_path, target: "_blank" %></td>
+
+      <td><%= link_to item.user&.name, item.user&.to_path, target: "_blank" %></td>
+
+      <td><%= l(item.created_at) %></td>
+      <td class="opts">
+        <%= link_to icon_tag("cancel"), admin_share_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @shares %>
+</div>

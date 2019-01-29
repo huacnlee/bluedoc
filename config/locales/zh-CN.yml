@@ -52,6 +52,9 @@ zh-CN:
         body: 评论内容
       member:
         role: 角色
+      share:
+        shareable: 分享内容
+        user: 分享人
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。

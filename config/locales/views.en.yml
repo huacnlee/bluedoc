@@ -131,6 +131,7 @@ en:
     Repository: Repository
     Comment: Comment
     Doc: Doc
+    Share: Share
     Notification: Notification
     Activity: Activity
     Back to Front: Back to Front
@@ -186,6 +187,11 @@ en:
         Save: Save
       create:
         Setting was successfully updated: Setting was successfully updated.
+    shares:
+      destroy:
+        Share was successfully deleted: Share was successfully deleted.
+      index:
+        Are you sure delete this item?: Are you sure delete this item?
   comments:
     comment_watch:
       Subscribe: Subscribe

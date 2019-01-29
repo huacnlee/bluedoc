@@ -36,6 +36,9 @@ en:
       doc:
         slug: Doc path
         title: Title
+      share:
+        shareable: Content
+        user: Creator
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.

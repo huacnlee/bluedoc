@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       end
     end
     resources :comments
+    resources :shares
   end
 
   # short attachment url
