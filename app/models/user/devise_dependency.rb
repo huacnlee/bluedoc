@@ -4,7 +4,7 @@ class User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
-         :timeoutable, :rememberable, :validatable,
+         :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab]
 
   attr_accessor :omniauth_provider, :omniauth_uid
