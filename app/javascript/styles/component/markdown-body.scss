@@ -9,6 +9,11 @@
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
+  position: relative;
+
+  img {
+    height: auto;
+  }
 
   // Clearfix on the markdown body
   &::before {
@@ -28,6 +33,11 @@
 
   > *:last-child {
     margin-bottom: 0 !important;
+  }
+
+  a:link,
+  a:visited {
+    color: $primary;
   }
 
   // Anchors like <a name="examples">. These sometimes end up wrapped around
@@ -77,6 +87,10 @@
     > :last-child {
       margin-bottom: 0;
     }
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
   kbd {
@@ -104,6 +118,9 @@
 
     br { display: none; }
   }
+
+  del { background: transparent; text-decoration: line-through; }
+  ins { background: #D6FFCB; text-decoration: none; }
 
   del code { text-decoration: inherit; }
 
@@ -155,6 +172,15 @@
   }
 
   // Headings
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child,
+  & > h4:first-child,
+  & > h5:first-child,
+  & > h6:first-child {
+    padding-top: 0px !important;
+  }
+
   h1,
   h2,
   h3,
@@ -165,18 +191,35 @@
     margin-bottom: $spacer-3;
     font-weight: bold;
     line-height: 180%;
+    position: relative;
 
-    .octicon-link {
-      color: $black;
-      vertical-align: middle;
-      visibility: hidden;
+    &:target {
+      margin-top: -80px;
+      padding-top: 80px;
+
+      a.heading-anchor {
+        top: 80px;
+      }
     }
 
-    &:hover .anchor {
+    a.heading-anchor {
+      display: none;
+      position: absolute;
+      left: -35px;
+      padding-right: 0;
       text-decoration: none;
+      color: #999;
+      line-height: inherit;
+      font-weight: 400;
+      width: 35px;
+      text-align: center;
+      border-bottom: 0;
+      font-family: serif;
+    }
 
-      .octicon-link {
-        visibility: visible;
+    &:hover {
+      a.heading-anchor {
+        display: inline-block;
       }
     }
 
@@ -286,8 +329,8 @@
   }
 
   li > p {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   li + li {
@@ -340,6 +383,80 @@
       background-color: transparent;
     }
   }
+
+  .attachment-file {
+    display: block;
+    position: relative;
+    color: #444 !important;
+
+    &:hover {
+      background: #f7f7f7;
+    }
+
+    &.selected {
+      background: #f9f9f9;
+    }
+
+    a { color: #444 !important; }
+
+    .icon-box {
+      position: absolute;
+      top: 17px;
+      left: 11px;
+      width: 30px;
+      .fas { font-size: 28px; color: #d5d5d5; }
+    }
+    a.close {
+      position: absolute;
+      top: 17px;
+      right: 4px;
+      color: #aaa;
+      padding: 0 6px;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+
+    .filename,
+    .filesize { display: block; margin-left: 34px; margin-right: 24px; }
+
+    .filename {
+      @extend .text-overflow;
+    }
+    .filesize { color: rgba(88, 96, 105, 0.31) !important }
+
+
+    .text-gray {
+      color: rgba(88, 96, 105, 0.31) !important
+    }
+
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 8px 10px;
+    text-decoration: none;
+    margin: 10px 0;
+  }
+
+  .plantuml-image {
+    margin-bottom: 15px;
+    background: transparent !important;
+  }
+
+  .tex-image {
+    vertical-align: middle;
+    background: transparent !important;
+    margin-bottom: 0;
+    display: inline-block;
+    padding: 5px;
+  }
+
+  video {
+    max-width: 100%;
+  }
+
 }
 
 .highlight  { background: #ffffff; }
