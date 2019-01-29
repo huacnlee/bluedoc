@@ -3,12 +3,15 @@
 %>
 
 <% if comment %>
-<div class="info mb-2">
+<div class="info">
   <%= user_name_tag(notification.actor) %> <%= t(".was posted a comment on") %>
   <%= link_to comment.commentable_title, notification_url(notification.id) %>
 </div>
+<span class="time">
+  <%= l notification.created_at, format: :short %>
+</span>
 
-<div class="description markdown-body">
+<div class="detail markdown-body">
   <%= sanitize_html comment.body_html %>
 </div>
 <% else %>

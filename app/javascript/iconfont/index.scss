@@ -39,6 +39,12 @@
   .fa-star-doc {
     @extend .fa-star-doc-fill;
   }
+  .fa-bell {
+    @extend .fa-bell-fill;
+  }
+  .fa-notice {
+    @extend .fa-notice-fill;
+  }
 }
 a[data-method=delete] {
   .fa-star {
