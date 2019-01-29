@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     when "repositories"
       @repositories = @user.repositories.recent_updated
     else
-      @recent_docs = current_user.user_actives.docs.limit(5)
+      @recent_docs = @user.user_actives.docs.limit(5)
       @activities = @user.actor_activities.includes(:target, :actor).page(params[:page]).per(per_page)
     end
 
