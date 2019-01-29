@@ -118,7 +118,7 @@
 
 #new_comment {
   margin-bottom: 20px;
-  textarea.form-control { height: 100px; min-height: 50px; }
+  textarea.form-control { border-color: #d9d9d9 !important; height: 100px; min-height: 50px; }
 
   .form-group { margin-top: 0; }
   .form-actions {

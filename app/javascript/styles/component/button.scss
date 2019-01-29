@@ -16,6 +16,7 @@
   appearance: none;
   .fas {
     transform: scale(1.2);
+    margin-top: -2px;
   }
   &:hover {
     text-decoration: none;
@@ -89,4 +90,8 @@
 
 .btn-sm {
   padding: 3px 8px;
+
+  .fas {
+    margin-top: 0px;
+  }
 }
