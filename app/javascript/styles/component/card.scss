@@ -55,14 +55,13 @@
     right: 20px;
     bottom: 15px;
     color: #979797;
-    padding: 8px;
     line-height: 1;
-    &:hover {
-      border-radius: 50%;
-      background: #f7f7f7;
-    }
-    .fas {
-      cursor: pointer;
+    a {
+      padding: 8px;
+      &:hover {
+        border-radius: 50%;
+        background: #f7f7f7;
+      }
     }
   }
 }
