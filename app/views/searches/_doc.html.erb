@@ -7,16 +7,17 @@
   end
 %>
 
-<div class="search-result search-result-doc">
-  <div class="title"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
-  <div class="info clearfix">
-    <span class="parent-name">
-      <%= item.repository&.user&.name %>
-      <span class="divider">/</span>
-      <%= item.repository&.name %>
-    </span>
-
-    <span class="date float-right"><%= t("updated at") %> <%= timeago item.body_updated_at %></span>
+<div class="search-result search-result-doc list-item list-avatar">
+  <div class="avatar-box icon-box icon-doc">
+    <%= icon_tag("avatar-doc") %>
+  </div>
+  <div class="title text-overflow"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
+  <div class="path">
+    <%= user_display_name_tag(item.repository&.user) %> /
+    <%= repository_name_tag(item.repository) %>
+  </div>
+  <div class="time-box">
+    <%= timeago item.body_updated_at %>
   </div>
   <div class="description">
     <%= highlight(description) %>

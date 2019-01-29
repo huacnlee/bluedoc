@@ -3,16 +3,20 @@
     <nav class="menu v-align-middle">
       <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
         li << link_to(docs_search_path(q: params[:q]), class: "menu-item") do %>
-          <%= icon_tag("doc", label: t(".Docs")) %><span class="counter"><%= @totals[:docs] %></span>
+          <span style="display:inline-block; min-width: 8em"><%= icon_tag("doc", label: t(".Docs")) %></span>
+          <b><%= @totals[:docs] %></b>
         <% end
         li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
-          <%= icon_tag("repo", label: t(".Repositories")) %><span class="counter"><%= @totals[:repositories] %></span>
+          <span style="display:inline-block; min-width: 8em"><%= icon_tag("repo", label: t(".Repositories")) %></span>
+          <b><%= @totals[:repositories] %></b>
         <% end
         li << link_to(groups_search_path(q: params[:q]), class: "menu-item") do %>
-          <%= icon_tag("group", label: t(".Groups")) %><span class="counter"><%= @totals[:groups] %></span>
+          <span style="display:inline-block; min-width: 8em"><%= icon_tag("group", label: t(".Groups")) %></span>
+          <b><%= @totals[:groups] %></b>
         <% end
         li << link_to(users_search_path(q: params[:q]), class: "menu-item") do %>
-          <%= icon_tag("user", label: t(".Users")) %><span class="counter"><%= @totals[:users] %></span>
+          <span style="display:inline-block; min-width: 8em"><%= icon_tag("user", label: t(".Users")) %></span>
+          <b><%= @totals[:users] %></b>
         <% end
       end %>
     </nav>
