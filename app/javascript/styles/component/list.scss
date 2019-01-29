@@ -1,7 +1,6 @@
 .list-item {
   width: 100%;
   padding: 15px 0;
-  line-height: 1.4;
   list-style: none;
   border-bottom: 1px solid #E6E6E6;
   position: relative;
@@ -42,24 +41,21 @@
   }
   .title {
     display: block;
-    a {
-      color: #000;
-    }
+    color: #000;
     font-size: 15px;
     padding-right: 20px;
     margin-bottom: 4px;
-    flex: auto;
   }
   .info {
     margin-top: 17px;
-    span {
+    > span {
       display: inline-block;
-      min-width: 60px;
+      width: 90px;
       margin-right: 20px;
       color: #333;
       vertical-align: middle;
       &.user {
-        min-width: 160px;
+        width: 180px;
       }
       .fas {
         margin-right: 5px;
@@ -79,12 +75,12 @@
     top: 11.5px;
     font-size: 14px;
     opacity: 0;
-    min-width: 30px;
-    height: 30px;
-    line-height: 30px;
     text-align: center;
   }
   .action-icon {
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
     a:hover {
       border-radius: 15px;
       background: #f7f7f7;

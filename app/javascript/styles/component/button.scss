@@ -3,7 +3,7 @@
   display: inline-block;
   padding: 6px 15px;
   text-align: center;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #999999;
   background: #fff;
   font-size: 14px;
   text-decoration: none;
@@ -17,7 +17,14 @@
   }
   &:hover {
     text-decoration: none;
-    color: $primary;
+    color: $text-main!important;
+    border-color: #333333;
+  }
+  &.disable {
+    border-color: #E0E0E0;
+    color: #C1C1C1;
+    user-select: none;
+    pointer-events: none;
   }
 }
 .btn.btn-sm {
@@ -36,25 +43,32 @@
 }
 
 .btn-primary {
-  border: 1px solid #9BBAFF;
+  border-color: #9BBAFF;
   background: #F3F7FF;
   color: $primary;
-
+  box-shadow: 0px 3px 6px 0px rgba(76, 132, 255, 0.14);
   &:hover {
-    border-color: #8EAAEE;
+    background: #E6EEFF;
+    color: $primary!important;
+    border-color: #9BBAFF;
   }
 }
 
 .btn-danger {
-  border: 1px solid #FFC1BE;
+  border-color: #FFC1BE;
   background: #FFF3F3;
   color: #EE4343;
-
+  box-shadow: 0px 3px 6px 0px rgba(255, 75, 75, 0.14);
   &:hover {
     border-color: #F3B7B7;
-    color: #AA2528 !important;
-    background: #FFF3F3;
+    color: #EE4343!important;
+    background: #FFE5E5;
   }
+}
+
+.btn-light {
+  border-color: #D9D9D9;
+  color: $text-gray;
 }
 
 .btn-block {
