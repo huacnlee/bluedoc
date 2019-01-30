@@ -5100,6 +5100,11 @@ p-try@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.0.0.tgz#85080bb87c64688fa47996fe8f7dfbe8211760b1"
 
+pako@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.3.tgz#5f515b0c6722e1982920ae8005eacb0b7ca73ccf"
+  integrity sha1-X1FbDGci4ZgpIK6ABerLC3ynPM8=
+
 pako@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.7.tgz#2473439021b57f1516c82f58be7275ad8ef1bb27"
@@ -5257,6 +5262,14 @@ pkg-dir@^3.0.0:
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-3.0.0.tgz#2749020f239ed990881b1f71210d51eb6523bea3"
   dependencies:
     find-up "^3.0.0"
+
+plantuml-encoder@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/plantuml-encoder/-/plantuml-encoder-1.2.5.tgz#6b8e5b9e1a1dbd88b3fd9fb46f734eec7d44b548"
+  integrity sha512-viV7Sz+BJNX/sC3iyebh2VfLyAZKuu3+JuBs2ISms8+zoTGwPqwk3/WEDw/zROmGAJ/xD4sNd8zsBw/YmTo7ng==
+  dependencies:
+    pako "1.0.3"
+    utf8-bytes "0.0.1"
 
 pluralize@^7.0.0:
   version "7.0.0"
@@ -7178,10 +7191,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typine@^0.0.29:
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.29.tgz#145a33ba02ad304e3d55da62d395bba9bcc933a6"
-  integrity sha512-yxs8Fl6JVLdx8ttzFDFdE+HIVHvdkVf+PQKu586EmWWXJEBv3z6zPhQYQo0Ri5c5wzOYa1imAZJnNdtzV77KEQ==
+typine@^0.0.30:
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.30.tgz#87df99dac92299c6fc5eb5234e832ef02b1b2e9b"
+  integrity sha512-wAUVeJmid8+8fkbf4mVGGSiadLwWKq8pSGFw2TXg360xcVCoHHZ6ABJmopk76T8+/1z8OgYTfL9ANfww93oLlA==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"
@@ -7203,6 +7216,7 @@ typine@^0.0.29:
     markdown-it-sub "^1.0.0"
     markdown-it-sup "^1.0.0"
     markdown-it-underline "^1.0.1"
+    plantuml-encoder "^1.2.5"
     prop-types "^15.6.2"
     react "^16.6.0"
     react-codemirror "^1.0.0"
@@ -7321,6 +7335,11 @@ url@^0.11.0:
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
+
+utf8-bytes@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/utf8-bytes/-/utf8-bytes-0.0.1.tgz#116b025448c9b500081cdfbf1f4d6c6c37d8837d"
+  integrity sha1-EWsCVEjJtQAIHN+/H01sbDfYg30=
 
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
