@@ -28,6 +28,12 @@ export default class InlineEditor extends React.PureComponent {
     }
   }
 
+  avoidSubmit = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    return false;
+  }
+
   render() {
     const {
       directUploadURL, blobURLTemplate, name, value = '', format = 'markdown',
@@ -35,16 +41,18 @@ export default class InlineEditor extends React.PureComponent {
 
     return <div>
       <textarea name={name} ref={this.inputRef} style={{ display: 'none' }} />
-      <RichEditor
-        mode="inline"
-        title=""
-        ref={this.editorRef}
-        directUploadURL={directUploadURL}
-        blobURLTemplate={blobURLTemplate}
-        onChange={this.onChange}
-        format={format}
-        value={value}
-      />
+      <form onSubmit={this.avoidSubmit}>
+        <RichEditor
+          mode="inline"
+          title=""
+          ref={this.editorRef}
+          directUploadURL={directUploadURL}
+          blobURLTemplate={blobURLTemplate}
+          onChange={this.onChange}
+          format={format}
+          value={value}
+        />
+      </form>
     </div>;
   }
 }
