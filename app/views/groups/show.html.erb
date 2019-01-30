@@ -11,7 +11,7 @@
         <input type="text" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="<%= t(".Find a repository") %>" />
         <%= icon_tag "search", class: "subnav-search-icon" %>
         <% if params[:q].present? %>
-          <a href="<%= @group.to_path %>" class="link-cancel"><%= icon_tag "search" %></a>
+          <a href="<%= @group.to_path %>" class="link-cancel"><%= icon_tag "cancel" %></a>
         <% end %>
       </div>
     </form>
