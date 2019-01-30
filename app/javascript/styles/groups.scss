@@ -7,21 +7,10 @@
       .group-title { font-size: 20px; }
     }
   }
-  
-  .group-members {
-    .group-member {
-      position: relative;
-  
-      .avatar-box {
-        width: 50px;
-      }
-  
-      .member-actions {
-        position: absolute;
-        top: 2px;
-        right: 0px;
-      }
+  .list-col-2 .list-item {
+    width: calc(50% - 40px);
+    &:nth-child(2n + 1) {
+      margin-right: 80px;
     }
   }
-  
 }

@@ -1,30 +1,18 @@
-<div class="group-member border-bottom py-3 d-table col-12">
-  <div class="d-table-cell col-7 v-align-middle">
-    <div class="float-left mr-3 v-align-middle">
-      <%= user_avatar_tag(member.user, style: :medium) %>
-    </div>
-    <div class="member-name"><%= link_to member.user.name, member.user.to_path, class: "link-gray-dark text-bold" %></div>
-    <div class="member-slug"><%= user_name_tag(member.user) %></div>
+<div class="list-item list-avatar">
+  <div class="avatar-box">
+    <%= user_avatar_tag(member.user, style: :medium) %>
   </div>
-  <div class="d-table-cell col-1 v-align-middle">
-    <span class="text-gray"><%= member.role_name %></span>
+  <div class="title text-overflow"><%= link_to member.user.name, member.user.to_path %></div>
+  <div class="description"><%= user_name_tag(member.user) %></div>
+  <div class="time-box">
+    <%= member.role_name %>
   </div>
 
-
-  <div class="d-table-cell col-1 v-align-middle">
+  <div class="action action-icon">
     <% if can? :manage, @group %>
       <% if member.user_id != current_user.id %>
-        <details class="dropdown float-right details-reset details-overlay d-inline-block">
-          <summary class="btn btn-sm" aria-haspopup="true">
-            <%= icon_tag("gear") %>
-            <div class="dropdown-caret"></div>
-          </summary>
-
-          <ul class="dropdown-menu dropdown-menu-sw">
-            <li><%= render "update_member", member: member %></li>
-            <li><a class="dropdown-item" href="<%= group_member_path(@group, member) %>" data-method="delete"><%= t(".Remove") %></a></li>
-          </ul>
-        </details>
+      <%= render "update_member", member: member %>
+      <a class="hover-danger" href="<%= group_member_path(@group, member) %>" data-method="delete"><%= icon_tag("delete") %></a>
       <% end %>
     <% end %>
   </div>

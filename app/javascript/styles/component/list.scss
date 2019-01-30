@@ -82,6 +82,13 @@
     min-width: 30px;
     height: 30px;
     line-height: 30px;
+    details {
+      display: inline-block;
+      summary:hover {
+        border-radius: 15px;
+        background: #f7f7f7;
+      }
+    }
     a:hover {
       border-radius: 15px;
       background: #f7f7f7;
@@ -96,7 +103,7 @@
       width: 30px;
     }
     // star、unstar、watch、unwatch
-    .btn {
+    a.btn {
       padding-left: 0;
       padding-right: 0;
       height: 30px;
@@ -137,11 +144,11 @@
   }
 }
 
-.list-container.list-col-2 {
+.list-col-2 {
   @extend .clearfix;
   .list-item {
     float: left;
-    width: calc(50% - 40px);
+    width: calc(50% - 20px);
     &:nth-child(2n + 1) {
       margin-right: 40px;
     }

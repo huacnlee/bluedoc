@@ -1,7 +1,7 @@
 <%= render layout: "shared/modal", locals: {
   title: t("group_members.update_member.Change member role"),
-  button_text: t("group_members.update_member.Change role"),
-  button_class: "dropdown-item"
+  button_text: icon_tag("change"),
+  button_class: ''
 } do %>
   <div class="box-body overflow-auto">
     <%= form_with(model: member, url: group_member_path(@group, member), method: :put) do |form| %>
