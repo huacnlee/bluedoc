@@ -8,28 +8,7 @@
   </div>
 
   <div class="form-group">
-    <markdown-toolbar for="comment_body">
-      <div class="toolbar-group">
-        <md-header class="md-btn"><%= icon_tag("text-heading") %></md-header>
-        <md-bold class="md-btn"><%= icon_tag("text-bold") %></md-bold>
-        <md-italic class="md-btn"><%= icon_tag("text-italic") %></md-italic>
-      </div>
-      <div class="toolbar-group">
-        <md-quote class="md-btn"><%= icon_tag("text-quote") %></md-quote>
-        <md-unordered-list class="md-btn"><%= icon_tag("text-bulleted-list") %></md-unordered-list>
-        <md-ordered-list class="md-btn"><%= icon_tag("text-numbered-list") %></md-ordered-list>
-      </div>
-      <div class="toolbar-group">
-        <md-code class="md-btn"><%= icon_tag("text-code") %></md-code>
-        <md-link class="md-btn"><%= icon_tag("text-link") %></md-link>
-        <md-mention class="md-btn"><%= icon_tag("text-mention") %></md-mention>
-      </div>
-    </markdown-toolbar>
-    <%= f.text_area :body, class: 'form-control mentionable', data: {
-       direct_upload_url: rails_direct_uploads_url,
-       blob_url_template: upload_path(":id")
-      } %>
-    <markdown-image-upload for="comment_body"></markdown-image-upload>
+    <%= react_component "InlineEditor", name: "comment[body]", format: "markdown", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id") %>
   </div>
 
   <div class="form-actions clearfix">

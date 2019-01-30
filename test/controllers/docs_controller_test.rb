@@ -153,7 +153,12 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select "#comment-watch-box", 1
     assert_select "#new_comment" do
-      assert_select "textarea[name=?]", "comment[body]"
+      assert_react_component "InlineEditor" do |props|
+        assert_equal "comment[body]", props[:name]
+        assert_equal "markdown", props[:format]
+        assert_equal rails_direct_uploads_url, props[:directUploadURL]
+        assert_equal upload_path(":id"), props[:blobURLTemplate]
+      end
     end
     assert_select ".doc-share-button-box", 0
 

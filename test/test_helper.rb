@@ -96,8 +96,7 @@ class ActionDispatch::IntegrationTest
   #   assert_equal "Hello world", props[:message]
   # end
   def assert_react_component(name)
-    assert_select "div[data-react-class]" do |el|
-      assert_select "[data-react-class=?]", name
+    assert_select "div[data-react-class=?]", name do |el|
       props = JSON.parse(el.attr("data-react-props"))
       props.deep_symbolize_keys!
 

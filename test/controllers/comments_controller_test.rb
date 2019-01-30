@@ -51,7 +51,8 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     post comments_path, params: { comment: comment_params }, xhr: true
     assert_equal 200, response.status
     assert_match %($('.comments').append(html);), response.body
-    assert_match %($('.new_comment [name="comment[body]"]').val('');), response.body
+    assert_match %($('.in-reply-info').html('');), response.body
+    assert_match %(document.dispatchEvent(new Event("reset:inline-editor:comment[body]"));), response.body
 
     assert_equal 1, @doc.comments.count
     comment = @doc.comments.last

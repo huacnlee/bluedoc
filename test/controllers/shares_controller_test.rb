@@ -57,7 +57,12 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       end
       assert_select "#comment-form-blankslate", 0
       assert_select "form.new_comment" do
-        assert_select "textarea.form-control"
+        assert_react_component "InlineEditor" do |props|
+          assert_equal "comment[body]", props[:name]
+          assert_equal "markdown", props[:format]
+          assert_equal rails_direct_uploads_url, props[:directUploadURL]
+          assert_equal upload_path(":id"), props[:blobURLTemplate]
+        end
       end
     end
     assert_equal true, user.read_doc?(share.shareable)

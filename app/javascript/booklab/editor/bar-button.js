@@ -9,8 +9,8 @@ export class BarButton extends React.Component {
       className = className + " active";
     }
 
-    return <button title={title} className={className} onMouseDown={onMouseDown}>
+    return <a title={title} className={className} onMouseDown={onMouseDown}>
       <i className={iconClassName}></i>
-    </button>
+    </a>
   }
 }
