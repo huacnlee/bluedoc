@@ -142,7 +142,7 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     MD
 
     out = BookLab::HTML.render(raw, format: :markdown)
-    svg_code = URI::encode(code.strip)
+    svg_code = BookLab::Plantuml.encode(code.strip)
     assert_equal %(<div class="highlight"><img src="#{Setting.plantuml_service_host}/svg/#{svg_code}" class="plantuml-image"></div>), out
   end
 

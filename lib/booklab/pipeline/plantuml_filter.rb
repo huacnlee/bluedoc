@@ -9,7 +9,7 @@ module BookLab
         doc.search("pre").each do |node|
           text = node.css("code").first&.inner_text || ""
           if text.start_with?("@startuml")
-            svg_code = URI::encode(text.strip)
+            svg_code = BookLab::Plantuml.encode(text.strip)
             node.replace(%(<img src="#{Setting.plantuml_service_host}/svg/#{svg_code}" class="plantuml-image" />))
           end
         end
