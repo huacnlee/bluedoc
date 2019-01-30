@@ -32,6 +32,13 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, slug: "Ruby on Rails")
     assert_equal false, user.valid?
     assert_equal "Ruby on Rails", user.slug
+
+    # location validate
+    user = build(:user, location: "a" * 50)
+    assert_equal true, user.valid?
+    user = build(:user, location: "a" * 51)
+    assert_equal false, user.valid?
+    assert_equal ["is too long (maximum is 50 characters)"], user.errors[:location]
   end
 
   test "Slugable" do
