@@ -12,7 +12,7 @@ export default class RichEditor extends React.Component {
     this.state = {
       value: this.getFormatValue({ value, format }),
       activeMarkups: [],
-      title: '',
+      title: props.title || "",
     };
 
     const { directUploadURL, blobURLTemplate } = this.props;
