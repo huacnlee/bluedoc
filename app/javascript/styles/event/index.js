@@ -5,5 +5,3 @@ import './flash';
 import './confirm';
 import './clipboard';
 import './retina-image';
-
-import '@github/markdown-toolbar-element';

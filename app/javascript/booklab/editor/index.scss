@@ -123,6 +123,16 @@
   }
 }
 
+.editor-container {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  padding-top: 64px;
+  width: 100%;
+  min-height: calc(100vh);
+  margin: 0;
+}
+
 .rich-editor-full {
   .editor-toolbar {
     position: fixed;
@@ -131,18 +141,8 @@
     z-index: 200;
   }
 
-  .editor-container {
-    position: absolute;
-    top: 0px;
-    left: 0;
-    padding-top: 64px;
-    width: 100%;
-    min-height: calc(100vh);
-    margin: 0;
-  }
-
   .editor-bg {
-    padding: 100px 20px 50px 20px;
+    padding: 100px 20px 50px;
     background: #f9f9f9;
     text-align: center;
     min-height: calc(100vh - 113px);
@@ -153,6 +153,7 @@
     width: 850px;
     text-align: left;
     padding: 32px 64px;
+    box-shadow: 0 1px 5px rgba(224, 224, 224, 0.64);
   }
 
   .editor-text {

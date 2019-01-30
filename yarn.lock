@@ -721,10 +721,6 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
-"@github/markdown-toolbar-element@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@github/markdown-toolbar-element/-/markdown-toolbar-element-0.1.1.tgz#2f4d82e40eefc8fe96de93868fe9db970a4b9a65"
-
 "@rails/webpacker@4.0.0-rc.5":
   version "4.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-4.0.0-rc.5.tgz#e640c4b6f055a2e57537e044234daf5fe9aa9954"
