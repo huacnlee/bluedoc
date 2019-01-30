@@ -47,6 +47,7 @@
     margin-bottom: 4px;
   }
   .info {
+    width: 100%;
     margin-top: 17px;
     > span {
       display: inline-block;
@@ -133,5 +134,16 @@
   }
   &.icon-repo {
     color: #FCBA00;
+  }
+}
+
+.list-container.list-col-2 {
+  @extend .clearfix;
+  .list-item {
+    float: left;
+    width: calc(50% - 40px);
+    &:nth-child(2n + 1) {
+      margin-right: 40px;
+    }
   }
 }
