@@ -12,9 +12,6 @@
     <%= truncate repository.description, length: 150 %>
   </div>
   <div class="info">
-    <span class="user text-overflow">
-      <%= icon_tag("user") %> <%= user_name_tag(repository.user) %>
-    </span>
     <span class="stars">
       <%= icon_tag("star-fill") %> <span><%= repository.stars_count %></span>
     </span>

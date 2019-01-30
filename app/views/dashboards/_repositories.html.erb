@@ -17,9 +17,6 @@
     </div>
     <% end %>
     <div class="info">
-      <span class="user text-overflow">
-        <%= icon_tag("user") %> <%= user_name_tag(item.subject&.user) %>
-      </span>
       <span class="stars">
         <%= icon_tag("star-fill") %> <span><%= item.subject.stars_count %></span>
       </span>
