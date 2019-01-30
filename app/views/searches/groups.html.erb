@@ -11,7 +11,7 @@
         <% end %>
 
         <% @result.records.each_with_hit do |item, hit| %>
-          <%= render "user", item: item, hit: hit %>
+          <%= render "group", item: item, hit: hit %>
         <% end %>
       </div>
     </div>

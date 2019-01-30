@@ -1,13 +1,10 @@
 <div id="notification-<%= notification.id %>"
      data-id="<%= notification.id %>"
-     class="notification clearfix notification-<%= notification.notify_type %><%= ' unread' unless notification.read? %>">
+     class="activity-item notification notification-<%= notification.notify_type %><%= ' unread' unless notification.read? %>">
   <div class="avatar-box">
-    <%= user_avatar_tag notification.actor, style: :tiny %>
+    <%= user_avatar_tag notification.actor, style: :medium %>
   </div>
   <div class="infos">
-    <span class="time-box">
-      <%= l notification.created_at, format: :short %>
-    </span>
     <%= render "/notifications/#{notification.notify_type}", notification: notification rescue t("notifications.Notification been deleted") %>
   </div>
 </div>

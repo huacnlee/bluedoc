@@ -35,7 +35,7 @@
   .title {
     color: $black;
     font-size: 15px;
-    padding-right: 20px;
+    padding-right: 35px;
     padding-bottom: 10px;
     flex: auto;
     overflow: hidden;
@@ -44,7 +44,7 @@
   }
   .info {
     font-size: 12px;
-    color: $text-gray;
+    color: $text-gray-light;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -55,14 +55,13 @@
     right: 20px;
     bottom: 15px;
     color: #979797;
-    padding: 8px;
     line-height: 1;
-    &:hover {
-      border-radius: 50%;
-      background: #f7f7f7;
-    }
-    .fas {
-      cursor: pointer;
+    a {
+      padding: 8px;
+      &:hover {
+        border-radius: 50%;
+        background: #f7f7f7;
+      }
     }
   }
 }

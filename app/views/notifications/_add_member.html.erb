@@ -2,11 +2,14 @@
   member = notification.target
 %>
 
-<div class="info mb-2">
+<div class="info">
   <%= user_name_tag(notification.actor) %> <%= t(".has added you as member of") %>
 </div>
+<span class="time">
+  <%= l notification.created_at, format: :short %>
+</span>
 
-<div class="description">
+<div class="detail">
   <% if member.subject_type == "Repository" %>
     <%= render "/repositories/card", repository: member.subject %>
   <% else %>

@@ -3,59 +3,13 @@
     background: #fff;
     border-color: #fff;
   }
-
-  .search-result {
-    padding: 20px 0px;
-    border-bottom: 1px solid #eaeaea;
-
-    &:first-child {
-      padding-top: 0;
+  .list-item {
+    .time-box {
+      top: 40px;
     }
-    &:last-child {
-      padding-bottom: 0;
-      border-bottom: 0px solid #eaeaea;
-    }
-
-    .title {
-      font-size: 14px;
-      margin-bottom: 0px;
-    }
-
-    .info {
-      color: $text-gray;
-      font-size: 12px;
-      .parent-name { color: #006b00; }
-      a { color: #006b00;}
-      .slug { color: #666; }
-      margin-bottom: 5px;
-    }
-
-    .description {
-      font-size: 13px;
-      color: $text-gray-dark;
-      font-size: 14px;
-      color: #555;
-
-      img { width: 100% !important; height: auto !important; }
-    }
-  }
-
-  .search-result-user {
-    padding-left: 45px;
-    position: relative;
-
-    .avatar-box {
-      position: absolute;
-      top: auto;
-      left: 0;
-    }
-  }
-}
-.page-searches {
-  .menu-item {
-    span:first-child {
-      min-width: 5em;
-      display: inline-block;
+    .description img{
+      width: 100% !important;
+      height: auto !important;
     }
   }
 }

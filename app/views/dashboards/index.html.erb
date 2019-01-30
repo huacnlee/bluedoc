@@ -67,9 +67,9 @@
         <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
         <ul class="cards-container group-list">
           <% @groups.each do |group| %>
-            <li class="card card-avatar group-item">
+            <li class="card card-avatar group-item" style="padding-top: 20px;padding-bottom: 20px;">
               <%= user_avatar_tag(group, style: :medium) %>
-              <div class="title">
+              <div class="title" style="padding-bottom: 4px">
                 <%= group_name_tag(group) %>
               </div>
               <div class="info">
