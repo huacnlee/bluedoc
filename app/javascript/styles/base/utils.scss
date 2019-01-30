@@ -19,6 +19,16 @@
   > summary::-webkit-details-marker { display: none; }
 }
 
+.button-reset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  &:hover {
+    color: $primary;
+  }
+}
+
 .float-right { float: right; }
 .float-left { float: left; }
 .border-bottom { border-bottom: 1px solid #eee; }
