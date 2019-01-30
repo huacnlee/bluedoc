@@ -3,17 +3,20 @@ mentionable = notification.target
 %>
 
 <% if mentionable %>
-  <strong><%= notification.actor_name %></strong> <%= t(".was mentioned you in") %>
-  <strong>
+  <div class="info">
+    <%= notification.actor_name %>
+    <%= t(".was mentioned you in") %>
     <% if mentionable.is_a?(Comment) %>
       <%= mentionable.commentable_title %>
     <% elsif mentionable.is_a?(Doc) %>
       <%= mentionable.title %>
     <% end %>
-  </strong>
-
+  </div>
+  <span class="time">
+    <%= l notification.created_at, format: :short %>
+  </span>
   <% if mentionable.is_a?(Comment) %>
-  <div class="description markdown-body">
+  <div class="detail markdown-body">
     <%= sanitize_html mentionable.body_html %>
   </div>
   <% end %>

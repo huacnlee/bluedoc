@@ -8,7 +8,7 @@
 
   .aside-wrap {
     @include breakpoint(md) {
-      width: 290px;
+      width: 270px;
       margin-right: 50px;
     }
   }
@@ -47,12 +47,13 @@
     .location, .created-on {
       .fas {
         vertical-align: baseline;
-        margin-right: 3px;
+        margin-right: 5px;
         transform: scale(1.2);
       }
     }
     .location {
-      margin-bottom: 10px;
+      width: 90%;
+      margin-bottom: 4px;
     }
     .created-on {
       margin-bottom: 30px;

@@ -7,14 +7,19 @@
   end
 %>
 
-<div class="search-result search-result-repo">
-  <div class="title"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
-  <div class="info clearfix">
-    <span class="parent-name">
-      <%= item.user&.name %>
-    </span>
+<div class="list-item list-avatar">
+  <div class="avatar-box icon-box icon-repo">
+    <%= icon_tag("avatar-repo") %>
   </div>
-  <div class="description">
-    <%= highlight description %>
+  <div class="title text-overflow"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
+  <% if description.present? %>
+    <div class="description text-overflow">
+      <%= highlight description %>
+    </div>
+  <% end %>
+  <div class="info">
+    <span class="user text-overflow">
+      <%= icon_tag("user") %> <%= user_name_tag(item.user) %>
+    </span>
   </div>
 </div>

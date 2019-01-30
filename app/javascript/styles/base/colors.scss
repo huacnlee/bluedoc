@@ -12,10 +12,9 @@ $primary: #2F70FF;
 $white: #FFF;
 $black: #000;
 $danger: #EE4343;
-
+$text-red: #EE4343;
 $border-color: #eee;
 $input-border-color: #e0e0e0;
-
 
 .text-gray {
   color: $text-gray;
@@ -31,7 +30,4 @@ $input-border-color: #e0e0e0;
 }
 .text-primary {
   color: $primary;
-}
-.text-red {
-  color: $danger;
 }

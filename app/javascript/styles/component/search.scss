@@ -14,9 +14,14 @@
       color: $text-main;
       height: auto;
       line-height: 1.5;
-
       &::placeholder {
         color: #aaa;
+      }
+      &:focus {
+        border-color: #333;
+        & + .fas {
+          color: #333;
+        }
       }
     }
     .subnav-search-icon {
