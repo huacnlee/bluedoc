@@ -2,7 +2,6 @@
   margin: 0;
   .subnav-search {
     position: relative;
-    margin-right: 30px;
     font-size: 13px;
     color: #BBBBBB;
     .subnav-search-input {
@@ -23,6 +22,12 @@
           color: #333;
         }
       }
+    }
+    .link-cancel {
+      position: absolute;
+      right: 1em;
+      top: 50%;
+      transform: translateY(-50%);
     }
     .subnav-search-icon {
       position: absolute;

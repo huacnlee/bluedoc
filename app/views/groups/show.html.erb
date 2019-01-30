@@ -4,17 +4,19 @@
 
 
 <div class="clearfix">
-  <div class="group-repositories col-12 col-md-9 float-left pr-md-5">
-    <div class="subhead">
-      <form action="" class="subnav-search" method="GET">
-        <input type="text" name="q" style="width: 320px" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="<%= t(".Find a repository") %>" />
+  <h1 class="title">
+    <%= t(".Repsitories") %>
+    <form action="" class="subnav-search-context float-right" method="GET">
+      <div class="subnav-search" >
+        <input type="text" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="<%= t(".Find a repository") %>" />
         <%= icon_tag "search", class: "subnav-search-icon" %>
         <% if params[:q].present? %>
-          <a href="<%= @group.to_path %>" class="link-cancel ml-2"><%= t(".Show all") %></a>
+          <a href="<%= @group.to_path %>" class="link-cancel"><%= icon_tag "search" %></a>
         <% end %>
-      </form>
-    </div>
-
+      </div>
+    </form>
+  </h1>
+  <div class="group-repositories col-12 col-md-9 float-left pr-md-5">
     <% if @repositories.blank? %>
       <div class="blankslate">
         <h3><%= t(".There is no repository") %></h3>
