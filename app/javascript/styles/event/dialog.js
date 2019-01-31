@@ -1,5 +1,5 @@
 document.addEventListener('turbolinks:load', () => {
-  $(document).on('click', 'details [data-close-dialog]', (e) => {
+  $(document).on('mouseup', 'details [data-close-dialog]', (e) => {
     $link = $(e.currentTarget);
     $container = $link.closest("[open]");
     $container.removeAttr('open');
