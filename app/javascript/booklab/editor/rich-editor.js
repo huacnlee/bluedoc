@@ -113,7 +113,7 @@ export default class RichEditor extends React.Component {
 
   // Render the editor.
   render() {
-    const { value, title } = this.state;
+    let { value, title } = this.state;
     const { mode = 'full' } = this.props;
     // change "New Document" as placeholder
     let placeholder = 'Document title';
