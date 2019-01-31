@@ -6,12 +6,10 @@
     description = hit.highlight.body if hit.highlight.body
   end
 %>
-<div class="list-item list-avatar">
+<div class="list-item list-avatar col-12 mb-5">
   <div class="avatar-box">
     <%= user_avatar_tag(item, style: :medium) %>
   </div>
   <div class="title text-overflow"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
-  <div class="description">
-    <%= highlight description %>
-  </div>
+  <div class="description"><%= item.slug %></div>
 </div>

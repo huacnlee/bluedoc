@@ -9,8 +9,8 @@ class Search extends React.PureComponent {
     this.state = {
       value: props.value,
       focused: false,
-      dropdownHovered: false
-    }
+      dropdownHovered: false,
+    };
   }
 
   onChange = (e) => {
@@ -18,21 +18,21 @@ class Search extends React.PureComponent {
   }
 
   onFocus = (e) => {
-    this.setState({ focused: true })
+    this.setState({ focused: true });
   }
 
   onBlur = (e) => {
     if (!this.state.dropdownHovered) {
-      this.setState({ focused: false })
+      this.setState({ focused: false });
     }
   }
 
   onHoverDropdown = (e) => {
-    this.setState({ dropdownHovered: true })
+    this.setState({ dropdownHovered: true });
   }
 
   onHoverOutDropdown = (e) => {
-    this.setState({ dropdownHovered: false })
+    this.setState({ dropdownHovered: false });
   }
 
   render() {

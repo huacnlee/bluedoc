@@ -17,8 +17,11 @@
     </div>
     <% end %>
     <div class="info">
-      <span class="user">
-        <%= icon_tag("user") %> <%= user_name_tag(repo&.user) %>
+      <span class="stars">
+        <%= icon_tag("star-fill") %> <span><%= repo.stars_count %></span>
+      </span>
+      <span class="watches">
+        <%= icon_tag("watches") %> <span><%= repo.watches_count %></span>
       </span>
     </div>
     <div class="action action-icon text-gray">

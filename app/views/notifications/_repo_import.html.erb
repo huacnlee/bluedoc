@@ -9,9 +9,9 @@
   <%= l notification.created_at, format: :short %>
 </span>
 <% if notification.meta[:status].to_s == "failed" %>
-  <div class="description markdown-body"><pre class="hightlight"><code><%= notification.meta[:message] %></code></pre></div>
+  <div class="detail markdown-body"><pre class="hightlight"><code><%= notification.meta[:message] %></code></pre></div>
 <% else %>
-  <div class="description">
+  <div class="detail">
     <%= render "/repositories/card", repository: repo %>
   </div>
 <% end %>

@@ -10,7 +10,7 @@
     <h2><%= @members.total_count %> <%= t(".Number of Members") %></h2>
   </div>
 
-  <div class="member-list">
+  <div class="member-list list-container list-col-2">
     <%= render partial: "member", collection: @members %>
     <%= paginate @members %>
   </div>

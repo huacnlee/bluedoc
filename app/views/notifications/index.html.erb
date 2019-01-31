@@ -16,16 +16,16 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="notifications box">
-      <h2 class="subhead clearfix">
+      <h2 class="subhead">
         <% if params[:tab] == "all" %><%= t(".All") %><% else %><%= t(".Unread") %><% end %>
         <% if params[:tab] == "all" %>
-          <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'btn btn-sm btn-danger float-right', method: 'delete' %>
+          <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'text-red float-right f5 mt-2', method: 'delete' %>
         <% else %>
-          <%= form_with scope: :notification, class: "d-inline-block float-right", url: main_app.read_notifications_path, method: :post do |form| %>
+          <%= form_with scope: :notification, class: "float-right", url: main_app.read_notifications_path, method: :post do |form| %>
             <% @notifications.each do |note| %>
             <input type="hidden" name="ids[]" value="<%= note.id %>">
             <% end %>
-            <button type="submit" class="btn btn-sm"><%= t(".Mark as read") %></button>
+            <button type="submit" class="button-reset f5"><%= t(".Mark as read") %></button>
           <% end %>
         <% end %>
       </h2>
