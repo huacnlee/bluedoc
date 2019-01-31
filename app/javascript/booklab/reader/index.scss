@@ -53,6 +53,28 @@
     }
   }
 
+  .versions-navbar {
+    height: 48px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+
+    .navbar-title {
+      line-height: 48px;
+    }
+    .navbar-buttons {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+      padding-top: 11px;
+
+      .diff-toggle {
+        margin-top: 5px;
+        margin-right: 15px;
+      }
+    }
+  }
+
   .main-container {
     padding: 0 !important;
   }
