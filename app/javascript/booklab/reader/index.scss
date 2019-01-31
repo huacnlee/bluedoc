@@ -12,13 +12,11 @@
   }
 
   .reader-navbar {
-    height: 48px;
+    @extend .clearfix;
     background: #fff;
     border: 0;
-    border-bottom: 1px solid #e0e0e0;
     position: relative;
     font-size: 14px;
-    margin-bottom: 20px;
 
     .btn-sm {
       box-shadow : 0 0 0;
@@ -26,33 +24,23 @@
     }
 
     .navbar-title {
-      line-height: 48px;
-
       a { color: #333; }
 
       .divider { color: #bbb; margin: 0 5px; }
 
-      a,
-      .divider {
-        @extend .text-overflow;
-      }
       .group-name,
       .repository-name {
-        max-width: 220px;
-      }
-
-      .doc-name {
-        max-width: 200px;
+        max-width: 240px;
         @extend .text-overflow;
+        display: inline;
       }
     }
 
     .navbar-buttons {
       position: absolute;
-      top: 0;
+      top: -6px;
       right: 0;
       text-align: right;
-      padding-top: 11px;
 
       .btn-link {
         text-align: center;
@@ -157,6 +145,10 @@
       text-align: left;
       width: auto;
       padding: 0px 0px;
+
+      .unpublished-draft-tip {
+        margin-top: 15px;
+      }
     }
 
     @media (min-width: 768px) {
