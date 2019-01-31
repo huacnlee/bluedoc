@@ -9,7 +9,7 @@
   <%= form_with(model: @group, local: true) do |form| %>
     <%= render "/shared/error_messages", target: @group %>
 
-    <div class="form-group" style="width: 500px">
+    <div class="form-group" style="max-width: 500px">
       <%= form.label :slug, class: "control-label" %>
       <%= form.text_field :slug, class: "form-control" %>
       <div class="form-text">
