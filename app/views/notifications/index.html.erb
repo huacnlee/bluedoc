@@ -17,7 +17,9 @@
   <div class="main-content">
     <div class="notifications box">
       <h2 class="subhead">
+        <span class="subhead-title">
         <% if params[:tab] == "all" %><%= t(".All") %><% else %><%= t(".Unread") %><% end %>
+        </span>
         <% if params[:tab] == "all" %>
           <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'text-red float-right f5 mt-2', method: 'delete' %>
         <% else %>
