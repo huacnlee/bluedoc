@@ -1,6 +1,7 @@
 .page-users, .page-account_settings {
   .user-title {
     text-align: center;
+    margin-top: 20px;
     @include breakpoint(md) {
       display: none;
     }
@@ -14,8 +15,10 @@
   }
 
   .user-sidebar {
-    padding: 30px 20px;
-    background: #F9F9F9;
+    @include breakpoint(md) {
+      padding: 30px 20px;
+      background: #F9F9F9;
+    }
   }
 
   .user-follow .btn {
@@ -62,11 +65,8 @@
   }
   .user-groups {
     line-height: 1;
-    display: none;
+    display: flex;
     margin-bottom: 30px;
-    @include breakpoint(md) {
-      display: flex;
-    }
     .group-label {
       line-height: 20px;
     }
@@ -81,8 +81,6 @@
 
   .user-avatar-box,
   .user-name-box,
-  .followers,
-  .following,
   {
     display: none;
     @include breakpoint(md) {

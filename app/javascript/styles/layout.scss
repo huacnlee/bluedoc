@@ -27,7 +27,6 @@
 .container {
   width: 100%;
   position: relative;
-
   padding: 0 15px;
   @include breakpoint(md) {
     padding: 0 25px;
