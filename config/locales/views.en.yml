@@ -151,6 +151,7 @@ en:
         Background Jobs: Background Jobs
         Database Stats: Database Stats
         Rebuild Search Index: Rebuild Search Index
+        Export Exceptions: Export Exceptions
         Service statuses: Service statuses
         Service:
           Database: Database

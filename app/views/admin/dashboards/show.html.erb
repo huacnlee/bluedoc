@@ -6,12 +6,17 @@
       </div>
       <div class="box-row">
         <a href="<%= admin_settings_path %>" target="_blank" class="btn mb-2"><%= icon_tag("gear") %> <%= t(".Settings") %></a>
-        <a href="/admin/exception-track" target="_blank" class="btn mb-2"><%= icon_tag("error") %> <%= t(".Exceptions") %></a>
         <a href="/admin/sidekiq" target="_blank" class="btn mb-2"><%= icon_tag("server") %> <%= t(".Background Jobs") %></a>
         <a href="/admin/pghero" target="_blank" class="btn mb-2"><%= icon_tag("dashboard") %> <%= t(".Database Stats") %></a>
       </div>
       <div class="box-row">
-        <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn"><%= t(".Rebuild Search Index") %></a>
+        <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn mb-2"><%= t(".Rebuild Search Index") %></a>
+      </div>
+      <div class="box-row">
+        <%= form_tag(exception_track.export_logs_path, method: 'post', style: "display: inline") do %>
+          <button type="submit" class="btn mb-2"><%= t(".Export Exceptions") %></button>
+        <% end %>
+        <a href="/admin/exception-track" target="_blank" class="btn mb-2"><%= icon_tag("error") %> <%= t(".Exceptions") %></a>
       </div>
     </div>
   </div>
