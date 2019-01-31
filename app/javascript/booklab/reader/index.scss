@@ -118,6 +118,8 @@
         }
         a {
           color: #555;
+          @extend .text-overflow;
+          width: 100%;
 
           &.active {
             color: darken($primary, 20%);
@@ -389,10 +391,10 @@
       list-style-position: inside;
       padding: 3px 0;
       display: block;
-      @extend .text-overflow;
 
       a {
         color: #696969;
+        width: 100%;
         @extend .text-overflow;
       }
 
