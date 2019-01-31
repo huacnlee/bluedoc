@@ -39,6 +39,18 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, location: "a" * 51)
     assert_equal false, user.valid?
     assert_equal ["is too long (maximum is 50 characters)"], user.errors[:location]
+
+    # url validates
+    user = build(:user, url: "http://" + "a" * 200)
+    assert_equal true, user.valid?
+    user = build(:user, url: "http://" + "a" * 255)
+    assert_equal false, user.valid?
+
+    # description limit
+    user = build(:user, description: "a" * 150)
+    assert_equal true, user.valid?
+    user = build(:user, description: "a" * 151)
+    assert_equal false, user.valid?
   end
 
   test "Slugable" do

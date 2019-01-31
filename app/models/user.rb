@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { in: 2..50 }
   validates :location, length: { maximum: 50 }
+  validates :description, length: { maximum: 150 }
+  validates :url, length: { maximum: 250 }
   validates :slug, uniqueness: { case_sensitive: false }
 
   after_commit :send_welcome_mail, on: :create
