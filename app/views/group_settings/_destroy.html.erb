@@ -1,7 +1,7 @@
 <%= render layout: "shared/modal", locals: {
   title: t("group_settings.destroy.Delete group"),
   button_text: t("group_settings.destroy.Delete this group"),
-  button_class: "btn btn-danger"
+  button_class: "btn btn-danger btn-submit"
 } do %>
   <div class="box-body overflow-auto">
     <%= form_with(model: @group, url: group_settings_path(@group), method: :delete) do |form| %>

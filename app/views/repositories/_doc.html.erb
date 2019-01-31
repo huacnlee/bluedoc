@@ -20,7 +20,7 @@
     <div class="action action-icon text-gray">
       <%= link_to icon_tag("edit"), doc.to_path("/edit") %>
       <% if can? :destroy, doc %>
-        <%= link_to icon_tag("trash"), doc.to_path, data: { method: :delete, remote: true, confirm: t(".Are you sure delete this Doc?") }, class: "btn-link btn-remove-doc" %>
+        <%= link_to icon_tag("delete"), doc.to_path, data: { method: :delete, remote: true, confirm: t(".Are you sure delete this Doc?") }, class: "btn-link btn-remove-doc" %>
       <% end %>
     </div>
   </div>

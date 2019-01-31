@@ -2,14 +2,7 @@
 <div class="repo-heading">
   <div class="container">
     <div class="heading clearfix">
-      <div class="row clearfix">
-        <div class="repo-actions float-right">
-          <%= action_button_tag(@repository, :watch, icon: "watch", with_count: true) %>
-          <%= action_button_tag(@repository, :star, with_count: true) %>
-          <% if can? :create_doc, @repository %>
-            <%= link_to icon_tag("doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), class: "btn btn-sm btn-create-doc btn-primary", data: { turbolinks: false } %>
-          <% end %>
-        </div>
+      <div class="float-left">
         <h1 class="text-gray-light">
           <span class="author"><%= group_name_tag @user %></span>
           /
@@ -19,14 +12,22 @@
               <span class="label label-private ml-2"><%= t(".Private") %></span>
             <% end %>
           </span>
+          
         </h1>
+        <div class="text-gray my-3"><%= @repository.description %></div>
+        <% if @repository.source? && @repository.source.provider == "gitbook" %>
+        <div class="source mb-2 text-gray">
+          <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
+        </div>
+        <% end %>
       </div>
-      <div class="text-gray my-3"><%= @repository.description %></div>
-      <% if @repository.source? && @repository.source.provider == "gitbook" %>
-      <div class="source mb-2 text-gray">
-        <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
+      <div class="repo-actions float-right">
+        <%= action_button_tag(@repository, :watch, with_count: true) %>
+        <%= action_button_tag(@repository, :star, with_count: true) %>
+        <% if can? :create_doc, @repository %>
+          <%= link_to icon_tag("doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false } %>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
 
