@@ -82,7 +82,9 @@ export default class RichEditor extends React.Component {
 
   setEditor = (editor) => {
     const { getEditor } = this.props;
-    getEditor(editor);
+    if (getEditor) {
+      getEditor(editor);
+    }
     this.editor = editor;
   }
 
