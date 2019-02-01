@@ -81,6 +81,8 @@ export default class RichEditor extends React.Component {
   getEditorContainer = () => this.container
 
   setEditor = (editor) => {
+    const { getEditor } = this.props;
+    getEditor(editor);
     this.editor = editor;
   }
 
@@ -109,6 +111,10 @@ export default class RichEditor extends React.Component {
   isActiveMarkup = (type) => {
     const { activeMarkups } = this.state;
     return activeMarkups.indexOf(type) >= 0;
+  }
+
+  focus = () => {
+    this.editor.focus();
   }
 
   // Render the editor.

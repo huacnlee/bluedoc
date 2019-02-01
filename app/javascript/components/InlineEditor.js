@@ -6,17 +6,24 @@ import RichEditor from 'booklab/editor/rich-editor';
 
 export default class InlineEditor extends React.PureComponent {
   inputRef = React.createRef()
-
   editorRef = React.createRef()
+  editor = null
 
   componentDidMount() {
     const { name } = this.props;
     const eventName = `reset:inline-editor:${name}`;
     document.addEventListener(eventName, this.resetValue);
+
+    const focusEventName = `focus:inline-editor:${name}`;
+    document.addEventListener(focusEventName, this.focus);
   }
 
   resetValue = () => {
     this.editorRef.current.handleReset({ value: '', format: this.props.format });
+  }
+
+  focus = () => {
+    this.editor.focus();
   }
 
   onChange = (markdownValue, smlValue) => {
@@ -34,6 +41,10 @@ export default class InlineEditor extends React.PureComponent {
     return false;
   }
 
+  setEditor = (editor) => {
+    this.editor = editor;
+  }
+
   render() {
     const {
       directUploadURL, blobURLTemplate, name, value = '', format = 'markdown',
@@ -46,6 +57,7 @@ export default class InlineEditor extends React.PureComponent {
           mode="inline"
           title=""
           ref={this.editorRef}
+          getEditor={this.setEditor}
           directUploadURL={directUploadURL}
           blobURLTemplate={blobURLTemplate}
           onChange={this.onChange}
