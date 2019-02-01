@@ -3,61 +3,46 @@
 
 <%= render "menu" %>
 <div class="col-12 col-md-9 float-left">
-   <div class="form-title"><h2><%= t(".Transfer") %></h2></div>
-   <div class="box mb-6">
-     <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
-       <div class="flex-auto mr-2 mb-2 mb-md-0">
-         <div class="font-weight-bold">
-           <%= t(".Transfer ownership") %>
-         </div>
-         <div class="form-text">
-           <%= t(".Transfer this repository to another user or to an group") %>
-         </div>
-       </div>
-       <%= render "transfer" %>
-     </div>
-   </div>
+  <div class="advanced-transfer">
+    <h1 class="title mb-3"><%= t(".Transfer") %></h1>
+    <div class="text-gray">
+      <%= t(".Transfer ownership") %>
+    </div>
+    <div class="text-gray-light mb-5">
+      <%= t(".Transfer this repository to another user or to an group") %>
+    </div>
+    <%= render "transfer" %>
+  </div>
 
   <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository),  remote: true, method: :patch) do |form| %>
-    <div class="form-title"><h2><%= t(".Danger Zone") %></h2></div>
-
+    <h1 class="title mb-3"><%= t(".Danger Zone") %></h1>
     <% if params[:_by] == "danger-zone" %>
       <%= render "/shared/error_messages", target: @repository %>
     <% end %>
     <input type="hidden" name="_action" value="advanced" />
     <input type="hidden" name="_by" value="danger-zone" />
 
-    <div class="box mb-6">
-      <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
-        <div class="flex-auto mr-2 mb-2 mb-md-0">
-          <label class="form-check-label font-weight-bold">
-            <% if @repository.private? %>
-              <%= t(".Make this repository public") %>
-            <% else %>
-              <%= t(".Make this repository private") %>
-            <% end %>
-          </label>
-          <div class="form-text">
-            <% if @repository.private? %>
-              <%= t(".Public this repository from the private") %>
-            <% else %>
-              <%= t(".Private this repository from the public") %>
-            <% end %>
-          </div>
-        </div>
-        <%= render "privacy" %>
+      <div class="text-gray">
+        <% if @repository.private? %>
+          <%= t(".Make this repository public") %>
+        <% else %>
+          <%= t(".Make this repository private") %>
+        <% end %>
       </div>
-      <div class="box-row d-flex flex-column flex-md-row flex-items-top py-4">
-        <div class="flex-auto mr-2 mb-2 mb-md-0">
-          <label class="form-check-label font-weight-bold">
-            <%= t(".Delete this repository") %>
-          </label>
-          <div class="form-text d-table-cell">
-            <%= t(".Once you delete a repository, there is no going back") %>
-          </div>
-        </div>
-        <%= render "destroy" %>
+      <div class="text-gray-light mb-5">
+        <% if @repository.private? %>
+          <%= t(".Public this repository from the private") %>
+        <% else %>
+          <%= t(".Private this repository from the public") %>
+        <% end %>
       </div>
-    </div>
+      <%= render "privacy" %>
+      <div class="text-gray">
+        <%= t(".Delete this repository") %>
+      </div>
+      <div class="text-gray-light mb-5">
+        <%= t(".Once you delete a repository, there is no going back") %>
+      </div>
+      <%= render "destroy" %>
   <% end %>
 </div>

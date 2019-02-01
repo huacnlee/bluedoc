@@ -2,9 +2,6 @@
 @import "./medium-zoom";
 
 .reader-body {
-  .nav-header .header-content,
-  .main-container {
-  }
   .container {
     @include breakpoint(md) {
       width: auto;
@@ -254,54 +251,24 @@
 
   .between-docs {
     .btn-link {
-      @extend .btn;
-      padding: 8px 15px;
+      padding: 10px 20px;
       max-width: 40%;
-      @extend .text-overflow;
-      background: #FFF;
-      box-shadow: 0 0 0;
-
       &:hover {
-        .fas { color: #333; }
+        background: #F7F7F7;
+        // color: $primary;
       }
     }
 
     .btn-prev {
       float: left;
-      position: relative;
-      padding-left: 38px;
-
-      &:before {
-        font-family: -apple-system, Helvetica, Arial;
-        content: "←";
-        color: #aaa;
-        font-size: 18px;
-        position: absolute;
-        display: inline-block;
-        top: 9px;
-        left: 15px;
-      }
     }
     .btn-next {
       float: right;
-      position: relative;
-      padding-right: 38px;
-      &:after {
-        font-family: -apple-system, Helvetica, Arial;
-        content: "→";
-        color: #aaa;
-        font-size: 18px;
-        position: absolute;
-        display: inline-block;
-        top: 9px;
-        right: 15px;
-      }
     }
   }
 
   .doc-readers {
     padding: 8px;
-    border-top: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
 
     .readers-link {

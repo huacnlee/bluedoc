@@ -56,7 +56,7 @@
       <% if @doc %>
       <div class="navbar-buttons">
         <% if can? :read, @doc %>
-          <%= action_button_tag(@doc, :star, icon: "star-doc", class: "btn btn-sm btn-link btn-star-doc") %>
+          <%= action_button_tag(@doc, :star, icon: "star", class: "btn btn-sm btn-link btn-star-doc") %>
         <% end %>
 
         <% if can? :update, @doc %>

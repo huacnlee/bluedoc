@@ -1,10 +1,10 @@
-<div class="box export-repository-archive mb-4">
+<div class="box export-repository-archive">
   <div class="box-header">
-    <h4 class="title mb-2"><%= icon_tag("zip") %> <%= t(".Export as Archive") %></h4>
-    <div class="text-gray">
-      <p><%= t(".Export all docs as markdown files, and archive them into a zip file") %></p>
-      <p><%= raw t(".This will including a SUMMARY for describe of the Table of contents") %></p>
-      <p><%= t(".After that you can use many Markdown tools") %> (<a href="https://toolchain.gitbook.com/setup.html" target="_blank">GitBook</a>, <a href="https://github.com/rust-lang-nursery/mdBook" target="_blank">mdBook</a>) <%= t(".to genrate it to other format") %></p>
+    <h2 class="sub-title mb-2"><%= t(".Export as Archive") %></h2>
+    <div class="text-gray-light">
+      <%= t(".Export all docs as markdown files, and archive them into a zip file") %><br/>
+      <%= raw t(".This will including a SUMMARY for describe of the Table of contents") %><br/>
+      <%= t(".After that you can use many Markdown tools") %> (<a href="https://toolchain.gitbook.com/setup.html" target="_blank" class="link-gray-dark">GitBook</a>, <a href="https://github.com/rust-lang-nursery/mdBook" target="_blank" class="link-gray-dark">mdBook</a>) <%= t(".to genrate it to other format") %>
     </div>
   </div>
   <div class="box-body">
@@ -46,10 +46,10 @@
       </script>
     <% else %>
       <div class="pdf-export-generate">
+        <div class="text-gray mb-3"><%= icon_tag("idea") %> <%= t(".Generate Archive will take a long time") %></div>
         <div class="form-group">
-          <%= link_to t(".Archive as zip"), repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-generate-archive", method: :post, remote: true, "disable-with": t(".Submiting") %>
+          <%= link_to t(".Archive as zip"), repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-submit btn-generate-archive", method: :post, remote: true, "disable-with": t(".Submiting") %>
         </div>
-        <div class="text-orange"><%= icon_tag("idea") %> <%= t(".Generate Archive will take a long time") %></div>
       </div>
     <% end %>
   </div>
