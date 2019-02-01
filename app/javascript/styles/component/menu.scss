@@ -60,15 +60,22 @@
     box-sizing: border-box;
     transition: all .3s ease;
     background: #fff;
+    overflow-y: revert !important;
     &[open] {
       padding: 20px 15px;
       height: calc(100vh - 50px);
     }
     summary {
-      position: fixed; 
-      top: 15px;
-      left: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #fff;
+      padding: 17px 12px 17px 15px;
       display: block;
+      line-height: 100%;;
+      &:active {
+        background: #f0f0f0;
+      }
     }
   }
 }

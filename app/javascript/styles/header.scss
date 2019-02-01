@@ -34,10 +34,8 @@
     }
   }
   .logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: static;
+//    transform: translate(-50%, -50%);
     font-size: 15px;
     color: $text-main;
     a {
