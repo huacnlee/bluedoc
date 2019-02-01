@@ -16,20 +16,40 @@
   }
 
   .repo-actions {
+    line-height: 30px;
     .btn, .social-count {
       height: auto;
-      line-height: 1.5;
-      padding: 4px 7px;
-
-      .fas {
-        margin-top: -3px;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+    .social-count {
+      margin-right: 40px;
+    }
+    a:hover {
+      border-radius: 15px;
+      background: #f7f7f7;
+      // star、unstar、watch、unwatch
+      &.btn span {
+        opacity: 1;
+        max-width: 10em;
+        padding-left: 15px;
       }
     }
-
-    .social-count {
-      &:hover {
-        cursor: default;
-        border-color: #999999;
+    a.btn {
+      .fas {
+        width: 30px;
+        float: right;
+        line-height: 30px;
+      }
+      span {
+        font-size: 12px;
+        display: inline-block;
+        line-height: 30px;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-width .4s linear, padding .4s linear, opacity 1s ease;
       }
     }
   }
@@ -50,8 +70,16 @@
       }
     }
   }
-
-
+  .repository-docs, .repo-toc {
+    @include breakpoint(md) {
+      width: 800px;
+      margin: 0 auto;
+    }
+    .doc-item .title {
+      width: 100%;
+      padding-right: 70px;
+    }
+  }
   .repo-toc {
     font-size: 16px;
     text-align: center;
@@ -89,7 +117,7 @@
         }
       }
     }
-
+    
     .toc-list {
 
       text-align: left;

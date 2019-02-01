@@ -15,10 +15,10 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
         <%= link_to icon_tag("edit-toc", label: t(".Edit TOC")), toc_user_repository_path(@user, @repository), class: "float-right edit-link" %>
       <% end %>
       <div class="title"><%= @repository.name %></div>
-      <div class="description"><%= @repository.description %></div>
+      <div class="description mb-2"><%= @repository.description %></div>
       <div class="editors">
         <% @repository.editors.each do |user| %>
-          <%= user_avatar_tag(user, style: :tiny) %>
+          <%= user_avatar_tag(user, style: :small) %>
         <% end %>
       </div>
     </div>

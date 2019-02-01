@@ -66,25 +66,21 @@
     </div>
 
     <div class="actions">
-      <%= form.submit t(".Update profile"), class: "btn btn-primary" %>
+      <%= form.submit t(".Update profile"), class: "btn btn-primary btn-submit" %>
     </div>
   <% end %>
 
 
   <% if can? :manage, @group %>
   <h2 class="sub-title"><%= t(".Danger zone") %></h2>
-  <div class="box mb-3">
-    <div class="box-row d-flex flex-column flex-md-row flex-items-top pb-4">
-      <div class="flex-auto mr-md-2 mb-2 mb-md-0">
-        <label class="form-check-label font-weight-bold">
-          <%= t(".Delete this group") %>
-        </label>
-        <div class="form-text d-table-cell">
-          <%= t(".Once you delete a group, there is no going back") %>
-        </div>
-      </div>
-      <%= render "destroy" %>
+  <div class="form-group">
+    <div class="text-main"  style="font-size: 15px">
+      <%= t(".Delete this group") %>
+    </div>
+    <div class="form-text">
+      <%= t(".Once you delete a group, there is no going back") %>
     </div>
   </div>
+  <%= render "destroy" %>
   <% end %>
 </div>

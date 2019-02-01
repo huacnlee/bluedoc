@@ -45,6 +45,9 @@
   .fa-notice {
     @extend .fa-notice-fill;
   }
+  .fa-home {
+    @extend .fa-home-fill;
+  }
 }
 a[data-method=delete] {
   .fa-star {

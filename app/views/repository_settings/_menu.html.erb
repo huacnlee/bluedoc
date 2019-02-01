@@ -1,12 +1,13 @@
 <%= render "/repositories/menu" %>
 
 <div class="col-12 col-md-3 float-left pr-md-4">
-  <ul class="menu">
+  <details class="details-reset menu js-menu">
+    <summary><%= icon_tag("menu") %></summary>
     <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
       li << link_to(t(".Options"), user_repository_settings_path(@user, @repository), class: "menu-item")
       li << link_to(t(".Manage docs"), docs_user_repository_settings_path(@user, @repository), class: "menu-item")
       li << link_to(t(".Collaborators"), collaborators_user_repository_settings_path(@user, @repository), class: "menu-item")
       li << link_to(t(".Advanced"), advanced_user_repository_settings_path(@user, @repository), class: "menu-item")
     end %>
-  </ul>
+  </details>
 </div>
