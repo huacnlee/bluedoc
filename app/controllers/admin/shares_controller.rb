@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::SharesController < Admin::ApplicationController
   before_action :set_share, only: [:show, :edit, :update, :destroy]
 
