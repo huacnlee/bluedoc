@@ -32,16 +32,11 @@
 
   // left menu
   .dashboard-menu {
-    display: none;
-    width: inherit;
-    height: calc(100% - 80px);
-    font-size: 14px;
     overflow-y: auto;
     @include breakpoint(md) {
       position: fixed;
       display: block;
     }
-
     .menu-item {
       line-height: 24px;
       .fas {

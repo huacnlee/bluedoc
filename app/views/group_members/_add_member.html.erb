@@ -1,8 +1,8 @@
 <% if can? :manage, @group %>
   <%= render layout: "shared/modal", locals: {
     title: t("group_members.add_member.Add member"),
-    button_text: icon_tag("add-user", label: "Add"),
-    button_class: "btn btn-primary"
+    button_text: icon_tag("add", label: "Add"),
+    button_class: "link-gray-dark"
   } do %>
     <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>

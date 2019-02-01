@@ -1,19 +1,19 @@
 <div class="box export-repository-pdf mb-4">
   <div class="box-header">
-    <h4 class="title mb-2"><%= icon_tag("pdf") %> <%= t(".Export as PDF") %></h4>
-    <div class="text-gray">
+    <h2 class="sub-title mb-2"><%= t(".Export as PDF") %></h2>
+    <div class="text-gray-light">
       <%= t(".You can export all docs as a PDF file") %>
     </div>
   </div>
   <div class="box-body">
     <% if Rails.env.development? %>
     <div class="mb-3">
-      <%= link_to icon_tag("pdf", label: t(".Preview PDF HTML")), repository.to_path("/settings/export?type=pdf"), class: "btn-link", target: "_blank" %>
+      <%= link_to t(".Preview PDF HTML"), repository.to_path("/settings/export?type=pdf"), class: "btn-link", target: "_blank" %>
     </div>
     <% end %>
 
-    <div class="text-gray mb-2">
-      <%= t(".Exporter will use the TOC ordered, otherwice same as the") %> <%= link_to t(".Doc list"), repository.to_path("/docs/list"), target: "_blank" %>.
+    <div class="text-gray-light mb-2">
+      <%= t(".Exporter will use the TOC ordered, otherwice same as the") %> <%= link_to t(".Doc list"), repository.to_path("/docs/list"), target: "_blank", class: "link-gray-dark" %>.
     </div>
 
     <% if repository.export_pdf_status == "running" %>

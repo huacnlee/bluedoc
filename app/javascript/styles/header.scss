@@ -34,10 +34,18 @@
     }
   }
   .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     font-size: 15px;
     color: $text-main;
     a {
       color: inherit;
+    }
+    @include breakpoint(md) {
+      position: static;
+      transform: translate(0, 0);
     }
   }
   .dropdown {
@@ -77,7 +85,7 @@
   }
   .search {
     display: none;
-    @include breakpoint(sm) {
+    @include breakpoint(md) {
       display: block;
     }
   }

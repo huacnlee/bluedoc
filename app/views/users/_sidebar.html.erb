@@ -5,7 +5,8 @@
 </div>
 <% end %>
 
-<div class="user-sidebar aside-content menu">
+<details class="aside-content details-reset user-sidebar menu js-menu">
+  <summary><%= icon_tag("menu") %></summary>
   <div class="user-avatar-box">
     <%= user_avatar_tag(@user, style: :large, link: false) %>
   </div>
@@ -48,4 +49,4 @@
     item << link_to(t(".Profile"), account_settings_path, class: "menu-item menu-sub-item depth-1")
     item << link_to(t(".Account"), account_account_settings_path, class: "menu-item menu-sub-item depth-1")
   end %>
-</div>
+</details>

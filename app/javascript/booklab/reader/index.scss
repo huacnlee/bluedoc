@@ -427,7 +427,9 @@
   height: auto;
   width: 100%;
   overflow: scroll;
-
+  &::backdrop {
+    background-color: #fff;
+  }
   .nav-header,
   .doc-sidebar,
   .reader-navbar,
