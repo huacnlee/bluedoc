@@ -8,15 +8,17 @@
         <%= doc_title_tag(item.subject) %>
       </div>
       <div class="path">
-        <%= user_display_name_tag(item.subject.repository.user) %> / 
+        <%= user_display_name_tag(item.subject.repository.user) %> /
         <%= repository_name_tag(item.subject&.repository) %>
       </div>
       <div class="time-box">
         <%= timeago item.updated_at %>
       </div>
+      <% if can? :update, item.subject %>
       <div class="action action-icon text-gray">
         <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
       </div>
+      <% end %>
     </li>
   <% end %>
 </ul>

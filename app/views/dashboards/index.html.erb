@@ -23,9 +23,11 @@
                 <div class="info">
                   <%= timeago item.updated_at %>
                 </div>
+                <% if can? :update, item.subject %>
                 <div class="action action-icon">
                   <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
                 </div>
+                <% end %>
               </li>
             <% end %>
           </ul>

@@ -14,10 +14,12 @@
         <%= doc_title_tag(doc) %>
       </div>
       <div class="path">
-        <%= user_display_name_tag(doc.repository.user) %> / 
+        <%= user_display_name_tag(doc.repository.user) %> /
         <%= repository_name_tag(doc.repository) %>
       </div>
+      <% if can? :update, doc %>
       <div class="action action-icon text-gray"><%= action_button_tag(doc, :star, undo: true) %></div>
+      <% end %>
       <div class="time-box">
         <%= timeago doc.updated_at %>
       </div>
