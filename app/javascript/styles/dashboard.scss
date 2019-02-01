@@ -32,7 +32,6 @@
 
   // left menu
   .dashboard-menu {
-    overflow-y: auto;
     @include breakpoint(md) {
       position: fixed;
       display: block;
