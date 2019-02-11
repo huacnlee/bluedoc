@@ -10,6 +10,8 @@ gem "redis-objects"
 gem "puma", "~> 3.11"
 gem "react-rails"
 
+gem "graphql"
+
 gem "sidekiq"
 
 gem "webpacker", "4.0.0.rc5"
@@ -72,6 +74,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rubocop"
+  gem "graphiql-rails"
 end
 
 group :test do
