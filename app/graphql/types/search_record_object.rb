@@ -1,6 +1,6 @@
 module Types
-  class SearchItemObject < BaseUnion
-    graphql_name "SearchItem"
+  class SearchRecordObject < BaseUnion
+    graphql_name "SearchRecord"
     description "Objects which may be search result"
 
     possible_types UserObject, DocObject

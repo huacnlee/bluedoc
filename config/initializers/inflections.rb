@@ -18,4 +18,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "GitBook"
   inflect.acronym "PDF"
   inflect.acronym "API"
+  inflect.acronym "GraphQL"
 end

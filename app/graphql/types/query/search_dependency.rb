@@ -22,7 +22,7 @@ module Types
       result.records.each_with_hit do |item, hit|
         @docs << item
       end
-      { total: result.total_count, nodes: @docs }
+      { total: result.total_count, records: @docs }
     end
   end
 end
