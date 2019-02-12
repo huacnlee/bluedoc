@@ -21,6 +21,10 @@ module BookLab
         @current_user = user
       end
 
+      def sign_out
+        @current_user = nil
+      end
+
       def assert_error_with(message)
         found = false
         response_errors.each do |error|

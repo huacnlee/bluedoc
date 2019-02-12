@@ -16,8 +16,15 @@ module Types
     end
 
     def search_docs(params)
-      repository = Repository.find(params[:repository_id])
-      result = BookLab::Search.new(:docs, params[:query], repository_id: repository.id, include_private: true).execute.limit(params[:limit])
+      search_options = { include_private: false }
+      if params[:repository_id]
+        repository = Repository.find(params[:repository_id])
+        authorize! :read, repository
+
+        search_options = { repository_id: repository.id, include_private: true }
+      end
+
+      result = BookLab::Search.new(:docs, params[:query], search_options).execute.limit(params[:limit])
       @docs = []
       result.records.each_with_hit do |item, hit|
         @docs << item
