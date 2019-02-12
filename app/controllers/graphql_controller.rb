@@ -1,4 +1,4 @@
-class GraphqlController < ApplicationController
+class GraphQLController < ApplicationController
   before_action :authenticate_anonymous!
   skip_before_action :verify_authenticity_token
 
