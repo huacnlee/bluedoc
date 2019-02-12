@@ -1,2 +1,2 @@
-class Types::Mutation < GraphQL::Schema::Object
+class Types::Mutation < Types::BaseQuery
 end
