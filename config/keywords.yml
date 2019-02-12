@@ -35,6 +35,7 @@ user:
   - shares
   - comments
   - comment
+  - graphql
 repository:
   - notes
   - note

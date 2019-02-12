@@ -7,10 +7,10 @@ class GraphQLControllerTest < ActionDispatch::IntegrationTest
     @user = create(:user)
   end
 
-  test "POST /_graphql" do
+  test "POST /graphql" do
     doc = create(:doc)
     query = %| { doc(id: #{doc.id}) { id,slug,title,body,bodySml,bodyHtml } } |
-    post "/_graphql", params: { query: query }
+    post "/graphql", params: { query: query }
     assert_equal 200, response.status
     response_data = JSON.parse(response.body)["data"]
     assert_not_nil response_data

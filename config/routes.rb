@@ -4,9 +4,9 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/_graphql/explorer", graphql_path: "/_graphql"
+    mount GraphiQL::Rails::Engine, at: "/graphql/explorer", graphql_path: "/graphql"
   end
-  post "/_graphql", to: "graphql#execute"
+  post "/graphql", to: "graphql#execute"
 
   devise_for :users, path: "account", controllers: {
     omniauth_callbacks: "users/omniauth_callbacks",
