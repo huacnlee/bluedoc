@@ -7,9 +7,15 @@ module Groups::SignInHelpers
     user
   end
 
-  def sign_in_role(role, group:)
+  def sign_in_role(role, group: nil, repository: nil)
     user = create(:user)
-    group.add_member(user, role)
+    if group
+      group.add_member(user, role)
+    elsif repository
+      repository.add_member(user, role)
+    else
+      raise "required keyword: group or repository"
+    end
     sign_in user
     user
   end

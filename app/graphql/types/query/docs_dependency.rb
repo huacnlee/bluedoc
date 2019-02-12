@@ -6,6 +6,9 @@ module Types
 
     def doc(id:)
       @doc = Doc.find(id)
+      authorize! :read, @doc
+
+      @doc
     end
   end
 end

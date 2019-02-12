@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class BookLab::RootQueryTest < BookLab::GraphQL::TestCase
+class BookLab::RootQueryTest < BookLab::GraphQL::IntegrationTest
   test "hello" do
     execute("{ hello }", context: {})
     assert_equal "Hello", response_data["hello"]
