@@ -10,6 +10,7 @@ require "minitest/autorun"
 require "mocha/minitest"
 require "rails/test_help"
 require "database_cleaner"
+require_relative "../lib/booklab/graphql/integration_test"
 require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
 
@@ -117,4 +118,8 @@ class ActionDispatch::IntegrationTest
       assert_select ".flash.flash-#{type}", text: flash[key]
     end
   end
+end
+
+class BookLab::GraphQL::IntegrationTest
+  include Groups::SignInHelpers
 end
