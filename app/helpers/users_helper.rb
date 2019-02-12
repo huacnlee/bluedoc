@@ -6,7 +6,7 @@ module UsersHelper
   def user_name_tag(user)
     return "" if user.blank?
 
-    link_to user.slug, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
+    link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
   end
 
   def user_display_name_tag(user)

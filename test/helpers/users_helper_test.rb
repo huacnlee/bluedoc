@@ -15,10 +15,10 @@ class UsersHelperTest < ActionView::TestCase
   test "user_name_tag" do
     assert_equal "", user_name_tag(nil)
     user = build(:user)
-    assert_html_equal %(<a class="user-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.slug}</a>), user_name_tag(user)
+    assert_html_equal %(<a class="user-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.name}</a>), user_name_tag(user)
 
     group = build(:group)
-    assert_html_equal %(<a class="user-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.slug}</a>), user_name_tag(group)
+    assert_html_equal %(<a class="user-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_name_tag(group)
   end
 
   test "user_display_name_tag" do

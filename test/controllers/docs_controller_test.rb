@@ -219,7 +219,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
           assert_select "[data-remote=?]", "true"
         end
         assert_select ".share-user" do
-          assert_select "a.user-name", text: share.user.slug
+          assert_select "a.user-name", text: share.user.name
         end
       end
     end
@@ -675,7 +675,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_match /is current in editing this document/, response.body
     assert_select ".edit-doc-lock-overlay" do
       assert_select "form[action=?]", doc.to_path("/lock")
-      assert_select ".user-name", text: user.slug
+      assert_select ".user-name", text: user.name
     end
   end
 
