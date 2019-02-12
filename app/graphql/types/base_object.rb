@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Types::BaseObject < GraphQL::Schema::Object
   # ID field
   field :id, Integer, null: false

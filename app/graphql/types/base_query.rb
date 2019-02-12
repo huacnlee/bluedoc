@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Types::BaseQuery < GraphQL::Schema::Object
   def authorize!(*args)
     current_ability.authorize!(*args)

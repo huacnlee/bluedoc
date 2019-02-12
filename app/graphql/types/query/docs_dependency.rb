@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class Query
     field :doc, DocObject, null: true do

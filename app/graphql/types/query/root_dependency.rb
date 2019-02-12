@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class Query
     field :hello, String, null: true, description: "Simple test API"

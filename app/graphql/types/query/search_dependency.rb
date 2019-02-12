@@ -1,18 +1,23 @@
+# frozen_string_literal: true
+
 module Types
   class Query
     field :search, SearchObject, null: true do
-      argument :type, String, required: true
-      argument :limit, Integer, required: false
-      argument :query, String, required: true
-      argument :repository_id, Integer, required: false
+      argument :type, String, required: true, description: "Search type: [user,group,repository,doc]"
+      argument :limit, Integer, required: false, description: "Result limit, default: 10"
+      argument :query, String, required: true, description: "Search query"
+      argument :repository_id, Integer, required: false, description: "For type: doc, search docs in a repository"
     end
 
     def search(params)
       params[:limit] ||= 10
-      case params[:type]
-      when "doc"
-        search_docs(params)
-      end
+      result = case params[:type]
+               when "doc"
+                 search_docs(params)
+               end
+
+      result[:limit] = params[:limit]
+      result
     end
 
     def search_docs(params)

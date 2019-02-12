@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class SearchRecordObject < BaseUnion
     graphql_name "SearchRecord"
@@ -6,12 +8,13 @@ module Types
     possible_types UserObject, DocObject
 
     def self.resolve_type(object, context)
-      if object.is_a?(User)
+      case object.class.name
+      when "User"
         Types::UserObject
-      elsif object.is_a?(Doc)
+      when "Doc"
         Types::DocObject
       else
-        Types::UserObject
+        raise "Can't resolve_type for #{object.inspect}"
       end
     end
   end

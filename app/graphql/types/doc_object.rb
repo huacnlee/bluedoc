@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class DocObject < BaseObject
     graphql_name "Doc"

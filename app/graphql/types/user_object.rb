@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class UserObject < BaseObject
     graphql_name "User"

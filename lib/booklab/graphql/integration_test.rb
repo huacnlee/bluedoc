@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab
   module GraphQL
     class IntegrationTest < ActiveSupport::TestCase
