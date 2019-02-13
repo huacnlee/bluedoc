@@ -45,10 +45,12 @@ class Admin::GroupsController < Admin::ApplicationController
     redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully deleted."
   end
 
+  # PRO-begin
   def restore
     @group.restore
     redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully restored."
   end
+  # PRO-end
 
   private
 

@@ -21,13 +21,14 @@ if File.exists?(pro_dir)
   puts "Can't execute this command in code base."
   puts "[delete-pro-features] feature was design for execute in Docker build pipeline to cleanup Pro features."
   puts ""
-  # exit
+  exit
 end
 
 Dir.glob(rails_root.join("./{app,lib,config}/**/*")).each do |fname|
   next if File::directory?(fname)
 
   allow_lines = []
+  in_range = false
   File.readlines(fname).each do |line|
     if line.include?("PRO-begin") || line.include?("PRO-end")
       in_range = true

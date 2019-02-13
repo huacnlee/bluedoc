@@ -48,10 +48,12 @@ class Admin::RepositoriesController < Admin::ApplicationController
     redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully deleted."
   end
 
+  # PRO-begin
   def restore
     @repository.restore
     redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully restored."
   end
+  # PRO-end
 
   private
 

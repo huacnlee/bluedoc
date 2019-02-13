@@ -45,10 +45,12 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to admin_users_path(q: @user.slug), notice: "User was successfully deleted."
   end
 
+  # PRO-begin
   def restore
     @user.restore
     redirect_to admin_users_path(q: @user.slug), notice: "User was successfully restored."
   end
+  # PRO-end
 
   private
 
