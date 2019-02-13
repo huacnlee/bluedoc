@@ -4,6 +4,8 @@ require "html/pipeline"
 
 module BookLab
   class HTML
+    depends_on :mention_fragments
+
     def self.constantizePilelines(*pipelines)
       pipelineClasses = pipelines.map { |name| "BookLab::Pipeline::#{name.to_s.camelize}Filter".constantize }
       ::HTML::Pipeline.new(pipelineClasses)

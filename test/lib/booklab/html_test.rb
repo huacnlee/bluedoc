@@ -258,4 +258,38 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
     assert_html_equal html, out
   end
+
+  test ".mention_fragments" do
+    raw = <<~MD
+    # Hello @foo this is heading1
+    ## Hello @foo this is heading2
+    ### Hello @foo this is heading3
+    #### Hello @foo this is heading4
+    #### Hello @bar this is heading4
+    ##### Hello @foo this is heading5
+    ###### Hello @foo this is heading6
+
+    Mention @foo in a paragraph
+
+    Mention @bar in a paragraph
+
+    > Mention @foo in blockquote
+    MD
+
+    html = BookLab::HTML.render(raw, format: :markdown)
+    fragments = BookLab::HTML.mention_fragments(html, "foo")
+    assert_equal 8, fragments.length
+    assert_equal "Hello @foo this is heading1", fragments[0]
+    assert_equal "Hello @foo this is heading2", fragments[1]
+    assert_equal "Hello @foo this is heading3", fragments[2]
+    assert_equal "Hello @foo this is heading4", fragments[3]
+    assert_equal "Hello @foo this is heading5", fragments[4]
+    assert_equal "Hello @foo this is heading6", fragments[5]
+    assert_equal "Mention @foo in a paragraph", fragments[6]
+    assert_equal "Mention @foo in blockquote", fragments[7]
+
+    fragments = BookLab::HTML.mention_fragments(html, "bar")
+    assert_equal 2, fragments.length
+    assert_equal "Hello @bar this is heading4", fragments[0]
+  end
 end
