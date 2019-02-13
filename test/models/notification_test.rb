@@ -128,6 +128,7 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_body.strip
     assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_title.strip
     assert_equal "repo_import-Repository-#{repo.id}", note.mail_message_id
+    assert_equal "", note.target_mention_fragment
   end
 
   test "comment Doc" do
@@ -140,27 +141,32 @@ class NotificationTest < ActiveSupport::TestCase
     assert_html_equal "<p><strong>#{note.actor_name}</strong> said:</p> #{comment.body_html}", note.mail_body
     assert_equal "#{doc.title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
+    assert_equal comment.body_html, note.target_mention_fragment
   end
 
   test "mention Comment" do
     doc = create(:doc)
+    user = create(:user)
     actor = create(:user)
-    comment = create(:comment, commentable: doc)
+    comment = create(:comment, commentable: doc, body: "Hello @#{user.slug}")
     note = create(:notification, notify_type: :mention, target: comment, actor: actor)
 
     assert_equal comment.to_url, note.target_url
-    assert_html_equal "<p><strong>#{note.actor_name}</strong> mentioned you:</p> #{comment.body_html}", note.mail_body
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> mentioned you:</p><div>#{note.target_mention_fragment}</div>", note.mail_body
     assert_equal "#{doc.title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
+    assert_equal comment.body_html, note.target_mention_fragment
   end
 
   test "mention Doc" do
-    doc = create(:doc)
+    user = create(:user)
+    doc = create(:doc, body: "Hello @#{user.slug}\n\n@#{user.slug} hello")
     actor = create(:user)
-    note = create(:notification, notify_type: :mention, target: doc, actor: actor)
+    note = create(:notification, notify_type: :mention, target: doc, user: user, actor: actor)
 
     assert_equal doc.to_url, note.target_url
-    assert_html_equal "<p><strong>#{note.actor_name}</strong> has mentioned you in [#{doc.title}].</p>", note.mail_body
+    assert_equal "Hello @#{user.slug}<br /><br />@#{user.slug} hello", note.target_mention_fragment
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has mentioned you in [#{doc.title}].</p><div>#{note.target_mention_fragment}</div>", note.mail_body
     assert_equal "#{doc.title} content has mentioned you.", note.mail_title
     assert_equal "comment-Doc-#{doc.id}", note.mail_message_id
   end

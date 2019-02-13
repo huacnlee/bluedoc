@@ -15,9 +15,9 @@ mentionable = notification.target
   <span class="time">
     <%= l notification.created_at, format: :short %>
   </span>
-  <% if mentionable.is_a?(Comment) %>
+  <% if notification.target_mention_fragment.present? %>
   <div class="detail markdown-body">
-    <%= sanitize_html mentionable.body_html %>
+    <%= sanitize_html notification.target_mention_fragment %>
   </div>
   <% end %>
 <% end %>

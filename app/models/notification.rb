@@ -75,10 +75,23 @@ class Notification < ActiveRecord::Base
     end
   end
 
+  def target_mention_fragment
+    return @target_mention_fragment if defined? @target_mention_fragment
+    @target_mention_fragment = case target_type
+    when "Comment" then self.target&.body_html
+    when "Doc" then BookLab::HTML.mention_fragments(self.target&.body_html, self.user&.slug).join("<br /><br />")
+    else
+      ""
+    end
+
+    @target_mention_fragment
+  end
+
   def mail_body
     ApplicationController.renderer.render "/notifications/body/#{notify_type}", layout: false, locals: { notification: self }
-  rescue
-    ApplicationController.renderer.render "/notifications/title/#{notify_type}", layout: false, locals: { notification: self }
+  rescue => e
+    BookLab::Error.track(e, title: "notification body render failed, fallbacked to title")
+    mail_title
   end
 
   def mail_title

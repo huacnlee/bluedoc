@@ -291,5 +291,11 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
     fragments = BookLab::HTML.mention_fragments(html, "bar")
     assert_equal 2, fragments.length
     assert_equal "Hello @bar this is heading4", fragments[0]
+
+    fragments = BookLab::HTML.mention_fragments(nil, "bar")
+    assert_equal [], fragments
+
+    fragments = BookLab::HTML.mention_fragments(html, nil)
+    assert_equal [], fragments
   end
 end

@@ -2,6 +2,9 @@ module BookLab
   class HTML
     # Extract mention fragments in a html
     def self.mention_fragments(html, username)
+      return [] if html.blank?
+      return [] if username.blank?
+
       doc = Nokogiri::HTML(html)
       username_href = "/#{username}"
 

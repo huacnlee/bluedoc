@@ -1,6 +1,8 @@
 <% if notification.target_type == "Comment" %>
   <p><strong><%= notification.actor_name %></strong> <%= t(".mentioned you") %>:</p>
-  <%= sanitize_html notification.target.body_html %>
+  <div><%= raw notification.target_mention_fragment %></div>
 <% elsif notification.target_type == "Doc" %>
   <p><strong><%= notification.actor_name %></strong> <%= t(".has mentioned you in subject", subject: notification.target.title) %></p>
+  <div><%= raw notification.target_mention_fragment %></div>
 <% end %>
+
