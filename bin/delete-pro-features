@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+# Remove Pro features code
+#
+# [Danger!] Please ensure that this command only use in Docker build pipeline.
+#
+# Usage:
+#
+# # PRO-begin
+# def this_is_pro_method
+# end
+# # PRO-end
+#
+# Afer run this command, will remove the code.
+require "pathname"
+rails_root = Pathname.new(File.expand_path("../", __dir__))
+
+puts "Rails Root: #{rails_root}"
+pro_dir = File.expand_path(rails_root.join(".git"))
+if File.exists?(pro_dir)
+  puts ""
+  puts "Can't execute this command in code base."
+  puts "[delete-pro-features] feature was design for execute in Docker build pipeline to cleanup Pro features."
+  puts ""
+  # exit
+end
+
+Dir.glob(rails_root.join("./{app,lib,config}/**/*")).each do |fname|
+  next if File::directory?(fname)
+
+  allow_lines = []
+  File.readlines(fname).each do |line|
+    if line.include?("PRO-begin") || line.include?("PRO-end")
+      in_range = true
+    end
+
+    if !in_range
+      allow_lines << line
+    end
+
+    if line.include?("PRO-end")
+      in_range = false
+    end
+  end
+
+  File.write(fname, allow_lines.join(""))
+end

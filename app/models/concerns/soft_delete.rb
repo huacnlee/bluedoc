@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 module SoftDelete
@@ -6,8 +7,10 @@ module SoftDelete
   included do
     default_scope -> { where(deleted_at: nil) }
 
+    # PRO-begin
     define_callbacks :soft_delete, :restore
     alias_method :destroy!, :destroy
+    # PRO-end
   end
 
   def destroy

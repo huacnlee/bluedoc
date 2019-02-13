@@ -14,44 +14,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
   }
 
-  # /admin
-  authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web, at: "/admin/sidekiq"
-    mount ExceptionTrack::Engine, at: "/admin/exception-track"
-    mount PgHero::Engine, at: "/admin/pghero"
-  end
-
-  namespace :admin do
-    root to: "dashboards#show"
-    resource :dashboard do
-      collection do
-        post :reindex
-      end
-    end
-    resource :settings
-    resources :groups do
-      member do
-        post :restore
-      end
-    end
-    resources :users do
-      member do
-        post :restore
-      end
-    end
-    resources :repositories do
-      member do
-        post :restore
-      end
-    end
-    resources :docs do
-      member do
-        post :restore
-      end
-    end
-    resources :comments
-    resources :shares
-  end
+  draw :admin
 
   # short attachment url
   get "/uploads/:id" => "blobs#show", as: :upload
