@@ -12,7 +12,7 @@ module BookLab
     end
 
     MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax)
-    SmlPileline = constantizePilelines(:sml, :plantuml)
+    SmlPileline = constantizePilelines(:sml, :normalize_mention, :mention, :plantuml)
     PublicAttachmentPipeline = constantizePilelines(:public_attachments)
 
     class << self

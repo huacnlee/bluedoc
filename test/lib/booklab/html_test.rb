@@ -47,6 +47,12 @@ class BookLab::HTMLTest < ActiveSupport::TestCase
 
     assert_html_equal html, out
     assert_html_equal out, BookLab::HTML.render_without_cache(sml, format: :sml)
+
+    # Mention
+    sml = %(["p", {}, "Hello world @huacnlee", ["codeblock", { code: "@html = a" }]])
+    out = BookLab::HTML.render_without_cache(sml, format: :sml)
+    html = %(<p>Hello world <a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a></p><div class="highlight"><pre class="highlight plaintext"><code>@html = a</code></pre></div>)
+    assert_html_equal html, out
   end
 
   test "markdown heading" do
