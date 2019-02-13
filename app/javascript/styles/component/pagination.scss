@@ -1,5 +1,12 @@
 .pagination {
   margin-top: 15px;
+
+  .previous_page,
+  .next_page {
+    .text {
+      display: none;
+    }
+  }
 }
 
 .pagination:after, .pagination:before {
