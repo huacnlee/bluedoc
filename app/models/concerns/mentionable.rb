@@ -44,7 +44,17 @@ module Mentionable
     when "Comment"
       self.user_id
     when "Doc"
-      self.last_editor_id
+      self.current_editor_id
+    end
+  end
+
+  # Is allow to do mention?
+  def mentioning?
+    # Skip send notification if Doc not in publishing
+    if self.class.name == "Doc"
+      self.publishing?
+    else
+      true
     end
   end
 
@@ -55,6 +65,7 @@ module Mentionable
     end
 
     def send_mention_notification
+      return unless mentioning?
       self.current_mention_user_ids = self.current_mention_user_ids - no_mention_user_ids
       NotificationJob.perform_later("mention", self, user_id: self.current_mention_user_ids, actor_id: self.mention_actor_id)
 
@@ -78,6 +89,8 @@ module Mentionable
     end
 
     def save_mention_user_ids
+      return unless mentioning?
+
       user_ids = self.mention_user_ids + (self.current_mention_user_ids || [])
       user_ids.uniq!
 

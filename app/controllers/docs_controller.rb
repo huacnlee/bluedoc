@@ -60,7 +60,12 @@ class DocsController < Users::ApplicationController
     update_params[:draft_body] = update_params[:body] if update_params[:body].present?
     update_params[:draft_body_sml] = update_params[:body_sml] if update_params[:body_sml].present?
 
-    # avoid change float on draft save
+    # Mark as publishing on Publish doc
+    if update_params[:body_sml].present?
+      @doc.publishing!
+    end
+
+    # avoid change format on draft save
     if update_params[:body_sml].blank?
       update_params[:format] = @doc.format
     end

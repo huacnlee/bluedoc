@@ -39,6 +39,14 @@ class DocTest < ActiveSupport::TestCase
     assert_equal %(<div><span>BookLab SML</span></div>), doc.body_html
   end
 
+  test "publishing / publishing?" do
+    doc = create(:doc)
+    assert_equal false, doc.publishing?
+
+    doc.publishing!
+    assert_equal true, doc.publishing?
+  end
+
   test "Body touch" do
     doc = create(:doc)
     assert_not_nil doc[:body_updated_at]
@@ -46,22 +54,27 @@ class DocTest < ActiveSupport::TestCase
 
     # body no changes
     doc.draft_body = "Draft foo"
-    assert_equal false, doc.publishing?
+    assert_equal false, doc.body_touch?
     doc.save
     assert_equal old_updated_at, doc.body_updated_at
 
     # change body
     doc.body = "Foo"
-    assert_equal true, doc.publishing?
+    assert_equal true, doc.body_touch?
     doc.save
     assert doc.body_updated_at > old_updated_at
 
     # change body_sml
     old_updated_at = doc.body_updated_at
     doc.body_sml = "Bar"
-    assert_equal true, doc.publishing?
+    assert_equal true, doc.body_touch?
     doc.save
     assert doc.body_updated_at > old_updated_at
+
+    # When publishing
+    assert_equal false, doc.body_touch?
+    doc.publishing!
+    assert_equal true, doc.body_touch?
   end
 
   test "User Active" do
@@ -150,6 +163,7 @@ class DocTest < ActiveSupport::TestCase
     assert_equal [user.id], doc.editor_ids
 
     # body changed
+    doc.publishing!
     doc.update(current_editor_id: user1.id, body_sml: "New body")
     assert_equal user1.id, doc.last_editor_id
     assert_equal user.id, doc.creator_id
