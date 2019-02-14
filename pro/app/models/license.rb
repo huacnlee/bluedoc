@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class License
   PRO_FEATURES = %i[
     soft_delete

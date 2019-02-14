@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::LicensesController < Admin::ApplicationController
   def show
   end

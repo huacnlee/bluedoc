@@ -78,10 +78,10 @@ class Notification < ActiveRecord::Base
   def target_mention_fragment
     return @target_mention_fragment if defined? @target_mention_fragment
     @target_mention_fragment = case target_type
-    when "Comment" then self.target&.body_html
-    when "Doc" then BookLab::HTML.mention_fragments(self.target&.body_html, self.user&.slug).join("<br /><br />")
-    else
-      ""
+                               when "Comment" then self.target&.body_html
+                               when "Doc" then BookLab::HTML.mention_fragments(self.target&.body_html, self.user&.slug).join("<br /><br />")
+                               else
+                                 ""
     end
 
     @target_mention_fragment

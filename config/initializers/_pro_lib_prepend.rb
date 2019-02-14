@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Load pro/lib file first for prepend lib/**
 
 # PRO-begin

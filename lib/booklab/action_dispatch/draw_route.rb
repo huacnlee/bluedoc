@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BookLab
   module ActionDispatch
     module DrawRoute

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # /admin
 authenticate :user, ->(u) { u.admin? } do
   mount Sidekiq::Web, at: "/admin/sidekiq"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :admin do
   resources :groups do
     member do
