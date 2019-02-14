@@ -47,6 +47,8 @@ class Admin::GroupsController < Admin::ApplicationController
 
   # PRO-begin
   def restore
+    check_feature! :soft_delete
+
     @group.restore
     redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully restored."
   end

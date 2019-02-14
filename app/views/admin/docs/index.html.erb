@@ -40,9 +40,13 @@
       <td class="opts">
         <%= link_to icon_tag("pencil"), edit_admin_doc_path(item.id) %>
         <%= link_to icon_tag("trash"), admin_doc_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
-        <% if License.allow_feature?(:soft_delete) && item.deleted? %>
-          <%= link_to icon_tag("restore"), restore_admin_doc_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
+        <!-- PRO-begin -->
+        <% feature_for(:soft_delete) do %>
+          <% if item.deleted? %>
+            <%= link_to icon_tag("restore"), restore_admin_doc_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
+          <% end %>
         <% end %>
+        <!-- PRO-end -->
       </td>
     </tr>
     <% end %>

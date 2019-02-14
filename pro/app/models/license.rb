@@ -13,6 +13,7 @@ class License
     end
 
     def allow_feature?(name)
+      return false unless license?
       return false if trial? && expired?
 
       features.include?(name)

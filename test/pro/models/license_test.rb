@@ -10,6 +10,11 @@ class LicenseTest < ActiveSupport::TestCase
   end
 
   test "features" do
+    License.stub(:license?, false) do
+      assert_equal false, License.allow_feature?(:soft_delete)
+      assert_equal false, License.allow_feature?(:foo)
+    end
+
     License.stub(:trial?, true) do
       License.stub(:expired?, true) do
         assert_equal false, License.allow_feature?(:soft_delete)
