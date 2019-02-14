@@ -4,6 +4,9 @@ class License
   ]
 
   class << self
+    delegate :expired?, :will_expire?, :expires_at,
+             :restrictions, :restricted?, :starts_at, to: :license
+
     def features
       PRO_FEATURES
     end
@@ -15,31 +18,32 @@ class License
     end
 
     def trial?
-      return true
+      restricted_attr(:trial).present?
     end
 
-    def expired?
-      return false
+    def remaining_days
+      return 0 if expired?
+
+      (expires_at - Date.today).to_i
     end
 
-    def exists?
-      Setting.license.present?
+    def license?
+      license && license.valid?
     end
 
     def restricted_attr(attr, default: nil)
-      return default unless exists?
+      return default unless license? && restricted?(attr)
+
+      restrictions[attr]
     end
 
-    def restrictions
-    end
-
-    def decrypt_license(raw)
-      len   = ActiveSupport::MessageEncryptor.key_len
-      salt  = SecureRandom.random_bytes(len)
-      key   = ActiveSupport::KeyGenerator.new('password').generate_key(salt, len)
-      crypt = ActiveSupport::MessageEncryptor.new(key)
-      encrypted_data = crypt.encrypt_and_sign('my secret data')
-      crypt.decrypt_and_verify(encrypted_data)
+    def license
+      @license ||=
+        begin
+          BookLab::License.import(Setting.license)
+        rescue BookLab::License::ImportError
+          nil
+        end
     end
   end
 end
