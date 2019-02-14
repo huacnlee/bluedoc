@@ -25,7 +25,7 @@
         <%= action_button_tag(@repository, :watch, with_count: true) %>
         <%= action_button_tag(@repository, :star, with_count: true) %>
         <% if can? :create_doc, @repository %>
-          <%= link_to icon_tag("doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false }, class: "btn-create-doc" %>
+          <%= link_to icon_tag("add-doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false }, class: "btn-create-doc" %>
         <% end %>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="doc-readers">
+<div class="doc-readers text-gray">
   <a href="<%= doc.to_path("/readers") %>" class="readers-link" data-remote="true">
     <span class="avatars">
       <% readers.take(5).map do |action| %>
@@ -24,7 +24,6 @@
           <div class="user-item">
             <%= user_avatar_tag(action.user, style: :tiny) %>
             <%= user_display_name_tag(action.user) %>
-
             <span class="time-box">
               <%= timeago action.updated_at.to_date %>
             </span>

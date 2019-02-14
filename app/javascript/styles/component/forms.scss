@@ -129,6 +129,26 @@ input[type=radio] {
   margin-right: 5px;
 }
 
+input[type=checkbox] {
+  margin-bottom: 2px;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  background-image: url('~images/icon-selected.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-appearance:none;
+  outline: none;
+  &:checked {
+    background-image: url('~images/icon-selected-fill.svg');
+  }
+  &.checkbox-radius {
+    background-image: url('~images/icon-checkbox.svg');
+    &:checked {
+      background-image: url('~images/icon-checkbox-fill.svg');
+    }
+  }
+}
 
 .form-checkbox {
   padding-left: 20px;

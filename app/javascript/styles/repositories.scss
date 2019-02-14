@@ -197,23 +197,15 @@
   }
 
   #repository-members {
-    border-bottom: 0;
-
     .repository-member {
-      border-bottom: 1px solid #e1e4e8;
-      padding: 20px 15px;
-
-      &:last-child {
-        border-bottom: 0;
+      position: relative;
+      .edit-member, .delete-member {
+        position: absolute;
+        top: 26px;
       }
-
-      .infos,
-      .member-role,
-      .actions {
-        vertical-align: middle !important;
-      }
-
-      .member-role {
+      .edit-member {
+        right: 100px;
+        margin: 0;
         .select-menu-modal {
           position: absolute;
           left: 0;
@@ -222,10 +214,8 @@
           width: 200px;
         }
         summary.select-menu-button {
-          margin-top: 10px;
           width: 80px;
           text-align: left;
-
           &:after {
             position: absolute;
             right: 10px;
@@ -233,26 +223,36 @@
           }
         }
       }
+      .delete-member {
+        top: 28px;
+        right: 10px;
+      }
     }
   }
 
-  .export-repository-pdf {
+  .export-repository-pdf, .export-repository-archive, .advanced-transfer {
+    margin-bottom: 100px;
   }
 
 
   .transfer-docs {
-    border: 1px solid #e0e0e0;
-    .box-header,
-    .box-footer { padding: 15px;  }
-    .box-header {
-      border-bottom: 1px solid #e0e0e0;
+    .docs-list{
+      max-height: 390px;
+      overflow-y: scroll;
+      border: 1px solid #e0e0e0;
+      padding: 0 20px;
+      .form-checkbox {
+        width: 15px;
+        height: 15px;
+      }
+      .box-row {
+        padding-top: 20px;
+        padding-bottom: 15px;
+        margin-bottom: 0;
+      }
     }
-    .flash-full {
-      border-left: 0;
-      border-right: 0;
-    }
-    .box-row {
-      padding: 0 15px;
+    .box-select {
+      width: 340px;
     }
   }
 }
