@@ -646,8 +646,8 @@ zh-CN:
       Overview: 动态
       no activities: 暂时还没有动态。
     repositories:
-      Repositories: 创建于参与的知识库
-      no repositories: 暂时没有任何知识库（或者用户没有公开知识库）。
+      Repositories: 参与的知识库
+      no repositories: 暂时还没有知识库（或者用户没有公开知识库）。
     sidebar:
       Followers: 关注者
       Following: 正在关注
