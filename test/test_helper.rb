@@ -118,6 +118,10 @@ class ActionDispatch::IntegrationTest
       assert_select ".flash.flash-#{type}", text: flash[key]
     end
   end
+
+  def rack_upload_file(name, content_type = "text/plain")
+    Rack::Test::UploadedFile.new(Rails.root.join("test/factories/#{name}"), content_type)
+  end
 end
 
 class BookLab::GraphQL::IntegrationTest

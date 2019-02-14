@@ -5,6 +5,7 @@ class License
 
   class << self
     delegate :expired?, :will_expire?, :expires_at,
+             :licensee,
              :restrictions, :restricted?, :starts_at, to: :license
 
     def features
@@ -38,10 +39,12 @@ class License
     end
 
     def license
+      return nil if Setting.license.blank?
+
       @license ||=
         begin
           BookLab::License.import(Setting.license)
-        rescue BookLab::License::ImportError
+        rescue
           nil
         end
     end

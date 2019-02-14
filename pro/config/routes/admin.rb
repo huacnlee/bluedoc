@@ -19,4 +19,5 @@ namespace :admin do
       post :restore
     end
   end
+  resource :licenses
 end

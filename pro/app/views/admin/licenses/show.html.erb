@@ -1,0 +1,25 @@
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item"><%= t(".License") %></li>
+<% end %>
+
+<%= form_for(Setting.new, url: admin_licenses_path, html: { multipart: true }) do |f| %>
+  <div class="sub-title"><%= t(".Add License") %></div>
+
+  <div class="form-group">
+    <label class="controler-label"><%= t(".Select license file") %></label>
+    <input type="file" name="license" class="form-control" />
+    <div class="form-text">
+      <%= raw t(".Pickup a booklab-license file to upload") %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary"><%= t(".Upload License") %></button>
+  </div>
+<% end %>
+
+<%= render "/admin/dashboards/license" %>
+
+<% if License.license? %>
+  <%= link_to icon_tag("trash", label: t(".Remove current license")), admin_licenses_path, class: "btn btn-danger btn-remove-license btn-sm", data: { method: :delete, confirm: t(".Are you sure remove license?") } %>
+<% end %>
