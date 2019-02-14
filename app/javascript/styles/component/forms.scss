@@ -135,11 +135,18 @@ input[type=checkbox] {
   height: 14px;
   vertical-align: middle;
   background-image: url('~images/icon-selected.svg');
-  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
   -webkit-appearance:none;
   outline: none;
   &:checked {
     background-image: url('~images/icon-selected-fill.svg');
+  }
+  &.checkbox-radius {
+    background-image: url('~images/icon-checkbox.svg');
+    &:checked {
+      background-image: url('~images/icon-checkbox-fill.svg');
+    }
   }
 }
 

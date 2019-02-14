@@ -1,15 +1,12 @@
-<li id="member-<%= member.id %>" class="repository-member d-table col-12">
-  <div class="infos d-table-cell col-7">
-    <div class="float-left mr-3 v-align-middle hide-sm">
-      <%= user_avatar_tag(member.user, style: :medium) %>
-    </div>
-    <div class="member-name"><%= link_to member.user.name, member.user.to_path, class: "link-gray-dark text-bold" %></div>
-    <div class="member-slug"><%= user_name_tag(member.user) %></div>
+<li id="member-<%= member.id %>" class="repository-member list-item list-avatar">
+  <div class="avatar-box">
+    <%= user_avatar_tag(member.user, style: :medium) %>
   </div>
-  <div class="member-role">
-    <% if can? :manage, @repository %>
-      <% if member.user_id != current_user.id %>
-        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post, html: {
+  <div class="title text-overflow"><%= link_to member.user.name, member.user.to_path %></div>
+  <div class="description"><%= user_name_tag(member.user) %></div>
+  <% if can? :manage, @repository %>
+    <% if member.user_id != current_user.id %>
+      <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :post, html: {
         class: "edit-member" }) do |f| %>
           <%= f.hidden_field :id %>
           <details class="details-reset details-overlay d-inline-block position-relative">
@@ -28,20 +25,12 @@
             </details-menu>
           </details>
         <% end %>
+      <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :delete, html: {
+        class: "delete-member"
+      }) do |f| %>
+        <%= f.hidden_field :id %>
+        <button type="submit" class="btn-link btn-danger" data-confirm="<%= t(".Are you sure to remove?") %>"><%= icon_tag("delete") %></button>
       <% end %>
     <% end %>
-  </div>
-
-  <div class="actions d-table-cell col-1">
-    <% if can? :manage, @repository %>
-      <% if member.user_id != current_user.id %>
-        <%= form_for(member, url: collaborator_user_repository_settings_path, remote: true, method: :delete, html: {
-          class: "delete-member"
-        }) do |f| %>
-          <%= f.hidden_field :id %>
-          <button type="submit" class="btn-link btn-danger" data-confirm="<%= t(".Are you sure to remove?") %>"><%= icon_tag("delete") %></button>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
+  <% end %>
 </li>

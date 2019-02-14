@@ -1,6 +1,6 @@
 <div class="box export-repository-archive">
   <div class="box-header">
-    <h2 class="sub-title mb-2"><%= t(".Export as Archive") %></h2>
+    <h1 class="title mb-3"><%= t(".Export as Archive") %></h1>
     <div class="text-gray-light">
       <%= t(".Export all docs as markdown files, and archive them into a zip file") %><br/>
       <%= raw t(".This will including a SUMMARY for describe of the Table of contents") %><br/>
@@ -46,7 +46,7 @@
       </script>
     <% else %>
       <div class="pdf-export-generate">
-        <div class="text-gray mb-3"><%= icon_tag("idea") %> <%= t(".Generate Archive will take a long time") %></div>
+        <div class="text-gray mb-3"><%= icon_tag("warn") %> <%= t(".Generate Archive will take a long time") %></div>
         <div class="form-group">
           <%= link_to t(".Archive as zip"), repository.to_path("/settings/export?type=archive&force=1"), class: "btn btn-primary btn-submit btn-generate-archive", method: :post, remote: true, "disable-with": t(".Submiting") %>
         </div>
