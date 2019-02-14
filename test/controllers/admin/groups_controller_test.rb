@@ -44,10 +44,14 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should restore admin_group" do
     @group.destroy
-    assert_difference("Group.count", +1) do
+    post restore_admin_group_path(@group.id)
+    assert_equal 501, response.status
+
+    allow_feature(:soft_delete) do
       post restore_admin_group_path(@group.id)
     end
     @group.reload
+    assert_equal false, @group.deleted?
     assert_redirected_to admin_groups_path(q: @group.slug)
 
     group = Group.find(@group.id)
