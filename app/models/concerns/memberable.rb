@@ -13,9 +13,11 @@ module Memberable
       self.creator_id ||= Current.user.id if Current.user.present?
     end
 
+    # PRO-begin
     set_callback :restore, :before do
       self.restore_dependents(:members)
     end
+    # PRO-end
   end
 
   def user_role(user)

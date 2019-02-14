@@ -62,6 +62,7 @@ class Setting < RailsSettings::Base
 
   # Readonly setting keys, no cache, only load from yml file
   field :host, :mailer_from, :mailer_options, readonly: true
+  field :license, default: "", type: :string
 
   class << self
     LOCALES = {
