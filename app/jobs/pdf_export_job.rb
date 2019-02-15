@@ -12,7 +12,7 @@ class PDFExportJob < ApplicationJob
 
     subject.update_export!(:pdf, pdf_file)
   rescue => e
-    BookLab::Error.track(e, title: "PDFExportJob [#{subject.class} #{subject.slug}] error")
+    BlueDoc::Error.track(e, title: "PDFExportJob [#{subject.class} #{subject.slug}] error")
   ensure
     pdf_file.close! if pdf_file
     subject.set_export_status(:pdf, "done")

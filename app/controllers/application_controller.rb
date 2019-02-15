@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from BookLab::FeatureNotAvailableError do |exception|
+  rescue_from BlueDoc::FeatureNotAvailableError do |exception|
     respond_to do |format|
       format.json { head :not_implemented }
       format.html { render plain: "Feature not available!", status: :not_implemented }

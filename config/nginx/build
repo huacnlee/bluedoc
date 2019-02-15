@@ -4,7 +4,7 @@
 # Build Nginx config files with ERB template
 require "erb"
 
-TEMPLATE_FILES = %w[nginx.conf booklab.conf]
+TEMPLATE_FILES = %w[nginx.conf bluedoc.conf]
 TEMPLATE_FILES.each do |fname|
   file_path = File.expand_path(File.join(__FILE__, "../#{fname}.erb"))
   out_path = File.expand_path(File.join(__FILE__, "../#{fname}"))

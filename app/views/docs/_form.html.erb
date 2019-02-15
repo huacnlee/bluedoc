@@ -34,7 +34,7 @@
   <div id="editor-form">
     <div class="editor-navbar">
       <div class="navbar-title">
-        <a class="navbar-brand" href="<%= @repository.to_path %>"><%= icon_tag("booklab") %></a>
+        <a class="navbar-brand" href="<%= @repository.to_path %>"><%= icon_tag("bluedoc") %></a>
         <span class= "divider">/</span>
         <%= repository_name_tag @repository %>
         <span class= "divider">/</span>
@@ -50,7 +50,7 @@
 
     <%= form.hidden_field :title, value: @doc.draft_title %>
     <%= form.hidden_field :format, value: @doc.format %>
-    <%= form.text_area :body, class: "booklab-editor", value: doc.draft_body_plain, data: {
+    <%= form.text_area :body, class: "bluedoc-editor", value: doc.draft_body_plain, data: {
        direct_upload_url: rails_direct_uploads_url,
        blob_url_template: upload_path(":id"),
        plantuml_service_host: Setting.plantuml_service_host,

@@ -16,14 +16,14 @@ end
 <div class="col-12">
   <div class="text-center mb-4">
     <div class="f1 mb-2"><%= t(".Sign up") %></div>
-    <div class="description text-gray-light f6"><%= t(".Welcome to use BookLab") %></div>
+    <div class="description text-gray-light f6"><%= t(".Welcome to use BlueDoc") %></div>
   </div>
 
   <% if auth_info.present? %>
   <div class="flash flash-warn mt-5">
     <strong><%= t(".Complete your account info") %></strong>
     <p><%= t(".You must complete the below form for sign up with") %> <b><%= resource.omniauth_provider&.humanize %></b></p>
-    <p><%= raw t(".If you had an exists BookLab account, you can sign in to bind account", link: link_to("Sign in", new_session_path(resource_name))) %></p>
+    <p><%= raw t(".If you had an exists BlueDoc account, you can sign in to bind account", link: link_to("Sign in", new_session_path(resource_name))) %></p>
   </div>
   <% end %>
 

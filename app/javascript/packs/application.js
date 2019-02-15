@@ -1,4 +1,4 @@
-import 'booklab';
+import 'bluedoc';
 
 require.context('../images/', true, /\.(gif|jpg|png|svg)$/i);
 

@@ -1,5 +1,5 @@
 {
-  "name": "booklab",
+  "name": "bluedoc",
   "private": true,
   "scripts": {
     "start": "./bin/webpack-dev-server",

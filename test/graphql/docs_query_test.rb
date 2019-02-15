@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class BookLab::DocsQueryTest < BookLab::GraphQL::IntegrationTest
+class BlueDoc::DocsQueryTest < BlueDoc::GraphQL::IntegrationTest
   test "doc" do
     body_sml = %(["p", "Hello world"])
     doc = create(:doc, body: "Hello world", body_sml: body_sml, format: :sml)

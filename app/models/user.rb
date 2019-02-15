@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   before_validation :check_slug_keywords
   def check_slug_keywords
-    if self.slug.present? && !BookLab::Slug.valid_user?(self.slug)
+    if self.slug.present? && !BlueDoc::Slug.valid_user?(self.slug)
       self.errors.add(:slug, t(".invalid, slug is a keyword", slug: self.slug))
     end
   end

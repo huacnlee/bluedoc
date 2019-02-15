@@ -31,10 +31,10 @@ Sometimes you want numbered lists:
   - And this
 
 ```rb
-class BookLab
+class BlueDoc
   class << self
     def markdown
-      BookLab::HTML.render("Hello **world**")
+      BlueDoc::HTML.render("Hello **world**")
     end
   end
 end

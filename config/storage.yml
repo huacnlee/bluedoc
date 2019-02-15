@@ -12,13 +12,13 @@ amazon:
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] || "need-access-key-id" %>
   secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] || "need-secret-access-key" %>
   region: <%= ENV["AWS_S3_REGION"] || "us-east-1" %>
-  bucket: <%= ENV["AWS_S3_BUCKET"] || "booklab" %>
+  bucket: <%= ENV["AWS_S3_BUCKET"] || "bluedoc" %>
 
 aliyun:
   service: Aliyun
   access_key_id: <%= ENV["ALIYUN_ACCESS_KEY_ID"]  || "need-access-key-id" %>
   access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY_SECRET"]  || "need-access-key-secret" %>
-  bucket: <%= ENV["ALIYUN_BUCKET"] || "booklab" %>
+  bucket: <%= ENV["ALIYUN_BUCKET"] || "bluedoc" %>
   endpoint: <%= ENV["ALIYUN_ENDPOINT"] || "https://oss-cn-beijing.aliyuncs.com" %>
   mode: <%= ENV["ALIYUN_MODE"] || "private" %>
   cname: <%= ENV["cname"] || false %>

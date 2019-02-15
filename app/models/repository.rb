@@ -26,7 +26,7 @@ class Repository < ApplicationRecord
 
   before_validation :check_slug_keywords
   def check_slug_keywords
-    if !BookLab::Slug.valid_repo?(self.slug)
+    if !BlueDoc::Slug.valid_repo?(self.slug)
       self.errors.add(:slug, t(".invalid, slug is a keyword", slug: self.slug))
     end
   end

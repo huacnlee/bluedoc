@@ -53,7 +53,7 @@ module SoftDelete
 
           update_columns(attrs)
         rescue ActiveRecord::RecordNotUnique => e
-          attrs[:slug] = "#{original_slug}-#{BookLab::Slug.random}"
+          attrs[:slug] = "#{original_slug}-#{BlueDoc::Slug.random}"
           retry_times += 1
 
           if retry_times < 10

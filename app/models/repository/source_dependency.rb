@@ -25,7 +25,7 @@ class Repository
   end
 
   def validate_gitbook_url
-    if !gitbook_url.blank? && !BookLab::Validate.url?(gitbook_url)
+    if !gitbook_url.blank? && !BlueDoc::Validate.url?(gitbook_url)
       self.errors.add(:gitbook_url, "is not a valid Git url, only support HTTP/HTTPS git url")
     end
   end

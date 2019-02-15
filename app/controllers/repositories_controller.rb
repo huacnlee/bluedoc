@@ -82,7 +82,7 @@ class RepositoriesController < Users::ApplicationController
 
     authorize! :read, @repository
 
-    @result = BookLab::Search.new(:docs, params[:q], repository_id: @repository.id, include_private: true).execute.page(params[:page])
+    @result = BlueDoc::Search.new(:docs, params[:q], repository_id: @repository.id, include_private: true).execute.page(params[:page])
   end
 
   # GET /:user/:repo/toc/edit
@@ -94,7 +94,7 @@ class RepositoriesController < Users::ApplicationController
       render :toc, layout: "editor"
     else
       toc_json = params.require(:repository).permit(:toc)[:toc]
-      toc_yaml = BookLab::Toc.parse(toc_json, format: :json).to_yaml
+      toc_yaml = BlueDoc::Toc.parse(toc_json, format: :json).to_yaml
 
       if @repository.update(toc: toc_yaml)
         redirect_to @repository.to_path, notice: "Table of Contents has updated"

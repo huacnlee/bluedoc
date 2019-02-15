@@ -22,7 +22,7 @@ module Mentionable
   end
 
   def extract_mentioned_users
-    usernames = body_plain.scan(/@([#{BookLab::Slug::FORMAT}]{3,20})/).flatten.map(&:downcase)
+    usernames = body_plain.scan(/@([#{BlueDoc::Slug::FORMAT}]{3,20})/).flatten.map(&:downcase)
     self.current_mention_user_ids = []
     if usernames.any?
       self.current_mention_user_ids = User.where(type: "User")

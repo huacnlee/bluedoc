@@ -29,7 +29,7 @@ module Types
         search_options = { repository_id: repository.id, include_private: true }
       end
 
-      result = BookLab::Search.new(:docs, params[:query], search_options).execute.limit(params[:limit])
+      result = BlueDoc::Search.new(:docs, params[:query], search_options).execute.limit(params[:limit])
       @docs = []
       result.records.each_with_hit do |item, hit|
         @docs << item

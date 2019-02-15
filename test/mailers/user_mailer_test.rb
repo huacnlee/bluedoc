@@ -13,7 +13,7 @@ class UserMailerTest < ActionMailer::TestCase
     end
 
     assert_equal [user.email], mail.to
-    assert_equal "Welcome to use BookLab", mail.subject
+    assert_equal "Welcome to use BlueDoc", mail.subject
     assert_match /Hi, #{user.name}/, mail.body.to_s
   end
 end

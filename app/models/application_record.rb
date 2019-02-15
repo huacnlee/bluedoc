@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
-  include BookLab::RichText::Attribute
+  include BlueDoc::RichText::Attribute
 
   self.abstract_class = true
 

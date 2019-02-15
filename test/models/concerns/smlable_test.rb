@@ -6,7 +6,7 @@ class SmlableTest < ActiveSupport::TestCase
   test "Doc" do
     # Markdown
     body = read_file("sample.md")
-    body_html = BookLab::HTML.render(body, format: :markdown)
+    body_html = BlueDoc::HTML.render(body, format: :markdown)
     draft_body = "Hello **world**"
     draft_body_html = "<p>Hello <strong>world</strong></p>"
 
@@ -20,7 +20,7 @@ class SmlableTest < ActiveSupport::TestCase
       opts[:public] ? "Render public" : body
     end
 
-    BookLab::HTML.stub(:render, stub_method) do
+    BlueDoc::HTML.stub(:render, stub_method) do
       assert_equal "Render public", doc.body_public_html
     end
 
@@ -36,10 +36,10 @@ class SmlableTest < ActiveSupport::TestCase
     doc = create(:doc, body_sml: raw, draft_body_sml: draft_raw, format: :sml)
     assert_equal raw, doc.body_sml_plain
     assert_equal draft_raw, doc.draft_body_sml_plain
-    assert_equal BookLab::HTML.render(raw, format: :sml), doc.body_html
-    assert_equal BookLab::HTML.render(draft_raw, format: :sml), doc.draft_body_html
+    assert_equal BlueDoc::HTML.render(raw, format: :sml), doc.body_html
+    assert_equal BlueDoc::HTML.render(draft_raw, format: :sml), doc.draft_body_html
 
-    BookLab::HTML.stub(:render, stub_method) do
+    BlueDoc::HTML.stub(:render, stub_method) do
       assert_equal "Render public", doc.body_public_html
     end
 
@@ -57,7 +57,7 @@ class SmlableTest < ActiveSupport::TestCase
 
   test "Version" do
     body = read_file("sample.md")
-    body_html = BookLab::HTML.render(body, format: :markdown)
+    body_html = BlueDoc::HTML.render(body, format: :markdown)
 
     doc = create(:doc, body: body, format: :markdown)
     version = doc.versions.last
@@ -69,7 +69,7 @@ class SmlableTest < ActiveSupport::TestCase
       opts[:public] ? "Render public" : body
     end
 
-    BookLab::HTML.stub(:render, stub_method) do
+    BlueDoc::HTML.stub(:render, stub_method) do
       assert_equal "Render public", version.body_public_html
     end
   end

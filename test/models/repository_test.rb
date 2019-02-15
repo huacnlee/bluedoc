@@ -62,8 +62,8 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   test "fullname" do
-    repo = build(:repository, name: "BookLab Help", slug: "help")
-    assert_equal "BookLab Help (help)", repo.fullname
+    repo = build(:repository, name: "BlueDoc Help", slug: "help")
+    assert_equal "BlueDoc Help (help)", repo.fullname
   end
 
   test "auto member watch" do
@@ -178,10 +178,10 @@ class RepositoryTest < ActiveSupport::TestCase
     repo = create(:repository, toc: toc)
     assert_equal toc, repo.toc_text
     assert_equal [].to_yaml, repo.toc_by_docs_text
-    assert_html_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
-    assert_html_equal BookLab::Toc.parse(toc).to_html(prefix: "/prefix"), repo.toc_html(prefix: "/prefix")
-    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_json
-    assert_html_equal BookLab::Toc.parse([].to_yaml).to_json, repo.toc_by_docs_json
+    assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
+    assert_html_equal BlueDoc::Toc.parse(toc).to_html(prefix: "/prefix"), repo.toc_html(prefix: "/prefix")
+    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_json
+    assert_html_equal BlueDoc::Toc.parse([].to_yaml).to_json, repo.toc_by_docs_json
 
     repo = create(:repository, toc: nil)
     assert_equal [].to_yaml, repo.toc_text
@@ -191,24 +191,24 @@ class RepositoryTest < ActiveSupport::TestCase
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
     assert_equal toc, repo.toc_by_docs_text
-    assert_html_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
-    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_json
-    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_by_docs_json
+    assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
+    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_json
+    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_by_docs_json
 
     doc2 = create(:doc, repository: repo)
     toc_hash << { title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
     repo = Repository.find(repo.id)
-    assert_equal BookLab::Toc.parse(toc).to_html, repo.toc_html
+    assert_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
 
     # override toc as custom yml
     custom_toc = [{ title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json].to_yaml.strip
     repo.update(toc: custom_toc)
     assert_equal custom_toc, repo.toc_text
     assert_equal toc, repo.toc_by_docs_text
-    assert_html_equal BookLab::Toc.parse(custom_toc).to_json, repo.toc_json
-    assert_html_equal BookLab::Toc.parse(toc).to_json, repo.toc_by_docs_json
+    assert_html_equal BlueDoc::Toc.parse(custom_toc).to_json, repo.toc_json
+    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_by_docs_json
   end
 
   test "update_toc_by_url" do
@@ -230,7 +230,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo.reload
     assert_match "setup-database", repo.toc_text
-    content = BookLab::Toc.parse(repo.toc_text, format: :yml)
+    content = BlueDoc::Toc.parse(repo.toc_text, format: :yml)
     item = content.find_by_url("setup-database")
     assert_not_nil item
     assert_equal "setup-database", item.url

@@ -43,7 +43,7 @@ zh-CN:
       new:
         Sign in: 登录
         Sign in with: 通过下面的方式登录
-        Input your username or email to sign in BookLab: 输入你的用户名或 Email 来登录 BookLab
+        Input your username or email to sign in BlueDoc: 输入你的用户名或 Email 来登录 BlueDoc
         You have signed in with:
         email: 用户名 / Email
         forget_password: 密码忘记了？
@@ -52,10 +52,10 @@ zh-CN:
       new:
         Sign up: 注册
         Already have a account: 已经有一个帐户
-        Welcome to use BookLab: 欢迎使用 BookLab
+        Welcome to use BlueDoc: 欢迎使用 BlueDoc
         Complete your account info: 完善您的帐号信息
         You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
-        If you had an exists BookLab account, you can sign in to bind account: 如果你已经有 BookLab 账号，你可以通过 %{link} 来绑定账号。
+        If you had an exists BlueDoc account, you can sign in to bind account: 如果你已经有 BlueDoc 账号，你可以通过 %{link} 来绑定账号。
     passwords:
       new:
         Reset password: 找回密码
@@ -102,9 +102,9 @@ zh-CN:
       Profile: 个人资料
       Update profile: 更新个人资料
       Upload new picture: 选择一张图片上传
-      System default: "BookLab 默认语言：%{locale_name}"
-      This photo will be used to identify you in BookLab It will be visible to anyone: 头像用于大家在 BookLab 里面快速识别你，对所有人公开。
-      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+      System default: "BlueDoc 默认语言：%{locale_name}"
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: 头像用于大家在 BlueDoc 里面快速识别你，对所有人公开。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
   activities:
     has added: 添加
     to: 到
@@ -115,7 +115,7 @@ zh-CN:
     starred: 收藏了
     transfer: 移动
   admin:
-    BookLab Admin: BookLab 管理后台
+    BlueDoc Admin: BlueDoc 管理后台
     Admin: 管理后台
     All: 所有数据
     Save: 保存
@@ -182,12 +182,12 @@ zh-CN:
         License: 专业版授权
         Add License: 设置授权证书
         Select license file: 选择授权证书文件
-        Pickup a booklab-license file to upload: 请选择 BookLab 授权流程获得到的 <code>.booklab-license</code> 文件，并上传。
+        Pickup a bluedoc-license file to upload: 请选择 BlueDoc 授权流程获得到的 <code>.bluedoc-license</code> 文件，并上传。
         Upload License: 上传证书
         Are you sure remove license?: 你确定要删除当前的授权证书吗？
         Remove current license: 删除当前证书
       create:
-        Invalid license: 无效的 BookLab 授权证书，请确定文件是否选择正确。
+        Invalid license: 无效的 BlueDoc 授权证书，请确定文件是否选择正确。
         License was successfully updated, thank you: 授权成功，感谢你的支持。
       destroy:
         License was successfully deleted: 授权信息清理成功。
@@ -199,15 +199,15 @@ zh-CN:
         Settings: 系统设置
         System settings: 系统设置
         Default language: "默认语言:"
-        Setup default language for BookLab: 设置 BookLab 所有用户的默认语言。
-        Enable anonymous visit public contents: 允许未登录用户访问 BookLab 上的公开内容。
-        Disable this BookLab will requirement sign in for all pages: 关闭此功能，BookLab 将要求所有内容页面必须登录。
+        Setup default language for BlueDoc: 设置 BlueDoc 所有用户的默认语言。
+        Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
+        Disable this BlueDoc will requirement sign in for all pages: 关闭此功能，BlueDoc 将要求所有内容页面必须登录。
         PlantUML Service Host: "UML 图像服务:"
-        BookLab use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BookLab 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。
+        BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。
         MathJax Service Host: "数学公式服务:"
         If you wants customize MaxJax SVG service: 如果你希望部署一套自己的数学公式图像生成服务，你可以修改这里，你的服务需要兼容这样的路径 <code>${mathjax_service_host}/svg?tex={tex}</code> 来生成 SVG 图像。
         Admin Emails: "管理员 Email 列表:"
-        Special account emails as admin with each line: "添加 Email 到这个列表（一行一个），用这些 Email 注册的账号将会获得 BookLab 管理后台的权限（请小心，别把自己删掉了）。"
+        Special account emails as admin with each line: "添加 Email 到这个列表（一行一个），用这些 Email 注册的账号将会获得 BlueDoc 管理后台的权限（请小心，别把自己删掉了）。"
         Customize UI: UI 定制
         Application Footer HTML: "全局页脚 HTML:"
         You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
@@ -405,8 +405,8 @@ zh-CN:
       Delete this group: 删除此团队
       Once you delete a group, there is no going back: 当你删除了团队，你将无法找回来，请考虑清楚。
       Upload new picture: 选择一张图片上传
-      This photo will be used to identify you in BookLab It will be visible to anyone: 给团队设置一个 Logo 以便于快速辨识。
-      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为 Logo，BookLab 会自动从重建缩放、裁剪为合适的尺寸。
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: 给团队设置一个 Logo 以便于快速辨识。
+      Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为 Logo，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
     update:
       Group update successed: 团队资料更新成功。
   groups:
@@ -437,7 +437,7 @@ zh-CN:
       Members: 团队成员
   notification_mailer:
     to_user:
-      View it on BookLab: 在 BookLab 上查看
+      View it on BlueDoc: 在 BlueDoc 上查看
   notifications:
     Notification been deleted: 触发通知的相关数据已删除。
     body:
@@ -504,7 +504,7 @@ zh-CN:
       A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
       Import from Git: 从 Git 导入知识库
       Import from Archive: 从 Zip 包导入知识库
-      Put a Git repository URL, BookLab will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BookLab 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
+      Put a Git repository URL, BlueDoc will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BlueDoc 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
       This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
       You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
       Or you have a GitBook source, you can use: 或者也可以通过 Git 的方式导入。
@@ -646,8 +646,8 @@ zh-CN:
       Users: 用户
     no_result:
       No result: 没有查询到结果
-      Can not find any contents like: "BookLab 无法找到任何有关于"
-      in BookLab: 的内容。
+      Can not find any contents like: "BlueDoc 无法找到任何有关于"
+      in BlueDoc: 的内容。
     search_info:
       About: 关于
       there have count results: 我们找到 %{count} 个结果。
@@ -659,7 +659,7 @@ zh-CN:
       Created by at: 创建于
   user_mailer:
     welcome:
-      You have successfully signed up to: 你已经成功的注册成功了 BookLab 账号，网站地址为：
+      You have successfully signed up to: 你已经成功的注册成功了 BlueDoc 账号，网站地址为：
       Your username is: "你注册的用户名:"
       Thanks for joining and have a great day: 欢迎你的使用。
   users:
@@ -693,5 +693,5 @@ zh-CN:
       Stars: 收藏的知识库
       no star repositories: 还未收藏过知识库。
     profile:
-      This photo will be used to identify you in BookLab It will be visible to anyone: 此照片将用于在BookLab中识别您的身份。任何人都可以看到它
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: 此照片将用于在BlueDoc中识别您的身份。任何人都可以看到它
       Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像

@@ -6,10 +6,10 @@ class RepositoryImportJob < ApplicationJob
 
     case type
     when "gitbook"
-      importer = BookLab::Import::GitBook.new(repository: repo, user: user, url: url)
+      importer = BlueDoc::Import::GitBook.new(repository: repo, user: user, url: url)
     when "archive"
       url = repo.import_archive&.service_url
-      importer = BookLab::Import::Archive.new(repository: repo, user: user, url: url)
+      importer = BlueDoc::Import::Archive.new(repository: repo, user: user, url: url)
     else
       return false
     end
@@ -18,7 +18,7 @@ class RepositoryImportJob < ApplicationJob
 
     Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :success })
   rescue => e
-    BookLab::Error.track(e, title: "RepositoryImportJob [#{repo.slug}] #{url} error")
+    BlueDoc::Error.track(e, title: "RepositoryImportJob [#{repo.slug}] #{url} error")
     Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :failed, message: e.message })
   end
 end

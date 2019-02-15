@@ -14,7 +14,7 @@
       <%= yield %>
     </div>
     <div style="border-top: 1px solid #f0f0f0; padding: 13px 15px; color: #aaa; font-size: 13px;">
-      <%= content_for?(:footer) ? yield(:footer) : raw("#{t(".This mail has sent from")} #{link_to "BookLab", Setting.host}.") %>
+      <%= content_for?(:footer) ? yield(:footer) : raw("#{t(".This mail has sent from")} #{link_to "BlueDoc", Setting.host}.") %>
     </div>
   </body>
 </html>

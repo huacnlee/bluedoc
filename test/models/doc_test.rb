@@ -35,8 +35,8 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, body: "<p>Hello <strong>world</strong></p>", format: :html)
     assert_equal "<p>Hello <strong>world</strong></p>", doc.body_html
 
-    doc = create(:doc, body_sml: %(["div", ["span",{},"BookLab SML"]]), format: :sml)
-    assert_equal %(<div><span>BookLab SML</span></div>), doc.body_html
+    doc = create(:doc, body_sml: %(["div", ["span",{},"BlueDoc SML"]]), format: :sml)
+    assert_equal %(<div><span>BlueDoc SML</span></div>), doc.body_html
   end
 
   test "publishing / publishing?" do
@@ -335,7 +335,7 @@ class DocTest < ActiveSupport::TestCase
     repo = create(:repository)
     create(:doc, slug: "foo-bar", repository_id: repo.id)
 
-    BookLab::Slug.stub(:random, "fake-new-slug") do
+    BlueDoc::Slug.stub(:random, "fake-new-slug") do
       doc.transfer_to(repo)
       doc.reload
       assert_equal repo.id, doc.repository_id
@@ -380,7 +380,7 @@ class DocTest < ActiveSupport::TestCase
     repo.reload
     assert_match "started-getting1", repo.toc_text
     assert_match "Started Getting", repo.toc_text
-    content = BookLab::Toc.parse(repo.toc_text)
+    content = BlueDoc::Toc.parse(repo.toc_text)
     item = content.find_by_url("started-getting1")
     assert_equal "Started Getting", item.title
     assert_equal 1, item.depth

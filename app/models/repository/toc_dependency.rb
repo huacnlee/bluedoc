@@ -16,7 +16,7 @@ class Repository
 
   def toc_html(prefix: nil)
     @toc_html ||= Rails.cache.fetch([cache_key_with_version, "toc_html", "v1", prefix]) do
-      BookLab::Toc.parse(toc_text).to_html(prefix: prefix)
+      BlueDoc::Toc.parse(toc_text).to_html(prefix: prefix)
     end
   end
 
@@ -36,11 +36,11 @@ class Repository
   end
 
   def toc_json
-    BookLab::Toc.parse(toc_text).to_json
+    BlueDoc::Toc.parse(toc_text).to_json
   end
 
   def toc_by_docs_json
-    BookLab::Toc.parse(toc_by_docs_text).to_json
+    BlueDoc::Toc.parse(toc_by_docs_text).to_json
   end
 
   # sort docs as Toc order
@@ -48,7 +48,7 @@ class Repository
     return @toc_ordered_docs if defined? @toc_ordered_docs
 
     # parse Toc and collect urls
-    ordered_urls = BookLab::Toc.parse(toc_text).items.collect(&:url)
+    ordered_urls = BlueDoc::Toc.parse(toc_text).items.collect(&:url)
     ordered_urls.compact!
     ordered_urls.map { |url| url.strip! }
 
@@ -72,7 +72,7 @@ class Repository
     # lock toc before update
     locker = Redis::Lock.new("#{self.cache_key}/update-toc", expiration: 2, timeout: 5)
     locker.lock do
-      content = BookLab::Toc.parse(toc_text)
+      content = BlueDoc::Toc.parse(toc_text)
       item = content.find_by_url(url)
       return false if item.blank?
 
@@ -108,8 +108,8 @@ class Repository
     end
 
     def lint_toc_format
-      BookLab::Toc.parse(toc_text, strict: true).to_html
-    rescue BookLab::Toc::FormatError => e
+      BlueDoc::Toc.parse(toc_text, strict: true).to_html
+    rescue BlueDoc::Toc::FormatError => e
       errors.add(:toc, "Invalid TOC format (required YAML format).")
     rescue => e
       errors.add(:toc, "Parse error: #{e.message}")

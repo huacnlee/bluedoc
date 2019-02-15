@@ -4,10 +4,10 @@ module Slugable
   extend ActiveSupport::Concern
 
   included do
-    validates :slug, format: { with: BookLab::Slug::REGEXP }, length: 2..128
+    validates :slug, format: { with: BlueDoc::Slug::REGEXP }, length: 2..128
 
     before_validation do
-      self.slug = BookLab::Slug.slugize(self.slug) unless self.is_a?(User)
+      self.slug = BlueDoc::Slug.slugize(self.slug) unless self.is_a?(User)
     end
   end
 
@@ -30,7 +30,7 @@ module Slugable
   end
 
   def soft_delete_destroy_attributes
-    { deleted_at: Time.now.utc, updated_at: Time.now.utc, slug: "deleted-#{BookLab::Slug.random}", deleted_slug: self.slug }
+    { deleted_at: Time.now.utc, updated_at: Time.now.utc, slug: "deleted-#{BlueDoc::Slug.random}", deleted_slug: self.slug }
   end
 
   class_methods do

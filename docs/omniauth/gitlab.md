@@ -10,8 +10,8 @@ The visit path is: "User Settings" -> "Applications" to enter the "Add new appli
 
 Fill in the info in form.
 
-- Name: BookLab
-- Redirect URI: https://your-booklab.com/account/auth/gitlab/callback
+- Name: BlueDoc
+- Redirect URI: https://your-bluedoc.com/account/auth/gitlab/callback
 - Scopes: api, read_user, openid
 
 > NOTE: the callback url path must equal to "${your-host}/account/auth/gitlab/callback", please do not change path
@@ -23,7 +23,7 @@ After form submited, you will get the:
 - Application ID
 - Secret
 
-## Setup BookLab
+## Setup BlueDoc
 
 You need custom two environment:
 
@@ -40,4 +40,4 @@ OMNIAUTH_GITLAB_API_PREFIX=https://your-gitlab.com/api/v4
 
 `OMNIAUTH_GITLAB_API_PREFIX` default value is "https://gitlab.com/api/v4"
 
-when you setup that and start BookLab, you will see the "Sign in with GitLab" button, on Sign in page.
+when you setup that and start BlueDoc, you will see the "Sign in with GitLab" button, on Sign in page.

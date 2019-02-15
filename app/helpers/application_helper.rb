@@ -3,11 +3,11 @@
 module ApplicationHelper
   def markdown(body, opts = {})
     opts[:format] = "markdown"
-    raw BookLab::HTML.render(body, opts)
+    raw BlueDoc::HTML.render(body, opts)
   end
 
   def sanitize_html(html)
-    raw Sanitize.fragment(html, BookLab::Sanitize::DEFAULT)
+    raw Sanitize.fragment(html, BlueDoc::Sanitize::DEFAULT)
   end
 
   def close_button
@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def title_tag(*texts)
     text = texts.join(" - ")
-    content_for :title, h("#{text} - BookLab")
+    content_for :title, h("#{text} - BlueDoc")
   end
 
   def action_button_tag(target, action_type, opts = {})

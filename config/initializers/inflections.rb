@@ -14,7 +14,7 @@
 
 # These inflection rules are supported but not enabled by default:
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.acronym "BookLab"
+  inflect.acronym "BlueDoc"
   inflect.acronym "GitBook"
   inflect.acronym "PDF"
   inflect.acronym "API"

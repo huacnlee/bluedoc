@@ -219,7 +219,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     get repo.to_path("/settings/collaborators")
     assert_equal 200, response.status
-    assert_select "title", text: "Collaborators - #{repo.name} - BookLab"
+    assert_select "title", text: "Collaborators - #{repo.name} - BlueDoc"
     assert_select "#repository-members" do
       assert_select ".repository-member", 3
       assert_select "#member-#{admin_member.id}" do

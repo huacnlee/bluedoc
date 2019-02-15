@@ -25,7 +25,7 @@ class GroupsController < Groups::ApplicationController
 
     include_private = can? :create_repo, @group
 
-    @result = BookLab::Search.new(:docs, params[:q], user_id: @group.id, include_private: include_private).execute.page(params[:page])
+    @result = BlueDoc::Search.new(:docs, params[:q], user_id: @group.id, include_private: include_private).execute.page(params[:page])
   end
 
   private

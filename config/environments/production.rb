@@ -62,7 +62,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter     = :sidekiq
-  config.active_job.queue_name_prefix = "booklab"
+  config.active_job.queue_name_prefix = "bluedoc"
 
   config.action_mailer.perform_caching = false
   config.action_mailer.smtp_settings = Setting.mailer_options.deep_symbolize_keys

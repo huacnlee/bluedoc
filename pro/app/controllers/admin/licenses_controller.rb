@@ -6,7 +6,7 @@ class Admin::LicensesController < Admin::ApplicationController
 
   def create
     license_data = params[:license]&.read || "empty"
-    license = BookLab::License.import(license_data)
+    license = BlueDoc::License.import(license_data)
     if license.valid?
       License.update(license_data)
       redirect_to admin_licenses_path, notice: t(".License was successfully updated, thank you")

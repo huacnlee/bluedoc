@@ -43,7 +43,7 @@ module Exportable
             when "Repository"
               self.name
             else
-              "booklab-export"
+              "bluedoc-export"
             end
 
     if type == :pdf

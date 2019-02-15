@@ -53,7 +53,7 @@ class Setting < RailsSettings::Base
   end
 
   field :default_locale, default: "en", type: :string
-  field :admin_emails, default: "admin@booklab.io", type: :array
+  field :admin_emails, default: "admin@bluedoc.io", type: :array
   field :application_footer_html, default: "", type: :string
   field :dashboard_sidebar_html, default: "", type: :string
   field :anonymous_enable, default: "1", type: :boolean

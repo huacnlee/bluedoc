@@ -2,7 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import RichEditor from 'booklab/editor/rich-editor';
+import RichEditor from 'bluedoc/editor/rich-editor';
 
 export default class InlineEditor extends React.PureComponent {
   inputRef = React.createRef()

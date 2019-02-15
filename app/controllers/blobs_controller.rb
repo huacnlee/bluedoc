@@ -14,10 +14,10 @@ class BlobsController < ApplicationController
   private
 
     def send_file_by_disk_key(blob, content_type:)
-      case BookLab::Blob.service_name
+      case BlueDoc::Blob.service_name
       when "Disk"
         expires_in 100.days
-        send_file BookLab::Blob.path_for(blob.key), type: content_type, disposition: blob_disposition, filename: @blob.filename.to_s
+        send_file BlueDoc::Blob.path_for(blob.key), type: content_type, disposition: blob_disposition, filename: @blob.filename.to_s
       else
         expires_in 10.hours
         redirect_to service_url(@blob, params[:s]), allow_other_host: true
@@ -26,12 +26,12 @@ class BlobsController < ApplicationController
 
     def service_url(blob, style = nil)
       Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}/v3", expires_in: 11.hours) do
-        case BookLab::Blob.service_name
+        case BlueDoc::Blob.service_name
         when "Aliyun"
           # Aliyun OSS limit that url max age: 64800s
           # ref: https://help.aliyun.com/document_detail/31952.html
           if style
-            blob.service_url(disposition: blob_disposition, expires_in: 12.hours, params: { "x-oss-process" => BookLab::Blob.process_for_aliyun(style) })
+            blob.service_url(disposition: blob_disposition, expires_in: 12.hours, params: { "x-oss-process" => BlueDoc::Blob.process_for_aliyun(style) })
           else
             blob.service_url(disposition: blob_disposition, expires_in: 12.hours)
           end

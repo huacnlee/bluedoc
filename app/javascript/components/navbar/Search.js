@@ -39,7 +39,7 @@ class Search extends React.PureComponent {
     const { action = '/search', scope } = this.props;
     const { value, focused } = this.state;
     const escapedValue = encodeURIComponent(value);
-    const placeholder = scope ? `Search in ${scope}` : 'Search BookLab';
+    const placeholder = scope ? `Search in ${scope}` : 'Search BlueDoc';
     return (
       <form action={action || '/search'} className="subnav-search-context" method="GET">
         <div className="subnav-search">
@@ -72,7 +72,7 @@ class Search extends React.PureComponent {
               <li className="autocomplete-item">
                 <a href={`/search?q=${escapedValue}`}>
                   {value}
-                  <span className="scope-name float-right">All on BookLab</span>
+                  <span className="scope-name float-right">All on BlueDoc</span>
                 </a>
               </li>
             </ul>

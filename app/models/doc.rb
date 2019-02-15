@@ -33,7 +33,7 @@ class Doc < ApplicationRecord
     self.repository_id = repo.id
     self.save!(validate: false)
   rescue ActiveRecord::RecordNotUnique
-    self.slug = BookLab::Slug.random
+    self.slug = BlueDoc::Slug.random
     retry
   end
 
@@ -64,7 +64,7 @@ class Doc < ApplicationRecord
       doc.last_editor_id = user_id
       doc.title = "New Document"
       doc.draft_title = doc.title
-      doc.slug = slug || BookLab::Slug.random(seed: 999999)
+      doc.slug = slug || BlueDoc::Slug.random(seed: 999999)
       doc.save!
       doc
     rescue ActiveRecord::RecordNotUnique

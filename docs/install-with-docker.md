@@ -8,15 +8,15 @@ Please follow Docker offical documentation install Docker with your Host OS.
 
 [https://docs\.docker\.com/install/](https://docs.docker.com/install/)
 
-## Get BookLab
+## Get BlueDoc
 
-Use `docker pull` to get BookLab Docker image:
+Use `docker pull` to get BlueDoc Docker image:
 
 ```bash
-$ docker pull booklab:latest
+$ docker pull bluedoc:latest
 ```
 
-## Install BookLab
+## Install BlueDoc
 
 ### Config your custom SECRET_KEY_BASE
 
@@ -37,47 +37,47 @@ $ echo $SECRET_KEY_BASE
 
 ### Initialize volume
 
-You need create a path to storage BookLab's database, uploads or log files.
+You need create a path to storage BlueDoc's database, uploads or log files.
 
 By default recommends you choice `/var/booklbar`:
 
 ```bash
-$ booklab_root=/var/booklab
-$ sudo mkdir -p ${booklab_root} && sudo chown -R `whoami` ${booklab_root}
+$ bluedoc_root=/var/bluedoc
+$ sudo mkdir -p ${bluedoc_root} && sudo chown -R `whoami` ${bluedoc_root}
 ```
 
-### Start BookLab
+### Start BlueDoc
 
 Now, just use `docker run` command to start BooLab
 
 ```bash
-$ booklab_root=/var/booklab
+$ bluedoc_root=/var/bluedoc
 $ docker run --detach \
-             --name booklab \
+             --name bluedoc \
              --publish 443:443 --publish 80:80 \
              --restart always \
-             --volume ${booklab_root}/public/system:/home/app/booklab/public/system \
-             --volume ${booklab_root}/data/postgresql:/var/lib/postgresql \
-             --volume ${booklab_root}/data/redis:/var/lib/redis \
-             --volume ${booklab_root}/data/elasticsearch:/usr/share/java/elasticsearch/data \
-             --volume ${booklab_root}/data/storage:/home/app/booklab/storage \
-             --volume ${booklab_root}/fonts:/home/app/booklab/fonts \
-             --volume ${booklab_root}/log:/home/app/booklab/log \
-             --volume ${booklab_root}/tmp:/home/app/booklab/tmp \
-             booklab:latest
+             --volume ${bluedoc_root}/public/system:/home/app/bluedoc/public/system \
+             --volume ${bluedoc_root}/data/postgresql:/var/lib/postgresql \
+             --volume ${bluedoc_root}/data/redis:/var/lib/redis \
+             --volume ${bluedoc_root}/data/elasticsearch:/usr/share/java/elasticsearch/data \
+             --volume ${bluedoc_root}/data/storage:/home/app/bluedoc/storage \
+             --volume ${bluedoc_root}/fonts:/home/app/bluedoc/fonts \
+             --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
+             --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
+             bluedoc:latest
 ```
 
-after run that command, you can use `docker logs booklab` to checkout the logs.
+after run that command, you can use `docker logs bluedoc` to checkout the logs.
 
 
 ```bash
-$ docker logs booklab
+$ docker logs bluedoc
 ```
 
 Or use `docker ps` to checkout processes:
 
 ```bash
-$ docker ps | grep booklab
+$ docker ps | grep bluedoc
 ```
 
 ## Setup PDF generate font.
@@ -89,46 +89,46 @@ https://www.google.com/get/noto/help/cjk/
 - OpenType (.otf)
 - Regular
 
-For example Simplified Chinese, we need a `noto.otf` put in `${booklab_root}/fonts/noto.otf`
+For example Simplified Chinese, we need a `noto.otf` put in `${bluedoc_root}/fonts/noto.otf`
 
 ```bash
-$ booklab_root=/var/booklab
+$ bluedoc_root=/var/bluedoc
 $ cd /tmp
 $ curl -O https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
 $ unzip NotoSansCJKsc-hinted.zip
-$ mkdir -p ${booklab_root}/fonts
-$ mv NotoSansCJKsc-Regular.otf ${booklab_root}/fonts/noto.otf
-$ ls -lh ${booklab_root}/fonts/noto.otf
+$ mkdir -p ${bluedoc_root}/fonts
+$ mv NotoSansCJKsc-Regular.otf ${bluedoc_root}/fonts/noto.otf
+$ ls -lh ${bluedoc_root}/fonts/noto.otf
 ```
 
 After that, the PDF generater will use `noto.otf` as font-family.
 
-## Update BookLab
+## Update BlueDoc
 
-We will continue upgrade BookLab, you can upgrade it by:
+We will continue upgrade BlueDoc, you can upgrade it by:
 
 ```
-$ docker pull booklab:lastest
+$ docker pull bluedoc:lastest
 ```
 
 And then, recreate Docker Container:
 
 ```
-$ docker stop booklab
-$ docker rm booklab
-$ booklab_root=/var/booklab
+$ docker stop bluedoc
+$ docker rm bluedoc
+$ bluedoc_root=/var/bluedoc
 
 $ docker run --detach \
-             --name booklab \
+             --name bluedoc \
              --publish 443:443 --publish 80:80 \
              --restart always \
-             --volume ${booklab_root}/public/system:/home/app/booklab/public/system \
-             --volume ${booklab_root}/data/postgresql:/var/lib/postgresql \
-             --volume ${booklab_root}/data/redis:/var/lib/redis \
-             --volume ${booklab_root}/data/elasticsearch:/usr/share/elasticsearch/data \
-             --volume ${booklab_root}/data/storage:/home/app/booklab/storage \
-             --volume ${booklab_root}/fonts:/home/app/booklab/fonts \
-             --volume ${booklab_root}/log:/home/app/booklab/log \
-             --volume ${booklab_root}/tmp:/home/app/booklab/tmp \
-             booklab:latest
+             --volume ${bluedoc_root}/public/system:/home/app/bluedoc/public/system \
+             --volume ${bluedoc_root}/data/postgresql:/var/lib/postgresql \
+             --volume ${bluedoc_root}/data/redis:/var/lib/redis \
+             --volume ${bluedoc_root}/data/elasticsearch:/usr/share/elasticsearch/data \
+             --volume ${bluedoc_root}/data/storage:/home/app/bluedoc/storage \
+             --volume ${bluedoc_root}/fonts:/home/app/bluedoc/fonts \
+             --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
+             --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
+             bluedoc:latest
 ```

@@ -54,9 +54,9 @@ gem "html-pipeline-rouge_filter"
 gem "commonmarker"
 gem "sanitize"
 
-gem "booklab-toc"
-gem "booklab-sml"
-gem "booklab-license"
+gem "bluedoc-toc"
+gem "bluedoc-sml"
+gem "bluedoc-license"
 
 gem "wicked_pdf"
 

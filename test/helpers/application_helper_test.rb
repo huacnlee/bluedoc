@@ -21,7 +21,7 @@ class ApplicationHelperTest < ActionView::TestCase
       opts[:public] ? "Render public" : body
     end
 
-    BookLab::HTML.stub(:render, stub_method) do
+    BlueDoc::HTML.stub(:render, stub_method) do
       assert_equal "Render public", markdown("Hello world", public: true)
       assert_equal "Hello world", markdown("Hello world")
     end

@@ -34,16 +34,16 @@ module Smlable
     def render_body_html(sml, markdown, opts = {})
       if opts[:format].to_sym == :sml
         begin
-          return BookLab::HTML.render(sml, format: :sml, public: opts[:public])
+          return BlueDoc::HTML.render(sml, format: :sml, public: opts[:public])
         rescue => e
           error_body = sml
-          BookLab::Error.track(e,
+          BlueDoc::Error.track(e,
             title: "doc:#{self.id} body_html with SML render faield, fallback to markdown",
             body: sml)
-          return BookLab::HTML.render(markdown, format: :markdown, public: opts[:public])
+          return BlueDoc::HTML.render(markdown, format: :markdown, public: opts[:public])
         end
       end
 
-      BookLab::HTML.render(markdown, format: :markdown, public: opts[:public])
+      BlueDoc::HTML.render(markdown, format: :markdown, public: opts[:public])
     end
 end

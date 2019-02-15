@@ -3,7 +3,7 @@
 <%= form_with(model: @repository, url: toc_user_repository_path(@user, @repository), class: "toc-form", local: true, remote: true) do |form| %>
   <div class="toc-navbar">
     <div class="navbar-title">
-      <a class="navbar-brand" href="/"><%= icon_tag("booklab") %></a>
+      <a class="navbar-brand" href="/"><%= icon_tag("bluedoc") %></a>
       <%= group_name_tag @user %>
       <span class= "divider">/</span>
       <%= repository_name_tag @repository %>

@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: booklab-dev
+  database: bluedoc-dev
 
 test:
   <<: *default
-  database: booklab-test
+  database: bluedoc-test
 
 production:
   <<: *default
-  database: booklab-prod
-  username: booklab
+  database: bluedoc-prod
+  username: bluedoc
   password: <%= ENV['BOOKLAB_DATABASE_PASSWORD'] %>

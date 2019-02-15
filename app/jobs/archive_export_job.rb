@@ -5,10 +5,10 @@ class ArchiveExportJob < ApplicationJob
     return nil if repo.blank?
     return nil unless repo.is_a?(Repository)
 
-    exporter = BookLab::Export::Archive.new(repository: repo)
+    exporter = BlueDoc::Export::Archive.new(repository: repo)
     exporter.perform
   rescue => e
-    BookLab::Error.track(e, title: "ArchiveExportJob [repo #{repo.slug}] error")
+    BlueDoc::Error.track(e, title: "ArchiveExportJob [repo #{repo.slug}] error")
   ensure
     repo.set_export_status(:archive, "done")
   end

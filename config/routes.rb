@@ -84,7 +84,7 @@ Rails.application.routes.draw do
 
   # NOTE! Keep :profile routes bottom of routes.rb
   resources :repositories, only: %i(index create)
-  resources :users, id: /[#{BookLab::Slug::FORMAT}]*/, path: "", as: "users" do
+  resources :users, id: /[#{BlueDoc::Slug::FORMAT}]*/, path: "", as: "users" do
     member do
       post :follow
       delete :unfollow

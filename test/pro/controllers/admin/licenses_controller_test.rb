@@ -32,12 +32,12 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".btn.btn-remove-license", 0
 
     # License expired
-    license = BookLab::License.new
+    license = BlueDoc::License.new
     license.starts_at = Date.new(2019, 2, 14)
     license.expires_at = Date.new(2018, 1, 1)
     license.licensee = {
       "Name" => "Jason Lee",
-      "Company" => "BookLab Inc.",
+      "Company" => "BlueDoc Inc.",
       "Email" => "huacnlee@gmail.com"
     }
     license.restrictions = {
@@ -64,7 +64,7 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[enctype='multipart/form-data']"
     assert_select ".license-details" do
       assert_select "[data-field=name]", text: "Jason Lee"
-      assert_select "[data-field=company]", text: "BookLab Inc."
+      assert_select "[data-field=company]", text: "BlueDoc Inc."
       assert_select "[data-field=email]", text: "huacnlee@gmail.com"
       assert_select "[data-field=starts_at]", text: "2019-02-14"
       assert_select "[data-field=expires_at]", text: license.expires_at.strftime("%Y-%m-%d")
@@ -78,11 +78,11 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     post "/admin/licenses", params: { license: rack_upload_file("blank.txt", "text/plain") }
     assert_redirected_to admin_licenses_path
     follow_redirect!
-    assert_select ".flash", text: "Invalid BookLab license file."
+    assert_select ".flash", text: "Invalid BlueDoc license file."
 
-    post "/admin/licenses", params: { license: rack_upload_file("test.booklab-license", "text/plain") }
+    post "/admin/licenses", params: { license: rack_upload_file("test.bluedoc-license", "text/plain") }
     assert_redirected_to admin_licenses_path
-    assert_equal read_file("test.booklab-license").strip, Setting.license.strip
+    assert_equal read_file("test.bluedoc-license").strip, Setting.license.strip
     assert_equal true, License.license?
     follow_redirect!
     assert_select ".flash", text: "License was successfully updated, thank you."

@@ -13,7 +13,7 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
   test "perform with gitbook" do
     mock = Minitest::Mock.new
     mock.expect(:perform, true, [])
-    BookLab::Import::GitBook.stub(:new, mock) do
+    BlueDoc::Import::GitBook.stub(:new, mock) do
       RepositoryImportJob.perform_now(@repo, user: @user, type: "gitbook", url: "git@foo.com")
     end
     mock.verify
@@ -31,7 +31,7 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
     mock = Minitest::Mock.new
     @repo.import_archive.attach(io: load_file("archive.zip"), filename: "test.zip")
     mock.expect(:perform, true, [])
-    BookLab::Import::Archive.stub(:new, mock) do
+    BlueDoc::Import::Archive.stub(:new, mock) do
       RepositoryImportJob.perform_now(@repo, user: @user, type: "archive", url: nil)
     end
     mock.verify

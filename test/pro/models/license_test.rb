@@ -3,10 +3,10 @@
 require "test_helper"
 
 class LicenseTest < ActiveSupport::TestCase
-  # Generate by booklab-license test/fixtures/license.key
+  # Generate by bluedoc-license test/fixtures/license.key
   # pub key in development Rails.root.join(".license-key.pub")
   setup do
-    Setting.license = read_file("test.booklab-license")
+    Setting.license = read_file("test.bluedoc-license")
   end
 
   test "features" do

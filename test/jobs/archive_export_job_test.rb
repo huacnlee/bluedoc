@@ -11,7 +11,7 @@ class ArchiveExportJobTest < ActiveSupport::TestCase
     exporter = MiniTest::Mock.new
     exporter.expect(:perform, [])
 
-    BookLab::Export::Archive.stub(:new, exporter) do
+    BlueDoc::Export::Archive.stub(:new, exporter) do
       ArchiveExportJob.perform_now(repo)
     end
 
@@ -22,7 +22,7 @@ class ArchiveExportJobTest < ActiveSupport::TestCase
     end
     repo.set_export_status(:archive, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
-      BookLab::Export::Archive.stub(:new, exporter) do
+      BlueDoc::Export::Archive.stub(:new, exporter) do
         ArchiveExportJob.perform_now(repo)
       end
     end

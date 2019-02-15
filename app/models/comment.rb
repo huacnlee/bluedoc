@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
   end
 
   def body_html
-    BookLab::HTML.render(self.body, format: :markdown)
+    BlueDoc::HTML.render(self.body, format: :markdown)
   end
 
   def commentable_title

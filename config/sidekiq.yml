@@ -2,9 +2,9 @@
 :concurrency: <%= ENV["sidekiq_threads"] || 20 %>
 :logfile: log/sidekiq.log
 :queues:
-  - [booklab_default, 10]
+  - [bluedoc_default, 10]
   - [default, 10]
-  - [booklab_mailers, 5]
+  - [bluedoc_mailers, 5]
   - [mailers, 5]
-  - [booklab_index, 3]
+  - [bluedoc_index, 3]
   - [index, 3]

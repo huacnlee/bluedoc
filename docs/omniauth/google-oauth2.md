@@ -17,7 +17,7 @@ And then visit: https://console.developers.google.com/apis/library/plus.googleap
 
 To enable Google Plus API.
 
-## Setup BookLab
+## Setup BlueDoc
 
 You need custom two environment:
 
@@ -26,4 +26,4 @@ OMNIAUTH_GOOGLE_CLIENT_ID=xxxx
 OMNIAUTH_GOOGLE_CLIENT_SECRET=xxxx
 ```
 
-when you setup that and start BookLab, you will see the "Sign in with Google" button, on Sign in page.
+when you setup that and start BlueDoc, you will see the "Sign in with Google" button, on Sign in page.

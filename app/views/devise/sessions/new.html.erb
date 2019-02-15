@@ -6,13 +6,13 @@ auth_info = auth_session["info"]
 <div class="col-12 mb-5">
   <div class="text-center mb-4">
     <div class="f1 mb-2"><%= t(".Sign in") %></div>
-    <div class="description f6 text-gray-light"><%= t(".Input your username or email to sign in BookLab") %></div>
+    <div class="description f6 text-gray-light"><%= t(".Input your username or email to sign in BlueDoc") %></div>
   </div>
 
   <% if auth_info %>
   <div class="flash flash-warn mt-5">
     <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
-    <p>Input your exists BookLab account to bind with <b><%= auth_session["provider"].humanize %></b></p>
+    <p>Input your exists BlueDoc account to bind with <b><%= auth_session["provider"].humanize %></b></p>
   </div>
   <% end %>
 

@@ -10,7 +10,7 @@ require "minitest/autorun"
 require "mocha/minitest"
 require "rails/test_help"
 require "database_cleaner"
-require_relative "../lib/booklab/graphql/integration_test"
+require_relative "../lib/bluedoc/graphql/integration_test"
 require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
 
@@ -135,6 +135,6 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-class BookLab::GraphQL::IntegrationTest
+class BlueDoc::GraphQL::IntegrationTest
   include Groups::SignInHelpers
 end

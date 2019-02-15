@@ -46,7 +46,7 @@ class License
 
       @license ||=
         begin
-          BookLab::License.import(Setting.license)
+          BlueDoc::License.import(Setting.license)
         rescue
           nil
         end

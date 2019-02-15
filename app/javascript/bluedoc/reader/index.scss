@@ -1,0 +1,478 @@
+@import "~bluedoc/mixin";
+@import "./medium-zoom";
+
+.reader-body {
+  .container {
+    @include breakpoint(md) {
+      width: auto;
+    }
+  }
+
+  .reader-navbar {
+    @extend .clearfix;
+    background: #fff;
+    border: 0;
+    position: relative;
+    font-size: 14px;
+
+    .btn-sm {
+      box-shadow : 0 0 0;
+      padding: 6px 8px;
+    }
+
+    .navbar-title {
+      a { color: #333; }
+
+      .divider { color: #bbb; margin: 0 5px; }
+
+      .group-name,
+      .repository-name {
+        max-width: 240px;
+        @extend .text-overflow;
+        display: inline;
+      }
+    }
+
+    .navbar-buttons {
+      position: absolute;
+      top: -6px;
+      right: 0;
+      text-align: right;
+
+      .btn-link {
+        text-align: center;
+        border: 0;
+      }
+
+      .dropdown-menu {
+        text-align: left;
+      }
+    }
+  }
+
+  .versions-navbar {
+    height: 48px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+
+    .navbar-title {
+      line-height: 48px;
+    }
+    .navbar-buttons {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+      padding-top: 11px;
+
+      .diff-toggle {
+        margin-top: 5px;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .main-container {
+    padding: 0 !important;
+  }
+
+  .flash-full {
+    .container {
+      margin-left: 0;
+      margin-right: 0;
+      width: auto;
+    }
+  }
+
+  .doc-page {
+    position: relative;
+    width: 100%;
+    .doc-sidebar {
+      flex: none;
+      display: none;
+      min-width: 200px;
+      max-width: 260px;
+
+      .doc-parents {
+        .link-group {
+          display: block;
+          color: $text-gray;
+          &:hover {
+            color: $text-gray-dark;
+          }
+        }
+        .link-back {
+          display: block;
+          text-align: left;
+          padding: 0px 0 10px 0;
+          font-size: 18px;
+          font-weight: bold;
+          @extend .text-overflow;
+        }
+      }
+
+      ul {
+        font-size: 13px;
+        line-height: 100%;
+        @extend .pt-2;
+        @extend .list-style-none;
+
+        .item-title {
+        }
+
+        li {
+          padding: 8px 0;
+        }
+        a {
+          color: #555;
+          @extend .text-overflow;
+          width: 100%;
+
+          &.active {
+            color: darken($primary, 20%);
+          }
+        }
+
+        .item-slug { display: none; }
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .doc-sidebar {
+        display: block;
+        width: 260px;
+        padding-top: 0px;
+        min-height: 100vh;
+      }
+    }
+
+    .doc-center {
+      order:1;
+      width: 100%;
+      text-align: center;
+    }
+
+    @media (min-width: 1330px) {
+      .doc-center {
+        width: 100%;
+      }
+    }
+
+    .doc-main {
+      flex: none;
+      margin: 0 auto;
+      text-align: left;
+      width: auto;
+      padding: 0px 0px;
+
+      .unpublished-draft-tip {
+        margin-top: 15px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .doc-main {
+        width: 750px;
+      }
+    }
+
+    @media (min-width: 1012px) {
+      .doc-main {
+        width: 750px;
+      }
+    }
+
+    @media (min-width: 1330px) {
+      .doc-main {
+        width: 750px;
+      }
+    }
+
+    .doc-title {
+      text-align: left;
+      word-break: break-word;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .doc-info {
+      color: #999;
+      margin-bottom: 30px;
+      .editors { margin-right: 10px; }
+    }
+
+    .doc-reaction {
+      margin: 30px 0;
+
+      .reaction-summary-item {
+        border: 1px solid #f0f0f0;
+        padding: 6px 10px;
+        margin-right: 4px;
+        .emoji { width: 22px; height: 22px; }
+        .fa-smile { font-size: 22px; }
+        &.selected {
+          border-color: rgba(148, 171, 240, 0.14);
+        }
+      }
+    }
+
+    .version-sidebar {
+      padding-right: 20px;
+      .pagination {
+        .page-number { display: none; }
+      }
+    }
+
+    .version-item {
+      display: block;
+      text-decoration: none;
+      padding: 10px 0;
+
+      .label { background: #fff; border:1px solid #eee; color: #666; border-radius: 2px; padding: 2px 4px; }
+
+      &:last-child {
+        border-bottom: 0px;
+      }
+
+      .title { font-size: 15px; margin-bottom: 5px; }
+      .info { font-size: 13px; }
+      .user-name { font-weight: bold; }
+
+      &:hover {
+        background: #fff;
+      }
+
+      &.selected {
+        color: $primary !important;
+        background: #fff;
+      }
+    }
+  }
+
+  .between-docs {
+    .btn-link {
+      padding: 10px 20px;
+      max-width: 40%;
+      &:hover {
+        background: #F7F7F7;
+        // color: $primary;
+      }
+    }
+
+    .btn-prev {
+      float: left;
+    }
+    .btn-next {
+      float: right;
+    }
+  }
+
+  .doc-readers {
+    padding: 8px;
+    border-bottom: 1px solid #e8e8e8;
+
+    .readers-link {
+      text-decoration: none;
+      color: #666;
+
+      &:hover {
+        color: #444;
+      }
+
+      .avatars {
+        margin-right: 5px;
+        .avatar {
+          width: 16px;
+          height: 16px;
+          vertical-align: text-bottom;
+        }
+      }
+    }
+
+    .user-list {
+      max-height: 450px;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    .user-item {
+      @extend .clearfix;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0px;
+      }
+
+      a { color: #444; }
+
+      .time-box {
+        color: #a0a0a0;
+        font-size: 13px;
+        float: right;
+      }
+    }
+  }
+}
+
+.reader-body {
+  .doc-share-page {
+    .doc-main {
+      padding: 0;
+    }
+
+    @media (min-width: 768px) {
+      .doc-main {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.doc-body-toc-holder {
+  order: 2;
+  width: 350px;
+  display: none;
+  @media (min-width: 1330px) {
+    display: block;
+  }
+}
+
+.doc-body-toc {
+  display: none;
+
+  @media (min-width: 1330px) {
+    display: block;
+  }
+
+  &>.toc-list {
+    position: fixed;
+    padding-top: 48px;
+    right: 32px;
+    width: 230px;
+    border-left: 1px solid #e8ebef;
+    font-size: 13px;
+    display: block;
+    padding-top: 0;
+    padding-left: 15px;
+    flex: none;
+
+    .toc-list {
+      padding-left: 11px !important;
+    }
+
+    .is-collapsed { display: none; }
+
+    li {
+      color: #888;
+      list-style-type: none;
+      list-style-position: inside;
+      padding: 3px 0;
+      display: block;
+
+      a {
+        color: #696969;
+        width: 100%;
+        @extend .text-overflow;
+      }
+
+      .heading-anchor { display:none; }
+
+      @for $i from 3 through 5 {
+        &.body-toc-item-#{$i} {
+          padding-left: (($i - 2) * 11px) !important;
+        }
+      }
+    }
+  }
+}
+
+.reader-body:fullscreen {
+  height: auto;
+  width: 100%;
+  overflow: scroll;
+  &::backdrop {
+    background-color: #fff;
+  }
+  .nav-header,
+  .doc-sidebar,
+  .reader-navbar,
+  .doc-body-toc,
+  .between-docs,
+  .footer,
+  .unpublished-draft-tip {
+    display: none !important;
+  }
+
+  .doc-center {
+    flex: none;
+  }
+  .doc-main {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto !important;
+    max-width: 90% !important;
+  }
+
+  .navbar-buttons { display: none !important; }
+  .navbar-wide-mode {
+    display: block !important;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    text-align: right;
+    right: 0;
+    z-index: 9999;
+    opacity: 0.5;
+
+    .btn {
+      border-radius: 0;
+      box-shadow: 0 0 0;
+      border: 1px solid #d0d0d0;
+
+      .fas {
+        margin-top: 1px;
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .doc-title {
+    padding: 50px 0 10px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 45px;
+  }
+  .markdown-body {
+    font-size: 22px;
+  }
+}
+
+.doc-export-pdf-box {
+  .icon-box {
+    text-align: center;
+    .fas {
+      font-size: 60px;
+      color: #FF977E;
+    }
+  }
+
+  .loading-box {
+    text-align: center;
+  }
+  .loading {
+    margin: 10px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('~images/loading.svg');
+    background-size: 40px;
+    width: 100px;
+    height: 50px;
+  }
+}
