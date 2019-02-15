@@ -1,5 +1,5 @@
 <div class="comments comments-<%= commentable.class.name.dasherize %>">
-  <div class="sub-title"><%= icon_tag("comments") %> <%= t(".Comments") %></div>
+  <div class="sub-title"><%= t(".Comments") %></div>
   <%= render "/comments/comment_watch", commentable: commentable %>
   <div class="comments-list">
     <%= render partial: "/comments/comment", collection: comments, as: :comment %>

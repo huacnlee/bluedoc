@@ -1,21 +1,21 @@
 <div id="comment-<%= comment.id %>" class="comment" data-parent-id="<%= comment.parent_id %>">
   <div class="avatar-box">
-    <%= user_avatar_tag(comment.user, style: :small) %>
+    <%= user_avatar_tag(comment.user, style: :medium) %>
   </div>
   <div class="comment-infos">
-    <div class="info clearfix">
+    <div class="info">
       <%= user_name_tag(comment.user) %>
-      <span class="time">
+      <div class="time">
         <%= link_to timeago(comment.created_at), "#comment-#{comment.id}" %>
-      </span>
-      <div class="opts float-right">
+      </div>
+      <div class="opts">
         <% if current_user %>
           <%= render "/reactions/new_button", reaction: Reaction.new(subject: comment) %>
         <% end %>
 
-        <details id="comment-<%= comment.id %>-menu-button" class="dropdown details-reset details-overlay d-inline-block ml-2">
+        <details id="comment-<%= comment.id %>-menu-button" class="dropdown details-reset details-overlay d-inline-block ml-4">
           <summary aria-haspopup="true">
-            <%= icon_tag("ellipsis-v") %>
+            <%= icon_tag("ellipsis") %>
           </summary>
           <div class="dropdown-menu dropdown-menu-sw">
             <ul>
