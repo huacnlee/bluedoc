@@ -234,9 +234,9 @@ class DocTest < ActiveSupport::TestCase
     assert_equal "new-doc-123", doc.slug
 
     # create same slug again will give a random slug
-    assert_raise(ActiveRecord::RecordInvalid) do
-      doc = Doc.create_new(repo, 123, slug: "new-doc-123")
-    end
+    doc1 = Doc.create_new(repo, 123, slug: "new-doc-123")
+    assert_equal false, doc1.new_record?
+    assert_not_equal "new-doc-123", doc1.slug
   end
 
   test "_search_body" do
