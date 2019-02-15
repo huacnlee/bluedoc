@@ -3,8 +3,10 @@
   open_attr = action_name == "share" ? " open" : ""
 %>
 <details
-  class="doc-share-button-box dropdown details-overlay details-reset d-inline-block hide-sm ml-1" <%= open_attr %>>
-  <summary class="btn btn-sm btn-link"><%= icon_tag("share") %></summary>
+  class="doc-share-button-box dropdown details-overlay details-reset d-inline-block hide-sm mr-4"
+  <%= open_attr %>
+>
+  <summary class="link-gray-dark"><%= icon_tag("share", label: t(".Share")) %></summary>
   <div class="doc-share-button-box dropdown-menu dropdown-menu-sw p-4" style="width: 420px">
     <h4 class="mb-2"><%= icon_tag("share") %> <%= t(".Share doc") %></h4>
     <% if doc.share %>
