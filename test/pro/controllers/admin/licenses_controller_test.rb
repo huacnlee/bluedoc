@@ -77,15 +77,14 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     sign_in_admin @user
     post "/admin/licenses", params: { license: rack_upload_file("blank.txt", "text/plain") }
     assert_redirected_to admin_licenses_path
-    assert_equal "", Setting.license
+    follow_redirect!
+    assert_select ".flash", text: "Invalid BookLab license file."
 
     post "/admin/licenses", params: { license: rack_upload_file("test.booklab-license", "text/plain") }
     assert_redirected_to admin_licenses_path
     assert_equal read_file("test.booklab-license").strip, Setting.license.strip
     assert_equal true, License.license?
-
-    get "/admin/licenses"
-    assert_equal 200, response.status
+    follow_redirect!
     assert_select ".flash", text: "License was successfully updated, thank you."
   end
 

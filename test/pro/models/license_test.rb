@@ -46,4 +46,13 @@ class LicenseTest < ActiveSupport::TestCase
     assert_equal 100, License.restricted_attr(:user_limit)
     assert_equal true, License.trial?
   end
+
+  test "update" do
+    old_license = Setting.license
+    License.update("foo")
+    assert_equal "foo", Setting.license
+    assert_nil License.license
+
+    License.update(old_license)
+  end
 end

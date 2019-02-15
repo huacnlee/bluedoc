@@ -51,5 +51,10 @@ class License
           nil
         end
     end
+
+    def update(license_body)
+      Setting.license = license_body
+      @license = nil
+    end
   end
 end
