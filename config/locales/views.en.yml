@@ -424,6 +424,7 @@ en:
       Can't find any Doc like: "Can't find any Doc like"
       in this Group: "in this Group."
     show:
+      Repositories: Repositories
       Show all: Show all
       Find a repository: Find a repository...
       There is no repository: There is no repository.

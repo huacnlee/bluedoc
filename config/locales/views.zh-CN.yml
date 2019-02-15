@@ -428,6 +428,7 @@ zh-CN:
       Can't find any Doc like: "无法找到任何与"
       in this Group: "相关的内容。"
     show:
+      Repositories: 知识库
       Show all: 查看所有知识库
       Find a repository: 查找知识库...
       There is no repository: 暂无知识库
