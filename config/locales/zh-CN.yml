@@ -16,6 +16,7 @@ zh-CN:
       repository: 知识库
       comment: 评论
       member: 成员
+      share: 分享
     attributes:
       doc:
         title: 文档标题

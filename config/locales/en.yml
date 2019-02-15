@@ -12,19 +12,28 @@ en:
     reader: Reader
   activerecord:
     models:
+      user: User
+      group: Group
+      repository: Repository
+      doc: Doc
+      comment: Comment
+      member: Member
+      share: Share
     attributes:
       user:
         slug: Username
         name: Real name
         url: Homepage URL
         description: Bio
+        followers_count: Followers
+        following_count: Following
       group:
         slug: Group name
         avatar: Avatar
         name: Title
         url: URL
         description: Description
-        members_count: Members Count
+        members_count: Members
         created_at: Created At
         updated_at: Updated At
       repository:
