@@ -43,14 +43,18 @@ class Admin::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should restore admin_repository" do
     @repository.destroy
-    assert_difference("Repository.count", +1) do
+
+    post restore_admin_repository_path(@repository.id)
+    assert_equal 501, response.status
+
+    allow_feature(:soft_delete) do
       post restore_admin_repository_path(@repository.id)
+      @repository.reload
+      assert_redirected_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug)
+      assert_equal false, @repository.deleted?
     end
-    @repository.reload
-    assert_redirected_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug)
 
     repo = Repository.find(@repository.id)
     assert_equal false, repo.deleted?
-
   end
 end

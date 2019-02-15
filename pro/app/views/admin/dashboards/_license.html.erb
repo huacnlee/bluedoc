@@ -1,0 +1,57 @@
+<!-- PRO-start -->
+<div id="license-info" class="box mb-3">
+  <% if controller_name == "dashboards" %>
+  <div class="box-header">
+    <h3 class="box-title clearfix">
+      <%= t(".License") %>
+
+      <span class="float-right">
+        <%= link_to t(".Add License"), admin_licenses_path, class: "btn btn-sm" %>
+      </span>
+    </h3>
+  </div>
+  <% end %>
+  <div class="box-row">
+    <div class="mb-2">
+      <% if !License.license? %>
+        <div class="flash license-no"><%= t(".No license") %></div>
+      <% else %>
+        <table class="license-details table mb-2">
+          <tr>
+            <td style="width: 150px"><%= t(".Licensee name") %></td>
+            <td data-field="name"><%= License.licensee["Name"] %></td>
+          </tr>
+          <tr>
+            <td><%= t(".Licensee email") %></td>
+            <td data-field="email"><%= License.licensee["Email"] %></td>
+          </tr>
+          <tr>
+            <td><%= t(".Licensee company") %></td>
+            <td data-field="company"><%= License.licensee["Company"] %></td>
+          </tr>
+          <% if License.trial? %>
+          <tr>
+            <td><%= t(".Licensee trial") %></td>
+            <td data-field="trial"><%= t(".Trial yes") %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <td><%= t(".Licensee issued_at") %></td>
+            <td data-field="starts_at"><%= License.starts_at %></td>
+          </tr>
+          <tr>
+            <td><%= t(".Licensee expires_at") %></td>
+            <td data-field="expires_at"><%= License.expires_at %></td>
+          </tr>
+        </table>
+
+        <% if License.expired? %>
+          <div class="flash flash-error license-expired"><%= t(".The license expired on expires_at", expires_at: License.expires_at) %></div>
+        <% else %>
+          <div class="flash license-will-expire"><%= t(".The license will expire on expires_at", expires_at: License.expires_at) %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- PRO-end -->

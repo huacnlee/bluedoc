@@ -12,6 +12,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from BookLab::FeatureNotAvailableError do |exception|
+    respond_to do |format|
+      format.json { head :not_implemented }
+      format.html { render plain: "Feature not available!", status: :not_implemented }
+    end
+  end
+
   def set_nav_search(url: request.fullpath)
     @nav_search_path = url
   end

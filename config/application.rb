@@ -17,6 +17,16 @@ module Booklab
       Rails.root.join("lib/booklab"),
     ]
 
+    # PRO-start
+    # Need enable config.eager_load = true in all environments for load libs on boot
+    pro_paths = config.eager_load_paths.each_with_object([]) do |path, memo|
+      pro_path = config.root.join("pro", Pathname.new(path).relative_path_from(config.root))
+      memo << pro_path.to_s if pro_path.exist?
+    end
+    config.eager_load_paths.unshift(*pro_paths)
+    config.paths["app/views"].unshift("#{config.root}/pro/app/views")
+    # PRO-end
+
     config.i18n.available_locales = ["en", "zh-CN"]
     config.i18n.fallbacks = true
 

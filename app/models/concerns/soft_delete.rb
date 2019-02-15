@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 module SoftDelete
@@ -6,10 +7,17 @@ module SoftDelete
   included do
     default_scope -> { where(deleted_at: nil) }
 
+    # PRO-begin
     define_callbacks :soft_delete, :restore
     alias_method :destroy!, :destroy
+    # PRO-end
   end
 
+  def deleted?
+    deleted_at.present?
+  end
+
+  # PRO-begin
   def destroy
     attrs = { deleted_at: Time.now.utc, updated_at: Time.now.utc }
     attrs = soft_delete_destroy_attributes if defined? soft_delete_destroy_attributes
@@ -62,17 +70,14 @@ module SoftDelete
     self.send(field).unscoped.where("deleted_at >= ?", self.deleted_at).restore_all
   end
 
-  def deleted?
-    deleted_at.present?
-  end
-
   class_methods do
     def destroy_all
-      all.each { |r| r.restore }
+      all.each { |r| r.destroy }
     end
 
     def restore_all
       all.each { |r| r.restore }
     end
   end
+  # PRO-end
 end

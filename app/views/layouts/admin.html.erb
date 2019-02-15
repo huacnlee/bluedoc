@@ -5,6 +5,11 @@
     <title>BookLab Admin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% if Rails.env.development? %>
+    <style type="text/css">
+      .translation_missing { color: red !important; }
+    </style>
+    <% end %>
 
     <%= stylesheet_pack_tag 'booklab', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>

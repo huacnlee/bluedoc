@@ -4,6 +4,12 @@
 <meta name="current-user" value="<%= current_user.slug %>">
 <% end %>
 
+<% if Rails.env.development? %>
+<style type="text/css">
+  .translation_missing { color: red !important; }
+</style>
+<% end %>
+
 <%= stylesheet_pack_tag 'booklab', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_pack_tag 'print', 'data-turbolinks-track': 'reload', media: "print" %>
 <script type="text/javascript" src="/js/jquery@3.3.1.js"></script>

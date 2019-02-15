@@ -56,6 +56,7 @@ gem "sanitize"
 
 gem "booklab-toc"
 gem "booklab-sml"
+gem "booklab-license"
 
 gem "wicked_pdf"
 

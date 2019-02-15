@@ -97,6 +97,7 @@ GEM
       execjs (~> 2.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
+    booklab-license (1.0.0)
     booklab-sml (0.5.1)
       activesupport
       escape_utils
@@ -395,6 +396,7 @@ DEPENDENCIES
   action-store
   activestorage-aliyun
   aws-sdk-s3
+  booklab-license
   booklab-sml
   booklab-toc
   bootsnap (>= 1.1.0)
