@@ -104,6 +104,14 @@ class BookLab::SanitizeTest < ActionView::TestCase
     assert_sanitize raw, raw
   end
 
+  test "css properties" do
+    raw = %(<p style="foo: 1">Hello</p>)
+    assert_sanitize %(<p>Hello</p>), raw
+
+    raw = %(<p style="text-indent: 10px; padding-left: 40px; width: 100px; height: 100px;">Hello</p>)
+    assert_sanitize raw, raw
+  end
+
   private
 
     def assert_sanitize(expected, html)

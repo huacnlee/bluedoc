@@ -98,7 +98,7 @@ GEM
     bcrypt (3.1.12)
     bindex (0.5.0)
     booklab-license (1.0.0)
-    booklab-sml (0.5.1)
+    booklab-sml (0.5.2)
       activesupport
       escape_utils
       rouge
