@@ -59,3 +59,16 @@ a[data-method=post] {
     @extend .fa-unwatch;
   }
 }
+
+// admin page icon
+.fa-pencil:before {
+  @extend .fa-edit;
+}
+
+.fa-trash:before {
+  @extend .fa-delete;
+}
+
+.fa-bell-slash:before {
+  @extend .fa-bell-fill;
+}
