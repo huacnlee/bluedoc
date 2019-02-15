@@ -44,6 +44,7 @@
   <%= render_list_items(type: :link, class: "menu-item", check_parameters: true) do |item|
     item << link_to(t(".Overview"), @user.to_path, class: "menu-item")
     item << link_to(t(".Repositories"), @user.to_path("?tab=repositories"), class: "menu-item")
+    item << link_to(t(".Notes"), @user.to_path("/notes"), class: "menu-item")
     item << link_to(t(".Stars"), @user.to_path("?tab=stars"), class: "menu-item")
     item << content_tag(:span, t(".Settings"), class: "menu-item")
     item << link_to(t(".Profile"), account_settings_path, class: "menu-item menu-sub-item depth-1")

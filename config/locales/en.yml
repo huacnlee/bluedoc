@@ -19,6 +19,7 @@ en:
       comment: Comment
       member: Member
       share: Share
+      note: Note
     attributes:
       user:
         slug: Username
@@ -48,6 +49,13 @@ en:
       share:
         shareable: Content
         user: Creator
+      note:
+        title: Title
+        slug: Slug
+        user_id: Owner
+        description: Description
+        body: Body
+        body_sml: Body
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.

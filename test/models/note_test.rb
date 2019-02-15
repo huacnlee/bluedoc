@@ -64,8 +64,8 @@ class NoteTest < ActiveSupport::TestCase
 
   test "to_path" do
     note = create(:note)
-    assert_equal "#{note.user.to_path}/#{note.slug}", note.to_path
-    assert_equal "#{note.user.to_path}/#{note.slug}/versions", note.to_path("/versions")
+    assert_equal "#{note.user.to_path}/notes/#{note.slug}", note.to_path
+    assert_equal "#{note.user.to_path}/notes/#{note.slug}/versions", note.to_path("/versions")
 
     assert_equal "#{Setting.host}#{note.to_path}", note.to_url
   end

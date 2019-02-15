@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :group_members, as: :members, path: :members
     resource :group_settings, as: :settings, path: :settings
   end
+  resources :notes, only: %i[new create]
   resources :versions
   resource :search do
     collection do
@@ -89,7 +90,8 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
     end
-
+    resources :notes, only: %i(index show update destroy) do
+    end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
       member do
         get :docs, path: "docs/list"

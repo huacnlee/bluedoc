@@ -25,9 +25,11 @@ zh-CN:
       New Repository: 新建知识库
       Import Repository: 导入知识库
       New Group: 新建团队
+      New Note: 新建笔记
       Your profile: 个人页面
       Your repositories: 你的知识库
       Your stars: 你的收藏
+      Your notes: 你的笔记
       Admin Panel: 管理后台
       Settings: 设置
       Sign out: 登出
@@ -686,6 +688,7 @@ zh-CN:
       Groups: 团队
       Overview: 动态
       Repositories: 知识库
+      Notes: 笔记
       Stars: 收藏
       Settings: 设置
       Profile: 个人资料
@@ -696,3 +699,8 @@ zh-CN:
     profile:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 此照片将用于在BlueDoc中识别您的身份。任何人都可以看到它
       Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像
+  notes:
+    index:
+      Notes: 笔记
+      No notes: 暂无笔记。
+

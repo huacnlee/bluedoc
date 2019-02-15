@@ -1,0 +1,35 @@
+<% title_tag "#{@user.name} - #{t(".Notes")}" %>
+
+<div class="flex-wrap">
+  <div class="aside-wrap">
+    <%= render "/users/sidebar" %>
+  </div>
+  <div class="main-wrap">
+    <div class="main-content">
+      <div class="user-notes">
+        <h1 class="title"><%= t(".Notes") %></h1>
+        <% if @notes.blank? %>
+        <div class="blankslate">
+          <p><%= t(".No notes") %></p>
+        </div>
+        <% else %>
+        <ul class="cards-container recent-notes">
+          <% @notes.each do |note| %>
+            <li class="card recent-note-item">
+              <div class="title">
+                <%= note_title_tag(note) %>
+              </div>
+              <div class="info">
+                <%= timeago note.body_updated_at %>
+              </div>
+              <div class="action action-icon">
+                <%= link_to icon_tag("edit"), note.to_path("/edit") %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

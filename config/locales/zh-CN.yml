@@ -17,6 +17,7 @@ zh-CN:
       comment: 评论
       member: 成员
       share: 分享
+      note: 笔记
     attributes:
       doc:
         title: 文档标题
@@ -56,6 +57,13 @@ zh-CN:
       share:
         shareable: 分享内容
         user: 分享人
+      note:
+        title: 标题
+        slug: 访问路径
+        user_id: 所属人
+        description: 简介
+        body: 正文
+        body_sml: 正文
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。

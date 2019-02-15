@@ -15,7 +15,7 @@ class Note < ApplicationRecord
   depends_on :publish, :body_touch, :versions
 
   def to_path(suffix = nil)
-    "#{user.to_path}/#{self.slug}#{suffix}"
+    "#{user.to_path}/notes/#{self.slug}#{suffix}"
   end
 
   # return next and prev of notes in same user

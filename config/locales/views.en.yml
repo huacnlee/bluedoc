@@ -25,9 +25,11 @@ en:
       New Repository: New Repository
       Import Repository: Import Repository
       New Group: New Group
+      New Note: New Note
       Your profile: Your profile
-      Your repositories: Your repositories
-      Your stars: Your stars
+      Your repositories: Your Repositories
+      Your notes: Your Notes
+      Your stars: Your Stars
       Admin Panel: Admin Panel
       Settings: Settings
       Sign out: Sign out
@@ -683,6 +685,7 @@ en:
       Groups: Groups
       Overview: Overview
       Repositories: Repositories
+      Notes: Notes
       Stars: Stars
       Settings: Settings
       Profile: Profile
@@ -693,3 +696,7 @@ en:
     profile:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc. It will be visible to anyone
       Use a photo or image rather than text and upload an image that is 132px square or larger: Use a photo or image rather than text and upload an image that is 132px square or larger
+  notes:
+    index:
+      Notes: Notes
+      No notes: Current no notes.
