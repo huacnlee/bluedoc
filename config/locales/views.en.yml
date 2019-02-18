@@ -708,4 +708,20 @@ en:
       Not found: Not found
       Last edit by: Last edit by
       edited at: edited at
+      Exit Fullscreen: Exit Fullscreen
+      Private: Private
+      Markdown: Markdown
+      Print document: Print document
+      Fullscreen: Fullscreen
+      Versions: Versions
+      Edit: Edit
+      Delete: Delete
+      Are you sure delete?: Are you sure delete this Note?
+      Notes: Notes
+      Read: Read
+    versions:
+      Versions: Versions
+      Diff mode: Diff mode
+      Revert: Revert
+      Cancel: Cancel
 

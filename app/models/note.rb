@@ -7,7 +7,7 @@ class Note < ApplicationRecord
   second_level_cache expires_in: 1.week
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :slug, length: { maximum: 200 }
+  validates :slug, length: { maximum: 200 }, uniqueness: { scope: :user_id, case_sensitive: false }
 
   scope :recent, -> { order("id desc") }
 

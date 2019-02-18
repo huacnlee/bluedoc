@@ -703,4 +703,28 @@ zh-CN:
     index:
       Notes: 笔记
       No notes: 暂无笔记。
+    edit:
+      New Note: 新建笔记
+      Publish: 发布
+      Note publish failed, because there has count issues: 笔记保存失败，因为有 %{count} 个问题
+    show:
+      Not found: 未找到
+      Last edit by: 最后由
+      edited at: 更新于
+      Exit Fullscreen: 退出全屏
+      Private: 私密
+      Markdown: Markdown 原文
+      Print document: 打印
+      Fullscreen: 全屏
+      Versions: 修改历史
+      Edit: 编辑
+      Delete: 删除
+      Are you sure delete?: 确定要删除这个笔记吗？
+      Notes: 笔记
+      Read: 阅读
+    versions:
+      Versions: 修改历史
+      Diff mode: 对比模式
+      Revert: 恢复到此版本
+      Cancel: 取消
 

@@ -18,6 +18,8 @@ class NotesController < Users::ApplicationController
   def new
     @note = Note.create_new(current_user.id, slug: params[:slug])
     redirect_to @note.to_path("/edit")
+  rescue ActiveRecord::RecordInvalid => e
+    redirect_to current_user.to_path("/notes/#{params[:slug]}"), alert: "Create slug as #{params[:slug]} failed, maybe it exist."
   end
 
   def show
@@ -57,6 +59,28 @@ class NotesController < Users::ApplicationController
     authorize! :read, @note
 
     render plain: @note.body_plain
+  end
+
+  # GET /:user/:repo/:slug/versions
+  def versions
+    authorize! :update, @note
+
+    @current_version = @note.versions.includes(:user).first
+    @previous_version = @note.versions.second
+    @versions = @note.versions.where("id <> ?", @current_version.id).includes(:user).page(params[:page]).per(7)
+    render "versions", layout: "reader"
+  end
+
+  # POST /:user/:repo/:slug/revert
+  def revert
+    authorize! :update, @note
+
+    version_id = params.permit(:version_id)[:version_id]
+    if @note.revert(version_id, user_id: current_user.id)
+      redirect_to @note.to_path, notice: "Note was successfully reverted."
+    else
+      redirect_to @note.to_path("/versions"), alert: "Revert failed, please check a exists version."
+    end
   end
 
   private

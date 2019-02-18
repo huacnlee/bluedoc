@@ -1,8 +1,65 @@
 <% title_tag @note ? @note.title : t(".Not found") %>
 
-<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
+<% content_for :subnav do %>
+<div class="navbar-wide-mode" style="display: none">
+  <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>
+</div>
+<% end %>
+
+<div class="doc-page note-page d-flex flex-wrap flex-lg-nowrap">
   <div class="doc-center">
     <div class="doc-main">
+      <div class="reader-navbar">
+        <div class="navbar-title">
+          <span class="hide-sm">
+            <%= user_name_tag @user %>
+            <span class="divider">/</span>
+          </span>
+          <%= link_to t(".Notes"), user_notes_path(@user) %>
+          <span class="divider">/</span>
+          <span class="doc-name"><%= t(".Read") %></span>
+          <% if @note&.private? %>
+            <span class="doc-name">
+              <span class="label label-private ml-2"><%= t(".Private") %></span>
+            </span>
+          <% end %>
+        </div>
+
+        <% if @note %>
+        <div class="navbar-buttons">
+          <% if can? :read, @note %>
+            <%= action_button_tag(@note, :star, icon: "star", class: "btn btn-sm btn-link btn-star-doc") %>
+          <% end %>
+
+          <% if can? :update, @note %>
+          <%= link_to icon_tag("edit"), edit_user_note_path(@user, @note), class: "btn btn-sm btn-link btn-edit-doc hide-sm ml-1" %>
+          <% end %>
+
+          <details class="dropdown details-overlay details-reset d-inline-block">
+            <summary class="btn btn-sm btn-link ml-1"><%= icon_tag("ellipsis") %></summary>
+            <ul class="dropdown-menu dropdown-menu-sw">
+              <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_note_path(@user, @note) %>"><%= t(".Markdown") %></a></li>
+              <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
+              <li class="dropdown-divider" role="separator"></li>
+              <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
+
+              <% if can? :update, @note %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_note_path(@user, @note) %>"><%= t(".Versions") %></a></li>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_note_path(@user, @note) %>"><%= t(".Edit") %></a></li>
+              <% end %>
+
+              <% if can? :destroy, @note %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_note_path(@user, @note) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+              <% end %>
+            </ul>
+          </details>
+        </div>
+        <% end %>
+      </div>
+
       <h1 class="doc-title"><%= @note.title %></h1>
 
       <div class="doc-info">

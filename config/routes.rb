@@ -94,7 +94,13 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
     end
-    resources :notes, only: %i(index edit show update destroy)
+    resources :notes, only: %i(index edit show update destroy) do
+      member do
+        get :raw
+        get :versions
+        patch :revert
+      end
+    end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
       member do
         get :docs, path: "docs/list"

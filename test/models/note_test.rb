@@ -11,12 +11,13 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal note, check_note
 
     # Create a exist slug, will auto regenrate a random slug
-    note1 = Note.create_new(user.id, slug: note.slug)
-    assert_equal false, note1.new_record?
-    assert_not_equal note.slug, note1.slug
-
-    check_note = user.notes.find_by_slug(note1.slug)
-    assert_equal note1, check_note
+    assert_raise(ActiveRecord::RecordInvalid) do
+      note1 = Note.create_new(user.id, slug: note.slug)
+      assert_equal false, note1.new_record?
+      assert_not_equal note.slug, note1.slug
+      check_note = user.notes.find_by_slug(note1.slug)
+      assert_equal note1, check_note
+    end
   end
 
   test "Validation" do

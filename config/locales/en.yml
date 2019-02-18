@@ -51,7 +51,7 @@ en:
         user: Creator
       note:
         title: Title
-        slug: Slug
+        slug: Note path
         user_id: Owner
         description: Description
         body: Body

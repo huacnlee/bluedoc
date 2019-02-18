@@ -1,0 +1,4 @@
+var selectedVersionId = $(".version-sidebar .version-items").data("selected-id");
+$(".version-sidebar .version-items").html('<%= escape_javascript(render("versions")) %>');
+$(".version-item-" + selectedVersionId).addClass("selected");
+document.dispatchEvent(new Event("turbolinks:load"));
