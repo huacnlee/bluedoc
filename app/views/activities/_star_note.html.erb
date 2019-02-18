@@ -1,0 +1,12 @@
+<% if activity.target && activity.target.is_a?(Note) %>
+<div class="info">
+  <%= user_name_tag(activity.actor) %>
+  <%= t("activities.starred Note") %>
+</div>
+<span class="time"><%= timeago activity.created_at %></span>
+<div class="detail">
+  <%= render "/notes/card", note: activity.target %>
+</div>
+<% else %>
+<div class="info">-</div>
+<% end %>

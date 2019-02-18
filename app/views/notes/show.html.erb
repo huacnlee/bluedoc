@@ -1,0 +1,100 @@
+<% title_tag @note ? @note.title : t(".Not found") %>
+
+<% content_for :subnav do %>
+<div class="navbar-wide-mode" style="display: none">
+  <a href="#" class="btn btn-wide-mode-exit"><%= t(".Exit Fullscreen") %></a>
+</div>
+<% end %>
+
+<div class="doc-page note-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-center flex-auto">
+    <div class="doc-main">
+
+      <div class="navbar-title">
+        <span class="hide-sm">
+          <%= user_name_tag @user %>
+          <span class="divider">/</span>
+        </span>
+        <%= link_to t(".Notes"), user_notes_path(@user) %>
+      </div>
+      <h1 class="doc-title">
+        <%= @note.title %>
+        <% if @note&.private? %>
+          <span class="doc-name">
+            <span class="label label-private ml-2"><%= t(".Private") %></span>
+          </span>
+        <% end %>
+      </h1>
+
+      <div class="reader-navbar text-main float-right">
+        <% if @note %>
+        <div class="navbar-buttons">
+          <% if can? :read, @note %>
+            <%= action_button_tag(@note, :star, icon: "star", class: "btn btn-sm btn-link btn-star-doc") %>
+          <% end %>
+
+          <% if can? :update, @note %>
+          <%= link_to icon_tag("edit", label: t(".Edit")), edit_user_note_path(@user, @note), class: "btn btn-sm btn-link btn-edit-doc hide-sm ml-1" %>
+          <% end %>
+
+          <details class="dropdown details-overlay details-reset d-inline-block ml-2">
+            <summary class="link-gray-dark"><%= icon_tag("more") %></summary>
+            <ul class="dropdown-menu dropdown-menu-sw">
+              <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_note_path(@user, @note) %>"><%= t(".Markdown") %></a></li>
+              <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
+              <li class="dropdown-divider" role="separator"></li>
+              <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
+
+              <% if can? :update, @note %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_note_path(@user, @note) %>"><%= t(".Versions") %></a></li>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_note_path(@user, @note) %>"><%= t(".Edit") %></a></li>
+              <% end %>
+
+              <% if can? :destroy, @note %>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_note_path(@user, @note) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+              <% end %>
+            </ul>
+          </details>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="doc-info">
+        <%= t(".Last edit by") %> <%= user_name_tag(@note.user) %> <%= t(".edited at") %> <%= timeago @note.body_updated_at %>
+      </div>
+
+      <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+        <%= raw @note.body_html %>
+      </div>
+
+      <div class="doc-reaction note-reaction">
+        <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
+      </div>
+
+      <%= render "readers", note: @note, readers: @readers %>
+
+      <% if @between_notes %>
+      <div class="between-docs my-4 clearfix">
+        <% if @between_notes[:prev] %>
+          <%= link_to @between_notes[:prev].title, @between_notes[:prev].to_path, class: "btn-link btn-prev" %>
+        <% end %>
+
+        <% if @between_notes[:next] %>
+          <%= link_to @between_notes[:next].title, @between_notes[:next].to_path, class: "btn-link btn-next" %>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @comments %>
+      <div class="doc-comments mt-3 clearfix">
+        <%= render "/comments/comments", commentable: @note, comments: @comments %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="doc-body-toc" data-turbolinks="false"></div>
+  </div>
+</div>

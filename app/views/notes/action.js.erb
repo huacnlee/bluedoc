@@ -1,0 +1,13 @@
+if ($(".data-action-button-reload").length > 0) {
+  Turbolinks.visit(window.location);
+} else {
+  var btnAction = $(".note-<%= @note.id %>-<%= params[:action_type ] %>-button");
+  var btn = $(".btn", btnAction);
+  <% if request.post? %>
+    btn.attr("data-method", "delete");
+    $("span", btnAction).text(btn.attr("data-undo-label"));
+  <% else %>
+    btn.attr("data-method", "post");
+    $("span", btnAction).text(btn.attr("data-label"));
+  <% end %>
+}

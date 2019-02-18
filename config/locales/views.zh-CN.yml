@@ -25,9 +25,11 @@ zh-CN:
       New Repository: 新建知识库
       Import Repository: 导入知识库
       New Group: 新建团队
+      New Note: 新建笔记
       Your profile: 个人页面
       Your repositories: 你的知识库
       Your stars: 你的收藏
+      Your notes: 你的笔记
       Admin Panel: 管理后台
       Settings: 设置
       Sign out: 登出
@@ -112,6 +114,7 @@ zh-CN:
     created: 创建了
     has followed: 关注了
     starred Doc: 收藏了文档
+    starred Note: 收藏了笔记
     starred: 收藏了
     transfer: 移动
   admin:
@@ -137,6 +140,7 @@ zh-CN:
     Share: 分享
     Notification: 通知
     Activity: 动态
+    Note: 笔记
     Back to Front: 回到前台
     Sign out: 登出
     comments:
@@ -219,6 +223,9 @@ zh-CN:
     shares:
       destroy:
         Share was successfully deleted: 分享删除成功。
+    notes:
+      index:
+        There only include the public Notes: "这里仅列出公开的笔记，以保护用户隐私。"
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知
@@ -248,9 +255,9 @@ zh-CN:
       In reply to: 回复
   dashboards:
     action_docs:
-      You does not have any action_name docs: 你还未 %{action} 过任何文档。
+      You does not have any action_name docs: 你还未收藏过任何文档。
     action_repositories:
-      You does not have any action_name repositories: 你还未 %{action} 过任何知识库。
+      You does not have any action_name repositories: 你还未收藏过任何知识库。
     groups:
       You does not have any groups: 你还没有任何团队。
     menu:
@@ -260,6 +267,7 @@ zh-CN:
       Group: 团队
       Star: 收藏
       Watch: 订阅
+      Note: 笔记
     repositories:
       You does not have any repositories: 你没有任何的知识库。
     docs:
@@ -284,8 +292,12 @@ zh-CN:
     stars:
       Stared Docs: 我收藏的文档
       Stared Repositories: 我收藏的知识库
+      Stared Notes: 我收藏的笔记
     watches:
       All Watches: 我订阅的知识库
+    action_notes:
+      You does not have any action_name notes: 你还未收藏过笔记。
+      Notes: 笔记
   versions:
     version:
       Current: 当前版本
@@ -687,6 +699,7 @@ zh-CN:
       Groups: 团队
       Overview: 动态
       Repositories: 知识库
+      Notes: 笔记
       Stars: 收藏
       Settings: 设置
       Profile: 个人资料
@@ -697,3 +710,56 @@ zh-CN:
     profile:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 此照片将用于在BlueDoc中识别您的身份。任何人都可以看到它
       Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像
+  notes:
+    card:
+      Notes: 笔记
+    index:
+      Notes: 笔记
+      No notes: 暂无笔记。
+      Private: 私密
+      Are you sure delete?: 确定要删除这个笔记吗？
+    new:
+      New Note: 新建笔记
+      Create Note: 创建笔记
+      Use a short description to describe of this Note: 用 200 字以内的文字来简单介绍这个笔记（可不填）。
+      Public: 公开
+      Private: 私密
+      Anyone can see this Note: 任何人可以阅读。
+      Only you can see this Note: 只有你可以阅读、修改、删除。
+    edit:
+      New Note: 新建笔记
+      Publish: 发布
+      Note publish failed, because there has count issues: 笔记保存失败，因为有 %{count} 个问题
+      Private: 私密
+    update:
+      Note was successfully updated: 笔记更新成功。
+    destroy:
+      Note was successfully deleted: 笔记删除成功。
+    revert:
+      Note was successfully reverted: 笔记修改历史恢复成功。
+      Revert failed, please check a exists version: 恢复失败，请一个正确的修改历史。
+    show:
+      Not found: 未找到
+      Last edit by: 最后由
+      edited at: 更新于
+      Exit Fullscreen: 退出全屏
+      Private: 私密
+      Markdown: Markdown 原文
+      Print document: 打印
+      Fullscreen: 全屏
+      Versions: 修改历史
+      Edit: 编辑
+      Delete: 删除
+      Are you sure delete?: 确定要删除这个笔记吗？
+      Notes: 笔记
+      Read: 阅读
+    versions:
+      Versions: 修改历史
+      Diff mode: 对比模式
+      Revert: 恢复到此版本
+      Cancel: 取消
+    readers:
+      people: 个人
+      has read: 阅读过此文档。
+      Reader list: 阅读过此文档的人
+

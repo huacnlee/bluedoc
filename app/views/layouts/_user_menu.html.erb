@@ -18,7 +18,9 @@
         <% else %>
         <li><a class="dropdown-item" href="<%= main_app.import_repository_path %>"><%= t(".Import Repository") %></a></li>
         <% end %>
-
+        <li class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="<%= main_app.new_note_path %>"><%= t(".New Note") %></a></li>
+        <li class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="<%= main_app.new_group_path %>"><%= t(".New Group") %></a></li>
       </ul>
     </div>
@@ -32,10 +34,11 @@
       </div>
       <ul>
         <li><a class="dropdown-item" href="<%= current_user.to_path %>"><%= t(".Your profile") %></a></li>
+        <li class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>"><%= t(".Your repositories") %></a></li>
-        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>"><%= t(".Your stars") %></a></li>
+        <li><a class="dropdown-item" href="<%= current_user.to_path("/notes") %>"><%= t(".Your notes") %></a></li>
         <% if current_user.admin? %>
-        <li class="dropdown-divider" role="separator"></li>
+        <li class="dropdown-divider"></li>
         <li><a class="dropdown-item" data-turbolinks="false" href="<%= main_app.admin_root_path %>"><%= t(".Admin Panel") %></a></li>
         <% end %>
         <li class="dropdown-divider" role="separator"></li>

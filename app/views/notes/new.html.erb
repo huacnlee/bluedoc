@@ -1,0 +1,61 @@
+<% title_tag t(".New Note") %>
+
+<div class="col-12 mb-5">
+  <h1 class="title"><%= t(".New Note") %></h1>
+
+<%= form_with(model: [@user, @note], url: user_notes_path(@user), local: true) do |form| %>
+  <%= render "/shared/error_messages", target: @note %>
+
+  <div class="form-group">
+    <%= form.label :title, class: "control-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :slug, class: "control-label" %>
+    <%= form.text_field :slug, class: "form-control" %>
+    <div class="form-text">
+      <%= Setting.host %><%= @user.to_path("/notes/") %><span id="preview-slug"><%= @note.slug %></span>
+    </div>
+    <script type="text/javascript">
+      $("input[name='note[slug]']").on("keyup", (e) => {
+        $input = $(e.currentTarget);
+        $("#preview-slug").text($input.val());
+      })
+    </script>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "control-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+    <div class="form-text">
+      <%= t(".Use a short description to describe of this Note") %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :privacy, class: "control-label" %>
+
+    <div class="form-checkbox">
+      <label>
+        <input type="radio" name="note[privacy]" checked value="public"> <%= t(".Public") %>
+        <div class="form-text">
+          <%= t(".Anyone can see this Note") %>
+        </div>
+      </label>
+    </div>
+    <div class="form-checkbox">
+      <label>
+        <input type="radio" name="note[privacy]" value="private"> <%= t(".Private") %>
+        <div class="form-text">
+          <%= t(".Only you can see this Note") %>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary"><%= t(".Create Note") %></button>
+  </div>
+<% end %>
+</div>

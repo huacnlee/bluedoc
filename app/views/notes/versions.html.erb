@@ -1,0 +1,50 @@
+<% content_for :subnav do %>
+<div class="reader-navbar versions-navbar">
+  <div class="container">
+    <div class="navbar-title">
+      <span class="hide-sm">
+        <a href="<%= @note.to_path %>" title="<%= @note.title %>"><%= truncate @note.title, length: 25 %></a>
+        <span class= "divider">/</span>
+        <span class="doc-title"><%= t(".Versions") %></span>
+      </span>
+    </div>
+
+    <div class="navbar-buttons">
+      <span class="diff-toggle float-left">
+        <label for="version-diff-toggle">
+          <input type="checkbox" id="version-diff-toggle">
+          <%= t(".Diff mode") %>
+        </label>
+      </span>
+
+      <%= form_with(model: @note, url: revert_user_note_path(@user, @note),
+        local: true, remote: true, class: "float-right") do |form| %>
+        <input type="hidden" name="version_id">
+        <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5"><%= t(".Revert") %></button>
+        <%= link_to t(".Cancel"), @note.to_path, class: "btn btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<div class="doc-page flex-wrap">
+  <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right">
+    <%= render partial: "versions/version", locals: { version: @current_version, current: true } %>
+    <div class="version-items" data-selected-id="<%= @current_version.id %>">
+      <%= render "versions" %>
+    </div>
+  </div>
+  <div id="previus-version-content" style="display: none">
+    <%= raw(@previous_version&.body_html || "") %>
+  </div>
+  <div class="doc-main main-content py-4">
+    <h1 class="doc-title"><%= @note.title %></h1>
+    <div class="version-preview">
+      <div class="markdown-body">
+        <%= raw @current_version.body_html %>
+      </div>
+    </div>
+    <div class="version-diff" style="display: none"><div class="markdown-body"></div></div>
+  </div>
+</div>

@@ -17,8 +17,8 @@ class Doc < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_one :share, as: :shareable, dependent: :destroy
 
-  validates :title, presence: true
-  validates :slug, uniqueness: { scope: :repository_id, case_sensitive: false }
+  validates :title, presence: true, length: { maximum: 255 }
+  validates :slug, length: { maximum: 200 }, uniqueness: { scope: :repository_id, case_sensitive: false }
 
   def to_path(suffix = nil)
     "#{repository.to_path}/#{self.slug}#{suffix}"

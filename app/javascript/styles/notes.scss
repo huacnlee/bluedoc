@@ -1,0 +1,16 @@
+.note-page {
+  .doc-body-toc > .toc-list li a {
+    width: auto !important;
+  }
+}
+
+.page-notes {
+  .recent-notes {
+    .recent-note-item {
+      .description {
+        color: $text-gray;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

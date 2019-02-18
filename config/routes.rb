@@ -42,10 +42,13 @@ Rails.application.routes.draw do
       get :docs
       get :stars
       get :stars_docs, path: "stars/docs"
+      get :stars_notes, path: "stars/notes"
       get :watches
     end
   end
+  # GET /new
   get "new", to: "repositories#new", as: :new_repository
+  # GET /new/import
   get "new/import", to: "repositories#import", as: :import_repository
   resource :autocomplete do
     collection do
@@ -53,6 +56,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # GET /groups/new, POST /groups
   resources :groups, only: %i[new create] do
     member do
       get :search
@@ -60,6 +64,8 @@ Rails.application.routes.draw do
     resources :group_members, as: :members, path: :members
     resource :group_settings, as: :settings, path: :settings
   end
+  # GET /notes/new, POST /notes
+  resources :notes, only: %i[new create]
   resources :versions
   resource :search do
     collection do
@@ -89,7 +95,16 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
     end
-
+    resources :notes, only: %i(index create edit show update destroy) do
+      member do
+        get :raw
+        get :versions
+        patch :revert
+        post :action
+        delete :action
+        get :readers
+      end
+    end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
       member do
         get :docs, path: "docs/list"
@@ -117,7 +132,6 @@ Rails.application.routes.draw do
           delete :collaborator
         end
       end
-
       resources :docs, only: %i(new create)
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do

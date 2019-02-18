@@ -21,4 +21,5 @@ namespace :admin do
   resources :docs
   resources :comments
   resources :shares
+  resources :notes
 end

@@ -579,3 +579,6 @@ pre {
   font-size: $font-size-small;
 }
 
+div[data-react-class] {
+  display: inline;
+}
