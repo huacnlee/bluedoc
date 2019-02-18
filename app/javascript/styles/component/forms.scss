@@ -162,3 +162,9 @@ input[type=checkbox] {
     border-color: $danger;
   }
 }
+
+.form-input-file {
+  input.form-control {
+    display: none;
+  }
+}

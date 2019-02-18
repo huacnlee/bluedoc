@@ -24,14 +24,21 @@
         <div class="form-group">
           <label class="control-label"><%= t(".Import from Archive") %></label>
           <label class="form-input-file">
-            <span class="btn">上传文件</span>
-            <%= form.file_field :import_archive, direct_upload: true, class: "form-control", accept: "application/zip" %>
+            <span class="btn"><%= t(".Select File") %></span>
+            <%= form.file_field :import_archive, direct_upload: true, class: "form-control js-upload-file", accept: "application/zip" %>
           </label>
+          <div class="py-2"><%= icon_tag("text-attachment") %> <span id="upload-file-name"></span></div>
           <div class="form-text">
             <div><%= raw t(".You can archive multiple markdown files as a zip file, and then choice the zip file for import") %></div>
             <div><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook) %>.</div>
           </div>
         </div>
+        <script type="text/javascript">
+          $("form").on("change", ".js-upload-file", (e) => {
+            const value = e.target.value;
+            $('#upload-file-name').text(value.split('\\').pop());
+          });
+        </script>
       <% end %>
     </div>
     <% end %>
