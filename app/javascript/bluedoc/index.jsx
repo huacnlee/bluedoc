@@ -7,12 +7,14 @@ import 'styles/event';
 import 'vendor/styleguide.js';
 import 'vendor/turbo-react.min.js';
 import { render as timeagoRender } from 'timeago.js';
+import i18n from "./i18n";
 import './rails-ujs-extends';
 
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(150);
 
 window.$ = jQuery;
+window.i18n = i18n;
 
 const metaLocale = document.querySelector('meta[name=locale]');
 window.App = {

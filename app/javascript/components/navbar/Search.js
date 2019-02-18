@@ -39,7 +39,8 @@ class Search extends React.PureComponent {
     const { action = '/search', scope } = this.props;
     const { value, focused } = this.state;
     const escapedValue = encodeURIComponent(value);
-    const placeholder = scope ? `Search in ${scope}` : 'Search BlueDoc';
+    const scopeName = i18n.t(scope);
+    const placeholder = scope ? i18n.t("Search in scope", { scope: scopeName }) : i18n.t('Search BlueDoc');
     return (
       <form action={action || '/search'} className="subnav-search-context" method="GET">
         <div className="subnav-search">

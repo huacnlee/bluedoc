@@ -54,6 +54,14 @@ export default class DocSetting extends React.Component {
     this.containerRef.current.removeAttribute('open');
   }
 
+  t = (key) => {
+    if (key.startsWith(".")) {
+      return i18n.t(`editor.DocSetting${key}`)
+    } else {
+      return i18n.t(key);
+    }
+  }
+
   render() {
     const { slug } = this.state;
     const { repositoryURL } = this.props;
@@ -63,10 +71,9 @@ export default class DocSetting extends React.Component {
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
         <summary className="btn"><i className="fas fa-setting"></i></summary>
         <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
-          <h4 className="mb-4">Doc settings</h4>
           <ErrorMessages messages={this.state.messages} />
           <div className="form-group mb-4">
-            <label className="control-label">Change Slug:</label>
+            <label className="control-label">{this.t(".Slug")}</label>
             <div className="input-group d-flex">
               <div className="input-group-prepend mr-2">
                 <div className="input-group-text">{repositoryURL}/</div>
@@ -75,7 +82,7 @@ export default class DocSetting extends React.Component {
             </div>
           </div>
           <div className="text-right">
-            <span className="btn btn-primary" onClick={this.onSubmit}>Done</span>
+            <span className="btn btn-primary" onClick={this.onSubmit}>{this.t(".Done")}</span>
           </div>
         </div>
       </details>

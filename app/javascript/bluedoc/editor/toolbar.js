@@ -199,7 +199,7 @@ export default class Toolbar extends React.Component {
     title = title || type;
 
     return (
-      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
+      <BarButton icon={icon} title={this.t(`.${title}`)} active={isActive} onMouseDown={onMouseDown} />
     );
   }
 
@@ -215,21 +215,30 @@ export default class Toolbar extends React.Component {
     title = title || type;
 
     return (
-      <BarButton icon={icon} title={title} active={isActive} onMouseDown={onMouseDown} />
+      <BarButton icon={icon} title={this.t(`.${title}`)} active={isActive} onMouseDown={onMouseDown} />
     );
   }
 
-  renderBlockButton = (type, icon) => {
+  renderBlockButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
     const onMouseDown = ev => this.onClickBlock(ev, type);
 
     return (
-      <BarButton icon={icon} title={type} active={isActive} onMouseDown={onMouseDown} />
+      <BarButton icon={icon} title={this.t(`.${title}`)} active={isActive} onMouseDown={onMouseDown} />
     );
+  }
+
+  t = (key) => {
+    if (key.startsWith(".")) {
+      return i18n.t(`editor.Editor${key}`)
+    } else {
+      return i18n.t(key);
+    }
   }
 
   render() {
     const { mode = 'full' } = this.props;
+    const { t } = this;
 
     return <div className="editor-toolbar">
       <div className="container">
@@ -263,31 +272,32 @@ export default class Toolbar extends React.Component {
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading5')}>Heading 5</a></li>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading6')}>Heading 6</a></li>
               <li className="dropdown-divider"></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>Paragraph</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>{t(".Paragraph")}</a></li>
             </ul>
           </div>
         </details>
         <span className="bar-divider"></span>
         </span>
         )}
-        {this.renderMarkButton('bold', 'bold', 'Bold ⌘-b')}
-        {this.renderMarkButton('italic', 'italic', 'Italic ⌘-i')}
+        {this.renderMarkButton('bold', 'bold', 'Bold')}
+        {this.renderMarkButton('italic', 'italic', 'Italic')}
         {this.renderMarkButton('strike', 'strikethrough', 'Strike Through')}
-        {this.renderMarkButton('underline', 'underline', 'Underline ⌘-u')}
-        {this.renderMarkButton('code', 'code', 'Inline Code ⌘-`')}
+        {this.renderMarkButton('underline', 'underline', 'Underline')}
+        {this.renderMarkButton('code', 'code', 'Inline Code')}
+        <BarButton icon="link" title={this.t(".Insert Link")} onMouseDown={this.handleCreateLink} />
         <span className="bar-divider"></span>
         {this.renderBlockButton('bulleted-list', 'bulleted-list', 'Bulleted list')}
         {this.renderBlockButton('ordered-list', 'numbered-list', 'Numbered list')}
         <span className="bar-divider"></span>
         {mode === 'full' && (
         <span>
-          <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
-          <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
+          <BarButton icon="outdent" title={this.t(".Outdent")} onMouseDown={e => this.handleIndent(e, false)} />
+          <BarButton icon="indent" title={this.t(".Indent")} onMouseDown={e => this.handleIndent(e)} />
           <span className="bar-divider"></span>
           {this.renderAlignButton('left', 'align-left', 'Align Left')}
-          {this.renderAlignButton('center', 'align-center', 'Align center')}
-          {this.renderAlignButton('right', 'align-right', 'Align right')}
-          {this.renderAlignButton('justify', 'align-justify', 'Align justify')}
+          {this.renderAlignButton('center', 'align-center', 'Align Center')}
+          {this.renderAlignButton('right', 'align-right', 'Align Right')}
+          {this.renderAlignButton('justify', 'align-justify', 'Align Justify')}
           <span className="bar-divider"></span>
         </span>
         )}
@@ -296,15 +306,14 @@ export default class Toolbar extends React.Component {
         {mode === 'full' && (
         <span>
           {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
-          <BarButton icon="tex" title="Insert TeX" onMouseDown={e => this.handleAddTex(e)} />
+          <BarButton icon="tex" title={this.t(".Insert TeX")} onMouseDown={e => this.handleAddTex(e)} />
           {this.renderBlockButton('horizontal-rule', 'hr', 'Insert Horizontal line')}
         </span>
         )}
         <span className="bar-divider"></span>
-        <BarButton icon="link" title="Insert Link" onMouseDown={this.handleCreateLink} />
-        <BarButton icon="image" title="Insert Image" onMouseDown={this.handleImageClick} />
-        <BarButton icon="attachment" title="Insert File" onMouseDown={this.handleFileClick} />
-        <BarButton icon="video" title="Insert Video" onMouseDown={this.handleVideoClick} />
+        <BarButton icon="image" title={this.t(".Insert Image")} onMouseDown={this.handleImageClick} />
+        <BarButton icon="attachment" title={this.t(".Insert File")} onMouseDown={this.handleFileClick} />
+        <BarButton icon="video" title={this.t(".Insert Video")} onMouseDown={this.handleVideoClick} />
       </div>
     </div>;
   }

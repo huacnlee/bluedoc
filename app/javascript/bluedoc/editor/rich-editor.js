@@ -119,14 +119,22 @@ export default class RichEditor extends React.Component {
     this.editor.focus();
   }
 
+  t = (key) => {
+    if (key.startsWith(".")) {
+      return i18n.t(`editor.Editor${key}`)
+    } else {
+      return i18n.t(key);
+    }
+  }
+
   // Render the editor.
   render() {
     let { value, title } = this.state;
     const { mode = 'full' } = this.props;
     // change "New Document" as placeholder
-    let placeholder = 'Document title';
+    let placeholder = this.t(".New Document");
     if (title.trim() === 'New Document') {
-      placeholder = 'New Document';
+      placeholder = this.t(".New Document");
       title = '';
     }
     return <div className={`rich-editor-${mode}`}>
@@ -153,6 +161,7 @@ export default class RichEditor extends React.Component {
               service={this.attachmentService}
               plantumlServiceHost={this.props.plantumlServiceHost}
               mathJaxServiceHost={this.props.mathJaxServiceHost}
+              placeholder={this.t(".Write document contents here")}
              />
           </div>
         </div>

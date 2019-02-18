@@ -76,6 +76,14 @@ export default class EditorSetting extends React.Component {
     this.setState({ privacy: e.currentTarget.value });
   }
 
+  t = (key) => {
+    if (key.startsWith(".")) {
+      return i18n.t(`notes.EditorSetting${key}`)
+    } else {
+      return i18n.t(key);
+    }
+  }
+
   render() {
     const { slug, description, privacy } = this.state;
     const wasPrivacy = this.props.privacy;
@@ -88,7 +96,7 @@ export default class EditorSetting extends React.Component {
         <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
           <ErrorMessages messages={this.state.messages} />
           <div className="form-group">
-            <label className="control-label">Note path:</label>
+            <label className="control-label">{this.t(".Note path")}</label>
             <div className="input-group d-flex">
               <div className="input-group-prepend mr-2">
                 <div className="input-group-text">{prefix}/</div>
@@ -98,31 +106,31 @@ export default class EditorSetting extends React.Component {
           </div>
 
           <div className="form-group mb-4">
-            <label className="control-label">Description:</label>
+            <label className="control-label">{this.t(".Description")}</label>
             <textarea className="form-control" ref={this.descriptionInputRef} defaultValue={description}></textarea>
           </div>
 
           <div className="form-group mb-4">
-            <label className="control-label">Privacy:</label>
+            <label className="control-label">{this.t(".Privacy")}</label>
             <div className="form-checkbox">
               <label>
-                <input type="radio" name="_privacy" checked={privacy === "public"} onChange={this.selectPrivacy} defaultValue="public" /> Public
-                <div className="form-text">Anyone can see this Note.</div>
+      <input type="radio" name="_privacy" checked={privacy === "public"} onChange={this.selectPrivacy} defaultValue="public" /> {this.t(".Public")}
+                <div className="form-text"> {this.t(".Anyone can see this Note")}</div>
               </label>
             </div>
             <div className="form-checkbox">
               <label>
-                <input type="radio" name="_privacy" checked={privacy === "private"} onChange={this.selectPrivacy} defaultValue="private" /> Private
-                <div className="form-text">Only you can see this Note.</div>
+      <input type="radio" name="_privacy" checked={privacy === "private"} onChange={this.selectPrivacy} defaultValue="private" /> {this.t(".Private")}
+                <div className="form-text">{this.t(".Only you can see this Note")}</div>
               </label>
             </div>
             {privacy === "private" && privacy !== wasPrivacy && (
-              <div className="flash flash-error">If you change privacy from Public to Private, The we will remove the reletion datas (Star, Activity) of this Note.</div>
+              <div className="flash flash-error">{this.t(".If you change privacy from Public to Private")}</div>
             )}
           </div>
 
           <div className="text-right">
-            <span className="btn btn-primary" onClick={this.onSubmit}>Done</span>
+            <span className="btn btn-primary" onClick={this.onSubmit}>{this.t(".Done")}</span>
           </div>
         </div>
       </details>
