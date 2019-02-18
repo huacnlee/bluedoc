@@ -7,24 +7,26 @@
 <% end %>
 
 <div class="doc-page note-page d-flex flex-wrap flex-lg-nowrap">
-  <div class="doc-center">
+  <div class="doc-center flex-auto">
     <div class="doc-main">
-      <div class="reader-navbar">
-        <div class="navbar-title">
-          <span class="hide-sm">
-            <%= user_name_tag @user %>
-            <span class="divider">/</span>
-          </span>
-          <%= link_to t(".Notes"), user_notes_path(@user) %>
-          <span class="divider">/</span>
-          <span class="doc-name"><%= t(".Read") %></span>
-          <% if @note&.private? %>
-            <span class="doc-name">
-              <span class="label label-private ml-2"><%= t(".Private") %></span>
-            </span>
-          <% end %>
-        </div>
 
+      <div class="navbar-title">
+        <span class="hide-sm">
+          <%= user_name_tag @user %>
+          <span class="divider">/</span>
+        </span>
+        <%= link_to t(".Notes"), user_notes_path(@user) %>
+      </div>
+      <h1 class="doc-title">
+        <%= @note.title %>
+        <% if @note&.private? %>
+          <span class="doc-name">
+            <span class="label label-private ml-2"><%= t(".Private") %></span>
+          </span>
+        <% end %>
+      </h1>
+
+      <div class="reader-navbar text-main float-right">
         <% if @note %>
         <div class="navbar-buttons">
           <% if can? :read, @note %>
@@ -32,11 +34,11 @@
           <% end %>
 
           <% if can? :update, @note %>
-          <%= link_to icon_tag("edit"), edit_user_note_path(@user, @note), class: "btn btn-sm btn-link btn-edit-doc hide-sm ml-1" %>
+          <%= link_to icon_tag("edit", label: t(".Edit")), edit_user_note_path(@user, @note), class: "btn btn-sm btn-link btn-edit-doc hide-sm ml-1" %>
           <% end %>
 
-          <details class="dropdown details-overlay details-reset d-inline-block">
-            <summary class="btn btn-sm btn-link ml-1"><%= icon_tag("ellipsis") %></summary>
+          <details class="dropdown details-overlay details-reset d-inline-block ml-2">
+            <summary class="link-gray-dark"><%= icon_tag("more") %></summary>
             <ul class="dropdown-menu dropdown-menu-sw">
               <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_note_path(@user, @note) %>"><%= t(".Markdown") %></a></li>
               <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
@@ -60,8 +62,6 @@
         <% end %>
       </div>
 
-      <h1 class="doc-title"><%= @note.title %></h1>
-
       <div class="doc-info">
         <%= t(".Last edit by") %> <%= user_name_tag(@note.user) %> <%= t(".edited at") %> <%= timeago @note.body_updated_at %>
       </div>
@@ -70,11 +70,11 @@
         <%= raw @note.body_html %>
       </div>
 
-       <%= render "readers", note: @note, readers: @readers %>
-
-      <div class="note-reaction">
+      <div class="doc-reaction note-reaction">
         <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
       </div>
+
+      <%= render "readers", note: @note, readers: @readers %>
 
       <% if @between_notes %>
       <div class="between-docs my-4 clearfix">
@@ -95,7 +95,6 @@
       <% end %>
     </div>
   </div>
-  <div class="doc-body-toc-holder"></div>
-  <div class="doc-body-toc" data-turbolinks="false">
+  <div class="doc-body-toc" data-turbolinks="false"></div>
   </div>
 </div>

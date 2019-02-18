@@ -6,6 +6,7 @@ import RichEditor from 'bluedoc/editor/rich-editor';
 
 export default class Editor extends React.PureComponent {
   inputRef = React.createRef()
+  formatInputRef = React.createRef()
   markdownInputRef = React.createRef()
   titleInputRef = React.createRef()
   editorRef = React.createRef()
@@ -23,10 +24,9 @@ export default class Editor extends React.PureComponent {
 
   onChange = (markdownValue, smlValue) => {
     const { format } = this.props;
-    if (format === 'markdown') {
-      this.inputRef.current.value = markdownValue;
-    } else {
-      this.markdownInputRef.current.value = markdownValue;
+    this.markdownInputRef.current.value = markdownValue;
+    if (smlValue) {
+      this.formatInputRef.current.value = "sml";
       this.inputRef.current.value = smlValue;
     }
   }
@@ -38,11 +38,12 @@ export default class Editor extends React.PureComponent {
   render() {
     const {
       directUploadURL, blobURLTemplate, plantumlServiceHost, mathJaxServiceHost,
-      name = 'body_sml', markdownName = 'body', titleName = 'title', value = '', title = '', format = 'markdown',
+      name = 'body_sml', markdownName = 'body', titleName = 'title', formatName = "format", value = '', title = '', format = 'markdown',
     } = this.props;
 
     return <div>
       <input name={titleName} ref={this.titleInputRef} value={title} style={{ display: 'none' }} />
+      <input name={formatName} ref={this.formatInputRef} value={format} style={{ display: 'none' }} />
       <textarea name={name} ref={this.inputRef} style={{ display: 'none' }} />
       <textarea name={markdownName} ref={this.markdownInputRef} style={{ display: 'none' }} />
       <form onSubmit={this.avoidSubmit}>

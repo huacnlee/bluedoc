@@ -23,6 +23,11 @@
                 <label class="label label-private"><%= t(".Private") %></label>
                 <% end %>
               </div>
+              <% if note.description.present? %>
+              <div class="description">
+                <%= note.description %>
+              </div>
+              <% end %>
               <div class="info">
                 <%= timeago note.body_updated_at %>
               </div>

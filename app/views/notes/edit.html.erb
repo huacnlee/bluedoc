@@ -46,6 +46,13 @@
       </div>
       <div class="navbar-buttons">
         <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
+        <%= react_component "notes/EditorSetting", {
+          slug: @note.slug,
+          description: @note.description,
+          privacy: @note.privacy,
+          prefix: user_notes_path(@user),
+          saveURL: user_note_path(@user),
+        } %>
       </div>
     </div>
   </div>
@@ -56,6 +63,7 @@
       value: @note.body_sml_plain,
       name: "note[body_sml]",
       markdownName: "note[body]",
+      formatName: "note[format]",
       titleName: "note[title]",
       directUploadURL: rails_direct_uploads_url,
       blobURLTemplate: upload_path(":id"),

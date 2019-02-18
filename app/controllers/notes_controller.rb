@@ -54,10 +54,18 @@ class NotesController < Users::ApplicationController
   def update
     authorize! :update, @note
 
-    if @note.update(note_params)
-      redirect_to @note.to_path, notice: t(".Note was successfully updated")
-    else
-      render :edit, layout: "editor"
+    if note_params[:body_sml].blank?
+      note_params[:format] = @note.format
+    end
+
+    respond_to do |format|
+      if @note.update(note_params)
+        format.html { redirect_to @note.to_path, notice: t(".Note was successfully updated") }
+        format.json { render json: { ok: true, note: { slug: @note.slug } } }
+      else
+        render :edit, layout: "editor"
+        format.json { render json: { ok: true, messages: @note.errors.full_messages } }
+      end
     end
   end
 
