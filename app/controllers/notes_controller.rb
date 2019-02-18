@@ -63,8 +63,8 @@ class NotesController < Users::ApplicationController
         format.html { redirect_to @note.to_path, notice: t(".Note was successfully updated") }
         format.json { render json: { ok: true, note: { slug: @note.slug } } }
       else
-        render :edit, layout: "editor"
-        format.json { render json: { ok: true, messages: @note.errors.full_messages } }
+        format.html { render :edit, layout: "editor" }
+        format.json { render json: { ok: false, messages: @note.errors.full_messages } }
       end
     end
   end

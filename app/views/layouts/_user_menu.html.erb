@@ -34,9 +34,9 @@
       </div>
       <ul>
         <li><a class="dropdown-item" href="<%= current_user.to_path %>"><%= t(".Your profile") %></a></li>
+        <li class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=repositories") %>"><%= t(".Your repositories") %></a></li>
         <li><a class="dropdown-item" href="<%= current_user.to_path("/notes") %>"><%= t(".Your notes") %></a></li>
-        <li><a class="dropdown-item" href="<%= current_user.to_path("?tab=stars") %>"><%= t(".Your stars") %></a></li>
         <% if current_user.admin? %>
         <li class="dropdown-divider"></li>
         <li><a class="dropdown-item" data-turbolinks="false" href="<%= main_app.admin_root_path %>"><%= t(".Admin Panel") %></a></li>

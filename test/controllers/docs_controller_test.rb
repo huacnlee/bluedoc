@@ -593,10 +593,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path("/versions")
     assert_equal 200, response.status
     assert_select ".version-item", 8
-    assert_select ".version-item label.current", 1
+    assert_select ".version-item .current", 1
     assert_select ".version-item.selected", 1
     assert_select ".version-items .version-item", 7
-    assert_select ".version-items .version-item label.current", 0
+    assert_select ".version-items .version-item .current", 0
     assert_select ".version-preview .markdown-body", html: last_version.body_html
     assert_select "#previus-version-content", html: previous_version.body_html
 

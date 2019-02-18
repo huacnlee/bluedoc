@@ -234,6 +234,26 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal note_params[:body], note.body_plain
     assert_equal note_params[:body_sml], note.body_sml_plain
     assert_equal note_params[:format], note.format
+
+
+    # shoud save with JSON API
+    put note.to_path, params: { note: { slug: "", title: "" }, format: :json }
+    assert_equal 200, response.status
+    res = JSON.parse(response.body)
+    assert_equal false, res["ok"]
+    assert_equal true, res["messages"].is_a?(Array)
+    assert_equal true, res["messages"].length > 0
+
+    put note.to_path, params: { note: { slug: "Hello world", description: "New description", privacy: "private" }, format: :json }
+    assert_equal 200, response.status
+    res = JSON.parse(response.body)
+    assert_equal true, res["ok"]
+    assert_equal "Hello-world", res["note"]["slug"]
+
+    note.reload
+    assert_equal "Hello-world", note.slug
+    assert_equal "New description", note.description
+    assert_equal true, note.private?
   end
 
   test "DELETE /:user/notes/:slug" do
@@ -296,10 +316,10 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     get note.to_path("/versions")
     assert_equal 200, response.status
     assert_select ".version-item", 8
-    assert_select ".version-item label.current", 1
+    assert_select ".version-item .current", 1
     assert_select ".version-item.selected", 1
     assert_select ".version-items .version-item", 7
-    assert_select ".version-items .version-item label.current", 0
+    assert_select ".version-items .version-item .current", 0
     assert_select ".version-preview .markdown-body", html: last_version.body_html
     assert_select "#previus-version-content", html: previous_version.body_html
 
