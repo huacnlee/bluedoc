@@ -1,4 +1,4 @@
-import { ErrorMessages } from '../shared/error-messages';
+import ErrorMessages from '../shared/error-messages';
 
 export default class DocSetting extends React.Component {
   constructor(props) {
@@ -62,10 +62,10 @@ export default class DocSetting extends React.Component {
       <React.Fragment>
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
         <summary className="btn"><i className="fas fa-setting"></i></summary>
-        <div className="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left">
-          <h4 className="mb-2">Doc settings</h4>
+        <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
+          <h4 className="mb-4">Doc settings</h4>
           <ErrorMessages messages={this.state.messages} />
-          <div className="form-group">
+          <div className="form-group mb-4">
             <label className="control-label">Change Slug:</label>
             <div className="input-group d-flex">
               <div className="input-group-prepend mr-2">
@@ -74,7 +74,7 @@ export default class DocSetting extends React.Component {
               <input type="text" ref={this.slugInputRef} className="form-control input-slug flex-auto" defaultValue={slug} />
             </div>
           </div>
-          <div className="mt-1 text-right">
+          <div className="text-right">
             <span className="btn btn-primary" onClick={this.onSubmit}>Done</span>
           </div>
         </div>
