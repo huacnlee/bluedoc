@@ -700,3 +700,12 @@ en:
     index:
       Notes: Notes
       No notes: Current no notes.
+    edit:
+      New Note: New Note
+      Publish: Publish
+      Note publish failed, because there has count issues: Note publish failed, because there has %{count} issues
+    show:
+      Not found: Not found
+      Last edit by: Last edit by
+      edited at: edited at
+

@@ -1,0 +1,42 @@
+<% title_tag @note ? @note.title : t(".Not found") %>
+
+<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-center">
+    <div class="doc-main">
+      <h1 class="doc-title"><%= @note.title %></h1>
+
+      <div class="doc-info">
+        <%= t(".Last edit by") %> <%= user_name_tag(@note.user) %> <%= t(".edited at") %> <%= timeago @note.body_updated_at %>
+      </div>
+
+      <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+        <%= raw @note.body_html %>
+      </div>
+
+      <div class="note-reaction">
+        <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
+      </div>
+
+      <% if @between_notes %>
+      <div class="between-docs my-4 clearfix">
+        <% if @between_notes[:prev] %>
+          <%= link_to @between_notes[:prev].title, @between_notes[:prev].to_path, class: "btn-link btn-prev" %>
+        <% end %>
+
+        <% if @between_notes[:next] %>
+          <%= link_to @between_notes[:next].title, @between_notes[:next].to_path, class: "btn-link btn-next" %>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @comments %>
+      <div class="doc-comments mt-3 clearfix">
+        <%= render "/comments/comments", commentable: @note, comments: @comments %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="doc-body-toc-holder"></div>
+  <div class="doc-body-toc" data-turbolinks="false">
+  </div>
+</div>

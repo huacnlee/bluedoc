@@ -1,0 +1,63 @@
+<%= form_with(model: [@user, @note],
+  url: user_note_path(params[:user_id]),
+  local: true,
+  remote: true,
+  id: "note-form") do |form| %>
+
+  <% if @note.errors.any? %>
+  <details class="note-validation-error details-reset details-overlay" open>
+    <summary></summary>
+    <details-dialog class="box box--overlay d-flex flex-column anim-fade-in fast">
+      <div class="box-body overflow-auto">
+        <button class="box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog>
+          <%= icon_tag "times" %>
+        </button>
+        <div class="mx-5 my-2">
+          <div class="mb-4 text-center text-red">
+            <p style="font-size: 32px"><%= icon_tag("error") %></p>
+            <div class="mb-1 text-red">
+              <strong><%= t(".Note publish failed, because there has count issues", count: @note.errors.count) %></strong>
+            </div>
+          </div>
+          <ul class="ml-3">
+            <% @note.errors.full_messages.each do |msg| %>
+             <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </details-dialog>
+    </details>
+  <% end %>
+
+
+  <div id="editor-form">
+    <div class="editor-navbar">
+      <div class="navbar-title">
+        <a class="navbar-brand" href="<%= @user.to_path %>"><%= icon_tag("bluedoc") %></a>
+        <span class= "divider">/</span>
+        <%= user_name_tag @user %>
+        <span class= "divider">/</span>
+        <a href="<%= @note.to_path %>" class="note-link"><%= @note.title || t(".New Note") %></a>
+        <span class="editor-message"></span>
+      </div>
+      <div class="navbar-buttons">
+        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
+      </div>
+    </div>
+  </div>
+  <div class="editor-container">
+    <%= react_component "Editor", {
+      format: @note.format,
+      title: @note.title,
+      value: @note.body_sml_plain,
+      name: "note[body_sml]",
+      markdownName: "note[body]",
+      titleName: "note[title]",
+      directUploadURL: rails_direct_uploads_url,
+      blobURLTemplate: upload_path(":id"),
+      plantumlServiceHost: Setting.plantuml_service_host,
+      mathJaxServiceHost: Setting.mathjax_service_host
+    } %>
+  </div>
+<% end %>

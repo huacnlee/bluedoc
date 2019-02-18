@@ -5,6 +5,7 @@ class User
   action_store :star, :repository, counter_cache: true
   action_store :star, :doc
   action_store :watch_comment, :doc
+  action_store :watch_comment, :note
   action_store :read, :doc, counter_cache: true
 
   # read doc, or update visit time if exist

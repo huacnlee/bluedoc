@@ -3,12 +3,16 @@
 class NotesController < Users::ApplicationController
   before_action :authenticate_anonymous!
 
-  before_action :set_user
-  before_action :set_note, only: %i[edit update destroy versions revert raw]
+  before_action :set_user, except: %i[new create]
+  before_action :set_note, only: %i[show edit update destroy versions revert raw]
   before_action :authenticate_user!, only: %i[new edit update destroy versions revert]
 
   def index
-    @notes = @user.notes.recent.page(params[:page])
+    @notes = @user.notes.recent
+    if @user != current_user
+      @notes = @notes.publics
+    end
+    @notes = @notes.page(params[:page])
   end
 
   def new
@@ -18,6 +22,11 @@ class NotesController < Users::ApplicationController
 
   def show
     authorize! :read, @note
+
+    @comments = @note.comments.with_includes.order("id asc")
+    @between_notes = @note.prev_and_next_of_notes
+
+    render :show, layout: "reader"
   end
 
   def edit

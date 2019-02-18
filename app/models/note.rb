@@ -2,6 +2,7 @@ class Note < ApplicationRecord
   include Slugable
   include Activityable
   include Smlable
+  include Reactionable
 
   second_level_cache expires_in: 1.week
 
@@ -11,6 +12,7 @@ class Note < ApplicationRecord
   scope :recent, -> { order("id desc") }
 
   belongs_to :user
+  has_many :comments, as: :commentable, dependent: :destroy
 
   depends_on :privacy, :publish, :body_touch, :versions
 
@@ -42,7 +44,7 @@ class Note < ApplicationRecord
       note.format = "sml"
       note.user_id = user_id
       note.title = "New Note"
-      note.slug = slug || BookLab::Slug.random(seed: 999999)
+      note.slug = slug || BlueDoc::Slug.random(seed: 999999)
       note.save!
       note
     rescue ActiveRecord::RecordNotUnique
