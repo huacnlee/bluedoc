@@ -8,11 +8,11 @@ class Note < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :slug, length: { maximum: 200 }
 
-   scope :recent, -> { order("id desc") }
+  scope :recent, -> { order("id desc") }
 
   belongs_to :user
 
-  depends_on :publish, :body_touch, :versions
+  depends_on :privacy, :publish, :body_touch, :versions
 
   def to_path(suffix = nil)
     "#{user.to_path}/notes/#{self.slug}#{suffix}"

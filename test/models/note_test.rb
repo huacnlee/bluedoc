@@ -90,4 +90,14 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal notes[3], result[:prev]
     assert_nil result[:next]
   end
+
+  test "Privacy" do
+    note = build(:note, privacy: :private)
+    assert_equal true, note.private?
+    assert_equal false, note.public?
+
+    note = build(:note, privacy: :public)
+    assert_equal false, note.private?
+    assert_equal true, note.public?
+  end
 end
