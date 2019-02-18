@@ -9,6 +9,10 @@
         <div class="subhead"><h2><%= t(".Stared Docs") %></div></div>
         <%= render "action_docs" %>
         <%= paginate @docs %>
+      <% elsif action_name == "stars_notes" %>
+        <div class="subhead"><h2><%= t(".Stared Notes") %></div></div>
+        <%= render "action_notes" %>
+        <%= paginate @notes %>
       <% else %>
         <div class="subhead"><h2><%= t(".Stared Repositories") %></h2></div>
         <%= render "action_repositories" %>

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get :docs
       get :stars
       get :stars_docs, path: "stars/docs"
+      get :stars_notes, path: "stars/notes"
       get :watches
     end
   end
@@ -94,11 +95,14 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
     end
-    resources :notes, only: %i(index edit show update destroy) do
+    resources :notes, only: %i(index create edit show update destroy) do
       member do
         get :raw
         get :versions
         patch :revert
+        post :action
+        delete :action
+        get :readers
       end
     end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do

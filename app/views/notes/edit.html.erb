@@ -1,5 +1,5 @@
 <%= form_with(model: [@user, @note],
-  url: user_note_path(params[:user_id]),
+  url: user_note_path(@user),
   local: true,
   remote: true,
   id: "note-form") do |form| %>
@@ -39,6 +39,9 @@
         <%= user_name_tag @user %>
         <span class= "divider">/</span>
         <a href="<%= @note.to_path %>" class="note-link"><%= @note.title || t(".New Note") %></a>
+        <% if @note.private? %>
+        <label class="label label-private"><%= t(".Private") %></label>
+        <% end %>
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">

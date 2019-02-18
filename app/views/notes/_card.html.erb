@@ -1,0 +1,11 @@
+<% if note %>
+  <div class="doc-card">
+    <div class="mb-1 text-main">
+      <%= note_title_tag(note) %>
+    </div>
+    <div class="path">
+      <%= user_name_tag(note.user) %> /
+      <%= link_to t(".Notes"), user_notes_path(note.user) %>
+    </div>
+  </div>
+<% end %>

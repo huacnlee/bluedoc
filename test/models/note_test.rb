@@ -100,5 +100,21 @@ class NoteTest < ActiveSupport::TestCase
     note = build(:note, privacy: :public)
     assert_equal false, note.private?
     assert_equal true, note.public?
+
+    note = create(:note, privacy: :public)
+    create(:activity, )
+  end
+
+  test "private dependent :activites" do
+    note = create(:note)
+    create(:activity, target: note)
+    create(:activity, target: note)
+    assert_equal 2, Activity.where(target: note).count
+
+    note.update(privacy: :public)
+    assert_equal 2, Activity.where(target: note).count
+
+    note.update(privacy: :private)
+    assert_equal 0, Activity.where(target: note).count
   end
 end

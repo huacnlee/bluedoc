@@ -49,7 +49,7 @@ zh-CN:
         user: 所属团队/个人
         user_id: 所属团队/个人
         description: 简介
-        privacy: 隐私
+        privacy: 隐私模式
       comment:
         body: 评论内容
       member:
@@ -64,6 +64,7 @@ zh-CN:
         description: 简介
         body: 正文
         body_sml: 正文
+        privacy: 隐私模式
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。

@@ -114,6 +114,7 @@ en:
     created: created
     has followed: has followed
     starred Doc: starred a Doc
+    starred Note: starred a Note
     starred: starred
     transfer: transfer
   admin:
@@ -248,9 +249,9 @@ en:
       In reply to: In reply to
   dashboards:
     action_docs:
-      You does not have any action_name docs: You does not have any %{action} docs.
+      You does not have any action_name docs: You does not have any star docs.
     action_repositories:
-      You does not have any action_name repositories: You does not have any %{action} repositories.
+      You does not have any action_name repositories: You does not have any star repositories.
     groups:
       You does not have any groups: You does not have any groups.
     menu:
@@ -260,6 +261,7 @@ en:
       Group: Groups
       Star: Stars
       Watch: Watches
+      Note: Notes
     docs:
       Dashboard Docs: Dashboard - Docs
       Recent docs: Recent edited docs
@@ -281,9 +283,13 @@ en:
       You have no activity in recently: You have no activity in recently.
     stars:
       Stared Docs: Stared Docs
+      Stared Notes: Stared Notes
       Stared Repositories: Stared Repositories
     watches:
       All Watches: All watches
+    action_notes:
+      You does not have any action_name notes: You does not have any star Notes.
+      Notes: Notes
   versions:
     version:
       Current: Current
@@ -697,13 +703,33 @@ en:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc. It will be visible to anyone
       Use a photo or image rather than text and upload an image that is 132px square or larger: Use a photo or image rather than text and upload an image that is 132px square or larger
   notes:
+    card:
+      Notes: Notes
     index:
       Notes: Notes
       No notes: Current no notes.
+      Private: Private
+      Are you sure delete?: Are you sure delete this Note?
+    new:
+      New Note: New Note
+      Create Note: Create Note
+      Use a short description to describe of this Note: Use a short description (in 200 chars) to describe of this Note.
+      Public: Public
+      Private: Private
+      Anyone can see this Note: Anyone can see this Note.
+      Only you can see this Note: Only you can see this Note.
     edit:
       New Note: New Note
       Publish: Publish
       Note publish failed, because there has count issues: Note publish failed, because there has %{count} issues
+      Private: Private
+    update:
+      Note was successfully updated: Note was successfully updated.
+    destroy:
+      Note was successfully deleted: Note was successfully deleted.
+    revert:
+      Note was successfully reverted: Note was successfully reverted.
+      Revert failed, please check a exists version: Revert failed, please check a exists version.
     show:
       Not found: Not found
       Last edit by: Last edit by
@@ -724,4 +750,8 @@ en:
       Diff mode: Diff mode
       Revert: Revert
       Cancel: Cancel
+    readers:
+      people: people
+      has read: has read this Doc.
+      Reader list: Reader list
 

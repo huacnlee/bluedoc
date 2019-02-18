@@ -121,6 +121,24 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".menu-item.selected", text: "Docs"
   end
 
+  test "GET /dashboard/stars/notes" do
+    assert_require_user do
+      get "/dashboard/stars/notes"
+    end
+
+    note0 = create(:note)
+    note1 = create(:note)
+
+    @user.star_note(note0)
+    @user.star_note(note1)
+
+    sign_in @user
+    get "/dashboard/stars/notes"
+    assert_equal 200, response.status
+    assert_select ".recent-notes .recent-doc-item", 2
+    assert_select ".menu-item.selected", text: "Notes"
+  end
+
   test "GET /dashboard/watches" do
     assert_require_user do
       get "/dashboard/watches"

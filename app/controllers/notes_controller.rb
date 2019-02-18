@@ -4,8 +4,8 @@ class NotesController < Users::ApplicationController
   before_action :authenticate_anonymous!
 
   before_action :set_user, except: %i[new create]
-  before_action :set_note, only: %i[show edit update destroy versions revert raw]
-  before_action :authenticate_user!, only: %i[new edit update destroy versions revert]
+  before_action :set_note, only: %i[show edit update destroy versions revert raw action readers]
+  before_action :authenticate_user!, except: %i[index show readers raw]
 
   def index
     @notes = @user.notes.recent
@@ -16,10 +16,19 @@ class NotesController < Users::ApplicationController
   end
 
   def new
-    @note = Note.create_new(current_user.id, slug: params[:slug])
-    redirect_to @note.to_path("/edit")
-  rescue ActiveRecord::RecordInvalid => e
-    redirect_to current_user.to_path("/notes/#{params[:slug]}"), alert: "Create slug as #{params[:slug]} failed, maybe it exist."
+    @user = current_user
+    @note = Note.new(slug: params[:slug] || BlueDoc::Slug.random)
+  end
+
+  def create
+    @user = current_user
+    @note = @user.notes.new(note_params)
+    @note.format = "sml"
+    if @note.save
+      redirect_to @note.to_path("/edit")
+    else
+      render "new"
+    end
   end
 
   def show
@@ -27,6 +36,11 @@ class NotesController < Users::ApplicationController
 
     @comments = @note.comments.with_includes.order("id asc")
     @between_notes = @note.prev_and_next_of_notes
+    @readers = @note.read_by_user_actions.order("updated_at desc").limit(5)
+
+    if current_user
+      current_user.read_note(@note)
+    end
 
     render :show, layout: "reader"
   end
@@ -41,7 +55,7 @@ class NotesController < Users::ApplicationController
     authorize! :update, @note
 
     if @note.update(note_params)
-      redirect_to @note.to_path, notice: "Note was successfully updated."
+      redirect_to @note.to_path, notice: t(".Note was successfully updated")
     else
       render :edit, layout: "editor"
     end
@@ -51,7 +65,7 @@ class NotesController < Users::ApplicationController
     authorize! :destroy, @note
 
     @note.destroy
-    redirect_to @user.to_path("/notes"), notice: "Note was successfully deleted."
+    redirect_to @user.to_path("/notes"), notice: t(".Note was successfully deleted")
   end
 
   # GET /:user/notes/:slug/raw
@@ -77,10 +91,34 @@ class NotesController < Users::ApplicationController
 
     version_id = params.permit(:version_id)[:version_id]
     if @note.revert(version_id, user_id: current_user.id)
-      redirect_to @note.to_path, notice: "Note was successfully reverted."
+      redirect_to @note.to_path, notice: t(".Note was successfully reverted")
     else
-      redirect_to @note.to_path("/versions"), alert: "Revert failed, please check a exists version."
+      redirect_to @note.to_path("/versions"), alert: t(".Revert failed, please check a exists version")
     end
+  end
+
+  # POST /:user/notes/:slug/action
+  # DELETE /:user/notes/:slug/action
+  def action
+    authorize! :read, @note
+
+    if request.post?
+      User.create_action(params[:action_type], target: @note, user: current_user)
+
+      if params[:action_type] == "star"
+        Activities::Note.new(@note).star
+      end
+    else
+      User.destroy_action(params[:action_type], target: @note, user: current_user)
+    end
+    @note.reload
+  end
+
+  # GET /:user/notes/:slug/readers
+  def readers
+    authorize! :read, @note
+
+    @readers = @note.read_by_user_actions.order("updated_at desc").all
   end
 
   private
@@ -90,6 +128,6 @@ class NotesController < Users::ApplicationController
     end
 
     def note_params
-      params.require(:note).permit(:title, :body, :body_sml, :slug, :format)
+      params.require(:note).permit(:title, :body, :body_sml, :slug, :format, :privacy, :description)
     end
 end

@@ -18,18 +18,28 @@
             <li class="card recent-note-item mb-2">
               <div class="title">
                 <%= note_title_tag(note) %>
+
+                <% if note.private? %>
+                <label class="label label-private"><%= t(".Private") %></label>
+                <% end %>
               </div>
               <div class="info">
                 <%= timeago note.body_updated_at %>
               </div>
               <div class="action action-icon">
-                <%= link_to icon_tag("edit"), note.to_path("/edit") %>
+                <% if can? :update, note %>
+                  <%= link_to icon_tag("edit"), note.to_path("/edit"), class: "btn-edit" %>
+                <% end %>
+                <% if can? :delete, note %>
+                  <%= link_to icon_tag("trash"), note.to_path, class: "btn-delete", data: { method: :delete, confirm: t(".Are you sure delete?") }  %>
+                <% end %>
               </div>
             </li>
           <% end %>
         </ul>
         <% end %>
       </div>
+      <%= paginate @notes %>
     </div>
   </div>
 </div>

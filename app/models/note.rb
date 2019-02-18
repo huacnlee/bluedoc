@@ -8,13 +8,14 @@ class Note < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :slug, length: { maximum: 200 }, uniqueness: { scope: :user_id, case_sensitive: false }
+  validates :description, length: { maximum: 200 }
 
   scope :recent, -> { order("id desc") }
 
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  depends_on :privacy, :publish, :body_touch, :versions
+  depends_on :privacy, :soft_delete, :publish, :body_touch, :versions
 
   def to_path(suffix = nil)
     "#{user.to_path}/notes/#{self.slug}#{suffix}"
@@ -39,12 +40,12 @@ class Note < ApplicationRecord
   end
 
   class << self
-    def create_new(user_id, slug: nil)
+    def create_new(user_id, slug: nil, title: nil)
       note = Note.new
       note.format = "sml"
       note.user_id = user_id
-      note.title = "New Note"
-      note.slug = slug || BlueDoc::Slug.random(seed: 999999)
+      note.title = title || "New Note"
+      note.slug = slug.blank? ? BlueDoc::Slug.random(seed: 999999) : slug
       note.save!
       note
     rescue ActiveRecord::RecordNotUnique

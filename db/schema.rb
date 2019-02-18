@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_062329) do
     t.string "format", limit: 20, default: "markdown", null: false
     t.datetime "body_updated_at"
     t.datetime "deleted_at"
+    t.string "deleted_slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "body_updated_at"], name: "index_notes_on_user_id_and_body_updated_at"

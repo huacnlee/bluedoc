@@ -273,6 +273,7 @@ class UserTest < ActiveSupport::TestCase
   test "actions" do
     user = create(:user)
     doc = create(:doc)
+    note = create(:note)
     repo = create(:repository)
 
     # watch repo
@@ -289,10 +290,31 @@ class UserTest < ActiveSupport::TestCase
     user.star_doc(doc)
     assert_equal true, user.star_doc?(doc)
 
+    # star note
+    user.star_note(note)
+    assert_equal true, user.star_note?(note)
+
     # watch comment doc
     user.watch_comment_doc(doc)
     assert_equal true, user.watch_comment_doc?(doc)
     assert_equal [user.id], doc.watch_comment_by_user_ids
+
+    # watch comment note
+    user.watch_comment_note(note)
+    assert_equal true, user.watch_comment_note?(note)
+    assert_equal [user.id], note.watch_comment_by_user_ids
+
+    # read doc
+    user.read_doc(doc)
+    user.read_doc(doc)
+    assert_equal true, user.read_doc?(doc)
+    assert_equal [user.id], doc.read_by_user_ids
+
+    # read note
+    user.read_note(note)
+    user.read_note(note)
+    assert_equal true, user.read_note?(note)
+    assert_equal [user.id], note.read_by_user_ids
   end
 
   test "avatar_url" do

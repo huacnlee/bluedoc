@@ -12,6 +12,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.string :format, limit: 20, null: false, default: "markdown"
       t.datetime :body_updated_at
       t.datetime :deleted_at
+      t.string :deleted_slug
 
       t.timestamps
     end

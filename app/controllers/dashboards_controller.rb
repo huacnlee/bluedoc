@@ -42,6 +42,12 @@ class DashboardsController < ApplicationController
     render "stars"
   end
 
+  # GET /dashboard/stars/notes
+  def stars_notes
+    @notes = current_user.star_notes.includes(:user).page(params[:page]).per(12)
+    render "stars"
+  end
+
   def watches
     @repositories = current_user.watch_repositories.includes(:user).page(params[:page]).per(12)
   end

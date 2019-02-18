@@ -17,6 +17,8 @@ class SoftDeleteTest < ActiveSupport::TestCase
     member0 = create(:member, subject: group0)
     member1 = create(:member, subject: repo0)
     member2 = create(:member)
+    note0 = create(:note, user_id: group0.id, slug: "note-0")
+    comment3 = create(:comment, commentable: note0)
 
     create_list(:activity, 2, group_id: group0.id)
     create_list(:activity, 2, repository_id: repo0.id)
@@ -42,6 +44,8 @@ class SoftDeleteTest < ActiveSupport::TestCase
     assert_soft_deleted Member, member0
     assert_soft_deleted Member, member1
     assert_no_soft_delete Member, member2
+    assert_soft_deleted Note, note0
+    assert_soft_deleted Comment, comment3
     assert_equal 0, Activity.where(group_id: group0.id).count
     assert_equal 0, Activity.where(repository_id: repo0.id).count
 
@@ -58,12 +62,15 @@ class SoftDeleteTest < ActiveSupport::TestCase
     assert_no_soft_delete Comment, comment1
     assert_no_soft_delete Member, member0
     assert_no_soft_delete Member, member1
+    assert_no_soft_delete Note, note0
+    assert_no_soft_delete Comment, comment3
 
     # Destroy again
     group.destroy
     assert_soft_deleted Group, group0, slug: "group-0"
     assert_soft_deleted Repository, repo0, slug: "repo-0"
     assert_soft_deleted Doc, doc0, slug: "doc-0"
+    assert_soft_deleted Note, note0, slug: "note-0"
 
     # Use same slug
     group3 = create(:group, slug: "group-0")
@@ -77,6 +84,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
     assert_match /group\-0\-/, group.slug
     assert_no_soft_delete Repository, repo0, slug: "repo-0"
     assert_no_soft_delete Doc, doc0, slug: "doc-0"
+    assert_no_soft_delete Note, note0, slug: "note-0"
   end
 
   test "Soft Delete with Repository" do
@@ -185,6 +193,41 @@ class SoftDeleteTest < ActiveSupport::TestCase
     member = Member.unscoped.find(member0.id)
     assert_no_soft_delete Member, member
     assert_equal "editor", member.role
+  end
+
+  test "Soft Delete Note with restore dependents" do
+    note = create(:note, body: "Hello world")
+    comment0 = create(:comment, commentable: note)
+    comment1 = create(:comment, commentable: note)
+    comment2 = create(:comment, commentable: note)
+    versions = create_list(:note_version, 2, subject: note)
+
+    # delete comment2 first
+    comment2.destroy
+    assert_soft_deleted Comment, comment2
+
+    sleep 0.01
+    note.destroy
+
+    assert_soft_deleted Note, note
+    assert_soft_deleted Comment, comment0
+    assert_soft_deleted Comment, comment1
+    assert_equal "Hello world", RichText.where(record: note).first&.body
+    assert_equal 3, note.versions.count
+    assert_equal "Hello world", note.versions.last&.body_plain
+
+    note = Note.unscoped.find(note.id)
+    note.restore
+    assert_no_soft_delete Note, note
+    assert_equal "Hello world", note.body_plain
+    assert_not_nil RichText.where(record: note).first
+    assert_equal 3, note.versions.count
+    assert_equal "Hello world", note.versions.last&.body_plain
+
+    assert_no_soft_delete Comment, comment0
+    assert_no_soft_delete Comment, comment1
+    # comment2 has deleted before doc destroy, so it will not restore
+    assert_soft_deleted Comment, comment2
   end
 
   private

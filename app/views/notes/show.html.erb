@@ -70,6 +70,8 @@
         <%= raw @note.body_html %>
       </div>
 
+       <%= render "readers", note: @note, readers: @readers %>
+
       <div class="note-reaction">
         <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
       </div>

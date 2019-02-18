@@ -18,6 +18,8 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".user-notes" do
       assert_select ".title", text: "Notes"
       assert_select ".recent-note-item", 3
+      assert_select ".recent-note-item .action a.btn-edit", 0
+      assert_select ".recent-note-item .action a.btn-delete", 0
     end
 
     # with anonymous disable
@@ -33,6 +35,8 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".user-notes" do
       assert_select ".title", text: "Notes"
       assert_select ".recent-note-item", 5
+      assert_select ".recent-note-item .action a.btn-edit", 5
+      assert_select ".recent-note-item .action a.btn-delete", 5
     end
 
     public_notes = create_list(:note, 3, user: @other_user, privacy: :public)
@@ -42,6 +46,8 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".user-notes" do
       assert_select ".title", text: "Notes"
       assert_select ".recent-note-item", 3
+      assert_select ".recent-note-item .action a.btn-edit", 0
+      assert_select ".recent-note-item .action a.btn-delete", 0
     end
   end
 
@@ -51,23 +57,58 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     end
 
     sign_in @user
-    get new_note_path
-    note = @user.notes.last
-    assert_redirected_to note.to_path("/edit")
-
-    # with slug param
-    assert_changes -> { @user.notes.count }, 1 do
-      get new_note_path, params: { slug: "hello-world" }
+    get new_note_path(slug: "hello-world")
+    assert_equal 200, response.status
+    assert_select "form[action=?]", user_notes_path(@user) do
+      assert_select "input[name='note[slug]']" do
+        assert_select "[value=?]", "hello-world"
+      end
     end
-    note = @user.notes.last
-    assert_equal "hello-world", note.slug
-    assert_redirected_to note.to_path("/edit")
 
-    # with same slug
-    assert_no_changes -> { @user.notes } do
-      get new_note_path, params: { slug: "hello-world" }
+    BlueDoc::Slug.stub(:random, "foo-bar") do
+      get new_note_path
     end
-    assert_redirected_to note.to_path
+    assert_equal 200, response.status
+    assert_select "form[action=?]", user_notes_path(@user) do
+      assert_select "input[name='note[slug]']" do
+        assert_select "[value=?]", "foo-bar"
+      end
+    end
+  end
+
+  test "POST /:user/notes" do
+    assert_require_user do
+      post user_notes_path(@user), params: { note: {} }
+    end
+
+    sign_in @user
+    note_params = {
+      slug: "foo-bar"
+    }
+    post user_notes_path(@user), params: { note: note_params }
+    assert_equal 200, response.status
+    assert_select ".flash-error"
+    assert_select "form[action=?]", user_notes_path(@user) do
+      assert_select "input[name='note[slug]']" do
+        assert_select "[value=?]", "foo-bar"
+      end
+    end
+
+
+    note_params = {
+      slug: "foo-bar",
+      title: "Hello world",
+      description: "This is description",
+      privacy: "private"
+    }
+    post user_notes_path(@user), params: { note: note_params }
+    assert_redirected_to @user.to_path("/notes/foo-bar/edit")
+
+    note = @user.notes.order("id asc").last
+    assert_equal note_params[:slug], note.slug
+    assert_equal note_params[:title], note.title
+    assert_equal note_params[:description], note.description
+    assert_equal true, note.private?
   end
 
   test "GET /:user/notes/:slug" do
@@ -285,5 +326,58 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to note.to_path
     note = Note.find_by_id(note.id)
     assert_equal "Hello world", note.body_plain
+  end
+
+  test "POST/DELETE /:user/notes/:slug/action" do
+    private_note = create(:note, user: @other_user, privacy: :private)
+    note = create(:note, user: @user, body: "Hello world")
+
+    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 200, response.status
+    assert_match /.note-#{note.id}-star-button/, response.body
+    assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
+    assert_equal true, @user.star_note?(note)
+
+    post private_note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 403, response.status
+
+    delete note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    assert_equal 200, response.status
+    assert_match /.note-#{note.id}-star-button/, response.body
+    assert_match /btn.attr\(\"data-label\"\)/, response.body
+    assert_equal false, @user.star_note?(note)
+  end
+
+  test "GET /:user/notes/:slug with readers" do
+    note = create(:note)
+
+    user = create(:user)
+    users = create_list(:user, 8)
+
+    users.map { |u| u.read_note(note) }
+
+    sign_in user
+
+    get note.to_path
+    assert_equal 200, response.status
+    assert_select ".note-readers" do
+      assert_select "a.readers-link .avatar", 5
+    end
+    assert_equal true, user.read_note?(note)
+  end
+
+  test "GET /:user/notes/:slug/readers" do
+    note = create(:note)
+    users = create_list(:user, 8)
+    users.map { |u| u.read_note(note) }
+
+    get note.to_path("/readers"), xhr: true
+    assert_equal 200, response.status
+
+    assert_match %(document.querySelector(".note-readers").outerHTML = ), response.body
   end
 end
