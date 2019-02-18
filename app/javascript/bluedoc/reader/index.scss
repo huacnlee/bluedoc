@@ -188,25 +188,35 @@
     .version-item {
       display: block;
       text-decoration: none;
-      padding: 10px 0;
-
-      .label { background: #fff; border:1px solid #eee; color: #666; border-radius: 2px; padding: 2px 4px; }
-
+      margin-bottom: 15px;
+      font-size: 12px;
+      .current {
+        border:1px solid #D9D9D9;
+        border-radius: 12px;
+        padding: 0 14px;
+        line-height: 20px;
+        transform: translateY(-3px)
+      }
       &:last-child {
         border-bottom: 0px;
       }
-
-      .title { font-size: 15px; margin-bottom: 5px; }
-      .info { font-size: 13px; }
-      .user-name { font-weight: bold; }
-
-      &:hover {
-        background: #fff;
+      .title {
+        font-size: 13px;
+        margin-bottom: 5px;
       }
-
+      .info {
+        color: $text-gray-light;
+      }
       &.selected {
         color: $primary !important;
-        background: #fff;
+        .info {
+          color: inherit;
+        }
+      }
+      &:hover {
+        .info {
+          color: inherit;
+        }
       }
     }
   }
@@ -217,7 +227,6 @@
       max-width: 40%;
       &:hover {
         background: #F7F7F7;
-        // color: $primary;
       }
     }
 
