@@ -15,7 +15,7 @@
           <span class="group-location mr-3"><%= icon_tag("location") %> <%= @group.location %></span>
           <% end %>
           <% if @group.url.present? %>
-          <span class="group-url"><%= link_to icon_tag("link", label: @group.url), @group.url %></span>
+          <span class="group-url"><%= link_to icon_tag("text-link", label: @group.url), @group.url %></span>
           <% end %>
         </div>
       </div>

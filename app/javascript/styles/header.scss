@@ -35,15 +35,13 @@
   }
   .logo {
     position: static;
-//    transform: translate(-50%, -50%);
     font-size: 15px;
     color: $text-main;
-    a {
-      color: inherit;
-    }
-    @include breakpoint(md) {
-      position: static;
-      transform: translate(0, 0);
+    margin-right: 20px;
+    a {color: inherit}
+    @include breakpoint(lg) {
+      width: 200px;
+      margin-right: 50px;
     }
   }
   .dropdown {

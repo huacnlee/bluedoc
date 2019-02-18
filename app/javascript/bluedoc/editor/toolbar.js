@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { BarButton } from './bar-button';
+import BarButton from './bar-button';
 
 // import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 
-export class Toolbar extends React.Component {
+export default class Toolbar extends React.Component {
   state = { }
 
   headingDropdown = React.createRef()
@@ -118,7 +118,7 @@ export class Toolbar extends React.Component {
     return false;
   }
 
-  handleVideoClick = () => {
+  handleVideoClick = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
 
@@ -152,7 +152,7 @@ export class Toolbar extends React.Component {
     return false;
   }
 
-  handleAddTex = ev => {
+  handleAddTex = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
 
@@ -195,7 +195,7 @@ export class Toolbar extends React.Component {
 
       this.onClickMark(ev, type);
       return false;
-    }
+    };
     title = title || type;
 
     return (
@@ -204,14 +204,14 @@ export class Toolbar extends React.Component {
   }
 
   renderAlignButton = (type, icon, title) => {
-    const isActive = this.isActiveMarkup("align-" + type);
+    const isActive = this.isActiveMarkup(`align-${type}`);
     const onMouseDown = (ev) => {
       ev.preventDefault();
       ev.stopPropagation();
 
       this.handleAlign(ev, type);
       return false;
-    }
+    };
     title = title || type;
 
     return (
@@ -229,7 +229,7 @@ export class Toolbar extends React.Component {
   }
 
   render() {
-    const { mode = "full" } = this.props;
+    const { mode = 'full' } = this.props;
 
     return <div className="editor-toolbar">
       <div className="container">
@@ -251,7 +251,7 @@ export class Toolbar extends React.Component {
           onChange={this.onVideoPicked}
           accept="video/*"
         />
-        {mode === "full" && (
+        {mode === 'full' && (
         <span>
         <details ref={this.headingDropdown} className="dropdown details-reset details-overlay bar-button">
           <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
@@ -279,21 +279,21 @@ export class Toolbar extends React.Component {
         {this.renderBlockButton('bulleted-list', 'bulleted-list', 'Bulleted list')}
         {this.renderBlockButton('ordered-list', 'numbered-list', 'Numbered list')}
         <span className="bar-divider"></span>
-        {mode === "full" && (
+        {mode === 'full' && (
         <span>
           <BarButton icon="outdent" title="Outdent ⌘-[" onMouseDown={e => this.handleIndent(e, false)} />
           <BarButton icon="indent" title="Indent ⌘-[" onMouseDown={e => this.handleIndent(e)} />
           <span className="bar-divider"></span>
-          {this.renderAlignButton("left", "align-left", "Align Left")}
-          {this.renderAlignButton("center", "align-center", "Align center")}
-          {this.renderAlignButton("right", "align-right", "Align right")}
-          {this.renderAlignButton("justify", "align-justify", "Align justify")}
+          {this.renderAlignButton('left', 'align-left', 'Align Left')}
+          {this.renderAlignButton('center', 'align-center', 'Align center')}
+          {this.renderAlignButton('right', 'align-right', 'Align right')}
+          {this.renderAlignButton('justify', 'align-justify', 'Align justify')}
           <span className="bar-divider"></span>
         </span>
         )}
         {this.renderBlockButton('blockquote', 'quote', 'Quote')}
         {this.renderBlockButton('codeblock', 'codeblock', 'Insert Code block')}
-        {mode === "full" && (
+        {mode === 'full' && (
         <span>
           {this.renderBlockButton('plantuml', 'uml', 'Insert PlantUML')}
           <BarButton icon="tex" title="Insert TeX" onMouseDown={e => this.handleAddTex(e)} />

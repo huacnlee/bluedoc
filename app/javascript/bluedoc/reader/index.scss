@@ -2,49 +2,59 @@
 @import "./medium-zoom";
 
 .reader-body {
+
   .container {
-    @include breakpoint(md) {
-      width: auto;
+    width: auto;
+  }
+
+  .doc-sidebar {
+    display: none;
+  }
+
+  .doc-body-toc {
+    display: none;
+  }
+
+  @include breakpoint(lg) {
+    .doc-sidebar {
+      display: block;
+      width: 200px;
+      margin-right: 50px;
+      padding-top: 0px;
+      min-height: 100vh;
+    }
+  }
+
+  @include breakpoint(xl) {
+    .container {
+      width: 1350px;
+    }
+    .doc-body-toc {
+      width: 230px;
+      margin-left: 50px;
+      display: block;
     }
   }
 
   .reader-navbar {
-    @extend .clearfix;
-    background: #fff;
-    border: 0;
-    position: relative;
     font-size: 14px;
-
     .btn-sm {
       box-shadow : 0 0 0;
       padding: 6px 8px;
     }
 
-    .navbar-title {
-      a { color: #333; }
-
-      .divider { color: #bbb; margin: 0 5px; }
-
-      .group-name,
-      .repository-name {
-        max-width: 240px;
-        @extend .text-overflow;
-        display: inline;
-      }
-    }
-
     .navbar-buttons {
-      position: absolute;
-      top: -6px;
-      right: 0;
       text-align: right;
-
+      .fas {
+        transform: scale(1.2);
+        margin-right: 3px;
+      }
       .btn-link {
         text-align: center;
         border: 0;
       }
-
       .dropdown-menu {
+        top: calc(100% + 12px);
         text-align: left;
       }
     }
@@ -88,107 +98,56 @@
     position: relative;
     width: 100%;
     .doc-sidebar {
-      flex: none;
-      display: none;
-      min-width: 200px;
-      max-width: 260px;
-
       .doc-parents {
+        text-align: left;
         .link-group {
-          display: block;
-          color: $text-gray;
-          &:hover {
-            color: $text-gray-dark;
-          }
+          font-size: 12px;
+          margin-bottom: 20px;
         }
         .link-back {
           display: block;
-          text-align: left;
-          padding: 0px 0 10px 0;
-          font-size: 18px;
+          margin-bottom: 5px;
+          font-size: 13px;
           font-weight: bold;
           @extend .text-overflow;
         }
       }
-
       ul {
         font-size: 13px;
-        line-height: 100%;
         @extend .pt-2;
         @extend .list-style-none;
-
-        .item-title {
-        }
-
         li {
-          padding: 8px 0;
+          padding: 6px 0;
         }
         a {
-          color: #555;
           @extend .text-overflow;
           width: 100%;
-
-          &.active {
-            color: darken($primary, 20%);
-          }
         }
-
         .item-slug { display: none; }
       }
     }
 
-    @media (min-width: 1100px) {
-      .doc-sidebar {
-        display: block;
-        width: 260px;
-        padding-top: 0px;
-        min-height: 100vh;
-      }
-    }
-
     .doc-center {
-      order:1;
-      width: 100%;
       text-align: center;
     }
 
-    @media (min-width: 1330px) {
-      .doc-center {
-        width: 100%;
-      }
-    }
-
     .doc-main {
-      flex: none;
       margin: 0 auto;
       text-align: left;
       width: auto;
       padding: 0px 0px;
-
       .unpublished-draft-tip {
         margin-top: 15px;
       }
     }
 
-    @media (min-width: 768px) {
-      .doc-main {
-        width: 750px;
-      }
-    }
-
-    @media (min-width: 1012px) {
-      .doc-main {
-        width: 750px;
-      }
-    }
-
-    @media (min-width: 1330px) {
-      .doc-main {
-        width: 750px;
-      }
+    .new_comment {
+      overflow-x: hidden;
     }
 
     .doc-title {
+      font-size: 26px;
+      margin-bottom: 14px;
       text-align: left;
       word-break: break-word;
       word-wrap: break-word;
@@ -196,14 +155,17 @@
     }
 
     .doc-info {
-      color: #999;
+      padding-bottom: 30px;
       margin-bottom: 30px;
+      border-bottom: 1px solid #E6E6E6;
       .editors { margin-right: 10px; }
+      .user-name {
+        @extend .link-gray-dark;
+      }
     }
 
     .doc-reaction {
       margin: 30px 0;
-
       .reaction-summary-item {
         border: 1px solid #f0f0f0;
         padding: 6px 10px;
@@ -226,25 +188,35 @@
     .version-item {
       display: block;
       text-decoration: none;
-      padding: 10px 0;
-
-      .label { background: #fff; border:1px solid #eee; color: #666; border-radius: 2px; padding: 2px 4px; }
-
+      margin-bottom: 15px;
+      font-size: 12px;
+      .current {
+        border:1px solid #D9D9D9;
+        border-radius: 12px;
+        padding: 0 14px;
+        line-height: 20px;
+        transform: translateY(-3px)
+      }
       &:last-child {
         border-bottom: 0px;
       }
-
-      .title { font-size: 15px; margin-bottom: 5px; }
-      .info { font-size: 13px; }
-      .user-name { font-weight: bold; }
-
-      &:hover {
-        background: #fff;
+      .title {
+        font-size: 13px;
+        margin-bottom: 5px;
       }
-
+      .info {
+        color: $text-gray-light;
+      }
       &.selected {
         color: $primary !important;
-        background: #fff;
+        .info {
+          color: inherit;
+        }
+      }
+      &:hover {
+        .info {
+          color: inherit;
+        }
       }
     }
   }
@@ -255,7 +227,6 @@
       max-width: 40%;
       &:hover {
         background: #F7F7F7;
-        // color: $primary;
       }
     }
 
@@ -332,33 +303,16 @@
   }
 }
 
-.doc-body-toc-holder {
-  order: 2;
-  width: 350px;
-  display: none;
-  @media (min-width: 1330px) {
-    display: block;
-  }
-}
-
 .doc-body-toc {
-  display: none;
-
-  @media (min-width: 1330px) {
-    display: block;
-  }
-
   &>.toc-list {
     position: fixed;
     padding-top: 48px;
-    right: 32px;
     width: 230px;
     border-left: 1px solid #e8ebef;
     font-size: 13px;
     display: block;
     padding-top: 0;
     padding-left: 15px;
-    flex: none;
 
     .toc-list {
       padding-left: 11px !important;
@@ -393,7 +347,7 @@
 .reader-body:fullscreen {
   height: auto;
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   &::backdrop {
     background-color: #fff;
   }

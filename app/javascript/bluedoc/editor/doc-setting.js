@@ -1,16 +1,17 @@
-import { ErrorMessages } from "../shared/error-messages";
+import ErrorMessages from '../shared/error-messages';
 
-export class DocSetting extends React.Component {
+export default class DocSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       slug: props.slug,
       saveURL: props.saveURL,
-      messages: []
-    }
+      messages: [],
+    };
   }
 
   slugInputRef = React.createRef()
+
   containerRef= React.createRef()
 
   onSubmit = (e) => {
@@ -21,12 +22,12 @@ export class DocSetting extends React.Component {
     const newSlug = slugInput.value;
 
     $.ajax({
-      method: "PUT",
+      method: 'PUT',
       url: saveURL,
-      dataType: "JSON",
+      dataType: 'JSON',
       data: {
         doc: {
-          slug: slugInput.value
+          slug: slugInput.value,
         },
       },
       success: (res) => {
@@ -43,14 +44,14 @@ export class DocSetting extends React.Component {
         } else {
           this.setState({ messages: res.messages });
         }
-      }
+      },
     });
 
-    return false
+    return false;
   }
 
   dismiss = () => {
-    this.containerRef.current.removeAttribute("open");
+    this.containerRef.current.removeAttribute('open');
   }
 
   render() {
@@ -60,26 +61,25 @@ export class DocSetting extends React.Component {
     return (
       <React.Fragment>
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
-        <summary className="btn"><i className="fas fa-info"></i></summary>
-        <div className="dropdown-menu dropdown-menu-sw p-4 mb-2 text-left">
-          <h4 className="mb-2"><i className="fas fa-info"></i> Doc settings</h4>
+        <summary className="btn"><i className="fas fa-setting"></i></summary>
+        <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
+          <h4 className="mb-4">Doc settings</h4>
           <ErrorMessages messages={this.state.messages} />
-          <div className="form-group">
+          <div className="form-group mb-4">
             <label className="control-label">Change Slug:</label>
-
-            <div className="input-group">
-              <div className="input-group-prepend">
+            <div className="input-group d-flex">
+              <div className="input-group-prepend mr-2">
                 <div className="input-group-text">{repositoryURL}/</div>
               </div>
-              <input type="text" ref={this.slugInputRef} className="form-control input-slug" defaultValue={slug} />
+              <input type="text" ref={this.slugInputRef} className="form-control input-slug flex-auto" defaultValue={slug} />
             </div>
           </div>
-          <div className="mt-1">
-            <a className="btn btn-primary" onClick={this.onSubmit}>Done</a>
+          <div className="text-right">
+            <span className="btn btn-primary" onClick={this.onSubmit}>Done</span>
           </div>
         </div>
       </details>
       </React.Fragment>
-    )
+    );
   }
 }

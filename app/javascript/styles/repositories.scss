@@ -252,7 +252,11 @@
       }
     }
     .box-select {
-      width: 340px;
+      width: 310px;
+      .btn {
+        text-align: left;
+        text-indent: 8px;
+      }
     }
   }
 }

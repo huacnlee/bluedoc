@@ -23,7 +23,7 @@
         <p><%= t(".You can create first repository") %> <%= link_to t(".Create new"), new_repository_path(user_id: @group.id) %>.</p>
       </div>
     <% else %>
-      <%= render @repositories %>
+      <%= render @repositories, no_path: true %>
       <%= paginate @repositories %>
     <% end %>
   </div>
