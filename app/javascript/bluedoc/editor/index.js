@@ -1,5 +1,5 @@
 import RichEditor from './rich-editor';
-import { DocSetting } from './doc-setting';
+import DocSetting from './doc-setting';
 
 class EditorBox {
   static init() {

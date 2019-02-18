@@ -42,9 +42,9 @@
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
-        <span class="btn-doc-info-box"></span>
+        <button type="submit" class="btn btn-primary"><%= t(".Publish") %></button>
         <button type="button" data-url="<%= user_repository_doc_path(@user, @repository, @doc) %>" class="btn btn-save"><%= t(".Save Draft") %></button>
-        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
+        <span class="btn-doc-info-box"></span>
       </div>
     </div>
 

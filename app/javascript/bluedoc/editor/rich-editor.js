@@ -1,6 +1,6 @@
 import { Container, serializer } from 'typine';
 import { AttachmentUpload } from './attachment-upload';
-import { Toolbar } from './toolbar';
+import Toolbar from './toolbar';
 
 const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
 
@@ -12,7 +12,7 @@ export default class RichEditor extends React.Component {
     this.state = {
       value: this.getFormatValue({ value, format }),
       activeMarkups: [],
-      title: props.title || "",
+      title: props.title || '',
     };
 
     const { directUploadURL, blobURLTemplate } = this.props;
