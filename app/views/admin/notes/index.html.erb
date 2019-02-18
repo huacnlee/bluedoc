@@ -1,0 +1,53 @@
+<%= render 'base' %>
+
+<div class="subnav">
+  <nav class="subnav-links">
+    <a href="<%= admin_notes_path %>" class="subnav-item"><%= t("admin.All") %></a>
+  </nav>
+  <div class="subnav-search float-left">
+    <form action="" method="GET">
+      <input type="search" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>">
+      <%= icon_tag "search", class: "subnav-search-icon" %>
+    </form>
+  </div>
+</div>
+
+<div class="flash"><%= t(".There only include the public Notes") %></div>
+
+<div class="admin-admin_notes">
+  <table class="table table-striped">
+    <tr class="head">
+      <td>Id</td>
+      <td><%= t("activerecord.attributes.note.title") %></td>
+      <td><%= t("created_at") %></td>
+      <td class="opts"></td>
+    </tr>
+    <% @notes.each do |item| %>
+    <tr id="note-<%= item.id %>" class="note-item <%= cycle("","even") %> <%= "deleted" if item.deleted? %>">
+      <td><%= item.id %></td>
+      <td>
+        <div><%= link_to item.title, item.to_path, target: "_blank" %></div>
+        <div class="mt-1 text-gray"><%= item.slug %></div>
+        <div class="mt-1">
+          <% if item.user %>
+            <%= link_to item.user&.name, admin_notes_path(user_id: item.user_id), class: "link-gray-dark" %>
+          <% end %>
+        </div>
+      </td>
+
+      <td class="text-gray" style="widith: 150px"><%= l(item.created_at) %></td>
+      <td class="opts">
+        <%= link_to icon_tag("trash"), admin_note_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
+        <!-- PRO-begin -->
+        <% feature_for(:soft_delete) do %>
+          <% if item.deleted? %>
+            <%= link_to icon_tag("restore"), restore_admin_note_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
+          <% end %>
+        <% end %>
+        <!-- PRO-end -->
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @notes %>
+</div>

@@ -137,6 +137,7 @@ en:
     Share: Share
     Notification: Notification
     Activity: Activity
+    Note: Note
     Back to Front: Back to Front
     Sign out: Sign out
     View: View
@@ -224,6 +225,9 @@ en:
         Share was successfully deleted: Share was successfully deleted.
       index:
         Are you sure delete this item?: Are you sure delete this item?
+    notes:
+      index:
+        There only include the public Notes: "There is only listing the public Notes for protected User privacy."
   comments:
     comment_watch:
       Subscribe: Subscribe

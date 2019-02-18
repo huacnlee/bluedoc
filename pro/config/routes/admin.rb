@@ -22,4 +22,9 @@ namespace :admin do
     end
   end
   resource :licenses
+  resources :notes do
+    member do
+      post :restore
+    end
+  end
 end
