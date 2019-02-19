@@ -23,4 +23,11 @@ class BlueDoc::SearchQueryTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal 0, response_data["search"]["total"]
     assert_equal [], response_data["search"]["records"]
   end
+
+  test "search with User" do
+    execute %| { search(type: "user", query: "") { total,records } } |
+    assert_not_nil response_data["search"]
+    assert_equal 0, response_data["search"]["total"]
+    assert_equal [], response_data["search"]["records"]
+  end
 end

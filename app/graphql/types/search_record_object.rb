@@ -5,7 +5,7 @@ module Types
     graphql_name "SearchRecord"
     description "Objects which may be search result"
 
-    possible_types UserObject, DocObject
+    possible_types UserObject, DocObject, GroupObject
 
     def self.resolve_type(object, context)
       case object.class.name
@@ -13,6 +13,8 @@ module Types
         Types::UserObject
       when "Doc"
         Types::DocObject
+      when "Group"
+        Types::GroupObject
       else
         raise "Can't resolve_type for #{object.inspect}"
       end

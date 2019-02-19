@@ -14,6 +14,8 @@ module Types
       result = case params[:type]
                when "doc"
                  search_docs(params)
+               when "user"
+                 search_users(params)
                end
 
       result[:limit] = params[:limit]
@@ -35,6 +37,15 @@ module Types
         @docs << item
       end
       { total: result.total_count, records: @docs }
+    end
+
+    def search_users(params)
+      result = BlueDoc::Search.new(:users, params[:query]).execute.limit(params[:limit])
+      @users = []
+      result.records.each_with_hit do |item, hit|
+        @users << item
+      end
+      { total: result.total_count, records: @users }
     end
   end
 end

@@ -29,6 +29,7 @@ module BlueDoc
 
       def assert_error_with(message)
         found = false
+        response_errors ||= []
         response_errors.each do |error|
           if error["message"] == message
             found = true

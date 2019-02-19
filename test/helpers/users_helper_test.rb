@@ -36,7 +36,7 @@ class UsersHelperTest < ActionView::TestCase
     # Attachment Avatar
     user = create(:user)
     user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
-    assert_equal true, user.avatar.attached?
+    assert_equal true, user.avatar_attached?
     avatar_url = "https://bar.com/foo.jpg"
 
     user.stub(:avatar_url, avatar_url) do
