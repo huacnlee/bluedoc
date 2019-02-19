@@ -88,7 +88,10 @@ class DocsController < Users::ApplicationController
   def raw
     authorize! :read, @doc
 
-    render plain: @doc.body_plain
+    respond_to do |format|
+      format.html { render :raw, layout: "editor" }
+      format.text { render plain: @doc.body_plain }
+    end
   end
 
   # POST /:user/:repo/:slug/pdf

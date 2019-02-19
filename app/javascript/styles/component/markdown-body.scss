@@ -549,3 +549,19 @@
 .markdown-body .cm-s-default .cm-variable{ color:#008080;}
 .markdown-body .cm-s-default .cm-tag{ color: #445588; }
 .markdown-body .cm-s-default .cm-def{ color: #990000; font-weight: bold; }
+
+.markdown-raw {
+  .CodeMirror {
+    padding: 16px;
+    margin-bottom: 18px;
+    overflow: auto;
+    font-size: 13px;
+    line-height: 1.45;
+    font-family: Monaco, monospace;
+
+    .CodeMirror-hscrollbar,
+    .CodeMirror-vscrollbar {
+      display: none !important;
+    }
+  }
+}

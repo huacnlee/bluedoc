@@ -94,7 +94,6 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-
     note_params = {
       slug: "foo-bar",
       title: "Hello world",
@@ -235,7 +234,6 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal note_params[:body_sml], note.body_sml_plain
     assert_equal note_params[:format], note.format
 
-
     # shoud save with JSON API
     put note.to_path, params: { note: { slug: "", title: "" }, format: :json }
     assert_equal 200, response.status
@@ -276,10 +274,18 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /:user/notes/:slug/raw" do
     note = create(:note, user: @user, body: "Hello world")
-    get note.to_path("/raw")
+    get note.to_path("/raw.txt")
     assert_equal 200, response.status
     assert_equal note.body_plain, response.body
     assert_equal "text/plain; charset=utf-8", response.headers["Content-Type"]
+
+    get note.to_path("/raw")
+    assert_equal 200, response.status
+    assert_select ".markdown-body.markdown-raw" do
+      assert_react_component "MarkdownRaw" do |props|
+        assert_equal note.body_plain, props[:value]
+      end
+    end
 
     # private
     note = create(:note, user: @other_user, privacy: :private)

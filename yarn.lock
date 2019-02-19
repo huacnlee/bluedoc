@@ -6028,6 +6028,7 @@ rc@^1.2.7:
 react-codemirror@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-codemirror/-/react-codemirror-1.0.0.tgz#91467b53b1f5d80d916a2fd0b4c7adb85a9001ba"
+  integrity sha1-kUZ7U7H12A2Rai/QtMetuFqQAbo=
   dependencies:
     classnames "^2.2.5"
     codemirror "^5.18.2"
@@ -7188,10 +7189,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typine@^0.0.30:
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.30.tgz#87df99dac92299c6fc5eb5234e832ef02b1b2e9b"
-  integrity sha512-wAUVeJmid8+8fkbf4mVGGSiadLwWKq8pSGFw2TXg360xcVCoHHZ6ABJmopk76T8+/1z8OgYTfL9ANfww93oLlA==
+typine@^0.0.31:
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.31.tgz#c74f8c68ee466faf3965d586907dc8f61b17fedf"
+  integrity sha512-+PYw6WDK03Nmq9wRHU8ek/KvZV7997+tq64i4XTJpJ/LkWNVuflVDgXYz7JDWxQEtEcfcvLEUyEwSvaXw9GW1A==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"

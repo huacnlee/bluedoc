@@ -549,10 +549,18 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /:user/:repo/:slug/raw" do
     doc = create(:doc, repository: @repo, body: "Hello world")
-    get doc.to_path("/raw")
+    get doc.to_path("/raw.txt")
     assert_equal 200, response.status
     assert_equal doc.body_plain, response.body
     assert_equal "text/plain; charset=utf-8", response.headers["Content-Type"]
+
+    get doc.to_path("/raw")
+    assert_equal 200, response.status
+    assert_select ".markdown-body.markdown-raw" do
+      assert_react_component "MarkdownRaw" do |props|
+        assert_equal doc.body_plain, props[:value]
+      end
+    end
 
     # private
     doc = create(:doc, repository: @private_repo)

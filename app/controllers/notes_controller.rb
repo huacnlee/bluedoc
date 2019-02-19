@@ -80,7 +80,10 @@ class NotesController < Users::ApplicationController
   def raw
     authorize! :read, @note
 
-    render plain: @note.body_plain
+    respond_to do |format|
+      format.html { render :raw, layout: "editor" }
+      format.text { render plain: @note.body_plain }
+    end
   end
 
   # GET /:user/:repo/:slug/versions
