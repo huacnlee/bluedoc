@@ -8,6 +8,7 @@
   list-style: none;
   position: relative;
   border: 1px solid $border-gray;
+  border-radius: 2px;
   &:hover {
     border-color: #EBEBEB;
     box-shadow: 0 4px 7px 0 rgba(190, 190, 190, .1);
@@ -25,7 +26,10 @@
     left: 20px;
   }
   .path {
-    color: $text-gray-dark;
+    color: $text-gray-light;
+    a {
+      color: $text-gray;
+    }
     font-size: 12px;
     margin-bottom: 5px;
     overflow: hidden;
@@ -52,12 +56,16 @@
   .action {
     visibility: hidden;
     position: absolute;
-    right: 20px;
-    bottom: 15px;
+    right: 10px;
+    bottom: 5px;
     color: #979797;
-    line-height: 1;
     a {
-      padding: 8px;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
       &:hover {
         border-radius: 50%;
         background: #f7f7f7;

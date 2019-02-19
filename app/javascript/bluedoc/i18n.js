@@ -58,7 +58,8 @@ i18n.init({
           },
         },
         "toc": {
-          "Table of contents": "Table of contents"
+          "Table of contents": "Table of contents",
+          "Add a custom item": "Add a custom item"
         },
       },
     },
@@ -115,7 +116,8 @@ i18n.init({
           },
         },
         "toc": {
-          "Table of contents": "目录"
+          "Table of contents": "目录",
+          "Add a custom item": "添加自定义项"
         },
       },
     }

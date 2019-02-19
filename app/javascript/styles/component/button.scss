@@ -14,13 +14,14 @@
   cursor: pointer;
   user-select: none;
   appearance: none;
+  outline: none;
   .fas {
     transform: scale(1.2);
     margin-top: -2px;
   }
   &:hover {
     text-decoration: none;
-    color: $text-main!important;
+    color: $text-main;
     border-color: #333333;
   }
   &.disable {
