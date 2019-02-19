@@ -264,7 +264,7 @@ zh-CN:
       Dashboard: 工作台
       Doc: 文档
       Repository: 知识库
-      Group: 团队
+      Group: 我的团队
       Star: 收藏
       Watch: 订阅
       Note: 笔记
@@ -290,11 +290,11 @@ zh-CN:
       All activity: 动态
       You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
     stars:
-      Stared Docs: 我收藏的文档
-      Stared Repositories: 我收藏的知识库
-      Stared Notes: 我收藏的笔记
+      Stared Docs: 收藏的文档
+      Stared Repositories: 收藏的知识库
+      Stared Notes: 收藏的笔记
     watches:
-      All Watches: 我订阅的知识库
+      All Watches: 订阅的知识库
     action_notes:
       You does not have any action_name notes: 你还未收藏过笔记。
       Notes: 笔记
