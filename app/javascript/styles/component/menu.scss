@@ -10,7 +10,8 @@
     }
   }
   .menu-item {
-    display: block;
+    @extend .icon-middle-wrap;
+    display: flex;
     color: $text-main;
     text-decoration: none;
     margin-bottom: 10px;
@@ -19,7 +20,7 @@
     }
     i.fas {
       color: #979797;
-      margin: 0 3px;
+      margin-right: 8px;
       transform: scale(1.2);
     }
     &.selected {
@@ -35,7 +36,7 @@
       }
     }
     &.depth-1 {
-      text-indent: 0.8em;
+      margin-left: 0.8em;
     }
   }
 

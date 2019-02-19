@@ -50,7 +50,7 @@
     width: 100%;
     margin-top: 17px;
     > span {
-      display: inline-block;
+      @extend .icon-middle-wrap;
       width: 90px;
       margin-right: 20px;
       color: #333;

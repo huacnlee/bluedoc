@@ -4,6 +4,15 @@
 	content: '';
 }
 
+.icon-middle-wrap {
+  display: inline-flex;
+  align-items: center;
+  .fas {
+    line-height: unset;
+    margin-right: 4px;
+  }
+}
+
 .flex-auto {
   width: 0;
 }
