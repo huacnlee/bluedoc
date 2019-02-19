@@ -2,7 +2,7 @@ if ($(".data-action-button-reload").length > 0) {
   Turbolinks.visit(window.location);
 } else {
   var btnAction = $(".doc-<%= @doc.id %>-<%= params[:action_type ] %>-button");
-  var btn = $(".btn", btnAction);
+  var btn = $("a", btnAction);
   <% if request.post? %>
     btn.attr("data-method", "delete");
     $("span", btnAction).text(btn.attr("data-undo-label"));
