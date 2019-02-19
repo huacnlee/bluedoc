@@ -7,6 +7,7 @@ export default SortableContainer(({
   items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
 }) => (
   <div className={cn('toc-list', 'col-8')}>
+    <h2 class="sub-title">{i18n.t('toc.Table of contents')}</h2>
     {items.map(item => (
       <TocItem
         key={`item-${item.key}`}

@@ -7,6 +7,7 @@
         -ms-user-select: none;
             user-select: none;
   background: #FFF;
+  border: 1px solid #F2F2F2;
   padding: 8px 13px;
   line-height: 20px;
   border-bottom: 1px solid #f0f0f0;
@@ -26,29 +27,37 @@
   }
 
   .slug {
-    color: #aaa;
-    margin-top: 2px;
-    font-size: 13px;
+    color: $text-gray-light;
+    font-size: 12px;
+    margin-top: 4px;
   }
 
   .title {
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 15px;
   }
 
   .opts {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
     position: absolute;
     top: 50%;
     right: 13px;
     transform: translateY(-50%);
     display: none;
-    color: #aaa;
+    color: $text-gray;
     cursor: pointer;
-    &:hover { color: #999; }
+    &:hover { 
+      color: $primary;
+      background: #F7F7F7;
+    }
   }
 
   &:hover {
-    background: #fefef0;
     .opts { display: block; }
   }
 }
