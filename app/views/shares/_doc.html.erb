@@ -26,7 +26,7 @@
         <% end %>
 
         <% if can? :update, @doc %>
-          <%= link_to icon_tag("pencil"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn  btn-sm px-2 ml-1" %>
+          <%= link_to icon_tag("pencil", label: t(".Edit")), edit_user_repository_doc_path(@user, @repository, @doc), class: "px-2 ml-1" %>
         <% end %>
       </div>
       <div class="markdown-body markdown-with-toc" data-turbolinks="false">
