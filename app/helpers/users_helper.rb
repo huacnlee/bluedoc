@@ -28,7 +28,7 @@ module UsersHelper
 
     return "" if user.blank?
 
-    if user.avatar.attached?
+    if user.avatar_attached?
       image_html = image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
     else
       image_html = default_avatar_tag(user, class: opts[:class])

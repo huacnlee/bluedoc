@@ -8,16 +8,20 @@ class User
                      file_content_type: { allow: %w[image/jpeg image/png] },
                      if: -> { avatar.attached? }
 
-  def letter_avatar_url
-    path = LetterAvatar.generate(self.slug, 240).sub("public/", "/")
-
-    "#{Setting.host}#{path}"
+  def avatar_url
+    Rails.cache.fetch([self.cache_key_with_version, "avatar_url"]) do
+      avatar_url_without_cache
+    end
   end
 
-  def avatar_url
-    return self.letter_avatar_url unless self.avatar.attached?
+  def avatar_attached?
+    Rails.cache.fetch([self.cache_key_with_version, "avatar_attached"]) do
+      self.avatar.attached?
+    end
+  end
+
+  def avatar_url_without_cache
+    return nil unless self.avatar_attached?
     "#{Setting.host}/uploads/#{self.avatar.blob.key}?s=large"
-  rescue
-    self.letter_avatar_url
   end
 end
