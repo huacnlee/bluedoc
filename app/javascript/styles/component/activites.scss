@@ -38,6 +38,9 @@
   border: none;
   padding: 5px 0;
   box-shadow: none;
+  &:hover {
+    color: $primary;
+  }
 }
 
 .user-card {
