@@ -68,6 +68,6 @@ module UsersHelper
     data = { id: slug, label: label, undo_label: undo_label }
     class_names += " active" if followed
 
-    link_to raw("<span>#{btn_label}</span>"), "#", data: data, class: class_names
+    content_tag :button, btn_label, data: data, class: class_names
   end
 end
