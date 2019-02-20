@@ -20,6 +20,15 @@ zh-CN:
       There has count issues: 发现有 %{count} 问题无法通过表单验证：
     select_menu:
       Choose an item: 选择一个
+    access_denied:
+      Access Denied: 访问拒绝 (403 错误)
+      Sorry you do not have permission visit it: 抱歉，你没有访问这个数据的权限。
+    feature_not_enable:
+      Feature not enable: 功能未启用
+      Sorry, this Feature not in enable in current: 抱歉，系统还未开启此项功能。
+    not_found:
+      Page not found: 页面无法找到 (404)
+      Sorry, that page does not exist: 当前访问的 URL 地址未能在服务器上找到。
   layouts:
     user_menu:
       New Repository: 新建知识库

@@ -136,6 +136,7 @@ class NotesController < Users::ApplicationController
 
     def set_note
       @note = @user.notes.find_by_slug(params[:id])
+      raise ActiveRecord::RecordNotFound if @note.blank?
     end
 
     def note_params

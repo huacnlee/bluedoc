@@ -20,6 +20,15 @@ en:
       There has count issues: "There has %{count} issues:"
     select_menu:
       Choose an item: Choose an item
+    access_denied:
+      Access Denied: Access Denied (403 Error)
+      Sorry you do not have permission visit it: You don't have permission to access it.
+    feature_not_enable:
+      Feature not enable: Feature not enable
+      Sorry, this Feature not in enable in current: Sorry, this Feature not in enable in current.
+    not_found:
+      Page not found: Page not found (404)
+      Sorry, that page does not exist: The requested URL was not found on this server.
   layouts:
     user_menu:
       New Repository: New Repository

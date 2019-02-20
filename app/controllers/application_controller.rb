@@ -8,14 +8,21 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden }
-      format.html { render plain: "Access Denied", status: :forbidden }
+      format.html { render "/shared/access_denied", status: :forbidden }
+    end
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    respond_to do |format|
+      format.json { head :not_found }
+      format.html { render "/shared/not_found", status: :not_found }
     end
   end
 
   rescue_from BlueDoc::FeatureNotAvailableError do |exception|
     respond_to do |format|
       format.json { head :not_implemented }
-      format.html { render plain: "Feature not available!", status: :not_implemented }
+      format.html { render "/shared/feature_not_enable", status: :not_implemented }
     end
   end
 
