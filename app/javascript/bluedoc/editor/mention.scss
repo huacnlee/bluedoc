@@ -1,0 +1,35 @@
+.mention-list {
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 101;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  .mention-item {
+    align-items: center;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    display: flex;
+    height: 32px;
+    padding: 4px 8px;
+    cursor: pointer;
+
+    .username {
+      margin-left: 5px;
+      color: #999;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: $primary;
+      color: #fff;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

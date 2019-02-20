@@ -457,6 +457,24 @@
     max-width: 100%;
   }
 
+  .user-mention {
+    color: lighten($primary, 10%) !important;
+    cursor: pointer;
+
+    .mention-name {
+      color: $primary !important;
+    }
+
+    &.user-mention-active {
+      background: #f0f0f0;
+    }
+  }
+  a.user-mention {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
 }
 
 .highlight  { background: #ffffff; }

@@ -1,8 +1,10 @@
 import { Container, serializer } from 'typine';
 import { AttachmentUpload } from './attachment-upload';
 import Toolbar from './toolbar';
-
+import { MentionList, getMentionInput, hasValidAncestors, USER_MENTION_NODE_TYPE, USER_MENTION_CONTEXT_TYPE } from './mention';
+import { searchUsers } from "../graphql";
 const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
+
 
 export default class RichEditor extends React.Component {
   constructor(props) {
@@ -90,14 +92,90 @@ export default class RichEditor extends React.Component {
 
   onChange = (change) => {
     const { format } = this.props;
+    // Mention
+    const mentionValue = getMentionInput(change.value)
+    if (mentionValue != this.lastMentionValue) {
+      this.lastMentionValue = mentionValue
+      if (hasValidAncestors(change.value)) {
+        this.searchUsers(mentionValue)
+      }
+
+      const { selection } = change.value
+      let decorations = change.value.decorations.filter(
+        value => value.mark.type !== USER_MENTION_CONTEXT_TYPE
+      )
+      if (mentionValue && hasValidAncestors(change.value)) {
+        decorations = decorations.push({
+          anchor: {
+            key: selection.start.key,
+            offset: selection.start.offset - mentionValue.length,
+          },
+          focus: {
+            key: selection.start.key,
+            offset: selection.start.offset,
+          },
+          mark: {
+            type: USER_MENTION_CONTEXT_TYPE,
+          },
+        })
+      }
+
+      this.setState({ value: change.value }, () => {
+        // We need to set decorations after the value flushes into the editor.
+        setTimeout(() => {
+          this.editor.setDecorations(decorations)
+        }, 20)
+      });
+
+      return
+    }
 
     this.setState({ value: change.value });
-
+    // Update SML value to Textarea
     const xslValue = serializer.parserToXSL(change.value);
     const markdownValue = serializer.parserToMarkdown(xslValue);
 
     const smlValue = JSON.stringify(xslValue);
     this.props.onChange(markdownValue, smlValue);
+  }
+
+  /**
+   * Replaces the current "context" with a user mention node corresponding to
+   * the given user.
+   * @param {Object} user
+   *   @param {string} user.id
+   *   @param {string} user.username
+   */
+  insertMention = user => {
+    const value = this.state.value
+    const inputValue = getMentionInput(value)
+    const editor = this.editor
+
+    // Delete the captured value, including the `@` symbol
+    editor.deleteBackward(inputValue.length + 1)
+
+    const selectedRange = editor.value.selection
+    editor
+      .insertText(' ')
+      .insertInlineAtRange(selectedRange, {
+        data: {
+          username: user.slug,
+          id: user.id,
+          name: user.name,
+        },
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: `@${user.name}`
+              },
+            ],
+          },
+        ],
+        type: USER_MENTION_NODE_TYPE,
+      })
+      .focus()
   }
 
   onChangeTitle = (e) => {
@@ -125,6 +203,27 @@ export default class RichEditor extends React.Component {
     } else {
       return i18n.t(key);
     }
+  }
+
+  searchUsers = (query) => {
+    this.setState({
+      mentionUsers: [],
+    })
+
+    if (!query) return
+
+    searchUsers({ query: query }).then((result) => {
+      this.setState({
+        // Only return the first 5 results
+        mentionUsers: result.search.records.slice(0, 5),
+      })
+    }).catch((errors) => {
+      if (Array.isArray(errors)) {
+        errors.forEach(err => console.log("GraphQL query error:", err.message))
+      } else {
+        console.log(errors);
+      }
+    })
   }
 
   // Render the editor.
@@ -163,6 +262,11 @@ export default class RichEditor extends React.Component {
               mathJaxServiceHost={this.props.mathJaxServiceHost}
               placeholder={this.t(".Write document contents here")}
              />
+            <MentionList
+              anchor=".mention-context"
+              users={this.state.mentionUsers}
+              onSelect={this.insertMention}
+            />
           </div>
         </div>
       </div>

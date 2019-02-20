@@ -3386,6 +3386,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
 
+graphql.js@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/graphql.js/-/graphql.js-0.6.1.tgz#7adaaf37b1ca221ce54751324156400c600d3d03"
+  integrity sha512-4QD4kciRSrBFW0SfLwD5TqSLeB2BugR9YwjULqGnewnu7q1H9qlD5WfwvggfKsrDvcav8QNcab7uHYlRljw9Ug==
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -7189,10 +7194,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typine@^0.0.33:
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.33.tgz#d582bd7be4445e3acf61a6080929120dd493e15a"
-  integrity sha512-5Iqjcha9p/qttgsu2sTv5eqdjWWbF0bkRCGPlrsBB4JP6/rQOHB4XuUvBvwXeQ6VC0ofUua1g3DRrHRao4DQrA==
+typine@^0.0.34:
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.34.tgz#c2a4c113ee492b9f579f9db2c96c323a066607d1"
+  integrity sha512-SMk9mNv3HACWsx175cD3UnlCVnLx5VBboTUbTfhV0BFa1X2EgdID1j54bMUcDvJSj+zyNL1SuhPYArCU1efL/w==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"

@@ -1,3 +1,5 @@
+@import "./mention";
+
 .editor-body {
   overflow-y: scroll;
 
@@ -144,7 +146,7 @@
     position: fixed;
     left: 0;
     top: 64px;
-    z-index: 200;
+    z-index: 100;
   }
 
   .editor-bg {
@@ -152,6 +154,9 @@
     background: #f9f9f9;
     text-align: center;
     min-height: calc(100vh - 113px);
+    position: absolute;
+    width: 100%;
+    z-index: 99;
   }
 
   .editor-box {

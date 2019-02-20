@@ -1,6 +1,7 @@
 import Turbolinks from 'turbolinks';
 import ReactDOM from 'react-dom';
 import React from 'react';
+
 import '@babel/polyfill';
 import 'activestorage';
 import 'styles/event';
@@ -15,6 +16,7 @@ Turbolinks.setProgressBarDelay(150);
 
 window.$ = jQuery;
 window.i18n = i18n;
+
 
 const metaLocale = document.querySelector('meta[name=locale]');
 window.App = {
