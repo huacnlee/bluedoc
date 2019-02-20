@@ -15,10 +15,6 @@
   user-select: none;
   appearance: none;
   outline: none;
-  .fas {
-    transform: scale(1.2);
-    margin-top: -2px;
-  }
   &:hover {
     text-decoration: none;
     color: $text-main;
