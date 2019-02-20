@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
     authorize! :read, commentable
 
     @comment = Comment.new(comment_params)
+    @comment.format = "sml"
     @comment.user = current_user
     @comment.save
   end
@@ -62,6 +63,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:commentable_type, :commentable_id, :parent_id, :body)
+      params.require(:comment).permit(:commentable_type, :commentable_id, :parent_id, :body, :body_sml)
     end
 end

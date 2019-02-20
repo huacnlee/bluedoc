@@ -33,11 +33,14 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   test "body_html" do
-    comment = create(:comment, body: "hello world")
+    comment = create(:comment, body: "hello world", format: "markdown")
     assert_html_equal "<p>hello world</p>", comment.body_html
 
     comment.update(body: "world hello")
     assert_html_equal "<p>world hello</p>", comment.body_html
+
+    comment = create(:comment, body_sml: '["p", {}, "Hello world SML"]', format: "sml")
+    assert_equal "<p>Hello world SML</p>", comment.body_html
   end
 
   test "commentable_title" do

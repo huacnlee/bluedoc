@@ -24,7 +24,11 @@ class Comment < ApplicationRecord
   end
 
   def body_html
-    BlueDoc::HTML.render(self.body, format: :markdown)
+    if self.format == "markdown"
+      BlueDoc::HTML.render(self.body, format: :markdown)
+    else
+      BlueDoc::HTML.render(self.body_sml, format: :sml)
+    end
   end
 
   def commentable_title

@@ -154,8 +154,9 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#comment-watch-box", 1
     assert_select "#new_comment" do
       assert_react_component "InlineEditor" do |props|
-        assert_equal "comment[body]", props[:name]
-        assert_equal "markdown", props[:format]
+        assert_equal "comment[body_sml]", props[:name]
+        assert_equal "comment[body]", props[:markdownName]
+        assert_equal "sml", props[:format]
         assert_equal rails_direct_uploads_url, props[:directUploadURL]
         assert_equal upload_path(":id"), props[:blobURLTemplate]
       end

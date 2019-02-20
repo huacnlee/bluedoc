@@ -4,8 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RichEditor from 'bluedoc/editor/rich-editor';
 
+const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
+
 export default class InlineEditor extends React.PureComponent {
   inputRef = React.createRef()
+  markdownInputRef = React.createRef()
   editorRef = React.createRef()
   editor = null
 
@@ -19,7 +22,8 @@ export default class InlineEditor extends React.PureComponent {
   }
 
   resetValue = () => {
-    this.editorRef.current.handleReset({ value: '', format: this.props.format });
+    console.log('---- reset value');
+    this.editorRef.current.handleReset({ value: '', format: "markdown" });
   }
 
   focus = () => {
@@ -32,6 +36,7 @@ export default class InlineEditor extends React.PureComponent {
       this.inputRef.current.value = markdownValue;
     } else {
       this.inputRef.current.value = smlValue;
+      this.markdownInputRef.current.value = markdownValue;
     }
   }
 
@@ -47,11 +52,12 @@ export default class InlineEditor extends React.PureComponent {
 
   render() {
     const {
-      directUploadURL, blobURLTemplate, name, value = '', format = 'markdown',
+      directUploadURL, blobURLTemplate, name = "body_sml", markdownName = "body", value = '', format = 'markdown',
     } = this.props;
 
     return <div>
       <textarea name={name} ref={this.inputRef} style={{ display: 'none' }} />
+      <textarea name={markdownName} ref={this.markdownInputRef} style={{ display: 'none' }} />
       <form onSubmit={this.avoidSubmit}>
         <RichEditor
           mode="inline"

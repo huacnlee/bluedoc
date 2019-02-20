@@ -8,7 +8,7 @@
   </div>
 
   <div class="form-group">
-    <%= react_component "InlineEditor", name: "comment[body]", format: "markdown", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id") %>
+    <%= react_component "InlineEditor", name: "comment[body_sml]", markdownName: "comment[body]", format: "sml", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id") %>
   </div>
 
   <div class="form-actions clearfix">

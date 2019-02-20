@@ -2,4 +2,4 @@ var html = '<%= j(render("/comments/comment", comment: @comment )) %>';
 $('.comments').append(html);
 $('input[name="comment[parent_id]"]').val('');
 $('.in-reply-info').html('');
-document.dispatchEvent(new Event("reset:inline-editor:comment[body]"));
+document.dispatchEvent(new Event("reset:inline-editor:comment[body_sml]"));

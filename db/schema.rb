@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_062329) do
+ActiveRecord::Schema.define(version: 2019_02_20_110838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 2019_02_15_062329) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "format", limit: 20, default: "markdown", null: false
+    t.text "body_sml"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["deleted_at"], name: "index_comments_on_deleted_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -164,9 +166,9 @@ ActiveRecord::Schema.define(version: 2019_02_15_062329) do
     t.string "format", limit: 20, default: "markdown", null: false
     t.datetime "body_updated_at"
     t.datetime "deleted_at"
-    t.string "deleted_slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "deleted_slug", limit: 200
     t.index ["user_id", "body_updated_at"], name: "index_notes_on_user_id_and_body_updated_at"
     t.index ["user_id", "deleted_at"], name: "index_notes_on_user_id_and_deleted_at"
     t.index ["user_id", "slug"], name: "index_notes_on_user_id_and_slug", unique: true
