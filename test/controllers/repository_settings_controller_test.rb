@@ -169,9 +169,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 403, response.status
 
     # target repo not found
-    assert_raise(ActiveRecord::RecordNotFound) do
-      post repo.to_path("/settings/docs"), params: { transfer: { repository_id: -1 } }
-    end
+    post repo.to_path("/settings/docs"), params: { transfer: { repository_id: -1 } }
+    assert_equal 404, response.status
 
     # transfer to repo have permisson
     transfer_params = {
@@ -309,10 +308,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     # should not add self
     member_params[:user_slug] = user1.slug
-    assert_raise(ActiveRecord::RecordNotFound) do
-      post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
-      assert_equal :admin, repo.user_role(user1)
-    end
+    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    assert_equal 404, response.status
   end
 
   test "POST /:user/:repo/settings/collaborator" do

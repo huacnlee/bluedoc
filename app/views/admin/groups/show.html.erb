@@ -7,7 +7,7 @@
 
   <div class="detail-row">
     <div class="detail-label"><%= t("activerecord.attributes.group.avatar") %></div>
-    <div class="detail-value"><%= image_tag @group.avatar_url, class: "avatar avatar-small" %></div>
+    <div class="detail-value"><%= user_avatar_tag(@group, style: :small) %></div>
   </div>
 
   <div class="detail-row">

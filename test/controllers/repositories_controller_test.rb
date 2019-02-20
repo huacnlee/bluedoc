@@ -164,13 +164,11 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_raise(ActiveRecord::RecordNotFound) do
-      get "/foo/#{repo.slug}"
-    end
+    get "/foo/#{repo.slug}"
+    assert_equal 404, response.status
 
-    assert_raise(ActiveRecord::RecordNotFound) do
-      get "/#{@user.slug}/#{repo.slug}"
-    end
+    get "/#{@user.slug}/#{repo.slug}"
+    assert_equal 404, response.status
 
     # private repo
     repo = create(:repository, user: @group, privacy: :private)

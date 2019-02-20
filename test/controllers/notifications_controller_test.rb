@@ -66,9 +66,8 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     sign_in other_user
-    assert_raise(ActiveRecord::RecordNotFound) do
-      get notification_path(note.id)
-    end
+    get notification_path(note.id)
+    assert_equal 404, response.status
 
     sign_in user
     get notification_path(note.id)

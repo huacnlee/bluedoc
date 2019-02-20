@@ -58,8 +58,9 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       assert_select "#comment-form-blankslate", 0
       assert_select "form.new_comment" do
         assert_react_component "InlineEditor" do |props|
-          assert_equal "comment[body]", props[:name]
-          assert_equal "markdown", props[:format]
+          assert_equal "comment[body_sml]", props[:name]
+          assert_equal "comment[body]", props[:markdownName]
+          assert_equal "sml", props[:format]
           assert_equal rails_direct_uploads_url, props[:directUploadURL]
           assert_equal upload_path(":id"), props[:blobURLTemplate]
         end
@@ -69,8 +70,8 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
 
     # close share
     share.destroy
-    assert_raise(ActiveRecord::RecordNotFound) do
-      get share.to_path
-    end
+
+    get share.to_path
+    assert_equal 404, response.status
   end
 end

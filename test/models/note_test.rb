@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class NoteTest < ActiveSupport::TestCase
   test "create_new" do
@@ -102,7 +104,7 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal true, note.public?
 
     note = create(:note, privacy: :public)
-    create(:activity, )
+    create(:activity,)
   end
 
   test "private dependent :activites" do

@@ -29,8 +29,8 @@ module BlueDoc
 
       def assert_error_with(message)
         found = false
-        response_errors ||= []
-        response_errors.each do |error|
+        errors = response_errors || []
+        errors.each do |error|
           if error["message"] == message
             found = true
             break
@@ -38,7 +38,7 @@ module BlueDoc
         end
 
         assert_equal true, found, <<~MSG
-        expected: #{response_errors.inspect}
+        expected: #{errors.inspect}
         include:  #{message}
         MSG
       end
