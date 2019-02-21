@@ -41,4 +41,21 @@ module BootstrapHelper
 
     raw items.join("")
   end
+
+  # Override current_page? method for ignore :page param, when check_parameters: true
+  # https://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-current_page-3F
+  def current_page?(url_string, check_parameters: false)
+    if url_string.index("?") || check_parameters
+      clean_params = request.query_parameters.except(:page)
+      if request.fullpath.index("?")
+        fullpath = request.path + "?" + clean_params.to_query
+      else
+        fullpath = request.path
+      end
+      puts fullpath
+      fullpath == url_string
+    else
+      request.path == url_string
+    end
+  end
 end
