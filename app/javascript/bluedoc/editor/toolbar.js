@@ -82,6 +82,7 @@ export default class Toolbar extends React.Component {
 
     this.headingDropdown.current.removeAttribute('open');
 
+    editor._removeListAtRanges();
     if (this.isActiveMarkup(type)) {
       editor.setBlocks('paragraph');
     } else {
