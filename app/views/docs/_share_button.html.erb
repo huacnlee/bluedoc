@@ -18,7 +18,7 @@
         <%= user_name_tag(doc.share&.user) %> <span class="text-gray-light"><%= t(".opened share at") %> <%= timeago doc.share.created_at %></span>
       </div>
       <div class="action float-right">
-        <%= link_to t(".Unshare"), doc.to_path("/share?unshare=1"), class: "btn btn-danger btn-cancel-share mr-3", method: :post, remote: true, "disable-with": t(".Submiting") %>
+        <%= link_to t(".Unshare"), doc.to_path("/share?unshare=1"), class: "btn btn-link text-danger hover-danger btn-cancel-share mr-3", method: :post, remote: true, "disable-with": t(".Submiting") %>
         <clipboard-copy class="btn btn-primary" data-clipboard-text="<%= doc.share.to_url %>"><%= t(".Copy Link") %></clipboard-copy>
       </div>
     <% else %>

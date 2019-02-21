@@ -31,6 +31,9 @@ $input-border-color: #e0e0e0;
 .text-primary {
   color: $primary;
 }
+.text-danger {
+  color: $danger;
+}
 
 .hover-danger:hover {
   color: $danger!important;
