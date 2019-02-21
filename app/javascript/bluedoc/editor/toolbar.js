@@ -266,13 +266,13 @@ export default class Toolbar extends React.Component {
           <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
             <ul>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading2')}>Heading 2</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading3')}>Heading 3</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading4')}>Heading 4</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading5')}>Heading 5</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading6')}>Heading 6</a></li>
-              <li className="dropdown-divider"></li>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>{t(".Paragraph")}</a></li>
+              <li className="dropdown-divider"></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading2')}>{t(".Heading 2")}</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading3')}>{t(".Heading 3")}</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading4')}>{t(".Heading 4")}</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading5')}>{t(".Heading 5")}</a></li>
+              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading6')}>{t(".Heading 6")}</a></li>
             </ul>
           </div>
         </details>
