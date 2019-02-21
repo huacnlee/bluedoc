@@ -22,7 +22,6 @@ export default class InlineEditor extends React.PureComponent {
   }
 
   resetValue = () => {
-    console.log('---- reset value');
     this.editorRef.current.handleReset({ value: '', format: "markdown" });
   }
 
