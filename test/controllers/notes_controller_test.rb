@@ -16,7 +16,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     get user_notes_path(@user)
     assert_equal 200, response.status
     assert_select ".user-notes" do
-      assert_select ".title", text: "Notes"
+      assert_select ".sub-title", text: "Notes"
       assert_select ".recent-note-item", 3
       assert_select ".recent-note-item .action a.btn-edit", 0
       assert_select ".recent-note-item .action a.btn-delete", 0
@@ -33,7 +33,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     get user_notes_path(@user)
     assert_equal 200, response.status
     assert_select ".user-notes" do
-      assert_select ".title", text: "Notes"
+      assert_select ".sub-title", text: "Notes"
       assert_select ".recent-note-item", 5
       assert_select ".recent-note-item .action a.btn-edit", 5
       assert_select ".recent-note-item .action a.btn-delete", 5
@@ -44,7 +44,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     get user_notes_path(@other_user)
     assert_equal 200, response.status
     assert_select ".user-notes" do
-      assert_select ".title", text: "Notes"
+      assert_select ".sub-title", text: "Notes"
       assert_select ".recent-note-item", 3
       assert_select ".recent-note-item .action a.btn-edit", 0
       assert_select ".recent-note-item .action a.btn-delete", 0
