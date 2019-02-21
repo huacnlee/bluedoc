@@ -10,7 +10,7 @@
   <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
     <div class="box transfer-docs">
       <h1 class="title mb-0">
-        <p class="content"><%= t(".Transfer docs to other repository") %></p>
+        <div class="content"><%= t(".Transfer docs to other repository") %></div>
         <div class="text-gray f5">
           <%= t(".Choise doc in list, you can move them into the other repository") %>
         </div>
@@ -29,7 +29,7 @@
       <div class="box-select mb-4">
         <%= render "/shared/user_repositories_select_menu", input_name: "transfer[repository_id]", value: params.dig(:transfer, :repository_id) %>
       </div>
-      <div class="text-gray mb-3"><%= icon_tag("warn") %> <%= t(".If there has same doc slug exists in the destination repository, it will change it as a random slug") %></div> 
+      <div class="text-gray mb-3"><%= icon_tag("warn") %> <%= t(".If there has same doc slug exists in the destination repository, it will change it as a random slug") %></div>
       <button type="submit" class="btn btn-danger btn-submit"><%= t(".Transfer now") %></button>
     </div>
   <% end %>

@@ -62,7 +62,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     assert_select "#doc-#{doc1.id}" do
-      assert_select ".doc-icon-share"
+      assert_select ".fa-share"
     end
   end
 
