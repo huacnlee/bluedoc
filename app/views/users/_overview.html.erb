@@ -1,6 +1,6 @@
 <div class="user-overview">
   <h1 class="title"><%= t(".Overview") %></h1>
-  <h2 class="subhead"><%= t(".Recent activity") %></h2>
+  <div class="subhead"><h2><%= t(".Recent activity") %></h2></div>
   <% if @recent_docs.blank? %>
   <div class="blankslate">
     <p><%= t(".You have no update Doc in recently") %></p>
@@ -26,7 +26,7 @@
     <% end %>
   </ul>
   <% end %>
-  <h2 class="subhead"><%= t(".All activity") %></h2>
+  <div class="subhead"><h2><%= t(".All activity") %></h2></div>
   <div class="user-activities mt-4">
     <% if @activities.blank? %>
       <div class="blankslate">

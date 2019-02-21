@@ -1,6 +1,8 @@
 .list-item {
   width: 100%;
-  padding: 15px 0;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  // padding: 15px 0;
   list-style: none;
   border-bottom: 1px solid #E6E6E6;
   position: relative;
@@ -26,7 +28,7 @@
   }
   .avatar-box {
     position: absolute;
-    top: 21.5px;
+    top: 6px;
     left: 0;
     line-height: 0;
   }
@@ -73,10 +75,15 @@
   .action {
     position: absolute;
     right: 0;
-    top: 11.5px;
+    top: -2px;
     font-size: 14px;
     opacity: 0;
     text-align: center;
+    .btn-follow-user {
+      font-size: 12px;
+      height: 26px;
+      line-height: 26px;
+    }
   }
   .action-icon {
     min-width: 30px;

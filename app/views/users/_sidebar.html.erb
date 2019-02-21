@@ -47,7 +47,7 @@
     item << link_to(t(".Notes"), @user.to_path("/notes"), class: "menu-item")
     item << link_to(t(".Stars"), @user.to_path("?tab=stars"), class: "menu-item")
     item << content_tag(:span, t(".Settings"), class: "menu-item")
-    item << link_to(t(".Profile"), account_settings_path, class: "menu-item menu-sub-item depth-1")
-    item << link_to(t(".Account"), account_account_settings_path, class: "menu-item menu-sub-item depth-1")
+    item << link_to(icon_tag("arrow", label: t(".Profile")), account_settings_path, class: "menu-item menu-sub-item depth-1")
+    item << link_to(icon_tag("arrow", label: t(".Account")), account_account_settings_path, class: "menu-item menu-sub-item depth-1")
   end %>
 </details>

@@ -8,7 +8,7 @@
   <div class="main-content">
     <h1 class="title"><%= t(".Profile") %></h1>
     <h2 class="sub-title"><%= t(".Avatar") %></h2>
-    <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
+    <%= form_for(@user, url: account_settings_path, html: { method: :put, class: "mb-section" }) do |f| %>
       <input type="hidden" name="_by" value="profile" />
       <div class="avatar-wrap">
         <div class="image-box">

@@ -14,11 +14,6 @@
 }
 
 // hack
-
-.fa-star-note {
-  @extend .fa-star-doc;
-}
-
 .selected {
   .fa-dashboard {
     @extend .fa-dashboard-fill;
@@ -45,7 +40,7 @@
     @extend .fa-star-doc-fill;
   }
   .fa-star-note {
-    @extend .fa-star-doc-fill;
+    @extend .fa-star-note-fill;
   }
   .fa-bell {
     @extend .fa-bell-fill;

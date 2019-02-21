@@ -5,7 +5,7 @@
   <div class="title"><%= user_display_name_tag(user) %></div>
   <div class="description"><%= user_name_tag(user) %></div>
   <% if user.description.present? %>
-    <div class="info mt-1 text-gray text-overflow"><%= user.description %></div>
+    <div class="info mt-2 text-gray text-overflow"><%= user.description %></div>
   <% end %>
   <div class="action">
     <%= follow_user_tag(user, class: "btn btn-sm btn-light") %>

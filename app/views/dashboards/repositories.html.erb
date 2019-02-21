@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <div class="subhead"><h2><%= t(".All repositories") %></h2></div>
+      <h2 class="sub-title"><%= t(".All repositories") %></h2>
       <%= render partial: "repositories", locals: { items: @repositories } %>
       <%= paginate @repositories %>
     </div>

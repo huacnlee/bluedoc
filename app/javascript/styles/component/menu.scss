@@ -30,13 +30,30 @@
       }
     }
     &.menu-sub-item {
+      position: relative;
       color: $text-gray-light;
+      .fa-arrow {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        opacity: 0;
+      }
       &.selected {
         color: $primary;
+        .fa-arrow {
+          opacity: 1;
+        }
       }
     }
     &.depth-1 {
       margin-left: 1.6em;
+    }
+  }
+  .menu-sub-item.menu-arrow {
+    position: relative;
+    &::before {
+      
     }
   }
 
