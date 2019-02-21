@@ -9,9 +9,6 @@
   .header-shadow {
     box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
   }
-  .fas {
-    font-size: 1.25em;
-  }
   .header-content {
     height: 100%;
     margin: auto;
@@ -46,6 +43,9 @@
   .dropdown {
     margin-left: 10px;
     padding: 10px 5px;
+    .fas {
+      font-size: 1.25em;
+    }
   }
   .nav-notifications {
     position: relative;

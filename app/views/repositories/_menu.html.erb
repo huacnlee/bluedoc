@@ -9,10 +9,9 @@
           <span class="text-main">
             <%= repository_name_tag @repository %>
             <% if @repository.private? %>
-              <span class="label label-private ml-2"><%= t(".Private") %></span>
+              <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
             <% end %>
           </span>
-          
         </h1>
         <div class="text-gray my-3"><%= @repository.description %></div>
         <% if @repository.source? && @repository.source.provider == "gitbook" %>

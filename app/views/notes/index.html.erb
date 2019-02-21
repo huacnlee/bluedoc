@@ -18,9 +18,8 @@
             <li class="card recent-note-item mb-2">
               <div class="title">
                 <%= note_title_tag(note) %>
-
                 <% if note.private? %>
-                <label class="label label-private"><%= t(".Private") %></label>
+                  <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
                 <% end %>
               </div>
               <% if note.description.present? %>

@@ -40,7 +40,7 @@
         <span class= "divider">/</span>
         <a href="<%= @note.to_path %>" class="note-link"><%= @note.title || t(".New Note") %></a>
         <% if @note.private? %>
-        <label class="label label-private"><%= t(".Private") %></label>
+          <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
         <% end %>
         <span class="editor-message"></span>
       </div>

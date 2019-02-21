@@ -20,9 +20,7 @@
       <h1 class="doc-title">
         <%= @note.title %>
         <% if @note&.private? %>
-          <span class="doc-name">
-            <span class="label label-private ml-2"><%= t(".Private") %></span>
-          </span>
+          <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
         <% end %>
       </h1>
 
