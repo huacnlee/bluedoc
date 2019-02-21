@@ -103,6 +103,7 @@ Rails.application.routes.draw do
         post :action
         delete :action
         get :readers
+        post :pdf
       end
     end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do

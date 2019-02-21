@@ -5,6 +5,7 @@ class Note < ApplicationRecord
   include Activityable
   include Smlable
   include Reactionable
+  include Exportable
 
   second_level_cache expires_in: 1.week
 

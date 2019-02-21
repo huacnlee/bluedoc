@@ -6,6 +6,8 @@ class PDFExportJob < ApplicationJob
 
     if subject.is_a?(Doc)
       pdf_file = render("doc", subject)
+    elsif subject.is_a?(Note)
+      pdf_file = render("note", subject)
     elsif subject.is_a?(Repository)
       pdf_file = render("repository", subject)
     end

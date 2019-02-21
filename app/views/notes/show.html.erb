@@ -41,6 +41,9 @@
             <summary class="link-gray-dark"><%= icon_tag("more") %></summary>
             <ul class="dropdown-menu dropdown-menu-sw">
               <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_note_path(@user, @note) %>"><%= t(".Markdown") %></a></li>
+              <% if can? :update, @note %>
+                <li><%= render "/docs/export_pdf", doc: @note %></li>
+              <% end %>
               <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
               <li class="dropdown-divider" role="separator"></li>
               <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>

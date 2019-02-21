@@ -166,4 +166,43 @@ class PDFExportJobTest < ActiveSupport::TestCase
     end
     assert_equal "done", repo.export_pdf_status.value
   end
+
+  test "perform with Note" do
+    note = create(:note, body: read_file("sample.md"))
+
+    f = WickedPdf::WickedPdfTempfile.new("blank.png")
+
+    rendered_html = ""
+    wicked = MiniTest::Mock.new
+    wicked.expect(:pdf_from_string, f) do |html, opts|
+      rendered_html = html
+    end
+
+    WickedPdf.stub(:new, wicked) do
+      PDFExportJob.perform_now(note)
+    end
+    wicked.verify
+
+    assert_not_equal "", rendered_html
+
+    html_node = Nokogiri::HTML(rendered_html)
+    assert_equal note.title, html_node.css("title")[0].inner_text.strip
+    assert_equal note.title, html_node.css(".pdf-title")[0].inner_text.strip
+    assert_html_equal note.body_public_html, html_node.css(".markdown-body")[0].inner_html
+
+    assert_equal "done", note.export_pdf_status.value
+    assert_equal true, note.pdf.attached?
+    assert_equal note.export_filename(:pdf), note.pdf.blob.filename.to_s
+
+    wicked.expect(:pdf_from_string, f) do |args|
+      raise "Error"
+    end
+    note.set_export_status(:pdf, "running")
+    assert_changes -> { ExceptionTrack::Log.count }, 1 do
+      WickedPdf.stub(:new, wicked) do
+        PDFExportJob.perform_now(note)
+      end
+    end
+    assert_equal "done", note.export_pdf_status.value
+  end
 end
