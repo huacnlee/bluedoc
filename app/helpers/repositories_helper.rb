@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RepositoriesHelper
-  def repository_name_tag(repo, opts={})
+  def repository_name_tag(repo, opts = {})
     return "" if repo.blank?
     return "" if repo.user.blank?
 

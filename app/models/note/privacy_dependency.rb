@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Note
   enum privacy: %i(private public), _prefix: :is
   scope :publics, -> { where(privacy: :public) }

@@ -19,6 +19,9 @@ class RepositoriesHelperTest < ActionView::TestCase
 
     html = repository_name_tag(@repo)
     assert_equal %(<a class="repository-name" href="#{@repo.to_path}">#{@repo.name}</a>), html
+
+    html = repository_name_tag(@repo, with_icon: true)
+    assert_equal %(<a class="repository-name icon-middle-wrap" href="#{@repo.to_path}"><i class="fas fa-repo "></i> <span>#{@repo.name}</span></a>), html
   end
 
   test "repository_path_tag" do
