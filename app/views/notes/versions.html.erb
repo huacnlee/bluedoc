@@ -8,21 +8,19 @@
         <span class="doc-title"><%= t(".Versions") %></span>
       </span>
     </div>
-
-    <div class="navbar-buttons">
-      <span class="diff-toggle float-left">
+    <div class="navbar-buttons d-flex flex-items-center">
+      <%= form_with(model: @note, url: revert_user_note_path(@user, @note),
+        local: true, remote: true) do |form| %>
+        <input type="hidden" name="version_id">
+        <button type="submit" disabled class="btn btn-sm btn-revert text-primary hover-primary"><%= t(".Revert") %></button>
+        <%= link_to t(".Cancel"), @note.to_path, class: "btn btn-sm" %>
+      <% end %>
+      <span class="diff-toggle">
         <label for="version-diff-toggle">
           <input type="checkbox" id="version-diff-toggle">
           <%= t(".Diff mode") %>
         </label>
       </span>
-
-      <%= form_with(model: @note, url: revert_user_note_path(@user, @note),
-        local: true, remote: true, class: "float-right") do |form| %>
-        <input type="hidden" name="version_id">
-        <button type="submit" disabled class="btn btn-sm btn-revert btn-primary px-5"><%= t(".Revert") %></button>
-        <%= link_to t(".Cancel"), @note.to_path, class: "btn btn-sm" %>
-      <% end %>
     </div>
   </div>
 </div>

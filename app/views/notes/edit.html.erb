@@ -45,7 +45,7 @@
         <span class="editor-message"></span>
       </div>
       <div class="navbar-buttons">
-        <button type="submit" class="btn btn-primary"><%= icon_tag("publish") %> <%= t(".Publish") %></button>
+        <button type="submit" class="btn btn-primary"><%= t(".Publish") %></button>
         <%= react_component "notes/EditorSetting", {
           slug: @note.slug,
           description: @note.description,

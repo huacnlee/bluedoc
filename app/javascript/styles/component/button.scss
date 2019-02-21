@@ -2,10 +2,11 @@
   position: relative;
   display: inline-block;
   padding: 0 15px;
-  height: 38px;
-  line-height: 38px;
+  height: 36px;
+  line-height: 36px;
   text-align: center;
   border: 1px solid #999999;
+  border-radius: 2px;
   background: #fff;
   font-size: 14px;
   text-decoration: none;
@@ -27,6 +28,7 @@
     pointer-events: none;
   }
 }
+
 .btn-sm {
   height: 30px;
   line-height: 30px;
