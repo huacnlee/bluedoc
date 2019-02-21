@@ -7194,10 +7194,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typine@^0.0.34:
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.34.tgz#c2a4c113ee492b9f579f9db2c96c323a066607d1"
-  integrity sha512-SMk9mNv3HACWsx175cD3UnlCVnLx5VBboTUbTfhV0BFa1X2EgdID1j54bMUcDvJSj+zyNL1SuhPYArCU1efL/w==
+typine@^0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.35.tgz#ed75a527f50c27c05b1559a7c7a731bcff566466"
+  integrity sha512-FcVR4op4MlInKo3hr/X2DRtYaP3HUAY7noMjXtFdXLYngM5boTEpx5TkVe5+AVSe/46j5lTQVutn9syKgMpeXw==
   dependencies:
     "@royie/slate" "^0.44.9"
     "@royie/slate-is-hotkey" "^0.1.6"

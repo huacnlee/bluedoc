@@ -20,12 +20,19 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     assert_equal out, BlueDoc::HTML.render_without_cache(raw, format: :markdown)
     assert_html_equal html, out
 
-    # cache test
+    # cache test for Markdown
     cache_key = ["bluedoc/html", "v1", Digest::MD5.hexdigest(raw), { format: :markdown }]
-    Rails.cache.write(cache_key, "A cache value")
-    assert_equal "A cache value", BlueDoc::HTML.render(raw, format: :markdown)
+    Rails.cache.write(cache_key, "A cache value from Markdown")
+    assert_equal "A cache value from Markdown", BlueDoc::HTML.render(raw, format: :markdown)
     Rails.cache.delete(cache_key)
     assert_html_equal html, BlueDoc::HTML.render(raw, format: :markdown)
+
+    # cache test for SML
+    cache_key = ["bluedoc/html", BlueDoc::SML::VERSION, Digest::MD5.hexdigest(raw), { format: :sml }]
+    Rails.cache.write(cache_key, "A cache value from SML")
+    assert_equal "A cache value from SML", BlueDoc::HTML.render(raw, format: :sml)
+    Rails.cache.delete(cache_key)
+    assert_html_equal BlueDoc::HTML.render_without_cache(raw, format: :sml), BlueDoc::HTML.render(raw, format: :sml)
   end
 
   test "render html with Sanitize" do

@@ -23,7 +23,9 @@ module BlueDoc
       def render(body, opts = {})
         return "" if body.blank?
 
-        Rails.cache.fetch(["bluedoc/html", "v1", Digest::MD5.hexdigest(body), opts]) do
+        cache_version = opts[:format].to_s == "sml" ? BlueDoc::SML::VERSION : "v1"
+
+        Rails.cache.fetch(["bluedoc/html", cache_version, Digest::MD5.hexdigest(body), opts]) do
           render_without_cache(body, opts)
         end
       end
