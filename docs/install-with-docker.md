@@ -13,7 +13,7 @@ Please follow Docker offical documentation install Docker with your Host OS.
 Use `docker pull` to get BlueDoc Docker image:
 
 ```bash
-$ docker pull bluedoc:latest
+$ docker pull bluedoc/bluedoc:latest
 ```
 
 ## Install BlueDoc
@@ -39,7 +39,7 @@ $ echo $SECRET_KEY_BASE
 
 You need create a path to storage BlueDoc's database, uploads or log files.
 
-By default recommends you choice `/var/booklbar`:
+By default recommends you choice `/var/bluedoc`:
 
 ```bash
 $ bluedoc_root=/var/bluedoc
@@ -48,7 +48,7 @@ $ sudo mkdir -p ${bluedoc_root} && sudo chown -R `whoami` ${bluedoc_root}
 
 ### Start BlueDoc
 
-Now, just use `docker run` command to start BooLab
+Now, just use `docker run` command to start BlueDoc
 
 ```bash
 $ bluedoc_root=/var/bluedoc
@@ -64,7 +64,7 @@ $ docker run --detach \
              --volume ${bluedoc_root}/fonts:/home/app/bluedoc/fonts \
              --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
              --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
-             bluedoc:latest
+             bluedoc/bluedoc:latest
 ```
 
 after run that command, you can use `docker logs bluedoc` to checkout the logs.
@@ -108,7 +108,7 @@ After that, the PDF generater will use `noto.otf` as font-family.
 We will continue upgrade BlueDoc, you can upgrade it by:
 
 ```
-$ docker pull bluedoc:lastest
+$ docker pull bluedoc/bluedoc:latest
 ```
 
 And then, recreate Docker Container:
@@ -130,5 +130,5 @@ $ docker run --detach \
              --volume ${bluedoc_root}/fonts:/home/app/bluedoc/fonts \
              --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
              --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
-             bluedoc:latest
+             bluedoc/bluedoc:latest
 ```
