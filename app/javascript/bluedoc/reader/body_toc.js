@@ -6,7 +6,7 @@ export default class BodyToc {
     tocbot.init({
       tocSelector: '.doc-body-toc',
       contentSelector: '.markdown-with-toc',
-      headingSelector: 'h1, h2, h3, h4, h5',
+      headingSelector: 'h1:not(:empty), h2:not(:empty), h3:not(:empty), h4:not(:empty), h5:not(:empty)',
       headingsOffset: 10,
       includeHtml: true,
       scrollSmooth: false,
