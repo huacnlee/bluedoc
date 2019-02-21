@@ -11,6 +11,8 @@
       <%= t(".Edit Table of contents") %>
     </div>
     <div class="navbar-buttons">
+      <button type="submit" class="btn btn-primary"><%= t(".Save") %></button>
+      <a href="<%= @repository.to_path %>" type="submit" class="btn"><%= t(".Cancel") %></a>
       <div class="dropdown toc-keyboard-tip d-inline-block py-3">
         <div class="btn"><i class="fas fa-keyboard"></i></div>
         <div class="dropdown-menu dropdown-menu-sw py-3 px-4" style="width: 420px">
@@ -58,8 +60,6 @@
           </table>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary"><%= t(".Save") %></button>
-      <a href="<%= @repository.to_path %>" type="submit" class="btn"><%= t(".Cancel") %></a>
     </div>
   </div>
 

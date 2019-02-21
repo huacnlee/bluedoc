@@ -14,7 +14,7 @@
     <b class="real-name"><%= @user.name %></b>
     <div class="user-name"><%= @user.slug %></div>
     <div class="user-follow">
-      <%= follow_user_tag(@user) %>
+      <%= follow_user_tag(@user, class: "btn btn-sm btn-block") %>
     </div>
     <% if @user.description.present? %>
       <div class="user-bio">

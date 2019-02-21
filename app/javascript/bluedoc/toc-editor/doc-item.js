@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 
 export default class DocItem extends PureComponent {
   onAddClick = () => {
-    const { item,onAddItem } = this.props;
+    const { item, onAddItem } = this.props;
     onAddItem && onAddItem(item);
   }
 
@@ -13,7 +13,7 @@ export default class DocItem extends PureComponent {
     if (exist) return null;
     return (
       <div className={`doc-item-drageable doc-item clearfix ${isNew ? 'new' : ''}`}>
-        <div className="title">{isNew ? 'Add a custom item' : title}</div>
+        <div className="title">{isNew ? i18n.t('Add a custom item') : title}</div>
         <div className="slug">{url}</div>
         <div className="opts" onClick={this.onAddClick}>
           <i className="fas fa-add"></i>

@@ -14,8 +14,8 @@
         <%= note_title_tag(note) %>
       </div>
       <div class="path">
-        <%= user_name_tag(note.user) %> /
-        <%= link_to t(".Notes"), user_notes_path(note.user) %>
+        <%= user_name_tag(note.user, with_icon: true) %> /
+        <%= link_to t(".Notes"), user_notes_path(note.user, with_icon: true) %>
       </div>
       <div class="action action-icon text-gray"><%= action_button_tag(note, :star, undo: true) %></div>
       <div class="time-box">

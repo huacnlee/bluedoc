@@ -57,6 +57,10 @@ i18n.init({
             "Done": "Done",
           },
         },
+        "toc": {
+          "Table of contents": "Table of contents",
+          "Add a custom item": "Add a custom item"
+        },
       },
     },
     zh_CN: {
@@ -110,6 +114,10 @@ i18n.init({
             "If you change privacy from Public to Private": "如果将笔记从公开切换到私密模式，其他人对此笔记的收藏记录将会被取消掉。",
             "Done": "更新设置",
           },
+        },
+        "toc": {
+          "Table of contents": "目录",
+          "Add a custom item": "添加自定义项"
         },
       },
     }

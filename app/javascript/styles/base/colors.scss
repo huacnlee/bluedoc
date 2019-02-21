@@ -33,5 +33,9 @@ $input-border-color: #e0e0e0;
 }
 
 .hover-danger:hover {
-  color: $danger;
+  color: $danger!important;
+}
+
+.hover-primary:hover {
+  color: $primary!important;
 }

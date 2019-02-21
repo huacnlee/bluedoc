@@ -3,14 +3,12 @@
 <%= render "menu" %>
 <div class="col-12 col-md-9 float-left">
   <div class="box transfer-docs">
-    <div class="box-header">
-      <h1 class="title mb-3">
-        <p><%= t(".Collaborators") %></p>
-        <div class="text-gray f5">
-          <%= t(".Push access to the repository") %>
-        </div>
-      </h1>
-    </div>
+    <h1 class="title mb-0">
+      <p><%= t(".Collaborators") %></p>
+      <div class="text-gray f5">
+        <%= t(".Push access to the repository") %>
+      </div>
+    </h1>
     <ul id="repository-members" class="table-list members mb-4">
       <% @members.each do |member| %>
         <%= render "member", member: member %>

@@ -27,7 +27,7 @@
   .detail {
     margin-top: 10px;
     padding: 12px 20px;
-    border: 1px solid $border-gray;
+    @extend .card-box;
   }
 }
 
@@ -38,6 +38,9 @@
   border: none;
   padding: 5px 0;
   box-shadow: none;
+  &:hover {
+    color: $primary;
+  }
 }
 
 .user-card {
@@ -70,7 +73,6 @@
     font-size: 13px;
   }
   .counter {
-    display: inline-block;
     min-width: 100px;
   }
 }

@@ -3,8 +3,8 @@
   <%= user_name_tag(activity.actor) %>
   <%= t("activities.starred") %>
   <span class="path">
-    <%= user_display_name_tag(activity.target.user) %> /
-    <%= repository_name_tag(activity.target) %>
+    <%= user_display_name_tag(activity.target.user, with_icon: true) %> /
+    <%= repository_name_tag(activity.target, with_icon: true) %>
   </span>
 </div>
 <span class="time"><%= timeago activity.created_at %></span>

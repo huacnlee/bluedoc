@@ -50,7 +50,7 @@
     width: 100%;
     margin-top: 17px;
     > span {
-      display: inline-block;
+      @extend .icon-middle-wrap;
       width: 90px;
       margin-right: 20px;
       color: #333;
@@ -108,8 +108,10 @@
       padding-right: 0;
       height: 30px;
       height: 30px;
+      @extend .icon-middle-wrap;
       .fas {
-        float: right;
+        transform: scale(1.2);
+        order: 2;
       }
       span {
         font-size: 12px;

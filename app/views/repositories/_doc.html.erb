@@ -3,17 +3,17 @@
     <div class="avatar-box icon-box icon-doc">
       <%= icon_tag("avatar-doc") %>
     </div>
-    <div class="title text-overflow">
+    <div class="title text-overflow icon-middle-wrap d-flex">
       <%= doc_title_tag(doc) %>
       <% if doc.share %>
-        <span class="doc-icon-share tooltipped tooltipped-ne" aria-label="<%= t(".Sharing") %>"><i class="fas fa-share"></i></span>
+        <i class="fas fa-share ml-2"></i>
       <% end %>
     </div>
-    <span class="time-box tooltipped tooltipped-ne" aria-label="<%= t(".Last updated at") %>"><i class="fas fa-clock"></i> <%= timeago doc.body_updated_at %></span>
+    <span class="time-box"><%= timeago doc.body_updated_at %></span>
     <div class="path">
       <% if @repository && doc.repository_id != @repository.id %>
-      <%= user_name_tag(doc.repository&.user) %> / 
-      <%= repository_name_tag(doc.repository) %>
+      <%= user_name_icon_tag(doc.repository&.user, with_icon: true) %> / 
+      <%= repository_name_tag(doc.repository, with_icon: true) %>
       <% end %>
       <%= user_name_tag(doc.last_editor) %>
     </div>

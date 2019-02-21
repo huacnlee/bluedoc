@@ -64,9 +64,8 @@
     }
   }
   .user-groups {
-    line-height: 1;
-    display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    align-items: unset;
     .group-label {
       line-height: 20px;
     }
@@ -80,8 +79,7 @@
   }
 
   .user-avatar-box,
-  .user-name-box,
-  {
+  .user-name-box {
     display: none;
     @include breakpoint(md) {
       display: block;

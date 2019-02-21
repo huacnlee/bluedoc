@@ -17,6 +17,14 @@
 
   .repo-actions {
     line-height: 30px;
+    @extend .icon-middle-wrap;
+    .btn-create-doc {
+      @extend .icon-middle-wrap;
+      .fas {
+        transform: scale(1.2);
+        margin-right: 8px;
+      }
+    }
     .btn, .social-count {
       height: auto;
       padding: 0;
@@ -43,8 +51,8 @@
         line-height: 30px;
       }
       span {
+        @extend .icon-middle-wrap;
         font-size: 12px;
-        display: inline-block;
         line-height: 30px;
         max-width: 0;
         opacity: 0;
@@ -106,22 +114,16 @@
         position: absolute;
         top: 0;
         right: 0;
-        color: #505050;
-        vertical-align: bottom;
         font-size: 14px;
-
+        @extend .icon-middle-wrap;
         .fas {
-          width: 14px;
-          height: 14px;
-          font-size: 15px;
+          transform: scale(1.1);
         }
       }
     }
     
     .toc-list {
-
       text-align: left;
-
       ul {
         li {
           list-style: none;
@@ -201,7 +203,7 @@
       position: relative;
       .edit-member, .delete-member {
         position: absolute;
-        top: 26px;
+        top: 20px;
       }
       .edit-member {
         right: 100px;
@@ -214,17 +216,11 @@
           width: 200px;
         }
         summary.select-menu-button {
-          width: 80px;
           text-align: left;
-          &:after {
-            position: absolute;
-            right: 10px;
-            top: 13px;
-          }
         }
       }
       .delete-member {
-        top: 28px;
+        top: 25px;
         right: 10px;
       }
     }

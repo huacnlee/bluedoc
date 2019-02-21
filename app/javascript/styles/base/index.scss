@@ -15,6 +15,15 @@ textarea {
   display: block;
 }
 
+.card-box {
+  border: 1px solid $border-gray;
+  border-radius: 2px;
+  &:hover {
+    border-color: #EBEBEB;
+    box-shadow: 0 4px 7px 0 rgba(190, 190, 190, .1);
+  }
+}
+
 @import "mixins.scss";
 @import "./grid.scss";
 @import "./utils.scss";

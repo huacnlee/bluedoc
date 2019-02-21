@@ -10,7 +10,8 @@
     <% @recent_docs.each do |item| %>
       <li class="card recent-doc-item">
         <div class="path">
-          <%= user_display_name_tag(item.subject.repository.user) %> / <%= repository_name_tag(item.subject&.repository) %>
+          <%= user_display_name_tag(item.subject.repository.user, with_icon: true) %> / 
+          <%= repository_name_tag(item.subject&.repository, with_icon: true) %>
         </div>
         <div class="title">
           <%= doc_title_tag(item.subject) %>

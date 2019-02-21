@@ -3,16 +3,24 @@
 module UsersHelper
   include LetterAvatar::AvatarHelper
 
-  def user_name_tag(user)
+  def user_name_tag(user, opts = {})
     return "" if user.blank?
 
-    link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
+    if opts[:with_icon]
+      link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-name icon-middle-wrap", title: user.fullname, data: { type: user.type.downcase }
+    else
+      link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
+    end
   end
 
-  def user_display_name_tag(user)
+  def user_display_name_tag(user, opts = {})
     return "" if user.blank?
 
-    link_to user.name, user.to_path, class: "user-display-name", title: user.fullname, data: { type: user.type.downcase }
+    if opts[:with_icon]
+      link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-display-name icon-middle-wrap", title: user.fullname, data: { type: user.type.downcase }
+    else
+      link_to user.name, user.to_path, class: "user-display-name", title: user.fullname, data: { type: user.type.downcase }
+    end
   end
 
   def group_name_tag(group)
@@ -68,6 +76,6 @@ module UsersHelper
     data = { id: slug, label: label, undo_label: undo_label }
     class_names += " active" if followed
 
-    link_to raw("<span>#{btn_label}</span>"), "#", data: data, class: class_names
+    content_tag :button, btn_label, data: data, class: class_names
   end
 end

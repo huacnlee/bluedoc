@@ -2,6 +2,7 @@
 @import './doc.scss';
 
 .editor-body {
+
   .main-container,
   .container {
     display: block;
@@ -22,7 +23,7 @@
     line-height: 64px;
     background: #fff;
     border: 0;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 0px 0px rgb(242, 242, 242), 0px 1px 4px 0px rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 9;
 
@@ -35,8 +36,15 @@
 
     .navbar-title {
       padding-left: 24px;
-      a { color: #333; }
-      .divider { color: #bbb; margin: 0 5px; }
+
+      a {
+        color: #333;
+      }
+
+      .divider {
+        color: #bbb;
+        margin: 0 5px;
+      }
     }
 
     .navbar-buttons {
@@ -54,6 +62,12 @@
 
       .btn {
         margin-left: 5px;
+        border: 0;
+      }
+
+      .btn-primary {
+        background: none;
+        box-shadow: none;
       }
 
       .dropdown-menu {
@@ -94,7 +108,6 @@
 
 .toc-editor-container {
   position: relative;
-  background: #eee;
   width: 100%;
   height: calc(100vh - 64px);
   overflow-y: auto;
@@ -105,21 +118,18 @@
   max-width: 990px;
   margin: auto;
   height: 100%;
+
   .doc-list {
     overflow-y: scroll;
     position: sticky;
     top: 94px;
     padding: 14px;
-    background: rgba(252, 252, 252, 0.73);
-    border: 1px solid #e8e8e8;
-    border-radius: 3px;
+    background: #F9F9F9;
   }
+
   .toc-list {
     margin-left: 20px;
     padding: 14px;
-    background: rgba(252, 252, 252, 0.73);
-    border: 1px solid #e8e8e8;
-    border-radius: 3px;
     height: 100%;
     overflow-y: scroll;
   }

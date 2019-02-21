@@ -16,15 +16,19 @@ class UsersHelperTest < ActionView::TestCase
     assert_equal "", user_name_tag(nil)
     user = build(:user)
     assert_html_equal %(<a class="user-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.name}</a>), user_name_tag(user)
+    assert_html_equal %(<a class="user-name icon-middle-wrap" title="#{user.fullname}" data-type="user" href="/#{user.slug}"><i class="fas fa-user "></i><span>#{user.name}</span></a>), user_name_tag(user, with_icon: true)
 
     group = build(:group)
     assert_html_equal %(<a class="user-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_name_tag(group)
+
+
   end
 
   test "user_display_name_tag" do
     assert_equal "", user_display_name_tag(nil)
     user = build(:user)
     assert_html_equal %(<a class="user-display-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.name}</a>), user_display_name_tag(user)
+    assert_html_equal %(<a class="user-display-name icon-middle-wrap" title="#{user.fullname}" data-type="user" href="/#{user.slug}"><i class="fas fa-user "></i><span>#{user.name}</span></a>), user_display_name_tag(user, with_icon: true)
 
     group = build(:group)
     assert_html_equal %(<a class="user-display-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_display_name_tag(group)
@@ -55,10 +59,10 @@ class UsersHelperTest < ActionView::TestCase
 
     user = create(:user)
 
-    assert_equal %(<a data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block" href="#"><span>Follow</span></a>), follow_user_tag(user)
+    assert_equal %(<button data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block" href="#">Follow</button>), follow_user_tag(user)
 
     @user.stub(:follow_user_ids, [user.id]) do
-      assert_equal %(<a data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block active" href="#"><span>Unfollow</span></a>), follow_user_tag(user)
+      assert_equal %(<button data-id="#{user.slug}" data-label="Follow" data-undo-label="Unfollow" class="btn-follow-user btn btn-block active" href="#">Unfollow</button>), follow_user_tag(user)
     end
   end
 end
