@@ -2,7 +2,6 @@
 
 class GraphQLController < ApplicationController
   before_action :authenticate_anonymous!
-  skip_before_action :verify_authenticity_token
 
   def execute
     variables = ensure_hash(params[:variables])

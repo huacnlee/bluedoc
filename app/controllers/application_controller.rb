@@ -26,6 +26,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from ActionController::InvalidAuthenticityToken do |exception|
+    respond_to do |format|
+      format.json { head :forbidden }
+      format.html { render plain: "Invalid Authenticity Token", status: :forbidden }
+    end
+  end
+
   def set_nav_search(url: request.fullpath)
     @nav_search_path = url
   end
