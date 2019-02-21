@@ -8,8 +8,8 @@
   <div class="main-wrap">
     <div class="main-content">
       <h1 class="title"><%= t(".Account") %></h1>
-      <h2 class="sub-title"><%= t(".Change password") %></h2>
-      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password", class: "mb-6" }) do |f| %>
+      <div class="sub-title"><h2><%= t(".Change password") %><h2></div>
+      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password", class: "mb-section" }) do |f| %>
         <% if params[:_by] == "password" %>
         <%= render "/shared/error_messages", target: @user %>
         <% end %>
@@ -30,7 +30,7 @@
           <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-button">
           <%= f.label :current_password, class: "control-label" %>
           <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
           <div class="form-text">
@@ -43,8 +43,8 @@
         </div>
       <% end %>
 
-      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-username", class: "mb-6" }) do |f| %>
-        <h2 class="sub-title"><%= t(".Change username") %></h2>
+      <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-username", class: "mb-section" }) do |f| %>
+        <div class="sub-title"><h2><%= t(".Change username") %><h2></div>
         <% if params[:_by] == "username" %>
         <%= render "/shared/error_messages", target: @user %>
         <% end %>
@@ -61,8 +61,8 @@
         </div>
       <% end %>
 
-      <h2 class="sub-title"><%= t(".Danger zone") %></h2>
-      <div class="form-group">
+      <div class="sub-title"><h2><%= t(".Danger zone") %><h2></div>
+      <div class="form-group mb-button">
         <div class="text-main" style="font-size: 15px">
           <%= t(".Delete my account") %>
         </div>
@@ -70,7 +70,7 @@
           <%= t(".Once you delete your account, there is no going back") %>
         </div>
       </div>
-      <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger", data: { confirm: t(".Are you sure?") }, method: :delete %>
+      <%= button_to t(".Delete my account"), account_settings_path, class: "btn btn-danger btn-submit", data: { confirm: t(".Are you sure?") }, method: :delete %>
     </div>
   </div>
 </div>

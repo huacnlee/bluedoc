@@ -1,17 +1,17 @@
 <% title_tag t(".New Note") %>
 
 <div class="col-12 mb-5">
-  <h1 class="title"><%= t(".New Note") %></h1>
+  <h2 class="sub-title"><%= t(".New Note") %></h2>
 
 <%= form_with(model: [@user, @note], url: user_notes_path(@user), local: true) do |form| %>
   <%= render "/shared/error_messages", target: @note %>
 
-  <div class="form-group">
+  <div class="form-group" style="max-width: 700px">
     <%= form.label :title, class: "control-label" %>
     <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="max-width: 700px">
     <%= form.label :slug, class: "control-label" %>
     <%= form.text_field :slug, class: "form-control" %>
     <div class="form-text">
@@ -25,9 +25,9 @@
     </script>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="max-width: 700px">
     <%= form.label :description, class: "control-label" %>
-    <%= form.text_area :description, class: "form-control" %>
+    <%= form.text_area :description, rows: 1, class: "form-control" %>
     <div class="form-text">
       <%= t(".Use a short description to describe of this Note") %>
     </div>
@@ -55,7 +55,7 @@
   </div>
 
   <div class="form-group">
-    <button type="submit" class="btn btn-primary"><%= t(".Create Note") %></button>
+    <button type="submit" class="btn btn-primary btn-submit"><%= t(".Create Note") %></button>
   </div>
 <% end %>
 </div>

@@ -9,7 +9,7 @@
 
   <%= form_for(@repository, url: docs_user_repository_settings_path(@user, @repository), method: :post) do |f| %>
     <div class="box transfer-docs">
-      <h1 class="title mb-0">
+      <h1 class="title mb-3">
         <div class="content"><%= t(".Transfer docs to other repository") %></div>
         <div class="text-gray f5">
           <%= t(".Choise doc in list, you can move them into the other repository") %>

@@ -20,7 +20,7 @@
             <br>
             <%= t(".Use a photo or image rather than text and upload an image that is 200px square or larger") %>
           </p>
-          <label class="btn-upload icon-middle-wrap">
+          <label class="btn-upload icon-middle-wrap link-gray-dark">
             <%= icon_tag("text-image") %>
             <%= t(".Upload new picture") %>
             <%= f.file_field :avatar, class: "js-manual-file-chooser" %>
@@ -60,7 +60,7 @@
         <%= f.url_field :url, class: "form-control" %>
       </div>
 
-      <div class="form-group">
+      <div class="form-group mb-button">
         <%= f.label :locale, class: "control-label" %>
         <%= f.select :locale, Setting.locale_options,
           { include_blank: t(".System default", locale_name: Setting.default_locale_name) },

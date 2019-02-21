@@ -16,7 +16,7 @@
         <br>
         <%= t(".Use a photo or image rather than text and upload an image that is 200px square or larger") %>
       </p>
-      <label class="btn-upload icon-middle-wrap">
+      <label class="btn-upload icon-middle-wrap link-gray-dark">
         <%= icon_tag("text-image") %>
         <%= t(".Upload new picture") %>
         <%= form.file_field :avatar, class: "js-manual-file-chooser" %>
@@ -37,27 +37,27 @@
     <input type="hidden" name="_by" value="show" />
     <%= render "/shared/error_messages", target: @group %>
 
-    <div class="form-group">
+    <div class="form-group" style="max-width: 700px">
       <%= form.label :name, class: "control-label" %>
       <%= form.text_field :name, class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="max-width: 700px">
       <%= form.label :url, class: "control-label" %>
       <%= form.url_field :url, class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="max-width: 700px">
       <%= form.label :location, class: "control-label" %>
       <%= form.text_field :location, class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="max-width: 700px">
       <%= form.label :description, class: "control-label" %>
       <%= form.text_field :description, class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="max-width: 700px">
       <%= form.label :slug, class: "control-label" %>
       <%= form.text_field :slug, class: "form-control" %>
       <div class="form-text">

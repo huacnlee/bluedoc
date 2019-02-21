@@ -69,10 +69,11 @@
       right: 0;
       text-align: right;
       padding-top: 11px;
-
-      .diff-toggle {
-        margin-top: 5px;
-        margin-right: 15px;
+      form {
+        margin-bottom: 0;
+      }
+      .btn {
+        border: none;
       }
     }
   }
@@ -92,6 +93,21 @@
   .doc-page {
     position: relative;
     width: 100%;
+    .editors, .avatars { 
+      display: inline-flex;
+      vertical-align: middle;
+      .avatar {
+        margin-right: 10px;
+      }
+    }
+    // .avatars {
+    //   margin-right: 5px;
+    //   .avatar {
+    //     width: 16px;
+    //     height: 16px;
+    //     vertical-align: text-bottom;
+    //   }
+    // }
     .doc-sidebar {
       .doc-parents {
         text-align: left;
@@ -153,7 +169,6 @@
       padding-bottom: 30px;
       margin-bottom: 30px;
       border-bottom: 1px solid #E6E6E6;
-      .editors { margin-right: 10px; }
       .user-name {
         @extend .link-gray-dark;
       }
@@ -219,6 +234,7 @@
     .btn-link {
       padding: 10px 20px;
       max-width: 40%;
+      font-size: 13px;
       &:hover {
         background: #F7F7F7;
       }
@@ -226,33 +242,31 @@
 
     .btn-prev {
       float: left;
+      &::before {
+        font-size: 12px;
+        display: block;
+        margin-bottom: 5px;
+        content: "Previous";
+        text-align: left;
+        color: $text-gray;
+      }
     }
     .btn-next {
       float: right;
+      &::before {
+        font-size: 12px;
+        display: block;
+        margin-bottom: 5px;
+        content: "Next";
+        text-align: right;
+        color: $text-gray;
+      }
     }
   }
 
   .doc-readers {
-    padding: 8px;
+    padding: 8px 0;
     border-bottom: 1px solid #e8e8e8;
-
-    .readers-link {
-      text-decoration: none;
-      color: #666;
-
-      &:hover {
-        color: #444;
-      }
-
-      .avatars {
-        margin-right: 5px;
-        .avatar {
-          width: 16px;
-          height: 16px;
-          vertical-align: text-bottom;
-        }
-      }
-    }
 
     .user-list {
       max-height: 450px;
