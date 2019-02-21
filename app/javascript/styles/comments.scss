@@ -81,12 +81,41 @@
 
 #comment-watch-box {
   .watch-button-group {
-    height: 30px;
-    line-height: 30px;
-    color: #999;
-
-    p { display: inline; }
-    .btn { margin-left: 5px; }
+    position: relative;
+    .form-label {
+      font-size: 15px;
+    }
+    .btn-radio {
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      width: 30px;
+      height: 10px;
+      border-radius: 5px;
+      background: #E6E6E6;
+      &::after {
+        display: block;
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #BEBEBE;
+        box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.14);
+        left: 0;
+        top: -3px;
+      }
+      &.checked {
+        background: #ACC6FF;
+        &::after {
+          left: auto;
+          right: 0;
+          background: $primary;
+          box-shadow: 0px 3px 5px 0px rgba(47, 112, 255, 0.39);
+        }
+      }
+    }
   }
 }
 

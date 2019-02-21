@@ -4,23 +4,20 @@
   action = current_user.find_action(:watch_comment, target: commentable)
   url = watch_comments_path(commentable_type: commentable.class.name, commentable_id: commentable.id)
   %>
-  <% if action %>
-    <% if action.action_option == "ignore" %>
-      <div class="watch-button-group" watch-status="ignore">
-        <div class="float-left"><%= t(".You’re ignoring this notifications") %></div>
-        <%= link_to icon_tag("bell", label: t(".Subscribe")), url, class: "btn btn-sm float-left", data: { method: :post, remote: true } %>
-      </div>
+  <div class="watch-button-group">
+    <div class="form-label"><%= t(".Subscribe") %></div>
+    <% if action %>
+      <% if action.action_option == "ignore" %>
+          <p class="text-gray" watch-status="ignore"><%= t(".You’re ignoring this notifications") %></p>
+          <%= link_to "", url, class: "btn-radio", data: { method: :post, remote: true } %>
+      <% else %>
+          <p class="text-gray" watch-status="watched"><%= t(".You’re receiving notifications because you’re subscribed") %></p>
+          <%= link_to "", url, class: "btn-radio checked", data: { method: :delete, remote: true } %>
+      <% end %>
     <% else %>
-      <div class="watch-button-group" watch-status="watched">
-        <div class="float-left"><%= t(".You’re receiving notifications because you’re subscribed") %></div>
-        <%= link_to icon_tag("bell-slash", label: t(".Unsubscribe")), url, class: "btn btn-sm float-left", data: { method: :delete, remote: true } %>
-      </div>
+        <p class="text-gray" watch-status="none"><%= t(".You’re not receiving notifications") %></p>
+        <%= link_to "", url, class: "btn-radio", data: { method: :post, remote: true } %>
     <% end %>
-  <% else %>
-    <div class="watch-button-group" watch-status="none">
-      <div class="float-left"><%= t(".You’re not receiving notifications") %></div>
-      <%= link_to icon_tag("bell", label: t(".Subscribe")), url, class: "btn btn-sm float-left", data: { method: :post, remote: true } %>
-    </div>
-  <% end %>
+  </div>
 </div>
 <% end %>
