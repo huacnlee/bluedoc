@@ -1,4 +1,5 @@
 @import "./mention";
+@import "./toolbar";
 
 .editor-body {
   overflow-y: scroll;
@@ -85,51 +86,7 @@
   padding: 0px;
 }
 
-.editor-toolbar {
-  width: 100%;
-  padding: 10px;
-  border-bottom: 1px solid #e9e9e9;
-  background: #fbfbfb;
-  text-align: center;
 
-  details {
-    z-index: 9;
-  }
-
-  .dropdown-item {
-    text-align: left;
-  }
-
-  .dropdown-caret {
-    transform: translateY(3px);
-  }
-  .bar-button {
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    color: #979797;
-    padding: 4px;
-    line-height: 100%;
-    border-radius: 2px;
-    margin: 0 1px;
-    border: 1px solid transparent;
-    display: inline-block;
-    font-size: 18px;
-
-    &:hover,
-    &.active {
-      color: $primary;
-      background: #eee;
-      border: 1px solid #e9e9e9;
-    }
-  }
-
-  .bar-divider {
-    border-left: 1px solid #e9e9e9;
-    margin-left: 6px;
-    padding-right: 6px;
-  }
-}
 
 .editor-container {
   position: absolute;

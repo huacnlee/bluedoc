@@ -263,17 +263,17 @@ export default class Toolbar extends React.Component {
         />
         {mode === 'full' && (
         <span>
-        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay bar-button">
-          <summary><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
+        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay">
+          <summary className="bar-button"><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
             <ul>
               <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>{t(".Paragraph")}</a></li>
               <li className="dropdown-divider"></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading2')}>{t(".Heading 2")}</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading3')}>{t(".Heading 3")}</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading4')}>{t(".Heading 4")}</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading5')}>{t(".Heading 5")}</a></li>
-              <li><a href="#" className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'heading6')}>{t(".Heading 6")}</a></li>
+              <li><a href="#" className="dropdown-item heading2" onMouseDown={e => this.handleHeading(e, 'heading2')}>{t(".Heading 2")}</a></li>
+              <li><a href="#" className="dropdown-item heading3" onMouseDown={e => this.handleHeading(e, 'heading3')}>{t(".Heading 3")}</a></li>
+              <li><a href="#" className="dropdown-item heading4" onMouseDown={e => this.handleHeading(e, 'heading4')}>{t(".Heading 4")}</a></li>
+              <li><a href="#" className="dropdown-item heading5" onMouseDown={e => this.handleHeading(e, 'heading5')}>{t(".Heading 5")}</a></li>
+              <li><a href="#" className="dropdown-item heading6" onMouseDown={e => this.handleHeading(e, 'heading6')}>{t(".Heading 6")}</a></li>
             </ul>
           </div>
         </details>
