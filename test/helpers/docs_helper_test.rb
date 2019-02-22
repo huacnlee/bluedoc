@@ -8,7 +8,7 @@ class DocsHelperTest < ActionView::TestCase
     repo = create(:repository, user: group)
     doc = create(:doc, repository: repo)
 
-    assert_equal %(<a class="doc-link" href="#{doc.to_path}">#{doc.title}</a>), doc_title_tag(doc)
+    assert_equal %(<a class="doc-link" title="#{doc.title}" href="#{doc.to_path}">#{doc.title}</a>), doc_title_tag(doc)
 
     assert_equal %(), doc_title_tag(nil)
 

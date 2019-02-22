@@ -52,7 +52,7 @@ module BootstrapHelper
       else
         fullpath = request.path
       end
-      puts fullpath
+
       fullpath == url_string
     else
       request.path == url_string

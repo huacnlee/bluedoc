@@ -14,7 +14,7 @@ gem "graphql"
 
 gem "sidekiq"
 
-gem "webpacker", "4.0.0.rc5"
+gem "webpacker", "4.0.0.rc7"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
@@ -37,7 +37,7 @@ gem "elasticsearch-rails"
 gem "second_level_cache"
 gem "bulk_insert"
 
-gem "devise", github: "plataformatec/devise"
+gem "devise"
 gem "omniauth-google-oauth2"
 gem "omniauth-github"
 gem "omniauth-gitlab"

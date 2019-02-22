@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@rails/webpacker": "4.0.0-rc.5",
+    "@rails/webpacker": "4.0.0-rc.7",
     "@royie/slate": "^0.44.9",
     "@royie/slate-plain-serializer": "^0.6.32",
     "@royie/slate-react": "^0.21.17",

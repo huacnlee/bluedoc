@@ -6,6 +6,6 @@ module DocsHelper
     return "" if doc.repository.blank?
     return "" if doc.repository.user.blank?
 
-    link_to truncate(doc.title, length: 100), doc.to_path, class: "doc-link"
+    link_to truncate(doc.title, length: 100), doc.to_path, class: "doc-link", title: doc.title
   end
 end
