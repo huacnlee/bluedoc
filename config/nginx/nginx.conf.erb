@@ -11,7 +11,7 @@ events {
 
 http {
   sendfile on;
-  client_max_body_size <%= ENV["CLIENT_MAX_BODY_SIZE"] || "50m" %>;
+  client_max_body_size <%= ENV["NGINX_CLIENT_MAX_BODY_SIZE"] || "50m" %>;
 
   tcp_nopush off;
   tcp_nodelay on;

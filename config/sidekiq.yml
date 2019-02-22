@@ -1,5 +1,5 @@
 ---
-:concurrency: <%= ENV["sidekiq_threads"] || 20 %>
+:concurrency: <%= ENV["SIDEKIQ_MAX_THREADS"] || 20 %>
 :logfile: log/sidekiq.log
 :queues:
   - [bluedoc_default, 10]

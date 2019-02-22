@@ -21,7 +21,7 @@ aliyun:
   bucket: <%= ENV["ALIYUN_BUCKET"] || "bluedoc" %>
   endpoint: <%= ENV["ALIYUN_ENDPOINT"] || "https://oss-cn-beijing.aliyuncs.com" %>
   mode: <%= ENV["ALIYUN_MODE"] || "private" %>
-  cname: <%= ENV["cname"] || false %>
+  cname: <%= ENV["ALIYUN_CNAME"] || false %>
 
 
 # Remember not to checkin your GCS keyfile to a repository
