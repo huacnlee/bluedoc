@@ -269,7 +269,7 @@ class TocEditor extends React.Component {
   // update TocNode Content
   onChangeItem = ({ index, item, memory }) => {
     const { items } = this.state;
-    if (item && index) {
+    if (item && index > -1) {
       items[index] = item;
     }
     if (memory) {
