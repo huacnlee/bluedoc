@@ -36,6 +36,9 @@ user:
   - comments
   - comment
   - graphql
+  - health
+  - notes
+  - note
 repository:
   - notes
   - note

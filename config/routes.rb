@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     mount GraphiQL::Rails::Engine, at: "/graphql/explorer", graphql_path: "/graphql"
   end
   post "/graphql", to: "graphql#execute"
+  get "/health", to: proc { [200, {}, ["ok"]] }
 
   devise_for :users, path: "account", controllers: {
     omniauth_callbacks: "users/omniauth_callbacks",

@@ -20,4 +20,9 @@ class BaseControllerTest < ActionDispatch::IntegrationTest
     assert_equal 404, response.status
     assert_select "h1", text: "Page not found (404)"
   end
+
+  test "/health" do
+    get "/health"
+    assert_equal 200, response.status
+  end
 end
