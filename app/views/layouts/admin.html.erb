@@ -42,6 +42,9 @@
           end %>
         </div>
         <div class="flex-auto"></div>
+        <div style="display:none">
+          <%= render(partial: "/layouts/search_nav", locals: { props: { action: @nav_search_path, scope: @nav_search_scope, value: params[:q] } }) %>
+        </div>
         <div class="navbar">
           <details class="dropdown details-reset details-overlay d-inline-block">
             <summary aria-haspopup="true">
