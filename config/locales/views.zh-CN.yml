@@ -163,7 +163,7 @@ zh-CN:
         Exceptions: 异常记录
         Background Jobs: 后台异步队列
         Database Stats: 数据库状态
-        Rebuild Search Index: 重新搜索索引（耗费性能）
+        Rebuild Search Index: 重建搜索索引（耗费性能）
         Export Exceptions: 导出异常信息
         Service statuses: 服务健康状态
         Statistics: 统计信息
