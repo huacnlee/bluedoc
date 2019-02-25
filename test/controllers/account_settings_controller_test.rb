@@ -79,7 +79,9 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     put account_settings_path, params: { user: account_params, _by: :password }
-    assert_redirected_to account_account_settings_path
+    assert_redirected_to new_user_session_path
+    follow_redirect!
+    assert_select ".flash", text: "Password has change successed, you need login again."
 
     user.reload
     assert_equal true, user.valid_password?(new_password)

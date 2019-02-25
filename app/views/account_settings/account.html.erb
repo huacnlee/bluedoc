@@ -16,6 +16,14 @@
 
         <input type="hidden" name="_by" value="password" />
 
+        <div class="form-group mb-button">
+          <%= f.label :current_password, class: "control-label" %>
+          <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+          <div class="form-text">
+            <%= t(".We need your current password to confirm your changes")  %>
+          </div>
+        </div>
+
         <div class="form-group">
           <%= f.label :password, class: "control-label" %>
           <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
@@ -28,14 +36,6 @@
         <div class="form-group">
           <%= f.label :password_confirmation, class: "control-label" %>
           <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-        </div>
-
-        <div class="form-group mb-button">
-          <%= f.label :current_password, class: "control-label" %>
-          <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
-          <div class="form-text">
-            <%= t(".We need your current password to confirm your changes")  %>
-          </div>
         </div>
 
         <div class="form-group">
@@ -57,7 +57,7 @@
             <%= f.text_field :slug, class: "form-control", autocomplete: "username" %>
             <%= f.submit t(".Update"), class: "btn" %>
           </div>
-          
+
         </div>
       <% end %>
 

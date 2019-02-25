@@ -93,7 +93,7 @@ zh-CN:
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
   account_settings:
-    Password has change successed: 密码已经修改成功。
+    Password has change successed: 密码已经修改成功，请重新登录。
     Profile has change successed: 个人资料已经更新成功。
     account:
       Account: 账号
