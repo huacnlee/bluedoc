@@ -13,7 +13,7 @@ module ActiveStorageS3ServiceURL
     object_for(key).public_url
   end
 
-  def upload(key, io, checksum: nil)
+  def upload(key, io, checksum: nil, **)
     instrument :upload, key: key, checksum: checksum do
       begin
         object_for(key).put(upload_options.merge(body: io, content_md5: checksum, acl: "public-read", cache_control: "max-age=#{300.days}"))
