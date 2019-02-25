@@ -3,7 +3,7 @@ import DocSetting from './doc-setting';
 
 class EditorBox {
   static init() {
-    const editorEls = document.getElementsByClassName('bluedoc-editor');
+    const editorEls = document.querySelectorAll('.bluedoc-editor');
     if (editorEls.length == 0) {
       return;
     }

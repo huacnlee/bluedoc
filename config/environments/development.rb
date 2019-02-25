@@ -33,7 +33,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   if ENV["ALIYUN_ACCESS_KEY_ID"]
-    config.active_storage.service = :aliyun
+    config.active_storage.service = :amazon
   else
     config.active_storage.service = :local
   end

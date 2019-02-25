@@ -22,44 +22,47 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <div class="nav-header">
-    <div class="header-content container">
-      <div class="navbar flex-none">
-        <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("bluedoc", label: t("admin.BlueDoc Admin")) %></a>
+  <body class="admin-body">
+    <%= react_component("Blank") %>
 
-        <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
-          li <<  link_to(t("admin.Group"), admin_groups_path, class: "nav-link")
-          li <<  link_to(t("admin.User"), admin_users_path, class: "nav-link")
-          li <<  link_to(t("admin.Repository"), admin_repositories_path, class: "nav-link")
-          li <<  link_to(t("admin.Doc"), admin_docs_path, class: "nav-link")
-          li <<  link_to(t("admin.Note"), admin_notes_path, class: "nav-link")
-          li <<  link_to(t("admin.Comment"), admin_comments_path, class: "nav-link")
-          li <<  link_to(t("admin.Share"), admin_shares_path, class: "nav-link")
-        end %>
-      </div>
-      <div class="flex-auto"></div>
-      <div class="navbar">
-        <details class="dropdown details-reset details-overlay d-inline-block">
-          <summary aria-haspopup="true">
-            <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
-            <div class="dropdown-caret"></div>
-          </summary>
-          <div class="dropdown-menu dropdown-menu-sw">
-            <div class="dropdown-header">
-              <%= current_user.slug %>
+    <div class="nav-header">
+
+      <div class="header-content container">
+        <div class="navbar flex-none">
+          <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("bluedoc", label: t("admin.BlueDoc Admin")) %></a>
+
+          <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
+            li <<  link_to(t("admin.Group"), admin_groups_path, class: "nav-link")
+            li <<  link_to(t("admin.User"), admin_users_path, class: "nav-link")
+            li <<  link_to(t("admin.Repository"), admin_repositories_path, class: "nav-link")
+            li <<  link_to(t("admin.Doc"), admin_docs_path, class: "nav-link")
+            li <<  link_to(t("admin.Note"), admin_notes_path, class: "nav-link")
+            li <<  link_to(t("admin.Comment"), admin_comments_path, class: "nav-link")
+            li <<  link_to(t("admin.Share"), admin_shares_path, class: "nav-link")
+          end %>
+        </div>
+        <div class="flex-auto"></div>
+        <div class="navbar">
+          <details class="dropdown details-reset details-overlay d-inline-block">
+            <summary aria-haspopup="true">
+              <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
+              <div class="dropdown-caret"></div>
+            </summary>
+            <div class="dropdown-menu dropdown-menu-sw">
+              <div class="dropdown-header">
+                <%= current_user.slug %>
+              </div>
+              <ul>
+                <li><a class="dropdown-item" data-turbolinks="false" href="<%= root_path %>"><%= t("admin.Back to Front") %></a></li>
+                <li class="dropdown-divider" role="separator"></li>
+                <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete"><%= t("admin.Sign out") %></a></li>
+              </ul>
             </div>
-            <ul>
-              <li><a class="dropdown-item" data-turbolinks="false" href="<%= root_path %>"><%= t("admin.Back to Front") %></a></li>
-              <li class="dropdown-divider" role="separator"></li>
-              <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete"><%= t("admin.Sign out") %></a></li>
-            </ul>
-          </div>
-        </details>
+          </details>
+        </div>
       </div>
     </div>
-  </div>
 
-  <body class="admin-body">
     <%= notice_message %>
     <div class="main-container">
       <div class="container">
