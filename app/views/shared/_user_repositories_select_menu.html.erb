@@ -15,7 +15,7 @@
     %>
       <label class="select-menu-item js-navigation-item<%= " selected" if checked %>" role="menuitemradio">
         <input type="radio" name="<%= name %>" value="<%= repo.id %>" <%= "checked" if checked %> class="js-owner-radio-button">
-        <%= icon_tag("check", class: "octicon-check select-menu-item-icon") %>
+        <%= icon_tag("check", class: "icon-check select-menu-item-icon") %>
         <div class="select-menu-item-text js-select-button-text">
           <%= user_avatar_tag(repo.user, style: :tiny) %>
           <%= repo.user&.slug %> <span class="divider">/</span>

@@ -5,7 +5,6 @@ import React from 'react';
 import '@babel/polyfill';
 import 'activestorage';
 import 'styles/event';
-import 'vendor/styleguide.js';
 import 'vendor/turbo-react.min.js';
 import { render as timeagoRender } from 'timeago.js';
 import i18n from "./i18n";

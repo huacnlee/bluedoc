@@ -332,7 +332,7 @@
     vertical-align: middle
 }
 
-.select-menu-item .octicon-check {
+.select-menu-item .icon-check {
     visibility: hidden
 }
 
@@ -368,7 +368,7 @@
     display: none
 }
 
-.select-menu-item.indeterminate>.octicon-check {
+.select-menu-item.indeterminate>.icon-check {
     display: none
 }
 
@@ -376,7 +376,7 @@
     display: block
 }
 
-.select-menu-item[aria-checked="true"] .octicon-check {
+.select-menu-item[aria-checked="true"] .icon-check {
     color: inherit;
     visibility: visible
 }
@@ -393,7 +393,7 @@
     color: #24292e
 }
 
-.select-menu-item.selected .octicon-check {
+.select-menu-item.selected .icon-check {
     color: inherit;
     visibility: visible
 }
@@ -433,7 +433,7 @@
     background-color: #f1f8ff
 }
 
-.select-menu-item-parent.navigation-focus .octicon-check,.select-menu-item-parent.navigation-focus.selected .octicon-check,.select-menu-item-parent[aria-selected="true"] .octicon-check,.select-menu-item-parent[aria-selected="true"].selected .octicon-check {
+.select-menu-item-parent.navigation-focus .icon-check,.select-menu-item-parent.navigation-focus.selected .icon-check,.select-menu-item-parent[aria-selected="true"] .icon-check,.select-menu-item-parent[aria-selected="true"].selected .icon-check {
     color: #24292e
 }
 
