@@ -1,0 +1,6 @@
+<%
+target_name = [notification.target&.user&.name, notification.target&.name].join(" / ")
+
+%>
+
+<%= t(".Repository name import has been status", name: target_name, status: notification.meta[:status]) %>

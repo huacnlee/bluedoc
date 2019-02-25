@@ -459,11 +459,15 @@ en:
   notifications:
     Notification been deleted: Notification trigger content has been deleted.
     body:
+      add_member:
+        has added you as member of: "has added you as member of [%{subject}]"
       comment:
         said: said
       mention:
         mentioned you: mentioned you
         has mentioned you in subject: "has mentioned you in [%{subject}]."
+      repo_import:
+        Repository name import has been status: "Repository [%{name}] import has been %{status}."
     title:
       add_member:
         has added you as member of: "has added you as member of [%{subject}]"
