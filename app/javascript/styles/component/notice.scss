@@ -1,0 +1,39 @@
+.notice-wrap {
+  position: relative;
+  height: 0;
+  width: 100%;
+  .notice {
+    width: 100%;
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 20px;
+    font-size: 12px;
+    border-radius: 4px;
+    color: #3BB46E;
+    border: 0.5px solid #3BB46E;
+    box-shadow: 0px 5px 10px 0 rgba(153, 153, 153, 0.1);
+    background: #fff;
+    z-index: 999;
+    @include breakpoint(md) {
+      width: auto;
+      padding-right: 140px;
+    }
+  }
+  .notice-close {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
+    font-size: 14px;
+    color: #979797;
+    cursor: pointer;
+  }
+  .notice-error {
+    color: #EE4343;
+    border: 0.5px solid #EE4343;
+  }
+}
+

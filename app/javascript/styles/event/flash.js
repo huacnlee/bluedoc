@@ -4,3 +4,10 @@ document.addEventListener('turbolinks:load', () => {
     $container.remove();
   });
 });
+
+document.addEventListener('turbolinks:load', () => {
+  $('.notice').on('click', '.js-notice-close', (e) => {
+    $container = $(e.delegateTarget);
+    $container.remove();
+  });
+});
