@@ -736,7 +736,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_not_nil doc.share
     assert_match /doc-share-button-box/, response.body
-    assert_match /open>/, response.body
+    assert_match /open/, response.body
     assert_match %($(".doc-share-button-box").replaceWith), response.body
 
     # Unshare

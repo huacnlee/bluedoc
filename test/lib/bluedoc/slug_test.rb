@@ -25,7 +25,7 @@ class BlueDoc::SlugTest < ActionView::TestCase
     assert_equal false, BlueDoc::Slug.valid_user?("dashboard")
     assert_equal false, BlueDoc::Slug.valid_user?("settings")
 
-    assert_equal true, BlueDoc::Slug.valid_user?("notes")
+    assert_equal false, BlueDoc::Slug.valid_user?("notes")
   end
 
   test ".valid_repo?" do
