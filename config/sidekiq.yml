@@ -1,8 +1,6 @@
 ---
 :concurrency: <%= ENV["SIDEKIQ_MAX_THREADS"] || 32 %>
-<% if !ENV["RAILS_LOG_TO_STDOUT"] %>
 :logfile: log/sidekiq.log
-<% end %>
 :queues:
   - [default, 10]
   - [mailers, 5]
