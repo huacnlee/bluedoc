@@ -3,11 +3,11 @@
 <%= render "menu" %>
 
 <div class="group-members">
-  <div class="subhead">
-    <div class="float-right">
+  <h1 class="title mt-3">
+    <%= @members.total_count %> <%= t(".Number of Members") %>
+    <div class="float-right f6 mt-2">
       <%= render "add_member" %>
     </div>
-    <h2><%= @members.total_count %> <%= t(".Number of Members") %></h2>
   </div>
 
   <div class="member-list list-container list-col-2">

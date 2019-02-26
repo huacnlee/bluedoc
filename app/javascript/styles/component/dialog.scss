@@ -26,24 +26,39 @@ details-dialog {
   width: 100%;
   height: 100vh;
   background: #fff;
-  padding: 24px;
+  padding: 30px 24px;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
-
+  .btn-cancel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 16px;
+    color: $text-gray;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+  }
   .btn-octicon {
     border: 0;
     background: transparent;
-    font-size: 24px;
+    font-size: 16px;
     padding: 0;
     margin: 0;
     line-height: 24px;
     color: $text-main;
-
     &:hover {
       color: $primary;
     }
+  }
+  .box-title {
+    font-size: 18px;
+  }
+  .actions {
+    float: right;
   }
 }
 

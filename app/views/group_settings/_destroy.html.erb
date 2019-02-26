@@ -5,12 +5,12 @@
 } do %>
   <div class="box-body overflow-auto">
     <%= form_with(model: @group, url: group_settings_path(@group), method: :delete) do |form| %>
-      <p>
+      <p class="text-gray-light f6 mb-4">
         <%= raw t("group_settings.destroy.This action cannot be undone") %>
         <%= raw t("group_settings.destroy.This will delete all contents", slug: @group.slug) %>
       </p>
       <div class="form-group">
-        <label class="control-label"><%= raw t("group_settings.destroy.Please type the path slug of group to confirm", slug: @group.slug) %></label>
+        <label class="control-label text-main"><%= raw t("group_settings.destroy.Please type the path slug of group to confirm", slug: @group.slug) %></label>
         <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @group.slug %>" autocomplete="off" class="form-control" />
       </div>
 

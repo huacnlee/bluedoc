@@ -57,7 +57,7 @@ a[data-method=delete] {
     @extend .fa-star-fill;
   }
 }
-a[data-method=post] {
+a[data-method=delete] {
   .fa-watch {
     @extend .fa-unwatch;
   }

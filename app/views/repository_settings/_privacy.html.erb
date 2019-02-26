@@ -6,16 +6,16 @@
 <details class="details-reset details-overlay details-overlay-dark">
   <summary class="btn btn-danger btn-submit" aria-haspopup="dialog"><%= t(".Make privacy", privacy: privacy_name) %></summary>
   <details-dialog class="box d-flex flex-column anim-fade-in fast">
-    <div class="box-header">
-      <button class="box-btn-octicon btn-octicon float-right" type="button" data-close-dialog>
-        <%= icon_tag "times" %>
+    <div class="box-header mb-5">
+      <button class="btn-cancel" type="button" data-close-dialog>
+        <%= icon_tag "cancel" %>
       </button>
       <h3 class="box-title"><%= t(".Make this repository privacy", privacy: privacy_name) %></h3>
     </div>
 
     <div class="box-body overflow-auto">
       <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :put) do |form| %>
-        <p>
+        <p class="text-gray-light f6 mb-4">
           <% if @repository.private? %>
             <%= t(".Public this repository from the private, this repository and docs will be visible to everyone who can visit") %> <%= Setting.host %>.
           <% else %>

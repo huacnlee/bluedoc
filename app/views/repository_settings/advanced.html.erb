@@ -3,12 +3,12 @@
 
 <%= render "menu" %>
 <div class="col-12 col-md-9 float-left">
-  <div class="advanced-transfer">
+  <div class="advanced-transfer mb-section">
     <h1 class="title mb-3"><%= t(".Transfer") %></h1>
     <div class="text-gray">
       <%= t(".Transfer ownership") %>
     </div>
-    <div class="text-gray-light mb-5">
+    <div class="text-gray-light mb-button">
       <%= t(".Transfer this repository to another user or to an group") %>
     </div>
     <%= render "transfer" %>
@@ -29,7 +29,7 @@
           <%= t(".Make this repository private") %>
         <% end %>
       </div>
-      <div class="text-gray-light mb-5">
+      <div class="text-gray-light mb-button">
         <% if @repository.private? %>
           <%= t(".Public this repository from the private") %>
         <% else %>
@@ -40,7 +40,7 @@
       <div class="text-gray">
         <%= t(".Delete this repository") %>
       </div>
-      <div class="text-gray-light mb-5">
+      <div class="text-gray-light mb-button">
         <%= t(".Once you delete a repository, there is no going back") %>
       </div>
       <%= render "destroy" %>

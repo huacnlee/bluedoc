@@ -3,7 +3,7 @@
     padding-top: 30px;
     background: #F9F9F9;
     .heading {
-      margin: 40px 0 20px 0;
+      margin: 40px 0;
       .group-title { font-size: 20px; }
     }
   }
@@ -12,5 +12,12 @@
     &:nth-child(2n + 1) {
       margin-right: 80px;
     }
+  }
+  .group-members {
+    font-size: 15px;
+  }
+  .list .user-avatar {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 }

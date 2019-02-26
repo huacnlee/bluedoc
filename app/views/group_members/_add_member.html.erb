@@ -2,7 +2,7 @@
   <%= render layout: "shared/modal", locals: {
     title: t("group_members.add_member.Add member"),
     button_text: icon_tag("add", label: "Add"),
-    button_class: "link-gray-dark"
+    button_class: "link-gray-dark icon-middle-wrap"
   } do %>
     <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>

@@ -1,10 +1,10 @@
 <details class="details-reset details-overlay details-overlay-dark">
   <summary class="<%= button_class %>" aria-haspopup="dialog"><%= button_text %></summary>
   <details-dialog class="box d-flex flex-column anim-fade-in fast">
-    <div class="box-header">
-      <button class="box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog>
-        <%= icon_tag "times" %>
-      </button>
+    <button class="btn-cancel" type="button" aria-label="Close dialog" data-close-dialog>
+      <%= icon_tag "cancel" %>
+    </button>
+    <div class="box-header mb-5">
       <h3 class="box-title"><%= title %></h3>
     </div>
     <div class="overflow-auto">

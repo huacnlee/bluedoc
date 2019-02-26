@@ -9,7 +9,7 @@
     <% if can? :manage, @group %>
       <% if member.user_id != current_user.id %>
       <%= render "update_member", member: member %>
-      <a class="hover-danger" href="<%= group_member_path(@group, member) %>" data-method="delete"><%= icon_tag("delete") %></a>
+      <a class="hover-danger text-gray" href="<%= group_member_path(@group, member) %>" data-method="delete"><%= icon_tag("delete") %></a>
       <% end %>
     <% end %>
   </div>

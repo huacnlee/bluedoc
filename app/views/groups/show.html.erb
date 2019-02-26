@@ -4,11 +4,11 @@
 
 
 <div class="clearfix">
-  <h1 class="title">
+  <h1 class="title mt-3">
     <%= t(".Repositories") %>
     <form action="" class="subnav-search-context float-right" method="GET">
       <div class="subnav-search" >
-        <input type="text" name="q" class="form-control subnav-search-input" value="<%= params[:q] %>" placeholder="<%= t(".Find a repository") %>" />
+        <input type="text" name="q" class="form-control subnav-search-input f6" value="<%= params[:q] %>" placeholder="<%= t(".Find a repository") %>" />
         <%= icon_tag "search", class: "subnav-search-icon" %>
         <% if params[:q].present? %>
           <a href="<%= @group.to_path %>" class="link-cancel"><%= icon_tag "cancel" %></a>
@@ -16,7 +16,7 @@
       </div>
     </form>
   </h1>
-  <div class="group-repositories col-12 col-md-9 float-left pr-md-5">
+  <div class="group-repositories col-12 col-md-9 float-left pr-md-6">
     <% if @repositories.blank? %>
       <div class="blankslate">
         <h3><%= t(".There is no repository") %></h3>
@@ -27,12 +27,12 @@
       <%= paginate @repositories %>
     <% end %>
   </div>
-  <div class="col-12 col-md-3 float-left hide-sm">
+  <div class="col-12 col-md-3 float-left hide-sm pl-3">
     <div class="group-members">
-      <h3 class="sub-title"><%= t(".Members") %>(<%= @group.members_count %>)</h3>
+      <div class="sub-title"><%= t(".Members") %>(<%= @group.members_count %>)</div>
       <div class="list clearfix">
         <% @members.limit(30).each do |member| %>
-          <div class="mr-3 mb-3 float-left"><%= user_avatar_tag(member.user, style: :medium) %></div>
+          <%= user_avatar_tag(member.user, style: :medium) %>
         <% end %>
       </div>
     </div>

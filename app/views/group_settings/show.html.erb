@@ -6,7 +6,7 @@
   <input type="hidden" name="_by" value="show" />
   <h1 class="title"><%= t(".Settings") %></h1>
   <h2 class="sub-title"><%= t(".Photo") %></h2>
-  <div class="avatar-wrap">
+  <div class="avatar-wrap mb-section">
     <div class="image-box">
       <%= user_avatar_tag(@group, style: :large, link: false) %>
     </div>
@@ -57,7 +57,7 @@
       <%= form.text_field :description, class: "form-control" %>
     </div>
 
-    <div class="form-group" style="max-width: 700px">
+    <div class="form-group mb-button" style="max-width: 700px">
       <%= form.label :slug, class: "control-label" %>
       <%= form.text_field :slug, class: "form-control" %>
       <div class="form-text">
@@ -65,15 +65,18 @@
       </div>
     </div>
 
-    <div class="actions">
+    <div class="actions mb-section">
       <%= form.submit t(".Update profile"), class: "btn btn-primary btn-submit" %>
     </div>
   <% end %>
 
 
   <% if can? :manage, @group %>
-  <h2 class="sub-title"><%= t(".Danger zone") %></h2>
-  <div class="form-group">
+  <div class="sub-title">
+    <h2><%= t(".Danger zone") %></h2>
+  </div>
+  
+  <div class="form-group mb-button">
     <div class="text-main"  style="font-size: 15px">
       <%= t(".Delete this group") %>
     </div>
