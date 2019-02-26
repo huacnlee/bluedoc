@@ -170,6 +170,11 @@ class DocTest < ActiveSupport::TestCase
     assert_equal [user.id, user1.id], doc.editor_ids
     assert_equal [user, user1], doc.editors
 
+    # Make sure update sync
+    user1.update(name: "AAA")
+    assert_equal [user, user1], doc.editors
+    assert_equal "AAA", doc.editors[1].name
+
     doc.update(title: "New title")
     assert_equal [user.id, user1.id], doc.editor_ids
 
