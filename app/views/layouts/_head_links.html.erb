@@ -12,10 +12,10 @@
 
 <%= stylesheet_pack_tag 'bluedoc', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_pack_tag 'print', 'data-turbolinks-track': 'reload', media: "print" %>
-<script type="text/javascript" src="/js/jquery@3.3.1.js"></script>
-<script type="text/javascript" src="/js/rails-ujs@5.2.1.js"></script>
-<script type="text/javascript" src="/js/turbolinks@5.2.0.js"></script>
-<script type="text/javascript" src="/js/react.production.min@16.6.1.js"></script>
-<script type="text/javascript" src="/js/react-dom.production.min@16.6.1.js"></script>
-<script type="text/javascript" src="/js/react-dom-server.browser.production.min@16.6.1.js"></script>
+<script type="text/javascript" src="<%= asset_path("/js/jquery@3.3.1.js", skip_pipeline: true) %>"></script>
+<script type="text/javascript" src="<%= asset_path("/js/rails-ujs@5.2.1.js", skip_pipeline: true) %>"></script>
+<script type="text/javascript" src="<%= asset_path("/js/turbolinks@5.2.0.js", skip_pipeline: true) %>"></script>
+<script type="text/javascript" src="<%= asset_path("/js/react.production.min@16.6.1.js", skip_pipeline: true) %>"></script>
+<script type="text/javascript" src="<%= asset_path("/js/react-dom.production.min@16.6.1.js", skip_pipeline: true) %>"></script>
+<script type="text/javascript" src="<%= asset_path("/js/react-dom-server.browser.production.min@16.6.1.js", skip_pipeline: true) %>"></script>
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
