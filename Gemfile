@@ -63,6 +63,8 @@ gem "wicked_pdf"
 
 gem "pghero"
 
+gem "foreman"
+
 group :development, :test do
   gem "mocha"
   gem "letter_opener"

@@ -16,4 +16,5 @@ docker run --detach \
            --volume ${bluedoc_root}/fonts:/home/app/bluedoc/fonts \
            --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
            --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
+           --env RAILS_LOG_TO_STDOUT=1 \
            bluedoc:latest
