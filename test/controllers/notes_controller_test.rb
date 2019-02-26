@@ -158,7 +158,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:user/notes/:slug with check prev / next link" do
-    create_list(:note, 4, user: @user)
+    create(:note, user: @user, privacy: :private)
+    create_list(:note, 3, user: @user)
+
     notes = @user.notes.order("id desc")
 
     get notes[0].to_path
@@ -181,13 +183,26 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    get notes[3].to_path
+    # Without user will not give last private note
+    get notes[2].to_path
     assert_equal 200, response.status
     assert_select ".between-docs" do
-      assert_select "a.btn-prev", text: notes[2].title do
-        assert_select "[href=?]", notes[2].to_path
+      assert_select "a.btn-prev", text: notes[1].title do
+        assert_select "[href=?]", notes[1].to_path
       end
       assert_select "a.btn-next", 0
+    end
+
+    sign_in @user
+    get notes[2].to_path
+    assert_equal 200, response.status
+    assert_select ".between-docs" do
+      assert_select "a.btn-prev", text: notes[1].title do
+        assert_select "[href=?]", notes[1].to_path
+      end
+      assert_select "a.btn-next", text: notes[3].title do
+        assert_select "[href=?]", notes[3].to_path
+      end
     end
   end
 

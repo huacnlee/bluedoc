@@ -75,22 +75,60 @@ class NoteTest < ActiveSupport::TestCase
 
   test "prev_and_next_of_notes" do
     user = create(:user)
+    other_user = create(:user)
+    private_note0 = create(:note, user: user, privacy: :private)
     create_list(:note, 5, user: user)
+    private_note1 = create(:note, user: user, privacy: :private)
+
     notes = user.notes.recent.all
+    public_notes = user.notes.publics.recent.all
+
+    # with first for including private
+    # Make sure all private when not with a user
+    notes.each do |note|
+      result = note.prev_and_next_of_notes
+      if result[:prev]
+        assert_equal false, result[:prev].private?
+      end
+      if result[:next]
+        assert_equal false, result[:next].private?
+      end
+
+      result = note.prev_and_next_of_notes(with_user: other_user)
+      if result[:prev]
+        assert_equal false, result[:prev].private?
+      end
+      if result[:next]
+        assert_equal false, result[:next].private?
+      end
+    end
 
     # with first
-    result = notes[0].prev_and_next_of_notes
+    result = notes[0].prev_and_next_of_notes(with_user: user)
     assert_nil result[:prev]
     assert_equal notes[1], result[:next]
 
+    result = public_notes[0].prev_and_next_of_notes
+    assert_nil result[:prev]
+    assert_equal public_notes[1], result[:next]
+
+
     # with normal
-    result = notes[2].prev_and_next_of_notes
+    result = notes[2].prev_and_next_of_notes(with_user: user)
     assert_equal notes[1], result[:prev]
     assert_equal notes[3], result[:next]
 
+    result = public_notes[2].prev_and_next_of_notes
+    assert_equal public_notes[1], result[:prev]
+    assert_equal public_notes[3], result[:next]
+
     # with last
-    result = notes[4].prev_and_next_of_notes
-    assert_equal notes[3], result[:prev]
+    result = notes[notes.length - 1].prev_and_next_of_notes(with_user: user)
+    assert_equal notes[notes.length - 2], result[:prev]
+    assert_nil result[:next]
+
+    result = public_notes[4].prev_and_next_of_notes
+    assert_equal public_notes[3], result[:prev]
     assert_nil result[:next]
   end
 
@@ -102,9 +140,6 @@ class NoteTest < ActiveSupport::TestCase
     note = build(:note, privacy: :public)
     assert_equal false, note.private?
     assert_equal true, note.public?
-
-    note = create(:note, privacy: :public)
-    create(:activity,)
   end
 
   test "private dependent :activites" do

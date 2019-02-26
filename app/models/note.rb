@@ -26,20 +26,21 @@ class Note < ApplicationRecord
 
   # return next and prev of notes in same user
   # { next: Note, prev: Note }
-  def prev_and_next_of_notes
-    return @prev_and_next_of_notes if defined? @prev_and_next_of_notes
+  def prev_and_next_of_notes(with_user: nil)
     result = { next: nil, prev: nil }
     recent_docs = self.user.notes.recent
+    if with_user&.id != self.user_id
+      recent_docs = recent_docs.publics
+    end
     idx = recent_docs.find_index { |note| note.id == self.id }
-    return nil if idx.nil?
+    return result if idx.nil?
     if idx < recent_docs.length
       result[:next] = recent_docs[idx + 1]
     end
     if idx > 0
       result[:prev] = recent_docs[idx - 1]
     end
-    @prev_and_next_of_notes = result
-    @prev_and_next_of_notes
+    result
   end
 
   class << self

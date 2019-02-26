@@ -35,7 +35,7 @@ class NotesController < Users::ApplicationController
     authorize! :read, @note
 
     @comments = @note.comments.with_includes.order("id asc")
-    @between_notes = @note.prev_and_next_of_notes
+    @between_notes = @note.prev_and_next_of_notes(with_user: current_user)
     @readers = @note.read_by_user_actions.order("updated_at desc").limit(5)
 
     if current_user
