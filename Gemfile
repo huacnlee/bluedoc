@@ -7,7 +7,6 @@ gem "rails", "6.0.0.beta1"
 gem "pg"
 gem "redis"
 gem "redis-objects"
-gem "redis-namespace"
 gem "puma", "~> 3.11"
 gem "react-rails"
 
