@@ -127,6 +127,11 @@
         font-size: 13px;
         @extend .pt-2;
         @extend .list-style-none;
+        @for $i from 1 through 5 {
+          .toc-item-#{$i} {
+            padding-left: ($i * 8px) !important;
+          }
+        }
         li {
           padding: 6px 0;
         }
