@@ -311,8 +311,6 @@ GEM
       railties (>= 3.2)
       tilt
     redis (4.1.0)
-    redis-namespace (1.6.0)
-      redis (>= 3.0.4)
     redis-objects (1.4.3)
       redis (~> 4.0)
     responders (2.4.1)
@@ -437,7 +435,6 @@ DEPENDENCIES
   rails-settings-cached
   react-rails
   redis
-  redis-namespace
   redis-objects
   rubocop
   sanitize
