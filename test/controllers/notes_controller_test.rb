@@ -87,7 +87,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     }
     post user_notes_path(@user), params: { note: note_params }
     assert_equal 200, response.status
-    assert_select ".flash-error"
+    assert_select ".notice-error"
     assert_select "form[action=?]", user_notes_path(@user) do
       assert_select "input[name='note[slug]']" do
         assert_select "[value=?]", "foo-bar"

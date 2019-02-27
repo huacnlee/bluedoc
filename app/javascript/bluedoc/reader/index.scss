@@ -82,14 +82,6 @@
     padding: 0 !important;
   }
 
-  .flash-full {
-    .container {
-      margin-left: 0;
-      margin-right: 0;
-      width: auto;
-    }
-  }
-
   .doc-page {
     position: relative;
     width: 100%;
@@ -153,7 +145,7 @@
       width: auto;
       padding: 0px 0px;
       .unpublished-draft-tip {
-        margin-top: 15px;
+        margin-bottom: 15px;
       }
     }
 

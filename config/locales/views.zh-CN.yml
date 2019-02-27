@@ -17,7 +17,7 @@ zh-CN:
       follow: 关注
       unfollow: 取消关注
     error_messages:
-      There has count issues: 发现有 %{count} 问题无法通过表单验证：
+      There has count issues_html: 发现有 <span class="text-danger">%{count}</span> 问题无法通过表单验证：
     select_menu:
       Choose an item: 选择一个
     access_denied:

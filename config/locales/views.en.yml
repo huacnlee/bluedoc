@@ -17,7 +17,7 @@ en:
       follow: Follow
       unfollow: Unfollow
     error_messages:
-      There has count issues: "There has %{count} issues:"
+      There has count issues_html: 'There has <span class="text-danger">%{count}</span> issues:'
     select_menu:
       Choose an item: Choose an item
     access_denied:

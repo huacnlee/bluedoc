@@ -310,7 +310,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_select ".unpublished-draft-tip" do
-      assert_select ".flash" do
+      assert_select ".notice" do
         assert_select "a.btn-preview" do
           assert_select "[href=?]", doc.to_path("?mode=draft")
         end
@@ -324,7 +324,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path("?mode=draft")
     assert_equal 200, response.status
     assert_select ".unpublished-draft-tip" do
-      assert_select ".flash.flash-error" do
+      assert_select ".notice.notice-error" do
         assert_select "a.btn-view" do
           assert_select "[href=?]", doc.to_path
         end

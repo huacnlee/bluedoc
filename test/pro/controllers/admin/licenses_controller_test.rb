@@ -23,7 +23,7 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
       get "/admin/licenses"
     end
     assert_equal 200, response.status
-    assert_select ".flash.license-no"
+    assert_select ".notice.license-no"
     assert_select ".license-details", 0
     assert_select "#license-info" do
       assert_select ".box-header", 0
@@ -59,7 +59,7 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
       get "/admin/licenses"
     end
     assert_equal 200, response.status
-    assert_select ".flash.license-will-expire"
+    assert_select ".notice.license-will-expire"
 
     assert_select "form[enctype='multipart/form-data']"
     assert_select ".license-details" do
@@ -78,14 +78,14 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     post "/admin/licenses", params: { license: rack_upload_file("blank.txt", "text/plain") }
     assert_redirected_to admin_licenses_path
     follow_redirect!
-    assert_select ".flash", text: "Invalid BlueDoc license file."
+    assert_select ".notice", text: "Invalid BlueDoc license file."
 
     post "/admin/licenses", params: { license: rack_upload_file("test.bluedoc-license", "text/plain") }
     assert_redirected_to admin_licenses_path
     assert_equal read_file("test.bluedoc-license").strip, Setting.license.strip
     assert_equal true, License.license?
     follow_redirect!
-    assert_select ".flash", text: "License was successfully updated, thank you."
+    assert_select ".notice", text: "License was successfully updated, thank you."
   end
 
   test "DELETE /admin/licenses" do
@@ -97,6 +97,6 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
 
     get admin_licenses_path
     assert_equal 200, response.status
-    assert_select ".flash", text: "License was successfully deleted."
+    assert_select ".notice", text: "License was successfully deleted."
   end
 end

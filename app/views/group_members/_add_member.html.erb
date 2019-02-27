@@ -6,7 +6,7 @@
   } do %>
     <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>
-        <div class="flash">
+        <div class="notice mb-3">
           <%= t("group_members.add_member.Type username to match user and then add as member of this group") %>
         </div>
 
@@ -15,7 +15,7 @@
           <%= render partial: "shared/autocomplete_users", locals: { input_name: "member[user_slug]" } %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-button">
           <%= form.label :role, class: "control-label" %>
 
           <div class="form-checkbox">
@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group float-right">
           <button class="btn btn-primary"><%= t("group_members.add_member.Add member") %></button>
         </div>
       <% end %>

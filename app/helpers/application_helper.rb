@@ -11,10 +11,6 @@ module ApplicationHelper
   end
 
   def close_button
-    raw %(<button type="button" class="flash-close js-flash-close"><i class="fas fa-cancel"></i></button>)
-  end
-
-  def notice_close_button
     raw %(<i class="notice-close js-notice-close fas fa-cancel"></i>)
   end
 
@@ -35,7 +31,7 @@ module ApplicationHelper
 
   def flash_block_tag(type, message)
     content_tag(:div, class: "notice notice-#{type}") do
-      notice_close_button + message
+      close_button + message
     end
   end
 

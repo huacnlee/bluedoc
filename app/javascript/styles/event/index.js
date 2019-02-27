@@ -1,7 +1,7 @@
 import './autocomplete';
 import './select-menu';
 import './dialog';
-import './flash';
+import './notice';
 import './confirm';
 import './clipboard';
 import './retina-image';
