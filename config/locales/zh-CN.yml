@@ -36,6 +36,7 @@ zh-CN:
         remember_me: 记住登录状态
         followers_count: 关注者
         following_count: 正在关注
+        locale: 界面语言
       group:
         avatar: Logo
         slug: 团队路径

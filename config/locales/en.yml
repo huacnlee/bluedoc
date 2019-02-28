@@ -28,6 +28,7 @@ en:
         description: Bio
         followers_count: Followers
         following_count: Following
+        locale: Language
       group:
         slug: Group name
         avatar: Avatar
