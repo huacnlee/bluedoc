@@ -45,5 +45,16 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     add_index :users, :unlock_token,         unique: true
+
+    # Create Admin user
+    user = User.new
+    user.password = "123456"
+
+    admin_sql = %(
+      INSERT INTO "users"("id", "type","slug","name","email","encrypted_password","created_at","updated_at")
+      VALUES (1,'User','admin','Admin','admin@booklab.io','#{user.encrypted_password}','#{Time.now}','#{Time.now}');
+    )
+
+    execute admin_sql
   end
 end
