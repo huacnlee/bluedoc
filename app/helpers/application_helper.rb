@@ -115,6 +115,6 @@ module ApplicationHelper
   def errors_for(form, field)
     message = form.object.errors.full_messages_for(field)&.first
     return nil if message.blank?
-    content_tag(:div, message, class: 'form-error')
+    content_tag(:div, message, class: "form-error")
   end
 end
