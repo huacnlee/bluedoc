@@ -331,4 +331,28 @@ class UserTest < ActiveSupport::TestCase
     user.avatar.attach(io: load_file("blank.png"), filename: "blank1.png")
     assert_not_equal old_avatar_url, user.avatar_url
   end
+
+  test "update_password" do
+    user = create(:user, password: "123456", password_confirmation: "123456")
+    assert_equal true, user.valid_password?("123456")
+
+    assert_equal false, user.update_password({})
+    assert_equal({ current_password: ["can't be blank"], password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+
+    user.errors.clear
+    assert_equal false, user.update_password(current_password: "123456")
+    assert_equal({ password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+
+    user.errors.clear
+    assert_equal false, user.update_password(current_password: "123456", password: "654321")
+    assert_equal({ password_confirmation: ["can't be blank"] }, user.errors.messages)
+
+    user.errors.clear
+    assert_equal false, user.update_password(current_password: "123456", password: "654321", password_confirmation: "123456")
+    assert_equal({ password_confirmation: ["doesn't match Password"] }, user.errors.messages)
+
+    user.errors.clear
+    user.update_password(current_password: "123456", password: "654321", password_confirmation: "654321")
+    assert_equal true, user.valid_password?("654321")
+  end
 end

@@ -28,6 +28,17 @@ class User
     end
   end
 
+  # Update user password
+  def update_password(params)
+    %i[current_password password password_confirmation].each do |key|
+      self.errors.add(key, :blank) if params[key].blank?
+    end
+
+    return false if self.errors.size > 0
+
+    self.update_with_password(params)
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     email = conditions.delete(:email)

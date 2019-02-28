@@ -10,33 +10,22 @@
       <h1 class="title"><%= t(".Account") %></h1>
       <div class="sub-title"><h2><%= t(".Change password") %><h2></div>
       <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-password", class: "mb-section" }) do |f| %>
-        <% if params[:_by] == "password" %>
-        <%= render "/shared/error_messages", target: @user %>
-        <% end %>
-
         <input type="hidden" name="_by" value="password" />
 
-        <div class="form-group mb-button">
-          <%= f.label :current_password, class: "control-label" %>
+        <%= form_group(f, :current_password, class: "form-group mb-button") do %>
           <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
           <div class="form-text">
             <%= t(".We need your current password to confirm your changes")  %>
           </div>
-        </div>
+        <% end %>
 
-        <div class="form-group">
-          <%= f.label :password, class: "control-label" %>
+        <%= form_group(f, :password) do %>
           <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
-          <% if @minimum_password_length %>
-            <br />
-            <em><%= t(".Minimum characters", length: @minimum_password_length) %></em>
-          <% end %>
-        </div>
+        <% end %>
 
-        <div class="form-group">
-          <%= f.label :password_confirmation, class: "control-label" %>
+        <%= form_group(f, :password_confirmation) do %>
           <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-        </div>
+        <% end %>
 
         <div class="form-group">
           <%= f.submit t(".Update password"), class: "btn btn-primary btn-submit"%>
@@ -45,20 +34,15 @@
 
       <%= form_for(@user, url: account_settings_path, html: { method: :put, id: "account-change-username", class: "mb-section" }) do |f| %>
         <div class="sub-title"><h2><%= t(".Change username") %><h2></div>
-        <% if params[:_by] == "username" %>
-        <%= render "/shared/error_messages", target: @user %>
-        <% end %>
-
         <input type="hidden" name="_by" value="username" />
 
-        <div class="form-group">
+        <%= form_group(f, :slug, label: false) do %>
           <p><%= t(".Unless you really need it, we recommended that you do not change your username") %></p>
           <div class="input-group input-button-group">
             <%= f.text_field :slug, class: "form-control", autocomplete: "username" %>
             <%= f.submit t(".Update"), class: "btn" %>
           </div>
-
-        </div>
+        <% end %>
       <% end %>
 
       <div class="sub-title"><h2><%= t(".Danger zone") %><h2></div>

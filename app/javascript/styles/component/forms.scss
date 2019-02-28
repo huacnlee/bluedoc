@@ -25,8 +25,8 @@ form {
       color: $text-gray-dark;
     }
   }
-  .form-control + .form-text {
-    padding-top: 10px;
+  .form-text {
+    margin-top: 10px;
   }
 
   .form-error {

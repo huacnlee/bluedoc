@@ -43,12 +43,14 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     sign_in @user
-    put account_settings_path, params: { user: { slug: "@*()" }, _by: :profile }
+    put account_settings_path, params: { user: { name: "" }, _by: :profile }
     assert_equal 200, response.status
-    assert_match /Username is invalid/, response.body
+    assert_select ".form-group .form-error"
 
     put account_settings_path, params: { user: account_params, _by: :profile }
     assert_redirected_to account_settings_path
+    follow_redirect!
+    assert_select ".flash", text: "Profile has change successed."
     @user.reload
     assert_equal account_params[:name], @user.name
     assert_equal account_params[:slug], @user.slug
@@ -70,18 +72,16 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     }
 
     sign_in user
-    put account_settings_path, params: { user: { password: "123", password_confirmation: "321" }, _by: :password }
+    put account_settings_path, params: { user: { current_password: password, password: "123", password_confirmation: "321" }, _by: :password }
     assert_equal 200, response.status
     assert_select "#account-change-password" do
-      assert_select ".flash.flash-error" do
-        assert_select "li", text: "Password confirmation doesn't match Password"
-      end
+      assert_select ".form-group .form-error"
     end
 
     put account_settings_path, params: { user: account_params, _by: :password }
-    assert_redirected_to new_user_session_path
+    assert_redirected_to account_account_settings_path
     follow_redirect!
-    assert_select ".flash", text: "Password has change successed, you need login again."
+    assert_select ".flash", text: "Password has change successed."
 
     user.reload
     assert_equal true, user.valid_password?(new_password)
@@ -95,9 +95,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     put account_settings_path, params: { user: { slug: user0.slug }, _by: :username }
     assert_equal 200, response.status
     assert_select "#account-change-username" do
-      assert_select ".flash.flash-error" do
-        assert_select "li", text: "Username has already been taken"
-      end
+      assert_select ".form-group .form-error", text: "Username has already been taken"
     end
 
     old_username = user.slug
@@ -106,6 +104,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     user.reload
     assert_equal "#{old_username}-new", user.slug
     assert_equal "Jason Lee", user.name
+    follow_redirect!
+    assert_select ".flash", text: "Username has change successed."
   end
 
   test "DELETE /account/settings" do

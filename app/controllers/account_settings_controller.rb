@@ -35,8 +35,9 @@ class AccountSettingsController < ApplicationController
 
     def update_password
       password_params = params.require(:user).permit(:current_password, :password, :password_confirmation)
-      if @user.update_with_password(password_params)
-        redirect_to new_user_session_path, notice: t(".Password has change successed")
+      if @user.update_password(password_params)
+        bypass_sign_in @user
+        redirect_to account_account_settings_path, notice: t(".Password has change successed")
       else
         render :account
       end
@@ -56,7 +57,7 @@ class AccountSettingsController < ApplicationController
       end
 
       if @user.update(slug: user_params[:slug])
-        redirect_to account_account_settings_path, notice: "Username has change successed"
+        redirect_to account_account_settings_path, notice: t(".Username has change successed")
       else
         render :account
       end
