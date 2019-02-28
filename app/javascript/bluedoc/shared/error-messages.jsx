@@ -21,9 +21,11 @@ export default class ErrorMessages extends React.Component {
     }
 
     return (
-      <div className="flash flash-block flash-error">
-        <div className="mb-1"><strong>{i18n.t("There has count issues", { count: messages.length })}</strong></div>
-        <ul className="list-style-none">
+      <div className="notice notice-block notice-error">
+        <p className="mb-2 text-main notice-title"
+          dangerouslySetInnerHTML={{ __html: i18n.t('There has count issues', { count: messages.length }) }}
+        />
+        <ul className="notice-lists">
           {messages.map(message => <li>{message}</li>)}
         </ul>
       </div>

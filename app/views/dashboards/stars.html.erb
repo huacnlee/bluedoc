@@ -6,15 +6,12 @@
   <div class="main-content">
     <div class="dashboard-content clearfix">
       <% if action_name == "stars_docs" %>
-        <h2 class="sub-title"><%= t(".Stared Docs") %></h2>
         <%= render "action_docs" %>
         <%= paginate @docs %>
       <% elsif action_name == "stars_notes" %>
-        <h2 class="sub-title"><%= t(".Stared Notes") %></h2>
         <%= render "action_notes" %>
         <%= paginate @notes %>
       <% else %>
-        <h2 class="sub-title"><%= t(".Stared Repositories") %></h2>
         <%= render "action_repositories" %>
         <%= paginate @repositories %>
       <% end %>

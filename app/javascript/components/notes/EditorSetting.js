@@ -125,7 +125,7 @@ export default class EditorSetting extends React.Component {
               </label>
             </div>
             {privacy === 'private' && privacy !== wasPrivacy && (
-              <div className="flash flash-error">{this.t('.If you change privacy from Public to Private')}</div>
+              <div className="notice notice-error">{this.t('.If you change privacy from Public to Private')}</div>
             )}
           </div>
 

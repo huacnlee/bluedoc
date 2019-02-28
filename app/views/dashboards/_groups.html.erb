@@ -1,8 +1,10 @@
 <% if items.blank? %>
-<div class="blankslate">
+<div class="blankslate no-data no-group">
+  <h3><%= t(".No groups") %></h3>
   <p><%= t(".You does not have any groups") %></p>
 </div>
 <% else %>
+<h2 class="sub-title"><%= t(".All groups of you") %></h2>
 <ul class="dashboard-groups list-container">
   <% items.each do |item| %>
   <li class="recent-group-item list-item list-avatar">

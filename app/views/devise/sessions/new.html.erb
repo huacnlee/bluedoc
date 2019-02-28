@@ -10,7 +10,7 @@ auth_info = auth_session["info"]
   </div>
 
   <% if auth_info %>
-  <div class="flash flash-warn mt-5">
+  <div class="notice my-4">
     <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
     <p>Input your exists BlueDoc account to bind with <b><%= auth_session["provider"].humanize %></b></p>
   </div>

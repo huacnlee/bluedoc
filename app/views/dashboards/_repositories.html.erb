@@ -1,9 +1,10 @@
 <% if items.blank? %>
-<div class="blankslate">
-  <p><%= t("You does not have any repositories") %></p>
+<div class="blankslate no-data no-repo">
+  <h3><%= t(".No repositories") %></h3>
+  <p><%= t(".You does not have any repositories") %></p>
 </div>
 <% else %>
-
+<h2 class="sub-title"><%= t(".All repositories") %></h2>
 <ul class="list-container dashboard-repos">
   <% items.each do |item| %>
   <li class="list-item list-avatar recent-repo-item">

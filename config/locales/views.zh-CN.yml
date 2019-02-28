@@ -17,7 +17,7 @@ zh-CN:
       follow: 关注
       unfollow: 取消关注
     error_messages:
-      There has count issues: 发现有 %{count} 问题无法通过表单验证：
+      There has count issues_html: 发现有 <span class="text-danger">%{count}</span> 问题无法通过表单验证：
     select_menu:
       Choose an item: 选择一个
     access_denied:
@@ -265,11 +265,15 @@ zh-CN:
       In reply to: 回复
   dashboards:
     action_docs:
+      No star docs: 没有收藏的文档
       You does not have any action_name docs: 你还未收藏过任何文档。
     action_repositories:
+      No star repositories: 没有收藏的知识库
+      No watches repositories: 没有关注的知识库
       You does not have any action_name repositories: 你还未收藏过任何知识库。
-    groups:
-      You does not have any groups: 你还没有任何团队。
+    action_notes:
+      You does not have any action_name notes: 你还未收藏过笔记。
+      Notes: 笔记
     menu:
       Dashboard: 工作台
       Doc: 文档
@@ -278,8 +282,6 @@ zh-CN:
       Star: 收藏
       Watch: 订阅
       Note: 笔记
-    repositories:
-      You does not have any repositories: 你没有任何的知识库。
     docs:
       Dashboard Docs: 工作台 - 我的文档
       Recent docs: 最近修改过的文档
@@ -288,9 +290,13 @@ zh-CN:
     groups:
       Dashboard Groups: 工作台 - 我的团队
       All groups of you: 你的团队
+      No groups: 没有团队
+      You does not have any groups: 你还没有任何团队。
     repositories:
       All repositories: 最近参与过的知识库
       Dashboard Repositories: 工作台 - 知识库
+      No repositories: 没有知识库
+      You does not have any repositories: 你没有任何的知识库。
     index:
       Recent edited docs: 最近修改过的文档
       Recent contributed repositories: 最近参与过的知识库
@@ -305,9 +311,6 @@ zh-CN:
       Stared Notes: 收藏的笔记
     watches:
       All Watches: 订阅的知识库
-    action_notes:
-      You does not have any action_name notes: 你还未收藏过笔记。
-      Notes: 笔记
   versions:
     version:
       Current: 当前版本

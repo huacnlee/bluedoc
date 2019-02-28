@@ -60,11 +60,11 @@
 .btn-danger {
   border-color: #FFC1BE;
   background: #FFF3F3;
-  color: #EE4343;
+  color: $danger;
   box-shadow: 0px 3px 6px 0px rgba(255, 75, 75, 0.14);
   &:hover {
     border-color: #F3B7B7;
-    color: #EE4343!important;
+    color: $danger!important;
     background: #FFE5E5;
   }
 }

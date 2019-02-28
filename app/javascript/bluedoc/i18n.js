@@ -7,7 +7,7 @@ i18n.init({
   resources: {
     en: {
       locales: {
-        "There has count issues": "There has {{count}} issues:",
+        "There has count issues": 'There has <span class="text-danger">{{count}}</span> issues:',
         "Repository": "Repository",
         "Search in scope": "Search in {{scope}}",
         "Search BlueDoc": "Search BlueDoc",
@@ -70,7 +70,7 @@ i18n.init({
     },
     zh_CN: {
       locales: {
-        "There has count issues": "有 {{count}} 个问题：",
+        "There has count issues": '有 <span class="text-danger">{{count}}</span> 个问题：',
         "Repository": "知识库",
         "Search in scope": "{{scope}}内搜索",
         "Search BlueDoc": "搜索 BlueDoc",
