@@ -91,16 +91,38 @@ class ApplicationHelperTest < ActionView::TestCase
     user.valid?
     html = form_for(user) do |f|
       form_group(f, :slug) do
-        "foo bar"
+        content_tag(:div, "input field")
       end
     end
 
     expected = <<~HTML
     <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
-      <div class="form-group has-error">foo bar<div class="form-error">Username is invalid</div></div>
+      <div class="form-group has-error">
+        <div class="field_with_errors">
+          <label class="control-label" for="user_slug">Username</label>
+        </div>
+        <div>input field</div>
+        <div class="form-error">Username is invalid</div>
+      </div>
     </form>
     HTML
 
+    assert_html_equal expected, html
+
+    # without label
+    expected = <<~HTML
+    <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
+      <div class="foo bar has-error">
+        <div>input field</div>
+        <div class="form-error">Username is invalid</div>
+      </div>
+    </form>
+    HTML
+    html = form_for(user) do |f|
+      form_group(f, :slug, label: false, class: "foo bar") do
+        content_tag(:div, "input field")
+      end
+    end
     assert_html_equal expected, html
   end
 

@@ -36,36 +36,29 @@
     <% end %>
 
     <%= form_for(@user, url: account_settings_path, html: { method: :put }) do |f| %>
-      <%= render "/shared/error_messages", target: @user %>
-
       <input type="hidden" name="_by" value="profile" />
 
-      <div class="form-group">
-        <%= f.label :name, class: "control-label" %>
+      <%= form_group(f, :name) do %>
         <%= f.text_field :name, class: "form-control"%>
-      </div>
+      <% end %>
 
-      <div class="form-group">
-        <%= f.label :description, class: "control-label" %>
-        <%= f.text_area :description, rows: 1, class: "form-control"%>
-      </div>
+      <%= form_group(f, :description) do %>
+        <%= f.text_field :description, class: "form-control"%>
+      <% end %>
 
-      <div class="form-group">
-        <%= f.label :location, class: "control-label" %>
+      <%= form_group(f, :location) do %>
         <%= f.text_field :location, class: "form-control" %>
-      </div>
+      <% end %>
 
-      <div class="form-group">
-        <%= f.label :url, class: "control-label" %>
+      <%= form_group(f, :url) do %>
         <%= f.url_field :url, class: "form-control" %>
-      </div>
+      <% end %>
 
-      <div class="form-group mb-button">
-        <%= f.label :locale, class: "control-label" %>
+      <%= form_group(f, :locale, class: "form-group mb-button") do %>
         <%= f.select :locale, Setting.locale_options,
           { include_blank: t(".System default", locale_name: Setting.default_locale_name) },
           { class: "form-control" } %>
-      </div>
+      <% end %>
 
       <div class="form-group">
         <%= f.submit t(".Update profile"), class: "btn btn-primary btn-submit" %>
