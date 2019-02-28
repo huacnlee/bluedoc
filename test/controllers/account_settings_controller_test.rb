@@ -50,7 +50,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     put account_settings_path, params: { user: account_params, _by: :profile }
     assert_redirected_to account_settings_path
     follow_redirect!
-    assert_select ".flash", text: "Profile has change successed."
+    assert_select ".notice", text: "Profile has change successed."
     @user.reload
     assert_equal account_params[:name], @user.name
     assert_equal account_params[:slug], @user.slug
@@ -105,7 +105,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "#{old_username}-new", user.slug
     assert_equal "Jason Lee", user.name
     follow_redirect!
-    assert_select ".flash", text: "Username has change successed."
+    assert_select ".notice", text: "Username has change successed."
   end
 
   test "DELETE /account/settings" do
