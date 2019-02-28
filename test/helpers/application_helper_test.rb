@@ -86,6 +86,24 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_action_button html, doc, :star, text: "Unstar", label: "Star", undo_label: "Unstar", icon: "star", method: :delete, with_count: false
   end
 
+  test "form_group" do
+    user = build(:user, slug: "")
+    user.valid?
+    html = form_for(user) do |f|
+      form_group(f, :slug) do
+        "foo bar"
+      end
+    end
+
+    expected = <<~HTML
+    <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
+      <div class="form-group has-error">foo bar<div class="form-error">Username is invalid</div></div>
+    </form>
+    HTML
+
+    assert_html_equal expected, html
+  end
+
   private
 
     def assert_action_button(html, target, action_type, opts = {})

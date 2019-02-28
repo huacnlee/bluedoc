@@ -28,6 +28,11 @@ form {
   .form-control + .form-text {
     padding-top: 10px;
   }
+
+  .form-error {
+    margin-top: 5px;
+    color: #EE4343;
+  }
 }
 
 .control-label {
