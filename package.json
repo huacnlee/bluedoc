@@ -29,7 +29,7 @@
     "styled-components": "^3.2.3",
     "timeago.js": "^4.0.0-beta.1",
     "tocbot": "^4.4.2",
-    "typine": "^0.0.35",
+    "typine": "^0.0.36",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
