@@ -42,6 +42,10 @@
         <%= f.text_field :name, class: "form-control"%>
       <% end %>
 
+      <%= form_group(f, :email) do %>
+        <%= f.email_field :email, class: "form-control"%>
+      <% end %>
+
       <%= form_group(f, :description) do %>
         <%= f.text_field :description, class: "form-control"%>
       <% end %>
