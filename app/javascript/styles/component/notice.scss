@@ -1,0 +1,71 @@
+.notice-wrap {
+  position: relative;
+  height: 0;
+  width: 100%;
+  font-size: 12px;
+  .notice {
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 7px 20px;
+    @include breakpoint(md) {
+      width: auto;
+      padding-right: 140px;
+      &.notice-block {
+        padding-right: 40px;
+      }
+    }
+  }
+}
+
+.notice {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 0px 5px 10px 0 rgba(153, 153, 153, 0.1);
+  background: #F7F7F7;
+  z-index: 999;
+  position: relative;
+  color: $text-gray;
+  &.notice-block {
+    margin-bottom: 20px;
+  }
+  .notice-lists {
+    list-style: inside decimal;
+  }
+  .notice-title {
+    font-weight: bold;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  a {
+    color: $primary;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.notice-close {
+  position: absolute;
+  right: 15px;
+  top: 4px;
+  padding: 5px;
+  font-size: 14px;
+  color: #979797;
+  cursor: pointer;
+}
+
+.notice-error {
+  background: #fff;
+  color: $danger;
+  border: 0.5px solid $danger;
+}
+
+.notice-success {
+  background: #fff;
+  color: #3BB46E;
+  border: 0.5px solid #3BB46E;
+}

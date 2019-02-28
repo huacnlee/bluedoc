@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def close_button
-    raw %(<button type="button" class="flash-close js-flash-close"><i class="fas fa-times"></i></button>)
+    raw %(<i class="notice-close js-notice-close fas fa-cancel"></i>)
   end
 
   def icon_tag(name, opts = {})
@@ -26,14 +26,12 @@ module ApplicationHelper
     flash_messages << flash_block_tag(:success, flash[:notice]) if flash[:notice]
     flash_messages << flash_block_tag(:error, flash[:alert]) if flash[:alert]
 
-    content_tag(:div, flash_messages.join("\n").html_safe, class: "flash-full")
+    content_tag(:div, flash_messages.join("\n").html_safe, class: "notice-wrap")
   end
 
   def flash_block_tag(type, message)
-    content_tag(:div, class: "flash flash-block flash-#{type}") do
-      content_tag(:div, class: "container") do
-        close_button + message
-      end
+    content_tag(:div, class: "notice notice-#{type}") do
+      close_button + message
     end
   end
 

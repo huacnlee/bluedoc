@@ -1,9 +1,10 @@
 <% if @docs.blank? %>
-<div class="blankslate">
+<div class="blankslate no-data no-star-doc">
+  <h3><%= t(".No star docs") %></h3>
   <p><%= t(".You does not have any action_name docs", action: action_name.singularize) %></p>
 </div>
 <% else %>
-
+<h2 class="sub-title"><%= t(".Stared Docs") %></h2>
 <ul class="list-container recent-docs">
   <% @docs.each do |doc| %>
     <li class="list-item list-avatar recent-doc-item">

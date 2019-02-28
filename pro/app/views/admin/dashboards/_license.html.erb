@@ -14,7 +14,7 @@
   <div class="box-row">
     <div class="mb-2">
       <% if !License.license? %>
-        <div class="flash license-no"><%= t(".No license") %></div>
+        <div class="notice license-no"><%= t(".No license") %></div>
       <% else %>
         <table class="license-details table mb-2">
           <tr>
@@ -46,9 +46,9 @@
         </table>
 
         <% if License.expired? %>
-          <div class="flash flash-error license-expired"><%= t(".The license expired on expires_at", expires_at: License.expires_at) %></div>
+          <div class="notice notice-error license-expired"><%= t(".The license expired on expires_at", expires_at: License.expires_at) %></div>
         <% else %>
-          <div class="flash license-will-expire"><%= t(".The license will expire on expires_at", expires_at: License.expires_at) %></div>
+          <div class="notice license-will-expire"><%= t(".The license will expire on expires_at", expires_at: License.expires_at) %></div>
         <% end %>
       <% end %>
     </div>

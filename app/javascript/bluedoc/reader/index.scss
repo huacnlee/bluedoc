@@ -82,14 +82,6 @@
     padding: 0 !important;
   }
 
-  .flash-full {
-    .container {
-      margin-left: 0;
-      margin-right: 0;
-      width: auto;
-    }
-  }
-
   .doc-page {
     position: relative;
     width: 100%;
@@ -100,14 +92,6 @@
         margin-right: 10px;
       }
     }
-    // .avatars {
-    //   margin-right: 5px;
-    //   .avatar {
-    //     width: 16px;
-    //     height: 16px;
-    //     vertical-align: text-bottom;
-    //   }
-    // }
     .doc-sidebar {
       .doc-parents {
         text-align: left;
@@ -127,6 +111,11 @@
         font-size: 13px;
         @extend .pt-2;
         @extend .list-style-none;
+        @for $i from 1 through 5 {
+          .toc-item-#{$i} {
+            padding-left: ($i * 8px) !important;
+          }
+        }
         li {
           padding: 6px 0;
         }
@@ -148,7 +137,7 @@
       width: auto;
       padding: 0px 0px;
       .unpublished-draft-tip {
-        margin-top: 15px;
+        margin-bottom: 15px;
       }
     }
 

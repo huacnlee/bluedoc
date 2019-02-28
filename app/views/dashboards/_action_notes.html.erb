@@ -1,9 +1,10 @@
 <% if @notes.blank? %>
-<div class="blankslate">
+<div class="blankslate no-data no-star-note">
+  <h3><%= t(".No star notes") %></h3>
   <p><%= t(".You does not have any action_name notes", action: action_name.singularize) %></p>
 </div>
 <% else %>
-
+<h2 class="sub-title"><%= t(".Stared Notes") %></h2>
 <ul class="list-container recent-docs recent-notes">
   <% @notes.each do |note| %>
     <li class="list-item list-avatar recent-doc-item">

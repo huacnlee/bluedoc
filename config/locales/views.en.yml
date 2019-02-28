@@ -17,7 +17,7 @@ en:
       follow: Follow
       unfollow: Unfollow
     error_messages:
-      There has count issues: "There has %{count} issues:"
+      There has count issues_html: 'There has <span class="text-danger">%{count}</span> issues:'
     select_menu:
       Choose an item: Choose an item
     access_denied:
@@ -263,11 +263,16 @@ en:
       In reply to: In reply to
   dashboards:
     action_docs:
+      No star docs: No star docs
       You does not have any action_name docs: You does not have any star docs.
     action_repositories:
-      You does not have any action_name repositories: You does not have any star repositories.
-    groups:
-      You does not have any groups: You does not have any groups.
+      No star repositories: No star repositories
+      No watches repositories: No watches repositories
+      You does not have any action_name repositories: You does not have any star repositories
+    action_notes:
+      No star notes: No star notes
+      You does not have any action_name notes: You does not have any star Notes.
+      Notes: Notes
     menu:
       Dashboard: Dashboard
       Doc: Docs
@@ -284,9 +289,13 @@ en:
     groups:
       Dashboard Groups: Dashboard - Groups
       All groups of you: All groups of you
+      No groups: No groups
+      You does not have any groups: You does not have any groups.
     repositories:
       All repositories: Recent contributed repositories
       Dashboard Repositories: Dashboard - Repositories
+      No repositories: No repositories
+      You does not have any repositories: You does not have any repositories
     index:
       Recent edited docs: Recent edited docs
       Recent contributed repositories: Recent contributed repositories
@@ -301,9 +310,6 @@ en:
       Stared Repositories: Stared Repositories
     watches:
       All Watches: All watches
-    action_notes:
-      You does not have any action_name notes: You does not have any star Notes.
-      Notes: Notes
   versions:
     version:
       Current: Current

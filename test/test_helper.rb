@@ -115,7 +115,7 @@ class ActionDispatch::IntegrationTest
       type = :success if key == :notice
       type = :error if key == :alert
 
-      assert_select ".flash.flash-#{type}", text: flash[key]
+      assert_select ".notice.notice-#{type}", text: flash[key]
     end
   end
 
