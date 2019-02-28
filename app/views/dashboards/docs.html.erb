@@ -4,13 +4,13 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="dashboard-content clearfix">
-      <h2 class="sub-title"><%= t(".Recent docs") %></h2>
       <% if @user_actives.blank? %>
-        <div class="blankslate">
+        <div class="blankslate no-data no-doc">
           <h3><%= t(".No docs") %></h3>
           <p><%= t(".You does not have any updated docs") %></p>
         </div>
       <% else %>
+        <h2 class="sub-title"><%= t(".Recent docs") %></h2>
         <%= render partial: "docs", locals: { items: @user_actives } %>
         <%= paginate @user_actives %>
       <% end %>

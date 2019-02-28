@@ -1,16 +1,46 @@
 .blankslate {
-  color: $text-gray;
+  color: #555;
   font-size: 12px;
   text-align: left;
-
   padding: 10px 0;
 
   h2, h3 {
-    font-size: 15px;
-    color: $text-gray;
-    font-weight: normal;
+    font-size: 16px;
+    color: #000;
     margin-bottom: 10px;
   }
 
-  a { color: $text-gray-dark; font-weight: bold;  }
+  a { color: $text-gray-dark; }
+
+  &.no-data {
+    padding-top: 240px;
+    background-size: auto 210px;
+    background-position: center 20px;
+    background-repeat: no-repeat;
+    text-align: center;
+    &.no-doc {
+      background-image: url('~images/nodata/doc.png');
+    }
+    &.no-repo {
+      background-image: url('~images/nodata/repo.png');
+    }
+    &.no-group {
+      background-image: url('~images/nodata/group.png');
+    }
+    &.no-result {
+      background-image: url('~images/nodata/result.png');
+    }
+    &.no-star-doc {
+      background-image: url('~images/nodata/star-doc.png');
+    }
+    &.no-star-repo {
+      background-image: url('~images/nodata/star-repo.png');
+    }
+    &.no-star-note {
+      background-image: url('~images/nodata/star-note.png');
+    }
+    &.no-watch {
+      background-image: url('~images/nodata/watch.png');
+    }
+  }
 }

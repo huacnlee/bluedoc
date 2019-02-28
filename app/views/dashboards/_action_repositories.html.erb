@@ -1,40 +1,50 @@
 <% if @repositories.blank? %>
-<div class="blankslate">
+<div class="blankslate no-data no-star-repo">
+  <% if action_name == "stars" %>
+    <h3><%= t(".No star repositories") %></h3>
+  <% else %>
+    <h3><%= t(".No watches repositories") %></h3>
+  <% end %>
+  
   <p><%= t(".You does not have any action_name repositories", action: action_name.singularize) %></p>
 </div>
 <% else %>
-
-<div class="dashboard-repos list-container" data-action-button-reload>
-  <% @repositories.each do |repo| %>
-  <div class="recent-repo-item list-item list-avatar">
-    <div class="avatar-box icon-box icon-repo">
-      <%= icon_tag("avatar-repo") %>
-    </div>
-    <div class="title path">
-      <%= user_name_tag(repo.user, with_icon: true) %> / 
-      <%= repository_name_tag(repo, with_icon: true) %>
-    </div>
-    <% if repo.description.present? %>
-    <div class="description">
-      <%= truncate repo.description, length: 100 %>
-    </div>
-    <% end %>
-    <div class="info">
-      <span class="stars">
-        <%= icon_tag("star-fill") %> <span><%= repo.stars_count %></span>
-      </span>
-      <span class="watches">
-        <%= icon_tag("watches") %> <span><%= repo.watches_count %></span>
-      </span>
-    </div>
-    <div class="action action-icon text-gray">
-      <% if action_name == "stars" %>
-        <%= action_button_tag(repo, :star, undo: true) %>
-      <% else %>
-        <%= action_button_tag(repo, :watch, icon: :watch, undo: true) %>
-      <% end %>
-    </div>
-  </div>
+  <% if action_name == "stars" %>
+    <h2 class="sub-title"><%= t(".Stared Repositories") %></h2>
+  <% else %>
+    <h2 class="sub-title"><%= t(".All Watches") %></h2>
   <% end %>
-</div>
+  <ul class="dashboard-repos list-container" data-action-button-reload>
+    <% @repositories.each do |repo| %>
+    <li class="recent-repo-item list-item list-avatar">
+      <div class="avatar-box icon-box icon-repo">
+        <%= icon_tag("avatar-repo") %>
+      </div>
+      <div class="title path">
+        <%= user_name_tag(repo.user, with_icon: true) %> / 
+        <%= repository_name_tag(repo, with_icon: true) %>
+      </div>
+      <% if repo.description.present? %>
+      <div class="description">
+        <%= truncate repo.description, length: 100 %>
+      </div>
+      <% end %>
+      <div class="info">
+        <span class="stars">
+          <%= icon_tag("star-fill") %> <span><%= repo.stars_count %></span>
+        </span>
+        <span class="watches">
+          <%= icon_tag("watches") %> <span><%= repo.watches_count %></span>
+        </span>
+      </div>
+      <div class="action action-icon text-gray">
+        <% if action_name == "stars" %>
+          <%= action_button_tag(repo, :star, undo: true) %>
+        <% else %>
+          <%= action_button_tag(repo, :watch, icon: :watch, undo: true) %>
+        <% end %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
 <% end %>
