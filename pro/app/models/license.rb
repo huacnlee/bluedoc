@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class License
-  PRO_FEATURES = %i[
+  PRO_FEATURES = %w[
     soft_delete
     reader_list
   ]
@@ -19,7 +19,7 @@ class License
       return false unless license?
       return false if trial? && expired?
 
-      features.include?(name)
+      features.include?(name.to_s) && license_features.include?(name.to_s)
     end
 
     def trial?
@@ -51,6 +51,10 @@ class License
         rescue
           nil
         end
+    end
+
+    def license_features
+      restricted_attr(:features, default: [])
     end
 
     def update(license_body)
