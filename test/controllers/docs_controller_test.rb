@@ -180,10 +180,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".doc-share-button-box", 0
 
     user = sign_in_role :editor, group: @group
-    get doc.to_path
+    allow_feature(:reader_list) do
+      get doc.to_path
+    end
     assert_equal 200, response.status
 
-    assert_equal true, user.read_doc?(doc)
+    allow_feature(:reader_list) do
+      assert_equal true, user.read_doc?(doc)
+    end
 
     assert_select "details.doc-share-button-box" do
       # assert_select "summary .text", text: "Share"
