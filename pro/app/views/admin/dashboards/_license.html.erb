@@ -31,17 +31,25 @@
           </tr>
           <% if License.trial? %>
           <tr>
-            <td><%= t(".Licensee trial") %></td>
+            <td><%= t(".trial") %></td>
             <td data-field="trial"><%= t(".Trial yes") %></td>
           </tr>
           <% end %>
           <tr>
-            <td><%= t(".Licensee issued_at") %></td>
+            <td><%= t(".issued_at") %></td>
             <td data-field="starts_at"><%= License.starts_at %></td>
           </tr>
           <tr>
-            <td><%= t(".Licensee expires_at") %></td>
+            <td><%= t(".expires_at") %></td>
             <td data-field="expires_at"><%= License.expires_at %></td>
+          </tr>
+          <tr>
+            <td><%= t(".features") %></td>
+            <td data-field="features">
+                <% License.license.features.each do |key| %>
+                <%=  t(".feature.#{key}") %><br />
+                <% end %>
+            </td>
           </tr>
         </table>
 

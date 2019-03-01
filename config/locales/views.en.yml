@@ -187,10 +187,14 @@ en:
         Licensee name: Name
         Licensee email: Email
         Licensee company: Company
-        Licensee trial: Trial
+        trial: Trial
         Trial yes: "YES"
-        Licensee issued_at: Issued Date
-        Licensee expires_at: Expires Date
+        issued_at: Issued Date
+        expires_at: Expires Date
+        features:  Features
+        feature:
+          soft_delete: Soft Delete
+          reader_list: Reader List
     licenses:
       show:
         License: License
