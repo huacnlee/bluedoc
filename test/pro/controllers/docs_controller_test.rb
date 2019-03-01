@@ -46,9 +46,4 @@ class Pro::DocsControllerTest < ActionDispatch::IntegrationTest
       assert_match %(document.querySelector(".doc-readers").outerHTML = ), response.body
     end
   end
-
-
-  test "POSt " do
-
-  end
 end

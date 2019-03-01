@@ -40,7 +40,9 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
     # sign in
     user = create(:user)
     sign_in user
-    get share.to_path
+    allow_feature(:reader_list) do
+      get share.to_path
+    end
     assert_equal 200, response.status
     assert_select ".doc-page" do
       assert_select ".doc-title", text: doc.title
@@ -66,7 +68,10 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
         end
       end
     end
-    assert_equal true, user.read_doc?(share.shareable)
+
+    allow_feature(:reader_list) do
+      assert_equal true, user.read_doc?(share.shareable)
+    end
 
     # close share
     share.destroy
