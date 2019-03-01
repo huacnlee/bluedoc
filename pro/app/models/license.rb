@@ -3,6 +3,7 @@
 class License
   PRO_FEATURES = %i[
     soft_delete
+    reader_list
   ]
 
   class << self

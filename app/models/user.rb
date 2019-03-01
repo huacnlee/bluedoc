@@ -8,6 +8,9 @@ class User < ApplicationRecord
   include Activityable
 
   depends_on :soft_delete, :devise, :avatar, :system_user, :actions, :membership, :search, :activities, :follows
+  # PRO-start
+  depends_on :read_target
+  # PRO-end
 
   has_many :owned_repositories, class_name: "Repository", dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy

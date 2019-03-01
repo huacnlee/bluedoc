@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Admin::ProDashboardsControllerTest < ActionDispatch::IntegrationTest
+class Pro::Admin::DashboardsControllerTest < ActionDispatch::IntegrationTest
   test "GET /admin" do
     user = create(:user)
     sign_in_admin user

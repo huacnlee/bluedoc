@@ -103,7 +103,9 @@ Rails.application.routes.draw do
         patch :revert
         post :action
         delete :action
+        # PRO-begin
         get :readers
+        # PRO-end
         post :pdf
       end
     end
@@ -146,7 +148,9 @@ Rails.application.routes.draw do
           get :versions
           patch :revert
           post :share
+          # PRO-begin
           get :readers
+          # PRO-end
         end
       end
     end
