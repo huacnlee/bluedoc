@@ -26,7 +26,7 @@ module ApplicationHelper
     flash_messages << flash_block_tag(:success, flash[:notice]) if flash[:notice]
     flash_messages << flash_block_tag(:error, flash[:alert]) if flash[:alert]
 
-    content_tag(:div, flash_messages.join("\n").html_safe, class: "notice-wrap")
+    content_tag(:div, flash_messages.join("\n").html_safe, class: "navbar-notice")
   end
 
   def flash_block_tag(type, message)
