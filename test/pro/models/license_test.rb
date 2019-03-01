@@ -23,12 +23,25 @@ class LicenseTest < ActiveSupport::TestCase
 
     License.stub(:trial?, true) do
       License.stub(:expired?, false) do
-        assert_equal true, License.allow_feature?(:soft_delete)
+        License.stub(:license_features, ['soft_delete']) do
+          assert_equal true, License.allow_feature?(:soft_delete)
+        end
       end
     end
 
     License.stub(:trial?, false) do
-      assert_equal true, License.allow_feature?(:soft_delete)
+      assert_equal false, License.allow_feature?(:foo)
+      assert_equal false, License.allow_feature?(:soft_delete)
+      assert_equal false, License.allow_feature?(:reader_list)
+    end
+
+    License.stub(:trial?, false) do
+      License.stub(:license_features, ['soft_delete', 'reader_list']) do
+        assert_equal false, License.allow_feature?(:foo)
+
+        assert_equal true, License.allow_feature?(:soft_delete)
+        assert_equal true, License.allow_feature?(:reader_list)
+      end
     end
   end
 
