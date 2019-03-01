@@ -187,10 +187,14 @@ zh-CN:
         Licensee name: 姓名
         Licensee email: Email
         Licensee company: 公司
-        Licensee trial: 试用版
+        trial: 试用版
         Trial yes: "是"
-        Licensee issued_at: 签发日
-        Licensee expires_at: 有效期
+        issued_at: 签发日
+        expires_at: 有效期
+        features:  开启功能
+        feature:
+          soft_delete: 软删除恢复
+          reader_list: 阅读记录
     licenses:
       show:
         License: 专业版授权
