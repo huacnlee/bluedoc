@@ -80,29 +80,6 @@ Or use `docker ps` to checkout processes:
 $ docker ps | grep bluedoc
 ```
 
-## Setup PDF generate font.
-
-By default, Docker Image only including English words font, if your want render PDF text for Simplified Chinese, Traditional Chinese, Japanese, or Korean ... you must dowload "Noto Sans CJK" from:
-
-https://www.google.com/get/noto/help/cjk/
-
-- OpenType (.otf)
-- Regular
-
-For example Simplified Chinese, we need a `noto.otf` put in `${bluedoc_root}/fonts/noto.otf`
-
-```bash
-$ bluedoc_root=/var/bluedoc
-$ cd /tmp
-$ curl -O https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
-$ unzip NotoSansCJKsc-hinted.zip
-$ mkdir -p ${bluedoc_root}/fonts
-$ mv NotoSansCJKsc-Regular.otf ${bluedoc_root}/fonts/noto.otf
-$ ls -lh ${bluedoc_root}/fonts/noto.otf
-```
-
-After that, the PDF generater will use `noto.otf` as font-family.
-
 ## Update BlueDoc
 
 We will continue upgrade BlueDoc, you can upgrade it by:
