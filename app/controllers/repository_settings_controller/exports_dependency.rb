@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositorySettingsController
   # POST /:user/:repo/settings/export
   # - type: pdf|archive

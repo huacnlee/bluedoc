@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotesController
   # GET /:user/notes/:slug/readers
   def readers

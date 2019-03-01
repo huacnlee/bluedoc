@@ -195,6 +195,8 @@ zh-CN:
         feature:
           soft_delete: 软删除恢复
           reader_list: 阅读记录
+          export_pdf: 知识库、文档导出 PDF
+          export_archive: 知识库导出 Zip
     licenses:
       show:
         License: 专业版授权
