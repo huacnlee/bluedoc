@@ -23,7 +23,7 @@ class LicenseTest < ActiveSupport::TestCase
 
     License.stub(:trial?, true) do
       License.stub(:expired?, false) do
-        License.stub(:license_features, ['soft_delete']) do
+        License.license.stub(:allow_feature?, true) do
           assert_equal true, License.allow_feature?(:soft_delete)
         end
       end
@@ -31,12 +31,14 @@ class LicenseTest < ActiveSupport::TestCase
 
     License.stub(:trial?, false) do
       assert_equal false, License.allow_feature?(:foo)
-      assert_equal false, License.allow_feature?(:soft_delete)
-      assert_equal false, License.allow_feature?(:reader_list)
+      License.license.stub(:features, %w[]) do
+        assert_equal false, License.allow_feature?(:soft_delete)
+        assert_equal false, License.allow_feature?(:reader_list)
+      end
     end
 
     License.stub(:trial?, false) do
-      License.stub(:license_features, ['soft_delete', 'reader_list']) do
+      License.license.stub(:features, %w[soft_delete reader_list]) do
         assert_equal false, License.allow_feature?(:foo)
 
         assert_equal true, License.allow_feature?(:soft_delete)
@@ -49,7 +51,7 @@ class LicenseTest < ActiveSupport::TestCase
     assert_not_nil License.license
     assert_equal true, License.license?
     assert_equal Date.new(2019, 2, 14), License.starts_at
-    assert_equal Date.new(2025, 1, 01), License.expires_at
+    assert_equal Date.new(2520, 2, 14), License.expires_at
     assert_equal true, License.will_expire?
     assert_equal false, License.expired?
     assert_equal (License.expires_at - Date.today).to_i, License.remaining_days
@@ -57,6 +59,9 @@ class LicenseTest < ActiveSupport::TestCase
     assert_equal "foo", License.restricted_attr(:foo, default: "foo")
     assert_equal "ultimate", License.restricted_attr(:plan, default: "foo")
     assert_equal true, License.trial?
+    assert_equal %w[soft_delete reader_list], License.features
+    assert_equal true, License.allow_feature?(:soft_delete)
+    assert_equal false, License.allow_feature?(:soft_delete1)
   end
 
   test "update" do
