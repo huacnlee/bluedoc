@@ -34,8 +34,6 @@ module Pro
           end
         end
       end
-
-
     end
   end
 end

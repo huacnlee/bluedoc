@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   action_store :read, :doc, counter_cache: true
   action_store :read, :note, counter_cache: true

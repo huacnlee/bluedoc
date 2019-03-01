@@ -195,6 +195,8 @@ en:
         feature:
           soft_delete: Soft Delete
           reader_list: Reader List
+          export_pdf: Export PDF
+          export_archive: Export Archive
     licenses:
       show:
         License: License

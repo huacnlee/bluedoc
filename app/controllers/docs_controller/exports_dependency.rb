@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # PRO-begin
 class DocsController
   # POST /:user/:repo/:slug/pdf
