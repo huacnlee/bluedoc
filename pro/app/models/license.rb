@@ -19,7 +19,7 @@ class License
       return false unless license?
       return false if trial? && expired?
 
-      features.include?(name.to_s) && license_features.include?(name.to_s)
+      features.include?(name.to_s) && license.allow_feature?(name)
     end
 
     def trial?
@@ -51,10 +51,6 @@ class License
         rescue
           nil
         end
-    end
-
-    def license_features
-      restricted_attr(:features, default: [])
     end
 
     def update(license_body)
