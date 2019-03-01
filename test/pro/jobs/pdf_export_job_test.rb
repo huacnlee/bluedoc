@@ -16,8 +16,14 @@ class PDFExportJobTest < ActiveSupport::TestCase
       rendered_html = html
     end
 
-    WickedPdf.stub(:new, wicked) do
+    assert_check_feature do
       PDFExportJob.perform_now(doc)
+    end
+
+    allow_feature(:export_pdf) do
+      WickedPdf.stub(:new, wicked) do
+        PDFExportJob.perform_now(doc)
+      end
     end
     wicked.verify
 
@@ -37,8 +43,10 @@ class PDFExportJobTest < ActiveSupport::TestCase
     end
     doc.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
-      WickedPdf.stub(:new, wicked) do
-        PDFExportJob.perform_now(doc)
+      allow_feature(:export_pdf) do
+        WickedPdf.stub(:new, wicked) do
+          PDFExportJob.perform_now(doc)
+        end
       end
     end
     assert_equal "done", doc.export_pdf_status.value
@@ -65,8 +73,14 @@ class PDFExportJobTest < ActiveSupport::TestCase
       rendered_html = html
     end
 
-    WickedPdf.stub(:new, wicked) do
+    assert_check_feature do
       PDFExportJob.perform_now(repo)
+    end
+
+    allow_feature(:export_pdf) do
+      WickedPdf.stub(:new, wicked) do
+        PDFExportJob.perform_now(repo)
+      end
     end
     wicked.verify
 
@@ -94,8 +108,10 @@ class PDFExportJobTest < ActiveSupport::TestCase
     end
     repo.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
-      WickedPdf.stub(:new, wicked) do
-        PDFExportJob.perform_now(repo)
+      allow_feature(:export_pdf) do
+        WickedPdf.stub(:new, wicked) do
+          PDFExportJob.perform_now(repo)
+        end
       end
     end
     assert_equal "done", repo.export_pdf_status.value
@@ -126,8 +142,14 @@ class PDFExportJobTest < ActiveSupport::TestCase
       rendered_html = html
     end
 
-    WickedPdf.stub(:new, wicked) do
+    assert_check_feature do
       PDFExportJob.perform_now(repo)
+    end
+
+    allow_feature(:export_pdf) do
+      WickedPdf.stub(:new, wicked) do
+        PDFExportJob.perform_now(repo)
+      end
     end
     wicked.verify
 
@@ -160,8 +182,10 @@ class PDFExportJobTest < ActiveSupport::TestCase
     end
     repo.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
-      WickedPdf.stub(:new, wicked) do
-        PDFExportJob.perform_now(repo)
+      allow_feature(:export_pdf) do
+        WickedPdf.stub(:new, wicked) do
+          PDFExportJob.perform_now(repo)
+        end
       end
     end
     assert_equal "done", repo.export_pdf_status.value
@@ -178,8 +202,14 @@ class PDFExportJobTest < ActiveSupport::TestCase
       rendered_html = html
     end
 
-    WickedPdf.stub(:new, wicked) do
+    assert_check_feature do
       PDFExportJob.perform_now(note)
+    end
+
+    allow_feature(:export_pdf) do
+      WickedPdf.stub(:new, wicked) do
+        PDFExportJob.perform_now(note)
+      end
     end
     wicked.verify
 
@@ -199,8 +229,10 @@ class PDFExportJobTest < ActiveSupport::TestCase
     end
     note.set_export_status(:pdf, "running")
     assert_changes -> { ExceptionTrack::Log.count }, 1 do
-      WickedPdf.stub(:new, wicked) do
-        PDFExportJob.perform_now(note)
+      allow_feature(:export_pdf) do
+        WickedPdf.stub(:new, wicked) do
+          PDFExportJob.perform_now(note)
+        end
       end
     end
     assert_equal "done", note.export_pdf_status.value

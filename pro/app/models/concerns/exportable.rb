@@ -18,8 +18,10 @@ module Exportable
     self.set_export_status(type, "running")
 
     if type == :pdf
+      check_feature! :export_pdf
       PDFExportJob.perform_later(self)
     elsif type == :archive
+      check_feature! :export_archive
       ArchiveExportJob.perform_later(self)
     end
   end

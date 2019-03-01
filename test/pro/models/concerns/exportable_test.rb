@@ -10,10 +10,16 @@ class ExportableTest < ActiveSupport::TestCase
     assert_nil doc.export_url(:pdf)
     assert_equal "#{doc.title}.pdf", doc.export_filename(:pdf)
 
-    assert_enqueued_with job: PDFExportJob do
+    assert_check_feature do
       doc.export(:pdf)
     end
-    assert_equal "running", doc.export_pdf_status.value
+
+    allow_feature(:export_pdf) do
+      assert_enqueued_with job: PDFExportJob do
+        doc.export(:pdf)
+      end
+      assert_equal "running", doc.export_pdf_status.value
+    end
 
     doc.update_export!(:pdf, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{doc.pdf.blob.key}", doc.export_url(:pdf)
@@ -25,8 +31,14 @@ class ExportableTest < ActiveSupport::TestCase
     assert_nil repo.export_url(:pdf)
     assert_equal "#{repo.name}.pdf", repo.export_filename(:pdf)
 
-    assert_enqueued_with job: PDFExportJob do
+    assert_check_feature do
       repo.export(:pdf)
+    end
+
+    allow_feature(:export_pdf) do
+      assert_enqueued_with job: PDFExportJob do
+        repo.export(:pdf)
+      end
     end
     assert_equal "running", repo.export_pdf_status.value
     assert_equal "running", repo.export_status(:pdf).value
@@ -41,8 +53,14 @@ class ExportableTest < ActiveSupport::TestCase
     assert_nil repo.export_url(:archive)
     assert_equal "#{repo.name}.zip", repo.export_filename(:archive)
 
-    assert_enqueued_with job: ArchiveExportJob do
+    assert_check_feature do
       repo.export(:archive)
+    end
+
+    allow_feature(:export_archive) do
+      assert_enqueued_with job: ArchiveExportJob do
+        repo.export(:archive)
+      end
     end
     assert_equal "running", repo.export_archive_status.value
     assert_equal "running", repo.export_status(:archive).value

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class RepositorySettingsController < Users::ApplicationController
+  # PRO-begin
+  depends_on :exports
+  # PRO-end
+
   before_action :authenticate_anonymous!
   before_action :authenticate_user!
   before_action :set_user
@@ -98,20 +102,6 @@ class RepositorySettingsController < Users::ApplicationController
       @member.destroy
     else
       @member.update(role: member_params[:role])
-    end
-  end
-
-  # POST /:user/:repo/settings/export
-  # - type: pdf|archive
-  def export
-    authorize! :update, @repository
-
-    if request.get? && params[:type] == "pdf"
-      render partial: "/export_pdf/repository", layout: "pdf", locals: { subject: @repository }
-    else
-      if params[:force]
-        @repository.export(params[:type])
-      end
     end
   end
 

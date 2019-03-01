@@ -2,6 +2,8 @@
 
 class ArchiveExportJob < ApplicationJob
   def perform(repo)
+    check_feature! :export_pdf
+
     return nil if repo.blank?
     return nil unless repo.is_a?(Repository)
 

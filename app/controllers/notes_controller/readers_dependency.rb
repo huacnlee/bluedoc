@@ -1,6 +1,7 @@
 class NotesController
   # GET /:user/notes/:slug/readers
   def readers
+    set_note
     check_feature! :reader_list
 
     authorize! :read, @note
