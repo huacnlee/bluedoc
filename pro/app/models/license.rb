@@ -4,6 +4,8 @@ class License
   PRO_FEATURES = %w[
     soft_delete
     reader_list
+    export_pdf
+    export_archive
   ]
 
   class << self

@@ -2,6 +2,8 @@
 
 class PDFExportJob < ApplicationJob
   def perform(subject)
+    check_feature! :export_pdf
+
     pdf_file = nil
 
     if subject.is_a?(Doc)

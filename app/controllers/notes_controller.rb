@@ -2,13 +2,13 @@
 
 class NotesController < Users::ApplicationController
   # PRO-start
-  depends_on :readers
+  depends_on :readers, :exports
   # PRO-end
 
   before_action :authenticate_anonymous!
 
   before_action :set_user, except: %i[new create]
-  before_action :set_note, only: %i[show edit update destroy versions revert raw action readers pdf]
+  before_action :set_note, only: %i[show edit update destroy versions revert raw action]
   before_action :authenticate_user!, except: %i[index show readers raw]
 
   def index
@@ -127,19 +127,6 @@ class NotesController < Users::ApplicationController
       User.destroy_action(params[:action_type], target: @note, user: current_user)
     end
     @note.reload
-  end
-
-  # POST /:user/notes/:slug/pdf
-  def pdf
-    authorize! :update, @note
-
-    if params[:force]
-      @note.export(:pdf)
-    end
-
-    # Let note same as a Doc to use doc view
-    @doc = @note
-    render "/docs/pdf"
   end
 
   private

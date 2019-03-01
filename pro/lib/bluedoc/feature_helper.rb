@@ -42,3 +42,4 @@ end
 
 ActionController::Base.send(:include, Pro::BlueDoc::FeatureHelper)
 ActiveRecord::Base.send(:include, Pro::BlueDoc::FeatureHelper::HelperMethods)
+ActiveJob::Base.send(:include, Pro::BlueDoc::FeatureHelper::HelperMethods)

@@ -2,11 +2,11 @@
 
 class DocsController < Users::ApplicationController
   # PRO-begin
-  depends_on :readers
+  depends_on :readers, :exports
   # PRO-end
 
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share pdf]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share]
 
   before_action :set_user
   before_action :set_repository
@@ -95,15 +95,6 @@ class DocsController < Users::ApplicationController
     respond_to do |format|
       format.html { render :raw, layout: "editor" }
       format.text { render plain: @doc.body_plain }
-    end
-  end
-
-  # POST /:user/:repo/:slug/pdf
-  def pdf
-    authorize! :update, @doc
-
-    if params[:force]
-      @doc.export(:pdf)
     end
   end
 
