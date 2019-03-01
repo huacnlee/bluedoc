@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class NotesController < Users::ApplicationController
+  # PRO-start
+  depends_on :readers
+  # PRO-end
+
   before_action :authenticate_anonymous!
 
   before_action :set_user, except: %i[new create]
@@ -123,13 +127,6 @@ class NotesController < Users::ApplicationController
       User.destroy_action(params[:action_type], target: @note, user: current_user)
     end
     @note.reload
-  end
-
-  # GET /:user/notes/:slug/readers
-  def readers
-    authorize! :read, @note
-
-    @readers = @note.read_by_user_actions.order("updated_at desc").all
   end
 
   # POST /:user/notes/:slug/pdf

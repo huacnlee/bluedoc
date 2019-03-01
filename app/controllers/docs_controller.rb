@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class DocsController < Users::ApplicationController
+  # PRO-begin
+  depends_on :readers
+  # PRO-end
+
   before_action :authenticate_anonymous!
   before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share pdf]
 
@@ -182,12 +186,6 @@ class DocsController < Users::ApplicationController
     else
       Share.create_share(@doc, user: current_user)
     end
-  end
-
-  # POST /:user/:repo/:slug/readers
-  def readers
-    authorize! :read, @doc
-    @readers = @doc.read_by_user_actions.order("updated_at desc").all
   end
 
   private

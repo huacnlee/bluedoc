@@ -65,6 +65,27 @@ class ActiveSupport::TestCase
       assert_equal meta, Notification.where(where_opts).last.meta
     end
   end
+
+  # Mock to allow feature in a block
+  # allow_feature(:soft_delete) do
+  #   assert_equal true, License.allow_feature?(:soft_delete)
+  # end
+  def allow_feature(name)
+    License.stub(:allow_feature?, true) do
+      yield
+    end
+    # Rails.cache.write("mock/test/allow_features", nil)
+  end
+
+  # Assert the block process will check the Pro feature
+  def assert_check_feature(&block)
+    assert_raise(BlueDoc::FeatureNotAvailableError) do
+      yield block
+
+      # Patch for intergration test, if reponse.status == 501, invoke raise error
+      raise BlueDoc::FeatureNotAvailableError if response&.status == 501
+    end
+  end
 end
 
 class ActionView::TestCase
@@ -121,17 +142,6 @@ class ActionDispatch::IntegrationTest
 
   def rack_upload_file(name, content_type = "text/plain")
     Rack::Test::UploadedFile.new(Rails.root.join("test/factories/#{name}"), content_type)
-  end
-
-  # Mock to allow feature in a block
-  # allow_feature(:soft_delete) do
-  #   assert_equal true, License.allow_feature?(:soft_delete)
-  # end
-  def allow_feature(name)
-    License.stub(:allow_feature?, true) do
-      yield
-    end
-    # Rails.cache.write("mock/test/allow_features", nil)
   end
 end
 

@@ -394,35 +394,6 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal false, @user.star_note?(note)
   end
 
-  test "GET /:user/notes/:slug with readers" do
-    note = create(:note)
-
-    user = create(:user)
-    users = create_list(:user, 8)
-
-    users.map { |u| u.read_note(note) }
-
-    sign_in user
-
-    get note.to_path
-    assert_equal 200, response.status
-    assert_select ".note-readers" do
-      assert_select "a.readers-link .avatar", 5
-    end
-    assert_equal true, user.read_note?(note)
-  end
-
-  test "GET /:user/notes/:slug/readers" do
-    note = create(:note)
-    users = create_list(:user, 8)
-    users.map { |u| u.read_note(note) }
-
-    get note.to_path("/readers"), xhr: true
-    assert_equal 200, response.status
-
-    assert_match %(document.querySelector(".note-readers").outerHTML = ), response.body
-  end
-
   test "GET /:user/notes/:slug with PDF export" do
     note = create(:note)
     get note.to_path

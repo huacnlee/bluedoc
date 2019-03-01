@@ -1,0 +1,9 @@
+class DocsController
+  # GET /:user/:repo/:slug/readers
+  def readers
+    check_feature! :reader_list
+
+    authorize! :read, @doc
+    @readers = @doc.read_by_user_actions.order("updated_at desc").all
+  end
+end

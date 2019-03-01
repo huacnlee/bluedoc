@@ -7,36 +7,4 @@ class User
   action_store :star, :note
   action_store :watch_comment, :doc
   action_store :watch_comment, :note
-  action_store :read, :doc, counter_cache: true
-  action_store :read, :note, counter_cache: true
-
-  # read Doc, or update visit time if exist
-  def read_doc(doc)
-    return nil if doc.blank?
-
-    action = User.find_action(:read, target: doc, user: self)
-    if action
-      action.touch
-      return action
-    end
-
-    action = User.create_action(:read, target: doc, user: self)
-    doc.reload
-    action
-  end
-
-  # read Note, or update visit time if exist
-  def read_note(note)
-    return nil if note.blank?
-
-    action = User.find_action(:read, target: note, user: self)
-    if action
-      action.touch
-      return action
-    end
-
-    action = User.create_action(:read, target: note, user: self)
-    note.reload
-    action
-  end
 end

@@ -44,8 +44,10 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
 
   test "should restore admin_doc" do
     @doc.destroy
-    post restore_admin_doc_path(@doc.id)
-    assert_equal 501, response.status
+
+    assert_check_feature do
+      post restore_admin_doc_path(@doc.id)
+    end
 
     allow_feature(:soft_delete) do
       post restore_admin_doc_path(@doc.id)

@@ -24,6 +24,7 @@ module BlueDoc
       memo << pro_path.to_s if pro_path.exist?
     end
     config.eager_load_paths.unshift(*pro_paths)
+
     config.paths["app/views"].unshift("#{config.root}/pro/app/views")
     # PRO-end
 
