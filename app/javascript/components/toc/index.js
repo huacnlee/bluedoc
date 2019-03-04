@@ -1,41 +1,14 @@
+import { isShow, formatList } from './utils';
+
 export default class TocList extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { list, folders } = this.initData(this.props);
+    const { list, folders } = formatList(this.props.list);
     this.state = {
       list,
       folders,
     };
   }
-
-  defaultFoldeDepth = 1;
-
-  initData = ({ list }) => {
-    const data = JSON.parse(list);
-    const prevNodeId = [0];
-    const folderNode = [];
-    const result = data.map((item, index) => {
-      const { depth = 0 } = item;
-      if (depth > prevNodeId.length - 1) {
-        folderNode.push(prevNodeId[prevNodeId.length - 1]);
-        prevNodeId.splice(depth, 0, index);
-      } else {
-        prevNodeId.splice(depth, prevNodeId.length - depth, index);
-      }
-      return {
-        ...item,
-        tocPath: prevNodeId.join('_'),
-      };
-    });
-    return {
-      list: result,
-      folders: folderNode.map(i => ({
-        id: i,
-        foldersStatus: result[i].depth > this.defaultFoldeDepth - 1,
-      })),
-    };
-  }
-
 
   handdleFolder = (index) => {
     const { folders } = this.state;
@@ -46,43 +19,30 @@ export default class TocList extends React.PureComponent {
     });
   }
 
-  isShow = (path) => {
-    const { folders } = this.state;
-    const pathNode = path.split('_');
-    if (pathNode.length > 1) {
-      pathNode.pop();
-      return !pathNode.some((item) => {
-        const folderNode = folders.find(e => e.id * 1 === item * 1);
-        return folderNode ? folderNode.foldersStatus : false;
-      });
-    }
-
-    return true;
-  }
-
   render() {
     const { list, folders } = this.state;
-    const { doc } = this.props;
-    console.log(doc, list);
+    const { doc = {}, withSlug = false } = this.props;
     return (
       <ul className="toc-items">
         {list.map(({
           title, url, tocPath, depth,
         }, index) => {
-          const show = this.isShow(tocPath);
+          const show = isShow(tocPath, folders);
           const folder = folders.find(e => e.id === index);
-          return show ? (
+          const active = withSlug && url === doc.slug;
+          return (
             <li
-              className={`toc-item ${url === doc.slug ? 'active' : ''}`}
+              className={`toc-item ${active ? 'active' : ''} ${show ? '' : 'hidden'}`}
               key={index}
               style={{ marginLeft: `${20 * (depth)}px` }}
             >
               {folder && (
                 <i className={`fas fa-arrow ${folder.foldersStatus ? '' : 'folder'}`} onClick={() => this.handdleFolder(index)}/>
               )}
-              <a href={url}>{title}</a>
+              <a href={url} className="item-link">{title}</a>
+              {withSlug && <a href={url} className="item-slug">{url}</a>}
             </li>
-          ) : null;
+          );
         })}
       </ul>
     );

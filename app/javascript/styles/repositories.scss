@@ -65,15 +65,6 @@
     overflow: hidden;
   }
 
-  .toc-items {
-    @for $i from 0 through 4 {
-      .toc-item-#{$i} {
-        .item-title {
-          margin-left: ($i * 14px) !important;
-        }
-      }
-    }
-  }
   .repository-docs, .repo-toc {
     @include breakpoint(md) {
       width: 800px;
@@ -121,6 +112,9 @@
     .toc-list {
       text-align: left;
       ul {
+        .hidden {
+          display: none;
+        }
         li {
           list-style: none;
           line-height: 18px;
@@ -128,9 +122,12 @@
           position: relative;
           display: flex;
           justify-content: space-between;
-
-          @extend .clearfix;
-
+          .fa-arrow {
+            position: absolute;
+            left: -20px;
+            top: 13px;
+            font-size: 6px;
+          }
           &:after {
             content: " ";
             width: 100%;
@@ -153,32 +150,26 @@
           }
 
           .item-link {
-            position: absolute;
             background: #FFF;
             padding-right: 15px;
             font-size: 15px;
             z-index: 1;
             min-width: 0;
             max-width: 70%;
-            color: #555;
+            color: #000;
             &:hover {
-              color: #222;
+              color: $primary;
             }
           }
 
           .item-slug {
-            position: relative;
-            background: #fff;
+            background: #FFF;
             padding-left: 15px;
             z-index: 1;
             min-width: 0;
             max-width: 30%;
             font-size: 13px;
-            color: #aaa;
-
-            &:hover {
-              text-decoration: none;
-            }
+            color: $gray;
           }
         }
       }

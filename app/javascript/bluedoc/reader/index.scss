@@ -110,6 +110,9 @@
       ul {
         font-size: 13px;
         @extend .list-style-none;
+        .hidden {
+          display: none;
+        }
         li {
           position: relative;
           padding: 4px 0;
