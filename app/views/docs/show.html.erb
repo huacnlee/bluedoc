@@ -29,9 +29,7 @@
       <a href="<%= @repository.to_path %>" class="link-back text-main" title="<%= @repository.name %>"><%= @repository.name %></a>
       <a href="<%= @user.to_path %>" class="link-group text-gray-light" title="<%= @user.name %>"><%= @user.name %></a>
     </div>
-    <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
-      <%= react_component("toc/index", {list: @repository.toc_json, doc: @doc} ) %>
-    <% end %>
+    <%= react_component("toc/index", { items: @repository.has_toc? ? @repository.toc_json : @repository.toc_by_docs_json, currentSlug: @doc&.slug } ) %>
   </div>
   <div class="doc-center flex-auto">
     <div class="doc-main">

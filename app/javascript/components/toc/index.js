@@ -1,11 +1,12 @@
-import { isShow, formatList } from './utils';
+import { isShow, formatItems } from './utils';
 
 export default class TocList extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { list, folders } = formatList(this.props.list);
+    const { items, folders } = formatItems(this.props.items);
+
     this.state = {
-      list,
+      items,
       folders,
     };
   }
@@ -20,16 +21,23 @@ export default class TocList extends React.PureComponent {
   }
 
   render() {
-    const { list, folders } = this.state;
-    const { doc = {}, withSlug = false } = this.props;
+    const { items, folders } = this.state;
+    const { currentSlug, withSlug = false, prefix } = this.props;
     return (
       <ul className="toc-items">
-        {list.map(({
+        {items.map(({
           title, url, tocPath, depth,
         }, index) => {
           const show = isShow(tocPath, folders);
           const folder = folders.find(e => e.id === index);
-          const active = withSlug && url === doc.slug;
+          const active = url === currentSlug;
+          const slug = url;
+
+          // If url is only slug (not contains "/") and has prefix props, add prefix to url
+          if (url && prefix && !url.includes("/")) {
+            url = `${prefix}${url}`;
+          }
+
           return (
             <li
               className={`toc-item ${active ? 'active' : ''} ${show ? '' : 'hidden'}`}
@@ -40,7 +48,7 @@ export default class TocList extends React.PureComponent {
                 <i className={`fas fa-arrow ${folder.foldersStatus ? '' : 'folder'}`} onClick={() => this.handdleFolder(index)}/>
               )}
               <a href={url} className="item-link">{title}</a>
-              {withSlug && <a href={url} className="item-slug">{url}</a>}
+              {withSlug && <a href={url} className="item-slug">{slug}</a>}
             </li>
           );
         })}

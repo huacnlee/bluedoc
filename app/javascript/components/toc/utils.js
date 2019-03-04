@@ -10,9 +10,9 @@ export const isShow = (path, folders) => {
   return true;
 };
 
-// format toc list data
-export const formatList = (list, defaultFoldeDepth = 1) => {
-  const data = JSON.parse(list);
+// format toc items
+export const formatItems = (items, defaultFoldeDepth = 1) => {
+  const data = JSON.parse(items);
   const prevNodeId = [0];
   const folderNode = [];
   const result = data.map((item, index) => {
@@ -29,7 +29,7 @@ export const formatList = (list, defaultFoldeDepth = 1) => {
     };
   });
   return {
-    list: result,
+    items: result,
     folders: folderNode.map(i => ({
       id: i,
       foldersStatus: result[i].depth > defaultFoldeDepth - 1,

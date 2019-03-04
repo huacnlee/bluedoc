@@ -23,7 +23,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
       </div>
     </div>
     <div class="toc-list">
-      <%= react_component("toc/index", {list: @repository.toc_json, withSlug: true} ) %>
+      <%= react_component("toc/index", { items: @repository.toc_json, withSlug: true, prefix: @repository.to_path("/") } ) %>
     </div>
   </div>
 <% end %>

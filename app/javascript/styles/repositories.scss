@@ -127,7 +127,7 @@
             position: absolute;
             left: -20px;
             top: 13px;
-            font-size: 6px;
+            font-size: 12px;
           }
           &:after {
             content: " ";
@@ -137,36 +137,25 @@
             top: 50%;
             right: 0;
           }
-
-          a {
-            text-decoration: none;
-          }
-
           .item-slug,
           .item-link {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             height: 18px;
-          }
-
-          .item-link {
+            position: relative;
+            z-index: 1;
             background: #FFF;
+          }
+          .item-link {
             padding-right: 15px;
             font-size: 15px;
-            z-index: 1;
             min-width: 0;
             max-width: 70%;
             color: #000;
-            &:hover {
-              color: $primary;
-            }
           }
-
           .item-slug {
-            background: #FFF;
             padding-left: 15px;
-            z-index: 1;
             min-width: 0;
             max-width: 30%;
             font-size: 13px;

@@ -392,7 +392,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     doc = create(:doc, repository: @repo)
     get doc.to_path
     assert_equal 200, response.status
-    assert_select ".toc-items-without-toc", 0
+    assert_react_component "toc/index" do |props|
+      assert_equal doc.repository.toc_json, props[:items]
+      assert_equal doc.slug, props[:currentSlug]
+    end
 
     repo = create(:repository)
     repo.update(has_toc: 0)
@@ -400,7 +403,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     get doc.to_path
     assert_equal 200, response.status
-    assert_select ".toc-items-without-toc", 1
+    assert_react_component "toc/index" do |props|
+      assert_equal doc.repository.toc_by_docs_json, props[:items]
+      assert_equal doc.slug, props[:currentSlug]
+    end
   end
 
   test "GET /:user/:repo/:slug/edit" do
