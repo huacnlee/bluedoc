@@ -13,6 +13,11 @@ class SearchesController < ApplicationController
     @result = BlueDoc::Search.new(:docs, params[:q]).execute.page(params[:page])
   end
 
+  def notes
+    set_nav_search url: notes_search_path
+    @result = BlueDoc::Search.new(:notes, params[:q]).execute.page(params[:page])
+  end
+
   def repositories
     set_nav_search url: repositories_search_path
     @result = BlueDoc::Search.new(:repositories, params[:q]).execute.page(params[:page])
@@ -32,6 +37,7 @@ class SearchesController < ApplicationController
     def set_totals
       @totals = {
         docs: BlueDoc::Search.new(:docs, params[:q]).execute.count,
+        notes: BlueDoc::Search.new(:notes, params[:q]).execute.count,
         repositories: BlueDoc::Search.new(:repositories, params[:q]).execute.count,
         groups: BlueDoc::Search.new(:groups, params[:q]).execute.count,
         users: BlueDoc::Search.new(:users, params[:q]).execute.count,

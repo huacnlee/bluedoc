@@ -154,4 +154,58 @@ class NoteTest < ActiveSupport::TestCase
     note.update(privacy: :private)
     assert_equal 0, Activity.where(target: note).count
   end
+
+  test "_search_body" do
+    user = create(:user)
+    note = create(:note, user: user, body: "Hello world")
+
+    expected = [user.fullname, note.to_path, note.body_plain].join("\n\n")
+    assert_equal expected, note._search_body
+  end
+
+  test "as_indexed_json" do
+    note = create(:note, body: "Hello world")
+
+    note.stub(:_search_body, "Search body") do
+      data = { slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: true, deleted: false }
+      assert_equal data, note.as_indexed_json
+    end
+
+    note = create(:note, body: "Hello world", privacy: "private", deleted_at: Time.now)
+
+    note.stub(:_search_body, "Search body") do
+      data = { slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: false, deleted: true }
+      assert_equal data, note.as_indexed_json
+    end
+  end
+
+  test "indexed_changed?" do
+    note = create(:note)
+    assert_equal true, note.indexed_changed?
+
+    note = Note.find(note.id)
+    assert_equal false, note.indexed_changed?
+    note.updated_at = Time.now
+    assert_equal false, note.indexed_changed?
+
+    note.stub(:saved_change_to_title?, true) do
+      assert_equal true, note.indexed_changed?
+    end
+
+    note.stub(:saved_change_to_deleted_at?, true) do
+      assert_equal true, note.indexed_changed?
+    end
+
+    note.stub(:saved_change_to_privacy?, true) do
+      assert_equal true, note.indexed_changed?
+    end
+
+    note.stub(:saved_change_to_user_id?, true) do
+      assert_equal true, note.indexed_changed?
+    end
+
+    note = Note.find(note.id)
+    note.body = "New Body"
+    assert_equal true, note.indexed_changed?
+  end
 end

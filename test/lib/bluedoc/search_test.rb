@@ -182,4 +182,63 @@ class BlueDoc::SearchText < ActionView::TestCase
     assert_equal [], search.execute
     mock.verify
   end
+
+  test "search notes" do
+    mock = MiniTest::Mock.new
+
+    # none
+    search = BlueDoc::Search.new(:notes, "foo")
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[slug title^10 body search_body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { public: true } }
+    ])
+
+    mock.expect(:search, [], [search_params, Note])
+    assert_equal [], search.execute
+    mock.verify
+
+    # with user_id and include_private
+    search = BlueDoc::Search.new(:notes, "foo", user_id: 2, include_private: true)
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[slug title^10 body search_body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { user_id: 2 } }
+    ])
+
+    mock.expect(:search, [], [search_params, Note])
+    assert_equal [], search.execute
+    mock.verify
+
+    # with user_id and public
+    search = BlueDoc::Search.new(:notes, "foo", user_id: 2)
+    search.client = mock
+    search_params = search.search_params({
+      query_string: {
+        fields: %w[slug title^10 body search_body],
+        query: "foo",
+        default_operator: "AND",
+        minimum_should_match: "70%",
+      }
+    }, [
+      { term: { user_id: 2 } },
+      { term: { public: true } }
+    ])
+
+    mock.expect(:search, [], [search_params, Note])
+    assert_equal [], search.execute
+    mock.verify
+  end
 end
