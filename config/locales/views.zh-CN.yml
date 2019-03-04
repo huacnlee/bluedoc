@@ -204,6 +204,7 @@ zh-CN:
           reader_list: 阅读记录
           export_pdf: 知识库、文档导出 PDF
           export_archive: 知识库导出 Zip
+          limit_user_emails: 用户邮件限制规则
     licenses:
       show:
         License: 专业版授权

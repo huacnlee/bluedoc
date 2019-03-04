@@ -10,10 +10,12 @@ class RegistrationsController < ActionDispatch::IntegrationTest
 
     assert_select ".user-email-suffix-support-list", 0
 
-    Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
-      get new_user_registration_path
-      assert_equal 200, response.status
-      assert_select ".user-email-suffix-support-list", text: "Support email suffix with: foo.com, bar.com"
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+        get new_user_registration_path
+        assert_equal 200, response.status
+        assert_select ".user-email-suffix-support-list", text: "Support email suffix with: foo.com, bar.com"
+      end
     end
 
     assert_no_match "Complete your account info", response.body

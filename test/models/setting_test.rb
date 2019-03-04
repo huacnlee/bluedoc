@@ -63,11 +63,30 @@ class SettingTest < ActiveSupport::TestCase
 
     Setting.stub(:user_email_suffixes, "foo.com,Bar.com") do
       assert_equal ["foo.com", "Bar.com"], Setting.user_email_suffix_list
+      allow_feature(:limit_user_emails) do
+        assert_equal false, Setting.valid_user_email?(nil)
+        assert_equal false, Setting.valid_user_email?("aaa@gmail.com")
+        assert_equal true, Setting.valid_user_email?("aaa@foo.com")
+        assert_equal true, Setting.valid_user_email?("bbb@Foo.Com")
+        assert_equal true, Setting.valid_user_email?("ccc@bar.Com")
+        assert_equal true, Setting.user_email_limit_enable?
+      end
+
+      # return true when now allow :limit_user_emails feature
+      assert_equal false, Setting.user_email_limit_enable?
       assert_equal false, Setting.valid_user_email?(nil)
-      assert_equal false, Setting.valid_user_email?("aaa@gmail.com")
-      assert_equal true, Setting.valid_user_email?("aaa@foo.com")
-      assert_equal true, Setting.valid_user_email?("bbb@Foo.Com")
-      assert_equal true, Setting.valid_user_email?("ccc@bar.Com")
+      assert_equal true, Setting.valid_user_email?("aaa@gmail.com")
+      assert_equal true, Setting.valid_user_email?("aaa@aaa.com")
+      assert_equal true, Setting.valid_user_email?("bbb@bbb.Com")
+    end
+  end
+
+  test "user_email_limit_enable?" do
+    allow_feature(:limit_user_emails) do
+      assert_equal false, Setting.user_email_limit_enable?
+      Setting.stub(:user_email_suffixes, "foo.com,Bar.com") do
+        assert_equal true, Setting.user_email_limit_enable?
+      end
     end
   end
 end

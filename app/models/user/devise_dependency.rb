@@ -17,7 +17,9 @@ class User
 
   # Validate email suffix
   validate do |user|
-    self.errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(self.email)
+    if user.user?
+      self.errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(self.email)
+    end
   end
 
   after_create :bind_omniauth_on_create

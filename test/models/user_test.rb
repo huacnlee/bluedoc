@@ -346,21 +346,32 @@ class UserTest < ActiveSupport::TestCase
 
   test "valid email suffix" do
     user = build(:user, email: "foo@gmail.com")
+    group = build(:group)
     assert_equal true, user.valid?
-    Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
-      assert_equal false, user.valid?
-      assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
-      user.email = "aaa@foo.com"
-      user.valid?
+    assert_equal true, group.valid?
+
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+        assert_equal false, user.valid?
+        assert_equal true, group.valid?
+        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+        user.email = "aaa@foo.com"
+        user.valid?
+      end
     end
     user.save
+    group.save
 
     user.reload
-    Setting.stub(:user_email_suffixes, "dar.com,bar.com") do
-      assert_equal false, user.valid?
-      assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
-      user.email = "aa@bar.com"
-      assert_equal true, user.valid?
+    group.reload
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "dar.com,bar.com") do
+        assert_equal false, user.valid?
+        assert_equal true, group.valid?
+        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+        user.email = "aa@bar.com"
+        assert_equal true, user.valid?
+      end
     end
   end
 end

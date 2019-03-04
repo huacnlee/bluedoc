@@ -85,10 +85,17 @@ class Setting < RailsSettings::Base
       LOCALES[Setting.default_locale.to_sym] || LOCALES[I18n.default_locale]
     end
 
+    # PRO-begin
+    def user_email_limit_enable?
+      License.allow_feature?(:limit_user_emails) && self.user_email_suffix_list.any?
+    end
+
     # Check User email by user_email_suffixes setting
     def valid_user_email?(email)
-      return true if self.user_email_suffix_list.blank?
       return false if email.blank?
+      return true unless License.allow_feature?(:limit_user_emails)
+      return true if self.user_email_suffix_list.blank?
+
       found = false
 
       self.user_email_suffix_list.each do |suffix|
@@ -100,5 +107,6 @@ class Setting < RailsSettings::Base
 
       found
     end
+    # PRO-end
   end
 end

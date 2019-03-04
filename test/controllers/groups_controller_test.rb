@@ -90,12 +90,12 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in @user
     post "/groups", params: { group: group_params }
-    assert_redirected_to "/#{group_params[:slug]}"
 
     group = Group.find_by_slug(group_params[:slug])
     assert_not_nil group
     assert_equal group_params[:name], group.name
     assert_equal "", group.email
+    assert_redirected_to "/#{group_params[:slug]}"
 
     post "/groups", params: { group: group_params }
     assert_equal 200, response.status

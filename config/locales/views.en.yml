@@ -204,6 +204,7 @@ en:
           reader_list: Reader List
           export_pdf: Export PDF
           export_archive: Export Archive
+          limit_user_emails: User Email limit rules
     licenses:
       show:
         License: License
