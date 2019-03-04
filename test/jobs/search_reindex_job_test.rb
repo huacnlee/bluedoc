@@ -10,6 +10,7 @@ class SearchReindexJobTest < ActiveSupport::TestCase
     create_list(:group, 3)
     create_list(:repository, 4)
     create_list(:doc, 5)
+    create_list(:note, 5)
 
     SearchReindexJob.perform_now
   end

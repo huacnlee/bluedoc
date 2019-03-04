@@ -99,6 +99,22 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
+  test "perform with Note" do
+    note = create(:note, body: "Hello world")
+
+    assert_perform_request method: "PUT", url: "test-notes/note/#{note.id}", body: note.as_indexed_json do
+      @job.perform("index", "note", note.id)
+    end
+
+    assert_perform_request method: "PUT", url: "test-notes/note/#{note.id}", body: note.as_indexed_json do
+      @job.perform("update", "note", note.id)
+    end
+
+    assert_perform_request method: "DELETE", url: "test-notes/note/123" do
+      @job.perform("delete", "note", 123)
+    end
+  end
+
   private
     def assert_perform_request(method: nil, url: nil, body: nil)
       yield

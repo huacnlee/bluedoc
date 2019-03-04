@@ -201,11 +201,19 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repo = create(:repository, user: @group)
     doc0 = create(:doc, repository: repo)
     doc1 = create(:doc, repository: repo)
-    get "/#{repo.user.slug}/#{repo.slug}"
+
+    get repo.to_path
     assert_equal 200, response.status
-    assert_select ".toc-item", 2
-    assert_select ".toc-item a.item-link[href=\"/#{@group.slug}/#{repo.slug}/#{doc0.slug}\"]", 1
-    assert_select ".toc-item a.item-link[href=\"/#{@group.slug}/#{repo.slug}/#{doc1.slug}\"]", 1
+    assert_react_component "toc/index" do |props|
+      assert_equal repo.toc_json, props[:items]
+      assert_equal true, props[:withSlug]
+      assert_equal repo.to_path("/"), props[:prefix]
+    end
+
+    repo.update(has_toc: 0)
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_no_react_component "toc/index"
   end
 
   test "POST/DELETE /:user/:repo/action" do

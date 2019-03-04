@@ -1,7 +1,6 @@
 import TocList from './toc-list';
 import DocList from './doc-list';
 import Hotkeys from './HotKeys';
-const _ = require("underscore");
 
 import {
   getFolderLength,
@@ -12,6 +11,8 @@ import {
   getIndexSameDepth,
 } from './utils';
 import Memory from './memory';
+
+const _ = require('underscore');
 
 const hotKeyMap = [
   'up',

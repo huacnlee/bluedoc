@@ -280,13 +280,17 @@ en:
       In reply to: In reply to
   dashboards:
     action_docs:
+      Stared Docs: Stared Docs
       No star docs: No star docs
       You does not have any action_name docs: You does not have any star docs.
     action_repositories:
+      Stared Repositories: Stared Repositories
+      All Watches: All watches
       No star repositories: No star repositories
       No watches repositories: No watches repositories
       You does not have any action_name repositories: You does not have any star repositories
     action_notes:
+      Stared Notes: Stared Notes
       No star notes: No star notes
       You does not have any action_name notes: You does not have any star Notes.
       Notes: Notes
@@ -321,12 +325,6 @@ en:
       Your Groups: Your Groups
       All activity: All activity
       You have no activity in recently: You have no activity in recently.
-    stars:
-      Stared Docs: Stared Docs
-      Stared Notes: Stared Notes
-      Stared Repositories: Stared Repositories
-    watches:
-      All Watches: All watches
   versions:
     version:
       Current: Current
@@ -692,6 +690,7 @@ en:
       Repositories: Repositories
       Groups: Groups
       Users: Users
+      Notes: Notes
     no_result:
       No result: No result
       Can not find any contents like: "Can't find any contents like"
