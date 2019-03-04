@@ -75,3 +75,10 @@ a[data-method=delete] {
 .fa-bell-slash:before {
   @extend .fa-bell-fill;
 }
+
+.fa-arrow {
+  transition: all .2s ease;
+  &.folder {
+    transform: rotate(90deg);
+  }
+}

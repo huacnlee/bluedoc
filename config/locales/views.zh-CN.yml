@@ -282,13 +282,17 @@ zh-CN:
       In reply to: 回复
   dashboards:
     action_docs:
+      Stared Docs: 收藏的文档
       No star docs: 没有收藏的文档
       You does not have any action_name docs: 你还未收藏过任何文档。
     action_repositories:
+      Stared Repositories: 收藏的知识库
+      All Watches: 订阅的知识库
       No star repositories: 没有收藏的知识库
       No watches repositories: 没有关注的知识库
       You does not have any action_name repositories: 你还未收藏过任何知识库。
     action_notes:
+      Stared Notes: 收藏的笔记
       You does not have any action_name notes: 你还未收藏过笔记。
       Notes: 笔记
     menu:
@@ -322,12 +326,6 @@ zh-CN:
       Your Groups: 你的团队
       All activity: 动态
       You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
-    stars:
-      Stared Docs: 收藏的文档
-      Stared Repositories: 收藏的知识库
-      Stared Notes: 收藏的笔记
-    watches:
-      All Watches: 订阅的知识库
   versions:
     version:
       Current: 当前版本

@@ -126,6 +126,10 @@ class ActionDispatch::IntegrationTest
     end
   end
 
+  def assert_no_react_component(name)
+    assert_select "div[data-react-class='#{name}']", 0
+  end
+
   # assert_flash rendered
   # assert_flash notice: "Repository was successfully created."
   # assert_flash alert: "Repository was successfully created."
