@@ -15,6 +15,11 @@ class User
     self.name = slug if name.blank?
   end
 
+  # Validate email suffix
+  validate do |user|
+    self.errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(self.email)
+  end
+
   after_create :bind_omniauth_on_create
 
   # Override Devise to send mails with async

@@ -69,6 +69,7 @@ zh-CN:
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。
+        is invalid email suffix: 域名后缀不在支持的列表（管理员后台设定限制 Email 必须符合规定的后缀）
   views:
     pagination:
       first: "&laquo; 第一页"

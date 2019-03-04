@@ -44,6 +44,13 @@
 
       <%= form_group(f, :email) do %>
         <%= f.email_field :email, class: "form-control", readonly: @user.unconfirmed_email.present? %>
+
+        <% if Setting.user_email_suffix_list.any? %>
+        <div class="form-text user-email-suffix-support-list">
+          <%= t(".Support email suffix with list_html", emails: Setting.user_email_suffix_list.join(", ")) %>
+        </div>
+        <% end %>
+
         <% if @user.unconfirmed_email %>
         <div class="form-text unconfirmed-info">
           <%= t(".Unconfirmed email_html", email: @user.unconfirmed_email) %>

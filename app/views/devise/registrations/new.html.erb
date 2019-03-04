@@ -40,6 +40,12 @@ end
 
     <%= form_group(f, :email) do %>
       <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+
+      <% if Setting.user_email_suffix_list.any? %>
+      <div class="form-text user-email-suffix-support-list">
+        <%= t(".Support email suffix with list_html", emails: Setting.user_email_suffix_list.join(", ")) %>
+      </div>
+      <% end %>
     <% end %>
 
     <%= form_group(f, :password) do %>

@@ -15,6 +15,13 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get account_settings_path
     assert_equal 200, response.status
+    assert_select ".user-email-suffix-support-list", 0
+
+    Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+      get account_settings_path
+      assert_equal 200, response.status
+      assert_select ".user-email-suffix-support-list", text: "Support email suffix with: foo.com, bar.com"
+    end
   end
 
   test "GET /account/settings/admin" do

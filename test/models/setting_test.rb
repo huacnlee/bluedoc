@@ -55,4 +55,19 @@ class SettingTest < ActiveSupport::TestCase
       assert_equal "English (US)", Setting.default_locale_name
     end
   end
+
+  test "valid_user_email?" do
+    assert_equal "", Setting.user_email_suffixes
+    assert_equal [], Setting.user_email_suffix_list
+    assert_equal true, Setting.valid_user_email?("foo")
+
+    Setting.stub(:user_email_suffixes, "foo.com,Bar.com") do
+      assert_equal ["foo.com", "Bar.com"], Setting.user_email_suffix_list
+      assert_equal false, Setting.valid_user_email?(nil)
+      assert_equal false, Setting.valid_user_email?("aaa@gmail.com")
+      assert_equal true, Setting.valid_user_email?("aaa@foo.com")
+      assert_equal true, Setting.valid_user_email?("bbb@Foo.Com")
+      assert_equal true, Setting.valid_user_email?("ccc@bar.Com")
+    end
+  end
 end

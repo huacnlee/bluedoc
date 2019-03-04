@@ -60,6 +60,7 @@ class Setting < RailsSettings::Base
   field :plantuml_service_host, default: (ENV["PLANTUML_SERVICE_HOST"] || "http://localhost:1608"), type: :string
   field :mathjax_service_host, default: (ENV["MATHJAX_SERVICE_HOST"] || "http://localhost:4010"), type: :string
   field :confirmable_enable, default: "1", type: :boolean
+  field :user_email_suffixes, default: "", type: :array
 
   # Readonly setting keys, no cache, only load from yml file
   field :host, :mailer_from, :mailer_options, readonly: true
@@ -82,6 +83,22 @@ class Setting < RailsSettings::Base
 
     def default_locale_name
       LOCALES[Setting.default_locale.to_sym] || LOCALES[I18n.default_locale]
+    end
+
+    # Check User email by user_email_suffixes setting
+    def valid_user_email?(email)
+      return true if self.user_email_suffix_list.blank?
+      return false if email.blank?
+      found = false
+
+      self.user_email_suffix_list.each do |suffix|
+        if email.downcase.end_with?(suffix.downcase)
+          found = true
+          break
+        end
+      end
+
+      found
     end
   end
 end

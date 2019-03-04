@@ -61,3 +61,4 @@ en:
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.
+        is invalid email suffix: suffix is not in the supported list (admin setting user Email must conform to the specified suffix).

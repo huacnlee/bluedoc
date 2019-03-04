@@ -68,6 +68,7 @@ en:
         "Complete your account info": Complete your account info
         "You must complete the below form for sign up with": You must complete the below form for sign up with
         "If you had an exists BlueDoc account, you can sign in to bind account": If you had an exists BlueDoc account, you can %{link} to bind account.
+        Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
     passwords:
       new:
         "Reset password": Reset password
@@ -122,6 +123,7 @@ en:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc It will be visible to anyone.
       Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
       Unconfirmed email_html: Unconfirmed Email sent to：<strong>%{email}</strong> , please confirm to complete email change.
+      Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
   activities:
     has added: has added
     to: to
@@ -225,6 +227,8 @@ en:
         System settings: System settings
         Default language: "Default language:"
         Setup default language for BlueDoc: Setup default language for BlueDoc.
+        Account Email suffix: Account Email suffix
+        Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "Limit user registration email must has suffx with in this list (split each by comma or break line, for example: <code>gmail.com,bluedoc.io</code>), keep this empty to allow any emails."
         Enable anonymous visit public contents: Enable anonymous visit public contents.
         Require Email confirm for new account: Require account confirmed Email before sign in.
         Disable this BlueDoc will requirement sign in for all pages: Disable this BlueDoc will requirement sign in for all pages.
