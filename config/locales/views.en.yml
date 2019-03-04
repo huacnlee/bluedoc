@@ -226,6 +226,7 @@ en:
         Default language: "Default language:"
         Setup default language for BlueDoc: Setup default language for BlueDoc.
         Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Require Email confirm for new account: Require account confirmed Email before sign in.
         Disable this BlueDoc will requirement sign in for all pages: Disable this BlueDoc will requirement sign in for all pages.
         PlantUML Service Host: "PlantUML Service Host:"
         BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc use %{link} for generate PlantUML SVG image, change this config to can use a custom service of your deployment.

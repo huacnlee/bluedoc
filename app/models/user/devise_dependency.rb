@@ -39,6 +39,10 @@ class User
     self.update_with_password(params)
   end
 
+  def confirmation_required?
+    Setting.confirmable_enable?
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     email = conditions.delete(:email)

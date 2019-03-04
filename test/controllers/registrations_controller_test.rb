@@ -53,6 +53,39 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_signed_in
   end
 
+  test "user sign up with confirmable disable" do
+    get new_user_registration_path
+    assert_equal 200, response.status
+
+    user_params = {
+      slug: "monster",
+      email: "monster@gmail.com",
+      password: "123456",
+      password_confimation: "123456",
+    }
+
+    # When confirmable_enable, we can sign up, and sign in visit root path
+    Setting.stub(:confirmable_enable?, false) do
+      post user_registration_path, params: { user: user_params }
+      assert_redirected_to root_path
+
+      follow_redirect!
+
+      user = User.find_by_slug("monster")
+      assert_equal false, user.confirmed?
+
+      assert_signed_in
+    end
+
+    # But, if we enable that, same account will require confirm
+    Setting.stub(:confirmable_enable?, true) do
+      get root_path
+      assert_redirected_to new_user_session_path
+      follow_redirect!
+      assert_select ".notice", text: "You have to confirm your email address before continuing."
+    end
+  end
+
   test "Sign up with Omniauth" do
     OmniAuth.config.add_mock(:google_oauth2, uid: "123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" })
 

@@ -15,6 +15,13 @@
     </div>
   </div>
 
+  <div class="form-checkbox">
+    <label>
+      <%= f.check_box :confirmable_enable, checked: Setting.confirmable_enable? %>
+      <%= t(".Require Email confirm for new account") %>
+    </label>
+  </div>
+
   <div class="form-group">
     <label class="controler-label"><%= t(".PlantUML Service Host") %></label>
     <%= f.text_field :plantuml_service_host, value: Setting.plantuml_service_host, class: "form-control", placeholder: "http://localhost:1608"  %>

@@ -14,6 +14,6 @@ class Admin::SettingsController < Admin::ApplicationController
   private
     def setting_params
       params.require(:setting).permit(:default_locale, :admin_emails, :application_footer_html, :dashboard_sidebar_html, :anonymous_enable,
-        :plantuml_service_host, :mathjax_service_host)
+        :plantuml_service_host, :mathjax_service_host, :confirmable_enable)
     end
 end

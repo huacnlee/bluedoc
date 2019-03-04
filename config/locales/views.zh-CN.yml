@@ -226,6 +226,7 @@ zh-CN:
         Default language: "默认语言:"
         Setup default language for BlueDoc: 设置 BlueDoc 所有用户的默认语言。
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
+        Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
         Disable this BlueDoc will requirement sign in for all pages: 关闭此功能，BlueDoc 将要求所有内容页面必须登录。
         PlantUML Service Host: "UML 图像服务:"
         BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。
