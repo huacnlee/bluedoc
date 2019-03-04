@@ -29,30 +29,12 @@
       <a href="<%= @repository.to_path %>" class="link-back text-main" title="<%= @repository.name %>"><%= @repository.name %></a>
       <a href="<%= @user.to_path %>" class="link-group text-gray-light" title="<%= @user.name %>"><%= @user.name %></a>
     </div>
-
     <% cache([@repository.cache_key_with_version, "doc-sidebar"]) do %>
-      <% if @repository.has_toc? %>
-        <%= sanitize_html @repository.toc_html(prefix: nil) %>
-      <% else %>
-        <ul class="toc-items toc-items-without-toc">
-        <% @repository.docs.each do |doc| %>
-          <li class="toc-item">
-            <%= link_to doc.to_path, class: "item-link" do %>
-              <span class="item-title"><%= doc.title %></span>
-            <% end %>
-          </li>
-        <% end %>
-      <% end %>
+      <%= react_component("toc/index", {list: @repository.toc_json, doc: @doc} ) %>
     <% end %>
   </div>
-  <script type="text/javascript">
-    var currentItem = document.querySelector(".doc-sidebar a.item-link[href='<%= @doc&.slug %>']");
-    if (currentItem) currentItem.classList.add("active");
-  </script>
   <div class="doc-center flex-auto">
     <div class="doc-main">
-
-
       <% if @doc.blank? %>
         <div class="doc-not-found text-center p-5">
           <div class="icon-box text-center mb-2">

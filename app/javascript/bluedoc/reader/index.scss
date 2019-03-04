@@ -2,7 +2,6 @@
 @import "./medium-zoom";
 
 .reader-body {
-
   .container {
     width: auto;
   }
@@ -18,7 +17,7 @@
   @include breakpoint(lg) {
     .doc-sidebar {
       display: block;
-      width: 200px;
+      width: 235px;
       margin-right: 50px;
       padding-top: 0px;
       min-height: 100vh;
@@ -85,6 +84,7 @@
   .doc-page {
     position: relative;
     width: 100%;
+    margin-top: 50px;
     .editors, .avatars { 
       display: inline-flex;
       vertical-align: middle;
@@ -109,19 +109,23 @@
       }
       ul {
         font-size: 13px;
-        @extend .pt-2;
         @extend .list-style-none;
-        @for $i from 1 through 5 {
-          .toc-item-#{$i} {
-            padding-left: ($i * 8px) !important;
-          }
-        }
         li {
-          padding: 6px 0;
+          position: relative;
+          padding: 4px 0;
+          .fa-arrow {
+            position: absolute;
+            left: -20px;
+            top: 8px;
+            font-size: 6px;
+          }
         }
         a {
           @extend .text-overflow;
           width: 100%;
+        }
+        .active {
+          color: $primary;
         }
         .item-slug { display: none; }
       }
