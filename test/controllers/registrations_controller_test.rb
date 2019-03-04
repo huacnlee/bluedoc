@@ -24,6 +24,8 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     get new_user_registration_path
     assert_redirected_to root_path
 
+    sign_out user
+
     user_params = {
       slug: "monster",
       email: "monster@gmail.com",
@@ -32,8 +34,22 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     }
 
     post user_registration_path, params: { user: user_params }
-    assert_redirected_to root_path
+    assert_redirected_to new_user_session_path
 
+    user = User.last
+    assert_equal user_params[:slug], user.slug
+    assert_equal user_params[:email], user.email
+    assert_equal true, user.valid_password?(user_params[:password])
+    assert_equal false, user.confirmed?
+
+    follow_redirect!
+    assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+
+    user.confirm
+    assert_equal true, user.confirmed?
+
+    post user_session_path, params: { user: { email: user_params[:email], password: user_params[:password] } }
+    assert_redirected_to root_path
     assert_signed_in
   end
 
@@ -113,9 +129,9 @@ class RegistrationsController < ActionDispatch::IntegrationTest
       password_confimation: "123456",
     }
     post user_registration_path, params: { user: user_params }
-    assert_redirected_to root_path
-
-    assert_signed_in
+    assert_redirected_to new_user_session_path
+    follow_redirect!
+    assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
 
     assert_nil session[:omniauth]
 

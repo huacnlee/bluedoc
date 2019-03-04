@@ -28,6 +28,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "PUT /account/settings with profile" do
+    old_email = @user.email
     account_params = {
       name: "new #{@user.name}",
       slug: "new-#{@user.slug}",
@@ -54,11 +55,28 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal account_params[:name], @user.name
     assert_equal account_params[:slug], @user.slug
-    assert_equal account_params[:email], @user.email
+    assert_equal old_email, @user.email
+    assert_equal account_params[:email], @user.unconfirmed_email
     assert_equal account_params[:description], @user.description
     assert_equal account_params[:location], @user.location
     assert_equal account_params[:url], @user.url
     assert_equal account_params[:locale], @user.locale
+
+    # check unconfirm
+    get account_settings_path
+    assert_equal 200, response.status
+    assert_select "form input[name='user[email]']" do
+      assert_select "[value=?]", old_email
+      assert_select "[readonly=?]", "readonly"
+    end
+    assert_select ".unconfirmed-info"
+    @user.update(confirmed_at: Time.now, unconfirmed_email: nil)
+    get account_settings_path
+    assert_equal 200, response.status
+    assert_select "form input[name='user[email]']" do
+      assert_select "[readonly]", 0
+    end
+    assert_select ".unconfirmed-info", 0
   end
 
   test "PUT /account/settings with password" do

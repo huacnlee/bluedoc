@@ -43,7 +43,12 @@
       <% end %>
 
       <%= form_group(f, :email) do %>
-        <%= f.email_field :email, class: "form-control"%>
+        <%= f.email_field :email, class: "form-control", readonly: @user.unconfirmed_email.present? %>
+        <% if @user.unconfirmed_email %>
+        <div class="form-text unconfirmed-info">
+          <%= t(".Unconfirmed email_html", email: @user.unconfirmed_email) %>
+        </div>
+        <% end %>
       <% end %>
 
       <%= form_group(f, :description) do %>

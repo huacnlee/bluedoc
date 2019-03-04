@@ -59,6 +59,7 @@ zh-CN:
         email: 用户名 / Email
         forget_password: 密码忘记了？
         Didn't receive unlock instructions?: 没有收到解锁账号的邮件？
+        Didn't receive confirmation instructions?: 未收到确认邮件？
     registrations:
       new:
         Sign up: 注册
@@ -76,7 +77,7 @@ zh-CN:
       confirmation_instructions:
         subject: 确认信息
         Welcome: 欢迎
-        You can confirm your account email through the link below: 你可以通过下面的链接来验证 Email 地址。
+        You can confirm your account email through the link below: 现在需要你通过下面的链接来完成账号的 Email 验证。
         Confirm my account: 确认我的账号
       unlock_instructions:
         subject: 解锁信息
@@ -92,6 +93,9 @@ zh-CN:
         Change my password: 修改我的密码
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
+    confirmations:
+      new:
+        Resend confirmation instructions: 重新发送确认邮件
   account_settings:
     Password has change successed: 密码已经修改成功。
     Profile has change successed: 个人资料已经更新成功。
@@ -117,6 +121,7 @@ zh-CN:
       System default: "BlueDoc 默认语言：%{locale_name}"
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 头像用于大家在 BlueDoc 里面快速识别你，对所有人公开。
       Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
+      Unconfirmed email_html: 待确认的 Email 更改：<strong>%{email}</strong> 请查收此地址的确认邮件，并完成确认
   activities:
     has added: 添加
     to: 到

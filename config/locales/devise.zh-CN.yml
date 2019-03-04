@@ -13,7 +13,7 @@
       not_found_in_database: 无效的 %{authentication_keys} 或密码不正确。
       timeout: 您已登录超时，请重新登录。
       unauthenticated: 继续操作前请注册或者登录。
-      unconfirmed: 请先激活您的帐号。
+      unconfirmed: 请先进入邮箱，点击确认链接激活您的帐号才可使用。
     omniauth_callbacks:
       failure: 无法通过 %{kind} 登录，因为 "%{reason}"。
       success: 成功通过 %{kind} 登录账号.
@@ -35,3 +35,13 @@
       send_instructions: 稍后，您将收到一封帐号解锁的邮件。
       send_paranoid_instructions: 如果你已有账号，你将会收到一封用于解锁的邮件。
       unlocked: 您的帐号已成功解锁，请登录。
+  errors:
+    messages:
+      already_confirmed: 之前已经确认过，请尝试直接登录
+      confirmation_period_expired: 确认码已过期 %{period}，请重新申请
+      expired: 已过期，请重新申请
+      not_found: 未找到
+      not_locked: 已锁定
+      not_saved:
+        one: '账号信息保存失败：'
+        other: "账号信息保存失败："

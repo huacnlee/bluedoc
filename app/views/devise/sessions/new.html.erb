@@ -43,6 +43,8 @@ auth_info = auth_session["info"]
 
     <div class="border-bottom text-center pt-3 pb-5 f6 text-gray-light">
       <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
+
+      <%= link_to t(".Didn't receive confirmation instructions?"), new_confirmation_path(resource_name), class: "btn-link btn-link-gray" %>
     </div>
   <% end %>
 </div>
