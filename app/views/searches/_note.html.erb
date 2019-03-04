@@ -1,0 +1,26 @@
+<%
+  title = item.title
+  description = ""
+  if hit.respond_to?(:highlight)
+    title = hit.highlight.title if hit.highlight.title
+    description = hit.highlight.body if hit.highlight.body
+  end
+%>
+
+<div class="search-result search-result-note list-item list-avatar">
+  <div class="avatar-box icon-box icon-note">
+    <%= icon_tag("avatar-doc") %>
+  </div>
+  <div class="title text-overflow"><%= link_to highlight(title), item.to_path, target: "_blank" %></div>
+  <div class="path">
+    <%= user_display_name_tag(item.user, with_icon: true) %>
+  </div>
+  <div class="time-box">
+    <%= timeago item.body_updated_at %>
+  </div>
+  <% if description.present? %>
+    <div class="description mt-3">
+      <%= highlight(description) %>
+    </div>
+  <% end %>
+</div>

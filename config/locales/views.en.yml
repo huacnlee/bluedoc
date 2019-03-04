@@ -690,6 +690,7 @@ en:
       Repositories: Repositories
       Groups: Groups
       Users: Users
+      Notes: Notes
     no_result:
       No result: No result
       Can not find any contents like: "Can't find any contents like"

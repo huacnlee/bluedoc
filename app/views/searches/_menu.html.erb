@@ -6,6 +6,10 @@
           <span style="display:inline-block; min-width: 8em"><%= icon_tag("doc", label: t(".Docs")) %></span>
           <b><%= @totals[:docs] %></b>
         <% end
+        li << link_to(notes_search_path(q: params[:q]), class: "menu-item") do %>
+          <span style="display:inline-block; min-width: 8em"><%= icon_tag("note", label: t(".Notes")) %></span>
+          <b><%= @totals[:notes] %></b>
+        <% end
         li << link_to(repositories_search_path(q: params[:q]), class: "menu-item") do %>
           <span style="display:inline-block; min-width: 8em"><%= icon_tag("repo", label: t(".Repositories")) %></span>
           <b><%= @totals[:repositories] %></b>
