@@ -6,6 +6,7 @@ class License
     reader_list
     export_pdf
     export_archive
+    limit_user_emails
   ]
 
   class << self

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_110838) do
+ActiveRecord::Schema.define(version: 2019_03_04_014940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -293,9 +293,14 @@ ActiveRecord::Schema.define(version: 2019_02_20_110838) do
     t.datetime "deleted_at"
     t.string "deleted_slug"
     t.string "locale"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index "lower((slug)::text)", name: "index_on_slug", unique: true
     t.index "type, lower((email)::text)", name: "index_on_type_and_email"
     t.index "type, lower((email)::text)", name: "uk_on_type_and_email", unique: true, where: "((COALESCE(email, ''::character varying))::text <> ''::text)"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

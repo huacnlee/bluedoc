@@ -16,6 +16,7 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
   test "POST /admin/settings" do
     setting_params = {
       anonymous_enable: "0",
+      confirmable_enable: "0",
       admin_emails: "foo@gmail.com\nbar@gmail.com\n#{@user.email}",
       application_footer_html: "<span>hello</span>",
       dashboard_sidebar_html: "<span>world</span>",

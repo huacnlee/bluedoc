@@ -22,8 +22,6 @@ class User < ApplicationRecord
   validates :url, length: { maximum: 250 }
   validates :slug, uniqueness: { case_sensitive: false }
 
-  after_commit :send_welcome_mail, on: :create
-
   before_validation :check_slug_keywords
   def check_slug_keywords
     if self.slug.present? && !BlueDoc::Slug.valid_user?(self.slug)
@@ -40,10 +38,6 @@ class User < ApplicationRecord
 
   def admin?
     Setting.has_admin?(self.email)
-  end
-
-  def send_welcome_mail
-    UserMailer.with(user: self).welcome.deliver_later
   end
 end
 

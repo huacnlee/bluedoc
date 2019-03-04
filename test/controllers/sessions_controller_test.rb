@@ -129,4 +129,32 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal 1, Authorization.count
   end
+
+  test "POST /account/sign_in with uncomfirmed user, should not allow login" do
+    user = create(:user, password: "123456", password_confirmation: "123456", confirmed_at: nil)
+
+    post user_session_path, params: { user: { email: user.email, password: "123456" } }
+    assert_redirected_to new_user_session_path
+    follow_redirect!
+    assert_select ".notice", text: "You have to confirm your email address before continuing."
+
+    # To get new confirmation
+    get new_user_confirmation_path
+    assert_equal 200, response.status
+    assert_select ".heading", text: "Resend confirmation instructions"
+
+    # Resend confirmation mail
+    post user_confirmation_path, params: { user: { email: user.email } }
+    assert_redirected_to new_user_session_path
+    user.reload
+    assert_not_nil user.confirmation_token
+    assert_not_nil user.confirmation_sent_at
+
+    # Do confirm, and resign in
+    user.update(confirmed_at: Time.now)
+    post user_session_path, params: { user: { email: user.email, password: "123456" } }
+    assert_redirected_to root_path
+
+    assert_signed_in
+  end
 end

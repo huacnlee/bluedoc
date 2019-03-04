@@ -8,6 +8,16 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
 
+    assert_select ".user-email-suffix-support-list", 0
+
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+        get new_user_registration_path
+        assert_equal 200, response.status
+        assert_select ".user-email-suffix-support-list", text: "Support email suffix with: foo.com, bar.com"
+      end
+    end
+
     assert_no_match "Complete your account info", response.body
     assert_select %(input[name="user[omniauth_provider]"]), 0
     assert_select %(input[name="user[omniauth_uid]"]), 0
@@ -24,6 +34,8 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     get new_user_registration_path
     assert_redirected_to root_path
 
+    sign_out user
+
     user_params = {
       slug: "monster",
       email: "monster@gmail.com",
@@ -32,9 +44,56 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     }
 
     post user_registration_path, params: { user: user_params }
-    assert_redirected_to root_path
+    assert_redirected_to new_user_session_path
 
+    user = User.last
+    assert_equal user_params[:slug], user.slug
+    assert_equal user_params[:email], user.email
+    assert_equal true, user.valid_password?(user_params[:password])
+    assert_equal false, user.confirmed?
+
+    follow_redirect!
+    assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+
+    user.confirm
+    assert_equal true, user.confirmed?
+
+    post user_session_path, params: { user: { email: user_params[:email], password: user_params[:password] } }
+    assert_redirected_to root_path
     assert_signed_in
+  end
+
+  test "user sign up with confirmable disable" do
+    get new_user_registration_path
+    assert_equal 200, response.status
+
+    user_params = {
+      slug: "monster",
+      email: "monster@gmail.com",
+      password: "123456",
+      password_confimation: "123456",
+    }
+
+    # When confirmable_enable, we can sign up, and sign in visit root path
+    Setting.stub(:confirmable_enable?, false) do
+      post user_registration_path, params: { user: user_params }
+      assert_redirected_to root_path
+
+      follow_redirect!
+
+      user = User.find_by_slug("monster")
+      assert_equal false, user.confirmed?
+
+      assert_signed_in
+    end
+
+    # But, if we enable that, same account will require confirm
+    Setting.stub(:confirmable_enable?, true) do
+      get root_path
+      assert_redirected_to new_user_session_path
+      follow_redirect!
+      assert_select ".notice", text: "You have to confirm your email address before continuing."
+    end
   end
 
   test "Sign up with Omniauth" do
@@ -113,9 +172,9 @@ class RegistrationsController < ActionDispatch::IntegrationTest
       password_confimation: "123456",
     }
     post user_registration_path, params: { user: user_params }
-    assert_redirected_to root_path
-
-    assert_signed_in
+    assert_redirected_to new_user_session_path
+    follow_redirect!
+    assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
 
     assert_nil session[:omniauth]
 

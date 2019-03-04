@@ -59,6 +59,7 @@ zh-CN:
         email: 用户名 / Email
         forget_password: 密码忘记了？
         Didn't receive unlock instructions?: 没有收到解锁账号的邮件？
+        Didn't receive confirmation instructions?: 未收到确认邮件？
     registrations:
       new:
         Sign up: 注册
@@ -67,6 +68,7 @@ zh-CN:
         Complete your account info: 完善您的帐号信息
         You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
         If you had an exists BlueDoc account, you can sign in to bind account: 如果你已经有 BlueDoc 账号，你可以通过 %{link} 来绑定账号。
+        Support email suffix with list_html: "支持的 Email 后缀: <code>%{emails}</code>"
     passwords:
       new:
         Reset password: 找回密码
@@ -76,7 +78,7 @@ zh-CN:
       confirmation_instructions:
         subject: 确认信息
         Welcome: 欢迎
-        You can confirm your account email through the link below: 你可以通过下面的链接来验证 Email 地址。
+        You can confirm your account email through the link below: 现在需要你通过下面的链接来完成账号的 Email 验证。
         Confirm my account: 确认我的账号
       unlock_instructions:
         subject: 解锁信息
@@ -92,6 +94,9 @@ zh-CN:
         Change my password: 修改我的密码
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
+    confirmations:
+      new:
+        Resend confirmation instructions: 重新发送确认邮件
   account_settings:
     Password has change successed: 密码已经修改成功。
     Profile has change successed: 个人资料已经更新成功。
@@ -117,6 +122,8 @@ zh-CN:
       System default: "BlueDoc 默认语言：%{locale_name}"
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 头像用于大家在 BlueDoc 里面快速识别你，对所有人公开。
       Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
+      Unconfirmed email_html: 待确认的 Email 更改：<strong>%{email}</strong> 请查收此地址的确认邮件，并完成确认
+      Support email suffix with list_html: "支持的 Email 后缀：<code>%{emails}</code>"
   activities:
     has added: 添加
     to: 到
@@ -197,6 +204,7 @@ zh-CN:
           reader_list: 阅读记录
           export_pdf: 知识库、文档导出 PDF
           export_archive: 知识库导出 Zip
+          limit_user_emails: 用户邮件限制规则
     licenses:
       show:
         License: 专业版授权
@@ -221,6 +229,9 @@ zh-CN:
         Default language: "默认语言:"
         Setup default language for BlueDoc: 设置 BlueDoc 所有用户的默认语言。
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
+        Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
+        Account Email suffix: 用户 Email 后缀限制
+        Limit user registration email must has suffx with in this list, empty it to allow any emails_html: 设置注册表单要求用户 Email 后缀必须在此列表设定之内（多个用换行或逗号分隔，比如 <code>gmail.com,bluedoc.io</code>），配合 Email 验证功能可以限制特定的 Email 用户使用 BlueDoc。清空此项将允许任何 Email 注册。
         Disable this BlueDoc will requirement sign in for all pages: 关闭此功能，BlueDoc 将要求所有内容页面必须登录。
         PlantUML Service Host: "UML 图像服务:"
         BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc 使用 %{link} 来生成 UML SVG 图片，如果你需要独立部署，可以通过修改这里来调整生成的图片地址。

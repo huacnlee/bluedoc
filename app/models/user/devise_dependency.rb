@@ -4,7 +4,7 @@ class User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
-         :rememberable, :validatable,
+         :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab]
 
   attr_accessor :omniauth_provider, :omniauth_uid
@@ -13,6 +13,13 @@ class User
 
   before_validation on: :create do
     self.name = slug if name.blank?
+  end
+
+  # Validate email suffix
+  validate do |user|
+    if user.user?
+      self.errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(self.email)
+    end
   end
 
   after_create :bind_omniauth_on_create
@@ -37,6 +44,10 @@ class User
     return false if self.errors.size > 0
 
     self.update_with_password(params)
+  end
+
+  def confirmation_required?
+    Setting.confirmable_enable?
   end
 
   def self.find_for_database_authentication(warden_conditions)

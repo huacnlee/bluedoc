@@ -59,6 +59,7 @@ en:
         "email": Username / Email
         forget_password: Forgot your password?
         "Didn't receive unlock instructions?": Didn't receive unlock instructions?
+        "Didn't receive confirmation instructions?": Didn't receive confirmation instructions?
     registrations:
       new:
         "Sign up": Sign up
@@ -67,6 +68,7 @@ en:
         "Complete your account info": Complete your account info
         "You must complete the below form for sign up with": You must complete the below form for sign up with
         "If you had an exists BlueDoc account, you can sign in to bind account": If you had an exists BlueDoc account, you can %{link} to bind account.
+        Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
     passwords:
       new:
         "Reset password": Reset password
@@ -92,6 +94,9 @@ en:
         "Change my password": Change my password
         "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
         "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
+    confirmations:
+      new:
+        Resend confirmation instructions: Resend confirmation instructions
   account_settings:
     Password has change successed: Password has change successed.
     Profile has change successed: Profile has change successed.
@@ -117,6 +122,8 @@ en:
       System default: "System default [%{locale_name}]"
       This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc It will be visible to anyone.
       Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+      Unconfirmed email_html: Unconfirmed Email sent to：<strong>%{email}</strong> , please confirm to complete email change.
+      Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
   activities:
     has added: has added
     to: to
@@ -197,6 +204,7 @@ en:
           reader_list: Reader List
           export_pdf: Export PDF
           export_archive: Export Archive
+          limit_user_emails: User Email limit rules
     licenses:
       show:
         License: License
@@ -220,7 +228,10 @@ en:
         System settings: System settings
         Default language: "Default language:"
         Setup default language for BlueDoc: Setup default language for BlueDoc.
+        Account Email suffix: Account Email suffix
+        Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "Limit user registration email must has suffx with in this list (split each by comma or break line, for example: <code>gmail.com,bluedoc.io</code>), keep this empty to allow any emails."
         Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Require Email confirm for new account: Require account confirmed Email before sign in.
         Disable this BlueDoc will requirement sign in for all pages: Disable this BlueDoc will requirement sign in for all pages.
         PlantUML Service Host: "PlantUML Service Host:"
         BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc use %{link} for generate PlantUML SVG image, change this config to can use a custom service of your deployment.

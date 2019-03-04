@@ -5,7 +5,7 @@
 <%= form_for(Setting.new, url: admin_settings_path) do |f| %>
   <div class="sub-title"><%= t(".System settings") %></div>
 
-  <div class="form-checkbox">
+  <div class="form-group form-checkbox">
     <label>
       <%= f.check_box :anonymous_enable, checked: Setting.anonymous_enable? %>
       <%= t(".Enable anonymous visit public contents") %>
@@ -13,6 +13,23 @@
     <div class="form-text">
       <%= t(".Disable this BlueDoc will requirement sign in for all pages") %>
     </div>
+  </div>
+
+  <% feature_for(:limit_user_emails) do %>
+  <div class="form-group">
+    <label class="controler-label"><%= t(".Account Email suffix") %></label>
+    <%= f.text_area :user_email_suffixes, value: Setting.user_email_suffixes, class: "form-control", style: "height: 100px; min-height: 100px"  %>
+    <div class="form-text">
+      <%= t(".Limit user registration email must has suffx with in this list, empty it to allow any emails_html") %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="form-group form-checkbox">
+    <label>
+      <%= f.check_box :confirmable_enable, checked: Setting.confirmable_enable? %>
+      <%= t(".Require Email confirm for new account") %>
+    </label>
   </div>
 
   <div class="form-group">

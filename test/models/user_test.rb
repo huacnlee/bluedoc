@@ -343,4 +343,35 @@ class UserTest < ActiveSupport::TestCase
     user.update_password(current_password: "123456", password: "654321", password_confirmation: "654321")
     assert_equal true, user.valid_password?("654321")
   end
+
+  test "valid email suffix" do
+    user = build(:user, email: "foo@gmail.com")
+    group = build(:group)
+    assert_equal true, user.valid?
+    assert_equal true, group.valid?
+
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+        assert_equal false, user.valid?
+        assert_equal true, group.valid?
+        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+        user.email = "aaa@foo.com"
+        user.valid?
+      end
+    end
+    user.save
+    group.save
+
+    user.reload
+    group.reload
+    allow_feature(:limit_user_emails) do
+      Setting.stub(:user_email_suffixes, "dar.com,bar.com") do
+        assert_equal false, user.valid?
+        assert_equal true, group.valid?
+        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+        user.email = "aa@bar.com"
+        assert_equal true, user.valid?
+      end
+    end
+  end
 end
