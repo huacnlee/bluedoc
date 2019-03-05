@@ -64,14 +64,22 @@ class RegistrationsController < ActionDispatch::IntegrationTest
   end
 
   test "visit sign up with Users limit" do
-    License.stub(:current_active_users_count, 100) do
+    License.stub(:users_limit, 50) do
+      # Free version not users limit
       get new_user_registration_path
-      assert_equal 403, response.status
-      assert_select "h1", text: "Users limit error"
+      assert_equal 200, response.status
 
-      post user_registration_path
-      assert_equal 403, response.status
-      assert_select "h1", text: "Users limit error"
+      License.stub(:license?, true) do
+        License.stub(:current_active_users_count, 100) do
+          get new_user_registration_path
+          assert_equal 403, response.status
+          assert_select "h1", text: "Users limit error"
+
+          post user_registration_path
+          assert_equal 403, response.status
+          assert_select "h1", text: "Users limit error"
+        end
+      end
     end
   end
 

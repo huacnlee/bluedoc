@@ -24,7 +24,7 @@ class Admin::LicensesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_equal 200, response.status
     assert_select ".notice.license-no"
-    assert_select ".license-details", 1
+    assert_select ".license-details", 0
     assert_select "#license-info" do
       assert_select ".box-header", 0
       assert_select ".box-header .btn", 0

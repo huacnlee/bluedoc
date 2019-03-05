@@ -15,16 +15,6 @@
     <div class="mb-2">
       <% if !License.license? %>
         <div class="notice license-no"><%= t(".No license") %></div>
-        <table class="license-details table mb-2">
-          <tr>
-            <td><%= t(".users limit") %></td>
-            <td data-field="users-limit">
-              <%= License.users_limit %> <%= t(".users") %>
-
-              <div class="text-gray"><%= t(".current actived") %> <%= License.current_active_users_count %>  <%= t(".users") %></div>
-            </td>
-          </tr>
-        </table>
       <% else %>
         <table class="license-details table mb-2">
           <tr>
