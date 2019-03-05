@@ -32,7 +32,6 @@ export const formatItems = (items, currentSlug, defaultFoldeDepth = 1) => {
   if (currentSlug) {
     const { tocPath } = result.find(v => v.url === currentSlug);
     pathNode = tocPath.split('_');
-    pathNode.pop();
   }
   const folders = folderNode.map((i) => {
     const foldersStatus = pathNode.indexOf(`${i}`) === -1
