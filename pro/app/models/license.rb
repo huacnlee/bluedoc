@@ -73,12 +73,12 @@ class License
     end
 
     def users_limit
-      restricted_attr(:users_limit, default: 10)
+      restricted_attr(:users_limit, default: 20)
     end
 
     def current_active_users_count
       # Reduce 2 users (admin, system)
-      User.count - 2
+      User.where(type: "User").count - 2
     end
   end
 end
