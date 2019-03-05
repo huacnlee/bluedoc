@@ -63,6 +63,18 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_signed_in
   end
 
+  test "visit sign up with Users limit" do
+    License.stub(:current_active_users_count, 100) do
+      get new_user_registration_path
+      assert_equal 403, response.status
+      assert_select "h1", text: "Users limit error"
+
+      post user_registration_path
+      assert_equal 403, response.status
+      assert_select "h1", text: "Users limit error"
+    end
+  end
+
   test "user sign up with confirmable disable" do
     get new_user_registration_path
     assert_equal 200, response.status

@@ -199,6 +199,9 @@ en:
         issued_at: Issued Date
         expires_at: Expires Date
         features:  Features
+        users limit: Users Limit
+        users: Users
+        current actived: "Current actived:"
         feature:
           soft_delete: Soft Delete
           reader_list: Reader List

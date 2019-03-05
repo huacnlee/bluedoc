@@ -11,8 +11,7 @@ class License
 
   class << self
     delegate :expired?, :will_expire?, :expires_at,
-             :licensee,
-             :restrictions, :restricted?, :starts_at, to: :license
+             :licensee, :restrictions, :restricted?, :starts_at, to: :license
 
     def features
       PRO_FEATURES
@@ -23,6 +22,18 @@ class License
       return false if trial? && expired?
 
       features.include?(name.to_s) && license.allow_feature?(name)
+    end
+
+    def check_users_limit!
+      if current_active_users_count >= users_limit
+        message = <<~MSG
+        There is not enough user quota for the current license or free version.
+
+        Current quota: #{users_limit}
+        Actived users: #{current_active_users_count}
+        MSG
+        raise BlueDoc::UsersLimitError.new(message)
+      end
     end
 
     def trial?
@@ -59,6 +70,15 @@ class License
     def update(license_body)
       Setting.license = license_body
       @license = nil
+    end
+
+    def users_limit
+      restricted_attr(:users_limit, default: 20)
+    end
+
+    def current_active_users_count
+      # Reduce 2 users (admin, system)
+      User.where(type: "User").count - 2
     end
   end
 end
