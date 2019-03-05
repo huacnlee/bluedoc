@@ -3,7 +3,7 @@ import { isShow, formatItems } from './utils';
 export default class TocList extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { items, folders } = formatItems(this.props.items);
+    const { items, folders } = formatItems(this.props.items, this.props.currentSlug);
 
     this.state = {
       items,
@@ -34,7 +34,7 @@ export default class TocList extends React.PureComponent {
           const slug = url;
 
           // If url is only slug (not contains "/") and has prefix props, add prefix to url
-          if (url && prefix && !url.includes("/")) {
+          if (url && prefix && !url.includes('/')) {
             url = `${prefix}${url}`;
           }
 

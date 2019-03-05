@@ -11,10 +11,11 @@ export const isShow = (path, folders) => {
 };
 
 // format toc items
-export const formatItems = (items, defaultFoldeDepth = 1) => {
+export const formatItems = (items, currentSlug, defaultFoldeDepth = 1) => {
   const data = JSON.parse(items);
   const prevNodeId = [0];
   const folderNode = [];
+  let pathNode = [];
   const result = data.map((item, index) => {
     const { depth = 0 } = item;
     if (depth > prevNodeId.length - 1) {
@@ -28,11 +29,21 @@ export const formatItems = (items, defaultFoldeDepth = 1) => {
       tocPath: prevNodeId.join('_'),
     };
   });
+  if (currentSlug) {
+    const { tocPath } = result.find(v => v.url === currentSlug);
+    pathNode = tocPath.split('_');
+    pathNode.pop();
+  }
+  const folders = folderNode.map((i) => {
+    const foldersStatus = pathNode.indexOf(`${i}`) === -1
+      ? result[i].depth > defaultFoldeDepth - 1 : false;
+    return {
+      id: i,
+      foldersStatus,
+    };
+  });
   return {
     items: result,
-    folders: folderNode.map(i => ({
-      id: i,
-      foldersStatus: result[i].depth > defaultFoldeDepth - 1,
-    })),
+    folders,
   };
 };
