@@ -7,7 +7,7 @@
   - [default, 10]
   - [mailers, 5]
   - [bluedoc_default, 10]
+  - [bluedoc_index, 6]
   - [bluedoc_mailers, 5]
   - [bluedoc_active_storage_analysis, 5]
-  - [bluedoc_index, 3]
-
+  - [bluedoc_active_storage_purge, 4]
