@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_014940) do
+ActiveRecord::Schema.define(version: 2019_03_05_023555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -233,6 +233,9 @@ ActiveRecord::Schema.define(version: 2019_03_04_014940) do
     t.string "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "retries_count", default: 0, null: false
+    t.text "message"
     t.index ["repository_id"], name: "index_repository_sources_on_repository_id"
   end
 

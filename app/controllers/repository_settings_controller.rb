@@ -105,6 +105,19 @@ class RepositorySettingsController < Users::ApplicationController
     end
   end
 
+  # POST /:user/:repo/settings/retry_import
+  def retry_import
+    authorize! :update, @repository
+
+    if params[:abort]
+      @repository.source.destroy
+      redirect_to @repository.to_path
+    else
+      @repository.import_from_source
+      redirect_to @repository.to_path, notice: t(".Repository import has started")
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository

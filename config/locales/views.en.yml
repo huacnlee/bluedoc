@@ -588,6 +588,11 @@ en:
     create:
       Repository was successfully created: Repository was successfully created.
       Repository was successfully created, and executed importing in background: Repository was successfully created, and executed importing in background, wait a moment you will see the import result.
+    import_status:
+      Repository import still running, please wait: Repository import still running, please wait...
+      Repository import was failed: Repository import was failed.
+      Retry import: Retry again
+      Abort: Abort
   repository_settings:
     exports:
       archive:
@@ -684,6 +689,8 @@ en:
       Features: Features
       Table of Contents: Table of Contents
       Enable to use Table of Contents style for Repository index: Enable to use Table of Contents style for Repository index.
+    retry_import:
+      Repository import has started: The Repository import has started to retry, and a notification will be sent later.
   searches:
     menu:
       Docs: Docs

@@ -38,7 +38,7 @@ class Repository
     return if self.source.blank?
 
     job = RepositoryImportJob.perform_later(self, type: self.source_provider, user: Current.user, url: self.source_url)
-    self.source.update(job_id: job.job_id) if job
+    self.source.update(job_id: job.job_id, status: :running) if job
   end
 
   private

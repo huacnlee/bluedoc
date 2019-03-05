@@ -5,5 +5,7 @@ FactoryBot.define do
     association :repository
     provider { "gitbook" }
     url { "https://github.com/huacnlee/test.git" }
+    status { "running" }
+    retries_count { 0 }
   end
 end

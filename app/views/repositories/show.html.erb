@@ -6,6 +6,8 @@
 toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
 %>
 
+<%= render "import_status" %>
+
 <% if toc_html.blank? %>
   <%= render "empty_docs" %>
 <% else %>

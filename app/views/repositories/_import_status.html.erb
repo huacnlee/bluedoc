@@ -1,0 +1,20 @@
+<% if @repository.source? && can?(:update, @repository)  %>
+  <% if @repository.source.running? %>
+  <div class="repo-import-status">
+    <div class="repo-import-running">
+      <%= flash_block_tag(:notice, t(".Repository import still running, please wait")) %>
+    </div>
+  </div>
+  <% elsif @repository.source.failed? %>
+  <div class="repo-import-status">
+    <div class="repo-import-failed border p-3">
+      <p><%= t(".Repository import was failed") %></p>
+      <div class="form-group">
+        <textarea class="form-control mt-2" readonly rows="8"><%= @repository.source.message %></textarea>
+      </div>
+      <%= link_to t(".Retry import"), @repository.to_path("/settings/retry_import"), class: "btn-retry btn btn-primary btn-sm", data: { method: :post } %>
+      <%= link_to t(".Abort"), @repository.to_path("/settings/retry_import?abort=1"), class: "btn-abort btn btn-sm", data: { method: :post } %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
