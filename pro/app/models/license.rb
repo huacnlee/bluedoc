@@ -25,6 +25,8 @@ class License
     end
 
     def check_users_limit!
+      return false unless license?
+      return false if users_limit == 0
       if current_active_users_count >= users_limit
         message = <<~MSG
         There is not enough user quota for the current license or free version.
@@ -34,6 +36,8 @@ class License
         MSG
         raise BlueDoc::UsersLimitError.new(message)
       end
+
+      false
     end
 
     def trial?
@@ -73,7 +77,7 @@ class License
     end
 
     def users_limit
-      restricted_attr(:users_limit, default: 20)
+      restricted_attr(:users_limit, default: 0)
     end
 
     def current_active_users_count

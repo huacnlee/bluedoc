@@ -74,7 +74,7 @@ class LicenseTest < ActiveSupport::TestCase
   end
 
   test "users_limit" do
-    assert_equal License.restricted_attr(:users_limit, default: 20), License.users_limit
+    assert_equal License.restricted_attr(:users_limit, default: 0), License.users_limit
   end
 
   test "current_active_users_count" do
@@ -84,15 +84,16 @@ class LicenseTest < ActiveSupport::TestCase
   end
 
   test "check_users_limit!" do
-    License.stub(:current_active_users_count, 21) do
-      assert_raise(BlueDoc::UsersLimitError) do |ex|
-        License.check_users_limit!
-      end
+    assert_equal false, License.check_users_limit!
 
+    License.stub(:current_active_users_count, 21) do
       License.stub(:restricted_attr, 30) do
-        License.check_users_limit!
+        assert_equal false, License.check_users_limit!
       end
-      License.stub(:restrictions, 5) do
+      License.stub(:restricted_attr, 0) do
+        assert_equal false, License.check_users_limit!
+      end
+      License.stub(:restricted_attr, 5) do
         assert_raise(BlueDoc::UsersLimitError) do |ex|
           License.check_users_limit!
         end
