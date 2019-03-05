@@ -26,6 +26,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from BlueDoc::UsersLimitError do |exception|
+    respond_to do |format|
+      format.json { head :forbidden }
+      format.html do
+        @exception = exception
+        render "/shared/users_limit_error", status: :forbidden
+      end
+    end
+  end
+
   rescue_from ActionController::InvalidAuthenticityToken do |exception|
     respond_to do |format|
       format.json { head :forbidden }
