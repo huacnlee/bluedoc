@@ -216,6 +216,49 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_no_react_component "toc/index"
   end
 
+  test "GET /:user/:repo with Import status" do
+    repo = create(:repository, user: @group)
+    source = create(:repository_source, repository: repo, status: :done)
+
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_select ".repo-import-status", 0
+
+    source.update(status: :running)
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_select ".repo-import-status", 0
+
+
+    source.update(status: :done)
+    sign_in_role :admin, group: @group
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_select ".repo-import-status", 0
+
+    source.update(status: :running)
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_select ".repo-import-status" do
+      assert_select ".repo-import-running"
+    end
+
+    source.update(status: :failed, message: "Hello world")
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_select ".repo-import-status" do
+      assert_select ".repo-import-failed" do
+        assert_select "textarea", text: "Hello world"
+        assert_select "a.btn-retry[data-method=post]" do
+          assert_select "[href=?]", repo.to_path("/settings/retry_import")
+        end
+        assert_select "a.btn-abort[data-method=post]" do
+          assert_select "[href=?]", repo.to_path("/settings/retry_import?abort=1")
+        end
+      end
+    end
+  end
+
   test "POST/DELETE /:user/:repo/action" do
     repo = create(:repository)
     repo1 = create(:repository)

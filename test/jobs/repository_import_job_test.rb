@@ -11,6 +11,9 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
   end
 
   test "perform with gitbook" do
+    create(:repository_source, repository: @repo)
+    @repo.reload
+    assert_not_nil @repo.source
     mock = Minitest::Mock.new
     mock.expect(:perform, true, [])
     BlueDoc::Import::GitBook.stub(:new, mock) do

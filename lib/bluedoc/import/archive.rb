@@ -10,7 +10,7 @@ module BlueDoc
       def download
         script = <<~SCRIPT
         mkdir -p #{self.repo_dir} && \
-        curl -sSL '#{self.url}' -o #{self.repo_dir}/archive.zip && \
+        wget -O #{self.repo_dir}/archive.zip '#{self.url}' && \
         unzip #{self.repo_dir}/archive.zip -d #{self.repo_dir}
         SCRIPT
 

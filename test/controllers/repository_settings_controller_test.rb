@@ -387,4 +387,29 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     member0.reload
     assert_equal "admin", member0.role
   end
+
+  test "POST /:user/:repo/settings/retry_import" do
+    repo = create(:repository, user: @group)
+    source = create(:repository_source, repository: repo, status: :done)
+
+    sign_in_role :reader, group: @group
+    post repo.to_path("/settings/retry_import")
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+    assert_enqueued_with job: RepositoryImportJob do
+      post repo.to_path("/settings/retry_import")
+    end
+    assert_redirected_to repo.to_path
+    follow_redirect!
+    assert_select ".notice", text: "The Repository import has started to retry, and a notification will be sent later."
+
+    source.reload
+    assert_equal "running", source.status
+
+    post repo.to_path("/settings/retry_import?abort=1")
+    assert_redirected_to repo.to_path
+
+    assert_equal false, repo.source?
+  end
 end

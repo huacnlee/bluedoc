@@ -588,6 +588,11 @@ zh-CN:
     create:
       Repository was successfully created: 知识库创建成功。
       Repository was successfully created, and executed importing in background: 知识库创建成功，导入任务已经在后台执行，我们会通过邮件通知导入结果。
+    import_status:
+      Repository import still running, please wait: 知识库导入正在执行中，请稍后...
+      Repository import was failed: 知识导入失败，请检查下面的原因或者可以联系管理员处理。
+      Retry import: 尝试重新导入
+      Abort: 放弃
   repository_settings:
     exports:
       archive:
@@ -684,6 +689,8 @@ zh-CN:
       Features: 功能开关
       Table of Contents: 自定义目录
       Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
+    retry_import:
+      Repository import has started: 知识库导入已经开始重试，稍后将会有通知告知结果。
   searches:
     menu:
       Docs: 文档
