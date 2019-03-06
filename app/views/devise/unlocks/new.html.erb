@@ -1,23 +1,19 @@
+<div class="col-12 col-md-7">
+  <div class="sub-title">
+    <div class="heading">Resend unlock instructions</div>
+    <div class="description">Input your account Email address, we will send a reset unlock link to you Email.</div>
+  </div>
 
-<div class="col-12 clearfix">
-  <div class="col-12 col-md-8">
-    <div class="sub-title">
-      <div class="heading"><%= icon_tag("lock") %> Resend unlock instructions</div>
-      <div class="description">Input your account Email address, we will send a reset unlock link to you Email.</div>
+  <%= form_for(resource, as: resource_name, url: user_unlock_path(resource.id), html: { method: :post }) do |f| %>
+    <%= render "/shared/error_messages", target: resource %>
+
+    <div class="form-group mb-button">
+      <%= f.label :email, class: "control-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
     </div>
 
-
-    <%= form_for(resource, as: resource_name, url: user_unlock_path(resource.id), html: { method: :post }) do |f| %>
-      <%= render "/shared/error_messages", target: resource %>
-
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Resend unlock instructions", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Resend unlock instructions", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

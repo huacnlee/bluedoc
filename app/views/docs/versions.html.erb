@@ -27,7 +27,7 @@
 </div>
 <% end %>
 
-<div class="doc-page flex-wrap">
+<div class="doc-page d-flex">
   <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right">
     <%= render partial: "versions/version", locals: { version: @current_version, current: true } %>
     <div class="version-items" data-selected-id="<%= @current_version.id %>">
