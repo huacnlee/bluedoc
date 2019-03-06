@@ -74,6 +74,14 @@ en:
         "Reset password": Reset password
         "Input your account Email address, we will send a reset password link to you Email": Input your account Email address, we will send a reset password link to you Email.
         "Submit": Send me reset password instructions
+    unlocks:
+      new:
+        Resend unlock instructions: Resend unlock instructions
+        Input your account Email address, we will send a reset unlock link to you Email: Input your account Email address, we will send a reset unlock link to you Email.
+        Submit: Resend unlock instructions
+    confirmations:
+      new:
+        Resend confirmation instructions: Resend confirmation instructions
     mailer:
       confirmation_instructions:
         subject: Confirmation
@@ -94,9 +102,10 @@ en:
         "Change my password": Change my password
         "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
         "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
-    confirmations:
-      new:
-        Resend confirmation instructions: Resend confirmation instructions
+      unlock_instructions:
+        Your account has been locked due to an excessive number of unsuccessful sign in attempts: Your account has been locked due to an excessive number of unsuccessful sign in attempts.
+        Click the link below to unlock your account: "Click the link below to unlock your account:"
+        Unlock my account: Unlock my account
   account_settings:
     Password has change successed: Password has change successed.
     Profile has change successed: Profile has change successed.

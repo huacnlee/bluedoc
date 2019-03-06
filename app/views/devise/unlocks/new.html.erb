@@ -1,7 +1,7 @@
 <div class="col-12 col-md-7">
   <div class="sub-title">
-    <div class="heading">Resend unlock instructions</div>
-    <div class="description">Input your account Email address, we will send a reset unlock link to you Email.</div>
+    <div class="heading"><%= t(".Resend unlock instructions") %></div>
+    <div class="description"><%= t(".Input your account Email address, we will send a reset unlock link to you Email") %></div>
   </div>
 
   <%= form_for(resource, as: resource_name, url: user_unlock_path(resource.id), html: { method: :post }) do |f| %>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Resend unlock instructions", class: "btn btn-primary" %>
+      <%= f.submit t(".Submit"), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

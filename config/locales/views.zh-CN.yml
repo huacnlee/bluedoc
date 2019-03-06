@@ -74,6 +74,14 @@ zh-CN:
         Reset password: 找回密码
         Input your account Email address, we will send a reset password link to you Email: 输入你的 Email 地址，我们将会给你发送一封找回密码的邮件。
         Submit: 发送找回密码邮件
+    confirmations:
+      new:
+        Resend confirmation instructions: 重新发送确认邮件
+    unlocks:
+      new:
+        Resend unlock instructions: 重新发送解锁邮件
+        Input your account Email address, we will send a reset unlock link to you Email: 输入你账号的 Email 地址，我们将会把解锁账号的链接发送到你的邮箱内。
+        Submit: 发送
     mailer:
       confirmation_instructions:
         subject: 确认信息
@@ -94,9 +102,10 @@ zh-CN:
         Change my password: 修改我的密码
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
-    confirmations:
-      new:
-        Resend confirmation instructions: 重新发送确认邮件
+      unlocks:
+        Your account has been locked due to an excessive number of unsuccessful sign in attempts: 你的账号因为多次错误的密码尝试而被系统暂时锁定。
+        Click the link below to unlock your account: "你可以点击下面的链接来解锁账号:"
+        Unlock my account: 解锁我的账号
   account_settings:
     Password has change successed: 密码已经修改成功。
     Profile has change successed: 个人资料已经更新成功。
