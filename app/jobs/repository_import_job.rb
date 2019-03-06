@@ -4,7 +4,6 @@ class RepositoryImportJob < ApplicationJob
   def perform(repo, user:, type:, url:)
     importer = nil
     return false if repo.source.blank?
-
     case type
     when "gitbook"
       importer = BlueDoc::Import::GitBook.new(repository: repo, user: user, url: url)
@@ -19,6 +18,7 @@ class RepositoryImportJob < ApplicationJob
 
     repo.source.update(status: :done, message: "", retries_count: 0)
     Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :success })
+    true
   rescue => e
     retries_count = (repo.source&.retries_count || 0) + 1
     repo.source.update(status: :failed, message: e.message, retries_count: retries_count)

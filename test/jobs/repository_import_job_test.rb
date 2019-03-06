@@ -31,6 +31,7 @@ class RepositoryImportJobTest < ActiveSupport::TestCase
   end
 
   test "perform with archive" do
+    create(:repository_source, repository: @repo)
     mock = Minitest::Mock.new
     @repo.import_archive.attach(io: load_file("archive.zip"), filename: "test.zip")
     mock.expect(:perform, true, [])

@@ -21,6 +21,7 @@ gem "kaminari"
 
 gem "aws-sdk-s3", require: false
 gem "mini_magick"
+gem "image_processing", "~> 1.2"
 # validates :avatar, file_size:
 gem "file_validators"
 gem "letter_avatar"
