@@ -55,7 +55,7 @@
 
               <% if can? :destroy, @note %>
                 <li class="dropdown-divider" role="separator"></li>
-                <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_note_path(@user, @note) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+                <li class="text-danger"><a class="dropdown-item" data-close-dialog data-method="delete" href="<%= user_note_path(@user, @note) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
               <% end %>
             </ul>
           </details>

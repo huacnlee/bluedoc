@@ -44,14 +44,15 @@
   left: 0;
   z-index: 100;
   width: 160px;
-  padding-top: $spacer-1;
-  padding-bottom: $spacer-1;
+  padding: 6px 0;
   margin-top: 0px;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
+  border: 1px solid #D9D9D9;
   border-radius: 3px;
-  box-shadow: 0 3px 8px rgba(27, 31, 35, 0.3);
+  box-shadow: 0 4px 8px rgba(174, 174, 174, .15);
+  color: $text-main;
   &::before,
   &::after {
     position: absolute;
@@ -60,15 +61,15 @@
   }
 
   &::before {
-    border: $spacer-2 solid transparent;
-    border-bottom-color: #eee;
+    border: 8px solid transparent;
+    border-bottom-color: #D9D9D9;
   }
 
   &::after {
-    border: $spacer-2 solid transparent;
+    border: 8px solid transparent;
     border-bottom-color: #fff;
   }
-
+  line-height: 32px;
   // stylelint-disable-next-line selector-max-type
   > ul {
     list-style: none;
@@ -88,22 +89,15 @@
 // Dropdown items (can be links or buttons)
 .dropdown-item {
   display: block;
-  padding: $spacer-1 $spacer-2 $spacer-1 $spacer-3;
+  padding: 0 14px;
   overflow: hidden;
-  color: $text-gray-dark;
   text-overflow: ellipsis;
   white-space: nowrap;
 
   &:hover,
   &.zeroclipboard-is-hover {
-    color: #fff !important;
-    text-decoration: none;
-    background-color: $primary;
-
-    > .octicon {
-      color: inherit;
-      opacity: 1;
-    }
+    background-color: #f5f5f5;
+    color: inherit!important;
   }
 
   &.btn-link {
@@ -121,8 +115,8 @@
 
 .dropdown-divider {
   height: 1px;
-  margin: $spacer-1 1px;
-  background-color: #e0e0e0;
+  margin: 4px 1px;
+  background-color: #D9D9D9;
 }
 
 .dropdown-header {

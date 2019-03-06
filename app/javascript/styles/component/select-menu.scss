@@ -1,9 +1,8 @@
 
 .select-menu-button {
-  @extend .form-control;
   padding-right: 40px;
   .avatar {
-    margin-top: -1px;
+    margin-right: 8px;
   }
 }
 
@@ -110,13 +109,14 @@
     width: 310px;
     margin-top: 4px;
     margin-bottom: 20px;
+    padding: 6px 0;
     overflow: hidden;
     color: #586069;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #D9D9D9;
-    box-shadow: rbga(0, 0, 0, 0.02);
-    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(174, 174, 174, .15);
+    border-radius: 6px;
 }
 
 .select-menu-modal-narrow {
@@ -279,11 +279,11 @@
     background: transparent;
     border: 0;
     width: 100%;
-    padding: 8px 8px 8px 30px;
+    padding: 5px 8px 5px 30px;
     overflow: hidden;
     color: inherit;
     cursor: pointer;
-    border-bottom: 1px solid #eaecef;
+    border-bottom: 1px solid #D9D9D9;
 
     label {
       margin-bottom: 0px;
@@ -345,7 +345,7 @@
 }
 
 .select-menu-item:hover,.select-menu-item:hover.selected,.select-menu-item:hover.select-menu-action,.select-menu-item:hover .description-inline,.select-menu-item:focus,.select-menu-item:focus.selected,.select-menu-item:focus.select-menu-action,.select-menu-item:focus .description-inline,.select-menu-item.navigation-focus,.select-menu-item.navigation-focus.selected,.select-menu-item.navigation-focus.select-menu-action,.select-menu-item.navigation-focus .description-inline,.select-menu-item[aria-selected="true"],.select-menu-item[aria-selected="true"].selected,.select-menu-item[aria-selected="true"].select-menu-action,.select-menu-item[aria-selected="true"] .description-inline {
-    background-color: #F3F7FF;
+    background-color: #F5F5F5;
 }
 
 .select-menu-item:hover>.octicon,.select-menu-item:hover.selected>.octicon,.select-menu-item:hover.select-menu-action>.octicon,.select-menu-item:hover .description-inline>.octicon,.select-menu-item:focus>.octicon,.select-menu-item:focus.selected>.octicon,.select-menu-item:focus.select-menu-action>.octicon,.select-menu-item:focus .description-inline>.octicon,.select-menu-item.navigation-focus>.octicon,.select-menu-item.navigation-focus.selected>.octicon,.select-menu-item.navigation-focus.select-menu-action>.octicon,.select-menu-item.navigation-focus .description-inline>.octicon,.select-menu-item[aria-selected="true"]>.octicon,.select-menu-item[aria-selected="true"].selected>.octicon,.select-menu-item[aria-selected="true"].select-menu-action>.octicon,.select-menu-item[aria-selected="true"] .description-inline>.octicon {
@@ -504,6 +504,10 @@ form.select-menu-item>div:first-child {
 .select-menu-item-text {
     display: block;
     text-align: left
+}
+
+.select-menu-item-text .avatar {
+    margin-right: 8px;
 }
 
 .select-menu-item-text .description {

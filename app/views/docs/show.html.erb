@@ -100,7 +100,7 @@
 
                   <% if can? :destroy, @doc %>
                     <li class="dropdown-divider" role="separator"></li>
-                    <li><a class="dropdown-item text-red" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+                    <li class="text-danger"><a class="dropdown-item" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
                   <% end %>
                 </ul>
               </details>

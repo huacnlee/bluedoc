@@ -10,11 +10,11 @@
   <div class="doc-share-button-box dropdown-menu dropdown-menu-sw p-4" style="width: 420px">
     <h4 class="mb-5"><%= t(".Share doc") %></h4>
     <% if doc.share %>
-      <p class="description"><%= t(".Everyone can visits this doc with the share link") %></p>
+      <p class="description f6"><%= t(".Everyone can visits this doc with the share link") %></p>
       <div class="form-group mb-3">
         <input type="text" readonly value="<%= doc.share.to_url %>" class="form-control" />
       </div>
-      <div class="share-user mb-5">
+      <div class="share-user mb-5 f6">
         <%= user_name_tag(doc.share&.user) %> <span class="text-gray-light"><%= t(".opened share at") %> <%= timeago doc.share.created_at %></span>
       </div>
       <div class="action float-right">
