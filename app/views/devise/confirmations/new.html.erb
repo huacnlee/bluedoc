@@ -1,22 +1,20 @@
-<div class="col-12 clearfix">
-  <div class="col-12 col-md-8">
-    <div class="sub-title">
-      <div class="heading"><%= t(".Resend confirmation instructions") %></div>
+<div class="col-12 col-md-7">
+  <div class="sub-title">
+    <div class="heading"><%= t(".Resend confirmation instructions") %></div>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "/shared/error_messages", target: resource %>
+
+    <div class="form-group mb-button">
+      <%= f.label :email, class: "control-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "/shared/error_messages", target: resource %>
-
-      <div class="form-group">
-        <%= f.label :email, class: "control-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit t(".Resend confirmation instructions") %>
-      </div>
-    <% end %>
-  </div>
+    <div class="actions">
+      <%= f.submit t(".Resend confirmation instructions"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>
 
 
