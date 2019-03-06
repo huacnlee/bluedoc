@@ -13,12 +13,10 @@ form {
     color: $text-gray-light;
     a { color: $text-gray-dark; }
     code {
-      display: inline-block;
-      background: #f5f5f5;
-      padding: 1px 4px;
-      border-radius: 2px;
-      color: #444;
-      font-size: inherit;
+      padding: 0;
+      font-weight: bold;
+      display: inline;
+      background: none;
       font-family: Monaco, Console, monospace;
     }
     strong {
@@ -154,10 +152,17 @@ input[type=checkbox] {
 
 .form-checkbox {
   padding-left: 20px;
-  margin: 15px 0;
+  margin-bottom: 20px;
   vertical-align: middle;
+  position: relative;
+  input[type=radio] {
+    position: absolute;
+    left: 0;
+    top: 4px;
+  }
   .form-text {
-    margin-top: 5px;
+    margin-top: 10px;
+    font-size: 12px;
   }
 }
 
