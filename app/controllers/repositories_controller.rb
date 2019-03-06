@@ -32,6 +32,7 @@ class RepositoriesController < Users::ApplicationController
 
     respond_to do |format|
       if @repository.save
+        @repository.import_from_source
         Activities::Repository.new(@repository).create
 
         notice = t(".Repository was successfully created")

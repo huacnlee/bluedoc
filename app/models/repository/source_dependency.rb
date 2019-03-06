@@ -15,7 +15,6 @@ class Repository
 
   before_validation :validate_gitbook_url
   after_save :save_source_url
-  after_commit :import_from_source, on: [:create]
 
   def gitbook_url
     return @gitbook_url if defined? @gitbook_url
