@@ -7,7 +7,7 @@ class BlobsController < ActiveStorage::BaseController
   # GET /uploads/:id?s=large
   def show
     send_file_by_disk_key @blob, content_type: @blob.content_type
-  rescue ActionController::MissingFile
+  rescue ActionController::MissingFile, ActiveStorage::FileNotFoundError
     head :not_found
   rescue ActiveStorage::IntegrityError
     head :unprocessable_entity
