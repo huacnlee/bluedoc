@@ -30,6 +30,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get user_path(@user), xhr: true
     assert_equal 200, response.status
     assert_match '$(".user-activities form.more-button")', response.body
+
+    # Should not allow open system user
+    get user_path(User.system)
+    assert_equal 404, response.status
   end
 
   test "GET /:slug?tab=repositories" do

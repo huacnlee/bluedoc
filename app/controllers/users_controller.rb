@@ -99,6 +99,7 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound if @user.system?
     end
 
     def user_params

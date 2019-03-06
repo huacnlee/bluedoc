@@ -288,6 +288,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal -1, User.system.id
     assert_equal "system", User.system.slug
     assert_equal "System", User.system.name
+
+    assert_equal true, User.system.system?
+
+    u = build(:user, slug: "admin")
+    assert_equal true, u.system?
   end
 
   test "actions" do

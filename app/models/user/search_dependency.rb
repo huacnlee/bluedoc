@@ -3,10 +3,6 @@
 class User
   include Searchable
 
-  SYSTEM_USER_SLUGS = %w[admin system]
-
-  scope :without_system, -> { where.not(slug: SYSTEM_USER_SLUGS) }
-
   def as_indexed_json(_options = {})
     {
       sub_type: self.type.downcase,
@@ -19,8 +15,7 @@ class User
   end
 
   def es_deleted?
-    return true if self.deleted?
-    SYSTEM_USER_SLUGS.include?(self.slug)
+    self.deleted? || self.system?
   end
 
   def indexed_changed?
