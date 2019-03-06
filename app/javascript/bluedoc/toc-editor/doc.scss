@@ -8,21 +8,18 @@
             user-select: none;
   background: #FFF;
   border: 1px solid #F2F2F2;
-  padding: 8px 13px;
-  line-height: 20px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-right: 34px;
+  padding: 12px 20px;
+  margin-bottom: 10px;
   position: relative;
 
-  &:first-child { border-radius: 3px 3px 0 0; }
-  &:last-child { border-radius: 0 0 3px 3px; }
-
   &.new {
-    margin-bottom: 8px;
     border-radius: 3px;
     font-weight: bold;
-    .opts {
-      display: block;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    .title {
+      text-align: center;
     }
   }
 

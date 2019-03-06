@@ -15,7 +15,7 @@ export default class DocList extends PureComponent {
     const list = this.filterList();
     const { onAddItem } = this.props;
     return (
-      <div className="doc-list col-4">
+      <div className="doc-list">
         <DocItem key='doc-new' onAddItem={onAddItem} isNew/>
         {list.map((item, index) => (
           <DocItem key={`item-${index}`} onAddItem={onAddItem} item={item} />
