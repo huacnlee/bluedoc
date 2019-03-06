@@ -2,7 +2,14 @@
 
 <div class="main-content">
   <div class="sub-title mb-4">
-    <div class="heading mb-3"><%= t(".New Repository") %></div>
+    
+    <div class="heading mb-3">
+      <% if params[:_by] == "import" %>
+        <%= t(".Import Repository") %>
+      <% else %>
+        <%= t(".New Repository") %>
+      <% end %>
+    </div>
     <div class="text-main"><%= raw t(".A repository contains all the documents for your project") %></div>
   </div>
 
@@ -10,7 +17,7 @@
     <%= render "/shared/error_messages", target: @repository %>
     <input type="hidden" name="_by" value="<%= params[:_by] %>" />
     <% if params[:_by] == "import" %>
-    <div class="import-box markdown-body clearfix mb-4">
+    <div class="import-box markdown-body">
       <% if params[:provider] == "gitbook" %>
         <div class="form-group" style="max-width: 700px">
           <label class="control-label"><%= t(".Import from Git") %></label>
@@ -27,16 +34,17 @@
             <span class="btn"><%= t(".Select File") %></span>
             <%= form.file_field :import_archive, direct_upload: true, class: "form-control js-upload-file", accept: "application/zip" %>
           </label>
-          <div class="py-2"><%= icon_tag("text-attachment") %> <span id="upload-file-name"></span></div>
+          <div class="py-2 v-hidden" id="upload-file-name-wrap"><%= icon_tag("text-attachment") %> <span id="upload-file-name"></span></div>
           <div class="form-text">
             <div><%= raw t(".You can archive multiple markdown files as a zip file, and then choice the zip file for import") %></div>
-            <div><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook) %>.</div>
+            <div><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook), class: "link-gray-dark" %>.</div>
           </div>
         </div>
         <script type="text/javascript">
           $("form").on("change", ".js-upload-file", (e) => {
             const value = e.target.value;
             $('#upload-file-name').text(value.split('\\').pop());
+            $('#upload-file-name-wrap').removeClass('v-hidden');
           });
         </script>
       <% end %>
@@ -69,15 +77,17 @@
 
       <div class="form-checkbox">
         <label>
-          <input type="radio" name="repository[privacy]" checked value="public"> <%= t(".Public") %>
-          <div class="form-text">
-            <%= t(".Anyone can see this repository") %>
-          </div>
+          <input type="radio" name="repository[privacy]" checked value="public"> 
+            <%= t(".Public") %>
+            <div class="form-text">
+              <%= t(".Anyone can see this repository") %>
+            </div>
         </label>
       </div>
       <div class="form-checkbox">
         <label>
-          <input type="radio" name="repository[privacy]" value="private"> <%= t(".Private") %>
+          <input type="radio" name="repository[privacy]" value="private">
+          <%= t(".Private") %>
           <div class="form-text">
             <%= t(".You choose who can see and edit to this repository") %>
           </div>
@@ -85,7 +95,7 @@
       </div>
     </div>
 
-    <div class="form-group mb-5" style="max-width: 700px">
+    <div class="form-group mb-button" style="max-width: 700px">
       <%= form.label :description, class: "control-label" %>
       <%= form.text_field :description, class: "form-control" %>
     </div>

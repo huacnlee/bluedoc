@@ -561,6 +561,7 @@ zh-CN:
       Sort by Created: 创建时间
     new:
       New Repository: 新建知识库
+      Import Repository: 导入知识库
       A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
       Import from Git: 从 Git 导入知识库
       Import from Archive: 从 Zip 包导入知识库

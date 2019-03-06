@@ -561,6 +561,7 @@ en:
       Sort by Created: Created
     new:
       New Repository: New Repository
+      Import Repository: Import Repository
       A repository contains all the documents for your project: A repository contains all the documents for your project.
       Import from Archive: Import from Archive
       Import from Git: Import from Git
