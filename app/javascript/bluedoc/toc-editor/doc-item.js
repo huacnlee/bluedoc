@@ -11,9 +11,19 @@ export default class DocItem extends PureComponent {
     const { item = {}, isNew = false } = this.props;
     const { exist = false, title = '', url = '' } = item;
     if (exist) return null;
+    if (isNew) {
+      return (
+        <div className='doc-item-drageable doc-item new link-gray-dark' onClick={this.onAddClick}>
+          <div className="title icon-middle-wrap">
+            <i className="fas fa-add" style={{ marginRight: '10px' }}></i>
+            {i18n.t('Add a custom item')}
+          </div>
+        </div>
+      );
+    }
     return (
-      <div className={`doc-item-drageable doc-item clearfix ${isNew ? 'new' : ''}`}>
-        <div className="title">{isNew ? i18n.t('Add a custom item') : title}</div>
+      <div className='doc-item-drageable doc-item'>
+        <div className="title">{title}</div>
         <div className="slug">{url}</div>
         <div className="opts" onClick={this.onAddClick}>
           <i className="fas fa-add"></i>
