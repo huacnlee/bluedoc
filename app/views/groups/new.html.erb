@@ -15,7 +15,7 @@
       </div>
     <% end %>
 
-    <%= form_group(f, :name) do %>
+    <%= form_group(f, :name, class: "form-group mb-button") do %>
       <%= f.text_field :name, class: "form-control"%>
       <div class="form-text">
         <%= t(".Display title of this Group") %>
