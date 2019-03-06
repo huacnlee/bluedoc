@@ -7,6 +7,6 @@ class NotesController
     check_feature! :reader_list
 
     authorize! :read, @note
-    @readers = @note.read_by_user_actions.order("updated_at desc").all
+    @readers = @note.read_by_user_actions.order("updated_at desc").limit(100)
   end
 end

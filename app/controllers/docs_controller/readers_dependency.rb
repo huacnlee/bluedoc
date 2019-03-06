@@ -8,7 +8,7 @@ class DocsController
     check_feature! :reader_list
 
     authorize! :read, @doc
-    @readers = @doc.read_by_user_actions.order("updated_at desc").all
+    @readers = @doc.read_by_user_actions.order("updated_at desc").limit(100)
   end
 end
 # PRO-end
