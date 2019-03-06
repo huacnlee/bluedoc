@@ -133,12 +133,18 @@ class UserTest < ActiveSupport::TestCase
     u2 = create(:user, email: "jason@com.com")
     u3 = create(:user, email: "Fooo@bar.com")
 
+    u01 = create(:user, slug: "admin", email: "jason@bar.com")
+    u02 = create(:user, slug: "system", email: "jason1@bar.com")
+
     users = User.prefix_search("ja")
     assert_equal [u0.slug, u1.slug, u2.slug].sort, users.collect(&:slug).sort
 
     # should seach following user at top of results
     u4 = create(:user, name: "Jack")
     u5 = create(:user, name: "Nowa")
+
+    u3.follow_user(u01)
+    u3.follow_user(u02)
     u3.follow_user(u4)
     u3.follow_user(u5)
     users = User.prefix_search("ja", user: u3)
@@ -221,6 +227,20 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "as_indexed_json" do
+    user = create(:user)
+    user.stub(:slug, "admin") do
+      assert_equal true, user.es_deleted?
+      assert_equal true, user.as_indexed_json[:deleted]
+    end
+    user.stub(:slug, "system") do
+      assert_equal true, user.es_deleted?
+      assert_equal true, user.as_indexed_json[:deleted]
+    end
+    user.stub(:deleted?, true) do
+      assert_equal true, user.es_deleted?
+      assert_equal true, user.as_indexed_json[:deleted]
+    end
+
     user = create(:user, description: "Hello world")
     data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false }
     assert_equal data, user.as_indexed_json
