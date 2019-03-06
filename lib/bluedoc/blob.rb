@@ -14,7 +14,7 @@ module BlueDoc
       end
 
       def variation(style)
-        ActiveStorage::Variation.new(combine_options: combine_options(style))
+        ActiveStorage::Variation.new(combine_options(style))
       end
 
       def process_for_aliyun(style)
