@@ -36,5 +36,10 @@ module BlueDoc
       num = SecureRandom.random_number(seed) + 100000
       num.to_s(36)
     end
+
+    # Generate a safe filename
+    def self.filenameize(title)
+      ActiveStorage::Filename.new(title).sanitized
+    end
   end
 end

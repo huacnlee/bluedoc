@@ -49,9 +49,9 @@ module Exportable
             end
 
     if type == :pdf
-      "#{fname}.pdf"
+      BlueDoc::Slug.filenameize("#{fname}.pdf")
     elsif type == :archive
-      "#{fname}.zip"
+      BlueDoc::Slug.filenameize("#{fname}.zip")
     end
   end
 

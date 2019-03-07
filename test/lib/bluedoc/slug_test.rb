@@ -53,4 +53,9 @@ class BlueDoc::SlugTest < ActionView::TestCase
       assert BlueDoc::Slug.random.length > 3
     end
   end
+
+  test "filenameize" do
+    assert_equal "你好 This is-+file.pdf", BlueDoc::Slug.filenameize("你好 This is-+file.pdf")
+    assert_equal "你好 This-is-file?^&.pdf", BlueDoc::Slug.filenameize("你好 This\\is/file?^&.pdf")
+  end
 end
