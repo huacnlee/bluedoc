@@ -60,6 +60,8 @@ class TocItem extends React.PureComponent {
 
   handleEdit = () => this.setState({ canEdit: true })
 
+  handleDelete = () => this.props.onDelete(this.props.item.index)
+
   handelDoneEdit = () => this.setState({
     canEdit: false,
   }, () => this.props.onChangeItem({ memory: true }))
@@ -102,13 +104,16 @@ class TocItem extends React.PureComponent {
               value={url}
               readOnly={!!id}
             />
-            <i className="fas fa-check btn-action btn-ok" onClick={this.handelDoneEdit}></i>
+            <i className="fas fa-check btn-ok" onClick={this.handelDoneEdit}></i>
           </form>
         ) : (
           <div className="cell-wrap">
             <span className="title">{title || 'title'}</span>
             <span className="slug">{url || 'url'}</span>
-            <i className="fas fa-pencil btn-action btn-edit" onClick={this.handleEdit}></i>
+            <div className="btn-action">
+              <i className="fas fa-pencil btn-edit" onClick={this.handleEdit}></i>
+              <i className="fas fa-delete btn-delete" onClick={this.handleDelete}></i>
+            </div>
           </div>
         )}
       </div>

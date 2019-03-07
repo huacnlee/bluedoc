@@ -356,6 +356,7 @@ class TocEditor extends React.Component {
           onSortEnd={this.onSortEnd}
           onSortMove={this.onSortMove}
           onSelectItem={this.onSelectItem}
+          onDeleteItem={this.onDeleteItem}
           onIndent={this.changeItemIndent}
         />
         <Hotkeys keyName={hotKeyMap.join(',')} onKeyDown={this.handleHotKey}></Hotkeys>
