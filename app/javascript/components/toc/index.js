@@ -21,8 +21,9 @@ export default class TocList extends React.PureComponent {
   }
 
   render() {
-    const { items, folders } = this.state;
+    const { items = [], folders = [] } = this.state;
     const { currentSlug, withSlug = false, prefix } = this.props;
+
     return (
       <ul className="toc-items">
         {items.map(({

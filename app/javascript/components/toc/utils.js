@@ -29,9 +29,12 @@ export const formatItems = (items, currentSlug, defaultFoldeDepth = 1) => {
       tocPath: prevNodeId.join('_'),
     };
   });
+
   if (currentSlug) {
-    const { tocPath } = result.find(v => v.url === currentSlug);
-    pathNode = tocPath.split('_');
+    const item = result.find(v => v.url === currentSlug);
+    if (item) {
+      pathNode = item.tocPath.split('_');
+    }
   }
   const folders = folderNode.map((i) => {
     const foldersStatus = pathNode.indexOf(`${i}`) === -1
