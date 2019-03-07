@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  include LetterAvatar::AvatarHelper
-
   def user_name_tag(user, opts = {})
     return "" if user.blank?
 

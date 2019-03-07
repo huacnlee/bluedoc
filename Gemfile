@@ -24,7 +24,6 @@ gem "mini_magick"
 gem "image_processing", "~> 1.2"
 # validates :avatar, file_size:
 gem "file_validators"
-gem "letter_avatar"
 gem "twemoji"
 
 gem "bootsnap", ">= 1.1.0", require: false
