@@ -136,7 +136,7 @@
         <% end %>
 
         <% if @comments %>
-        <div class="doc-comments mt-3 clearfix">
+        <div class="doc-comments mt-3 clearfix" id="comment">
           <%= render "/comments/comments", commentable: @doc, comments: @comments %>
         </div>
         <% end %>
@@ -145,3 +145,4 @@
   </div>
   <div class="doc-body-toc" data-turbolinks="false"></div>
 </div>
+<%= react_component("QuickScroll") %>
