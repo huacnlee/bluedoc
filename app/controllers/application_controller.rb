@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  depends_on :devise_parameters, :locales
+  depends_on :devise_parameters, :locales, :captcha
   helper_method :unread_notifications_count
   before_action :unread_notifications_count
 

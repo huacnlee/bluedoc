@@ -244,6 +244,8 @@ en:
         Account Email suffix: Account Email suffix
         Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "Limit user registration email must has suffx with in this list (split each by comma or break line, for example: <code>gmail.com,bluedoc.io</code>), keep this empty to allow any emails."
         Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Enable captcha: Enable Captcha
+        Check to enable captcha for protected some important form: "Check to enable captcha for protected some important form (Registration / Forget password ...)"
         Require Email confirm for new account: Require account confirmed Email before sign in.
         Disable this BlueDoc will requirement sign in for all pages: Disable this BlueDoc will requirement sign in for all pages.
         PlantUML Service Host: "PlantUML Service Host:"

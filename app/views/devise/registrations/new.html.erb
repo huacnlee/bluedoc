@@ -56,10 +56,12 @@ end
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     <% end %>
 
+    <% if rucaptcha_enable? %>
     <%= form_group(f, :base, label: false) do %>
       <label class="control-label"><%= t("Captcha") %></label>
       <%= rucaptcha_input_tag(class: 'form-control') %>
       <%= rucaptcha_image_tag(alt: 'Captcha') %>
+    <% end %>
     <% end %>
 
     <div class="actions text-center mt-6">

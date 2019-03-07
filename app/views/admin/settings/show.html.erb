@@ -15,6 +15,16 @@
     </div>
   </div>
 
+  <div class="form-group form-checkbox">
+    <label>
+      <%= f.check_box :captcha_enable, checked: Setting.captcha_enable? %>
+      <%= t(".Enable captcha") %>
+    </label>
+    <div class="form-text">
+      <%= t(".Check to enable captcha for protected some important form") %>
+    </div>
+  </div>
+
   <% feature_for(:limit_user_emails) do %>
   <div class="form-group">
     <label class="controler-label"><%= t(".Account Email suffix") %></label>

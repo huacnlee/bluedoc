@@ -8,6 +8,9 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
 
+    assert_select "input[name='_rucaptcha']"
+    assert_select ".rucaptcha-image"
+
     assert_select ".user-email-suffix-support-list", 0
 
     allow_feature(:limit_user_emails) do
@@ -35,8 +38,6 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
 
     sign_out user
-
-
 
     user_params = {
       slug: "monster",
@@ -69,6 +70,35 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     post user_session_path, params: { user: { email: user_params[:email], password: user_params[:password] } }
     assert_redirected_to root_path
     assert_signed_in
+  end
+
+  test "Signup with captcha disabled" do
+    Setting.stub(:captcha_enable?, false) do
+      get new_user_registration_path
+      assert_equal 200, response.status
+      assert_match /Sign in/, response.body
+
+      assert_select "input[name='_rucaptcha']", 0
+      assert_select ".rucaptcha-image", 0
+
+      user_params = {
+        slug: "monster",
+        email: "monster@gmail.com",
+        password: "123456",
+        password_confimation: "123456",
+      }
+
+      # Check captcha
+      post user_registration_path, params: { user: user_params }
+      assert_redirected_to new_user_session_path
+
+      follow_redirect!
+      assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+
+      user = User.last
+      assert_equal user_params[:slug], user.slug
+      assert_equal user_params[:email], user.email
+    end
   end
 
   test "visit sign up with Users limit" do

@@ -244,6 +244,8 @@ zh-CN:
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
         Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
         Account Email suffix: 用户 Email 后缀限制
+        Enable captcha: 启用验证码
+        Check to enable captcha for protected some important form: "在一些重要的表单开启验证码功能（注册、找回密码...）"
         Limit user registration email must has suffx with in this list, empty it to allow any emails_html: 设置注册表单要求用户 Email 后缀必须在此列表设定之内（多个用换行或逗号分隔，比如 <code>gmail.com,bluedoc.io</code>），配合 Email 验证功能可以限制特定的 Email 用户使用 BlueDoc。清空此项将允许任何 Email 注册。
         Disable this BlueDoc will requirement sign in for all pages: 关闭此功能，BlueDoc 将要求所有内容页面必须登录。
         PlantUML Service Host: "UML 图像服务:"
