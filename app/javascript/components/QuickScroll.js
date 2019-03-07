@@ -4,12 +4,17 @@ import React, { PureComponent } from 'react';
 export default class QuickScroll extends PureComponent {
   // quick scroll to page top
   handleScrollTop = () => {
-    window.scrollTo(0, 0);
+    if (document.fullscreenElement) {
+      document.body.scrollTo(0, 0);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }
 
   // quick scroll to comment position
   handleScrollComment = () => {
-    document.querySelector('#comment').scrollIntoView(false);
+    const commentEle = document.querySelector('#comment');
+    commentEle && commentEle.scrollIntoView(false);
   }
 
   render() {

@@ -44,7 +44,7 @@
               <% end %>
               <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
               <li class="dropdown-divider" role="separator"></li>
-              <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><i class="fas fa-wide-mode"></i> <%= t(".Fullscreen") %></a></li>
+              <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><%= t(".Fullscreen") %></a></li>
 
               <% if can? :update, @note %>
                 <li class="dropdown-divider" role="separator"></li>
@@ -90,7 +90,7 @@
       <% end %>
 
       <% if @comments %>
-      <div class="doc-comments mt-3 clearfix">
+      <div class="doc-comments mt-3 clearfix" id="comment">
         <%= render "/comments/comments", commentable: @note, comments: @comments %>
       </div>
       <% end %>
@@ -99,3 +99,4 @@
   <div class="doc-body-toc" data-turbolinks="false"></div>
   </div>
 </div>
+<%= react_component("QuickScroll") %>
