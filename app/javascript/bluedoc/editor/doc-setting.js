@@ -1,4 +1,4 @@
-import ErrorMessages from '../shared/error-messages';
+import ErrorMessages from '../shared/error-messages.jsx';
 
 export default class DocSetting extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class DocSetting extends React.Component {
       dataType: 'JSON',
       data: {
         doc: {
-          slug: slugInput.value,
+          slug: newSlug,
         },
       },
       success: (res) => {
@@ -66,7 +66,6 @@ export default class DocSetting extends React.Component {
     const { repositoryURL } = this.props;
 
     return (
-      <React.Fragment>
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
         <summary className="btn"><i className="fas fa-setting"></i></summary>
         <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
@@ -74,8 +73,8 @@ export default class DocSetting extends React.Component {
           <div className="form-group mb-4">
             <label className="control-label">{this.t('.Slug')}</label>
             <div className="input-group d-flex">
-              <div className="input-group-prepend mr-2">
-                <div className="input-group-text">{repositoryURL}/</div>
+              <div className="input-group-prepend mr-2" title={`${repositoryURL}/`}>
+                <div className="input-group-text text-overflow">{repositoryURL}/</div>
               </div>
               <input type="text" ref={this.slugInputRef} className="form-control input-slug flex-auto" defaultValue={slug} />
             </div>
@@ -85,7 +84,6 @@ export default class DocSetting extends React.Component {
           </div>
         </div>
       </details>
-      </React.Fragment>
     );
   }
 }

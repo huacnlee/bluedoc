@@ -89,7 +89,9 @@ textarea.form-control {
 
   .input-group-prepend {
     margin-right: -1px;
+    max-width: 50%;
     .input-group-text {
+      width: 100%;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       padding: 9px 15px;
