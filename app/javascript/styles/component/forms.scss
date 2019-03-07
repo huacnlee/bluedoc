@@ -88,25 +88,15 @@ textarea.form-control {
   }
 
   .input-group-prepend {
-    margin-right: -1px;
     max-width: 50%;
     .input-group-text {
       width: 100%;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
       padding: 9px 15px;
-      margin-bottom: 0;
-      font-size: 1rem;
-      font-weight: 400;
       line-height: 1.5;
-      color: #495057;
-      text-align: center;
-      white-space: nowrap;
-      background-color: #f7f7f7;
-      border: 1px solid #f0f0f0;
-      border-right: 0;
-      border-radius: 2px 0 0 2px;
-      font-size: 13px;
+      color: $text-gray-light;
+      background-color: #f9f9f9;
+      border-radius: 2px;
+      font-size: 12px;
     }
   }
 
