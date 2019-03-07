@@ -15,6 +15,7 @@ class RepositoryImportGitbookTest < ActiveSupport::TestCase
 
     url = "https://hello"
     repo = create(:repository, gitbook_url: url)
+    repo.import_from_source
     assert_enqueued_jobs 1, only: RepositoryImportJob
     assert_equal false, repo.new_record?
 
