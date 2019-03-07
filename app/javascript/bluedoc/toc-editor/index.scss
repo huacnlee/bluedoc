@@ -58,6 +58,9 @@
 
       .dropdown {
         display: flex;
+        .btn {
+          vertical-align: unset;
+        }
       }
 
       .btn {
@@ -72,6 +75,8 @@
 
       .dropdown-menu {
         text-align: left;
+        right: 5px;
+        top: 110%;
       }
     }
   }
@@ -86,7 +91,7 @@
   }
 
   .fas {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   code {
