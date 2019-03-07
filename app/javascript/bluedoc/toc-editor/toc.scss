@@ -60,6 +60,9 @@
         visibility: visible;
         z-index: 2;
       }
+      span.slug {
+        visibility: hidden;
+      }
     }
   }
 
@@ -100,20 +103,34 @@
   }
   .btn-action {
     position: absolute;
-    color: #777;
+    color: #979797;
+    .fas {
+      padding: 8px;
+      border-radius: 15px;
+      margin-left: 6px;
+      &:hover {
+        background: #F7F7F7;
+      }
+    }
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    visibility: hidden;
+  }
+  .btn-edit:hover {
+    color: $primary;
+  }
+  .btn-delete:hover {
+    color: $danger;
+  }
+  .btn-ok {
+    position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 16px;
-    &:hover {
-      color: #333;
-    }
-    &:active {
-      color: #000;
-    }
-  }
-  .btn-edit {
-    visibility: hidden;
   }
 }
