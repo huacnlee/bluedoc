@@ -61,6 +61,7 @@ class Setting < RailsSettings::Base
   field :mathjax_service_host, default: (ENV["MATHJAX_SERVICE_HOST"] || "http://localhost:4010"), type: :string
   field :confirmable_enable, default: "1", type: :boolean
   field :user_email_suffixes, default: "", type: :array
+  field :captcha_enable, default: "1", type: :boolean
 
   # Readonly setting keys, no cache, only load from yml file
   field :host, :mailer_from, :mailer_options, readonly: true

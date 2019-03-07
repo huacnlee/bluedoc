@@ -3,6 +3,7 @@ zh-CN:
   updated_at: 更新时间
   created at: 创建于
   updated at: 更新于
+  Captcha: 验证码
   shared:
     more_button:
       More: "加载更多 ..."
@@ -98,7 +99,7 @@ zh-CN:
         Password has changed: 我们联系你，是因为你的密码已被修改。
       reset_password_instructions:
         subject: 重置密码信息
-        "Someone has requested a link to change your password. You can do this through the link below": 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
+        Someone has requested a link to change your password: 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
         Change my password: 修改我的密码
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。
@@ -243,6 +244,8 @@ zh-CN:
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
         Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
         Account Email suffix: 用户 Email 后缀限制
+        Enable captcha: 启用验证码
+        Check to enable captcha for protected some important form: "在一些重要的表单开启验证码功能（注册、找回密码...）"
         Limit user registration email must has suffx with in this list, empty it to allow any emails_html: 设置注册表单要求用户 Email 后缀必须在此列表设定之内（多个用换行或逗号分隔，比如 <code>gmail.com,bluedoc.io</code>），配合 Email 验证功能可以限制特定的 Email 用户使用 BlueDoc。清空此项将允许任何 Email 注册。
         Disable this BlueDoc will requirement sign in for all pages: 关闭此功能，BlueDoc 将要求所有内容页面必须登录。
         PlantUML Service Host: "UML 图像服务:"

@@ -2,11 +2,14 @@
 
 require "test_helper"
 
-class RegistrationsController < ActionDispatch::IntegrationTest
+class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "normal user sign up" do
     get new_user_registration_path
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
+
+    assert_select "input[name='_rucaptcha']"
+    assert_select ".rucaptcha-image"
 
     assert_select ".user-email-suffix-support-list", 0
 
@@ -43,6 +46,12 @@ class RegistrationsController < ActionDispatch::IntegrationTest
       password_confimation: "123456",
     }
 
+    # Check captcha
+    post user_registration_path, params: { user: user_params }
+    assert_equal 200, response.status
+    assert_select ".form-error", text: "Captcha invalid!"
+
+    ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
     post user_registration_path, params: { user: user_params }
     assert_redirected_to new_user_session_path
 
@@ -63,7 +72,38 @@ class RegistrationsController < ActionDispatch::IntegrationTest
     assert_signed_in
   end
 
+  test "Signup with captcha disabled" do
+    Setting.stub(:captcha_enable?, false) do
+      get new_user_registration_path
+      assert_equal 200, response.status
+      assert_match /Sign in/, response.body
+
+      assert_select "input[name='_rucaptcha']", 0
+      assert_select ".rucaptcha-image", 0
+
+      user_params = {
+        slug: "monster",
+        email: "monster@gmail.com",
+        password: "123456",
+        password_confimation: "123456",
+      }
+
+      # Check captcha
+      post user_registration_path, params: { user: user_params }
+      assert_redirected_to new_user_session_path
+
+      follow_redirect!
+      assert_select ".notice", text: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+
+      user = User.last
+      assert_equal user_params[:slug], user.slug
+      assert_equal user_params[:email], user.email
+    end
+  end
+
   test "visit sign up with Users limit" do
+    ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
+
     License.stub(:users_limit, 50) do
       # Free version not users limit
       get new_user_registration_path
@@ -84,6 +124,8 @@ class RegistrationsController < ActionDispatch::IntegrationTest
   end
 
   test "user sign up with confirmable disable" do
+    ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
+
     get new_user_registration_path
     assert_equal 200, response.status
 
@@ -117,6 +159,7 @@ class RegistrationsController < ActionDispatch::IntegrationTest
   end
 
   test "Sign up with Omniauth" do
+    ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
     OmniAuth.config.add_mock(:google_oauth2, uid: "123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" })
 
     get "/account/auth/google_oauth2/callback"

@@ -193,7 +193,6 @@ GEM
     kaminari-core (1.1.1)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_avatar (0.3.6)
     letter_opener (1.7.0)
       launchy (~> 2.2)
     listen (3.1.5)
@@ -338,6 +337,8 @@ GEM
     ruby-vips (2.0.13)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
+    rucaptcha (2.5.0)
+      railties (>= 3.2)
     sanitize (5.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
@@ -424,7 +425,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   kaminari
-  letter_avatar
   letter_opener
   listen (>= 3.0.5, < 3.2)
   mini_magick
@@ -443,6 +443,7 @@ DEPENDENCIES
   redis
   redis-objects
   rubocop
+  rucaptcha
   sanitize
   second_level_cache
   sidekiq

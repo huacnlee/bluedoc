@@ -23,3 +23,12 @@ form {
     margin-bottom: 0px;
   }
 }
+
+.rucaptcha-image {
+  height: 50px;
+  cursor: pointer;
+
+  &:active {
+    opacity: 0.6;
+  }
+}

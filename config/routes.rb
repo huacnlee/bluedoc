@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks",
     sessions: "users/sessions",
     registrations: "users/registrations",
+    passwords: "users/passwords"
   }
 
   draw :admin
