@@ -14,7 +14,7 @@ gem "graphql"
 
 gem "sidekiq"
 
-gem "webpacker", "4.0.0.rc7"
+gem "webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
