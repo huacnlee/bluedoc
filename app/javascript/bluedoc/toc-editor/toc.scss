@@ -28,6 +28,16 @@
       pointer-events: auto;
     }
   }
+  &:hover {
+    box-shadow: 0px 4px 7px rgba(190, 190, 190, .1);
+    .btn-action {
+      visibility: visible;
+      z-index: 2;
+    }
+    span.slug {
+      visibility: hidden;
+    }
+  }
 
   .fa-caret {
     color: #aaa;
@@ -54,16 +64,6 @@
     flex: 1;
     padding-left: 10px;
     padding-right: 10px;
-
-    &:hover {
-      .btn-action {
-        visibility: visible;
-        z-index: 2;
-      }
-      span.slug {
-        visibility: hidden;
-      }
-    }
   }
 
   .form-edit {
