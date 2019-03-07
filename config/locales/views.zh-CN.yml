@@ -3,6 +3,7 @@ zh-CN:
   updated_at: 更新时间
   created at: 创建于
   updated at: 更新于
+  Captcha: 验证码
   shared:
     more_button:
       More: "加载更多 ..."
@@ -98,7 +99,7 @@ zh-CN:
         Password has changed: 我们联系你，是因为你的密码已被修改。
       reset_password_instructions:
         subject: 重置密码信息
-        "Someone has requested a link to change your password. You can do this through the link below": 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
+        Someone has requested a link to change your password: 我们收到了找回密码的申请，你可以通过下面的链接来找回密码。
         Change my password: 修改我的密码
         If you did not request this, please ignore this email: 如果不是你申请的，请忽略这封邮件。
         Your password would not change if you not click: 除非你点击链接，你的密码、账号不会有任何影响。

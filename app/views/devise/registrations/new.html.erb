@@ -56,6 +56,12 @@ end
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     <% end %>
 
+    <%= form_group(f, :base, label: false) do %>
+      <label class="control-label"><%= t("Captcha") %></label>
+      <%= rucaptcha_input_tag(class: 'form-control') %>
+      <%= rucaptcha_image_tag(alt: 'Captcha') %>
+    <% end %>
+
     <div class="actions text-center mt-6">
       <%= f.submit t(".Sign up"), class: "btn btn-primary btn-full mb-3" %>
       <%= link_to t(".Already have a account"), new_session_path(resource_name), class: "f6 text-gray-light" %>

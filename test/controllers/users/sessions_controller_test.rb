@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class SessionsControllerTest < ActionDispatch::IntegrationTest
+class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user, slug: "huacnlee", email: "huacnlee@gmail.com", password: "123456", password_confirmation: "123456")
   end

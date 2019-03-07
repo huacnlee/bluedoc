@@ -3,6 +3,7 @@ en:
   updated_at: Updated at
   created at: created at
   updated at: updated at
+  Captcha: Captcha
   shared:
     more_button:
       More: "More ..."
@@ -98,7 +99,7 @@ en:
         "Password has changed": We're contacting you to notify you that your password has been changed.
       reset_password_instructions:
         subject: Reset password instructions
-        "Someone has requested a link to change your password. You can do this through the link below": Someone has requested a link to change your password. You can do this through the link below.
+        Someone has requested a link to change your password: Someone has requested a link to change your password. You can do this through the link below.
         "Change my password": Change my password
         "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
         "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.

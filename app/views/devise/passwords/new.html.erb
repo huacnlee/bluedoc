@@ -13,6 +13,14 @@
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
+      <div class="form-group">
+        <label class="control-label"><%= t("Captcha") %></label>
+        <div style="width: 250px">
+          <%= rucaptcha_input_tag(class: 'form-control') %>
+        </div>
+        <%= rucaptcha_image_tag(alt: 'Captcha') %>
+      </div>
+
       <div class="actions">
         <%= f.submit t(".Submit"), class: "btn btn-primary" %>
       </div>
