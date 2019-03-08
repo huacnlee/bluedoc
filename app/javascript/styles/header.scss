@@ -1,3 +1,29 @@
+.navbar-brand {
+  font-size: 18px;
+  margin-right: 5px;
+  background: url(~images/logo.png) center left no-repeat;
+  background-size: 45px 45px;
+  padding-left: 48px;
+
+  .blue {
+    color: darken($primary, 5%);
+  }
+
+  .fas {
+    font-size: 22px;
+    margin-bottom: -3px;
+  }
+  color: #8B96AD;
+  text-decoration: none !important;
+
+  &:hover {
+    .blue {
+      color: darken($primary, 8%);
+    }
+    color: darken(#8B96AD, 2%) !important;
+  }
+}
+
 .nav-header {
   width: 100%;
   height: 50px;
@@ -9,6 +35,9 @@
   .header-shadow {
     box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
   }
+  .navbar-brand {
+    margin-right: 25px;
+  }
   .header-content {
     height: 100%;
     margin: auto;
@@ -16,30 +45,6 @@
     align-items: center;
   }
 
-  .navbar-brand {
-    font-size: 18px;
-    .fas {
-      font-size: 22px;
-      margin-bottom: -3px;
-    }
-    color: #333;
-    text-decoration: none !important;
-
-    &:hover {
-      color: #111 !important;
-    }
-  }
-  .logo {
-    position: static;
-    font-size: 15px;
-    color: $text-main;
-    margin-right: 20px;
-    a {color: inherit}
-    @include breakpoint(lg) {
-      width: 235px;
-      margin-right: 50px;
-    }
-  }
   .dropdown {
     margin-left: 10px;
     padding: 10px 5px;

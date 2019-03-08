@@ -32,11 +32,11 @@ export default class TocList extends React.PureComponent {
           const show = isShow(tocPath, folders);
           const folder = folders.find(e => e.id === index);
           const active = url === currentSlug;
-          const slug = url;
+          let linkUrl = url;
 
           // If url is only slug (not contains "/") and has prefix props, add prefix to url
           if (url && prefix && !url.includes('/')) {
-            url = `${prefix}${url}`;
+            linkUrl = `${prefix}${url}`;
           }
 
           return (
@@ -48,8 +48,8 @@ export default class TocList extends React.PureComponent {
               {folder && (
                 <i className={`fas fa-arrow ${folder.foldersStatus ? '' : 'folder'}`} onClick={() => this.handdleFolder(index)}/>
               )}
-              <a href={url} className="item-link">{title}</a>
-              {withSlug && <a href={url} className="item-slug">{slug}</a>}
+              <a href={linkUrl} className="item-link">{title}</a>
+              {withSlug && <a href={linkUrl} className="item-slug">{url}</a>}
             </li>
           );
         })}
