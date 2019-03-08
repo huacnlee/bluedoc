@@ -1,11 +1,7 @@
 .quick-wrap {
   position: fixed;
-  bottom: 50px;
-  right: 50px;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1;
-  }
+  bottom: 5px;
+  right: 5px;
 }
 
 .quick-btn {
@@ -17,6 +13,7 @@
   &:hover {
     color: $primary;
   }
+  cursor: pointer;
 }
 
 .quick-top {

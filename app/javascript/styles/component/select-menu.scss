@@ -106,7 +106,8 @@
 
 .select-menu-modal {
     position: relative;
-    width: 310px;
+    min-width: 310px;
+    max-width: 500px;
     margin-top: 4px;
     margin-bottom: 20px;
     padding: 6px 0;
