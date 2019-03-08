@@ -36,6 +36,10 @@ export class MentionList extends React.PureComponent {
     const body = document.querySelector('body')
     const { users = [] } = this.props;
 
+    if (this.state.top === 0 && this.state.left === 0) {
+      return <div />
+    }
+
     return ReactDOM.createPortal(
       <div className="mention-list"
         ref={this.menuRef}
