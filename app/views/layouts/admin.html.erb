@@ -29,7 +29,7 @@
 
       <div class="header-content container">
         <div class="navbar flex-none">
-          <a class="navbar-brand mr-2" href="/admin"><%= icon_tag("bluedoc", label: t("admin.BlueDoc Admin")) %></a>
+          <a class="navbar-brand mr-2" href="/admin"><%= t("admin.BlueDoc Admin") %></a>
 
           <%= render_list_items(class: "nav-link", type: :link, active_class: "selected") do |li|
             li <<  link_to(t("admin.Group"), admin_groups_path, class: "nav-link")
