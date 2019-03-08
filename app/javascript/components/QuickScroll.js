@@ -1,20 +1,30 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { PureComponent } from 'react';
+import animateScrollTo from 'animated-scroll-to';
 
 export default class QuickScroll extends PureComponent {
   // quick scroll to page top
   handleScrollTop = () => {
     if (document.fullscreenElement) {
-      document.body.scrollTo(0, 0);
+      animateScrollTo(0, {
+        element: document.body,
+      });
     } else {
-      window.scrollTo(0, 0);
+      animateScrollTo(0);
     }
   }
 
   // quick scroll to comment position
   handleScrollComment = () => {
     const commentEle = document.querySelector('#comment');
-    commentEle && commentEle.scrollIntoView(false);
+    if (!commentEle) return;
+    if (document.fullscreenElement) {
+      animateScrollTo(commentEle, {
+        element: document.body,
+      });
+    } else {
+      animateScrollTo(commentEle);
+    }
   }
 
   render() {

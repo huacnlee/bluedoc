@@ -2,10 +2,6 @@
 @import "primer-support/index.scss";
 @import "./normalize.scss";
 
-html {
-  scroll-behavior: smooth;
-}
-
 // cover primer normalize.scss a tag color
 a {
   color: inherit;

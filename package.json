@@ -13,6 +13,7 @@
     "@royie/slate-plain-serializer": "^0.6.32",
     "@royie/slate-react": "^0.21.17",
     "activestorage": "^5.2.2",
+    "animated-scroll-to": "^1.2.2",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
     "clipboard": "^2.0.4",
