@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class ApplicationController
   helper_method :rucaptcha_enable?
 
   def rucaptcha_enable?
-    return Setting.captcha_enable?
+    Setting.captcha_enable?
   end
 
   def verify_captcha?(resource)
