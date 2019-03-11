@@ -1,13 +1,15 @@
 <% if @repositories.blank? %>
-<div class="blankslate no-data no-star-repo">
   <% if action_name == "stars" %>
+  <div class="blankslate no-data no-star-repo">
     <h3><%= t(".No star repositories") %></h3>
+    <p><%= t(".You does not have any action_name repositories", action: action_name.singularize) %></p>
+  </div>
   <% else %>
+  <div class="blankslate no-data no-watch">
     <h3><%= t(".No watches repositories") %></h3>
+    <p><%= t(".You does not have any action_name repositories", action: action_name.singularize) %></p>
+  </div>
   <% end %>
-  
-  <p><%= t(".You does not have any action_name repositories", action: action_name.singularize) %></p>
-</div>
 <% else %>
   <% if action_name == "stars" %>
     <h2 class="sub-title"><%= t(".Stared Repositories") %></h2>
