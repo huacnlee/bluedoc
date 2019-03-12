@@ -268,6 +268,10 @@ zh-CN:
     notes:
       index:
         There only include the public Notes: "这里仅列出公开的笔记，以保护用户隐私。"
+      destroy:
+        Note was successfully deleted: 笔记删除成功
+      restore: 
+        Note was successfully restored: 笔记恢复成功
     docs: 
       create:
         Doc was successfully created: 文档创建成功

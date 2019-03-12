@@ -270,12 +270,16 @@ en:
     notes:
       index:
         There only include the public Notes: "There is only listing the public Notes for protected User privacy."
+      destroy:
+        Note was successfully deleted: Note was successfully deleted
+      restore: 
+        Note was successfully restored: Note was successfully restored
     docs: 
       create:
         Doc was successfully created: Doc was successfully created
       update:
         Doc was successfully updated: Doc was successfully updated
-      destory:
+      destroy:
         Doc was successfully deleted: Doc was successfully deleted
       restore: 
         Doc was successfully restored: Doc was successfully restored
@@ -284,7 +288,7 @@ en:
         Group was successfully created: Group was successfully created
       update:
         Group was successfully updated: Group was successfully updated
-      destory:
+      destroy:
         Group was successfully deleted: Group was successfully deleted
       restore: 
         Group was successfully restored: Group was successfully restored

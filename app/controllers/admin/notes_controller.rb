@@ -17,7 +17,7 @@ class Admin::NotesController < Admin::ApplicationController
 
   def destroy
     @note.destroy
-    redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: "Note was successfully deleted."
+    redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: t(".Note was successfully deleted")
   end
 
   # PRO-begin
@@ -25,7 +25,7 @@ class Admin::NotesController < Admin::ApplicationController
     check_feature! :soft_delete
 
     @note.restore
-    redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: "Doc was successfully restored."
+    redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: t(".Note was successfully restored")
   end
   # PRO-end
 
