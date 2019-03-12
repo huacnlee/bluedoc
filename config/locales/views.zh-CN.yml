@@ -345,6 +345,13 @@ zh-CN:
     version:
       Current: 当前版本
   docs:
+    update:
+      Doc was successfully updated: 文档更新成功
+    revert:
+      Doc was successfully reverted: 文档回滚成功
+      Revert failed, please check a exists version: 回滚失败，请选择一个存在的版号
+    destroy:
+      Doc was successfully destroyed: 文档销毁成功
     draft_tip:
       You are on the draft preview page, the contents has saved at: 当前处于草稿预览界面，草稿内容保存于
       View Published: 查看已发布内容

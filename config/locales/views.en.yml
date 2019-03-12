@@ -344,6 +344,13 @@ en:
     version:
       Current: Current
   docs:
+    update:
+      Doc was successfully updated: Doc was successfully updated
+    revert:
+      Doc was successfully reverted: Doc was successfully reverted
+      Revert failed, please check a exists version: Revert failed, please check a exists version
+    destroy: 
+      Doc was successfully destroyed: Doc was successfully destroyed
     draft_tip:
       You are on the draft preview page, the contents has saved at: You are on the draft preview page, the contents has saved at
       View Published: View Published
