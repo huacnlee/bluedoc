@@ -512,6 +512,8 @@ zh-CN:
       View it on BlueDoc: 在 BlueDoc 上查看
   notifications:
     Notification been deleted: 触发通知的相关数据已删除。
+    read: 
+      Success marked notifications as read: 成功将 %{num} 消息设置为已读
     body:
       add_member:
         has added you as member of: "将你添加为 [%{subject}] 的成员。"

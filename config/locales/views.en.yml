@@ -511,6 +511,8 @@ en:
       View it on BlueDoc: View it on BlueDoc
   notifications:
     Notification been deleted: Notification trigger content has been deleted.
+    read: 
+      Success marked notifications as read: Success marked %{num} notifications as read
     body:
       add_member:
         has added you as member of: "has added you as member of [%{subject}]"
