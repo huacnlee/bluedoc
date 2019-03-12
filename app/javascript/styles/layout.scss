@@ -28,7 +28,7 @@
   width: 100%;
   position: relative;
   padding: 0 15px;
-  @include breakpoint(md) {
+  @include breakpoint(lg) {
     padding: 0 25px;
     width: 1080px;
   }
