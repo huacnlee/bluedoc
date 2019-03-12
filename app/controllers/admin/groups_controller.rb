@@ -26,7 +26,7 @@ class Admin::GroupsController < Admin::ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      redirect_to(admin_groups_path, notice: "Group was successfully created.")
+      redirect_to admin_groups_path, notice: t(".Group was successfully created")
     else
       render :new
     end
@@ -34,7 +34,7 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to admin_groups_path, notice: "Group was successfully updated."
+      redirect_to admin_groups_path, notice: t(".Group was successfully updated")
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully deleted."
+    redirect_to admin_groups_path(q: @group.slug), notice: t(".Group was successfully deleted")
   end
 
   # PRO-begin
@@ -50,7 +50,7 @@ class Admin::GroupsController < Admin::ApplicationController
     check_feature! :soft_delete
 
     @group.restore
-    redirect_to admin_groups_path(q: @group.slug), notice: "Group was successfully restored."
+    redirect_to admin_groups_path(q: @group.slug), notice: t(".Group was successfully restored")
   end
   # PRO-end
 

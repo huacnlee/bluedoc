@@ -273,10 +273,19 @@ zh-CN:
         Doc was successfully created: 文档创建成功
       update:
         Doc was successfully updated: 文档更新成功
-      destory:
+      destroy:
         Doc was successfully deleted: 文档删除成功
       restore: 
         Doc was successfully restored: 文档恢复成功
+    groups: 
+      create:
+        Group was successfully created: 团队创建成功
+      update:
+        Group was successfully updated: 团队更新成功
+      destroy:
+        Group was successfully deleted: 团队删除成功
+      restore: 
+        Group was successfully restored: 团队恢复成功
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知

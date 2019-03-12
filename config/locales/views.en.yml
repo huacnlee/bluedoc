@@ -279,6 +279,15 @@ en:
         Doc was successfully deleted: Doc was successfully deleted
       restore: 
         Doc was successfully restored: Doc was successfully restored
+    groups: 
+      create:
+        Group was successfully created: Group was successfully created
+      update:
+        Group was successfully updated: Group was successfully updated
+      destory:
+        Group was successfully deleted: Group was successfully deleted
+      restore: 
+        Group was successfully restored: Group was successfully restored
   comments:
     comment_watch:
       Subscribe: Subscribe
