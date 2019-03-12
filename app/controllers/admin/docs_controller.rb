@@ -29,7 +29,7 @@ class Admin::DocsController < Admin::ApplicationController
     @doc = Doc.new(doc_params)
 
     if @doc.save
-      redirect_to(admin_docs_path, notice: "Doc was successfully created.")
+      redirect_to admin_docs_path, notice: t(".Doc was successfully created")
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Admin::DocsController < Admin::ApplicationController
 
   def update
     if @doc.update(doc_params)
-      redirect_to admin_docs_path, notice: "Doc was successfully updated."
+      redirect_to admin_docs_path, notice: t(".Doc was successfully updated")
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class Admin::DocsController < Admin::ApplicationController
 
   def destroy
     @doc.destroy
-    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: "Doc was successfully deleted."
+    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: t(".Doc was successfully deleted")
   end
 
   # PRO-begin
@@ -53,7 +53,7 @@ class Admin::DocsController < Admin::ApplicationController
     check_feature! :soft_delete
 
     @doc.restore
-    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: "Doc was successfully restored."
+    redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: t(".Doc was successfully restored")
   end
   # PRO-end
 

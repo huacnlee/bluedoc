@@ -270,6 +270,15 @@ en:
     notes:
       index:
         There only include the public Notes: "There is only listing the public Notes for protected User privacy."
+    docs: 
+      create:
+        Doc was successfully created: Doc was successfully created
+      update:
+        Doc was successfully updated: Doc was successfully updated
+      destory:
+        Doc was successfully deleted: Doc was successfully deleted
+      restore: 
+        Doc was successfully restored: Doc was successfully restored
   comments:
     comment_watch:
       Subscribe: Subscribe

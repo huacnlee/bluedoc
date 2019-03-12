@@ -22,6 +22,12 @@ zh-CN:
       doc:
         title: 文档标题
         slug: 文档路径
+        url: 文档链接
+        repository: 所属知识库
+        comments_count: 评论数量
+        editors: 参与人员
+        created_at: 创建时间
+        updated_at: 更新时间
       user:
         slug: 用户名
         name: 姓名
