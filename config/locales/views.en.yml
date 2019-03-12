@@ -463,6 +463,7 @@ en:
       This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
       Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
       I understand, delete this group: I understand, delete this group!
+      Group has deleted: Group has deleted
     show:
       Photo: Logo
       Settings: Settings
@@ -478,6 +479,8 @@ en:
     update:
       Group update successed: Group update successed.
   groups:
+    create: 
+      Group has created: Group has created
     menu:
       Repository: Repositories
       Search: Search

@@ -464,6 +464,7 @@ zh-CN:
       This will delete all contents: 执行此动作将会直接删除 <strong>%{slug}</strong> 团队下的所有知识库、团队成员、文档、修改历史以及评论等内容。
       Please type the path slug of group to confirm: 请输入团队的路径 <strong class="text-red">%{slug}</strong> 以确认：
       I understand, delete this group: 我清楚理解，确定删除此团队！
+      Group has deleted: 团队已经删除
     show:
       Photo: 团队 Logo
       Settings: 团队设置
@@ -479,6 +480,8 @@ zh-CN:
     update:
       Group update successed: 团队资料更新成功。
   groups:
+    create: 
+      Group has created: 团队已经创建
     menu:
       Repository: 知识库
       Search: 搜索
