@@ -2,4 +2,11 @@
 
 module BlueDoc
   VERSION = "1.0.0.beta1"
+
+  def self.full_version
+    version_str = VERSION
+    if ENV["BLUEDOC_BUILD_VERSION"]
+      version_str += " (build: #{ENV["BLUEDOC_BUILD_VERSION"]})"
+    end
+  end
 end
