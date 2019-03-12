@@ -1,5 +1,5 @@
 
-<%= form_for([:admin,@group]) do |f| %>
+<%= form_for([:admin, @group], url: admin_group_path(@group.id)) do |f| %>
   <%= render "/shared/error_messages", target: @group  %>
 
   <div class="form-group">
@@ -15,11 +15,6 @@
   <div class="form-group">
     <%= f.label :description, class: "control-label" %>
     <%= f.text_field :description, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :members_count, class: "control-label" %>
-    <%= f.text_field :members_count, class: "form-control" %>
   </div>
 
   <div class="form-action">

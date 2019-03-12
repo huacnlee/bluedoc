@@ -1,5 +1,5 @@
 
-<%= form_for([:admin,@doc]) do |f| %>
+<%= form_for([:admin,@doc], url: admin_doc_path(@doc.id)) do |f| %>
   <%= render "/shared/error_messages", target: @doc  %>
 
   <div class="form-group">

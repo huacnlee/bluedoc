@@ -1,5 +1,5 @@
 
-<%= form_for([:admin,@repository]) do |f| %>
+<%= form_for([:admin,@repository], url: admin_repository_path(@repository.id)) do |f| %>
   <%= render "/shared/error_messages", target: @repository  %>
 
   <div class="form-group">
