@@ -235,6 +235,14 @@ en:
     reposiories:
       show:
         All doc: All doc
+      create:
+        Repository was successfully created: Repository was successfully created
+      update:
+        Repository was successfully updated: Repository was successfully updated
+      destroy:
+        Repository was successfully deleted: Repository was successfully deleted
+      restore: 
+        Repository was successfully restored: Repository was successfully restored
     settings:
       show:
         Settings: Settings

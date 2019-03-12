@@ -235,6 +235,14 @@ zh-CN:
     repositories:
       show:
         All docs: 所有文档
+      create:
+        Repository was successfully created: 知识库创建成功
+      update:
+        Repository was successfully updated: 知识库更新成功
+      destroy:
+        Repository was successfully deleted: 知识库删除成功
+      restore: 
+        Repository was successfully restored: 知识库恢复成功
     settings:
       show:
         Settings: 系统设置

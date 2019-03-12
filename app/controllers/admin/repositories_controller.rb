@@ -29,7 +29,7 @@ class Admin::RepositoriesController < Admin::ApplicationController
     @repository = Repository.new(repository_params)
 
     if @repository.save
-      redirect_to(admin_repositories_path, notice: "Repository was successfully created.")
+      redirect_to admin_repositories_path, notice: t(".Repository was successfully created")
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Admin::RepositoriesController < Admin::ApplicationController
 
   def update
     if @repository.update(repository_params)
-      redirect_to admin_repositories_path, notice: "Repository was successfully updated."
+      redirect_to admin_repositories_path, notice: t(".Repository was successfully updated")
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class Admin::RepositoriesController < Admin::ApplicationController
 
   def destroy
     @repository.destroy
-    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully deleted."
+    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: t(".Repository was successfully deleted")
   end
 
   # PRO-begin
@@ -53,7 +53,7 @@ class Admin::RepositoriesController < Admin::ApplicationController
     check_feature! :soft_delete
 
     @repository.restore
-    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: "Repository was successfully restored."
+    redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: t(".Repository was successfully restored")
   end
   # PRO-end
 
