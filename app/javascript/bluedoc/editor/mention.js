@@ -31,8 +31,8 @@ export class MentionList extends React.PureComponent {
     if (users && users.length > 1 && users !== prevState.users) {
       const anchorEle = window.document.querySelector(anchor);
       if (anchorEle) {
-        const { top, left } = anchorEle.getBoundingClientRect();
-        pos = { top, left };
+        const { bottom, left } = anchorEle.getBoundingClientRect();
+        pos = { top: bottom, left };
       }
     }
     return { ...prevState, pos, users: users.filter(v => v.slug) };
@@ -44,16 +44,20 @@ export class MentionList extends React.PureComponent {
   componentDidMount = () => {
     this.updateMenu();
     window.addEventListener('keydown', this.handleKeyDown, true);
+    window.addEventListener('scroll', this.updateMenu);
+    window.addEventListener('resize', this.updateMenu);
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown, true);
+    window.removeEventListener('scroll', this.updateMenu);
+    window.removeEventListener('resize', this.updateMenu);
   }
 
   updateMenu = () => {
     const anchor = window.document.querySelector(this.props.anchor);
     if (!anchor) {
-      this.setState(DEFAULT_POSITION);
+      this.setState({ pos: DEFAULT_POSITION });
     } else {
       const anchorRect = anchor.getBoundingClientRect();
       this.setState({
@@ -86,7 +90,10 @@ export class MentionList extends React.PureComponent {
         event.stopPropagation();
         event.preventDefault();
         const user = users[activeIndex];
-        user && this.props.onSelect(user);
+        if (user) {
+          this.props.onSelect(user);
+          this.setState({ activeIndex: 0 });
+        }
         break;
       }
       default:
