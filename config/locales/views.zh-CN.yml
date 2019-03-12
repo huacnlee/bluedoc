@@ -112,6 +112,7 @@ zh-CN:
     Profile has change successed: 个人资料已经更新成功。
     Username has change successed: 用户名修改成功。
     account:
+      Account Settings: 账号设置
       Account: 账号
       Change password: 修改密码
       Minimum characters: 最少要求 %{length} 个字符
@@ -335,6 +336,12 @@ zh-CN:
     reply_info:
       In reply to: 回复
   dashboards:
+    stars: 
+      Stars: 收藏
+      Dashboard: 工作台
+    watches:
+      Watches: 订阅
+      Dashboard: 工作台
     action_docs:
       Stared Docs: 收藏的文档
       No star docs: 没有收藏的文档
@@ -430,6 +437,7 @@ zh-CN:
       opened share at: 分享于
       Create a share link to allow non-member visit this doc: 创建分享链接，任何人（不需要登录）可以通过这个链接来访问此文档。
     edit:
+      Edit Doc: 编辑文档
       Doc current in locked: 此文档目前有其他人在编辑。
       Warning: 警告！
       is current in editing this document: 目前正在编辑此文档。
@@ -755,6 +763,7 @@ zh-CN:
       By default, will add user as :role role: 默认添加为 <strong>%{role}</strong> 角色，添加后可修改。
       Add: 添加协作者
     docs:
+      Setting: 设置
       Transfer docs to other repository: 转移文档到其他知识库
       Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
       If there has same doc slug exists in the destination repository, it will change it as a random slug: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。

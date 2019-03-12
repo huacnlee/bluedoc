@@ -62,10 +62,10 @@ class RepositorySettingsController < Users::ApplicationController
       transfer_docs = @docs.where(id: transfer_params[:doc_id])
       Doc.transfer_docs(transfer_docs, @target_repository)
 
-      notice = t(".Successfully transfered docs to", {
+      notice = t(".Successfully transfered docs to",
         num: transfer_docs.length,
         path: "#{@target_repository.user&.name} / #{@target_repository.name}"
-      })
+      )
       redirect_to docs_user_repository_settings_path(@user, @repository), notice: notice
     end
   end

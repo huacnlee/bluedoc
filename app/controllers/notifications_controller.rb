@@ -20,7 +20,7 @@ class NotificationsController < ::ApplicationController
   def read
     ids = notifications.where(id: params[:ids]).pluck(:id)
     Notification.read!(ids)
-    redirect_to notifications_path, notice: t(".Success marked notifications as read", {num: ids.length})
+    redirect_to notifications_path, notice: t(".Success marked notifications as read", num: ids.length)
   end
 
   def clean

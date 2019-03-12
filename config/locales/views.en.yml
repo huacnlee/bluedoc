@@ -112,6 +112,7 @@ en:
     Profile has change successed: Profile has change successed.
     Username has change successed: Username has change successed.
     account:
+      Account Settings: Account Settings
       Account: Account
       "Change password": Change password
       "Minimum characters": characters minimum %{length}
@@ -333,6 +334,12 @@ en:
     reply_info:
       In reply to: In reply to
   dashboards:
+    stars: 
+      Stars: Stars
+      Dashboard: Dashboard
+    watches:
+      Watches: Watches
+      Dashboard: Dashboard
     action_docs:
       Stared Docs: Stared Docs
       No star docs: No star docs
@@ -429,6 +436,7 @@ en:
       opened share at: opened share at
       Create a share link to allow non-member visit this doc: Create a share link to allow non-member visit this doc.
     edit:
+      Edit Doc: Edit Doc
       Doc current in locked: Doc current in locked.
       Warning: Warning!
       is current in editing this document: is current in editing this document.
@@ -755,6 +763,7 @@ en:
       By default, will add user as :role role: By default, will add user as <strong>%{role}</strong> role.
       Add: Add
     docs:
+      Setting: Setting
       Transfer docs to other repository: Transfer docs to other repository
       Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
       If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
