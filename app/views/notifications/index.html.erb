@@ -19,18 +19,16 @@
 <div class="main-wrap">
   <div class="main-content">
     <div class="notifications box">
-      <h2 class="subhead">
-        <span class="subhead-title">
+      <h2 class="sub-title">
         <% if params[:tab] == "all" %><%= t(".All") %><% else %><%= t(".Unread") %><% end %>
-        </span>
         <% if params[:tab] == "all" %>
-          <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'text-red float-right f5 mt-2', method: 'delete' %>
+          <%= link_to t(".Clear all"), main_app.clean_notifications_path, class: 'float-right f6 mt-2 hover-danger', method: 'delete' %>
         <% else %>
           <%= form_with scope: :notification, class: "float-right", url: main_app.read_notifications_path, method: :post do |form| %>
             <% @notifications.each do |note| %>
             <input type="hidden" name="ids[]" value="<%= note.id %>">
             <% end %>
-            <button type="submit" class="button-reset f5"><%= t(".Mark as read") %></button>
+            <button type="submit" class="button-reset f6"><%= t(".Mark as read") %></button>
           <% end %>
         <% end %>
       </h2>
