@@ -1,8 +1,11 @@
 .navbar-notice {
-  position: relative;
+  position: fixed;
+  top: 50px;
+  left: 0;
   height: 0;
   width: 100%;
   font-size: 12px;
+  z-index: 99;
   .notice {
     position: absolute;
     top: 1px;
