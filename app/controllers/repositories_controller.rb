@@ -98,7 +98,7 @@ class RepositoriesController < Users::ApplicationController
       toc_yaml = BlueDoc::Toc.parse(toc_json, format: :json).to_yaml
 
       if @repository.update(toc: toc_yaml)
-        redirect_to @repository.to_path, notice: "Table of Contents has updated"
+        redirect_to @repository.to_path, notice: t(".Table of Contents has updated")
       else
         render :toc, layout: "editor"
       end

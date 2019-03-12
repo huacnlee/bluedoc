@@ -4,7 +4,10 @@
   background: url(~images/logo.png) center left no-repeat;
   background-size: 45px 45px;
   padding-left: 48px;
-
+  display: none;
+  @include breakpoint(md) {
+    display: inline-block;
+  }
   .blue {
     color: darken($primary, 5%);
   }
@@ -22,6 +25,7 @@
     }
     color: darken(#8B96AD, 2%) !important;
   }
+
 }
 
 .nav-header {

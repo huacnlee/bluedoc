@@ -26,7 +26,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to(admin_users_path, notice: "User was successfully created.")
+      redirect_to admin_users_path, notice: t(".User was successfully created")
     else
       render :new
     end
@@ -34,7 +34,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: "User was successfully updated."
+      redirect_to admin_users_path, notice: t(".User was successfully updated")
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path(q: @user.slug), notice: "User was successfully deleted."
+    redirect_to admin_users_path(q: @user.slug), notice: t(".User was successfully deleted")
   end
 
   # PRO-begin
@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::ApplicationController
     check_feature! :soft_delete
 
     @user.restore
-    redirect_to admin_users_path(q: @user.slug), notice: "User was successfully restored."
+    redirect_to admin_users_path(q: @user.slug), notice: t(".User was successfully restored")
   end
   # PRO-end
 

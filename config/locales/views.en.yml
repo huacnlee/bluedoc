@@ -112,6 +112,7 @@ en:
     Profile has change successed: Profile has change successed.
     Username has change successed: Username has change successed.
     account:
+      Account Settings: Account Settings
       Account: Account
       "Change password": Change password
       "Minimum characters": characters minimum %{length}
@@ -235,6 +236,14 @@ en:
     reposiories:
       show:
         All doc: All doc
+      create:
+        Repository was successfully created: Repository was successfully created
+      update:
+        Repository was successfully updated: Repository was successfully updated
+      destroy:
+        Repository was successfully deleted: Repository was successfully deleted
+      restore: 
+        Repository was successfully restored: Repository was successfully restored
     settings:
       show:
         Settings: Settings
@@ -270,6 +279,37 @@ en:
     notes:
       index:
         There only include the public Notes: "There is only listing the public Notes for protected User privacy."
+      destroy:
+        Note was successfully deleted: Note was successfully deleted
+      restore: 
+        Note was successfully restored: Note was successfully restored
+    docs: 
+      create:
+        Doc was successfully created: Doc was successfully created
+      update:
+        Doc was successfully updated: Doc was successfully updated
+      destroy:
+        Doc was successfully deleted: Doc was successfully deleted
+      restore: 
+        Doc was successfully restored: Doc was successfully restored
+    groups: 
+      create:
+        Group was successfully created: Group was successfully created
+      update:
+        Group was successfully updated: Group was successfully updated
+      destroy:
+        Group was successfully deleted: Group was successfully deleted
+      restore: 
+        Group was successfully restored: Group was successfully restored
+    users: 
+      create:
+        User was successfully created: User was successfully created
+      update:
+        User was successfully updated: User was successfully updated
+      destroy:
+        User was successfully deleted: User was successfully deleted
+      restore: 
+        User was successfully restored: User was successfully restored
   comments:
     comment_watch:
       Subscribe: Subscribe
@@ -294,6 +334,12 @@ en:
     reply_info:
       In reply to: In reply to
   dashboards:
+    stars: 
+      Stars: Stars
+      Dashboard: Dashboard
+    watches:
+      Watches: Watches
+      Dashboard: Dashboard
     action_docs:
       Stared Docs: Stared Docs
       No star docs: No star docs
@@ -344,6 +390,13 @@ en:
     version:
       Current: Current
   docs:
+    update:
+      Doc was successfully updated: Doc was successfully updated
+    revert:
+      Doc was successfully reverted: Doc was successfully reverted
+      Revert failed, please check a exists version: Revert failed, please check a exists version
+    destroy: 
+      Doc was successfully destroyed: Doc was successfully destroyed
     draft_tip:
       You are on the draft preview page, the contents has saved at: You are on the draft preview page, the contents has saved at
       View Published: View Published
@@ -383,6 +436,7 @@ en:
       opened share at: opened share at
       Create a share link to allow non-member visit this doc: Create a share link to allow non-member visit this doc.
     edit:
+      Edit Doc: Edit Doc
       Doc current in locked: Doc current in locked.
       Warning: Warning!
       is current in editing this document: is current in editing this document.
@@ -421,6 +475,12 @@ en:
       Revert: Revert
       Cancel: Cancel
   group_members:
+    create:
+      User has added as member: User has added as member
+    update:
+      Member has update successed: Member has update successed
+    destroy:
+      Member has remove successed: Member has remove successed
     add_member:
       Add member: Add member
       Type username to match user and then add as member of this group: Type Username or Real name to match user and then add as member of this group.
@@ -450,6 +510,7 @@ en:
       This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
       Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
       I understand, delete this group: I understand, delete this group!
+      Group has deleted: Group has deleted
     show:
       Photo: Logo
       Settings: Settings
@@ -465,6 +526,8 @@ en:
     update:
       Group update successed: Group update successed.
   groups:
+    create: 
+      Group has created: Group has created
     menu:
       Repository: Repositories
       Search: Search
@@ -495,6 +558,8 @@ en:
       View it on BlueDoc: View it on BlueDoc
   notifications:
     Notification been deleted: Notification trigger content has been deleted.
+    read: 
+      Success marked notifications as read: Success marked %{num} notifications as read
     body:
       add_member:
         has added you as member of: "has added you as member of [%{subject}]"
@@ -583,6 +648,7 @@ en:
     show:
       Edit TOC: Edit
     toc:
+      Table of Contents has updated: Table of Contents has updated
       Edit TOC: Edit TOC
       Back to Repository: Back to Repository
       Edit Table of contents: Edit Table of contents
@@ -610,6 +676,8 @@ en:
       Retry import: Retry again
       Abort: Abort
   repository_settings:
+    update:
+      Update successed: Update successed
     exports:
       archive:
         Export as Archive: Export as Archive
@@ -650,6 +718,7 @@ en:
       Please type in the path: Please type in the path
       to confirm: to confirm.
       I understand, delete this repository: I understand, delete this repository
+      Repository has destroyed: Repository has destroyed
     member:
       Are you sure to remove?: Are you sure to remove?
     menu:
@@ -674,6 +743,7 @@ en:
       to confirm: to confirm.
       Target username or group path: New owner’s BlueDoc username or group path
       Confirm and transfer: Transfer this repository
+      Repository has transfer successed: Repository has transfer successed
     advanced:
       Settings: Settings
       Transfer: Transfer
@@ -693,10 +763,12 @@ en:
       By default, will add user as :role role: By default, will add user as <strong>%{role}</strong> role.
       Add: Add
     docs:
+      Setting: Setting
       Transfer docs to other repository: Transfer docs to other repository
       Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
       If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
       Transfer now: Transfer now!
+      Successfully transfered docs to: Successfully transfered %{num} docs to %{path}
     show:
       Settings: Settings
       Repository profile: Repository profile
@@ -734,6 +806,8 @@ en:
       Your username is: "Your username is:"
       Thanks for joining and have a great day: Thanks for joining and have a great day!
   users:
+    create: 
+      Group has created: Group has created
     card:
       followers: followers
     followers:

@@ -78,7 +78,7 @@ class DocsController < Users::ApplicationController
       if @doc.update(update_params)
         format.html {
           @doc.unlock!
-          redirect_to @doc.to_path, notice: "Doc was successfully updated."
+          redirect_to @doc.to_path, notice: t(".Doc was successfully updated")
         }
         format.json { render json: { ok: true, doc: { slug: @doc.slug } } }
       else
@@ -114,9 +114,9 @@ class DocsController < Users::ApplicationController
 
     version_id = params.permit(:version_id)[:version_id]
     if @doc.revert(version_id, user_id: current_user.id)
-      redirect_to @doc.to_path, notice: "Doc was successfully reverted."
+      redirect_to @doc.to_path, notice: t(".Doc was successfully reverted")
     else
-      redirect_to @doc.to_path("/versions"), alert: "Revert failed, please check a exists version."
+      redirect_to @doc.to_path("/versions"), alert: t(".Revert failed, please check a exists version")
     end
   end
 
@@ -143,7 +143,7 @@ class DocsController < Users::ApplicationController
 
     @doc.destroy
     respond_to do |format|
-      format.html { redirect_to @repository.to_path, notice: "Doc was successfully destroyed." }
+      format.html { redirect_to @repository.to_path, notice: t(".Doc was successfully destroyed") }
       format.json { head :no_content }
       format.js
     end

@@ -23,7 +23,7 @@ class GroupSettingsController < Groups::ApplicationController
     authorize! :destroy, @group
 
     @group.destroy
-    redirect_to root_path, notice: "Group has deleted"
+    redirect_to root_path, notice: t(".Group has deleted")
   end
 
   private
