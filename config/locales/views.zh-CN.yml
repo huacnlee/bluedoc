@@ -429,6 +429,12 @@ zh-CN:
       Revert: 回滚到此版本
       Cancel: 退出
   group_members:
+    create:
+      User has added as member: 用户已经添加为成员
+    update:
+      Member has update successed: 成员成功更新
+    destroy:
+      Member has remove successed: 成员成功删除
     add_member:
       Add member: 添加成员
       Type username to match user and then add as member of this group: 输入需要添加的成员的用户名/姓名来匹配，并从结果中选择需要添加的成员。

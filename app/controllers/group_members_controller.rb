@@ -21,21 +21,21 @@ class GroupMembersController < Groups::ApplicationController
     end
 
     @group.add_member(user, member_params[:role])
-    redirect_to group_members_path(@group), notice: "User has added as member"
+    redirect_to group_members_path(@group), notice: t(".User has added as member")
   end
 
   def update
     authorize! :manage, @group
 
     @member.update(member_params)
-    redirect_to group_members_path(@group), notice: "Member has update successed"
+    redirect_to group_members_path(@group), notice: t(".Member has update successed")
   end
 
   def destroy
     authorize! :manage, @group
 
     @member.destroy
-    redirect_to group_members_path(@group), notice: "Member has remove successed"
+    redirect_to group_members_path(@group), notice: t(".Member has remove successed")
   end
 
   private

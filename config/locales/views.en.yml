@@ -428,6 +428,12 @@ en:
       Revert: Revert
       Cancel: Cancel
   group_members:
+    create:
+      User has added as member: User has added as member
+    update:
+      Member has update successed: Member has update successed
+    destroy:
+      Member has remove successed: Member has remove successed
     add_member:
       Add member: Add member
       Type username to match user and then add as member of this group: Type Username or Real name to match user and then add as member of this group.
