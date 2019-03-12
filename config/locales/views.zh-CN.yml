@@ -298,6 +298,15 @@ zh-CN:
         Group was successfully deleted: 团队删除成功
       restore: 
         Group was successfully restored: 团队恢复成功
+    users: 
+      create:
+        User was successfully created: 用户创建成功
+      update:
+        User was successfully updated: 用户更新成功
+      destroy:
+        User was successfully deleted: 用户删除成功
+      restore: 
+        User was successfully restored: 用户恢复成功
   notifications:
     all_notifications: 所有通知
     clean_all: 清空所有通知

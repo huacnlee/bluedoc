@@ -300,6 +300,15 @@ en:
         Group was successfully deleted: Group was successfully deleted
       restore: 
         Group was successfully restored: Group was successfully restored
+    users: 
+      create:
+        User was successfully created: User was successfully created
+      update:
+        User was successfully updated: User was successfully updated
+      destroy:
+        User was successfully deleted: User was successfully deleted
+      restore: 
+        User was successfully restored: User was successfully restored
   comments:
     comment_watch:
       Subscribe: Subscribe
