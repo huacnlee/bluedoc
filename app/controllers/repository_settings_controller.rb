@@ -22,7 +22,7 @@ class RepositorySettingsController < Users::ApplicationController
     authorize! :update, @repository
 
     if @repository.update(repository_params)
-      redirect_to user_repository_settings_path(@user, @repository), notice: "Update successed"
+      redirect_to user_repository_settings_path(@user, @repository), notice: t(".Update successed")
     else
       render params[:_action]
     end
@@ -35,7 +35,7 @@ class RepositorySettingsController < Users::ApplicationController
 
     if @repository.transfer(new_slug)
       @repository.reload
-      redirect_to @repository.to_path, notice: "Repository has transfer successed"
+      redirect_to @repository.to_path, notice: t(".Repository has transfer successed")
     else
       redirect_to advanced_user_repository_settings_path(@user, @repository), alert: @repository.errors[:user_id].join("")
     end
@@ -45,7 +45,7 @@ class RepositorySettingsController < Users::ApplicationController
     authorize! :destroy, @repository
 
     @repository.destroy
-    redirect_to @user.to_path, notice: "Repository has destroyed"
+    redirect_to @user.to_path, notice: t(".Repository has destroyed")
   end
 
   def docs
@@ -62,7 +62,10 @@ class RepositorySettingsController < Users::ApplicationController
       transfer_docs = @docs.where(id: transfer_params[:doc_id])
       Doc.transfer_docs(transfer_docs, @target_repository)
 
-      notice = "Successfully transfered #{transfer_docs.length} docs to #{@target_repository.user&.name} / #{@target_repository.name}."
+      notice = t(".Successfully transfered docs to", {
+        num: transfer_docs.length,
+        path: "#{@target_repository.user&.name} / #{@target_repository.name}"
+      })
       redirect_to docs_user_repository_settings_path(@user, @repository), notice: notice
     end
   end

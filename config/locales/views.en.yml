@@ -601,6 +601,7 @@ en:
     show:
       Edit TOC: Edit
     toc:
+      Table of Contents has updated: Table of Contents has updated
       Edit TOC: Edit TOC
       Back to Repository: Back to Repository
       Edit Table of contents: Edit Table of contents
@@ -628,6 +629,8 @@ en:
       Retry import: Retry again
       Abort: Abort
   repository_settings:
+    update:
+      Update successed: Update successed
     exports:
       archive:
         Export as Archive: Export as Archive
@@ -668,6 +671,7 @@ en:
       Please type in the path: Please type in the path
       to confirm: to confirm.
       I understand, delete this repository: I understand, delete this repository
+      Repository has destroyed: Repository has destroyed
     member:
       Are you sure to remove?: Are you sure to remove?
     menu:
@@ -692,6 +696,7 @@ en:
       to confirm: to confirm.
       Target username or group path: New owner’s BlueDoc username or group path
       Confirm and transfer: Transfer this repository
+      Repository has transfer successed: Repository has transfer successed
     advanced:
       Settings: Settings
       Transfer: Transfer
@@ -715,6 +720,7 @@ en:
       Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
       If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
       Transfer now: Transfer now!
+      Successfully transfered docs to: Successfully transfered %{num} docs to %{path}
     show:
       Settings: Settings
       Repository profile: Repository profile

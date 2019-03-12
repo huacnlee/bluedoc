@@ -601,6 +601,7 @@ zh-CN:
     show:
       Edit TOC: 编辑目录
     toc:
+      Table of Contents has updated: 目录已更新
       Edit TOC: 编辑目录
       Back to Repository: 返回知识库
       Edit Table of contents: 编辑知识库目录
@@ -628,6 +629,8 @@ zh-CN:
       Retry import: 尝试重新导入
       Abort: 放弃
   repository_settings:
+    update:
+      Update successed: 更新成功
     exports:
       archive:
         Export as Archive: 导出 Zip 包
@@ -668,6 +671,7 @@ zh-CN:
       Please type in the path: 请输入知识库路径
       to confirm: 以确认
       I understand, delete this repository: 我明白，确定删除知识库
+      Repository has destroyed: 知识库已经删除
     member:
       Are you sure to remove?: 确定要移除他/她吗？
     menu:
@@ -692,6 +696,7 @@ zh-CN:
       to confirm: 以确认
       Target username or group path: 目标团队路径/个人用户名
       Confirm and transfer: 确定转移知识库
+      Repository has transfer successed: 知识库已经转移成功
     advanced:
       Settings: 高级设置
       Transfer: 转移知识库
@@ -715,6 +720,7 @@ zh-CN:
       Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
       If there has same doc slug exists in the destination repository, it will change it as a random slug: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
       Transfer now: 执行文档转移
+      Successfully transfered docs to: 成功转移 %{num} 文档到 %{path}
     show:
       Settings: 设置
       Repository profile: 知识库资料
