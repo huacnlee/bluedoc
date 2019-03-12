@@ -23,7 +23,11 @@
     }
 
     &:hover {
-      cursor: pointer;
+      background: $primary;
+      color: #fff;
+    }
+
+    &.active {
       background: $primary;
       color: #fff;
     }
