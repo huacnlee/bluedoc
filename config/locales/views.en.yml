@@ -758,6 +758,8 @@ en:
       Your username is: "Your username is:"
       Thanks for joining and have a great day: Thanks for joining and have a great day!
   users:
+    create: 
+      Group has created: Group has created
     card:
       followers: followers
     followers:

@@ -758,6 +758,8 @@ zh-CN:
       Your username is: "你注册的用户名:"
       Thanks for joining and have a great day: 欢迎你的使用。
   users:
+    create: 
+      Group has created: 团队已经创建
     card:
       followers: 关注者
     followers:
