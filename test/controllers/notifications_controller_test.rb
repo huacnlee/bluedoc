@@ -23,7 +23,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     get notifications_path
     assert_equal 200, response.status
     assert_select ".notifications" do
-      assert_select ".subhead .subhead-title", text: "Unread"
+      assert_select ".sub-title", text: "Unread"
       assert_select %(input[name="ids[]"]), 2
     end
 
@@ -33,7 +33,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     get notifications_path, params: { tab: :all }
     assert_equal 200, response.status
     assert_select ".notifications"
-    assert_select ".subhead .subhead-title", text: "All"
+    assert_select ".sub-title", text: "All"
     assert_select ".notification", 4
 
     ids = unread_notes.collect(&:id)
