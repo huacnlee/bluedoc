@@ -24,7 +24,7 @@
         <% readers.each do |action| %>
           <div class="user-item">
             <%= user_avatar_tag(action.user, style: :tiny) %>
-            <%= user_display_name_tag(action.user) %>
+            <%= user_name_tag(action.user) %>
             <span class="time-box">
               <%= timeago action.updated_at.to_date %>
             </span>

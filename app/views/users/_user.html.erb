@@ -2,8 +2,8 @@
   <div class="avatar-box">
     <%= user_avatar_tag(user, style: :medium) %>
   </div>
-  <div class="title"><%= user_display_name_tag(user) %></div>
-  <div class="description"><%= user_name_tag(user) %></div>
+  <div class="title"><%= user_name_tag(user) %></div>
+  <div class="description"><%= user_slug_tag(user) %></div>
   <% if user.description.present? %>
     <div class="info mt-2 text-gray text-overflow"><%= user.description %></div>
   <% end %>

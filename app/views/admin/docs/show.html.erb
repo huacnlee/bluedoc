@@ -18,7 +18,7 @@
 
   <div class="detail-row">
     <div class="detail-label"><%= t("activerecord.attributes.doc.repository") %>:</div>
-    <div class="detail-value"><%= group_name_tag(@doc.repository.user) %> / <%= repository_name_tag(@doc.repository) %></div>
+    <div class="detail-value"><%= user_name_tag(@doc.repository.user) %> / <%= repository_name_tag(@doc.repository) %></div>
   </div>
 
   <div class="detail-row">

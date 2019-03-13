@@ -11,7 +11,7 @@
     </div>
   <% else %>
     <div class="title text-overflow path">
-      <%= user_name_tag(repository.user, with_icon: true) %> / 
+      <%= user_name_tag(repository.user, with_icon: true) %> /
       <%= repository_name_tag(repository, with_icon: true) %>
       <% if repository.private? %>
         <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>

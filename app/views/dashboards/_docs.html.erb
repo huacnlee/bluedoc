@@ -8,7 +8,7 @@
         <%= doc_title_tag(item.subject) %>
       </div>
       <div class="path">
-        <%= user_display_name_tag(item.subject.repository.user, with_icon: true) %> /
+        <%= user_name_tag(item.subject.repository.user, with_icon: true) %> /
         <%= repository_name_tag(item.subject&.repository, with_icon: true) %>
       </div>
       <div class="time-box">

@@ -1,7 +1,7 @@
 <div class="repository-card">
   <div class="mb-1 text-main">
     <% if defined?(current_group) && current_group.id != repository.user_id %>
-    <%= user_display_name_tag(repository.user) %> /
+    <%= user_name_tag(repository.user) %> /
     <% end %>
     <%= repository_name_tag(repository) %>
   </div>

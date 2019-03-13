@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 module UsersHelper
+  def user_slug_tag(user)
+    return "" if user.blank?
+    link_to user.slug, user.to_path, class: "user-slug", title: user.fullname, data: { type: user.type.downcase }
+  end
+
   def user_name_tag(user, opts = {})
     return "" if user.blank?
 
@@ -8,16 +13,6 @@ module UsersHelper
       link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-name icon-middle-wrap", title: user.fullname, data: { type: user.type.downcase }
     else
       link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
-    end
-  end
-
-  def user_display_name_tag(user, opts = {})
-    return "" if user.blank?
-
-    if opts[:with_icon]
-      link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-display-name icon-middle-wrap", title: user.fullname, data: { type: user.type.downcase }
-    else
-      link_to user.name, user.to_path, class: "user-display-name", title: user.fullname, data: { type: user.type.downcase }
     end
   end
 
