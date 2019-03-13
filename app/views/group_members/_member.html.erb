@@ -3,7 +3,7 @@
     <%= user_avatar_tag(member.user, style: :medium) %>
   </div>
   <div class="title text-overflow"><%= link_to member.user.name, member.user.to_path %></div>
-  <div class="description"><%= user_name_tag(member.user) %></div>
+  <div class="description"><%= user_slug_tag(member.user) %></div>
   <div class="time-box"><%= member.role_name %></div>
   <div class="action action-icon">
     <% if can? :manage, @group %>

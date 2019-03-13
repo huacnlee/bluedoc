@@ -12,6 +12,15 @@ class UsersHelperTest < ActionView::TestCase
 
   def current_user; @user; end
 
+  test "user_slug_tag" do
+    assert_equal "", user_slug_tag(nil)
+    user = build(:user)
+    assert_html_equal %(<a class="user-slug" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.slug}</a>), user_slug_tag(user)
+
+    group = build(:group)
+    assert_html_equal %(<a class="user-slug" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.slug}</a>), user_slug_tag(group)
+  end
+
   test "user_name_tag" do
     assert_equal "", user_name_tag(nil)
     user = build(:user)
@@ -20,18 +29,6 @@ class UsersHelperTest < ActionView::TestCase
 
     group = build(:group)
     assert_html_equal %(<a class="user-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_name_tag(group)
-
-
-  end
-
-  test "user_display_name_tag" do
-    assert_equal "", user_display_name_tag(nil)
-    user = build(:user)
-    assert_html_equal %(<a class="user-display-name" title="#{user.fullname}" data-type="user" href="/#{user.slug}">#{user.name}</a>), user_display_name_tag(user)
-    assert_html_equal %(<a class="user-display-name icon-middle-wrap" title="#{user.fullname}" data-type="user" href="/#{user.slug}"><i class="fas fa-user "></i><span>#{user.name}</span></a>), user_display_name_tag(user, with_icon: true)
-
-    group = build(:group)
-    assert_html_equal %(<a class="user-display-name" title="#{group.fullname}" data-type="group" href="/#{group.slug}">#{group.name}</a>), user_display_name_tag(group)
   end
 
   test "user_avatar_tag" do
