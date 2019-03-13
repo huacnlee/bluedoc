@@ -28,6 +28,10 @@ module BlueDoc
     config.paths["app/views"].unshift("#{config.root}/pro/app/views")
     # PRO-end
 
+    config.to_prepare do
+      Devise::Mailer.layout "mailer"
+    end
+
     config.i18n.available_locales = ["en", "zh-CN"]
     config.i18n.fallbacks = true
 
