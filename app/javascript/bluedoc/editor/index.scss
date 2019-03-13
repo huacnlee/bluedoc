@@ -372,6 +372,23 @@
       margin: 0;
     }
   }
+
+  ul + .paragraph,
+  ul + h1,
+  ul + h2,
+  ul + h3,
+  ul + h4,
+  ul + h5,
+  ul + h6,
+  ol + .paragraph,
+  ol + h1,
+  ol + h2,
+  ol + h3,
+  ol + h4,
+  ol + h5,
+  ol + h6 {
+    margin-top: 20px !important;
+  }
 }
 
 .doc-setting-box {
