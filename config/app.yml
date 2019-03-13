@@ -2,6 +2,7 @@
 defaults: &defaults
   host: '<%= ENV['APP_HOST'] || "http://localhost:3000" %>'
   mailer_from: <%= ENV["MAILER_FROM"] || "no-reply@bluedoc.io" %>
+  mailer_delivery_method: '<%= ENV["MAILER_DELIVERY_METHOD"] || "sendmail" %>'
   mailer_options:
     address: '<%= ENV['SMTP_ADDRESS'] %>'
     port: <%= ENV['SMTP_PORT'] || 25 %>

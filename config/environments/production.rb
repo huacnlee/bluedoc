@@ -67,7 +67,12 @@ Rails.application.configure do
   config.active_job.queue_name_prefix = "bluedoc"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.smtp_settings = Setting.mailer_options.deep_symbolize_keys
+
+  if Setting.mailer_delivery_method == "sendmail"
+    config.action_mailer.delivery_method = :sendmail
+  else
+    config.action_mailer.smtp_settings = Setting.mailer_options.deep_symbolize_keys
+  end
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
