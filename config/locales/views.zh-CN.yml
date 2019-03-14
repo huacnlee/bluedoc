@@ -242,7 +242,7 @@ zh-CN:
         Repository was successfully updated: 知识库更新成功
       destroy:
         Repository was successfully deleted: 知识库删除成功
-      restore: 
+      restore:
         Repository was successfully restored: 知识库恢复成功
     settings:
       show:
@@ -279,34 +279,34 @@ zh-CN:
         There only include the public Notes: "这里仅列出公开的笔记，以保护用户隐私。"
       destroy:
         Note was successfully deleted: 笔记删除成功
-      restore: 
+      restore:
         Note was successfully restored: 笔记恢复成功
-    docs: 
+    docs:
       create:
         Doc was successfully created: 文档创建成功
       update:
         Doc was successfully updated: 文档更新成功
       destroy:
         Doc was successfully deleted: 文档删除成功
-      restore: 
+      restore:
         Doc was successfully restored: 文档恢复成功
-    groups: 
+    groups:
       create:
         Group was successfully created: 团队创建成功
       update:
         Group was successfully updated: 团队更新成功
       destroy:
         Group was successfully deleted: 团队删除成功
-      restore: 
+      restore:
         Group was successfully restored: 团队恢复成功
-    users: 
+    users:
       create:
         User was successfully created: 用户创建成功
       update:
         User was successfully updated: 用户更新成功
       destroy:
         User was successfully deleted: 用户删除成功
-      restore: 
+      restore:
         User was successfully restored: 用户恢复成功
   notifications:
     all_notifications: 所有通知
@@ -336,7 +336,7 @@ zh-CN:
     reply_info:
       In reply to: 回复
   dashboards:
-    stars: 
+    stars:
       Stars: 收藏
       Dashboard: 工作台
     watches:
@@ -527,7 +527,7 @@ zh-CN:
     update:
       Group was successfully updated: 团队资料更新成功。
   groups:
-    create: 
+    create:
       Group was successfully created: 团队已经创建
     menu:
       Repository: 知识库
@@ -559,7 +559,7 @@ zh-CN:
       View it on BlueDoc: 在 BlueDoc 上查看
   notifications:
     Notification been deleted: 触发通知的相关数据已删除。
-    read: 
+    read:
       Success marked notifications as read: 成功将 %{num} 消息设置为已读
     body:
       add_member:
@@ -763,7 +763,7 @@ zh-CN:
       By default, will add user as :role role: 默认添加为 <strong>%{role}</strong> 角色，添加后可修改。
       Add: 添加协作者
     docs:
-      Setting: 设置
+      Settings: 设置
       Transfer docs to other repository: 转移文档到其他知识库
       Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
       If a file already exists with that name in the destination repository, the doc path will be changed into a random string: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
@@ -806,7 +806,7 @@ zh-CN:
       Your username is: "你注册的用户名:"
       Thanks for joining and have a great day: 欢迎你的使用。
   users:
-    create: 
+    create:
       Group was successfully created: 团队已经创建
     card:
       followers: 关注者

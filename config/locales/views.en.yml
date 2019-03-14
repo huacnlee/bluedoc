@@ -763,7 +763,7 @@ en:
       By default, will add user as :role role: By default, will add user as <strong>%{role}</strong> role.
       Add: Add
     docs:
-      Setting: Setting
+      Settings: Settings
       Transfer docs to other repository: Transfer docs to other repository
       Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
       If a file already exists with that name in the destination repository, the doc path will be changed into a random string: If a file already exists with that name in the destination repository, the doc path will be changed into a random string.
