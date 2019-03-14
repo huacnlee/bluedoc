@@ -143,15 +143,15 @@ input[type=checkbox] {
 }
 
 .form-checkbox {
-  padding-left: 20px;
+  padding-left: 30px;
   margin-bottom: 20px;
   vertical-align: middle;
   position: relative;
   line-height: 1.5;
   input[type=radio] {
     position: absolute;
-    left: 0;
-    top: 4px;
+    left: 1px;
+    top: 2px;
   }
   .form-text {
     margin-top: 10px;

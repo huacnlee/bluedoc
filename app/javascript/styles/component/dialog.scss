@@ -31,6 +31,7 @@ details-dialog {
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
+  font-weight: initial;
   .btn-cancel {
     position: absolute;
     top: 16px;
@@ -64,10 +65,11 @@ details-dialog {
 
 @media (min-width: 768px) {
   details-dialog {
-    margin: 15vh auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 450px;
     height: auto;
-    max-height: 70vh;
+    max-height: 100vh;
     border-radius: 3px;
   }
 }
