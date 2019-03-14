@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module BlueDoc
   class Application < Rails::Application
-    config.load_defaults 6.0
+    config.load_defaults "6.0"
 
     config.autoload_paths += [
       Rails.root.join("lib")
@@ -16,6 +16,8 @@ module BlueDoc
     config.eager_load_paths += [
       Rails.root.join("lib/bluedoc"),
     ]
+
+    config.autoloader = :classic
 
     # PRO-start
     # Need enable config.eager_load = true in all environments for load libs on boot
