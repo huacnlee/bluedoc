@@ -17,7 +17,7 @@
           <%= t(".all of contents") %>
         </p>
         <div class="form-group">
-          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <label class="control-label"><%= t(".Please enter the repository path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
           <input type="text" confirm-for="btn-confirm-delete" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
         </div>
 

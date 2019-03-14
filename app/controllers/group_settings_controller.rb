@@ -13,7 +13,7 @@ class GroupSettingsController < Groups::ApplicationController
 
     params[:_by] ||= "show"
     if @group.update(group_params)
-      redirect_to group_settings_path(@group), notice: t(".Group update successed")
+      redirect_to group_settings_path(@group), notice: t(".Group was successfully updated")
     else
       render params[:_by]
     end
@@ -23,7 +23,7 @@ class GroupSettingsController < Groups::ApplicationController
     authorize! :destroy, @group
 
     @group.destroy
-    redirect_to root_path, notice: t(".Group has deleted")
+    redirect_to root_path, notice: t(".Group was successfully deleted")
   end
 
   private

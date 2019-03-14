@@ -3,4 +3,4 @@ target_name = [notification.target&.user&.name, notification.target&.name].join(
 
 %>
 
-<%= t(".Repository name import has been status", name: target_name, status: notification.meta[:status]) %>
+<%= t(".Repository name has been imported", name: target_name, status: notification.meta[:status]) %>

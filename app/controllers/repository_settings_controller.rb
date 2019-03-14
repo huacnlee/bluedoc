@@ -22,7 +22,7 @@ class RepositorySettingsController < Users::ApplicationController
     authorize! :update, @repository
 
     if @repository.update(repository_params)
-      redirect_to user_repository_settings_path(@user, @repository), notice: t(".Update successed")
+      redirect_to user_repository_settings_path(@user, @repository), notice: t(".Repository was successfully updated")
     else
       render params[:_action]
     end
@@ -35,7 +35,7 @@ class RepositorySettingsController < Users::ApplicationController
 
     if @repository.transfer(new_slug)
       @repository.reload
-      redirect_to @repository.to_path, notice: t(".Repository has transfer successed")
+      redirect_to @repository.to_path, notice: t(".Repository was successfully transfered")
     else
       redirect_to advanced_user_repository_settings_path(@user, @repository), alert: @repository.errors[:user_id].join("")
     end
@@ -45,7 +45,7 @@ class RepositorySettingsController < Users::ApplicationController
     authorize! :destroy, @repository
 
     @repository.destroy
-    redirect_to @user.to_path, notice: t(".Repository has destroyed")
+    redirect_to @user.to_path, notice: t(".Repository has successfully destroyed")
   end
 
   def docs

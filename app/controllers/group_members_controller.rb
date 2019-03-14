@@ -28,7 +28,7 @@ class GroupMembersController < Groups::ApplicationController
     authorize! :manage, @group
 
     @member.update(member_params)
-    redirect_to group_members_path(@group), notice: t(".Member has update successed")
+    redirect_to group_members_path(@group), notice: t(".Member was successfully updated")
   end
 
   def destroy

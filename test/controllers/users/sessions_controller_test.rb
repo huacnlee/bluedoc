@@ -141,7 +141,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     # To get new confirmation
     get new_user_confirmation_path
     assert_equal 200, response.status
-    assert_select ".heading", text: "Resend confirmation instructions"
+    assert_select ".heading", text: "Resend confirmation email"
 
     # Resend confirmation mail
     post user_confirmation_path, params: { user: { email: user.email } }

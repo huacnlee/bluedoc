@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   def create
     @user = Group.new(user_params)
     if @user.create
-      redirect_to @user.to_path, notice: t(".Group has created")
+      redirect_to @user.to_path, notice: t(".Group was successfully created")
     else
       render "new"
     end

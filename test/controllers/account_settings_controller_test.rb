@@ -21,7 +21,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
         get account_settings_path
         assert_equal 200, response.status
-        assert_select ".user-email-suffix-support-list", text: "Support email suffix with: foo.com, bar.com"
+        assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
       end
     end
   end
@@ -60,7 +60,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     put account_settings_path, params: { user: account_params, _by: :profile }
     assert_redirected_to account_settings_path
     follow_redirect!
-    assert_select ".notice", text: "Profile has change successed."
+    assert_select ".notice", text: "You have successfully updated your profile."
     @user.reload
     assert_equal account_params[:name], @user.name
     assert_equal account_params[:slug], @user.slug
@@ -108,7 +108,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     put account_settings_path, params: { user: account_params, _by: :password }
     assert_redirected_to account_account_settings_path
     follow_redirect!
-    assert_select ".notice", text: "Password has change successed."
+    assert_select ".notice", text: "You have successfully changed your password."
 
     user.reload
     assert_equal true, user.valid_password?(new_password)
@@ -132,7 +132,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "#{old_username}-new", user.slug
     assert_equal "Jason Lee", user.name
     follow_redirect!
-    assert_select ".notice", text: "Username has change successed."
+    assert_select ".notice", text: "You have successfully changed your username."
   end
 
   test "DELETE /account/settings" do

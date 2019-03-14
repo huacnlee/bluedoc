@@ -16,7 +16,7 @@ locked_user = @doc.locked_user
       <div class="overflow-auto">
         <%= form_for(@doc, url: @doc.to_path("/lock"), method: :post, remote: true) do %>
           <div id="doc-lock-box" class="box-body overflow-auto">
-            <p><strong class="text-red"><%= t(".Warning") %></strong> <%= user_avatar_tag(locked_user, style: :tiny) %> <%= user_name_tag(locked_user) %> <%= t(".is current in editing this document") %></p>
+            <p><strong class="text-red"><%= t(".Warning") %></strong> <%= user_avatar_tag(locked_user, style: :tiny) %> <%= user_name_tag(locked_user) %> <%= t(".in editing this document now") %></p>
             <p><%= t(".Continue edit will make conflict, do you wants continue?") %></p>
           </div>
           <div class="box-footer clearfix">

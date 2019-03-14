@@ -3,7 +3,7 @@
     <div class="unpublished-draft-tip">
       <% if params[:mode] == "draft" %>
         <div class="notice notice-error">
-          <p><%= t(".You are on the draft preview page, the contents has saved at") %> <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
+          <p><%= t(".You are at the draft preview page, the contents has saved at") %> <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
           <p>
             <%= link_to t(".View Published"), @doc.to_path, class: "btn-view mr-3" %>
             <%= link_to t(".Continue edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit" %>

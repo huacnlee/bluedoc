@@ -1,6 +1,6 @@
 <div class="col-12 col-md-7">
   <div class="sub-title">
-    <div class="heading"><%= t(".Resend confirmation instructions") %></div>
+    <div class="heading"><%= t(".Resend confirmation email") %></div>
   </div>
 
   <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit t(".Resend confirmation instructions"), class: "btn btn-primary" %>
+      <%= f.submit t(".Resend confirmation email"), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

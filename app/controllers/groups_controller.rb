@@ -12,7 +12,7 @@ class GroupsController < Groups::ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to @group.to_path, notice: t(".Group has created")
+      redirect_to @group.to_path, notice: t(".Group was successfully created")
     else
       render "new"
     end

@@ -69,7 +69,7 @@ zh-CN:
         Complete your account info: 完善您的帐号信息
         You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
         If you had an exists BlueDoc account, you can sign in to bind account: 如果你已经有 BlueDoc 账号，你可以通过 %{link} 来绑定账号。
-        Support email suffix with list_html: "支持的 Email 后缀: <code>%{emails}</code>"
+        Supported email suffix with list_html: "支持的 Email 后缀: <code>%{emails}</code>"
     passwords:
       new:
         Reset password: 找回密码
@@ -77,7 +77,7 @@ zh-CN:
         Submit: 发送找回密码邮件
     confirmations:
       new:
-        Resend confirmation instructions: 重新发送确认邮件
+        Resend confirmation email: 重新发送确认邮件
     unlocks:
       new:
         Resend unlock instructions: 重新发送解锁邮件
@@ -108,9 +108,9 @@ zh-CN:
         Click the link below to unlock your account: "你可以点击下面的链接来解锁账号:"
         Unlock my account: 解锁我的账号
   account_settings:
-    Password has change successed: 密码已经修改成功。
-    Profile has change successed: 个人资料已经更新成功。
-    Username has change successed: 用户名修改成功。
+    You have successfully changed your password: 密码已经修改成功。
+    You have successfully updated your profile: 个人资料已经更新成功。
+    You have successfully changed your username: 用户名修改成功。
     account:
       Account Settings: 账号设置
       Account: 账号
@@ -134,7 +134,7 @@ zh-CN:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 头像用于大家在 BlueDoc 里面快速识别你，对所有人公开。
       Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为头像，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
       Unconfirmed email_html: 待确认的 Email 更改：<strong>%{email}</strong> 请查收此地址的确认邮件，并完成确认
-      Support email suffix with list_html: "支持的 Email 后缀：<code>%{emails}</code>"
+      Supported email suffix with list_html: "支持的 Email 后缀：<code>%{emails}</code>"
   activities:
     has added: 添加
     to: 到
@@ -399,7 +399,7 @@ zh-CN:
     destroy:
       Doc was successfully destroyed: 文档销毁成功
     draft_tip:
-      You are on the draft preview page, the contents has saved at: 当前处于草稿预览界面，草稿内容保存于
+      You are at the draft preview page, the contents has saved at: 当前处于草稿预览界面，草稿内容保存于
       View Published: 查看已发布内容
       Continue edit: 继续编辑
       There have the unpublished content saved at: 当前还有未发布的草稿内容，保存于
@@ -408,8 +408,8 @@ zh-CN:
       Export: 导出
       Export PDF: 导出 PDF
       PDF of this document page has in generating, please wait: "正在后台生成此文档的 PDF 文档，请稍后 ..."
-      If you are waiting a long time, and still no response, then you can retry: 如果你等待了很长一段时间这里依然没响应，你可以点击 %{retry}，重新触发一个 PDF 生成任务。
-      PDF of this document page has generated: 已有生成好的 PDF 文件。
+      If you are waiting a long time you can retry: 如果你等待了很长一段时间这里依然没响应，你可以点击 %{retry}，重新触发一个 PDF 生成任务。
+      PDF of this document page has been generated: 已有生成好的 PDF 文件。
       Click the button to download it: 你可以点击下面的按钮下载 PDF 文件。
       Download PDF: 下载 PDF 文件
       Generate Again: 重新生成
@@ -435,12 +435,12 @@ zh-CN:
       Open share: 开启分享
       Everyone can visits this doc with the share link: "任何人都可以通过此分享链接阅读这篇文档："
       opened share at: 分享于
-      Create a share link to allow non-member visit this doc: 创建分享链接，任何人（不需要登录）可以通过这个链接来访问此文档。
+      Create a share link to allow anyone to visit this doc: 创建分享链接，任何人（不需要登录）可以通过这个链接来访问此文档。
     edit:
       Edit Doc: 编辑文档
       Doc current in locked: 此文档目前有其他人在编辑。
       Warning: 警告！
-      is current in editing this document: 目前正在编辑此文档。
+      in editing this document now: 目前正在编辑此文档。
       Continue edit will make conflict, do you wants continue?: 继续编辑将会产生冲突，建议你联系他/她，然后在编辑。是否要继续编辑？
       Continue edit: 继续编辑
       Cancel: 放弃
@@ -479,17 +479,17 @@ zh-CN:
     create:
       User has added as member: 用户已经添加为成员
     update:
-      Member has update successed: 成员成功更新
+      Member was successfully updated: 成员成功更新
     destroy:
       Member has remove successed: 成员成功删除
     add_member:
       Add member: 添加成员
-      Type username to match user and then add as member of this group: 输入需要添加的成员的用户名/姓名来匹配，并从结果中选择需要添加的成员。
+      Enter username to find the member you want to add into the group: 输入需要添加的成员的用户名/姓名来匹配，并从结果中选择需要添加的成员。
       Search user: 搜索用户：
       Admin: 管理员
       Editor: 编辑者
       Reader: 只读者
-      All permission of this group: 管理员拥有此团队的最高权限。
+      Admin has the highest authority in the group: 管理员拥有此团队的最高权限。
       Can create, update docs or repositories of this group: 可以在此团队下创建/修改文档或知识库，用于参与内容的场景。
       Readonly mode for all resources of this group: 赋予只读权限，可以阅读团队下所有公开、私密的内容。
     update_member:
@@ -511,7 +511,7 @@ zh-CN:
       This will delete all contents: 执行此动作将会直接删除 <strong>%{slug}</strong> 团队下的所有知识库、团队成员、文档、修改历史以及评论等内容。
       Please type the path slug of group to confirm: 请输入团队的路径 <strong class="text-red">%{slug}</strong> 以确认：
       I understand, delete this group: 我清楚理解，确定删除此团队！
-      Group has deleted: 团队已经删除
+      Group was successfully deleted: 团队已经删除
     show:
       Photo: 团队 Logo
       Settings: 团队设置
@@ -525,10 +525,10 @@ zh-CN:
       This photo will be used to identify you in BlueDoc It will be visible to anyone: 给团队设置一个 Logo 以便于快速辨识。
       Use a photo or image rather than text and upload an image that is 200px square or larger: 建议你上传一张尺寸大于 200px 的正方形图片作为 Logo，BlueDoc 会自动从重建缩放、裁剪为合适的尺寸。
     update:
-      Group update successed: 团队资料更新成功。
+      Group was successfully updated: 团队资料更新成功。
   groups:
     create: 
-      Group has created: 团队已经创建
+      Group was successfully created: 团队已经创建
     menu:
       Repository: 知识库
       Search: 搜索
@@ -563,33 +563,33 @@ zh-CN:
       Success marked notifications as read: 成功将 %{num} 消息设置为已读
     body:
       add_member:
-        has added you as member of: "将你添加为 [%{subject}] 的成员。"
+        has added you as a member of: "将你添加为 [%{subject}] 的成员。"
       comment:
         said: 说
       mention:
         mentioned you: 提及了你
         has mentioned you in subject: "在 “%{subject}” 里提及了你。"
       repo_import:
-        Repository name import has been status: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+        Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
     title:
       add_member:
-        has added you as member of: "将你添加为 [%{subject}] 的成员。"
+        has added you as a member of: "将你添加为 [%{subject}] 的成员。"
       comment:
         got a comment: 收到了一条新的评论。
       mention:
         got a comment: 收到了一条新的评论。
         got a mention: 里面提及了你。
       repo_import:
-        Repository name import has been status: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+        Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
     add_member:
-      has added you as member of: "将你添加为成员："
+      has added you as a member of: "将你添加为成员："
     comment:
       was posted a comment on: "评论了"
     mention:
       was mentioned you in: "提及了你"
     repo_import:
       Repository: 知识库
-      import has been: "导入任务已经执行完成，结果："
+      has been imported: "导入任务已经执行完成，结果："
     index:
       Unread: 未读通知
       All: 全部通知
@@ -631,7 +631,7 @@ zh-CN:
       Import from Git: 从 Git 导入知识库
       Import from Archive: 从 Zip 包导入知识库
       Select File: 选择文件
-      Put a Git repository URL, BlueDoc will import all of the markdown files as a Doc: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BlueDoc 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
+      Enter a Git repository URL: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BlueDoc 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
       This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
       You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
       Or you have a GitBook source, you can use: 或者也可以通过 Git 的方式导入。
@@ -648,7 +648,7 @@ zh-CN:
     show:
       Edit TOC: 编辑目录
     toc:
-      Table of Contents has updated: 目录已更新
+      Table of Contents was successfully updated: 目录已更新
       Edit TOC: 编辑目录
       Back to Repository: 返回知识库
       Edit Table of contents: 编辑知识库目录
@@ -677,7 +677,7 @@ zh-CN:
       Abort: 放弃
   repository_settings:
     update:
-      Update successed: 更新成功
+      Repository was successfully updated: 更新成功
     exports:
       archive:
         Export as Archive: 导出 Zip 包
@@ -715,10 +715,10 @@ zh-CN:
       This action cannot be undone: 此功能 <strong>无法</strong> 撤销！
       This will permanently delete the: 继续操作将会删除
       all of contents: ，知识库，以及知识库下面的文档、修改历史、评论等所有有关内容都会同时删除。
-      Please type in the path: 请输入知识库路径
+      Please enter the repository path: 请输入知识库路径
       to confirm: 以确认
       I understand, delete this repository: 我明白，确定删除知识库
-      Repository has destroyed: 知识库已经删除
+      Repository has successfully destroyed: 知识库已经删除
     member:
       Are you sure to remove?: 确定要移除他/她吗？
     menu:
@@ -731,19 +731,19 @@ zh-CN:
       private: 私密
       Make privacy: 设置为%{privacy}
       Make this repository privacy: 设置知识库为%{privacy}模式
-      Public this repository from the private, this repository and docs will be visible to everyone who can visit: 将知识库从私密切换到公开，你需要知道知识库下面的文档将会被任何能访问，如果他们能打开
-      Private this repository from the public, this change will remove repository watchers, stars: 将知识库从公开切换到私密，将会清除知识库已有的订阅者、收藏，以确保知识库的内容不会被外部人员看到。
-      Please type in the path: 请输入知识库路径
+      Set the repository as public, this repository and all docs will be visible to everyone: 将知识库从私密切换到公开，你需要知道知识库下面的文档将会被任何能访问，如果他们能打开
+      Set the repository as private, all subscribers will be removed: 将知识库从公开切换到私密，将会清除知识库已有的订阅者、收藏，以确保知识库的内容不会被外部人员看到。
+      Please enter the repository path: 请输入知识库路径
       to confirm: 以确认
       Confirm and submit: 我明白，确定设置为%{privacy}
     transfer:
       Transfer: 转移知识库
       Transfer repository: 转移知识库到其他团队/个人
-      Please type in the path: 请输入知识库路径
+      Please enter the repository path: 请输入知识库路径
       to confirm: 以确认
       Target username or group path: 目标团队路径/个人用户名
       Confirm and transfer: 确定转移知识库
-      Repository has transfer successed: 知识库已经转移成功
+      Repository was successfully transfered: 知识库已经转移成功
     advanced:
       Settings: 高级设置
       Transfer: 转移知识库
@@ -766,7 +766,7 @@ zh-CN:
       Setting: 设置
       Transfer docs to other repository: 转移文档到其他知识库
       Choise doc in list, you can move them into the other repository: 在下面的列表里面勾选你需要转移的文档。
-      If there has same doc slug exists in the destination repository, it will change it as a random slug: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
+      If a file already exists with that name in the destination repository, the doc path will be changed into a random string: 假如目标知识库已经存在同名的文档路径，重名的文档路径将会被修改为随机字符串。
       Transfer now: 执行文档转移
       Successfully transfered docs to: 成功转移 %{num} 文档到 %{path}
     show:
@@ -807,7 +807,7 @@ zh-CN:
       Thanks for joining and have a great day: 欢迎你的使用。
   users:
     create: 
-      Group has created: 团队已经创建
+      Group was successfully created: 团队已经创建
     card:
       followers: 关注者
     followers:
@@ -867,7 +867,7 @@ zh-CN:
       Note was successfully deleted: 笔记删除成功。
     revert:
       Note was successfully reverted: 笔记修改历史恢复成功。
-      Revert failed, please check a exists version: 恢复失败，请一个正确的修改历史。
+      Revert failed, please check a exists version: 恢复失败，请确定选择是否正确。
     show:
       Not found: 未找到
       Last edit by: 最后由

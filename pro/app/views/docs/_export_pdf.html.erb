@@ -14,7 +14,7 @@
             <div class="loading-box"><div class="loading"></div></div>
             <p><%= t("docs.export_pdf.PDF of this document page has in generating, please wait") %></p>
             <p style="display: none" class="pdf-export-retry-message text-gray">
-              <%= raw t("docs.export_pdf.If you are waiting a long time, and still no response, then you can retry", retry: link_to("retry", doc.to_path("/pdf?force=1"), method: "post", remote: true)) %>
+              <%= raw t("docs.export_pdf.If you are waiting a long time you can retry", retry: link_to("retry", doc.to_path("/pdf?force=1"), method: "post", remote: true)) %>
             </p>
           </div>
           <script type="text/javascript">
@@ -34,7 +34,7 @@
             });
           </script>
         <% elsif doc.pdf.attached? %>
-          <p class="description"><%= t("docs.export_pdf.PDF of this document page has generated") %></p>
+          <p class="description"><%= t("docs.export_pdf.PDF of this document page has been generated") %></p>
           <p class="description"><%= t("docs.export_pdf.Click the button to download it") %></p>
           <div class="form-group">
             <%= link_to t("docs.export_pdf.Download PDF"), doc.export_url(:pdf), target: "_blank", class: "btn btn-download-pdf btn-primary" %>

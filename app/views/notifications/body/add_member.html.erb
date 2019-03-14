@@ -4,4 +4,4 @@ if notification.target&.subject_type == "Repository"
   target_name = [notification.target&.subject&.user&.name, notification.target&.subject.name].join(" / ")
 end
 %>
-<%= notification.actor&.name %> <%= t(".has added you as member of", subject: target_name) %>
+<%= notification.actor&.name %> <%= t(".has added you as a member of", subject: target_name) %>

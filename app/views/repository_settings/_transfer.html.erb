@@ -11,7 +11,7 @@
     <div class="box-body overflow-auto">
       <%= form_with(model: @repository, url: transfer_user_repository_settings_path(@user, @repository), method: :patch) do |form| %>
         <div class="form-group">
-          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <label class="control-label"><%= t(".Please enter the repository path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
           <input type="text" confirm-for="#btn-confirm-transfer" confirm-value="<%= @repository.slug %>" class="form-control" />
         </div>
 

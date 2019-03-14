@@ -18,18 +18,18 @@ en:
       follow: Follow
       unfollow: Unfollow
     error_messages:
-      There has count issues_html: 'There has <span class="text-danger">%{count}</span> issues:'
+      There has count issues_html: '<span class="text-danger">%{count}</span> problem cannot be solved by form authentication:'
     select_menu:
-      Choose an item: Choose an item
+      Choose an item: Select one
     access_denied:
       Access Denied: Access Denied (403 Error)
-      Sorry you do not have permission visit it: You don't have permission to access it.
+      Sorry you do not have permission visit it: "Sorry, you have no access to the data."
     feature_not_enable:
-      Feature not enable: Feature not enable
-      Sorry, this Feature not in enable in current: Sorry, this Feature not in enable in current.
+      Feature not enable: Feature not Enabled
+      Sorry, this Feature not in enable in current: "Sorry, this feature has not been enabled yet."
     not_found:
       Page not found: Page not found (404)
-      Sorry, that page does not exist: The requested URL was not found on this server.
+      Sorry, that page does not exist: "Sorry, the requested URL cannot be found."
   layouts:
     user_menu:
       New Repository: New Repository
@@ -46,7 +46,7 @@ en:
       Sign in: Sign in
       Sign up: Sign up
     mailer:
-      This mail has sent from: This mail has sent from
+      This mail has sent from: "Mail was sent from"
   devise:
     sessions:
       signed_in: Signed in.
@@ -55,86 +55,86 @@ en:
       new:
         "Sign in": Sign in
         "Sign in with": Sign in with
-        "Input your username or email to sign in BlueDoc": Input your username or email to sign in BlueDoc
+        "Input your username or email to sign in BlueDoc": "Enter your username or email to sign in to BlueDoc"
         "You have signed in with": You have signed in with <b>%{type}</b>
         "email": Username / Email
-        forget_password: Forgot your password?
-        "Didn't receive unlock instructions?": Didn't receive unlock instructions?
-        "Didn't receive confirmation instructions?": Didn't receive confirmation instructions?
+        forget_password: Forgot password?
+        "Didn't receive unlock instructions?": "Didn't receive account unlock email?"
+        "Didn't receive confirmation instructions?": "Didn't receive confirmation email?"
     registrations:
       new:
         "Sign up": Sign up
-        "Already have a account": Already have a account
-        "Welcome to use BlueDoc": Welcome to use BlueDoc
-        "Complete your account info": Complete your account info
-        "You must complete the below form for sign up with": You must complete the below form for sign up with
-        "If you had an exists BlueDoc account, you can sign in to bind account": If you had an exists BlueDoc account, you can %{link} to bind account.
-        Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
+        "Already have a account": Already have an account
+        "Welcome to use BlueDoc": Welcome to BlueDoc
+        "Complete your account info": "Complete your account settings"
+        "You must complete the below form for sign up with": "You must complete the below form to sign up"
+        "If you had an exists BlueDoc account, you can sign in to bind account": "If you had an existing BlueDoc account, you can linke your account through %{link}."
+        Supported email suffix with list_html: "Supported email suffix with <code>%{emails}</code>"
     passwords:
       new:
-        "Reset password": Reset password
-        "Input your account Email address, we will send a reset password link to you Email": Input your account Email address, we will send a reset password link to you Email.
-        "Submit": Send me reset password instructions
+        "Reset password": "Reset password"
+        "Input your account Email address, we will send a reset password link to you Email": "Enter your account email address, we will send a password reset link to your email:"
+        "Submit": "Send reset email"
     unlocks:
       new:
-        Resend unlock instructions: Resend unlock instructions
-        Input your account Email address, we will send a reset unlock link to you Email: Input your account Email address, we will send a reset unlock link to you Email.
-        Submit: Resend unlock instructions
+        Resend unlock instructions: "Resend account unlock email"
+        Input your account Email address, we will send a reset unlock link to you Email: "Enter your account email address, we will send an account unlock link to you email."
+        Submit: "Resend account unlock email"
     confirmations:
       new:
-        Resend confirmation instructions: Resend confirmation instructions
+        Resend confirmation email: "Resend confirmation email"
     mailer:
       confirmation_instructions:
         subject: Confirmation
         "Welcome": Welcome
-        "You can confirm your account email through the link below": "You can confirm your account email through the link below:"
+        "You can confirm your account email through the link below": "Click the link below to verify your account email:"
         "Confirm my account": Confirm my account
       unlock_instructions:
         subject: Unlock instructions
       email_changed:
         subject: Email has changed
-        "Your email is being changed to": We're contacting you to notify you that your email is being changed to
+        "Your email is being changed to": "You have changed your email address to"
       password_change:
         subject: Password has changed
-        "Password has changed": We're contacting you to notify you that your password has been changed.
+        "Password has changed": "You have changed your password."
       reset_password_instructions:
         subject: Reset password instructions
         Someone has requested a link to change your password: Someone has requested a link to change your password. You can do this through the link below.
         "Change my password": Change my password
-        "If you did not request this, please ignore this email": If you didn't request this, please ignore this email.
-        "Your password would not change if you not click": Your password won't change until you access the link above and create a new one.
+        "If you did not request this, please ignore this email": "If you didn't request this, please ignore this email."
+        "Your password would not change if you not click": "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         Your account has been locked due to an excessive number of unsuccessful sign in attempts: Your account has been locked due to an excessive number of unsuccessful sign in attempts.
         Click the link below to unlock your account: "Click the link below to unlock your account:"
         Unlock my account: Unlock my account
   account_settings:
-    Password has change successed: Password has change successed.
-    Profile has change successed: Profile has change successed.
-    Username has change successed: Username has change successed.
+    You have successfully changed your password: "You have successfully changed your password."
+    You have successfully updated your profile: "You have successfully updated your profile."
+    You have successfully changed your username: "You have successfully changed your username."
     account:
       Account Settings: Account Settings
       Account: Account
       "Change password": Change password
-      "Minimum characters": characters minimum %{length}
-      "We need your current password to confirm your changes": We need your current password to confirm your changes.
+      "Minimum characters": "Min. %{length} characters"
+      "We need your current password to confirm your changes": "Enter your old password."
       "Update password": Update password
       "Danger zone": Danger zone
       "Delete my account": Delete my account
-      "Once you delete your account, there is no going back": Once you delete your account, there is no going back. Please be certain.
-      "Are you sure?": "Danger! Once you delete your account, there is no going back, are you sure?"
-      Change username:  Change username
+      "Once you delete your account, there is no going back": "Once deleted, you cannot recover your account."
+      "Are you sure?": "Once deleted, you cannot recover your account. Confirm to delete?"
+      Change username: Change username
       Update: Update
-      Unless you really need it, we recommended that you do not change your username: Unless you really need it, we recommended that you don't change your username. This will cause the related links, such as the Repositories, Docs, Mentions, etc. that were linked to you before to be opened.
+      Unless you really need it, we recommended that you do not change your username: Unless you really need it, we recommended that you do not change your username. This will cause the related links, such as the Repositories, Docs, Mentions, etc. that were linked to you before to be opened.
     show:
       Avatar: Avatar
       Profile: Profile
-      Update profile: Update profile
-      Upload new picture: Upload new picture
-      System default: "System default [%{locale_name}]"
-      This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc It will be visible to anyone.
-      Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
-      Unconfirmed email_html: Unconfirmed Email sent to：<strong>%{email}</strong> , please confirm to complete email change.
-      Support email suffix with list_html: "Support email suffix with: <code>%{emails}</code>"
+      Update profile: Update your profile
+      Upload new picture: Upload a new picture
+      System default: "Default language [%{locale_name}]"
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: "Your avatar will be visible to all BlueDoc users."
+      Use a photo or image rather than text and upload an image that is 200px square or larger: "Please upload a square picture that is larger than 200px your avatar. BlueDoc automatically resize it for the best display."
+      Unconfirmed email_html: "Unconfirmed email：<strong>%{email}</strong> , Please check email sent to this address and complete verification process."
+      Supported email suffix with list_html: "Supported email suffix with <code>%{emails}</code>"
   activities:
     has added: has added
     to: to
@@ -149,8 +149,8 @@ en:
     BlueDoc Admin: BlueDoc Admin
     Admin: Admin
     All: All
-    Are you sure delete this item?: Are you sure delete this item?
-    Are you sure restore this item?: Are you sure restore this item?
+    Are you sure delete this item?: Are you sure to delete this item?
+    Are you sure restore this item?: Are you sure to recover this item?
     Save: Save
     Cancel: Cancel
     index: Index
@@ -194,7 +194,7 @@ en:
           ElasticSearchService: Fulltext Search Service
         Statistics: Statistics
       reindex:
-        Search indexes has running reindex with async: Search indexes has running reindex with async.
+        Search indexes has running reindex with async: "Search indexes has running reindex with async"
       license:
         License: License
         No license: No license.
@@ -224,13 +224,13 @@ en:
         License: License
         Add License: Add License
         Select license file: Select License File
-        Pickup a bluedoc-license file to upload: Pickup a <code>.bluedoc-license</code> file to upload.
+        Pickup a bluedoc-license file to upload: Pickup a<code>.bluedoc-license</code> file to upload.
         Upload License: Upload License
         Are you sure remove license?: Are you sure to remove current License?
         Remove current license: Remove current license
       create:
         Invalid license: Invalid BlueDoc license file.
-        License was successfully updated, thank you: License was successfully updated, thank you.
+        License was successfully updated, thank you: "License was successfully updated, thank you."
       destroy:
         License was successfully deleted: License was successfully deleted.
     reposiories:
@@ -242,32 +242,32 @@ en:
         Repository was successfully updated: Repository was successfully updated
       destroy:
         Repository was successfully deleted: Repository was successfully deleted
-      restore: 
+      restore:
         Repository was successfully restored: Repository was successfully restored
     settings:
       show:
         Settings: Settings
         System settings: System settings
         Default language: "Default language:"
-        Setup default language for BlueDoc: Setup default language for BlueDoc.
-        Account Email suffix: Account Email suffix
-        Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "Limit user registration email must has suffx with in this list (split each by comma or break line, for example: <code>gmail.com,bluedoc.io</code>), keep this empty to allow any emails."
-        Enable anonymous visit public contents: Enable anonymous visit public contents.
+        Setup default language for BlueDoc: "Setup default language for BlueDoc."
+        Account Email suffix: "Email suffix restriction"
+        Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "This list contains all usable email suffix (separate each with a newline or comma). With email verification process, certain emails can be restricted from accessing BlueDoc. By removing this setting, all email shall be able to access BlueDoc."
+        Enable anonymous visit public contents: "Enable anonymous visitors to access public contents."
         Enable captcha: Enable Captcha
-        Check to enable captcha for protected some important form: "Check to enable captcha for protected some important form (Registration / Forget password ...)"
-        Require Email confirm for new account: Require account confirmed Email before sign in.
-        Disable this BlueDoc will requirement sign in for all pages: Disable this BlueDoc will requirement sign in for all pages.
+        Check to enable captcha for protected some important form: "Check to enable captcha for important forms such as (registration, reset password)"
+        Require Email confirm for new account: Require account to confirmed email before sign in.
+        Disable this BlueDoc will requirement sign in for all pages: "Disable this feature, BlueDoc will require you to signin to all content pages."
         PlantUML Service Host: "PlantUML Service Host:"
-        BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: BlueDoc use %{link} for generate PlantUML SVG image, change this config to can use a custom service of your deployment.
+        BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: "BlueDoc use %{link} to generate PlantUML SVG image. You can change this config to custom your deployment."
         MathJax Service Host: "MathJax Service Host:"
-        If you wants customize MaxJax SVG service: If you want's customize MaxJax SVG service, you can implement that a http server to serve <code>${mathjax_service_host}/svg?tex={tex}</code> to result svg contents
+        If you wants customize MaxJax SVG service: "If you want to customize MaxJax SVG service, you can config here. Your services must be compatible with these paths <code>${mathjax_service_host}/svg?tex={tex}</code>"
         Admin Emails: "Admin Emails:"
-        Special account emails as admin with each line: "Special account emails as admin with each line."
+        Special account emails as admin with each line: "Add email to this list (one at each line or split by comma). These email will be granted admin authorities. Please be careful not to delete yourself."
         Customize UI: Customize UI
         Application Footer HTML: "Application Footer HTML:"
-        You can use HTML to customize the footer: "You can use HTML to customize the footer, including Stylesheet and JavaScript."
+        You can use HTML to customize the footer: "You can use HTML to customize the page footer, including Stylesheet and JavaScript."
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
-        Customize the sidebar html in dashboard page for user signed in: Customize the sidebar html in dashboard page for user signed in.
+        Customize the sidebar html in dashboard page for user signed in: "Customize the sidebar HTML in the dashboard page."
         Save: Save
       create:
         Setting was successfully updated: Setting was successfully updated.
@@ -275,40 +275,40 @@ en:
       destroy:
         Share was successfully deleted: Share was successfully deleted.
       index:
-        Are you sure delete this item?: Are you sure delete this item?
+        Are you sure delete this item?: Are you sure to delete this item?
     notes:
       index:
         There only include the public Notes: "There is only listing the public Notes for protected User privacy."
       destroy:
         Note was successfully deleted: Note was successfully deleted
-      restore: 
+      restore:
         Note was successfully restored: Note was successfully restored
-    docs: 
+    docs:
       create:
         Doc was successfully created: Doc was successfully created
       update:
         Doc was successfully updated: Doc was successfully updated
       destroy:
         Doc was successfully deleted: Doc was successfully deleted
-      restore: 
+      restore:
         Doc was successfully restored: Doc was successfully restored
-    groups: 
+    groups:
       create:
         Group was successfully created: Group was successfully created
       update:
         Group was successfully updated: Group was successfully updated
       destroy:
         Group was successfully deleted: Group was successfully deleted
-      restore: 
+      restore:
         Group was successfully restored: Group was successfully restored
-    users: 
+    users:
       create:
         User was successfully created: User was successfully created
       update:
         User was successfully updated: User was successfully updated
       destroy:
         User was successfully deleted: User was successfully deleted
-      restore: 
+      restore:
         User was successfully restored: User was successfully restored
   comments:
     comment_watch:
@@ -325,7 +325,7 @@ en:
     comments:
       Comments: Comments
       Sign in to write comment: Sign in to write comment
-      You must sign in first: "You want write comment? you must sign in first."
+      You must sign in first: "You want write comment? You must sign in first."
       Sign in now: Sign in now
     form:
       Submit: Comment
@@ -334,7 +334,7 @@ en:
     reply_info:
       In reply to: In reply to
   dashboards:
-    stars: 
+    stars:
       Stars: Stars
       Dashboard: Dashboard
     watches:
@@ -347,13 +347,13 @@ en:
     action_repositories:
       Stared Repositories: Stared Repositories
       All Watches: All watches
-      No star repositories: No star repositories
-      No watches repositories: No watches repositories
-      You does not have any action_name repositories: You does not have any star repositories
+      No star repositories: You does not have any stared repositories
+      No watches repositories: You does not have any watched repositories
+      You does not have any action_name repositories: You does not have any stared repositories
     action_notes:
       Stared Notes: Stared Notes
       No star notes: No star notes
-      You does not have any action_name notes: You does not have any star Notes.
+      You does not have any action_name notes: You does not have any stared Notes.
       Notes: Notes
     menu:
       Dashboard: Dashboard
@@ -377,15 +377,15 @@ en:
       All repositories: Recent contributed repositories
       Dashboard Repositories: Dashboard - Repositories
       No repositories: No repositories
-      You does not have any repositories: You does not have any repositories
+      You does not have any repositories: "You have no recently updated Repositories."
     index:
       Recent edited docs: Recent edited docs
       Recent contributed repositories: Recent contributed repositories
-      You have no update Doc in recently: You have no update Doc in recently.
-      You have no update Repositories in recently: You have no update Repositories in recently.
+      You have no update Doc in recently: You have no recently updated Doc.
+      You have no update Repositories in recently: "You have no recently updated Repositories."
       Your Groups: Your Groups
       All activity: All activity
-      You have no activity in recently: You have no activity in recently.
+      You have no activity in recently: You have no activity recently.
   versions:
     version:
       Current: Current
@@ -395,29 +395,29 @@ en:
     revert:
       Doc was successfully reverted: Doc was successfully reverted
       Revert failed, please check a exists version: Revert failed, please check a exists version
-    destroy: 
+    destroy:
       Doc was successfully destroyed: Doc was successfully destroyed
     draft_tip:
-      You are on the draft preview page, the contents has saved at: You are on the draft preview page, the contents has saved at
+      You are at the draft preview page, the contents has saved at: "You are at the draft preview page, the content is saved at:"
       View Published: View Published
-      Continue edit: Continue edit
-      There have the unpublished content saved at: There have the unpublished content saved at
+      Continue edit: Continue with editing
+      There have the unpublished content saved at: "Unpublished contents are saved at:"
       Preview the draft: Preview the draft
     export_pdf:
       Export: Export
       Export PDF: Export PDF
-      PDF of this document page has in generating, please wait: "PDF of this document page has in generating, please wait ..."
-      If you are waiting a long time, and still no response, then you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a PDF export task again.
-      PDF of this document page has generated: PDF of this document page has generated.
+      PDF of this document page has in generating, please wait: "Generating PDF of this document page now, please wait ..."
+      If you are waiting a long time you can retry: "If there is no response after a long waiting, you can click %{retry} to start a new PDF generation."
+      PDF of this document page has been generated: "PDF of this document page has been generated."
       Click the button to download it: Click the button to download it.
       Download PDF: Download PDF
       Generate Again: Generate Again!
       Submiting: "Submiting..."
-      Click button to genrate PDF file for this document: Click button to genrate PDF file for this document.
+      Click button to genrate PDF file for this document: "Click button to genrate PDF file for this document."
       Generate PDF: Generate PDF
     form:
-      Doc publish failed, because there has count issues: Doc publish failed, because there has %{count} issues.
-      New doc: New doc
+      Doc publish failed, because there has count issues: You have failed to verfify this document due to problems at %{count}.
+      New doc: New Doc
       Save Draft: Save Draft
       Publish: Publish
     readers:
@@ -434,17 +434,17 @@ en:
       Share doc: Share doc
       Everyone can visits this doc with the share link: "Everyone can visits this doc with the share link:"
       opened share at: opened share at
-      Create a share link to allow non-member visit this doc: Create a share link to allow non-member visit this doc.
+      Create a share link to allow anyone to visit this doc: "Create a share link to allow anyone to visit this doc."
     edit:
       Edit Doc: Edit Doc
-      Doc current in locked: Doc current in locked.
+      Doc current in locked: "Others are editing this doc now."
       Warning: Warning!
-      is current in editing this document: is current in editing this document.
-      Continue edit will make conflict, do you wants continue?: Continue edit will make conflict, do you wants continue?
-      Continue edit: Continue edit
+      in editing this document now: "in editing this document now."
+      Continue edit will make conflict, do you wants continue?: "If you continue to edit, it may lead to conflicts, do you still wish to continue?"
+      Continue edit: Continue with editing
       Cancel: Cancel
     show:
-      Back to list: Back to list
+      Back to list: Back to repository
       Not found: Not found
       Private: Private
       Edit: Edit
@@ -454,10 +454,10 @@ en:
       Fullscreen: Fullscreen
       Versions: Versions...
       Delete: Delete
-      Are you sure delete?: Are you sure delete this Doc?
+      Are you sure delete?: Are you sure to delete this Doc?
       Exit Fullscreen: Exit
       Doc not found: Doc not found
-      Sorry, this Doc does not exists: Sorry, this Doc does not exists, please checkout that URL is correct.
+      Sorry, this Doc does not exists: "Sorry, this Doc does not exist. Please check your URL address."
       Create Doc for this URL: Create Doc for this URL
       Last edit by: Last edit by
       edited at: at
@@ -465,7 +465,7 @@ en:
       created at: at
     transfer:
       Transfer docs: Transfer docs
-      When you wants move docs into other repository: When you wants move docs into other repository, you can choice them and select a destination repository to transfer.
+      When you wants move docs into other repository: "Select the document you want to transfer from below and select the repository you want to transfer to."
       Select doc to transfer: Select doc to transfer
       To repository: To repository
       Transfer now: Transfer now!
@@ -478,19 +478,19 @@ en:
     create:
       User has added as member: User has added as member
     update:
-      Member has update successed: Member has update successed
+      Member was successfully updated: Member was successfully updated.
     destroy:
-      Member has remove successed: Member has remove successed
+      Member has remove successed: Member was successfully removed.
     add_member:
       Add member: Add member
-      Type username to match user and then add as member of this group: Type Username or Real name to match user and then add as member of this group.
+      Enter username to find the member you want to add into the group: "Enter username to find the member you want to add into the group."
       Search user: "Search user:"
       Admin: Admin
       Editor: Editor
       Reader: Reader
-      All permission of this group: All permission of this group.
-      Can create, update docs or repositories of this group: Can create, update docs or repositories of this group.
-      Readonly mode for all resources of this group: Readonly mode for all resources of this group.
+      Admin has the highest authority in the group: "Admin has the highest authority in the group."
+      Can create, update docs or repositories of this group: "Editor can create, update docs or repositories of this group."
+      Readonly mode for all resources of this group: "Read only mode. Reader can access all public and private content of this group."
     update_member:
       Change member role: Change member role
       Change role: Change role...
@@ -506,28 +506,28 @@ en:
     destroy:
       Delete group: Delete group
       Delete this group: Delete this group
-      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This action cannot be undone: This action <strong>cannot</strong> be revoked.
       This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
-      Please type the path slug of group to confirm: Please type the path <strong class="text-red"><%= @group.slug %></strong> to confirm
+      Please type the path slug of group to confirm: Please enter the path <strong class="text-red"><%= @group.slug %></strong> to confirm
       I understand, delete this group: I understand, delete this group!
-      Group has deleted: Group has deleted
+      Group was successfully deleted: "Group was successfully deleted."
     show:
       Photo: Logo
       Settings: Settings
       Group profile: Group profile
       Update profile: Update profile
-      Danger to change slug: "Danger! When you change the group name, the links to this group's contents will can not open."
+      Danger to change slug: "Danger! Once you change your group path, you will not be able to open contents linking to this group."
       Danger zone: Danger zone
       Delete this group: Delete this group
-      Once you delete a group, there is no going back: Once you delete a group, there is no going back. Please be certain.
+      Once you delete a group, there is no going back: "Once you delete a group, you can not recover it. Please be certain."
       Upload new picture: Upload new picture
-      This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify group in BlueDoc It will be visible to anyone.
-      Use a photo or image rather than text and upload an image that is 200px square or larger: Use a photo or image rather than text and upload an image that is 200px square or larger.
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: "This photo will be used as your group logo in BlueDoc. It will be visible to everyone."
+      Use a photo or image rather than text and upload an image that is 200px square or larger: "Use a photo or image. You are recommended to upload a square image that is 200px or larger."
     update:
-      Group update successed: Group update successed.
+      Group was successfully updated: Group was successfully updated.
   groups:
-    create: 
-      Group has created: Group has created
+    create:
+      Group was successfully created: Group was successfully created
     menu:
       Repository: Repositories
       Search: Search
@@ -537,66 +537,66 @@ en:
       Group: Group
     new:
       New Group: New Group
-      Group accounts allow your team to plan, build, review, and ship documents: Group accounts allow your team to plan, build, review, and ship documents...
-      Great group path names are short and memorable: Great group path names are short and memorable, <code>%{host}/group-name</code>.
-      The letters, numbers or dash is allow, for example: "The letters, numbers or dash is allow, and we will keep the letter case, for example:"
-      Display title of this Group: Display title of this Group
+      Group accounts allow your team to plan, build, review, and ship documents: "Creating a group allows members working on the same project accessing all contents together. "
+      Great group path names are short and memorable: "A short and easy to remember group path is convenient for sharing and accessing."
+      The letters, numbers or dash is allow, for example: "You can letters, numbers or dash in your group path, e.g."
+      Display title of this Group: "Used for displaying group name at different places."
       Create Group: Create Group
     search:
-      Can't find any Doc like: "Can't find any Doc like"
+      Can't find any Doc like: "Can not find any related Doc"
       in this Group: "in this Group."
     show:
       Repositories: Repositories
       Show all: Show all
       Find a repository: Find a repository...
-      There is no repository: There is no repository.
-      You can create first repository: You can create first repository,
-      Create new: Create new
+      There is no repository: "There is no repository"
+      You can create first repository: o repository under this group, you can
+      Create new: Create a new repositor
       Members: Members
   notification_mailer:
     to_user:
       View it on BlueDoc: View it on BlueDoc
   notifications:
-    Notification been deleted: Notification trigger content has been deleted.
-    read: 
-      Success marked notifications as read: Success marked %{num} notifications as read
+    Notification been deleted: "Data for this notification has been deleted."
+    read:
+      Success marked notifications as read: Successfully marked %{num} notifications as read
     body:
       add_member:
-        has added you as member of: "has added you as member of [%{subject}]"
+        has added you as a member of: "has added you as a member of [%{subject}]"
       comment:
         said: said
       mention:
         mentioned you: mentioned you
         has mentioned you in subject: "has mentioned you in [%{subject}]."
       repo_import:
-        Repository name import has been status: "Repository [%{name}] import has been %{status}."
+        Repository name has been imported: "Repository [%{name}] has been imported %{status}."
     title:
       add_member:
-        has added you as member of: "has added you as member of [%{subject}]"
+        has added you as a member of: "has added you as a member of [%{subject}]"
       comment:
         got a comment: got a comment.
       mention:
         got a comment: got a comment.
         got a mention: content has mentioned you.
       repo_import:
-        Repository name import has been status: "Repository [%{name}] import has been %{status}."
+        Repository name has been imported: "Repository [%{name}] has been imported %{status}."
     add_member:
-      has added you as member of: "has added you as member of:"
+      has added you as a member of: "has added you as a member of:"
     comment:
       was posted a comment on: "was posted a comment on"
     mention:
       was mentioned you in: "was mentioned you in"
     repo_import:
       Repository: Repository
-      import has been: import has been
+      has been imported: as been imported
     index:
       Unread: Unread
       All: All
       Clear all: Clear all
       Mark as read: Mark as read
       notifications: notifications
-      You does not have any notifications: You does not have any notifications.
-      You does not have any unread notifications: You does not have any unread notifications.
+      You does not have any notifications: You do not have any notifications.
+      You does not have any unread notifications: You do not have any unread notifications.
   reactions:
     new_button:
       Select a item: Pick a reaction
@@ -604,7 +604,7 @@ en:
     doc:
       Sharing: Sharing
       Last updated at: Last updated at
-      Are you sure delete this Doc?: Are you sure delete this Doc?
+      Are you sure delete this Doc?: Are you sure to delete this Doc?
     empty_docs:
       There is no documents: There is no documents
       You can create first document: "You can create first document,"
@@ -627,28 +627,28 @@ en:
     new:
       New Repository: New Repository
       Import Repository: Import Repository
-      A repository contains all the documents for your project: A repository contains all the documents for your project.
+      A repository contains all the documents for your project: "A repository contains all the documents of your project."
       Import from Archive: Import from Archive
       Import from Git: Import from Git
       Select File: Select File
-      Put a Git repository URL, BlueDoc will import all of the markdown files as a Doc: Put a Git repository URL, BlueDoc will import all of the <code>.md, .markdown</code> files as a Doc.
+      Enter a Git repository URL: "Enter a Git repository URL, BlueDoc will import all of the markdown files <code>.md, .markdown</code> as a Doc."
       This feature is best compatible with: 'This feature is best compatible with <a href="https://gitbook.io">GitBook</a> format (including a <code>SUMMARY.md</code> to describe of the Table of Contents).'
-      You can archive multiple markdown files as a zip file, and then choice the zip file for import: You can archive multiple <code>.md, .markdown</code> files as a zip file, and then choice the zip file for import.
-      Or you have a GitBook source, you can use: Or you have a GitBook source, you can use
-      Great repository names are short and memorable: Great repository names are short and memorable.
-      Anyone can see this repository: Anyone can see this repository.
-      You choose who can see and edit to this repository: You choose who can see and edit to this repository.
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import: "You can archive multiple markdown files <code>.md, .markdown</code> as a zip file, and choose the zip file to import."
+      Or you have a GitBook source, you can use: "Or you can use GitBook source to import:"
+      Great repository names are short and memorable: "Use a short and easy to remember path for your Repository"
+      Anyone can see this repository: "Everyone can access content of this repository."
+      You choose who can see and edit to this repository: "Users outside the Group cannot access the Repository unless you add them into the Group or as a member."
       Public: Public
       Private: Private
       Create Repository: Create Repository
     search:
       Search Docs: Search Docs
-      Can not find any Doc like: "Can't find any Doc like"
-      in this Repository: in this Repository.
+      Can not find any Doc like: "No related Docs like"
+      in this Repository: "are found in this Repository."
     show:
       Edit TOC: Edit
     toc:
-      Table of Contents has updated: Table of Contents has updated
+      Table of Contents was successfully updated: "Table of Contents was successfully updated."
       Edit TOC: Edit TOC
       Back to Repository: Back to Repository
       Edit Table of contents: Edit Table of contents
@@ -669,58 +669,58 @@ en:
       Cancel: Cancel
     create:
       Repository was successfully created: Repository was successfully created.
-      Repository was successfully created, and executed importing in background: Repository was successfully created, and executed importing in background, wait a moment you will see the import result.
+      Repository was successfully created, and executed importing in background: "Repository was successfully created, and executed importing in background."
     import_status:
-      Repository import still running, please wait: Repository import still running, please wait...
-      Repository import was failed: Repository import was failed.
+      Repository import still running, please wait: "Importing repository now, please wait ..."
+      Repository import was failed: "You have failed to import repository. Check reasons from below or contact admins."
       Retry import: Retry again
-      Abort: Abort
+      Abort: Give up
   repository_settings:
     update:
-      Update successed: Update successed
+      Repository was successfully updated: Repository was successfully updated
     exports:
       archive:
         Export as Archive: Export as Archive
-        Export all docs as markdown files, and archive them into a zip file: Export all docs as markdown files, and archive them into a zip file.
-        This will including a SUMMARY for describe of the Table of contents: This will including a <code>SUMMARY.md</code> for describe of the Table of contents.
-        After that you can use many Markdown tools: After that you can use many Markdown tools
-        to genrate it to other format: to genrate it to other format.
-        Archive of this repository has in generating: Archive of this repository has in generating, please wait ...
-        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a Archive export task again.
-        Archive of this repository was generated: Archive of this repository was generated.
-        Click the button to download it: Click the button to download it.
+        Export all docs as markdown files, and archive them into a zip file: "Export all docs as markdown files, and archive them into a zip file."
+        This will including a SUMMARY for describe of the Table of contents: "The exported file contains a table of contents (SUMMARY.MD) describing the depository."
+        After that you can use many Markdown tools: "You can use third-party tools, e.g."
+        to genrate it to other format: "to genrate static Website or Ebook. You can also use this to backup your contents."
+        Archive of this repository has in generating: "Archiving your depository now, please wait..."
+        If you are waiting a long time, you can retry: "If there is no response after a long waiting, you can %{retry}."
+        Archive of this repository was generated: "Repository zip has been generated."
+        Click the button to download it: "Click the button to download. If there is update to the content, you can generate the zip file again."
         Download: Download
         Generate Again: Generate Again!
         Submiting: Submiting...
         Archive as zip: Archive as zip
-        Generate Archive will take a long time: Generate Archive will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+        Generate Archive will take a long time: "It takes a long time to generate the zip file. You can continue with other works and come back later."
       pdf:
         Export as PDF: Export as PDF
-        You can export all docs as a PDF file: You can export all docs in this Repository as a PDF file.
+        You can export all docs as a PDF file: "You can export all docs as a PDF file."
         Preview PDF HTML: Preview PDF HTML
-        Exporter will use the TOC ordered, otherwice same as the: Exporter will use the Table of Contents ordered for generate the PDF file. If you was not enable that, docs order will following as the updated at same like the
+        Exporter will use the TOC ordered, otherwice same as the: "PDF will be generated based on the order of contents in the depository. If you did not enable this function, the PDF will be generated based on the"
         Doc list: Docs page
-        PDF has in generating, please wait: PDF of this repository has in generating, please wait ...
-        If you are waiting a long time, you can retry: If you are waiting a long time, and still no response, then you can %{retry} it to generate a PDF export task again.
-        PDF of this repository was generated: PDF of this repository was generated.
+        PDF has in generating, please wait: "Exporting PDF now, please wait..."
+        If you are waiting a long time, you can retry: "If there is no response after a long waiting, you can %{retry}."
+        PDF of this repository was generated: "PDF of this repository was generated."
         Click the button to download it: Click the button to download it.
         Download: Download PDF
         Generate Again: Generate Again!
         Submiting: Submiting...
         Generate PDF: Generate PDF
-        Generate PDF will take a long time: Generate PDF will take a long time in backgroud task, you can continue the other other works, then check it after a moment.
+        Generate PDF will take a long time: "It takes a long time to generate the PDF file. You can continue with other works and come back later."
     destroy:
       Delete repository: Delete repository
       Delete this repository: Delete this repository
-      This action cannot be undone: This action <strong>cannot</strong> be undone.
+      This action cannot be undone: This action <strong>cannot</strong> be revoked.
       This will permanently delete the: This will permanently delete the
       all of contents: repository, docs, versions and comments.
-      Please type in the path: Please type in the path
+      Please enter the path: Please enter in the path
       to confirm: to confirm.
       I understand, delete this repository: I understand, delete this repository
-      Repository has destroyed: Repository has destroyed
+      Repository has successfully destroyed: Repository has successfully destroyed
     member:
-      Are you sure to remove?: Are you sure to remove?
+      Are you sure to remove?: Are you sure to to remove?
     menu:
       Options: Options
       Manage docs: Manage docs
@@ -729,21 +729,21 @@ en:
     privacy:
       public: public
       private: private
-      Make privacy: Make %{privacy}
-      Make this repository privacy: Make this repository %{privacy}
-      Public this repository from the private, this repository and docs will be visible to everyone who can visit: Public this repository from the private, this repository and docs will be visible to everyone who can visit
-      Private this repository from the public, this change will remove repository watchers, stars: Private this repository from the public, this change will remove repository watchers, stars.
-      Please type in the path: Please type in the path
+      Make privacy: Set as %{privacy}
+      Make this repository privacy: Set the repository as %{privacy}
+      Set the repository as public, this repository and all docs will be visible to everyone: Set the repository as public, this repository and all docs will be visible to everyone
+      Set the repository as private, all subscribers will be removed: Set the repository as private, all subscribers will be removed.
+      Please enter the path: Please enter the path
       to confirm: to confirm.
       Confirm and submit: I understand, %{privacy} this repository.
     transfer:
       Transfer: Transfer
       Transfer repository: Transfer repository
-      Please type in the path: Please type in the path
+      Please enter the path: Please enter the path
       to confirm: to confirm.
       Target username or group path: New owner’s BlueDoc username or group path
       Confirm and transfer: Transfer this repository
-      Repository has transfer successed: Repository has transfer successed
+      Repository was successfully transfered: Repository was successfully transfered
     advanced:
       Settings: Settings
       Transfer: Transfer
@@ -766,19 +766,19 @@ en:
       Setting: Setting
       Transfer docs to other repository: Transfer docs to other repository
       Choise doc in list, you can move them into the other repository: Choise doc in list, you can move them into the other repository.
-      If there has same doc slug exists in the destination repository, it will change it as a random slug: If there has same doc slug exists in the destination repository, it will change it as a random slug.
+      If a file already exists with that name in the destination repository, the doc path will be changed into a random string: If a file already exists with that name in the destination repository, the doc path will be changed into a random string.
       Transfer now: Transfer now!
       Successfully transfered docs to: Successfully transfered %{num} docs to %{path}
     show:
       Settings: Settings
-      Repository profile: Repository profile
+      Repository profile: "Repository profile"
       Repository slug help: "%{host}%{user_path}/repository-name"
       Update: Update
       Features: Features
       Table of Contents: Table of Contents
-      Enable to use Table of Contents style for Repository index: Enable to use Table of Contents style for Repository index.
+      Enable to use Table of Contents style for Repository index: "Enable Table of contents. You can edit structure of the Table of contents of your Repository."
     retry_import:
-      Repository import has started: The Repository import has started to retry, and a notification will be sent later.
+      Repository import has started: "Start importing your repository. Once finished, a notification will be sent to you."
   searches:
     menu:
       Docs: Docs
@@ -788,11 +788,11 @@ en:
       Notes: Notes
     no_result:
       No result: No result
-      Can not find any contents like: "Can't find any contents like"
-      in BlueDoc: in BlueDoc.
+      Can not find any contents like: "No related documents like"
+      in BlueDoc: can be found in BlueDoc.
     search_info:
       About: About
-      there have count results: there have %{count} results.
+      there have count results: "%{count} results have been found."
   shares:
     doc:
       Last edit by: Last edit by
@@ -806,8 +806,8 @@ en:
       Your username is: "Your username is:"
       Thanks for joining and have a great day: Thanks for joining and have a great day!
   users:
-    create: 
-      Group has created: Group has created
+    create:
+      Group was successfully created: Group was successfully created
     card:
       followers: followers
     followers:
@@ -838,8 +838,8 @@ en:
       Stars: Stared Repositories
       no star repositories: was not star any repositories.
     profile:
-      This photo will be used to identify you in BlueDoc It will be visible to anyone: This photo will be used to identify you in BlueDoc. It will be visible to anyone
-      Use a photo or image rather than text and upload an image that is 132px square or larger: Use a photo or image rather than text and upload an image that is 132px square or larger
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: "This photo will be used to identify you in BlueDoc. It will be visible to everyone."
+      Use a photo or image rather than text and upload an image that is 132px square or larger: "Use a photo or image and upload a square image that is 132px or larger"
   notes:
     card:
       Notes: Notes
@@ -851,15 +851,15 @@ en:
     new:
       New Note: New Note
       Create Note: Create Note
-      Use a short description to describe of this Note: Use a short description (in 200 chars) to describe of this Note.
+      Use a short description to describe of this Note: "Use a short description to describe this Note (optional)"
       Public: Public
       Private: Private
-      Anyone can see this Note: Anyone can see this Note.
-      Only you can see this Note: Only you can see this Note.
+      Anyone can see this Note: "Anyone can see this Note."
+      Only you can see this Note: "Only you can see this Note."
     edit:
       New Note: New Note
       Publish: Publish
-      Note publish failed, because there has count issues: Note publish failed, because there has %{count} issues
+      Note publish failed, because there has count issues: "You have failed to save the note due to %{count} issues"
       Private: Private
     update:
       Note was successfully updated: Note was successfully updated.
@@ -867,7 +867,7 @@ en:
       Note was successfully deleted: Note was successfully deleted.
     revert:
       Note was successfully reverted: Note was successfully reverted.
-      Revert failed, please check a exists version: Revert failed, please check a exists version.
+      Revert failed, please check a exists version: "Fail to revert! Please check the correct version."
     show:
       Not found: Not found
       Last edit by: Last edit by

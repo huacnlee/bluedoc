@@ -192,7 +192,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "details.doc-share-button-box" do
       # assert_select "summary .text", text: "Share"
       assert_select ".dropdown-menu" do
-        assert_select ".description", text: "Create a share link to allow non-member visit this doc."
+        assert_select ".description", text: "Create a share link to allow anyone to visit this doc."
         assert_select ".share-user", 0
         assert_select ".btn-open-share" do
           assert_select "[href=?]", doc.to_path("/share")
@@ -622,7 +622,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     assert_select "script#edit-doc-script-lock", 0
-    assert_match /is current in editing this document/, response.body
+    assert_match /in editing this document now/, response.body
     assert_select ".edit-doc-lock-overlay" do
       assert_select "form[action=?]", doc.to_path("/lock")
       assert_select ".user-name", text: user.name

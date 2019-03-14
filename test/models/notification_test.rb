@@ -104,8 +104,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :add_member, target: member)
     assert_equal group.to_url, note.target_url
 
-    assert_equal "#{note.actor.name} has added you as member of [#{group.name}]", note.mail_body
-    assert_equal "#{note.actor.name} has added you as member of [#{group.name}]", note.mail_title
+    assert_equal "#{note.actor.name} has added you as a member of [#{group.name}]", note.mail_body
+    assert_equal "#{note.actor.name} has added you as a member of [#{group.name}]", note.mail_title
     assert_equal "add_member-User-#{group.id}", note.mail_message_id
   end
 
@@ -115,8 +115,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :add_member, target: member)
     assert_equal repo.to_url, note.target_url
 
-    assert_equal "#{note.actor.name} has added you as member of [#{repo.user.name} / #{repo.name}]", note.mail_body
-    assert_equal "#{note.actor.name} has added you as member of [#{repo.user.name} / #{repo.name}]", note.mail_title
+    assert_equal "#{note.actor.name} has added you as a member of [#{repo.user.name} / #{repo.name}]", note.mail_body
+    assert_equal "#{note.actor.name} has added you as a member of [#{repo.user.name} / #{repo.name}]", note.mail_title
     assert_equal "add_member-Repository-#{repo.id}", note.mail_message_id
   end
 
@@ -125,8 +125,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :repo_import, target: repo, meta: { status: :success })
 
     assert_equal repo.to_url, note.target_url
-    assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_body.strip
-    assert_equal "Repository [#{repo.user.name} / #{repo.name}] import has been success.", note.mail_title.strip
+    assert_equal "Repository [#{repo.user.name} / #{repo.name}] has been imported success.", note.mail_body.strip
+    assert_equal "Repository [#{repo.user.name} / #{repo.name}] has been imported success.", note.mail_title.strip
     assert_equal "repo_import-Repository-#{repo.id}", note.mail_message_id
     assert_equal "", note.target_mention_fragment
   end

@@ -7,7 +7,7 @@
     <div class="box-body overflow-auto">
       <%= form_with(model: Member.new, url: group_members_path(@group), method: :post) do |form| %>
         <div class="notice mb-3">
-          <%= t("group_members.add_member.Type username to match user and then add as member of this group") %>
+          <%= t("group_members.add_member.Enter username to find the member you want to add into the group") %>
         </div>
 
         <div class="form-group">
@@ -22,7 +22,7 @@
             <label>
               <input type="radio" name="member[role]" checked value="admin"> <%= t("group_members.add_member..Admin") %>
               <div class="form-text">
-                <%= t("group_members.add_member..All permission of this group") %>
+                <%= t("group_members.add_member.Admin has the highest authority in the group") %>
               </div>
             </label>
           </div>

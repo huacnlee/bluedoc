@@ -402,7 +402,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to repo.to_path
     follow_redirect!
-    assert_select ".notice", text: "The Repository import has started to retry, and a notification will be sent later."
+    assert_select ".notice", text: "Start importing your repository. Once finished, a notification will be sent to you."
 
     source.reload
     assert_equal "running", source.status

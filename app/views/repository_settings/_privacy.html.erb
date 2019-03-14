@@ -17,16 +17,16 @@
       <%= form_with(model: @repository, url: user_repository_settings_path(@user, @repository), method: :put) do |form| %>
         <p class="text-gray-light f6 mb-4">
           <% if @repository.private? %>
-            <%= t(".Public this repository from the private, this repository and docs will be visible to everyone who can visit") %> <%= Setting.host %>.
+            <%= t(".Set the repository as public, this repository and all docs will be visible to everyone") %> <%= Setting.host %>.
           <% else %>
-            <%= t(".Private this repository from the public, this change will remove repository watchers, stars") %>
+            <%= t(".Set the repository as private, all subscribers will be removed") %>
           <% end %>
         </p>
 
         <%= form.hidden_field :privacy, value: value %>
 
         <div class="form-group">
-          <label class="control-label"><%= t(".Please type in the path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
+          <label class="control-label"><%= t(".Please enter the repository path") %> <strong class="text-red"><%= @repository.slug %></strong> <%= t(".to confirm") %></label>
           <input type="text" confirm-for="#btn-confirm-change-private" confirm-value="<%= @repository.slug %>" autocomplete="off" class="form-control" />
         </div>
 

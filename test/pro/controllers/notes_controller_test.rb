@@ -100,7 +100,7 @@ class ProNotesControllerTest < ActionDispatch::IntegrationTest
       get note.to_path
       assert_equal 200, response.status
       assert_select ".doc-export-pdf-box details" do
-        assert_select ".description", text: "PDF of this document page has generated."
+        assert_select ".description", text: "PDF of this document page has been generated."
         assert_select ".btn-download-pdf" do
           assert_select "[href=?]", note.export_url(:pdf)
         end
