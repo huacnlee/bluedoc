@@ -51,8 +51,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
     user.password = "123456"
 
     admin_sql = %(
-      INSERT INTO "users"("id", "type","slug","name","email","encrypted_password","created_at","updated_at")
-      VALUES (1,'User','admin','Admin','admin@bluedoc.io','#{user.encrypted_password}','#{Time.now}','#{Time.now}');
+      INSERT INTO "users"("type","slug","name","email","encrypted_password","created_at","updated_at")
+      VALUES ('User','admin','Admin','admin@bluedoc.io','#{user.encrypted_password}','#{Time.now}','#{Time.now}');
     )
 
     execute admin_sql

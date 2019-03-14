@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2019_03_05_023555) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -106,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "title", null: false
     t.string "draft_title"
     t.string "slug", limit: 200, null: false
-    t.integer "repository_id"
+    t.bigint "repository_id"
     t.integer "creator_id"
     t.integer "last_editor_id"
     t.integer "comments_count", default: 0, null: false
@@ -166,9 +165,9 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "format", limit: 20, default: "markdown", null: false
     t.datetime "body_updated_at"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "deleted_slug", limit: 200
+    t.string "deleted_slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "body_updated_at"], name: "index_notes_on_user_id_and_body_updated_at"
     t.index ["user_id", "deleted_at"], name: "index_notes_on_user_id_and_deleted_at"
     t.index ["user_id", "slug"], name: "index_notes_on_user_id_and_slug", unique: true
@@ -182,7 +181,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "target_type"
     t.integer "target_id"
     t.integer "group_id"
-    t.string "repository_id"
+    t.integer "repository_id"
     t.text "meta"
     t.datetime "read_at"
     t.datetime "created_at", null: false
