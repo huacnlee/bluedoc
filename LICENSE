@@ -1,31 +1,11 @@
 The BlueDoc license
 Copyright (c) 2019-present BlueDoc
 
-With regard to the BlueDoc Software:
+With regards to the BlueDoc Software:
 
-This software and associated documentation files (the "Software") may only be
-used in production, if you (and any entity that you represent) have agreed to,
-and are in compliance with, the BlueDoc Terms of Service or other
-agreement governing the use of the Software, as agreed by you and BlueDoc,
-and otherwise have a valid BlueDoc Pro Edition subscription for the
-correct number of user seats. Subject to the foregoing sentence, you are free to
-modify this Software and publish patches to the Software. You agree that BlueDoc
-and/or its licensors (as applicable) retain all right, title and interest in and
-to all such modifications and/or patches, and all such modifications and/or
-patches may only be used, copied, modified, displayed, distributed, or otherwise
-exploited with a valid BlueDoc Pro Edition subscription for the  correct
-number of user seats. Notwithstanding the foregoing, you may copy and modify
-the Software for development and testing purposes, without requiring a
-subscription. You agree that BlueDoc and/or its licensors (as applicable) retain
-all right, title and interest in and to all such modifications. You are not
-granted any other rights beyond what is expressly stated herein. Subject to the
-foregoing, it is forbidden to copy, merge, publish, distribute, sublicense,
-and/or sell the Software.
+this software and associated documentation files (the "Software") may only be used in production, if you (and any entity that you represent) have agreed to and are in compliance with the BlueDoc Terms of Service or other agreement governing the use of the Software, as agreed by you and BlueDoc, or otherwise, have a valid BlueDoc Pro Edition subscription for the correct number of user seats. Subject to the foregoing sentence, you are free to modify this Software and publish patches to the Software. You agree that BlueDoc and/or its licensors (as applicable) retain all right, title and interest in and to all such modifications and/or patches, and all such modifications and/or patches may only be used, copied, modified, displayed, distributed, or otherwise exploited with a valid BlueDoc Pro Edition subscription for the correct number of user seats. Notwithstanding the foregoing, you may copy and modify the Software for development and testing purposes, without requiring a subscription. You agree that BlueDoc and/or its licensors (as applicable) retain all right, title and interest in and to all such modifications. You are not granted any other rights beyond what is expressly stated herein. Subject to the foregoing, it is forbidden to copy, merge, publish, distribute, sublicense, and/or sell the Software.
 
-Any part of this Software distributed as part of BlueDoc or that is a file
-that produces client-side JavaScript, in whole or in part, is copyrighted under
-the MIT license. The full text of this Pro License shall be included in all
-copies or substantial portions of the Software.
+Any part of this Software distributed as part of BlueDoc or that is a file that produces client-side JavaScript, in whole or in part, is copyrighted under the MIT license. The full text of this Pro License shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -35,6 +15,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-For all third party components incorporated into the BlueDoc Software, those
-components are licensed under the original license provided by the owner of the
-applicable component.
+For all third-party components incorporated into the BlueDoc Software, those components are licensed under the original license provided by the owner of the applicable component.
