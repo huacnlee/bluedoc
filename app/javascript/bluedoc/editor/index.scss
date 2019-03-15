@@ -16,43 +16,38 @@
     border: 0;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
     z-index: 201;
-
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 15px;
     .navbar-title {
-      line-height: 64px;
-      padding-left: 24px;
-
+      display: flex;
+      align-items: baseline;
+      flex: 1;
       a { color: #333; }
-
-      .divider { color: #bbb; margin: 0 5px; }
+      .divider { color: #bbb; margin: 0 3px; }
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowarp;
     }
 
     .navbar-buttons {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 64px;
       text-align: right;
-      padding-right: 15px;
-      padding-top: 14px;
-
       > .btn-primary {
         background: none;
         box-shadow: none;
       }
-
       > .btn {
         text-align: center;
         margin-left: 5px;
         border: 0;
       }
-
       .doc-setting-box > .btn {
         text-align: center;
         margin-left: 5px;
         border: 0;
         font-size: 18px;
       }
-
       .dropdown-menu {
         text-align: left;
         right: 5px;
