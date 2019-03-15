@@ -52,9 +52,6 @@
   }
   .menu-sub-item.menu-arrow {
     position: relative;
-    &::before {
-      
-    }
   }
 
   a.menu-item {
@@ -88,7 +85,7 @@
       top: 0;
       left: 0;
       background: #fff;
-      padding: 17px 12px 17px 15px;
+      padding: 17px 30px 17px 15px;
       display: block;
       line-height: 100%;;
       &:active {
