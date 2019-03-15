@@ -775,51 +775,63 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@royie/slate-base64-serializer@^0.2.94":
-  version "0.2.94"
-  resolved "https://registry.yarnpkg.com/@royie/slate-base64-serializer/-/slate-base64-serializer-0.2.94.tgz#2b16b803a753a13ae38ad5c6ed3b45bb98e37086"
+"@types/q@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
+
+"@typine/slate-base64-serializer@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-base64-serializer/-/slate-base64-serializer-0.3.1.tgz#566b8a94386a26cfd4cd7fbf3c37e59513c465dd"
+  integrity sha512-lWzmi2aNPlw17a3FppNzCV6gDoDFAEOERnLn82nJ/ilE3d+uVJEkI+7JVjjYuZZNnSw2k4ANQtKJqzjyAM50Ug==
   dependencies:
     isomorphic-base64 "^1.0.2"
 
-"@royie/slate-dev-environment@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@royie/slate-dev-environment/-/slate-dev-environment-0.2.3.tgz#e578e8ce47b55dbb7df3f23e1e564f0f1a57f925"
+"@typine/slate-dev-environment@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-dev-environment/-/slate-dev-environment-0.3.1.tgz#64a4f17e084d2be464ee176de6f9627f5fb59d20"
+  integrity sha512-pbqYJxzSqhtnnBbeaJjkXo18XiGsWTQwua/EfS+aysFAnDYyHwkQpGzigPIteywIJxbYH7YySRzu5Qv12sg6vQ==
   dependencies:
     is-in-browser "^1.1.3"
 
-"@royie/slate-hotkeys@^0.2.10":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@royie/slate-hotkeys/-/slate-hotkeys-0.2.10.tgz#1adac496bddd4a3619082f9433326278927aab7a"
+"@typine/slate-hotkeys@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-hotkeys/-/slate-hotkeys-0.3.1.tgz#6c93fdbdd4d4d88ad781489db625400b4dfa1e7d"
+  integrity sha512-eQ65o7bc56AorqtLEKwucV5rzyJ9J+r5aN717sMybLAofRFgaGCnhy4mAk5zmbSPT7fhOS7xe8lIbcKIWMpS1Q==
   dependencies:
-    "@royie/slate-dev-environment" "^0.2.3"
+    "@typine/slate-dev-environment" "^0.3.1"
     is-hotkey "0.1.4"
 
-"@royie/slate-is-hotkey@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@royie/slate-is-hotkey/-/slate-is-hotkey-0.1.6.tgz#ac0bb30952e2cced96830783185eb908f646d60e"
+"@typine/slate-is-hotkey@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-is-hotkey/-/slate-is-hotkey-0.2.1.tgz#e6fea42301b4d13a5000064069aa2f964ef1fb84"
+  integrity sha512-eQaHViKd6WgBGk+Zs+PX4s4/L6xlc8m4cl5ZlxVKeWVV1AnnYJemzEc9VhmjjEm44QLyjowGyGKjLzDl7RlfUQ==
 
-"@royie/slate-plain-serializer@^0.6.32":
-  version "0.6.32"
-  resolved "https://registry.yarnpkg.com/@royie/slate-plain-serializer/-/slate-plain-serializer-0.6.32.tgz#b09682aeec54dd83bc2af0e4fedda01ede70d93d"
+"@typine/slate-plain-serializer@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-plain-serializer/-/slate-plain-serializer-0.7.1.tgz#ffc2f6072a157f8d2880d8e46456e99ce29b2e56"
+  integrity sha512-q9SycS8yNBFFkkKM5PyFtD9u+erckVPD6r6uaKTa6Dk0N41i+IHuOfmgGpX88pE0WpQYwX9YinZ2Vm9oRbpq/Q==
 
-"@royie/slate-prop-types@^0.5.24":
-  version "0.5.24"
-  resolved "https://registry.yarnpkg.com/@royie/slate-prop-types/-/slate-prop-types-0.5.24.tgz#9cc542be91ef60de724ea2814d9a90fca28d7c17"
+"@typine/slate-prop-types@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-prop-types/-/slate-prop-types-0.6.1.tgz#95b473abdc2ce6d4483aa8cbc581fc2f66e3fd28"
+  integrity sha512-KONqF3Mc+b+fbLet6eIL7wVvHjCZcROdFcFRkkY5cGYXiJhRvjZjSs7Q/E4iyyKqErVfR4QueVesjrdYt61LOQ==
 
-"@royie/slate-react-placeholder@^0.1.12":
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/@royie/slate-react-placeholder/-/slate-react-placeholder-0.1.12.tgz#6297327f02c0aeef3c5ddc053c0286415b3be6a9"
+"@typine/slate-react-placeholder@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-react-placeholder/-/slate-react-placeholder-0.2.1.tgz#1cef85bfe5028efe27de7280091a8032f09d8f37"
+  integrity sha512-x7JZTuZ2BkLrQpkmrPpcy8w7q4b4yhWm47S1XlEAWIR4Fuhren+0lFFZ994ylquwx9ZRDd4Kuh/u5luGqxPmig==
 
-"@royie/slate-react@^0.21.17":
-  version "0.21.17"
-  resolved "https://registry.yarnpkg.com/@royie/slate-react/-/slate-react-0.21.17.tgz#32ef8c95c6c9a33b56446602f48adde58241d51e"
+"@typine/slate-react@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@typine/slate-react/-/slate-react-0.22.1.tgz#7e64b89d59f69b3564855b9d26b38b848c82cc82"
+  integrity sha512-dqjoKrNChnr1B8gHIP3i+fie8ULGG4pvmQh21+nESOWosOJzccocx/WqtZONj+nK8/0viQoNYs1dVZ1KeSM5lg==
   dependencies:
-    "@royie/slate-base64-serializer" "^0.2.94"
-    "@royie/slate-dev-environment" "^0.2.3"
-    "@royie/slate-hotkeys" "^0.2.10"
-    "@royie/slate-plain-serializer" "^0.6.32"
-    "@royie/slate-prop-types" "^0.5.24"
-    "@royie/slate-react-placeholder" "^0.1.12"
+    "@typine/slate-base64-serializer" "^0.3.1"
+    "@typine/slate-dev-environment" "^0.3.1"
+    "@typine/slate-hotkeys" "^0.3.1"
+    "@typine/slate-plain-serializer" "^0.7.1"
+    "@typine/slate-prop-types" "^0.6.1"
+    "@typine/slate-react-placeholder" "^0.2.1"
     debug "^3.1.0"
     get-window "^1.1.1"
     is-window "^1.0.2"
@@ -831,9 +843,10 @@
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
-"@royie/slate@^0.44.9":
-  version "0.44.9"
-  resolved "https://registry.yarnpkg.com/@royie/slate/-/slate-0.44.9.tgz#8189da6df6d299ddf3444983cdaed3259426b477"
+"@typine/slate@^0.45.1":
+  version "0.45.2"
+  resolved "https://registry.yarnpkg.com/@typine/slate/-/slate-0.45.2.tgz#257e9abeb8e0b31ed3706c15afd766f2686ca43b"
+  integrity sha512-ayW61nAXIwR1QSOlW65jyzzHq8DRxPPLotXH0J4WOE5Kc3AZqZTZD4usIuuxVS3wFzP1Tp35EU8a6BQGnyZAiQ==
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -843,10 +856,6 @@
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
     type-of "^2.0.1"
-
-"@types/q@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -7394,14 +7403,14 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typine@^0.0.39:
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.0.39.tgz#7f793321b03385d7e84edb2938d57b9bbe24aec3"
-  integrity sha512-5gMwFFhtZ5eSUKQTaT5qdZrjACWvL6EYKkJDQXPDVlN8VLbuZUZMn42/JZU85XOZAr44aw/8sCoBgqZO4SgLxA==
+typine@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.1.3.tgz#5b97cb886f72bc41ac241148a2185644b4836839"
+  integrity sha512-PTsJUYD2D2ShFMOeFAZV1Dxtbl+lUDmwgi5h06sd7mmSJiD07ZNJ1UNEQu+2aQuXAK03mDZ6JL2Aug6ZtCBQoA==
   dependencies:
-    "@royie/slate" "^0.44.9"
-    "@royie/slate-is-hotkey" "^0.1.6"
-    "@royie/slate-react" "^0.21.17"
+    "@typine/slate" "^0.45.1"
+    "@typine/slate-is-hotkey" "^0.2.1"
+    "@typine/slate-react" "^0.22.1"
     fast-deep-equal "^2.0.1"
     filesize "^3.6.1"
     htmlminiiiiii "^3.5.21"
