@@ -755,10 +755,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@typine/slate-react@^0.21.19":
-  version "0.21.19"
-  resolved "https://registry.yarnpkg.com/@typine/slate-react/-/slate-react-0.21.19.tgz#a0144009a044b3f1273b9d561a224090d4989ba4"
-  integrity sha512-/xNdn+PUF88f8vu8fvYkcTfAnOvZzp8GrzS8znAKZoQN076MxHZxM95de2l3/S+Bejs20T5DgHrGf3xk2pWUyg==
+"@typine/slate-react@^0.21.24":
+  version "0.21.24"
+  resolved "https://registry.yarnpkg.com/@typine/slate-react/-/slate-react-0.21.24.tgz#368723089ed386eaf44b76bc6325dec2b2fbee54"
+  integrity sha512-laXzb4W1GeXLL2v9mqoK/1tmIuDX99w9ipGb/kLI59WcgX5N912YyJXeYwhOY2lE8kg3/ze7kzVlPP+YfjkYbQ==
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -7261,28 +7261,6 @@ slate-react-placeholder@^0.1.15:
   resolved "https://registry.yarnpkg.com/slate-react-placeholder/-/slate-react-placeholder-0.1.15.tgz#311cf6887d458ac60e1f4dbd48afc69a4433fbd1"
   integrity sha512-kIoVgh+xk5RyNxPltipM8bzrTdFDBT2H4r5lkOK90JQrZCNwqwUsaRALWuyfP3ftlS9ZGHmpqxcwxkq4Kk2+iA==
 
-slate-react@^0.21.18:
-  version "0.21.18"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.21.18.tgz#0f32e200428fec8eed99332d7f9021b438128e64"
-  integrity sha512-+qe4GYVGcz/wugN83ptYKKsSo6VC2yEvYLqr4ucxtx2272vT+P4JyKyKIcJD1/jQDW0vgRil1GOWgTztE0tcLg==
-  dependencies:
-    debug "^3.1.0"
-    get-window "^1.1.1"
-    is-window "^1.0.2"
-    lodash "^4.1.1"
-    memoize-one "^4.0.0"
-    prop-types "^15.5.8"
-    react-immutable-proptypes "^2.1.0"
-    selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.97"
-    slate-dev-environment "^0.2.2"
-    slate-hotkeys "^0.2.9"
-    slate-plain-serializer "^0.6.36"
-    slate-prop-types "^0.5.27"
-    slate-react-placeholder "^0.1.15"
-    tiny-invariant "^1.0.1"
-    tiny-warning "^0.0.3"
-
 slate@^0.44.12:
   version "0.44.12"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.44.12.tgz#06dbf98a7583d1a3b56636e762f494e4b0a13ffa"
@@ -7992,12 +7970,12 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typine@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.1.8.tgz#d816cac3d5e6f620d3fb8964dbfbf06521f5d285"
-  integrity sha512-ODHZq9X+NRcaACK4nyqjMSsChsnucyWb00BR+FIl3JX1hAeo112wmfN4nHEli6nz9ytOcwM+hrlrUle5qXkXOA==
+typine@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/typine/-/typine-0.1.12.tgz#0e29a648a4619d4866347be84feb5385fa4b418f"
+  integrity sha512-LxBKVGTr8f6HalxBwymb+H+ttYpAYJbGOCrMnY+OGmDIksZtC/vpttBalPFTqUgiWhI3WK3MkBZOLNhPZ1bQEA==
   dependencies:
-    "@typine/slate-react" "^0.21.19"
+    "@typine/slate-react" "^0.21.24"
     fast-deep-equal "^2.0.1"
     filesize "^3.6.1"
     htmlparser2 "^3.10.0"

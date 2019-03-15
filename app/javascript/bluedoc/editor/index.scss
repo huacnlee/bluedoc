@@ -253,6 +253,7 @@
     table tr,
     table td,
     .math-box,
+    .link-item,
     .image {
       &[data-active=true],
       [data-active=true] {
@@ -311,6 +312,14 @@
     .math-box {
       &[data-active=true] {
         .tex-image {
+          background: rgba(187, 201, 255, 0.18) !important;
+        }
+      }
+    }
+    .link-item {
+      cursor: pointer;
+      &[data-active=true] {
+        .link-title {
           background: rgba(187, 201, 255, 0.18) !important;
         }
       }
