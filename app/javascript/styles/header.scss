@@ -1,11 +1,13 @@
 .navbar-brand {
   font-size: 18px;
-  margin-right: 5px;
+  margin-right: 10px;
   background: url(~images/logo.png) center left no-repeat;
   background-size: 45px 45px;
   padding-left: 48px;
-  display: none;
+  width: 0;
+  overflow: hidden;
   @include breakpoint(md) {
+    width: auto;
     display: inline-block;
   }
   .blue {
@@ -39,16 +41,12 @@
   .header-shadow {
     box-shadow: 0 5px 15px 0 rgba(0,0,0,.1);
   }
-  .navbar-brand {
-    margin-right: 25px;
-  }
   .header-content {
     height: 100%;
     margin: auto;
     display: flex;
     align-items: center;
   }
-
   .dropdown {
     margin-left: 10px;
     padding: 10px 5px;
