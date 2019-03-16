@@ -5,11 +5,11 @@
       <h1 class="text-gray-light">
         <div class="repo-name">
           <%= repository_name_tag @repository %>
-          <% if @repository.private? %>
-            <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
-          <% end %>
         </div>
         <div class="group-name"><%= group_name_tag @user %></div>
+        <% if @repository.private? %>
+          <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
+        <% end %>
       </h1>
 
       <div class="text-gray my-3"><%= @repository.description %></div>
@@ -33,9 +33,13 @@
   <div class="container">
     <nav class="reponav clearfix">
       <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        item << link_to(t(".Summary"), @repository.to_path, class: "reponav-item")
-        item << link_to(t(".Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name != "search"
-        item << link_to(t(".Docs"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if @repository.has_toc? if action_name == "search"
+        if @repository.has_toc?
+          item << link_to(t(".Summary"), @repository.to_path, class: "reponav-item")
+          item << link_to(t(".Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs")
+        else
+          item << link_to(t(".Docs"), @repository.to_path, class: "reponav-item")
+        end
+        item << link_to(t(".Search"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if action_name == "search"
         item << link_to(t(".Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
       end %>
     </nav>

@@ -6,10 +6,10 @@
       margin: 40px 0 20px 0;
       .group-name {
         font-size: 16px;
-        color: $text-gray;
+        color: $text-gray-dark;
       }
       .repo-name {
-        color: $text-main;
+        color: $primary;
         font-size: 35px;
       }
     }
@@ -21,6 +21,7 @@
   .repo-actions {
     line-height: 30px;
     @extend .icon-middle-wrap;
+
     .btn-create-doc {
       @extend .icon-middle-wrap;
       .fas {
