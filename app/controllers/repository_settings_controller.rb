@@ -24,7 +24,8 @@ class RepositorySettingsController < Users::ApplicationController
     if @repository.update(repository_params)
       redirect_to user_repository_settings_path(@user, @repository), notice: t(".Repository was successfully updated")
     else
-      render params[:_action]
+      # FIXME: Render path contains parameter value issue
+      render action: params[:_action]
     end
   end
 

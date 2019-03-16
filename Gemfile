@@ -70,6 +70,7 @@ group :development, :test do
   gem "letter_opener"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
+  gem "brakeman"
 end
 
 group :development do

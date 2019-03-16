@@ -15,7 +15,8 @@ class GroupSettingsController < Groups::ApplicationController
     if @group.update(group_params)
       redirect_to group_settings_path(@group), notice: t(".Group was successfully updated")
     else
-      render params[:_by]
+      # FIXME: Render path contains parameter value
+      render action: params[:_by]
     end
   end
 
