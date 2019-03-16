@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    commentable = commentable_klass.find(comment_params[:commentable_id])
+    commentable = commentable_klass(comment_params[:commentable_type]).find(comment_params[:commentable_id])
 
     authorize! :read, commentable
 
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
   # POST /comments/watch?commentable_type=&commentable_id=
   # DELETE /comments/watch?commentable_type=&commentable_id=
   def watch
-    @commentable = commentable_klass.find(params[:commentable_id])
+    @commentable = commentable_klass(params[:commentable_type]).find(params[:commentable_id])
 
     authorize! :read, @commentable
 
@@ -54,8 +54,8 @@ class CommentsController < ApplicationController
   end
 
   private
-    def commentable_klass
-      klass = case comment_params[:commentable_type]
+    def commentable_klass(type)
+      klass = case type
       when "Doc" then Doc
       when "Note" then Note
       else

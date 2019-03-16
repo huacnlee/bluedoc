@@ -101,7 +101,7 @@ class CommentTest < ActiveSupport::TestCase
 
     # commentable_watch_by_user_ids should not including ignore user
     comment = build(:comment, commentable: doc)
-    assert_equal [user1.id, user2.id], comment.commentable_watch_by_user_ids
+    assert_equal [user1.id, user2.id].sort, comment.commentable_watch_by_user_ids.sort
 
     # auto watch_comment to doc on create
     comment.save
