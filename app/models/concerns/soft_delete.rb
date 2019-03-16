@@ -9,6 +9,7 @@ module SoftDelete
 
     # PRO-begin
     define_callbacks :soft_delete, :restore
+    alias_method :destroy!, :destroy
     # PRO-end
   end
 
@@ -16,7 +17,8 @@ module SoftDelete
     deleted_at.present?
   end
 
-  def destroy!
+  # Permanently destroy record
+  def permanent_destroy
     self.class.transaction do
       run_callbacks(:soft_delete) do
         run_callbacks(:destroy) do

@@ -46,7 +46,8 @@ class Admin::DocsController < Admin::ApplicationController
   def destroy
     if params[:permanent]
       @doc.versions.unscoped.delete_all
-      @doc.destroy!
+      @doc.comments.unscoped.delete_all
+      @doc.permanent_destroy
     else
       @doc.destroy
     end

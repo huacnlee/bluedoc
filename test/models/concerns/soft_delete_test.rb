@@ -10,18 +10,19 @@ class SoftDeleteTest < ActiveSupport::TestCase
 
     doc.destroy
     assert_equal 1, Doc.unscoped.where(id: doc.id).count
-    assert_equal true, Version.unscoped.where(subject: doc).any?
-    assert_equal 0, Comment.unscoped.where(commentable: doc).count
+    assert_equal 0, Comment.where(commentable: doc).count
+    # comments soft deleted
+    assert_equal 2, Comment.unscoped.where(commentable: doc).count
 
     # reload to try permanently delete
     doc = Doc.unscoped.find(doc.id)
-    comments = create_list(:comment, 2, commentable: doc)
-    doc.destroy!
+    doc.permanent_destroy
     assert_equal 0, Doc.unscoped.where(id: doc.id).count
     # version will still keep
     assert_equal 2, Version.unscoped.where(subject: doc).count
-    # comments will relative delete
-    assert_equal 0, Comment.unscoped.where(commentable: doc).count
+    assert_equal 0, Comment.where(commentable: doc).count
+    # comments soft deleted
+    assert_equal 2, Comment.unscoped.where(commentable: doc).count
   end
 
   test "Soft Delete with Group destroy" do
@@ -256,6 +257,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
     def assert_soft_deleted(klass, item, slug: nil)
       assert_nil klass.find_by_id(item.id), "should not find anymore with id"
       reload_item = klass.unscoped.find_by_id(item.id)
+      assert_not_nil reload_item
       assert_not_nil reload_item.deleted_at, "deleted_at should present"
       assert_equal reload_item.deleted_at.to_s, reload_item.updated_at.to_s, "updated_at should equal to deleted_at"
 
