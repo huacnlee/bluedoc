@@ -3,6 +3,27 @@
 require "test_helper"
 
 class SoftDeleteTest < ActiveSupport::TestCase
+  test "destroy!" do
+    doc = create(:doc)
+    version = create(:version, subject: doc)
+    comments = create_list(:comment, 2, commentable: doc)
+
+    doc.destroy
+    assert_equal 1, Doc.unscoped.where(id: doc.id).count
+    assert_equal true, Version.unscoped.where(subject: doc).any?
+    assert_equal 0, Comment.unscoped.where(commentable: doc).count
+
+    # reload to try permanently delete
+    doc = Doc.unscoped.find(doc.id)
+    comments = create_list(:comment, 2, commentable: doc)
+    doc.destroy!
+    assert_equal 0, Doc.unscoped.where(id: doc.id).count
+    # version will still keep
+    assert_equal 2, Version.unscoped.where(subject: doc).count
+    # comments will relative delete
+    assert_equal 0, Comment.unscoped.where(commentable: doc).count
+  end
+
   test "Soft Delete with Group destroy" do
     group0 = create(:group, slug: "group-0")
     repo0 = create(:repository, user: group0, slug: "repo-0")
