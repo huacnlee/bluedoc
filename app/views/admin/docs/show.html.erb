@@ -3,6 +3,8 @@
 <div class="detail admin-edit-admin_doc">
   <div class="detail-action">
     <%= link_to icon_tag("arrow-left", label: "Back"), admin_docs_path, class: "btn" %>
+
+    <%= link_to "Permanent delete!", admin_doc_path(@doc.id, permanent: true), class: "btn btn-danger", method: :delete, 'data-confirm' => "Are you sure delete this item? This will permanently delete Doc and it's versions in Database!" %>
   </div>
 
 

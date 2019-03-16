@@ -44,7 +44,13 @@ class Admin::DocsController < Admin::ApplicationController
   end
 
   def destroy
-    @doc.destroy
+    if params[:permanent]
+      @doc.versions.unscoped.delete_all
+      @doc.destroy!
+    else
+      @doc.destroy
+    end
+
     redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: t(".Doc was successfully deleted")
   end
 
