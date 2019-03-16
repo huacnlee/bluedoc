@@ -142,7 +142,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
       count_html = ""
       if with_count
-        count_html = raw(%(<span class="social-count" >#{target.send(action_count)}</span>))
+        count_html = raw(%(<i class="social-count" >#{target.send(action_count)}</i>))
       end
       btn_class = opts[:class] || "btn btn-sm"
       btn_class += " btn-with-count" if with_count
@@ -150,11 +150,11 @@ class ApplicationHelperTest < ActionView::TestCase
       url = target.to_path("/action?action_type=#{action_type}")
 
       expected = <<~TEXT
-        <span class="#{target.class.name.underscore}-#{target.id}-#{action_type}-button">
+        <span class="#{target.class.name.underscore}-#{target.id}-#{action_type}-button action-button">
         <a data-method="#{method}" data-label="#{label}" data-undo-label="#{undo_label}" data-remote="true" data-disable="true" class="#{btn_class}" href="#{url}">
         #{icon_html}
-        </a>
         #{count_html}
+        </a>
         </span>
        TEXT
       assert_equal expected.gsub(/\n/, ""), html

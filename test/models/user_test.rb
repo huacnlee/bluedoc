@@ -15,9 +15,6 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, slug: "Jason-Lee_123", name: nil)
     assert_equal true, user.valid?
 
-    user = build(:user, slug: "admin", name: nil)
-    assert_equal true, user.valid?
-
     user = build(:user, slug: "Jason", name: nil)
     assert_equal true, user.valid?
 
@@ -133,7 +130,9 @@ class UserTest < ActiveSupport::TestCase
     u2 = create(:user, email: "jason@com.com")
     u3 = create(:user, email: "Fooo@bar.com")
 
-    u01 = create(:user, slug: "admin", email: "jason@bar.com")
+    # Migration also has been created the admin user
+    u01 = User.where(slug: "admin").take
+    # u01 = create(:user, slug: "admin", email: "jason@bar.com")
     u02 = create(:user, slug: "system", email: "jason1@bar.com")
 
     users = User.prefix_search("ja")

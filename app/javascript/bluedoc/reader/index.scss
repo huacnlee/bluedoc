@@ -85,7 +85,7 @@
     position: relative;
     width: 100%;
     margin-top: 50px;
-    .editors, .avatars { 
+    .editors, .avatars {
       display: inline-flex;
       vertical-align: middle;
       .avatar {
@@ -102,7 +102,7 @@
         .link-back {
           display: block;
           margin-bottom: 5px;
-          font-size: 13px;
+          font-size: 18px;
           font-weight: bold;
           @extend .text-overflow;
         }

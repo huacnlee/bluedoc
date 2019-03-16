@@ -20,12 +20,12 @@
         </div>
       </div>
     </div>
-    <nav class="reponav" role="navigation">
-      <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        item << link_to(t(".Repository"), @group.to_path, class: "reponav-item")
-        item << link_to(t(".Search"), search_group_path(@group), class: "reponav-item") if current_page?(search_group_path(@group))
-        item << link_to(t(".Member"), group_members_path(@group), class: "reponav-item")
-        item << link_to(t(".Settings"), group_settings_path(@group), class: "reponav-item") if can? :update, @group
+    <nav class="groupnav" role="navigation">
+      <%= render_list_items(type: :link, class: "groupnav-item", active_class: "selected") do |item|
+        item << link_to(t(".Repository"), @group.to_path, class: "groupnav-item")
+        item << link_to(t(".Search"), search_group_path(@group), class: "groupnav-item") if current_page?(search_group_path(@group))
+        item << link_to(t(".Member"), group_members_path(@group), class: "groupnav-item")
+        item << link_to(t(".Settings"), group_settings_path(@group), class: "groupnav-item") if can? :update, @group
       end %>
     </nav>
   </div>

@@ -5,6 +5,23 @@
     font-size: 14px;
     margin-right: 30px;
     text-decoration: none;
+    color: $primary;
+    font-weight: bold;
+    position: relative;
+    &.selected {
+      color: $text-main;
+      border-bottom: 2px solid $text-main;
+    }
+  }
+}
+
+.groupnav {
+  margin-left: -10px;
+  .groupnav-item {
+    padding: 10px 10px 15px;
+    font-size: 14px;
+    margin-right: 30px;
+    text-decoration: none;
     color: $text-gray;
     position: relative;
     &.selected {

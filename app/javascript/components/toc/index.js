@@ -43,7 +43,7 @@ export default class TocList extends React.PureComponent {
             <li
               className={`toc-item ${active ? 'active' : ''} ${show ? '' : 'hidden'}`}
               key={index}
-              style={{ marginLeft: `${20 * (depth)}px` }}
+              style={{ marginLeft: `${15 * (depth)}px` }}
             >
               {folder && (
                 <i className={`fas fa-arrow ${folder.foldersStatus ? '' : 'folder'}`} onClick={() => this.handdleFolder(index)}/>

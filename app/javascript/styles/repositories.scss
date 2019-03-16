@@ -1,10 +1,17 @@
 .page-repositories,
 .page-repository_settings {
   .repo-heading {
-    padding-top: 30px;
-    background: #F9F9F9;
+    text-align: center;
     .heading {
-      margin: 40px 0 10px 0;
+      margin: 40px 0 20px 0;
+      .group-name {
+        font-size: 16px;
+        color: $text-gray;
+      }
+      .repo-name {
+        color: $text-main;
+        font-size: 35px;
+      }
     }
     h1 {
       font-size: 20px;
@@ -17,8 +24,7 @@
     .btn-create-doc {
       @extend .icon-middle-wrap;
       .fas {
-        transform: scale(1.2);
-        margin-right: 8px;
+        transform: scale(1.4);
       }
     }
     .btn, .social-count {
@@ -28,32 +34,29 @@
       background: transparent;
     }
     .social-count {
-      margin-right: 40px;
+      font-style: normal;
     }
-    a:hover {
-      border-radius: 15px;
+    .btn-create-doc:hover,
+    .action-button a:hover {
       background: #f7f7f7;
-      // star、unstar、watch、unwatch
-      &.btn span {
-        opacity: 1;
-        max-width: 10em;
-        padding-left: 15px;
-      }
     }
-    a.btn {
+
+    .btn-create-doc,
+    .action-button a.btn {
+      margin: 0 10px;
+      padding: 0px 5px;
+      border-radius: 15px;
       .fas {
         width: 30px;
-        float: right;
+        float: left;
         line-height: 30px;
       }
-      span {
+      span { padding: 0 5px; }
+      .social-count { margin-left: 5px; margin-top: -2px;}
+      span,.social-count {
         @extend .icon-middle-wrap;
-        font-size: 12px;
-        line-height: 30px;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-width .4s linear, padding .4s linear, opacity 1s ease;
+        font-size: 14px;
+        line-height: 30px
       }
     }
   }
@@ -98,9 +101,6 @@
       }
 
       .edit-link {
-        position: absolute;
-        top: 0;
-        right: 0;
         font-size: 14px;
         @extend .icon-middle-wrap;
         .fas {
@@ -108,7 +108,7 @@
         }
       }
     }
-    
+
     .toc-list {
       text-align: left;
       ul {
@@ -132,7 +132,7 @@
           &:after {
             content: " ";
             width: 100%;
-            border-bottom: 1px dashed #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
             position: absolute;
             top: 50%;
             right: 0;

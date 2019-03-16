@@ -2,25 +2,25 @@
 <div class="repo-heading">
   <div class="container">
     <div class="heading clearfix">
-      <div class="float-left">
-        <h1 class="text-gray-light">
-          <span class="author"><%= group_name_tag @user %></span>
-          /
-          <span class="text-main">
-            <%= repository_name_tag @repository %>
-            <% if @repository.private? %>
-              <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
-            <% end %>
-          </span>
-        </h1>
-        <div class="text-gray my-3"><%= @repository.description %></div>
-        <% if @repository.source? && @repository.source.provider == "gitbook" %>
-        <div class="source mb-2 text-gray">
-          <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
+      <h1 class="text-gray-light">
+        <div class="repo-name">
+          <%= repository_name_tag @repository %>
+          <% if @repository.private? %>
+            <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
+          <% end %>
         </div>
-        <% end %>
+        <div class="group-name"><%= group_name_tag @user %></div>
+      </h1>
+
+      <div class="text-gray my-3"><%= @repository.description %></div>
+
+      <% if @repository.source? && @repository.source.provider == "gitbook" %>
+      <div class="source mb-3 text-gray">
+        <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
       </div>
-      <div class="repo-actions float-right">
+      <% end %>
+
+      <div class="repo-actions">
         <%= action_button_tag(@repository, :watch, with_count: true) %>
         <%= action_button_tag(@repository, :star, with_count: true) %>
         <% if can? :create_doc, @repository %>

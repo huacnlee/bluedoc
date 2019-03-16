@@ -110,7 +110,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     get search_group_path(@group), params: { q: "test" }
     assert_equal 200, response.status
-    assert_select ".reponav-item.selected" do
+    assert_select ".groupnav-item.selected" do
       assert_select "[href=?]", search_group_path(@group)
     end
   end

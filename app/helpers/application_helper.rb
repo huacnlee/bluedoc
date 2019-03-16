@@ -86,11 +86,15 @@ module ApplicationHelper
 
     out = []
 
-    out << link_to(icon_tag(icon, label: btn_label), url, data: data, class: class_names)
+    social_count = ""
+
     if with_count && target.respond_to?(action_count)
-      out << %(<span class="social-count" >#{target.send(action_count)}</span>)
+      social_count = %(<i class="social-count" >#{target.send(action_count)}</i>)
     end
-    content_tag(:span, raw(out.join("")), class: "#{target.class.name.underscore.singularize}-#{target.id}-#{action_type}-button")
+
+    out << link_to(raw([icon_tag(icon, label: btn_label), social_count].join("")), url, data: data, class: class_names)
+
+    content_tag(:span, raw(out.join("")), class: "#{target.class.name.underscore.singularize}-#{target.id}-#{action_type}-button action-button")
   end
 
   # Render div.form-group with a block, it including validation error below input

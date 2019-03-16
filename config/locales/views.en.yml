@@ -646,10 +646,10 @@ en:
       Can not find any Doc like: "No related Docs like"
       in this Repository: "are found in this Repository."
     show:
-      Edit TOC: Edit
+      Edit TOC: Edit Contents
     toc:
       Table of Contents was successfully updated: "Table of Contents was successfully updated."
-      Edit TOC: Edit TOC
+      Edit TOC: Edit Contents
       Back to Repository: Back to Repository
       Edit Table of contents: Edit Table of contents
       Move cursor Up: Move cursor up
