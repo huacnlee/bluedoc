@@ -15,7 +15,10 @@
       <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
       <% if @recent_repos.blank? %>
         <div class="blankslate">
-          <p><%= t(".You have no update Repositories in recently") %></p>
+          <p><%= t(".You have no update Repositories in recently_html") %></p>
+          <p>
+            <%= link_to t(".New Repository"), "/new", class: "btn btn-sm btn-block" %>
+          </p>
         </div>
       <% else %>
       <div class="repo-list">
@@ -31,16 +34,20 @@
       <div class="dashboard-content">
 
         <div class="dashboard-section dashboard-docs">
-          <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
+
           <% if @recent_docs.blank? %>
-            <div class="blankslate">
-              <p><%= t(".You have no update Doc in recently") %></p>
+            <div class="blankslate no-data no-star-doc">
+              <div class="mb-3"><%= t(".You have no update Doc in recently_html") %></div>
+              <div>
+                <%= link_to t(".New Repository"), "/new", class: "btn btn-sm" %>
+              </div>
             </div>
           <% else %>
-            <ul class="cards-container recent-docs">
-              <%= render(partial: "doc", collection: @recent_docs, as: :item) %>
-              <%= render "/shared/more_button", url: docs_dashboard_path %>
-            </ul>
+          <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
+          <ul class="cards-container recent-docs">
+            <%= render(partial: "doc", collection: @recent_docs, as: :item) %>
+            <%= render "/shared/more_button", url: docs_dashboard_path %>
+          </ul>
           <% end %>
         </div>
 

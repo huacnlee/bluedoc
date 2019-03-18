@@ -370,8 +370,9 @@ en:
     index:
       Recent edited docs: Recent edited docs
       Recent contributed repositories: Repositories
-      You have no update Doc in recently: You have no recently updated Doc.
-      You have no update Repositories in recently: "You have no recently updated Repositories."
+      You have no update Doc in recently_html: <p>You have no recently updated Doc.</p><p>You can create a Repository to starting write your first document.</p>
+      You have no update Repositories in recently_html: "You have no recently updated Repositories."
+      New Repository: "Create a Repository"
       Your Groups: Your Groups
     activities:
       All activity: All activity
