@@ -750,15 +750,43 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@types/q@^1.5.1":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
-  integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
+"@thebluedoc/editor@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.0.0.tgz#d9e42e6377ceb5a156b334abbdb389ca4a9eb3a0"
+  integrity sha512-pR2e5jrKJMr1z1GUOUVWWz3qD28oM0K0nmZW7pCgYS4QL0+/ejHXeTkz7zcg7cQ4hX3pMyvAsNCuwCRkLbRHgg==
+  dependencies:
+    "@thebluedoc/slate-react" "^0.21.24"
+    fast-deep-equal "^2.0.1"
+    filesize "^3.6.1"
+    htmlparser2 "^3.10.0"
+    immutable "^3.8.2"
+    is-hotkey "^0.1.4"
+    is-url "^1.2.4"
+    jsonml.js "^0.1.0"
+    lodash "^4.17.11"
+    markdown-it "^8.4.2"
+    markdown-it-abbr "^1.0.4"
+    markdown-it-checkboxes "^1.0.0"
+    markdown-it-container "^2.0.0"
+    markdown-it-ins "^2.0.0"
+    markdown-it-mark "^2.0.0"
+    markdown-it-sub "^1.0.0"
+    markdown-it-sup "^1.0.0"
+    markdown-it-underline "^1.0.1"
+    plantuml-encoder "^1.2.5"
+    prop-types "^15.6.2"
+    react "^16.6.0"
+    react-codemirror "^1.0.0"
+    react-dom "^16.6.0"
+    react-portal "^4.1.4"
+    slate "^0.44.12"
+    styled-components "^3.2.3"
+    uuid "^3.3.2"
 
-"@typine/slate-react@^0.21.24":
-  version "0.21.24"
-  resolved "https://registry.yarnpkg.com/@typine/slate-react/-/slate-react-0.21.24.tgz#368723089ed386eaf44b76bc6325dec2b2fbee54"
-  integrity sha512-laXzb4W1GeXLL2v9mqoK/1tmIuDX99w9ipGb/kLI59WcgX5N912YyJXeYwhOY2lE8kg3/ze7kzVlPP+YfjkYbQ==
+"@thebluedoc/slate-react@^0.21.24":
+  version "0.21.25"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/slate-react/-/slate-react-0.21.25.tgz#86a374a8d7e32d1eb5ab5b27169ffd3e39fd1a1b"
+  integrity sha512-VUY5STXE8NziV7SkKWnXtomaz22ue3+QP+tRB2j+grKlDCTpk20ZwHWV/tx134+RFZ4+eUcAMLc2lsqFM6lUsw==
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -776,6 +804,11 @@
     slate-react-placeholder "^0.1.15"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
+
+"@types/q@^1.5.1":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
+  integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -7969,39 +8002,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typine@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/typine/-/typine-0.1.12.tgz#0e29a648a4619d4866347be84feb5385fa4b418f"
-  integrity sha512-LxBKVGTr8f6HalxBwymb+H+ttYpAYJbGOCrMnY+OGmDIksZtC/vpttBalPFTqUgiWhI3WK3MkBZOLNhPZ1bQEA==
-  dependencies:
-    "@typine/slate-react" "^0.21.24"
-    fast-deep-equal "^2.0.1"
-    filesize "^3.6.1"
-    htmlparser2 "^3.10.0"
-    immutable "^3.8.2"
-    is-hotkey "^0.1.4"
-    is-url "^1.2.4"
-    jsonml.js "^0.1.0"
-    lodash "^4.17.11"
-    markdown-it "^8.4.2"
-    markdown-it-abbr "^1.0.4"
-    markdown-it-checkboxes "^1.0.0"
-    markdown-it-container "^2.0.0"
-    markdown-it-ins "^2.0.0"
-    markdown-it-mark "^2.0.0"
-    markdown-it-sub "^1.0.0"
-    markdown-it-sup "^1.0.0"
-    markdown-it-underline "^1.0.1"
-    plantuml-encoder "^1.2.5"
-    prop-types "^15.6.2"
-    react "^16.6.0"
-    react-codemirror "^1.0.0"
-    react-dom "^16.6.0"
-    react-portal "^4.1.4"
-    slate "^0.44.12"
-    styled-components "^3.2.3"
-    uuid "^3.3.2"
 
 ua-parser-js@^0.7.18:
   version "0.7.19"
