@@ -56,10 +56,10 @@ class CommentsController < ApplicationController
   private
     def commentable_klass(type)
       klass = case type
-      when "Doc" then Doc
-      when "Note" then Note
-      else
-        raise "Invalid :commentable_type #{params[:commentable_type]}"
+              when "Doc" then Doc
+              when "Note" then Note
+              else
+                raise "Invalid :commentable_type #{params[:commentable_type]}"
       end
     end
 
