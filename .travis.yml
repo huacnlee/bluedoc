@@ -26,12 +26,12 @@ matrix:
 before_install:
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
   - psql -c "create database \"bluedoc-test\" WITH OWNER=\"admin\";" -U postgres
-
-install:
-  - bundle
   - nvm install node
   - npm i -g yarn
+
+install:
   - yarn
+  - bundle
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 
