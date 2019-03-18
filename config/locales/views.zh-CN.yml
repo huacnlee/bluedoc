@@ -339,6 +339,9 @@ zh-CN:
     stars:
       Stars: 收藏
       Dashboard: 工作台
+      Repository: 知识库
+      Doc: 文档
+      Note: 笔记
     watches:
       Watches: 订阅
       Dashboard: 工作台
@@ -364,27 +367,15 @@ zh-CN:
       Star: 收藏
       Watch: 订阅
       Note: 笔记
-    docs:
-      Dashboard Docs: 工作台 - 我的文档
-      Recent docs: 最近修改过的文档
-      No docs: 没有文档
-      You does not have any updated docs: 你还未创建或参与修改过任何文档。
-    groups:
-      Dashboard Groups: 工作台 - 我的团队
-      All groups of you: 你的团队
-      No groups: 没有团队
-      You does not have any groups: 你还没有任何团队。
-    repositories:
-      All repositories: 最近参与过的知识库
-      Dashboard Repositories: 工作台 - 知识库
-      No repositories: 没有知识库
-      You does not have any repositories: 你没有任何的知识库。
+      Activity: 动态
     index:
       Recent edited docs: 最近修改过的文档
-      Recent contributed repositories: 最近参与过的知识库
-      You have no update Doc in recently: 你还未创建或修改过文档。
-      You have no update Repositories in recently: 你还未创建或修改过任文档，这里将罗列你最近参与过的文档所在的知识库。
+      Recent contributed repositories: 知识库
+      You have no update Doc in recently_html: <p>你还未创建或修改过文档。</p><p>你可以创建一个知识库，然后开始在 BlueDoc 上编写你的第一篇文档。</p>
+      You have no update Repositories in recently_html: 你还未创建或修改过任文档。<br />这里将罗列你最近参与过的文档所在的知识库。
+      New Repository: "创建一个知识库"
       Your Groups: 你的团队
+    activities:
       All activity: 动态
       You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
   versions:

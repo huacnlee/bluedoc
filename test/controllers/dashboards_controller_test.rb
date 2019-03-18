@@ -34,9 +34,8 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /dashboard/docs" do
-    assert_require_user do
-      get "/dashboard/docs"
-    end
+    get "/dashboard/docs", params: { format: :js }, xhr: true
+    assert_equal 401, response.status
 
     doc0 = create(:doc)
     doc1 = create(:doc)
@@ -44,15 +43,14 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(doc1, user: @user)
 
     sign_in @user
-    get "/dashboard/docs"
+    get "/dashboard/docs", params: { format: :js }, xhr: true
     assert_equal 200, response.status
-    assert_select ".recent-docs .recent-doc-item", 2
+    assert_match %{$(".dashboard-docs form.more-button")}, response.body
   end
 
   test "GET /dashboard/repositories" do
-    assert_require_user do
-      get "/dashboard/repositories"
-    end
+    get "/dashboard/repositories", params: { format: :js }, xhr: true
+    assert_equal 401, response.status
 
     group = create(:group)
     group.add_member(@user, :editor)
@@ -62,15 +60,14 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(repo1, user: @user)
 
     sign_in @user
-    get "/dashboard/repositories"
+    get "/dashboard/repositories", params: { format: :js }, xhr: true
     assert_equal 200, response.status
-    assert_select ".dashboard-repos .recent-repo-item", 2
+    assert_match %{$(".dashboard-repositories form.more-button")}, response.body
   end
 
   test "GET /dashboard/groups" do
-    assert_require_user do
-      get "/dashboard/groups"
-    end
+    get "/dashboard/groups", params: { format: :js }, xhr: true
+    assert_equal 401, response.status
 
     group0 = create(:group)
     group0.add_member(@user, :editor)
@@ -80,9 +77,9 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(group1, user: @user)
 
     sign_in @user
-    get "/dashboard/groups"
+    get "/dashboard/groups", params: { format: :js }, xhr: true
     assert_equal 200, response.status
-    assert_select ".dashboard-groups .recent-group-item", 2
+    assert_match %{$(".dashboard-groups form.more-button")}, response.body
   end
 
   test "GET /dashboard/stars" do
@@ -103,9 +100,9 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".menu-item.selected", text: "Repositories"
   end
 
-  test "GET /dashboard/stars/docs" do
+  test "GET /dashboard/stars?tab=docs" do
     assert_require_user do
-      get "/dashboard/stars/docs"
+      get "/dashboard/stars?tab=docs"
     end
 
     doc0 = create(:doc)
@@ -115,15 +112,15 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     @user.star_doc(doc1)
 
     sign_in @user
-    get "/dashboard/stars/docs"
+    get "/dashboard/stars?tab=docs"
     assert_equal 200, response.status
     assert_select ".recent-docs .recent-doc-item", 2
     assert_select ".menu-item.selected", text: "Docs"
   end
 
-  test "GET /dashboard/stars/notes" do
+  test "GET /dashboard/stars?tab=otes" do
     assert_require_user do
-      get "/dashboard/stars/notes"
+      get "/dashboard/stars?tab=notes"
     end
 
     note0 = create(:note)
@@ -133,7 +130,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     @user.star_note(note1)
 
     sign_in @user
-    get "/dashboard/stars/notes"
+    get "/dashboard/stars?tab=notes"
     assert_equal 200, response.status
     assert_select ".recent-notes .recent-doc-item", 2
     assert_select ".menu-item.selected", text: "Notes"

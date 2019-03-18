@@ -1,0 +1,7 @@
+<% if @groups.blank? %>
+  $(".dashboard-groups form.more-button").remove();
+<% else %>
+var html = '<%= escape_javascript(render(partial: "group", collection: @groups, as: :group)) %>';
+html += '<%= escape_javascript render "/shared/more_button", url: groups_dashboard_path %>';
+$(".dashboard-groups form.more-button").replaceWith(html);
+<% end %>

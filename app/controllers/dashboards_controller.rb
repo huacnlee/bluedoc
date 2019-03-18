@@ -5,10 +5,9 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @groups = current_user.groups.with_attached_avatar.limit(10)
-    @recent_docs = current_user.user_actives.docs.limit(5)
-    @recent_repos = current_user.user_actives.repositories.limit(5)
-    @activities = current_user.activities.includes(:actor, :target).page(1).per(20)
+    @groups = current_user.groups.with_attached_avatar.limit(100)
+    @recent_docs = current_user.user_actives.docs.limit(12)
+    @recent_repos = current_user.user_actives.repositories.limit(12)
   end
 
   def activities
@@ -28,24 +27,19 @@ class DashboardsController < ApplicationController
   end
 
   def docs
-    @user_actives = current_user.user_actives.docs.page(params[:page]).per(12)
+    @docs = current_user.user_actives.docs.page(params[:page]).per(12)
   end
 
-  # GET /dashboard/stars
+  # GET /dashboard/stars?tab=
   def stars
-    @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
-  end
-
-  # GET /dashboard/stars/docs
-  def stars_docs
-    @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(12)
-    render "stars"
-  end
-
-  # GET /dashboard/stars/notes
-  def stars_notes
-    @notes = current_user.star_notes.includes(:user).page(params[:page]).per(12)
-    render "stars"
+    case params[:tab]
+    when "docs"
+      @docs = current_user.star_docs.includes(repository: :user).page(params[:page]).per(12)
+    when "notes"
+      @notes = current_user.star_notes.includes(:user).page(params[:page]).per(12)
+    else
+      @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
+    end
   end
 
   def watches

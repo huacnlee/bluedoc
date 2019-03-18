@@ -1,0 +1,7 @@
+<% if @repositories.blank? %>
+  $(".dashboard-repositories form.more-button").remove();
+<% else %>
+var html = '<%= escape_javascript(render(partial: "repository", collection: @repositories, as: :item)) %>';
+html += '<%= escape_javascript render "/shared/more_button", url: repositories_dashboard_path %>';
+$(".dashboard-repositories form.more-button").replaceWith(html);
+<% end %>
