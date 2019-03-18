@@ -72,6 +72,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "brakeman"
   gem "simplecov"
+  gem "codecov"
 end
 
 group :development do

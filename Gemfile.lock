@@ -102,6 +102,10 @@ GEM
       activerecord (>= 3.2.0)
     byebug (10.0.2)
     cancancan (2.3.0)
+    codecov (0.1.14)
+      json
+      simplecov
+      url
     commonmarker (0.18.2)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.5)
@@ -388,6 +392,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.1)
+    url (0.3.2)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -420,6 +425,7 @@ DEPENDENCIES
   bulk_insert
   byebug
   cancancan
+  codecov
   commonmarker
   database_cleaner
   devise
