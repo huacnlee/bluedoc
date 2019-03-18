@@ -337,6 +337,9 @@ en:
     stars:
       Stars: Stars
       Dashboard: Dashboard
+      Repository: Repositories
+      Doc: Docs
+      Note: Notes
     watches:
       Watches: Watches
       Dashboard: Dashboard
@@ -363,27 +366,14 @@ en:
       Star: Stars
       Watch: Watches
       Note: Notes
-    docs:
-      Dashboard Docs: Dashboard - Docs
-      Recent docs: Recent edited docs
-      No docs: No docs
-      You does not have any updated docs: You does not have any updated docs.
-    groups:
-      Dashboard Groups: Dashboard - Groups
-      All groups of you: All groups of you
-      No groups: No groups
-      You does not have any groups: You does not have any groups.
-    repositories:
-      All repositories: Recent contributed repositories
-      Dashboard Repositories: Dashboard - Repositories
-      No repositories: No repositories
-      You does not have any repositories: "You have no recently updated Repositories."
+      Activity: Activities
     index:
       Recent edited docs: Recent edited docs
       Recent contributed repositories: Recent contributed repositories
       You have no update Doc in recently: You have no recently updated Doc.
       You have no update Repositories in recently: "You have no recently updated Repositories."
       Your Groups: Your Groups
+    activities:
       All activity: All activity
       You have no activity in recently: You have no activity recently.
   versions:

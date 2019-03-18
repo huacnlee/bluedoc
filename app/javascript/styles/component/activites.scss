@@ -23,7 +23,7 @@
       font-size: 12px;
     }
   }
-  
+
   .detail {
     margin-top: 10px;
     padding: 12px 20px;
@@ -34,7 +34,7 @@
 
 .more-button button{
   font-size: 14px;
-  color: $text-main;
+  color: $primary;
   border: none;
   padding: 5px 0;
   box-shadow: none;
@@ -69,7 +69,7 @@
 }
 
 .repository-card {
-  .desc { 
+  .desc {
     font-size: 13px;
   }
   .counter {

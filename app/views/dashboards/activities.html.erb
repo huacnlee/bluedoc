@@ -1,0 +1,21 @@
+<% title_tag t(".All activity") %>
+
+<%= render "menu" %>
+
+<div class="flex-wrap">
+  <div class="main-wrap">
+    <div class="main-content">
+      <div class="dashboard-section activities">
+        <div class="subhead"><h2><%= t(".All activity") %></h2></div>
+        <% if @activities.blank? %>
+          <div class="blankslate">
+            <p><%= t(".You have no activity in recently") %></p>
+          </div>
+        <% else %>
+          <%= render @activities %>
+          <%= render "/shared/more_button", url: activities_dashboard_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

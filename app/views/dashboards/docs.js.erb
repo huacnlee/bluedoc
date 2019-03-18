@@ -1,0 +1,7 @@
+<% if @docs.blank? %>
+  $(".dashboard-docs form.more-button").remove();
+<% else %>
+var html = '<%= escape_javascript(render(partial: "doc", collection: @docs, as: :item)) %>';
+html += '<%= escape_javascript render "/shared/more_button", url: docs_dashboard_path %>';
+$(".dashboard-docs form.more-button").replaceWith(html);
+<% end %>

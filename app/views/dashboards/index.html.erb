@@ -1,101 +1,51 @@
-<div class="flex-wrap">
 <%= render "menu" %>
-<div class="main-wrap">
-  <div class="main-content">
-    <div class="dashboard-content">
 
-      <div class="dashboard-section">
-        <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
-        <% if @recent_docs.blank? %>
-          <div class="blankslate">
-            <p><%= t(".You have no update Doc in recently") %></p>
-          </div>
-        <% else %>
-          <ul class="cards-container recent-docs">
-            <% @recent_docs.each do |item| %>
-              <li class="card recent-doc-item">
-                <div class="path">
-                  <%= user_name_tag(item.subject.repository.user, with_icon: true) %> / 
-                  <%= repository_name_tag(item.subject&.repository, with_icon: true) %>
-                </div>
-                <div class="title">
-                  <%= doc_title_tag(item.subject) %>
-                </div>
-                <div class="info">
-                  <%= timeago item.updated_at %>
-                </div>
-                <% if can? :update, item.subject %>
-                <div class="action action-icon">
-                  <%= link_to icon_tag("edit"), item.subject.to_path("/edit") %>
-                </div>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
+<div class="flex-wrap">
+  <div class="aside-wrap">
+    <% if !@groups.blank? %>
+    <div class="dashboard-section dashboard-groups">
+      <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
+      <div class="group-list">
+        <%= render(partial: "group", collection: @groups, as: :group) %>
       </div>
+    </div>
+    <% end %>
 
-      <div class="dashboard-section">
-        <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
-        <% if @recent_repos.blank? %>
-          <div class="blankslate">
-            <p><%= t(".You have no update Repositories in recently") %></p>
-          </div>
-        <% else %>
-        <ul class="cards-container repo-list">
-          <% @recent_repos.each do |item| %>
-            <li class="card repo-item">
-              <div class="path">
-                <%= user_name_tag(item.subject.user, with_icon: true) %>
-              </div>
-              <div class="title">
-                <%= repository_name_tag(item.subject) %>
-              </div>
-              <div class="info">
-                <%= timeago item.updated_at %>
-              </div>
-              <div class="action action-icon">
-              <% if can? :create_doc, item.subject %>
-                <%= link_to icon_tag("add-doc"), item.subject.to_path("/docs/new"), target: "_blank" %>
-              <% end %>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-        <% end %>
-      </div>
-
-      <% if !@groups.blank? %>
-      <div class="dashboard-section">
-        <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
-        <ul class="cards-container group-list">
-          <% @groups.each do |group| %>
-            <li class="card card-avatar group-item" style="padding-top: 20px;padding-bottom: 20px;">
-              <%= user_avatar_tag(group, style: :medium) %>
-              <div class="title" style="padding-bottom: 4px">
-                <%= group_name_tag(group) %>
-              </div>
-              <div class="info">
-                <%= group.description || group.slug %>
-              </div>
-            </li>
-          <% end %>
-        </ul>
+    <div class="dashboard-section dashboard-repositories">
+      <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
+      <% if @recent_repos.blank? %>
+        <div class="blankslate">
+          <p><%= t(".You have no update Repositories in recently") %></p>
+        </div>
+      <% else %>
+      <div class="repo-list">
+        <%= render(partial: "repository", collection: @recent_repos, as: :item) %>
+        <%= render "/shared/more_button", url: repositories_dashboard_path %>
       </div>
       <% end %>
+    </div>
+  </div>
 
-      <div class="dashboard-section activities">
-        <div class="subhead"><h2><%= t(".All activity") %></h2></div>
-        <% if @activities.blank? %>
-          <div class="blankslate">
-            <p><%= t(".You have no activity in recently") %></p>
-          </div>
-        <% else %>
-          <%= render @activities %>
-          <%= render "/shared/more_button", url: activities_dashboard_path %>
-        <% end %>
+  <div class="main-wrap">
+    <div class="main-content">
+      <div class="dashboard-content">
+
+        <div class="dashboard-section dashboard-docs">
+          <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
+          <% if @recent_docs.blank? %>
+            <div class="blankslate">
+              <p><%= t(".You have no update Doc in recently") %></p>
+            </div>
+          <% else %>
+            <ul class="cards-container recent-docs">
+              <%= render(partial: "doc", collection: @recent_docs, as: :item) %>
+              <%= render "/shared/more_button", url: docs_dashboard_path %>
+            </ul>
+          <% end %>
+        </div>
+
+
       </div>
     </div>
   </div>
-</div>
 </div>

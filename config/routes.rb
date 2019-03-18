@@ -39,12 +39,10 @@ Rails.application.routes.draw do
   resource :dashboard do
     member do
       get :activities
-      get :groups
-      get :repositories
       get :docs
+      get :repositories
+      get :groups
       get :stars
-      get :stars_docs, path: "stars/docs"
-      get :stars_notes, path: "stars/notes"
       get :watches
     end
   end

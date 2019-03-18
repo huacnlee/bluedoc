@@ -3,8 +3,81 @@
     display: none;
   }
 
+  .dashboard-nav {
+    background: #F7F7F7;
+    padding: 14px 0;
+
+    display: flex;
+    align-content: center;
+
+    .dashboard-nav-item {
+      display: block;
+      float: left;
+      margin-right: 25px;
+      @extend .icon-middle-wrap;
+      color: $text-main;
+      text-decoration: none;
+
+      i.fas {
+        color: #979797;
+        margin-right: 4px;
+        transform: scale(1.2);
+      }
+      &.selected {
+        color: $primary;
+        i.fas {
+          color: inherit;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-nav-item {
+        margin-right: 0px;
+        margin-bottom: 5px;
+        float: none;
+      }
+    }
+  }
+
   .dashboard-section {
     margin-bottom: 40px;
+  }
+
+  .aside-wrap {
+    .subhead {
+      h2 {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .group-list {
+    @extend .clearfix;
+
+    .group-item {
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .repo-list {
+    .repo-item {
+      margin-bottom: 10px;
+
+      .divider {
+        color: $text-gray;
+        margin: 0 2px;
+        font-size: 0.8em;
+      }
+
+      .fas {
+        color: $text-gray;
+        font-size: 1.2em;
+        margin-top: -2px;
+      }
+    }
   }
 
   // card layout style
@@ -12,13 +85,22 @@
     .card {
       float: left;
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
     @include breakpoint(md) {
       margin-right: -30px;
       .card {
         margin-right: 30px;
+        margin-bottom: 30px;
         width: calc(50% - 30px);
+      }
+
+    }
+
+    .more-button {
+      font-weight: bold;
+      .btn {
+        color: $primary !important;
       }
     }
   }
@@ -26,7 +108,6 @@
   // left menu
   .dashboard-menu {
     @include breakpoint(md) {
-      position: fixed;
       display: block;
     }
     .menu-item {
