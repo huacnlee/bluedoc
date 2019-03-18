@@ -42,7 +42,14 @@
   }
 
   .aside-wrap {
-    padding-left: 30px;
+    padding: 30px 20px;
+    background: #F9F9F9;
+    margin-left: 50px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+
     .subhead {
       h2 {
         font-size: 15px;
