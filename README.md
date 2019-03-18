@@ -1,7 +1,6 @@
 # BlueDoc
 
-[![Build Status](https://travis-ci.org/thebluedoc/bluedoc.svg?branch=master)](https://travis-ci.org/thebluedoc/bluedoc)
-
+[![Build Status](https://travis-ci.org/thebluedoc/bluedoc.svg?branch=master)](https://travis-ci.org/thebluedoc/bluedoc) [![codecov](https://codecov.io/gh/thebluedoc/bluedoc/branch/master/graph/badge.svg)](https://codecov.io/gh/thebluedoc/bluedoc)
 
 
 ## Development
