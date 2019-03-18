@@ -1,34 +1,6 @@
 <%= render "menu" %>
 
 <div class="flex-wrap">
-  <div class="aside-wrap">
-    <% if !@groups.blank? %>
-    <div class="dashboard-section dashboard-groups">
-      <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
-      <div class="group-list">
-        <%= render(partial: "group", collection: @groups, as: :group) %>
-      </div>
-    </div>
-    <% end %>
-
-    <div class="dashboard-section dashboard-repositories">
-      <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
-      <% if @recent_repos.blank? %>
-        <div class="blankslate">
-          <p><%= t(".You have no update Repositories in recently_html") %></p>
-          <p>
-            <%= link_to t(".New Repository"), "/new", class: "btn btn-sm btn-block" %>
-          </p>
-        </div>
-      <% else %>
-      <div class="repo-list">
-        <%= render(partial: "repository", collection: @recent_repos, as: :item) %>
-        <%= render "/shared/more_button", url: repositories_dashboard_path %>
-      </div>
-      <% end %>
-    </div>
-  </div>
-
   <div class="main-wrap">
     <div class="main-content">
       <div class="dashboard-content">
@@ -55,4 +27,36 @@
       </div>
     </div>
   </div>
+
+  <div class="aside-wrap">
+    <% if !@groups.blank? %>
+    <div class="dashboard-section dashboard-groups">
+      <div class="subhead"><h2><%= t(".Your Groups") %></h2></div>
+      <div class="group-list">
+        <%= render(partial: "group", collection: @groups, as: :group) %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="dashboard-section dashboard-repositories">
+      <div class="subhead"><h2><%= t(".Recent contributed repositories") %></h2></div>
+      <% if @recent_repos.blank? %>
+        <div class="blankslate">
+          <p><%= t(".You have no update Repositories in recently_html") %></p>
+          <p>
+            <%= link_to t(".New Repository"), "/new", class: "btn btn-sm btn-block" %>
+          </p>
+        </div>
+      <% else %>
+      <div class="repo-list">
+        <%= render(partial: "repository", collection: @recent_repos, as: :item) %>
+        <%= render "/shared/more_button", url: repositories_dashboard_path %>
+      </div>
+      <% end %>
+    </div>
+
+    <%= raw Setting.dashboard_sidebar_html %>
+  </div>
+
+
 </div>
