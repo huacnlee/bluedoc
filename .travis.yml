@@ -1,0 +1,40 @@
+language: ruby
+
+addons:
+  postgresql: "9.6"
+
+services:
+  - postgresql
+  - memcached
+  - redis-server
+  - elasticsearch
+
+cache:
+  bundler: true
+  directories:
+    - node_modules
+  yarn: true
+
+rvm:
+  - 2.6.2
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: ruby-head
+
+before_install:
+  - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
+  - psql -c "create database \"bluedoc-test\" WITH OWNER=\"admin\";" -U postgres
+  - nvm install node
+  - npm i -g yarn
+
+install:
+  - yarn
+  - bundle
+before_script:
+  - RAILS_ENV=test bundle exec rake db:migrate
+
+script:
+  - RAILS_ENV=test bundle exec rake
+  - bundle exec rubocop .
