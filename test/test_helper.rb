@@ -5,6 +5,15 @@ ENV["RAILS_ENV"] ||= "test"
 ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
 ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
 
+require "simplecov"
+if ENV["CI"] == "true"
+  require "codecov"
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+SimpleCov.start "rails" do
+  add_filter "lib/generators"
+end
+
 require_relative "../config/environment"
 require "minitest/autorun"
 require "mocha/minitest"
