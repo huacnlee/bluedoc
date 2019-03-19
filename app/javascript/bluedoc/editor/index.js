@@ -27,6 +27,11 @@ class EditorBox {
         e.preventDefault();
         handleSave();
       }
+      // safair command + [,]
+      // Prevent browser history from going forward or backward
+      if ((e.keyCode === 219 || e.keyCode === 221) && e.metaKey) {
+        e.preventDefault();
+      }
     }, false);
 
     const bodyInput = document.getElementsByName('doc[body]')[0];
