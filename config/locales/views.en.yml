@@ -499,7 +499,7 @@ en:
       Delete this group: Delete this group
       This action cannot be undone: This action <strong>cannot</strong> be revoked.
       This will delete all contents: This will permanently delete the <strong>%{slug}</strong> repositories, members, docs, versions and comments.
-      Please type the path slug of group to confirm: Please enter the path <strong class="text-red"><%= @group.slug %></strong> to confirm
+      Please type the path slug of group to confirm: Please enter the path <strong class="text-red">%{slug}</strong> to confirm
       I understand, delete this group: I understand, delete this group!
       Group was successfully deleted: "Group was successfully deleted."
     show:
