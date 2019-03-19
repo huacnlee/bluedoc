@@ -1,0 +1,14 @@
+#!/bin/bash -e
+docker kill ldap-service
+docker rm ldap-service
+docker kill phpldapadmin-service
+docker rm phpldapadmin-service
+
+docker run --name ldap-service -p 389:389 -p 636:636 --hostname ldap-service --detach osixia/openldap:1.2.4
+docker run --name phpldapadmin-service -p 6443:80 --env PHPLDAPADMIN_HTTPS=false --hostname phpldapadmin-service --link ldap-service:ldap-host --env PHPLDAPADMIN_LDAP_HOSTS=ldap-host --detach osixia/phpldapadmin:0.7.2
+
+PHPLDAP_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" phpldapadmin-service)
+
+echo "Go to: http://localhost:6443"
+echo "Login DN: cn=admin,dc=example,dc=org"
+echo "Password: admin"

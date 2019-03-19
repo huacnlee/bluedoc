@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  protect_from_forgery except: %i[ldap], prepend: true
+
   def google_oauth2
     process_callback
   end
@@ -13,8 +15,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     process_callback
   end
 
+  def ldap
+    process_callback
+  end
+
   def failure
-    redirect_to root_path
+    set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(failed_strategy.name), reason: failure_message
+
+    if failed_strategy.name == "ldap"
+      render "devise/sessions/ldap"
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   private

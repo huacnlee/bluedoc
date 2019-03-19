@@ -47,10 +47,10 @@
 }
 
 
-// sign up page 
-.page-registrations, .page-sessions {
+// sign up page
+.page-registrations, .page-sessions, .page-ldaps, .page-omniauth_callbacks {
   .main-container .container {
-    max-width: 360px;
+    max-width: 420px;
     margin-top: 70px;
   }
 }

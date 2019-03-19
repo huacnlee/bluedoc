@@ -6,13 +6,13 @@ auth_info = auth_session["info"]
 <div class="col-12 mb-5">
   <div class="text-center mb-4">
     <div class="f1 mb-2"><%= t(".Sign in") %></div>
-    <div class="description f6 text-gray-light"><%= t(".Input your username or email to sign in BlueDoc") %></div>
+    <div class="description f6 text-gray-light"><%= t(".Enter your username or email to sign in BlueDoc_html") %></div>
   </div>
 
   <% if auth_info %>
   <div class="notice my-4">
-    <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
-    <p>Input your exists BlueDoc account to bind with <b><%= auth_session["provider"].humanize %></b></p>
+    <p><%= t(".You have signed in with_html", type: auth_session["provider"].humanize) %></p>
+    <p><%= t(".Enter your exists BlueDoc account to bind with_html", type: auth_session["provider"].humanize) %></p>
   </div>
   <% end %>
 
@@ -48,6 +48,7 @@ auth_info = auth_session["info"]
     </div>
   <% end %>
 </div>
+
 <% if defined? omniauth_authorize_path %>
 <div class="col-12">
   <div class="text-center f6 text-gray-light mb-3"><%= t(".Sign in with") %></div>
@@ -60,6 +61,10 @@ auth_info = auth_session["info"]
     <% end %>
     <% if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present? %>
       <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "" %>
+    <% end %>
+
+    <% if Setting.ldap_enable? %>
+      <%= link_to icon_tag("user", label: "LDAP"), new_ldap_user_session_path, class: "" %>
     <% end %>
   </div>
 </div>

@@ -55,8 +55,9 @@ zh-CN:
       new:
         Sign in: 登录
         Sign in with: 通过下面的方式登录
-        Input your username or email to sign in BlueDoc: 输入你的用户名或 Email 来登录 BlueDoc
-        You have signed in with:
+        Enter your username or email to sign in BlueDoc_html: 输入你的用户名或 Email 来登录 BlueDoc
+        You have signed in with_html: 你已经通过 <b>%{type}</b> 的方式登录了。
+        "Enter your exists BlueDoc account to bind with_html": "请输入你已有的 BlueDoc 账号，以便我们将他和 <b>%{type}</b> 账户关联起来，方便下次直接登录。"
         email: 用户名 / Email
         forget_password: 密码忘记了？
         Didn't receive unlock instructions?: 没有收到解锁账号的邮件？
@@ -67,7 +68,7 @@ zh-CN:
         Already have a account: 已经有一个帐户
         Welcome to use BlueDoc: 欢迎使用 BlueDoc
         Complete your account info: 完善您的帐号信息
-        You must complete the below form for sign up with: 您必须填写以下表单才能完成注册
+        You must complete the below form for sign up with_html: 您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。
         If you had an exists BlueDoc account, you can sign in to bind account: 如果你已经有 BlueDoc 账号，你可以通过 %{link} 来绑定账号。
         Supported email suffix with list_html: "支持的 Email 后缀: <code>%{emails}</code>"
     passwords:

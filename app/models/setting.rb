@@ -109,5 +109,9 @@ class Setting < RailsSettings::Base
       found
     end
     # PRO-end
+
+    def ldap_enable?
+      Setting.ldap_enable == "true" || Setting.ldap_enable == "1"
+    end
   end
 end

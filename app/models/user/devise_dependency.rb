@@ -5,7 +5,7 @@ class User
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :validatable, :confirmable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab]
+         :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab ldap]
 
   attr_accessor :omniauth_provider, :omniauth_uid
 

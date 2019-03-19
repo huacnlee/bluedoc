@@ -38,6 +38,7 @@ gem "second_level_cache"
 gem "bulk_insert"
 
 gem "devise"
+gem "omniauth-ldap"
 gem "omniauth-google-oauth2"
 gem "omniauth-github"
 gem "omniauth-gitlab"

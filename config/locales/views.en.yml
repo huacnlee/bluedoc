@@ -55,19 +55,27 @@ en:
       new:
         "Sign in": Sign in
         "Sign in with": Sign in with
-        "Input your username or email to sign in BlueDoc": "Enter your username or email to sign in to BlueDoc"
-        "You have signed in with": You have signed in with <b>%{type}</b>
+        "Enter your username or email to sign in BlueDoc_html": "Enter your username or email to sign in to BlueDoc"
+        "You have signed in with_html": "You have signed in with_html <b>%{type}</b>"
+        "Enter your exists BlueDoc account to bind with_html": "Enter your exists BlueDoc account to bind with <b>%{type}</b>."
         "email": Username / Email
         forget_password: Forgot password?
         "Didn't receive unlock instructions?": "Didn't receive account unlock email?"
         "Didn't receive confirmation instructions?": "Didn't receive confirmation email?"
+      ldap:
+        "Sign in": Sign in
+        "Username": Username
+        "Password": Password
+        Normal sign in: Sign in with BlueDoc Account
+        Sign in with LDAP: LDAP Account
+        Enter your LDAP username to sign in BlueDoc: Enter you LDAP account to binding BlueDoc.
     registrations:
       new:
         "Sign up": Sign up
         "Already have a account": Already have an account
         "Welcome to use BlueDoc": Welcome to BlueDoc
         "Complete your account info": "Complete your account settings"
-        "You must complete the below form for sign up with": "You must complete the below form to sign up"
+        "You must complete the below form for sign up with_html": "You must complete the below form to sign up with <strong>%{provider}</strong>."
         "If you had an exists BlueDoc account, you can sign in to bind account": "If you had an existing BlueDoc account, you can linke your account through %{link}."
         Supported email suffix with list_html: "Supported email suffix with <code>%{emails}</code>"
     passwords:
