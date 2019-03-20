@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
+  get "/account/sign_in/ldap" => "users/ldaps#new", as: :new_ldap_user_session
 
   draw :admin
 

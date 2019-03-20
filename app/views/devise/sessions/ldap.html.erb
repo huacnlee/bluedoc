@@ -1,0 +1,24 @@
+<div id="session-ldap" class="col-12 mb-5">
+  <div class="text-center mb-4">
+    <div class="f1 mb-2 title"><%= Setting.ldap_title %></div>
+    <div class="description f6 text-gray-light"><%= raw Setting.ldap_description %></div>
+  </div>
+
+  <form action="/account/auth/ldap/callback" method="POST">
+    <div class="form-group">
+      <label class="control-label"><%= t(".Username") %></label>
+      <input type="text" name="username" autocomplete="username" class="form-control" value="<%= params[:username] %>" />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label"><%= t(".Password") %></label>
+      <input type="password" name="password" autocomplete="username" class="form-control" />
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary mr-3"><%= t(".Sign in") %></button>
+      <%= link_to t(".Normal sign in"), new_user_session_path %>
+    </div>
+  </form>
+</div>
+

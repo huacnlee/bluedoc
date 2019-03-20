@@ -6,13 +6,13 @@ auth_info = auth_session["info"]
 <div class="col-12 mb-5">
   <div class="text-center mb-4">
     <div class="f1 mb-2"><%= t(".Sign in") %></div>
-    <div class="description f6 text-gray-light"><%= t(".Input your username or email to sign in BlueDoc") %></div>
+    <div class="description f6 text-gray-light"><%= t(".Enter your username or email to sign in BlueDoc_html") %></div>
   </div>
 
   <% if auth_info %>
   <div class="notice my-4">
-    <p><%= raw t(".You have signed in with", type: auth_session["provider"].humanize) %></p>
-    <p>Input your exists BlueDoc account to bind with <b><%= auth_session["provider"].humanize %></b></p>
+    <p><%= t(".You have signed in with_html", type: BlueDoc::Utils.omniauth_camelize(auth_session["provider"])) %></p>
+    <p><%= t(".Enter your exists BlueDoc account to bind with_html", type: BlueDoc::Utils.omniauth_camelize(auth_session["provider"])) %></p>
   </div>
   <% end %>
 
@@ -41,6 +41,12 @@ auth_info = auth_session["info"]
       <%= f.submit t(".Sign in"), class: "btn btn-primary btn-full" %>
     </div>
 
+    <% if allow_feature?(:ldap_auth) && Setting.ldap_enable? %>
+    <div class="pt-3">
+      <%= link_to Setting.ldap_title, new_ldap_user_session_path, class: "btn btn-full btn-ldap-auth" %>
+    </div>
+    <% end %>
+
     <div class="border-bottom text-center pt-3 pb-5 f6 text-gray-light">
       <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
 
@@ -48,6 +54,7 @@ auth_info = auth_session["info"]
     </div>
   <% end %>
 </div>
+
 <% if defined? omniauth_authorize_path %>
 <div class="col-12">
   <div class="text-center f6 text-gray-light mb-3"><%= t(".Sign in with") %></div>

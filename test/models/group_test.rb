@@ -70,4 +70,9 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal 3, repos.length
     assert_equal [repo2.id, repo3.id, repo4.id], repos.pluck(:id).sort
   end
+
+  test "password_required?" do
+    group = build(:group)
+    assert_equal false, group.password_required?
+  end
 end

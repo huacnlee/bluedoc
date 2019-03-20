@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  protect_from_forgery except: %i[ldap], prepend: true
+
   def google_oauth2
     process_callback
   end
@@ -13,8 +15,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     process_callback
   end
 
+  def ldap
+    check_feature! :ldap_auth
+
+    process_callback
+  end
+
   def failure
-    redirect_to root_path
+    set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(failed_strategy.name), reason: failure_message
+
+    if failed_strategy.name == "ldap"
+      render "devise/sessions/ldap"
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   private
@@ -23,12 +37,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to(new_user_session_path) && (return)
       end
 
-      session[:omniauth] = omniauth_auth
-
-      @user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
-      if @user
+      @user = User.find_or_create_by_omniauth(omniauth_auth)
+      if @user&.persisted?
+        # Sign in @user when exists binding or successfully created a user with binding
         sign_in_and_redirect @user, event: :authentication
       else
+        # Otherwice (username/email has been used or not match with User validation)
+        # Save auth info to Session and showup the Sign up/Sign in form for manual binding account.
+        if @user
+          set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
+        end
+
+        session[:omniauth] = omniauth_auth
         redirect_to new_user_registration_path
       end
     end

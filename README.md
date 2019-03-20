@@ -12,6 +12,22 @@ $ brew install node imagemagick postgresql elasticsearch redis
 $ brew cask install wkhtmltopdf
 ```
 
+Setup the default ENV vars to open all features:
+
+```
+export LDAP_HOST=localhost
+
+export OMNIAUTH_GOOGLE_CLIENT_ID=
+export OMNIAUTH_GOOGLE_CLIENT_SECRET=
+
+export OMNIAUTH_GITHUB_CLIENT_ID=
+export OMNIAUTH_GITHUB_CLIENT_SECRET=
+
+export OMNIAUTH_GITLAB_CLIENT_ID=
+export OMNIAUTH_GITLAB_CLIENT_SECRET=
+export OMNIAUTH_GITLAB_API_PREFIX=
+```
+
 Start development server:
 
 - `yarn start` - to start webpack dev server.

@@ -22,7 +22,7 @@ end
   <% if auth_info.present? %>
   <div class="notice my-5">
     <p><%= t(".Complete your account info") %></p>
-    <p><%= t(".You must complete the below form for sign up with") %> <b><%= resource.omniauth_provider&.humanize %></b></p>
+    <p><%= t(".You must complete the below form for sign up with_html", provider: BlueDoc::Utils.omniauth_camelize(resource.omniauth_provider)) %></p>
     <p><%= raw t(".If you had an exists BlueDoc account, you can sign in to bind account", link: link_to("Sign in", new_session_path(resource_name))) %></p>
   </div>
   <% end %>

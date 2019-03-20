@@ -62,10 +62,14 @@ class Setting < RailsSettings::Base
   field :confirmable_enable, default: "1", type: :boolean
   field :user_email_suffixes, default: "", type: :array
   field :captcha_enable, default: "1", type: :boolean
+  field :license, default: "", type: :string
 
   # Readonly setting keys, no cache, only load from yml file
-  field :host, :mailer_from, :mailer_options, readonly: true
-  field :license, default: "", type: :string
+  field :host, :mailer_from, :mailer_options, :ldap_options, readonly: true
+
+  field :ldap_name, default: "LDAP", type: :string
+  field :ldap_title, default: "LDAP Login", type: :string
+  field :ldap_description, default: "Enter you LDAP account to login and binding BlueDoc.", type: :string
 
   class << self
     LOCALES = {
@@ -109,5 +113,9 @@ class Setting < RailsSettings::Base
       found
     end
     # PRO-end
+
+    def ldap_enable?
+      Setting.ldap_options["host"].present?
+    end
   end
 end

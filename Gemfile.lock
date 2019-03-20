@@ -230,6 +230,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    net-ldap (0.16.1)
     netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
@@ -258,6 +259,11 @@ GEM
       jwt (>= 1.5)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.5)
+    omniauth-ldap (1.0.5)
+      net-ldap (~> 0.12)
+      omniauth (~> 1.0)
+      pyu-ruby-sasl (~> 0.0.3.2)
+      rubyntlm (~> 0.3.4)
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
@@ -271,6 +277,7 @@ GEM
     powerpack (0.1.2)
     public_suffix (3.0.3)
     puma (3.12.0)
+    pyu-ruby-sasl (0.0.3.3)
     rack (2.0.6)
     rack-protection (2.0.5)
       rack
@@ -345,6 +352,7 @@ GEM
     ruby-vips (2.0.13)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
+    rubyntlm (0.3.4)
     rucaptcha (2.5.0)
       railties (>= 3.2)
     sanitize (5.0.0)
@@ -450,6 +458,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-gitlab
   omniauth-google-oauth2
+  omniauth-ldap
   pg
   pghero
   puma (~> 3.11)

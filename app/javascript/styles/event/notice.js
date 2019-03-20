@@ -8,5 +8,5 @@ document.addEventListener('turbolinks:load', () => {
     if (noticeEle) {
       noticeEle.remove();
     }
-  }, 3000);
+  }, 10000);
 });
