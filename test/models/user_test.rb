@@ -406,7 +406,10 @@ class UserTest < ActiveSupport::TestCase
 
     # LDAP omniauth_provider
     user = build(:user, omniauth_provider: "ldap")
-    assert_equal false, user.password_required?
+    assert_equal true, user.password_required?
+    allow_feature(:ldap_auth) do
+      assert_equal false, user.password_required?
+    end
 
     # Other omniauth_provider
     user = build(:user, omniauth_provider: "github")
@@ -434,30 +437,36 @@ class UserTest < ActiveSupport::TestCase
     }
     omniauth_auth = { "provider" => "ldap", "uid" => "123", "info" => info }
     user0 = User.find_or_create_by_omniauth(omniauth_auth)
-    assert_not_nil user0
-    assert_equal false, user0.new_record?
-    assert_equal "Jason Lee", user0.name
-    assert_equal "huacnlee", user0.slug
-    assert_equal "huacnlee@example.org", user0.email
-    assert_equal true, user0.confirmed?
-    assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
+    # When feature not allow, return nil
+    assert_nil user0
 
-    # When same slug exist and no authorization bind found
-    create(:user, slug: "monster")
-    info = {
-      "name" => "Jason Lee",
-      "login" => "monster",
-      "email" => "huacnlee@example.org"
-    }
-    omniauth_auth = { "provider" => "ldap", "uid" => "124", "info" => info }
-    user1 = User.find_or_create_by_omniauth(omniauth_auth)
-    assert_not_nil user1
-    assert_equal true, user1.new_record?
-    assert_equal true, user1.errors.any?
+    allow_feature(:ldap_auth) do
+      user0 = User.find_or_create_by_omniauth(omniauth_auth)
+      assert_not_nil user0
+      assert_equal false, user0.new_record?
+      assert_equal "Jason Lee", user0.name
+      assert_equal "huacnlee", user0.slug
+      assert_equal "huacnlee@example.org", user0.email
+      assert_equal true, user0.confirmed?
+      assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
 
-    # When same authorization bind exists return bind user
-    user2 = User.find_or_create_by_omniauth({ "provider" => "ldap", "uid" => "123" })
-    assert_not_nil user2
-    assert_equal user0, user2
+      # When same slug exist and no authorization bind found
+      create(:user, slug: "monster")
+      info = {
+        "name" => "Jason Lee",
+        "login" => "monster",
+        "email" => "huacnlee@example.org"
+      }
+      omniauth_auth = { "provider" => "ldap", "uid" => "124", "info" => info }
+      user1 = User.find_or_create_by_omniauth(omniauth_auth)
+      assert_not_nil user1
+      assert_equal true, user1.new_record?
+      assert_equal true, user1.errors.any?
+
+      # When same authorization bind exists return bind user
+      user2 = User.find_or_create_by_omniauth({ "provider" => "ldap", "uid" => "123" })
+      assert_not_nil user2
+      assert_equal user0, user2
+    end
   end
 end

@@ -6,19 +6,28 @@ module Pro
       module HelperMethods
         extend ActiveSupport::Concern
 
-        def check_feature!(name)
-          return if allow_feature?(name)
-          raise ::BlueDoc::FeatureNotAvailableError.new("Feature not available!")
+        included do
+          include ClassMethods
         end
 
-        def allow_feature?(name)
-          License.allow_feature?(name)
+
+        module ClassMethods
+          def check_feature!(name)
+            return if allow_feature?(name)
+            raise ::BlueDoc::FeatureNotAvailableError.new("Feature not available!")
+          end
+
+          def allow_feature?(name)
+            License.allow_feature?(name)
+          end
+
+          def feature_for(name, &block)
+            return "" unless allow_feature?(name)
+            block.call
+          end
         end
 
-        def feature_for(name, &block)
-          return "" unless allow_feature?(name)
-          block.call
-        end
+
       end
 
       extend ActiveSupport::Concern

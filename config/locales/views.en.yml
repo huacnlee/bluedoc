@@ -227,6 +227,7 @@ en:
           export_pdf: Export PDF
           export_archive: Export Archive
           limit_user_emails: User Email limit rules
+          ldap_auth: LDAP Authentication
     licenses:
       show:
         License: License

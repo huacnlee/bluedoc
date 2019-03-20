@@ -58,7 +58,7 @@ class User
 
   # Allow empty password, when use LDAP or encrypted_password was empty
   def password_required?
-    return false if self.omniauth_provider == "ldap"
+    return false if allow_feature?(:ldap_auth) && self.omniauth_provider == "ldap"
 
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
@@ -68,7 +68,7 @@ class User
     user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
     return user if user
 
-    if omniauth_auth["provider"] == "ldap"
+    if allow_feature?(:ldap_auth) && omniauth_auth["provider"] == "ldap"
       user = self.create({
         omniauth_provider: omniauth_auth["provider"],
         omniauth_uid: omniauth_auth["uid"],

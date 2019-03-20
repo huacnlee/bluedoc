@@ -22,6 +22,20 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+  test "GET /account/sign_in with LDAP button" do
+    get new_user_session_path
+    assert_equal 200, response.status
+    assert_select ".btn-ldap-auth", 0
+
+    allow_feature :ldap_auth do
+      get new_user_session_path
+      assert_equal 200, response.status
+      assert_select ".btn-ldap-auth" do
+        assert_select "[href=?]", new_ldap_user_session_path
+      end
+    end
+  end
+
   test "POST /account/sign_in with username" do
     post user_session_path, params: { user: { email: "huacnlee" } }
     assert_equal 200, response.status

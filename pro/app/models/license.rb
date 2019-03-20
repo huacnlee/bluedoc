@@ -7,6 +7,7 @@ class License
     export_pdf
     export_archive
     limit_user_emails
+    ldap_auth
   ]
 
   class << self
