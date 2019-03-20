@@ -55,4 +55,30 @@ class User
     email = conditions.delete(:email)
     where(conditions.to_h).where(["(slug ilike :value OR email ilike :value)", { value: email }]).first
   end
+
+  # Allow empty password, when use LDAP or encrypted_password was empty
+  def password_required?
+    return false if self.encrypted_password.blank?
+    return false if self.omniauth_provider == "ldap"
+
+    true
+  end
+
+  # Use Omniauth callback info to create and bind user
+  def self.find_or_create_by_omniauth(omniauth_auth)
+    user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
+    return user if user
+
+    if omniauth_auth["provider"] == "ldap"
+      user = self.create({
+        omniauth_provider: omniauth_auth["provider"],
+        omniauth_uid: omniauth_auth["uid"],
+        name: omniauth_auth.dig("info", "name"),
+        slug: omniauth_auth.dig("info", "login"),
+        email: omniauth_auth.dig("info", "email")
+      })
+    end
+
+    user
+  end
 end

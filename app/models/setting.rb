@@ -62,10 +62,10 @@ class Setting < RailsSettings::Base
   field :confirmable_enable, default: "1", type: :boolean
   field :user_email_suffixes, default: "", type: :array
   field :captcha_enable, default: "1", type: :boolean
+  field :license, default: "", type: :string
 
   # Readonly setting keys, no cache, only load from yml file
-  field :host, :mailer_from, :mailer_options, readonly: true
-  field :license, default: "", type: :string
+  field :host, :mailer_from, :mailer_options, :ldap_enable, :ldap_options, readonly: true
 
   class << self
     LOCALES = {

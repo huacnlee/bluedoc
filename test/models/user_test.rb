@@ -398,4 +398,46 @@ class UserTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "find_or_create_by_omniauth with normal provider" do
+    omniauth_auth = { "provider" => "gitlab", "uid" => "123" }
+    assert_nil User.find_or_create_by_omniauth(omniauth_auth)
+
+    authorization = create(:authorization, provider: "gitlab", uid: "123")
+    assert_equal authorization.user, User.find_or_create_by_omniauth(omniauth_auth)
+  end
+
+  test "find_or_create_by_omniauth with LDAP" do
+    info = {
+      "name" => "Jason Lee",
+      "login" => "huacnlee",
+      "email" => "huacnlee@example.org"
+    }
+    omniauth_auth = { "provider" => "ldap", "uid" => "123", "info" => info }
+    user0 = User.find_or_create_by_omniauth(omniauth_auth)
+    assert_not_nil user0
+    assert_equal false, user0.new_record?
+    assert_equal "Jason Lee", user0.name
+    assert_equal "huacnlee", user0.slug
+    assert_equal "huacnlee@example.org", user0.email
+    assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
+
+    # When same slug exist and no authorization bind found
+    create(:user, slug: "monster")
+    info = {
+      "name" => "Jason Lee",
+      "login" => "monster",
+      "email" => "huacnlee@example.org"
+    }
+    omniauth_auth = { "provider" => "ldap", "uid" => "124", "info" => info }
+    user1 = User.find_or_create_by_omniauth(omniauth_auth)
+    assert_not_nil user1
+    assert_equal true, user1.new_record?
+    assert_equal true, user1.errors.any?
+
+    # When same authorization bind exists return bind user
+    user2 = User.find_or_create_by_omniauth({ "provider" => "ldap", "uid" => "123" })
+    assert_not_nil user2
+    assert_equal user0, user2
+  end
 end

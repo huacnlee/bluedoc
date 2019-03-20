@@ -35,12 +35,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to(new_user_session_path) && (return)
       end
 
-      session[:omniauth] = omniauth_auth
-
-      @user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
-      if @user
+      @user = User.find_or_create_by_omniauth(omniauth_auth)
+      if @user.persisted?
         sign_in_and_redirect @user, event: :authentication
       else
+        set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages
+
+        session[:omniauth] = omniauth_auth
         redirect_to new_user_registration_path
       end
     end

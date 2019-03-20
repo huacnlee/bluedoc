@@ -41,6 +41,12 @@ auth_info = auth_session["info"]
       <%= f.submit t(".Sign in"), class: "btn btn-primary btn-full" %>
     </div>
 
+    <% if Setting.ldap_enable? %>
+    <div class="pt-3">
+      <%= link_to Setting.ldap_options["title"], new_ldap_user_session_path, class: "btn btn-full" %>
+    </div>
+    <% end %>
+
     <div class="border-bottom text-center pt-3 pb-5 f6 text-gray-light">
       <%= link_to t(".Didn't receive unlock instructions?"), new_user_unlock_path(resource_name), class: "btn-link btn-link-gray" %>
 
@@ -61,10 +67,6 @@ auth_info = auth_session["info"]
     <% end %>
     <% if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present? %>
       <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "" %>
-    <% end %>
-
-    <% if Setting.ldap_enable? %>
-      <%= link_to icon_tag("user", label: "LDAP"), new_ldap_user_session_path, class: "" %>
     <% end %>
   </div>
 </div>

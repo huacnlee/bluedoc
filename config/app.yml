@@ -14,6 +14,7 @@ defaults: &defaults
   ldap_enable: "<%= ENV["LDAP_ENABLE"] || "0" %>"
   ldap_options:
     title: "<%= ENV["LDAP_TITLE"] || "LDAP Login" %>"
+    description: "<%= ENV["LDAP_DESCRIPTION"] || "Enter you LDAP account to login and binding BlueDoc." %>"
     host: "<%= ENV["LDAP_HOST"] || "localhost" %>"
     # LDAP server. `:plain` means no encryption. `:simple_tls` represents SSL/TLS
     # (usually on port 636) while `:start_tls` represents StartTLS (usually port 389).

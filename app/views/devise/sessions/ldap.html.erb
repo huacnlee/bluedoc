@@ -1,7 +1,7 @@
 <div class="col-12 mb-5">
   <div class="text-center mb-4">
-    <div class="f1 mb-2"><%= t(".Sign in with LDAP") %></div>
-    <div class="description f6 text-gray-light"><%= t(".Enter your LDAP username to sign in BlueDoc") %></div>
+    <div class="f1 mb-2"><%= Setting.ldap_options["title"] %></div>
+    <div class="description f6 text-gray-light"><%= raw Setting.ldap_options["description"] %></div>
   </div>
 
   <form action="/account/auth/ldap/callback" method="POST">
