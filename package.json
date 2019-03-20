@@ -10,7 +10,7 @@
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "4.0.2",
     "activestorage": "^5.2.2",
-    "@thebluedoc/editor": "^1.0.0",
+    "@thebluedoc/editor": "^1.0.1",
     "animated-scroll-to": "^1.2.2",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
