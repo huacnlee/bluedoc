@@ -55,7 +55,7 @@ class LicenseTest < ActiveSupport::TestCase
     assert_equal true, License.will_expire?
     assert_equal false, License.expired?
     assert_equal (License.expires_at - Date.today).to_i, License.remaining_days
-    assert_equal({ plan: "ultimate", trial: true }, License.license.restrictions)
+    assert_equal({ plan: "ultimate", users_limit: 1000000, trial: true }, License.license.restrictions)
     assert_equal "foo", License.restricted_attr(:foo, default: "foo")
     assert_equal "ultimate", License.restricted_attr(:plan, default: "foo")
     assert_equal true, License.trial?

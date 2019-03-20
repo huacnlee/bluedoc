@@ -22,7 +22,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(failed_strategy.name), reason: failure_message
+    set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(failed_strategy.name), reason: failure_message
 
     if failed_strategy.name == "ldap"
       render "devise/sessions/ldap"
@@ -45,7 +45,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # Otherwice (username/email has been used or not match with User validation)
         # Save auth info to Session and showup the Sign up/Sign in form for manual binding account.
         if @user
-          set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
+          set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
         end
 
         session[:omniauth] = omniauth_auth

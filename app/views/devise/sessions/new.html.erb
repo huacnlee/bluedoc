@@ -11,8 +11,8 @@ auth_info = auth_session["info"]
 
   <% if auth_info %>
   <div class="notice my-4">
-    <p><%= t(".You have signed in with_html", type: auth_session["provider"].humanize) %></p>
-    <p><%= t(".Enter your exists BlueDoc account to bind with_html", type: auth_session["provider"].humanize) %></p>
+    <p><%= t(".You have signed in with_html", type: BlueDoc::Utils.omniauth_camelize(auth_session["provider"])) %></p>
+    <p><%= t(".Enter your exists BlueDoc account to bind with_html", type: BlueDoc::Utils.omniauth_camelize(auth_session["provider"])) %></p>
   </div>
   <% end %>
 
