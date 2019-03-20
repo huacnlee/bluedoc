@@ -15,10 +15,15 @@ export class AttachmentUpload {
   }
 
   directUploadWillStoreFileWithXHR(xhr) {
+    const progress = this.progress;
+    let lastPercent = 0;
     xhr.upload.addEventListener("progress", event => {
-      if (this.progress) {
-        const percent = event.loaded / event.total * 100
-        this.progress(percent);
+      if (progress) {
+        const percent = Math.round(event.loaded / event.total * 100)
+        if (percent % 10 == 0 && percent != lastPercent) {
+          progress(percent);
+          lastPercent = percent;
+        }
       }
     })
   }
