@@ -93,7 +93,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
+  cursor: pointer;
   &:hover,
   &.zeroclipboard-is-hover {
     background-color: #f5f5f5;
