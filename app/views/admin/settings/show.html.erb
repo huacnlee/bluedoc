@@ -92,6 +92,36 @@
     </div>
   </div>
 
+  <% feature_for :ldap_auth do %>
+    <% if Setting.ldap_enable? %>
+    <div class="ldap-auth-fields">
+      <div class="form-group">
+        <label class="controler-label"><%= t(".LDAP Name") %></label>
+        <%= f.text_field :ldap_name, value: Setting.ldap_name, class: "form-control"  %>
+        <div class="form-text">
+          <%= t(".Display name of LDAP_html") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="controler-label"><%= t(".LDAP Title") %></label>
+        <%= f.text_field :ldap_title, value: Setting.ldap_title, class: "form-control"  %>
+        <div class="form-text">
+          <%= t(".For customize the LDAP Login button title and page title_html") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="controler-label"><%= t(".LDAP Description") %></label>
+        <%= f.text_area :ldap_description, value: Setting.ldap_description, class: "form-control"  %>
+        <div class="form-text">
+          <%= t(".Customize the LDAP Login page description_html") %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
   <div class="form-action">
     <%= f.submit t(".Save"), class: "btn btn-primary mr-1" %>
   </div>

@@ -33,7 +33,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
       assert_select ".btn-ldap-auth" do
         assert_select "[href=?]", new_ldap_user_session_path
       end
-      assert_select ".btn-ldap-auth", text: Setting.ldap_options["title"]
+      assert_select ".btn-ldap-auth", text: Setting.ldap_title
     end
   end
 

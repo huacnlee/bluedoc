@@ -69,7 +69,7 @@ class User
     return user if user
 
     if allow_feature?(:ldap_auth) && omniauth_auth["provider"] == "ldap"
-      user = self.create({
+      user = self.create(
         omniauth_provider: omniauth_auth["provider"],
         omniauth_uid: omniauth_auth["uid"],
         name: omniauth_auth.dig("info", "name"),
@@ -77,7 +77,7 @@ class User
         email: omniauth_auth.dig("info", "email"),
         # Directly to confirm user
         confirmed_at: Time.now
-      })
+      )
     end
 
     user

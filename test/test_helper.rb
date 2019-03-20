@@ -4,7 +4,7 @@ ENV["RAILS_ENV"] ||= "test"
 # setup omniauth for test
 ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
 ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
-ENV["LDAP_ENABLE"] ||= "1"
+ENV["LDAP_HOST"] ||= "localhost"
 
 require "simplecov"
 if ENV["CI"] == "true"

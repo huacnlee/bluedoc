@@ -270,6 +270,12 @@ zh-CN:
         You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
         Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
         Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
+        LDAP Name: LDAP 别名
+        Display name of LDAP_html: "给 LDAP 登录方式自定义名称，以便于使用者能理解（例如：Windows 账号）。"
+        LDAP Title: LDAP 标题
+        For customize the LDAP Login button title and page title_html: "自定义 LDAP 登录页面的主标题（包括登录按钮名称）。"
+        LDAP Description: LDAP 详细介绍
+        Customize the LDAP Login page description_html: "你可以用 HTML 编写一段对 LDAP 登录的解释，以便于大家能更容易理解，这个信息将会在 LDAP 登录页面上显示。"
         Save: 保存
       create:
         Setting was successfully updated: 系统设置更新成功。

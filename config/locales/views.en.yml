@@ -277,6 +277,12 @@ en:
         You can use HTML to customize the footer: "You can use HTML to customize the page footer, including Stylesheet and JavaScript."
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
         Customize the sidebar html in dashboard page for user signed in: "Customize the sidebar HTML in the dashboard page."
+        LDAP Name: LDAP Name
+        Display name of LDAP_html: "The display name of the <b>LDAP</b>, for example: <b>My Company Account<b>."
+        LDAP Title: LDAP Title
+        For customize the LDAP Login button title and page title_html: "Customize the page title and button title for LDAP login."
+        LDAP Description: LDAP Description
+        Customize the LDAP Login page description_html: "You can write a message for tell users how to does they use LDAP login. The message will showup on the LDAP login page."
         Save: Save
       create:
         Setting was successfully updated: Setting was successfully updated.

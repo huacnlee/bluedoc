@@ -17,8 +17,8 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
       assert_equal 200, response.status
 
       assert_select "#session-ldap" do
-        assert_select ".title", text: Setting.ldap_options["title"]
-        assert_select ".description", text: Setting.ldap_options["description"]
+        assert_select ".title", text: Setting.ldap_title
+        assert_select ".description", text: Setting.ldap_description
         assert_select "form" do
           assert_select "[action=?]", "/account/auth/ldap/callback"
           assert_select "[method=?]", "POST"
@@ -83,7 +83,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
       post "/account/auth/ldap/callback"
       assert_equal 200, response.status
       assert_select "#session-ldap"
-      assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_options["name"]} because "Invalid credentials".)
+      assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_name} because "Invalid credentials".)
     end
   end
 
@@ -121,7 +121,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
       post "/account/auth/ldap/callback"
       assert_redirected_to new_user_registration_path
       follow_redirect!
-      assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_options["name"]} because "Username is invalid".)
+      assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_name} because "Username is invalid".)
 
       # make sure sign in will bind
       post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }

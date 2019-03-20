@@ -59,7 +59,7 @@ class LicenseTest < ActiveSupport::TestCase
     assert_equal "foo", License.restricted_attr(:foo, default: "foo")
     assert_equal "ultimate", License.restricted_attr(:plan, default: "foo")
     assert_equal true, License.trial?
-    assert_equal %w[soft_delete reader_list export_pdf export_archive limit_user_emails], License.features
+    assert_equal %w[soft_delete reader_list export_pdf export_archive limit_user_emails ldap_auth], License.features
     assert_equal true, License.allow_feature?(:soft_delete)
     assert_equal false, License.allow_feature?(:soft_delete1)
   end

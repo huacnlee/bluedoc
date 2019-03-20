@@ -11,16 +11,12 @@ defaults: &defaults
     password: '<%= ENV['SMTP_PASSWORD'] %>'
     authentication: '<%= ENV['SMTP_AUTHENTICATION'] || "login" %>'
     enable_starttls_auto: <%= ENV['SMTP_ENABLE_STARTTLS_AUTO'] || true %>
-  ldap_enable: "<%= ENV["LDAP_ENABLE"] || "0" %>"
   ldap_options:
-    name: "<%= ENV["LDAP_NAME"] || "LDAP" %>"
-    title: "<%= ENV["LDAP_TITLE"] || "LDAP Login" %>"
-    description: "<%= ENV["LDAP_DESCRIPTION"] || "Enter you LDAP account to login and binding BlueDoc." %>"
-    host: "<%= ENV["LDAP_HOST"] || "localhost" %>"
+    host: "<%= ENV["LDAP_HOST"] %>"
     # LDAP server. `:plain` means no encryption. `:simple_tls` represents SSL/TLS
     # (usually on port 636) while `:start_tls` represents StartTLS (usually port 389).
     encryption: "<%= ENV["LDAP_ENCRYPTION"] || "plain" %>"
-    port: "<%= ENV["LDAP_HOST"] || "389" %>"
+    port: "<%= ENV["LDAP_PORT"] || "389" %>"
     base: "<%= ENV["LDAP_BASE"] || "dc=example,dc=org" %>"
     # Typically AD would be 'sAMAccountName' or 'UserPrincipalName', while OpenLDAP is 'uid'.
     uid: "<%= ENV["LDAP_UID"] || "uid" %>"

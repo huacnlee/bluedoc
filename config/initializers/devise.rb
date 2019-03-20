@@ -269,7 +269,7 @@ Devise.setup do |config|
         site: ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"
       }
   end
-  if ENV["LDAP_ENABLE"].present?
+  if Setting.ldap_enable?
     ldap_options = Setting.ldap_options.deep_symbolize_keys
     config.omniauth :ldap, ldap_options
   end

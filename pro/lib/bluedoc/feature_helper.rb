@@ -26,8 +26,6 @@ module Pro
             block.call
           end
         end
-
-
       end
 
       extend ActiveSupport::Concern

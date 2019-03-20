@@ -9,6 +9,6 @@ class BlueDoc::UtilsTest < ActionView::TestCase
     assert_equal "GitLab", BlueDoc::Utils.omniauth_camelize("gitlab")
     assert_equal "Google", BlueDoc::Utils.omniauth_camelize("google_oauth2")
     assert_equal "Google", BlueDoc::Utils.omniauth_camelize(:google_oauth2)
-    assert_equal Setting.ldap_options["title"], BlueDoc::Utils.omniauth_camelize("ldap")
+    assert_equal Setting.ldap_name, BlueDoc::Utils.omniauth_camelize("ldap")
   end
 end

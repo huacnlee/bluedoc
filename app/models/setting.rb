@@ -65,7 +65,11 @@ class Setting < RailsSettings::Base
   field :license, default: "", type: :string
 
   # Readonly setting keys, no cache, only load from yml file
-  field :host, :mailer_from, :mailer_options, :ldap_enable, :ldap_options, readonly: true
+  field :host, :mailer_from, :mailer_options, :ldap_options, readonly: true
+
+  field :ldap_name, default: "LDAP", type: :string
+  field :ldap_title, default: "LDAP Login", type: :string
+  field :ldap_description, default: "Enter you LDAP account to login and binding BlueDoc.", type: :string
 
   class << self
     LOCALES = {
@@ -111,7 +115,7 @@ class Setting < RailsSettings::Base
     # PRO-end
 
     def ldap_enable?
-      Setting.ldap_enable == "true" || Setting.ldap_enable == "1"
+      Setting.ldap_options["host"].present?
     end
   end
 end

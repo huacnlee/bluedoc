@@ -13,6 +13,20 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
   end
 
+
+  test "GET /admin/settings for check :ldap_auth" do
+    get admin_settings_path
+    assert_equal 200, response.status
+    assert_select ".ldap-auth-fields", 0
+
+    allow_feature :ldap_auth do
+      get admin_settings_path
+      assert_equal 200, response.status
+      assert_select ".ldap-auth-fields", 1
+    end
+  end
+
+
   test "POST /admin/settings" do
     setting_params = {
       anonymous_enable: "0",
@@ -24,6 +38,9 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       plantuml_service_host: "http://my-plantuml.com",
       mathjax_service_host: "http://my-mathjax.com",
       default_locale: "zh-CN",
+      ldap_name: "Foo",
+      ldap_title: "LDAP Foo",
+      ldap_description: "LDAP Foo bar"
     }
 
     post admin_settings_path, params: { setting: setting_params }

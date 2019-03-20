@@ -464,7 +464,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal true, user1.errors.any?
 
       # When same authorization bind exists return bind user
-      user2 = User.find_or_create_by_omniauth({ "provider" => "ldap", "uid" => "123" })
+      user2 = User.find_or_create_by_omniauth("provider" => "ldap", "uid" => "123")
       assert_not_nil user2
       assert_equal user0, user2
     end
