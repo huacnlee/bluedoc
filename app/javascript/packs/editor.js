@@ -1,1 +1,1 @@
-import 'bluedoc/editor/index.js'
+import 'bluedoc/editor/index.js';
