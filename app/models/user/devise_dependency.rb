@@ -58,10 +58,9 @@ class User
 
   # Allow empty password, when use LDAP or encrypted_password was empty
   def password_required?
-    return false if self.encrypted_password.blank?
     return false if self.omniauth_provider == "ldap"
 
-    true
+    !persisted? || !password.nil? || !password_confirmation.nil?
   end
 
   # Use Omniauth callback info to create and bind user
@@ -75,7 +74,9 @@ class User
         omniauth_uid: omniauth_auth["uid"],
         name: omniauth_auth.dig("info", "name"),
         slug: omniauth_auth.dig("info", "login"),
-        email: omniauth_auth.dig("info", "email")
+        email: omniauth_auth.dig("info", "email"),
+        # Directly to confirm user
+        confirmed_at: Time.now
       })
     end
 

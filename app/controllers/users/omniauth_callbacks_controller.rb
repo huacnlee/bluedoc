@@ -36,10 +36,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
 
       @user = User.find_or_create_by_omniauth(omniauth_auth)
-      if @user.persisted?
+      if @user&.persisted?
+        # Sign in @user when exists binding or successfully created a user with binding
         sign_in_and_redirect @user, event: :authentication
       else
-        set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages
+        # Otherwice (username/email has been used or not match with User validation)
+        # Save auth info to Session and showup the Sign up/Sign in form for manual binding account.
+        if @user
+          set_flash_message! :alert, :failure, kind: OmniAuth::Utils.camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
+        end
 
         session[:omniauth] = omniauth_auth
         redirect_to new_user_registration_path

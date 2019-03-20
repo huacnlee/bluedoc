@@ -399,6 +399,25 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "password_required?" do
+    # Normal case
+    user = build(:user)
+    assert_equal true, user.password_required?
+
+    # LDAP omniauth_provider
+    user = build(:user, omniauth_provider: "ldap")
+    assert_equal false, user.password_required?
+
+    # Other omniauth_provider
+    user = build(:user, omniauth_provider: "github")
+    assert_equal true, user.password_required?
+
+    # Created user
+    user = create(:user)
+    user = User.find(user.id)
+    assert_equal false, user.password_required?
+  end
+
   test "find_or_create_by_omniauth with normal provider" do
     omniauth_auth = { "provider" => "gitlab", "uid" => "123" }
     assert_nil User.find_or_create_by_omniauth(omniauth_auth)
@@ -420,6 +439,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "Jason Lee", user0.name
     assert_equal "huacnlee", user0.slug
     assert_equal "huacnlee@example.org", user0.email
+    assert_equal true, user0.confirmed?
     assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
 
     # When same slug exist and no authorization bind found
