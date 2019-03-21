@@ -18,6 +18,8 @@ class CreateIssues < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.integer :last_editor_id
       t.datetime :last_edited_at
+      t.integer :comments_count, null: false, default: 0
+      t.integer :reads_count, null: false, default: 0
       t.string :format, limit: 20, default: "markdown", null: false
 
       t.timestamps

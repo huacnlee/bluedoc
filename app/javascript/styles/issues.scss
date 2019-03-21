@@ -1,0 +1,20 @@
+.page-issues {
+  .issue-heading {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 13px;
+
+    h1 {
+      font-size: 18px;
+      margin-bottom: 13px;
+
+      .issue-iid {
+        color: $text-gray;
+        margin-left: 4px;
+      }
+    }
+  }
+  .issue-box {
+
+  }
+}

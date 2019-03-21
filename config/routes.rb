@@ -139,6 +139,7 @@ Rails.application.routes.draw do
         end
       end
       resources :docs, only: %i(new create)
+      resources :issues
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do
           get :raw

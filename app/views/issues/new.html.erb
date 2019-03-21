@@ -1,0 +1,23 @@
+<% title_tag t(".Issues"), @repository.name %>
+
+<%= render "menu" %>
+
+<div class="col-12 col-md-8">
+  <h2 class="subtitle mb-3">
+    <%= t(".New Issue") %>
+  </h2>
+
+  <%= form_for(@issue, url: user_repository_issues_path(@user, @repository)) do |f| %>
+    <%= form_group(f, :title, label: false) do %>
+      <%= f.text_field :title, class: "form-control" %>
+    <% end %>
+
+    <%= form_group(f, :body_sml, label: false) do %>
+      <%= react_component "InlineEditor", name: "issue[body_sml]", markdownName: "issue[body]", format: "sml", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id") %>
+    <% end %>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><%= t(".Create Issue") %></button>
+    </div>
+  <% end %>
+</div>

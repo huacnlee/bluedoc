@@ -1,6 +1,7 @@
 class Issue < ApplicationRecord
   include Smlable
   include Sequenceable
+  include Reactionable
 
   has_sequence :repository, scope: :issue
 
@@ -19,6 +20,16 @@ class Issue < ApplicationRecord
 
   def to_path(suffix = nil)
     "#{repository.to_path}/issues/#{self.iid}#{suffix}"
+  end
+
+  def to_url(anchor: nil)
+    url = [Setting.host, self.to_path].join("")
+    url += "##{anchor}" if anchor
+    url
+  end
+
+  def issue_title
+    [self.title, "##{self.iid}"].join(" ")
   end
 
   def self.find_by_iid(iid)

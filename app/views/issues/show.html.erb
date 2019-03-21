@@ -1,0 +1,32 @@
+<% title_tag @issue.title, @repository.name %>
+
+<%= render "menu" %>
+
+<div id="issue-<%= @issue.id %>" class="issue-box">
+  <div class="issue-heading">
+    <%= link_to t(".New Issue"), new_user_repository_issue_path(@user, @repository), class: "btn btn-primary float-right" %>
+    <h1><%= @issue.title %><span class="issue-iid">#<%= @issue.iid %></span></h1>
+    <div class="issue-info">
+      <span class="author"><%= user_name_tag(@issue.user) %></span>
+      <span class="created-at"><%= t("created at") %> <%= timeago @issue.created_at %></span>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8">
+    <div class="info">
+    </div>
+    <div class="markdown-body">
+      <%= raw @issue.body_html %>
+    </div>
+
+    <div class="doc-reaction issue-reaction">
+      <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+    </div>
+
+    <% if @comments %>
+    <div class="issue-comments mt-3 clearfix" id="comment">
+      <%= render "/comments/comments", commentable: @issue, comments: @comments %>
+    </div>
+    <% end %>
+  </div>
+</div>

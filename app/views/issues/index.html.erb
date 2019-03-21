@@ -1,0 +1,20 @@
+<% title_tag t(".Issues"), @repository.name %>
+
+<%= render "menu" %>
+
+<div class="col-12">
+  <div class="issue-list">
+    <% @issues.each do |issue| %>
+    <div class="issue issue-<%= issue.status %> card">
+      <div class="title">
+        <%= link_to issue.title, issue.to_path %>
+      </div>
+      <div class="info">
+        #<%= issue.iid %>
+        <span class="created-at"><%= t("created at") %> <%= timeago issue.created_at %></span>
+        <span class="author"><%= user_name_tag(issue.user) %></span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :reply_to, class_name: "Comment", required: false, foreign_key: :parent_id
 
-  validates :commentable_type, inclusion: { in: %w[Doc Note] }
+  validates :commentable_type, inclusion: { in: %w[Doc Note Issue] }
   validates :body, presence: true, length: { minimum: 2 }
 
   scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
@@ -34,6 +34,7 @@ class Comment < ApplicationRecord
   def commentable_title
     case self.commentable_type
     when "Doc" then self.commentable&.title || ""
+    when "Issue" then self.commentable&.issue_title || ""
     else
       ""
     end
@@ -42,6 +43,7 @@ class Comment < ApplicationRecord
   def to_url
     case self.commentable_type
     when "Doc" then self.commentable.to_url(anchor: "comment-#{self.id}")
+    when "Issue" then self.commentable.to_url(anchor: "comment-#{self.id}")
     else
       ""
     end

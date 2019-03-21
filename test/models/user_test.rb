@@ -299,6 +299,7 @@ class UserTest < ActiveSupport::TestCase
     doc = create(:doc)
     note = create(:note)
     repo = create(:repository)
+    issue = create(:issue)
 
     # watch repo
     user.watch_repository(repo)
@@ -327,6 +328,11 @@ class UserTest < ActiveSupport::TestCase
     user.watch_comment_note(note)
     assert_equal true, user.watch_comment_note?(note)
     assert_equal [user.id], note.watch_comment_by_user_ids
+
+    # watch comment issue
+    user.watch_comment_issue(issue)
+    assert_equal true, user.watch_comment_issue?(issue)
+    assert_equal [user.id], issue.watch_comment_by_user_ids
   end
 
   test "avatar_url" do

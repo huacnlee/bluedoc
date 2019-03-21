@@ -44,3 +44,5 @@ repository:
   - note
   - repositories
   - repository
+  - issue
+  - issues

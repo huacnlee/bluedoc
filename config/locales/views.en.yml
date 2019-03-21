@@ -624,6 +624,7 @@ en:
       Search: Search
       Settings: Settings
       Repository: Repository
+      Issues: Issues
     repository:
       Private: Private
     docs:
@@ -900,4 +901,17 @@ en:
       people: people
       has read: has read this Doc.
       Reader list: Reader list
+  issues:
+    menu:
+      New Issue: New Issue
+    index:
+      Issues: Issues
+    new:
+      New Issue: New Issue
+      Create Issue: Create Issue
+    show:
+      New Issue: New Issue
+    create:
+      Issue was successfully created: Issue was successfully created.
+      Issue was successfully created: Issue was successfully updated.
 
