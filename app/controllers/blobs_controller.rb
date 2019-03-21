@@ -64,6 +64,6 @@ class BlobsController < ActiveStorage::BaseController
     end
 
     def blob_disposition
-      ActiveStorage.variable_content_types.include?(@blob.content_type) ? :inline : :attachment
+      ActiveStorage.content_types_allowed_inline.include?(@blob.content_type) ? :inline : :attachment
     end
 end
