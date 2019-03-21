@@ -7,7 +7,10 @@
   <div class="main-wrap">
     <div class="main-content">
       <div class="user-notes">
-        <h2 class="sub-title"><%= t(".Notes") %></h2>
+        <h2 class="sub-title">
+          <%= t(".Notes") %>
+          <%= link_to t(".New Note"), new_note_path, class: "btn btn-primary btn-sm float-right  " %>
+        </h2>
         <% if @notes.blank? %>
         <div class="blankslate">
           <p><%= t(".No notes") %></p>
