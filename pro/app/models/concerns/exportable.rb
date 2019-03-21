@@ -44,6 +44,8 @@ module Exportable
               self.title
             when "Repository"
               self.name
+            when "Note"
+              self.title
             else
               "bluedoc-export"
             end
