@@ -911,6 +911,7 @@ en:
       Create Issue: Create Issue
     show:
       New Issue: New Issue
+      comments: comments
     create:
       Issue was successfully created: Issue was successfully created.
       Issue was successfully created: Issue was successfully updated.

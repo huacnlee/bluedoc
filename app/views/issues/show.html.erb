@@ -9,6 +9,7 @@
     <div class="issue-info">
       <span class="author"><%= user_name_tag(@issue.user) %></span>
       <span class="created-at"><%= t("created at") %> <%= timeago @issue.created_at %></span>
+      <a class="ml-3" href="#comment"><%= @issue.comments_count %> <%= t(".comments") %></a>
     </div>
   </div>
 

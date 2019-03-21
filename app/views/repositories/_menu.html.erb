@@ -12,14 +12,6 @@
         <% end %>
       </h1>
 
-      <div class="text-gray my-3"><%= @repository.description %></div>
-
-      <% if @repository.source? && @repository.source.provider == "gitbook" %>
-      <div class="source mb-3 text-gray">
-        <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
-      </div>
-      <% end %>
-
       <div class="repo-actions">
         <%= action_button_tag(@repository, :watch, with_count: true) %>
         <%= action_button_tag(@repository, :star, with_count: true) %>

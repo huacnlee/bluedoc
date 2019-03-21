@@ -6,7 +6,7 @@ class IssuesController < Users::ApplicationController
   before_action :set_issue, only: %i[show]
 
   def index
-    @issues = @repository.issues.open.order("updated_at desc").page(params[:page]).per(20)
+    @issues = @repository.issues.includes(:user, :last_editor).open.order("iid desc").page(params[:page]).per(20)
   end
 
   def new
