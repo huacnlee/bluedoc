@@ -5,7 +5,7 @@ class Ability
 
   attr_reader :user, :cache
 
-  depends_on :groups, :repositories, :docs, :comments, :notes
+  depends_on :groups, :repositories, :docs, :comments, :notes, :issues
 
   def initialize(u)
     @user = u || User.new
@@ -25,6 +25,7 @@ class Ability
     abilities_for_docs
     abilities_for_comments
     abilities_for_notes
+    abilities_for_issues
 
     can :read, Member, user_id: user.id
   end
