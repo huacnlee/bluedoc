@@ -3,7 +3,7 @@ class IssuesController < Users::ApplicationController
   before_action :authenticate_user!
   before_action :set_user
   before_action :set_repository
-  before_action :set_issue, only: %i[show]
+  before_action :set_issue, only: %i[show assignees]
 
   def index
     @issues = @repository.issues.includes(:user, :last_editor).open.order("iid desc").page(params[:page]).per(20)
@@ -24,7 +24,23 @@ class IssuesController < Users::ApplicationController
   end
 
   def show
+    authorize! :read, @issue
+
     @comments = @issue.comments.with_includes.order("id asc")
+  end
+
+  def assignees
+    authorize! :update, @issue
+
+    if params[:clear]
+      @issue.update_assignees([])
+    else
+      unless issue_params[:assignee_id].nil?
+        @issue.update_assignees(issue_params[:assignee_id])
+      end
+    end
+
+    render json: { ok: true, assignees: @issue.assignees.collect(&:as_item_json) }
   end
 
   private
@@ -38,6 +54,6 @@ class IssuesController < Users::ApplicationController
     end
 
     def issue_params
-      params.require(:issue).permit(:title, :body, :body_sml, :format)
+      params.require(:issue).permit(:title, :body, :body_sml, :format, assignee_id: [])
     end
 end

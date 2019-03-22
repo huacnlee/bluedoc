@@ -139,7 +139,11 @@ Rails.application.routes.draw do
         end
       end
       resources :docs, only: %i(new create)
-      resources :issues
+      resources :issues do
+        member do
+          post :assignees
+        end
+      end
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do
           get :raw

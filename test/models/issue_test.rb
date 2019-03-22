@@ -45,4 +45,42 @@ class IssueTest < ActiveSupport::TestCase
       assert_equal [user1, user2].sort, issue.read_by_users.sort
     end
   end
+
+  test "assignee_target_users" do
+    users = create_list(:user, 4)
+    group = create(:group)
+    group.add_member(users[0], :reader)
+    group.add_member(users[1], :editor)
+    group.add_member(users[2], :admin)
+
+    repo = create(:repository, user: group)
+    repo.add_member(users[3], :admin)
+
+    issue = create(:issue, repository: repo)
+
+    target_users = issue.assignee_target_users
+    assert_equal 4, target_users.count
+    assert_equal users.sort, target_users.sort
+  end
+
+  test "update_assignees" do
+    users0 = create_list(:user, 3)
+    users1 = create_list(:user, 2)
+
+    issue = create(:issue)
+    issue.update_assignees(users0.collect(&:id))
+    issue.reload
+    assert_equal users0.sort, issue.assignees.sort
+    assert_equal 3, IssueAssignee.where(issue_id: issue.id).count
+
+    issue.update_assignees(users1.collect(&:id))
+    issue.reload
+    assert_equal users1.sort, issue.assignees.sort
+    assert_equal 2, IssueAssignee.where(issue_id: issue.id).count
+
+    issue.update_assignees([])
+    issue.reload
+    assert_equal [], issue.assignees
+    assert_equal 0, IssueAssignee.where(issue_id: issue.id).count
+  end
 end

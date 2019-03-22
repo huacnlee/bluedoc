@@ -475,4 +475,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal user0, user2
     end
   end
+
+  test "as_item_json" do
+    user = create(:user)
+
+    assert_equal %w[id slug name avatar_url], user.as_item_json.keys
+    assert_equal user.as_json(only: %i[id slug name], methods: %i[avatar_url]), user.as_item_json
+  end
 end

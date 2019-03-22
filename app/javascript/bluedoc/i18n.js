@@ -70,6 +70,14 @@ i18n.init({
           "Table of contents": "Table of contents",
           "Add a custom item": "Add a custom item"
         },
+        "issues": {
+          "Assignee": {
+            "Assignee": "Assignee",
+            "No one assigned": "No one assigned.",
+            "Filter": "Filter",
+            "Clear All": "Clear All",
+          }
+        }
       },
     },
     zh_CN: {
@@ -137,6 +145,14 @@ i18n.init({
           "Table of contents": "目录",
           "Add a custom item": "添加自定义项"
         },
+        "issues": {
+          "Assignee": {
+            "Assignee": "任务指派",
+            "No one assigned": "暂无指派处理人.",
+            "Filter": "过滤",
+            "Clear All": "清除所有",
+          }
+        }
       },
     }
   },

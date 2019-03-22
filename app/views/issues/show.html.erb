@@ -13,21 +13,27 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-8">
-    <div class="info">
-    </div>
-    <div class="markdown-body">
-      <%= raw @issue.body_html %>
+  <div class="flex-wrap">
+    <div class="col-12 col-md-8">
+      <div class="info">
+      </div>
+      <div class="markdown-body">
+        <%= raw @issue.body_html %>
+      </div>
+
+      <div class="doc-reaction issue-reaction">
+        <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+      </div>
+
+      <% if @comments %>
+      <div class="issue-comments mt-3 clearfix" id="comment">
+        <%= render "/comments/comments", commentable: @issue, comments: @comments %>
+      </div>
+      <% end %>
     </div>
 
-    <div class="doc-reaction issue-reaction">
-      <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+    <div class="col-12 col-md-3">
+      <%= react_component "issues/Sidebar", { issueURL: @issue.to_path, assignees: @issue.assignees.collect(&:as_item_json), assigneeTargets: @issue.assignee_target_users.collect(&:as_item_json) } %>
     </div>
-
-    <% if @comments %>
-    <div class="issue-comments mt-3 clearfix" id="comment">
-      <%= render "/comments/comments", commentable: @issue, comments: @comments %>
-    </div>
-    <% end %>
   </div>
 </div>

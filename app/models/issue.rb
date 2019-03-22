@@ -5,12 +5,12 @@ class Issue < ApplicationRecord
 
   has_sequence :repository, scope: :issue
 
+  depends_on :assignees
+
   belongs_to :user
   belongs_to :repository
   belongs_to :last_editor, class_name: "User", required: false
 
-  has_many :issue_assignees
-  has_many :assignees, class_name: "User", through: :issue_assignees
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :repository, presence: true

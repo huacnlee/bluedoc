@@ -912,6 +912,8 @@ en:
     show:
       New Issue: New Issue
       comments: comments
+      Assignee: Assignee
+      No one assigned: No one assigned.
     create:
       Issue was successfully created: Issue was successfully created.
       Issue was successfully created: Issue was successfully updated.

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   include Slugable
   include Activityable
 
-  depends_on :soft_delete, :devise, :avatar, :system_user, :actions, :membership, :search, :activities, :follows
+  depends_on :soft_delete, :devise, :avatar, :system_user, :actions, :membership, :search, :activities, :follows, :serializable
   # PRO-start
   depends_on :read_target
   # PRO-end

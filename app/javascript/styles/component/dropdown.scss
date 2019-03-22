@@ -120,9 +120,15 @@
 }
 
 .dropdown-header {
-  padding: $spacer-1 $spacer-2 $spacer-1 $spacer-3;
+  padding: 0px 14px;
   font-size: 14px;
   color: $text-gray;
+
+  input.form-control {
+    padding: 2px 7px;
+    line-height: 100%;
+    height: 30px;
+  }
 }
 
 .dropdown-menu-content {
