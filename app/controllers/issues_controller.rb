@@ -1,19 +1,25 @@
 class IssuesController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create assignees edit update]
   before_action :set_user
   before_action :set_repository
   before_action :set_issue, only: %i[show assignees]
 
   def index
+    authorize! :read, @repository
+
     @issues = @repository.issues.includes(:user, :last_editor).open.order("iid desc").page(params[:page]).per(20)
   end
 
   def new
+    authorize! :create_issue, @repository
+
     @issue = @repository.issues.new
   end
 
   def create
+    authorize! :create_issue, @repository
+
     @issue = @repository.issues.new(issue_params)
     @issue.user_id = current_user.id
     if @issue.save

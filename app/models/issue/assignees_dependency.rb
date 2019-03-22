@@ -6,7 +6,8 @@ class Issue
   def assignee_target_users
     user_ids = repository.members.pluck(:user_id)
     user_ids += repository.user.members.pluck(:user_id)
-    User.where(id: user_ids.uniq).with_attached_avatar
+    users = User.where(id: user_ids.uniq).with_attached_avatar
+    users.sort_by { |user| user_ids.index(user.id) }
   end
 
   # Replace issue assignees
