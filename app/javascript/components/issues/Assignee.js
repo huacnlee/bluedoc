@@ -84,13 +84,13 @@ export default class Assignee extends React.PureComponent {
 
     const { selectedAssigneeIds, assignees, showAssigneeMenu } = this.state;
 
-    return <div className="issue-assignee">
-      <div className="sub-title clearfix">
-        <h2 className="float-left">{this.t(".Assignee")}</h2>
+    return <div className="sidebar-box issue-assignee">
+      <div className="clearfix">
+        <h2 className="float-left sub-title ">{this.t(".Assignee")}</h2>
 
         {abilities.manage && (
         <details className="dropdown details-overlay details-reset d-inline-block float-right" ref={this.menuRef}>
-          <summary className="btn btn-sm"><i className="fas fa-gear"></i></summary>
+          <summary class="btn btn-sm"><i className="fas fa-gear"></i></summary>
           <AssigneeMenu {...this.props}
             selectedAssigneeIds={selectedAssigneeIds}
             onClearAssignees={this.onClearAssignees}

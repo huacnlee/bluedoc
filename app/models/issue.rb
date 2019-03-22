@@ -1,11 +1,13 @@
 class Issue < ApplicationRecord
+  second_level_cache expires_in: 1.week
+
   include Smlable
   include Sequenceable
   include Reactionable
 
   has_sequence :repository, scope: :issue
 
-  depends_on :assignees
+  depends_on :assignees, :participants
 
   belongs_to :user
   belongs_to :repository

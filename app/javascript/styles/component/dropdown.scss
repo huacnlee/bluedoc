@@ -22,6 +22,10 @@
       pointer-events: all;
     }
   }
+
+  clipboard-copy {
+    cursor: pointer;
+  }
 }
 
 .dropdown-caret {

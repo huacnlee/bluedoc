@@ -17,4 +17,20 @@
   .issue-box {
 
   }
+
+  .issue-sidebar {
+    padding-left: 20px;
+
+    .sidebar-box {
+      margin-bottom: 30px;
+      .sub-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .user-avatar-link {
+      margin-right: 5px;
+    }
+  }
 }

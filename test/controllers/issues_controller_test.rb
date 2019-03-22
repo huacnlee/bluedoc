@@ -102,6 +102,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal false, props[:abilities][:update]
       assert_equal false, props[:abilities][:manage]
+      assert_equal issue.participants.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:participants].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
     end
 
     # Private Repository

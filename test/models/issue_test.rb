@@ -83,4 +83,20 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [], issue.assignees
     assert_equal 0, IssueAssignee.where(issue_id: issue.id).count
   end
+
+  test "participants" do
+    issue = create(:issue)
+    user0 = create(:user)
+    user1 = create(:user)
+    create(:comment, commentable: issue, user: user0)
+    create(:comment, commentable: issue, user: user0)
+    create(:comment, commentable: issue, user: user1)
+    create(:comment, commentable: issue, user: user1)
+    create(:comment, commentable: issue, user_id: -999)
+
+    assert_equal 3, issue.participants.length
+    assert_equal true, issue.participants.include?(issue.user)
+    assert_equal true, issue.participants.include?(user0)
+    assert_equal true, issue.participants.include?(user1)
+  end
 end

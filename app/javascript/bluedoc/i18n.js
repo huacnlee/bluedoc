@@ -71,6 +71,9 @@ i18n.init({
           "Add a custom item": "Add a custom item"
         },
         "issues": {
+          "Sidebar": {
+            "Participants": "participants",
+          },
           "Assignee": {
             "Assignee": "Assignee",
             "No one assigned": "No one assigned.",
@@ -146,6 +149,9 @@ i18n.init({
           "Add a custom item": "添加自定义项"
         },
         "issues": {
+          "Sidebar": {
+            "Participants": "个参与者",
+          },
           "Assignee": {
             "Assignee": "任务指派",
             "No one assigned": "暂无指派处理人.",

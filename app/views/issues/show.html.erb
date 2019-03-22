@@ -40,7 +40,8 @@
         abilities: {
           update: can?(:update, @issue),
           manage: can?(:manage, @issue),
-        }
+        },
+        participants: @issue.participants.collect(&:as_item_json),
       } %>
     </div>
   </div>
