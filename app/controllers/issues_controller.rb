@@ -8,7 +8,14 @@ class IssuesController < Users::ApplicationController
   def index
     authorize! :read, @repository
 
-    @issues = @repository.issues.includes(:user, :last_editor).open.order("iid desc").page(params[:page]).per(20)
+    @issues = @repository.issues.includes(:user, :last_editor)
+    if params[:status] == "closed"
+      @issues = @issues.closed
+    else
+      @issues = @issues.open
+    end
+
+    @issues = @issues.order("iid desc").page(params[:page]).per(12)
   end
 
   def new

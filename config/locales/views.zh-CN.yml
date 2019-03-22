@@ -894,4 +894,20 @@ zh-CN:
       people: 个人
       has read: 阅读过此文档。
       Reader list: 阅读过此文档的人
-
+  issues:
+    menu:
+      New Issue: 新建议题
+    index:
+      Issues: 议题
+      New Issue: 新建议题
+      Open: 进行中
+      Closed: 已结束
+    new:
+      New Issue: 新建议题
+      Create Issue: 创建议题
+    show:
+      New Issue: 新建议题
+      comments: 回复
+    create:
+      Issue was successfully created: 议题创建成功。
+      Issue was successfully created: 议题更新成功

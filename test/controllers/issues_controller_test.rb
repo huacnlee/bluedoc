@@ -25,6 +25,9 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :reader, group: @group
     get @private_repository.to_path("/issues")
     assert_equal 200, response.status
+
+    get @private_repository.to_path("/issues?status=closed")
+    assert_equal 200, response.status
   end
 
   test "GET /:user/:repo/issues/new" do

@@ -2,7 +2,7 @@
   .issue-heading {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
-    margin-bottom: 13px;
+    margin-bottom: 25px;
 
     h1 {
       font-size: 18px;
@@ -18,8 +18,55 @@
 
   }
 
+  .issuenav {
+    float: left;
+    margin-left: 15px;
+    .issuenav-item {
+      padding: 5px 5px 8px;
+      font-size: 14px;
+      margin: 0 2px;
+      text-decoration: none;
+      color: $primary;
+      position: relative;
+      &.selected {
+        color: $text-main;
+        border-bottom: 1px solid $text-main;
+      }
+    }
+  }
+
+  .issue-list {
+    .issue {
+      position: relative;
+      padding-left: 42px;
+
+      &.issue-closed {
+        .issue-status {
+          .fas {
+            color: $danger;
+          }
+        }
+      }
+
+      .issue-status {
+        position: absolute;
+        top: 13px;
+        left: 20px;
+        width: 24px;
+        .fas {
+          color: $green;
+        }
+      }
+      .counter {
+        float: right;
+        margin-top: -25px;
+        color: $text-gray;
+      }
+    }
+  }
+
   .issue-sidebar {
-    padding-left: 20px;
+    padding-left: 30px;
 
     .sidebar-box {
       margin-bottom: 30px;

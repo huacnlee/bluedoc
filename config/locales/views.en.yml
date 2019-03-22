@@ -906,14 +906,15 @@ en:
       New Issue: New Issue
     index:
       Issues: Issues
+      New Issue: New Issue
+      Open: Open
+      Closed: Closed
     new:
       New Issue: New Issue
       Create Issue: Create Issue
     show:
       New Issue: New Issue
-      comments: comments
-      Assignee: Assignee
-      No one assigned: No one assigned.
+      comments: Comments
     create:
       Issue was successfully created: Issue was successfully created.
       Issue was successfully created: Issue was successfully updated.
