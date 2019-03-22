@@ -15,7 +15,7 @@
   </div>
   <div class="issue-list">
     <% @issues.each do |issue| %>
-    <div class="issue issue-<%= issue.status %> card mb-1">
+    <div class="issue issue-<%= issue.status %> mb-1">
       <div class="issue-status">
         <%= icon_tag("notice") %>
       </div>
@@ -27,6 +27,12 @@
         #<%= issue.iid %>
         <span class="created-at"><%= t("created at") %> <%= timeago issue.created_at %></span>
         <span class="author"><%= user_name_tag(issue.user) %></span>
+
+        <span class="assignees">
+          <% issue.assignees.each do |user| %>
+            <%= user_avatar_tag(user, style: :tiny) %>
+          <% end %>
+        </span>
       </div>
 
       <% if issue.comments_count > 0 %>

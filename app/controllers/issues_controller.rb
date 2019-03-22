@@ -8,7 +8,7 @@ class IssuesController < Users::ApplicationController
   def index
     authorize! :read, @repository
 
-    @issues = @repository.issues.includes(:user, :last_editor)
+    @issues = @repository.issues.includes(:user, :last_editor, :assignees)
     if params[:status] == "closed"
       @issues = @issues.closed
     else

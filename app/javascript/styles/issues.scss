@@ -38,13 +38,31 @@
   .issue-list {
     .issue {
       position: relative;
+      padding: 12px 20px;
       padding-left: 42px;
+      line-height: 1.4;
+      list-style: none;
+      position: relative;
+      @extend .card-box;
+
+      .info {
+        margin-top: 8px;
+        color: $text-gray;
+      }
 
       &.issue-closed {
         .issue-status {
           .fas {
             color: $danger;
           }
+        }
+      }
+
+      .assignees {
+        float: right;
+
+        .user-avatar {
+          margin-left: 2px;
         }
       }
 
@@ -58,8 +76,9 @@
         }
       }
       .counter {
-        float: right;
-        margin-top: -25px;
+        position: absolute;
+        top: 13px;
+        right: 20px;
         color: $text-gray;
       }
     }
