@@ -21,6 +21,7 @@ class Ability::IssuesTest < ActiveSupport::TestCase
     assert @ability.cannot? :destroy, issue
     assert @ability.can? :create_issue, Repository
     assert @ability.can? :create_issue, repo
+    assert @ability.cannot? :manage, issue
 
     assert @other_ability.can? :read, issue
     assert @other_ability.cannot? :update, issue
@@ -49,6 +50,7 @@ class Ability::IssuesTest < ActiveSupport::TestCase
     assert @ability.cannot? :update, private_repo
     assert @ability.cannot? :destroy, issue
     assert @ability.cannot? :destroy, private_issue
+    assert @ability.cannot? :manage, private_issue
 
     # :editor
     group.add_member(@user, :editor)
@@ -59,6 +61,7 @@ class Ability::IssuesTest < ActiveSupport::TestCase
     assert @ability.can? :read, private_issue
     assert @ability.cannot? :update, private_issue
     assert @ability.cannot? :destroy, private_issue
+    assert @ability.cannot? :manage, private_issue
 
     # :admin
     group.add_member(@user, :admin)
@@ -69,6 +72,7 @@ class Ability::IssuesTest < ActiveSupport::TestCase
     assert @ability.can? :read, private_issue
     assert @ability.can? :update, private_issue
     assert @ability.can? :destroy, private_issue
+    assert @ability.can? :manage, private_issue
 
     # Other user
     assert @other_ability.can? :read, issue

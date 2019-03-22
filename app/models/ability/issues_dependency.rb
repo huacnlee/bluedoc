@@ -6,7 +6,7 @@ class Ability
       can? :read, issue.repository
     end
     can :manage, Issue do |issue|
-      can? :manage, issue.repository
+      can? :update, issue.repository
     end
     can :update, Issue, user_id: user.id
     can :update, Issue do |issue|

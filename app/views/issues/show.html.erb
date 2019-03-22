@@ -36,7 +36,11 @@
       <%= react_component "issues/Sidebar", {
         issueURL: @issue.to_path,
         assignees: @issue.assignees.collect(&:as_item_json),
-        assigneeTargets: @issue.assignee_target_users.collect(&:as_item_json)
+        assigneeTargets: @issue.assignee_target_users.collect(&:as_item_json),
+        abilities: {
+          update: can?(:update, @issue),
+          manage: can?(:manage, @issue),
+        }
       } %>
     </div>
   </div>

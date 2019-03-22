@@ -36,7 +36,7 @@ class IssuesController < Users::ApplicationController
   end
 
   def assignees
-    authorize! :update, @issue
+    authorize! :manage, @issue
 
     if params[:clear]
       @issue.update_assignees([])

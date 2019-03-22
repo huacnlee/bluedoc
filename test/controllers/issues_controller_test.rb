@@ -100,6 +100,8 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal issue.to_path, props[:issueURL]
       assert_equal issue.assignee_target_users.collect(&:as_item_json), props[:assigneeTargets].collect(&:deep_stringify_keys)
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
+      assert_equal false, props[:abilities][:update]
+      assert_equal false, props[:abilities][:manage]
     end
 
     # Private Repository
@@ -110,6 +112,26 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :reader, group: @group
     get private_issue.to_path
     assert_equal 200, response.status
+    assert_react_component "issues/Sidebar" do |props|
+      assert_equal false, props[:abilities][:update]
+      assert_equal false, props[:abilities][:manage]
+    end
+
+    sign_in_role :editor, group: @group
+    get private_issue.to_path
+    assert_equal 200, response.status
+    assert_react_component "issues/Sidebar" do |props|
+      assert_equal false, props[:abilities][:update]
+      assert_equal false, props[:abilities][:manage]
+    end
+
+    sign_in_role :admin, group: @group
+    get private_issue.to_path
+    assert_equal 200, response.status
+    assert_react_component "issues/Sidebar" do |props|
+      assert_equal true, props[:abilities][:update]
+      assert_equal true, props[:abilities][:manage]
+    end
   end
 
   test "POST /:user/:repo/issues/:iid/assignees" do

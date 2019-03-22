@@ -80,7 +80,7 @@ export default class Assignee extends React.PureComponent {
   }
 
   render() {
-    const { assigneeTargets } = this.props;
+    const { assigneeTargets, abilities } = this.props;
 
     const { selectedAssigneeIds, assignees, showAssigneeMenu } = this.state;
 
@@ -88,6 +88,7 @@ export default class Assignee extends React.PureComponent {
       <div className="sub-title clearfix">
         <h2 className="float-left">{this.t(".Assignee")}</h2>
 
+        {abilities.manage && (
         <details className="dropdown details-overlay details-reset d-inline-block float-right" ref={this.menuRef}>
           <summary className="btn btn-sm"><i className="fas fa-gear"></i></summary>
           <AssigneeMenu {...this.props}
@@ -96,6 +97,7 @@ export default class Assignee extends React.PureComponent {
             onSelect={this.onSelectAssignee}
             t={this.t} />
         </details>
+        )}
       </div>
 
       <div className="assignee-list">
