@@ -915,6 +915,8 @@ en:
     show:
       New Issue: New Issue
       comments: Comments
+      closed: Closed
+      open: Open
     create:
       Issue was successfully created: Issue was successfully created.
       Issue was successfully created: Issue was successfully updated.

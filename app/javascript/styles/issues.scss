@@ -15,7 +15,16 @@
     }
   }
   .issue-box {
+    .issue-status {
+      margin-right: 10px;
 
+      @extend .label;
+      @extend .label-success;
+
+      &.issue-status-closed {
+        @extend .label-danger;
+      }
+    }
   }
 
   .issuenav {

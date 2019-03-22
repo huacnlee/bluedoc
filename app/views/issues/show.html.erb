@@ -7,6 +7,7 @@
     <%= link_to t(".New Issue"), new_user_repository_issue_path(@user, @repository), class: "btn btn-primary float-right" %>
     <h1><%= @issue.title %><span class="issue-iid">#<%= @issue.iid %></span></h1>
     <div class="issue-info">
+      <span class="issue-status issue-status-<%= @issue.status %>"><%= icon_tag("warn") %> <%= t(".#{@issue.status}") %></span>
       <span class="author"><%= user_name_tag(@issue.user) %></span>
       <span class="created-at"><%= t("created at") %> <%= timeago @issue.created_at %></span>
       <a class="ml-3" href="#comment"><%= @issue.comments_count %> <%= t(".comments") %></a>
@@ -15,8 +16,6 @@
 
   <div class="flex-wrap">
     <div class="col-12 col-md-8">
-      <div class="info">
-      </div>
       <div class="markdown-body">
         <%= raw @issue.body_html %>
       </div>

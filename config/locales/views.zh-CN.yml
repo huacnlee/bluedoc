@@ -908,6 +908,8 @@ zh-CN:
     show:
       New Issue: 新建议题
       comments: 回复
+      open: 进行中
+      closed: 已结束
     create:
       Issue was successfully created: 议题创建成功。
       Issue was successfully created: 议题更新成功
