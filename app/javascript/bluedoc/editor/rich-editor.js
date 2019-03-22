@@ -1,5 +1,5 @@
 import { Container, serializer } from '@thebluedoc/editor';
-import { AttachmentUpload } from './attachment-upload';
+import AttachmentUpload from './attachment-upload';
 import Toolbar from './toolbar';
 import {
   MentionList,
