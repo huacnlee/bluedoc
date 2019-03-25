@@ -3,7 +3,7 @@ class IssuesController < Users::ApplicationController
   before_action :authenticate_user!, only: %i[new create assignees edit update]
   before_action :set_user
   before_action :set_repository
-  before_action :set_issue, only: %i[show assignees]
+  before_action :set_issue, only: %i[show edit update assignees]
 
   def index
     authorize! :read, @repository
@@ -40,6 +40,23 @@ class IssuesController < Users::ApplicationController
     authorize! :read, @issue
 
     @comments = @issue.comments.with_includes.order("id asc")
+  end
+
+  def edit
+    authorize! :update, @issue
+  end
+
+  def update
+    authorize! :update, @issue
+
+    update_params = issue_params.to_hash.deep_symbolize_keys
+    update_params[:last_editor_id] = current_user.id
+    update_params[:last_edited_at] = Time.now
+    if @issue.update(update_params)
+      redirect_to @issue.to_path, notice: t(".Issue was successfully updated")
+    else
+      render :edit
+    end
   end
 
   def assignees

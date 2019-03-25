@@ -3,6 +3,8 @@
     padding: 10px 0;
     border-bottom: 1px solid #eee;
     margin-bottom: 25px;
+    position: relative;
+    padding-left: 50px;
 
     h1 {
       font-size: 18px;
@@ -13,7 +15,34 @@
         margin-left: 4px;
       }
     }
+
+    .heading-avatar {
+      position: absolute;
+      top: 15px;
+      left: 0px;
+
+      @media (max-width: 768px) {
+        top: 55px;
+      }
+    }
+
+    .heading-buttons {
+      float: right;
+
+      @media (max-width: 768px) {
+        float: none;
+        display: block;
+        padding-bottom: 10px;
+      }
+    }
   }
+
+  .comments {
+    .sub-title {
+      display: none;
+    }
+  }
+
   .issue-box {
     .issue-status {
       margin-right: 10px;
@@ -30,6 +59,7 @@
   .issuenav {
     float: left;
     margin-left: 15px;
+
     .issuenav-item {
       padding: 5px 5px 8px;
       font-size: 14px;
@@ -93,8 +123,34 @@
     }
   }
 
+
+
   .issue-sidebar {
-    padding-left: 30px;
+    background: #f7f7f7;
+    padding: 25px;
+    margin-left: 30px;
+    height: 100vh;
+
+    @media (max-width: 768px) {
+      margin-left: 0px;
+      height: auto;
+    }
+
+    .dropdown {
+      summary {
+        .fas {
+          font-size: 18px;
+        }
+
+        &:hover {
+          color: $text-gray;
+        }
+      }
+
+      .dropdown-header {
+        padding-bottom: 5px;
+      }
+    }
 
     .sidebar-box {
       margin-bottom: 30px;

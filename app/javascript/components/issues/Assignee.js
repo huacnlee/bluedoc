@@ -90,7 +90,7 @@ export default class Assignee extends React.PureComponent {
 
         {abilities.manage && (
         <details className="dropdown details-overlay details-reset d-inline-block float-right" ref={this.menuRef}>
-          <summary class="btn btn-sm"><i className="fas fa-gear"></i></summary>
+          <summary><i className="fas fa-gear"></i></summary>
           <AssigneeMenu {...this.props}
             selectedAssigneeIds={selectedAssigneeIds}
             onClearAssignees={this.onClearAssignees}

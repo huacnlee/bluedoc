@@ -189,4 +189,66 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     issue.reload
     assert_equal [], issue.assignees
   end
+
+  test "GET /:user/:repo/issues/:iid/edit" do
+    issue = create(:issue, repository: @repository)
+    assert_require_user do
+      get issue.to_path("/edit")
+    end
+
+    user = create(:user)
+    sign_in user
+    get issue.to_path("/edit")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    get issue.to_path("/edit")
+    assert_equal 403, response.status
+
+    sign_in_role :admin, group: @group
+    get issue.to_path("/edit")
+    assert_equal 200, response.status
+    assert_select "form.edit_issue" do
+      assert_select "[action=?]", issue.to_path
+      assert_select ".btn-primary", text: "Update Issue"
+    end
+    assert_react_component "InlineEditor" do |props|
+      assert_equal issue.body_sml_plain, props[:value]
+    end
+  end
+
+  test "PUT /:user/:repo/issues/:iid" do
+    issue = create(:issue, repository: @repository)
+    assert_require_user do
+      put issue.to_path
+    end
+
+    user = create(:user)
+    sign_in user
+    put issue.to_path
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    put issue.to_path
+    assert_equal 403, response.status
+
+    issue_params = {
+      title: "New title",
+      body_sml: %(["p", {}, "Hello world"]),
+      body: "Hello world",
+    }
+
+    old_edited_at = issue.last_edited_at
+
+    user1 = sign_in_role :admin, group: @group
+    put issue.to_path, params: { issue: issue_params }
+    assert_redirected_to issue.to_path
+
+    issue.reload
+    assert_equal issue_params[:title], issue.title
+    assert_equal issue_params[:body_sml], issue.body_sml_plain
+    assert_equal issue_params[:body], issue.body_plain
+    assert_equal user1.id, issue.last_editor_id
+    assert_not_equal old_edited_at, issue.last_edited_at
+  end
 end

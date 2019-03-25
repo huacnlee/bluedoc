@@ -911,13 +911,20 @@ en:
       Closed: Closed
     new:
       New Issue: New Issue
+    edit:
+      Edit Issue: Edit Issue
+    form:
       Create Issue: Create Issue
+      Update Issue: Update Issue
+      Cancel: Cancel
     show:
       New Issue: New Issue
+      Edit: Edit
       comments: Comments
       closed: Closed
       open: Open
     create:
       Issue was successfully created: Issue was successfully created.
-      Issue was successfully created: Issue was successfully updated.
+    update:
+      Issue was successfully updated: Issue was successfully updated.
 

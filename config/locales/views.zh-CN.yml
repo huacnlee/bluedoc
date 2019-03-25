@@ -904,12 +904,19 @@ zh-CN:
       Closed: 已结束
     new:
       New Issue: 新建议题
+    edit:
+      Edit Issue: 修改议题
+    form:
       Create Issue: 创建议题
+      Update Issue: 更新议题
+      Cancel: 取消
     show:
       New Issue: 新建议题
+      Edit: 修改
       comments: 回复
       open: 进行中
       closed: 已结束
     create:
       Issue was successfully created: 议题创建成功。
-      Issue was successfully created: 议题更新成功
+    update:
+      Issue was successfully updated: 议题更新成功。
