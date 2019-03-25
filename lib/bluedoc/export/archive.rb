@@ -7,7 +7,7 @@ module BlueDoc
         zip_filename = File.join(tmp_path, "#{SecureRandom.uuid}.zip")
 
         # SUMMARY.md
-        summary = BlueDoc::Toc.parse(repository.toc_text).to_markdown(prefix: "./docs/", suffix: ".md")
+        summary = BlueDoc::Toc.parse(repository.toc_text).to_markdown(prefix: "./", suffix: ".md")
         write_file!("SUMMARY.md", summary)
 
         repository.docs.each do |doc|
@@ -15,7 +15,7 @@ module BlueDoc
           body_html = doc.body_html
 
           body = downlod_images(body, body_html)
-          write_file!("docs/#{doc.slug}.md", body)
+          write_file!("#{doc.slug}.md", body)
         end
 
         execute("cd #{repo_dir} && zip -r #{zip_filename} ./* && cd -")
@@ -64,8 +64,8 @@ module BlueDoc
             next
           end
 
-          # replace old "/uploads/{key}" into new src "../images/{new_filename}"
-          new_src = "../images/#{File.basename(fname)}"
+          # replace old "/uploads/{key}" into new src "./images/{new_filename}"
+          new_src = "./images/#{File.basename(fname)}"
           logger.info "------- replace image src ----------"
           logger.info "- #{src}"
           logger.info "+ #{new_src}"
