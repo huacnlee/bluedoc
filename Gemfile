@@ -16,7 +16,7 @@ gem "sidekiq"
 
 gem "webpacker"
 gem "turbolinks"
-gem "jbuilder"
+gem "jbuilder", github: "rails/jbuilder"
 gem "kaminari"
 
 gem "aws-sdk-s3", require: false
