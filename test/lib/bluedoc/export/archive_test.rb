@@ -31,13 +31,13 @@ class BlueDoc::Export::ArchiveTest < ActiveSupport::TestCase
     exporter = BlueDoc::Export::Archive.new(repository: @repo)
 
     expected = <<~MD
-    ../images/blank.png
+    ./images/blank.png
 
     ![](/uploads/)
 
-    ![](../images/blank.png)
+    ![](./images/blank.png)
 
-    ![](../images/#{file_key1}.png)
+    ![](./images/#{file_key1}.png)
 
     ![](https://www.google.com.hk/test.png)
     MD
