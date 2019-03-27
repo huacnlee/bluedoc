@@ -220,14 +220,6 @@
 
     [data-active=true] {
       position: relative;
-      &:before {
-        content: "⇢";
-        position: absolute;
-        color: rgba(0, 0, 0, 0.3);
-        left: -32px;
-        font-size: 20px;
-        display: block;
-      }
 
       hr {
         background: $primary;
@@ -241,12 +233,6 @@
     blockquote {
       .paragraph {
         margin-bottom: 0px;
-      }
-
-      .paragraph[data-active=true] {
-        &:before {
-          left: -48px;
-        }
       }
     }
 
