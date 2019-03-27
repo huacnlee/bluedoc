@@ -43,6 +43,10 @@ i18n.init({
             "Insert Image": "Insert Image",
             "Insert File": "Insert File",
             "Insert Video": "Insert Video",
+            "Insert Table": "Insert Table",
+            "Undo": "Undo",
+            "Redo": "Redo",
+            "Clear Format": "Clear Format",
           },
           "DocSetting": {
             "Slug": "Doc path",
@@ -106,6 +110,10 @@ i18n.init({
             "Insert Image": "插入图片",
             "Insert File": "插入附件",
             "Insert Video": "插入视频",
+            "Insert Table": "插入表格",
+            "Undo": "撤销",
+            "Redo": "重做",
+            "Clear Format": "清除格式",
           },
           "DocSetting": {
             "Slug": "文档路径",

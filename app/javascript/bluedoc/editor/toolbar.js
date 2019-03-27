@@ -191,6 +191,50 @@ export default class Toolbar extends React.Component {
     ev.target.value = '';
   }
 
+  handleInsertTable = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    editor._insertTable(3, 2);
+
+    return false;
+  }
+
+  handleUndo = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    editor.undo();
+
+    return false;
+  }
+
+  handleRedo = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    editor.redo();
+
+    return false;
+  }
+
+  handleClearFormat = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    editor._clearMarksAtRanges();
+
+    return false;
+  }
+
   renderMarkButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
     const onMouseDown = (ev) => {
@@ -240,8 +284,13 @@ export default class Toolbar extends React.Component {
   }
 
   render() {
-    const { mode = 'full' } = this.props;
+    const { mode = 'full', value } = this.props;
     const { t } = this;
+
+    const { data } = value
+    const undos = data.get('undos')
+    const redos = data.get('redos')
+
 
     return <div className="editor-toolbar">
       <div className="container">
@@ -263,6 +312,9 @@ export default class Toolbar extends React.Component {
           onChange={this.onVideoPicked}
           accept="video/*"
         />
+        <BarButton icon="undo" title={this.t('.Undo')} enable={undos && undos.size > 0} onMouseDown={this.handleUndo} />
+        <BarButton icon="redo" title={this.t('.Redo')} enable={redos && redos.size > 0} onMouseDown={this.handleRedo} />
+        <span className="bar-divider"></span>
         {mode === 'full' && (
         <span>
         <details ref={this.headingDropdown} className="dropdown details-reset details-overlay">
@@ -317,6 +369,9 @@ export default class Toolbar extends React.Component {
         <BarButton icon="image" title={this.t('.Insert Image')} onMouseDown={this.handleImageClick} />
         <BarButton icon="attachment" title={this.t('.Insert File')} onMouseDown={this.handleFileClick} />
         <BarButton icon="video" title={this.t('.Insert Video')} onMouseDown={this.handleVideoClick} />
+        <BarButton icon="table" title={this.t('.Insert Table')} onMouseDown={this.handleInsertTable} />
+        <span className="bar-divider"></span>
+        <BarButton icon="clear-style" title={this.t('.Clear Format')} onMouseDown={this.handleClearFormat} />
       </div>
     </div>;
   }

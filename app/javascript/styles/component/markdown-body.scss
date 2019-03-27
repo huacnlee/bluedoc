@@ -392,7 +392,7 @@
 
   // Tables
   table {
-    display: block;
+    display: table;
     width: 100%;
     overflow: auto;
 
@@ -404,14 +404,19 @@
     td {
       padding: 6px 13px;
       border: 1px solid #eee;
+
+      p,
+      .paragraph {
+        margin-bottom: 0 !important;
+      }
     }
 
     tr {
-      background-color: #fff;
+      background-color: #f7f7f7;
       border-top: 1px solid #eee;
 
       &:nth-child(2n) {
-        background-color: #f7f7f7;
+        background-color: #fff;
       }
     }
 
