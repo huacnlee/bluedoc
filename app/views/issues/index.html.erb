@@ -15,7 +15,7 @@
   </div>
   <div class="issue-list">
     <% @issues.each do |issue| %>
-    <div class="issue issue-<%= issue.status %> mb-1">
+    <div id="issue-<%= issue.id %>" class="issue issue-<%= issue.status %> mb-1">
       <div class="issue-status">
         <%= icon_tag("warn") %>
       </div>

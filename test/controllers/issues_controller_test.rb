@@ -11,8 +11,21 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:user/:repo/issues" do
+    user0 = create(:user)
+    user1 = create(:user)
+    user2 = create(:user)
+    issue0 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user2.id])
+    issue1 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user1.id, user2.id])
+    issue2 = create(:issue,  repository: @repository, assignee_ids: [user2.id])
+
     get @repository.to_path("/issues")
     assert_equal 200, response.status
+    assert_select ".issue-list .issue", 3
+    assert_select "#issue-#{issue1.id}" do
+      assert_select ".assignees" do
+        assert_select ".user-avatar", 3
+      end
+    end
 
     get @private_repository.to_path("/issues")
     assert_equal 403, response.status
@@ -162,9 +175,8 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
     assert_equal 2, data["assignees"].length
-    assert_equal issue.assignees.sort.collect(&:as_item_json), data["assignees"].sort_by { |item| item[:id] }
-
     issue.reload
+    assert_equal issue.assignees.sort.collect(&:as_item_json), data["assignees"].sort_by { |item| item[:id] }
     assert_equal users.sort, issue.assignees.sort
 
     # Agian to override
@@ -177,7 +189,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users1.sort.collect(&:as_item_json), data["assignees"].sort_by { |item| item[:id] }
 
     issue.reload
-    assert_equal users1.sort, issue.assignees.sort
+    assert_equal users1.sort_by { |u| u.id }, issue.assignees
 
     # Clear all
     post issue.to_path("/assignees"), params: { clear: 1 }

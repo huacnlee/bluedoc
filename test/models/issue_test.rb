@@ -63,6 +63,16 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal users.sort, target_users.sort
   end
 
+  test "assignees" do
+    issue = create(:issue)
+    users = create_list(:user, 3)
+    issue.update(assignee_ids: [users[1].id,users[0].id, users[2].id])
+    assert_equal [users[1],users[0], users[2]], issue.assignees
+
+    issue.assignees = [users[0], users[2]]
+    assert_equal [users[0], users[2]], issue.assignees
+  end
+
   test "update_assignees" do
     users0 = create_list(:user, 3)
     users1 = create_list(:user, 2)

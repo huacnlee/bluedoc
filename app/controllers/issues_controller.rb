@@ -8,7 +8,7 @@ class IssuesController < Users::ApplicationController
   def index
     authorize! :read, @repository
 
-    @issues = @repository.issues.includes(:user, :last_editor, :assignees)
+    @issues = @repository.issues.includes(:user, :last_editor)
     if params[:status] == "closed"
       @issues = @issues.closed
     else
@@ -16,6 +16,7 @@ class IssuesController < Users::ApplicationController
     end
 
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
+    @issues = @issues.preload_assignees
   end
 
   def new
