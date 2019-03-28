@@ -142,6 +142,7 @@ Rails.application.routes.draw do
       resources :issues do
         member do
           post :assignees
+          post :labels
         end
       end
       resources :docs, path: "", only: %i(show edit update destroy) do

@@ -7,7 +7,7 @@ class Issue < ApplicationRecord
 
   has_sequence :repository, scope: :issue
 
-  depends_on :assignees, :participants
+  depends_on :assignees, :labels, :participants
 
   belongs_to :user
   belongs_to :repository

@@ -1,7 +1,7 @@
 import UserAvatar from "../users/UserAvatar";
 import AssigneeMenu from "./AssigneeMenu";
 
-export default class Assignee extends React.PureComponent {
+export default class Assignees extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -16,7 +16,7 @@ export default class Assignee extends React.PureComponent {
 
   t = (key) => {
     if (key.startsWith('.')) {
-      return i18n.t(`issues.Assignee${key}`);
+      return i18n.t(`issues.Assignees${key}`);
     }
     return i18n.t(key);
   }

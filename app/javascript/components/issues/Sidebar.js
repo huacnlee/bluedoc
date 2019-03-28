@@ -1,4 +1,5 @@
-import Assignee from "./Assignee";
+import Assignees from "./Assignees";
+import Labels from "./Labels";
 import UserAvatar from "../users/UserAvatar";
 
 export default class Sidebar extends React.PureComponent {
@@ -17,7 +18,9 @@ export default class Sidebar extends React.PureComponent {
     const { participants } = this.props;
 
     return <div className="issue-sidebar">
-      <Assignee {...this.props} />
+      <Assignees {...this.props} />
+
+      <Labels {...this.props} />
 
       <div className="sidebar-box issue-participants mt-3">
         <h2 className="sub-title">{participants.length} {this.t(".Participants")}</h2>

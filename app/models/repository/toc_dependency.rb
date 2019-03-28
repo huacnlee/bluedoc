@@ -9,6 +9,7 @@ class Repository
   after_update :track_doc_version
 
   def has_toc?
+    return true if self.preferences[:has_toc].nil?
     ActiveModel::Type::Boolean.new.cast(self.preferences[:has_toc])
   end
 

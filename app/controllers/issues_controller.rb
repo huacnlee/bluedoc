@@ -1,12 +1,14 @@
 class IssuesController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new create assignees edit update]
+  before_action :authenticate_user!, only: %i[new create assignees labels edit update]
   before_action :set_user
   before_action :set_repository
-  before_action :set_issue, only: %i[show edit update assignees]
+  before_action :set_issue, only: %i[show edit update assignees labels]
 
   def index
     authorize! :read, @repository
+
+    @repository.ensure_default_issue_labels
 
     @issues = @repository.issues.includes(:user, :last_editor)
     if params[:status] == "closed"
@@ -16,7 +18,7 @@ class IssuesController < Users::ApplicationController
     end
 
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
-    @issues = @issues.preload_assignees
+    @issues = @issues.preload_assignees.preload_labels
   end
 
   def new
@@ -74,6 +76,20 @@ class IssuesController < Users::ApplicationController
     render json: { ok: true, assignees: @issue.assignees.collect(&:as_item_json) }
   end
 
+  def labels
+    authorize! :manage, @issue
+
+    if params[:clear]
+      @issue.update_labels([])
+    else
+      unless issue_params[:label_id].nil?
+        @issue.update_labels(issue_params[:label_id])
+      end
+    end
+
+    render json: { ok: true, labels: @issue.labels.as_json }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository
@@ -85,6 +101,6 @@ class IssuesController < Users::ApplicationController
     end
 
     def issue_params
-      params.require(:issue).permit(:title, :body, :body_sml, :format, assignee_id: [])
+      params.require(:issue).permit(:title, :body, :body_sml, :format, assignee_id: [], label_id: [])
     end
 end

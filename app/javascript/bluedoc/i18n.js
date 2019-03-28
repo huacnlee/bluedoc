@@ -74,9 +74,15 @@ i18n.init({
           "Sidebar": {
             "Participants": "participants",
           },
-          "Assignee": {
+          "Assignees": {
             "Assignee": "Assignee",
             "No one assigned": "No one assigned.",
+            "Filter": "Filter",
+            "Clear All": "Clear All",
+          },
+          "Labels": {
+            "Label": "Label",
+            "No label": "No label.",
             "Filter": "Filter",
             "Clear All": "Clear All",
           }
@@ -152,9 +158,15 @@ i18n.init({
           "Sidebar": {
             "Participants": "个参与者",
           },
-          "Assignee": {
+          "Assignees": {
             "Assignee": "任务指派",
-            "No one assigned": "暂无指派处理人.",
+            "No one assigned": "暂无指派处理人。",
+            "Filter": "过滤",
+            "Clear All": "清除所有",
+          },
+          "Labels": {
+            "Label": "标签",
+            "No label": "暂无标签。",
             "Filter": "过滤",
             "Clear All": "清除所有",
           }

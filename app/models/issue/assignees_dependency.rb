@@ -20,7 +20,7 @@ class Issue
     return @assignees if defined? @assignees
 
     records = User.where(id: self.assignee_ids)
-    records.sort { |u| self.assignee_ids.index(u.id) }
+    records.sort_by { |u| self.assignee_ids.index(u.id) }
   end
 
   def assignees=(val)

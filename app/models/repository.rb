@@ -9,7 +9,7 @@ class Repository < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :soft_delete, :source, :preferences, :toc, :editors, :user_actives, :watches, :privacy, :search
+  depends_on :soft_delete, :source, :preferences, :toc, :editors, :user_actives, :watches, :privacy, :search, :issues
 
   attr_accessor :last_editor_id
 
@@ -17,7 +17,6 @@ class Repository < ApplicationRecord
   belongs_to :creator, class_name: "User", required: false
   has_many :docs, dependent: :destroy
   has_many :shares, dependent: :destroy
-  has_many :issues, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..50 }
   validates :slug, uniqueness: { scope: :user_id, case_sensitive: false }

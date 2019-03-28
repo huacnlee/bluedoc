@@ -102,8 +102,10 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /:user/:repo/issues/:iid" do
     users = create_list(:user, 3)
+    labels = create_list(:label, 3, target: @repository)
     issue = create(:issue, repository: @repository)
     issue.update_assignees([users[0].id, users[1].id])
+    issue.update_labels([labels[1].id, labels[2].id])
 
     @group.add_member(users[0], :reader)
     @repository.add_member(users[1], :reader)
@@ -116,6 +118,8 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal issue.to_path, props[:issueURL]
       assert_equal issue.assignee_target_users.collect(&:as_item_json), props[:assigneeTargets].collect(&:deep_stringify_keys)
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
+      assert_equal issue.labels.as_json, props[:labels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
+      assert_equal @repository.issue_labels.as_json, props[:targetLabels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal false, props[:abilities][:update]
       assert_equal false, props[:abilities][:manage]
       assert_equal issue.participants.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:participants].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
@@ -200,6 +204,57 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     issue.reload
     assert_equal [], issue.assignees
+  end
+
+  test "POST /:user/:repo/issues/:iid/labels" do
+    issue = create(:issue, repository: @repository)
+    assert_require_user do
+      post issue.to_path("/labels")
+    end
+
+    user = create(:user)
+    sign_in user
+    post issue.to_path("/labels")
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: @group
+    post issue.to_path("/labels")
+    assert_equal 403, response.status
+
+    labels = create_list(:label, 2, target: @repository)
+
+    # Set labels
+    sign_in_role :admin, group: @group
+    post issue.to_path("/labels"), params: { issue: { label_id: labels.collect(&:id) }}
+    assert_equal 200, response.status
+    data = JSON.parse(response.body)
+    assert_equal true, data["ok"]
+    assert_equal 2, data["labels"].length
+    issue.reload
+    assert_equal issue.labels.as_json, data["labels"].sort_by { |item| item[:id] }
+    assert_equal labels.sort, issue.labels.sort
+
+    # Agian to override
+    labels1 = create_list(:label, 3, target: @repository)
+    post issue.to_path("/labels"), params: { issue: { label_id: labels1.collect(&:id) }}
+    assert_equal 200, response.status
+    data = JSON.parse(response.body)
+    assert_equal true, data["ok"]
+    assert_equal 3, data["labels"].length
+    assert_equal labels1.sort.as_json, data["labels"].sort_by { |item| item[:id] }
+
+    issue.reload
+    assert_equal labels1.sort_by { |u| u.id }, issue.labels.sort_by { |u| u.id }
+
+    # Clear all
+    post issue.to_path("/labels"), params: { clear: 1 }
+    assert_equal 200, response.status
+    data = JSON.parse(response.body)
+    assert_equal true, data["ok"]
+    assert_equal 0, data["labels"].length
+
+    issue.reload
+    assert_equal [], issue.labels
   end
 
   test "GET /:user/:repo/issues/:iid/edit" do
