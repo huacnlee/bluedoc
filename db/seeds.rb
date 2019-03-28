@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Ensure Search indexes
+[User, Group, Repository, Doc, Note].each do |klass|
+  unless klass.__elasticsearch__.index_exists?
+    klass.__elasticsearch__.create_index!
+  end
+end
