@@ -1,6 +1,5 @@
 class Issue
-  has_many :issue_assignees
-  has_many :assignees, class_name: "User", through: :issue_assignees, source: :user
+  scope :with_assignees, -> (ids) { ids.any? ? where("ARRAY[?] <@ assignee_ids", ids) : all }
 
   # Users that for assignee
   def assignee_target_users
@@ -12,7 +11,11 @@ class Issue
 
   # Replace issue assignees
   def update_assignees(assignee_ids)
-    self.assignee_ids = assignee_ids
+    self.assignee_ids = assignee_ids.uniq
     self.save
+  end
+
+  def assignees
+    User.where(id: self.assignee_ids)
   end
 end

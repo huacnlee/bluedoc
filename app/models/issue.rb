@@ -20,6 +20,8 @@ class Issue < ApplicationRecord
 
   enum status: %i(open closed)
 
+  scope :recent, -> { order("iid desc") }
+
   def to_path(suffix = nil)
     "#{repository.to_path}/issues/#{self.iid}#{suffix}"
   end

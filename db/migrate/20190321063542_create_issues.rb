@@ -22,28 +22,26 @@ class CreateIssues < ActiveRecord::Migration[6.0]
       t.integer :reads_count, null: false, default: 0
       t.string :format, limit: 20, default: "markdown", null: false
 
+      t.integer :assignee_ids, array: true, default: [], null: false
+      t.integer :label_ids, array: true, default: [], null: false
+
       t.timestamps
     end
 
     add_index :issues, [:repository_id, :iid], unique: true
     add_index :issues, [:repository_id, :status]
     add_index :issues, [:repository_id, :user_id]
+    add_index :issues, :assignee_ids, using: :gin
+    add_index :issues, :label_ids, using: :gin
 
     create_table :labels do |t|
-      t.integer :repository_id, null: false
+      t.string :target_type, null: false, limit: 20
+      t.integer :target_id, null: false
       t.string :title, null: false, limit: 100
       t.string :color
       t.timestamps
     end
 
-    add_index :labels, [:repository_id, :title], unique: true
-
-    create_table :issue_assignees do |t|
-      t.integer :issue_id, null: false
-      t.integer :user_id, null: false
-      t.timestamps
-    end
-
-    add_index :issue_assignees, [:issue_id, :user_id], unique: true
+    add_index :labels, [:target_type, :target_id, :title], unique: true
   end
 end

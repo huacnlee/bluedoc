@@ -131,14 +131,6 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "issue_assignees", force: :cascade do |t|
-    t.integer "issue_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["issue_id", "user_id"], name: "index_issue_assignees_on_issue_id_and_user_id", unique: true
-  end
-
   create_table "issues", force: :cascade do |t|
     t.integer "iid", null: false
     t.integer "repository_id", null: false
@@ -147,21 +139,28 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.integer "user_id"
     t.integer "last_editor_id"
     t.datetime "last_edited_at"
+    t.integer "comments_count", default: 0, null: false
+    t.integer "reads_count", default: 0, null: false
     t.string "format", limit: 20, default: "markdown", null: false
+    t.integer "assignee_ids", default: [], null: false, array: true
+    t.integer "label_ids", default: [], null: false, array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignee_ids"], name: "index_issues_on_assignee_ids", using: :gin
+    t.index ["label_ids"], name: "index_issues_on_label_ids", using: :gin
     t.index ["repository_id", "iid"], name: "index_issues_on_repository_id_and_iid", unique: true
     t.index ["repository_id", "status"], name: "index_issues_on_repository_id_and_status"
     t.index ["repository_id", "user_id"], name: "index_issues_on_repository_id_and_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
-    t.integer "repository_id", null: false
+    t.string "target_type", limit: 20, null: false
+    t.integer "target_id", null: false
     t.string "title", limit: 100, null: false
     t.string "color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["repository_id", "title"], name: "index_labels_on_repository_id_and_title", unique: true
+    t.index ["target_type", "target_id", "title"], name: "index_labels_on_target_type_and_target_id_and_title", unique: true
   end
 
   create_table "members", force: :cascade do |t|
