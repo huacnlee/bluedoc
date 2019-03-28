@@ -15,7 +15,6 @@ module Searchable
     index_name do
       "#{Rails.env}-#{name.pluralize}".downcase
     end
-    document_type name.underscore
 
     after_commit on: :create do
       self.reindex
