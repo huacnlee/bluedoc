@@ -312,11 +312,11 @@ export default class Toolbar extends React.Component {
           onChange={this.onVideoPicked}
           accept="video/*"
         />
+        {mode === 'full' && (
+        <span>
         <BarButton icon="undo" title={this.t('.Undo')} enable={undos && undos.size > 0} onMouseDown={this.handleUndo} />
         <BarButton icon="redo" title={this.t('.Redo')} enable={redos && redos.size > 0} onMouseDown={this.handleRedo} />
         <span className="bar-divider"></span>
-        {mode === 'full' && (
-        <span>
         <details ref={this.headingDropdown} className="dropdown details-reset details-overlay">
           <summary className="bar-button"><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
           <div className="dropdown-menu dropdown-menu-se">
@@ -369,7 +369,11 @@ export default class Toolbar extends React.Component {
         <BarButton icon="image" title={this.t('.Insert Image')} onMouseDown={this.handleImageClick} />
         <BarButton icon="attachment" title={this.t('.Insert File')} onMouseDown={this.handleFileClick} />
         <BarButton icon="video" title={this.t('.Insert Video')} onMouseDown={this.handleVideoClick} />
+        {mode === 'full' && (
+        <span>
         <BarButton icon="table" title={this.t('.Insert Table')} onMouseDown={this.handleInsertTable} />
+        </span>
+        )}
         <span className="bar-divider"></span>
         <BarButton icon="clear-style" title={this.t('.Clear Format')} onMouseDown={this.handleClearFormat} />
       </div>
