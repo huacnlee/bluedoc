@@ -32,7 +32,7 @@
           item << link_to(t(".Docs"), @repository.to_path, class: "reponav-item")
         end
         item << link_to(t(".Search"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if action_name == "search"
-        item << link_to(t(".Issues"), @repository.to_path("/issues"), class: "reponav-item")
+        item << link_to(t(".Issues"), @repository.to_path("/issues"), class: "reponav-item reponav-issues")
         item << link_to(t(".Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
       end %>
     </nav>
