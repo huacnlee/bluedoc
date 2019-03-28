@@ -14,9 +14,13 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     user0 = create(:user)
     user1 = create(:user)
     user2 = create(:user)
-    issue0 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user2.id])
-    issue1 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user1.id, user2.id])
-    issue2 = create(:issue,  repository: @repository, assignee_ids: [user2.id])
+    label0 = create(:label, target: @repository)
+    label1 = create(:label, target: @repository)
+    label2 = create(:label, target: @repository)
+
+    issue0 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user2.id], label_ids: [label1.id, label2.id])
+    issue1 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user1.id, user2.id], label_ids: [label0.id, label2.id])
+    issue2 = create(:issue,  repository: @repository, assignee_ids: [user2.id], label_ids: [label0.id, label1.id, label2.id])
 
     get @repository.to_path("/issues")
     assert_equal 200, response.status
@@ -27,6 +31,19 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
+    get @repository.to_path("/issues?assignee_id=#{user1.id}")
+    assert_equal 200, response.status
+    assert_select ".issue-list .issue", 1
+
+    get @repository.to_path("/issues?label_id=#{label0.id}")
+    assert_equal 200, response.status
+    assert_select ".issue-list .issue", 2
+
+    get @repository.to_path("/issues?assignee_id=#{user0.id}&label_id=#{label1.id}")
+    assert_equal 200, response.status
+    assert_select ".issue-list .issue", 1
+
+    # Private Repository
     get @private_repository.to_path("/issues")
     assert_equal 403, response.status
 

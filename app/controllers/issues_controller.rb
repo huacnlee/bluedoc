@@ -17,6 +17,14 @@ class IssuesController < Users::ApplicationController
       @issues = @issues.open
     end
 
+    if params[:label_id]
+      @issues = @issues.with_labels([params[:label_id]])
+    end
+
+    if params[:assignee_id]
+      @issues = @issues.with_assignees([params[:assignee_id]])
+    end
+
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
     @issues = @issues.preload_assignees.preload_labels
   end

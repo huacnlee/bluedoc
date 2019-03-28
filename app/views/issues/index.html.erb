@@ -29,8 +29,14 @@
         <span class="author"><%= user_name_tag(issue.user) %></span>
 
         <span class="assignees">
-          <% issue.assignees.each do |user| %>
-            <%= user_avatar_tag(user, style: :tiny) %>
+          <% issue.assignees.take(3).each do |user| %>
+            <%= link_to user_avatar_tag(user, style: :tiny, link: false), { assignee_id: user.id }, { class: "user-avatar" } %>
+          <% end %>
+        </span>
+
+        <span class="labels ml-1">
+          <% issue.labels.take(2).each do |label| %>
+            <%= link_to label.title, { label_id: label.id }, { class: "issue-label", style: "background: #{label.color}" } %>
           <% end %>
         </span>
       </div>

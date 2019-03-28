@@ -1,6 +1,10 @@
 class Issue
   # has_and_belongs_to_many :assignees, join_table: :users, class_name: "User", foreign_key: :assignee_ids
-  scope :with_labels, -> (ids) { ids.any? ? where("ARRAY[?] <@ label_ids", ids) : all }
+  scope :with_labels, -> (ids) do
+    ids = [ids] unless ids.is_a?(Array)
+    ids = ids.collect { |id| id.to_i }
+    ids.any? ? where("ARRAY[?] <@ label_ids", ids) : all
+  end
 
   # Replace issue assignees
   def update_labels(label_ids)
