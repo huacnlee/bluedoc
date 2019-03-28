@@ -1,3 +1,5 @@
+import UserAvatar from "../users/UserAvatar";
+
 export default class Assignee extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -104,7 +106,7 @@ export default class Assignee extends React.PureComponent {
       {assignees.length > 0 && assignees.map(user => {
         return <div className="assignee-item mb-1">
           <a href={`/${user.slug}`} className="issue-assignee-item">
-            <img src={user.avatar_url} className="avatar avatar-tiny" />
+            <UserAvatar user={user} style="tiny" link={false} />
             <span className="ml-1">{user.name}</span>
           </a>
         </div>
@@ -175,7 +177,7 @@ class AssigneeMenu extends React.Component {
           <i className="fas fa-check"></i>
         )}
         </span>
-        <img src={user.avatar_url} className="avatar avatar-tiny" />
+        <UserAvatar user={user} style="tiny" link={false} />
         <span className="ml-1">{user.name}</span>
       </a>
     </li>
