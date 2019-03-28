@@ -23,6 +23,7 @@ require "database_cleaner"
 require_relative "../lib/bluedoc/graphql/integration_test"
 require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
+require_relative "./support/jobs_test_helper"
 
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.orm = :active_record
