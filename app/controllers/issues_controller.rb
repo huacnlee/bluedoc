@@ -108,6 +108,8 @@ class IssuesController < Users::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_repository
       @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
+
+      raise ActiveRecord::RecordNotFound unless @repository.has_issues?
     end
 
     def set_issue

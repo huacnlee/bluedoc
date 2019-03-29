@@ -778,6 +778,8 @@ zh-CN:
       Features: 功能开关
       Table of Contents: 自定义目录
       Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
+      Issues: 议题
+      Enable or disable Issues feature: "启用或禁用议题功能。"
     retry_import:
       Repository import has started: 知识库导入已经开始重试，稍后将会有通知告知结果。
   searches:

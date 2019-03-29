@@ -785,6 +785,8 @@ en:
       Features: Features
       Table of Contents: Table of Contents
       Enable to use Table of Contents style for Repository index: "Enable Table of contents. You can edit structure of the Table of contents of your Repository."
+      Issues: Issues
+      Enable or disable Issues feature: "Enable or disable Issues feature."
     retry_import:
       Repository import has started: "Start importing your repository. Once finished, a notification will be sent to you."
   searches:

@@ -43,6 +43,11 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".issue-list .issue", 1
 
+    # Issues feature not enable
+    @repository.update(has_issues: 0)
+    get @repository.to_path("/issues")
+    assert_equal 404, response.status
+
     # Private Repository
     get @private_repository.to_path("/issues")
     assert_equal 403, response.status
@@ -135,7 +140,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal issue.to_path, props[:issueURL]
       assert_equal @repository.issue_assignees.collect(&:as_item_json), props[:targetAssignees].collect(&:deep_stringify_keys)
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
-      assert_equal issue.labels.as_json, props[:labels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
+      assert_equal issue.labels.sort.as_json, props[:labels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal @repository.issue_labels.as_json, props[:targetLabels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal false, props[:abilities][:update]
       assert_equal false, props[:abilities][:manage]

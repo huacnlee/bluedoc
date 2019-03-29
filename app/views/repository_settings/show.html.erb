@@ -54,6 +54,15 @@
           </div>
         </div>
       </div>
+      <div class="box-row d-flex flex-items-center pb-3">
+        <div class="form-check">
+          <%= form.check_box :has_issues, checked: @repository.has_issues?, class: "form-check-input form-check-submit" %>
+          <%= form.label :has_issues, t(".Issues"), class: "form-check-label font-weight-bold" %>
+          <div class="form-text mt-1">
+            <%= t(".Enable or disable Issues feature") %>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
