@@ -93,6 +93,7 @@ i18n.init({
           "ListFilter": {
             "Assignee": "Assignee",
             "Label": "Label",
+            "Search": "Search",
           }
         }
       },
@@ -185,6 +186,7 @@ i18n.init({
           "ListFilter": {
             "Assignee": "指派",
             "Label": "标签",
+            "Search": "搜索",
           }
         }
       },

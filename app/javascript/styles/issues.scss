@@ -99,6 +99,22 @@
         padding: 5px 5px 8px;
         margin: 0 6px;
       }
+
+      .filter-search {
+        position: relative;
+        .fa-search {
+          position: absolute;
+          top: 13px;
+          left: 13px;
+          color: #aaa;
+        }
+        .form-control {
+          padding: 4px;
+          height: auto;
+          border-radius: 30px;
+          padding-left: 30px;
+        }
+      }
     }
   }
 

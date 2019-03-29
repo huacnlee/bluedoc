@@ -19,6 +19,7 @@
       targetAssignees: @repository.issue_assignees.collect(&:as_item_json),
       label_id: params[:label_id],
       targetLabels: @repository.issue_labels.as_json,
+      q: params[:q],
     } %>
 
     <div class="actions">

@@ -23,6 +23,7 @@ export default class ListFilter extends React.PureComponent {
     this.state = {
       assignee_ids: assignee_id,
       label_ids: label_id,
+      q: props.q,
       needSubmit: null,
     }
   }
@@ -76,6 +77,13 @@ export default class ListFilter extends React.PureComponent {
     return false
   }
 
+  onSearchKeyUp = (e) => {
+    if (e.keyCode == 13) {
+      this.setState({ q: e.currentTarget.value, needSubmit: new Date()   });
+      return false
+    }
+  }
+
   componentDidUpdate = (prevProps, prevState) => {
     const form = this.formRef.current;
 
@@ -85,7 +93,7 @@ export default class ListFilter extends React.PureComponent {
   }
 
   render() {
-    let { assignee_ids, label_ids } = this.state;
+    let { assignee_ids, label_ids, q } = this.state;
 
     return <form action={location.href} data-remote={true} ref={this.formRef} method="GET" className="list-filter">
       <details className="filter-item dropdown details-overlay details-reset d-inline-block">
@@ -103,6 +111,11 @@ export default class ListFilter extends React.PureComponent {
           return <input type="hidden" name="label_id[]" value={id} />
         })}
       </details>
+
+      <div className="filter-item d-inline-block filter-search">
+        <input type="text" name="q" className="form-control" placeholder={this.t(".Search")} onKeyUp={this.onSearchKeyUp} defaultValue={q} />
+        <i className="fas fa-search"></i>
+      </div>
     </form>
   }
 }

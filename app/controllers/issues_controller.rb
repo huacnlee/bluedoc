@@ -25,6 +25,10 @@ class IssuesController < Users::ApplicationController
       @issues = @issues.with_assignees(params[:assignee_id])
     end
 
+    if !params[:q].blank?
+      @issues = @issues.where("title ilike ?", "%#{params[:q]}%")
+    end
+
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
     @issues = @issues.preload_assignees.preload_labels
     render :index
