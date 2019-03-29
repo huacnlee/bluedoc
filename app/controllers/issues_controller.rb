@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IssuesController < Users::ApplicationController
   before_action :authenticate_anonymous!
   before_action :authenticate_user!, only: %i[new create assignees labels edit update]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Issue
   def participants
     return @participants if defined? @participants

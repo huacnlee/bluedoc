@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Issue < ApplicationRecord
   second_level_cache expires_in: 1.week
 

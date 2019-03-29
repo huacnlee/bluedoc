@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sequence < ApplicationRecord
   belongs_to :target, polymorphic: true
 

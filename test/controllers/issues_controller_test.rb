@@ -7,7 +7,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     @group = create(:group)
     @repository = create(:repository, user: @group)
 
-    @private_repository =  create(:repository, user: @group, privacy: :private)
+    @private_repository = create(:repository, user: @group, privacy: :private)
   end
 
   test "GET /:user/:repo/issues" do
@@ -196,7 +196,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Set assignees
     sign_in_role :admin, group: @group
-    post issue.to_path("/assignees"), params: { issue: { assignee_id: users.collect(&:id) }}
+    post issue.to_path("/assignees"), params: { issue: { assignee_id: users.collect(&:id) } }
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -207,7 +207,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Agian to override
     users1 = create_list(:user, 3)
-    post issue.to_path("/assignees"), params: { issue: { assignee_id: users1.collect(&:id) }}
+    post issue.to_path("/assignees"), params: { issue: { assignee_id: users1.collect(&:id) } }
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -247,7 +247,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Set labels
     sign_in_role :admin, group: @group
-    post issue.to_path("/labels"), params: { issue: { label_id: labels.collect(&:id) }}
+    post issue.to_path("/labels"), params: { issue: { label_id: labels.collect(&:id) } }
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -258,7 +258,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Agian to override
     labels1 = create_list(:label, 3, target: @repository)
-    post issue.to_path("/labels"), params: { issue: { label_id: labels1.collect(&:id) }}
+    post issue.to_path("/labels"), params: { issue: { label_id: labels1.collect(&:id) } }
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]

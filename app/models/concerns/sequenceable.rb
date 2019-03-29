@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sequenceable
   extend ActiveSupport::Concern
 

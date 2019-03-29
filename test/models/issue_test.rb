@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class IssueTest < ActiveSupport::TestCase
   setup do
@@ -49,8 +51,8 @@ class IssueTest < ActiveSupport::TestCase
   test "assignees" do
     issue = create(:issue)
     users = create_list(:user, 3)
-    issue.update(assignee_ids: [users[1].id,users[0].id, users[2].id])
-    assert_equal [users[1],users[0], users[2]], issue.assignees
+    issue.update(assignee_ids: [users[1].id, users[0].id, users[2].id])
+    assert_equal [users[1], users[0], users[2]], issue.assignees
 
     issue.assignees = [users[0], users[2]]
     assert_equal [users[0], users[2]], issue.assignees
@@ -84,18 +86,18 @@ class IssueTest < ActiveSupport::TestCase
 
   test "with_assignees" do
     repo = create(:repository)
-    issue_other = create(:issue, assignee_ids: [1,2,3,4,5])
-    issue0 = create(:issue, repository: repo, assignee_ids: [1,2,3], status: :open)
-    issue1 = create(:issue, repository: repo, assignee_ids: [2,3,4], status: :open)
-    issue2 = create(:issue, repository: repo, assignee_ids: [3,4,5], status: :closed)
+    issue_other = create(:issue, assignee_ids: [1, 2, 3, 4, 5])
+    issue0 = create(:issue, repository: repo, assignee_ids: [1, 2, 3], status: :open)
+    issue1 = create(:issue, repository: repo, assignee_ids: [2, 3, 4], status: :open)
+    issue2 = create(:issue, repository: repo, assignee_ids: [3, 4, 5], status: :closed)
 
     assert_equal [issue_other, issue0, issue1, issue2], Issue.with_assignees([3]).order("id asc")
     assert_equal [issue2, issue1, issue0], repo.issues.with_assignees([3]).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_assignees(3).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_assignees("3").recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees([3,2]).recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees(["3","2"]).recent
-    assert_equal [issue0],  repo.issues.with_assignees([1,2,3]).recent
+    assert_equal [issue1, issue0],  repo.issues.with_assignees([3, 2]).recent
+    assert_equal [issue1, issue0],  repo.issues.with_assignees(["3", "2"]).recent
+    assert_equal [issue0],  repo.issues.with_assignees([1, 2, 3]).recent
     assert_equal [issue2, issue1],  repo.issues.with_assignees([4]).recent
     assert_equal [issue2, issue1, issue0],  repo.issues.with_assignees([]).recent
     assert_equal [issue2],  repo.issues.closed.with_assignees([]).recent
@@ -121,7 +123,7 @@ class IssueTest < ActiveSupport::TestCase
   test "labels" do
     issue = create(:issue)
     labels = create_list(:label, 3, target: issue.repository)
-    issue.update(label_ids: [labels[1].id,labels[0].id, labels[2].id])
+    issue.update(label_ids: [labels[1].id, labels[0].id, labels[2].id])
     assert_equal [labels[1], labels[0], labels[2]], issue.labels
 
     issue.labels = [labels[0], labels[2]]
@@ -157,18 +159,18 @@ class IssueTest < ActiveSupport::TestCase
 
   test "with_labels" do
     repo = create(:repository)
-    issue_other = create(:issue, label_ids: [1,2,3,4,5])
-    issue0 = create(:issue, repository: repo, label_ids: [1,2,3], status: :open)
-    issue1 = create(:issue, repository: repo, label_ids: [2,3,4], status: :open)
-    issue2 = create(:issue, repository: repo, label_ids: [3,4,5], status: :closed)
+    issue_other = create(:issue, label_ids: [1, 2, 3, 4, 5])
+    issue0 = create(:issue, repository: repo, label_ids: [1, 2, 3], status: :open)
+    issue1 = create(:issue, repository: repo, label_ids: [2, 3, 4], status: :open)
+    issue2 = create(:issue, repository: repo, label_ids: [3, 4, 5], status: :closed)
 
     assert_equal [issue_other, issue0, issue1, issue2], Issue.with_labels([3]).order("id asc")
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels([3]).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels(3).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels("3").recent
-    assert_equal [issue1, issue0],  repo.issues.with_labels([3,2]).recent
-    assert_equal [issue1, issue0],  repo.issues.with_labels(["3","2"]).recent
-    assert_equal [issue0],  repo.issues.with_labels([1,2,3]).recent
+    assert_equal [issue1, issue0],  repo.issues.with_labels([3, 2]).recent
+    assert_equal [issue1, issue0],  repo.issues.with_labels(["3", "2"]).recent
+    assert_equal [issue0],  repo.issues.with_labels([1, 2, 3]).recent
     assert_equal [issue2, issue1],  repo.issues.with_labels([4]).recent
     assert_equal [issue2, issue1, issue0],  repo.issues.with_labels([]).recent
     assert_equal [issue2],  repo.issues.closed.with_labels([]).recent

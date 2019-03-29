@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Issue
   # has_and_belongs_to_many :assignees, join_table: :users, class_name: "User", foreign_key: :assignee_ids
   scope :with_assignees, -> (ids) do
