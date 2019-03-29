@@ -10,6 +10,13 @@
   }
 }
 
+.label-danger {
+  border-color: $danger;
+  color: $danger;
+  font-weight: normal;
+}
+
+.label-success,
 .label-private {
   border-color: $green;
   color: $green;

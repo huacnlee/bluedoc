@@ -617,6 +617,7 @@ zh-CN:
       Search: 搜索
       Settings: 设置
       Repository: 知识库
+      Issues: 议题
     repository:
       Private: 私密
     docs:
@@ -777,6 +778,8 @@ zh-CN:
       Features: 功能开关
       Table of Contents: 自定义目录
       Enable to use Table of Contents style for Repository index: 开启自定义目录，你可以自由编辑知识库的目录结构。
+      Issues: 议题
+      Enable or disable Issues feature: "启用或禁用议题功能。"
     retry_import:
       Repository import has started: 知识库导入已经开始重试，稍后将会有通知告知结果。
   searches:
@@ -893,4 +896,31 @@ zh-CN:
       people: 个人
       has read: 阅读过此文档。
       Reader list: 阅读过此文档的人
-
+  issues:
+    menu:
+      New Issue: 新建议题
+    index:
+      Issues: 议题
+      New Issue: 新建议题
+      Open: 进行中
+      Closed: 已结束
+    new:
+      New Issue: 新建议题
+    edit:
+      Edit Issue: 修改议题
+    form:
+      Create Issue: 创建议题
+      Update Issue: 更新议题
+      Cancel: 取消
+    show:
+      New Issue: 新建议题
+      Edit: 修改
+      comments: 回复
+      open: 进行中
+      closed: 已结束
+      Close Issue: 结束
+      Reopen Issue: 重新打开
+    create:
+      Issue was successfully created: 议题创建成功。
+    update:
+      Issue was successfully updated: 议题更新成功。

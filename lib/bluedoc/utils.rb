@@ -18,6 +18,17 @@ module BlueDoc
           OmniAuth::Utils.camelize(provider)
         end
       end
+
+      # Generate random HEX color
+      # for example: #EA09DD
+      def random_color
+        "##{Random.new.bytes(3).unpack("H*")[0]}"
+      end
+
+      # Valid hex color
+      def valid_color?(color)
+        /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.match?(color)
+      end
     end
   end
 end

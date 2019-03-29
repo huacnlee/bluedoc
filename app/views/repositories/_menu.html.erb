@@ -12,14 +12,6 @@
         <% end %>
       </h1>
 
-      <div class="text-gray my-3"><%= @repository.description %></div>
-
-      <% if @repository.source? && @repository.source.provider == "gitbook" %>
-      <div class="source mb-3 text-gray">
-        <%= icon_tag("code-fork") %> <span class="source-url" title="<%= t(".Import from this URL") %>"><%= @repository.source_url %></span>
-      </div>
-      <% end %>
-
       <div class="repo-actions">
         <%= action_button_tag(@repository, :watch, with_count: true) %>
         <%= action_button_tag(@repository, :star, with_count: true) %>
@@ -40,6 +32,7 @@
           item << link_to(t(".Docs"), @repository.to_path, class: "reponav-item")
         end
         item << link_to(t(".Search"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if action_name == "search"
+        item << link_to(t(".Issues"), @repository.to_path("/issues"), class: "reponav-item reponav-issues", "data-controller" => :issues) if @repository.has_issues?
         item << link_to(t(".Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
       end %>
     </nav>

@@ -299,6 +299,7 @@ class UserTest < ActiveSupport::TestCase
     doc = create(:doc)
     note = create(:note)
     repo = create(:repository)
+    issue = create(:issue)
 
     # watch repo
     user.watch_repository(repo)
@@ -327,6 +328,11 @@ class UserTest < ActiveSupport::TestCase
     user.watch_comment_note(note)
     assert_equal true, user.watch_comment_note?(note)
     assert_equal [user.id], note.watch_comment_by_user_ids
+
+    # watch comment issue
+    user.watch_comment_issue(issue)
+    assert_equal true, user.watch_comment_issue?(issue)
+    assert_equal [user.id], issue.watch_comment_by_user_ids
   end
 
   test "avatar_url" do
@@ -468,5 +474,12 @@ class UserTest < ActiveSupport::TestCase
       assert_not_nil user2
       assert_equal user0, user2
     end
+  end
+
+  test "as_item_json" do
+    user = create(:user)
+
+    assert_equal %w[id slug name avatar_url], user.as_item_json.keys
+    assert_equal user.as_json(only: %i[id slug name], methods: %i[avatar_url]), user.as_item_json
   end
 end

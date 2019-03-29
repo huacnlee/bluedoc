@@ -624,6 +624,7 @@ en:
       Search: Search
       Settings: Settings
       Repository: Repository
+      Issues: Issues
     repository:
       Private: Private
     docs:
@@ -784,6 +785,8 @@ en:
       Features: Features
       Table of Contents: Table of Contents
       Enable to use Table of Contents style for Repository index: "Enable Table of contents. You can edit structure of the Table of contents of your Repository."
+      Issues: Issues
+      Enable or disable Issues feature: "Enable or disable Issues feature."
     retry_import:
       Repository import has started: "Start importing your repository. Once finished, a notification will be sent to you."
   searches:
@@ -900,4 +903,32 @@ en:
       people: people
       has read: has read this Doc.
       Reader list: Reader list
+  issues:
+    menu:
+      New Issue: New Issue
+    index:
+      Issues: Issues
+      New Issue: New Issue
+      Open: Open
+      Closed: Closed
+    new:
+      New Issue: New Issue
+    edit:
+      Edit Issue: Edit Issue
+    form:
+      Create Issue: Create Issue
+      Update Issue: Update Issue
+      Cancel: Cancel
+    show:
+      New Issue: New Issue
+      Edit: Edit
+      comments: Comments
+      closed: Closed
+      open: Open
+      Close Issue: Close Issue
+      Reopen Issue: Reopen Issue
+    create:
+      Issue was successfully created: Issue was successfully created.
+    update:
+      Issue was successfully updated: Issue was successfully updated.
 

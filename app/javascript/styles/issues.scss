@@ -1,0 +1,235 @@
+.page-issues {
+  .issue-heading {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 50px;
+
+    h1 {
+      font-size: 18px;
+      margin-bottom: 13px;
+
+      .issue-iid {
+        color: $text-gray;
+        margin-left: 4px;
+      }
+    }
+
+    .heading-avatar {
+      position: absolute;
+      top: 15px;
+      left: 0px;
+
+      @media (max-width: 768px) {
+        top: 55px;
+      }
+    }
+
+    .heading-buttons {
+      float: right;
+
+      @media (max-width: 768px) {
+        float: none;
+        display: block;
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  .comments {
+    .sub-title {
+      display: none;
+    }
+  }
+
+  .issue-box {
+    .issue-status {
+      margin-right: 10px;
+
+      @extend .label;
+      @extend .label-success;
+
+      &.issue-status-closed {
+        @extend .label-danger;
+      }
+    }
+  }
+
+  .issue-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .sub-title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+    .actions {
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .issuenav {
+      margin-left: 15px;
+
+      .issuenav-item {
+        padding: 5px 5px 8px;
+        font-size: 14px;
+        margin: 0 2px;
+        text-decoration: none;
+        color: $primary;
+        position: relative;
+        &.selected {
+          color: $text-main;
+          border-bottom: 1px solid $text-main;
+        }
+      }
+    }
+
+    .list-filter {
+      flex: auto;
+      margin-left: 15px;
+
+      .filter-item {
+        padding: 5px 5px 8px;
+        margin: 0 6px;
+      }
+
+      .filter-search {
+        position: relative;
+        .fa-search {
+          position: absolute;
+          top: 13px;
+          left: 13px;
+          color: #aaa;
+        }
+        .form-control {
+          padding: 4px;
+          height: auto;
+          border-radius: 30px;
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+
+
+  .issue-list {
+    .issue {
+      position: relative;
+      padding: 12px 20px;
+      padding-left: 42px;
+      line-height: 1.4;
+      list-style: none;
+      position: relative;
+      @extend .card-box;
+
+      .info {
+        margin-top: 8px;
+        color: $text-gray;
+      }
+
+      &.issue-closed {
+        .issue-status {
+          .fas {
+            color: $danger;
+          }
+        }
+      }
+
+      .assignees {
+        float: right;
+
+        .user-avatar {
+          margin-left: 2px;
+        }
+      }
+
+      .issue-status {
+        position: absolute;
+        top: 13px;
+        left: 20px;
+        width: 24px;
+        .fas {
+          color: $green;
+        }
+      }
+      .counter {
+        position: absolute;
+        top: 13px;
+        right: 20px;
+        color: $text-gray;
+      }
+    }
+  }
+
+
+
+  .issue-sidebar {
+    background: #f7f7f7;
+    padding: 25px;
+    margin-left: 30px;
+    height: 100vh;
+
+    @media (max-width: 768px) {
+      margin-left: 0px;
+      height: auto;
+    }
+
+    .dropdown {
+      summary {
+        .fas {
+          font-size: 18px;
+        }
+
+        &:hover {
+          color: $text-gray;
+        }
+      }
+    }
+
+    .sidebar-box {
+      margin-bottom: 30px;
+      .sub-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .user-avatar-link {
+      margin-right: 5px;
+    }
+
+    .issue-label {
+      display: block;
+      padding: 4px 15px;
+      border-radius: 2px;
+    }
+
+    .dropdown-menu {
+      .issue-label {
+        padding: 4px 25px;
+        display: inline-block;
+        @extend .text-overflow;
+      }
+    }
+  }
+
+  .issue-label {
+    border-radius: 0px;
+    color: #fff;
+    padding: 3px 7px;
+    font-size: 12px;
+    line-height: 100%;
+
+    &:hover {
+      color: #fff !important;
+      opacity: 0.8;
+    }
+  }
+}

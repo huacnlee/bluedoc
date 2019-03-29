@@ -44,20 +44,33 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   test "commentable_title" do
+    # Doc
     doc = create(:doc)
     comment = create(:comment, commentable: doc)
-
     assert_equal doc.title, comment.commentable_title
 
     comment = create(:comment, commentable_type: "Doc", commentable_id: -1)
     assert_equal "", comment.commentable_title
+
+    # Issue
+    issue = create(:issue)
+    comment = create(:comment, commentable: issue)
+    assert_equal issue.issue_title, comment.commentable_title
+
+    comment = create(:comment, commentable_type: "Issue", commentable_id: -1)
+    assert_equal "", comment.commentable_title
   end
 
   test "to_url" do
+    # Doc
     doc = create(:doc)
     comment = create(:comment, commentable: doc)
-
     assert_equal "#{doc.to_url}#comment-#{comment.id}", comment.to_url
+
+    # Issue
+    issue = create(:issue)
+    comment = create(:comment, commentable: issue)
+    assert_equal "#{issue.to_url}#comment-#{comment.id}", comment.to_url
   end
 
   test "destroy to clear relation parent_id" do

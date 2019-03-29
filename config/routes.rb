@@ -139,6 +139,15 @@ Rails.application.routes.draw do
         end
       end
       resources :docs, only: %i(new create)
+      resources :issues do
+        collection do
+          get :closed
+        end
+        member do
+          post :assignees
+          post :labels
+        end
+      end
       resources :docs, path: "", only: %i(show edit update destroy) do
         member do
           get :raw

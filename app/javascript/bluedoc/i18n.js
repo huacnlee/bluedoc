@@ -70,6 +70,32 @@ i18n.init({
           "Table of contents": "Table of contents",
           "Add a custom item": "Add a custom item"
         },
+        "issues": {
+          "Sidebar": {
+            "Participants": "participants",
+          },
+          "Assignees": {
+            "Assignee": "Assignee",
+            "No one assigned": "No one assigned.",
+          },
+          "AssigneeMenu": {
+            "Filter": "Filter",
+            "Clear All": "Clear All",
+          },
+          "Labels": {
+            "Label": "Label",
+            "No label": "No label.",
+          },
+          "LabelMenu": {
+            "Filter": "Filter",
+            "Clear All": "Clear All",
+          },
+          "ListFilter": {
+            "Assignee": "Assignee",
+            "Label": "Label",
+            "Search": "Search",
+          }
+        }
       },
     },
     zh_CN: {
@@ -137,6 +163,32 @@ i18n.init({
           "Table of contents": "目录",
           "Add a custom item": "添加自定义项"
         },
+        "issues": {
+          "Sidebar": {
+            "Participants": "个参与者",
+          },
+          "Assignees": {
+            "Assignee": "任务指派",
+            "No one assigned": "暂无指派处理人。",
+          },
+          "AssigneeMenu": {
+            "Filter": "过滤",
+            "Clear All": "清除所有",
+          },
+          "Labels": {
+            "Label": "标签",
+            "No label": "暂无标签。",
+          },
+          "LabelMenu": {
+            "Filter": "过滤",
+            "Clear All": "清除所有",
+          },
+          "ListFilter": {
+            "Assignee": "指派",
+            "Label": "标签",
+            "Search": "搜索",
+          }
+        }
       },
     }
   },

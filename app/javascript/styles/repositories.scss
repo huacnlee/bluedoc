@@ -1,9 +1,10 @@
 .page-repositories,
-.page-repository_settings {
+.page-repository_settings,
+.page-issues {
   .repo-heading {
     text-align: center;
     .heading {
-      margin: 40px 0 20px 0;
+      margin: 20px 0 20px 0;
       .group-name {
         font-size: 16px;
         color: $text-gray-dark;
@@ -19,10 +20,12 @@
   }
 
   .repo-actions {
+    margin-top: 10px;
     line-height: 30px;
     @extend .icon-middle-wrap;
 
     .btn-create-doc {
+      display: inline-block;
       @extend .icon-middle-wrap;
       .fas {
         transform: scale(1.4);

@@ -1,0 +1,19 @@
+<%= form_for(@issue, url: (
+  @issue.new_record? ? user_repository_issues_path(@user, @repository) : user_repository_issue_path(@user, @repository, @issue.iid)
+)) do |f| %>
+  <%= form_group(f, :title, label: false) do %>
+    <%= f.text_field :title, class: "form-control" %>
+  <% end %>
+
+  <%= form_group(f, :body_sml, label: false) do %>
+    <%= react_component "InlineEditor", name: "issue[body_sml]", markdownName: "issue[body]", format: "sml", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id"), value: @issue.body_sml_plain %>
+  <% end %>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary"><%= @issue.new_record? ? t(".Create Issue") : t(".Update Issue") %></button>
+
+    <% unless @issue.new_record? %>
+      <%= link_to t(".Cancel"), @issue.to_path, class: "btn ml-1" %>
+    <% end %>
+  </div>
+<% end %>

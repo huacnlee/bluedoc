@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_023555) do
+ActiveRecord::Schema.define(version: 2019_03_21_063542) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -105,7 +106,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "title", null: false
     t.string "draft_title"
     t.string "slug", limit: 200, null: false
-    t.bigint "repository_id"
+    t.integer "repository_id"
     t.integer "creator_id"
     t.integer "last_editor_id"
     t.integer "comments_count", default: 0, null: false
@@ -128,6 +129,38 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.integer "iid", null: false
+    t.integer "repository_id", null: false
+    t.string "title", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "user_id"
+    t.integer "last_editor_id"
+    t.datetime "last_edited_at"
+    t.integer "comments_count", default: 0, null: false
+    t.integer "reads_count", default: 0, null: false
+    t.string "format", limit: 20, default: "markdown", null: false
+    t.integer "assignee_ids", default: [], null: false, array: true
+    t.integer "label_ids", default: [], null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignee_ids"], name: "index_issues_on_assignee_ids", using: :gin
+    t.index ["label_ids"], name: "index_issues_on_label_ids", using: :gin
+    t.index ["repository_id", "iid"], name: "index_issues_on_repository_id_and_iid", unique: true
+    t.index ["repository_id", "status"], name: "index_issues_on_repository_id_and_status"
+    t.index ["repository_id", "user_id"], name: "index_issues_on_repository_id_and_user_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "target_type", limit: 20, null: false
+    t.integer "target_id", null: false
+    t.string "title", limit: 100, null: false
+    t.string "color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["target_type", "target_id", "title"], name: "index_labels_on_target_type_and_target_id_and_title", unique: true
   end
 
   create_table "members", force: :cascade do |t|
@@ -165,9 +198,9 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "format", limit: 20, default: "markdown", null: false
     t.datetime "body_updated_at"
     t.datetime "deleted_at"
-    t.string "deleted_slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "deleted_slug", limit: 200
     t.index ["user_id", "body_updated_at"], name: "index_notes_on_user_id_and_body_updated_at"
     t.index ["user_id", "deleted_at"], name: "index_notes_on_user_id_and_deleted_at"
     t.index ["user_id", "slug"], name: "index_notes_on_user_id_and_slug", unique: true
@@ -181,7 +214,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.string "target_type"
     t.integer "target_id"
     t.integer "group_id"
-    t.integer "repository_id"
+    t.string "repository_id"
     t.text "meta"
     t.datetime "read_at"
     t.datetime "created_at", null: false
@@ -236,6 +269,15 @@ ActiveRecord::Schema.define(version: 2019_03_05_023555) do
     t.integer "retries_count", default: 0, null: false
     t.text "message"
     t.index ["repository_id"], name: "index_repository_sources_on_repository_id"
+  end
+
+  create_table "sequences", force: :cascade do |t|
+    t.string "target_type", limit: 20, null: false
+    t.integer "target_id", null: false
+    t.string "scope", limit: 20, default: "", null: false
+    t.integer "number", default: 0, null: false
+    t.index ["target_type", "target_id", "scope", "number"], name: "uk_target_scope_number", unique: true
+    t.index ["target_type", "target_id", "scope"], name: "uk_target_scope", unique: true
   end
 
   create_table "settings", force: :cascade do |t|

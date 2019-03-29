@@ -7,4 +7,5 @@ class User
   action_store :star, :note
   action_store :watch_comment, :doc
   action_store :watch_comment, :note
+  action_store :watch_comment, :issue
 end

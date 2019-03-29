@@ -27,6 +27,17 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :admin, group: @group
     get "/#{repo.user.slug}/#{repo.slug}/settings/profile"
     assert_equal 200, response.status
+    assert_select "input[name='repository[has_issues]']" do
+      assert_select "[checked=?]", "checked"
+    end
+
+    repo.update(has_issues: 0)
+    get "/#{repo.user.slug}/#{repo.slug}/settings/profile"
+    assert_equal 200, response.status
+
+    assert_select "input[name='repository[has_issues]']" do
+      assert_select "[checked=checked]", 0
+    end
   end
 
   test "PUT /:user/:repo/settings/profile" do
@@ -39,7 +50,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       name: "new name",
       slug: "new-#{repo.slug}",
       description: "new description",
-      has_toc: "1",
+      has_toc: "0",
+      has_issues: "0",
       privacy: "public"
     }
 
@@ -60,7 +72,9 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal repo_params[:slug], updated_repo.slug
     assert_equal repo_params[:description], updated_repo.description
     assert_equal repo_params[:has_toc], updated_repo.has_toc
-    assert_equal true, updated_repo.has_toc?
+    assert_equal false, updated_repo.has_toc?
+    assert_equal repo_params[:has_issues], updated_repo.has_issues
+    assert_equal false, updated_repo.has_issues?
     assert_equal repo_params[:privacy], updated_repo.privacy
   end
 

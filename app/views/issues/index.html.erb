@@ -1,0 +1,67 @@
+<% title_tag t(".Issues"), @repository.name %>
+
+<%= render "menu" %>
+
+<div class="col-12">
+  <div class="issue-toolbar clearfix">
+    <div class="sub-title">
+      <h2><%= t(".Issues") %></h2>
+      <nav class="issuenav" role="navigation">
+        <%= render_list_items(type: :link, class: "issuenav-item", active_class: "selected") do |item|
+          item << link_to(t(".Open"), @repository.to_path("/issues"), class: "issuenav-item")
+          item << link_to(t(".Closed"), @repository.to_path("/issues/closed"), class: "issuenav-item")
+        end %>
+      </nav>
+    </div>
+
+    <%= react_component "issues/ListFilter", {
+      assignee_id: params[:assignee_id],
+      targetAssignees: @repository.issue_assignees.collect(&:as_item_json),
+      label_id: params[:label_id],
+      targetLabels: @repository.issue_labels.as_json,
+      q: params[:q],
+    } %>
+
+    <div class="actions">
+      <%= link_to t(".New Issue"), new_user_repository_issue_path(@user, @repository), class: "btn btn-primary float-right" %>
+    </div>
+  </div>
+  <div class="issue-list">
+    <% @issues.each do |issue| %>
+    <div id="issue-<%= issue.id %>" class="issue issue-<%= issue.status %> mb-1">
+      <div class="issue-status">
+        <%= icon_tag("warn") %>
+      </div>
+
+      <div class="title">
+        <%= link_to issue.title, issue.to_path %>
+      </div>
+      <div class="info">
+        #<%= issue.iid %>
+        <span class="created-at"><%= t("created at") %> <%= timeago issue.created_at %></span>
+        <span class="author"><%= user_name_tag(issue.user) %></span>
+
+        <span class="assignees">
+          <% issue.assignees.take(3).each do |user| %>
+            <%= link_to user_avatar_tag(user, style: :tiny, link: false), { assignee_id: user.id }, { class: "user-avatar" } %>
+          <% end %>
+        </span>
+
+        <span class="labels ml-1">
+          <% issue.labels.take(2).each do |label| %>
+            <%= link_to label.title, { label_id: label.id }, { class: "issue-label", style: "background: #{label.color}" } %>
+          <% end %>
+        </span>
+      </div>
+
+      <% if issue.comments_count > 0 %>
+      <div class="counter">
+        <i class="fas fa-comments"></i> <%= issue.comments_count %>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+
+    <%= paginate @issues %>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<% title_tag @issue.title, @repository.name %>
+
+<%= render "menu" %>
+
+<div id="issue-<%= @issue.id %>" class="issue-box">
+  <div class="issue-heading">
+    <span class="heading-buttons">
+      <% if can? :update, @issue %>
+        <%= link_to t(".Edit"), edit_user_repository_issue_path(@user, @repository, @issue.iid), class: "btn btn-sm mr-1" %>
+      <% end %>
+      <%= link_to t(".New Issue"), new_user_repository_issue_path(@user, @repository), class: "btn btn-sm btn-primary" %>
+    </span>
+    <h1><%= @issue.title %><span class="issue-iid">#<%= @issue.iid %></span></h1>
+    <div class="heading-avatar">
+      <%= user_avatar_tag(@issue.user, style: :medium) %>
+    </div>
+    <div class="issue-info">
+      <span class="issue-status issue-status-<%= @issue.status %>"><%= icon_tag("warn") %> <%= t(".#{@issue.status}") %></span>
+      <span class="author"><%= user_name_tag(@issue.user) %></span>
+      <span class="created-at"><%= t("created at") %> <%= timeago @issue.created_at %></span>
+      <a class="ml-3" href="#comment"><%= @issue.comments_count %> <%= t(".comments") %></a>
+    </div>
+  </div>
+
+  <div class="flex-wrap">
+    <div class="col-12 col-md-8">
+      <div class="markdown-body">
+        <%= raw @issue.body_html %>
+      </div>
+
+      <div class="doc-reaction issue-reaction">
+        <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+      </div>
+
+      <% if @comments %>
+      <div class="issue-comments mt-3 clearfix" id="comment">
+        <%= render "/comments/comments", commentable: @issue, comments: @comments %>
+        <%= form_for(@issue, url: @issue.to_path, html: { id: "issue-status-actions", style: "margin-top: -71px;", class: "float-right" }) do |f| %>
+          <% if @issue.open? %>
+            <%= f.hidden_field :status, value: "closed" %>
+            <button type="submit" class="btn"><%= t(".Close Issue") %></button>
+          <% else %>
+            <%= f.hidden_field :status, value: "open" %>
+            <button type="submit" class="btn"><%= t(".Reopen Issue") %></button>
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <%= react_component "issues/Sidebar", {
+        issueURL: @issue.to_path,
+        assignees: @issue.assignees.collect(&:as_item_json),
+        targetAssignees: @repository.issue_assignees.collect(&:as_item_json),
+        labels: @issue.labels.as_json,
+        targetLabels: @repository.issue_labels.as_json,
+        abilities: {
+          update: can?(:update, @issue),
+          manage: can?(:manage, @issue),
+        },
+        participants: @issue.participants.collect(&:as_item_json),
+      } %>
+    </div>
+  </div>
+</div>

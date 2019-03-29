@@ -11,4 +11,25 @@ class BlueDoc::UtilsTest < ActionView::TestCase
     assert_equal "Google", BlueDoc::Utils.omniauth_camelize(:google_oauth2)
     assert_equal Setting.ldap_name, BlueDoc::Utils.omniauth_camelize("ldap")
   end
+
+  test "random_color" do
+    20.times do
+      color = BlueDoc::Utils.random_color
+      assert_equal true, color.start_with?("#")
+      assert_equal true, BlueDoc::Utils.valid_color?(color)
+    end
+  end
+
+  test "valid_color?" do
+    assert_equal true, BlueDoc::Utils.valid_color?("#FA01D0")
+    assert_equal true, BlueDoc::Utils.valid_color?("#9912EB")
+    assert_equal true, BlueDoc::Utils.valid_color?("#000000")
+    assert_equal true, BlueDoc::Utils.valid_color?("#999")
+    assert_equal true, BlueDoc::Utils.valid_color?("#000")
+    assert_equal false, BlueDoc::Utils.valid_color?("#BB")
+    assert_equal false, BlueDoc::Utils.valid_color?("#BBCC")
+    assert_equal false, BlueDoc::Utils.valid_color?("#BBCCII")
+    assert_equal false, BlueDoc::Utils.valid_color?("#09*&()")
+    assert_equal false, BlueDoc::Utils.valid_color?("#MN92OP")
+  end
 end

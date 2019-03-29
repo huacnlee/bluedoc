@@ -58,6 +58,7 @@ class CommentsController < ApplicationController
       klass = case type
               when "Doc" then Doc
               when "Note" then Note
+              when "Issue" then Issue
               else
                 raise "Invalid :commentable_type #{params[:commentable_type]}"
       end

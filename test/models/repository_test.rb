@@ -148,7 +148,9 @@ class RepositoryTest < ActiveSupport::TestCase
 
   test "preferences" do
     repo = create(:repository)
-    assert_equal true, repo.preferences[:has_toc]
+
+    # TOC
+    assert_nil repo.preferences[:has_toc]
     assert_equal true, repo.has_toc?
 
     repo.preferences[:has_toc] = 1
@@ -160,6 +162,8 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 0, repo.has_toc
     assert_equal false, repo.has_toc?
 
+    repo.has_toc = nil
+    assert_equal true, repo.has_toc?
     repo.has_toc = "1"
     assert_equal true, repo.has_toc?
     repo.has_toc = "true"
@@ -171,6 +175,23 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.reload
 
     assert_equal({ "has_toc" => "0" }, repo.preferences)
+
+    # Issues
+    assert_nil repo.preferences[:has_issues]
+    repo.has_issues = 0
+    assert_equal 0, repo.preferences[:has_issues]
+    assert_equal false, repo.has_issues?
+    repo.has_issues = 1
+    assert_equal 1, repo.preferences[:has_issues]
+    assert_equal true, repo.has_issues?
+    repo.has_issues = "1"
+    assert_equal true, repo.has_issues?
+    repo.has_issues = "true"
+    assert_equal true, repo.has_issues?
+    repo.has_issues = "0"
+    assert_equal false, repo.has_issues?
+    repo.has_issues = nil
+    assert_equal true, repo.has_issues?
   end
 
   test "toc_text / toc_html / toc_json" do
@@ -416,5 +437,20 @@ class RepositoryTest < ActiveSupport::TestCase
 
     assert_equal [user1.id, user0.id, user2.id], repo.editor_ids
     assert_equal [user1, user0, user2], repo.editors
+  end
+
+  test "issue_assignees" do
+    users = create_list(:user, 4)
+    group = create(:group)
+    group.add_member(users[0], :reader)
+    group.add_member(users[1], :editor)
+    group.add_member(users[2], :admin)
+
+    repo = create(:repository, user: group)
+    repo.add_member(users[3], :admin)
+
+    target_users = repo.issue_assignees
+    assert_equal 4, target_users.count
+    assert_equal users.sort, target_users.sort
   end
 end
