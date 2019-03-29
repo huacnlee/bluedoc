@@ -452,5 +452,13 @@ class RepositoryTest < ActiveSupport::TestCase
     target_users = repo.issue_assignees
     assert_equal 4, target_users.count
     assert_equal users.sort, target_users.sort
+
+    # with user/repository
+    user = create(:user)
+    repo = create(:repository, user: user)
+    repo.add_member(users[3], :editor)
+    target_users = repo.issue_assignees
+    assert_equal 2, target_users.count
+    assert_equal [user, users[3]].sort, target_users.sort
   end
 end
