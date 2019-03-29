@@ -88,7 +88,7 @@ GEM
     bcrypt (3.1.12)
     bindex (0.5.0)
     bluedoc-license (1.2.0)
-    bluedoc-sml (0.6.1)
+    bluedoc-sml (0.6.2)
       activesupport
       escape_utils
       rouge
@@ -408,7 +408,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     wicked_pdf (1.1.0)
-    zeitwerk (1.3.3)
+    zeitwerk (1.4.3)
 
 PLATFORMS
   ruby
