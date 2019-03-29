@@ -438,4 +438,19 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal [user1.id, user0.id, user2.id], repo.editor_ids
     assert_equal [user1, user0, user2], repo.editors
   end
+
+  test "issue_assignees" do
+    users = create_list(:user, 4)
+    group = create(:group)
+    group.add_member(users[0], :reader)
+    group.add_member(users[1], :editor)
+    group.add_member(users[2], :admin)
+
+    repo = create(:repository, user: group)
+    repo.add_member(users[3], :admin)
+
+    target_users = repo.issue_assignees
+    assert_equal 4, target_users.count
+    assert_equal users.sort, target_users.sort
+  end
 end

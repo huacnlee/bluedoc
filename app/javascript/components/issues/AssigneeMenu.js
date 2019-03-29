@@ -4,13 +4,18 @@ export default class AssigneeMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      assigneeTargets: props.assigneeTargets,
+      targetAssignees: props.targetAssignees,
     }
   }
 
-  onSelectItem = (userId) => {
+  onSelectItem = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     const { onSelect } = this.props;
-    onSelect(userId);
+
+    const assigneeId = parseInt(e.currentTarget.getAttribute("data-id"));
+    onSelect(assigneeId);
 
     return false
   }
@@ -18,41 +23,48 @@ export default class AssigneeMenu extends React.Component {
   onFilter = (e) => {
     const input = e.currentTarget;
     const value = input.value.trim();
-    let { assigneeTargets } = this.state;
+    let { targetAssignees } = this.state;
 
     if (value.length > 0) {
-      assigneeTargets = this.props.assigneeTargets.filter(user => {
+      targetAssignees = this.props.targetAssignees.filter(user => {
         return user.slug.includes(value) || user.name.includes(value);
       })
     } else {
-      assigneeTargets = this.props.assigneeTargets
+      targetAssignees = this.props.targetAssignees
     }
 
     this.setState({
-      assigneeTargets: assigneeTargets,
+      targetAssignees: targetAssignees,
     })
   }
 
-  render() {
-    const { selectedAssigneeIds, onClearAssignees, t } = this.props;
-    const { assigneeTargets } = this.state;
+  t = (key) => {
+    if (key.startsWith('.')) {
+      return i18n.t(`issues.AssigneeMenu${key}`);
+    }
+    return i18n.t(key);
+  }
 
-    return <div className="dropdown-menu dropdown-menu-sw" style={{ width: "200px" }}>
+  render() {
+    const { selectedIds, onClear } = this.props;
+    const { targetAssignees } = this.state;
+    const { t } = this;
+
+    return <div className="dropdown-menu dropdown-menu-sw dropdown-menu-filter" style={{ width: "250px", top: "24px", right: "-8px" }}>
     <div className="dropdown-header">
       <div><input type="text" onKeyUp={this.onFilter} className="form-control" placeholder={t(".Filter")} /></div>
-      {selectedAssigneeIds.length > 0 && (
-        <div class="mt-2">
-          <a href="#" onClick={onClearAssignees}><i className="fas fa-times"></i> {t(".Clear All")}</a>
+      {selectedIds.length > 0 && (
+        <div class="mt-1">
+          <a href="#" onClick={onClear}><i className="fas fa-times"></i> {t(".Clear All")}</a>
         </div>
       )}
     </div>
-    <div className="dropdown-divider"></div>
     <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
-    {assigneeTargets.map(user => {
+    {targetAssignees.map(user => {
       return <li>
       <a className="dropdown-item" href="#" data-id={user.id} onClick={this.onSelectItem}>
         <span style={{ width: "20px", display: "inline-block" }}>
-        {selectedAssigneeIds.includes(user.id) && (
+        {selectedIds.includes(user.id) && (
           <i className="fas fa-check"></i>
         )}
         </span>

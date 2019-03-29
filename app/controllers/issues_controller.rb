@@ -17,16 +17,22 @@ class IssuesController < Users::ApplicationController
       @issues = @issues.open
     end
 
-    if params[:label_id]
-      @issues = @issues.with_labels([params[:label_id]])
+    if !params[:label_id].blank?
+      @issues = @issues.with_labels(params[:label_id])
     end
 
-    if params[:assignee_id]
-      @issues = @issues.with_assignees([params[:assignee_id]])
+    if !params[:assignee_id].blank?
+      @issues = @issues.with_assignees(params[:assignee_id])
     end
 
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
     @issues = @issues.preload_assignees.preload_labels
+    render :index
+  end
+
+  def closed
+    params[:status] = "closed"
+    index
   end
 
   def new
@@ -109,6 +115,6 @@ class IssuesController < Users::ApplicationController
     end
 
     def issue_params
-      params.require(:issue).permit(:title, :body, :body_sml, :format, assignee_id: [], label_id: [])
+      params.require(:issue).permit(:title, :body, :body_sml, :format, :status, assignee_id: [], label_id: [])
     end
 end

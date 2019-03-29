@@ -916,6 +916,8 @@ zh-CN:
       comments: 回复
       open: 进行中
       closed: 已结束
+      Close Issue: 结束
+      Reopen Issue: 重新打开
     create:
       Issue was successfully created: 议题创建成功。
     update:

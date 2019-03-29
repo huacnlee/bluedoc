@@ -25,6 +25,7 @@
     @extend .icon-middle-wrap;
 
     .btn-create-doc {
+      display: inline-block;
       @extend .icon-middle-wrap;
       .fas {
         transform: scale(1.4);

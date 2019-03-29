@@ -56,23 +56,52 @@
     }
   }
 
-  .issuenav {
-    float: left;
-    margin-left: 15px;
+  .issue-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
 
-    .issuenav-item {
-      padding: 5px 5px 8px;
-      font-size: 14px;
-      margin: 0 2px;
-      text-decoration: none;
-      color: $primary;
-      position: relative;
-      &.selected {
-        color: $text-main;
-        border-bottom: 1px solid $text-main;
+    .sub-title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+    .actions {
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .issuenav {
+      margin-left: 15px;
+
+      .issuenav-item {
+        padding: 5px 5px 8px;
+        font-size: 14px;
+        margin: 0 2px;
+        text-decoration: none;
+        color: $primary;
+        position: relative;
+        &.selected {
+          color: $text-main;
+          border-bottom: 1px solid $text-main;
+        }
+      }
+    }
+
+    .list-filter {
+      flex: auto;
+      margin-left: 15px;
+
+      .filter-item {
+        padding: 5px 5px 8px;
+        margin: 0 6px;
       }
     }
   }
+
 
   .issue-list {
     .issue {
@@ -146,10 +175,6 @@
           color: $text-gray;
         }
       }
-
-      .dropdown-header {
-        padding-bottom: 5px;
-      }
     }
 
     .sidebar-box {
@@ -172,21 +197,22 @@
 
     .dropdown-menu {
       .issue-label {
-        padding: 6px 15px;
+        padding: 4px 25px;
         display: inline-block;
+        @extend .text-overflow;
       }
     }
   }
 
   .issue-label {
-    border-radius: 4px;
-    color: #555;
-    padding: 3px 10px;
-    font-size: 13px;
+    border-radius: 0px;
+    color: #fff;
+    padding: 3px 7px;
+    font-size: 12px;
     line-height: 100%;
 
     &:hover {
-      color: #555 !important;
+      color: #fff !important;
       opacity: 0.8;
     }
   }

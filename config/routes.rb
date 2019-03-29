@@ -140,6 +140,9 @@ Rails.application.routes.draw do
       end
       resources :docs, only: %i(new create)
       resources :issues do
+        collection do
+          get :closed
+        end
         member do
           post :assignees
           post :labels

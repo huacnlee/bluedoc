@@ -77,14 +77,22 @@ i18n.init({
           "Assignees": {
             "Assignee": "Assignee",
             "No one assigned": "No one assigned.",
+          },
+          "AssigneeMenu": {
             "Filter": "Filter",
             "Clear All": "Clear All",
           },
           "Labels": {
             "Label": "Label",
             "No label": "No label.",
+          },
+          "LabelMenu": {
             "Filter": "Filter",
             "Clear All": "Clear All",
+          },
+          "ListFilter": {
+            "Assignee": "Assignee",
+            "Label": "Label",
           }
         }
       },
@@ -161,14 +169,22 @@ i18n.init({
           "Assignees": {
             "Assignee": "任务指派",
             "No one assigned": "暂无指派处理人。",
+          },
+          "AssigneeMenu": {
             "Filter": "过滤",
             "Clear All": "清除所有",
           },
           "Labels": {
             "Label": "标签",
             "No label": "暂无标签。",
+          },
+          "LabelMenu": {
             "Filter": "过滤",
             "Clear All": "清除所有",
+          },
+          "ListFilter": {
+            "Assignee": "指派",
+            "Label": "标签",
           }
         }
       },

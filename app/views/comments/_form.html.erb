@@ -3,6 +3,7 @@
   <%= f.hidden_field :commentable_id %>
   <%= f.hidden_field :parent_id %>
 
+
   <div class="avatar-box">
     <%= user_avatar_tag(current_user, style: :medium) %>
   </div>
@@ -15,5 +16,6 @@
     <%= f.submit t(".Submit"), class: 'btn btn-primary' %>
     <div class="in-reply-info">
     </div>
+    <%= yield :comment_form_actions %>
   </div>
 <% end %>

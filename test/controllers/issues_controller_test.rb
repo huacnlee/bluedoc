@@ -56,7 +56,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     get @private_repository.to_path("/issues")
     assert_equal 200, response.status
 
-    get @private_repository.to_path("/issues?status=closed")
+    get @private_repository.to_path("/issues/closed")
     assert_equal 200, response.status
   end
 
@@ -133,7 +133,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".issue-heading .issue-iid", text: "##{issue.iid}"
     assert_react_component "issues/Sidebar" do |props|
       assert_equal issue.to_path, props[:issueURL]
-      assert_equal issue.assignee_target_users.collect(&:as_item_json), props[:assigneeTargets].collect(&:deep_stringify_keys)
+      assert_equal @repository.issue_assignees.collect(&:as_item_json), props[:targetAssignees].collect(&:deep_stringify_keys)
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal issue.labels.as_json, props[:labels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal @repository.issue_labels.as_json, props[:targetLabels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
@@ -320,6 +320,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       title: "New title",
       body_sml: %(["p", {}, "Hello world"]),
       body: "Hello world",
+      status: "closed"
     }
 
     old_edited_at = issue.last_edited_at
@@ -334,5 +335,6 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal issue_params[:body], issue.body_plain
     assert_equal user1.id, issue.last_editor_id
     assert_not_equal old_edited_at, issue.last_edited_at
+    assert_equal true, issue.closed?
   end
 end

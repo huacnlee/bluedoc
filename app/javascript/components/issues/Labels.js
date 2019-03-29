@@ -21,14 +21,9 @@ export default class Labels extends React.PureComponent {
   }
 
 
-  onSelect = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
+  onSelect = (targetId) => {
     this.menuRef.current.removeAttribute("open");
 
-    const target = e.currentTarget;
-    const targetId = parseInt(target.getAttribute("data-id"));
     let { selectedIds } = this.state;
 
     if (selectedIds.includes(targetId)) {

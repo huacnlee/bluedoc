@@ -8,9 +8,14 @@ export default class LabelMenu extends React.Component {
     }
   }
 
-  onSelect = (userId) => {
+  onSelect = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     const { onSelect } = this.props;
-    onSelect(userId);
+
+    const labelId = parseInt(e.currentTarget.getAttribute("data-id"));
+    onSelect(labelId);
 
     return false
   }
@@ -33,20 +38,27 @@ export default class LabelMenu extends React.Component {
     })
   }
 
-  render() {
-    const { selectedIds, onClear, t } = this.props;
-    const { targetLabels } = this.state;
+  t = (key) => {
+    if (key.startsWith('.')) {
+      return i18n.t(`issues.LabelMenu${key}`);
+    }
+    return i18n.t(key);
+  }
 
-    return <div className="dropdown-menu dropdown-menu-sw" style={{ width: "200px" }}>
+  render() {
+    const { selectedIds, onClear } = this.props;
+    const { targetLabels } = this.state;
+    const { t } = this;
+
+    return <div className="dropdown-menu dropdown-menu-sw dropdown-menu-filter" style={{ width: "250px", top: "24px", right: "-8px" }}>
     <div className="dropdown-header">
       <div><input type="text" onKeyUp={this.onFilter} className="form-control" placeholder={t(".Filter")} /></div>
       {selectedIds.length > 0 && (
-        <div class="mt-2">
+        <div class="mt-1">
           <a href="#" onClick={onClear}><i className="fas fa-times"></i> {t(".Clear All")}</a>
         </div>
       )}
     </div>
-    <div className="dropdown-divider"></div>
     <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
     {targetLabels.map(item => {
       return <li>

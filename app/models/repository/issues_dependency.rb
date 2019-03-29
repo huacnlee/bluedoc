@@ -10,12 +10,12 @@ class Repository
   end
 
   DEFAULT_ISSUE_LABELS = {
-    discussion: "#afb9ff",
-    question: "#ff6c4b",
-    support: "#31e06f",
-    invalid: "#f9ea37",
-    duplicate: "#dec07c",
-    wontfix: "#e6a9ff"
+    discussion: "#3070ff",
+    question: "#d62800",
+    support: "#00a505",
+    invalid: "#6f42c1",
+    duplicate: "#008080",
+    wontfix: "#5a5a5a"
   }
 
   def ensure_default_issue_labels
@@ -29,5 +29,13 @@ class Repository
         Label.create!(target: self, title: name.to_s.titleize, color: DEFAULT_ISSUE_LABELS[name])
       end
     end
+  end
+
+  # Users that for issue assignee
+  def issue_assignees
+    user_ids = self.members.pluck(:user_id)
+    user_ids += self.user.members.pluck(:user_id)
+    users = User.where(id: user_ids.uniq).with_attached_avatar
+    users.sort_by { |user| user_ids.index(user.id) }
   end
 end

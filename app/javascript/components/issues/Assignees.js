@@ -22,14 +22,9 @@ export default class Assignees extends React.PureComponent {
   }
 
 
-  onSelectAssignee = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
+  onSelect = (userId) => {
     this.menuRef.current.removeAttribute("open");
 
-    const target = e.currentTarget;
-    const userId = parseInt(target.getAttribute("data-id"));
     let { selectedAssigneeIds } = this.state;
 
     if (selectedAssigneeIds.includes(userId)) {
@@ -39,11 +34,9 @@ export default class Assignees extends React.PureComponent {
     }
 
     this.updateAssignees(selectedAssigneeIds);
-
-    return false;
   }
 
-  onClearAssignees = (e) => {
+  onClear = (e) => {
     e.stopPropagation();
     e.preventDefault();
     this.updateAssignees([]);
@@ -83,7 +76,7 @@ export default class Assignees extends React.PureComponent {
   }
 
   render() {
-    const { assigneeTargets, abilities } = this.props;
+    const { targetAssignees, abilities } = this.props;
 
     const { selectedAssigneeIds, assignees, showAssigneeMenu } = this.state;
 
@@ -95,9 +88,9 @@ export default class Assignees extends React.PureComponent {
         <details className="dropdown details-overlay details-reset d-inline-block float-right" ref={this.menuRef}>
           <summary><i className="fas fa-gear"></i></summary>
           <AssigneeMenu {...this.props}
-            selectedAssigneeIds={selectedAssigneeIds}
-            onClearAssignees={this.onClearAssignees}
-            onSelect={this.onSelectAssignee}
+            selectedIds={selectedAssigneeIds}
+            onClear={this.onClear}
+            onSelect={this.onSelect}
             t={this.t} />
         </details>
         )}
