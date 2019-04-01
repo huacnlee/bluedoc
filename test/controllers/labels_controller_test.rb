@@ -64,7 +64,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     json = JSON.parse(response.body)
     assert_equal false, json["ok"]
-    assert_equal "Label Name can't be blank", json["errors"]
+    assert_equal "Label name can't be blank", json["errors"]
   end
 
   test "PUT /:user/:repo/issues/labels/:id" do
