@@ -34,7 +34,11 @@ class Repository
   # Users that for issue assignee
   def issue_assignees
     user_ids = self.members.pluck(:user_id)
-    user_ids += self.user.members.pluck(:user_id)
+    if self.user.group?
+      user_ids += self.user.members.pluck(:user_id)
+    else
+      user_ids << self.user_id
+    end
     users = User.where(id: user_ids.uniq).with_attached_avatar
     users.sort_by { |user| user_ids.index(user.id) }
   end
