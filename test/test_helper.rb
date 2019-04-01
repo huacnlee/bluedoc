@@ -25,7 +25,9 @@ require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
 require_relative "./support/jobs_test_helper"
 
-DatabaseCleaner.strategy = :truncation
+FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
+
+DatabaseCleaner.strategy = :deletion
 DatabaseCleaner.orm = :active_record
 OmniAuth.config.test_mode = true
 
