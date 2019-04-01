@@ -1,0 +1,13 @@
+<% title_tag t(".Labels"), @repository.name %>
+
+<%= render "menu" %>
+
+<div class="col-12">
+  <div class="label-list">
+    <% @labels.each do |label| %>
+      <%= react_component "labels/Label", id: label.id, title: label.title, color: label.color %>
+    <% end %>
+
+    <%= react_component "labels/Label", editMode: true %>
+  </div>
+</div>

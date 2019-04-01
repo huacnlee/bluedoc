@@ -29,7 +29,8 @@ module BootstrapHelper
         link = link.gsub(opts[:class], "#{opts[:class]} #{opts[:active_class]}")
       end
 
-      if c_name && controller_name.to_s == c_name
+      # [labels issues].include?(issues)
+      if c_name && c_name.split(" ").include?(controller_name.to_s)
         link = link.gsub(opts[:class], "#{opts[:class]} #{opts[:active_class]}")
       end
 

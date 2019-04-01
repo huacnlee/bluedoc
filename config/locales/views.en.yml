@@ -931,4 +931,7 @@ en:
       Issue was successfully created: Issue was successfully created.
     update:
       Issue was successfully updated: Issue was successfully updated.
+  labels:
+    index:
+      Labels: Labels
 

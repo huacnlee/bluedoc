@@ -1,4 +1,5 @@
-.page-issues {
+.page-issues,
+.page-labels {
   .issue-heading {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
@@ -231,5 +232,63 @@
       color: #fff !important;
       opacity: 0.8;
     }
+  }
+
+  .label-list {
+    .label-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 10px;
+
+      .actions { opacity: 0; }
+
+      .issue-label-box {
+        display: flex;
+        align-items: center;
+        width: 240px;
+      }
+
+      .issue-label {
+        padding: 5px 13px;
+        font-size: 14px;
+        border-radius: 3px;
+        text-align: center;
+        max-width: 240px;
+        @extend .text-overflow;
+      }
+
+      .label-color {
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+
+        .color-picker-item {
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+          border: 1px solid #fff;
+        }
+      }
+
+      .message {
+        margin-left: 10px;
+        color: $danger;
+      }
+
+      &:hover {
+        .actions {
+          opacity: 1;
+        }
+      }
+    }
+
+    .new-title {
+      padding: 10px 10px 0px 10px;
+      font-weight: bold;
+    }
+  }
+
+  .label-item-new {
+    background: #f7f7f7;
   }
 }

@@ -58,6 +58,11 @@ en:
         body: Body
         body_sml: Body
         privacy: Privacy
+      label:
+        title: Label name
+        color: Color
+      issue:
+        title: Title
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.

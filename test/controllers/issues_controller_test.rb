@@ -30,6 +30,9 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
         assert_select ".user-avatar", 3
       end
     end
+    assert_react_component "issues/ListFilter" do |props|
+      assert_equal @repository.to_path, props[:repoURL]
+    end
 
     get @repository.to_path("/issues?assignee_id=#{user1.id}")
     assert_equal 200, response.status

@@ -77,9 +77,15 @@ export default class Labels extends React.PureComponent {
   }
 
   render() {
-    const { targetLabels, abilities } = this.props;
+    const { targetLabels, abilities, issueURL } = this.props;
 
     const { selectedIds, labels, showMenu } = this.state;
+
+    // /:user/:repo/issues/:iid -> /:user/:repo/issues/labels
+    let labelsURL;
+    if (issueURL) {
+      labelsURL = issueURL.replace(/\/[\d]+$/, "/labels");
+    }
 
     return <div className="sidebar-box issue-labels">
       <div className="clearfix">
@@ -92,6 +98,7 @@ export default class Labels extends React.PureComponent {
             selectedIds={selectedIds}
             onClear={this.onClear}
             onSelect={this.onSelect}
+            labelsURL={labelsURL}
             t={this.t} />
         </details>
         )}

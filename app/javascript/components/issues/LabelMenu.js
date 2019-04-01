@@ -46,7 +46,7 @@ export default class LabelMenu extends React.Component {
   }
 
   render() {
-    const { selectedIds, onClear } = this.props;
+    const { selectedIds, onClear, labelsURL } = this.props;
     const { targetLabels } = this.state;
     const { t } = this;
 
@@ -73,6 +73,11 @@ export default class LabelMenu extends React.Component {
     </li>
     })}
     </ul>
+    {labelsURL && (
+      <div className="dropdown-footer">
+      <a href={labelsURL} className="float-right">{this.t(".Manage")}</a>
+      </div>
+    )}
     </div>
   }
 }

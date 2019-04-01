@@ -139,6 +139,7 @@ Rails.application.routes.draw do
         end
       end
       resources :docs, only: %i(new create)
+      resources :labels, path: "issues/labels"
       resources :issues do
         collection do
           get :closed

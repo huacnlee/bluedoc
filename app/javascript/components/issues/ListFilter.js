@@ -93,6 +93,7 @@ export default class ListFilter extends React.PureComponent {
   }
 
   render() {
+    const { repoURL } = this.props;
     let { assignee_ids, label_ids, q } = this.state;
 
     return <form action={location.href} data-remote={true} ref={this.formRef} method="GET" className="list-filter">
@@ -106,7 +107,11 @@ export default class ListFilter extends React.PureComponent {
 
       <details className="filter-item dropdown details-overlay details-reset d-inline-block">
         <summary>{this.t(".Label")} <div className="dropdown-caret"></div></summary>
-        <LabelMenu {...this.props} onSelect={this.onSelectLabel} onClear={this.onClearLabel} selectedIds={label_ids} />
+        <LabelMenu {...this.props}
+          onSelect={this.onSelectLabel}
+          onClear={this.onClearLabel}
+          selectedIds={label_ids}
+          labelsURL={`${repoURL}/issues/labels`} />
         {label_ids.map(id => {
           return <input type="hidden" name="label_id[]" value={id} />
         })}

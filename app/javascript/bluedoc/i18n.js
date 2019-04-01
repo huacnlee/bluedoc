@@ -89,12 +89,23 @@ i18n.init({
           "LabelMenu": {
             "Filter": "Filter",
             "Clear All": "Clear All",
+            "Manage": "Manage...",
           },
           "ListFilter": {
             "Assignee": "Assignee",
             "Label": "Label",
             "Search": "Search",
           }
+        },
+        "labels": {
+          "New Label": "New Label",
+          "Label Title": "Title",
+          "Edit": "Edit",
+          "Update": "Save",
+          "Create": "Create",
+          "Cancel": "Cancel",
+          "Delete": "Delete",
+          "Are you sure delete this Label": "Are you sure to delete this Label?",
         }
       },
     },
@@ -182,12 +193,23 @@ i18n.init({
           "LabelMenu": {
             "Filter": "过滤",
             "Clear All": "清除所有",
+            "Manage": "标签管理...",
           },
           "ListFilter": {
             "Assignee": "指派",
             "Label": "标签",
             "Search": "搜索",
           }
+        },
+        "labels": {
+          "New Label": "新建标签",
+          "Label Title": "名称",
+          "Edit": "编辑",
+          "Update": "保存",
+          "Create": "创建",
+          "Cancel": "取消",
+          "Delete": "删除",
+          "Are you sure delete this Label": "确定要删除这个标签吗？",
         }
       },
     }

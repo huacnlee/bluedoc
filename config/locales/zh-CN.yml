@@ -72,6 +72,11 @@ zh-CN:
         body: 正文
         body_sml: 正文
         privacy: 隐私模式
+      label:
+        title: 标签名称
+        color: 颜色
+      issue:
+        title: 标题
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。

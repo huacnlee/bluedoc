@@ -1,0 +1,39 @@
+.color-picker {
+  padding: 10px;
+  width: 202px;
+  line-height: 100%;
+  left: -4px;
+
+  .color-highlights {
+    margin-bottom: 10px;
+  }
+
+  .color-preview {
+    display: flex;
+    align-items: center;
+
+    margin-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+
+    .color-name {
+      margin-left: 5px;
+    }
+  }
+}
+
+.color-picker-item {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.65;
+  }
+
+  &:active,
+  &[active=true] {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  }
+}
