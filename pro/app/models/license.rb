@@ -78,7 +78,7 @@ class License
     end
 
     def users_limit
-      restricted_attr(:users_limit, default: 0)
+      restricted_attr(:users_limit, default: 0).to_i
     end
 
     def current_active_users_count
