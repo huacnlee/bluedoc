@@ -1,4 +1,6 @@
 zh-CN:
+  rucaptcha:
+    invalid: "验证码不正确（如无法识别，可以点击刷新验证码）"
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"

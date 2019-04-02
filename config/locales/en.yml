@@ -1,6 +1,8 @@
 ---
 en:
   hello: Hello world
+  rucaptcha:
+    invalid: "The captcha code is incorrect (if you can't read, you can click image to refresh it)"
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
