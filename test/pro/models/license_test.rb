@@ -75,6 +75,9 @@ class LicenseTest < ActiveSupport::TestCase
 
   test "users_limit" do
     assert_equal License.restricted_attr(:users_limit, default: 0), License.users_limit
+    License.license.stub(:restrictions, users_limit: "100") do
+      assert_equal 100, License.users_limit
+    end
   end
 
   test "current_active_users_count" do
