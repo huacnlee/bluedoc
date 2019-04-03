@@ -38,7 +38,7 @@ class BlobsController < ActiveStorage::BaseController
     end
 
     def service_url(blob, style = nil)
-      Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}/v4", expires_in: 11.hours) do
+      Rails.cache.fetch("blobs/show#{blob.cache_key}#{style}/v5", expires_in: 11.hours) do
         scope = blob
 
         # Resize image
