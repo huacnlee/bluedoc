@@ -3,6 +3,16 @@ import { Timeago } from "bluebox/timeago";
 import { UserLink } from "bluebox/user";
 import ContentLoader from "react-content-loader"
 
+import { graph } from "bluedoc/graphql";
+
+const deleteDoc = graph(`
+  mutation(@autodeclare) {
+    deleteDoc(input: { id: $id }) {
+      id
+    }
+  }
+`);
+
 /**
  * Document manage list Item
  */
@@ -11,6 +21,7 @@ export class DocItem extends React.Component {
     super(props);
 
     this.state = {
+      deleted: false,
       doc: this.props.doc,
     }
   }
@@ -18,9 +29,22 @@ export class DocItem extends React.Component {
   onDelete = (e) => {
     e.preventDefault();
 
+    const { t } = this.props;
+
     const { doc } = this.state;
 
+    if (!confirm(t(".Are you sure to delete this Doc"))) {
+      return false
+    }
+
     console.log("on delete ", doc.id);
+    deleteDoc({ id: doc.id }).then((result) => {
+      this.setState({
+        deleted: true
+      })
+    }).catch((errors) => {
+      console.log(errors);
+    });
 
     return false;
   }
@@ -37,7 +61,11 @@ export class DocItem extends React.Component {
 
   render() {
     const { repository, user, abilities } = this.props;
-    const { doc } = this.state;
+    const { doc, deleted } = this.state;
+
+    if (deleted) {
+      return <div />
+    }
 
     return <div className="doc-item list-item list-avatar">
       <div className="avatar-box icon-box icon-doc"><Icon name="avatar-doc" /></div>

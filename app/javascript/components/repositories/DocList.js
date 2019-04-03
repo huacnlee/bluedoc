@@ -73,6 +73,10 @@ export default class DocList extends React.Component {
 
     const { docs, sort, loading, pageInfo } = this.state;
 
+    if (docs.length == 0) {
+      return <EmptyDoc {...this.props} t={this.t} />
+    }
+
     return <div className="repository-docs">
       <Toolbar onChange={this.onToolbarChange} sort={sort} t={this.t} />
       <div className="doc-list">
@@ -84,7 +88,7 @@ export default class DocList extends React.Component {
           </div>
         )}
         {!loading && (
-          docs.map(doc => <DocItem doc={doc} {...this.props} /> )
+          docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} /> )
         )}
       </div>
       <Pagination onPage={this.onPage} pageInfo={pageInfo} />
@@ -133,6 +137,22 @@ class Toolbar extends React.Component {
   }
 }
 
-
-
+class EmptyDoc extends React.Component {
+  render() {
+    const { t, abilities, newDocURL } = this.props;
+    return <div className="repository-docs" data-turbolinks="false">
+      <div className="blankslate text-center">
+      <h3>{t(".There is no documents")}</h3>
+      {abilities.update && (
+        <div>
+        <p>{t(".You can create first document")}</p>
+        <p>
+          <a href={newDocURL} className="btn btn-sm btn-primary">{t(".Create doc")}</a>
+        </p>
+        </div>
+      )}
+      </div>
+    </div>
+  }
+}
 

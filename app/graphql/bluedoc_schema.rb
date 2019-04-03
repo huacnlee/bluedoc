@@ -2,7 +2,7 @@
 
 class BlueDocSchema < GraphQL::Schema
   default_max_page_size 50
-  mutation ::Mutation::MutationType
+  mutation ::Types::Mutation
   query ::Query::QueryType
 
   rescue_from CanCan::AccessDenied, &:message

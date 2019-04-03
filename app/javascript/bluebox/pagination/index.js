@@ -14,7 +14,7 @@ export class Pagination extends React.Component {
   render() {
     const { pageInfo = {} } = this.props;
 
-    if (pageInfo.totalPages == 1) {
+    if (pageInfo.totalCount == 0 || pageInfo.totalPages == 1) {
       return <div />
     }
 
