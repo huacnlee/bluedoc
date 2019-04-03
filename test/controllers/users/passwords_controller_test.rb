@@ -17,7 +17,7 @@ class Users::PasswordsControllerTest < ActionDispatch::IntegrationTest
     }
     post user_password_path, params: { user: form_params }
     assert_equal 200, response.status
-    assert_match /Captcha invalid/, response.body
+    assert_match /The captcha code is incorrect/, response.body
 
     ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
     post user_password_path, params: { user: form_params }

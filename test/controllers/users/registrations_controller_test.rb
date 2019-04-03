@@ -49,7 +49,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     # Check captcha
     post user_registration_path, params: { user: user_params }
     assert_equal 200, response.status
-    assert_select ".form-error", text: "Captcha invalid!"
+    assert_select ".form-error", text: "The captcha code is incorrect (if you can't read, you can click image to refresh it)"
 
     ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
     post user_registration_path, params: { user: user_params }
