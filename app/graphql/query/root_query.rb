@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Types
-  class Query
+module Query
+  class QueryType < BaseQuery
     field :hello, String, null: true, description: "Simple test API"
 
     def hello

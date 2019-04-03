@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Types
-  class Query
-    field :search, SearchObject, null: true do
+module Query
+  class QueryType < BaseQuery
+    field :search, Types::SearchType, null: true do
       argument :type, String, required: true, description: "Search type: [user,group,repository,doc]"
       argument :limit, Integer, required: false, description: "Result limit, default: 10"
       argument :query, String, required: true, description: "Search query"
