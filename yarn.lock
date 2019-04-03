@@ -750,10 +750,10 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@thebluedoc/editor@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.1.0.tgz#b6b8717a8dfc981812c72b8e3215979723387cc4"
-  integrity sha512-4FQ2uY/3d2JKv9Gx/IOnjR2iqpQmbuS4+mmGClh9SmNInH4NDlDcvPCj5ulKEzid9qif8Ou6Bs4zYa3+MPWczA==
+"@thebluedoc/editor@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.1.1.tgz#66f1858e78b4d68298fcc1e9e7769f66c8639ea1"
+  integrity sha512-oUGSwstF6HdBVnXqw2GYViMtoRRGPzxpe4GLkS0OXPAqqcSAg47l77a7+Wb2MZ2lGfg7a5wMNlwk5ZBjey9VHQ==
   dependencies:
     "@thebluedoc/slate-react" "^0.21.24"
     fast-deep-equal "^2.0.1"
