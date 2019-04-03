@@ -106,7 +106,14 @@ i18n.init({
           "Cancel": "Cancel",
           "Delete": "Delete",
           "Are you sure delete this Label": "Are you sure to delete this Label?",
-        }
+        },
+        "repositories": {
+          "Docs": {
+            "Sort by": "Sort by",
+            "Sort by updated": "Updated",
+            "Sort by created": "Created",
+          },
+        },
       },
     },
     zh_CN: {
@@ -210,7 +217,14 @@ i18n.init({
           "Cancel": "取消",
           "Delete": "删除",
           "Are you sure delete this Label": "确定要删除这个标签吗？",
-        }
+        },
+        "repositories": {
+          "Docs": {
+            "Sort by": "排序",
+            "Sort by updated": "更新时间",
+            "Sort by created": "创建时间",
+          },
+        },
       },
     }
   },

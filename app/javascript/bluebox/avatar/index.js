@@ -1,4 +1,4 @@
-class DefaultAvatar extends React.Component {
+export class DefaultAvatar extends React.Component {
   render() {
     const { user, style } = this.props
 
@@ -9,7 +9,7 @@ class DefaultAvatar extends React.Component {
   }
 }
 
-export default class UserAvatar extends React.Component {
+export class UserAvatar extends React.Component {
   constructor(props) {
     super(props);
   }

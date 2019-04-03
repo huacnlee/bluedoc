@@ -1,6 +1,6 @@
 import Assignees from "./Assignees";
 import Labels from "./Labels";
-import UserAvatar from "../users/UserAvatar";
+import { UserAvatar } from "bluebox/avatar";
 
 export default class Sidebar extends React.PureComponent {
   constructor(props) {

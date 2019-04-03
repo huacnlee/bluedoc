@@ -1,4 +1,4 @@
-import { ColorPicker, ColorItem } from "../ColorPicker";
+import { ColorPicker, ColorItem } from "bluebox/color-picker";
 
 export default class Label extends React.PureComponent {
   constructor(props) {

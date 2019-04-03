@@ -1,4 +1,4 @@
-import UserAvatar from "../users/UserAvatar";
+import { UserAvatar } from "bluebox/avatar";
 import AssigneeMenu from "./AssigneeMenu";
 
 export default class Assignees extends React.PureComponent {

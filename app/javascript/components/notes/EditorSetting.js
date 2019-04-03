@@ -1,5 +1,5 @@
 
-import ErrorMessages from '../../bluedoc/shared/error-messages.jsx';
+import { ErrorMessages } from 'bluebox/notice';
 
 export default class EditorSetting extends React.Component {
   constructor(props) {

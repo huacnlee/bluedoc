@@ -14,8 +14,8 @@ module Types
       object.current_per_page
     end
 
-    field :next_page, Integer, null: false, description: "Next page number"
-    field :prev_page, Integer, null: false, description: "Prev page number"
+    field :next_page, Integer, null: true, description: "Next page number"
+    field :prev_page, Integer, null: true, description: "Prev page number"
 
     field :first_page, Boolean, null: false, description: "First page of the collection?"
     def first_page

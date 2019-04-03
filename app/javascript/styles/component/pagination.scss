@@ -1,11 +1,16 @@
 .pagination {
   margin-top: 15px;
+  list-style: none;
 
   .previous_page,
   .next_page {
     .text {
       display: none;
     }
+  }
+
+  * {
+    outline: none;
   }
 }
 
