@@ -147,7 +147,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_match /#{repo.name}/, response.body
     assert_select ".btn-create-doc", 0
     assert_select ".reponav-item-docs", 1
-    assert_select ".reponav .reponav-issues", 1
+    assert_select ".reponav .reponav-issues", 0
     assert_select ".repo-toc"
     assert_select ".label-private", 0
 
@@ -203,10 +203,10 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     # has_issues? disable
     repo = create(:repository, user: @group)
-    repo.update(has_issues: 0)
+    repo.update(has_issues: 1)
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
-    assert_select ".reponav .reponav-issues", 0
+    assert_select ".reponav .reponav-issues", 1
   end
 
   test "GET /:user/:repo TOC List" do

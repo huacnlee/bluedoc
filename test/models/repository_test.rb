@@ -191,7 +191,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.has_issues = "0"
     assert_equal false, repo.has_issues?
     repo.has_issues = nil
-    assert_equal true, repo.has_issues?
+    assert_equal false, repo.has_issues?
   end
 
   test "toc_text / toc_html / toc_json" do

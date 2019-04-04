@@ -11,7 +11,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:user/:repo/settings/profile" do
-    repo = create(:repository, user: @group)
+    repo = create(:repository, user: @group, has_issues: 1)
     assert_require_user do
       get "/#{repo.user.slug}/#{repo.slug}/settings/profile"
     end

@@ -5,7 +5,7 @@ class Repository
   has_many :issue_labels, as: :target, dependent: :destroy, class_name: "Label"
 
   def has_issues?
-    return true if self.preferences[:has_issues].nil?
+    return false if self.preferences[:has_issues].nil?
     ActiveModel::Type::Boolean.new.cast(self.preferences[:has_issues])
   end
 

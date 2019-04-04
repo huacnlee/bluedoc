@@ -5,7 +5,7 @@ require "test_helper"
 class LabelsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @group = create(:group)
-    @repository = create(:repository, user: @group)
+    @repository = create(:repository, user: @group, has_issues: 1)
   end
 
   test "GET /:user/:repo/labels" do

@@ -5,9 +5,9 @@ require "test_helper"
 class IssuesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @group = create(:group)
-    @repository = create(:repository, user: @group)
+    @repository = create(:repository, user: @group, has_issues: 1)
 
-    @private_repository = create(:repository, user: @group, privacy: :private)
+    @private_repository = create(:repository, user: @group, privacy: :private, has_issues: 1)
   end
 
   test "GET /:user/:repo/issues" do
