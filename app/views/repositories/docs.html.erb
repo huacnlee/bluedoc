@@ -6,7 +6,7 @@
   repositoryId: @repository.id,
   newDocURL: @repository.to_path("/docs/new"),
   abilities: {
-    update: can?(:update, @repository),
+    update: can?(:update, Doc.new(repository_id: @repository.id)),
     destroy: can?(:destroy, Doc.new(repository_id: @repository.id)),
   },
 } %>
