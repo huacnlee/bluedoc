@@ -1,7 +1,7 @@
 document.addEventListener('turbolinks:load', () => {
-  $('.notice').on('click', '.js-notice-close', (e) => {
-    const $container = $(e.delegateTarget);
-    $container.remove();
+  $('body').on('click', '.notice .js-notice-close', (e) => {
+    const $container = $(e.currentTarget).closest(".notice");
+    $container.fadeOut().remove();
   });
   setTimeout(() => {
     const noticeEle = document.querySelector('.navbar-notice .notice');

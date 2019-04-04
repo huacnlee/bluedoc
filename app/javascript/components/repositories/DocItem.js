@@ -27,7 +27,7 @@ export class DocItem extends React.Component {
   onDelete = (e) => {
     e.preventDefault();
 
-    const { t } = this.props;
+    const { t, onDelete } = this.props;
 
     const { doc } = this.state;
 
@@ -35,13 +35,11 @@ export class DocItem extends React.Component {
       return false
     }
 
-    console.log("on delete ", doc.id);
     deleteDoc({ id: doc.id }).then((result) => {
-      this.setState({
-        deleted: true
-      })
+      onDelete(doc.id);
+      App.notice(t(".Doc was successfully destroyed"));
     }).catch((errors) => {
-      console.log(errors);
+      App.alert(errors);
     });
 
     return false;

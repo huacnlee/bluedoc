@@ -37,7 +37,6 @@ export default class DocList extends React.Component {
   }
 
   onPage = (page) => {
-
     this.fetch(page);
   }
 
@@ -56,7 +55,7 @@ export default class DocList extends React.Component {
         loading: false,
       });
     }).catch((errors) => {
-      console.error(errors);
+      App.alert(errors);
     });
   }
 
@@ -66,6 +65,13 @@ export default class DocList extends React.Component {
     })
 
     this.fetch(1);
+  }
+
+  onItemDeleted = (id) => {
+    let { docs } = this.state;
+
+    docs = docs.filter(doc => doc.id != id);
+    this.setState({ docs });
   }
 
   render() {
@@ -88,7 +94,7 @@ export default class DocList extends React.Component {
           </div>
         )}
         {!loading && (
-          docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} /> )
+          docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} onDelete={this.onItemDeleted} /> )
         )}
       </div>
       <Pagination onPage={this.onPage} pageInfo={pageInfo} />
@@ -141,7 +147,7 @@ class EmptyDoc extends React.Component {
   render() {
     const { t, abilities, newDocURL } = this.props;
     return <div className="repository-docs" data-turbolinks="false">
-      <div className="blankslate text-center">
+      <div className="blankslate no-data no-doc text-center">
       <h3>{t(".There is no documents")}</h3>
       {abilities.update && (
         <div>

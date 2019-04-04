@@ -116,7 +116,7 @@ i18n.init({
             "There is no documents": "There is no documents",
             "You can create first document": "You can create first document.",
             "Create doc": "Create now",
-
+            "Doc was successfully destroyed": "Doc was successfully destroyed.",
           },
         },
       },
@@ -232,6 +232,7 @@ i18n.init({
             "There is no documents": "此知识库暂无文档",
             "You can create first document": "你可以现在创建第一篇文档。",
             "Create doc": "立即创建",
+            "Doc was successfully destroyed": "文档删除成功。",
           },
         },
       },
