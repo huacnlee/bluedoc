@@ -104,6 +104,10 @@ a[data-method=delete] {
   @extend .fa-setting;
 }
 
+.fa-check:before {
+  @extend .fa-select;
+}
+
 .fa-arrow {
   transition: all .2s ease;
   &.folder {
