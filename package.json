@@ -9,7 +9,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "4.0.2",
-    "@thebluedoc/editor": "^1.1.1",
+    "@thebluedoc/editor": "^1.1.2",
     "activestorage": "^5.2.2",
     "animated-scroll-to": "^1.2.2",
     "babel-preset-react": "^6.24.1",
