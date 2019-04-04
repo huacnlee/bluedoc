@@ -21,8 +21,11 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
-    assert_select "#doc-#{doc.id}"
-    assert_select ".btn-remove-doc", 0
+    assert_react_component "repositories/DocList" do |props|
+      assert_equal @repo.id, props[:repositoryId]
+      assert_equal @repo.to_path("/docs/new"), props[:newDocURL]
+      assert_equal({ update: false, destroy: false }, props[:abilities])
+    end
 
     # with anonymous disable
     Setting.stub(:anonymous_enable?, false) do
@@ -49,20 +52,19 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :reader, group: @group
     get @private_repo.to_path("/docs/list")
     assert_equal 200, response.status
-    assert_select "#doc-#{doc.id} .btn-remove-doc", 0
+    assert_react_component "repositories/DocList" do |props|
+      assert_equal @private_repo.id, props[:repositoryId]
+      assert_equal @private_repo.to_path("/docs/new"), props[:newDocURL]
+      assert_equal({ update: false, destroy: false }, props[:abilities])
+    end
 
     sign_in_role :editor, group: @group
     get @private_repo.to_path("/docs/list")
     assert_equal 200, response.status
-    assert_select "#doc-#{doc.id} .btn-remove-doc", 1
-
-    doc1 = create(:doc, repository: @private_repo)
-    share = create(:share, shareable: doc1)
-    get @private_repo.to_path("/docs/list")
-    assert_equal 200, response.status
-
-    assert_select "#doc-#{doc1.id}" do
-      assert_select ".fa-share"
+    assert_react_component "repositories/DocList" do |props|
+      assert_equal @private_repo.id, props[:repositoryId]
+      assert_equal @private_repo.to_path("/docs/new"), props[:newDocURL]
+      assert_equal({ update: true, destroy: true }, props[:abilities])
     end
   end
 

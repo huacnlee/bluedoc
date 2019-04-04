@@ -195,7 +195,11 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
     assert_select ".reponav-item-docs", 0
-    assert_select ".repository-docs"
+    assert_react_component "repositories/DocList" do |props|
+      assert_equal repo.id, props[:repositoryId]
+      assert_equal repo.to_path("/docs/new"), props[:newDocURL]
+      assert_equal({ update: true, destroy: true }, props[:abilities])
+    end
 
     # has_issues? disable
     repo = create(:repository, user: @group)

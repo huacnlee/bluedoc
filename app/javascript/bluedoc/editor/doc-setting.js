@@ -1,4 +1,4 @@
-import ErrorMessages from '../shared/error-messages.jsx';
+import { ErrorMessages } from 'bluebox/notice';
 
 export default class DocSetting extends React.Component {
   constructor(props) {

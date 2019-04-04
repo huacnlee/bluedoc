@@ -1,4 +1,4 @@
-import UserAvatar from "../users/UserAvatar";
+import { UserAvatar } from "bluebox/avatar";
 
 export default class AssigneeMenu extends React.Component {
   constructor(props) {

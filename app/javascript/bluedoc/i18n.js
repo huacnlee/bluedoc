@@ -106,7 +106,19 @@ i18n.init({
           "Cancel": "Cancel",
           "Delete": "Delete",
           "Are you sure delete this Label": "Are you sure to delete this Label?",
-        }
+        },
+        "repositories": {
+          "Docs": {
+            "Sort by": "Sort by",
+            "Sort by updated": "Updated",
+            "Sort by created": "Created",
+            "Are you sure to delete this Doc": "Are you sure to delete this Doc?",
+            "There is no documents": "There is no documents",
+            "You can create first document": "You can create first document.",
+            "Create doc": "Create now",
+            "Doc was successfully destroyed": "Doc was successfully destroyed.",
+          },
+        },
       },
     },
     zh_CN: {
@@ -210,7 +222,19 @@ i18n.init({
           "Cancel": "取消",
           "Delete": "删除",
           "Are you sure delete this Label": "确定要删除这个标签吗？",
-        }
+        },
+        "repositories": {
+          "Docs": {
+            "Sort by": "排序",
+            "Sort by updated": "更新时间",
+            "Sort by created": "创建时间",
+            "Are you sure to delete this Doc": "确定要删除这篇文档吗？",
+            "There is no documents": "此知识库暂无文档",
+            "You can create first document": "你可以现在创建第一篇文档。",
+            "Create doc": "立即创建",
+            "Doc was successfully destroyed": "文档删除成功。",
+          },
+        },
       },
     }
   },
