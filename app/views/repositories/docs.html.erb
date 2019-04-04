@@ -2,11 +2,8 @@
 
 <%= render "menu" %>
 
-
 <%= react_component "repositories/DocList", {
   repositoryId: @repository.id,
-  userId: @user.id,
-  sort: params[:sort],
   newDocURL: @repository.to_path("/docs/new"),
   abilities: {
     update: can?(:update, @repository),

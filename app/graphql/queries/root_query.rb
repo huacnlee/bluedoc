@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Query
+module Queries
   class QueryType < BaseQuery
     field :hello, String, null: true, description: "Simple test API"
 

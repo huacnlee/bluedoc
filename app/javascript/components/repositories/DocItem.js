@@ -7,9 +7,7 @@ import { graph } from "bluedoc/graphql";
 
 const deleteDoc = graph(`
   mutation(@autodeclare) {
-    deleteDoc(input: { id: $id }) {
-      id
-    }
+    deleteDoc(id: $id)
   }
 `);
 

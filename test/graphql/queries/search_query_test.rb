@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class BlueDoc::SearchQueryTest < BlueDoc::GraphQL::IntegrationTest
+class Queries::SearchQueryTest < BlueDoc::GraphQL::IntegrationTest
   test "search with doc" do
     # with private repo
     repo = create(:repository, privacy: :private)

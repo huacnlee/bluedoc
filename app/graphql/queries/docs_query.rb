@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Query
+module Queries
   class QueryType < BaseQuery
     field :doc, Types::DocType, null: true do
       argument :id, Integer, required: true
@@ -13,7 +13,7 @@ module Query
       @doc
     end
 
-    # TODO: write test
+    # Get docs in a repository
     field :repository_docs, Types::DocsType, null: true do
       argument :repository_id, ID, required: true
       argument :page, Integer, required: false, default_value: 1

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types::QueryAuth
   def authorize!(*args)
     current_ability.authorize!(*args)

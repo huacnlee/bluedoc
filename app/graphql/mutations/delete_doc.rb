@@ -1,7 +1,9 @@
-class Mutations::DeleteDoc < Mutations::BaseMutation
-  null true
+# frozen_string_literal: true
 
+class Mutations::DeleteDoc < Mutations::BaseMutation
   argument :id, ID, required: true
+
+  type Boolean
 
   def resolve(id:)
     @doc = Doc.find(id)
@@ -10,6 +12,6 @@ class Mutations::DeleteDoc < Mutations::BaseMutation
 
     @doc.destroy
 
-    { id: id }
+    true
   end
 end

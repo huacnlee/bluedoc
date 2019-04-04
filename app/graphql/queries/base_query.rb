@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Query
+module Queries
   class BaseQuery < GraphQL::Schema::Object
     include ::Types::QueryAuth
   end

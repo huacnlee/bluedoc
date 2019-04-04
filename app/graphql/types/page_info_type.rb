@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   # Kaminari style pagination result
   class PageInfoType < GraphQL::Schema::Object

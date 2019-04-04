@@ -5,13 +5,20 @@ module BlueDoc
     class IntegrationTest < ActiveSupport::TestCase
       attr_accessor :response
 
-      def execute(query_string, context: nil)
-        context ||= { current_user: @current_user }
+      def execute(query_string)
         @response = BlueDocSchema.execute(query_string, context: context)
         assert_not_nil @response
       end
 
+      def context
+        { current_user: @current_user }
+      end
+
       def response_data
+        unless response_errors.blank?
+          raise "Expect to get response_data by there has errors\n\n  #{response_errors}"
+        end
+
         @response["data"]
       end
 

@@ -2,15 +2,14 @@
 
 require "test_helper"
 
-class BlueDoc::RootQueryTest < BlueDoc::GraphQL::IntegrationTest
+class Queries::RootQueryTest < BlueDoc::GraphQL::IntegrationTest
   test "hello" do
-    execute("{ hello }", context: {})
+    execute("{ hello }")
     assert_equal "Hello", response_data["hello"]
 
     user = build(:user)
-    execute("{ hello }", context: {
-      current_user: user
-    })
+    sign_in user
+    execute("{ hello }")
     assert_equal "Hello, #{user.name}", response_data["hello"]
   end
 end
