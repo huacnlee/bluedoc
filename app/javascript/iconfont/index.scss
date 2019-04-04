@@ -1,5 +1,29 @@
-@import './bluedoc.scss';
 @import './iconfont.scss';
+
+[data-icon]:before {
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="fa-"]:before,
+[class*=" fa-"]:before {
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 .fas {
   font-family: 'iconfont', 'bluedoc';
@@ -74,6 +98,10 @@ a[data-method=delete] {
 
 .fa-bell-slash:before {
   @extend .fa-bell-fill;
+}
+
+.fa-gear:before {
+  @extend .fa-setting;
 }
 
 .fa-arrow {

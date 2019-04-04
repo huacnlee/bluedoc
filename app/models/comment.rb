@@ -42,8 +42,8 @@ class Comment < ApplicationRecord
 
   def to_url
     case self.commentable_type
-    when "Doc" then self.commentable.to_url(anchor: "comment-#{self.id}")
-    when "Issue" then self.commentable.to_url(anchor: "comment-#{self.id}")
+    when "Doc" then self.commentable&.to_url(anchor: "comment-#{self.id}")
+    when "Issue" then self.commentable&.to_url(anchor: "comment-#{self.id}")
     else
       ""
     end
