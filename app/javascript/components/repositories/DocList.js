@@ -28,7 +28,7 @@ export default class DocList extends React.Component {
       docs: [],
       pageInfo: { },
       sort: "created",
-      loading: false,
+      loading: true,
     }
   }
 
@@ -79,7 +79,7 @@ export default class DocList extends React.Component {
 
     const { docs, sort, loading, pageInfo } = this.state;
 
-    if (docs.length == 0) {
+    if (!loading && docs.length == 0) {
       return <EmptyDoc {...this.props} t={this.t} />
     }
 
@@ -97,7 +97,9 @@ export default class DocList extends React.Component {
           docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} onDelete={this.onItemDeleted} /> )
         )}
       </div>
-      <Pagination onPage={this.onPage} pageInfo={pageInfo} />
+      {docs.length > 0 &&
+        <Pagination onPage={this.onPage} pageInfo={pageInfo} />
+      }
     </div>
   }
 

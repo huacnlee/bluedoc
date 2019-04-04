@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import BarButton from './bar-button';
+import { ColorPicker } from "bluebox/color-picker";
 
 // import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
 
 export default class Toolbar extends React.Component {
   state = { }
-
-  headingDropdown = React.createRef()
 
   isActiveMarkup = (type) => {
     const { container } = this.props;
@@ -80,14 +79,14 @@ export default class Toolbar extends React.Component {
     ev.stopPropagation();
     const { editor } = this.props;
 
-    this.headingDropdown.current.removeAttribute('open');
-
     editor._removeListAtRanges();
     if (this.isActiveMarkup(type)) {
       editor.setBlocks('paragraph');
     } else {
       editor.setBlocks(type);
     }
+
+    editor.focus();
 
     return false;
   }
@@ -235,6 +234,12 @@ export default class Toolbar extends React.Component {
     return false;
   }
 
+  handleTextColor = (color) => {
+    const { editor } = this.props;
+
+    editor._setColorAtRanges("color", color).focus();
+  }
+
   renderMarkButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
     const onMouseDown = (ev) => {
@@ -317,8 +322,8 @@ export default class Toolbar extends React.Component {
         <BarButton icon="undo" title={this.t('.Undo')} enable={undos && undos.size > 0} onMouseDown={this.handleUndo} />
         <BarButton icon="redo" title={this.t('.Redo')} enable={redos && redos.size > 0} onMouseDown={this.handleRedo} />
         <span className="bar-divider"></span>
-        <details ref={this.headingDropdown} className="dropdown details-reset details-overlay">
-          <summary className="bar-button"><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></summary>
+        <div className="dropdown d-inline-block">
+          <button className="bar-button"><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></button>
           <div className="dropdown-menu dropdown-menu-se">
             <ul>
               <li className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>{t('.Paragraph')}</li>
@@ -330,7 +335,11 @@ export default class Toolbar extends React.Component {
               <li className="dropdown-item heading6" onMouseDown={e => this.handleHeading(e, 'heading6')}>{t('.Heading 6')}</li>
             </ul>
           </div>
-        </details>
+        </div>
+        <div className="dropdown d-inline-block" ref={this.textColorDropdown}>
+          <button className="bar-button"><i className="fas fa-text-color"></i><div className="dropdown-caret"></div></button>
+          <ColorPicker mode="lite" onChange={this.handleTextColor} className="dropdown-menu-se" />
+        </div>
         <span className="bar-divider"></span>
         </span>
         )}

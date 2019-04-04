@@ -36,41 +36,41 @@ const COLORS = {
     "#e1bee7",
     "#f3e5f5",
   ],
-  "indigo": [
-    "#1a237e",
-    "#283593",
-    "#303f9f",
-    "#3949ab",
-    "#3f51b5",
-    "#5c6bc0",
-    "#7986cb",
-    "#9fa8da",
-    "#c5cae9",
-    "#e8eaf6",
+  "blue": [
+    "#0d47a1",
+    "#1565c0",
+    "#1976d2",
+    "#1e88e5",
+    "#2196f3",
+    "#42a5f5",
+    "#64b5f6",
+    "#90caf9",
+    "#bbdefb",
+    "#e3f2fd",
   ],
-  "lightblue": [
-    "#01579b",
-    "#0277bd",
-    "#0288d1",
-    "#039be5",
-    "#03a9f4",
-    "#29b6f6",
-    "#4fc3f7",
-    "#81d4fa",
-    "#b3e5fc",
-    "#e1f5fe",
+  "cyan": [
+    "#006064",
+    "#00838f",
+    "#0097a7",
+    "#00acc1",
+    "#00bcd4",
+    "#26c6da",
+    "#4dd0e1",
+    "#80deea",
+    "#b2ebf2",
+    "#e0f7fa",
   ],
-  "teal": [
-    "#004d40",
-    "#00695c",
-    "#00796b",
-    "#00897b",
-    "#009688",
-    "#26a69a",
-    "#4db6ac",
-    "#80cbc4",
-    "#b2dfdb",
-    "#e0f2f1",
+  "green": [
+    "#1b5e20",
+    "#2e7d32",
+    "#388e3c",
+    "#43a047",
+    "#4caf50",
+    "#66bb6a",
+    "#81c784",
+    "#a5d6a7",
+    "#c8e6c9",
+    "#e8f5e9",
   ],
   "lightgreen": [
     "#33691e",
@@ -164,17 +164,19 @@ export class ColorPicker extends React.Component {
   }
 
   render() {
-    let { className = "dropdown-menu-sw" } = this.props;
+    let { className = "dropdown-menu-sw", mode = "full" } = this.props;
     const { color, previewColor } = this.state;
 
     className = `color-picker dropdown-menu ${className}`;
+
+    let colors = Object.entries(COLORS);
 
     return <div className={className}>
       <div className="color-highlights">
         {HILIGHT_COLORS.map(val => <ColorItem activeColor={color} onHover={this.onPreview} onSelect={this.onChange} color={val} />)}
       </div>
       <div className="colors">
-        {Object.entries(COLORS).map(([key, colors]) => {
+        {colors.map(([key, colors]) => {
           return (<div className="colors-group">
             {colors.map(val => <ColorItem activeColor={color} onHover={this.onPreview} onSelect={this.onChange} color={val} />)}
           </div>)
