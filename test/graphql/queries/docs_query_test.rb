@@ -54,4 +54,35 @@ class Queries::DocsQueryTest < BlueDoc::GraphQL::IntegrationTest
     res = response_data["repositoryDocs"]
     assert_equal 3, res["records"].length
   end
+
+  test "repository_tocs" do
+    repo = create(:repository)
+    docs = create_list(:doc, 4, repository: repo)
+    docs[0].move_to(docs[1], :child)
+
+    query_body = "{ id, title, url, docId, depth, parentId }"
+
+    execute(%| { repositoryTocs(repositoryId: #{repo.id}) #{query_body} } |)
+    records = response_data["repositoryTocs"]
+    assert_equal 4, records.length
+    assert_equal docs[1].toc.id, records[0]["id"]
+    assert_equal docs[1].toc.title, records[0]["title"]
+    assert_equal docs[1].toc.url, records[0]["url"]
+    assert_nil records[0]["parentId"]
+    assert_equal 0, records[0]["depth"]
+    assert_equal docs[0].toc.id, records[1]["id"]
+    assert_equal docs[0].toc.parent_id, records[1]["parentId"]
+    assert_equal 1, records[1]["depth"]
+
+    # private repo
+    repo = create(:repository, privacy: :private)
+    docs = create_list(:doc, 3, repository: repo)
+    execute(%| { repositoryTocs(repositoryId: #{repo.id}) #{query_body} } |)
+    assert_unauthorized
+
+    sign_in_role :reader, repository: repo
+    execute(%| { repositoryTocs(repositoryId: #{repo.id}) #{query_body} } |)
+    records = response_data["repositoryTocs"]
+    assert_equal 3, records.length
+  end
 end

@@ -58,4 +58,27 @@ class RepositoryTocTest < ActiveSupport::TestCase
     assert_equal docs[0], docs[2].toc.prev.doc
     assert_equal docs[3], docs[2].toc.next.doc
   end
+
+  test "destroy" do
+    doc = create(:doc)
+    toc = doc.toc
+
+    toc.destroy
+
+    assert_nil RepositoryToc.find_by_id(toc.id)
+    assert_nil Doc.find_by_id(doc.id)
+
+    # Restore will revert toc
+    doc = Doc.unscoped.find_by_id(doc.id)
+    allow_feature :soft_delete do
+      doc.restore
+    end
+    doc = Doc.find_by_id(doc.id)
+    assert_not_nil doc
+    assert_not_nil doc.toc
+
+    toc1 = create(:repository_toc, doc_id: nil)
+    toc1.destroy
+    assert_nil RepositoryToc.find_by_id(toc1.id)
+  end
 end

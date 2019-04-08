@@ -45,13 +45,13 @@ class Doc < ApplicationRecord
   end
 
   class << self
-    def create_new(repo, user_id, slug: nil)
+    def create_new(repo, user_id, slug: nil, title: nil)
       doc = Doc.new
       doc.format = "sml"
       doc.repository_id = repo.id
       doc.creator_id = user_id
       doc.last_editor_id = user_id
-      doc.title = "New Document"
+      doc.title = title || "New Document"
       doc.draft_title = doc.title
       doc.slug = slug || BlueDoc::Slug.random(seed: 999999)
       doc.save!

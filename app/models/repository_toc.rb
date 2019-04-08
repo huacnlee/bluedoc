@@ -1,6 +1,6 @@
 class RepositoryToc < ApplicationRecord
   belongs_to :repository
-  belongs_to :doc, required: false
+  belongs_to :doc, required: false, dependent: :destroy
   belongs_to :parent, class_name: "RepositoryToc", required: false
 
   acts_as_nested_set scope: :repository_id

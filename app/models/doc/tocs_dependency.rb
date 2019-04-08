@@ -15,6 +15,12 @@ class Doc
     self.toc.move_to(target_doc.toc, position)
   end
 
+  def ensure_toc!
+    if !self.toc
+      self.send(:sync_create_toc_after_create)
+    end
+  end
+
   private
     def sync_create_toc_after_create
       self.create_toc!(title: self.title, url: self.slug, repository_id: self.repository_id, doc_id: self.id)
