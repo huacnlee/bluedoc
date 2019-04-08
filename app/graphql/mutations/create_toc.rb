@@ -8,7 +8,7 @@ class Mutations::CreateToc < Mutations::BaseMutation
   argument :target_id, ID, required: false, description: "Order toc with the target (default: append to bottom)"
   argument :position, String, required: false, default_value: "right", description: "If you give target_id, this option for speical the positon of toc: [left, right, child]"
 
-  type ::Types::RepositoryTocType
+  type ::Types::TocType
 
   def resolve(repository_id:, title: nil, url: nil, target_id: nil, position: "right", external: false)
     @repository = Repository.find(repository_id)

@@ -2,7 +2,7 @@
 
 # Sync update TOC after doc update
 class Doc
-  has_one :toc, class_name: "RepositoryToc"
+  has_one :toc
 
   after_update :sync_update_toc_after_update
   after_create :sync_create_toc_after_create

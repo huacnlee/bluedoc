@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class RepositoryTocTest < ActiveSupport::TestCase
+class TocTest < ActiveSupport::TestCase
   include ActionMailer::TestHelper
 
   test "create_by_toc_text! with toc_text exist" do
@@ -24,7 +24,7 @@ class RepositoryTocTest < ActiveSupport::TestCase
     RichText.create!(record: repo, name: "toc", body: toc_docs.to_yaml)
 
     # Do upgrade
-    RepositoryToc.create_by_toc_text!(repo)
+    Toc.create_by_toc_text!(repo)
 
     # Reload
     repo = Repository.find(repo.id)
@@ -37,10 +37,10 @@ class RepositoryTocTest < ActiveSupport::TestCase
     old_updated_at = repo.updated_at
     docs = create_list(:doc, 6, repository: repo)
     # cleanup auto created tocs first
-    RepositoryToc.where(repository: repo).delete_all
+    Toc.where(repository: repo).delete_all
 
     # Do upgrade
-    RepositoryToc.create_by_toc_text!(repo)
+    Toc.create_by_toc_text!(repo)
 
     assert_equal docs, repo.tocs.collect(&:doc)
   end
@@ -65,7 +65,7 @@ class RepositoryTocTest < ActiveSupport::TestCase
 
     toc.destroy
 
-    assert_nil RepositoryToc.find_by_id(toc.id)
+    assert_nil Toc.find_by_id(toc.id)
     assert_nil Doc.find_by_id(doc.id)
 
     # Restore will revert toc
@@ -77,8 +77,8 @@ class RepositoryTocTest < ActiveSupport::TestCase
     assert_not_nil doc
     assert_not_nil doc.toc
 
-    toc1 = create(:repository_toc, doc_id: nil)
+    toc1 = create(:toc, doc_id: nil)
     toc1.destroy
-    assert_nil RepositoryToc.find_by_id(toc1.id)
+    assert_nil Toc.find_by_id(toc1.id)
   end
 end

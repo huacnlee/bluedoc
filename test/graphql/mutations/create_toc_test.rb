@@ -15,7 +15,7 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
 
     user = sign_in_role :editor, repository: repository
     toc0 = perform(repository_id: repository.id, title: "Google", url: "https://www.google.com", external: true)
-    assert_equal true, toc0.is_a?(RepositoryToc)
+    assert_equal true, toc0.is_a?(Toc)
     assert_not_nil toc0
     assert_not_nil toc0.id
     assert_equal repository.id, toc0.repository_id
@@ -25,7 +25,7 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
 
     # create doc and append to toc0 child
     toc1 = perform(repository_id: repository.id, title: "Foo Bar", url: "foobar", target_id: toc0.id, position: "child")
-    assert_equal true, toc1.is_a?(RepositoryToc)
+    assert_equal true, toc1.is_a?(Toc)
     assert_not_nil toc1
     assert_not_nil toc1.id
     assert_equal repository.id, toc1.repository_id
@@ -41,7 +41,7 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
 
     # create doc and append to toc1 before
     toc2 = perform(repository_id: repository.id, title: "Hello", target_id: toc1.id, position: "left")
-    assert_equal true, toc2.is_a?(RepositoryToc)
+    assert_equal true, toc2.is_a?(Toc)
     assert_equal "Hello", toc2.title
     assert_not_nil toc2.url
     assert_not_nil toc2.doc
@@ -53,7 +53,7 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
 
     # create doc and append to toc1 after
     toc3 = perform(repository_id: repository.id, title: "World", target_id: toc1.id, position: "right")
-    assert_equal true, toc3.is_a?(RepositoryToc)
+    assert_equal true, toc3.is_a?(Toc)
     assert_equal "World", toc3.title
     assert_not_nil toc3.url
     assert_not_nil toc3.doc

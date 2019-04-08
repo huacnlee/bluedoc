@@ -1,7 +1,9 @@
-class RepositoryToc < ApplicationRecord
+# frozen_string_literal: true
+
+class Toc < ApplicationRecord
   belongs_to :repository
   belongs_to :doc, required: false, dependent: :destroy
-  belongs_to :parent, class_name: "RepositoryToc", required: false
+  belongs_to :parent, class_name: "Toc", required: false
 
   acts_as_nested_set scope: :repository_id
 

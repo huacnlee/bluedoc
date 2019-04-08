@@ -10,7 +10,7 @@ class Mutations::UpdateTocTest < BlueDoc::GraphQL::IntegrationTest
   test "update_toc" do
     doc = create(:doc)
     toc = doc.toc
-    other_toc = create(:repository_toc)
+    other_toc = create(:toc)
 
     assert_raise(CanCan::AccessDenied) do
       perform(id: toc.id)
@@ -30,7 +30,7 @@ class Mutations::UpdateTocTest < BlueDoc::GraphQL::IntegrationTest
   end
 
   test "update_toc with external" do
-    toc = create(:repository_toc)
+    toc = create(:toc)
     sign_in_role :editor, repository: toc.repository
     assert_equal true, perform(id: toc.id, title: "New title", url: "new-url")
     toc.reload

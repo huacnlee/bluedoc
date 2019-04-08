@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Repository
-  has_many :tocs, class_name: "RepositoryToc"
+  has_many :tocs
 
   def has_toc?
-    return true
+    true
   end
 
   def toc_html(prefix: nil)

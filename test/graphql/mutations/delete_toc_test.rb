@@ -10,7 +10,7 @@ class Mutations::DeleteTocTest < BlueDoc::GraphQL::IntegrationTest
   test "delete_toc" do
     doc = create(:doc)
     toc = doc.toc
-    other_toc = create(:repository_toc)
+    other_toc = create(:toc)
 
     assert_raise(CanCan::AccessDenied) do
       perform(id: toc.id)
@@ -23,6 +23,6 @@ class Mutations::DeleteTocTest < BlueDoc::GraphQL::IntegrationTest
     # Delete
     assert_equal true, perform(id: toc.id)
     assert_nil Doc.find_by_id(doc.id)
-    assert_nil RepositoryToc.find_by_id(toc.id)
+    assert_nil Toc.find_by_id(toc.id)
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class RepositoryTocType < BaseType
+  class TocType < BaseType
     graphql_name "RepositoryToc"
 
     field :parent_id, Integer, null: true, description: "Parent toc id"

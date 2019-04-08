@@ -270,22 +270,6 @@ ActiveRecord::Schema.define(version: 2019_04_08_081720) do
     t.index ["repository_id"], name: "index_repository_sources_on_repository_id"
   end
 
-  create_table "repository_tocs", force: :cascade do |t|
-    t.integer "repository_id", null: false
-    t.string "title", null: false
-    t.integer "doc_id"
-    t.string "url"
-    t.integer "depth", default: 0, null: false
-    t.integer "parent_id"
-    t.integer "lft", null: false
-    t.integer "rgt", null: false
-    t.index ["repository_id", "doc_id"], name: "index_repository_tocs_on_repository_id_and_doc_id"
-    t.index ["repository_id", "lft"], name: "index_repository_tocs_on_repository_id_and_lft"
-    t.index ["repository_id", "parent_id"], name: "index_repository_tocs_on_repository_id_and_parent_id"
-    t.index ["repository_id", "rgt"], name: "index_repository_tocs_on_repository_id_and_rgt"
-    t.index ["repository_id"], name: "index_repository_tocs_on_repository_id"
-  end
-
   create_table "sequences", force: :cascade do |t|
     t.string "target_type", limit: 20, null: false
     t.integer "target_id", null: false
@@ -317,6 +301,22 @@ ActiveRecord::Schema.define(version: 2019_04_08_081720) do
     t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id", unique: true
     t.index ["slug"], name: "index_shares_on_slug", unique: true
     t.index ["user_id"], name: "index_shares_on_user_id"
+  end
+
+  create_table "tocs", force: :cascade do |t|
+    t.integer "repository_id", null: false
+    t.string "title", null: false
+    t.integer "doc_id"
+    t.string "url"
+    t.integer "depth", default: 0, null: false
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.index ["repository_id", "doc_id"], name: "index_tocs_on_repository_id_and_doc_id"
+    t.index ["repository_id", "lft"], name: "index_tocs_on_repository_id_and_lft"
+    t.index ["repository_id", "parent_id"], name: "index_tocs_on_repository_id_and_parent_id"
+    t.index ["repository_id", "rgt"], name: "index_tocs_on_repository_id_and_rgt"
+    t.index ["repository_id"], name: "index_tocs_on_repository_id"
   end
 
   create_table "user_actives", force: :cascade do |t|

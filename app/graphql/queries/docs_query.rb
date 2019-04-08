@@ -13,7 +13,7 @@ module Queries
       @doc
     end
 
-    field :repository_tocs, [Types::RepositoryTocType], null: true, description: "Get all toc list for Repository (Ordered with toc order)" do
+    field :repository_tocs, [Types::TocType], null: true, description: "Get all toc list for Repository (Ordered with toc order)" do
       argument :repository_id, ID, required: true
     end
     def repository_tocs(params)
