@@ -9,7 +9,7 @@ class Repository
   delegate :url, to: :source, allow_nil: true, prefix: true
   delegate :job_id, to: :source, allow_nil: true, prefix: true
 
-  has_one_attached :import_archive
+  has_one_attached :import_archive, dependent: :nullify
 
   attr_accessor :gitbook_url
 
