@@ -35,7 +35,6 @@ class ProRepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".export-repository-pdf", 0
 
     allow_feature(:export_pdf) do
-
       get repo.to_path("/settings/docs")
       assert_equal 200, response.status
       assert_select ".box.export-repository-pdf" do

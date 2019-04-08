@@ -9,7 +9,7 @@ class Doc < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :publish, :soft_delete, :contents, :toc_sync, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search
+  depends_on :publish, :soft_delete, :contents, :tocs, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search
 
   delegate :private?, :public?, to: :repository
 
@@ -42,8 +42,8 @@ class Doc < ApplicationRecord
   def prev_and_next_of_docs
     return @prev_and_next_of_docs if defined? @prev_and_next_of_docs
     result = { next: nil, prev: nil }
-    ordered_docs = self.repository.read_ordered_docs
-    idx = ordered_docs.find_index { |doc| doc.id == self.id }
+    ordered_docs = self.repository.toc_ordered_docs
+    idx = ordered_docs.find_index { |doc| doc&.id == self.id }
     return nil if idx.nil?
     if idx < ordered_docs.length
       result[:next] = ordered_docs[idx + 1]

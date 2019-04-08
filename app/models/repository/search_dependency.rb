@@ -26,6 +26,6 @@ class Repository
   end
 
   def _search_body
-    [self.user&.fullname, self.description, self.toc&.body.to_s].join("\n\n")
+    [self.user&.fullname, self.description].join("\n\n")
   end
 end

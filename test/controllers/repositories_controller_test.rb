@@ -189,18 +189,6 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_match /#{repo.to_path("/settings")}/, response.body
     assert_select ".btn-create-doc"
 
-    # has_doc? enable, should render :docs
-    repo = create(:repository, user: @group)
-    repo.update(has_toc: 0)
-    get "/#{repo.user.slug}/#{repo.slug}"
-    assert_equal 200, response.status
-    assert_select ".reponav-item-docs", 0
-    assert_react_component "repositories/DocList" do |props|
-      assert_equal repo.id, props[:repositoryId]
-      assert_equal repo.to_path("/docs/new"), props[:newDocURL]
-      assert_equal({ update: true, destroy: true }, props[:abilities])
-    end
-
     # has_issues? disable
     repo = create(:repository, user: @group)
     repo.update(has_issues: 1)
@@ -221,11 +209,6 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       assert_equal true, props[:withSlug]
       assert_equal repo.to_path("/"), props[:prefix]
     end
-
-    repo.update(has_toc: 0)
-    get repo.to_path
-    assert_equal 200, response.status
-    assert_no_react_component "toc/index"
   end
 
   test "GET /:user/:repo with Import status" do

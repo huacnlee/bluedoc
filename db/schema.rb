@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_063542) do
+ActiveRecord::Schema.define(version: 2019_04_08_031916) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -106,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.string "title", null: false
     t.string "draft_title"
     t.string "slug", limit: 200, null: false
-    t.integer "repository_id"
+    t.bigint "repository_id"
     t.integer "creator_id"
     t.integer "last_editor_id"
     t.integer "comments_count", default: 0, null: false
@@ -198,9 +197,9 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.string "format", limit: 20, default: "markdown", null: false
     t.datetime "body_updated_at"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "deleted_slug", limit: 200
+    t.string "deleted_slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "body_updated_at"], name: "index_notes_on_user_id_and_body_updated_at"
     t.index ["user_id", "deleted_at"], name: "index_notes_on_user_id_and_deleted_at"
     t.index ["user_id", "slug"], name: "index_notes_on_user_id_and_slug", unique: true
@@ -214,7 +213,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.string "target_type"
     t.integer "target_id"
     t.integer "group_id"
-    t.string "repository_id"
+    t.integer "repository_id"
     t.text "meta"
     t.datetime "read_at"
     t.datetime "created_at", null: false
@@ -269,6 +268,22 @@ ActiveRecord::Schema.define(version: 2019_03_21_063542) do
     t.integer "retries_count", default: 0, null: false
     t.text "message"
     t.index ["repository_id"], name: "index_repository_sources_on_repository_id"
+  end
+
+  create_table "repository_tocs", force: :cascade do |t|
+    t.integer "repository_id", null: false
+    t.string "title", null: false
+    t.integer "doc_id"
+    t.string "url"
+    t.integer "depth", default: 0, null: false
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.index ["repository_id", "doc_id"], name: "index_repository_tocs_on_repository_id_and_doc_id"
+    t.index ["repository_id", "lft"], name: "index_repository_tocs_on_repository_id_and_lft"
+    t.index ["repository_id", "parent_id"], name: "index_repository_tocs_on_repository_id_and_parent_id"
+    t.index ["repository_id", "rgt"], name: "index_repository_tocs_on_repository_id_and_rgt"
+    t.index ["repository_id"], name: "index_repository_tocs_on_repository_id"
   end
 
   create_table "sequences", force: :cascade do |t|

@@ -51,37 +51,6 @@ class VersionTest < ActiveSupport::TestCase
     assert_equal user.id, doc.versions.first.user_id
   end
 
-  test "Versionable with Repository Toc" do
-    repo = create(:repository)
-    assert_equal 0, repo.toc_versions.count
-
-    repo = build(:repository)
-    toc = <<~TOC
-    - title: Hello world
-      url: hello
-    TOC
-    repo.toc = toc
-    repo.save
-
-    assert_equal false, repo.new_record?
-
-    version = repo.toc_versions.first
-    assert_equal "TocVersion", version.type
-    assert_equal toc.strip, version.body_plain.strip
-
-    repo.update(name: "Foo bar")
-    assert_equal 1, repo.toc_versions.count
-
-    new_toc = <<~TOC
-    - title: World hello
-      url: hello
-    TOC
-    repo.update(toc: new_toc)
-    assert_equal 2, repo.toc_versions.count
-    version = repo.toc_versions.first
-    assert_equal new_toc.strip, version.body_plain.strip
-  end
-
   test "Versionable with Note" do
     note = build(:note, body: "This is new body", body_sml: "AAA this is new body", format: "sml")
     note.save

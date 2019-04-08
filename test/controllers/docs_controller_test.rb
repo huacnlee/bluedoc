@@ -341,7 +341,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_react_component "toc/index" do |props|
-      assert_equal doc.repository.toc_by_docs_json, props[:items]
+      assert_equal doc.repository.toc_json, props[:items]
       assert_equal doc.slug, props[:currentSlug]
     end
   end
