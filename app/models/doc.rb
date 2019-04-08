@@ -40,19 +40,8 @@ class Doc < ApplicationRecord
   # return next and prev of docs in same repository
   # { next: Doc, prev: Doc }
   def prev_and_next_of_docs
-    return @prev_and_next_of_docs if defined? @prev_and_next_of_docs
-    result = { next: nil, prev: nil }
-    ordered_docs = self.repository.toc_ordered_docs
-    idx = ordered_docs.find_index { |doc| doc&.id == self.id }
-    return nil if idx.nil?
-    if idx < ordered_docs.length
-      result[:next] = ordered_docs[idx + 1]
-    end
-    if idx > 0
-      result[:prev] = ordered_docs[idx - 1]
-    end
-    @prev_and_next_of_docs = result
-    @prev_and_next_of_docs
+    ordered_docs = self.repository.tocs.nested_tree
+    { next: self.toc&.next&.doc, prev: self.toc&.prev&.doc }
   end
 
   class << self

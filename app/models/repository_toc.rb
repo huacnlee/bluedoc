@@ -7,6 +7,14 @@ class RepositoryToc < ApplicationRecord
 
   scope :nested_tree, -> { order("lft asc") }
 
+  def next
+    self.repository.tocs.nested_tree.right_of(self.right).first
+  end
+
+  def prev
+    self.repository.tocs.nested_tree.left_of(self.left).last
+  end
+
   def self.to_markdown
     outs = []
     self.nested_tree.each do |item|
@@ -19,7 +27,7 @@ class RepositoryToc < ApplicationRecord
   def self.to_text
     outs = []
     self.nested_tree.each do |item|
-      outs << { id: item.id, url: item.url, title: item.title, depth: item.depth }.as_json
+      outs << { id: item.doc_id, url: item.url, title: item.title, depth: item.depth }.as_json
     end
     outs.to_yaml
   end
@@ -40,7 +48,9 @@ class RepositoryToc < ApplicationRecord
         if toc.depth > last_item.depth
           parent = last_item
         elsif toc.depth < last_item.depth
-          parent = parent.parent
+          (last_item.depth - toc.depth).times do
+            parent = parent&.parent
+          end
         end
       end
 
@@ -57,11 +67,13 @@ class RepositoryToc < ApplicationRecord
         parent: parent,
       )
     end
+
+    repo.touch
   end
 
   # Load old toc text
   def self.repo_old_toc_text(repo)
-    toc = ::RichText.new(name: "toc", record: repo)
+    toc = ::RichText.where(record: repo, name: "toc").take
     return toc&.body if toc.present?
 
     lines = []

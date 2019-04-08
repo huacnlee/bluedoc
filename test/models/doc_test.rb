@@ -408,22 +408,20 @@ class DocTest < ActiveSupport::TestCase
     repo = create(:repository)
     docs = create_list(:doc, 5, repository: repo)
 
-    repo.stub(:toc_ordered_docs, docs) do
-      # with first
-      result = docs[0].prev_and_next_of_docs
-      assert_nil result[:prev]
-      assert_equal docs[1], result[:next]
+    # with first
+    result = docs[0].prev_and_next_of_docs
+    assert_nil result[:prev]
+    assert_equal docs[1], result[:next]
 
-      # with normal
-      result = docs[2].prev_and_next_of_docs
-      assert_equal docs[1], result[:prev]
-      assert_equal docs[3], result[:next]
+    # with normal
+    result = docs[2].prev_and_next_of_docs
+    assert_equal docs[1], result[:prev]
+    assert_equal docs[3], result[:next]
 
-      # with last
-      result = docs[4].prev_and_next_of_docs
-      assert_equal docs[3], result[:prev]
-      assert_nil result[:next]
-    end
+    # with last
+    result = docs[4].prev_and_next_of_docs
+    assert_equal docs[3], result[:prev]
+    assert_nil result[:next]
   end
 
   test "read doc" do
