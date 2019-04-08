@@ -70,6 +70,9 @@
   .repo-list {
     .repo-item {
       margin-bottom: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
       .divider {
         color: $text-gray;
