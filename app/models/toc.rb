@@ -36,12 +36,13 @@ class Toc < ApplicationRecord
 
   # Create tocs from the old markdown style toc text
   # This method will clear all tocs in repo, before
-  def self.create_by_toc_text!(repo)
-    items = BlueDoc::Toc.parse(repo_old_toc_text(repo))
+  def self.create_by_toc_text!(repo, toc: nil)
+    toc = repo_old_toc_text(repo) if toc.nil?
+    items = BlueDoc::Toc.parse(toc)
     last_item = nil
     parent = nil
 
-    self.where(repository_id: repo.id).destroy_all
+    self.where(repository_id: repo.id).delete_all
 
     docs = repo.docs.all
 
