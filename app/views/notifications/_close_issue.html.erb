@@ -1,0 +1,17 @@
+<%
+issue = notification.target
+%>
+
+<% if issue %>
+  <div class="info">
+    <%= notification.actor_name %>
+    <%= t(".has closed issue") %>
+  </div>
+  <span class="time">
+    <%= l notification.created_at, format: :short %>
+  </span>
+  <div class="detail">
+    <div class="title"><%= link_to issue.issue_title, notification_url(notification) %></div>
+    <div class="f6 mt-2 text-gray"><%= repository_path_tag(issue.repository) %></div>
+  </div>
+<% end %>

@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :owned_repositories, class_name: "Repository", dependent: :destroy
   has_many :user_actives, -> { order("updated_at desc, id desc") }, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_many :issue_assignees
+  has_many :issues, through: :issue_assignees
+  has_many :owned_issues, class_name: "Issue"
 
   validates :name, presence: true, length: { in: 2..50 }
   validates :location, length: { maximum: 50 }

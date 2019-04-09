@@ -12,7 +12,7 @@ class IssuesController < Users::ApplicationController
 
     @repository.ensure_default_issue_labels
 
-    @issues = @repository.issues.includes(:user, :last_editor)
+    @issues = @repository.issues.includes(:user, :last_editor, :assignees)
     if params[:status] == "closed"
       @issues = @issues.closed
     else
@@ -32,7 +32,7 @@ class IssuesController < Users::ApplicationController
     end
 
     @issues = @issues.order("iid desc").page(params[:page]).per(12)
-    @issues = @issues.preload_assignees.preload_labels
+    @issues = @issues.preload_labels
     render :index
   end
 

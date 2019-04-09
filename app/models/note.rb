@@ -18,7 +18,7 @@ class Note < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  depends_on :privacy, :soft_delete, :publish, :body_touch, :versions, :search
+  depends_on :privacy, :soft_delete, :publish, :body_touch, :versions, :search, :watches
 
   def to_path(suffix = nil)
     "#{user.to_path}/notes/#{self.slug}#{suffix}"

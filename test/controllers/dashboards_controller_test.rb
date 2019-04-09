@@ -14,8 +14,10 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
 
     doc0 = create(:doc)
     doc1 = create(:doc)
+    issue0 = create(:issue)
     group = create(:group)
     group.add_member(@user, :editor)
+    UserActive.track(issue0, user: @user)
     UserActive.track(doc0, user: @user)
     UserActive.track(doc1, user: @user)
     UserActive.track(doc0.repository, user: @user)
@@ -24,6 +26,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     get "/"
     assert_equal 200, response.status
     assert_select ".recent-docs .recent-doc-item", 2
+    assert_select ".recent-issues .recent-issue-item", 1
     assert_select ".group-list .group-item", 1
     # assert_select ".group-list .group-item.group-item-more", 1
     assert_select ".repo-list .repo-item", 1

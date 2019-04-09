@@ -13,14 +13,13 @@ module NotifyTrackable
       when "Repository"
         notify_params[:group_id] = target.user_id
         notify_params[:repository_id] = target.id
-      when "Doc"
+      when "Doc", "Issue"
         notify_params[:repository_id] = target.repository_id
         notify_params[:group_id] = target.repository&.user_id
       when "Member"
         subject = target.subject
         case target.subject_type
-        when "Group"
-        when "User"
+        when "Group", "User"
           notify_params[:group_id] = subject.id
         when "Repository"
           notify_params[:group_id] = subject.user_id
@@ -51,6 +50,7 @@ module NotifyTrackable
       end
 
       user_ids = users.map(&:id) if users.present?
+      user_ids = user_ids.map { |id| id.to_i }
       user_ids.uniq!
       user_ids
     end

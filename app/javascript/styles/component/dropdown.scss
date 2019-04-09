@@ -80,17 +80,24 @@
 
   &.dropdown-menu-filter {
     .dropdown-header {
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding-top: 4px;
+      padding-bottom: 4px;
       margin-top: -6px;
-      background: #F7F7F7;
-      border-bottom: 1px solid #e0e0e0;
-      margin-bottom: 8px;
+      background: #fff;
+      border-bottom: 1px solid #d9d9d9;
+      margin-bottom: 0px;
+
+      .form-control {
+        border: 0;
+        background: transparent;
+        border-bottom: 1px solid #d9d9d9;
+        border-radius: 0;
+      }
     }
 
     &::after {
       border: 8px solid transparent;
-      border-bottom-color: #F7F7F7;
+      border-bottom-color: #fff;
     }
   }
   line-height: 32px;

@@ -45,16 +45,6 @@
   }
 
   .issue-box {
-    .issue-status {
-      margin-right: 10px;
-
-      @extend .label;
-      @extend .label-success;
-
-      &.issue-status-closed {
-        @extend .label-danger;
-      }
-    }
   }
 
   .issue-toolbar {
@@ -136,7 +126,7 @@
       }
 
       &.issue-closed {
-        .issue-status {
+        .status {
           .fas {
             color: $danger;
           }
@@ -151,7 +141,7 @@
         }
       }
 
-      .issue-status {
+      .status {
         position: absolute;
         top: 13px;
         left: 20px;
@@ -208,6 +198,7 @@
 
     .issue-label {
       display: block;
+      vertical-align: middle;
       padding: 4px 15px;
       border-radius: 2px;
     }
@@ -290,5 +281,17 @@
 
   .label-item-new {
     background: #f7f7f7;
+  }
+}
+
+
+.issue-status {
+  margin-right: 10px;
+
+  @extend .label;
+  @extend .label-success;
+
+  &.issue-status-closed {
+    @extend .label-danger;
   }
 }

@@ -9,6 +9,7 @@ class UserActive < ApplicationRecord
   scope :docs, -> { where(subject_type: "Doc").includes(subject: { repository: :user }) }
   scope :repositories, -> { where(subject_type: "Repository").includes(subject: :user) }
   scope :groups, -> { where(subject_type: "User").includes(subject: { avatar_attachment: :blob }) }
+  scope :issues, -> { where(subject_type: "Issue").includes(subject: { repository: :user }) }
 
   def self.track(subject, user_id: nil, user: nil)
     return false if subject.blank?

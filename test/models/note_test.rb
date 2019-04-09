@@ -208,4 +208,10 @@ class NoteTest < ActiveSupport::TestCase
     note.body = "New Body"
     assert_equal true, note.indexed_changed?
   end
+
+  test "watches" do
+    note = create(:note)
+
+    assert_equal true, note.user.watch_comment_note?(note)
+  end
 end

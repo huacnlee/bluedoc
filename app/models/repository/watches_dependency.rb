@@ -3,6 +3,9 @@
 class Repository
   after_create :trigger_members_watch
 
+  # watch user id list by action-store default
+  # @repository.watch_by_user_ids
+
   private
     def trigger_members_watch
       if self.user.user?

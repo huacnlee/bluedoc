@@ -170,4 +170,52 @@ class NotificationTest < ActiveSupport::TestCase
     assert_equal "#{doc.title} content has mentioned you.", note.mail_title
     assert_equal "comment-Doc-#{doc.id}", note.mail_message_id
   end
+
+  test "issue_assign" do
+    issue = create(:issue)
+    actor = create(:user)
+    note = create(:notification, notify_type: :issue_assign, target: issue, actor: actor)
+
+    assert_equal issue.to_url, note.target_url
+    assert_equal "issue_assign-Issue-#{issue.id}", note.mail_message_id
+    assert_equal issue.body_html, note.target_mention_fragment
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has assigned issue to you:</p><a href=\"#{Setting.host}/notifications/#{note.id}\">#{issue.issue_title}</a>", note.mail_body
+    assert_equal "#{issue.issue_title} has assigned to you.", note.mail_title
+  end
+
+  test "new_issue" do
+    issue = create(:issue)
+    actor = create(:user)
+    note = create(:notification, notify_type: :new_issue, target: issue, actor: actor)
+
+    assert_equal issue.to_url, note.target_url
+    assert_equal "new_issue-Issue-#{issue.id}", note.mail_message_id
+    assert_equal issue.body_html, note.target_mention_fragment
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has opened new issue:</p><a href=\"#{Setting.host}/notifications/#{note.id}\">#{issue.issue_title}</a>", note.mail_body
+    assert_equal "#{issue.issue_title} has opened new issue.", note.mail_title
+  end
+
+  test "close_issue" do
+    issue = create(:issue)
+    actor = create(:user)
+    note = create(:notification, notify_type: :close_issue, target: issue, actor: actor)
+
+    assert_equal issue.to_url, note.target_url
+    assert_equal "close_issue-Issue-#{issue.id}", note.mail_message_id
+    assert_equal issue.body_html, note.target_mention_fragment
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has closed issue:</p><a href=\"#{Setting.host}/notifications/#{note.id}\">#{issue.issue_title}</a>", note.mail_body
+    assert_equal "#{issue.issue_title} has closed issue.", note.mail_title
+  end
+
+  test "reopen_issue" do
+    issue = create(:issue)
+    actor = create(:user)
+    note = create(:notification, notify_type: :reopen_issue, target: issue, actor: actor)
+
+    assert_equal issue.to_url, note.target_url
+    assert_equal "reopen_issue-Issue-#{issue.id}", note.mail_message_id
+    assert_equal issue.body_html, note.target_mention_fragment
+    assert_html_equal "<p><strong>#{note.actor_name}</strong> has reopened issue:</p><a href=\"#{Setting.host}/notifications/#{note.id}\">#{issue.issue_title}</a>", note.mail_body
+    assert_equal "#{issue.issue_title} has reopened issue.", note.mail_title
+  end
 end

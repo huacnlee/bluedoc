@@ -3,6 +3,8 @@
 require "test_helper"
 
 class IssueTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @repo = create(:repository)
   end
@@ -67,6 +69,9 @@ class IssueTest < ActiveSupport::TestCase
     issue.reload
     assert_equal users0.sort, issue.assignees.sort
     assert_equal users0.collect(&:id).sort, issue.assignee_ids.sort
+    users0.each do |user|
+      assert_includes issue.watch_comment_by_user_ids, user.id
+    end
 
     issue.update_assignees(users1.collect(&:id))
     issue.reload
@@ -79,26 +84,31 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [], issue.assignee_ids
 
     # should save uniq
-    issue.update_assignees([1, 2, 1, 3, 2])
+    users2 = create_list(:user, 3)
+    issue.update_assignees([users2[0].id, users2[0].id, users2[1].id, users2[2].id])
     issue.reload
-    assert_equal [1, 2, 3], issue.assignee_ids
+    assert_equal users2.collect(&:id).sort, issue.assignee_ids.sort
   end
 
   test "with_assignees" do
     repo = create(:repository)
-    issue_other = create(:issue, assignee_ids: [1, 2, 3, 4, 5])
-    issue0 = create(:issue, repository: repo, assignee_ids: [1, 2, 3], status: :open)
-    issue1 = create(:issue, repository: repo, assignee_ids: [2, 3, 4], status: :open)
-    issue2 = create(:issue, repository: repo, assignee_ids: [3, 4, 5], status: :closed)
+    users = create_list(:user, 5)
+    issue_other = create(:issue, assignee_ids: users.collect(&:id))
+    issue0 = create(:issue, repository: repo, assignee_ids: [users[0].id, users[1].id, users[2].id], status: :open)
+    issue1 = create(:issue, repository: repo, assignee_ids: [users[1].id, users[2].id, users[3].id], status: :open)
+    issue2 = create(:issue, repository: repo, assignee_ids: [users[2].id, users[3].id, users[4].id], status: :closed)
 
-    assert_equal [issue_other, issue0, issue1, issue2], Issue.with_assignees([3]).order("id asc")
-    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees([3]).recent
-    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees(3).recent
-    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees("3").recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees([3, 2]).recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees(["3", "2"]).recent
-    assert_equal [issue0],  repo.issues.with_assignees([1, 2, 3]).recent
-    assert_equal [issue2, issue1],  repo.issues.with_assignees([4]).recent
+    # call from Issue will including all repository issues
+    assert_equal [issue_other, issue0, issue1, issue2], Issue.with_assignees([users[2].id]).order("id asc")
+
+    # under a repository issues
+    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees([users[2].id]).recent
+    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees(users[2].id).recent
+    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees("#{users[2].id}").recent
+    assert_equal [issue1, issue0],  repo.issues.with_assignees([users[1].id]).recent
+    assert_equal [issue1, issue0],  repo.issues.with_assignees(["#{users[1].id}"]).recent
+    assert_equal [issue0],  repo.issues.with_assignees([users[0].id]).recent
+    assert_equal [issue2, issue1],  repo.issues.with_assignees([users[3].id]).recent
     assert_equal [issue2, issue1, issue0],  repo.issues.with_assignees([]).recent
     assert_equal [issue2],  repo.issues.closed.with_assignees([]).recent
     assert_equal [issue1, issue0],  repo.issues.open.with_assignees([]).recent
@@ -175,5 +185,65 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [issue2, issue1, issue0],  repo.issues.with_labels([]).recent
     assert_equal [issue2],  repo.issues.closed.with_labels([]).recent
     assert_equal [issue1, issue0],  repo.issues.open.with_labels([]).recent
+  end
+
+  test "watches / notifications" do
+    user = create(:user)
+    repo = create(:repository)
+    user1 = create(:user)
+    user2 = create(:user)
+    actor = create(:user)
+
+    perform_enqueued_jobs do
+      user.watch_repository(repo)
+      user1.watch_repository(repo)
+      user2.watch_repository(repo)
+      assert_equal 3, repo.watch_by_user_ids.length
+
+      issue = create(:issue, user_id: user.id, repository: repo)
+
+      # issue should have 3 watchers
+      assert_equal [user.id, user1.id, user2.id].sort, issue.watch_comment_by_user_ids.sort
+
+      # Should create new_issue notification
+      assert_equal 2, Notification.where(target: issue).count
+      notes = Notification.where(notify_type: "new_issue", target: issue, actor_id: issue.user_id)
+      assert_equal 2, notes.length
+      assert_equal [user1.id, user2.id].sort, notes.collect(&:user_id).sort
+
+      # update issue
+      issue.update(title: "New issue title")
+      # should not create any notification like close_issue, reopen_issue
+      assert_equal 0, Notification.where(notify_type: "close_issue").count
+      assert_equal 0, Notification.where(notify_type: "reopen_issue").count
+
+      # close issue
+      Current.stub(:user, actor) do
+        issue.closed!
+      end
+      notes = Notification.where(notify_type: "close_issue", target: issue)
+      assert_equal 3, notes.count
+      assert_equal actor.id, notes.first.actor_id
+      assert_equal issue.watch_comment_by_user_ids.sort, notes.collect(&:user_id).sort
+
+      # reopen issue
+      Current.stub(:user, actor) do
+        issue.open!
+      end
+      notes = Notification.where(notify_type: "reopen_issue", target: issue)
+      assert_equal 3, notes.count
+      assert_equal actor.id, notes.first.actor_id
+      assert_equal issue.watch_comment_by_user_ids.sort, notes.collect(&:user_id).sort
+    end
+  end
+
+  test "user_actives for Issue" do
+    user = create(:user)
+    issue = create(:issue, user: user)
+
+    assert_equal 3, user.user_actives.count
+    assert_equal 1, user.user_actives.where(subject: issue).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository.user).count
   end
 end
