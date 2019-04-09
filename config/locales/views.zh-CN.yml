@@ -324,8 +324,8 @@ zh-CN:
     comment_watch:
       Subscribe: 订阅新评论
       Unsubscribe: 取消订阅
-      You’re ignoring this notifications: 你禁用此文档的通知。
-      You’re not receiving notifications: 你未订阅评论的通知。
+      You’re ignoring this notifications: 你已经主动忽略此内容的通知。
+      You’re not receiving notifications: 你还未订阅通知。
       You’re receiving notifications because you’re subscribed: 目前你已订阅，将会收到新评论的通知。
     comment:
       Delete: 删除评论

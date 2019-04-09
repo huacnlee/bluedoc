@@ -11,7 +11,11 @@ class Issue
   # Replace issue assignees
   def update_assignees(assignee_ids)
     self.assignee_ids = assignee_ids.uniq
-    self.save
+    if self.save
+      self.assignee_ids.each do |user_id|
+        User.create_action(:watch_comment, target: self, user_type: "User", user_id: user_id)
+      end
+    end
   end
 
   def assignees

@@ -67,6 +67,9 @@ class IssueTest < ActiveSupport::TestCase
     issue.reload
     assert_equal users0.sort, issue.assignees.sort
     assert_equal users0.collect(&:id).sort, issue.assignee_ids.sort
+    users0.each do |user|
+      assert_includes issue.watch_comment_by_user_ids, user.id
+    end
 
     issue.update_assignees(users1.collect(&:id))
     issue.reload
