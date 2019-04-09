@@ -802,6 +802,7 @@ en:
       Groups: Groups
       Users: Users
       Notes: Notes
+      Issues: Issues
     no_result:
       No result: No result
       Can not find any contents like: "No related documents like"

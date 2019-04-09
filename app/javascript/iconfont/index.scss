@@ -108,6 +108,15 @@ a[data-method=delete] {
   @extend .fa-select;
 }
 
+.fa-times:before {
+  @extend .fa-cancel;
+}
+
+.fa-avatar-note:before,
+.fa-avatar-issue:before {
+  @extend .fa-avatar-doc;
+}
+
 .fa-arrow {
   transition: all .2s ease;
   &.folder {

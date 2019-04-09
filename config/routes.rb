@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       get :groups
       get :users
       get :notes
+      get :issues
     end
   end
   resources :comments do

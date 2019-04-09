@@ -83,8 +83,10 @@ export default class Labels extends React.PureComponent {
 
     // /:user/:repo/issues/:iid -> /:user/:repo/issues/labels
     let labelsURL;
+    let issuesURL;
     if (issueURL) {
       labelsURL = issueURL.replace(/\/[\d]+$/, "/labels");
+      issuesURL = issueURL.replace(/\/[\d]+$/, "");
     }
 
     return <div className="sidebar-box issue-labels">
@@ -107,7 +109,7 @@ export default class Labels extends React.PureComponent {
       <div className="label-list">
       {labels.length > 0 && labels.map(item => {
         return <div className="mb-1">
-          <a href="#" className="issue-label" style={{ backgroundColor: item.color }}>
+          <a href={`${issuesURL}?label_id=${item.id}`} className="issue-label" style={{ backgroundColor: item.color }}>
             <span className="issue-label-name">{item.title}</span>
           </a>
         </div>
