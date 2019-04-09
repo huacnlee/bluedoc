@@ -3,6 +3,7 @@
 module Types
   class DocType < BaseType
     graphql_name "Doc"
+    description "Doc item"
 
     field :slug, String, null: false, description: "Document slug"
     field :path, String, null: false, method: :to_path, description: "Full path of this document"

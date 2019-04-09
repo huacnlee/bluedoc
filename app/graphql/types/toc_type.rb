@@ -2,7 +2,8 @@
 
 module Types
   class TocType < BaseType
-    graphql_name "RepositoryToc"
+    graphql_name "Toc"
+    description "Toc item for Doc for describe the doc in the table of contents tree"
 
     field :parent_id, Integer, null: true, description: "Parent toc id"
     field :depth, Integer, null: false, description: "Depth"
