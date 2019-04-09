@@ -113,6 +113,7 @@
     font-size: 100%;
     background-color: rgba($black, 0.05);
     border-radius: 1px;
+    border: 0px;
     display: inline-block;
 
     br { display: none; }
@@ -392,9 +393,9 @@
 
   // Tables
   table {
-    display: table;
+    display: block;
     width: 100%;
-    overflow: auto;
+    overflow-x: scroll;
 
     th {
       font-weight: bold;
@@ -404,6 +405,7 @@
     td {
       padding: 6px 13px;
       border: 1px solid #eee;
+      white-space: nowrap;
 
       p,
       .paragraph {
