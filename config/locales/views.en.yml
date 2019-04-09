@@ -578,6 +578,12 @@ en:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
       issue_assign:
         has assigned issue to you: "has assigned issue to you:"
+      new_issue:
+        has opened new issue: "has opened new issue:"
+      close_issue:
+        has closed issue: "has closed issue:"
+      reopen_issue:
+        has reopened issue: "has reopened issue:"
     title:
       add_member:
         has added you as a member of: "has added you as a member of [%{subject}]"
@@ -590,6 +596,12 @@ en:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
       issue_assign:
         has assign to you: "has assigned to you."
+      new_issue:
+        has opened new issue: "has opened new issue."
+      close_issue:
+        has closed issue: "has closed issue."
+      reopen_issue:
+        has reopened issue: "has reopened issue."
     add_member:
       has added you as a member of: "has added you as a member of:"
     comment:
@@ -601,6 +613,12 @@ en:
       has been imported: as been imported
     issue_assign:
       has assigned issue to you: "has assigned issue to you."
+    new_issue:
+      has opened new issue: "has opened new issue."
+    close_issue:
+      has closed issue: "has closed issue."
+    reopen_issue:
+      has reopened issue: "has reopened issue."
     index:
       Unread: Unread
       All: All

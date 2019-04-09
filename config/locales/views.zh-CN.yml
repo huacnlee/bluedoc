@@ -572,6 +572,12 @@ zh-CN:
         Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
       issue_assign:
         has assigned issue to you: "指派议题给你："
+      new_issue:
+        has opened new issue: "创建了的新议题："
+      close_issue:
+        has closed issue: "关闭了议题："
+      reopen_issue:
+        has reopened issue: "重新开启了议题："
     title:
       add_member:
         has added you as a member of: "将你添加为 [%{subject}] 的成员。"
@@ -584,6 +590,12 @@ zh-CN:
         Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
       issue_assign:
         has assign to you: "指派议题给你。"
+      new_issue:
+        has opened new issue: "创建了的新议题。"
+      close_issue:
+        has closed issue: "关闭了议题。"
+      reopen_issue:
+        has reopened issue: "重新开启了议题。"
     add_member:
       has added you as a member of: "将你添加为成员："
     comment:
@@ -595,6 +607,12 @@ zh-CN:
       has been imported: "导入任务已经执行完成，结果："
     issue_assign:
       has assigned issue to you: "指派议题给你。"
+    new_issue:
+      has opened new issue: "创建了的新议题。"
+    close_issue:
+      has closed issue: "关闭了议题。"
+    reopen_issue:
+      has reopened issue: "重新开启了议题。"
     index:
       Unread: 未读通知
       All: 全部通知

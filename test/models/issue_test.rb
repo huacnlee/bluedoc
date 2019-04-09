@@ -3,6 +3,8 @@
 require "test_helper"
 
 class IssueTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @repo = create(:repository)
   end
@@ -180,10 +182,53 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [issue1, issue0],  repo.issues.open.with_labels([]).recent
   end
 
-  test "watches" do
+  test "watches / notifications" do
     user = create(:user)
-    issue = create(:issue, user_id: user.id)
+    repo = create(:repository)
+    user1 = create(:user)
+    user2 = create(:user)
+    actor = create(:user)
 
-    assert_equal [user.id], issue.watch_comment_by_user_ids
+    perform_enqueued_jobs do
+      user.watch_repository(repo)
+      user1.watch_repository(repo)
+      user2.watch_repository(repo)
+      assert_equal 3, repo.watch_by_user_ids.length
+
+      issue = create(:issue, user_id: user.id, repository: repo)
+
+      # issue should have 3 watchers
+      assert_equal [user.id, user1.id, user2.id].sort, issue.watch_comment_by_user_ids.sort
+
+      # Should create new_issue notification
+      assert_equal 2, Notification.where(target: issue).count
+      notes = Notification.where(notify_type: "new_issue", target: issue, actor_id: issue.user_id)
+      assert_equal 2, notes.length
+      assert_equal [user1.id, user2.id].sort, notes.collect(&:user_id).sort
+
+      # update issue
+      issue.update(title: "New issue title")
+      # should not create any notification like close_issue, reopen_issue
+      assert_equal 0, Notification.where(notify_type: "close_issue").count
+      assert_equal 0, Notification.where(notify_type: "reopen_issue").count
+
+      # close issue
+      Current.stub(:user, actor) do
+        issue.closed!
+      end
+      notes = Notification.where(notify_type: "close_issue", target: issue)
+      assert_equal 3, notes.count
+      assert_equal actor.id, notes.first.actor_id
+      assert_equal issue.watch_comment_by_user_ids.sort, notes.collect(&:user_id).sort
+
+      # reopen issue
+      Current.stub(:user, actor) do
+        issue.open!
+      end
+      notes = Notification.where(notify_type: "reopen_issue", target: issue)
+      assert_equal 3, notes.count
+      assert_equal actor.id, notes.first.actor_id
+      assert_equal issue.watch_comment_by_user_ids.sort, notes.collect(&:user_id).sort
+    end
   end
 end

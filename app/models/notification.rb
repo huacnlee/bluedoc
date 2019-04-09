@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  NOTIFY_TYPES = %w[add_member repo_import comment mention issue_assign]
+  NOTIFY_TYPES = %w[add_member repo_import comment mention issue_assign new_issue close_issue reopen_issue]
 
   before_create :bind_relation_for_target
   after_commit :create_email_notify, on: [:create]
@@ -67,10 +67,8 @@ class Notification < ActiveRecord::Base
   def target_url
     case notify_type
     when "add_member" then self.target&.subject&.to_url
-    when "repo_import" then self.target&.to_url
-    when "comment" then self.target&.to_url
-    when "mention" then self.target&.to_url
-    when "issue_assign" then self.target&.to_url
+    when "repo_import", "comment", "mention", "issue_assign", "new_issue", "close_issue", "reopen_issue"
+      self.target&.to_url
     else
       Setting.host
     end
@@ -79,9 +77,9 @@ class Notification < ActiveRecord::Base
   def target_mention_fragment
     return @target_mention_fragment if defined? @target_mention_fragment
     @target_mention_fragment = case target_type
-                               when "Comment" then self.target&.body_html
                                when "Doc" then BlueDoc::HTML.mention_fragments(self.target&.body_html, self.user&.slug).join("<br /><br />")
-                               when "Issue" then self.target&.body_html
+                               when "Comment", "Issue"
+                                 self.target&.body_html
                                else
                                  ""
     end

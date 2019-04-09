@@ -10,6 +10,14 @@ class Issue
 
   private
     def triger_watch_on_create
-      User.create_action(:watch_comment, target: self, user_type: "User", user_id: self.user_id)
+      user_ids = self.repository.watch_by_user_ids
+      user_ids << self.user_id
+      user_ids.uniq!
+
+      Action.bulk_insert do |work|
+        user_ids.each do |user_id|
+          work.add(action_type: "watch_comment", target_type: "Issue", target_id: self.id, user_type: "User", user_id: user_id)
+        end
+      end
     end
 end
