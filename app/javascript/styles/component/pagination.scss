@@ -26,7 +26,8 @@
 .pagination a, .pagination em, .pagination span {
   position: relative;
   float: left;
-  padding: 5px 12px;
+  padding: 0px 12px;
+  line-height: 29px;
   margin: 0 3px;
   font-size: 13px;
   font-style: normal;
@@ -68,8 +69,9 @@
 }
 
 .pagination .disabled, .pagination .disabled:hover, .pagination .gap,
+.pagination .disabled a,
 .pagination .gap:hover {
-  color: #d0d0d0;
-  text-decoration: none;
-  cursor: default;
+  color: #d0d0d0 !important;
+  text-decoration: none !important;
+  cursor: default !important;
 }
