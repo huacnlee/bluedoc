@@ -12,6 +12,9 @@ en:
     admin: Admin
     editor: Editor
     reader: Reader
+  issue_status:
+    open: Open
+    closed: Closed
   activerecord:
     models:
       user: User

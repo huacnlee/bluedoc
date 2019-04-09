@@ -1,0 +1,12 @@
+<li class="list-item recent-issue-item">
+  <div class="title">
+    <%= link_to item.subject.title, item.subject.to_url %>
+  </div>
+  <div class="path">
+    <span class="issue-iid mr-2">#<%= item.subject.iid %></span>
+  <span class="issue-status issue-status-<%= item.subject.status %>"><%= t("issue_status.#{item.subject.status}") %></span>
+
+    <%= user_name_tag(item.subject.repository.user) %> /
+    <%= repository_name_tag(item.subject&.repository) %>
+  </div>
+</li>

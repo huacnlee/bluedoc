@@ -19,6 +19,7 @@ class Issue
     if self.save
       new_assignee_ids.each do |user_id|
         User.create_action(:watch_comment, target: self, user_type: "User", user_id: user_id)
+        UserActive.track(self, user_id: user_id)
       end
 
       NotificationJob.perform_later "issue_assign", self, user_id: new_assignee_ids, actor_id: Current.user&.id

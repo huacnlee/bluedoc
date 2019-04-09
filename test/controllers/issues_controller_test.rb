@@ -218,7 +218,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users1.sort.collect(&:as_item_json), data["assignees"].sort_by { |item| item[:id] }
 
     issue.reload
-    assert_equal users1.sort_by { |u| u.id }, issue.assignees
+    assert_equal users1.sort_by { |u| u.id }, issue.assignees.sort
 
     # Clear all
     post issue.to_path("/assignees"), params: { clear: 1 }

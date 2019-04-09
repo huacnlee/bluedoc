@@ -236,4 +236,14 @@ class IssueTest < ActiveSupport::TestCase
       assert_equal issue.watch_comment_by_user_ids.sort, notes.collect(&:user_id).sort
     end
   end
+
+  test "user_actives for Issue" do
+    user = create(:user)
+    issue = create(:issue, user: user)
+
+    assert_equal 3, user.user_actives.count
+    assert_equal 1, user.user_actives.where(subject: issue).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository.user).count
+  end
 end

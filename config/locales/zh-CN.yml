@@ -10,6 +10,9 @@ zh-CN:
     admin: 管理员
     editor: 编辑者
     reader: 只读者
+  issue_status:
+    open: 进行中
+    closed: 已关闭
   activerecord:
     models:
       doc: 文档

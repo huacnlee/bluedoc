@@ -15,7 +15,7 @@
       <%= user_avatar_tag(@issue.user, style: :medium) %>
     </div>
     <div class="issue-info">
-      <span class="issue-status issue-status-<%= @issue.status %>"><%= icon_tag("issue") %> <%= t(".#{@issue.status}") %></span>
+      <span class="issue-status issue-status-<%= @issue.status %>"><%= icon_tag("issue") %> <%= t("issue_status.#{@issue.status}") %></span>
       <span class="author"><%= user_name_tag(@issue.user) %></span>
       <span class="created-at"><%= t("created at") %> <%= timeago @issue.created_at %></span>
       <a class="ml-3" href="#comment"><%= @issue.comments_count %> <%= t(".comments") %></a>

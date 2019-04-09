@@ -253,4 +253,19 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal 1, comment.reactions.count
     assert_equal comment, comment.reactions.first.subject
   end
+
+  test "user_actives for Issue" do
+    user = create(:user)
+    issue = create(:issue)
+
+    # ensure clear
+    user.user_actives.delete_all
+
+    comment = create(:comment, commentable: issue, user: user)
+
+    assert_equal 3, user.user_actives.count
+    assert_equal 1, user.user_actives.where(subject: issue).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository).count
+    assert_equal 1, user.user_actives.where(subject: issue.repository.user).count
+  end
 end
