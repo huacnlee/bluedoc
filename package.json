@@ -26,6 +26,8 @@
     "react-content-loader": "^4.2.1",
     "react-paginate": "^6.3.0",
     "react-sortable-hoc": "^0.8.4",
+    "react-sortable-tree": "^2.6.2",
+    "react-sortable-tree-theme-minimal": "^0.0.14",
     "react-timeago": "^4.4.0",
     "react_ujs": "^2.4.4",
     "slate": "^0.44.12",

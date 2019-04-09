@@ -1,51 +1,41 @@
-export const isShow = (path, folders) => {
-  const pathNode = path.split('_');
-  if (pathNode.length > 1) {
-    pathNode.pop();
-    return !pathNode.some((item) => {
-      const folderNode = folders.find(e => e.id * 1 === item * 1);
-      return folderNode ? folderNode.foldersStatus : false;
-    });
+const getTreeFromFlatData = ({
+  flatData,
+  getKey = node => node.id,
+  getParentKey = node => node.parentId,
+  rootKey = '0',
+}) => {
+  if (!flatData) {
+    return [];
   }
-  return true;
-};
 
-// format toc items
-export const formatItems = (items, currentSlug, defaultFoldeDepth = 1) => {
-  const data = JSON.parse(items);
-  const prevNodeId = [0];
-  const folderNode = [];
-  let pathNode = [];
-  const result = data.map((item, index) => {
-    const { depth = 0 } = item;
-    if (depth > prevNodeId.length - 1) {
-      folderNode.push(prevNodeId[prevNodeId.length - 1]);
-      prevNodeId.splice(depth, 0, index);
+  const childrenToParents = {};
+  flatData.forEach((child) => {
+    const parentKey = getParentKey(child);
+
+    if (parentKey in childrenToParents) {
+      childrenToParents[parentKey].push(child);
     } else {
-      prevNodeId.splice(depth, prevNodeId.length - depth, index);
+      childrenToParents[parentKey] = [child];
     }
-    return {
-      ...item,
-      tocPath: prevNodeId.join('_'),
-    };
   });
 
-  if (currentSlug) {
-    const item = result.find(v => v.url === currentSlug);
-    if (item) {
-      pathNode = item.tocPath.split('_');
-    }
+  if (!(rootKey in childrenToParents)) {
+    return [];
   }
-  const folders = folderNode.map((i) => {
-    const foldersStatus = pathNode.indexOf(`${i}`) === -1
-      ? result[i].depth > defaultFoldeDepth - 1 : false;
-    return {
-      id: i,
-      foldersStatus,
-    };
-  });
-  return {
-    items: result,
-    folders,
+
+  const trav = (parent) => {
+    const parentKey = getKey(parent);
+    if (parentKey in childrenToParents) {
+      return {
+        ...parent,
+        children: childrenToParents[parentKey].map(child => trav(child)),
+      };
+    }
+
+    return { ...parent };
   };
+
+  return childrenToParents[rootKey].map(child => trav(child));
 };
+
+export { getTreeFromFlatData };
