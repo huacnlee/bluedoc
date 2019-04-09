@@ -1,12 +1,3 @@
-export class Icon extends React.Component {
-  render() {
-    const { name, className } = this.props;
+const Icon = ({ name, className }) => <i className={`fas fa-${name} ${className || ''}`} />;
 
-    let finalClassName = `fas fa-${name}`;
-    if (className) {
-      finalClassName += " " + className;
-    }
-
-    return <i className={finalClassName} />
-  }
-}
+export default Icon;

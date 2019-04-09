@@ -1,14 +1,13 @@
-const webpack = require('webpack')
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
 
 const extendConfig = {
   externals: {
-    "react": "React",
-    "react-dom": "ReactDOM",
-    'react-dom/server': "ReactDOMServer",
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    'react-dom/server': 'ReactDOMServer',
     jquery: 'jQuery',
     'rails-ujs': 'Rails',
-    turbolinks: 'Turbolinks'
+    turbolinks: 'Turbolinks',
   },
   // optimization: {
   //   splitChunks: {
@@ -22,8 +21,8 @@ const extendConfig = {
   //     }
   //   }
   // },
-}
+};
 
-environment.config.merge(extendConfig)
+environment.config.merge(extendConfig);
 
-module.exports = environment
+module.exports = environment;

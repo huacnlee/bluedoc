@@ -1,4 +1,4 @@
-import { graph } from "bluedoc/graphql";
+import { graph } from 'bluedoc/graphql';
 
 const getDocs = graph(`
   query (@autodeclare) {

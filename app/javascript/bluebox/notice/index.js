@@ -1,5 +1,5 @@
-import ErrorMessages from "./error-messages"
+import ErrorMessages from './error-messages';
 
 export {
-  ErrorMessages
-}
+  ErrorMessages,
+};
