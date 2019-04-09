@@ -576,6 +576,8 @@ en:
         has mentioned you in subject: "has mentioned you in [%{subject}]."
       repo_import:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
+      issue_assign:
+        has assigned issue to you: "has assigned issue to you:"
     title:
       add_member:
         has added you as a member of: "has added you as a member of [%{subject}]"
@@ -586,6 +588,8 @@ en:
         got a mention: content has mentioned you.
       repo_import:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
+      issue_assign:
+        has assign to you: "has assigned to you."
     add_member:
       has added you as a member of: "has added you as a member of:"
     comment:
@@ -595,6 +599,8 @@ en:
     repo_import:
       Repository: Repository
       has been imported: as been imported
+    issue_assign:
+      has assigned issue to you: "has assigned issue to you."
     index:
       Unread: Unread
       All: All

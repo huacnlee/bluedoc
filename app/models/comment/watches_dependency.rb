@@ -9,8 +9,7 @@ class Comment
     return user_ids if self.commentable.blank?
 
     case self.commentable_type
-    when "Doc"
-    when "Issue"
+    when "Doc", "Issue"
       user_ids = self.commentable.watch_comment_by_user_ids
     else
       user_ids = self.commentable.watch_comment_by_user_actions.where("action_option is null or action_option != ?", "ignore").pluck(:user_id)

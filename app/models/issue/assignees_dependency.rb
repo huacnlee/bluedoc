@@ -10,11 +10,17 @@ class Issue
 
   # Replace issue assignees
   def update_assignees(assignee_ids)
-    self.assignee_ids = assignee_ids.uniq
+    assignee_ids = assignee_ids.uniq
+    # New assignee will ignore exists users and current_user
+    new_assignee_ids = assignee_ids - self.assignee_ids - [Current.user&.id]
+
+    self.assignee_ids = assignee_ids
     if self.save
-      self.assignee_ids.each do |user_id|
+      new_assignee_ids.each do |user_id|
         User.create_action(:watch_comment, target: self, user_type: "User", user_id: user_id)
       end
+
+      NotificationJob.perform_later "issue_assign", self, user_id: new_assignee_ids, actor_id: Current.user&.id
     end
   end
 

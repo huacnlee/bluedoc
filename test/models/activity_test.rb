@@ -194,6 +194,16 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal doc, activity_params[:target]
   end
 
+  test "fill_depend_id_for_target for Issue" do
+    issue = create(:issue)
+    activity_params = { target: issue }
+    Activity.fill_depend_id_for_target(activity_params)
+
+    assert_equal issue.repository.user_id, activity_params[:group_id]
+    assert_equal issue.repository_id, activity_params[:repository_id]
+    assert_equal issue, activity_params[:target]
+  end
+
   test "fill_depend_id_for_target for Member / Group" do
     group = create(:group)
     member = create(:member, subject: group)
