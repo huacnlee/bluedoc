@@ -176,4 +176,11 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [issue2],  repo.issues.closed.with_labels([]).recent
     assert_equal [issue1, issue0],  repo.issues.open.with_labels([]).recent
   end
+
+  test "watches" do
+    user = create(:user)
+    issue = create(:issue, user_id: user.id)
+
+    assert_equal [user.id], issue.watch_comment_by_user_ids
+  end
 end

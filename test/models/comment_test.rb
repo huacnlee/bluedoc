@@ -123,6 +123,53 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal true, comment.commentable_watch_by_user_ids.include?(comment.user_id)
   end
 
+  test "watches for Issue" do
+    issue = create(:issue)
+    user1 = create(:user)
+    user2 = create(:user)
+    user3 = create(:user)
+
+    user1.watch_comment_issue(issue)
+    user2.watch_comment_issue(issue)
+    User.create_action(:watch_comment, target: issue, user: user3, action_option: "ignore")
+
+    comment = build(:comment, commentable: nil)
+    assert_equal [], comment.commentable_watch_by_user_ids
+
+    # commentable_watch_by_user_ids should not including ignore user
+    comment = build(:comment, commentable: issue)
+    assert_equal [issue.user_id, user1.id, user2.id].sort, comment.commentable_watch_by_user_ids.sort
+
+    # auto watch_comment to doc on create
+    comment.save
+    assert_equal true, issue.watch_comment_by_user_ids.include?(comment.user_id)
+    assert_equal 4, comment.commentable_watch_by_user_ids.length
+    assert_equal true, comment.commentable_watch_by_user_ids.include?(comment.user_id)
+  end
+
+  test "watches for Note" do
+    note = create(:note)
+    user1 = create(:user)
+    user2 = create(:user)
+    user3 = create(:user)
+
+    user1.watch_comment_note(note)
+    user2.watch_comment_note(note)
+    User.create_action(:watch_comment, target: note, user: user3, action_option: "ignore")
+
+    comment = build(:comment, commentable: nil)
+    assert_equal [], comment.commentable_watch_by_user_ids
+
+    # commentable_watch_by_user_ids should not including ignore user
+    comment = build(:comment, commentable: note)
+    assert_equal [note.user_id, user1.id, user2.id].sort, comment.commentable_watch_by_user_ids.sort
+
+    # auto watch_comment to doc on create
+    comment.save
+    assert_equal 4, comment.commentable_watch_by_user_ids.length
+    assert_equal true, comment.commentable_watch_by_user_ids.include?(comment.user_id)
+  end
+
   test "notifications" do
     doc = create(:doc)
     user1 = create(:user)
