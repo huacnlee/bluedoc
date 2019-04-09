@@ -23,6 +23,7 @@ zh-CN:
       member: 成员
       share: 分享
       note: 笔记
+      issue: 议题
     attributes:
       doc:
         title: 文档标题
@@ -81,7 +82,12 @@ zh-CN:
         title: 标签名称
         color: 颜色
       issue:
+        iid: 序号
         title: 标题
+        user: 创建人
+        status: 状态
+        body: 正文
+        body_sml: 正文
     errors:
       messages:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。

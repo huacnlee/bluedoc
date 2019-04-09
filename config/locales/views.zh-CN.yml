@@ -170,6 +170,7 @@ zh-CN:
     Notification: 通知
     Activity: 动态
     Note: 笔记
+    Issue: 议题
     Back to Front: 回到前台
     Sign out: 登出
     comments:
@@ -289,6 +290,8 @@ zh-CN:
         Note was successfully deleted: 笔记删除成功
       restore:
         Note was successfully restored: 笔记恢复成功
+      destroy:
+        Issue was successfully deleted: 议题删除成功
     docs:
       create:
         Doc was successfully created: 文档创建成功
