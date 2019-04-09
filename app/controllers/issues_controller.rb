@@ -52,6 +52,7 @@ class IssuesController < Users::ApplicationController
 
     @issue = @repository.issues.new(issue_params)
     @issue.user_id = current_user.id
+    @issue.format = "sml"
     if @issue.save
       redirect_to @issue.to_path, notice: t(".Issue was successfully created")
     else
@@ -75,6 +76,7 @@ class IssuesController < Users::ApplicationController
     update_params = issue_params.to_hash.deep_symbolize_keys
     update_params[:last_editor_id] = current_user.id
     update_params[:last_edited_at] = Time.now
+    update_params[:format] = "sml"
     if @issue.update(update_params)
       redirect_to @issue.to_path, notice: t(".Issue was successfully updated")
     else
