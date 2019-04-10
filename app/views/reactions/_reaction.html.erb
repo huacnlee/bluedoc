@@ -12,14 +12,16 @@ title = ""
 if reaction.group_user_slugs.length > 0
   title = reaction.group_user_slugs.take(3).join(", ")
   if reaction.group_user_slugs.length > 3
-    title += " ... and #{reaction.group_user_slugs.length} people"
+    title += t(".and count people has reacted", count: reaction.group_user_slugs.length)
+  else
+    title += t(".has reacted")
   end
-  title += " has reacted"
 end
 %>
 
 <button type="submit" class="<%= class_name %>"
   name="reaction[content]" value="<%= value %>"
+  data-toggle="tooltip"
   title="<%= title %>">
   <%= image_tag reaction.url, class: "emoji" %>
   <% if reaction.group_count > 0 %>

@@ -1,5 +1,5 @@
 <details class="details-overlay details-reset position-relative float-left reaction-popover-container">
-  <summary class="btn-link reaction-summary-item add-reaction-btn"><%= icon_tag("smile") %></summary>
+  <summary class="reaction-summary-item add-reaction-btn"><%= icon_tag("smile") %></summary>
   <div class="dropdown-menu dropdown-menu-ne add-reaction-popover anim-scale-in">
     <%= form_for reaction, url: reactions_path, method: :post, remote: true do |f| %>
       <%= f.hidden_field :subject_type %>
