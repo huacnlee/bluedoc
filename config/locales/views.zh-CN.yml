@@ -627,6 +627,9 @@ zh-CN:
   reactions:
     new_button:
       Select a item: "用表情来表达你的想法"
+    reaction:
+      and count people has reacted: " 和其他 %{count} 个人选择此表情"
+      has reacted: " 选择此表情"
   repositories:
     doc:
       Sharing: 分享中

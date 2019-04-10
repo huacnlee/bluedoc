@@ -635,6 +635,9 @@ en:
   reactions:
     new_button:
       Select a item: Pick a reaction
+    reaction:
+      and count people has reacted: " and %{count} people has reacted"
+      has reacted: " has reacted"
   repositories:
     doc:
       Sharing: Sharing
