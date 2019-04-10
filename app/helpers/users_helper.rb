@@ -37,8 +37,8 @@ module UsersHelper
 
     return image_html if opts[:link] == false
 
-    data = { name: user.name, slug: user.slug, type: user.type.downcase }
-    link_to user.to_path, class: "user-avatar", data: data do
+    data = { name: user.name, slug: user.slug, type: user.type.downcase, toggle: "tooltip" }
+    link_to user.to_path, class: "user-avatar", title: user.name, data: data do
       image_html
     end
   end
