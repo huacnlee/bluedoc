@@ -4,39 +4,38 @@
     <div class="heading clearfix">
       <h1 class="text-gray-light">
         <div class="repo-name">
-          <%= repository_name_tag @repository %>
+          <%= group_name_tag @user %> <span class="divider">/</span> <%= repository_name_tag @repository %>
+          <% if @repository.private? %>
+           <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
+          <% end %>
         </div>
-        <div class="group-name"><%= group_name_tag @user %></div>
-        <% if @repository.private? %>
-          <span class="label label-private icon-middle-wrap ml-2"><%= icon_tag("lock") %><%= t(".Private") %></span>
-        <% end %>
       </h1>
 
-      <div class="repo-actions">
-        <%= action_button_tag(@repository, :watch, with_count: true) %>
-        <%= action_button_tag(@repository, :star, with_count: true) %>
-        <% if can? :create_doc, @repository %>
-          <%= link_to icon_tag("add-doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false }, class: "btn-create-doc" %>
-        <% end %>
+      <div class="heading-actions">
+        <div class="repo-actions">
+          <%= action_button_tag(@repository, :watch, with_count: true) %>
+          <%= action_button_tag(@repository, :star, with_count: true) %>
+          <% if can? :create_doc, @repository %>
+            <%= link_to icon_tag("add-doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false }, class: "btn btn-create-doc" %>
+          <% end %>
+        </div>
+        <nav class="reponav clearfix">
+          <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
+            if @repository.has_toc?
+              item << link_to(t(".Summary"), @repository.to_path, class: "reponav-item")
+              item << link_to(t(".Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs")
+            else
+              item << link_to(t(".Docs"), @repository.to_path, class: "reponav-item")
+            end
+            item << link_to(t(".Search"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if action_name == "search"
+            item << link_to(t(".Issues"), @repository.to_path("/issues"), class: "reponav-item reponav-issues", "data-controller" => [:issues, :labels]) if @repository.has_issues?
+            item << link_to(t(".Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
+          end %>
+        </nav>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <nav class="reponav clearfix">
-      <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|
-        if @repository.has_toc?
-          item << link_to(t(".Summary"), @repository.to_path, class: "reponav-item")
-          item << link_to(t(".Docs"), docs_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs")
-        else
-          item << link_to(t(".Docs"), @repository.to_path, class: "reponav-item")
-        end
-        item << link_to(t(".Search"), search_user_repository_path(@user, @repository), class: "reponav-item reponav-item-docs") if action_name == "search"
-        item << link_to(t(".Issues"), @repository.to_path("/issues"), class: "reponav-item reponav-issues", "data-controller" => [:issues, :labels]) if @repository.has_issues?
-        item << link_to(t(".Settings"), user_repository_settings_path(@user, @repository), class: "reponav-item", "data-controller" => :repository_settings) if can? :update, @repository
-      end %>
-    </nav>
-  </div>
 </div>
 <% end %>
 

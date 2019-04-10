@@ -1,12 +1,99 @@
 .page-users, .page-group_members, .page-group_settings, .page-groups {
   .group-heading {
-    padding-top: 30px;
-    background: #F9F9F9;
+    background: #f7f7f7;
+
     .heading {
-      margin: 40px 0;
-      .group-title { font-size: 20px; }
+      display: block;
+      align-items: center;
+      padding: 20px 0 0 0;
+
+      .group-avatar-box {
+        .avatar {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      .group-name {
+        margin-bottom: 20px;
+        text-align: center;
+
+
+        h1 {
+          font-size: 28px;
+          line-height: 28px;
+          a {
+            max-width: 450px;
+            color: #333 !important;
+            @extend .text-overflow;
+          }
+        }
+
+        .group-title {
+          margin-top: 10px;
+          margin-left: 10px;
+          max-width: 450px;
+          @extend .text-overflow;
+        }
+
+        .group-description {
+          color: #777;
+          margin-top: 6px;
+          max-width: 450px;
+          @extend .text-overflow;
+        }
+      }
+
+      .heading-actions {
+        text-align: center;
+
+        .group-info {
+          margin-bottom: 10px;
+          color: #777;
+
+          .group-url {
+            color: #777;
+
+            span {
+              max-width: 200px;
+              @extend .text-overflow;
+            }
+          }
+        }
+      }
+
+      @include breakpoint(md) {
+        display: flex;
+
+        .group-name {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: top;
+          text-align: left !important;
+
+          .group-title {
+            margin-top: 0px;
+          }
+        }
+
+        .heading-actions {
+          justify-content: flex-end;
+          flex-grow: 2;
+          text-align: right;
+
+          .group-info {
+            margin-bottom: 20px;
+          }
+        }
+
+        .reponav {
+          margin-right: -15px;
+        }
+      }
+
     }
   }
+
   .list-col-2 .list-item {
     width: calc(50% - 40px);
     &:nth-child(2n + 1) {

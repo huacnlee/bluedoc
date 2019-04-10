@@ -18,7 +18,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
   <% end %>
 </div>
 
-<% if toc_html.blank? %>
+<% if @repository.toc_json.blank? || @repository.toc_json == "[]" %>
   <%= render "empty_docs" %>
 <% else %>
   <div class="repo-toc">

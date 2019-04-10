@@ -94,16 +94,20 @@
     }
     .doc-sidebar {
       .doc-parents {
+        @extend .card;
+        @extend .card:hover;
+        margin-bottom: 20px;
+
         text-align: left;
         .link-group {
-          font-size: 12px;
-          margin-bottom: 20px;
+          font-size: 14px;
+          color: #333 !important;
         }
         .link-back {
           color: $primary;
           display: block;
           margin-bottom: 5px;
-          font-size: 18px;
+          font-size: 20px;
           font-weight: bold;
           @extend .text-overflow;
         }

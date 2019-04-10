@@ -148,7 +148,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".btn-create-doc", 0
     assert_select ".reponav-item-docs", 1
     assert_select ".reponav .reponav-issues", 0
-    assert_select ".repo-toc"
+    assert_select ".repo-toc", 0
     assert_select ".label-private", 0
 
     # nav search
