@@ -8,7 +8,7 @@
       <div class="dashboard-section activities col-10">
         <div class="subhead"><h2><%= t(".All activity") %></h2></div>
         <% if @activities.blank? %>
-          <div class="blankslate">
+          <div class="blankslate no-data no-activity">
             <p><%= t(".You have no activity in recently") %></p>
           </div>
         <% else %>

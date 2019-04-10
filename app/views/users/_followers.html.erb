@@ -1,7 +1,7 @@
 <div class="user-followers">
   <h2 class="sub-title"><%= t(".Followers") %></h2>
   <% if @users.blank? %>
-    <div class="blankslate">
+    <div class="blankslate no-data no-follow">
       <p><%= @user.name %> <%= t(".no followers") %></p>
     </div>
   <% else %>

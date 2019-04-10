@@ -561,7 +561,7 @@ en:
       Show all: Show all
       Find a repository: Find a repository...
       There is no repository: "There is no repository"
-      You can create first repository: o repository under this group, you can
+      You can create first repository: You repository under this group.
       Create new: Create a new repositor
       Members: Members
   notification_mailer:
