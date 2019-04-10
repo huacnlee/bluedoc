@@ -750,14 +750,15 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@thebluedoc/editor@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.1.4.tgz#3da488aceebaa566748e9d3b23ad973aa0c7841c"
-  integrity sha512-iMpgISZ6YgkZCj3iJnryYeQX0OXDLc4r/iYC0ogjxIXw5zF22Y56ZlIf7gkUkKOFOEFmdD6xR30sHpfqn3yMtg==
+"@thebluedoc/editor@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.1.5.tgz#d44111b5da02bf19e6d8df7d7e48cb27600349f8"
+  integrity sha512-ECvYSQ1oe0RX7rpCb4qPgA05iSoPa69xp3TUGALRv+wxEEdUKN2QhE+vM9Z/aLFZra+1Bk50DYSpfc/Pm9MPuw==
   dependencies:
     "@thebluedoc/slate-react" "^0.21.24"
     fast-deep-equal "^2.0.1"
     filesize "^3.6.1"
+    get-window "^1.1.1"
     htmlparser2 "^3.10.0"
     immutable "^3.8.2"
     is-hotkey "^0.1.4"
@@ -780,6 +781,8 @@
     react-dom "^16.6.0"
     react-portal "^4.1.4"
     slate "^0.44.12"
+    slate-base64-serializer "^0.2.97"
+    slate-plain-serializer "^0.6.36"
     styled-components "^3.2.3"
     uuid "^3.3.2"
 
