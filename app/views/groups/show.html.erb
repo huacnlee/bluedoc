@@ -18,9 +18,10 @@
   </h1>
   <div class="group-repositories col-12 col-md-9 float-left pr-md-6">
     <% if @repositories.blank? %>
-      <div class="blankslate">
+      <div class="blankslate no-data no-repo">
         <h3><%= t(".There is no repository") %></h3>
-        <p><%= t(".You can create first repository") %> <%= link_to t(".Create new"), new_repository_path(user_id: @group.id) %>.</p>
+        <p><%= t(".You can create first repository") %></p>
+        <p><%= link_to t(".Create new"), new_repository_path(user_id: @group.id), class: "btn btn-primary" %></p>
       </div>
     <% else %>
       <%= render @repositories, no_path: true %>

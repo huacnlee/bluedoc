@@ -8,7 +8,7 @@
         <div class="dashboard-section dashboard-docs">
 
           <% if @recent_docs.blank? %>
-            <div class="blankslate no-data no-star-doc">
+            <div class="blankslate no-data no-timeline">
               <div class="mb-3"><%= t(".You have no update Doc in recently_html") %></div>
               <div>
                 <%= link_to t(".New Repository"), "/new", class: "btn btn-sm" %>

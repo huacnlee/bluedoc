@@ -37,9 +37,7 @@
     <div class="doc-main">
       <% if @doc.blank? %>
         <div class="doc-not-found text-center p-5">
-          <div class="icon-box text-center mb-2">
-            <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
-          </div>
+          <div class="blankslate no-data not-found"></div>
           <h3 class="title"><%= t(".Doc not found") %></h3>
 
           <p><%= t(".Sorry, this Doc does not exists") %></p>

@@ -554,7 +554,7 @@ zh-CN:
       Show all: 查看所有知识库
       Find a repository: 查找知识库...
       There is no repository: 暂无知识库
-      You can create first repository: 此团队下还未创建任何知识库，你可以现在就
+      You can create first repository: 此团队下还未创建任何知识库。
       Create new: 创建一个新知识库
       Members: 团队成员
   notification_mailer:

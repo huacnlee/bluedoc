@@ -12,7 +12,7 @@
           <%= link_to t(".New Note"), new_note_path, class: "btn btn-primary btn-sm float-right" %>
         </h2>
         <% if @notes.blank? %>
-        <div class="blankslate">
+        <div class="blankslate no-data no-note">
           <p><%= t(".No notes") %></p>
         </div>
         <% else %>
