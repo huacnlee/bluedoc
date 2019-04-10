@@ -2,7 +2,6 @@ import { SortableContainer } from 'react-sortable-hoc';
 import cn from 'classnames';
 import TocItem from './toc-item';
 
-
 export default SortableContainer(({
   items, onChangeItem, onDeleteItem, activeIndex, onSelectItem, autoFocus, onIndent,
 }) => (

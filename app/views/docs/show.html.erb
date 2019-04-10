@@ -29,7 +29,7 @@
       <a href="<%= @repository.to_path %>" class="link-back text-main" title="<%= @repository.name %>"><%= @repository.name %></a>
       <a href="<%= @user.to_path %>" class="link-group text-gray-light" title="<%= @user.name %>"><%= @user.name %></a>
     </div>
-    <%= react_component("toc/index", { repositoryId: @repository&.id, currentDocId: @doc&.id } ) %>
+    <%= react_component("toc-tree/index", { repositoryId: @repository&.id, currentDocId: @doc&.id } ) %>
   </div>
   <div class="doc-center flex-auto">
     <div class="doc-main">
