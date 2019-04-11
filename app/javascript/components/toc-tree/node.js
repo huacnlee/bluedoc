@@ -9,7 +9,7 @@ import {
 
 class Node extends Component {
   state = {
-    position: 'right',
+    position: '',
   }
 
   updatePosition = (position) => {
@@ -23,15 +23,33 @@ class Node extends Component {
       info,
       isOver,
       isDragging,
+      canDrop,
       connectDragSource,
       connectDropTarget,
+      children,
+      path,
     } = this.props;
     const { position } = this.state;
-    console.log(position);
+    const depth = path.length;
+    const styleList = {
+      left: {
+        borderTop: '1px solid blue',
+      },
+      right: {
+        borderBottom: '1px solid blue',
+      },
+      child: {
+        background: 'blue',
+      },
+    };
+    const style = (isOver && canDrop && !!position) ? styleList[position] : {};
     return connectDragSource(
       connectDropTarget(
-      <div>
-        {isOver ? position : ''} {info.title} {isDragging ? 'drag' : ''}
+      <div >
+        <div style={style}>
+          {info.id} {isDragging ? 'drag' : ''}
+          {depth}
+        </div>
       </div>,
       ),
     );
@@ -53,10 +71,16 @@ export default DropTarget(
       const position = getTargetPosition(props, monitor, component);
       component.updatePosition(position);
     },
+    canDrop(props, monitor, component) {
+      const { originalPath } = monitor.getItem();
+      const { path } = props;
+      return !originalPath.every((i, idx) => i === path[idx]);
+    },
   },
   (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
+    isOver: !!monitor.isOver(),
+    canDrop: !!monitor.canDrop(),
   }),
 )(DragSource(
   'toc',

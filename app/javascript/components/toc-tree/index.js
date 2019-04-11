@@ -50,30 +50,14 @@ class TocTree extends Component {
 
   onMoveNode = (data) => {
     const {
-      node, nextPath, treeData,
+      targetId, dragId, position,
     } = data;
 
-    const len = nextPath.length;
     const params = {
-      id: node.id,
-      position: 'right',
-      targetId: null,
+      id: dragId,
+      position,
+      targetId,
     };
-      // 插在之前
-    if (len === 1 && nextPath[0] === 0) {
-      params.position = 'left';
-      params.targetId = treeData[1].id;
-      // 插入子集
-    } else if (len > 1 && (nextPath[len - 1] - nextPath[len - 2] === 1)) {
-      const targetPath = nextPath.slice(0, len - 1);
-      params.position = 'child';
-      params.targetId = this.getNodeByPath({ treeData, path: targetPath }).id;
-      // 插在之后
-    } else {
-      const targetPath = [...nextPath];
-      targetPath[len - 1] -= 1;
-      params.targetId = this.getNodeByPath({ treeData, path: targetPath }).id;
-    }
     moveTocList(params).then((result) => {
       console.log(result, params, '保存成功');
     });
