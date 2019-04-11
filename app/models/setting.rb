@@ -2,8 +2,6 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
-  source Rails.root.join("config/app.yml")
-
   SEPARATOR_REGEXP = /[\s,]/
 
   class << self
@@ -39,6 +37,11 @@ class Setting < RailsSettings::Base
             separator = SEPARATOR_REGEXP if separator.nil?
             val.split(separator).reject { |str| str.empty? }
           end
+        elsif type == :hash
+          self.class.define_method("#{key.to_s.singularize}_hash") do
+            val = self.send(key.to_sym) || "{}"
+            val.to_hash.deep_symbolize_keys
+          end
         end
       end
 
@@ -65,11 +68,52 @@ class Setting < RailsSettings::Base
   field :license, default: "", type: :string
 
   # Readonly setting keys, no cache, only load from yml file
-  field :host, :mailer_from, :mailer_options, :ldap_options, readonly: true
+  # field :host, :mailer_from, :mailer_options, :ldap_options, readonly: true
 
+  field :host, type: :string, default: "http://localhost:3000"
+
+  field :mailer_from, type: :string, default: "no-reply@bluedoc.io"
+  field :mailer_delivery_method, type: :string, default: (ENV["MAILER_DELIVERY_METHOD"] || "sendmail")
+  field :mailer_options, type: :hash, default: {
+    address: ENV["SMTP_ADDRESS"],
+    port: (ENV['SMTP_PORT'] || 25).to_i,
+    domain: ENV['SMTP_DOMAIN'],
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: ENV['SMTP_AUTHENTICATION'] || "login",
+    enable_starttls_auto: (ENV['SMTP_ENABLE_STARTTLS_AUTO'] || "true") == "true",
+  }
+
+  # Devise config
+  field :ldap_options, type: :hash, default: {
+    # LDAP server. `:plain` means no encryption. `:simple_tls` represents SSL/TLS
+    # (usually on port 636) while `:start_tls` represents StartTLS (usually port 389).
+    host: "",
+    encryption: "plain",
+    port: 389,
+    # Typically AD would be 'sAMAccountName' or 'UserPrincipalName', while OpenLDAP is 'uid'.
+    base: "dc=example,dc=org",
+    uid: "uid",
+    # Most LDAP servers require that you supply a complete DN as a binding-credential, along with an authenticator
+    # such as a password. But for many applications, you often don’t have a full DN to identify the user.
+    # You usually get a simple identifier like a username or an email address, along with a password.
+    #
+    # - bind_dn - the admin username
+    # - password - the admin password
+    bind_dn: "cn=admin,dc=example,dc=org",
+    password: "admin"
+  }
   field :ldap_name, default: "LDAP", type: :string
   field :ldap_title, default: "LDAP Login", type: :string
   field :ldap_description, default: "Enter you LDAP account to login and binding BlueDoc.", type: :string
+
+  field :omniauth_google_client_id, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] || ""), type: :string
+  field :omniauth_google_client_secret, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] || ""), type: :string
+  field :omniauth_github_client_id, default: (ENV["OMNIAUTH_GITHUB_CLIENT_ID"] || ""), type: :string
+  field :omniauth_github_client_secret, default: (ENV["OMNIAUTH_GITHUB_CLIENT_SECRET"] || ""), type: :string
+  field :omniauth_gitlab_client_id, default: (ENV["OMNIAUTH_GITLAB_CLIENT_ID"] || ""), type: :string
+  field :omniauth_gitlab_client_secret, default: (ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"] || ""), type: :string
+  field :omniauth_gitlab_api_prefix, default: (ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"), type: :string
 
   class << self
     LOCALES = {
@@ -114,8 +158,12 @@ class Setting < RailsSettings::Base
     end
     # PRO-end
 
+    def mailer_sender
+      "BlueDoc <#{Setting.mailer_from}>"
+    end
+
     def ldap_enable?
-      Setting.ldap_options["host"].present?
+      Setting.ldap_option_hash[:host].present?
     end
   end
 end

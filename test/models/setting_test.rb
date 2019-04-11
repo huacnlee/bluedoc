@@ -34,15 +34,6 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal "http://127.0.0.1:1608", Setting.plantuml_service_host
   end
 
-  test "readonly fields" do
-    default = RailsSettings::Default
-    %i[host mailer_from mailer_options].each do |field|
-      assert_equal default[field], Setting.send(field), "Setting.#{field.to_s} should be #{default[field]}"
-      Setting.send("#{field}=", "123")
-      assert_equal default[field], Setting.send(field), "Setting.#{field.to_s} should be #{default[field]}"
-    end
-  end
-
   test "default_locale" do
     assert_equal [["English (US)", "en"], ["简体中文", "zh-CN"]], Setting.locale_options
     Setting.stub(:default_locale, "zh-CN") do

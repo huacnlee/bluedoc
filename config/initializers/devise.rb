@@ -18,7 +18,6 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = "BlueDoc <#{Setting.mailer_from}>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -257,22 +256,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  if ENV["OMNIAUTH_GOOGLE_CLIENT_ID"].present?
-    config.omniauth :google_oauth2, ENV["OMNIAUTH_GOOGLE_CLIENT_ID"], ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"]
-  end
-  if ENV["OMNIAUTH_GITHUB_CLIENT_ID"].present?
-    config.omniauth :github, ENV["OMNIAUTH_GITHUB_CLIENT_ID"], ENV["OMNIAUTH_GITHUB_CLIENT_SECRET"]
-  end
-  if ENV["OMNIAUTH_GITLAB_CLIENT_ID"].present?
-    config.omniauth :gitlab, ENV["OMNIAUTH_GITLAB_CLIENT_ID"], ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"],
-      client_options: {
-        site: ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"
-      }
-  end
-  if Setting.ldap_enable?
-    ldap_options = Setting.ldap_options.deep_symbolize_keys
-    config.omniauth :ldap, ldap_options
-  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
