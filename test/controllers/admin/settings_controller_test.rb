@@ -10,17 +10,22 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /admin/settings" do
     get admin_settings_path
+    assert_redirected_to admin_settings_path(_action: "show")
+    follow_redirect!
+
     assert_equal 200, response.status
   end
 
 
   test "GET /admin/settings for check :ldap_auth" do
-    get admin_settings_path
+    get admin_settings_path(_action: "show")
     assert_equal 200, response.status
     assert_select ".ldap-auth-fields", 0
 
     allow_feature :ldap_auth do
-      get admin_settings_path
+      Setting.stub(:ldap_enable?, true) do
+        get admin_settings_path(_action: "show")
+      end
       assert_equal 200, response.status
       assert_select ".ldap-auth-fields", 1
     end
@@ -41,17 +46,22 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       default_locale: "zh-CN",
       ldap_name: "Foo",
       ldap_title: "LDAP Foo",
-      ldap_description: "LDAP Foo bar"
+      ldap_description: "LDAP Foo bar",
+      mailer_from: "foo@bar.com",
+      mailer_options: <<~YAML
+      address: foo.com
+      username: foo
+      YAML
     }
 
     post admin_settings_path, params: { setting: setting_params }
     assert_redirected_to admin_settings_path
 
     setting_params.each_key do |key|
-      assert_equal setting_params[key], Setting.send(key)
+      assert_equal setting_params[key].strip, Setting.send(key).strip
     end
 
-    get admin_settings_path
+    get admin_settings_path(_action: "ui")
     assert_equal 200, response.status
     assert_select "select[name='setting[default_locale]']" do
       assert_select "option[selected]" do

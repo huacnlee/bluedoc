@@ -17,7 +17,6 @@ module BlueDoc
 
       def action_mailer
         fetch_config(:action_mailer, {
-          delivery_method: Setting.mailer_delivery_method.to_sym,
           smtp_settings: Setting.mailer_option_hash.deep_symbolize_keys,
           default_url_options: {
             host: Setting.host,

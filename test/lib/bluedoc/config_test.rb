@@ -4,12 +4,7 @@ require "test_helper"
 
 class BlueDoc::ConfigTest < ActiveSupport::TestCase
   test "Rails.application.config.action_mailer" do
-    Setting.stub(:mailer_delivery_method, "foo") do
-      assert_equal :foo, Rails.application.config.action_mailer.delivery_method
-    end
-    Setting.stub(:mailer_delivery_method, "bar") do
-      assert_equal :bar, Rails.application.config.action_mailer.delivery_method
-    end
+    assert_equal :test, Rails.application.config.action_mailer.delivery_method
 
     mailer_options = {
       foo: "aaa",
@@ -83,5 +78,9 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
         end
       end
     end
+  end
+
+  test "ApplicationMailer.default_url_options" do
+    assert_equal({ host: Setting.host }, ApplicationMailer.default_url_options)
   end
 end
