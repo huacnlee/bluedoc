@@ -14,7 +14,11 @@ namespace :admin do
       post :reindex
     end
   end
-  resource :settings
+  resource :settings do
+    collection do
+      post :test_mail
+    end
+  end
   resources :groups
   resources :users
   resources :repositories

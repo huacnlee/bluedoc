@@ -21,11 +21,12 @@ class Setting < RailsSettings::Base
       def _define_field(key, default: nil, type: :string, separator: nil)
         self.class.define_method(key) do
           val = self[key]
-          default = default.call if default.is_a?(Proc)
+          default_val = default
+          default_val = default.call if default.is_a?(Proc)
           if type == :hash
-            default = YAML.dump(default)
+            default_val = YAML.dump(default_val.deep_stringify_keys)
           end
-          return default if val.nil?
+          return default_val if val.nil?
           val
         end
 
@@ -76,7 +77,7 @@ class Setting < RailsSettings::Base
 
   # ActionMailer
   field :mailer_from, type: :string, default: "no-reply@bluedoc.io"
-  field :mailer_delivery_method, type: :string, default: (ENV["MAILER_DELIVERY_METHOD"] || "sendmail")
+  field :mailer_delivery_method, type: :string, default: "smtp"
   field :mailer_options, type: :hash, default: {
     address: ENV["SMTP_ADDRESS"],
     port: (ENV['SMTP_PORT'] || 25).to_i,

@@ -29,6 +29,7 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /admin/settings" do
     setting_params = {
+      host: "http://foo.com",
       anonymous_enable: "0",
       confirmable_enable: "0",
       captcha_enable: "0",
