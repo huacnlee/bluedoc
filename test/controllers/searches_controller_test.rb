@@ -66,6 +66,32 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "GET /search/issues" do
+    get issues_search_path, params: { q: "Hello" }
+    assert_equal 200, response.status
+
+    assert_react_component "navbar/Search" do |props|
+      assert_equal "/search/issues", props[:action]
+
+      assert_react_component "navbar/Search" do |props|
+        assert_equal issues_search_path, props[:action]
+        assert_nil props[:scope]
+        assert_equal "Hello", props[:value]
+      end
+    end
+
+    assert_select %(.menu .menu-item.selected) do
+      assert_select "[href=?]", "\/search\/issues?q=Hello"
+    end
+
+    # with anonymous disable
+    Setting.stub(:anonymous_enable?, false) do
+      assert_require_user do
+        get issues_search_path, params: { q: "Hello" }
+      end
+    end
+  end
+
   test "GET /search/repositories" do
     get repositories_search_path, params: { q: "Hello" }
     assert_equal 200, response.status

@@ -3,40 +3,104 @@
 .page-issues,
 .page-labels {
   .repo-heading {
-    text-align: center;
-    .heading {
-      margin: 20px 0 20px 0;
-      .group-name {
-        font-size: 16px;
-        color: $text-gray-dark;
-      }
-      .repo-name {
-        color: $primary;
-        font-size: 35px;
+    text-align: left;
+    background: #f7f7f7;
+
+    .container {
+
+    }
+
+    @include breakpoint(lg) {
+      .container {
       }
     }
-    h1 {
-      font-size: 20px;
+
+    .heading {
+      display: block;
+      align-items: center;
+
+      margin: 20px 0 0px 0;
+
+      h1 {
+        font-size: 28px; line-height: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .repo-name {
+        color: #333 !important;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+
+        .divider {
+          color: #999;
+          font-size: 0.8em;
+          margin: 0 3px;
+        }
+      }
+
+      .group-name {
+        max-width: 250px;
+        @extend .text-overflow;
+        color: #333 !important;
+      }
+      .repository-name {
+        max-width: 300px;
+        @extend .text-overflow;
+        color: #333 !important;
+      }
+
+      @include breakpoint(md) {
+        display: flex;
+
+        h1 {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          .repo-name {
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        .heading-actions {
+          justify-content: flex-end;
+          flex-grow: 2;
+          text-align: right;
+
+          .repo-actions {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+
+    .heading-actions {
+      text-align: center;
     }
   }
 
-  .repo-actions {
-    margin-top: 10px;
-    line-height: 30px;
-    @extend .icon-middle-wrap;
 
-    .btn-create-doc {
-      display: inline-block;
-      @extend .icon-middle-wrap;
-      .fas {
-        transform: scale(1.4);
-      }
-    }
-    .btn, .social-count {
+
+  .repo-actions {
+    .btn {
       height: auto;
       padding: 0;
+      line-height: 100%;
       border: none;
       background: transparent;
+      padding: 5px;
+      margin: 0 10px;
+
+      .fas {
+        font-size: 1rem;
+        margin-top: -1px;
+      }
+
+      span { padding: 0px; }
+      .social-count { margin: 0; margin-left: 5px; color: $text-gray; }
     }
     .social-count {
       font-style: normal;
@@ -46,24 +110,6 @@
       background: #f7f7f7;
     }
 
-    .btn-create-doc,
-    .action-button a.btn {
-      margin: 0 10px;
-      padding: 0px 5px;
-      border-radius: 15px;
-      .fas {
-        width: 30px;
-        float: left;
-        line-height: 30px;
-      }
-      span { padding: 0 5px; }
-      .social-count { margin-left: 5px; margin-top: -2px;}
-      span,.social-count {
-        @extend .icon-middle-wrap;
-        font-size: 14px;
-        line-height: 30px
-      }
-    }
   }
 
   .repo-description {
@@ -75,7 +121,6 @@
 
   .repository-docs, .repo-toc {
     @include breakpoint(md) {
-      width: 800px;
       margin: 0 auto;
     }
     .doc-item .title {
@@ -202,7 +247,7 @@
         }
       }
       .delete-member {
-        top: 10px;
+        top: 6px;
         right: 10px;
       }
     }

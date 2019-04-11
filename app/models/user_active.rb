@@ -9,6 +9,11 @@ class UserActive < ApplicationRecord
   scope :docs, -> { where(subject_type: "Doc").includes(subject: { repository: :user }) }
   scope :repositories, -> { where(subject_type: "Repository").includes(subject: :user) }
   scope :groups, -> { where(subject_type: "User").includes(subject: { avatar_attachment: :blob }) }
+  scope :issues, -> {
+    where(subject_type: "Issue")
+    .joins("inner join issues on issues.id = user_actives.subject_id and issues.status != #{Issue.statuses[:closed]}")
+    .includes(subject: { repository: :user })
+  }
 
   def self.track(subject, user_id: nil, user: nil)
     return false if subject.blank?

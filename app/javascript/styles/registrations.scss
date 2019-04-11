@@ -1,0 +1,49 @@
+.page-registrations {
+  .main-container > .container {
+    margin-top: 0;
+    max-width: 550px;
+  }
+
+  .heading {
+    padding-top: 180px;
+    margin: 0 auto;
+    background: transparent url(~images/sign-up.svg) center top no-repeat;
+    background-size: 280px auto;
+  }
+}
+
+
+.page-sessions {
+  .main-container > .container {
+    margin-top: 0;
+  }
+
+  .heading {
+    padding-top: 130px;
+    background: transparent url(~images/sign-in.svg) center top no-repeat;
+    background-size: 280px auto;
+  }
+}
+
+.page-passwords,
+.page-confirmations,
+.page-unlocks {
+  .main-container > .container {
+    max-width: 650px;
+    margin-top: 0;
+  }
+
+  .sub-title {
+    padding-top: 210px;
+    margin: 0 auto;
+    background: transparent url(~images/password.svg) center top no-repeat;
+    background-size: 280px auto;
+  }
+}
+
+.page-confirmations,
+.page-unlocks {
+  .sub-title {
+    background-image: url(~images/confirmations.svg);
+  }
+}

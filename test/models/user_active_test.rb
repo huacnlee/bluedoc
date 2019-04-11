@@ -71,5 +71,20 @@ class UserActiveTest < ActiveSupport::TestCase
     groups = UserActive.with_user(user).groups.collect(&:subject)
     assert_equal true, groups.include?(doc0.repository.user)
     assert_equal true, groups.include?(doc1.repository.user)
+
+    # with_user(user).issues
+    issue0 = create(:issue)
+    issue1 = create(:issue)
+    issue2 = create(:issue, status: :closed)
+    UserActive.track(issue0, user: user)
+    UserActive.track(issue1, user: user)
+    UserActive.track(issue2, user: user)
+    assert_equal 2, UserActive.with_user(user).issues.count
+    issues = UserActive.with_user(user).issues.collect(&:subject)
+    assert_equal [issue1.id, issue0.id], issues.collect(&:id)
+    issue2.open!
+    assert_equal 3, UserActive.with_user(user).issues.count
+    issues = UserActive.with_user(user).issues.collect(&:subject)
+    assert_equal [issue2.id, issue1.id, issue0.id], issues.collect(&:id)
   end
 end

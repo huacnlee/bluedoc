@@ -23,6 +23,8 @@ class SearchIndexJob < ApplicationJob
       obj = Group.find_by_id(id)
     when  "note"
       obj = Note.find_by_id(id)
+    when "issue"
+      obj = Issue.find_by_id(id)
     end
 
     return false if obj.blank?

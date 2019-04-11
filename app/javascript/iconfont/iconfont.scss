@@ -6,6 +6,10 @@
        url(~iconfont/iconfont.svg#bluedoc) format('svg');
 }
 
+.fa-file:before {
+  content: "\e646";
+}
+
 .fa-arrow:before {
   content: "\e647";
 }
@@ -429,4 +433,13 @@
 .fa-error:before {
   content: "\e643";
 }
+
+.fa-note:before {
+  content: "\e644";
+}
+
+.fa-issue:before {
+  content: "\e645";
+}
+
 

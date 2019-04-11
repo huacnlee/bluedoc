@@ -18,9 +18,11 @@
       <% end %>
     </div>
   <% end %>
+  <% if repository.description.present? %>
   <div class="description text-overflow">
     <%= truncate repository.description, length: 150 %>
   </div>
+  <% end %>
   <div class="info">
     <span class="stars">
       <%= icon_tag("star-fill") %> <span><%= repository.stars_count %></span>

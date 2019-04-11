@@ -21,6 +21,7 @@ module BlueDoc
       when :groups then search_groups
       when :users then search_users
       when :notes then search_notes
+      when :issues then search_issues
       else
         raise ActiveRecord::RecordNotFound
       end
@@ -149,6 +150,33 @@ module BlueDoc
         }
 
         client.search(search_params(q, filter), User)
+      end
+
+      def search_issues
+        filter = []
+
+        if self.user_id
+          filter << { term: { user_id: self.user_id } }
+        elsif self.repository_id
+          filter << { term: { repository_id: self.repository_id } }
+        end
+
+        if !self.private?
+          filter << { term: { "repository.public" => true } }
+        end
+
+        q = {
+          query_string: {
+            fields: %w[slug title^10 body search_body],
+            query: (self.query || ""),
+            default_operator: "AND",
+            minimum_should_match: "70%",
+          }
+        }
+
+        params = search_params(q, filter)
+
+        client.search(params, Issue)
       end
   end
 end

@@ -6,8 +6,9 @@ class DashboardsController < ApplicationController
 
   def index
     @groups = current_user.groups.with_attached_avatar.limit(100)
-    @recent_docs = current_user.user_actives.docs.limit(12)
+    @recent_docs = current_user.user_actives.docs.limit(6)
     @recent_repos = current_user.user_actives.repositories.limit(12)
+    @recent_issues = current_user.user_actives.issues.limit(12)
   end
 
   def activities

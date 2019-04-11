@@ -174,6 +174,7 @@ en:
     Notification: Notification
     Activity: Activity
     Note: Note
+    Issue: Issue
     Back to Front: Back to Front
     Sign out: Sign out
     View: View
@@ -298,6 +299,9 @@ en:
         Note was successfully deleted: Note was successfully deleted
       restore:
         Note was successfully restored: Note was successfully restored
+    issues:
+      destroy:
+        Issue was successfully deleted: Issue was successfully deleted
     docs:
       create:
         Doc was successfully created: Doc was successfully created
@@ -384,6 +388,7 @@ en:
       Activity: Activities
     index:
       Recent edited docs: Recent edited docs
+      Recent actived issues: Recent actived issues
       Recent contributed repositories: Repositories
       You have no update Doc in recently_html: <p>You have no recently updated Doc.</p><p>You can create a Repository to starting write your first document.</p>
       You have no update Repositories in recently_html: "You have no recently updated Repositories."
@@ -556,7 +561,7 @@ en:
       Show all: Show all
       Find a repository: Find a repository...
       There is no repository: "There is no repository"
-      You can create first repository: o repository under this group, you can
+      You can create first repository: You repository under this group.
       Create new: Create a new repositor
       Members: Members
   notification_mailer:
@@ -576,6 +581,14 @@ en:
         has mentioned you in subject: "has mentioned you in [%{subject}]."
       repo_import:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
+      issue_assign:
+        has assigned issue to you: "has assigned issue to you:"
+      new_issue:
+        has opened new issue: "has opened new issue:"
+      close_issue:
+        has closed issue: "has closed issue:"
+      reopen_issue:
+        has reopened issue: "has reopened issue:"
     title:
       add_member:
         has added you as a member of: "has added you as a member of [%{subject}]"
@@ -586,6 +599,14 @@ en:
         got a mention: content has mentioned you.
       repo_import:
         Repository name has been imported: "Repository [%{name}] has been imported %{status}."
+      issue_assign:
+        has assign to you: "has assigned to you."
+      new_issue:
+        has opened new issue: "has opened new issue."
+      close_issue:
+        has closed issue: "has closed issue."
+      reopen_issue:
+        has reopened issue: "has reopened issue."
     add_member:
       has added you as a member of: "has added you as a member of:"
     comment:
@@ -595,6 +616,14 @@ en:
     repo_import:
       Repository: Repository
       has been imported: as been imported
+    issue_assign:
+      has assigned issue to you: "has assigned issue to you."
+    new_issue:
+      has opened new issue: "has opened new issue."
+    close_issue:
+      has closed issue: "has closed issue."
+    reopen_issue:
+      has reopened issue: "has reopened issue."
     index:
       Unread: Unread
       All: All
@@ -606,6 +635,9 @@ en:
   reactions:
     new_button:
       Select a item: Pick a reaction
+    reaction:
+      and count people has reacted: " and %{count} people has reacted"
+      has reacted: " has reacted"
   repositories:
     doc:
       Sharing: Sharing
@@ -796,6 +828,7 @@ en:
       Groups: Groups
       Users: Users
       Notes: Notes
+      Issues: Issues
     no_result:
       No result: No result
       Can not find any contents like: "No related documents like"

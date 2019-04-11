@@ -1,0 +1,7 @@
+<%
+issue = notification.target
+%>
+
+<p><strong><%= notification.actor_name %></strong> <%= t(".has closed issue") %></p>
+
+<%= link_to issue.issue_title, notification_url(notification, host: Setting.host) %>

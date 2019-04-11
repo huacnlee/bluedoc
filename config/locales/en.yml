@@ -12,6 +12,9 @@ en:
     admin: Admin
     editor: Editor
     reader: Reader
+  issue_status:
+    open: Open
+    closed: Closed
   activerecord:
     models:
       user: User
@@ -22,6 +25,7 @@ en:
       member: Member
       share: Share
       note: Note
+      issue: Issue
     attributes:
       user:
         slug: Username
@@ -64,7 +68,12 @@ en:
         title: Label name
         color: Color
       issue:
+        iid: Issue ID
         title: Title
+        user: Creator
+        status: Status
+        body: Body
+        body_sml: Body
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.

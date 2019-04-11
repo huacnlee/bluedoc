@@ -3,7 +3,7 @@
 
   <div class="user-activities mt-4">
     <% if @activities.blank? %>
-      <div class="blankslate">
+      <div class="blankslate no-data no-activity">
         <p><strong><%= @user.name %></strong> <%= t(".no activities") %></p>
       </div>
     <% else %>

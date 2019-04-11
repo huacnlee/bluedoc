@@ -327,12 +327,12 @@ class UserTest < ActiveSupport::TestCase
     # watch comment note
     user.watch_comment_note(note)
     assert_equal true, user.watch_comment_note?(note)
-    assert_equal [user.id], note.watch_comment_by_user_ids
+    assert_equal [note.user_id, user.id].sort, note.watch_comment_by_user_ids.sort
 
     # watch comment issue
     user.watch_comment_issue(issue)
     assert_equal true, user.watch_comment_issue?(issue)
-    assert_equal [user.id], issue.watch_comment_by_user_ids
+    assert_equal [issue.user_id, user.id].sort, issue.watch_comment_by_user_ids.sort
   end
 
   test "avatar_url" do

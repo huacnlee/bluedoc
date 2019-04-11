@@ -21,10 +21,12 @@ export default class Pagination extends React.Component {
       onPageChange={this.onPage}
       breakClassName="gap"
       activeLinkClassName="selected"
-      previousLinkClassName="previous_page"
-      nextLinkClassName="next_page"
+      previousLinkClassName="previous_page fas fa-left"
+      nextLinkClassName="next_page fas fa-right"
       pageLinkClassName="page-number"
       disabledClassName="disabled"
+      nextLabel=""
+      previousLabel=""
       containerClassName="pagination"
     />;
   }

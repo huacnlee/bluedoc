@@ -170,6 +170,7 @@ zh-CN:
     Notification: 通知
     Activity: 动态
     Note: 笔记
+    Issue: 议题
     Back to Front: 回到前台
     Sign out: 登出
     comments:
@@ -289,6 +290,8 @@ zh-CN:
         Note was successfully deleted: 笔记删除成功
       restore:
         Note was successfully restored: 笔记恢复成功
+      destroy:
+        Issue was successfully deleted: 议题删除成功
     docs:
       create:
         Doc was successfully created: 文档创建成功
@@ -324,8 +327,8 @@ zh-CN:
     comment_watch:
       Subscribe: 订阅新评论
       Unsubscribe: 取消订阅
-      You’re ignoring this notifications: 你禁用此文档的通知。
-      You’re not receiving notifications: 你未订阅评论的通知。
+      You’re ignoring this notifications: 你已经主动忽略此内容的通知。
+      You’re not receiving notifications: 你还未订阅通知。
       You’re receiving notifications because you’re subscribed: 目前你已订阅，将会收到新评论的通知。
     comment:
       Delete: 删除评论
@@ -377,7 +380,8 @@ zh-CN:
       Note: 笔记
       Activity: 动态
     index:
-      Recent edited docs: 最近修改过的文档
+      Recent edited docs: 参与的文档
+      Recent actived issues: 参与的议题
       Recent contributed repositories: 知识库
       You have no update Doc in recently_html: <p>你还未创建或修改过文档。</p><p>你可以创建一个知识库，然后开始在 BlueDoc 上编写你的第一篇文档。</p>
       You have no update Repositories in recently_html: 你还未创建或修改过任文档。<br />这里将罗列你最近参与过的文档所在的知识库。
@@ -550,7 +554,7 @@ zh-CN:
       Show all: 查看所有知识库
       Find a repository: 查找知识库...
       There is no repository: 暂无知识库
-      You can create first repository: 此团队下还未创建任何知识库，你可以现在就
+      You can create first repository: 此团队下还未创建任何知识库。
       Create new: 创建一个新知识库
       Members: 团队成员
   notification_mailer:
@@ -570,6 +574,14 @@ zh-CN:
         has mentioned you in subject: "在 “%{subject}” 里提及了你。"
       repo_import:
         Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+      issue_assign:
+        has assigned issue to you: "指派议题给你："
+      new_issue:
+        has opened new issue: "创建了的新议题："
+      close_issue:
+        has closed issue: "关闭了议题："
+      reopen_issue:
+        has reopened issue: "重新开启了议题："
     title:
       add_member:
         has added you as a member of: "将你添加为 [%{subject}] 的成员。"
@@ -580,6 +592,14 @@ zh-CN:
         got a mention: 里面提及了你。
       repo_import:
         Repository name has been imported: "你的知识库 “%{name}” 导入任务执行完成，结果：[%{status}]"
+      issue_assign:
+        has assign to you: "指派议题给你。"
+      new_issue:
+        has opened new issue: "创建了的新议题。"
+      close_issue:
+        has closed issue: "关闭了议题。"
+      reopen_issue:
+        has reopened issue: "重新开启了议题。"
     add_member:
       has added you as a member of: "将你添加为成员："
     comment:
@@ -589,6 +609,14 @@ zh-CN:
     repo_import:
       Repository: 知识库
       has been imported: "导入任务已经执行完成，结果："
+    issue_assign:
+      has assigned issue to you: "指派议题给你。"
+    new_issue:
+      has opened new issue: "创建了的新议题。"
+    close_issue:
+      has closed issue: "关闭了议题。"
+    reopen_issue:
+      has reopened issue: "重新开启了议题。"
     index:
       Unread: 未读通知
       All: 全部通知
@@ -599,6 +627,9 @@ zh-CN:
   reactions:
     new_button:
       Select a item: "用表情来表达你的想法"
+    reaction:
+      and count people has reacted: " 和其他 %{count} 个人选择此表情"
+      has reacted: " 选择此表情"
   repositories:
     doc:
       Sharing: 分享中
@@ -789,6 +820,7 @@ zh-CN:
       Groups: 团队
       Users: 用户
       Notes: 笔记
+      Issues: 议题
     no_result:
       No result: 没有查询到结果
       Can not find any contents like: "BlueDoc 无法找到任何有关于"

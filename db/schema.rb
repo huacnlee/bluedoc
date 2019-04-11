@@ -130,6 +130,15 @@ ActiveRecord::Schema.define(version: 2019_04_08_081720) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "issue_assignees", force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["issue_id", "user_id"], name: "index_issue_assignees_on_issue_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_issue_assignees_on_user_id"
+  end
+
   create_table "issues", force: :cascade do |t|
     t.integer "iid", null: false
     t.integer "repository_id", null: false
@@ -141,11 +150,9 @@ ActiveRecord::Schema.define(version: 2019_04_08_081720) do
     t.integer "comments_count", default: 0, null: false
     t.integer "reads_count", default: 0, null: false
     t.string "format", limit: 20, default: "markdown", null: false
-    t.integer "assignee_ids", default: [], null: false, array: true
     t.integer "label_ids", default: [], null: false, array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["assignee_ids"], name: "index_issues_on_assignee_ids", using: :gin
     t.index ["label_ids"], name: "index_issues_on_label_ids", using: :gin
     t.index ["repository_id", "iid"], name: "index_issues_on_repository_id_and_iid", unique: true
     t.index ["repository_id", "status"], name: "index_issues_on_repository_id_and_status"

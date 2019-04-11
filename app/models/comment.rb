@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   include Mentionable
   include Activityable
 
-  depends_on :watches, :notifications
+  depends_on :watches, :notifications, :user_actives
 
   belongs_to :commentable, polymorphic: true, counter_cache: true, required: false
   belongs_to :user, required: false

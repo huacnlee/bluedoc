@@ -80,7 +80,9 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
   test "POST /account/auth/ldap/callback with invalid_credentials" do
     allow_feature :ldap_auth do
       OmniAuth.config.mock_auth[:ldap] = :invalid_credentials
-      post "/account/auth/ldap/callback"
+      OmniAuth.logger.stub(:error, "") do
+        post "/account/auth/ldap/callback"
+      end
       assert_equal 200, response.status
       assert_select "#session-ldap"
       assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_name} because "Invalid credentials".)

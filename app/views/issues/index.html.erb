@@ -28,10 +28,15 @@
     </div>
   </div>
   <div class="issue-list">
+    <% if @issues.blank? %>
+    <div class="blankslate no-data no-issue text-center my-6">
+    </div>
+    <% end %>
+
     <% @issues.each do |issue| %>
     <div id="issue-<%= issue.id %>" class="issue issue-<%= issue.status %> mb-1">
-      <div class="issue-status">
-        <%= icon_tag("warn") %>
+      <div class="status">
+        <%= icon_tag("issue") %>
       </div>
 
       <div class="title">
