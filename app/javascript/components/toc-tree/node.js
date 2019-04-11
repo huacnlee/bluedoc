@@ -3,20 +3,35 @@ import {
   DragSource,
   DropTarget,
 } from 'react-dnd';
+import {
+  getTargetPosition,
+} from './utils';
 
 class Node extends Component {
+  state = {
+    position: 'right',
+  }
+
+  updatePosition = (position) => {
+    if (position !== this.state.position) {
+      this.setState({ position });
+    }
+  }
+
   render() {
     const {
-      id,
       info,
+      isOver,
       isDragging,
       connectDragSource,
       connectDropTarget,
     } = this.props;
+    const { position } = this.state;
+    console.log(position);
     return connectDragSource(
       connectDropTarget(
       <div>
-        {info.title}
+        {isOver ? position : ''} {info.title} {isDragging ? 'drag' : ''}
       </div>,
       ),
     );
@@ -26,17 +41,17 @@ class Node extends Component {
 export default DropTarget(
   'toc',
   {
-    drop(props, monitor) {
-      const targetItem = monitor.getItem();
-      console.log('drop', targetItem, props);
+    drop(props, monitor, component) {
+      const position = getTargetPosition(props, monitor, component);
+      return {
+        targetId: props.info.id,
+        targetPath: props.path,
+        position,
+      };
     },
-    hover(props, monitor) {
-      const { id: draggedId } = monitor.getItem();
-      const { id: overId } = props;
-      if (draggedId !== overId) {
-        const { index: overIndex } = props.findNode(overId);
-        // props.moveNode(draggedId, overIndex);
-      }
+    hover(props, monitor, component) {
+      const position = getTargetPosition(props, monitor, component);
+      component.updatePosition(position);
     },
   },
   (connect, monitor) => ({
@@ -47,24 +62,12 @@ export default DropTarget(
   'toc',
   {
     beginDrag: props => ({
-      id: props.id,
-      originalIndex: props.findNode(props.id).index,
+      dragId: props.info.id,
+      originalPath: props.path,
     }),
-    // drop: () => ({ title: 'isdrop' }),
     endDrag(props, monitor) {
-      const { id: droppedId, originalIndex } = monitor.getItem();
-      const didDrop = monitor.didDrop();
-      const dropResult = monitor.getDropResult();
-      console.log('end', dropResult, monitor.getItem(), monitor.didDrop());
-      if (didDrop) {
-        props.moveNode(droppedId, originalIndex);
-      }
-    },
-    isDragging: (props, monitor) => {
-      const dropTargetNode = monitor.getItem().node;
-      const draggedNode = props.node;
-
-      return draggedNode === dropTargetNode;
+      if (!monitor.didDrop()) return;
+      props.moveNode({ ...monitor.getItem(), ...monitor.getDropResult() });
     },
   },
   (connect, monitor) => ({

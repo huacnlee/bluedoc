@@ -79,7 +79,7 @@ class TocTree extends Component {
     });
   }
 
-  onChange = treeData => this.setState({ items: treeData })
+  onChange = treeData => this.setState({ treeData })
 
   render() {
     const { treeData } = this.state;

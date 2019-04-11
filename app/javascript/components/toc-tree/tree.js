@@ -6,12 +6,13 @@ import TreeNode from './node';
 
 
 class Tree extends Component {
-  moveNode = (id, targetId, position = 'right') => {
+  moveNode = ({
+    dragId, targetId, position, originalPath, targetPath,
+  }) => {
     const { treeData, onChange } = this.props;
-    const { node, index } = this.findNode(id);
-    console.log(id, targetId);
+    const { node, index } = this.findNode(dragId);
     const newTreeData = update(treeData, {
-      $splice: [[index, 1], [targetId, 0, node]],
+      $splice: [[originalPath, 1], [targetPath, 0, node]],
     });
     console.log('move', newTreeData);
     onChange(newTreeData);
@@ -27,17 +28,16 @@ class Tree extends Component {
   }
 
   render() {
-    const { treeData = [{ id: 1, title: 'hahaha' }] } = this.props;
+    const { treeData = [] } = this.props;
     return (
       <div style={{ height: 400 }}>
         {
-          treeData.map(node => (
+          treeData.map((node, index) => (
             <TreeNode
               key={node.id}
               info={node}
-              id={node.id}
+              path={index}
               moveNode={this.moveNode}
-              findNode={this.findNode}
             />
           ))
         }

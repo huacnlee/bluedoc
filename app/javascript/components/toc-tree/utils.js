@@ -1,3 +1,5 @@
+import { findDOMNode } from 'react-dom';
+
 const getTreeFromFlatData = ({
   flatData,
   getKey = node => node.id,
@@ -38,4 +40,24 @@ const getTreeFromFlatData = ({
   return childrenToParents[rootKey].map(child => trav(child));
 };
 
-export { getTreeFromFlatData };
+const getTargetPosition = (dropTargetProps, monitor, component) => {
+  if (!component) return '';
+  const node = findDOMNode(component);
+  if (!node) return '';
+  const { dragId } = monitor.getItem();
+  const { targetId } = dropTargetProps;
+  console.log(dropTargetProps, monitor.getItem());
+  if (dragId === targetId) return '';
+  const { bottom, top } = node.getBoundingClientRect();
+  const { y } = monitor.getClientOffset();
+  let position = 'child';
+  if (y - top < 5) {
+    position = 'left';
+  }
+  if (bottom - y < 5) {
+    position = 'right';
+  }
+  return position;
+};
+
+export { getTreeFromFlatData, getTargetPosition };
