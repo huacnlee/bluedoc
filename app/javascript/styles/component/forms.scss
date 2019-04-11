@@ -52,6 +52,11 @@ form {
   &:focus {
     border-color: #333;
   }
+  &[readonly],
+  &[disabled] {
+    background: #f9f9f9 !important;
+    border-color: #D9D9D9 !important;
+  }
 }
 textarea.form-control {
   resize: vertical;

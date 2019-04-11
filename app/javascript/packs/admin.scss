@@ -55,10 +55,16 @@ form {
   }
 
   code {
-    color: #999 !important;
+    color: #666 !important;
     padding: 1px 3px !important;
     background: #f7f7f7 !important;
     font-weight: normal !important;
+  }
+
+  pre {
+    background: #f7f7f7;
+    padding: 12px;
+    border-radius: 3px;
   }
 }
 
