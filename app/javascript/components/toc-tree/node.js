@@ -33,10 +33,10 @@ class Node extends Component {
     const depth = path.length;
     const styleList = {
       left: {
-        borderTop: '1px solid blue',
+        borderTop: '2px solid blue',
       },
       right: {
-        borderBottom: '1px solid blue',
+        borderBottom: '2px solid blue',
       },
       child: {
         background: 'blue',
@@ -48,6 +48,7 @@ class Node extends Component {
       <li className="toc-item" style={{
         ...style,
         marginLeft: `${depth * 15}px`,
+        opacity: isDragging ? 0.2 : 1,
       }}>
         {!!info.children && <i className={'fas fa-arrow folder'}></i>}
         <a className="item-link" href={info.url}>{info.title}</a>
@@ -93,6 +94,11 @@ export default DropTarget(
     endDrag(props, monitor) {
       if (!monitor.didDrop()) return;
       props.moveNode({ ...monitor.getItem(), ...monitor.getDropResult() });
+    },
+    isDragging(props, monitor) {
+      const { originalPath } = monitor.getItem();
+      const { path } = props;
+      return originalPath.every((i, idx) => i === path[idx]);
     },
   },
   (connect, monitor) => ({

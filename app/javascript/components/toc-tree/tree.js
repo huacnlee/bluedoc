@@ -114,7 +114,7 @@ class Tree extends Component {
         path={[...parentPath, index]}
         moveNode={this.moveNode}
       />
-      {this.renderTreeNode(node.children, [...parentPath, index])}
+      {node.children && this.renderTreeNode(node.children, [...parentPath, index])}
     </>
   ))
 
@@ -122,9 +122,7 @@ class Tree extends Component {
     const { treeData = [] } = this.props;
     return (
       <ul className="toc-items">
-        {
-          this.renderTreeNode(treeData, [])
-        }
+        {this.renderTreeNode(treeData)}
       </ul>
     );
   }
