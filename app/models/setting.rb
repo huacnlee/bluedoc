@@ -22,6 +22,9 @@ class Setting < RailsSettings::Base
         self.class.define_method(key) do
           val = self[key]
           default = default.call if default.is_a?(Proc)
+          if type == :hash
+            default = YAML.dump(default)
+          end
           return default if val.nil?
           val
         end
@@ -40,7 +43,10 @@ class Setting < RailsSettings::Base
         elsif type == :hash
           self.class.define_method("#{key.to_s.singularize}_hash") do
             val = self.send(key.to_sym) || "{}"
-            val.to_hash.deep_symbolize_keys
+            if val.is_a?(String)
+              val = YAML.load(val).to_hash rescue {}
+            end
+            val.deep_symbolize_keys
           end
         end
       end
@@ -55,6 +61,7 @@ class Setting < RailsSettings::Base
       end
   end
 
+  field :host, type: :string, default: "http://localhost:3000"
   field :default_locale, default: "en", type: :string
   field :admin_emails, default: "admin@bluedoc.io", type: :array
   field :application_footer_html, default: "", type: :string
@@ -67,11 +74,7 @@ class Setting < RailsSettings::Base
   field :captcha_enable, default: "1", type: :boolean
   field :license, default: "", type: :string
 
-  # Readonly setting keys, no cache, only load from yml file
-  # field :host, :mailer_from, :mailer_options, :ldap_options, readonly: true
-
-  field :host, type: :string, default: "http://localhost:3000"
-
+  # ActionMailer
   field :mailer_from, type: :string, default: "no-reply@bluedoc.io"
   field :mailer_delivery_method, type: :string, default: (ENV["MAILER_DELIVERY_METHOD"] || "sendmail")
   field :mailer_options, type: :hash, default: {
@@ -84,7 +87,7 @@ class Setting < RailsSettings::Base
     enable_starttls_auto: (ENV['SMTP_ENABLE_STARTTLS_AUTO'] || "true") == "true",
   }
 
-  # Devise config
+  # Devise
   field :ldap_options, type: :hash, default: {
     # LDAP server. `:plain` means no encryption. `:simple_tls` represents SSL/TLS
     # (usually on port 636) while `:start_tls` represents StartTLS (usually port 389).
@@ -106,7 +109,6 @@ class Setting < RailsSettings::Base
   field :ldap_name, default: "LDAP", type: :string
   field :ldap_title, default: "LDAP Login", type: :string
   field :ldap_description, default: "Enter you LDAP account to login and binding BlueDoc.", type: :string
-
   field :omniauth_google_client_id, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] || ""), type: :string
   field :omniauth_google_client_secret, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] || ""), type: :string
   field :omniauth_github_client_id, default: (ENV["OMNIAUTH_GITHUB_CLIENT_ID"] || ""), type: :string

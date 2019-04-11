@@ -80,4 +80,37 @@ class SettingTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "mailer_sender" do
+    Setting.stub(:mailer_from, "foo@bar.com") do
+      assert_equal "BlueDoc <foo@bar.com>", Setting.mailer_sender
+    end
+
+    Setting.stub(:mailer_from, "bar@foo.com") do
+      assert_equal "BlueDoc <bar@foo.com>", Setting.mailer_sender
+    end
+  end
+
+  test "ldap_options" do
+    assert_kind_of String, Setting.ldap_options
+    assert_kind_of Hash, Setting.ldap_option_hash
+    Setting.ldap_options = <<~YAML
+    host: "foo.com"
+    encryption: "aaa"
+    YAML
+    assert_equal "foo.com", Setting.ldap_option_hash[:host]
+    assert_equal "aaa", Setting.ldap_option_hash[:encryption]
+  end
+
+  test "mailer_options" do
+    assert_kind_of String, Setting.mailer_options
+    assert_kind_of Hash, Setting.mailer_option_hash
+    Setting.mailer_options = <<~YAML
+    address: "foo.com"
+    user_name: "aaa"
+    YAML
+
+    assert_equal "foo.com", Setting.mailer_option_hash[:address]
+    assert_equal "aaa", Setting.mailer_option_hash[:user_name]
+  end
 end
