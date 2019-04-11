@@ -67,6 +67,7 @@ class TocTree extends Component {
 
   render() {
     const { treeData } = this.state;
+    console.log(treeData);
     return (
       <Tree
         treeData={treeData}

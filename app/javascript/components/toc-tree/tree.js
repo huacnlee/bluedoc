@@ -121,11 +121,11 @@ class Tree extends Component {
   render() {
     const { treeData = [] } = this.props;
     return (
-      <div style={{ height: 400 }}>
+      <ul className="toc-items">
         {
           this.renderTreeNode(treeData, [])
         }
-      </div>
+      </ul>
     );
   }
 }

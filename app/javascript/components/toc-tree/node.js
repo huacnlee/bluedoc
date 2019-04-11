@@ -26,8 +26,8 @@ class Node extends Component {
       canDrop,
       connectDragSource,
       connectDropTarget,
-      children,
       path,
+      children,
     } = this.props;
     const { position } = this.state;
     const depth = path.length;
@@ -45,12 +45,13 @@ class Node extends Component {
     const style = (isOver && canDrop && !!position) ? styleList[position] : {};
     return connectDragSource(
       connectDropTarget(
-      <div >
-        <div style={style}>
-          {info.id} {isDragging ? 'drag' : ''}
-          {depth}
-        </div>
-      </div>,
+      <li className="toc-item" style={{
+        ...style,
+        marginLeft: `${depth * 15}px`,
+      }}>
+        {!!info.children && <i className={'fas fa-arrow folder'}></i>}
+        <a className="item-link" href={info.url}>{info.title}</a>
+      </li>,
       ),
     );
   }

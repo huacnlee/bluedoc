@@ -22,8 +22,127 @@
     <% end %>
   </div>
 <% end %>
-<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
-  <%= react_component("toc-tree/index", { repositoryId: @repository&.id, currentDocId: @doc&.id } ) %>
 
+<div class="doc-page d-flex flex-wrap flex-lg-nowrap">
+  <div class="doc-sidebar flex-justify-start">
+    <div class="doc-parents">
+      <a href="<%= @repository.to_path %>" class="link-back text-main" title="<%= @repository.name %>"><%= @repository.name %></a>
+      <a href="<%= @user.to_path %>" class="link-group text-gray-light" title="<%= @user.name %>"><%= @user.name %></a>
+    </div>
+    <%= react_component("toc-tree/index", { repositoryId: @repository&.id, currentDocId: @doc&.id } ) %>
+  </div>
+  <div class="doc-center flex-auto">
+    <div class="doc-main">
+      <% if @doc.blank? %>
+        <div class="doc-not-found text-center p-5">
+          <div class="icon-box text-center mb-2">
+            <i class="fas fa-info" style="font-size: 64px; color: #ccc;"></i>
+          </div>
+          <h3 class="title"><%= t(".Doc not found") %></h3>
+
+          <p><%= t(".Sorry, this Doc does not exists") %></p>
+          <p class="text-red"><%= request.url %></p>
+
+          <% if can? :create_doc, @repository %>
+            <div class="actions mt-3" data-turbolinks="false">
+              <%= link_to t(".Create Doc for this URL"), new_user_repository_doc_path(slug: params[:id]), class: "btn btn-lg btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render "draft_tip" %>
+
+        <h1 class="doc-title"><%= @doc.title %></h1>
+
+        <div class="doc-info text-gray-light">
+          <span class="editors">
+            <% @doc.editors.each do |user| %>
+              <%= user_avatar_tag(user, style: :tiny) %>
+            <% end %>
+          </span>
+
+          <% if @doc.last_editor %>
+          <%= t(".Last edit by") %> <%= user_name_tag(@doc.last_editor) %> <%= t(".edited at") %> <%= timeago @doc.body_updated_at %>
+          <% else %>
+          <%= t(".Created by") %> <%= user_name_tag(@doc.creator) %> <%= t(".created at") %> <%= timeago @doc.created_at %>
+          <% end %>
+
+          <div class="reader-navbar text-main float-right">
+            <% if @doc %>
+            <div class="navbar-buttons">
+              <% if can? :read, @doc %>
+                <%= action_button_tag(@doc, :star, icon: "star", class: "mr-4 btn-star-doc") %>
+              <% end %>
+
+              <% if can? :update, @doc %>
+                <%= link_to icon_tag("edit", label: t(".Edit")), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit-doc hide-sm mr-4" %>
+              <% end %>
+
+              <%= render "share_button", doc: @doc %>
+
+              <details class="dropdown details-overlay details-reset d-inline-block">
+                <summary class="link-gray-dark"><%= icon_tag("more") %></summary>
+                <ul class="dropdown-menu dropdown-menu-sw">
+                  <li><a class="dropdown-item" data-close-dialog target="_blank" href="<%= raw_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Markdown") %></a></li>
+                  <% if can? :update, @doc %>
+                    <li><%= render "export_pdf", doc: @doc %></li>
+                  <% end %>
+                  <li><a class="dropdown-item btn-print-doc" data-close-dialog href="#"><%= t(".Print document") %></a></li>
+                  <li class="dropdown-divider" role="separator"></li>
+                  <li><a class="dropdown-item btn-wide-mode" data-close-dialog href="#"><%= t(".Fullscreen") %></a></li>
+
+                  <% if can? :update, @doc %>
+                    <li class="dropdown-divider" role="separator"></li>
+                    <li><a class="dropdown-item" data-close-dialog href="<%= versions_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Versions") %></a></li>
+                    <li class="dropdown-divider" role="separator"></li>
+                    <li><a class="dropdown-item" data-close-dialog href="<%= edit_user_repository_doc_path(@user, @repository, @doc) %>"><%= t(".Edit") %></a></li>
+                  <% end %>
+
+                  <% if can? :destroy, @doc %>
+                    <li class="dropdown-divider" role="separator"></li>
+                    <li class="text-danger"><a class="dropdown-item" data-close-dialog data-method="delete" href="<%= user_repository_doc_path(@user, @repository, @doc) %>" data-confirm="<%= t(".Are you sure delete?") %>"><%= t(".Delete") %></a></li>
+                  <% end %>
+                </ul>
+              </details>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+          <% if params[:mode] == "draft" %>
+            <%= raw @doc.draft_body_html %>
+          <% else %>
+            <%= raw @doc.body_html %>
+          <% end %>
+        </div>
+
+        <div class="doc-reaction">
+          <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+        </div>
+
+        <%= render "readers", doc: @doc, readers: @readers %>
+
+        <% if @between_docs %>
+        <div class="between-docs my-4 clearfix">
+          <% if @between_docs[:prev] %>
+            <%= link_to @between_docs[:prev].title, @between_docs[:prev].to_path, class: "btn-link btn-prev" %>
+          <% end %>
+
+          <% if @between_docs[:next] %>
+            <%= link_to @between_docs[:next].title, @between_docs[:next].to_path, class: "btn-link btn-next" %>
+          <% end %>
+        </div>
+        <% end %>
+
+        <% if @comments %>
+        <div class="doc-comments mt-3 clearfix" id="comment">
+          <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="doc-body-toc" data-turbolinks="false"></div>
 </div>
 <%= react_component("QuickScroll") %>
