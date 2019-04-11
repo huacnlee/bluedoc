@@ -191,10 +191,10 @@ export const getTargetPosition = (dropTargetProps, monitor, component) => {
   const { bottom, top } = node.getBoundingClientRect();
   const { y } = monitor.getClientOffset();
   let position = 'child';
-  if (y - top < 5) {
+  if (y - top < 10) {
     position = 'left';
   }
-  if (bottom - y < 5) {
+  if (bottom - y < 10) {
     position = 'right';
   }
   return position;

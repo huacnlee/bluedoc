@@ -27,7 +27,6 @@ class Node extends Component {
       connectDragSource,
       connectDropTarget,
       path,
-      children,
     } = this.props;
     const { position } = this.state;
     const depth = path.length;
