@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bluedoc/config/application_config"
 require "bluedoc/config/devise_config"
 require "bluedoc/config/application_mailer_config"

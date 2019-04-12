@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BlueDoc
   class Config
     class ApplicationConfig
@@ -16,12 +18,12 @@ module BlueDoc
       end
 
       def action_mailer
-        fetch_config(:action_mailer, {
+        fetch_config(:action_mailer,
           smtp_settings: Setting.mailer_option_hash.deep_symbolize_keys,
           default_url_options: {
             host: Setting.host,
           }
-        })
+        )
       end
 
       private
