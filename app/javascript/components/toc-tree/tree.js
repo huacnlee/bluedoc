@@ -55,16 +55,15 @@ class Tree extends Component {
     position,
     dragNode,
   }) => {
-    const { direction, depth } = this.getDireaction(originalPath, targetPath);
+    const isMove = this.getDireaction(originalPath, targetPath);
     const newTargetPath = [...targetPath];
-    if (depth < newTargetPath.length && direction === 'down') {
-      newTargetPath[depth] -= 1;
+    if (isMove) {
+      newTargetPath[originalPath.length - 1] -= 1;
     }
     if (position === 'right') {
       newTargetPath[newTargetPath.length - 1] += 1;
     }
     let pos = {};
-    // if (!direction || !depth) return null;
     newTargetPath.reverse().forEach((i, idx) => {
       if (idx > 0) {
         pos = { [i]: { children: pos } };
@@ -78,19 +77,9 @@ class Tree extends Component {
   }
 
   getDireaction = (path, targetPath) => {
-    let direction;
-    let depth;
-    targetPath.some((i, idx) => {
-      if (i === path[idx]) return false;
-      depth = idx;
-      if (i > path[idx]) {
-        direction = 'down';
-      } else {
-        direction = 'up';
-      }
-      return true;
-    });
-    return { direction, depth };
+    if (targetPath.length < path.length) return false;
+    const flag = path.slice(0, -1).every((i, idx) => i === targetPath[idx]);
+    return flag && targetPath[path.length - 1] > path[path.length - 1];
   }
 
   findNode = (path) => {
@@ -113,6 +102,8 @@ class Tree extends Component {
         info={node}
         path={[...parentPath, index]}
         moveNode={this.moveNode}
+        editMode={this.props.editMode}
+        active={node.docId === this.props.currentDocId}
       />
       {node.children && this.renderTreeNode(node.children, [...parentPath, index])}
     </>

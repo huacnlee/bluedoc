@@ -26,10 +26,14 @@ const moveTocList = graph(`
 `);
 
 class TocTree extends Component {
-  state = {
-    treeData: [],
-    loading: true,
-    editMode: false,
+  constructor(props) {
+    super(props);
+    console.log(props.abilities.update);
+    this.state = {
+      treeData: [],
+      loading: true,
+      editMode: props.abilities.update,
+    };
   }
 
   componentDidMount() {
@@ -72,17 +76,17 @@ class TocTree extends Component {
     const { editMode } = this.state;
 
     this.setState({
-      editMode
-    })
+      editMode,
+    });
 
     return false;
   }
 
   render() {
     const { treeData, editMode } = this.state;
-    const { titleBar, abilities, repository, user } = this.props;
-
-    console.log(treeData);
+    const {
+      titleBar, abilities, repository, user, currentDocId,
+    } = this.props;
     return (
       <div className="toc-tree">
         {titleBar && (
@@ -103,12 +107,12 @@ class TocTree extends Component {
           )}
         </div>
         )}
-
         <Tree
           treeData={treeData}
           editMode={editMode}
           onChange={this.onChange}
           onMoveNode={this.onMoveNode}
+          currentDocId={currentDocId}
         />
       </div>
     );
