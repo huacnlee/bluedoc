@@ -7,3 +7,4 @@ import './clipboard';
 import './retina-image';
 import './menu';
 import './tooltip';
+import './zoom-img';
