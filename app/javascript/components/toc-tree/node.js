@@ -23,6 +23,7 @@ class Node extends Component {
 
   render() {
     const {
+      active,
       info,
       isOver,
       isDragging,
@@ -38,9 +39,11 @@ class Node extends Component {
       connectDropTarget(
       <li className={cn('toc-item', {
         [`drop-${position}`]: isOver && canDrop && !!position && !(isParent && position === 'child'),
+      }, {
+        active,
       })} style={{
         marginLeft: `${depth * 15}px`,
-        opacity: isDragging ? 0.2 : 1,
+        opacity: isDragging ? 0.6 : 1,
       }}>
         {isParent && <i className={'fas fa-arrow folder'}></i>}
         <a className="item-link" href={info.url}>{info.title}</a>
@@ -90,6 +93,9 @@ export default DropTarget(
 )(DragSource(
   'toc',
   {
+    canDrag(props) {
+      return props.editMode;
+    },
     beginDrag: props => ({
       dragId: props.info.id,
       originalPath: props.path,
