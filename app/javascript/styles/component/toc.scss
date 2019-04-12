@@ -34,6 +34,48 @@
 .toc-items {
   .toc-item {
     position: relative;
+
+    .item-link {
+      padding-left: 3px;
+      width: auto;
+    }
+
+    .item-more {
+      position: absolute;
+      visibility: hidden;
+      right: 4px;
+      top: 4px;
+      summary {
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+        border-radius: 2px;
+        text-align: center;
+      }
+
+      .dropdown-item {
+        display: block !important;
+      }
+    }
+
+    &:hover {
+      background: #f7f7f7;
+
+      .item-more {
+        visibility: visible;
+        background: #f7f7f7;
+
+        summary {
+          border: 1px solid transparent;
+          &:hover {
+            background: #eee;
+            border-color: #e0e0e0;
+          }
+        }
+      }
+    }
+
+
     &.drop-left::after {
       top: -1px;
       @extend .drop;
@@ -43,7 +85,8 @@
       @extend .drop;
     }
     &.drop-child {
-      background: rgba(0, 0, 0, .1);
+      color: #fff;
+      background: $primary;
     }
   }
 }

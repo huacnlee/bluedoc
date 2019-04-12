@@ -44,6 +44,14 @@ class Node extends Component {
       }}>
         {isParent && <i className={'fas fa-arrow folder'}></i>}
         <a className="item-link" href={info.url}>{info.title}</a>
+        <details className="item-more dropdown details-reset d-inline-block">
+          <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
+          <ul className="dropdown-menu dropdown-menu-sw">
+            <li><a href="#" className="dropdown-item">重命名</a></li>
+            <li className="dropdown-divider"></li>
+            <li><a href="#" className="dropdown-item">删除</a></li>
+          </ul>
+        </details>
       </li>,
       ),
     );

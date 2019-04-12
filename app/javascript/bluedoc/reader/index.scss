@@ -118,7 +118,7 @@
         .hidden {
           display: none;
         }
-        li {
+        li.toc-item {
           position: relative;
           padding: 4px 0;
           .fa-arrow {
@@ -131,7 +131,7 @@
         }
         a {
           @extend .text-overflow;
-          width: 100%;
+          max-width: 100%;
         }
         .active {
           color: $primary;
