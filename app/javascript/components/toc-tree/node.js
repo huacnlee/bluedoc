@@ -3,6 +3,7 @@ import {
   DragSource,
   DropTarget,
 } from 'react-dnd';
+import cn from 'classnames';
 import {
   getTargetPosition,
 } from './utils';
@@ -18,6 +19,8 @@ class Node extends Component {
     }
   }
 
+  isParent = ({ children = [] }) => children && children.length > 0
+
   render() {
     const {
       info,
@@ -29,27 +32,17 @@ class Node extends Component {
       path,
     } = this.props;
     const { position } = this.state;
-    const depth = path.length;
-    const styleList = {
-      left: {
-        borderTop: '2px solid blue',
-      },
-      right: {
-        borderBottom: '2px solid blue',
-      },
-      child: {
-        background: 'blue',
-      },
-    };
-    const style = (isOver && canDrop && !!position) ? styleList[position] : {};
+    const depth = path.length - 1;
+    const isParent = this.isParent(info);
     return connectDragSource(
       connectDropTarget(
-      <li className="toc-item" style={{
-        ...style,
+      <li className={cn('toc-item', {
+        [`drop-${position}`]: isOver && canDrop && !!position && !(isParent && position === 'child'),
+      })} style={{
         marginLeft: `${depth * 15}px`,
         opacity: isDragging ? 0.2 : 1,
       }}>
-        {!!info.children && <i className={'fas fa-arrow folder'}></i>}
+        {isParent && <i className={'fas fa-arrow folder'}></i>}
         <a className="item-link" href={info.url}>{info.title}</a>
       </li>,
       ),
@@ -62,17 +55,19 @@ export default DropTarget(
   {
     drop(props, monitor, component) {
       const position = getTargetPosition(props, monitor, component);
+      const hasChild = props.info.children && props.info.children.length > 1;
       return {
         targetId: props.info.id,
         targetPath: props.path,
         position,
+        canDrop: !(position === 'child' && hasChild),
       };
     },
     hover(props, monitor, component) {
       const position = getTargetPosition(props, monitor, component);
       component.updatePosition(position);
     },
-    canDrop(props, monitor, component) {
+    canDrop(props, monitor) {
       const { originalPath } = monitor.getItem();
       const { path } = props;
       return !originalPath.every((i, idx) => i === path[idx]);
@@ -92,7 +87,9 @@ export default DropTarget(
     }),
     endDrag(props, monitor) {
       if (!monitor.didDrop()) return;
-      props.moveNode({ ...monitor.getItem(), ...monitor.getDropResult() });
+      const { canDrop, ...resultDrop } = monitor.getDropResult();
+      if (!canDrop) return;
+      props.moveNode({ ...monitor.getItem(), ...resultDrop });
     },
     isDragging(props, monitor) {
       const { originalPath } = monitor.getItem();

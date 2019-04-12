@@ -1,0 +1,26 @@
+.drop {
+  display: block;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: $primary;
+}
+
+.toc-items {
+  .toc-item {
+    position: relative;
+    &.drop-left::after {
+      top: -1px;
+      @extend .drop;
+    }
+    &.drop-right::after {
+      bottom: -1px;
+      @extend .drop;
+    }
+    &.drop-child {
+      background: rgba(0, 0, 0, .1);
+    }
+  }
+}

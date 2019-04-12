@@ -36,17 +36,10 @@ class Tree extends Component {
   // remove dragged node
   getRemoveData = (path) => {
     const { treeData } = this.props;
-    let isOnlyChild = false;
-    if (path.length > 1) {
-      const parentNode = this.findNode(path.slice(0, -1));
-      isOnlyChild = parentNode.children.length === 1;
-    }
     let pos = {};
     [...path].reverse().forEach((i, idx) => {
       if (idx > 0) {
         pos = { [i]: { children: pos } };
-      } else if (isOnlyChild) {
-        pos = { $merge: { children: undefined } };
       } else {
         pos = { $splice: [[i, 1]] };
       }
