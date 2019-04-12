@@ -100,6 +100,7 @@ class Tree extends Component {
       <TreeNode
         key={node.id}
         info={node}
+        repository={this.props.repository}
         path={[...parentPath, index]}
         moveNode={this.moveNode}
         editMode={this.props.editMode}

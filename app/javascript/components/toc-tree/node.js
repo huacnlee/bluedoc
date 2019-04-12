@@ -9,8 +9,20 @@ import {
 } from './utils';
 
 class Node extends Component {
-  state = {
-    position: '',
+  constructor(props) {
+    super(props)
+
+    const { info, repository } = props;
+
+    let url = info.url;
+    if (url && !url.includes("/")) {
+      url = `${repository.path}/${url}`;
+    }
+
+    this.state = {
+      position: '',
+      url: url,
+    }
   }
 
   updatePosition = (position) => {
@@ -31,8 +43,9 @@ class Node extends Component {
       connectDragSource,
       connectDropTarget,
       path,
+      editMode,
     } = this.props;
-    const { position } = this.state;
+    const { position, url } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
     return connectDragSource(
@@ -46,8 +59,10 @@ class Node extends Component {
         opacity: isDragging ? 0.6 : 1,
       }}>
         {isParent && <i className={'fas fa-arrow folder'}></i>}
-        <a className="item-link" href={info.url}>{info.title}</a>
-        <details className="item-more dropdown details-overlay details-reset d-inline-block">
+        <a className="item-link" href={url}>{info.title}</a>
+        <a className="item-slug" href={url}>{info.url}</a>
+        {editMode && (
+          <details className="item-more dropdown details-overlay details-reset d-inline-block">
           <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
           <ul className="dropdown-menu dropdown-menu-sw">
             <li><a href={`${info.url}/edit`} className="dropdown-item">编辑文档</a></li>
@@ -56,6 +71,7 @@ class Node extends Component {
             <li><a href="#" className="dropdown-item">删除</a></li>
           </ul>
         </details>
+        )}
       </li>,
       ),
     );

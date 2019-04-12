@@ -24,6 +24,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
   <% else %>
   <div class="toc-list">
     <%= react_component("toc-tree/index", {
+      readonly: true,
       repositoryId: @repository.id,
       repository: {
         path: @repository.to_path,
@@ -33,6 +34,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
         path: @user.to_path,
         name: @user.name
       },
+
       abilities: {
         update: can?(:update, @repository),
       }
