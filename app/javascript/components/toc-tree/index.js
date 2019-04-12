@@ -29,6 +29,7 @@ class TocTree extends Component {
   state = {
     treeData: [],
     loading: true,
+    editMode: false,
   }
 
   componentDidMount() {
@@ -65,15 +66,51 @@ class TocTree extends Component {
 
   onChange = treeData => this.setState({ treeData })
 
+  toggleEditMode = (e) => {
+    e.preventDefault();
+
+    const { editMode } = this.state;
+
+    this.setState({
+      editMode
+    })
+
+    return false;
+  }
+
   render() {
-    const { treeData } = this.state;
+    const { treeData, editMode } = this.state;
+    const { titleBar, abilities, repository, user } = this.props;
+
     console.log(treeData);
     return (
-      <Tree
-        treeData={treeData}
-        onChange={this.onChange}
-        onMoveNode={this.onMoveNode}
-      />
+      <div className="toc-tree">
+        {titleBar && (
+        <div className="toc-tree-toolbar doc-parents">
+          <a className="link-back text-main" href={repository.path}>{repository.name}</a>
+          <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
+          {abilities.update && (
+            <div className="actions">
+            <details className="dropdown details-overlay details-reset d-inline-block">
+              <summary className="btn-link"><i className="fas fa-more"></i></summary>
+              <ul className="dropdown-menu dropdown-menu-sw">
+                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">创建新文档</a></li>
+                <li className="dropdown-divider"></li>
+                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">知识库设置</a></li>
+              </ul>
+            </details>
+            </div>
+          )}
+        </div>
+        )}
+
+        <Tree
+          treeData={treeData}
+          editMode={editMode}
+          onChange={this.onChange}
+          onMoveNode={this.onMoveNode}
+        />
+      </div>
     );
   }
 }

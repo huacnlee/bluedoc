@@ -112,7 +112,7 @@
           @extend .text-overflow;
         }
       }
-      ul {
+      ul.toc-items {
         font-size: 13px;
         @extend .list-style-none;
         .hidden {

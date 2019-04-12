@@ -8,6 +8,29 @@
   background: $primary;
 }
 
+.toc-tree-toolbar {
+  @extend .card;
+  @extend .card:hover;
+
+  position: relative;
+
+  .actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .fas {
+    font-size: 16px;
+  }
+
+  .dropdown-menu {
+    text-align: left;
+    right: -9px;
+    top: calc(100% - -1px);
+  }
+}
+
 .toc-items {
   .toc-item {
     position: relative;

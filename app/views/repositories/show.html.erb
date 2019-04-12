@@ -19,16 +19,24 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
 </div>
 
 <div class="repo-toc">
-  <div class="toc-header">
-    <% if can? :create_doc, @repository %>
-      <%= link_to icon_tag("edit", label: t(".Edit TOC")), toc_user_repository_path(@user, @repository), class: "edit-link" %>
-    <% end %>
-  </div>
   <% if @repository.toc_json.blank? || @repository.toc_json == "[]" %>
     <%= render "empty_docs" %>
   <% else %>
   <div class="toc-list">
-    <%= react_component("toc/index", { items: @repository.toc_json, withSlug: true, prefix: @repository.to_path("/") } ) %>
+    <%= react_component("toc-tree/index", {
+      repositoryId: @repository.id,
+      repository: {
+        path: @repository.to_path,
+        name: @repository.name,
+      },
+      user: {
+        path: @user.to_path,
+        name: @user.name
+      },
+      abilities: {
+        update: can?(:update, @repository),
+      }
+    } ) %>
   </div>
   <% end %>
 </div>
