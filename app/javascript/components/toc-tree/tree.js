@@ -11,8 +11,9 @@ class Tree extends Component {
   }) => {
     const { onChange, onMoveNode } = this.props;
     const dragNode = this.findNodeByPath(originalPath);
+    const dropNode = this.findNodeByPath(targetPath);
     const newTreeData = this.getNewData({
-      originalPath, targetPath, position, dragNode,
+      originalPath, targetPath, position, dragNode, dropNode,
     });
     onChange(newTreeData);
     // fetch server
@@ -21,7 +22,7 @@ class Tree extends Component {
 
   // get changed treedata
   getNewData = ({
-    originalPath, targetPath, position, dragNode,
+    originalPath, targetPath, position, dragNode, dropNode,
   }) => {
     const tempData = this.getRemoveData(originalPath);
     return this.getAddData({
@@ -30,6 +31,7 @@ class Tree extends Component {
       targetPath,
       position,
       dragNode,
+      dropNode,
     });
   }
 
@@ -54,6 +56,7 @@ class Tree extends Component {
     targetPath,
     position,
     dragNode,
+    dropNode,
   }) => {
     const isMove = this.getIsMove(originalPath, targetPath);
     const newTargetPath = [...targetPath];
@@ -68,7 +71,11 @@ class Tree extends Component {
       if (idx > 0) {
         pos = { [i]: { children: pos } };
       } else if (position === 'child') {
-        pos = { [i]: { $merge: { children: [dragNode] } } };
+        if (!dropNode.children) {
+          pos = { [i]: { $merge: { children: [dragNode] } } };
+        } else {
+          pos = { [i]: { children: { $push: [dragNode] } } };
+        }
       } else {
         pos = { $splice: [[i, 0, dragNode]] };
       }
@@ -84,7 +91,6 @@ class Tree extends Component {
   }
 
   toggleExpaned = ({ path, expanded }) => {
-    console.log('toggleExpaned', path, expanded);
     let pos = {};
     [...path].reverse().forEach((i, idx) => {
       if (idx > 0) {
@@ -93,7 +99,6 @@ class Tree extends Component {
         pos = { [i]: { $merge: { expanded: !expanded } } };
       }
     });
-    console.log(pos);
     const newTreeData = update(this.props.treeData, pos);
     this.props.onChange(newTreeData);
   }

@@ -53,7 +53,7 @@ class Node extends Component {
     return connectDragSource(
       connectDropTarget(
       <li className={cn('toc-item', {
-        [`drop-${position}`]: isOver && canDrop && !!position && !(isParent && position === 'child'),
+        [`drop-${position}`]: isOver && canDrop && !!position,
       }, {
         active,
       })} style={{
@@ -68,9 +68,9 @@ class Node extends Component {
           <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
           <ul className="dropdown-menu dropdown-menu-sw">
             <li><a href={`${info.url}/edit`} className="dropdown-item">编辑文档</a></li>
-            <li><a href="#" className="dropdown-item">重命名</a></li>
-            <li className="dropdown-divider"></li>
-            <li><a href="#" className="dropdown-item">删除</a></li>
+            <li><a href='#' className='dropdown-item'>重命名</a></li>
+            <li className='dropdown-divider'></li>
+            <li><a href='#' className='dropdown-item'>删除</a></li>
           </ul>
         </details>
         )}
@@ -85,12 +85,11 @@ export default DropTarget(
   {
     drop(props, monitor, component) {
       const position = getTargetPosition(props, monitor, component);
-      const hasChild = props.info.children && props.info.children.length > 1;
       return {
         targetId: props.info.id,
         targetPath: props.path,
         position,
-        canDrop: !(position === 'child' && hasChild),
+        canDrop: true,
       };
     },
     hover(props, monitor, component) {
