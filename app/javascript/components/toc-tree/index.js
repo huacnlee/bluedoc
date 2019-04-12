@@ -91,7 +91,7 @@ class TocTree extends Component {
           <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
           {abilities.update && (
             <div className="actions">
-            <details className="dropdown details-overlay details-reset d-inline-block">
+            <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
               <summary className="btn-link"><i className="fas fa-more"></i></summary>
               <ul className="dropdown-menu dropdown-menu-sw">
                 <li><a href={`${repository.path}/docs/new`} className="dropdown-item">创建新文档</a></li>
