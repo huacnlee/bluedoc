@@ -208,6 +208,10 @@ export default class RichEditor extends React.Component {
     return i18n.t(key);
   }
 
+  coreT = (key) => {
+    return i18n.t(`editor.Core.${key}`);
+  }
+
   searchUsers = (query) => {
     this.setState({
       mentionUsers: [],
@@ -264,6 +268,7 @@ export default class RichEditor extends React.Component {
               service={this.attachmentService}
               plantumlServiceHost={this.props.plantumlServiceHost}
               mathJaxServiceHost={this.props.mathJaxServiceHost}
+              t={this.coreT}
               placeholder={this.t('.Write document contents here')}
              />
             <MentionList
