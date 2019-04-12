@@ -10,7 +10,7 @@ class Tree extends Component {
     dragId, targetId, position, originalPath, targetPath,
   }) => {
     const { onChange, onMoveNode } = this.props;
-    const dragNode = this.findNode(originalPath);
+    const dragNode = this.findNodeByPath(originalPath);
     const newTreeData = this.getNewData({
       originalPath, targetPath, position, dragNode,
     });
@@ -55,7 +55,7 @@ class Tree extends Component {
     position,
     dragNode,
   }) => {
-    const isMove = this.getDireaction(originalPath, targetPath);
+    const isMove = this.getIsMove(originalPath, targetPath);
     const newTargetPath = [...targetPath];
     if (isMove) {
       newTargetPath[originalPath.length - 1] -= 1;
@@ -76,13 +76,29 @@ class Tree extends Component {
     return update(treeData, pos);
   }
 
-  getDireaction = (path, targetPath) => {
+  // when originalNode remove influence targetNode's path
+  getIsMove = (path, targetPath) => {
     if (targetPath.length < path.length) return false;
     const flag = path.slice(0, -1).every((i, idx) => i === targetPath[idx]);
     return flag && targetPath[path.length - 1] > path[path.length - 1];
   }
 
-  findNode = (path) => {
+  toggleExpaned = ({ path, expanded }) => {
+    console.log('toggleExpaned', path, expanded);
+    let pos = {};
+    [...path].reverse().forEach((i, idx) => {
+      if (idx > 0) {
+        pos = { [i]: { children: pos } };
+      } else {
+        pos = { [i]: { $merge: { expanded: !expanded } } };
+      }
+    });
+    console.log(pos);
+    const newTreeData = update(this.props.treeData, pos);
+    this.props.onChange(newTreeData);
+  }
+
+  findNodeByPath = (path) => {
     const { treeData } = this.props;
     let result = null;
     path.forEach((i, idx) => {
@@ -105,8 +121,9 @@ class Tree extends Component {
         moveNode={this.moveNode}
         editMode={this.props.editMode}
         active={node.docId === this.props.currentDocId}
+        toggleExpaned={this.toggleExpaned}
       />
-      {node.children && this.renderTreeNode(node.children, [...parentPath, index])}
+      {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}
     </>
   ))
 

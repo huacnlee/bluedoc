@@ -10,19 +10,19 @@ import {
 
 class Node extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     const { info, repository } = props;
 
-    let url = info.url;
-    if (url && !url.includes("/")) {
+    let { url } = info;
+    if (url && !url.includes('/')) {
       url = `${repository.path}/${url}`;
     }
 
     this.state = {
       position: '',
-      url: url,
-    }
+      url,
+    };
   }
 
   updatePosition = (position) => {
@@ -44,10 +44,12 @@ class Node extends Component {
       connectDropTarget,
       path,
       editMode,
+      toggleExpaned,
     } = this.props;
     const { position, url } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
+    const { expanded = false } = info;
     return connectDragSource(
       connectDropTarget(
       <li className={cn('toc-item', {
@@ -58,7 +60,7 @@ class Node extends Component {
         marginLeft: `${depth * 15}px`,
         opacity: isDragging ? 0.6 : 1,
       }}>
-        {isParent && <i className={'fas fa-arrow folder'}></i>}
+        {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: !expanded })} />}
         <a className="item-link" href={url}>{info.title}</a>
         <a className="item-slug" href={url}>{info.url}</a>
         {editMode && (
