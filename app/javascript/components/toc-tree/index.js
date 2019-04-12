@@ -25,6 +25,12 @@ const moveTocList = graph(`
   }
 `);
 
+const deleteToc = graph(`
+  mutation (@autodeclare) {
+    deleteToc(id: $id)
+  }
+`);
+
 class TocTree extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +72,14 @@ class TocTree extends Component {
       targetId,
     };
     moveTocList(params).then((result) => {
-      console.log(result, params, '保存成功');
+      console.log(result, params, '排序成功');
+    });
+  }
+
+  onDeleteNode = (params) => {
+    deleteToc(params).then((result) => {
+      console.log(result, params, '删除成功');
+      window.location.reload();
     });
   }
 
@@ -114,6 +127,7 @@ class TocTree extends Component {
           editMode={editMode}
           onChange={this.onChange}
           onMoveNode={this.onMoveNode}
+          onDeleteNode={this.onDeleteNode}
           repository={repository}
           currentDocId={currentDocId}
         />

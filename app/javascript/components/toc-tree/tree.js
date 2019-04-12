@@ -116,21 +116,27 @@ class Tree extends Component {
     return result;
   }
 
-  renderTreeNode = (data = [], parentPath = []) => data.map((node, index) => (
-    <>
-      <TreeNode
-        key={node.id}
-        info={node}
-        repository={this.props.repository}
-        path={[...parentPath, index]}
-        moveNode={this.moveNode}
-        editMode={this.props.editMode}
-        active={node.docId === this.props.currentDocId}
-        toggleExpaned={this.toggleExpaned}
-      />
-      {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}
-    </>
-  ))
+  renderTreeNode = (data = [], parentPath = []) => {
+    const {
+      repository, editMode, currentDocId, onDeleteNode,
+    } = this.props;
+    return data.map((node, index) => (
+      <>
+        <TreeNode
+          key={node.id}
+          info={node}
+          repository={repository}
+          path={[...parentPath, index]}
+          moveNode={this.moveNode}
+          editMode={editMode}
+          active={node.docId === currentDocId}
+          toggleExpaned={this.toggleExpaned}
+          onDeleteNode={onDeleteNode}
+        />
+        {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}
+      </>
+    ));
+  }
 
   render() {
     const { treeData = [] } = this.props;

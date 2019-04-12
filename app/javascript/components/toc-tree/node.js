@@ -4,9 +4,7 @@ import {
   DropTarget,
 } from 'react-dnd';
 import cn from 'classnames';
-import {
-  getTargetPosition,
-} from './utils';
+import { getTargetPosition } from './utils';
 
 class Node extends Component {
   constructor(props) {
@@ -45,11 +43,12 @@ class Node extends Component {
       path,
       editMode,
       toggleExpaned,
+      onDeleteNode,
     } = this.props;
     const { position, url } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
-    const { expanded = false } = info;
+    const { expanded = false, title, id } = info;
     return connectDragSource(
       connectDropTarget(
       <li className={cn('toc-item', {
@@ -61,7 +60,7 @@ class Node extends Component {
         opacity: isDragging ? 0.6 : 1,
       }}>
         {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: !expanded })} />}
-        <a className="item-link" href={url}>{info.title}</a>
+        <a className="item-link" href={url}>{title}</a>
         <a className="item-slug" href={url}>{info.url}</a>
         {editMode && (
           <details className="item-more dropdown details-overlay details-reset d-inline-block">
@@ -70,7 +69,7 @@ class Node extends Component {
             <li><a href={`${info.url}/edit`} className="dropdown-item">编辑文档</a></li>
             <li><a href='#' className='dropdown-item'>重命名</a></li>
             <li className='dropdown-divider'></li>
-            <li><a href='#' className='dropdown-item'>删除</a></li>
+            <li className='dropdown-item' onClick={() => onDeleteNode({ id })}>删除</li>
           </ul>
         </details>
         )}
