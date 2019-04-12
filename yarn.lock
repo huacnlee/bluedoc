@@ -750,10 +750,10 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@thebluedoc/editor@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.1.5.tgz#d44111b5da02bf19e6d8df7d7e48cb27600349f8"
-  integrity sha512-ECvYSQ1oe0RX7rpCb4qPgA05iSoPa69xp3TUGALRv+wxEEdUKN2QhE+vM9Z/aLFZra+1Bk50DYSpfc/Pm9MPuw==
+"@thebluedoc/editor@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.2.0.tgz#3e8184ff97e9b91be3d1d315f6cb53fc902b9157"
+  integrity sha512-vMAdpftOllXZVfOrBCkrA+6gRk6ut1+g+IkIKJ1yNCI0BO9vd3rMtBO60ZpwZF6I2mY5u8/NKdpGnjQvA8Aviw==
   dependencies:
     "@thebluedoc/slate-react" "^0.21.24"
     fast-deep-equal "^2.0.1"
@@ -8580,3 +8580,8 @@ yargs@^7.0.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
+
+zooming@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/zooming/-/zooming-2.1.1.tgz#3e05006b4e10335235ca626244d053d90a9c7e72"
+  integrity sha512-Z38dkZRQsFNBE67+xDBQLNKMs5J1Gc+s3/zO6iezTrC24VYLJV7YPBdBDJmiLhff5qa6Awxv4wsjqx3oYz2MYA==
