@@ -160,6 +160,7 @@ Rails.application.routes.draw do
           delete :action
           get :versions
           patch :revert
+          patch :abort_draft
           post :share
           # PRO-begin
           get :readers

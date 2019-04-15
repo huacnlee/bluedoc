@@ -423,6 +423,7 @@ zh-CN:
       You are at the draft preview page, the contents has saved at: 当前处于草稿预览界面，草稿内容保存于
       View Published: 查看已发布内容
       Continue edit: 继续编辑
+      Abort draft: 废弃草稿
       There have the unpublished content saved at: 当前还有未发布的草稿内容，保存于
       Preview the draft: 预览草稿
     export_pdf:
@@ -496,6 +497,8 @@ zh-CN:
       Diff mode: 显示修改差异
       Revert: 回滚到此版本
       Cancel: 退出
+    abort_draft:
+      Doc draft was successfully aborted: "已废弃文档未发布的草稿内容。"
   group_members:
     create:
       User has added as member: 用户已经添加为成员

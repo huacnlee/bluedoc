@@ -6,7 +6,8 @@
           <p><%= t(".You are at the draft preview page, the contents has saved at") %> <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
           <p>
             <%= link_to t(".View Published"), @doc.to_path, class: "btn-view mr-3" %>
-            <%= link_to t(".Continue edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit" %>
+            <%= link_to t(".Continue edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit mr-3" %>
+            <%= link_to t(".Abort draft"), abort_draft_user_repository_doc_path(@user, @repository, @doc), class: "btn-abort", data: { method: :patch } %>
           </p>
         </div>
       <% else %>
@@ -14,7 +15,8 @@
           <p><%= t(".There have the unpublished content saved at") %> <strong><%= timeago @doc.draft_body.updated_at %></strong>.</p>
           <p>
             <%= link_to t(".Preview the draft"), @doc.to_path("?mode=draft"), class: "btn-preview mr-3" %>
-            <%= link_to t(".Continue edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit" %>
+            <%= link_to t(".Continue edit"), edit_user_repository_doc_path(@user, @repository, @doc), class: "btn-edit mr-3" %>
+            <%= link_to t(".Abort draft"), abort_draft_user_repository_doc_path(@user, @repository, @doc), class: "btn-abort", data: { method: :patch } %>
           </p>
         </div>
       <% end %>

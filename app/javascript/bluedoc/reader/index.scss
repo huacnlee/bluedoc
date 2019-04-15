@@ -147,6 +147,10 @@
       padding: 0px 0px;
       .unpublished-draft-tip {
         margin-bottom: 15px;
+
+        .btn-abort {
+          color: $danger;
+        }
       }
     }
 

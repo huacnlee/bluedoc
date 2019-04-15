@@ -430,6 +430,7 @@ en:
       You are at the draft preview page, the contents has saved at: "You are at the draft preview page, the content is saved at:"
       View Published: View Published
       Continue edit: Continue with editing
+      Abort draft: Abort draft
       There have the unpublished content saved at: "Unpublished contents are saved at:"
       Preview the draft: Preview the draft
     export_pdf:
@@ -503,6 +504,8 @@ en:
       Diff mode: Diff mode
       Revert: Revert
       Cancel: Cancel
+    abort_draft:
+      Doc draft was successfully aborted: "Unpublish draft contents was successfully aborted."
   group_members:
     create:
       User has added as member: User has added as member

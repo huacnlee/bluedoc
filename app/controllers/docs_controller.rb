@@ -6,7 +6,7 @@ class DocsController < Users::ApplicationController
   # PRO-end
 
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert action lock share]
+  before_action :authenticate_user!, only: %i[new edit create update destroy versions revert abort_draft action lock share]
 
   before_action :set_user
   before_action :set_repository
@@ -118,6 +118,13 @@ class DocsController < Users::ApplicationController
     else
       redirect_to @doc.to_path("/versions"), alert: t(".Revert failed, please check a exists version")
     end
+  end
+
+  # POST /:user/:repo/:slug/abort_draft
+  def abort_draft
+    authorize! :update, @doc
+    @doc.update(draft_body: @doc.body_plain, draft_body_sml: @doc.body_sml_plain)
+    redirect_to @doc.to_path, notice: t(".Doc draft was successfully aborted")
   end
 
   # POST /:user/:repo/:slug/action

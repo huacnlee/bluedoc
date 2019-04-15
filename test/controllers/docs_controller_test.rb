@@ -282,6 +282,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
         assert_select "a.btn-edit" do
           assert_select "[href=?]", doc.to_path("/edit")
         end
+        assert_select "a.btn-abort" do
+          assert_select "[href=?]", doc.to_path("/abort_draft")
+          assert_select "[data-method=?]", "patch"
+        end
       end
     end
     assert_select ".markdown-body", html: doc.body_html
@@ -295,6 +299,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
         end
         assert_select "a.btn-edit" do
           assert_select "[href=?]", doc.to_path("/edit")
+        end
+        assert_select "a.btn-abort" do
+          assert_select "[href=?]", doc.to_path("/abort_draft")
+          assert_select "[data-method=?]", "patch"
         end
       end
     end
@@ -579,6 +587,33 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     doc = Doc.find_by_id(doc.id)
     assert_equal "Hello world", doc.body_plain
     assert_equal u.id, doc.last_editor_id
+  end
+
+  test "PATCH /:user/:repo/:slug/abort_draft" do
+    doc = create(:doc, repository: @repo,
+      body: "Hello world", draft_body: "Hello world [draft]",
+      body_sml: %(["p", "Hello world"]), draft_body_sml: %(["p", "Hello world [draft]"]))
+
+
+    sign_in @user
+    patch doc.to_path("/abort_draft")
+    assert_equal 403, response.status
+
+    sign_in_role :reader, group: @group
+    patch doc.to_path("/abort_draft")
+    assert_equal 403, response.status
+
+    u = sign_in_role :editor, group: @group
+    patch doc.to_path("/abort_draft")
+    assert_redirected_to doc.to_path
+    follow_redirect!
+
+    doc = Doc.find_by_id(doc.id)
+    assert_equal "Hello world", doc.draft_body_plain
+    assert_equal "Hello world", doc.body_plain
+    assert_equal %(["p", "Hello world"]), doc.draft_body_sml_plain
+    assert_equal %(["p", "Hello world"]), doc.body_sml_plain
+    assert_select ".notice", text: "Unpublish draft contents was successfully aborted."
   end
 
   test "POST/DELETE /:user/:repo/:slug/action" do
