@@ -34,9 +34,11 @@ class Node extends Component {
   }
 
   handleDelete = () => {
-    const { onDeleteNode, info: { id } } = this.props;
+    const {
+      onDeleteNode, info: { id }, path, active,
+    } = this.props;
     if (onDeleteNode && id) {
-      onDeleteNode({ id });
+      onDeleteNode({ id, path, reload: active });
     }
   }
 
@@ -45,7 +47,7 @@ class Node extends Component {
     confirm({
       info,
       t,
-      onSuccessBack: () => { console.log('success'); },
+      onSuccessBack: (result) => { console.log('success'); },
     });
   }
 

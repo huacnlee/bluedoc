@@ -6,6 +6,19 @@ import TreeNode from './node';
 
 
 class Tree extends Component {
+  // del node event
+  delNode = ({
+    id,
+    path,
+    reload,
+  }) => {
+    const { onChange, onDeleteNode } = this.props;
+    const newTreeData = this.getRemoveData(path);
+    !reload && onChange(newTreeData);
+    onDeleteNode({ id }, reload);
+  }
+
+  // move node event
   moveNode = ({
     dragId, targetId, position, originalPath, targetPath,
   }) => {
@@ -118,7 +131,7 @@ class Tree extends Component {
 
   renderTreeNode = (data = [], parentPath = []) => {
     const {
-      repository, editMode, viewMode, currentDocId, onDeleteNode, t,
+      repository, editMode, viewMode, currentDocId, t,
     } = this.props;
     return data.map((node, index) => (
       <>
@@ -132,7 +145,7 @@ class Tree extends Component {
           viewMode={viewMode}
           active={node.docId === currentDocId}
           toggleExpaned={this.toggleExpaned}
-          onDeleteNode={onDeleteNode}
+          onDeleteNode={this.delNode}
           t={t}
         />
         {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}

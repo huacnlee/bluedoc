@@ -59,15 +59,15 @@ class TocTree extends Component {
     });
   }
 
-  onDeleteNode = (params) => {
+  onDeleteNode = (params, reload) => {
     if (!confirm(this.t('.Are you sure to delete'))) {
       return false;
     }
 
     deleteToc(params).then((result) => {
       App.notice(this.t('.Toc has successfully deleted'));
-      // FIXME: 从 this.state.treeData 里面删除此项，而不是 getTocList
-      this.getTocList();
+      // 当删除项是当前阅读的文档
+      reload && window.location.reload();
     });
   }
 
