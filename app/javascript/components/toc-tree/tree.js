@@ -18,6 +18,26 @@ class Tree extends Component {
     onDeleteNode({ id }, reload);
   }
 
+  // update node info event
+  updateNode = ({
+    result,
+    path,
+  }) => {
+    const { treeData, onChange } = this.props;
+
+    let pos;
+    [...path].reverse().forEach((i, idx) => {
+      if (idx > 0) {
+        pos = { [i]: { children: pos } };
+      } else {
+        pos = { [i]: { $merge: { ...result } } };
+      }
+    });
+    console.log(pos);
+    const newTreeData = update(treeData, pos);
+    onChange(newTreeData);
+  }
+
   // move node event
   moveNode = ({
     dragId, targetId, position, originalPath, targetPath,
@@ -146,6 +166,7 @@ class Tree extends Component {
           active={node.docId === currentDocId}
           toggleExpaned={this.toggleExpaned}
           onDeleteNode={this.delNode}
+          onUpdateNode={this.updateNode}
           t={t}
         />
         {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}

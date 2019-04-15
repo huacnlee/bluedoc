@@ -22,11 +22,11 @@ class ConfirmDialog extends Component {
   handleClose = () => this.setState({ open: false })
 
   handleConfirm = () => {
-    const { info: { id }, onSuccessBack } = this.props;
+    const { info = {}, onSuccessBack, active } = this.props;
     const title = this.titleRef.current.value;
     const url = this.urlRef.current.value;
     const params = {
-      id,
+      id: info.id,
       title,
       url,
     };
@@ -36,8 +36,14 @@ class ConfirmDialog extends Component {
     }, () => {
       updateToc(params).then((result) => {
         App.notice(this.props.t('.Toc has successfully updated'));
-        onSuccessBack && onSuccessBack();
-        this.setState({ loading: false }, this.handleClose);
+        // 修改当前文档，页面重载， 否则更新treedate数据
+        if (active) {
+          const newHref = window.location.href.replace(info.url, url);
+          window.Turbolinks.visit(newHref);
+        } else {
+          onSuccessBack && onSuccessBack({ title, url });
+          this.setState({ loading: false }, this.handleClose);
+        }
       });
     });
   }

@@ -11,20 +11,19 @@ class Node extends Component {
   constructor(props) {
     super(props);
 
-    const { info, repository } = props;
-
-    let { url } = info;
-    if (url && !url.includes('/')) {
-      url = `${repository.path}/${url}`;
-    }
-
     this.state = {
-      menuOpen: null,
       position: '',
-      url,
     };
 
     this.menu = React.createRef();
+  }
+
+  getUrl = () => {
+    const { info: { url }, repository } = this.props;
+    if (url && !url.includes('/')) {
+      return `${repository.path}/${url}`;
+    }
+    return url;
   }
 
   updatePosition = (position) => {
@@ -37,17 +36,24 @@ class Node extends Component {
     const {
       onDeleteNode, info: { id }, path, active,
     } = this.props;
-    if (onDeleteNode && id) {
-      onDeleteNode({ id, path, reload: active });
-    }
+    onDeleteNode({ id, path, reload: active });
   }
 
   handleUpdate = () => {
-    const { info, t } = this.props;
+    const {
+      info, t, path, onUpdateNode, active,
+    } = this.props;
     confirm({
       info,
       t,
-      onSuccessBack: (result) => { console.log('success'); },
+      active,
+      onSuccessBack: (result) => {
+        onUpdateNode({
+          result,
+          path,
+          reload: info.title !== result.title,
+        });
+      },
     });
   }
 
@@ -73,10 +79,11 @@ class Node extends Component {
       toggleExpaned,
       t,
     } = this.props;
-    const { position, url } = this.state;
+    const { position } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
     const { expanded = false, title } = info;
+    const url = this.getUrl();
     return connectDragSource(
       connectDropTarget(
       <li
