@@ -207,7 +207,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "toc-tree/index" do |props|
       assert_equal true, props[:readonly]
       assert_equal repo.id, props[:repositoryId]
-      assert_equal({ path: repo.to_path, name: repo.name }, props[:repository])
+      assert_equal({ path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
       assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
       assert_equal false, props[:abilities][:update]
     end
