@@ -33,7 +33,6 @@ class Tree extends Component {
         pos = { [i]: { $merge: { ...result } } };
       }
     });
-    console.log(pos);
     const newTreeData = update(treeData, pos);
     onChange(newTreeData);
   }
@@ -149,29 +148,41 @@ class Tree extends Component {
     return result;
   }
 
+  // 是否折叠 true(折叠)， false(展开)
+  getExpanded = ({ children, expanded }, parentPath) => {
+    const { expandedDepth } = this.props;
+    // 没有子项
+    if (!children) return true;
+    // 有折叠参数
+    if (typeof expanded !== 'undefined') return expanded;
+    return parentPath.length >= expandedDepth - 1;
+  }
+
   renderTreeNode = (data = [], parentPath = []) => {
     const {
       repository, editMode, viewMode, currentDocId, t,
     } = this.props;
-    return data.map((node, index) => (
-      <>
-        <TreeNode
-          key={node.id}
-          info={node}
-          repository={repository}
-          path={[...parentPath, index]}
-          moveNode={this.moveNode}
-          editMode={editMode}
-          viewMode={viewMode}
-          active={node.docId === currentDocId}
-          toggleExpaned={this.toggleExpaned}
-          onDeleteNode={this.delNode}
-          onUpdateNode={this.updateNode}
-          t={t}
-        />
-        {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}
-      </>
-    ));
+    return data.map((node, index) => {
+      const expanded = this.getExpanded(node, parentPath);
+      return (
+        <>
+          <TreeNode
+            key={node.id}
+            info={{ expanded, ...node }}
+            repository={repository}
+            path={[...parentPath, index]}
+            moveNode={this.moveNode}
+            editMode={editMode}
+            viewMode={viewMode}
+            active={node.docId === currentDocId}
+            toggleExpaned={this.toggleExpaned}
+            onDeleteNode={this.delNode}
+            onUpdateNode={this.updateNode}
+            t={t}
+          />
+          {!expanded && this.renderTreeNode(node.children, [...parentPath, index])}
+        </>);
+    });
   }
 
   render() {

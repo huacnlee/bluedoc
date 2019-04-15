@@ -12,7 +12,9 @@ class TocTree extends Component {
   constructor(props) {
     super(props);
 
-    let { readonly, abilities, repository, tocs } = props;
+    let {
+      readonly, abilities, repository, tocs,
+    } = props;
 
     if (!abilities.update) {
       readonly = true;
@@ -126,6 +128,8 @@ class TocTree extends Component {
       onDeleteNode={this.onDeleteNode}
       repository={repository}
       currentDocId={currentDocId}
+      // 默认折叠的层级
+      expandedDepth={3}
       t={this.t}
      />;
   }

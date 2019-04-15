@@ -61,11 +61,11 @@
 
       &:hover {
         background: #f7f7f7;
-
+        .item-link {
+          padding-right: 25px;
+        }
         .item-more {
           visibility: visible;
-          background: #f7f7f7;
-
           summary {
             border: 1px solid transparent;
             &:hover {
