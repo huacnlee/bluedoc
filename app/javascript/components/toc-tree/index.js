@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graph } from 'bluedoc/graphql';
 import Tree from './tree';
+import ContentLoader from "react-content-loader"
 import {
   getTreeFromFlatData,
 } from './utils';
@@ -110,10 +111,11 @@ class TocTree extends Component {
   }
 
   render() {
-    const { treeData, editMode } = this.state;
+    const { loading, treeData, editMode } = this.state;
     const {
       titleBar, abilities, repository, user, currentDocId,
     } = this.props;
+
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
         {titleBar && (
@@ -134,7 +136,12 @@ class TocTree extends Component {
           )}
         </div>
         )}
-        <Tree
+
+        {loading && (
+          <TreeLoader />
+        )}
+        {!loading && (
+          <Tree
           treeData={treeData}
           editMode={editMode}
           onChange={this.onChange}
@@ -142,10 +149,33 @@ class TocTree extends Component {
           onDeleteNode={this.onDeleteNode}
           repository={repository}
           currentDocId={currentDocId}
-        />
+         />
+        )}
       </div>
     );
   }
 }
+
+const TreeLoader = () => (
+  <div style={{ width: "300px", height: "220px" }}>
+  <ContentLoader
+    height={220}
+    width={300}
+    speed={2}
+    primaryColor="#f3f3f3"
+    secondaryColor="#ecebeb"
+  >
+    <rect x="10" y="15" rx="4" ry="4" width="117" height="6" />
+    <rect x="10" y="39" rx="3" ry="3" width="85" height="6" />
+    <rect x="24" y="63" rx="3" ry="3" width="130" height="6" />
+    <rect x="24" y="87" rx="3" ry="3" width="100" height="6" />
+    <rect x="10" y="111" rx="3" ry="3" width="69" height="6" />
+    <rect x="10" y="135" rx="3" ry="3" width="80" height="6" />
+    <rect x="24" y="159" rx="3" ry="3" width="140" height="6" />
+    <rect x="38" y="183" rx="3" ry="3" width="140" height="6" />
+    <rect x="10" y="207" rx="3" ry="3" width="100" height="6" />
+  </ContentLoader>
+  </div>
+)
 
 export default TocTree;
