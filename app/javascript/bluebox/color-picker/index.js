@@ -13,15 +13,15 @@ const HILIGHT_COLORS = [
 
 const COLORS = {
   "red": [
-     "#b71c1c",
-     "#c62828",
-     "#d32f2f",
-     "#e53935",
-     "#f44336",
-     "#ef5350",
-     "#e57373",
-     "#ef9a9a",
-     "#ffcdd2",
+    "#b71c1c",
+    "#c62828",
+    "#d32f2f",
+    "#e53935",
+    "#f44336",
+    "#ef5350",
+    "#e57373",
+    "#ef9a9a",
+    "#ffcdd2",
     "#ffebee",
   ],
   "purple": [

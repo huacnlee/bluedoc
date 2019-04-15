@@ -28,7 +28,7 @@ class DashboardsController < ApplicationController
   end
 
   def docs
-    @docs = current_user.user_actives.docs.page(params[:page]).per(12)
+    @docs = current_user.user_actives.docs.page(params[:page]).per(6)
   end
 
   # GET /dashboard/stars?tab=

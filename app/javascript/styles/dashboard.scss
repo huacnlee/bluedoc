@@ -99,16 +99,24 @@
       margin-right: -30px;
       .card {
         margin-right: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         width: calc(50% - 30px);
       }
 
     }
 
     .more-button {
-      font-weight: bold;
+      font-weight: normal;
       .btn {
-        color: $primary !important;
+        height: auto;
+        line-height: auto;
+        color: #333;
+        .fas {
+          color: #777;
+        }
+        &:hover {
+          color: $primary;
+        }
       }
     }
   }
