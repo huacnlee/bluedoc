@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def self.default_url_options
+    { host: Setting.host }
+  end
+
   def set_nav_search(url: request.fullpath)
     @nav_search_path = url
   end

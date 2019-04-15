@@ -248,11 +248,16 @@ zh-CN:
       restore:
         Repository was successfully restored: 知识库恢复成功
     settings:
+      menu:
+        Settings: 系统设置
+        System settings: 系统设置
+        Customize UI: UI 定制
+        Mailer: "邮件配置"
       show:
         Settings: 系统设置
         System settings: 系统设置
-        Default language: "默认语言:"
-        Setup default language for BlueDoc: 设置 BlueDoc 所有用户的默认语言。
+        Host: "网站地址:"
+        BlueDoc application host_html: "[必填] 为 BlueDoc 配置基本的网站 URL 地址，网站地址为访问 BlueDoc 的地址，格式如： <code>http(s)://your-domain.com</code>。"
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
         Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
         Account Email suffix: 用户 Email 后缀限制
@@ -266,17 +271,30 @@ zh-CN:
         If you wants customize MaxJax SVG service: 如果你希望部署一套自己的数学公式图像生成服务，你可以修改这里，你的服务需要兼容这样的路径 <code>${mathjax_service_host}/svg?tex={tex}</code> 来生成 SVG 图像。
         Admin Emails: "管理员 Email 列表:"
         Special account emails as admin with each line: "添加 Email 到这个列表（一行一个），用这些 Email 注册的账号将会获得 BlueDoc 管理后台的权限（请小心，别把自己删掉了）。"
-        Customize UI: UI 定制
-        Application Footer HTML: "全局页脚 HTML:"
-        You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
-        Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
-        Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
         LDAP Name: LDAP 别名
         Display name of LDAP_html: "给 LDAP 登录方式自定义名称，以便于使用者能理解（例如：Windows 账号）。"
         LDAP Title: LDAP 标题
         For customize the LDAP Login button title and page title_html: "自定义 LDAP 登录页面的主标题（包括登录按钮名称）。"
         LDAP Description: LDAP 详细介绍
         Customize the LDAP Login page description_html: "你可以用 HTML 编写一段对 LDAP 登录的解释，以便于大家能更容易理解，这个信息将会在 LDAP 登录页面上显示。"
+        Save: 保存
+      ui:
+        Customize UI: UI 定制
+        Application Footer HTML: "全局页脚 HTML:"
+        You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
+        Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"
+        Customize the sidebar html in dashboard page for user signed in: "你可以在用户工作台页面（URL 路径为: “/”）的侧边栏定制 HTML 代码。"
+        Default language: "默认语言:"
+        Setup default language for BlueDoc: 设置 BlueDoc 所有用户的默认语言。
+        Save: 保存
+      mailer:
+        Mailer: "邮件配置"
+        Email sender: "发送邮件地址:"
+        The Email sender of BlueDoc mails_html: "配置用于发送邮件的邮件地址，比如: <code>no-reply@your-host.com</code>"
+        SMTP options: "STMP 参数配置:"
+        Use YAML format to config the SMTP_html: "请用 <a href='http://www.yamllint.com' target='_blank'>YAML</a> 格式编写配置信息。"
+        Show details: "详细说明..."
+        Send a test Email to me: "发送测试邮件到我的 Email"
         Save: 保存
       create:
         Setting was successfully updated: 系统设置更新成功。

@@ -16,6 +16,7 @@
   user-select: none;
   appearance: none;
   outline: none;
+
   &:hover {
     text-decoration: none;
     color: $text-main;
@@ -37,6 +38,7 @@
 .btn-link {
   border: 0px !important;
   background: transparent;
+  box-shadow: 0 0 0;
 }
 
 .btn-primary {
@@ -60,6 +62,19 @@
     border-color: #F3B7B7;
     color: $danger!important;
     background: #FFE5E5;
+  }
+}
+
+.btn-success {
+  border-color: #28a745;
+  background: #f1fff2;
+  color: $green;
+  box-shadow: 0px 3px 6px 0px rgba(92, 255, 98, 0.14);
+
+  &:hover {
+    border-color: #28a745;
+    color: $green !important;
+    background: #e4ffe7;
   }
 }
 

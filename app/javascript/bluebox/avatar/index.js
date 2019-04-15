@@ -3,7 +3,7 @@ export class DefaultAvatar extends React.Component {
     const { user, style } = this.props;
 
     const firstChar = user.slug[0].toUpperCase();
-    const idx = firstChar.charCodeAt(0) % 5;
+    const idx = firstChar.charCodeAt(0) % 10;
 
     return <span className={`avatar avatar-${style} default-avatar default-avatar-${idx}`}>{firstChar}</span>;
   }

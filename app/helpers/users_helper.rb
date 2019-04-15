@@ -47,7 +47,7 @@ module UsersHelper
     opts[:class] ||= ""
 
     first_char = user.slug[0].upcase
-    idx = first_char.bytes.first % 5
+    idx = first_char.bytes.first % 10
     class_name = "default-avatar #{opts[:class]} default-avatar-#{idx}"
     content_tag(:span, first_char, class: class_name)
   end

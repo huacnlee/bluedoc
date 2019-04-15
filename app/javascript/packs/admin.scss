@@ -49,4 +49,26 @@ form {
   .form-checkbox {
       padding-left: 0;
   }
+
+  .control-label {
+    font-size: 14px;
+  }
+
+  code {
+    color: #666 !important;
+    padding: 1px 3px !important;
+    background: #f7f7f7 !important;
+    font-weight: normal !important;
+  }
+
+  pre {
+    background: #f7f7f7;
+    padding: 12px;
+    border-radius: 3px;
+  }
+}
+
+.sub-title {
+  font-size: 18px;
+  font-weight: bold;
 }

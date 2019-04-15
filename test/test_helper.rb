@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] ||= "test"
-# setup omniauth for test
-ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
-ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
-ENV["LDAP_HOST"] ||= "localhost"
 
 require "simplecov"
 if ENV["CI"] == "true"
@@ -38,6 +34,7 @@ class ActiveSupport::TestCase
     DatabaseCleaner.start
     MockElasticSearch.start
     I18n.locale = "en"
+    Setting.host = "http://www.example.com"
   end
 
   teardown do

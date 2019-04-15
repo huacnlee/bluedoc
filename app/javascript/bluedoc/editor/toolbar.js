@@ -322,6 +322,8 @@ export default class Toolbar extends React.Component {
         <BarButton icon="undo" title={this.t('.Undo')} enable={undos && undos.size > 0} onMouseDown={this.handleUndo} />
         <BarButton icon="redo" title={this.t('.Redo')} enable={redos && redos.size > 0} onMouseDown={this.handleRedo} />
         <span className="bar-divider"></span>
+        </span>
+        )}
         <div className="dropdown d-inline-block">
           <button className="bar-button"><i className="fas fa-text-heading"></i><div className="dropdown-caret"></div></button>
           <div className="dropdown-menu dropdown-menu-se">
@@ -336,13 +338,13 @@ export default class Toolbar extends React.Component {
             </ul>
           </div>
         </div>
+        {mode === 'full' && (
         <div className="dropdown d-inline-block" ref={this.textColorDropdown}>
           <button className="bar-button"><i className="fas fa-text-color"></i><div className="dropdown-caret"></div></button>
           <ColorPicker mode="lite" onChange={this.handleTextColor} className="dropdown-menu-se" />
         </div>
-        <span className="bar-divider"></span>
-        </span>
         )}
+        <span className="bar-divider"></span>
         {this.renderMarkButton('bold', 'bold', 'Bold')}
         {this.renderMarkButton('italic', 'italic', 'Italic')}
         {this.renderMarkButton('strike', 'strikethrough', 'Strike Through')}

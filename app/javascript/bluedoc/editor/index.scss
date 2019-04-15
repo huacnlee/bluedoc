@@ -253,6 +253,10 @@
       }
     }
 
+    [data-valid=false] {
+      border: 2px solid $danger;
+    }
+
     .codeblock-box {
       position: relative;
 

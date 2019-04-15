@@ -43,7 +43,7 @@
       <% end %>
 
       <%= form_group(f, :email) do %>
-        <%= f.email_field :email, class: "form-control", readonly: @user.unconfirmed_email.present? %>
+        <%= f.email_field :email, class: "form-control" %>
 
         <% if Setting.user_email_limit_enable? %>
         <div class="form-text user-email-suffix-support-list">

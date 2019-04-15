@@ -18,7 +18,9 @@
           <div class="subhead"><h2><%= t(".Recent edited docs") %></h2></div>
           <ul class="cards-container recent-docs">
             <%= render(partial: "doc", collection: @recent_docs, as: :item) %>
-            <%= render "/shared/more_button", url: docs_dashboard_path %>
+            <% if @recent_docs.length >= 6 %>
+              <%= render "/shared/more_button", url: docs_dashboard_path %>
+            <% end %>
           </ul>
           <% end %>
         </div>
@@ -58,7 +60,9 @@
       <% else %>
       <div class="repo-list">
         <%= render(partial: "repository", collection: @recent_repos, as: :item) %>
-        <%= render "/shared/more_button", url: repositories_dashboard_path %>
+        <% if @recent_repos.length >= 12 %>
+          <%= render "/shared/more_button", url: repositories_dashboard_path %>
+        <% end %>
       </div>
       <% end %>
     </div>
