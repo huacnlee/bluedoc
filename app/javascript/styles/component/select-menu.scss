@@ -106,7 +106,7 @@
 
 .select-menu-modal {
     position: relative;
-    min-width: 310px;
+    min-width: 210px;
     max-width: 500px;
     margin-top: 4px;
     margin-bottom: 20px;
@@ -117,7 +117,7 @@
     background-clip: padding-box;
     border: 1px solid #D9D9D9;
     box-shadow: 0 4px 8px rgba(174, 174, 174, .15);
-    border-radius: 6px;
+    border-radius: 3px;
 }
 
 .select-menu-modal-narrow {
@@ -284,7 +284,6 @@
     overflow: hidden;
     color: inherit;
     cursor: pointer;
-    border-bottom: 1px solid #D9D9D9;
 
     label {
       margin-bottom: 0px;
