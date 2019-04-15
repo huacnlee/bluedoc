@@ -1,3 +1,4 @@
+/* eslint-disable */
 import i18n from "i18next";
 
 const metaLocale = document.querySelector('meta[name=locale]');
@@ -135,7 +136,7 @@ i18n.init({
         },
         "repositories": {
           "Docs": {
-            "Sort by": "Sort by",
+            "Sort by": "Sort by:",
             "Sort by updated": "Updated",
             "Sort by created": "Created",
             "Are you sure to delete this Doc": "Are you sure to delete this Doc?",
@@ -144,6 +145,20 @@ i18n.init({
             "Create doc": "Create now",
             "Doc was successfully destroyed": "Doc was successfully destroyed.",
           },
+        },
+        "toc-tree": {
+          "Are you sure to delete": "Are you sure to delete this document?",
+          "Toc has successfully updated": "Document has successfully updated.",
+          "Toc has successfully deleted": "Document has successfully deleted.",
+          "Create Doc": "Create Doc",
+          "Setting Doc": "Document setting",
+          "Repository Settings": "Settings",
+          "Edit doc": "Edit",
+          "Delete doc": "Delete",
+          "title": "Title",
+          "url": "Url",
+          "Update": "Save",
+          "Cancel": "Cancel",
         },
       },
     },
@@ -277,7 +292,7 @@ i18n.init({
         },
         "repositories": {
           "Docs": {
-            "Sort by": "排序",
+            "Sort by": "排序:",
             "Sort by updated": "更新时间",
             "Sort by created": "创建时间",
             "Are you sure to delete this Doc": "确定要删除这篇文档吗？",
@@ -286,6 +301,20 @@ i18n.init({
             "Create doc": "立即创建",
             "Doc was successfully destroyed": "文档删除成功。",
           },
+        },
+        "toc-tree": {
+          "Are you sure to delete": "你确定要删除这篇文档吗？",
+          "Toc has successfully updated": "文档更新成功。",
+          "Toc has successfully deleted": "文档删除成功。",
+          "Setting Doc": "文档设置",
+          "Create Doc": "新建文档",
+          "Repository Settings": "知识库设置",
+          "Edit doc": "编辑文档",
+          "Delete doc": "删除",
+          "title": "标题",
+          "url": "链接",
+          "Update": "保存",
+          "Cancel": "取消",
         },
       },
     }

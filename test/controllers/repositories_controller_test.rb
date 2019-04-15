@@ -189,18 +189,6 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_match /#{repo.to_path("/settings")}/, response.body
     assert_select ".btn-create-doc"
 
-    # has_doc? enable, should render :docs
-    repo = create(:repository, user: @group)
-    repo.update(has_toc: 0)
-    get "/#{repo.user.slug}/#{repo.slug}"
-    assert_equal 200, response.status
-    assert_select ".reponav-item-docs", 0
-    assert_react_component "repositories/DocList" do |props|
-      assert_equal repo.id, props[:repositoryId]
-      assert_equal repo.to_path("/docs/new"), props[:newDocURL]
-      assert_equal({ update: true, destroy: true }, props[:abilities])
-    end
-
     # has_issues? disable
     repo = create(:repository, user: @group)
     repo.update(has_issues: 1)
@@ -216,16 +204,13 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     get repo.to_path
     assert_equal 200, response.status
-    assert_react_component "toc/index" do |props|
-      assert_equal repo.toc_json, props[:items]
-      assert_equal true, props[:withSlug]
-      assert_equal repo.to_path("/"), props[:prefix]
+    assert_react_component "toc-tree/index" do |props|
+      assert_equal true, props[:readonly]
+      assert_equal repo.id, props[:repositoryId]
+      assert_equal({ path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
+      assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
+      assert_equal false, props[:abilities][:update]
     end
-
-    repo.update(has_toc: 0)
-    get repo.to_path
-    assert_equal 200, response.status
-    assert_no_react_component "toc/index"
   end
 
   test "GET /:user/:repo with Import status" do

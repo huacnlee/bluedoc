@@ -10,14 +10,22 @@
     color: #aaa;
 
     .btn-link {
-      border-bottom: 1px solid transparent;
+      color: #777 !important;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent !important;
     }
 
-    a.selected {
+    .divider {
+      color: #ddd;
+      margin: 0 3px;
+    }
+
+    .btn-link.selected {
+      color: #333 !important;
+      border-color: #ddd !important;
       &:hover {
         text-decoration: none;
       }
-      border-bottom-color: $input-border-color;
     }
   }
 }

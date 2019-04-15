@@ -1,7 +1,7 @@
 <%
   @title = subject.name
 
-  docs = subject.has_toc? ? subject.toc_ordered_docs : subject.docs.recent
+  docs = subject.toc_ordered_docs
 
   toc_html = subject.toc_html(prefix: "#")
 %>

@@ -47,7 +47,7 @@
     <div class="box mb-3">
       <div class="box-row d-flex flex-items-center pb-3">
         <div class="form-check">
-          <%= form.check_box :has_toc, class: "form-check-input form-check-submit" %>
+          <%= form.check_box :has_toc, checked: @repository.has_toc?, class: "form-check-input form-check-submit" %>
           <%= form.label :has_toc, t(".Table of Contents"), class: "form-check-label font-weight-bold" %>
           <div class="form-text mt-1">
             <%= t(".Enable to use Table of Contents style for Repository index") %>

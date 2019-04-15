@@ -100,9 +100,7 @@ module BlueDoc
           end
 
           toc_content = ::BlueDoc::Toc.parse(toc, format: :markdown)
-          if repository.update(toc: toc_content.to_yaml)
-            logger.warn "Update Repository toc failed, #{repository.errors.inspect}"
-          end
+          ::Toc.create_by_toc_text!(self.repository, toc: toc_content.to_yaml)
         end
       ensure
         FileUtils.rm_rf(self.repo_dir)

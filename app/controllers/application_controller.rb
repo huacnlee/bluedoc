@@ -60,4 +60,17 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+
+  def graphql_query(method, args = "", result = "")
+    query = <<~QUERY
+    query {
+      #{method}(#{args}) {
+        #{result}
+      }
+    }
+    QUERY
+
+    result = BlueDocSchema.execute(query)
+    result["data"][method.to_s]
+  end
 end

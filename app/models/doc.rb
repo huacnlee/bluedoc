@@ -9,7 +9,7 @@ class Doc < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :publish, :soft_delete, :contents, :toc_sync, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search
+  depends_on :publish, :soft_delete, :contents, :tocs, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search
 
   delegate :private?, :public?, to: :repository
 
@@ -40,29 +40,18 @@ class Doc < ApplicationRecord
   # return next and prev of docs in same repository
   # { next: Doc, prev: Doc }
   def prev_and_next_of_docs
-    return @prev_and_next_of_docs if defined? @prev_and_next_of_docs
-    result = { next: nil, prev: nil }
-    ordered_docs = self.repository.read_ordered_docs
-    idx = ordered_docs.find_index { |doc| doc.id == self.id }
-    return nil if idx.nil?
-    if idx < ordered_docs.length
-      result[:next] = ordered_docs[idx + 1]
-    end
-    if idx > 0
-      result[:prev] = ordered_docs[idx - 1]
-    end
-    @prev_and_next_of_docs = result
-    @prev_and_next_of_docs
+    ordered_docs = self.repository.tocs.nested_tree
+    { next: self.toc&.next&.doc, prev: self.toc&.prev&.doc }
   end
 
   class << self
-    def create_new(repo, user_id, slug: nil)
+    def create_new(repo, user_id, slug: nil, title: nil)
       doc = Doc.new
       doc.format = "sml"
       doc.repository_id = repo.id
       doc.creator_id = user_id
       doc.last_editor_id = user_id
-      doc.title = "New Document"
+      doc.title = title || "New Document"
       doc.draft_title = doc.title
       doc.slug = slug || BlueDoc::Slug.random(seed: 999999)
       doc.save!

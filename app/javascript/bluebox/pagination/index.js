@@ -1,12 +1,9 @@
-import { Icon } from "bluebox/iconfont"
-
 import ReactPaginate from 'react-paginate';
 
-export class Pagination extends React.Component {
-
+export default class Pagination extends React.Component {
   onPage = (selectedItem) => {
-    const newPage = selectedItem.selected + 1
-    console.log("goto page", newPage);
+    const newPage = selectedItem.selected + 1;
+    console.log('goto page', newPage);
 
     this.props.onPage(newPage);
   }
@@ -14,8 +11,8 @@ export class Pagination extends React.Component {
   render() {
     const { pageInfo = {} } = this.props;
 
-    if (pageInfo.totalCount == 0 || pageInfo.totalPages == 1) {
-      return <div />
+    if (pageInfo.totalCount === 0 || pageInfo.totalPages === 1) {
+      return <div />;
     }
 
     return <ReactPaginate
@@ -31,6 +28,6 @@ export class Pagination extends React.Component {
       nextLabel=""
       previousLabel=""
       containerClassName="pagination"
-    />
+    />;
   }
 }
