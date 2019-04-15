@@ -34,15 +34,6 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal "http://127.0.0.1:1608", Setting.plantuml_service_host
   end
 
-  test "readonly fields" do
-    default = RailsSettings::Default
-    %i[host mailer_from mailer_options].each do |field|
-      assert_equal default[field], Setting.send(field), "Setting.#{field.to_s} should be #{default[field]}"
-      Setting.send("#{field}=", "123")
-      assert_equal default[field], Setting.send(field), "Setting.#{field.to_s} should be #{default[field]}"
-    end
-  end
-
   test "default_locale" do
     assert_equal [["English (US)", "en"], ["简体中文", "zh-CN"]], Setting.locale_options
     Setting.stub(:default_locale, "zh-CN") do
@@ -88,5 +79,38 @@ class SettingTest < ActiveSupport::TestCase
         assert_equal true, Setting.user_email_limit_enable?
       end
     end
+  end
+
+  test "mailer_sender" do
+    Setting.stub(:mailer_from, "foo@bar.com") do
+      assert_equal "BlueDoc <foo@bar.com>", Setting.mailer_sender
+    end
+
+    Setting.stub(:mailer_from, "bar@foo.com") do
+      assert_equal "BlueDoc <bar@foo.com>", Setting.mailer_sender
+    end
+  end
+
+  test "ldap_options" do
+    assert_kind_of String, Setting.ldap_options
+    assert_kind_of Hash, Setting.ldap_option_hash
+    Setting.ldap_options = <<~YAML
+    host: "foo.com"
+    encryption: "aaa"
+    YAML
+    assert_equal "foo.com", Setting.ldap_option_hash[:host]
+    assert_equal "aaa", Setting.ldap_option_hash[:encryption]
+  end
+
+  test "mailer_options" do
+    assert_kind_of String, Setting.mailer_options
+    assert_kind_of Hash, Setting.mailer_option_hash
+    Setting.mailer_options = <<~YAML
+    address: "foo.com"
+    user_name: "aaa"
+    YAML
+
+    assert_equal "foo.com", Setting.mailer_option_hash[:address]
+    assert_equal "aaa", Setting.mailer_option_hash[:user_name]
   end
 end

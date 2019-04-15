@@ -1,0 +1,13 @@
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item"><%= t(".Settings") %></li>
+<% end %>
+
+<div class="col-12 col-md-3">
+  <ul class="menu">
+    <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
+      li << link_to(t(".System settings"), admin_settings_path(_action: "show"), class: "menu-item")
+      li << link_to(t(".Mailer"), admin_settings_path(_action: "mailer"), class: "menu-item")
+      li << link_to(t(".Customize UI"), admin_settings_path(_action: "ui"), class: "menu-item")
+    end %>
+  </ul>
+</div>

@@ -255,11 +255,16 @@ en:
       restore:
         Repository was successfully restored: Repository was successfully restored
     settings:
+      menu:
+        Settings: Settings
+        System settings: System settings
+        Customize UI: Customize UI
+        Mailer: Email configution
       show:
         Settings: Settings
         System settings: System settings
-        Default language: "Default language:"
-        Setup default language for BlueDoc: "Setup default language for BlueDoc."
+        Host: "Host:"
+        BlueDoc application host_html: "Config the base URL for BlueDoc application <code>http(s)://your-domain.com</code> [required]."
         Account Email suffix: "Email suffix restriction"
         Limit user registration email must has suffx with in this list, empty it to allow any emails_html: "This list contains all usable email suffix (separate each with a newline or comma). With email verification process, certain emails can be restricted from accessing BlueDoc. By removing this setting, all email shall be able to access BlueDoc."
         Enable anonymous visit public contents: "Enable anonymous visitors to access public contents."
@@ -273,7 +278,11 @@ en:
         If you wants customize MaxJax SVG service: "If you want to customize MaxJax SVG service, you can config here. Your services must be compatible with these paths <code>${mathjax_service_host}/svg?tex={tex}</code>"
         Admin Emails: "Admin Emails:"
         Special account emails as admin with each line: "Add email to this list (one at each line or split by comma). These email will be granted admin authorities. Please be careful not to delete yourself."
+        Save: Save
+      ui:
         Customize UI: Customize UI
+        Default language: "Default language:"
+        Setup default language for BlueDoc: "Setup default language for BlueDoc."
         Application Footer HTML: "Application Footer HTML:"
         You can use HTML to customize the footer: "You can use HTML to customize the page footer, including Stylesheet and JavaScript."
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"
@@ -284,6 +293,15 @@ en:
         For customize the LDAP Login button title and page title_html: "Customize the page title and button title for LDAP login."
         LDAP Description: LDAP Description
         Customize the LDAP Login page description_html: "You can write a message for tell users how to does they use LDAP login. The message will showup on the LDAP login page."
+        Save: Save
+      mailer:
+        Mailer: Email configution
+        Email sender: "Email sender:"
+        The Email sender of BlueDoc mails_html: "The Email sender of BlueDoc mails, for example: <code>no-reply@your-host.com</code>"
+        SMTP options: "STMP Options:"
+        Use YAML format to config the SMTP_html: "Use YAML format to config the SMTP."
+        Show details: "More help..."
+        Send a test Email to me: "Send a test Email to me"
         Save: Save
       create:
         Setting was successfully updated: Setting was successfully updated.
