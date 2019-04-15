@@ -37,6 +37,7 @@
         name: @user.name,
         path: @user.to_path,
       },
+      tocs: @tocs,
       currentDocId: @doc&.id,
       abilities: {
         update: can?(:update, @repository),

@@ -12,22 +12,27 @@ class TocTree extends Component {
   constructor(props) {
     super(props);
 
-    let { readonly, abilities, repository } = props;
+    let { readonly, abilities, repository, tocs } = props;
 
     if (!abilities.update) {
       readonly = true;
     }
 
+    const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null });
+
     this.state = {
-      treeData: [],
-      loading: true,
+      treeData,
+      loading: false,
       editMode: !readonly,
       viewMode: repository.has_toc ? 'tree' : 'list',
     };
   }
 
   componentDidMount() {
-    this.getTocList();
+    const { tocs } = this.props;
+    if (!tocs) {
+      this.getTocList();
+    }
   }
 
   // fetch Toc List

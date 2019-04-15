@@ -33,6 +33,8 @@ class DocsController < Users::ApplicationController
       @between_docs = @doc.prev_and_next_of_docs
     end
 
+    @tocs = graphql_query(:repositoryTocs, "repositoryId: #{@repository.id}", "id, docId, title, url, parentId, depth")
+
     render "show", layout: "reader"
   end
 
