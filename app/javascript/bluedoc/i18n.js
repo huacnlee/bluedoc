@@ -156,7 +156,9 @@ i18n.init({
           "Edit doc": "Edit",
           "Delete doc": "Delete",
           "title": "Title",
-          "url": "Url"
+          "url": "Url",
+          "Update": "Save",
+          "Cancel": "Cancel",
         },
       },
     },
@@ -310,7 +312,9 @@ i18n.init({
           "Edit doc": "编辑文档",
           "Delete doc": "删除",
           "title": "标题",
-          "url": "链接"
+          "url": "链接",
+          "Update": "保存",
+          "Cancel": "取消",
         },
       },
     }

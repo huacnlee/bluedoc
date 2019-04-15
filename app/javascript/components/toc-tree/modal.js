@@ -72,8 +72,8 @@ class ConfirmDialog extends Component {
           </form>
         </DialogContent>
         <DialogActions style={{ margin: '0 24px 24px 24px' }}>
-          <button className='btn' onClick={this.handleClose}>取消</button>
-          <button className='btn btn-primary' onClick={this.handleConfirm}>确认</button>
+          <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>
+          <button className='btn btn-primary' onClick={this.handleConfirm}>{t('.Update')}</button>
         </DialogActions>
       </Dialog>
     );
