@@ -119,6 +119,12 @@ i18n.init({
             "Doc was successfully destroyed": "Doc was successfully destroyed.",
           },
         },
+        "toc-tree": {
+          "Are you sure to delete": "Are you sure to delete this document?",
+          "Toc has successfully deleted": "Document has successfully deleted.",
+          "Create Doc": "Create Doc",
+          "Repository Settings": "Settings",
+        },
       },
     },
     zh_CN: {
@@ -234,6 +240,12 @@ i18n.init({
             "Create doc": "立即创建",
             "Doc was successfully destroyed": "文档删除成功。",
           },
+        },
+        "toc-tree": {
+          "Are you sure to delete": "你确定要删除这篇文档吗？",
+          "Toc has successfully deleted": "文档删除成功。",
+          "Create Doc": "新建文档",
+          "Repository Settings": "知识库设置",
         },
       },
     }

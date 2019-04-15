@@ -77,10 +77,22 @@ class TocTree extends Component {
   }
 
   onDeleteNode = (params) => {
+    if (!confirm(this.t(".Are you sure to delete"))) {
+      return false;
+    }
+
     deleteToc(params).then((result) => {
-      console.log(result, params, '删除成功');
-      window.location.reload();
+      App.notice(this.t(".Toc has successfully deleted"));
+      // FIXME: 从 this.state.treeData 里面删除此项，而不是 getTocList
+      this.getTocList();
     });
+  }
+
+  t = (key) => {
+    if (key.startsWith('.')) {
+      return i18n.t(`toc-tree${key}`);
+    }
+    return i18n.t(key);
   }
 
   onChange = treeData => this.setState({ treeData })
@@ -113,9 +125,9 @@ class TocTree extends Component {
             <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
               <summary className="btn-link"><i className="fas fa-more"></i></summary>
               <ul className="dropdown-menu dropdown-menu-sw">
-                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">创建新文档</a></li>
+                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t(".Create Doc")}</a></li>
                 <li className="dropdown-divider"></li>
-                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">知识库设置</a></li>
+                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t(".Repository Settings")}</a></li>
               </ul>
             </details>
             </div>
