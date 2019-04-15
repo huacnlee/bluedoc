@@ -5,7 +5,19 @@ class Toc < ApplicationRecord
   belongs_to :doc, required: false, dependent: :destroy
   belongs_to :parent, class_name: "Toc", required: false
 
-  acts_as_nested_set scope: :repository_id
+  # Move children to left of self, on self destroy
+  # NOTE! THIS METHOD MUST KEEP BEFORE THE acts_as_nested_set METHOD
+  before_destroy do
+    next_children = Toc.where(repository_id: self.repository_id, parent_id: self.id).order("lft asc").all
+    last = nil
+    next_children.each do |child|
+      last ||= self
+      child.move_to(last, :right)
+      last = child.reload
+    end
+  end
+
+  acts_as_nested_set scope: :repository_id, dependent: :nullify
 
   scope :nested_tree, -> { order("lft asc") }
 

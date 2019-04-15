@@ -72,7 +72,11 @@ class TocTree extends Component {
     deleteToc(params).then((result) => {
       App.notice(this.t('.Toc has successfully deleted'));
       // 当删除项是当前阅读的文档
-      reload && window.Turbolinks.visit(window.location.href);
+      if (reload) {
+        window.Turbolinks.visit(window.location.href);
+      } else {
+        this.getTocList();
+      }
     });
   }
 
