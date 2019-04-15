@@ -148,7 +148,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".btn-create-doc", 0
     assert_select ".reponav-item-docs", 1
     assert_select ".reponav .reponav-issues", 0
-    assert_select ".repo-toc", 0
+    assert_select ".repo-toc .toc-list", 0
     assert_select ".label-private", 0
 
     # nav search
@@ -204,10 +204,12 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     get repo.to_path
     assert_equal 200, response.status
-    assert_react_component "toc/index" do |props|
-      assert_equal repo.toc_json, props[:items]
-      assert_equal true, props[:withSlug]
-      assert_equal repo.to_path("/"), props[:prefix]
+    assert_react_component "toc-tree/index" do |props|
+      assert_equal true, props[:readonly]
+      assert_equal repo.id, props[:repositoryId]
+      assert_equal({ path: repo.to_path, name: repo.name }, props[:repository])
+      assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
+      assert_equal false, props[:abilities][:update]
     end
   end
 
