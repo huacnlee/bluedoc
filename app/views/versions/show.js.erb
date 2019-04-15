@@ -4,5 +4,9 @@ $("input[name=version_id]").val("<%= @version.id %>");
 $(".version-item").removeClass("selected");
 $(".version-item-<%= @version.id %>").addClass("selected");
 $(".version-items").data("selected-id", '<%= @version.id %>');
-$(".btn-revert").removeAttr("disabled");
+<% if @version.id != @current_version.id %>
+  $(".btn-revert").removeAttr("disabled");
+<% else %>
+  $(".btn-revert").attr("disabled", "disabled");
+<% end %>
 $(".version-preview").trigger("render:diff");

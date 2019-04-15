@@ -13,7 +13,7 @@
       <%= form_with(model: @doc, url: revert_user_repository_doc_path(@user, @repository, @doc),
         local: true, remote: true) do |form| %>
         <input type="hidden" name="version_id">
-        <button type="submit" disabled class="btn btn-sm btn-revert text-primary hover-primary"><%= t(".Revert") %></button>
+        <button type="submit" disabled class="btn btn-sm btn-primary btn-revert"><%= t(".Revert") %></button>
         <%= link_to t(".Cancel"), @doc.to_path, class: "btn btn-sm mr-2" %>
       <% end %>
       <span class="diff-toggle">
@@ -28,7 +28,7 @@
 <% end %>
 
 <div class="doc-page d-flex">
-  <div class="doc-sidebar version-sidebar py-4 flex-justify-start overflow-auto border-right">
+  <div class="doc-sidebar version-sidebar">
     <%= render partial: "versions/version", locals: { version: @current_version, current: true } %>
     <div class="version-items" data-selected-id="<%= @current_version.id %>">
       <%= render "versions" %>

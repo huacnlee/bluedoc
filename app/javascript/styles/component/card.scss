@@ -71,3 +71,7 @@
   }
 }
 
+.card-static {
+  @extend .card;
+  @extend .card:hover;
+}

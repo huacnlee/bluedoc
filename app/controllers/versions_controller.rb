@@ -13,6 +13,7 @@ class VersionsController < ApplicationController
 
     def set_version
       @version = Version.find(params[:id])
+      @current_version = @version.subject.versions.includes(:user).first
       @previous_version = @version.subject.versions.order("id desc").where("id < ?", @version.id).first
       raise ActiveRecord::RecordNotFound if @version.subject.blank?
     end

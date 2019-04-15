@@ -22,11 +22,14 @@
     color: $text-main;
     border-color: #333333;
   }
+  &[disabled],
   &.disable {
-    border-color: #E0E0E0;
-    color: #C1C1C1;
-    user-select: none;
-    pointer-events: none;
+    border-color: #E0E0E0 !important;
+    color: #C1C1C1 !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
   }
 }
 
