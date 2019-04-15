@@ -65,7 +65,7 @@ class Node extends Component {
         <a className="item-slug" href={url}>{info.url}</a>
         {editMode && (
           <details className="item-more dropdown details-overlay details-reset d-inline-block">
-          <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
+          <summary><i className="fas fa-ellipsis"></i></summary>
           <ul className="dropdown-menu dropdown-menu-sw">
             <li><a href={`${info.url}/edit`} className="dropdown-item">{t(".Edit doc")}</a></li>
             <li className='dropdown-divider'></li>

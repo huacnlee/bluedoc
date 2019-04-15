@@ -160,7 +160,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.has_toc = 0
     assert_equal 0, repo.preferences[:has_toc]
     assert_equal 0, repo.has_toc
-    assert_equal true, repo.has_toc?
+    assert_equal false, repo.has_toc?
 
     repo.has_toc = nil
     assert_equal true, repo.has_toc?
@@ -169,7 +169,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.has_toc = "true"
     assert_equal true, repo.has_toc?
     repo.has_toc = "0"
-    assert_equal true, repo.has_toc?
+    assert_equal false, repo.has_toc?
 
     repo.save
     repo.reload

@@ -76,6 +76,14 @@
         }
       }
 
+      details[open] {
+        background: #f7f7f7;
+        summary {
+          background: #eee;
+          border: 1px solid #e0e0e0 !important;
+        }
+      }
+
 
       &.drop-left::after {
         top: -1px;

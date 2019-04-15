@@ -72,7 +72,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal repo_params[:slug], updated_repo.slug
     assert_equal repo_params[:description], updated_repo.description
     assert_equal repo_params[:has_toc], updated_repo.has_toc
-    assert_equal true, updated_repo.has_toc?
+    assert_equal false, updated_repo.has_toc?
     assert_equal repo_params[:has_issues], updated_repo.has_issues
     assert_equal false, updated_repo.has_issues?
     assert_equal repo_params[:privacy], updated_repo.privacy

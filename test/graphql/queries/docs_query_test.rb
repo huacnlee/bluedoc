@@ -55,7 +55,7 @@ class Queries::DocsQueryTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal 3, res["records"].length
   end
 
-  test "repository_tocs" do
+  test "repository_tocs for toc enable" do
     repo = create(:repository)
     docs = create_list(:doc, 4, repository: repo)
     docs[0].move_to(docs[1], :child)
@@ -84,5 +84,24 @@ class Queries::DocsQueryTest < BlueDoc::GraphQL::IntegrationTest
     execute(%| { repositoryTocs(repositoryId: #{repo.id}) #{query_body} } |)
     records = response_data["repositoryTocs"]
     assert_equal 3, records.length
+  end
+
+  test "repository_tocs for toc disable" do
+    repo = create(:repository)
+    repo.update(has_toc: 0)
+    docs = create_list(:doc, 4, repository: repo)
+    docs[0].move_to(docs[1], :child)
+
+    query_body = "{ id, title, url, docId, depth, parentId }"
+
+    execute(%| { repositoryTocs(repositoryId: #{repo.id}) #{query_body} } |)
+    records = response_data["repositoryTocs"]
+    assert_equal 4, records.length
+    assert_equal docs[0].toc.id, records[0]["id"]
+    assert_equal docs[0].toc.title, records[0]["title"]
+    assert_equal docs[0].toc.url, records[0]["url"]
+    assert_equal docs[1].toc.id, records[1]["id"]
+    assert_equal docs[2].toc.id, records[2]["id"]
+    assert_equal docs[3].toc.id, records[3]["id"]
   end
 end

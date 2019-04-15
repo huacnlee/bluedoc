@@ -18,7 +18,7 @@ export default class ListNode extends Component {
       <a className="item-slug" href={docURL}>{url}</a>
       {editMode &&
         <details className="item-more dropdown details-overlay details-reset d-inline-block">
-          <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
+          <summary><i className="fas fa-ellipsis"></i></summary>
           <ul className="dropdown-menu dropdown-menu-sw">
             <li><a href={`${docURL}/edit`} className="dropdown-item">{t(".Edit doc")}</a></li>
             <li className='dropdown-divider'></li>

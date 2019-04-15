@@ -1,6 +1,7 @@
 <div class="blankslate no-data no-doc text-center" data-turbolinks="false">
   <h3><%= t(".There is no documents") %></h3>
   <% if can? :create_doc, @repository %>
-  <p><%= t(".You can create first document") %> <%= link_to t(".Create doc"), @repository.to_path("/docs/new") %>.</p>
+  <p><%= t(".You can create first document") %></p>
+  <p><%= link_to t(".Create doc"), @repository.to_path("/docs/new"), class: "btn btn-primary" %></p>
   <% end %>
 </div>

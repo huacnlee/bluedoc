@@ -329,9 +329,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     doc = create(:doc, repository: @repo)
     get doc.to_path
     assert_equal 200, response.status
-    assert_react_component "toc/index" do |props|
-      assert_equal doc.repository.toc_json, props[:items]
-      assert_equal doc.slug, props[:currentSlug]
+    assert_react_component "toc-tree/index" do |props|
+      assert_nil props[:readonly]
+      assert_equal true, props[:titleBar]
+      assert_equal @repo.id, props[:repositoryId]
+      assert_equal({ name: @repo.name, path: @repo.to_path, has_toc: @repo.has_toc? }, props[:repository])
+      assert_equal({ name: @repo.user.name, path: @repo.user.to_path }, props[:user])
+      assert_equal doc.id, props[:currentDocId]
+      assert_equal false, props[:abilities][:update]
     end
 
     repo = create(:repository)
@@ -340,9 +345,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     get doc.to_path
     assert_equal 200, response.status
-    assert_react_component "toc/index" do |props|
-      assert_equal doc.repository.toc_json, props[:items]
-      assert_equal doc.slug, props[:currentSlug]
+    assert_react_component "toc-tree/index" do |props|
+      assert_equal({ name: repo.name, path: repo.to_path, has_toc: repo.has_toc? }, props[:repository])
     end
   end
 
