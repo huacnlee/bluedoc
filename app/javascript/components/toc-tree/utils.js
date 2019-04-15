@@ -199,3 +199,9 @@ export const getTargetPosition = (dropTargetProps, monitor, component) => {
   }
   return position;
 };
+
+export const getNewUrl = (url) => {
+  const pathArr = window.location.pathname.split('/');
+  pathArr.splice(-1, 1, url);
+  return `${window.location.origin}${pathArr.join('/')}`;
+};

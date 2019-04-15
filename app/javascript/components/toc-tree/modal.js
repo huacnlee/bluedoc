@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { updateToc } from './api';
+import { getNewUrl } from './utils';
 
 class ConfirmDialog extends Component {
   constructor(props) {
@@ -38,8 +39,7 @@ class ConfirmDialog extends Component {
         App.notice(this.props.t('.Toc has successfully updated'));
         // 修改当前文档，页面重载， 否则更新treedate数据
         if (active) {
-          const newHref = window.location.href.replace(info.url, url);
-          window.Turbolinks.visit(newHref);
+          window.Turbolinks.visit(getNewUrl(url));
         } else {
           onSuccessBack && onSuccessBack({ title, url });
           this.setState({ loading: false }, this.handleClose);
