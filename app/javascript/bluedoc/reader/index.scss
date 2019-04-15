@@ -126,7 +126,7 @@
             cursor: pointer;
             position: absolute;
             left: -14px;
-            top: 5px;
+            top: calc(50% - 6px);
             font-size: 12px;
           }
         }

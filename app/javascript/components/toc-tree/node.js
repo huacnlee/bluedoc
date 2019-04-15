@@ -5,6 +5,7 @@ import {
 } from 'react-dnd';
 import cn from 'classnames';
 import { getTargetPosition } from './utils';
+import confirm from './modal';
 
 class Node extends Component {
   constructor(props) {
@@ -18,14 +19,39 @@ class Node extends Component {
     }
 
     this.state = {
+      menuOpen: null,
       position: '',
       url,
     };
+
+    this.menu = React.createRef();
   }
 
   updatePosition = (position) => {
     if (position !== this.state.position) {
       this.setState({ position });
+    }
+  }
+
+  handleDelete = () => {
+    const { onDeleteNode, info: { id } } = this.props;
+    if (onDeleteNode && id) {
+      onDeleteNode({ id });
+    }
+  }
+
+  handleUpdate = () => {
+    const { info, t } = this.props;
+    confirm({
+      info,
+      t,
+      onSuccessBack: () => { console.log('success'); },
+    });
+  }
+
+  toggleMenu = () => {
+    if (this.props.editMode && this.menu) {
+      this.menu.current.removeAttribute('open');
     }
   }
 
@@ -43,35 +69,40 @@ class Node extends Component {
       path,
       editMode,
       toggleExpaned,
-      onDeleteNode,
       t,
     } = this.props;
     const { position, url } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
-    const { expanded = false, title, id } = info;
+    const { expanded = false, title } = info;
     return connectDragSource(
       connectDropTarget(
-      <li className={cn('toc-item', {
-        [`drop-${position}`]: isOver && canDrop && !!position,
-      }, {
-        active,
-      })} style={{
-        marginLeft: `${depth * 15}px`,
-        opacity: isDragging ? 0.6 : 1,
-      }}>
+      <li
+        className={cn('toc-item', {
+          [`drop-${position}`]: isOver && canDrop && !!position,
+        }, { active })}
+        style={{
+          marginLeft: `${depth * 15}px`,
+          opacity: isDragging ? 0.6 : 1,
+        }}
+        onMouseLeave={this.toggleMenu}
+      >
         {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: !expanded })} />}
         <a className="item-link" href={url}>{title}</a>
         <a className="item-slug" href={url}>{info.url}</a>
         {editMode && (
-          <details className="item-more dropdown details-overlay details-reset d-inline-block">
-          <summary><i className="fas fa-ellipsis"></i></summary>
-          <ul className="dropdown-menu dropdown-menu-sw">
-            <li><a href={`${info.url}/edit`} className="dropdown-item">{t(".Edit doc")}</a></li>
-            <li className='dropdown-divider'></li>
-            <li className='dropdown-item' onClick={() => onDeleteNode({ id })}>{t(".Delete doc")}</li>
-          </ul>
-        </details>
+          <details
+            className="item-more dropdown details-overlay details-reset d-inline-block"
+            ref={this.menu}
+          >
+            <summary><i className="fas fa-ellipsis"></i></summary>
+            <ul className="dropdown-menu dropdown-menu-sw">
+              <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
+              <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
+              <li className='dropdown-divider'></li>
+              <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
+            </ul>
+          </details>
         )}
       </li>,
       ),

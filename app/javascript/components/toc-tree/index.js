@@ -1,37 +1,12 @@
 import React, { Component } from 'react';
-import { graph } from 'bluedoc/graphql';
+import ContentLoader from 'react-content-loader';
 import Tree from './tree';
-import ListNode from "./ListNode";
-import ContentLoader from "react-content-loader"
+import ListNode from './ListNode';
 import {
   getTreeFromFlatData,
 } from './utils';
+import { getTocList, moveTocList, deleteToc } from './api';
 
-
-const getTocList = graph(`
-  query (@autodeclare) {
-    repositoryTocs(repositoryId: $repositoryId) {
-      id,
-      docId,
-      title,
-      url,
-      parentId,
-      depth
-    }
-  }
-`);
-
-const moveTocList = graph(`
-  mutation (@autodeclare) {
-    moveToc(id: $id, targetId: $targetId, position: $position )
-  }
-`);
-
-const deleteToc = graph(`
-  mutation (@autodeclare) {
-    deleteToc(id: $id)
-  }
-`);
 
 class TocTree extends Component {
   constructor(props) {
@@ -40,14 +15,14 @@ class TocTree extends Component {
     let { readonly, abilities, repository } = props;
 
     if (!abilities.update) {
-      readonly = true
+      readonly = true;
     }
 
     this.state = {
       treeData: [],
       loading: true,
       editMode: !readonly,
-      viewMode: repository.has_toc ? "tree" : "list",
+      viewMode: repository.has_toc ? 'tree' : 'list',
     };
   }
 
@@ -78,18 +53,19 @@ class TocTree extends Component {
       position,
       targetId,
     };
+
     moveTocList(params).then((result) => {
       console.log(result, params, '排序成功');
     });
   }
 
   onDeleteNode = (params) => {
-    if (!confirm(this.t(".Are you sure to delete"))) {
+    if (!confirm(this.t('.Are you sure to delete'))) {
       return false;
     }
 
     deleteToc(params).then((result) => {
-      App.notice(this.t(".Toc has successfully deleted"));
+      App.notice(this.t('.Toc has successfully deleted'));
       // FIXME: 从 this.state.treeData 里面删除此项，而不是 getTocList
       this.getTocList();
     });
@@ -106,36 +82,30 @@ class TocTree extends Component {
 
   toggleEditMode = (e) => {
     e.preventDefault();
-
     const { editMode } = this.state;
-
-    this.setState({
-      editMode,
-    });
-
-    return false;
+    this.setState({ editMode: !editMode });
   }
 
   renderItems() {
-    const { loading, treeData, editMode, viewMode  } = this.state;
+    const {
+      loading, treeData, editMode, viewMode,
+    } = this.state;
     const { repository, currentDocId } = this.props;
 
     if (loading) {
-      return <TreeLoader />
+      return <TreeLoader />;
     }
 
-    if (viewMode == "list") {
+    if (viewMode === 'list') {
       return <ul className="toc-items">
-        {treeData.map(toc => {
-          return <ListNode toc={toc}
-            onDeleteNode={this.onDeleteNode}
-            t={this.t}
-            editMode={editMode}
-            repository={repository}
-            currentDocId={currentDocId}
-          />
-        })}
-      </ul>
+        {treeData.map(toc => <ListNode toc={toc}
+          onDeleteNode={this.onDeleteNode}
+          t={this.t}
+          editMode={editMode}
+          repository={repository}
+          currentDocId={currentDocId}
+        />)}
+      </ul>;
     }
 
     return <Tree
@@ -148,7 +118,7 @@ class TocTree extends Component {
       repository={repository}
       currentDocId={currentDocId}
       t={this.t}
-     />
+     />;
   }
 
   render() {
@@ -168,9 +138,9 @@ class TocTree extends Component {
             <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
               <summary className="btn-link"><i className="fas fa-more"></i></summary>
               <ul className="dropdown-menu dropdown-menu-sw">
-                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t(".Create Doc")}</a></li>
+                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t('.Create Doc')}</a></li>
                 <li className="dropdown-divider"></li>
-                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t(".Repository Settings")}</a></li>
+                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t('.Repository Settings')}</a></li>
               </ul>
             </details>
             </div>
@@ -184,25 +154,25 @@ class TocTree extends Component {
 }
 
 const TreeLoader = () => (
-  <div style={{ width: "230px", height: "220px" }}>
-  <ContentLoader
-    height={220}
-    width={230}
-    speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
-  >
-    <rect x="10" y="15" rx="4" ry="4" width="117" height="6" />
-    <rect x="10" y="39" rx="3" ry="3" width="85" height="6" />
-    <rect x="24" y="63" rx="3" ry="3" width="130" height="6" />
-    <rect x="24" y="87" rx="3" ry="3" width="100" height="6" />
-    <rect x="10" y="111" rx="3" ry="3" width="69" height="6" />
-    <rect x="10" y="135" rx="3" ry="3" width="80" height="6" />
-    <rect x="24" y="159" rx="3" ry="3" width="140" height="6" />
-    <rect x="38" y="183" rx="3" ry="3" width="140" height="6" />
-    <rect x="10" y="207" rx="3" ry="3" width="100" height="6" />
-  </ContentLoader>
+  <div style={{ width: '230px', height: '220px' }}>
+    <ContentLoader
+      height={220}
+      width={230}
+      speed={2}
+      primaryColor="#f3f3f3"
+      secondaryColor="#ecebeb"
+    >
+      <rect x="10" y="15" rx="4" ry="4" width="117" height="6" />
+      <rect x="10" y="39" rx="3" ry="3" width="85" height="6" />
+      <rect x="24" y="63" rx="3" ry="3" width="130" height="6" />
+      <rect x="24" y="87" rx="3" ry="3" width="100" height="6" />
+      <rect x="10" y="111" rx="3" ry="3" width="69" height="6" />
+      <rect x="10" y="135" rx="3" ry="3" width="80" height="6" />
+      <rect x="24" y="159" rx="3" ry="3" width="140" height="6" />
+      <rect x="38" y="183" rx="3" ry="3" width="140" height="6" />
+      <rect x="10" y="207" rx="3" ry="3" width="100" height="6" />
+    </ContentLoader>
   </div>
-)
+);
 
 export default TocTree;

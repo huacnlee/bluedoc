@@ -118,7 +118,7 @@ class Tree extends Component {
 
   renderTreeNode = (data = [], parentPath = []) => {
     const {
-      repository, editMode, viewMode, currentDocId, onDeleteNode, t
+      repository, editMode, viewMode, currentDocId, onDeleteNode, t,
     } = this.props;
     return data.map((node, index) => (
       <>
