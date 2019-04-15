@@ -4,7 +4,8 @@ class Repository
   has_many :tocs
 
   def has_toc?
-    true
+    return true if self.preferences[:has_toc].nil?
+    ActiveModel::Type::Boolean.new.cast(self.preferences[:has_toc])
   end
 
   def toc_html(prefix: nil)

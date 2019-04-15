@@ -44,6 +44,7 @@ class Node extends Component {
       editMode,
       toggleExpaned,
       onDeleteNode,
+      t,
     } = this.props;
     const { position, url } = this.state;
     const depth = path.length - 1;
@@ -66,10 +67,9 @@ class Node extends Component {
           <details className="item-more dropdown details-overlay details-reset d-inline-block">
           <summary className="btn-link"><i className="fas fa-ellipsis"></i></summary>
           <ul className="dropdown-menu dropdown-menu-sw">
-            <li><a href={`${info.url}/edit`} className="dropdown-item">编辑文档</a></li>
-            <li><a href='#' className='dropdown-item'>重命名</a></li>
+            <li><a href={`${info.url}/edit`} className="dropdown-item">{t(".Edit doc")}</a></li>
             <li className='dropdown-divider'></li>
-            <li className='dropdown-item' onClick={() => onDeleteNode({ id })}>删除</li>
+            <li className='dropdown-item' onClick={() => onDeleteNode({ id })}>{t(".Delete doc")}</li>
           </ul>
         </details>
         )}

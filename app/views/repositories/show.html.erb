@@ -29,6 +29,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
       repository: {
         path: @repository.to_path,
         name: @repository.name,
+        has_toc: @repository.has_toc?,
       },
       user: {
         path: @user.to_path,

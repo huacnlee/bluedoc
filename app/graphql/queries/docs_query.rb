@@ -20,7 +20,11 @@ module Queries
       @repository = Repository.find(params[:repository_id])
       authorize! :read, @repository
 
-      @repository.tocs.nested_tree.includes(:doc)
+      if @repository.has_toc?
+        @repository.tocs.nested_tree.includes(:doc)
+      else
+        @repository.tocs.order("doc_id asc").includes(:doc)
+      end
     end
 
     # Get docs in a repository

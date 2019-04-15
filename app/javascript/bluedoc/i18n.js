@@ -109,7 +109,7 @@ i18n.init({
         },
         "repositories": {
           "Docs": {
-            "Sort by": "Sort by",
+            "Sort by": "Sort by:",
             "Sort by updated": "Updated",
             "Sort by created": "Created",
             "Are you sure to delete this Doc": "Are you sure to delete this Doc?",
@@ -124,6 +124,8 @@ i18n.init({
           "Toc has successfully deleted": "Document has successfully deleted.",
           "Create Doc": "Create Doc",
           "Repository Settings": "Settings",
+          "Edit doc": "Edit",
+          "Delete doc": "Delete",
         },
       },
     },
@@ -231,7 +233,7 @@ i18n.init({
         },
         "repositories": {
           "Docs": {
-            "Sort by": "排序",
+            "Sort by": "排序:",
             "Sort by updated": "更新时间",
             "Sort by created": "创建时间",
             "Are you sure to delete this Doc": "确定要删除这篇文档吗？",
@@ -246,6 +248,8 @@ i18n.init({
           "Toc has successfully deleted": "文档删除成功。",
           "Create Doc": "新建文档",
           "Repository Settings": "知识库设置",
+          "Edit doc": "编辑文档",
+          "Delete doc": "删除",
         },
       },
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graph } from 'bluedoc/graphql';
 import Tree from './tree';
+import ListNode from "./ListNode";
 import ContentLoader from "react-content-loader"
 import {
   getTreeFromFlatData,
@@ -36,12 +37,17 @@ class TocTree extends Component {
   constructor(props) {
     super(props);
 
-    const { readonly, abilities } = props;
+    let { readonly, abilities, repository } = props;
+
+    if (!abilities.update) {
+      readonly = true
+    }
 
     this.state = {
       treeData: [],
       loading: true,
-      editMode: !readonly && abilities.update,
+      editMode: !readonly,
+      viewMode: repository.has_toc ? "tree" : "list",
     };
   }
 
@@ -110,10 +116,45 @@ class TocTree extends Component {
     return false;
   }
 
+  renderItems() {
+    const { loading, treeData, editMode, viewMode  } = this.state;
+    const { repository, currentDocId } = this.props;
+
+    if (loading) {
+      return <TreeLoader />
+    }
+
+    if (viewMode == "list") {
+      return <ul className="toc-items">
+        {treeData.map(toc => {
+          return <ListNode toc={toc}
+            onDeleteNode={this.onDeleteNode}
+            t={this.t}
+            editMode={editMode}
+            repository={repository}
+            currentDocId={currentDocId}
+          />
+        })}
+      </ul>
+    }
+
+    return <Tree
+      treeData={treeData}
+      editMode={editMode}
+      viewMode={viewMode}
+      onChange={this.onChange}
+      onMoveNode={this.onMoveNode}
+      onDeleteNode={this.onDeleteNode}
+      repository={repository}
+      currentDocId={currentDocId}
+      t={this.t}
+     />
+  }
+
   render() {
-    const { loading, treeData, editMode } = this.state;
+    const { editMode } = this.state;
     const {
-      titleBar, abilities, repository, user, currentDocId,
+      titleBar, abilities, repository, user,
     } = this.props;
 
     return (
@@ -136,31 +177,17 @@ class TocTree extends Component {
           )}
         </div>
         )}
-
-        {loading && (
-          <TreeLoader />
-        )}
-        {!loading && (
-          <Tree
-          treeData={treeData}
-          editMode={editMode}
-          onChange={this.onChange}
-          onMoveNode={this.onMoveNode}
-          onDeleteNode={this.onDeleteNode}
-          repository={repository}
-          currentDocId={currentDocId}
-         />
-        )}
+        {this.renderItems()}
       </div>
     );
   }
 }
 
 const TreeLoader = () => (
-  <div style={{ width: "300px", height: "220px" }}>
+  <div style={{ width: "230px", height: "220px" }}>
   <ContentLoader
     height={220}
-    width={300}
+    width={230}
     speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
