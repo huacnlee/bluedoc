@@ -120,12 +120,13 @@
         }
         li.toc-item {
           position: relative;
-          padding: 4px 0;
+          padding: 5px 0;
+          line-height: 1;
           .fa-arrow {
             cursor: pointer;
             position: absolute;
-            left: -20px;
-            top: 8px;
+            left: -14px;
+            top: 5px;
             font-size: 12px;
           }
         }
