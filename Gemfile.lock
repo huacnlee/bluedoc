@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/huacnlee/awesome_nested_set.git
+  revision: 98044c69de2b6645ca352a4da9410ac27cb18a14
+  specs:
+    awesome_nested_set (3.1.4)
+      activerecord (>= 4.0.0)
+
+GIT
   remote: https://github.com/rails/jbuilder.git
   revision: ca14de39b441564e1fd6d4653771d7a2b2f7470a
   specs:
@@ -429,6 +436,7 @@ PLATFORMS
 DEPENDENCIES
   action-store
   activestorage-aliyun
+  awesome_nested_set!
   aws-sdk-s3
   bluedoc-license
   bluedoc-sml

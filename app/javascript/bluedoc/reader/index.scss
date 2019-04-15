@@ -109,26 +109,27 @@
           @extend .text-overflow;
         }
       }
-      ul {
+      ul.toc-items {
         font-size: 13px;
         @extend .list-style-none;
         .hidden {
           display: none;
         }
-        li {
+        li.toc-item {
           position: relative;
-          padding: 4px 0;
+          padding: 7px 0;
+          line-height: 1;
           .fa-arrow {
             cursor: pointer;
             position: absolute;
-            left: -20px;
-            top: 8px;
+            left: -14px;
+            top: calc(50% - 6px);
             font-size: 12px;
           }
         }
         a {
           @extend .text-overflow;
-          width: 100%;
+          max-width: 100%;
         }
         .active {
           color: $primary;

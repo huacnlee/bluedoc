@@ -76,15 +76,11 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select "form input[name='user[email]']" do
       assert_select "[value=?]", old_email
-      assert_select "[readonly=?]", "readonly"
     end
     assert_select ".unconfirmed-info"
     @user.update(confirmed_at: Time.now, unconfirmed_email: nil)
     get account_settings_path
     assert_equal 200, response.status
-    assert_select "form input[name='user[email]']" do
-      assert_select "[readonly]", 0
-    end
     assert_select ".unconfirmed-info", 0
   end
 

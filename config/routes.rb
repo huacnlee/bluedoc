@@ -115,8 +115,6 @@ Rails.application.routes.draw do
       member do
         get :docs, path: "docs/list"
         get :search, path: "docs/search"
-        get :toc, path: "toc/edit"
-        patch :toc, path: "toc/edit"
         post :action
         delete :action
       end

@@ -666,7 +666,7 @@ en:
       Are you sure delete this Doc?: Are you sure to delete this Doc?
     empty_docs:
       There is no documents: There is no documents
-      You can create first document: "You can create first document,"
+      You can create first document: "You can create first document."
       Create doc: Create doc
     menu:
       New Doc: New Doc

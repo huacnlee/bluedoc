@@ -2,10 +2,10 @@
 
 class RepositoriesController < Users::ApplicationController
   before_action :authenticate_anonymous!
-  before_action :authenticate_user!, only: %i[new import edit create update destroy action toc]
+  before_action :authenticate_user!, only: %i[new import edit create update destroy action]
 
-  before_action :set_user, only: %i(show edit update destroy docs search action toc)
-  before_action :set_repository, only: %i(show edit update destroy docs search action toc)
+  before_action :set_user, only: %i(show edit update destroy docs search action)
+  before_action :set_repository, only: %i(show edit update destroy docs search action)
 
   def index
     authorize! :read, @user
@@ -73,25 +73,6 @@ class RepositoriesController < Users::ApplicationController
     authorize! :read, @repository
 
     @result = BlueDoc::Search.new(:docs, params[:q], repository_id: @repository.id, include_private: true).execute.page(params[:page])
-  end
-
-  # GET /:user/:repo/toc/edit
-  def toc
-    authorize! :create_doc, @repository
-
-    if request.get?
-      @docs = @repository.docs.order("id desc")
-      render :toc, layout: "editor"
-    else
-      toc_json = params.require(:repository).permit(:toc)[:toc]
-      toc_yaml = BlueDoc::Toc.parse(toc_json, format: :json).to_yaml
-
-      if @repository.update(toc: toc_yaml)
-        redirect_to @repository.to_path, notice: t(".Table of Contents was successfully updated")
-      else
-        render :toc, layout: "editor"
-      end
-    end
   end
 
   def action

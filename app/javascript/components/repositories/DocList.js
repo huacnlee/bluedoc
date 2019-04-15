@@ -1,6 +1,6 @@
-import { DocItem, DocItemLoader } from "./DocItem";
-import { Pagination } from "bluebox/pagination"
-import { graph } from "bluedoc/graphql";
+import Pagination from 'bluebox/pagination';
+import { graph } from 'bluedoc/graphql';
+import { DocItem, DocItemLoader } from './DocItem';
 
 const getDocs = graph(`
   query (@autodeclare) {
@@ -27,9 +27,9 @@ export default class DocList extends React.Component {
     this.state = {
       docs: [],
       pageInfo: { },
-      sort: "created",
+      sort: 'created',
       loading: true,
-    }
+    };
   }
 
   componentDidMount = () => {
@@ -47,11 +47,11 @@ export default class DocList extends React.Component {
     this.setState({ loading: true });
 
     getDocs({ repositoryId, page, sort }).then((result) => {
-      const { records, pageInfo } = result.repositoryDocs
+      const { records, pageInfo } = result.repositoryDocs;
       this.setState({
         // Only return the first 5 results
         docs: records,
-        pageInfo: pageInfo,
+        pageInfo,
         loading: false,
       });
     }).catch((errors) => {
@@ -62,7 +62,7 @@ export default class DocList extends React.Component {
   onToolbarChange = ({ sort }) => {
     this.setState({
       sort,
-    })
+    });
 
     this.fetch(1);
   }
@@ -77,10 +77,12 @@ export default class DocList extends React.Component {
   render() {
     const { } = this.props;
 
-    const { docs, sort, loading, pageInfo } = this.state;
+    const {
+      docs, sort, loading, pageInfo,
+    } = this.state;
 
     if (!loading && docs.length == 0) {
-      return <EmptyDoc {...this.props} t={this.t} />
+      return <EmptyDoc {...this.props} t={this.t} />;
     }
 
     return <div className="repository-docs">
@@ -94,13 +96,13 @@ export default class DocList extends React.Component {
           </div>
         )}
         {!loading && (
-          docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} onDelete={this.onItemDeleted} /> )
+          docs.map(doc => <DocItem doc={doc} {...this.props} t={this.t} onDelete={this.onItemDeleted} />)
         )}
       </div>
-      {docs.length > 0 &&
-        <Pagination onPage={this.onPage} pageInfo={pageInfo} />
+      {docs.length > 0
+        && <Pagination onPage={this.onPage} pageInfo={pageInfo} />
       }
-    </div>
+    </div>;
   }
 
   t = (key) => {
@@ -117,18 +119,18 @@ class Toolbar extends React.Component {
 
     this.state = {
       sort: props.sort,
-    }
+    };
   }
 
   onSort = (e) => {
     e.preventDefault();
 
     const { onChange } = this.props;
-    const sort = e.target.getAttribute("sort")
+    const sort = e.target.getAttribute('sort');
 
     onChange({ sort });
 
-    return false
+    return false;
   }
 
   render() {
@@ -136,12 +138,12 @@ class Toolbar extends React.Component {
 
     return <div className="subnav">
     <div className="float-right subnav-sorting">
-      <span className="text-gray mr-2">{t(".Sort by")}</span>
-      <a href="#" onClick={this.onSort} sort="recent" className={`btn-link ${sort == "recent" ? " selected" : ""}`}>{t(".Sort by updated")}</a>
+      <span className="text-gray mr-2">{t('.Sort by')}</span>
+      <a href="#" onClick={this.onSort} sort="recent" className={`btn-link ${sort == 'recent' ? ' selected' : ''}`}>{t('.Sort by updated')}</a>
       <span className="divider">/</span>
-      <a href="#" onClick={this.onSort} sort="created" className={`btn-link ${sort == "created" ? " selected" : ""}`}>{t(".Sort by created")}</a>
+      <a href="#" onClick={this.onSort} sort="created" className={`btn-link ${sort == 'created' ? ' selected' : ''}`}>{t('.Sort by created')}</a>
     </div>
-  </div>
+  </div>;
   }
 }
 
@@ -150,17 +152,16 @@ class EmptyDoc extends React.Component {
     const { t, abilities, newDocURL } = this.props;
     return <div className="repository-docs" data-turbolinks="false">
       <div className="blankslate no-data no-doc text-center">
-      <h3>{t(".There is no documents")}</h3>
+      <h3>{t('.There is no documents')}</h3>
       {abilities.update && (
         <div>
-        <p>{t(".You can create first document")}</p>
+        <p>{t('.You can create first document')}</p>
         <p>
-          <a href={newDocURL} className="btn btn-sm btn-primary">{t(".Create doc")}</a>
+          <a href={newDocURL} className="btn btn-sm btn-primary">{t('.Create doc')}</a>
         </p>
         </div>
       )}
       </div>
-    </div>
+    </div>;
   }
 }
-

@@ -658,7 +658,7 @@ zh-CN:
       Are you sure delete this Doc?: 确定要删除这篇文档吗？
     empty_docs:
       There is no documents: 此知识库暂无文档
-      You can create first document: 你可以现在创建第一篇文档，
+      You can create first document: 你可以现在创建第一篇文档。
       Create doc: 创建文档
     menu:
       New Doc: 新建文档

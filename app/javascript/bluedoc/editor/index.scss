@@ -4,6 +4,10 @@
 .editor-body {
   overflow-y: scroll;
 
+  .container {
+    width: 100%;
+  }
+
   form { margin: 0; }
 
   .editor-navbar {

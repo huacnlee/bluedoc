@@ -195,162 +195,49 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   test "toc_text / toc_html / toc_json" do
-    toc = [{ title: "Hello world", url: "/hello", id: nil, depth: 0 }.as_json].to_yaml.strip
-    repo = create(:repository, toc: toc)
+    repo = create(:repository)
+    doc0 = create(:doc, repository: repo)
+    toc = [{ id: doc0.id, url: doc0.slug, title: doc0.title, depth: doc0.depth }.as_json].to_yaml
+
     assert_equal toc, repo.toc_text
-    assert_equal [].to_yaml, repo.toc_by_docs_text
     assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
     assert_html_equal BlueDoc::Toc.parse(toc).to_html(prefix: "/prefix"), repo.toc_html(prefix: "/prefix")
     assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_json
-    assert_html_equal BlueDoc::Toc.parse([].to_yaml).to_json, repo.toc_by_docs_json
+    assert_equal [doc0], repo.toc_ordered_docs
 
-    repo = create(:repository, toc: nil)
+    repo = create(:repository)
+    doc0.toc.destroy
     assert_equal [].to_yaml, repo.toc_text
 
     doc1 = create(:doc, repository: repo)
-    toc_hash = [{ title: doc1.title, depth: 0, id: doc1.id, url: doc1.slug }.as_json]
+    toc_hash = [{ id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0 }.as_json]
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
-    assert_equal toc, repo.toc_by_docs_text
     assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
     assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_json
-    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_by_docs_json
+    assert_equal [doc1], repo.toc_ordered_docs
 
     doc2 = create(:doc, repository: repo)
-    toc_hash << { title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json
+    toc_hash << { id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0 }.as_json
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
     repo = Repository.find(repo.id)
     assert_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
+    assert_equal [doc1, doc2], repo.toc_ordered_docs
 
-    # override toc as custom yml
-    custom_toc = [{ title: doc2.title, depth: 0, id: doc2.id, url: doc2.slug }.as_json].to_yaml.strip
-    repo.update(toc: custom_toc)
-    assert_equal custom_toc, repo.toc_text
-    assert_equal toc, repo.toc_by_docs_text
-    assert_html_equal BlueDoc::Toc.parse(custom_toc).to_json, repo.toc_json
-    assert_html_equal BlueDoc::Toc.parse(toc).to_json, repo.toc_by_docs_json
-  end
-
-  test "update_toc_by_url" do
-    toc = <<~TOC
-    - title: Hello
-      url: hello
-      depth: 0
-    - title: Getting Started
-      url: getting-started
-      depth: 1
-    - title: Database setup
-      url: database-setup
-      depth: 1
-    TOC
-    repo = create(:repository, toc: toc)
-
-    assert_equal false, repo.update_toc_by_url("not-exist", title: "Setup database", url: "setup-database")
-    assert_equal true, repo.update_toc_by_url("database-setup", title: "Setup database", url: "setup-database")
-
-    repo.reload
-    assert_match "setup-database", repo.toc_text
-    content = BlueDoc::Toc.parse(repo.toc_text, format: :yml)
-    item = content.find_by_url("setup-database")
-    assert_not_nil item
-    assert_equal "setup-database", item.url
-    assert_equal "Setup database", item.title
-    assert_equal 1, item.depth
-
-    # Test parallel update
-    threads = []
-    threads << Thread.new do
-      repo.update_toc_by_url("setup-database", title: "Update by Thread 1", url: "update-by-thread-1")
-    end
-    threads << Thread.new do
-      repo.update_toc_by_url("getting-started", title: "Update by Thread 2", url: "update-by-thread-2")
-    end
-    threads << Thread.new do
-      repo.update_toc_by_url("hello", title: "Update by Thread 3", url: "update-by-thread-3")
-    end
-    threads.each(&:join)
-
-    repo.reload
-    new_toc = <<~TOC
-    ---
-    - title: Update by Thread 3
-      url: update-by-thread-3
-      depth: 0
-      id:
-    - title: Update by Thread 2
-      url: update-by-thread-2
-      depth: 1
-      id:
-    - title: Update by Thread 1
-      url: update-by-thread-1
-      depth: 1
-      id:
-    TOC
-    assert_equal YAML.dump(YAML.load(new_toc)), repo.toc_text
-  end
-
-  test "validate toc" do
-    toc = "foo\"\"\nsdk"
-    repo = build(:repository, toc: toc)
-    assert_equal false, repo.valid?
-    assert_equal ["Invalid TOC format (required YAML format)."], repo.errors[:toc]
-
-    toc = <<~TOC
-    - name: Hello
-     slug: hello
-    TOC
-    repo = build(:repository, toc: toc)
-    assert_equal false, repo.valid?
-    assert_equal ["Invalid TOC format (required YAML format)."], repo.errors[:toc]
-
-    toc = <<~TOC
-    - title: Hello
-      url: hello
-    TOC
-    repo = build(:repository, toc: toc)
-    assert_equal true, repo.valid?
-  end
-
-  test "toc_ordered_docs" do
-    repo = create(:repository)
-    docs = create_list(:doc, 5, repository: repo)
-    toc = <<~TOC
-    - url: #{docs[2].slug}
-    - url: #{docs[1].slug}
-    - url: #{docs[4].slug}
-    - url: #{docs[0].slug}
-    - url: http://foobar.com
-    TOC
-    repo.update!(toc: toc)
-
-    # Only including doc in Toc
-    assert_equal [docs[2].slug, docs[1].slug, docs[4].slug, docs[0].slug], repo.toc_ordered_docs.collect(&:slug)
-    assert_equal docs[2], repo.toc_ordered_docs[0]
-    assert_equal docs[1], repo.toc_ordered_docs[1]
-    assert_equal docs[4], repo.toc_ordered_docs[2]
-    assert_equal docs[0], repo.toc_ordered_docs[3]
-  end
-
-  test "read_ordered_docs" do
-    repo0 = create(:repository)
-    docs = create_list(:doc, 4, repository: repo0)
-
-    # enable toc, should return same as toc_ordered_docs
-    repo0.stub(:has_toc?, true) do
-      repo0.stub(:toc_ordered_docs, docs) do
-        assert_equal docs, repo0.read_ordered_docs
-      end
-    end
-
-    # disabled toc, return with id asc
-    repo1 = create(:repository)
-    doc10 = create(:doc, repository: repo1)
-    doc11 = create(:doc, repository: repo1)
-    doc12 = create(:doc, repository: repo1)
-    repo1.stub(:has_toc?, false) do
-      assert_equal [doc10, doc11, doc12], repo1.read_ordered_docs
-    end
+    # Create doc3 and move to doc1's child
+    doc3 = create(:doc, repository: repo)
+    doc3.move_to(doc1, :child)
+    toc_hash = [
+      { id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0 }.as_json,
+      { id: doc3.id, url: doc3.slug, title: doc3.title, depth: 1 }.as_json,
+      { id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0 }.as_json,
+    ]
+    toc = toc_hash.to_yaml
+    repo = Repository.find(repo.id)
+    assert_equal [doc1, doc3, doc2], repo.toc_ordered_docs
+    assert_equal toc, repo.toc_text
+    assert_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
   end
 
   test "transfer" do
@@ -370,13 +257,9 @@ class RepositoryTest < ActiveSupport::TestCase
 
   test "_search_body" do
     user = create(:user)
-    toc = <<~TOC
-    - title: Hello
-      url: hello
-    TOC
-    repo = create(:repository, user: user, description: "Hello world", toc: toc)
+    repo = create(:repository, user: user, description: "Hello world")
 
-    expected = [user.fullname, repo.description, toc].join("\n\n")
+    expected = [user.fullname, repo.description].join("\n\n")
 
     assert_equal expected.strip, repo.send(:_search_body).strip
   end
@@ -426,17 +309,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo = create(:repository, editor_ids: [user1.id, user0.id])
     assert_equal [user1.id, user0.id], repo.editor_ids
-
-    mock_current user: user2
-    toc = <<~TOC
-    - title: Hello
-      url: hello
-    TOC
-    repo.update!(toc: toc)
-    repo.reload
-
-    assert_equal [user1.id, user0.id, user2.id], repo.editor_ids
-    assert_equal [user1, user0, user2], repo.editors
+    assert_equal [user1, user0], repo.editors
   end
 
   test "issue_assignees" do

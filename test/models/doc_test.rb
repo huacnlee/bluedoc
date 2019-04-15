@@ -362,62 +362,66 @@ class DocTest < ActiveSupport::TestCase
     end
   end
 
-  test "toc_sync" do
-    toc = <<~TOC
-    - title: Hello
-      url: hello
-      depth: 0
-    - title: Getting Started
-      url: getting-started
-      depth: 1
-    - title: Database setup
-      url: database-setup
-      depth: 1
-    TOC
-    repo = create(:repository, toc: toc)
+  test "tocs" do
+    repo = create(:repository)
     doc = create(:doc, repository: repo, slug: "getting-started")
+    assert_not_nil doc.toc
+    assert_equal doc.id, doc.toc.doc_id
+    assert_equal doc.repository_id, doc.toc.repository_id
+    assert_equal doc.slug, doc.toc.url
+    assert_equal doc.title, doc.toc.title
+    assert_equal 0, doc.depth
+    assert_nil doc.parent
 
     doc.update(slug: "started-getting")
     assert_equal "started-getting", doc.slug
+    assert_equal doc.slug, doc.toc.url
 
     repo.reload
     assert_match "started-getting", repo.toc_text
 
     doc.update(slug: "started-getting1", title: "Started Getting")
     repo.reload
-    assert_match "started-getting1", repo.toc_text
-    assert_match "Started Getting", repo.toc_text
-    content = BlueDoc::Toc.parse(repo.toc_text)
-    item = content.find_by_url("started-getting1")
-    assert_equal "Started Getting", item.title
-    assert_equal 1, item.depth
+    assert_match "started-getting1", doc.toc.url
+    assert_match "Started Getting", doc.toc.title
 
-    doc.update(title: "Started Getting1")
-    repo.reload
-    assert_match "started-getting1", repo.toc_text
-    assert_match "Started Getting1", repo.toc_text
+    doc1 = create(:doc, repository: repo)
+    doc1.move_to(doc, :child)
+    assert_equal 1, doc1.depth
+    assert_equal doc.toc, doc1.parent
+
+    doc2 = create(:doc, repository: repo)
+    doc2.move_to(doc1, :left)
+    assert_equal 1, doc1.depth
+    assert_equal doc.toc, doc1.parent
+
+    # destroy doc and restore it
+    doc2.destroy
+    doc2 = Doc.unscoped.find(doc2.id)
+    allow_feature :soft_delete do
+      doc2.restore
+      assert_not_nil doc2.toc
+    end
   end
 
   test "prev_and_next_of_docs" do
     repo = create(:repository)
     docs = create_list(:doc, 5, repository: repo)
 
-    repo.stub(:read_ordered_docs, docs) do
-      # with first
-      result = docs[0].prev_and_next_of_docs
-      assert_nil result[:prev]
-      assert_equal docs[1], result[:next]
+    # with first
+    result = docs[0].prev_and_next_of_docs
+    assert_nil result[:prev]
+    assert_equal docs[1], result[:next]
 
-      # with normal
-      result = docs[2].prev_and_next_of_docs
-      assert_equal docs[1], result[:prev]
-      assert_equal docs[3], result[:next]
+    # with normal
+    result = docs[2].prev_and_next_of_docs
+    assert_equal docs[1], result[:prev]
+    assert_equal docs[3], result[:next]
 
-      # with last
-      result = docs[4].prev_and_next_of_docs
-      assert_equal docs[3], result[:prev]
-      assert_nil result[:next]
-    end
+    # with last
+    result = docs[4].prev_and_next_of_docs
+    assert_equal docs[3], result[:prev]
+    assert_nil result[:next]
   end
 
   test "read doc" do

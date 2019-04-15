@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "bluebox/*": ["./app/javascript/bluebox/*"],
+      "bluedoc/*": ["./app/javascript/bluedoc/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}

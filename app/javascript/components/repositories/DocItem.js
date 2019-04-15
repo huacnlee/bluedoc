@@ -1,9 +1,9 @@
-import { Icon } from "bluebox/iconfont";
-import { Timeago } from "bluebox/timeago";
-import { UserLink } from "bluebox/user";
-import ContentLoader from "react-content-loader"
+import Icon from 'bluebox/iconfont';
+import { Timeago } from 'bluebox/timeago';
+import UserLink from 'bluebox/user';
+import ContentLoader from 'react-content-loader';
 
-import { graph } from "bluedoc/graphql";
+import { graph } from 'bluedoc/graphql';
 
 const deleteDoc = graph(`
   mutation(@autodeclare) {
@@ -21,7 +21,7 @@ export class DocItem extends React.Component {
     this.state = {
       deleted: false,
       doc: this.props.doc,
-    }
+    };
   }
 
   onDelete = (e) => {
@@ -31,13 +31,13 @@ export class DocItem extends React.Component {
 
     const { doc } = this.state;
 
-    if (!confirm(t(".Are you sure to delete this Doc"))) {
-      return false
+    if (!confirm(t('.Are you sure to delete this Doc'))) {
+      return false;
     }
 
     deleteDoc({ id: doc.id }).then((result) => {
       onDelete(doc.id);
-      App.notice(t(".Doc was successfully destroyed"));
+      App.notice(t('.Doc was successfully destroyed'));
     }).catch((errors) => {
       App.alert(errors);
     });
@@ -60,7 +60,7 @@ export class DocItem extends React.Component {
     const { doc, deleted } = this.state;
 
     if (deleted) {
-      return <div />
+      return <div />;
     }
 
     return <div className="doc-item list-item list-avatar">
@@ -82,13 +82,13 @@ export class DocItem extends React.Component {
           <a href="#" onClick={this.onDelete}><Icon name="trash" /></a>
         )}
       </div>
-    </div>
+    </div>;
   }
 }
 
 // http://danilowoz.com/create-content-loader/
 export const DocItemLoader = () => (
-  <div style={{ width: "400px" }}>
+  <div style={{ width: '400px' }}>
     <ContentLoader
       height={60}
       width={400}
@@ -101,4 +101,4 @@ export const DocItemLoader = () => (
       <circle cx="20" cy="31" r="19" />
     </ContentLoader>
   </div>
-)
+);
