@@ -4,11 +4,9 @@ class UpgradeToc < ActiveRecord::Migration[6.0]
     Repository.all.each do |repo|
       puts "    repo: #{repo.id}"
       begin
-        if repo.tocs.blank?
-          Toc.create_by_toc_text!(repo)
-        end
-      rescue => e
-        puts "    repo: #{repo.id} upgrade failed: #{e.inspect}"
+        Toc.create_by_toc_text!(repo)
+      rescue
+        puts "    repo: #{repo.id} upgrade failed"
       end
     end
   end
