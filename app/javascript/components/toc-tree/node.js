@@ -6,7 +6,7 @@ import {
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import cn from 'classnames';
 import { getTargetPosition } from './utils';
-import confirm from './modal';
+import dialog from './modal';
 
 class Node extends Component {
   constructor(props) {
@@ -26,6 +26,9 @@ class Node extends Component {
     }
   }
 
+  // open this toc url
+  // why js link ？
+  // The safair browser will have an extra preview image when dragging the link.
   handleLink = () => window.Turbolinks.visit(this.getUrl())
 
   getUrl = () => {
@@ -42,6 +45,7 @@ class Node extends Component {
     }
   }
 
+  // delete this toc
   handleDelete = () => {
     const {
       onDeleteNode, info: { id }, path, active,
@@ -49,11 +53,12 @@ class Node extends Component {
     onDeleteNode({ id, path, reload: active });
   }
 
+  // update toc info {title, url}
   handleUpdate = () => {
     const {
       info, t, path, onUpdateNode, active,
     } = this.props;
-    confirm({
+    dialog({
       info,
       t,
       active,
@@ -67,13 +72,14 @@ class Node extends Component {
     });
   }
 
+  // Automatically restore the menu state when the mouse leaves
   toggleMenu = () => {
     if (this.props.editMode && this.menu) {
       this.menu.current.removeAttribute('open');
     }
   }
 
-  isParent = ({ children = [] }) => children && children.length > 0
+  hasChildren = ({ children = [] }) => children && children.length > 0
 
   render() {
     const {
@@ -91,7 +97,7 @@ class Node extends Component {
     } = this.props;
     const { position } = this.state;
     const depth = path.length - 1;
-    const isParent = this.isParent(info);
+    const hasChildren = this.hasChildren(info);
     const { expanded, title } = info;
     return connectDragSource(
       connectDropTarget(
@@ -105,7 +111,7 @@ class Node extends Component {
           }}
           onMouseLeave={this.toggleMenu}
         >
-          {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
+          {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
           <div className="item-link" onClick={this.handleLink}>{title}</div>
           <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
           {editMode && (

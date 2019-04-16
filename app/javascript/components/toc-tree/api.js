@@ -34,3 +34,18 @@ export const updateToc = graph(`
     updateToc(id: $id, title: $title, url: $url)
   }
 `);
+
+// create toc
+export const createToc = graph(`
+  mutation (@autodeclare) {
+    createToc(
+      repositoryId: $repositoryId,
+      id: $id,
+      title: $title,
+      url: $url,
+      external: $external,
+      targetId: $targetId,
+      position: $position
+    )
+  }
+`);

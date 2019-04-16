@@ -80,7 +80,7 @@ class ConfirmDialog extends Component {
   }
 }
 
-export default function confirm(config) {
+export default function dialog(config) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   let currentConfig = { ...config, close, open: true };
