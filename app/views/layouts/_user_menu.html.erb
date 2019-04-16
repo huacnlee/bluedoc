@@ -30,7 +30,7 @@
     <%= user_avatar_tag(current_user, style: "tiny", link: false) %>
     <div class="dropdown-menu dropdown-menu-sw">
       <div class="dropdown-header">
-        <%= current_user.slug %>
+        <%= current_user.name %>
       </div>
       <ul>
         <li><a class="dropdown-item" href="<%= current_user.to_path %>"><%= t(".Your profile") %></a></li>

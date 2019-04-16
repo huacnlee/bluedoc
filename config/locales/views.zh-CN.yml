@@ -70,6 +70,7 @@ zh-CN:
         Complete your account info: 完善您的帐号信息
         You must complete the below form for sign up with_html: 您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。
         If you had an exists BlueDoc account, you can sign in to bind account: 如果你已经有 BlueDoc 账号，你可以通过 %{link} 来绑定账号。
+        name help_html: "请用<strong>真实姓名</strong>或在公司里面常用的<strong>称呼</strong>。"
         Supported email suffix with list_html: "支持的 Email 后缀: <code>%{emails}</code>"
     passwords:
       new:

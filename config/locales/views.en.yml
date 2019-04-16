@@ -77,6 +77,7 @@ en:
         "Complete your account info": "Complete your account settings"
         "You must complete the below form for sign up with_html": "You must complete the below form to sign up with <strong>%{provider}</strong>."
         "If you had an exists BlueDoc account, you can sign in to bind account": "If you had an existing BlueDoc account, you can linke your account through %{link}."
+        name help_html: "Please use your <strong>real name<strong> or a <strong>nickname</strong> commonly used in the company."
         Supported email suffix with list_html: "Supported email suffix with <code>%{emails}</code>"
     passwords:
       new:

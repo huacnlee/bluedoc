@@ -38,6 +38,13 @@ end
       <%= f.text_field :slug, autofocus: true, autocomplete: "username", class: "form-control" %>
     <% end %>
 
+    <%= form_group(f, :name) do %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+      <div class="form-text">
+        <%= t(".name help_html") %>
+      </div>
+    <% end %>
+
     <%= form_group(f, :email) do %>
       <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
 
