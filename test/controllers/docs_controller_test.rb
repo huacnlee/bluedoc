@@ -347,6 +347,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       assert_equal false, props[:abilities][:update]
     end
 
+    sign_in_role :editor, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_react_component "toc-tree/index" do |props|
+      assert_equal true, props[:abilities][:update]
+    end
+
     repo = create(:repository)
     repo.update(has_toc: 0)
     doc = create(:doc, repository: repo)

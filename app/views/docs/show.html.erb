@@ -40,7 +40,7 @@
       tocs: @tocs,
       currentDocId: @doc&.id,
       abilities: {
-        update: can?(:update, @repository),
+        update: can?(:create_doc, @repository),
       }
     }) %>
   </div>

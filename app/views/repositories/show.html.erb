@@ -36,7 +36,7 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
         name: @user.name
       },
       abilities: {
-        update: can?(:update, @repository),
+        update: can?(:create_doc, @repository),
       }
     } ) %>
   </div>

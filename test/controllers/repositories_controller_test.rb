@@ -211,6 +211,13 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
       assert_equal false, props[:abilities][:update]
     end
+
+    sign_in_role :editor, group: @group
+    get repo.to_path
+    assert_equal 200, response.status
+    assert_react_component "toc-tree/index" do |props|
+      assert_equal true, props[:abilities][:update]
+    end
   end
 
   test "GET /:user/:repo with Import status" do
