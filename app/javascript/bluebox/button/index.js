@@ -40,9 +40,10 @@ export class Button extends Component {
 
 export class PrimaryButton extends Button {
   constructor(props) {
-    let { className } = props;
-    className = `btn-primary ${className}`
+    const { className } = props;
+    props.className = `btn-primary ${className}`
 
     super(props);
   }
 }
+
