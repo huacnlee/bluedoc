@@ -48,6 +48,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.valid?
     user = build(:user, description: "a" * 151)
     assert_equal false, user.valid?
+
+    # Humanize name
+    user = build(:user, slug: "jason.lee", name: nil)
+    assert_equal true, user.valid?
+    assert_equal "jason.lee", user.slug
+    assert_equal "Jason Lee", user.name
+    user = build(:user, slug: "huacnlee", name: "Jason Lee")
+    assert_equal true, user.valid?
+    assert_equal "huacnlee", user.slug
+    assert_equal "Jason Lee", user.name
   end
 
   test "Slugable" do

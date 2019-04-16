@@ -29,6 +29,14 @@ module BlueDoc
       def valid_color?(color)
         /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.match?(color)
       end
+
+      # huashun.li -> Huashun Li
+      # huashun-li -> Huashun Li
+      def humanize_name(slug)
+        return nil if slug.nil?
+
+        slug.split(/[\-\.\s]/).map { |s| s.humanize }.join(" ")
+      end
     end
   end
 end

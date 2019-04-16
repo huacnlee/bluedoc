@@ -32,4 +32,11 @@ class BlueDoc::UtilsTest < ActionView::TestCase
     assert_equal false, BlueDoc::Utils.valid_color?("#09*&()")
     assert_equal false, BlueDoc::Utils.valid_color?("#MN92OP")
   end
+
+  test "humanize_name" do
+    assert_equal "Huashun Li", BlueDoc::Utils.humanize_name("huashun.li")
+    assert_equal "Huacnlee", BlueDoc::Utils.humanize_name("huacnlee")
+    assert_equal "Hua Shun Li", BlueDoc::Utils.humanize_name("hua.shun.li")
+    assert_equal "Jason Lee", BlueDoc::Utils.humanize_name("jason-lee")
+  end
 end

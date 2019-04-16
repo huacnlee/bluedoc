@@ -12,7 +12,7 @@ class User
   has_many :authorizations
 
   before_validation on: :create do
-    self.name = slug if name.blank?
+    self.name = BlueDoc::Utils.humanize_name(slug) if name.blank?
   end
 
   # Validate email suffix
