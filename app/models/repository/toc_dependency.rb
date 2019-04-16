@@ -22,6 +22,6 @@ class Repository
 
   # sort docs as Toc order
   def toc_ordered_docs
-    @toc_ordered_docs ||= self.tocs.nested_tree.includes(:doc).collect(&:doc)
+    @toc_ordered_docs ||= self.tocs.nested_tree.includes(:doc).collect(&:doc).compact
   end
 end
