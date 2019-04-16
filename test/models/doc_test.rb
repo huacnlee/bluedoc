@@ -338,7 +338,26 @@ class DocTest < ActiveSupport::TestCase
   end
 
   test "transfer_to" do
-    doc = create(:doc, slug: "foo-bar")
+    repo0 = create(:repository)
+    doc = create(:doc, slug: "foo-bar", repository_id: repo0.id)
+    doc1 = create(:doc, slug: "foo-bar-1", repository_id: repo0.id)
+    doc1.move_to(doc, :child)
+    doc11 = create(:doc, slug: "foo-bar-11", repository_id: repo0.id)
+    doc11.move_to(doc1, :child)
+    doc2 = create(:doc, slug: "foo-bar-2", repository_id: repo0.id)
+    doc2.move_to(doc, :child)
+    toc = doc.toc
+
+    expcted_toc = <<~TOC
+    foo-bar
+      foo-bar-1
+        foo-bar-11
+      foo-bar-2
+    TOC
+
+    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |toc| "  " * toc.depth + toc.url }.join("\n").strip
+
+    assert_not_nil toc
     repo = create(:repository)
     create(:doc, slug: "foo-bar", repository_id: repo.id)
 
@@ -346,8 +365,20 @@ class DocTest < ActiveSupport::TestCase
       doc.transfer_to(repo)
       doc.reload
       assert_equal repo.id, doc.repository_id
+      assert_not_nil doc.toc
+      assert_equal repo.id, doc.toc.repository_id
+      toc = Toc.find_by_id(toc.id)
+      assert_nil toc
       assert_equal "fake-new-slug", doc.slug
     end
+
+    expcted_toc = <<~TOC
+    foo-bar-1
+      foo-bar-11
+    foo-bar-2
+    TOC
+    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |toc| "  " * toc.depth + toc.url }.join("\n").strip
+
   end
 
   test "transfer_docs" do

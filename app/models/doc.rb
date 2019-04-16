@@ -30,8 +30,15 @@ class Doc < ApplicationRecord
 
   # transfer doc to repository, if slug exist, auto rename
   def transfer_to(repo)
-    self.repository_id = repo.id
-    self.save!(validate: false)
+    self.transaction do
+      self.repository_id = repo.id
+      self.save!(validate: false)
+      # free doc releative
+      self.toc.update(doc_id: nil)
+      # destroy to invoke rebuild tree
+      self.toc.destroy
+      self.reload.ensure_toc!
+    end
   rescue ActiveRecord::RecordNotUnique
     self.slug = BlueDoc::Slug.random
     retry
