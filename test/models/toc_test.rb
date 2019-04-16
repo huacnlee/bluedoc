@@ -63,7 +63,12 @@ class TocTest < ActiveSupport::TestCase
     repo = create(:repository)
     doc0 = create(:doc, repository: repo, title: "First item")
     doc = create(:doc, repository: repo, title: "Will delete item")
-    docs = create_list(:doc, 4, repository: repo)
+    docs = [
+      create(:doc, title: "title 1", repository: repo),
+      create(:doc, title: "title 2", repository: repo),
+      create(:doc, title: "title 3", repository: repo),
+      create(:doc, title: "title 4", repository: repo)
+    ]
     docs[0].move_to(doc, :child)
     docs[1].move_to(docs[0], :right)
     docs[2].move_to(docs[0], :child)
