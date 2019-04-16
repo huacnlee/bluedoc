@@ -13,9 +13,9 @@ class TocTree extends Component {
   constructor(props) {
     super(props);
     const {
-      abilities, repository, tocs, readonly,
+      abilities, repository, tocs, readonly, currentDocId,
     } = props;
-    const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null });
+    const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null, active: currentDocId });
     const viewMode = repository.has_toc ? 'tree' : 'list';
     const editMode = !abilities.update ? false : !readonly;
     this.state = {
@@ -35,8 +35,8 @@ class TocTree extends Component {
 
   // fetch Toc List
   getTocList = () => {
-    const { repositoryId } = this.props;
-    getTocList({ repositoryId }).then((result) => {
+    const { repository } = this.props;
+    repository && getTocList({ repositoryId: repository.id }).then((result) => {
       this.setState({
         treeData: getTreeFromFlatData({ flatData: result.repositoryTocs, rootKey: null }),
         loading: false,
@@ -63,8 +63,8 @@ class TocTree extends Component {
   }
 
   onDeleteNode = (params, reload) => {
-    if (!confirm(this.t('.Are you sure to delete'))) {
-      return false;
+    if (!window.confirm(this.t('.Are you sure to delete'))) {
+      return;
     }
 
     deleteToc(params).then((result) => {
@@ -144,14 +144,14 @@ class TocTree extends Component {
           <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
           {abilities.update && (
             <div className="actions">
-            <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
-              <summary className="btn-link"><i className="fas fa-more"></i></summary>
-              <ul className="dropdown-menu dropdown-menu-sw">
-                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t('.Create Doc')}</a></li>
-                <li className="dropdown-divider"></li>
-                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t('.Repository Settings')}</a></li>
-              </ul>
-            </details>
+              <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
+                <summary className="btn-link"><i className="fas fa-more"></i></summary>
+                <ul className="dropdown-menu dropdown-menu-sw">
+                  <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t('.Create Doc')}</a></li>
+                  <li className="dropdown-divider"></li>
+                  <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t('.Repository Settings')}</a></li>
+                </ul>
+              </details>
             </div>
           )}
         </div>

@@ -19,6 +19,23 @@ class Tree extends Component {
     onDeleteNode({ id }, reload);
   }
 
+  CreateNode = ({
+    info,
+    path,
+    position = 'child',
+  }) => {
+    const { treeData, onChange } = this.props;
+    const dropNode = this.findNodeByPath(path);
+    const newTreeData = this.getAddData({
+      treeData,
+      targetPath: path,
+      position,
+      dragNode: info,
+      dropNode,
+    });
+    onChange(newTreeData);
+  }
+
   // update node info event
   updateNode = ({
     result,
@@ -58,6 +75,7 @@ class Tree extends Component {
     originalPath, targetPath, position, dragNode, dropNode,
   }) => {
     const tempData = this.getRemoveData(originalPath);
+    const isMove = this.getIsMove(originalPath, targetPath);
     return this.getAddData({
       treeData: tempData,
       originalPath,
@@ -65,6 +83,7 @@ class Tree extends Component {
       position,
       dragNode,
       dropNode,
+      isMove,
     });
   }
 
@@ -90,8 +109,8 @@ class Tree extends Component {
     position,
     dragNode,
     dropNode,
+    isMove = false,
   }) => {
-    const isMove = this.getIsMove(originalPath, targetPath);
     const newTargetPath = [...targetPath];
     if (isMove) {
       newTargetPath[originalPath.length - 1] -= 1;
@@ -179,6 +198,7 @@ class Tree extends Component {
             toggleExpaned={this.toggleExpaned}
             onDeleteNode={this.delNode}
             onUpdateNode={this.updateNode}
+            onCreateNode={this.CreateNode}
             t={t}
           />
           {expanded && this.renderTreeNode(node.children, [...parentPath, index])}

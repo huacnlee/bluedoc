@@ -1,17 +1,43 @@
 import { findDOMNode } from 'react-dom';
 
+const expandedActiveNode = ({
+  flatData,
+  active,
+}) => {
+  const activeNode = flatData.find(node => node.docId === active);
+  if (activeNode === -1 || !active) return flatData;
+  const { parentId = null } = activeNode;
+  if (!parentId) return flatData;
+  return setNodeExpanded({ flatData, id: parentId });
+};
+
+function setNodeExpanded({
+  id,
+  flatData,
+}) {
+  const tempArr = [...flatData];
+  const nodeIndex = flatData.findIndex(node => node.id === id);
+  tempArr[nodeIndex] = { ...tempArr[nodeIndex], expanded: true };
+  const { parentId = null } = flatData[nodeIndex];
+  if (parentId !== null) {
+    setNodeExpanded({ id: parentId, flatData: tempArr });
+  }
+  return tempArr;
+}
+
 export const getTreeFromFlatData = ({
   flatData,
   getKey = node => node.id,
   getParentKey = node => node.parentId,
   rootKey = '0',
+  active,
 }) => {
   if (!flatData) {
     return [];
   }
 
   const childrenToParents = {};
-  flatData.forEach((child) => {
+  expandedActiveNode({ flatData, active }).forEach((child) => {
     const parentKey = getParentKey(child);
 
     if (parentKey in childrenToParents) {

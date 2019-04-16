@@ -27,11 +27,11 @@
   <div class="doc-sidebar flex-justify-start">
     <%= react_component("toc-tree/index", {
       titleBar: true,
-      repositoryId: @repository&.id,
       repository: {
         name: @repository.name,
         path: @repository.to_path,
         has_toc: @repository.has_toc?,
+        id: @repository&.id,
       },
       user: {
         name: @user.name,

@@ -60,8 +60,9 @@ class Node extends Component {
       info, t, path, onUpdateNode, active, repository,
     } = this.props;
     dialog({
+      type: 'updateToc',
       info,
-      repoPath: repository.path,
+      repository,
       t,
       active,
       onSuccessBack: (result) => {
@@ -69,6 +70,25 @@ class Node extends Component {
           result,
           path,
           reload: info.title !== result.title,
+        });
+      },
+    });
+  }
+
+  // create child toc
+  handleCreate = () => {
+    const {
+      info, t, path, onCreateNode, repository,
+    } = this.props;
+    dialog({
+      type: 'createToc',
+      repository,
+      info,
+      t,
+      onSuccessBack: (result) => {
+        onCreateNode && onCreateNode({
+          info: result,
+          path,
         });
       },
     });
@@ -125,6 +145,7 @@ class Node extends Component {
               <ul className="dropdown-menu dropdown-menu-sw">
                 <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
                 <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
+                <li className='dropdown-item' onClick={this.handleCreate}>{t('.Create Doc')}</li>
                 <li className='dropdown-divider'></li>
                 <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
               </ul>

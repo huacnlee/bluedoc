@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { updateToc } from './api';
+import Dialog from 'bluebox/dialog';
+import { updateToc, createToc } from './api';
 import { getNewUrl } from './utils';
 
 class ConfirmDialog extends Component {
@@ -23,6 +20,22 @@ class ConfirmDialog extends Component {
   handleClose = () => this.setState({ open: false })
 
   handleConfirm = () => {
+    const { type } = this.props;
+    this.setState({
+      loading: true,
+    }, () => {
+      if (type === 'updateToc') {
+        this.handleUpdateToc();
+      }
+      if (type === 'createToc') {
+        this.handleCreateToc();
+      }
+    });
+  }
+
+
+  // update toc
+  handleUpdateToc = () => {
     const { info = {}, onSuccessBack, active } = this.props;
     const title = this.titleRef.current.value;
     const url = this.urlRef.current.value;
@@ -31,54 +44,89 @@ class ConfirmDialog extends Component {
       title,
       url,
     };
-
-    this.setState({
-      loading: true,
-    }, () => {
-      updateToc(params).then((result) => {
-        App.notice(this.props.t('.Toc has successfully updated'));
-        // 修改当前文档，页面重载， 否则更新treedate数据
-        if (active) {
-          window.Turbolinks.visit(getNewUrl(url));
-        } else {
-          onSuccessBack && onSuccessBack({ title, url });
-          this.setState({ loading: false }, this.handleClose);
-        }
-      });
+    updateToc(params).then((result) => {
+      window.App.notice(this.props.t('.Toc has successfully updated'));
+      // 修改当前文档，页面重载， 否则更新treedate数据
+      if (active) {
+        window.Turbolinks.visit(getNewUrl(url));
+      } else {
+        onSuccessBack && onSuccessBack({ title, url });
+        this.setState({ loading: false }, this.handleClose);
+      }
     });
   }
 
+  // create toc
+  handleCreateToc = () => {
+    const {
+      repository,
+      info: {
+        id: targetId,
+      }, onSuccessBack, active,
+    } = this.props;
+    const title = this.titleRef.current.value;
+    const url = this.urlRef.current.value;
+    const params = {
+      repositoryId: repository.id,
+      title,
+      // url: !url ? null : url,
+      targetId,
+      position: 'child',
+    };
+    createToc(params).then((result) => {
+      window.App.notice(this.props.t('.Toc has successfully updated'));
+      // 修改当前文档，页面重载， 否则更新treedate数据
+      if (active) {
+        window.Turbolinks.visit(getNewUrl(url));
+      } else {
+        onSuccessBack && onSuccessBack({ ...result.createToc });
+        this.setState({ loading: false }, this.handleClose);
+      }
+    });
+  }
+
+
   render() {
     const { open } = this.state;
-    const { info = {}, t, repoPath = '' } = this.props;
+    const {
+      info = {}, t, repository, type,
+    } = this.props;
     const { url, title } = info;
     return (
       <Dialog
         open={open}
-        onClose={this.handleClose}
-        onExited={this.props.afterClose}
-        aria-labelledby="form-dialog-title"
+        title={t('.title')}
+        onClose={this.handleCLose}
+        actionsEle={[
+          <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>,
+          <button className='btn btn-primary' onClick={this.handleConfirm}>{t('.Update')}</button>,
+        ]}
       >
-        <DialogTitle id="form-dialog-title">{t('.Setting Doc')}</DialogTitle>
-        <DialogContent style={{ minWidth: 400 }}>
-          <form>
-            <div className='form-group'>
-              <label className='control-label'>{t('.title')}</label>
-              <input className='form-control' type='text' defaultValue={title} ref={this.titleRef}/>
+        <form>
+          <div className='form-group'>
+            <label className='control-label'></label>
+            <input
+              className='form-control'
+              type='text'
+              defaultValue={type === 'updateToc' ? title : ''}
+              placeholder={'title'}
+              ref={this.titleRef}
+            />
+          </div>
+          <div className='form-group'>
+            <label className='control-label'>{t('.url')}</label>
+            <div className='with-prefix'>
+              <div className='form-prefix'>{`${repository.path}/`}</div>
+              <input
+                className='form-control'
+                type='text'
+                defaultValue={type === 'updateToc' ? url : ''}
+                placeholder={'slug'}
+                ref={this.urlRef}
+              />
             </div>
-            <div className='form-group'>
-              <label className='control-label'>{t('.url')}</label>
-              <div className="with-prefix">
-                <div className="form-prefix">{`${repoPath}/`}</div>
-                <input className="form-control" type='text' defaultValue={url} ref={this.urlRef}/>
-              </div>
-            </div>
-          </form>
-        </DialogContent>
-        <DialogActions style={{ margin: '0 24px 24px 24px' }}>
-          <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>
-          <button className='btn btn-primary' onClick={this.handleConfirm}>{t('.Update')}</button>
-        </DialogActions>
+          </div>
+        </form>
       </Dialog>
     );
   }
