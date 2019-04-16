@@ -50,12 +50,13 @@ class ConfirmDialog extends Component {
 
   render() {
     const { open } = this.state;
-    const { info = {}, t } = this.props;
+    const { info = {}, t, repoPath = '' } = this.props;
     const { url, title } = info;
     return (
       <Dialog
         open={open}
         onClose={this.handleClose}
+        onExited={this.props.afterClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{t('.Setting Doc')}</DialogTitle>
@@ -67,7 +68,10 @@ class ConfirmDialog extends Component {
             </div>
             <div className='form-group'>
               <label className='control-label'>{t('.url')}</label>
-              <input className='form-control' type='text' defaultValue={url} ref={this.urlRef}/>
+              <div className="with-prefix">
+                <div className="form-prefix">{`${repoPath}/`}</div>
+                <input className="form-control" type='text' defaultValue={url} ref={this.urlRef}/>
+              </div>
             </div>
           </form>
         </DialogContent>
@@ -83,14 +87,16 @@ class ConfirmDialog extends Component {
 export default function dialog(config) {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  let currentConfig = { ...config, close, open: true };
+
+  let currentConfig = {
+    ...config, close, open: true, afterClose: destory.bind(this),
+  };
 
   function close() {
     currentConfig = {
       ...currentConfig,
       open: false,
     };
-
     render(currentConfig);
   }
 
@@ -100,6 +106,13 @@ export default function dialog(config) {
       ...newConfig,
     };
     render(currentConfig);
+  }
+
+  function destory() {
+    const unmountResult = ReactDOM.unmountComponentAtNode(div);
+    if (unmountResult && div.parentNode) {
+      div.parentNode.removeChild(div);
+    }
   }
 
   function render(props) {

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
 import Tree from './tree';
@@ -11,22 +12,17 @@ import { getTocList, moveTocList, deleteToc } from './api';
 class TocTree extends Component {
   constructor(props) {
     super(props);
-
-    let {
-      readonly, abilities, repository, tocs,
+    const {
+      abilities, repository, tocs, readonly,
     } = props;
-
-    if (!abilities.update) {
-      readonly = true;
-    }
-
     const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null });
-
+    const viewMode = repository.has_toc ? 'tree' : 'list';
+    const editMode = !abilities.update ? false : !readonly;
     this.state = {
-      treeData,
       loading: false,
-      editMode: !readonly,
-      viewMode: repository.has_toc ? 'tree' : 'list',
+      treeData,
+      editMode,
+      viewMode,
     };
   }
 
@@ -46,7 +42,7 @@ class TocTree extends Component {
         loading: false,
       });
     }).catch((errors) => {
-      App.alert(errors);
+      window.App.alert(errors);
     });
   }
 
@@ -72,7 +68,7 @@ class TocTree extends Component {
     }
 
     deleteToc(params).then((result) => {
-      App.notice(this.t('.Toc has successfully deleted'));
+      window.App.notice(this.t('.Toc has successfully deleted'));
       // 当删除项是当前阅读的文档
       if (reload) {
         window.Turbolinks.visit(window.location.href);
@@ -84,9 +80,9 @@ class TocTree extends Component {
 
   t = (key) => {
     if (key.startsWith('.')) {
-      return i18n.t(`toc-tree${key}`);
+      return window.i18n.t(`toc-tree${key}`);
     }
-    return i18n.t(key);
+    return window.i18n.t(key);
   }
 
   onChange = treeData => this.setState({ treeData })

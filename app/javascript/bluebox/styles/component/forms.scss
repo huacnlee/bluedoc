@@ -176,3 +176,17 @@ input[type=checkbox] {
     display: none;
   }
 }
+
+.form-group .with-prefix {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .form-prefix {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .form-control {
+    flex: 1;
+    width: auto;
+  }
+}

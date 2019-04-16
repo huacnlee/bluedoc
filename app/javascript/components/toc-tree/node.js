@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { Component } from 'react';
 import {
   DragSource,
@@ -56,10 +57,11 @@ class Node extends Component {
   // update toc info {title, url}
   handleUpdate = () => {
     const {
-      info, t, path, onUpdateNode, active,
+      info, t, path, onUpdateNode, active, repository,
     } = this.props;
     dialog({
       info,
+      repoPath: repository.path,
       t,
       active,
       onSuccessBack: (result) => {
