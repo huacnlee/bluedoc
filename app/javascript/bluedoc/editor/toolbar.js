@@ -303,7 +303,7 @@ export default class Toolbar extends React.Component {
           type="file"
           innerRef={ref => (this.imageFile = ref)}
           onChange={this.onImagePicked}
-          accept="image/*"
+          accept="image/jpg, image/jpeg, image/png, image/gif, image/tiff"
         />
         <HiddenInput
           type="file"
