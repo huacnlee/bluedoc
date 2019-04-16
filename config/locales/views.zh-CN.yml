@@ -563,11 +563,6 @@ zh-CN:
       Group: 团队
     new:
       New Group: 新建团队
-      Group accounts allow your team to plan, build, review, and ship documents: 团队用将一个项目组或做相同工作的一群人拉到一起，大家可以在同一个团队下组织内容。
-      Great group path names are short and memorable: 一个简单好记的团队路径有助于传播，创建以后将会是这样的路径访问：<code>%{host}/your-group-path</code>
-      The letters, numbers or dash is allow, for example: "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:"
-      Display title of this Group: 用于各种地方显示团队的名称
-      Create Group: 创建团队
     search:
       Can't find any Doc like: "无法找到任何与"
       in this Group: "相关的内容。"

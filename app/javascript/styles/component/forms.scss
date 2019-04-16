@@ -96,12 +96,12 @@ textarea.form-control {
     max-width: 50%;
     .input-group-text {
       width: 100%;
-      padding: 9px 15px;
+      padding: 9px 15px 8px 15px;
       line-height: 1.5;
       color: $text-gray-light;
-      background-color: #f9f9f9;
-      border-radius: 2px;
-      font-size: 12px;
+      background-color: #eaeaea;
+      border-radius: 2px 0 0 2px;
+      font-size: 13px;
     }
   }
 

@@ -79,11 +79,14 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     get "/groups/new"
     assert_equal 200, response.status
     assert_match /New Group/, response.body
+    assert_react_component "groups/NewGroup" do |props|
+      assert_not_nil props[:group]
+    end
   end
 
   test "POST /groups" do
     g = build(:group)
-    group_params = { name: g.name, slug: g.slug }
+    group_params = { name: g.name, slug: g.slug, description: "Hello world" }
     assert_require_user do
       post "/groups", params: { group: group_params }
     end
@@ -94,12 +97,19 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     group = Group.find_by_slug(group_params[:slug])
     assert_not_nil group
     assert_equal group_params[:name], group.name
+    assert_equal group_params[:description], group.description
     assert_equal "", group.email
     assert_redirected_to "/#{group_params[:slug]}"
 
     post "/groups", params: { group: group_params }
     assert_equal 200, response.status
-    assert_match /Group name has already been taken/, response.body
+    assert_react_component "groups/NewGroup" do |props|
+      assert_not_nil props[:group]
+      assert_equal group.name, props[:group][:name]
+      assert_equal group.slug, props[:group][:slug]
+      assert_equal group.description, props[:group][:description]
+      assert_equal "Group name has already been taken", props[:group][:errors][:slug]
+    end
   end
 
   test "GET /groups/:pathname/search" do

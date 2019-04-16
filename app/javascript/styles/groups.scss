@@ -1,4 +1,19 @@
 .page-users, .page-group_members, .page-group_settings, .page-groups {
+  .new-group-form {
+    max-width: 740px;
+    margin: 10px auto;
+
+    @include breakpoint(md) {
+      padding-right: 110px;
+      background: transparent url(~images/nodata/group.svg) right 70px no-repeat;
+      background-size: 280px auto;
+    }
+
+    .heading {
+
+    }
+  }
+
   .group-heading {
     background: #f7f7f7;
 

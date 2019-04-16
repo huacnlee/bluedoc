@@ -160,6 +160,19 @@ i18n.init({
           "Update": "Save",
           "Cancel": "Cancel",
         },
+        "groups": {
+          "NewGroup": {
+            "New Group": "New Group",
+            "Group accounts allow your team to plan, build, review, and ship documents": "Creating a group allows members working on the same project accessing all contents together.",
+            "Name": "Group Title",
+            "Slug": "Group Name",
+            "Description": "Description",
+            "Display title of this Group": "Used for displaying group name at different places.",
+            "Great group path names are short and memorable": "A short and easy to remember group path is convenient for sharing and accessing.",
+            "The letters, numbers or dash is allow, for example": "You can letters, numbers or dash in your group path, e.g.",
+            "Create Group": "Create Group",
+          },
+        },
       },
     },
     zh_CN: {
@@ -315,6 +328,19 @@ i18n.init({
           "url": "链接",
           "Update": "保存",
           "Cancel": "取消",
+        },
+        "groups": {
+          "NewGroup": {
+            "New Group": "新建团队",
+            "Group accounts allow your team to plan, build, review, and ship documents": "团队用将一个项目组或做相同工作的一群人拉到一起，大家可以在同一个团队下组织内容。",
+            "Name": "团队名称",
+            "Slug": "团队路径",
+            "Description": "团队介绍",
+            "Display title of this Group": "用于各种地方显示团队的名称。",
+            "Great group path names are short and memorable": "一个简单好记的团队路径有助于传播。",
+            "The letters, numbers or dash is allow, for example": "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:",
+            "Create Group": "创建团队",
+          },
         },
       },
     }

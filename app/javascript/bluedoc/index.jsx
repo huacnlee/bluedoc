@@ -24,6 +24,10 @@ const metaLocale = document.querySelector('meta[name=locale]');
 window.App = {
   // en, zh_CN
   locale: (metaLocale && metaLocale.content || 'en').replace('-', '_'),
+  host: `${location.protocol}//${location.host}`,
+
+  csrf_param: "authenticity_token",
+  csrf_token: null,
 
   /**
    * Alert message
@@ -44,4 +48,6 @@ window.App = {
 
 document.addEventListener('turbolinks:load', () => {
   timeagoRender(document.querySelectorAll('.timeago'), App.locale);
+  App.csrf_token = document.querySelector("meta[name=csrf-token]").getAttribute("content");
+  App.csrf_param = document.querySelector("meta[name=csrf-param]").getAttribute("content");
 });

@@ -1,29 +1,5 @@
 <% title_tag t(".New Group") %>
 
 <div class="main-content">
-  <div class="sub-title mb-4">
-    <div class="heading mb-3"><%= t(".New Group") %></div>
-    <div class="text-main"><%= t(".Group accounts allow your team to plan, build, review, and ship documents") %></div>
-  </div>
-
-  <%= form_with(model: @group, local: true, html: { style: "max-width: 700px" }) do |f| %>
-    <%= form_group(f, :slug) do %>
-      <%= f.text_field :slug, class: "form-control" %>
-      <div class="form-text">
-        <div><%= raw t(".Great group path names are short and memorable", host: Setting.host) %></div>
-        <div><%= t(".The letters, numbers or dash is allow, for example") %>BlueDoc-Help</div>
-      </div>
-    <% end %>
-
-    <%= form_group(f, :name, class: "form-group mb-button") do %>
-      <%= f.text_field :name, class: "form-control"%>
-      <div class="form-text">
-        <%= t(".Display title of this Group") %>
-      </div>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit t(".Create Group"), class: "btn btn-primary btn-submit" %>
-    </div>
-  <% end %>
+  <%= react_component "groups/NewGroup", { group: @group.as_rc_json(only: [:slug, :name, :description]) } %>
 </div>
