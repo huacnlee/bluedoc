@@ -3,6 +3,7 @@ import {
   DragSource,
   DropTarget,
 } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import cn from 'classnames';
 import { getTargetPosition } from './utils';
 import confirm from './modal';
@@ -17,6 +18,15 @@ class Node extends Component {
 
     this.menu = React.createRef();
   }
+
+  componentDidMount() {
+    const { connectDragPreview } = this.props;
+    if (connectDragPreview) {
+      connectDragPreview(getEmptyImage(), { captureDraggingState: true });
+    }
+  }
+
+  handleLink = () => window.Turbolinks.visit(this.getUrl())
 
   getUrl = () => {
     const { info: { url }, repository } = this.props;
@@ -82,38 +92,37 @@ class Node extends Component {
     const { position } = this.state;
     const depth = path.length - 1;
     const isParent = this.isParent(info);
-    const { expanded = false, title } = info;
-    const url = this.getUrl();
+    const { expanded, title } = info;
     return connectDragSource(
       connectDropTarget(
-      <li
-        className={cn('toc-item', {
-          [`drop-${position}`]: isOver && canDrop && !!position,
-        }, { active })}
-        style={{
-          marginLeft: `${depth * 15}px`,
-          opacity: isDragging ? 0.6 : 1,
-        }}
-        onMouseLeave={this.toggleMenu}
-      >
-        {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: !expanded })} />}
-        <a className="item-link" href={url}>{title}</a>
-        <a className="item-slug" href={url}>{info.url}</a>
-        {editMode && (
-          <details
-            className="item-more dropdown details-overlay details-reset d-inline-block"
-            ref={this.menu}
-          >
-            <summary><i className="fas fa-ellipsis"></i></summary>
-            <ul className="dropdown-menu dropdown-menu-sw">
-              <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
-              <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
-              <li className='dropdown-divider'></li>
-              <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
-            </ul>
-          </details>
-        )}
-      </li>,
+        <li
+          className={cn('toc-item', {
+            [`drop-${position}`]: isOver && canDrop && !!position,
+          }, { active })}
+          style={{
+            marginLeft: `${depth * 15}px`,
+            opacity: isDragging ? 0.6 : 1,
+          }}
+          onMouseLeave={this.toggleMenu}
+        >
+          {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
+          <div className="item-link" onClick={this.handleLink}>{title}</div>
+          <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
+          {editMode && (
+            <details
+              className="item-more dropdown details-overlay details-reset d-inline-block"
+              ref={this.menu}
+            >
+              <summary><i className="fas fa-ellipsis"></i></summary>
+              <ul className="dropdown-menu dropdown-menu-sw">
+                <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
+                <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
+                <li className='dropdown-divider'></li>
+                <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
+              </ul>
+            </details>
+          )}
+        </li>,
       ),
     );
   }
@@ -155,6 +164,8 @@ export default DropTarget(
     beginDrag: props => ({
       dragId: props.info.id,
       originalPath: props.path,
+      info: props.info,
+      active: props.active,
     }),
     endDrag(props, monitor) {
       if (!monitor.didDrop()) return;
@@ -170,6 +181,7 @@ export default DropTarget(
   },
   (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging(),
   }),
 )(Node));

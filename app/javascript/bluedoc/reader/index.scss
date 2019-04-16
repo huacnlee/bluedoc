@@ -109,13 +109,13 @@
           @extend .text-overflow;
         }
       }
-      ul.toc-items {
+      .toc-items {
         font-size: 13px;
         @extend .list-style-none;
         .hidden {
           display: none;
         }
-        li.toc-item {
+        .toc-item {
           position: relative;
           padding: 7px 0;
           line-height: 1;
@@ -127,8 +127,9 @@
             font-size: 12px;
           }
         }
-        a {
+        .item-link {
           @extend .text-overflow;
+          color: inherit;
           max-width: 100%;
         }
         .active {

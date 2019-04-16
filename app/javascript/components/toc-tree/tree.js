@@ -3,7 +3,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import TreeNode from './node';
-
+import DragLayer from './customerDragLayer';
 
 class Tree extends Component {
   // del node event
@@ -148,14 +148,14 @@ class Tree extends Component {
     return result;
   }
 
-  // 是否折叠 true(折叠)， false(展开)
+  // 是否折叠 true(展开)， false(折叠)
   getExpanded = ({ children, expanded }, parentPath) => {
     const { expandedDepth } = this.props;
     // 没有子项
-    if (!children) return true;
+    if (!children) return false;
     // 有折叠参数
     if (typeof expanded !== 'undefined') return expanded;
-    return parentPath.length >= expandedDepth - 1;
+    return parentPath.length < expandedDepth - 1;
   }
 
   renderTreeNode = (data = [], parentPath = []) => {
@@ -180,7 +180,7 @@ class Tree extends Component {
             onUpdateNode={this.updateNode}
             t={t}
           />
-          {!expanded && this.renderTreeNode(node.children, [...parentPath, index])}
+          {expanded && this.renderTreeNode(node.children, [...parentPath, index])}
         </>);
     });
   }
@@ -189,6 +189,7 @@ class Tree extends Component {
     const { treeData = [] } = this.props;
     return (
       <ul className="toc-items">
+        <DragLayer />
         {this.renderTreeNode(treeData)}
       </ul>
     );
