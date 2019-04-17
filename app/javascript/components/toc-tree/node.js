@@ -128,15 +128,17 @@ class Node extends Component {
             [`drop-${position}`]: isOver && canDrop && !!position,
           }, { active })}
           style={{
+            marginLeft: `${depth * 15}px`,
             opacity: isDragging ? 0.6 : 1,
-            cursor: editMode ? 'move' : 'default',
           }}
           onMouseLeave={this.toggleMenu}
         >
-          {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
-          <div className="item-link" style={{ marginLeft: `${depth * 15}px` }} onClick={this.handleLink}>{title}</div>
+          <div className="item-link">
+            {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
+            <a href="#" onClick={this.handleLink}>{title}</a>
+          </div>
           <div className="item-connect-line"></div>
-          <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
+          <a href="#" className="item-slug" onClick={this.handleLink}>{info.url}</a>
           {editMode && (
             <details
               className="item-more dropdown details-overlay details-reset"

@@ -1,10 +1,12 @@
 import React from 'react';
 import { DragLayer } from 'react-dnd';
 import cn from 'classnames';
+import { FormHelperText } from '@material-ui/core';
 
 const layerStyles = {
   position: 'fixed',
   pointerEvents: 'none',
+  display: 'flex',
   zIndex: 100,
   left: 0,
   top: 0,
@@ -23,7 +25,7 @@ const getItemStyles = ({ initialOffset, currentOffset }) => {
   return {
     transform,
     WebkitTransform: transform,
-    opacity: 0.2,
+    opacity: 0.5,
   };
 };
 
@@ -38,7 +40,6 @@ const CustomDragLayer = (props) => {
     <div style={layerStyles}>
       <div style={getItemStyles(props)}>
         <li className={cn('toc-item', { active: item.active })}>
-          {isParent && <i className={cn('fas fa-arrow', { folder: expanded })} />}
           <div className="item-link" href="#">{title}</div>
         </li>
       </div>

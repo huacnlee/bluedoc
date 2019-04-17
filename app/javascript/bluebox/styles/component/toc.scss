@@ -8,7 +8,7 @@
   // edit-switch-component
   .edit-switch {
     position: absolute;
-    right: -10px;
+    right: 0px;
     top: -50px;
     span {
       vertical-align: middle;
@@ -45,7 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-left: 20px;
+      cursor: default;
 
       &.active {
         color: $primary;
@@ -53,25 +53,15 @@
       &.drop-left::after {
         top: -1px;
         @extend .drop;
+        margin-left: 23px;
       }
       &.drop-right::after {
         bottom: -1px;
         @extend .drop;
+        margin-left: 23px;
       }
       &.drop-child {
         background: #E6EEFF;;
-      }
-      .fa-arrow {
-        cursor: pointer;
-        position: absolute;
-        left: 5px;
-        top: calc(50% - 4px);
-        font-size: 12px;
-        color: #777;
-
-        &:hover {
-          color: #000;
-        }
       }
     }
   }
@@ -79,16 +69,28 @@
   .item-link {
     @extend .text-overflow;
     z-index: 1;
-    cursor: pointer;
-    &:hover {
-      color: $primary;
-    }
   }
   .item-link {
     font-size: 15px;
+    position: relative;
+    padding-left: 20px;
+
+    .fa-arrow {
+      cursor: pointer;
+      position: absolute;
+      left: 5px;
+      top: calc(50% - 4px);
+      font-size: 12px;
+      color: #888;
+
+      &:hover {
+        color: #000;
+      }
+    }
   }
   .item-slug {
     font-size: 13px;
+    margin-right: 10px;
   }
 }
 
