@@ -146,6 +146,7 @@
             border-color: #e0e0e0;
           }
         }
+        .item-connect-line { display: none; }
       }
       .item-more {
         display: none;
@@ -230,7 +231,7 @@
       flex: 1;
       height: 1px;
       margin: 0 10px;
-      background: #e8e8e8;
+      background: #eaeaea;
     }
   }
 }
