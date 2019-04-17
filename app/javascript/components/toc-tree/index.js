@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
+import Switch from '@material-ui/core/Switch';
 import Tree from './tree';
 import ListNode from './ListNode';
 import {
@@ -91,11 +92,7 @@ class TocTree extends Component {
 
   onChange = treeData => this.setState({ treeData })
 
-  toggleEditMode = (e) => {
-    e.preventDefault();
-    const { editMode } = this.state;
-    this.setState({ editMode: !editMode });
-  }
+  toggleEditMode = () => this.setState({ editMode: !this.state.editMode })
 
   renderItems() {
     const {
@@ -136,9 +133,8 @@ class TocTree extends Component {
   render() {
     const { editMode } = this.state;
     const {
-      titleBar, abilities, repository, user,
+      titleBar, abilities, repository, user, editSwitch = true,
     } = this.props;
-
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
         {titleBar && (
@@ -158,6 +154,17 @@ class TocTree extends Component {
             </div>
           )}
         </div>
+        )}
+        {editSwitch && (
+          <label className={'edit-switch'}>
+            <span>编辑模式</span>
+            <Switch
+              checked={this.state.editMode}
+              value="editMode"
+              color="primary"
+              onChange={this.toggleEditMode}
+            />
+          </label>
         )}
         {this.renderItems()}
       </div>

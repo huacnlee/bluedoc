@@ -136,10 +136,11 @@ class Node extends Component {
         >
           {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
           <div className="item-link" onClick={this.handleLink}>{title}</div>
+          <div className="item-connect-line"></div>
           <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
           {editMode && (
             <details
-              className="item-more dropdown details-overlay details-reset d-inline-block"
+              className="item-more dropdown details-overlay details-reset"
               ref={this.menu}
             >
               <summary><i className="fas fa-ellipsis"></i></summary>

@@ -1,3 +1,68 @@
+.toc-tree {
+  position: relative;
+
+  .toc-items {
+    font-size: 13px;
+    @extend .list-style-none;
+  }
+  // edit-switch-component
+  .edit-switch {
+    position: absolute;
+    right: -10px;
+    top: -50px;
+    span {
+      vertical-align: middle;
+    }
+  }
+
+  // 
+  .toc-items {
+    font-size: 13px;
+    @extend .list-style-none;
+    .toc-item {
+      position: relative;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &.active {
+        color: $primary;
+      } 
+      &.drop-left::after {
+        top: -1px;
+        @extend .drop;
+      }
+      &.drop-right::after {
+        bottom: -1px;
+        @extend .drop;
+      }
+      &.drop-child {
+        background: #E6EEFF;;
+      }
+      .fa-arrow {
+        cursor: pointer;
+        position: absolute;
+        left: -16px;
+        top: calc(50% - 6px);
+        font-size: 12px;
+      }
+    }
+  }
+  .item-slug,
+  .item-link {
+    @extend .text-overflow;
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+      color: $primary;
+    }
+  }
+  .item-link {
+    font-size: 15px;
+    color: #000;
+  }
+}
+
 .drop {
   display: block;
   content: '';
@@ -31,51 +96,36 @@
   }
 }
 
+
 .toc-tree[data-edit-mode=true] {
   .toc-items {
     .toc-item {
-      position: relative;
-
-      .item-link {
-        padding-left: 3px;
-        width: auto;
+      &:hover {
+        background: #f7f7f7;
+        .item-more {
+          display: block;
+        }
       }
-
       .item-more {
-        position: absolute;
-        visibility: hidden;
-        right: 4px;
-        top: 4px;
+        display: none;
+        margin: 0 5px;
         summary {
+          border: 1px solid transparent;
           height: 20px;
           line-height: 20px;
           width: 20px;
           border-radius: 2px;
           text-align: center;
+          vertical-align: middle;
+          &:hover {
+            background: #eee;
+            border-color: #e0e0e0;
+          }
         }
-
         .dropdown-item {
           display: block !important;
         }
       }
-
-      &:hover {
-        background: #f7f7f7;
-        .item-link {
-          padding-right: 25px;
-        }
-        .item-more {
-          visibility: visible;
-          summary {
-            border: 1px solid transparent;
-            &:hover {
-              background: #eee;
-              border-color: #e0e0e0;
-            }
-          }
-        }
-      }
-
       details[open] {
         background: #f7f7f7;
         summary {
@@ -83,20 +133,46 @@
           border: 1px solid #e0e0e0 !important;
         }
       }
+    }
+  }
+}
 
+.reader-body {
+  .toc-tree {
+    .item-slug {
+      display: none;
+    }
+    .item-connect-line {
+      display: none;
+    }
+  }
+}
 
-      &.drop-left::after {
-        top: -1px;
-        @extend .drop;
-      }
-      &.drop-right::after {
-        bottom: -1px;
-        @extend .drop;
-      }
-      &.drop-child {
-        color: #fff;
-        background: $primary;
-      }
+.page-repositories {
+  .toc-tree {
+    text-align: left;
+    .toc-item {
+      margin: 5px 0;
+    }
+    .item-more {
+      display: none;
+    }
+    .item-link {
+      min-width: 0;
+      max-width: 70%;
+    }
+    .item-slug {
+      padding-left: 15px;
+      min-width: 0;
+      max-width: 30%;
+      font-size: 13px;
+      color: $gray;
+    }
+    .item-connect-line {
+      flex: 1;
+      height: 1px;
+      margin: 0 10px;
+      background: #e8e8e8;
     }
   }
 }

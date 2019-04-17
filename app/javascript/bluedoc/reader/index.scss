@@ -109,35 +109,6 @@
           @extend .text-overflow;
         }
       }
-      .toc-items {
-        font-size: 13px;
-        @extend .list-style-none;
-        .hidden {
-          display: none;
-        }
-        .toc-item {
-          position: relative;
-          padding: 7px 0;
-          line-height: 1;
-          .fa-arrow {
-            cursor: pointer;
-            position: absolute;
-            left: -14px;
-            top: calc(50% - 6px);
-            font-size: 12px;
-          }
-        }
-        .item-link {
-          @extend .text-overflow;
-          color: inherit;
-          max-width: 100%;
-          cursor: pointer;
-        }
-        .active {
-          color: $primary;
-        }
-        .item-slug { display: none; }
-      }
     }
 
     .doc-center {
