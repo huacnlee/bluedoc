@@ -135,10 +135,10 @@ class Node extends Component {
         >
           <div className="item-link">
             {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
-            <a href="#" onClick={this.handleLink}>{title}</a>
+            <span onClick={this.handleLink}>{title}</span>
           </div>
           <div className="item-connect-line"></div>
-          <a href="#" className="item-slug" onClick={this.handleLink}>{info.url}</a>
+          <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
           {editMode && (
             <details
               className="item-more dropdown details-overlay details-reset"
