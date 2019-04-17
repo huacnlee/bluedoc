@@ -311,4 +311,9 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     fragments = BlueDoc::HTML.mention_fragments(html, nil)
     assert_equal [], fragments
   end
+
+  test "SML text escape" do
+    sml = %(["blockquote", {}, ["span", {}, "You can use the:"], ["span",{"t":0,"cd":1},"<code> or <strong> marks"]])
+    assert_html_equal "<blockquote><span>You can use the:</span><code>&lt;code&gt; or &lt;strong&gt; marks</code></blockquote>", BlueDoc::HTML.render(sml, format: :sml)
+  end
 end
