@@ -158,7 +158,7 @@ class TocTree extends Component {
         {this.renderItems()}
         {titleBar && abilities.update && (
           <div className="toc-tree-bottom-toolbar">
-            <a href="#" className="btn-new btn-block"><Icon name="new" /> {this.t('.Create Doc')}</a>
+            <a href="#" className="btn-new btn-block"><Icon name="add" /> {this.t('.Create Doc')}</a>
           </div>
         )}
       </div>

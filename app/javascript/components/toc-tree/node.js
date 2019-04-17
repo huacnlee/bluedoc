@@ -128,14 +128,13 @@ class Node extends Component {
             [`drop-${position}`]: isOver && canDrop && !!position,
           }, { active })}
           style={{
-            marginLeft: `${depth * 15}px`,
             opacity: isDragging ? 0.6 : 1,
             cursor: editMode ? 'move' : 'default',
           }}
           onMouseLeave={this.toggleMenu}
         >
           {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
-          <div className="item-link" onClick={this.handleLink}>{title}</div>
+          <div className="item-link" style={{ marginLeft: `${depth * 15}px` }} onClick={this.handleLink}>{title}</div>
           <div className="item-connect-line"></div>
           <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
           {editMode && (
