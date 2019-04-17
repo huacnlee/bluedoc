@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
 import Switch from '@material-ui/core/Switch';
+import Icon from 'bluebox/iconfont';
+import update from 'immutability-helper';
 import Tree from './tree';
 import ListNode from './ListNode';
-import Icon from "bluebox/iconfont";
+import dialog from './modal';
 
 import {
   getTreeFromFlatData,
@@ -15,8 +17,10 @@ class TocTree extends Component {
   constructor(props) {
     super(props);
     const {
-      abilities, repository, tocs, readonly, currentDocId,
+      // type : ['center', 'side']
+      abilities, repository, tocs, currentDocId, type,
     } = props;
+
 
     const viewMode = repository.has_toc ? 'tree' : 'list';
     const treeData = viewMode === 'tree' ? getTreeFromFlatData({
@@ -24,10 +28,13 @@ class TocTree extends Component {
       rootKey: null,
       active: currentDocId,
     }) : tocs;
-    const editMode = !abilities.update ? false : !readonly;
+    const canEdit = abilities.update;
+    // 只有在文档页面侧边并且有权限 默认可编辑
+    const editMode = canEdit && type === 'side';
     this.state = {
       loading: false,
       treeData,
+      canEdit,
       editMode,
       viewMode,
     };
@@ -96,6 +103,20 @@ class TocTree extends Component {
 
   toggleEditMode = () => this.setState({ editMode: !this.state.editMode })
 
+  handleCreate = () => {
+    const { repository } = this.props;
+    const { treeData } = this.state;
+    dialog({
+      type: 'newToc',
+      repository,
+      t: this.t,
+      onSuccessBack: (result) => {
+        const newTreeData = update(treeData, { $push: [result] });
+        this.onChange(newTreeData);
+      },
+    });
+  }
+
   renderItems() {
     const {
       loading, treeData, editMode, viewMode,
@@ -133,20 +154,21 @@ class TocTree extends Component {
   }
 
   render() {
-    const { editMode } = this.state;
+    const { editMode, canEdit } = this.state;
     const {
-      titleBar, abilities, repository, user,
+      titleBar, abilities, repository, user, type,
     } = this.props;
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
-        {titleBar ? (
+        {type === 'side' && (
           <div className="toc-tree-toolbar doc-parents">
             <a className="link-back text-main" href={repository.path}>{repository.name}</a>
             <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
           </div>
-        ) : (
+        )}
+        {type === 'center' && canEdit && (
           <label className={'edit-switch'}>
-            <span>{this.t(".Edit Toc")}</span>
+            <span>{this.t('.Edit Toc')}</span>
             <Switch
               checked={this.state.editMode}
               value="editMode"
@@ -156,9 +178,12 @@ class TocTree extends Component {
           </label>
         )}
         {this.renderItems()}
-        {titleBar && abilities.update && (
-          <div className="toc-tree-bottom-toolbar">
-            <a href="#" className="btn-new btn-block"><Icon name="add" /> {this.t('.Create Doc')}</a>
+        {type === 'side' && canEdit && (
+          <div
+            className="toc-tree-bottom-toolbar btn-new btn-block"
+            onClick={this.handleCreate}
+          >
+            <Icon name="add" /> {this.t('.Create Doc')}
           </div>
         )}
       </div>

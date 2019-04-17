@@ -30,6 +30,9 @@ class ConfirmDialog extends Component {
       if (type === 'createToc') {
         this.handleCreateToc();
       }
+      if (type === 'newToc') {
+        this.handleNewToc();
+      }
     });
   }
 
@@ -56,7 +59,7 @@ class ConfirmDialog extends Component {
     });
   }
 
-  // create toc
+  // create toc inset toc tree
   handleCreateToc = () => {
     const {
       repository,
@@ -70,8 +73,12 @@ class ConfirmDialog extends Component {
       repositoryId: repository.id,
       title,
       targetId,
+      url,
       position: 'child',
     };
+    if (!url) {
+      delete params.url;
+    }
     createToc(params).then((result) => {
       window.App.notice(this.props.t('.Toc has successfully updated'));
       // 修改当前文档，页面重载， 否则更新treedate数据
@@ -84,12 +91,35 @@ class ConfirmDialog extends Component {
     });
   }
 
+  // create toc insert toc-tree bottom
+  handleNewToc = () => {
+    const {
+      repository,
+      onSuccessBack,
+    } = this.props;
+    const title = this.titleRef.current.value;
+    const url = this.urlRef.current.value;
+    const params = {
+      repositoryId: repository.id,
+      title,
+      url,
+    };
+    if (!url) {
+      delete params.url;
+    }
+    createToc(params).then((result) => {
+      window.App.notice(this.props.t('.Toc has successfully updated'));
+      onSuccessBack && onSuccessBack({ ...result.createToc });
+      this.setState({ loading: false }, this.handleClose);
+    });
+  }
+
   render() {
     const { open } = this.state;
     const {
       info = {}, t, repository, type,
     } = this.props;
-    const { url, title } = info;
+    const { url = '', title = '' } = info;
     return (
       <Dialog
         open={open}

@@ -34,13 +34,16 @@ const CustomDragLayer = (props) => {
   if (!isDragging || !item) {
     return null;
   }
-  const { title, children, expanded } = item.info;
-  const isParent = children && children.length > 0;
+  const { title } = item.info;
   return (
     <div style={layerStyles}>
       <div style={getItemStyles(props)}>
-        <li className={cn('toc-item', { active: item.active })}>
-          <div className="item-link" href="#">{title}</div>
+        <li className={cn('toc-item', { active: item.active })} style={{
+          width: '100%',
+          paddingRight: '20px',
+          boxShadow: '0 4px 7px 0 rgba(190, 190, 190, 1)',
+        }}>
+          <div className="item-link">{title}</div>
         </li>
       </div>
     </div>
