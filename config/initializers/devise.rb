@@ -256,10 +256,21 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :google_oauth2, "none"
-  config.omniauth :github, "none"
-  config.omniauth :gitlab, "none"
-  config.omniauth :ldap, {}
+  if Setting.omniauth_google_client_id.present?
+    config.omniauth :google_oauth2, Setting.omniauth_google_client_id, Setting.omniauth_google_client_secret
+  end
+  if Setting.omniauth_github_client_id.present?
+    config.omniauth :github, Setting.omniauth_github_client_id, Setting.omniauth_github_client_secret
+  end
+  if Setting.omniauth_gitlab_client_id.present?
+    client_options = {
+      site: Setting.omniauth_gitlab_api_prefix || "https://gitlab.com/api/v4"
+    }
+    config.omniauth :gitlab, Setting.omniauth_gitlab_client_id, Setting.omniauth_gitlab_client_secret, client_options: client_options
+  end
+  if Setting.ldap_enable?
+    config.omniauth :ldap, Setting.ldap_option_hash
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

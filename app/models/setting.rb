@@ -93,20 +93,20 @@ class Setting < RailsSettings::Base
   field :ldap_options, type: :hash, default: {
     # LDAP server. `:plain` means no encryption. `:simple_tls` represents SSL/TLS
     # (usually on port 636) while `:start_tls` represents StartTLS (usually port 389).
-    host: "",
-    encryption: "plain",
-    port: 389,
+    host: (ENV["LDAP_HOST"] || ""),
+    encryption: (ENV["LDAP_ENCRYPTION"] || "plain"),
+    port: (ENV["LDAP_PORT"] || 389).to_i,
     # Typically AD would be 'sAMAccountName' or 'UserPrincipalName', while OpenLDAP is 'uid'.
-    base: "dc=example,dc=org",
-    uid: "uid",
+    base: (ENV["LDAP_BASE"] || "dc=example,dc=org"),
+    uid: (ENV["LDAP_UID"] || "uid"),
     # Most LDAP servers require that you supply a complete DN as a binding-credential, along with an authenticator
     # such as a password. But for many applications, you often don’t have a full DN to identify the user.
     # You usually get a simple identifier like a username or an email address, along with a password.
     #
     # - bind_dn - the admin username
     # - password - the admin password
-    bind_dn: "cn=admin,dc=example,dc=org",
-    password: "admin"
+    bind_dn: (ENV["LDAP_BIND_DN"] || "cn=admin,dc=example,dc=org"),
+    password: (ENV["LDAP_PASSWORD"] || "admin")
   }
   field :ldap_name, default: "LDAP", type: :string
   field :ldap_title, default: "LDAP Login", type: :string
