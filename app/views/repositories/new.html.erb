@@ -1,107 +1,18 @@
 <% title_tag t(".New Repository") %>
 
 <div class="main-content">
-  <div class="sub-title mb-4">
-    
-    <div class="heading mb-3">
-      <% if params[:_by] == "import" %>
-        <%= t(".Import Repository") %>
-      <% else %>
-        <%= t(".New Repository") %>
-      <% end %>
-    </div>
-    <div class="text-main"><%= raw t(".A repository contains all the documents for your project") %></div>
+  <div class="container">
+    <%
+      groups = current_user.groups.with_attached_avatar.to_a
+      groups.unshift(current_user)
+    %>
+
+    <%= react_component "repositories/NewRepository", {
+      type: params[:_by],
+      provider: params[:provider],
+      action: repositories_path,
+      repository: @repository.as_rc_json(only: %i[slug name user_id descrption gitbook_url privacy]),
+      groups: groups.as_json(only: %i[id slug name], methods: :avatar_url),
+    } %>
   </div>
-
-  <%= form_with(model: [@user, @repository], local: true) do |form| %>
-    <%= render "/shared/error_messages", target: @repository %>
-    <input type="hidden" name="_by" value="<%= params[:_by] %>" />
-    <% if params[:_by] == "import" %>
-    <div class="import-box markdown-body">
-      <% if params[:provider] == "gitbook" %>
-        <div class="form-group" style="max-width: 700px">
-          <label class="control-label"><%= t(".Import from Git") %></label>
-          <%= form.text_field :gitbook_url, class: "form-control", placeholder: "https://github.com/somewhere/gitbook.git" %>
-          <div class="form-text">
-            <div><%= raw t(".Enter a Git repository URL") %></div>
-            <div><%= raw t(".This feature is best compatible with") %></div>
-          </div>
-        </div>
-      <% else %>
-        <div class="form-group">
-          <label class="control-label"><%= t(".Import from Archive") %></label>
-          <label class="form-input-file">
-            <span class="btn mb-2"><%= t(".Select File") %></span>
-            <%= form.file_field :import_archive, direct_upload: true, class: "form-control js-upload-file", accept: "application/zip" %>
-          </label>
-          <div class="v-hidden f5" id="upload-file-name-wrap"><%= icon_tag("text-attachment") %> <span id="upload-file-name"></span></div>
-          <div class="form-text">
-            <div><%= raw t(".You can archive multiple markdown files as a zip file, and then choice the zip file for import") %></div>
-            <div><%= t(".Or you have a GitBook source, you can use") %> <%= link_to t(".Import from Git"), import_repository_path(provider: :gitbook), class: "link-gray-dark" %>.</div>
-          </div>
-        </div>
-        <script type="text/javascript">
-          $("form").on("change", ".js-upload-file", (e) => {
-            const value = e.target.value;
-            $('#upload-file-name').text(value.split('\\').pop());
-            $('#upload-file-name-wrap').removeClass('v-hidden');
-          });
-        </script>
-      <% end %>
-    </div>
-    <% end %>
-
-    <div class="form-group" style="max-width: 700px">
-      <div class="d-flex">
-        <div class="form-group mr-2 mb-0">
-          <%= form.label :user_id, class: "control-label" %>
-          <%= render partial: "/shared/user_groups_select_menu", locals: { input_name: "repository[user_id]", value: @repository.user_id } %>
-        </div>
-        <div class="form-group flex-auto mb-0">
-          <%= form.label :slug, class: "control-label" %>
-          <%= form.text_field :slug, class: "form-control" %>
-        </div>
-      </div>
-      <div class="form-text">
-        <%= t(".Great repository names are short and memorable") %>
-      </div>
-    </div>
-
-    <div class="form-group" style="max-width: 700px">
-      <%= form.label :name, class: "control-label" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-
-    <div class="form-group" style="max-width: 700px">
-      <%= form.label :privacy, class: "control-label" %>
-
-      <div class="form-checkbox">
-        <label>
-          <input type="radio" name="repository[privacy]" checked value="public"> 
-            <%= t(".Public") %>
-            <div class="form-text">
-              <%= t(".Anyone can see this repository") %>
-            </div>
-        </label>
-      </div>
-      <div class="form-checkbox">
-        <label>
-          <input type="radio" name="repository[privacy]" value="private">
-          <%= t(".Private") %>
-          <div class="form-text">
-            <%= t(".You choose who can see and edit to this repository") %>
-          </div>
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group mb-button" style="max-width: 700px">
-      <%= form.label :description, class: "control-label" %>
-      <%= form.text_field :description, class: "form-control" %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit t(".Create Repository"), class: "btn btn-primary btn-submit" %>
-    </div>
-  <% end %>
 </div>

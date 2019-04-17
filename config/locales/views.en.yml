@@ -683,18 +683,20 @@ en:
       Sort by Created: Created
     new:
       New Repository: New Repository
+      Choose an item: Select Group/User
       Import Repository: Import Repository
       A repository contains all the documents for your project: "A repository contains all the documents of your project."
       Import from Archive: Import from Archive
       Import from Git: Import from Git
-      Select File: Select File
-      Enter a Git repository URL: "Enter a Git repository URL, BlueDoc will import all of the markdown files <code>.md, .markdown</code> as a Doc."
-      This feature is best compatible with: 'This feature is best compatible with <a href="https://gitbook.io">GitBook</a> format (including a <code>SUMMARY.md</code> to describe of the Table of Contents).'
-      You can archive multiple markdown files as a zip file, and then choice the zip file for import: "You can archive multiple markdown files <code>.md, .markdown</code> as a zip file, and choose the zip file to import."
+      Select File: Select a zip File for import
+      Enter a Git repository URL_html: "Enter a Git repository URL, BlueDoc will import all of the markdown files <code>.md, .markdown</code> as a Doc."
+      This feature is best compatible with_html: 'This feature is best compatible with <a href="https://gitbook.io" target="_blank">GitBook</a> format (including a <code>SUMMARY.md</code> to describe of the Table of Contents).'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import_html: "You can archive multiple markdown files <code>.md, .markdown</code> as a zip file, and choose the zip file to import."
       Or you have a GitBook source, you can use: "Or you can use GitBook source to import:"
       Great repository names are short and memorable: "Use a short and easy to remember path for your Repository"
       Anyone can see this repository: "Everyone can access content of this repository."
       You choose who can see and edit to this repository: "Users outside the Group cannot access the Repository unless you add them into the Group or as a member."
+      Invalid git source url format: "Invalid source URL, must use http or https protocol Git URL."
       Public: Public
       Private: Private
       Create Repository: Create Repository

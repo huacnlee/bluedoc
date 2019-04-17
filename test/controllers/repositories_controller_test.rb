@@ -17,12 +17,23 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     get "/new"
     assert_equal 200, response.status
 
+    group = create(:group)
+    group.add_member(@user, :editor)
+
     get "/new", params: { user_id: @user.id }
     assert_equal 200, response.status
-    assert_select ".select-menu .select-menu-item.selected input[checked]" do
-      assert_select "[value=?]", "#{@user.id}"
+    assert_react_component "repositories/NewRepository" do |props|
+      assert_nil props[:type]
+      assert_nil props[:provider]
+      assert_not_nil props[:repository]
+      assert_equal @user.id, props[:repository][:user_id]
+      assert_equal repositories_path, props[:action]
+
+      groups = props[:groups]
+      assert_equal 2, groups.length
+      assert_equal @user.as_json(only: %i[id slug name], methods: :avatar_url), groups[0].deep_stringify_keys
+      assert_equal group.as_json(only: %i[id slug name], methods: :avatar_url), groups[1].deep_stringify_keys
     end
-    assert_select ".import-box", 0
   end
 
   test "GET /new/import" do
@@ -30,28 +41,30 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       get "/new/import"
     end
 
+    group = create(:group)
+    group.add_member(@user, :editor)
+
     sign_in @user
     get "/new/import"
     assert_equal 200, response.status
-    assert_select ".import-box", 1 do
-      assert_select ".form-group" do
-        assert_select "label.control-label", text: "Import from Archive"
-        assert_select "input[type=file]" do
-          assert_select "[name=?]", "repository[import_archive]"
-        end
-        assert_select "a[href=?]", import_repository_path(provider: :gitbook)
-      end
+    assert_react_component "repositories/NewRepository" do |props|
+      assert_equal "import", props[:type]
+      assert_nil props[:provider]
+      assert_not_nil props[:repository]
+      assert_equal @user.id, props[:repository][:user_id]
+      assert_equal repositories_path, props[:action]
+
+      groups = props[:groups]
+      assert_equal 2, groups.length
+      assert_equal @user.as_json(only: %i[id slug name], methods: :avatar_url), groups[0].deep_stringify_keys
+      assert_equal group.as_json(only: %i[id slug name], methods: :avatar_url), groups[1].deep_stringify_keys
     end
 
     get "/new/import", params: { provider: :gitbook }
     assert_equal 200, response.status
-    assert_select ".import-box", 1 do
-      assert_select ".form-group" do
-        assert_select "label.control-label", text: "Import from Git"
-        assert_select "input.form-control" do
-          assert_select "[name=?]", "repository[gitbook_url]"
-        end
-      end
+    assert_react_component "repositories/NewRepository" do |props|
+      assert_equal "import", props[:type]
+      assert_equal "gitbook", props[:provider]
     end
   end
 

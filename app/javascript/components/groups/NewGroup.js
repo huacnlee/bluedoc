@@ -84,7 +84,7 @@ export default class NewGroup extends React.Component {
           <ControlLabel name={t(".Slug")} />
           <div className="input-group d-flex">
             <div className="input-group-prepend"><div className="input-group-text text-overflow">{App.host}/</div></div>
-            <input type="text" className="form-control" onChange={this.hasInputedSlug} name="group[slug]" defaultValue={slug} />
+            <input type="text" className="form-control" onChange={this.onSlugChange} name="group[slug]" defaultValue={slug} />
           </div>
           <div class="form-text">
             <p>{t(".Great group path names are short and memorable")}</p>

@@ -33,7 +33,9 @@ default: &default
     - .woff2
 
   extensions:
+    - .erb
     - .jsx
+    - .js.erb
     - .mjs
     - .js
     - .sass

@@ -675,18 +675,20 @@ zh-CN:
       Sort by Created: 创建时间
     new:
       New Repository: 新建知识库
+      Choose an item: 选择团队/个人
       Import Repository: 导入知识库
       A repository contains all the documents for your project: 知识库用于将多篇文档组织在一起，你还可以通过目录的方式整理他们。
       Import from Git: 从 Git 导入知识库
       Import from Archive: 从 Zip 包导入知识库
-      Select File: 选择文件
-      Enter a Git repository URL: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BlueDoc 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
-      This feature is best compatible with: '此功能能最佳的只是 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
-      You can archive multiple markdown files as a zip file, and then choice the zip file for import: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
+      Select File: 选择需要导入的 Zip 文件
+      Enter a Git repository URL_html: 输入一个 Git URL 地址（只能支持 HTTP / HTTPS 协议），BlueDoc 将会自动导入 Git 仓库内的所有 <code>.md, .markdown</code> 文件，并以兼容的方式创建文档。
+      This feature is best compatible with_html: '此功能能最佳的支持 <a href="https://gitbook.io">GitBook</a> 的编写的内容 (内部包含一个 <code>SUMMARY.md</code> 来描述目录结构)，导入以后目录结构也能整理出来。'
+      You can archive multiple markdown files as a zip file, and then choice the zip file for import_html: 你可以将多个 <code>.md, .markdown</code> 文件用 zip 格式打包在一起，然后将 zip 包上传来实现导入。
       Or you have a GitBook source, you can use: 或者也可以通过 Git 的方式导入。
       Great repository names are short and memorable: 知识库路径用于 URL 里面，简单好记的名称能更好的使用和传播（只允许用字母、数字、中横行）。
       Anyone can see this repository: 任何人（如果全站要求登录，也是需要登录的）可以访问此知识库下的内容。
       You choose who can see and edit to this repository: 团队以外的人保密，除非你将他们加入到团队成员或知识库协作者列表。
+      Invalid git source url format: "Git 源地址格式不正确，只支持 http 或 https 协议的 Git URL。"
       Public: "完全公开"
       Private: "私密"
       Create Repository: 创建知识库

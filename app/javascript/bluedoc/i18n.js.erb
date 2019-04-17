@@ -1,13 +1,18 @@
 /* eslint-disable */
 import i18n from "i18next";
+const deepAssign = require('deep-assign');
 
 const metaLocale = document.querySelector('meta[name=locale]');
 const lang = (metaLocale && metaLocale.content || 'en').replace('-', '_');
+
+<% I18n.backend.eager_load! %>
+const RAILS_I18N = <%= I18n.backend.translations.to_json %>;
+
 i18n.init({
   // we init with resources
   resources: {
     en: {
-      locales: {
+      locales: deepAssign(RAILS_I18N["en"], {
         "There has count issues": 'There has <span class="text-danger">{{count}}</span> issues:',
         "Repository": "Repository",
         "Search in scope": "Search in {{scope}}",
@@ -173,10 +178,10 @@ i18n.init({
             "Create Group": "Create Group",
           },
         },
-      },
+      }),
     },
     zh_CN: {
-      locales: {
+      locales: deepAssign(RAILS_I18N["zh-CN"], {
         "There has count issues": '有 <span class="text-danger">{{count}}</span> 个问题：',
         "Repository": "知识库",
         "Search in scope": "{{scope}}内搜索",
@@ -341,8 +346,8 @@ i18n.init({
             "The letters, numbers or dash is allow, for example": "字母、数字、中横行都可以用作团队路径，支持使用大写字母，不可以包含中文、空格、特殊字符等，例如:",
             "Create Group": "创建团队",
           },
-        },
-      },
+        }
+      }),
     }
   },
   fallbackLng: "en",

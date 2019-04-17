@@ -9,7 +9,7 @@ export const Form = React.forwardRef((props, ref) => (
 
 export class FormGroup extends Component {
   render() {
-    let { className, children, name, object } = this.props;
+    let { className = "", children, name, object, style } = this.props;
     const { errors } = object;
 
     className = `form-group ${className}`;
@@ -19,7 +19,7 @@ export class FormGroup extends Component {
       className += " has-error";
     }
 
-    return <div className={className} {...this.props}>
+    return <div className={className} style={style}>
       {children}
       {errorMessage && (
         <div className="form-error">{errorMessage}</div>

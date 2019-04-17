@@ -1,3 +1,24 @@
+.page-repositories {
+  .new-repository-form {
+    max-width: 750px;
+    margin: 0 auto;
+
+    @include breakpoint(md) {
+      padding-right: 150px;
+      background: transparent url(~images/new-repo.svg) right 20px no-repeat;
+      background-size: 320px auto;
+    }
+
+    &[type=import] {
+      background: none;
+    }
+
+    .card-static {
+      background: #fff;
+    }
+  }
+}
+
 .page-repositories,
 .page-repository_settings,
 .page-issues,
