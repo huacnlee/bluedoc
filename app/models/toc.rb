@@ -74,7 +74,7 @@ class Toc < ApplicationRecord
         toc.id = doc&.id
       end
 
-      last_item = self.unscoped.create!(
+      last_item = self.create!(
         repository_id: repo.id,
         title: toc.title,
         url: toc.url,
