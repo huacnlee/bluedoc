@@ -147,7 +147,7 @@ class Node extends Component {
               <ul className="dropdown-menu dropdown-menu-sw">
                 <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
                 <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
-                <li className='dropdown-item' onClick={this.handleCreate}>{t('.Create Doc')}</li>
+                <li className='dropdown-item' onClick={this.handleCreate}>{t('.Add a Doc inside')}</li>
                 <li className='dropdown-divider'></li>
                 <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
               </ul>

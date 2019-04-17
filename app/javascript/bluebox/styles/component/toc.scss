@@ -60,6 +60,9 @@
   .item-link {
     font-size: 15px;
   }
+  .item-slug {
+    font-size: 13px;
+  }
 }
 
 .drop {
@@ -94,7 +97,6 @@
     top: calc(100% - -1px);
   }
 }
-
 
 .toc-tree[data-edit-mode=true] {
   .toc-items {
@@ -136,6 +138,7 @@
   }
 }
 
+// doc page
 .reader-body {
   .toc-tree {
     .item-slug {
@@ -147,6 +150,7 @@
   }
 }
 
+// repo page
 .page-repositories {
   .toc-tree {
     text-align: left;
@@ -157,15 +161,10 @@
       display: none;
     }
     .item-link {
-      min-width: 0;
       max-width: 70%;
     }
     .item-slug {
-      padding-left: 15px;
-      min-width: 0;
       max-width: 30%;
-      font-size: 13px;
-      color: $gray;
     }
     .item-connect-line {
       flex: 1;
