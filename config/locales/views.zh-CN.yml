@@ -281,6 +281,8 @@ zh-CN:
         Save: 保存
       ui:
         Customize UI: UI 定制
+        Broadcast Message: "广播消息:"
+        Write boradcast message, this will show on all pages: "编写一段广播消息，可以在所有页面顶部显示 (支持 HTML)。"
         Application Footer HTML: "全局页脚 HTML:"
         You can use HTML to customize the footer: "这里自定义一段 HTML，它们将会生成到所有页面的页脚，你甚至也可以使用 CSS 或 JavaScript 来定制页面。"
         Dashboard Sidebar HTML: "用户工作台侧边栏 HTML 定制:"

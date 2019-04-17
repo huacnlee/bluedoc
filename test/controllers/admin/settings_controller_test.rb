@@ -39,6 +39,7 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       confirmable_enable: "0",
       captcha_enable: "0",
       admin_emails: "foo@gmail.com\nbar@gmail.com\n#{@user.email}",
+      broadcast_message_html: "<span>hello world</span>",
       application_footer_html: "<span>hello</span>",
       dashboard_sidebar_html: "<span>world</span>",
       plantuml_service_host: "http://my-plantuml.com",
@@ -58,7 +59,7 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_settings_path
 
     setting_params.each_key do |key|
-      assert_equal setting_params[key].strip, Setting.send(key).strip
+      assert_equal setting_params[key]&.strip, Setting.send(key)&.strip
     end
 
     get admin_settings_path(_action: "ui")
