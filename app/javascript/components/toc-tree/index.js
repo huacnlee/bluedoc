@@ -4,6 +4,8 @@ import ContentLoader from 'react-content-loader';
 import Switch from '@material-ui/core/Switch';
 import Tree from './tree';
 import ListNode from './ListNode';
+import Icon from "bluebox/iconfont";
+
 import {
   getTreeFromFlatData,
 } from './utils';
@@ -138,25 +140,13 @@ class TocTree extends Component {
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
         {titleBar ? (
-        <div className="toc-tree-toolbar doc-parents">
-          <a className="link-back text-main" href={repository.path}>{repository.name}</a>
-          <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
-          {abilities.update && (
-            <div className="actions">
-              <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
-                <summary className="btn-link"><i className="fas fa-more"></i></summary>
-                <ul className="dropdown-menu dropdown-menu-sw">
-                  <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t('.Create Doc')}</a></li>
-                  <li className="dropdown-divider"></li>
-                  <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t('.Repository Settings')}</a></li>
-                </ul>
-              </details>
-            </div>
-          )}
-        </div>
+          <div className="toc-tree-toolbar doc-parents">
+            <a className="link-back text-main" href={repository.path}>{repository.name}</a>
+            <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
+          </div>
         ) : (
           <label className={'edit-switch'}>
-            <span>编辑模式</span>
+            <span>{this.t(".Edit Toc")}</span>
             <Switch
               checked={this.state.editMode}
               value="editMode"
@@ -166,6 +156,11 @@ class TocTree extends Component {
           </label>
         )}
         {this.renderItems()}
+        {titleBar && abilities.update && (
+          <div className="toc-tree-bottom-toolbar">
+            <a href="#" className="btn-new btn-block"><Icon name="new" /> {this.t('.Create Doc')}</a>
+          </div>
+        )}
       </div>
     );
   }

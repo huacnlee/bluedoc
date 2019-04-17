@@ -15,7 +15,21 @@
     }
   }
 
-  // 
+  .btn-new {
+    border: 1px solid #e5e5e5;
+    padding: 4px 10px;
+    text-align: left;
+    color: $black;
+    &:hover {
+      color: $black !important;
+      background: #f7f7f7;
+    }
+    &:active {
+      background: #eaeaea;
+    }
+  }
+
+  //
   .toc-items {
     font-size: 13px;
     @extend .list-style-none;
@@ -27,7 +41,7 @@
       align-items: center;
       &.active {
         color: $primary;
-      } 
+      }
       &.drop-left::after {
         top: -1px;
         @extend .drop;
@@ -73,6 +87,12 @@
   right: 0;
   height: 2px;
   background: $primary;
+}
+
+.toc-tree-bottom-toolbar {
+  margin-top: 15px;
+
+
 }
 
 .toc-tree-toolbar {
