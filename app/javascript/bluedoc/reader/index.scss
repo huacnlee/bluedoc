@@ -131,6 +131,7 @@
           @extend .text-overflow;
           color: inherit;
           max-width: 100%;
+          cursor: pointer;
         }
         .active {
           color: $primary;

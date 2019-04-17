@@ -15,7 +15,11 @@ class TocTree extends Component {
     const {
       abilities, repository, tocs, readonly, currentDocId,
     } = props;
-    const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null, active: currentDocId });
+    const treeData = getTreeFromFlatData({
+      flatData: tocs || [],
+      rootKey: null,
+      active: currentDocId,
+    });
     const viewMode = repository.has_toc ? 'tree' : 'list';
     const editMode = !abilities.update ? false : !readonly;
     this.state = {

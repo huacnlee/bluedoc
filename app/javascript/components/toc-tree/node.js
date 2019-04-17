@@ -130,6 +130,7 @@ class Node extends Component {
           style={{
             marginLeft: `${depth * 15}px`,
             opacity: isDragging ? 0.6 : 1,
+            cursor: editMode ? 'move' : 'default',
           }}
           onMouseLeave={this.toggleMenu}
         >
