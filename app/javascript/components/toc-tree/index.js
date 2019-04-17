@@ -169,10 +169,11 @@ class TocTree extends Component {
             </div>
           )}
           {type === 'center' && canEdit && (
-            <>
-              <div className='btn-new' onClick={this.handleCreate}>
-                <Icon name="add" /> {this.t('.Create Doc')}
+            <div className="repo-toc-toolbar">
+              <div className='btn btn-sm btn-success btn-new-doc' onClick={this.handleCreate}>
+                <Icon name="add-doc" /> {this.t('.Create Doc')}
               </div>
+
               <label className={'edit-switch'}>
                 <span>{this.t('.Edit Toc')}</span>
                 <Switch
@@ -182,7 +183,7 @@ class TocTree extends Component {
                   onChange={this.toggleEditMode}
                 />
               </label>
-            </>
+            </div>
           )}
           {this.renderItems()}
           {type === 'side' && canEdit && (
@@ -190,7 +191,7 @@ class TocTree extends Component {
               className="toc-tree-bottom-toolbar btn-new btn-block"
               onClick={this.handleCreate}
             >
-              <Icon name="add" /> {this.t('.Create Doc')}
+              <Icon name="add-doc" /> {this.t('.Create Doc')}
             </div>
           )}
         </div>

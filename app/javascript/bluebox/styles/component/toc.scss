@@ -6,7 +6,7 @@
     @extend .list-style-none;
   }
   // edit-switch-component
-  
+
 
   .btn-new {
     border: 1px solid #e5e5e5;
@@ -197,17 +197,12 @@
 
 // repo page
 .page-repositories {
-  .btn-new {
-    position: absolute;
-    left: 0px;
-    top: -50px;
+  .repo-toc-toolbar {
     font-size: 13px;
+    text-align: center;
   }
   .edit-switch {
-    position: absolute;
-    right: 0px;
-    top: -50px;
-    font-size: 13px;
+    margin-left: 20px;
     color: #666;
     span {
       vertical-align: middle;

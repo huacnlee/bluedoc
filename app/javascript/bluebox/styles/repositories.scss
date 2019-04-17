@@ -106,6 +106,7 @@
 
 
   .repo-actions {
+    margin-right: 20px;
     .btn {
       height: auto;
       padding: 0;
@@ -185,8 +186,8 @@
   @media (min-width: 768px) {
     .repo-toc {
       .toc-list {
-        width: 100%;
-        margin: 30px auto;
+        max-width: 850px;
+        margin: 0px auto 30px auto;
       }
     }
   }
