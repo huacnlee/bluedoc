@@ -79,7 +79,7 @@ class TocTree extends Component {
 
   onDeleteNode = (params, reload) => {
     if (!window.confirm(this.t('.Are you sure to delete'))) {
-      return;
+      return false;
     }
 
     deleteToc(params).then((result) => {
@@ -91,6 +91,8 @@ class TocTree extends Component {
         this.getTocList();
       }
     });
+
+    return true;
   }
 
   t = (key) => {
@@ -186,7 +188,6 @@ class TocTree extends Component {
               </label>
             </div>
           )}
-          {this.renderItems()}
           {type === 'side' && canEdit && (
             <div
               className="toc-tree-bottom-toolbar btn-new btn-block"
@@ -195,6 +196,7 @@ class TocTree extends Component {
               <Icon name="add-doc" /> {this.t('.Create Doc')}
             </div>
           )}
+          {this.renderItems()}
         </div>
       </MuiThemeProvider>
     );

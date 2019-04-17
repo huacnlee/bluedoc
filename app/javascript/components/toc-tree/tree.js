@@ -14,9 +14,11 @@ class Tree extends Component {
     reload,
   }) => {
     const { onChange, onDeleteNode } = this.props;
-    const newTreeData = this.getRemoveData(path);
-    !reload && onChange(newTreeData);
-    onDeleteNode({ id }, reload);
+
+    if (onDeleteNode({ id }, reload)) {
+      const newTreeData = this.getRemoveData(path);
+      !reload && onChange(newTreeData);
+    }
   }
 
   CreateNode = ({
