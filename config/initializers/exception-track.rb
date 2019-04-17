@@ -14,5 +14,6 @@ ExceptionNotification.configure do |config|
                                   ActionController::BadRequest
                                   ActionView::MissingTemplate
                                   ActionController::UrlGenerationError
-                                  ActionController::UnknownFormat)
+                                  ActionController::UnknownFormat
+                                  ActionController::InvalidCrossOriginRequest)
 end
