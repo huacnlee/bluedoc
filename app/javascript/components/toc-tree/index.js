@@ -107,6 +107,7 @@ class TocTree extends Component {
     const { repository } = this.props;
     const { treeData } = this.state;
     dialog({
+      title: this.t('.Create Doc'),
       type: 'newToc',
       repository,
       t: this.t,
@@ -155,9 +156,7 @@ class TocTree extends Component {
 
   render() {
     const { editMode, canEdit } = this.state;
-    const {
-      titleBar, abilities, repository, user, type,
-    } = this.props;
+    const { repository, user, type } = this.props;
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
         {type === 'side' && (
@@ -167,15 +166,20 @@ class TocTree extends Component {
           </div>
         )}
         {type === 'center' && canEdit && (
-          <label className={'edit-switch'}>
-            <span>{this.t('.Edit Toc')}</span>
-            <Switch
-              checked={this.state.editMode}
-              value="editMode"
-              color="primary"
-              onChange={this.toggleEditMode}
-            />
-          </label>
+          <>
+            <div className='btn-new' onClick={this.handleCreate}>
+              <Icon name="add" /> {this.t('.Create Doc')}
+            </div>
+            <label className={'edit-switch'}>
+              <span>{this.t('.Edit Toc')}</span>
+              <Switch
+                checked={this.state.editMode}
+                value="editMode"
+                color="primary"
+                onChange={this.toggleEditMode}
+              />
+            </label>
+          </>
         )}
         {this.renderItems()}
         {type === 'side' && canEdit && (

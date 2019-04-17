@@ -6,21 +6,14 @@
     @extend .list-style-none;
   }
   // edit-switch-component
-  .edit-switch {
-    position: absolute;
-    right: 0px;
-    top: -50px;
-    span {
-      vertical-align: middle;
-    }
-  }
+  
 
   .btn-new {
     border: 1px solid #e5e5e5;
     padding: 4px 10px;
     text-align: left;
     color: $black;
-
+    cursor: pointer;
     .fas {
       font-size: 14px;
       color: #666;
@@ -42,7 +35,6 @@
     .toc-item {
       position: relative;
       height: 30px;
-      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -144,9 +136,11 @@
       cursor: move;
       &:hover {
         background: #f7f7f7;
+        .item-slug {
+          visibility: hidden;
+        }
         .item-more {
           display: block;
-
           summary {
             color: #777;
             border-color: #e0e0e0;
@@ -203,13 +197,33 @@
 
 // repo page
 .page-repositories {
+  .btn-new {
+    position: absolute;
+    left: 0px;
+    top: -50px;
+    font-size: 13px;
+  }
+  .edit-switch {
+    position: absolute;
+    right: 0px;
+    top: -50px;
+    font-size: 13px;
+    color: #666;
+    span {
+      vertical-align: middle;
+    }
+  }
   .toc-tree {
     text-align: left;
     .toc-item {
       margin: 5px 0;
     }
     .item-more {
-      display: none;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9;
     }
     .item-link {
       max-width: 70%;

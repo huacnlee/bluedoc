@@ -117,13 +117,13 @@ class ConfirmDialog extends Component {
   render() {
     const { open } = this.state;
     const {
-      info = {}, t, repository, type,
+      title: dialogTitle, info = {}, t, repository, type,
     } = this.props;
-    const { url = '', title = '' } = info;
+    const { url = Math.random().toString(36).substring(8), title = '' } = info;
     return (
       <Dialog
         open={open}
-        title={t('.title')}
+        title={dialogTitle}
         onClose={this.handleCLose}
         actionsEle={[
           <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>,
@@ -150,7 +150,7 @@ class ConfirmDialog extends Component {
               <input
                 className='form-control'
                 type='text'
-                defaultValue={type === 'updateToc' ? url : ''}
+                defaultValue={url}
                 placeholder={'slug'}
                 ref={this.urlRef}
               />

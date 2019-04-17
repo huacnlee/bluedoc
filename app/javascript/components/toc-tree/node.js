@@ -60,6 +60,7 @@ class Node extends Component {
       info, t, path, onUpdateNode, active, repository,
     } = this.props;
     dialog({
+      title: t('.Setting Doc'),
       type: 'updateToc',
       info,
       repository,
@@ -81,6 +82,7 @@ class Node extends Component {
       info, t, path, onCreateNode, repository,
     } = this.props;
     dialog({
+      title: t('.Add a Doc inside'),
       type: 'createToc',
       repository,
       info,
@@ -149,7 +151,7 @@ class Node extends Component {
                 <li className='dropdown-item' onClick={this.handleCreate}>{t('.Add a Doc inside')}</li>
                 <li className='dropdown-divider'></li>
                 <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
-                <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
+                <li className='dropdown-item text-danger' onClick={this.handleDelete}>{t('.Delete doc')}</li>
               </ul>
             </details>
           )}
