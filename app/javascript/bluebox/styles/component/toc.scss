@@ -1,3 +1,96 @@
+.toc-tree {
+  position: relative;
+
+  .toc-items {
+    font-size: 13px;
+    @extend .list-style-none;
+  }
+  // edit-switch-component
+
+
+  .btn-new {
+    border: 1px solid #e5e5e5;
+    padding: 4px 10px;
+    text-align: left;
+    color: $black;
+    cursor: pointer;
+    .fas {
+      font-size: 14px;
+      color: #666;
+    }
+
+    &:hover {
+      color: $black !important;
+      background: #f7f7f7;
+    }
+    &:active {
+      background: #eaeaea;
+    }
+  }
+
+  //
+  .toc-items {
+    font-size: 13px;
+    @extend .list-style-none;
+    .toc-item {
+      position: relative;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
+
+      &.active {
+        color: $primary;
+      }
+      &.drop-left::after {
+        top: -1px;
+        @extend .drop;
+        margin-left: 23px;
+      }
+      &.drop-right::after {
+        bottom: -1px;
+        @extend .drop;
+        margin-left: 23px;
+      }
+      &.drop-child {
+        background: #E6EEFF;;
+      }
+    }
+  }
+  .item-slug,
+  .item-link {
+    @extend .text-overflow;
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+      color: $primary;
+    }
+  }
+  .item-link {
+    font-size: 15px;
+    position: relative;
+    padding-left: 20px;
+
+    .fa-arrow {
+      cursor: pointer;
+      position: absolute;
+      left: 5px;
+      top: calc(50% - 4px);
+      font-size: 12px;
+      color: #888;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+  .item-slug {
+    font-size: 13px;
+    margin-right: 10px;
+  }
+}
+
 .drop {
   display: block;
   content: '';
@@ -6,6 +99,12 @@
   right: 0;
   height: 2px;
   background: $primary;
+}
+
+.toc-tree-bottom-toolbar {
+  margin-bottom: 8px;
+
+
 }
 
 .toc-tree-toolbar {
@@ -34,69 +133,105 @@
 .toc-tree[data-edit-mode=true] {
   .toc-items {
     .toc-item {
-      position: relative;
-
-      .item-link {
-        padding-left: 3px;
-        width: auto;
+      cursor: move;
+      &:hover {
+        background: #f7f7f7;
+        .item-slug {
+          visibility: hidden;
+        }
+        .item-more {
+          display: block;
+          summary {
+            color: #777;
+            border-color: #e0e0e0;
+          }
+        }
+        .item-connect-line { display: none; }
       }
-
       .item-more {
-        position: absolute;
-        visibility: hidden;
-        right: 4px;
-        top: 4px;
+        display: none;
+        margin: 0 5px;
+
         summary {
+          border: 1px solid transparent;
           height: 20px;
           line-height: 20px;
           width: 20px;
           border-radius: 2px;
           text-align: center;
-        }
+          vertical-align: middle;
 
+          &:hover {
+            color: #555 !important;
+            background: #fff;
+          }
+          &:active {
+            background: #eee;
+          }
+        }
         .dropdown-item {
           display: block !important;
         }
       }
-
-      &:hover {
-        background: #f7f7f7;
-
-        .item-more {
-          visibility: visible;
-          background: #f7f7f7;
-
-          summary {
-            border: 1px solid transparent;
-            &:hover {
-              background: #eee;
-              border-color: #e0e0e0;
-            }
-          }
-        }
-      }
-
       details[open] {
         background: #f7f7f7;
         summary {
-          background: #eee;
+          background: #eee !important;
           border: 1px solid #e0e0e0 !important;
         }
       }
+    }
+  }
+}
 
+// doc page
+.reader-body {
+  .toc-tree {
+    .item-slug {
+      display: none;
+    }
+    .item-connect-line {
+      display: none;
+    }
+  }
+}
 
-      &.drop-left::after {
-        top: -1px;
-        @extend .drop;
-      }
-      &.drop-right::after {
-        bottom: -1px;
-        @extend .drop;
-      }
-      &.drop-child {
-        color: #fff;
-        background: $primary;
-      }
+// repo page
+.page-repositories {
+  .repo-toc-toolbar {
+    font-size: 13px;
+    text-align: center;
+  }
+  .edit-switch {
+    margin-left: 20px;
+    color: #666;
+    span {
+      vertical-align: middle;
+    }
+  }
+  .toc-tree {
+    text-align: left;
+    .toc-item {
+      margin: 5px 0;
+    }
+    .item-more {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9;
+    }
+    .item-link {
+      max-width: 70%;
+    }
+    .item-slug {
+      max-width: 30%;
+    }
+    .item-connect-line {
+      flex: 1;
+      height: 1px;
+      margin: 0 10px;
+      background: #eaeaea;
     }
   }
 }

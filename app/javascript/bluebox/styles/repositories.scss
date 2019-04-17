@@ -106,6 +106,7 @@
 
 
   .repo-actions {
+    margin-right: 20px;
     .btn {
       height: auto;
       padding: 0;
@@ -180,69 +181,13 @@
         }
       }
     }
-
-    .toc-list {
-      text-align: left;
-      ul {
-        .hidden {
-          display: none;
-        }
-        li {
-          list-style: none;
-          line-height: 18px;
-          padding: 10px 0;
-          position: relative;
-          display: flex;
-          justify-content: space-between;
-          .fa-arrow {
-            cursor: pointer;
-            position: absolute;
-            left: -20px;
-            top: 13px;
-            font-size: 12px;
-          }
-          &:after {
-            content: " ";
-            width: 100%;
-            border-bottom: 1px solid #e8e8e8;
-            position: absolute;
-            top: 50%;
-            right: 0;
-          }
-          .item-slug,
-          .item-link {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            height: 18px;
-            position: relative;
-            z-index: 1;
-            background: #FFF;
-          }
-          .item-link {
-            padding-right: 15px;
-            font-size: 15px;
-            min-width: 0;
-            max-width: 70%;
-            color: #000;
-          }
-          .item-slug {
-            padding-left: 15px;
-            min-width: 0;
-            max-width: 30%;
-            font-size: 13px;
-            color: $gray;
-          }
-        }
-      }
-    }
   }
 
   @media (min-width: 768px) {
     .repo-toc {
       .toc-list {
-        width: 100%;
-        margin: 30px auto;
+        max-width: 850px;
+        margin: 0px auto 30px auto;
       }
     }
   }

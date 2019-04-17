@@ -30,7 +30,36 @@ export const deleteToc = graph(`
 
 // update toc info {title , url}
 export const updateToc = graph(`
-  mutation (@autodeclare) {
+  mutation (
+    $id: ID!,
+    $title: String!,
+    $url: String,
+  ) {
     updateToc(id: $id, title: $title, url: $url)
+  }
+`);
+
+// create toc
+export const createToc = graph(`
+  mutation (
+    $repositoryId: ID!,
+    $title: String!,
+    $url: String,
+    $external: Boolean,
+    $targetId: ID,
+    $position: String
+  ) {
+    createToc(
+      repositoryId: $repositoryId,
+      title: $title,
+      url: $url,
+      external: $external,
+      targetId: $targetId,
+      position: $position
+    ) {
+      id,
+      title,
+      url,
+    }
   }
 `);

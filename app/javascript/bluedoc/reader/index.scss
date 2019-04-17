@@ -109,33 +109,6 @@
           @extend .text-overflow;
         }
       }
-      ul.toc-items {
-        font-size: 13px;
-        @extend .list-style-none;
-        .hidden {
-          display: none;
-        }
-        li.toc-item {
-          position: relative;
-          padding: 7px 0;
-          line-height: 1;
-          .fa-arrow {
-            cursor: pointer;
-            position: absolute;
-            left: -14px;
-            top: calc(50% - 6px);
-            font-size: 12px;
-          }
-        }
-        a {
-          @extend .text-overflow;
-          max-width: 100%;
-        }
-        .active {
-          color: $primary;
-        }
-        .item-slug { display: none; }
-      }
     }
 
     .doc-center {

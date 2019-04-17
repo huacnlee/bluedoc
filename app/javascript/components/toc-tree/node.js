@@ -1,11 +1,13 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { Component } from 'react';
 import {
   DragSource,
   DropTarget,
 } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import cn from 'classnames';
 import { getTargetPosition } from './utils';
-import confirm from './modal';
+import dialog from './modal';
 
 class Node extends Component {
   constructor(props) {
@@ -17,6 +19,18 @@ class Node extends Component {
 
     this.menu = React.createRef();
   }
+
+  componentDidMount() {
+    const { connectDragPreview } = this.props;
+    if (connectDragPreview) {
+      connectDragPreview(getEmptyImage(), { captureDraggingState: true });
+    }
+  }
+
+  // open this toc url
+  // why js link ？
+  // The safair browser will have an extra preview image when dragging the link.
+  handleLink = () => window.Turbolinks.visit(this.getUrl())
 
   getUrl = () => {
     const { info: { url }, repository } = this.props;
@@ -32,6 +46,7 @@ class Node extends Component {
     }
   }
 
+  // delete this toc
   handleDelete = () => {
     const {
       onDeleteNode, info: { id }, path, active,
@@ -39,12 +54,16 @@ class Node extends Component {
     onDeleteNode({ id, path, reload: active });
   }
 
+  // update toc info {title, url}
   handleUpdate = () => {
     const {
-      info, t, path, onUpdateNode, active,
+      info, t, path, onUpdateNode, active, repository,
     } = this.props;
-    confirm({
+    dialog({
+      title: t('.Setting Doc'),
+      type: 'updateToc',
       info,
+      repository,
       t,
       active,
       onSuccessBack: (result) => {
@@ -57,13 +76,34 @@ class Node extends Component {
     });
   }
 
+  // create child toc
+  handleCreate = () => {
+    const {
+      info, t, path, onCreateNode, repository,
+    } = this.props;
+    dialog({
+      title: t('.Add a Doc inside'),
+      type: 'createToc',
+      repository,
+      info,
+      t,
+      onSuccessBack: (result) => {
+        onCreateNode && onCreateNode({
+          info: result,
+          path,
+        });
+      },
+    });
+  }
+
+  // Automatically restore the menu state when the mouse leaves
   toggleMenu = () => {
     if (this.props.editMode && this.menu) {
       this.menu.current.removeAttribute('open');
     }
   }
 
-  isParent = ({ children = [] }) => children && children.length > 0
+  hasChildren = ({ children = [] }) => children && children.length > 0
 
   render() {
     const {
@@ -81,39 +121,41 @@ class Node extends Component {
     } = this.props;
     const { position } = this.state;
     const depth = path.length - 1;
-    const isParent = this.isParent(info);
-    const { expanded = false, title } = info;
-    const url = this.getUrl();
+    const hasChildren = this.hasChildren(info);
+    const { expanded, title } = info;
     return connectDragSource(
       connectDropTarget(
-      <li
-        className={cn('toc-item', {
-          [`drop-${position}`]: isOver && canDrop && !!position,
-        }, { active })}
-        style={{
-          marginLeft: `${depth * 15}px`,
-          opacity: isDragging ? 0.6 : 1,
-        }}
-        onMouseLeave={this.toggleMenu}
-      >
-        {isParent && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: !expanded })} />}
-        <a className="item-link" href={url}>{title}</a>
-        <a className="item-slug" href={url}>{info.url}</a>
-        {editMode && (
-          <details
-            className="item-more dropdown details-overlay details-reset d-inline-block"
-            ref={this.menu}
-          >
-            <summary><i className="fas fa-ellipsis"></i></summary>
-            <ul className="dropdown-menu dropdown-menu-sw">
-              <li><a href={`${info.url}/edit`} className="dropdown-item">{t('.Edit doc')}</a></li>
-              <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
-              <li className='dropdown-divider'></li>
-              <li className='dropdown-item' onClick={this.handleDelete}>{t('.Delete doc')}</li>
-            </ul>
-          </details>
-        )}
-      </li>,
+        <li
+          className={cn('toc-item', {
+            [`drop-${position}`]: isOver && canDrop && !!position,
+          }, { active })}
+          style={{
+            marginLeft: `${depth * 15}px`,
+            opacity: isDragging ? 0.6 : 1,
+          }}
+          onMouseLeave={this.toggleMenu}
+        >
+          <div className="item-link">
+            {hasChildren && <i onClick={() => toggleExpaned({ path, expanded })} className={cn('fas fa-arrow', { folder: expanded })} />}
+            <span onClick={this.handleLink}>{title}</span>
+          </div>
+          <div className="item-connect-line"></div>
+          <div className="item-slug" onClick={this.handleLink}>{info.url}</div>
+          {editMode && (
+            <details
+              className="item-more dropdown details-overlay details-reset"
+              ref={this.menu}
+            >
+              <summary><i className="fas fa-ellipsis"></i></summary>
+              <ul className="dropdown-menu dropdown-menu-sw">
+                <li className='dropdown-item' onClick={this.handleCreate}>{t('.Add a Doc inside')}</li>
+                <li className='dropdown-divider'></li>
+                <li className='dropdown-item' onClick={this.handleUpdate}>{t('.Setting Doc')}</li>
+                <li className='dropdown-item text-danger' onClick={this.handleDelete}>{t('.Delete doc')}</li>
+              </ul>
+            </details>
+          )}
+        </li>,
       ),
     );
   }
@@ -155,6 +197,8 @@ export default DropTarget(
     beginDrag: props => ({
       dragId: props.info.id,
       originalPath: props.path,
+      info: props.info,
+      active: props.active,
     }),
     endDrag(props, monitor) {
       if (!monitor.didDrop()) return;
@@ -170,6 +214,7 @@ export default DropTarget(
   },
   (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging(),
   }),
 )(Node));

@@ -1,9 +1,10 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import TreeNode from './node';
-
+import DragLayer from './customerDragLayer';
 
 class Tree extends Component {
   // del node event
@@ -13,9 +14,28 @@ class Tree extends Component {
     reload,
   }) => {
     const { onChange, onDeleteNode } = this.props;
-    const newTreeData = this.getRemoveData(path);
-    !reload && onChange(newTreeData);
-    onDeleteNode({ id }, reload);
+
+    if (onDeleteNode({ id }, reload)) {
+      const newTreeData = this.getRemoveData(path);
+      !reload && onChange(newTreeData);
+    }
+  }
+
+  CreateNode = ({
+    info,
+    path,
+    position = 'child',
+  }) => {
+    const { treeData, onChange } = this.props;
+    const dropNode = this.findNodeByPath(path);
+    const newTreeData = this.getAddData({
+      treeData,
+      targetPath: path,
+      position,
+      dragNode: info,
+      dropNode,
+    });
+    onChange(newTreeData);
   }
 
   // update node info event
@@ -33,7 +53,6 @@ class Tree extends Component {
         pos = { [i]: { $merge: { ...result } } };
       }
     });
-    console.log(pos);
     const newTreeData = update(treeData, pos);
     onChange(newTreeData);
   }
@@ -58,6 +77,7 @@ class Tree extends Component {
     originalPath, targetPath, position, dragNode, dropNode,
   }) => {
     const tempData = this.getRemoveData(originalPath);
+    const isMove = this.getIsMove(originalPath, targetPath);
     return this.getAddData({
       treeData: tempData,
       originalPath,
@@ -65,6 +85,7 @@ class Tree extends Component {
       position,
       dragNode,
       dropNode,
+      isMove,
     });
   }
 
@@ -90,8 +111,8 @@ class Tree extends Component {
     position,
     dragNode,
     dropNode,
+    isMove = false,
   }) => {
-    const isMove = this.getIsMove(originalPath, targetPath);
     const newTargetPath = [...targetPath];
     if (isMove) {
       newTargetPath[originalPath.length - 1] -= 1;
@@ -149,35 +170,49 @@ class Tree extends Component {
     return result;
   }
 
+  // 是否折叠 true(展开)， false(折叠)
+  getExpanded = ({ children, expanded }, parentPath) => {
+    const { expandedDepth } = this.props;
+    // 没有子项
+    if (!children) return false;
+    // 有折叠参数
+    if (typeof expanded !== 'undefined') return expanded;
+    return parentPath.length < expandedDepth - 1;
+  }
+
   renderTreeNode = (data = [], parentPath = []) => {
     const {
       repository, editMode, viewMode, currentDocId, t,
     } = this.props;
-    return data.map((node, index) => (
-      <>
-        <TreeNode
-          key={node.id}
-          info={node}
-          repository={repository}
-          path={[...parentPath, index]}
-          moveNode={this.moveNode}
-          editMode={editMode}
-          viewMode={viewMode}
-          active={node.docId === currentDocId}
-          toggleExpaned={this.toggleExpaned}
-          onDeleteNode={this.delNode}
-          onUpdateNode={this.updateNode}
-          t={t}
-        />
-        {(node.children && !node.expanded) && this.renderTreeNode(node.children, [...parentPath, index])}
-      </>
-    ));
+    return data.map((node, index) => {
+      const expanded = this.getExpanded(node, parentPath);
+      return (
+        <>
+          <TreeNode
+            key={node.id}
+            info={{ expanded, ...node }}
+            repository={repository}
+            path={[...parentPath, index]}
+            moveNode={this.moveNode}
+            editMode={editMode}
+            viewMode={viewMode}
+            active={(node.docId && currentDocId && node.docId === currentDocId)}
+            toggleExpaned={this.toggleExpaned}
+            onDeleteNode={this.delNode}
+            onUpdateNode={this.updateNode}
+            onCreateNode={this.CreateNode}
+            t={t}
+          />
+          {expanded && this.renderTreeNode(node.children, [...parentPath, index])}
+        </>);
+    });
   }
 
   render() {
     const { treeData = [] } = this.props;
     return (
       <ul className="toc-items">
+        <DragLayer />
         {this.renderTreeNode(treeData)}
       </ul>
     );

@@ -15,9 +15,6 @@
         <div class="repo-actions">
           <%= action_button_tag(@repository, :watch, with_count: true) %>
           <%= action_button_tag(@repository, :star, with_count: true) %>
-          <% if can? :create_doc, @repository %>
-            <%= link_to icon_tag("add-doc", label: t(".New Doc")), new_user_repository_doc_path(@user, @repository), data: { turbolinks: false }, class: "btn btn-create-doc" %>
-          <% end %>
         </div>
         <nav class="reponav clearfix">
           <%= render_list_items(type: :link, class: "reponav-item", active_class: "selected") do |item|

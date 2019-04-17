@@ -1,30 +1,43 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
+import theme from 'bluebox/theme';
+import Icon from 'bluebox/iconfont';
+import update from 'immutability-helper';
 import Tree from './tree';
 import ListNode from './ListNode';
+import dialog from './modal';
+
 import {
   getTreeFromFlatData,
 } from './utils';
 import { getTocList, moveTocList, deleteToc } from './api';
 
-
 class TocTree extends Component {
   constructor(props) {
     super(props);
+    const {
+      // type : ['center', 'side']
+      abilities, repository, tocs, currentDocId, type,
+    } = props;
 
-    let { readonly, abilities, repository, tocs } = props;
-
-    if (!abilities.update) {
-      readonly = true;
-    }
-
-    const treeData = getTreeFromFlatData({ flatData: tocs || [], rootKey: null });
-
+    const viewMode = repository.has_toc ? 'tree' : 'list';
+    const treeData = viewMode === 'tree' ? getTreeFromFlatData({
+      flatData: tocs || [],
+      rootKey: null,
+      active: currentDocId,
+    }) : tocs;
+    const canEdit = abilities.update;
+    // 只有在文档页面侧边并且有权限 默认可编辑
+    const editMode = canEdit && type === 'side';
     this.state = {
-      treeData,
       loading: false,
-      editMode: !readonly,
-      viewMode: repository.has_toc ? 'tree' : 'list',
+      treeData,
+      canEdit,
+      editMode,
+      viewMode,
     };
   }
 
@@ -37,14 +50,14 @@ class TocTree extends Component {
 
   // fetch Toc List
   getTocList = () => {
-    const { repositoryId } = this.props;
-    getTocList({ repositoryId }).then((result) => {
+    const { repository } = this.props;
+    repository && getTocList({ repositoryId: repository.id }).then((result) => {
       this.setState({
         treeData: getTreeFromFlatData({ flatData: result.repositoryTocs, rootKey: null }),
         loading: false,
       });
     }).catch((errors) => {
-      App.alert(errors);
+      window.App.alert(errors);
     });
   }
 
@@ -65,12 +78,12 @@ class TocTree extends Component {
   }
 
   onDeleteNode = (params, reload) => {
-    if (!confirm(this.t('.Are you sure to delete'))) {
+    if (!window.confirm(this.t('.Are you sure to delete'))) {
       return false;
     }
 
     deleteToc(params).then((result) => {
-      App.notice(this.t('.Toc has successfully deleted'));
+      window.App.notice(this.t('.Toc has successfully deleted'));
       // 当删除项是当前阅读的文档
       if (reload) {
         window.Turbolinks.visit(window.location.href);
@@ -78,21 +91,36 @@ class TocTree extends Component {
         this.getTocList();
       }
     });
+
+    return true;
   }
 
   t = (key) => {
     if (key.startsWith('.')) {
-      return i18n.t(`toc-tree${key}`);
+      return window.i18n.t(`toc-tree${key}`);
     }
-    return i18n.t(key);
+    return window.i18n.t(key);
   }
 
   onChange = treeData => this.setState({ treeData })
 
-  toggleEditMode = (e) => {
-    e.preventDefault();
-    const { editMode } = this.state;
-    this.setState({ editMode: !editMode });
+  toggleEditMode = () => this.setState({ editMode: !this.state.editMode })
+
+  handleCreate = () => {
+    const { repository } = this.props;
+    const { treeData } = this.state;
+    dialog({
+      title: this.t('.Create Doc'),
+      type: 'createToc',
+      info: treeData[0],
+      repository,
+      position: 'left',
+      t: this.t,
+      onSuccessBack: (result) => {
+        const newTreeData = update(treeData, { $splice: [[0, 0, result]] });
+        this.onChange(newTreeData);
+      },
+    });
   }
 
   renderItems() {
@@ -100,7 +128,6 @@ class TocTree extends Component {
       loading, treeData, editMode, viewMode,
     } = this.state;
     const { repository, currentDocId } = this.props;
-
     if (loading) {
       return <TreeLoader />;
     }
@@ -126,38 +153,52 @@ class TocTree extends Component {
       onDeleteNode={this.onDeleteNode}
       repository={repository}
       currentDocId={currentDocId}
+      // 默认折叠的层级
+      expandedDepth={3}
       t={this.t}
      />;
   }
 
   render() {
-    const { editMode } = this.state;
-    const {
-      titleBar, abilities, repository, user,
-    } = this.props;
-
+    const { editMode, canEdit } = this.state;
+    const { repository, user, type } = this.props;
     return (
-      <div className="toc-tree" data-edit-mode={editMode}>
-        {titleBar && (
-        <div className="toc-tree-toolbar doc-parents">
-          <a className="link-back text-main" href={repository.path}>{repository.name}</a>
-          <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
-          {abilities.update && (
-            <div className="actions">
-            <details data-turbolinks={false} className="dropdown details-overlay details-reset d-inline-block">
-              <summary className="btn-link"><i className="fas fa-more"></i></summary>
-              <ul className="dropdown-menu dropdown-menu-sw">
-                <li><a href={`${repository.path}/docs/new`} className="dropdown-item">{this.t('.Create Doc')}</a></li>
-                <li className="dropdown-divider"></li>
-                <li><a href={`${repository.path}/settings/profile`} className="dropdown-item">{this.t('.Repository Settings')}</a></li>
-              </ul>
-            </details>
+      <MuiThemeProvider theme={theme}>
+        <div className="toc-tree" data-edit-mode={editMode}>
+          {type === 'side' && (
+            <div className="toc-tree-toolbar doc-parents">
+              <a className="link-back text-main" href={repository.path}>{repository.name}</a>
+              <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
             </div>
           )}
+          {type === 'center' && canEdit && (
+            <div className="repo-toc-toolbar">
+              <div className='btn btn-sm btn-success btn-new-doc' onClick={this.handleCreate}>
+                <Icon name="add-doc" /> {this.t('.Create Doc')}
+              </div>
+
+              <label className={'edit-switch'}>
+                <span>{this.t('.Edit Toc')}</span>
+                <Switch
+                  checked={this.state.editMode}
+                  value="editMode"
+                  color="primary"
+                  onChange={this.toggleEditMode}
+                />
+              </label>
+            </div>
+          )}
+          {type === 'side' && canEdit && (
+            <div
+              className="toc-tree-bottom-toolbar btn-new btn-block"
+              onClick={this.handleCreate}
+            >
+              <Icon name="add-doc" /> {this.t('.Create Doc')}
+            </div>
+          )}
+          {this.renderItems()}
         </div>
-        )}
-        {this.renderItems()}
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
