@@ -2,7 +2,7 @@ import Turbolinks from 'turbolinks';
 
 import '@babel/polyfill';
 import 'activestorage';
-import 'styles/event';
+import 'bluebox/classic';
 import 'vendor/turbo-react.min';
 import { render as timeagoRender } from 'timeago.js';
 import i18n from './i18n';
