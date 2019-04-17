@@ -133,11 +133,11 @@ class TocTree extends Component {
   render() {
     const { editMode } = this.state;
     const {
-      titleBar, abilities, repository, user, editSwitch = true,
+      titleBar, abilities, repository, user,
     } = this.props;
     return (
       <div className="toc-tree" data-edit-mode={editMode}>
-        {titleBar && (
+        {titleBar ? (
         <div className="toc-tree-toolbar doc-parents">
           <a className="link-back text-main" href={repository.path}>{repository.name}</a>
           <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
@@ -154,8 +154,7 @@ class TocTree extends Component {
             </div>
           )}
         </div>
-        )}
-        {editSwitch && (
+        ) : (
           <label className={'edit-switch'}>
             <span>编辑模式</span>
             <Switch
