@@ -1573,6 +1573,11 @@ bluebird@^3.5.3:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
 
+bluedoc-icons@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/bluedoc-icons/-/bluedoc-icons-1.0.3.tgz#b6846b7b6e03524c9528bd6300d64bc87b979091"
+  integrity sha512-t6n/kJc+Il8bNbo4qOmxUJbqXXzkbpLypbhbYPCJtMCzqYkrHFoXYPHcLX+eyZEAfJ/SfDw3Mis06n/405ut/Q==
+
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
