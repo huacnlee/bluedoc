@@ -15,6 +15,18 @@ body {
   margin-bottom: 0px !important;
 }
 
+.broadcast-message {
+  padding: 5px 0;
+  margin-top: 1px;
+  border-top: 1px solid rgba(137, 168, 254, 1);
+  border-bottom: 1px solid rgba(137, 168, 254, 1);
+  background: rgba(137, 168, 254, 0.14);
+
+  .container {
+    text-align: center;
+  }
+}
+
 form {
   margin-bottom: 30px;
 

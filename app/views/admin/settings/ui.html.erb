@@ -15,6 +15,14 @@
       </div>
 
       <div class="form-group">
+        <label class="control-label"><%= t(".Broadcast Message") %></label>
+        <%= f.text_area :broadcast_message_html, value: Setting.broadcast_message_html, class: "form-control", style: "height: 100px; min-height: 100px"  %>
+        <div class="form-text">
+          <%= t(".Write boradcast message, this will show on all pages") %>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label class="control-label"><%= t(".Application Footer HTML") %></label>
         <%= f.text_area :application_footer_html, value: Setting.application_footer_html, class: "form-control", style: "height: 200px; min-height: 200px"  %>
         <div class="form-text">

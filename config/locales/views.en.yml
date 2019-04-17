@@ -284,6 +284,8 @@ en:
         Customize UI: Customize UI
         Default language: "Default language:"
         Setup default language for BlueDoc: "Setup default language for BlueDoc."
+        Broadcast Message: "Broadcast Message:"
+        Write boradcast message, this will show on all pages: "Write boradcast message, this will show on all pages (HTML allowed)."
         Application Footer HTML: "Application Footer HTML:"
         You can use HTML to customize the footer: "You can use HTML to customize the page footer, including Stylesheet and JavaScript."
         Dashboard Sidebar HTML: "Dashboard Sidebar HTML:"

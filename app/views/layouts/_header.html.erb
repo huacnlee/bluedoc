@@ -10,3 +10,6 @@
     <%= render "/layouts/user_menu" %>
   </div>
 </div>
+<% if Setting.broadcast_message_html.present? %>
+<div class="broadcast-message"><div class="container"><%= raw Setting.broadcast_message_html %></div></div>
+<% end %>
