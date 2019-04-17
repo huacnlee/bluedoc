@@ -69,7 +69,6 @@ class ConfirmDialog extends Component {
     const params = {
       repositoryId: repository.id,
       title,
-      // url: !url ? null : url,
       targetId,
       position: 'child',
     };
@@ -84,7 +83,6 @@ class ConfirmDialog extends Component {
       }
     });
   }
-
 
   render() {
     const { open } = this.state;

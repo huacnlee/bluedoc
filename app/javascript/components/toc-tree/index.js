@@ -8,19 +8,19 @@ import {
 } from './utils';
 import { getTocList, moveTocList, deleteToc } from './api';
 
-
 class TocTree extends Component {
   constructor(props) {
     super(props);
     const {
       abilities, repository, tocs, readonly, currentDocId,
     } = props;
-    const treeData = getTreeFromFlatData({
+
+    const viewMode = repository.has_toc ? 'tree' : 'list';
+    const treeData = viewMode === 'tree' ? getTreeFromFlatData({
       flatData: tocs || [],
       rootKey: null,
       active: currentDocId,
-    });
-    const viewMode = repository.has_toc ? 'tree' : 'list';
+    }) : tocs;
     const editMode = !abilities.update ? false : !readonly;
     this.state = {
       loading: false,
@@ -102,7 +102,6 @@ class TocTree extends Component {
       loading, treeData, editMode, viewMode,
     } = this.state;
     const { repository, currentDocId } = this.props;
-
     if (loading) {
       return <TreeLoader />;
     }
