@@ -56,6 +56,8 @@ class RepositoriesController < Users::ApplicationController
     unless @repository.has_toc?
       docs
       render "docs"
+    else
+      @tocs = graphql_query(:repositoryTocs, "repositoryId: #{@repository.id}", "id, docId, title, url, parentId, depth")
     end
   end
 
