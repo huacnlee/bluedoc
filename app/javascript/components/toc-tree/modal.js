@@ -30,9 +30,6 @@ class ConfirmDialog extends Component {
       if (type === 'createToc') {
         this.handleCreateToc();
       }
-      if (type === 'newToc') {
-        this.handleNewToc();
-      }
     });
   }
 
@@ -65,7 +62,9 @@ class ConfirmDialog extends Component {
       repository,
       info: {
         id: targetId,
-      }, onSuccessBack, active,
+      }, onSuccessBack,
+      active,
+      position = 'child',
     } = this.props;
     const title = this.titleRef.current.value;
     const url = this.urlRef.current.value;
@@ -74,7 +73,7 @@ class ConfirmDialog extends Component {
       title,
       targetId,
       url,
-      position: 'child',
+      position,
     };
     if (!url) {
       delete params.url;
@@ -119,7 +118,7 @@ class ConfirmDialog extends Component {
     const {
       title: dialogTitle, info = {}, t, repository, type,
     } = this.props;
-    const { url = Math.random().toString(36).substring(8), title = '' } = info;
+    const { url = '', title = '' } = info;
     return (
       <Dialog
         open={open}
@@ -150,7 +149,7 @@ class ConfirmDialog extends Component {
               <input
                 className='form-control'
                 type='text'
-                defaultValue={url}
+                defaultValue={type === 'updateToc' ? url : Math.random().toString(36).substring(8)}
                 placeholder={'slug'}
                 ref={this.urlRef}
               />

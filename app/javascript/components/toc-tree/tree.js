@@ -194,7 +194,7 @@ class Tree extends Component {
             moveNode={this.moveNode}
             editMode={editMode}
             viewMode={viewMode}
-            active={node.docId === currentDocId}
+            active={(node.docId && currentDocId && node.docId === currentDocId)}
             toggleExpaned={this.toggleExpaned}
             onDeleteNode={this.delNode}
             onUpdateNode={this.updateNode}

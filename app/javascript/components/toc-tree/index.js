@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -22,7 +22,6 @@ class TocTree extends Component {
       // type : ['center', 'side']
       abilities, repository, tocs, currentDocId, type,
     } = props;
-
 
     const viewMode = repository.has_toc ? 'tree' : 'list';
     const treeData = viewMode === 'tree' ? getTreeFromFlatData({
@@ -110,11 +109,13 @@ class TocTree extends Component {
     const { treeData } = this.state;
     dialog({
       title: this.t('.Create Doc'),
-      type: 'newToc',
+      type: 'createToc',
+      info: treeData[0],
       repository,
+      position: 'left',
       t: this.t,
       onSuccessBack: (result) => {
-        const newTreeData = update(treeData, { $push: [result] });
+        const newTreeData = update(treeData, { $splice: [[0, 0, result]] });
         this.onChange(newTreeData);
       },
     });

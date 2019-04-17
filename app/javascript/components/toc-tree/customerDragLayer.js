@@ -1,7 +1,6 @@
 import React from 'react';
 import { DragLayer } from 'react-dnd';
 import cn from 'classnames';
-import { FormHelperText } from '@material-ui/core';
 
 const layerStyles = {
   position: 'fixed',
