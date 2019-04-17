@@ -113,8 +113,10 @@ class ConfirmDialog extends Component {
           </div>
           <div className='form-group'>
             <label className='control-label'>{t('.url')}</label>
-            <div className='with-prefix'>
-              <div className='form-prefix'>{`${repository.path}/`}</div>
+            <div className='input-group d-flex'>
+              <div className='input-group-prepend'>
+                <div className='input-group-text'>{`${repository.path}/`}</div>
+              </div>
               <input
                 className='form-control'
                 type='text'
