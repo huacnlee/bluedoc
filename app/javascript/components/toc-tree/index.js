@@ -22,7 +22,6 @@ class TocTree extends Component {
       // type : ['center', 'side']
       abilities, repository, tocs, currentDocId, type,
     } = props;
-
     const viewMode = repository.has_toc ? 'tree' : 'list';
     const treeData = viewMode === 'tree' ? getTreeFromFlatData({
       flatData: tocs || [],
@@ -50,10 +49,10 @@ class TocTree extends Component {
 
   // fetch Toc List
   getTocList = () => {
-    const { repository } = this.props;
+    const { repository, currentDocId } = this.props;
     repository && getTocList({ repositoryId: repository.id }).then((result) => {
       this.setState({
-        treeData: getTreeFromFlatData({ flatData: result.repositoryTocs, rootKey: null }),
+        treeData: getTreeFromFlatData({ flatData: result.repositoryTocs, rootKey: null, active: currentDocId }),
         loading: false,
       });
     }).catch((errors) => {
