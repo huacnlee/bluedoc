@@ -66,7 +66,7 @@ GEM
       actionpack (= 6.0.0.beta3)
       activerecord (= 6.0.0.beta3)
       marcel (~> 0.3.1)
-    activestorage-aliyun (0.6.2)
+    activestorage-aliyun (0.6.3)
       aliyun-sdk (>= 0.6.0)
       rails (>= 5.2.0)
     activesupport (6.0.0.beta3)
