@@ -5,12 +5,13 @@
     font-size: 14px;
     margin: 0 15px;
     text-decoration: none;
-    color: $primary;
+    color: #404040;
     font-weight: bold;
     position: relative;
+    &:hover,
     &.selected {
-      color: $text-main !important;
-      border-bottom: 2px solid $text-main;
+      color: $primary !important;
+      border-bottom: 2px solid $primary;
     }
   }
 }

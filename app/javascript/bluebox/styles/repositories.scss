@@ -25,7 +25,7 @@
 .page-labels {
   .repo-heading {
     text-align: left;
-    background: #f7f7f7;
+    background: #F7F7F7;
 
     .container {
 
@@ -40,7 +40,7 @@
       display: block;
       align-items: center;
 
-      margin: 20px 0 0px 0;
+      margin: 20px 0 0px 20px;
 
       h1 {
         font-size: 28px; line-height: 28px;
@@ -130,7 +130,6 @@
     }
     .btn-create-doc:hover,
     .action-button a:hover {
-      background: #f7f7f7;
     }
 
   }

@@ -126,8 +126,8 @@ class ConfirmDialog extends Component {
         onClose={this.handleClose}
         afterClose={afterClose}
         actionsEle={[
-          <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>,
-          <button className='btn btn-primary' onClick={this.handleConfirm}>{t('.Update')}</button>,
+          <button className='btn' style={{ minWidth: "88px" }} onClick={this.handleClose}>{t('.Cancel')}</button>,
+          <button className='btn btn-primary' style={{ minWidth: "88px" }} onClick={this.handleConfirm}>{t('.Update')}</button>,
         ]}
       >
         <form>
@@ -138,7 +138,7 @@ class ConfirmDialog extends Component {
               type='text'
               autoFocus
               defaultValue={type === 'updateToc' ? title : ''}
-              placeholder={'title'}
+              placeholder={t('.title')}
               ref={this.titleRef}
             />
           </div>

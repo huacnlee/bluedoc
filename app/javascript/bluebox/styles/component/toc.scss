@@ -9,19 +9,25 @@
 
 
   .btn-new {
-    border: 1px solid #e5e5e5;
-    padding: 4px 10px;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 2px;
     text-align: left;
-    color: $black;
+    color: #333;
+    font-weight: bold;
     cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+
     .fas {
       font-size: 14px;
-      color: #666;
+      color: #444;
+      font-weight: bold;
     }
 
     &:hover {
       color: $black !important;
       background: #f7f7f7;
+      border-color: #f7f7f7;
     }
     &:active {
       background: #eaeaea;
