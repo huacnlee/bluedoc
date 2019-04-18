@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Dialog from 'bluebox/dialog';
-import { updateToc, createToc } from './api';
+import { Fetch, updateToc, createToc } from './api';
 import { getNewUrl } from './utils';
 
 class ConfirmDialog extends Component {
@@ -17,7 +17,22 @@ class ConfirmDialog extends Component {
     this.urlRef = React.createRef();
   }
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyEnter);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyEnter);
+  }
+
   handleClose = () => this.setState({ open: false })
+
+  handleKeyEnter = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.handleConfirm();
+    }
+  }
 
   handleConfirm = () => {
     const { type } = this.props;
@@ -44,15 +59,19 @@ class ConfirmDialog extends Component {
       title,
       url,
     };
-    updateToc(params).then((result) => {
-      window.App.notice(this.props.t('.Toc has successfully updated'));
-      // 修改当前文档，页面重载， 否则更新treedate数据
-      if (active) {
-        window.Turbolinks.visit(getNewUrl(url));
-      } else {
-        onSuccessBack && onSuccessBack({ title, url });
-        this.setState({ loading: false }, this.handleClose);
-      }
+    Fetch({
+      api: updateToc,
+      params,
+      onSuccess: (result) => {
+        window.App.notice(this.props.t('.Toc has successfully updated'));
+        // 修改当前文档，页面重载， 否则更新treedate数据
+        if (active) {
+          window.Turbolinks.visit(getNewUrl(url));
+        } else {
+          onSuccessBack && onSuccessBack({ title, url });
+          this.setState({ loading: false }, this.handleClose);
+        }
+      },
     });
   }
 
@@ -78,52 +97,34 @@ class ConfirmDialog extends Component {
     if (!url) {
       delete params.url;
     }
-    createToc(params).then((result) => {
-      window.App.notice(this.props.t('.Toc has successfully updated'));
-      // 修改当前文档，页面重载， 否则更新treedate数据
-      if (active) {
-        window.Turbolinks.visit(getNewUrl(url));
-      } else {
-        onSuccessBack && onSuccessBack({ ...result.createToc });
-        this.setState({ loading: false }, this.handleClose);
-      }
-    });
-  }
-
-  // create toc insert toc-tree bottom
-  handleNewToc = () => {
-    const {
-      repository,
-      onSuccessBack,
-    } = this.props;
-    const title = this.titleRef.current.value;
-    const url = this.urlRef.current.value;
-    const params = {
-      repositoryId: repository.id,
-      title,
-      url,
-    };
-    if (!url) {
-      delete params.url;
-    }
-    createToc(params).then((result) => {
-      window.App.notice(this.props.t('.Toc has successfully updated'));
-      onSuccessBack && onSuccessBack({ ...result.createToc });
-      this.setState({ loading: false }, this.handleClose);
+    Fetch({
+      api: createToc,
+      params,
+      onSuccess: (result) => {
+        window.App.notice(this.props.t('.Toc has successfully updated'));
+        // 修改当前文档，页面重载， 否则更新treedate数据
+        if (active) {
+          window.Turbolinks.visit(getNewUrl(url));
+        } else {
+          onSuccessBack && onSuccessBack({ ...result.createToc });
+          this.setState({ loading: false }, this.handleClose);
+        }
+      },
     });
   }
 
   render() {
     const { open } = this.state;
     const {
-      title: dialogTitle, info = {}, t, repository, type,
+      title: dialogTitle, info = {}, t, repository, type, afterClose,
     } = this.props;
     const { url = '', title = '' } = info;
     return (
       <Dialog
         open={open}
         title={dialogTitle}
-        onClose={this.handleCLose}
+        onClose={this.handleClose}
+        afterClose={afterClose}
         actionsEle={[
           <button className='btn' onClick={this.handleClose}>{t('.Cancel')}</button>,
           <button className='btn btn-primary' onClick={this.handleConfirm}>{t('.Update')}</button>,
@@ -135,6 +136,7 @@ class ConfirmDialog extends Component {
             <input
               className='form-control'
               type='text'
+              autoFocus
               defaultValue={type === 'updateToc' ? title : ''}
               placeholder={'title'}
               ref={this.titleRef}

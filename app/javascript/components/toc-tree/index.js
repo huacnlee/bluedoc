@@ -13,7 +13,9 @@ import dialog from './modal';
 import {
   getTreeFromFlatData,
 } from './utils';
-import { getTocList, moveTocList, deleteToc } from './api';
+import {
+  Fetch, getTocList, moveTocList, deleteToc,
+} from './api';
 
 class TocTree extends Component {
   constructor(props) {
@@ -50,13 +52,21 @@ class TocTree extends Component {
   // fetch Toc List
   getTocList = () => {
     const { repository, currentDocId } = this.props;
-    repository && getTocList({ repositoryId: repository.id }).then((result) => {
-      this.setState({
-        treeData: getTreeFromFlatData({ flatData: result.repositoryTocs, rootKey: null, active: currentDocId }),
-        loading: false,
-      });
-    }).catch((errors) => {
-      window.App.alert(errors);
+    repository && Fetch({
+      api: getTocList,
+      params: {
+        repositoryId: repository.id,
+      },
+      onSuccess: (result) => {
+        this.setState({
+          treeData: getTreeFromFlatData({
+            flatData: result.repositoryTocs,
+            rootKey: null,
+            active: currentDocId,
+          }),
+          loading: false,
+        });
+      },
     });
   }
 
@@ -70,9 +80,10 @@ class TocTree extends Component {
       position,
       targetId,
     };
-
-    moveTocList(params).then((result) => {
-      console.log(result, params, '排序成功');
+    Fetch({
+      api: moveTocList,
+      params,
+      onSuccess: (result) => { console.log(result, params, '排序成功'); },
     });
   }
 
@@ -81,16 +92,19 @@ class TocTree extends Component {
       return false;
     }
 
-    deleteToc(params).then((result) => {
-      window.App.notice(this.t('.Toc has successfully deleted'));
-      // 当删除项是当前阅读的文档
-      if (reload) {
-        window.Turbolinks.visit(window.location.href);
-      } else {
-        this.getTocList();
-      }
+    Fetch({
+      api: deleteToc,
+      params,
+      onSuccess: (result) => {
+        window.App.notice(this.t('.Toc has successfully deleted'));
+        // 当删除项是当前阅读的文档
+        if (reload) {
+          window.Turbolinks.visit(window.location.href);
+        } else {
+          this.getTocList();
+        }
+      },
     });
-
     return true;
   }
 
