@@ -338,11 +338,10 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_react_component "toc-tree/index" do |props|
-      assert_nil props[:readonly]
-      assert_equal true, props[:titleBar]
-      assert_equal @repo.id, props[:repositoryId]
-      assert_equal({ name: @repo.name, path: @repo.to_path, has_toc: @repo.has_toc? }, props[:repository])
-      assert_equal({ name: @repo.user.name, path: @repo.user.to_path }, props[:user])
+      assert_equal "side", props[:type]
+      assert_not_nil props[:tocs]
+      assert_equal({ id: @repo.id, name: @repo.name, path: @repo.to_path, has_toc: @repo.has_toc? }, props[:repository])
+      assert_equal({ id: @repo.user.id, name: @repo.user.name, path: @repo.user.to_path }, props[:user])
       assert_equal doc.id, props[:currentDocId]
       assert_equal false, props[:abilities][:update]
     end
