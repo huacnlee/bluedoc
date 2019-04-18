@@ -22,12 +22,14 @@
       padding-top: 0px;
       min-height: 100vh;
     }
+
+    .doc-body-toc {
+      width: 180px;
+      margin-left: 30px;
+    }
   }
 
   @include breakpoint(xl) {
-    .container {
-      width: 1350px;
-    }
     .doc-body-toc {
       width: 230px;
       margin-left: 50px;
