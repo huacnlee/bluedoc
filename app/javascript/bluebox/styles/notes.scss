@@ -5,6 +5,17 @@
 }
 
 .page-notes {
+  .new-note-form {
+    max-width: 750px;
+    margin: 0 auto;
+
+    @include breakpoint(md) {
+      padding-right: 180px;
+      background: transparent url(~images/nodata/note.svg) right 20px no-repeat;
+      background-size: 260px auto;
+    }
+  }
+
   .recent-notes {
     .recent-note-item {
       .description {
