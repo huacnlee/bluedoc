@@ -21,7 +21,7 @@ class NotesController < Users::ApplicationController
 
   def new
     @user = current_user
-    @note = Note.new(slug: params[:slug] || BlueDoc::Slug.random)
+    @note = Note.new(slug: params[:slug])
   end
 
   def create

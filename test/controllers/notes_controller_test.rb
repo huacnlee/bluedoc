@@ -57,22 +57,13 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     end
 
     sign_in @user
-    get new_note_path(slug: "hello-world")
+    get new_note_path
     assert_equal 200, response.status
-    assert_select "form[action=?]", user_notes_path(@user) do
-      assert_select "input[name='note[slug]']" do
-        assert_select "[value=?]", "hello-world"
-      end
-    end
-
-    BlueDoc::Slug.stub(:random, "foo-bar") do
-      get new_note_path
-    end
-    assert_equal 200, response.status
-    assert_select "form[action=?]", user_notes_path(@user) do
-      assert_select "input[name='note[slug]']" do
-        assert_select "[value=?]", "foo-bar"
-      end
+    assert_react_component "notes/NewNote" do |props|
+      assert_equal user_notes_path(@user), props[:action]
+      assert_nil  props[:note][:slug]
+      assert_nil props[:note][:title]
+      assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
   end
 
@@ -87,11 +78,12 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     }
     post user_notes_path(@user), params: { note: note_params }
     assert_equal 200, response.status
-    assert_select ".notice-error"
-    assert_select "form[action=?]", user_notes_path(@user) do
-      assert_select "input[name='note[slug]']" do
-        assert_select "[value=?]", "foo-bar"
-      end
+    assert_react_component "notes/NewNote" do |props|
+      assert_equal user_notes_path(@user), props[:action]
+      assert_equal "foo-bar", props[:note][:slug]
+      assert_nil props[:note][:title]
+      assert_equal({ title: "Title can't be blank" }, props[:note][:errors])
+      assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
 
     note_params = {
