@@ -4,8 +4,9 @@ const expandedActiveNode = ({
   flatData,
   active,
 }) => {
+  if (!active || !flatData) return [];
   const activeNode = flatData.find(node => node.docId === active);
-  if (activeNode === -1 || !active) return flatData;
+  if (!activeNode || !active) return flatData;
   const { parentId = null } = activeNode;
   if (!parentId) return flatData;
   return setNodeExpanded({ flatData, id: parentId });
@@ -37,7 +38,11 @@ export const getTreeFromFlatData = ({
   }
 
   const childrenToParents = {};
-  expandedActiveNode({ flatData, active }).forEach((child) => {
+  let tempFlatData = flatData;
+  if (active) {
+    tempFlatData = expandedActiveNode({ flatData, active });
+  }
+  tempFlatData.forEach((child) => {
     const parentKey = getParentKey(child);
 
     if (parentKey in childrenToParents) {

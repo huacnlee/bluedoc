@@ -63,3 +63,32 @@ export const createToc = graph(`
     }
   }
 `);
+
+export const Fetch = ({
+  api,
+  params,
+  onSuccess,
+  onError = handleError,
+}) => {
+  if (!api) return;
+  api(params)
+    .then((result) => {
+      if (result.error) {
+        onError(result);
+      } else {
+        onSuccess(result);
+      }
+    }).catch((result) => {
+      console.log('error', result);
+      handleError(result);
+    });
+};
+
+
+export const handleSuccess = (result) => {
+  console.log('success', result);
+};
+
+export const handleError = (result) => {
+  result.error.message && window.App.notice(result.error.message, 'error');
+};
