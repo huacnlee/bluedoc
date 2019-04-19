@@ -7,7 +7,7 @@ module BlueDoc
         def register
           config = ApplicationMailerConfig.new
           %i[default_url_options].each do |name|
-            ::ApplicationMailer.send(:define_singleton_method, name) do
+            ::ActionMailer::Base.send(:define_singleton_method, name) do
               config.send(name)
             end
           end

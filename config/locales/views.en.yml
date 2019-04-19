@@ -84,6 +84,11 @@ en:
         "Reset password": "Reset password"
         "Input your account Email address, we will send a reset password link to you Email": "Enter your account email address, we will send a password reset link to your email:"
         "Submit": "Send reset email"
+      edit:
+        "Change password": "Change password"
+        "New password": "New password"
+        "Confirm new password": "Confirm new password"
+        "Change my password": "Change my password"
     unlocks:
       new:
         Resend unlock instructions: "Resend account unlock email"

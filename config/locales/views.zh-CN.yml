@@ -77,6 +77,11 @@ zh-CN:
         Reset password: 找回密码
         Input your account Email address, we will send a reset password link to you Email: 输入你的 Email 地址，我们将会给你发送一封找回密码的邮件。
         Submit: 发送找回密码邮件
+      edit:
+        "Change password": "修改密码"
+        "New password": "新密码"
+        "Confirm new password": "确认新密码"
+        "Change my password": "确认修改密码"
     confirmations:
       new:
         Resend confirmation email: 重新发送确认邮件
