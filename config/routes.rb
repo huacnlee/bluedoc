@@ -44,7 +44,6 @@ Rails.application.routes.draw do
       get :repositories
       get :groups
       get :stars
-      get :watches
     end
   end
   # GET /new
