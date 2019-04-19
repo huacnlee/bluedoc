@@ -71,6 +71,10 @@
   }
 }
 
+.card-success {
+  border: 0.5px solid #3BB46E;
+}
+
 .card-static {
   @extend .card;
   @extend .card:hover;

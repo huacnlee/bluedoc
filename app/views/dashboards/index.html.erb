@@ -6,7 +6,6 @@
       <div class="dashboard-content">
 
         <div class="dashboard-section dashboard-docs">
-
           <% if @recent_docs.blank? %>
             <div class="blankslate no-data no-timeline">
               <div class="mb-3"><%= t(".You have no update Doc in recently_html") %></div>
@@ -24,6 +23,36 @@
           </ul>
           <% end %>
         </div>
+
+        <% if @watched_repositories.present? %>
+        <div class="dashboard-section dashboard-watched-repositories">
+          <div class="subhead"><h2><%= t(".Watched updates") %></h2></div>
+          <div class="wached-repository-groups">
+            <% @watched_repositories.each do |repository| %>
+              <% docs = @doc_groups[repository.id] %>
+              <% if docs.length > 0 %>
+              <div class="doc-group card-static mb-4">
+                <div class="repository-title"><%= repository_name_tag(repository, with_icon: true) %></div>
+                <div class="items">
+                  <% if docs.blank? %>
+                    <div class="blankslate">
+                      <%= t(".No recent updated docs") %>
+                    </div>
+                  <% else %>
+                    <% docs.each do |doc| %>
+                      <div class="doc-item mb-2">
+                        <div class="doc-link"><%= link_to doc.title, doc.to_path %></div>
+                        <div class="info mt-1"><%= user_name_tag(doc.last_editor) %> <%= timeago doc.body_updated_at %></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
 
         <% if !@recent_issues.blank? %>
         <div class="dashboard-section dashboard-issues">

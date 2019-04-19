@@ -138,21 +138,4 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".recent-notes .recent-doc-item", 2
     assert_select ".menu-item.selected", text: "Notes"
   end
-
-  test "GET /dashboard/watches" do
-    assert_require_user do
-      get "/dashboard/watches"
-    end
-
-    repo0 = create(:repository)
-    repo1 = create(:repository)
-
-    @user.watch_repository(repo0)
-    @user.watch_repository(repo1)
-
-    sign_in @user
-    get "/dashboard/watches"
-    assert_equal 200, response.status
-    assert_select ".dashboard-repos .recent-repo-item", 2
-  end
 end

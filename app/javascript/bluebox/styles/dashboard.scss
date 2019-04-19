@@ -41,6 +41,30 @@
     margin-bottom: 40px;
   }
 
+  .dashboard-watched-repositories {
+    .doc-group {
+      @extend .card-static;
+      flex-basis: 30%;
+      margin-right: 20px;
+      overflow: hidden;
+
+      .repository-title {
+        margin-bottom: 10px;
+        font-size: 12px;
+        overflow: hidden;
+        .repository-name {
+          white-space: nowrap;
+          @extend .text-overflow;
+        }
+      }
+    }
+
+    .wached-repository-groups {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
   .aside-wrap {
     padding: 30px 20px;
     background: #F9F9F9;

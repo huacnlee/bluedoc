@@ -414,6 +414,8 @@ en:
       Activity: Activities
     index:
       Recent edited docs: Recent edited docs
+      Watched updates: Watched updates
+      No recent updated docs: No recent updated docs.
       Recent actived issues: Recent actived issues
       Recent contributed repositories: Repositories
       You have no update Doc in recently_html: <p>You have no recently updated Doc.</p><p>You can create a Repository to starting write your first document.</p>
