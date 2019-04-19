@@ -269,14 +269,10 @@
         cursor: pointer;
         font-size: 13px;
         color: #555;
-        padding: 1px 5px;
+        padding: 0;
         margin: 0;
         position: relative;
         width: 240px;
-
-        &:hover {
-          background: #f4f4f4;
-        }
       }
       .close {
         float: right;
