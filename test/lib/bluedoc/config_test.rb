@@ -30,5 +30,14 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
 
   test "ApplicationMailer.default_url_options" do
     assert_equal({ host: Setting.host }, ApplicationMailer.default_url_options)
+    assert_equal({ host: Setting.host }, ActionMailer::Base.default_url_options)
+
+    mailer_options = {
+      foo: "aaa",
+      bar: "bbb"
+    }
+    Setting.stub(:mailer_option_hash, mailer_options) do
+      assert_equal(mailer_options, ActionMailer::Base.smtp_settings)
+    end
   end
 end

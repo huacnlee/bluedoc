@@ -6,7 +6,7 @@ module BlueDoc
       class << self
         def register
           config = ApplicationMailerConfig.new
-          %i[default_url_options].each do |name|
+          %i[default_url_options smtp_settings].each do |name|
             ::ActionMailer::Base.send(:define_singleton_method, name) do
               config.send(name)
             end
@@ -18,6 +18,10 @@ module BlueDoc
         {
           host: Setting.host,
         }
+      end
+
+      def smtp_settings
+        Setting.mailer_option_hash.deep_symbolize_keys
       end
     end
   end
