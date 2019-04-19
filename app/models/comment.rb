@@ -33,7 +33,10 @@ class Comment < ApplicationRecord
 
   def commentable_title
     case self.commentable_type
-    when "Doc" then self.commentable&.title || ""
+    when "Doc"
+      doc = self.commentable
+      return "" if doc.blank?
+      [doc.repository&.user&.name, doc.repository&.name, self.commentable&.title].join(" / ")
     when "Issue" then self.commentable&.issue_title || ""
     else
       ""

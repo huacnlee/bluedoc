@@ -138,8 +138,8 @@ class NotificationTest < ActiveSupport::TestCase
     note = create(:notification, notify_type: :comment, target: comment, actor: actor)
 
     assert_equal comment.to_url, note.target_url
-    assert_html_equal "<p><strong>#{note.actor_name}</strong> said:</p> #{comment.body_html}", note.mail_body
-    assert_equal "#{doc.title} got a comment.", note.mail_title
+    assert_html_equal "<p><a style=\"font-weight:bold; color: #333\" href=\"#{comment.to_url}\">#{comment.commentable_title}</a></p><p><strong>#{note.actor_name}</strong> said:</p> #{comment.body_html}", note.mail_body
+    assert_equal "#{comment.commentable_title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
     assert_equal comment.body_html, note.target_mention_fragment
   end
@@ -153,7 +153,7 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal comment.to_url, note.target_url
     assert_html_equal "<p><strong>#{note.actor_name}</strong> mentioned you:</p><div>#{note.target_mention_fragment}</div>", note.mail_body
-    assert_equal "#{doc.title} got a comment.", note.mail_title
+    assert_equal "#{comment.commentable_title} got a comment.", note.mail_title
     assert_equal "comment-#{comment.commentable_type}-#{comment.commentable_id}", note.mail_message_id
     assert_equal comment.body_html, note.target_mention_fragment
   end

@@ -47,7 +47,7 @@ class CommentTest < ActiveSupport::TestCase
     # Doc
     doc = create(:doc)
     comment = create(:comment, commentable: doc)
-    assert_equal doc.title, comment.commentable_title
+    assert_equal [doc.repository.user.name, doc.repository.name, doc.title].join(" / "), comment.commentable_title
 
     comment = create(:comment, commentable_type: "Doc", commentable_id: -1)
     assert_equal "", comment.commentable_title

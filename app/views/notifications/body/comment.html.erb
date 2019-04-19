@@ -2,5 +2,7 @@
 comment = notification.target
 %>
 
+<p><%= link_to comment.commentable_title, comment.to_url, style: "font-weight:bold; color: #333" %></p>
 <p><strong><%= notification.actor_name %></strong> <%= t(".said") %>:</p>
+
 <%= sanitize_html comment.body_html %>
