@@ -402,6 +402,8 @@ zh-CN:
       Activity: 动态
     index:
       Recent edited docs: 参与的文档
+      Watched updates: 关注知识库更新
+      No recent updated docs: 无更新内容。
       Recent actived issues: 参与的议题
       Recent contributed repositories: 知识库
       You have no update Doc in recently_html: <p>你还未创建或修改过文档。</p><p>你可以创建一个知识库，然后开始在 BlueDoc 上编写你的第一篇文档。</p>
