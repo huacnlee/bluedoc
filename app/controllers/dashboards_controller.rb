@@ -10,7 +10,7 @@ class DashboardsController < ApplicationController
     @recent_repos = current_user.user_actives.repositories.limit(12)
     @recent_issues = current_user.user_actives.issues.limit(12)
 
-    @watched_repositories = current_user.watch_repositories.order("updated_at desc").includes(:user).page(params[:page]).per(12)
+    @watched_repositories = current_user.watch_repositories.order("updated_at desc").includes(:user).page(params[:page]).per(6)
     @doc_groups = {}
     @watched_repositories.each do |repo|
       @doc_groups[repo.id] = repo.docs.order("body_updated_at desc").limit(5)

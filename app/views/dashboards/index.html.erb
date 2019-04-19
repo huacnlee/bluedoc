@@ -30,6 +30,7 @@
           <div class="wached-repository-groups">
             <% @watched_repositories.each do |repository| %>
               <% docs = @doc_groups[repository.id] %>
+              <% if docs.length > 0 %>
               <div class="doc-group card-static mb-4">
                 <div class="repository-title"><%= repository_name_tag(repository, with_icon: true) %></div>
                 <div class="items">
@@ -47,6 +48,7 @@
                   <% end %>
                 </div>
               </div>
+              <% end %>
             <% end %>
           </div>
         </div>

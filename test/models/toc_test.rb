@@ -42,7 +42,7 @@ class TocTest < ActiveSupport::TestCase
     # Do upgrade
     Toc.create_by_toc_text!(repo)
 
-    assert_equal docs, repo.tocs.collect(&:doc)
+    assert_equal docs.sort, repo.tocs.collect(&:doc).sort
   end
 
   test "next / prev" do
