@@ -38,8 +38,8 @@ class RepoWatchableTest < ActiveSupport::TestCase
     user2.watch_comment_issue(issue)
     user3.watch_comment_issue(issue)
 
-    assert_equal [user1.id, user2.id, user3.id, user4.id].sort, issue.watch_comment_by_user_ids.sort
+    assert_equal [user1.id, user2.id, user3.id, user4.id, issue.user_id].sort, issue.watch_comment_by_user_ids.sort
     User.create_action(:watch_comment, target: issue, user: user4, action_option: "ignore")
-    assert_equal [user1.id, user2.id, user3.id].sort, issue.watch_comment_by_user_ids.sort
+    assert_equal [user1.id, user2.id, user3.id, issue.user_id].sort, issue.watch_comment_by_user_ids.sort
   end
 end

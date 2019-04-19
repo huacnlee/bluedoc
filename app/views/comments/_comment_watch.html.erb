@@ -1,22 +1,20 @@
 <% if current_user %>
 <div id="comment-watch-box" class="border-bottom mb-3 pb-3 clearfix">
   <%
-  action = current_user.find_action(:watch_comment, target: commentable)
+  status = commentable.watch_comment_status_by_user_id(current_user.id)
   url = watch_comments_path(commentable_type: commentable.class.name, commentable_id: commentable.id)
   %>
   <div class="watch-button-group">
     <div class="form-label"><%= t(".Subscribe") %></div>
-    <% if action %>
-      <% if action.action_option == "ignore" %>
-          <p class="text-gray" watch-status="ignore"><%= t(".You’re ignoring this notifications") %></p>
-          <%= link_to "", url, class: "btn-radio", data: { method: :post, remote: true } %>
-      <% else %>
-          <p class="text-gray" watch-status="watched"><%= t(".You’re receiving notifications because you’re subscribed") %></p>
-          <%= link_to "", url, class: "btn-radio checked", data: { method: :delete, remote: true } %>
-      <% end %>
-    <% else %>
-        <p class="text-gray" watch-status="none"><%= t(".You’re not receiving notifications") %></p>
+    <% if status == "ignore" %>
+        <p class="text-gray" watch-status="ignore"><%= t(".You’re ignoring this notifications") %></p>
         <%= link_to "", url, class: "btn-radio", data: { method: :post, remote: true } %>
+    <% elsif status == "watch" %>
+        <p class="text-gray" watch-status="watched"><%= t(".You’re receiving notifications because you’re subscribed") %></p>
+        <%= link_to "", url, class: "btn-radio checked", data: { method: :delete, remote: true } %>
+    <% else %>
+      <p class="text-gray" watch-status="none"><%= t(".You’re not receiving notifications") %></p>
+      <%= link_to "", url, class: "btn-radio", data: { method: :post, remote: true } %>
     <% end %>
   </div>
 </div>

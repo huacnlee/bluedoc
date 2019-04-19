@@ -217,7 +217,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_react_component "toc-tree/index" do |props|
       assert_equal "center", props[:type]
-      assert_equal({ path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
+      assert_equal({ id: repo.id, path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
       assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
       assert_equal false, props[:abilities][:update]
       assert_not_nil props[:tocs]

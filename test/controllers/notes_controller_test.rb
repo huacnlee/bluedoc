@@ -61,7 +61,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_react_component "notes/NewNote" do |props|
       assert_equal user_notes_path(@user), props[:action]
-      assert_nil  props[:note][:slug]
+      assert_nil props[:note][:slug]
       assert_nil props[:note][:title]
       assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
