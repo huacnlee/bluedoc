@@ -107,7 +107,11 @@ class CommentTest < ActiveSupport::TestCase
 
     user1.watch_comment_doc(doc)
     user2.watch_comment_doc(doc)
+
+    assert_equal "unwatch", doc.watch_comment_status_by_user_id(user3.id)
     User.create_action(:watch_comment, target: doc, user: user3, action_option: "ignore")
+    assert_equal "ignore", doc.watch_comment_status_by_user_id(user3.id)
+    assert_equal "watch", doc.watch_comment_status_by_user_id(user2.id)
 
     comment = build(:comment, commentable: nil)
     assert_equal [], comment.commentable_watch_by_user_ids
@@ -131,7 +135,10 @@ class CommentTest < ActiveSupport::TestCase
 
     user1.watch_comment_issue(issue)
     user2.watch_comment_issue(issue)
+    assert_equal "unwatch", issue.watch_comment_status_by_user_id(user3.id)
     User.create_action(:watch_comment, target: issue, user: user3, action_option: "ignore")
+    assert_equal "ignore", issue.watch_comment_status_by_user_id(user3.id)
+    assert_equal "watch", issue.watch_comment_status_by_user_id(user2.id)
 
     comment = build(:comment, commentable: nil)
     assert_equal [], comment.commentable_watch_by_user_ids
@@ -156,6 +163,8 @@ class CommentTest < ActiveSupport::TestCase
     user1.watch_comment_note(note)
     user2.watch_comment_note(note)
     User.create_action(:watch_comment, target: note, user: user3, action_option: "ignore")
+    assert_equal "ignore", note.watch_comment_status_by_user_id(user3.id)
+    assert_equal "unwatch", note.watch_comment_status_by_user_id(-1)
 
     comment = build(:comment, commentable: nil)
     assert_equal [], comment.commentable_watch_by_user_ids
@@ -168,6 +177,7 @@ class CommentTest < ActiveSupport::TestCase
     comment.save
     assert_equal 4, comment.commentable_watch_by_user_ids.length
     assert_equal true, comment.commentable_watch_by_user_ids.include?(comment.user_id)
+    assert_equal "watch", comment.commentable.watch_comment_status_by_user_id(comment.user_id)
   end
 
   test "notifications" do

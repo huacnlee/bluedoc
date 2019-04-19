@@ -193,14 +193,12 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
     assert_no_match /#{repo.to_path("/settings")}/, response.body
-    assert_select ".btn-create-doc"
     assert_select ".label-private"
 
     sign_in_role :admin, group: @group
     get "/#{repo.user.slug}/#{repo.slug}"
     assert_equal 200, response.status
     assert_match /#{repo.to_path("/settings")}/, response.body
-    assert_select ".btn-create-doc"
 
     # has_issues? disable
     repo = create(:repository, user: @group)
@@ -218,11 +216,11 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     get repo.to_path
     assert_equal 200, response.status
     assert_react_component "toc-tree/index" do |props|
-      assert_equal true, props[:readonly]
-      assert_equal repo.id, props[:repositoryId]
-      assert_equal({ path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
+      assert_equal "center", props[:type]
+      assert_equal({ id: repo.id, path: repo.to_path, name: repo.name, has_toc: true }, props[:repository])
       assert_equal({ path: @group.to_path, name: @group.name }, props[:user])
       assert_equal false, props[:abilities][:update]
+      assert_not_nil props[:tocs]
     end
 
     sign_in_role :editor, group: @group
