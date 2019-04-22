@@ -67,7 +67,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in other_user
     get notification_path(note.id)
-    assert_equal 404, response.status
+    assert_redirected_to notifications_path
 
     sign_in user
     get notification_path(note.id)

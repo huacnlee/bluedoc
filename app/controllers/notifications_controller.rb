@@ -11,7 +11,13 @@ class NotificationsController < ::ApplicationController
   end
 
   def show
-    @notification = notifications.find_by!(id: params[:id])
+    @notification = notifications.find_by_id(params[:id])
+    # Redirect to /notifications when visit /notifications/:id not found
+    # Because some times, mail has sent, but notification was deleted by target depends destroy
+    if @notification.blank?
+      return redirect_to notifications_path
+    end
+
     Notification.read!([@notification.id])
 
     redirect_to @notification.target_url
