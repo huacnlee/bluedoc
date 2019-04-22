@@ -6,6 +6,7 @@ class Doc < ApplicationRecord
   include Reactionable
   include Mentionable
   include Exportable
+  include InlineCommentable
 
   second_level_cache expires_in: 1.week
 
