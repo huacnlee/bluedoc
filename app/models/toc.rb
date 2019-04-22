@@ -54,8 +54,6 @@ class Toc < ApplicationRecord
     last_item = nil
     parent = nil
 
-    self.where(repository_id: repo.id).delete_all
-
     docs = repo.docs.all
 
     items.each do |toc|
