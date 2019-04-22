@@ -48,21 +48,34 @@ class DocTest < ActiveSupport::TestCase
   end
 
   test "Body touch" do
-    doc = create(:doc)
+    repo = create(:repository)
+    doc = create(:doc, repository: repo)
     assert_not_nil doc[:body_updated_at]
     old_updated_at = doc[:body_updated_at]
+    old_repo_updated_at = repo.updated_at
 
     # body no changes
     doc.draft_body = "Draft foo"
     assert_equal false, doc.body_touch?
     doc.save
     assert_equal old_updated_at, doc.body_updated_at
+    repo.reload
+    assert_equal old_repo_updated_at, repo.updated_at
+
+    # update title or other nod changes
+    doc.title = "New Title"
+    doc.save
+    assert_equal old_updated_at, doc.body_updated_at
+    repo.reload
+    assert_equal old_repo_updated_at, repo.updated_at
 
     # change body
     doc.body = "Foo"
     assert_equal true, doc.body_touch?
     doc.save
     assert doc.body_updated_at > old_updated_at
+    repo.reload
+    assert repo.updated_at > old_repo_updated_at
 
     # change body_sml
     old_updated_at = doc.body_updated_at
@@ -70,11 +83,20 @@ class DocTest < ActiveSupport::TestCase
     assert_equal true, doc.body_touch?
     doc.save
     assert doc.body_updated_at > old_updated_at
+    repo.reload
+    assert repo.updated_at > old_repo_updated_at
 
     # When publishing
     assert_equal false, doc.body_touch?
     doc.publishing!
     assert_equal true, doc.body_touch?
+
+    # create doc will touch repository
+    repo.reload
+    old_repo_updated_at = repo.updated_at
+    create(:doc, repository: repo)
+    repo.reload
+    assert repo.updated_at > old_repo_updated_at
   end
 
   test "User Active" do

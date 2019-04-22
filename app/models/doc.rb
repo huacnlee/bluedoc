@@ -13,7 +13,7 @@ class Doc < ApplicationRecord
 
   delegate :private?, :public?, to: :repository
 
-  belongs_to :repository, touch: true
+  belongs_to :repository
   has_many :comments, as: :commentable, dependent: :destroy
   has_one :share, as: :shareable, dependent: :destroy
 
