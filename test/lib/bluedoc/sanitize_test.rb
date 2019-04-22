@@ -112,6 +112,11 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
     assert_sanitize raw, raw
   end
 
+  test "nid attribute" do
+    raw = %(<p nid="Snk2l3">Hello</p><div nid="lkn2SK"><ul nid="lkajsd"></ul></div>)
+    assert_sanitize raw, raw
+  end
+
   private
 
     def assert_sanitize(expected, html)
