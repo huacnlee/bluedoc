@@ -6,6 +6,7 @@ class CreateInlineComments < ActiveRecord::Migration[6.0]
       t.string :nid, limit: 32, null: false
       t.integer :user_id
       t.integer :comments_count, null: false, default: 0
+      t.timestamps
 
       t.index [:subject_type, :subject_id, :nid], unique: true
     end

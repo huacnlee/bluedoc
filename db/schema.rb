@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 2019_04_22_095304) do
     t.string "nid", limit: 32, null: false
     t.integer "user_id"
     t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["subject_type", "subject_id", "nid"], name: "index_inline_comments_on_subject_type_and_subject_id_and_nid", unique: true
   end
 

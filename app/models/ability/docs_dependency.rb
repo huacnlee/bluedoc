@@ -5,6 +5,9 @@ class Ability
     can :read, Doc do |doc|
       can? :read, doc.repository
     end
+    can :create_comment, Doc do |doc|
+      can? :read, doc.repository
+    end
     can :manage, Doc do |doc|
       can? :manage, doc.repository
     end

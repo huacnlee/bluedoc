@@ -55,6 +55,17 @@ class Comment < ApplicationRecord
     end
   end
 
+  def self.class_with_commentable_type(type)
+    klass = case type
+    when "Doc" then Doc
+    when "Note" then Note
+    when "Issue" then Issue
+    when "InlineComment" then InlineComment
+    else
+      raise "Invalid :commentable_type #{type}"
+    end
+  end
+
   private
 
     def clear_relation_parent_id

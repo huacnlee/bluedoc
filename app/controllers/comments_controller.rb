@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    commentable = commentable_klass(comment_params[:commentable_type]).find(comment_params[:commentable_id])
+    commentable = Comment.class_with_commentable_type(comment_params[:commentable_type]).find(comment_params[:commentable_id])
 
     authorize! :read, commentable
 
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
   # POST /comments/watch?commentable_type=&commentable_id=
   # DELETE /comments/watch?commentable_type=&commentable_id=
   def watch
-    @commentable = commentable_klass(params[:commentable_type]).find(params[:commentable_id])
+    @commentable = Comment.class_with_commentable_type(params[:commentable_type]).find(params[:commentable_id])
 
     authorize! :read, @commentable
 
@@ -54,16 +54,6 @@ class CommentsController < ApplicationController
   end
 
   private
-    def commentable_klass(type)
-      klass = case type
-              when "Doc" then Doc
-              when "Note" then Note
-              when "Issue" then Issue
-              else
-                raise "Invalid :commentable_type #{params[:commentable_type]}"
-      end
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
