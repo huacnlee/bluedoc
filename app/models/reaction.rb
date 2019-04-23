@@ -66,4 +66,15 @@ class Reaction < ApplicationRecord
   def text
     @emoji_text ||= ":#{self.name}:"
   end
+
+  def self.class_with_subject_type(type)
+    klass = case type
+    when "Doc" then Doc
+    when "Note" then Note
+    when "Issue" then Issue
+    when "Comment" then Comment
+    else
+      raise "Invalid :subject_type #{type}"
+    end
+  end
 end

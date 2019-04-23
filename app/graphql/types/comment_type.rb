@@ -5,6 +5,8 @@ module Types
     graphql_name "Comment"
     description "Comment type"
 
+    include Types::ReactionFields
+
     field :commentable_type, String, null: false, description: "commentable class type"
     field :commentable_id, ID, null: false, description: "commentable primary key"
     field :body, String, null: true, description: "Markdown content"

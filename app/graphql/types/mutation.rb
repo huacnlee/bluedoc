@@ -19,4 +19,7 @@ class Types::Mutation < GraphQL::Schema::Object
   field :update_comment, mutation: Mutations::UpdateComment, description: "Update Comment"
   field :delete_comment, mutation: Mutations::DeleteComment, description: "Delete Comment"
   field :watch_comments, mutation: Mutations::WatchComments, description: "Watch Comments"
+
+  # Reaction
+  field :update_reaction, mutation: Mutations::UpdateReaction, description: "Set/Unset Reaction"
 end

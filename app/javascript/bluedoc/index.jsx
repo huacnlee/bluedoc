@@ -26,6 +26,8 @@ window.App = {
   locale: (metaLocale && metaLocale.content || 'en').replace('-', '_'),
   host: `${location.protocol}//${location.host}`,
 
+  currentUser: null,
+
   csrf_param: "authenticity_token",
   csrf_token: null,
   directUploadURL: "/rails/active_storage/direct_uploads",

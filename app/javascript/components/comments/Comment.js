@@ -2,6 +2,7 @@ import { UserAvatar } from "bluebox/avatar";
 import { Icon } from 'bluebox/iconfont';;
 import { Timeago } from 'bluebox/timeago';
 import { UserLink } from 'bluebox/user';
+import Reactions from '../reactions/Index';
 
 import InReply from "./InReply";
 
@@ -9,7 +10,14 @@ export default class Comment extends React.Component {
   constructor(props) {
     super(props)
 
+    const { comment } = this.props;
+
     this.menuRef = React.createRef();
+
+    this.state = {
+      reactions: comment.reactions,
+      reactionsUpdated: Date.now(),
+    }
   }
 
   t = (key) => {
@@ -46,6 +54,12 @@ export default class Comment extends React.Component {
     }
   }
 
+  onReactionChange = (reactions) => {
+    this.setState({
+      reactions: [...reactions],
+    })
+  }
+
   dismissMenu = () => {
     if (this.menuRef) {
       this.menuRef.current.removeAttribute("open");
@@ -55,6 +69,7 @@ export default class Comment extends React.Component {
   render() {
     const { comment, currentUser, abilities = {} } = this.props;
     const { t } = this;
+    const { reactions } = this.state;
 
     let canDestroy = abilities.destroy;
     let canUpdate = abilities.update;
@@ -81,7 +96,7 @@ export default class Comment extends React.Component {
             <Timeago value={comment.createdAt} />
           </div>
           <div className="opts">
-
+            <Reactions subjectType="Comment" subjectId={comment.id} mode="new_button" reactions={reactions} onChange={this.onReactionChange} />
             <details id={`comment-${comment.id}-menu-button`} ref={this.menuRef} className="dropdown details-reset details-overlay d-inline-block ml-4">
               <summary><Icon name="ellipsis" /></summary>
               <div className="dropdown-menu dropdown-menu-sw">
@@ -106,6 +121,8 @@ export default class Comment extends React.Component {
           <InReply comment={comment} />
           <div dangerouslySetInnerHTML={{ __html: comment.bodyHtml }} />
         </div>
+
+        <Reactions subjectType="Comment" subjectId={comment.id} reactions={reactions} mode="list" onChange={this.onReactionChange} />
       </div>
     </div>
 

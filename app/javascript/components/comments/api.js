@@ -1,7 +1,7 @@
 import { graph } from 'bluedoc/graphql';
 
 const userBodyQuery = "id, slug, name, avatarUrl, url"
-const commentBodyQuery = `id, bodyHtml, user { ${userBodyQuery} }, parentId, replyTo { id, bodyHtml, user { ${userBodyQuery} } }, createdAt, updatedAt`
+const commentBodyQuery = `id, bodyHtml, user { ${userBodyQuery} }, parentId, reactions { name, url, groupUserSlugs, groupCount }, replyTo { id, bodyHtml, user { ${userBodyQuery} } }, createdAt, updatedAt`
 
 export const createComment = graph(`
   mutation(@autodeclare) {

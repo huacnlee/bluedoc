@@ -23,6 +23,10 @@
         display: block;
         color: #555;
 
+        .reaction-box {
+          float: left;
+        }
+
         & > a { width: 20px; height: 20px; margin-left: 5px; display: inline-block; text-align: center; }
         & > a:hover,
         summary > .fas:hover
