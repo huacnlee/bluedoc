@@ -26,6 +26,7 @@ export default class InlineEditor extends React.PureComponent {
   }
 
   focus = () => {
+    setTimeout(() => App.scrollTo("#new_comment"), 50);
     this.editor.focus();
   }
 

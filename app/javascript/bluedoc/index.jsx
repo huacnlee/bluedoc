@@ -44,6 +44,14 @@ window.App = {
       html.remove();
     }, 10000);
   },
+
+  scrollTo: (selector) => {
+    const element = document.querySelector(selector);
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 };
 
 document.addEventListener('turbolinks:load', () => {
