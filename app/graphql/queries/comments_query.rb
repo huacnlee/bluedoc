@@ -23,7 +23,12 @@ module Queries
       commentable = Comment.class_with_commentable_type(commentable_type).find(commentable_id)
       authorize! :read, commentable
 
-      commentable.comments.with_includes.order("id asc").page(page).per(per)
+      @comments = commentable.comments.with_includes.order("id asc").page(page).per(per)
+
+      # mark notifications read
+      Notification.read_targets(current_user, target_type: "Comment", target_id: @comments.collect(&:id))
+
+      @comments
     end
   end
 end

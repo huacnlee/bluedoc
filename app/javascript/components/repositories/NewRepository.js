@@ -1,5 +1,5 @@
 const { Component } = React;
-import Icon from "bluebox/iconfont";
+import{ Icon } from "bluebox/iconfont";
 import { UserAvatar } from "bluebox/avatar";
 import { Form, FormGroup, ControlLabel } from "bluebox/form";
 import { PrimaryButton } from "bluebox/button";

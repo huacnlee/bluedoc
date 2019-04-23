@@ -31,7 +31,12 @@ export default class InlineEditor extends React.PureComponent {
   }
 
   onChange = (markdownValue, smlValue) => {
-    const { format } = this.props;
+    const { format, onChange } = this.props;
+
+    if (onChange) {
+      onChange(markdownValue, smlValue)
+    }
+
     if (format === 'markdown') {
       this.inputRef.current.value = markdownValue;
     } else {
@@ -52,7 +57,7 @@ export default class InlineEditor extends React.PureComponent {
 
   render() {
     const {
-      directUploadURL, blobURLTemplate, name = "body_sml", markdownName = "body", value = '', format = 'markdown',
+      name = "body_sml", markdownName = "body", value = '', format = 'markdown',
     } = this.props;
 
     return <div>
@@ -64,8 +69,6 @@ export default class InlineEditor extends React.PureComponent {
           title=""
           ref={this.editorRef}
           getEditor={this.setEditor}
-          directUploadURL={directUploadURL}
-          blobURLTemplate={blobURLTemplate}
           onChange={this.onChange}
           format={format}
           value={value}

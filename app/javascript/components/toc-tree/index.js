@@ -4,7 +4,7 @@ import ContentLoader from 'react-content-loader';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import theme from 'bluebox/theme';
-import Icon from 'bluebox/iconfont';
+import { Icon } from 'bluebox/iconfont';;
 import update from 'immutability-helper';
 import Tree from './tree';
 import ListNode from './ListNode';

@@ -6,7 +6,7 @@
   <% end %>
 
   <%= form_group(f, :body_sml, label: false) do %>
-    <%= react_component "InlineEditor", name: "issue[body_sml]", markdownName: "issue[body]", format: "sml", directUploadURL: rails_direct_uploads_url, blobURLTemplate: upload_path(":id"), value: @issue.body_sml_plain %>
+    <%= react_component "InlineEditor", name: "issue[body_sml]", markdownName: "issue[body]", format: "sml", value: @issue.body_sml_plain %>
   <% end %>
 
   <div class="form-actions">

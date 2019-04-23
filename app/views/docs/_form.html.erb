@@ -50,8 +50,6 @@
     <%= form.hidden_field :title, value: @doc.draft_title %>
     <%= form.hidden_field :format, value: @doc.format %>
     <%= form.text_area :body, class: "bluedoc-editor", value: doc.draft_body_plain, data: {
-       direct_upload_url: rails_direct_uploads_url,
-       blob_url_template: upload_path(":id"),
        plantuml_service_host: Setting.plantuml_service_host,
        mathjax_service_host: Setting.mathjax_service_host,
        repository_url: @repository.to_path,

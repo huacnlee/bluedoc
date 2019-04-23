@@ -23,7 +23,7 @@ export default class RichEditor extends React.Component {
       title: props.title || '',
     };
 
-    const { directUploadURL, blobURLTemplate } = this.props;
+    const { directUploadURL, blobURLTemplate } = window.App;
 
     this.attachmentService = {
       imageUpload(file, onProgress) {

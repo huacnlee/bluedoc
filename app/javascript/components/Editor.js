@@ -37,7 +37,7 @@ export default class Editor extends React.PureComponent {
 
   render() {
     const {
-      directUploadURL, blobURLTemplate, plantumlServiceHost, mathJaxServiceHost,
+      plantumlServiceHost, mathJaxServiceHost,
       name = 'body_sml', markdownName = 'body', titleName = 'title', formatName = "format", value = '', title = '', format = 'markdown',
     } = this.props;
 
@@ -51,8 +51,6 @@ export default class Editor extends React.PureComponent {
           title={title}
           ref={this.editorRef}
           getEditor={this.setEditor}
-          directUploadURL={directUploadURL}
-          blobURLTemplate={blobURLTemplate}
           plantumlServiceHost={plantumlServiceHost}
           mathJaxServiceHost={mathJaxServiceHost}
           onChange={this.onChange}

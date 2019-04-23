@@ -146,11 +146,16 @@
         </div>
         <% end %>
 
-        <% if @comments %>
-        <div class="doc-comments mt-3 clearfix" id="comment">
-          <%= render "/comments/comments", commentable: @doc, comments: @comments %>
-        </div>
-        <% end %>
+        <%= react_component "comments/Index", {
+          currentUser: current_user&.as_json(only: %i[id slug name avatar_url]),
+          commentableType: "Doc",
+          commentableId: @doc.id,
+          watchStatus: @doc.watch_comment_status_by_user_id(current_user&.id),
+          abilities: {
+            update: can?(:update, @doc),
+            destroy: can?(:destroy, @doc),
+          },
+        } %>
       <% end %>
     </div>
   </div>

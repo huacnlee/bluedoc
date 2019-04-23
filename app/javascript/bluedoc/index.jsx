@@ -28,11 +28,22 @@ window.App = {
 
   csrf_param: "authenticity_token",
   csrf_token: null,
+  directUploadURL: "/rails/active_storage/direct_uploads",
+  blobURLTemplate: "/uploads/:id",
+
+  routes: {
+    new_session_path: "/sessions/sign_in",
+  },
 
   /**
    * Alert message
    */
   alert: (message) => {
+    if (typeof message != "string") {
+      if (message.error) {
+        message = message.error.message;
+      }
+    }
     App.notice(message, 'error');
   },
 

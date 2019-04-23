@@ -6,7 +6,7 @@ class Queries::CommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
   test "comment" do
     parent_comment = create(:comment)
     comment = create(:comment, commentable: parent_comment.commentable, parent_id: parent_comment.id)
-    execute(%| { comment(id: #{comment.id}) { id,url,commentableType,commentableId,user { id,slug,name },body,bodySml,bodyHtml,parentId } } |)
+    execute(%| { comment(id: #{comment.id}) { id,url,commentableType,commentableId,user { id,slug,name }, replyTo { id,bodyHtml, user { id,slug } },body,bodySml,bodyHtml,parentId } } |)
     res = response_data["comment"]
     assert_equal comment.id, res["id"]
     assert_equal comment.to_url, res["url"]
@@ -16,6 +16,10 @@ class Queries::CommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal comment.body_sml.to_s, res["bodySml"]
     assert_equal comment.body_html, res["bodyHtml"]
     assert_equal comment.parent_id, res["parentId"]
+    assert_equal comment.reply_to.id, res["replyTo"]["id"]
+    assert_equal comment.reply_to.body_html, res["replyTo"]["bodyHtml"]
+    assert_equal comment.reply_to.user.id, res["replyTo"]["user"]["id"]
+    assert_equal comment.reply_to.user.slug, res["replyTo"]["user"]["slug"]
     assert_equal comment.user_id, res["user"]["id"]
     assert_equal comment.user.slug, res["user"]["slug"]
     assert_equal comment.user.name, res["user"]["name"]

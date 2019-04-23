@@ -12,7 +12,7 @@ export class DefaultAvatar extends React.Component {
 export class UserAvatar extends React.Component {
   render() {
     const {
-      user, style, className, link = true,
+      user, style = "small", className, link = true,
     } = this.props;
 
     let avatarHTML;
@@ -24,7 +24,7 @@ export class UserAvatar extends React.Component {
     }
 
     if (!link) {
-      return avatarHTML;
+      return <span className={className}>{avatarHTML}</span>;
     }
 
     return <a className={`user-avatar-link ${className}`} href={`/${user.slug}`} title={user.name}>

@@ -140,11 +140,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
 
     # comments
-    assert_select "#comment-watch-box", 0
-    assert_select "#new_comment", 0
-    assert_select "#comment-form-blankslate" do
-      assert_select "h2", "Sign in to write comment"
-      assert_select "a.btn[href=?]", new_user_session_path
+    assert_react_component "comments/Index" do |props|
+      assert_nil props[:currentUser]
+      assert_equal "Doc", props[:commentableType]
+      assert_equal doc.id, props[:commentableId]
+      assert_equal "unwatch", props[:watchStatus]
+      assert_equal false, props[:abilities][:update]
+      assert_equal false, props[:abilities][:destroy]
     end
 
     # share
@@ -153,15 +155,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get doc.to_path
     assert_equal 200, response.status
-    assert_select "#comment-watch-box", 1
-    assert_select "#new_comment" do
-      assert_react_component "InlineEditor" do |props|
-        assert_equal "comment[body_sml]", props[:name]
-        assert_equal "comment[body]", props[:markdownName]
-        assert_equal "sml", props[:format]
-        assert_equal rails_direct_uploads_url, props[:directUploadURL]
-        assert_equal upload_path(":id"), props[:blobURLTemplate]
-      end
+    assert_react_component "comments/Index" do |props|
+      assert_equal @user.as_json(only: %i[id slug name avatar_url]), props[:currentUser].deep_stringify_keys
+      assert_equal "Doc", props[:commentableType]
+      assert_equal doc.id, props[:commentableId]
+      assert_equal "unwatch", props[:watchStatus]
+      assert_equal false, props[:abilities][:update]
+      assert_equal false, props[:abilities][:destroy]
     end
     assert_select ".doc-share-button-box", 0
 

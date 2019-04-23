@@ -3,6 +3,11 @@
     font-size: 18px;
     .fas { font-size: 28px; margin-right: 8px; }
   }
+
+  .pagination {
+    margin: 20px auto;
+  }
+
   .comment {
     border-bottom: 1px dashed #E6E6E6;
     .info {
@@ -72,6 +77,10 @@
 
         .user-name { color: #333; font-weight: bold; }
         .comment-id { color: #333; }
+        .body {
+          margin-top: 8px;
+          font-size: 14px;
+        }
       }
     }
 

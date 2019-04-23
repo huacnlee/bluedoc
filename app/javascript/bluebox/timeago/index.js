@@ -38,7 +38,10 @@ if (locale === "zh-CN") {
 
 export class Timeago extends React.Component {
   render() {
-    const { value } = this.props;
+    let { value, time } = this.props;
+    if (!value) {
+      value = time;
+    }
 
     return <TimeAgo date={value} formatter={formatter} />
   }

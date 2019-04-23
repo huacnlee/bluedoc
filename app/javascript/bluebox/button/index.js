@@ -29,7 +29,7 @@ export class Button extends Component {
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, className = "" } = this.props;
     const { disabled } = this.state;
 
     let newClassName = `btn ${className}`;
@@ -40,10 +40,14 @@ export class Button extends Component {
 
 export class PrimaryButton extends Button {
   constructor(props) {
-    const { className } = props;
-    props.className = `btn-primary ${className}`
-
     super(props);
+  }
+
+  render() {
+    let { className, children } = this.props;
+    className = `btn-primary ${className}`
+
+    return <Button {...this.props} className={className}>{children}</Button>
   }
 }
 
