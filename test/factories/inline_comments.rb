@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :inline_comment do
     association :subject, factory: :doc
     sequence(:nid) { |n| "nid-#{n}" }
+    association :user
   end
 end
