@@ -308,10 +308,16 @@
       padding: 3px 0;
       display: block;
 
+      &.is-active-li {
+        & > a { color: #333; font-weight: bold; }
+      }
+
       a {
         color: #696969;
         width: 100%;
         @extend .text-overflow;
+
+        img { display: none; }
       }
 
       .heading-anchor { display:none; }
