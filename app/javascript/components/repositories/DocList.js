@@ -1,6 +1,7 @@
 import Pagination from 'bluebox/pagination';
 import { graph } from 'bluedoc/graphql';
 import { DocItem, DocItemLoader } from './DocItem';
+import Icon from "bluebox/iconfont";
 
 const getDocs = graph(`
   query (@autodeclare) {
@@ -138,7 +139,7 @@ class Toolbar extends React.Component {
 
     return <div className="subnav">
     <div className="float-right subnav-sorting">
-      <span className="text-gray mr-2">{t('.Sort by')}</span>
+      <span className="text-gray mr-2"><Icon name="sort" /> {t('.Sort by')}</span>
       <a href="#" onClick={this.onSort} sort="recent" className={`btn-link ${sort == 'recent' ? ' selected' : ''}`}>{t('.Sort by updated')}</a>
       <span className="divider">/</span>
       <a href="#" onClick={this.onSort} sort="created" className={`btn-link ${sort == 'created' ? ' selected' : ''}`}>{t('.Sort by created')}</a>

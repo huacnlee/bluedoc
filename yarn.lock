@@ -894,6 +894,11 @@
     styled-components "^3.2.3"
     uuid "^3.3.2"
 
+"@thebluedoc/icons@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/icons/-/icons-1.1.1.tgz#90ddcc13ce81ea132385c1eda53d355a03b2b8b0"
+  integrity sha512-+E6ulQqUt19NyDzdalSLNoiqzLQMm7bveZoZaprdyNPyNxhox1DmqgYtimbOODztq8oCYzDKA6aRuBlkJG4l+Q==
+
 "@thebluedoc/slate-react@^0.21.24":
   version "0.21.25"
   resolved "https://registry.yarnpkg.com/@thebluedoc/slate-react/-/slate-react-0.21.25.tgz#86a374a8d7e32d1eb5ab5b27169ffd3e39fd1a1b"
@@ -1648,11 +1653,6 @@ bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
-
-bluedoc-icons@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/bluedoc-icons/-/bluedoc-icons-1.0.3.tgz#b6846b7b6e03524c9528bd6300d64bc87b979091"
-  integrity sha512-t6n/kJc+Il8bNbo4qOmxUJbqXXzkbpLypbhbYPCJtMCzqYkrHFoXYPHcLX+eyZEAfJ/SfDw3Mis06n/405ut/Q==
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
