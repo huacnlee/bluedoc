@@ -21,6 +21,7 @@ class TocTest < ActiveSupport::TestCase
       { id: docs[5].id, url: docs[5].slug, title: docs[5].title, depth: 1 }.as_json,
     ]
 
+    repo.tocs.destroy_all
     RichText.create!(record: repo, name: "toc", body: toc_docs.to_yaml)
 
     # Do upgrade
