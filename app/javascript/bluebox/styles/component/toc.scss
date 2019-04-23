@@ -139,7 +139,15 @@
 .toc-tree[data-edit-mode=true] {
   .toc-items {
     .toc-item {
-      cursor: move;
+      cursor: default;
+
+      &.toc-item-dragging {
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+      }
+
       &:hover {
         background: #f7f7f7;
         .item-slug {

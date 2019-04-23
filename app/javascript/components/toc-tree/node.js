@@ -128,7 +128,9 @@ class Node extends Component {
         <li
           className={cn('toc-item', {
             [`drop-${position}`]: isOver && canDrop && !!position,
-          }, { active })}
+          }, { active }, {
+            ["toc-item-dragging"]: isDragging,
+          })}
           style={{
             marginLeft: `${depth * 15}px`,
             opacity: isDragging ? 0.6 : 1,
