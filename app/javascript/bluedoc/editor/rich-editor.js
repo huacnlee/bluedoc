@@ -209,6 +209,7 @@ export default class RichEditor extends React.Component {
   }
 
   coreT = (key) => {
+    console.log(`I18n editor.Core.${key}`);
     return i18n.t(`editor.Core.${key}`);
   }
 

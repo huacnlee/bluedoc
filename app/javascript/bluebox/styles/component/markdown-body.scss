@@ -482,6 +482,11 @@
     margin: 10px 0;
   }
 
+  .plantuml-box {
+    text-align: center;
+    img { max-width: 100%; }
+  }
+
   .plantuml-image {
     margin-bottom: 15px;
     background: transparent !important;

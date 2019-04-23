@@ -856,11 +856,12 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
-"@thebluedoc/editor@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.3.0.tgz#1771fd64d1c80f6257bfd0ad604735c5efd88f5c"
-  integrity sha512-hBA8KAzwpf7EBvrIzju0CKp4/VgNVYPT1tslXLnANdGomEoNrHpEGkeUw68St4A+B0cKEIVORoubQJvzMbs6cQ==
+"@thebluedoc/editor@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/editor/-/editor-1.4.0.tgz#c347c6c70d2f8be77045f61a0975f40e69363382"
+  integrity sha512-GBpV1IWuu925NSwUROxdNf7tQwV63A1t0TqTKmMqZctC1dRzWXVviqa1wt/+wRMU04VbBW7OBlTe3i+XiGBgvQ==
   dependencies:
+    "@material-ui/core" "^3.9.3"
     "@thebluedoc/slate-react" "^0.21.24"
     fast-deep-equal "^2.0.1"
     filesize "^3.6.1"
