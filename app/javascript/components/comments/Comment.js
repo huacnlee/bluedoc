@@ -1,14 +1,14 @@
-import { UserAvatar } from "bluebox/avatar";
-import { Icon } from 'bluebox/iconfont';;
+import { UserAvatar } from 'bluebox/avatar';
+import { Icon } from 'bluebox/iconfont';
 import { Timeago } from 'bluebox/timeago';
 import { UserLink } from 'bluebox/user';
 import Reactions from '../reactions/Index';
 
-import InReply from "./InReply";
+import InReply from './InReply';
 
 export default class Comment extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     const { comment } = this.props;
 
@@ -17,7 +17,7 @@ export default class Comment extends React.Component {
     this.state = {
       reactions: comment.reactions,
       reactionsUpdated: Date.now(),
-    }
+    };
   }
 
   t = (key) => {
@@ -25,13 +25,13 @@ export default class Comment extends React.Component {
       return i18n.t(`comments.comment${key}`);
     }
     return i18n.t(key);
-  }
+  };
 
   onDelete = (e) => {
     e.preventDefault();
     this.dismissMenu();
 
-    if (!confirm(this.t(".Are you sure?"))) {
+    if (!confirm(this.t('.Are you sure?'))) {
       return false;
     }
 
@@ -42,7 +42,7 @@ export default class Comment extends React.Component {
     }
 
     return false;
-  }
+  };
 
   onReply = (e) => {
     e.preventDefault();
@@ -52,19 +52,19 @@ export default class Comment extends React.Component {
     if (onReply) {
       onReply(comment);
     }
-  }
+  };
 
   onReactionChange = (reactions) => {
     this.setState({
       reactions: [...reactions],
-    })
-  }
+    });
+  };
 
   dismissMenu = () => {
     if (this.menuRef) {
-      this.menuRef.current.removeAttribute("open");
+      this.menuRef.current.removeAttribute('open');
     }
-  }
+  };
 
   render() {
     const { comment, currentUser, abilities = {} } = this.props;
@@ -83,48 +83,85 @@ export default class Comment extends React.Component {
       }
     }
 
-    const pageURL = window.location.href.replace(window.location.hash, "")
-
-    return <div id={`comment-${comment.id}`} className="comment" data-parent-id={comment.parentId}>
-      <div class="avatar-box">
-        <UserAvatar user={comment.user} style="medium" />
-      </div>
-      <div className="comment-infos">
-        <div className="info">
-          <UserLink user={comment.user} />
-          <div className="time">
-            <Timeago value={comment.createdAt} />
-          </div>
-          <div className="opts">
-            <Reactions subjectType="Comment" subjectId={comment.id} mode="new_button" reactions={reactions} onChange={this.onReactionChange} />
-            <details id={`comment-${comment.id}-menu-button`} ref={this.menuRef} className="dropdown details-reset details-overlay d-inline-block ml-4">
-              <summary><Icon name="ellipsis" /></summary>
-              <div className="dropdown-menu dropdown-menu-sw">
-                <ul>
-                  <li><clipboard-copy class="dropdown-item btn-link" data-close-dialog data-clipboard-text={`${pageURL}#comment-${comment.id}`} data-clipboard-tooltip-target={`#comment-${comment.id}-menu-button`}>{t(".Copy link")}</clipboard-copy></li>
-                  {currentUser && (
-                    <li><a href="#" onClick={this.onReply} className="dropdown-item">{t(".Reply")}</a></li>
-                  )}
-                  {canDestroy && (
-                    <>
-                      <li class="dropdown-divider"></li>
-                      <li><a href="#" onClick={this.onDelete} className="dropdown-item">{t(".Delete")}</a></li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            </details>
-          </div>
+    const pageURL = window.location.href.replace(window.location.hash, '');
+    return (
+      <div id={`comment-${comment.id}`} className="comment" data-parent-id={comment.parentId}>
+        <div class="avatar-box">
+          <UserAvatar user={comment.user} style="medium" />
         </div>
+        <div className="comment-infos">
+          <div className="info">
+            <UserLink user={comment.user} />
+            <div className="time">
+              <Timeago value={comment.createdAt} />
+            </div>
+            <div className="opts">
+              <Reactions
+                key="reactions1"
+                subjectType="Comment"
+                subjectId={comment.id}
+                mode="new_button"
+                reactions={reactions}
+                onChange={this.onReactionChange}
+              />
+              <details
+                id={`comment-${comment.id}-menu-button`}
+                ref={this.menuRef}
+                className="dropdown details-reset details-overlay d-inline-block ml-4"
+              >
+                <summary>
+                  <Icon name="ellipsis" />
+                </summary>
+                <div className="dropdown-menu dropdown-menu-sw">
+                  <ul>
+                    <li>
+                      <clipboard-copy
+                        class="dropdown-item btn-link"
+                        data-close-dialog
+                        data-clipboard-text={`${pageURL}#comment-${comment.id}`}
+                        data-clipboard-tooltip-target={`#comment-${comment.id}-menu-button`}
+                      >
+                        {t('.Copy link')}
+                      </clipboard-copy>
+                    </li>
+                    {currentUser && (
+                      <li>
+                        <a href="#" onClick={this.onReply} className="dropdown-item">
+                          {t('.Reply')}
+                        </a>
+                      </li>
+                    )}
+                    {canDestroy && (
+                      <>
+                        <li class="dropdown-divider" />
+                        <li>
+                          <a href="#" onClick={this.onDelete} className="dropdown-item">
+                            {t('.Delete')}
+                          </a>
+                        </li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
 
-        <div class="markdown-body">
-          <InReply comment={comment} />
-          <div dangerouslySetInnerHTML={{ __html: comment.bodyHtml }} />
+          <div class="markdown-body">
+            <InReply comment={comment} />
+            <div dangerouslySetInnerHTML={{ __html: comment.bodyHtml }} />
+          </div>
+
+          <Reactions
+            key="reactions2"
+            subjectType="Comment"
+            subjectId={comment.id}
+            reactions={reactions}
+            mode="list"
+            onChange={this.onReactionChange}
+          />
         </div>
-
-        <Reactions subjectType="Comment" subjectId={comment.id} reactions={reactions} mode="list" onChange={this.onReactionChange} />
       </div>
-    </div>
-
+    );
   }
 }

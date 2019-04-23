@@ -5,15 +5,15 @@ export default class Reaction extends React.Component {
     const { currentUser = {} } = App;
     const { reaction } = props;
 
-    let existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
-    let active = existSlugs.includes(currentUser.slug);
-
+    const existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
+    const active = existSlugs.includes(currentUser.slug);
 
     this.state = {
       active,
       groupCount: reaction.groupCount || reaction.group_count,
-    }
+    };
   }
+
   onClick = (e) => {
     e.preventDefault();
 
@@ -22,29 +22,35 @@ export default class Reaction extends React.Component {
 
     if (onSelect) {
       if (active) {
-        onSelect(reaction.name, "unset")
+        onSelect(reaction.name, 'unset');
       } else {
-        onSelect(reaction.name, "set")
+        onSelect(reaction.name, 'set');
       }
     }
 
     return false;
-  }
+  };
 
   render() {
-    const { reaction, className = "" } = this.props;
+    const { reaction, className = '' } = this.props;
     const { active, groupCount } = this.state;
-    let btnClassName = "btn-link reaction-item " + className;
+    let btnClassName = `btn-link reaction-item ${className}`;
 
     if (active) {
-      btnClassName += " selected"
+      btnClassName += ' selected';
     }
 
-    return <a href="#" onClick={this.onClick} className={btnClassName} data-toggle="tooltip" title={reaction.name}>
-      <img src={reaction.url} className="emoji" />
-      {groupCount > 0 && (
-        <span className="ml-1">{groupCount}</span>
-      )}
-    </a>
+    return (
+      <a
+        href="#"
+        onClick={this.onClick}
+        className={btnClassName}
+        data-toggle="tooltip"
+        title={reaction.name}
+      >
+        <img src={reaction.url} className="emoji" />
+        {groupCount > 0 && <span className="ml-1">{groupCount}</span>}
+      </a>
+    );
   }
 }
