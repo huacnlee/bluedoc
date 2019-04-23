@@ -8,17 +8,21 @@ export default class Reactions extends React.Component {
 
     this.state = {
       t: props.updated || Date.now(),
+      reactions: this.props.reactions || [],
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.onChange && props.reactions !== state.reactions) {
+      return {
+        reactions: props.reactions,
+      };
+    }
+    return null;
   }
 
   onSelect = (name, option) => {
     const { subjectType, subjectId } = this.props;
-
-    if (option === 'unset') {
-      let { reactions } = this.props;
-      reactions = reactions.filter(r => r.name != name);
-      this.updateReactions(reactions);
-    }
 
     updateReaction({
       subjectType,
@@ -30,24 +34,27 @@ export default class Reactions extends React.Component {
         this.updateReactions(result.updateReaction);
       })
       .catch((errors) => {
-        App.alert(errors);
+        window.App.alert(errors);
       });
   };
 
   updateReactions = (newReactions) => {
     const { onChange } = this.props;
-    onChange && onChange(newReactions);
+    if (onChange) {
+      onChange(newReactions);
+    } else {
+      this.setState({ reactions: newReactions });
+    }
   };
 
   render() {
-    const { t } = this.state;
-    const { reactions = [], mode = 'normal' } = this.props;
+    const { t, reactions = [] } = this.state;
+    const { mode = 'normal' } = this.props;
 
     let boxClassName = 'reaction-box';
     if (mode === 'normal' && reactions.length === 0) {
       boxClassName += ' reaction-box-empty';
     }
-
     return (
       <div class={boxClassName} updated={t}>
         {mode !== 'new_button'
