@@ -13,7 +13,7 @@ const layerStyles = {
   height: '100%',
 };
 
-const getItemStyles = ({ initialOffset, currentOffset }) => {
+const getItemStyles = ({ currentOffset }) => {
   if (!currentOffset) {
     return {
       display: 'none',
@@ -29,8 +29,8 @@ const getItemStyles = ({ initialOffset, currentOffset }) => {
 };
 
 const CustomDragLayer = (props) => {
-  const { item, isDragging } = props;
-  if (!isDragging || !item) {
+  const { item, isDragging, itemType } = props;
+  if (!isDragging || !item || itemType !== 'toc') {
     return null;
   }
   const { title } = item.info;
@@ -51,6 +51,7 @@ const CustomDragLayer = (props) => {
 
 export default DragLayer(monitor => ({
   item: monitor.getItem(),
+  itemType: monitor.getItemType(),
   currentOffset: monitor.getSourceClientOffset(),
   isDragging: monitor.isDragging(),
 }))(CustomDragLayer);
