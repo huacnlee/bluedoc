@@ -43,7 +43,8 @@ export default class Reactions extends React.Component {
     if (onChange) {
       onChange(newReactions);
     } else {
-      this.setState({ reactions: newReactions });
+      this.setState({ reactions: [] });
+      this.setState({ reactions: [...newReactions] });
     }
   };
 

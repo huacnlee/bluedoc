@@ -1,4 +1,4 @@
-import Tooltip from 'tooltip.js';
+import { Tooltip } from 'bluebox/tooltip';
 
 export default class Reaction extends React.Component {
   constructor(props) {
@@ -31,16 +31,6 @@ export default class Reaction extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    const { title } = this.state;
-
-    new Tooltip(this.itemRef.current, {
-      placement: "bottom",
-      trigger: "hover",
-      title: title,
-    });
-  }
-
   onClick = (e) => {
     e.preventDefault();
 
@@ -68,24 +58,26 @@ export default class Reaction extends React.Component {
 
   render() {
     const { reaction, className = '' } = this.props;
-    const { active, usersCount } = this.state;
+    const { active, usersCount, title } = this.state;
     const { t } = this;
-    let btnClassName = `btn-link reaction-item ${className}`;
+    let btnClassName = `reaction-item ${className}`;
 
     if (active) {
       btnClassName += ' selected';
     }
 
     return (
-      <a
-        href="#"
-        onClick={this.onClick}
-        className={btnClassName}
-        ref={this.itemRef}
-      >
-        <img src={reaction.url} className="emoji" />
-        {usersCount > 0 && <span className="ml-1">{usersCount}</span>}
-      </a>
+      <Tooltip title={title}>
+        <a
+          href="#"
+          onClick={this.onClick}
+          className={btnClassName}
+          ref={this.itemRef}
+        >
+          <img src={reaction.url} className="emoji" />
+          {usersCount > 0 && <span className="ml-1">{usersCount}</span>}
+        </a>
+      </Tooltip>
     );
   }
 }
