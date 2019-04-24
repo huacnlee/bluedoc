@@ -41,8 +41,10 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       assert_select ".btn-edit-doc", 0
       assert_select ".btn-star-doc", 0
       assert_select ".markdown-body"
-      assert_select ".doc-reaction" do
-        assert_select ".add-reaction-btn"
+      assert_react_component "reactions/Index" do |props|
+        assert_equal "Doc", props[:subjectType]
+        assert_equal doc.id, props[:subjectId]
+        assert_equal doc.reactions_as_json.sort, props[:reactions].sort
       end
 
       assert_react_component "comments/Index" do |props|

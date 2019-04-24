@@ -29,7 +29,11 @@
       </div>
 
       <div class="doc-reaction issue-reaction">
-        <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+        <%= react_component "reactions/Index", {
+          subjectType: "Issue",
+          subjectId: @issue.id,
+          reactions: @issue.reactions_as_json,
+        } %>
       </div>
 
       <div class="issue-comments mt-3 clearfix" id="comment">

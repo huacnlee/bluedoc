@@ -113,6 +113,13 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       assert_select "[href=?]", @user.to_path
     end
 
+    # reactions
+    assert_react_component "reactions/Index" do |props|
+      assert_equal "Note", props[:subjectType]
+      assert_equal note.id, props[:subjectId]
+      assert_equal note.reactions_as_json.sort, props[:reactions].sort
+    end
+
     # comments
     assert_react_component "comments/Index" do |props|
       assert_nil props[:currentUser]

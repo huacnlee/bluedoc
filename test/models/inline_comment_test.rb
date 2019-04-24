@@ -42,8 +42,10 @@ class InlineCommentTest < ActiveSupport::TestCase
   end
 
   test "subject & nid unique" do
+    user = create(:user)
     inline_comment = create(:inline_comment, subject: doc, nid: "hello")
-    assert_raise(ActiveRecord::RecordNotUnique) { InlineComment.create!(subject: doc, nid: "hello") }
+    assert_raise(ActiveRecord::RecordNotUnique) { InlineComment.create!(subject: doc, nid: "hello", user_id: user.id) }
+
     assert_equal inline_comment, InlineComment.create_or_find_by!(subject: doc, nid: "hello")
 
     inline_comment1 = InlineComment.create_or_find_by!(subject: doc, nid: "Hello")

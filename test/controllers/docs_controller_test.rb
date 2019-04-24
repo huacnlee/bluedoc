@@ -139,6 +139,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[href=?]", @group.to_path
     end
 
+    # reactions
+    assert_react_component "reactions/Index" do |props|
+      assert_equal "Doc", props[:subjectType]
+      assert_equal doc.id, props[:subjectId]
+      assert_equal doc.reactions_as_json.sort, props[:reactions].sort
+    end
+
     # comments
     assert_react_component "comments/Index" do |props|
       assert_nil props[:currentUser]

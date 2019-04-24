@@ -179,6 +179,14 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal true, props[:abilities][:manage]
     end
 
+    # reactions
+    assert_react_component "reactions/Index" do |props|
+      assert_equal "Issue", props[:subjectType]
+      assert_equal private_issue.id, props[:subjectId]
+      assert_equal private_issue.reactions_as_json.sort, props[:reactions].sort
+    end
+
+    # comments
     assert_react_component "comments/Index" do |props|
       assert_equal user.as_json(only: %i[id slug name avatar_url]), props[:currentUser].deep_stringify_keys
       assert_equal "Issue", props[:commentableType]

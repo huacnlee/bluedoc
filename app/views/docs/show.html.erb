@@ -132,7 +132,7 @@
           <%= react_component "reactions/Index", {
             subjectType: "Doc",
             subjectId: @doc.id,
-            reactions: @doc.reactions.grouped.as_json(only: %i[id name], methods: %i[url group_user_slugs group_count]),
+            reactions: @doc.reactions_as_json,
           } %>
         </div>
 

@@ -72,7 +72,11 @@
       </div>
 
       <div class="doc-reaction note-reaction">
-        <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
+        <%= react_component "reactions/Index", {
+          subjectType: "Note",
+          subjectId: @note.id,
+          reactions: @note.reactions_as_json,
+        } %>
       </div>
 
       <%= render "readers", note: @note, readers: @readers %>
