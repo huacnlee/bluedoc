@@ -29,8 +29,19 @@ export default class Index extends React.Component {
 
   componentDidMount = () => {
     this.fetch(1);
+  }
 
+  componentDidUpdate = () => {
     // TODO: Focus Comment item when location.href.hash exist
+    if (!App._hasScrolledToComments) {
+      App._hasScrolledToComments = true;
+      if (location.hash) {
+        const element = document.querySelector(location.hash);
+        console.log('-------- will scroll to ', location.hash, element);
+
+        setTimeout(() => App.scrollTo(location.hash), 100);
+      }
+    }
   }
 
   onPage = (page) => {

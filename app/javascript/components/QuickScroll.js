@@ -16,7 +16,7 @@ export default class QuickScroll extends PureComponent {
 
   // quick scroll to comment position
   handleScrollComment = () => {
-    const commentEle = document.querySelector('#comment');
+    const commentEle = document.querySelector('div[data-react-class="comments/Index"]');
     if (!commentEle) return;
     if (document.fullscreenElement) {
       animateScrollTo(commentEle, {

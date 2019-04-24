@@ -59,6 +59,8 @@ window.App = {
 
   scrollTo: (selector) => {
     const element = document.querySelector(selector);
+    if (!element) return;
+
     element.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
