@@ -13,9 +13,9 @@ i18n.init({
   resources: {
     en: {
       locales: deepAssign(RAILS_I18N["en"], {
-        "There has count issues": 'There has <span class="text-danger">{{count}}</span> issues:',
+        "There has count issues": 'There has <span class="text-danger">%{count}</span> issues:',
         "Repository": "Repository",
-        "Search in scope": "Search in {{scope}}",
+        "Search in scope": "Search in %{scope}",
         "Search BlueDoc": "Search BlueDoc",
         "dialog": {
           "Cancel": "Cancel",
@@ -203,9 +203,9 @@ i18n.init({
     },
     zh_CN: {
       locales: deepAssign(RAILS_I18N["zh-CN"], {
-        "There has count issues": '有 <span class="text-danger">{{count}}</span> 个问题：',
+        "There has count issues": '有 <span class="text-danger">%{count}</span> 个问题：',
         "Repository": "知识库",
-        "Search in scope": "{{scope}}内搜索",
+        "Search in scope": "%{scope}内搜索",
         "Search BlueDoc": "搜索 BlueDoc",
         "dialog": {
           "Cancel": "取消",
@@ -399,6 +399,11 @@ i18n.init({
   // have a common namespace used around the full app
   ns: ["locales"],
   defaultNS: "locales",
+
+  interpolation: {
+    prefix: "%{",
+    suffix: "}",
+  },
 
   react: {
     wait: true

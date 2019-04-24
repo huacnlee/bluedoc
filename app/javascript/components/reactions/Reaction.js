@@ -1,17 +1,44 @@
+import Tooltip from 'tooltip.js';
+
 export default class Reaction extends React.Component {
   constructor(props) {
     super(props);
 
+    this.itemRef = React.createRef();
+
     const { currentUser = {} } = App;
     const { reaction } = props;
+
+    const { t } = this;
 
     const existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
     const active = existSlugs.includes(currentUser.slug);
 
+    let title = '';
+    if (existSlugs.length > 0) {
+      title = existSlugs.slice(0,3).join(', ')
+      if (existSlugs.length > 3) {
+        title += t(".and count people has reacted", { count: existSlugs.length })
+      } else {
+        title += t(".has reacted")
+      }
+    }
+
     this.state = {
       active,
-      groupCount: reaction.groupCount || reaction.group_count,
+      usersCount: reaction.groupCount || reaction.group_count,
+      title,
     };
+  }
+
+  componentDidMount = () => {
+    const { title } = this.state;
+
+    new Tooltip(this.itemRef.current, {
+      placement: "bottom",
+      trigger: "hover",
+      title: title,
+    });
   }
 
   onClick = (e) => {
@@ -29,11 +56,20 @@ export default class Reaction extends React.Component {
     }
 
     return false;
-  };
+  }
+
+
+  t = (key, opts = {}) => {
+    if (key.startsWith('.')) {
+      return i18n.t(`reactions.reaction${key}`, opts);
+    }
+    return i18n.t(key);
+  }
 
   render() {
     const { reaction, className = '' } = this.props;
-    const { active, groupCount } = this.state;
+    const { active, usersCount } = this.state;
+    const { t } = this;
     let btnClassName = `btn-link reaction-item ${className}`;
 
     if (active) {
@@ -45,11 +81,10 @@ export default class Reaction extends React.Component {
         href="#"
         onClick={this.onClick}
         className={btnClassName}
-        data-toggle="tooltip"
-        title={reaction.name}
+        ref={this.itemRef}
       >
         <img src={reaction.url} className="emoji" />
-        {groupCount > 0 && <span className="ml-1">{groupCount}</span>}
+        {usersCount > 0 && <span className="ml-1">{usersCount}</span>}
       </a>
     );
   }
