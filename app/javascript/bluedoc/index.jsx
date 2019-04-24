@@ -33,7 +33,7 @@ window.App = {
   blobURLTemplate: '/uploads/:id',
 
   routes: {
-    new_session_path: '/sessions/sign_in',
+    new_session_path: '/account/sign_in',
   },
 
   /**

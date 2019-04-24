@@ -28,6 +28,6 @@ App.currentUser = {
   name: "<%= current_user.name %>",
   avatarUrl: "<%= current_user.avatar_url %>",
 }
-App.allowReactions = <%= raw Reaction.allow_reactions.to_json(only: %i[name], methods: %i[url]) %>
 <% end %>
+App.allowReactions = <%= raw Reaction.allow_reactions.to_json(only: %i[name], methods: %i[url]) %>
 </script>

@@ -4,13 +4,13 @@ export default class Reaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.itemRef = React.createRef()
+    this.itemRef = React.createRef();
   }
 
   onClick = (e) => {
     e.preventDefault();
 
-    const active = e.currentTarget.className.includes("selected");
+    const active = e.currentTarget.className.includes('selected');
 
     const { onSelect, reaction } = this.props;
 
@@ -38,18 +38,21 @@ export default class Reaction extends React.Component {
     const { t } = this;
     let btnClassName = `reaction-item ${className}`;
 
-    const { currentUser = {} } = App;
+    const { currentUser } = App;
 
     const existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
-    const active = existSlugs.includes(currentUser.slug);
+    let active = false;
+    if (currentUser) {
+      active = existSlugs.includes(currentUser.slug);
+    }
 
     let title = '';
     if (existSlugs.length > 0) {
-      title = existSlugs.slice(0,3).join(', ')
+      title = existSlugs.slice(0, 3).join(', ');
       if (existSlugs.length > 3) {
-        title += t(".and count people has reacted", { count: existSlugs.length })
+        title += t('.and count people has reacted', { count: existSlugs.length });
       } else {
-        title += t(".has reacted")
+        title += t('.has reacted');
       }
     }
 

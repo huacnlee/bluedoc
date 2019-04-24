@@ -22,7 +22,7 @@ export default class CommentForm extends React.Component {
   renderBlankslate() {
     const { t } = this;
 
-    return <div id="comment-form-blankslate" className="blankslate">
+    return <div id="comment-form-blankslate" style={{ marginTop: '60px', textAlign: 'center' }} className="blankslate">
       <h2>{t('.Sign in to write comment')}</h2>
       <p>{t('.You must sign in first')}</p>
       <p><a href={App.routes.new_session_path} className="btn">{t('.Sign in now')}</a></p>
