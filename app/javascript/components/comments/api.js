@@ -12,7 +12,7 @@ export const createComment = graph(`
 `);
 
 export const createCommentWithParent = graph(`
-  mutation($commentableType: String!, $commentableId: ID!, $body: String!, $bodySml: String!, $nid: String!, parentId: String!) {
+  mutation($commentableType: String!, $commentableId: ID!, $body: String!, $bodySml: String!, $nid: String!, $parentId: ID!) {
     createComment(commentableType: $commentableType, commentableId: $commentableId, body: $body, bodySml: $bodySml, nid: $nid, parentId: $parentId) {
       ${commentBodyQuery}
     }

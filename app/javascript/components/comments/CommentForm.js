@@ -113,7 +113,7 @@ export default class CommentForm extends React.Component {
 
     return <div className="new-comment" id="new_comment">
       <div className="avatar-box">
-        <UserAvatar user={currentUser} type="medium" />
+        <UserAvatar user={currentUser} link={false} type="medium" />
       </div>
 
       <div className="form-group">
@@ -126,8 +126,8 @@ export default class CommentForm extends React.Component {
         {replyTo && (
           <>
             <span className="mr-1">{t('.Reply to')}</span>
-            <UserAvatar user={replyTo.user} type="small" className="mr-1" />
-            <UserLink user={replyTo.user} className="mr-1" />
+            <UserAvatar user={replyTo.user} type="small" link={false} className="mr-1" />
+            <UserLink user={replyTo.user} className="mr-1" link={false} />
             <a href="#" onClick={this.onCancelReplyTo}><Icon name="times" /></a>
           </>
         )}

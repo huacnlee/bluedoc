@@ -47,7 +47,7 @@ export const getInlineComments = graph(`
 
 const initInlineComments = () => {
   // inline comments
-  const blocks = document.querySelectorAll('.reader-body .markdown-body [nid]');
+  const blocks = document.querySelectorAll('.reader-body .markdown-body > [nid]');
   const docId = document.querySelector('.reader-body .markdown-body').getAttribute('data-id');
 
   const existInlineComments = {};
