@@ -163,7 +163,6 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_react_component "comments/Index" do |props|
-      assert_equal @user.as_json(only: %i[id slug name avatar_url]), props[:currentUser].deep_stringify_keys
       assert_equal "Doc", props[:commentableType]
       assert_equal doc.id, props[:commentableId]
       assert_equal "unwatch", props[:watchStatus]

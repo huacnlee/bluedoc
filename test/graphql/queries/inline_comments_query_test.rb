@@ -34,19 +34,22 @@ class Queries::InlineCommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
   test "inline_comments" do
     repo = create(:repository)
     doc = create(:doc, repository: repo)
-    inline_comments = create_list(:inline_comment, 2, subject: doc)
+    inline_comments = create_list(:inline_comment, 2, subject: doc, comments_count: 1)
+    create(:inline_comment, subject: doc)
+    assert_equal 3, doc.inline_comments.count
 
     query_body = "{ id,subjectType,subjectId,nid,url,commentsCount,user { id,slug,name } }"
 
     execute(%| { inlineComments(subjectType: "Doc", subjectId: #{doc.id}) #{query_body} } |)
     records = response_data["inlineComments"]
     assert_equal 2, records.length
+    assert_equal inline_comments.collect(&:id).sort, records.map { |r| r["id"] }.sort
     assert_equal %w[id subjectType subjectId nid url commentsCount user], response_data["inlineComments"][0].keys
 
     # private repo
     repo = create(:repository, privacy: :private)
     doc = create(:doc, repository: repo)
-    inline_comments = create_list(:inline_comment, 2, subject: doc)
+    inline_comments = create_list(:inline_comment, 2, subject: doc, comments_count: 1)
 
     execute(%| { inlineComments(subjectType: "Doc", subjectId: #{doc.id}) #{query_body} } |)
     assert_unauthorized
