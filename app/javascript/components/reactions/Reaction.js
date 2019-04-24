@@ -4,38 +4,15 @@ export default class Reaction extends React.Component {
   constructor(props) {
     super(props);
 
-    this.itemRef = React.createRef();
-
-    const { currentUser = {} } = App;
-    const { reaction } = props;
-
-    const { t } = this;
-
-    const existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
-    const active = existSlugs.includes(currentUser.slug);
-
-    let title = '';
-    if (existSlugs.length > 0) {
-      title = existSlugs.slice(0,3).join(', ')
-      if (existSlugs.length > 3) {
-        title += t(".and count people has reacted", { count: existSlugs.length })
-      } else {
-        title += t(".has reacted")
-      }
-    }
-
-    this.state = {
-      active,
-      usersCount: reaction.groupCount || reaction.group_count,
-      title,
-    };
+    this.itemRef = React.createRef()
   }
 
   onClick = (e) => {
     e.preventDefault();
 
+    const active = e.currentTarget.className.includes("selected");
+
     const { onSelect, reaction } = this.props;
-    const { active } = this.state;
 
     if (onSelect) {
       if (active) {
@@ -58,9 +35,25 @@ export default class Reaction extends React.Component {
 
   render() {
     const { reaction, className = '' } = this.props;
-    const { active, usersCount, title } = this.state;
     const { t } = this;
     let btnClassName = `reaction-item ${className}`;
+
+    const { currentUser = {} } = App;
+
+    const existSlugs = reaction.groupUserSlugs || reaction.group_user_slugs || [];
+    const active = existSlugs.includes(currentUser.slug);
+
+    let title = '';
+    if (existSlugs.length > 0) {
+      title = existSlugs.slice(0,3).join(', ')
+      if (existSlugs.length > 3) {
+        title += t(".and count people has reacted", { count: existSlugs.length })
+      } else {
+        title += t(".has reacted")
+      }
+    }
+
+    const usersCount = reaction.groupCount || reaction.group_count;
 
     if (active) {
       btnClassName += ' selected';
@@ -72,6 +65,7 @@ export default class Reaction extends React.Component {
           href="#"
           onClick={this.onClick}
           className={btnClassName}
+          active={active}
           ref={this.itemRef}
         >
           <img src={reaction.url} className="emoji" />
