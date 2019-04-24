@@ -87,7 +87,7 @@ export default class Comment extends React.Component {
     return (
       <div id={`comment-${comment.id}`} className="comment" data-parent-id={comment.parentId}>
         <div class="avatar-box">
-          <UserAvatar user={comment.user} style="medium" />
+          <UserAvatar user={comment.user} type="medium" />
         </div>
         <div className="comment-infos">
           <div className="info">

@@ -1,9 +1,9 @@
-import { UserAvatar } from "bluebox/avatar";
+import { UserAvatar } from 'bluebox/avatar';
 import { UserLink } from 'bluebox/user';
+import { PrimaryButton } from "bluebox/button";
 import InlineEditor from "../InlineEditor"
 import { createComment, createCommentWithParent } from "./api";
-import { PrimaryButton } from "bluebox/button";
-import { Icon } from "bluebox/iconfont"
+import { Icon } from 'bluebox/iconfont';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -23,10 +23,10 @@ export default class CommentForm extends React.Component {
     const { t } = this;
 
     return <div id="comment-form-blankslate" className="blankslate">
-      <h2>{t(".Sign in to write comment")}</h2>
-      <p>{t(".You must sign in first")}</p>
-      <p><a href={App.routes.new_session_path} className="btn">{t(".Sign in now")}</a></p>
-    </div>
+      <h2>{t('.Sign in to write comment')}</h2>
+      <p>{t('.You must sign in first')}</p>
+      <p><a href={App.routes.new_session_path} className="btn">{t('.Sign in now')}</a></p>
+    </div>;
   }
 
   focus = () => {
@@ -36,7 +36,9 @@ export default class CommentForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { commentableType, commentableId, replyTo, onCreate } = this.props;
+    const {
+ commentableType, commentableId, replyTo, onCreate
+} = this.props;
     const { t } = this;
 
     const { body, bodySml } = this.state;
@@ -51,7 +53,7 @@ export default class CommentForm extends React.Component {
       commentableId,
       body,
       bodySml,
-    }
+    };
 
     let invokeMethod = createComment;
 
@@ -61,7 +63,7 @@ export default class CommentForm extends React.Component {
     }
 
     invokeMethod(createParams).then((result) => {
-      const comment = result["createComment"];
+      const comment = result.createComment;
       if (onCreate) {
         onCreate(comment);
       }
@@ -78,7 +80,7 @@ export default class CommentForm extends React.Component {
     this.setState({
       body: markdownValue,
       bodySml: smlValue,
-    })
+    });
   }
 
   onCancelReplyTo = (e) => {
@@ -109,7 +111,7 @@ export default class CommentForm extends React.Component {
 
     return <div className="new-comment" id="new_comment">
       <div className="avatar-box">
-        <UserAvatar user={currentUser} style="medium" />
+        <UserAvatar user={currentUser} type="medium" />
       </div>
 
       <div className="form-group">
@@ -117,18 +119,18 @@ export default class CommentForm extends React.Component {
       </div>
 
       <div class="form-actions clearfix">
-        <PrimaryButton style={{ width: "180px" }} onClick={this.onSubmit}>{t(".Submit")}</PrimaryButton>
+        <PrimaryButton style={{ width: '180px' }} onClick={this.onSubmit}>{t('.Submit')}</PrimaryButton>
         <div className="in-reply-info">
         {replyTo && (
           <>
-            <span className="mr-1">{t(".Reply to")}</span>
-            <UserAvatar user={replyTo.user} style="small" className="mr-1" />
+            <span className="mr-1">{t('.Reply to')}</span>
+            <UserAvatar user={replyTo.user} type="small" className="mr-1" />
             <UserLink user={replyTo.user} className="mr-1" />
             <a href="#" onClick={this.onCancelReplyTo}><Icon name="times" /></a>
           </>
         )}
         </div>
       </div>
-    </div>
+    </div>;
   }
 }

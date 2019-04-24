@@ -1,17 +1,17 @@
-import { UserAvatar } from "bluebox/avatar";
-import AssigneeMenu from "./AssigneeMenu";
+import { UserAvatar } from 'bluebox/avatar';
+import AssigneeMenu from './AssigneeMenu';
 
 export default class Assignees extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.menuRef = React.createRef()
+    this.menuRef = React.createRef();
 
     this.state = {
       showAssigneeMenu: false,
       assignees: props.assignees,
       selectedAssigneeIds: props.assignees.map(user => user.id),
-    }
+    };
   }
 
   t = (key) => {
@@ -23,7 +23,7 @@ export default class Assignees extends React.PureComponent {
 
 
   onSelect = (userId) => {
-    this.menuRef.current.removeAttribute("open");
+    this.menuRef.current.removeAttribute('open');
 
     let { selectedAssigneeIds } = this.state;
 
@@ -48,13 +48,13 @@ export default class Assignees extends React.PureComponent {
 
     this.setState({
       selectedAssigneeIds: assigneeIds,
-    })
+    });
 
     let data = {
       issue: {
-        assignee_id: assigneeIds
-      }
-    }
+        assignee_id: assigneeIds,
+      },
+    };
 
     if (assigneeIds.length == 0) {
       data = { clear: 1 };
@@ -62,17 +62,17 @@ export default class Assignees extends React.PureComponent {
 
     $.ajax({
       url: `${issueURL}/assignees`,
-      method: "POST",
-      data: data,
+      method: 'POST',
+      data,
       success: (res) => {
         if (res.ok) {
           this.setState({
             assignees: res.assignees,
             selectedAssigneeIds: res.assignees.map(user => user.id),
-          })
+          });
         }
-      }
-    })
+      },
+    });
   }
 
   render() {
@@ -82,7 +82,7 @@ export default class Assignees extends React.PureComponent {
 
     return <div className="sidebar-box issue-assignee">
       <div className="clearfix">
-        <h2 className="float-left sub-title ">{this.t(".Assignee")}</h2>
+        <h2 className="float-left sub-title ">{this.t('.Assignee')}</h2>
 
         {abilities.manage && (
         <details className="dropdown details-overlay details-reset d-inline-block float-right" ref={this.menuRef}>
@@ -97,20 +97,18 @@ export default class Assignees extends React.PureComponent {
       </div>
 
       <div className="assignee-list">
-      {assignees.length > 0 && assignees.map(user => {
-        return <div className="assignee-item mb-1">
+      {assignees.length > 0 && assignees.map(user => <div className="assignee-item mb-1">
           <a href={`/${user.slug}`} className="issue-assignee-item">
-            <UserAvatar user={user} style="tiny" link={false} />
+            <UserAvatar user={user} type="tiny" link={false} />
             <span className="ml-1">{user.name}</span>
           </a>
-        </div>
-      })}
+        </div>)}
       {assignees.length == 0 && (
         <div className="blankslate">
-          {this.t(".No one assigned")}
+          {this.t('.No one assigned')}
         </div>
       )}
       </div>
-    </div>
+    </div>;
   }
 }

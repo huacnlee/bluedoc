@@ -1,5 +1,5 @@
-import { UserAvatar } from "bluebox/avatar";
-import { UserLink } from "bluebox/user";
+import { UserAvatar } from 'bluebox/avatar';
+import { UserLink } from 'bluebox/user';
 
 export default class InReply extends React.Component {
   constructor(props) {
@@ -7,7 +7,7 @@ export default class InReply extends React.Component {
 
     this.state = {
       detail: false,
-    }
+    };
   }
 
   t = (key) => {
@@ -22,10 +22,9 @@ export default class InReply extends React.Component {
     e.preventDefault();
 
 
-    this.setState({ detail: !this.state.detail })
+    this.setState({ detail: !this.state.detail });
 
     return false;
-
   }
 
   render() {
@@ -34,7 +33,7 @@ export default class InReply extends React.Component {
     const { t } = this;
 
     if (!comment.replyTo) {
-      return <span />
+      return <span />;
     }
 
     if (detail) {
@@ -43,25 +42,24 @@ export default class InReply extends React.Component {
 
     return <div class="in-reply-to">
       <a href="#" onClick={this.onToggle} className="in-reply-link">
-        <span className="mr-1">{t(".In reply to")}</span>
-        <UserAvatar user={comment.replyTo.user} style="tiny" link={false} className="mr-1" />
+        <span className="mr-1">{t('.In reply to')}</span>
+        <UserAvatar user={comment.replyTo.user} type="tiny" link={false} className="mr-1" />
         <UserLink user={comment.replyTo.user} link={false} />
       </a>
-    </div>
+    </div>;
   }
 
   renderDetail() {
     const { comment } = this.props;
-    const { detail } = this.state;
     const { t } = this;
 
     return <div class="in-reply-to">
       <div className="in-reply-link">
-        <span className="mr-1">{t(".In reply to")}</span>
-        <UserAvatar user={comment.replyTo.user} style="tiny" link={false} className="mr-1" />
+        <span className="mr-1">{t('.In reply to')}</span>
+        <UserAvatar user={comment.replyTo.user} type="tiny" link={false} className="mr-1" />
         <UserLink user={comment.replyTo.user} link={false} />
         <div className="body markdown-body" dangerouslySetInnerHTML={{ __html: comment.replyTo.bodyHtml }} />
       </div>
-    </div>
+    </div>;
   }
 }

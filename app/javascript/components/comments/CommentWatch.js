@@ -1,6 +1,4 @@
-import { UserAvatar } from "bluebox/avatar";
-import { watchComments } from "./api";
-import{ Icon } from "bluebox/iconfont"
+import { watchComments } from './api';
 
 export default class CommentWatch extends React.Component {
   constructor(props) {
@@ -9,7 +7,7 @@ export default class CommentWatch extends React.Component {
     this.state = {
       status: props.watchStatus,
       loading: false,
-    }
+    };
   }
 
   t = (key) => {
@@ -27,13 +25,13 @@ export default class CommentWatch extends React.Component {
 
     this.setState({ loading: true });
 
-    const newStatus = e.target.getAttribute("status");
+    const newStatus = e.target.getAttribute('status');
 
     watchComments({ commentableType, commentableId, option: newStatus }).then((result) => {
       this.setState({
         status: newStatus,
         loading: false,
-      })
+      });
     }).catch((errors) => {
       App.alert(errors);
       this.setState({ loading: false });
@@ -48,15 +46,15 @@ export default class CommentWatch extends React.Component {
     const { status, loading } = this.state;
 
     if (!currentUser) {
-      return <span />
+      return <span />;
     }
 
     return <div id="comment-watch-box" className="border-bottom mb-3 pb-3 clearfix">
       <div className="watch-button-group">
-        <div className="form-label">{t(".Subscribe")}</div>
+        <div className="form-label">{t('.Subscribe')}</div>
         {this.renderButton()}
       </div>
-    </div>
+    </div>;
   }
 
   renderButton() {
@@ -64,21 +62,21 @@ export default class CommentWatch extends React.Component {
     const { t } = this;
 
     switch (status) {
-      case "ignore":
+      case 'ignore':
         return <>
-          <p class="text-gray" watch-status="ignore">{t(".You’re ignoring this notifications")}</p>
+          <p class="text-gray" watch-status="ignore">{t('.You’re ignoring this notifications')}</p>
           <a href="#" className="btn-radio" status="watch" onClick={this.onSubmit} />
-        </>
-      case "watch":
+        </>;
+      case 'watch':
         return <>
-          <p class="text-gray" watch-status="watched">{t(".You’re receiving notifications because you’re subscribed")}</p>
+          <p class="text-gray" watch-status="watched">{t('.You’re receiving notifications because you’re subscribed')}</p>
           <a href="#" className="btn-radio checked" status="ignore" onClick={this.onSubmit} />
-        </>
+        </>;
       default:
         return <>
-          <p class="text-gray" watch-status="none">{t(".You’re not receiving notifications")}</p>
+          <p class="text-gray" watch-status="none">{t('.You’re not receiving notifications')}</p>
           <a href="#" className="btn-radio" status="watch" onClick={this.onSubmit} />
-        </>
+        </>;
     }
   }
 }
