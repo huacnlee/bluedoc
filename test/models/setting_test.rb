@@ -14,6 +14,17 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal true, Setting.anonymous_enable?
   end
 
+  test "confirmable_enable" do
+    assert_equal "0", Setting.confirmable_enable
+    assert_equal false, Setting.confirmable_enable?
+
+    Setting.confirmable_enable = "1"
+    assert_equal true, Setting.confirmable_enable?
+
+    Setting.confirmable_enable = "0"
+    assert_equal false, Setting.confirmable_enable?
+  end
+
   test "has_admin?" do
     Setting.admin_emails = "admin@gitbook.io\nhuacnlee@gmail.com"
     assert_equal 2, Setting.admin_email_list.length
