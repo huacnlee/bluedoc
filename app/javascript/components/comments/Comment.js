@@ -67,7 +67,8 @@ export default class Comment extends React.Component {
   };
 
   render() {
-    const { comment, currentUser, abilities = {} } = this.props;
+    const { comment, abilities = {}, type = 'full' } = this.props;
+    const { currentUser } = App;
     const { t } = this;
     const { reactions } = this.state;
 
@@ -76,10 +77,10 @@ export default class Comment extends React.Component {
 
     if (currentUser) {
       if (!canDestroy) {
-        canDestroy = comment.user.id == currentUser.id;
+        canDestroy = comment.user.id === currentUser.id;
       }
       if (!canUpdate) {
-        canUpdate = comment.user.id == currentUser.id;
+        canUpdate = comment.user.id === currentUser.id;
       }
     }
 
@@ -96,14 +97,16 @@ export default class Comment extends React.Component {
               <Timeago value={comment.createdAt} />
             </div>
             <div className="opts">
-              <Reactions
-                key="reactions1"
-                subjectType="Comment"
-                subjectId={comment.id}
-                mode="new_button"
-                reactions={reactions}
-                onChange={this.onReactionChange}
-              />
+              {type === 'full' && (
+                <Reactions
+                  key="reactions1"
+                  subjectType="Comment"
+                  subjectId={comment.id}
+                  mode="new_button"
+                  reactions={reactions}
+                  onChange={this.onReactionChange}
+                />
+              )}
               <details
                 id={`comment-${comment.id}-menu-button`}
                 ref={this.menuRef}
@@ -152,14 +155,16 @@ export default class Comment extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: comment.bodyHtml }} />
           </div>
 
-          <Reactions
-            key="reactions2"
-            subjectType="Comment"
-            subjectId={comment.id}
-            reactions={reactions}
-            mode="list"
-            onChange={this.onReactionChange}
-          />
+          {type === 'full' && (
+            <Reactions
+              key="reactions2"
+              subjectType="Comment"
+              subjectId={comment.id}
+              reactions={reactions}
+              mode="list"
+              onChange={this.onReactionChange}
+            />
+          )}
         </div>
       </div>
     );

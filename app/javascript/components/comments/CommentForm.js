@@ -1,9 +1,9 @@
 import { UserAvatar } from 'bluebox/avatar';
 import { UserLink } from 'bluebox/user';
-import { PrimaryButton } from "bluebox/button";
-import InlineEditor from "../InlineEditor"
-import { createComment, createCommentWithParent } from "./api";
+import { PrimaryButton } from 'bluebox/button';
 import { Icon } from 'bluebox/iconfont';
+import InlineEditor from '../InlineEditor';
+import { createComment, createCommentWithParent } from './api';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -37,8 +37,8 @@ export default class CommentForm extends React.Component {
     e.preventDefault();
 
     const {
- commentableType, commentableId, replyTo, onCreate
-} = this.props;
+      commentableType, commentableId, nid = '', replyTo, onCreate,
+    } = this.props;
     const { t } = this;
 
     const { body, bodySml } = this.state;
@@ -53,6 +53,7 @@ export default class CommentForm extends React.Component {
       commentableId,
       body,
       bodySml,
+      nid,
     };
 
     let invokeMethod = createComment;
@@ -102,7 +103,8 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    const { currentUser, replyTo } = this.props;
+    const { replyTo } = this.props;
+    const { currentUser } = App;
     const { t } = this;
 
     if (!currentUser) {

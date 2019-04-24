@@ -268,6 +268,55 @@
       }
     }
   }
+
+  .inline-comment-button {
+    visibility: hidden;
+    font-weight: normal;
+    color: #666;
+    line-height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -44px;
+
+
+    &.has-comments {
+      visibility: visible;
+    }
+
+    .inline-comment-button-icon {
+      display: block;
+      width: 45px;
+      padding: 7px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 100%;
+      text-align: center;
+
+      color: #666;
+
+      &:hover {
+        background: rgba(255, 250, 167, 0.73);
+        color: rgba(125, 51, 32, 0.81) !important;
+      }
+
+      .fas {
+        font-size: 17px;
+      }
+    }
+  }
+
+  [nid] {
+    position: relative;
+
+    &.has-inline-comments,
+    &:hover {
+      .inline-comment-button {
+        visibility: visible;
+      }
+    }
+  }
 }
 
 .reader-body {

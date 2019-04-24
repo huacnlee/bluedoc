@@ -1,19 +1,19 @@
 import { graph } from 'bluedoc/graphql';
 
-const userBodyQuery = "id, slug, name, avatarUrl, url"
-const commentBodyQuery = `id, bodyHtml, user { ${userBodyQuery} }, parentId, reactions { name, url, groupUserSlugs, groupCount }, replyTo { id, bodyHtml, user { ${userBodyQuery} } }, createdAt, updatedAt`
+const userBodyQuery = 'id, slug, name, avatarUrl, url';
+const commentBodyQuery = `id, bodyHtml, user { ${userBodyQuery} }, parentId, reactions { name, url, groupUserSlugs, groupCount }, replyTo { id, bodyHtml, user { ${userBodyQuery} } }, createdAt, updatedAt`;
 
 export const createComment = graph(`
-  mutation(@autodeclare) {
-    createComment(commentableType: $commentableType, commentableId: $commentableId, body: $body, bodySml: $bodySml) {
+  mutation($commentableType: String!, $commentableId: ID!, $body: String!, $bodySml: String!, $nid: String!) {
+    createComment(commentableType: $commentableType, commentableId: $commentableId, body: $body, bodySml: $bodySml, nid: $nid) {
       ${commentBodyQuery}
     }
   }
 `);
 
 export const createCommentWithParent = graph(`
-  mutation(@autodeclare) {
-    createComment(commentableType: $commentableType, commentableId: $commentableId, body: $body, bodySml: $bodySml, parentId: $parentId) {
+  mutation($commentableType: String!, $commentableId: ID!, $body: String!, $bodySml: String!, $nid: String!, parentId: String!) {
+    createComment(commentableType: $commentableType, commentableId: $commentableId, body: $body, bodySml: $bodySml, nid: $nid, parentId: $parentId) {
       ${commentBodyQuery}
     }
   }
@@ -33,8 +33,8 @@ export const watchComments = graph(`
 
 
 export const getComments = graph(`
-  query (@autodeclare) {
-    comments(commentableType: $commentableType, commentableId: $commentableId, per: 50, page: $page) {
+  query ($commentableType: String!, $commentableId: ID!, $page: Int!, $nid: String!) {
+    comments(commentableType: $commentableType, commentableId: $commentableId, nid: $nid, per: 50, page: $page) {
       records {
         ${commentBodyQuery}
       },

@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+        <div class="markdown-body markdown-with-toc" data-turbolinks="false" data-id="<%= @doc.id %>">
           <% if params[:mode] == "draft" %>
             <%= raw @doc.draft_body_html %>
           <% else %>
@@ -151,7 +151,6 @@
         <% end %>
 
         <%= react_component "comments/Index", {
-          currentUser: current_user&.as_json(only: %i[id slug name avatar_url]),
           commentableType: "Doc",
           commentableId: @doc.id,
           watchStatus: @doc.watch_comment_status_by_user_id(current_user&.id),

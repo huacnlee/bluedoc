@@ -68,4 +68,28 @@ class Queries::CommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
     res = response_data["comments"]
     assert_equal 4, res["records"].length
   end
+
+  test "comments with inline_comment nid" do
+    doc = create(:doc)
+    inline_comment = create(:inline_comment, subject: doc)
+    comments = create_list(:comment, 3, commentable: inline_comment)
+
+    query_body = "{ records { id, bodyHtml, user { id, slug, name }, createdAt, updatedAt }, pageInfo { page, totalCount, totalPages } }"
+
+    execute(%| { comments(commentableType: "Doc", commentableId: #{doc.id}, per: 2, nid: "#{inline_comment.nid}") #{query_body} } |)
+    res = response_data["comments"]
+    records = res["records"]
+    assert_equal 2, records.length
+    item = records[0]
+    assert_equal comments[0].id, item["id"]
+    assert_equal comments[0].body_html, item["bodyHtml"]
+    assert_equal comments[0].user.id, item["user"]["id"]
+    assert_equal comments[0].user.slug, item["user"]["slug"]
+    assert_equal comments[0].created_at.iso8601, item["createdAt"]
+    assert_equal comments[0].updated_at.iso8601, item["updatedAt"]
+
+    pageInfo = res["pageInfo"]
+    assert_equal 1, pageInfo["page"]
+    assert_equal 3, pageInfo["totalCount"]
+  end
 end

@@ -1,15 +1,15 @@
-import CommentWatch from "./CommentWatch";
-import CommentForm from "./CommentForm";
-import Comment from "./Comment";
-import ContentLoader from "react-content-loader"
+import ContentLoader from 'react-content-loader';
+import { Pagination } from 'bluebox/pagination';
+import CommentWatch from './CommentWatch';
+import CommentForm from './CommentForm';
+import Comment from './Comment';
 
-import{ Pagination } from 'bluebox/pagination';
 
-import { getComments, deleteComment } from "./api";
+import { getComments, deleteComment } from './api';
 
 export default class Index extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.formRef = React.createRef();
 
@@ -17,7 +17,7 @@ export default class Index extends React.Component {
       comments: [],
       replyTo: null,
       loading: false,
-    }
+    };
   }
 
   t = (key) => {
@@ -38,11 +38,13 @@ export default class Index extends React.Component {
   }
 
   fetch(page) {
-    const { commentableType, commentableId } = this.props;
+    const { commentableType, commentableId, nid = '' } = this.props;
 
     this.setState({ loading: true });
 
-    getComments({ commentableType, commentableId, page }).then((result) => {
+    getComments({
+      commentableType, commentableId, page, nid,
+    }).then((result) => {
       const { records, pageInfo } = result.comments;
       this.setState({
         // Only return the first 5 results
@@ -54,7 +56,7 @@ export default class Index extends React.Component {
       App.alert(errors);
       this.setState({
         loading: false,
-      })
+      });
     });
   }
 
@@ -72,7 +74,7 @@ export default class Index extends React.Component {
   onReply = (comment) => {
     this.setState({
       replyTo: comment,
-    })
+    });
 
     this.formRef.current.focus();
   }
@@ -80,26 +82,29 @@ export default class Index extends React.Component {
   onCancelReplyTo = () => {
     this.setState({
       replyTo: null,
-    })
+    });
     this.formRef.current.focus();
   }
 
   onCommentCreate = (comment) => {
-    let { comments } = this.state;
+    const { comments } = this.state;
     comments.push(comment);
     this.setState({ comments });
   }
 
   render() {
-    const { comments, replyTo, loading, pageInfo } = this.state;
+    const { type = 'full' } = this.props;
+    const {
+      comments, replyTo, loading, pageInfo,
+    } = this.state;
     const { t } = this;
 
-    return <div className="comments">
-      <div class="sub-title">{t(".Comments")}</div>
+    return <div className={`comments comments-${type}`}>
+      <div class="sub-title">{t('.Comments')}</div>
       <CommentWatch {...this.props} />
       <div className="comments-list">
         {loading && (
-          <div style={{ width: "400px" }}>
+          <div style={{ width: '400px' }}>
             <CommentLoader />
             <CommentLoader />
           </div>
@@ -114,7 +119,7 @@ export default class Index extends React.Component {
       }
 
       <CommentForm ref={this.formRef} {...this.props} onCreate={this.onCommentCreate} onCancelReplyTo={this.onCancelReplyTo} replyTo={replyTo} />
-    </div>
+    </div>;
   }
 }
 
@@ -132,4 +137,4 @@ const CommentLoader = () => (
     <rect x="51" y="67" rx="4" ry="4" width="340" height="16" />
     <rect x="51" y="94" rx="4" ry="4" width="300" height="16" />
   </ContentLoader>
-)
+);

@@ -894,10 +894,10 @@
     styled-components "^3.2.3"
     uuid "^3.3.2"
 
-"@thebluedoc/icons@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@thebluedoc/icons/-/icons-1.1.1.tgz#90ddcc13ce81ea132385c1eda53d355a03b2b8b0"
-  integrity sha512-+E6ulQqUt19NyDzdalSLNoiqzLQMm7bveZoZaprdyNPyNxhox1DmqgYtimbOODztq8oCYzDKA6aRuBlkJG4l+Q==
+"@thebluedoc/icons@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@thebluedoc/icons/-/icons-1.1.2.tgz#b0d03f38aa8610109848a47522334e4b0a49dde5"
+  integrity sha512-a68lo9b+VMjq4jh3gRHOheIG+vAbIkIcJYMO3pHyWZwcGSIDZZFKxJnbu3NW88J4egyMJeMXZSFWHXTYF471KQ==
 
 "@thebluedoc/slate-react@^0.21.24":
   version "0.21.25"

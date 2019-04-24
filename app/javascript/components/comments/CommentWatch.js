@@ -41,7 +41,7 @@ export default class CommentWatch extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
+    const { currentUser } = App;
     const { t } = this;
     const { status, loading } = this.state;
 
@@ -49,7 +49,7 @@ export default class CommentWatch extends React.Component {
       return <span />;
     }
 
-    return <div id="comment-watch-box" className="border-bottom mb-3 pb-3 clearfix">
+    return <div className="comment-watch-box border-bottom mb-3 pb-3 clearfix">
       <div className="watch-button-group">
         <div className="form-label">{t('.Subscribe')}</div>
         {this.renderButton()}

@@ -25,7 +25,7 @@ module Queries
       @doc = Doc.find(subject_id)
       authorize! :read, @doc
 
-      @doc.inline_comments.includes(:user)
+      @doc.inline_comments.where("comments_count > 0").includes(:user)
     end
   end
 end
