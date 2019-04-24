@@ -15,12 +15,14 @@ export class UserAvatar extends React.Component {
       user, type = 'small', className, link = true,
     } = this.props;
 
+    const avatarUrl = user.avatarUrl || user.avatar_url;
+
     let avatarHTML;
 
-    if (!user.avatar_url) {
+    if (!avatarUrl) {
       avatarHTML = <DefaultAvatar {...this.props} />;
     } else {
-      avatarHTML = <img src={user.avatar_url} className={`avatar avatar-${type}`} />;
+      avatarHTML = <img src={avatarUrl} className={`avatar avatar-${type}`} />;
     }
 
     if (!link) {
