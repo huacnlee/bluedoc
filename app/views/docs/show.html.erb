@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        <div class="markdown-body markdown-with-toc" data-turbolinks="false">
+        <div class="markdown-body markdown-with-toc" data-turbolinks="false" data-id="<%= @doc.id %>">
           <% if params[:mode] == "draft" %>
             <%= raw @doc.draft_body_html %>
           <% else %>
@@ -129,7 +129,11 @@
         </div>
 
         <div class="doc-reaction">
-          <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+          <%= react_component "reactions/Index", {
+            subjectType: "Doc",
+            subjectId: @doc.id,
+            reactions: @doc.reactions_as_json,
+          } %>
         </div>
 
         <%= render "readers", doc: @doc, readers: @readers %>
@@ -146,11 +150,15 @@
         </div>
         <% end %>
 
-        <% if @comments %>
-        <div class="doc-comments mt-3 clearfix" id="comment">
-          <%= render "/comments/comments", commentable: @doc, comments: @comments %>
-        </div>
-        <% end %>
+        <%= react_component "comments/Index", {
+          commentableType: "Doc",
+          commentableId: @doc.id,
+          watchStatus: @doc.watch_comment_status_by_user_id(current_user&.id),
+          abilities: {
+            update: can?(:update, @doc),
+            destroy: can?(:destroy, @doc),
+          },
+        } %>
       <% end %>
     </div>
   </div>

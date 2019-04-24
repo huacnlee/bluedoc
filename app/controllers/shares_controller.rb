@@ -11,7 +11,6 @@ class SharesController < ApplicationController
       end
 
       current_user&.read_doc(@doc)
-      @comments = @doc.comments.with_includes.order("id asc")
     end
 
     render :show, layout: "reader"

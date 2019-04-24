@@ -1,4 +1,4 @@
-export default class UserLink extends React.Component {
+export class UserLink extends React.Component {
   render() {
     const { user, className } = this.props;
 

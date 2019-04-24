@@ -29,23 +29,25 @@
       </div>
 
       <div class="doc-reaction issue-reaction">
-        <%= render "/reactions/reactions", subject: @issue, reactions: @issue.reactions %>
+        <%= react_component "reactions/Index", {
+          subjectType: "Issue",
+          subjectId: @issue.id,
+          reactions: @issue.reactions_as_json,
+        } %>
       </div>
 
-      <% if @comments %>
       <div class="issue-comments mt-3 clearfix" id="comment">
-        <%= render "/comments/comments", commentable: @issue, comments: @comments %>
-        <%= form_for(@issue, url: @issue.to_path, html: { id: "issue-status-actions", style: "margin-top: -71px;", class: "float-right" }) do |f| %>
-          <% if @issue.open? %>
-            <%= f.hidden_field :status, value: "closed" %>
-            <button type="submit" class="btn"><%= t(".Close Issue") %></button>
-          <% else %>
-            <%= f.hidden_field :status, value: "open" %>
-            <button type="submit" class="btn"><%= t(".Reopen Issue") %></button>
-          <% end %>
-        <% end %>
+        <%= react_component "comments/Index", {
+          currentUser: current_user&.as_json(only: %i[id slug name avatar_url]),
+          commentableType: "Issue",
+          commentableId: @issue.id,
+          watchStatus: @issue.watch_comment_status_by_user_id(current_user&.id),
+          abilities: {
+            update: can?(:update, @issue),
+            destroy: can?(:destroy, @issue),
+          },
+        } %>
       </div>
-      <% end %>
     </div>
 
     <div class="col-12 col-md-4">

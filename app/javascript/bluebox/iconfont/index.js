@@ -1,3 +1,1 @@
-const Icon = ({ name, className }) => <i className={`fas fa-${name} ${className || ''}`} />;
-
-export default Icon;
+export const Icon = ({ name, className }) => <i className={`fas fa-${name} ${className || ''}`} />;

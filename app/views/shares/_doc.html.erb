@@ -33,14 +33,25 @@
         <%= raw @doc.body_html %>
       </div>
       <div class="doc-reaction mt-5">
-        <%= render "/reactions/reactions", subject: @doc, reactions: @doc.reactions %>
+        <%= react_component "reactions/Index", {
+          subjectType: "Doc",
+          subjectId: @doc.id,
+          reactions: @doc.reactions_as_json,
+        } %>
       </div>
 
-      <% if @comments %>
       <div class="doc-comments mt-3 clearfix">
-        <%= render "/comments/comments", commentable: @doc, comments: @comments %>
+        <%= react_component "comments/Index", {
+          currentUser: current_user&.as_json(only: %i[id slug name avatar_url]),
+          commentableType: "Doc",
+          commentableId: @doc.id,
+          watchStatus: @doc.watch_comment_status_by_user_id(current_user&.id),
+          abilities: {
+            update: can?(:update, @doc),
+            destroy: can?(:destroy, @doc),
+          },
+        } %>
       </div>
-      <% end %>
     </div>
     </div>
     <div class="doc-body-toc" data-turbolinks="false">

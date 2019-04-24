@@ -87,7 +87,6 @@ Rails.application.routes.draw do
       delete :watch
     end
   end
-  resource :reactions, path: "user/reactions"
   resources :shares
 
   # NOTE! Keep :profile routes bottom of routes.rb

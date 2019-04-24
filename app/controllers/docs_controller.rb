@@ -23,11 +23,6 @@ class DocsController < Users::ApplicationController
       current_user&.read_doc(@doc)
       @readers = @doc.read_by_user_actions.order("updated_at desc").limit(5)
 
-      @comments = @doc.comments.with_includes.order("id asc")
-
-      # mark notifications read
-      Notification.read_targets(current_user, target_type: "Comment", target_id: @comments.collect(&:id))
-
       @reactions = @doc.reactions
 
       @between_docs = @doc.prev_and_next_of_docs

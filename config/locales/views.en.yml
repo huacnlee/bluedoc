@@ -372,12 +372,10 @@ en:
       Sign in to write comment: Sign in to write comment
       You must sign in first: "You want write comment? You must sign in first."
       Sign in now: Sign in now
-    form:
       Submit: Comment
-    in_reply:
+      Comment was successfully created: Comment was successfully created.
       In reply to: In reply to
-    reply_info:
-      In reply to: In reply to
+      Reply to: Reply to
   dashboards:
     stars:
       Stars: Stars

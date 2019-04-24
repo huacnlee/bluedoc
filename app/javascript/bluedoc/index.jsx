@@ -12,7 +12,6 @@ import './editor/index.js';
 import './reader/index.js';
 import './versions/index.js';
 import './follow-user/index.js';
-import './comments/index.js';
 
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(150);
@@ -26,13 +25,26 @@ window.App = {
   locale: (metaLocale && metaLocale.content || 'en').replace('-', '_'),
   host: `${location.protocol}//${location.host}`,
 
-  csrf_param: "authenticity_token",
+  currentUser: null,
+
+  csrf_param: 'authenticity_token',
   csrf_token: null,
+  directUploadURL: '/rails/active_storage/direct_uploads',
+  blobURLTemplate: '/uploads/:id',
+
+  routes: {
+    new_session_path: '/sessions/sign_in',
+  },
 
   /**
    * Alert message
    */
   alert: (message) => {
+    if (typeof message != 'string') {
+      if (message.error) {
+        message = message.error.message;
+      }
+    }
     App.notice(message, 'error');
   },
 
@@ -47,15 +59,17 @@ window.App = {
 
   scrollTo: (selector) => {
     const element = document.querySelector(selector);
+    if (!element) return;
+
     element.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start',
     });
-  }
+  },
 };
 
 document.addEventListener('turbolinks:load', () => {
   timeagoRender(document.querySelectorAll('.timeago'), App.locale);
-  App.csrf_token = document.querySelector("meta[name=csrf-token]").getAttribute("content");
-  App.csrf_param = document.querySelector("meta[name=csrf-param]").getAttribute("content");
+  App.csrf_token = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+  App.csrf_param = document.querySelector('meta[name=csrf-param]').getAttribute('content');
 });

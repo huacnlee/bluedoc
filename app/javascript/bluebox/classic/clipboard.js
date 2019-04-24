@@ -32,13 +32,15 @@ document.addEventListener('turbolinks:load', () => {
       message = $target.attr('clipboard-success-text');
     }
 
-    const tooltip = new Tooltip($tipTarget, {
-      title: message,
-      trigger: "trigger",
-      closeOnClickOutside: true,
-    });
-    tooltip.show()
+    if ($tipTarget.length > 0) {
+      const tooltip = new Tooltip($tipTarget, {
+        title: message,
+        trigger: "trigger",
+        closeOnClickOutside: true,
+      });
+      tooltip.show()
 
-    setTimeout(() => tooltip.hide(), 5000);
+      setTimeout(() => tooltip.hide(), 5000);
+    }
   });
 });

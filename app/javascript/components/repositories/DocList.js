@@ -1,7 +1,7 @@
-import Pagination from 'bluebox/pagination';
+import{ Pagination } from 'bluebox/pagination';
 import { graph } from 'bluedoc/graphql';
 import { DocItem, DocItemLoader } from './DocItem';
-import Icon from "bluebox/iconfont";
+import { Icon } from "bluebox/iconfont";
 
 const getDocs = graph(`
   query (@autodeclare) {

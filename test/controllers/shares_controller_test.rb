@@ -18,22 +18,14 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       assert_select ".doc-reaction" do
         assert_select ".add-reaction-btn", 0
       end
-      assert_select ".comments" do
-        assert_select ".comment", 2 do
-          assert_select ".add-reaction-btn", 0
-        end
 
-        comments.each do |comment|
-          assert_select "details#comment-#{comment.id}-menu-button"
-          assert_select "clipboard-copy" do
-            assert_select "[data-clipboard-text=?]", share.to_url + "#comment-#{comment.id}"
-            assert_select "[data-clipboard-tooltip-target=?]", "#comment-#{comment.id}-menu-button"
-          end
-        end
-      end
-      assert_select "form.new_comment", 0
-      assert_select "#comment-form-blankslate" do
-        assert_select "h2", text: "Sign in to write comment"
+      assert_react_component "comments/Index" do |props|
+        assert_nil props[:currentUser]
+        assert_equal "Doc", props[:commentableType]
+        assert_equal doc.id, props[:commentableId]
+        assert_equal "unwatch", props[:watchStatus]
+        assert_equal false, props[:abilities][:update]
+        assert_equal false, props[:abilities][:destroy]
       end
     end
 
@@ -49,23 +41,19 @@ class SharesControllerTest < ActionDispatch::IntegrationTest
       assert_select ".btn-edit-doc", 0
       assert_select ".btn-star-doc", 0
       assert_select ".markdown-body"
-      assert_select ".doc-reaction" do
-        assert_select ".add-reaction-btn"
+      assert_react_component "reactions/Index" do |props|
+        assert_equal "Doc", props[:subjectType]
+        assert_equal doc.id, props[:subjectId]
+        assert_equal doc.reactions_as_json.sort, props[:reactions].sort
       end
-      assert_select ".comments" do
-        assert_select ".comment", 2 do
-          assert_select ".add-reaction-btn"
-        end
-      end
-      assert_select "#comment-form-blankslate", 0
-      assert_select "form.new_comment" do
-        assert_react_component "InlineEditor" do |props|
-          assert_equal "comment[body_sml]", props[:name]
-          assert_equal "comment[body]", props[:markdownName]
-          assert_equal "sml", props[:format]
-          assert_equal rails_direct_uploads_url, props[:directUploadURL]
-          assert_equal upload_path(":id"), props[:blobURLTemplate]
-        end
+
+      assert_react_component "comments/Index" do |props|
+        assert_equal user.as_json(only: %i[id slug name avatar_url]), props[:currentUser].deep_stringify_keys
+        assert_equal "Doc", props[:commentableType]
+        assert_equal doc.id, props[:commentableId]
+        assert_equal "unwatch", props[:watchStatus]
+        assert_equal false, props[:abilities][:update]
+        assert_equal false, props[:abilities][:destroy]
       end
     end
 

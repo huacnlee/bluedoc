@@ -16,7 +16,7 @@ module BlueDoc
 
       def response_data
         unless response_errors.blank?
-          raise "Expect to get response_data by there has errors\n\n  #{response_errors}"
+          raise "Expect to get response_data by there has errors\n#{JSON.pretty_generate(response_errors)}"
         end
 
         @response["data"]

@@ -366,12 +366,10 @@ zh-CN:
       Sign in to write comment: 登录以后可以评论
       You must sign in first: "你需要先登录以后才能发布评论。"
       Sign in now: 现在登录
-    form:
       Submit: 发布评论
-    in_reply:
+      Comment was successfully created: 评论发布成功。
       In reply to: 回复
-    reply_info:
-      In reply to: 回复
+      Reply to: 回复
   dashboards:
     stars:
       Stars: 收藏

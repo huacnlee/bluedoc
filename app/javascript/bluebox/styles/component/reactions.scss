@@ -5,6 +5,18 @@
     .new_reaction { float: none; }
   }
   .emoji { display: inline-block; width: 18px; height: 18px; margin-right: 3px; }
+
+  display: flex;
+
+  .reaction-item {
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+
+  .add-reactions-options {
+    display: flex;
+  }
 }
 
 .reaction-summary-item {
@@ -27,7 +39,7 @@
 }
 
 .add-reactions-options-item {
-  .emoji { display: inline-block; width: 18px; height: 18px; margin-right: 3px; }
+  .emoji { width: 18px; height: 18px; margin-right: 3px; }
 }
 
 .add-reaction-btn {
@@ -38,24 +50,19 @@
   }
 }
 
-.add-reactions-options-item {
-  display: inline-block;
-}
-
 .add-reaction-popover.dropdown-menu {
   padding: 13px;
   width: 320px;
 
   .dropdown-divider {
-    margin: 15px 0;
+    margin: 5px 0;
     background: #f0f0f0;
   }
 
-  .btn-link {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 1;
+  .reaction-item {
+    padding: 5px 5px;
+    text-align: center;
+
     &:hover {
       background: #f7f7f7;
     }

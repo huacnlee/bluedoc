@@ -1,10 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import theme from 'bluebox/theme';
-import Icon from 'bluebox/iconfont';
+import { Switch } from 'bluebox/switch';
+import { Icon } from 'bluebox/iconfont';;
 import update from 'immutability-helper';
 import Tree from './tree';
 import ListNode from './ListNode';
@@ -176,42 +174,40 @@ class TocTree extends Component {
     const { editMode, canEdit } = this.state;
     const { repository, user, type } = this.props;
     return (
-      <MuiThemeProvider theme={theme}>
-        <div className="toc-tree" data-edit-mode={editMode}>
-          {type === 'side' && (
-            <div className="toc-tree-toolbar doc-parents">
-              <a className="link-back text-main" href={repository.path}>{repository.name}</a>
-              <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
-            </div>
-          )}
-          {type === 'center' && canEdit && (
-            <div className="repo-toc-toolbar">
-              <div className='btn btn-sm btn-success btn-new-doc' onClick={this.handleCreate}>
-                <Icon name="add-doc" /> {this.t('.Create Doc')}
-              </div>
-
-              <label className={'edit-switch'}>
-                <span>{this.t('.Edit Toc')}</span>
-                <Switch
-                  checked={this.state.editMode}
-                  value="editMode"
-                  color="primary"
-                  onChange={this.toggleEditMode}
-                />
-              </label>
-            </div>
-          )}
-          {type === 'side' && canEdit && (
-            <div
-              className="toc-tree-bottom-toolbar btn-new btn-block"
-              onClick={this.handleCreate}
-            >
+      <div className="toc-tree" data-edit-mode={editMode}>
+        {type === 'side' && (
+          <div className="toc-tree-toolbar doc-parents">
+            <a className="link-back text-main" href={repository.path}>{repository.name}</a>
+            <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
+          </div>
+        )}
+        {type === 'center' && canEdit && (
+          <div className="repo-toc-toolbar">
+            <div className='btn btn-sm btn-success btn-new-doc' onClick={this.handleCreate}>
               <Icon name="add-doc" /> {this.t('.Create Doc')}
             </div>
-          )}
-          {this.renderItems()}
-        </div>
-      </MuiThemeProvider>
+
+            <label className={'edit-switch'}>
+              <span>{this.t('.Edit Toc')}</span>
+              <Switch
+                checked={this.state.editMode}
+                value="editMode"
+                color="primary"
+                onChange={this.toggleEditMode}
+              />
+            </label>
+          </div>
+        )}
+        {type === 'side' && canEdit && (
+          <div
+            className="toc-tree-bottom-toolbar btn-new btn-block"
+            onClick={this.handleCreate}
+          >
+            <Icon name="add-doc" /> {this.t('.Create Doc')}
+          </div>
+        )}
+        {this.renderItems()}
+      </div>
     );
   }
 }

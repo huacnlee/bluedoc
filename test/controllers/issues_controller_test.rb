@@ -144,7 +144,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal @repository.issue_assignees.collect(&:as_item_json), props[:targetAssignees].collect(&:deep_stringify_keys)
       assert_equal issue.assignees.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:assignees].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal issue.labels.sort.as_json, props[:labels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
-      assert_equal @repository.issue_labels.as_json, props[:targetLabels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
+      assert_equal @repository.issue_labels.sort.as_json, props[:targetLabels].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
       assert_equal false, props[:abilities][:update]
       assert_equal false, props[:abilities][:manage]
       assert_equal issue.participants.collect(&:as_item_json).sort_by { |item| item["id"] }, props[:participants].collect(&:deep_stringify_keys).sort_by { |item| item["id"] }
@@ -171,12 +171,29 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
       assert_equal false, props[:abilities][:manage]
     end
 
-    sign_in_role :admin, group: @group
+    user = sign_in_role :admin, group: @group
     get private_issue.to_path
     assert_equal 200, response.status
     assert_react_component "issues/Sidebar" do |props|
       assert_equal true, props[:abilities][:update]
       assert_equal true, props[:abilities][:manage]
+    end
+
+    # reactions
+    assert_react_component "reactions/Index" do |props|
+      assert_equal "Issue", props[:subjectType]
+      assert_equal private_issue.id, props[:subjectId]
+      assert_equal private_issue.reactions_as_json.sort, props[:reactions].sort
+    end
+
+    # comments
+    assert_react_component "comments/Index" do |props|
+      assert_equal user.as_json(only: %i[id slug name avatar_url]), props[:currentUser].deep_stringify_keys
+      assert_equal "Issue", props[:commentableType]
+      assert_equal private_issue.id, props[:commentableId]
+      assert_equal "unwatch", props[:watchStatus]
+      assert_equal true, props[:abilities][:update]
+      assert_equal true, props[:abilities][:destroy]
     end
   end
 

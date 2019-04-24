@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :reply_to, class_name: "Comment", required: false, foreign_key: :parent_id
 
-  validates :commentable_type, inclusion: { in: %w[Doc Note Issue] }
+  validates :commentable_type, inclusion: { in: %w[Doc Note Issue InlineComment] }
   validates :body, presence: true, length: { minimum: 2 }
 
   scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
@@ -38,6 +38,7 @@ class Comment < ApplicationRecord
       return "" if doc.blank?
       [doc.repository&.user&.name, doc.repository&.name, self.commentable&.title].join(" / ")
     when "Issue" then self.commentable&.issue_title || ""
+    when "InlineComment" then self.commentable&.title || ""
     else
       ""
     end
@@ -47,8 +48,21 @@ class Comment < ApplicationRecord
     case self.commentable_type
     when "Doc" then self.commentable&.to_url(anchor: "comment-#{self.id}")
     when "Issue" then self.commentable&.to_url(anchor: "comment-#{self.id}")
+    when "InlineComment"
+      self.commentable&.to_url
     else
       ""
+    end
+  end
+
+  def self.class_with_commentable_type(type)
+    klass = case type
+    when "Doc" then Doc
+    when "Note" then Note
+    when "Issue" then Issue
+    when "InlineComment" then InlineComment
+    else
+      raise "Invalid :commentable_type #{type}"
     end
   end
 

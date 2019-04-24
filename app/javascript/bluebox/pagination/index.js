@@ -1,6 +1,6 @@
 import ReactPaginate from 'react-paginate';
 
-export default class Pagination extends React.Component {
+export class Pagination extends React.Component {
   onPage = (selectedItem) => {
     const newPage = selectedItem.selected + 1;
     console.log('goto page', newPage);

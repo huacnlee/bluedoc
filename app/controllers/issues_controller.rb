@@ -62,8 +62,6 @@ class IssuesController < Users::ApplicationController
 
   def show
     authorize! :read, @issue
-
-    @comments = @issue.comments.with_includes.order("id asc")
   end
 
   def edit

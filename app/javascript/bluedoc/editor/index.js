@@ -117,8 +117,6 @@ class EditorBox {
       <RichEditor
         onChange={onChange}
         onChangeTitle={onChangeTitle}
-        directUploadURL={bodyInput.attributes['data-direct-upload-url'].value}
-        blobURLTemplate={bodyInput.attributes['data-blob-url-template'].value}
         plantumlServiceHost={bodyInput.attributes['data-plantuml-service-host'].value}
         mathJaxServiceHost={bodyInput.attributes['data-mathjax-service-host'].value}
         title={titleInput.value}

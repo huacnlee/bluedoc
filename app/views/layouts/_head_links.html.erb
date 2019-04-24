@@ -20,3 +20,14 @@
 <script type="text/javascript" src="<%= asset_path("/js/react-dom.production.min@16.6.1.js", skip_pipeline: true) %>"></script>
 <script type="text/javascript" src="<%= asset_path("/js/react-dom-server.browser.production.min@16.6.1.js", skip_pipeline: true) %>"></script>
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+<script type="text/javascript">
+<% if current_user %>
+App.currentUser = {
+  id: <%= current_user.id %>,
+  slug: "<%= current_user.slug %>",
+  name: "<%= current_user.name %>",
+  avatarUrl: "<%= current_user.avatar_url %>",
+}
+App.allowReactions = <%= raw Reaction.allow_reactions.to_json(only: %i[name], methods: %i[url]) %>
+<% end %>
+</script>

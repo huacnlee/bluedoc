@@ -22,12 +22,14 @@ class Ability::DocsTest < ActiveSupport::TestCase
     assert @ability.can? :manage, doc
 
     assert @other_ability.can? :read, doc
+    assert @other_ability.can? :create_comment, doc
     assert @other_ability.cannot? :read, private_doc
     assert @other_ability.cannot? :create, doc
     assert @other_ability.cannot? :update, doc
     assert @other_ability.cannot? :destroy, doc
 
     assert @anonymous_ability.can? :read, doc
+    assert @anonymous_ability.can? :create_comment, doc
     assert @anonymous_ability.cannot? :read, private_doc
     assert @anonymous_ability.cannot? :create, doc
     assert @anonymous_ability.cannot? :update, doc
@@ -40,6 +42,7 @@ class Ability::DocsTest < ActiveSupport::TestCase
     assert @ability.can? :manage, doc
 
     assert @other_ability.cannot? :read, doc
+    assert @other_ability.cannot? :create_comment, doc
     assert @anonymous_ability.cannot? :read, doc
   end
 

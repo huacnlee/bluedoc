@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "bluebox/*": ["./app/javascript/bluebox/*"],
-      "bluedoc/*": ["./app/javascript/bluedoc/*"]
+      "bluebox/*": ["./app/javascript/bluebox/*", "./app/javascript/bluebox/*/index.js"],
+      "bluedoc/*": ["./app/javascript/bluedoc/*", "./app/javascript/bluedoc/*/index.js"],
     }
   },
   "exclude": [

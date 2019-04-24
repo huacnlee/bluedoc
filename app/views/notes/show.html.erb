@@ -72,7 +72,11 @@
       </div>
 
       <div class="doc-reaction note-reaction">
-        <%= render "/reactions/reactions", subject: @note, reactions: @note.reactions %>
+        <%= react_component "reactions/Index", {
+          subjectType: "Note",
+          subjectId: @note.id,
+          reactions: @note.reactions_as_json,
+        } %>
       </div>
 
       <%= render "readers", note: @note, readers: @readers %>
@@ -89,11 +93,18 @@
       </div>
       <% end %>
 
-      <% if @comments %>
       <div class="doc-comments mt-3 clearfix" id="comment">
-        <%= render "/comments/comments", commentable: @note, comments: @comments %>
+        <%= react_component "comments/Index", {
+          currentUser: current_user&.as_json(only: %i[id slug name avatar_url]),
+          commentableType: "Note",
+          commentableId: @note.id,
+          watchStatus: @note.watch_comment_status_by_user_id(current_user&.id),
+          abilities: {
+            update: can?(:update, @issue),
+            destroy: can?(:destroy, @issue),
+          },
+        } %>
       </div>
-      <% end %>
     </div>
   </div>
   <div class="doc-body-toc" data-turbolinks="false"></div>

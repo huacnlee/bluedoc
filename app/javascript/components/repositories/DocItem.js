@@ -1,6 +1,6 @@
-import Icon from 'bluebox/iconfont';
+import { Icon } from 'bluebox/iconfont';;
 import { Timeago } from 'bluebox/timeago';
-import UserLink from 'bluebox/user';
+import { UserLink } from 'bluebox/user';
 import ContentLoader from 'react-content-loader';
 
 import { graph } from 'bluedoc/graphql';

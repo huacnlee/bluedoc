@@ -8,30 +8,34 @@ const defaultSML = '["root",["p",["span",{"t":1},["span",{"t":0},""]]]]';
 
 export default class InlineEditor extends React.PureComponent {
   inputRef = React.createRef()
+
   markdownInputRef = React.createRef()
+
   editorRef = React.createRef()
+
   editor = null
 
-  componentDidMount() {
-    const { name } = this.props;
-    const eventName = `reset:inline-editor:${name}`;
-    document.addEventListener(eventName, this.resetValue);
-
-    const focusEventName = `focus:inline-editor:${name}`;
-    document.addEventListener(focusEventName, this.focus);
-  }
-
   resetValue = () => {
-    this.editorRef.current.handleReset({ value: '', format: "markdown" });
+    this.editorRef.current.handleReset({ value: '', format: 'markdown' });
   }
 
   focus = () => {
-    setTimeout(() => App.scrollTo("#new_comment"), 50);
+    setTimeout(() => {
+      this.editorRef.current.container.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }, 50);
     this.editor.focus();
   }
 
   onChange = (markdownValue, smlValue) => {
-    const { format } = this.props;
+    const { format, onChange } = this.props;
+
+    if (onChange) {
+      onChange(markdownValue, smlValue);
+    }
+
     if (format === 'markdown') {
       this.inputRef.current.value = markdownValue;
     } else {
@@ -52,7 +56,7 @@ export default class InlineEditor extends React.PureComponent {
 
   render() {
     const {
-      directUploadURL, blobURLTemplate, name = "body_sml", markdownName = "body", value = '', format = 'markdown',
+      name = 'body_sml', markdownName = 'body', value = '', format = 'markdown',
     } = this.props;
 
     return <div>
@@ -64,8 +68,6 @@ export default class InlineEditor extends React.PureComponent {
           title=""
           ref={this.editorRef}
           getEditor={this.setEditor}
-          directUploadURL={directUploadURL}
-          blobURLTemplate={blobURLTemplate}
           onChange={this.onChange}
           format={format}
           value={value}

@@ -1,6 +1,6 @@
-import Assignees from "./Assignees";
-import Labels from "./Labels";
-import { UserAvatar } from "bluebox/avatar";
+import { UserAvatar } from 'bluebox/avatar';
+import Assignees from './Assignees';
+import Labels from './Labels';
 
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
@@ -23,11 +23,11 @@ export default class Sidebar extends React.PureComponent {
       <Labels {...this.props} />
 
       <div className="sidebar-box issue-participants mt-3">
-        <h2 className="sub-title">{participants.length} {this.t(".Participants")}</h2>
+        <h2 className="sub-title">{participants.length} {this.t('.Participants')}</h2>
         <div className="item-list">
-          {participants.map(user => <UserAvatar user={user} style="tiny" />)}
+          {participants.map(user => <UserAvatar user={user} type="tiny" />)}
         </div>
       </div>
-    </div>
+    </div>;
   }
 }

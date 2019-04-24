@@ -60,7 +60,7 @@ module BlueDoc
       attributes: ::Sanitize::Config.merge({},
        {
          # Here must use :all not "all"
-         :all  => ["class", "id", "lang", "style", "title", "width", "height", :data],
+         :all  => ["class", "nid", "id", "lang", "style", "title", "width", "height", :data],
          "a"   => ["href", "rel", "target"],
          "img" => ["alt", "src"],
          "source" => ["src", "type"],

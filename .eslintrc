@@ -8,7 +8,10 @@
     "$": true,
     "process": true,
     "__dirname": true,
-    "React": true
+    "React": true,
+    "App": true,
+    "i18n": true,
+    "ReactDOM": true,
   },
   "parser": "babel-eslint",
   "extends": ["airbnb-base", "react-app"],
