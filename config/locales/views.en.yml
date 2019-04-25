@@ -288,7 +288,7 @@ en:
       ui:
         Customize UI: Customize UI
         Site Logo: "Logo:"
-        Custom site logo: "Upload a logo for custom navigation (recommended for crop image to 45px height, and keep transparent backgrounds PNG/SVG images)."
+        Custom site logo: "Upload a logo for custom navigation (recommended for crop image to 90px height, and keep transparent backgrounds PNG/SVG images)."
         Default language: "Default language:"
         Setup default language for BlueDoc: "Setup default language for BlueDoc."
         Broadcast Message: "Broadcast Message:"
