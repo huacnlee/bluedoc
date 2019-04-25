@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        <div class="markdown-body markdown-with-toc" data-turbolinks="false" data-id="<%= @doc.id %>">
+        <div class="markdown-body markdown-with-toc" data-turbolinks="false" subject-type="Doc" subject-id="<%= @doc.id %>">
           <% if params[:mode] == "draft" %>
             <%= raw @doc.draft_body_html %>
           <% else %>

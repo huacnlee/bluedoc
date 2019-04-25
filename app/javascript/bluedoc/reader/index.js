@@ -48,14 +48,18 @@ export const getInlineComments = graph(`
 const initInlineComments = () => {
   // inline comments
   const blocks = document.querySelectorAll('.reader-body .markdown-body > [nid]');
-  const docId = document.querySelector('.reader-body .markdown-body').getAttribute('data-id');
+  const markdownBody = document.querySelector('.reader-body .markdown-body');
+  if (!markdownBody) return;
 
-  if (!docId) {
+  const subjectId = markdownBody.getAttribute('subject-id');
+  const subjectType = markdownBody.getAttribute('subject-type');
+
+  if (!subjectType || !subjectId) {
     return;
   }
 
   const existInlineComments = {};
-  getInlineComments({ subjectType: 'Doc', subjectId: docId }).then((result) => {
+  getInlineComments({ subjectType, subjectId }).then((result) => {
     result.inlineComments.forEach((item) => {
       existInlineComments[item.nid] = item.commentsCount;
     });
@@ -93,7 +97,7 @@ const initInlineComments = () => {
 
   const inlineCommentPanelRef = React.createRef();
 
-  ReactDOM.render(<InlineComments commentableType="Doc" commentableId={docId} ref={inlineCommentPanelRef} />, popoverContainer);
+  ReactDOM.render(<InlineComments commentableType={subjectType} commentableId={subjectId} ref={inlineCommentPanelRef} />, popoverContainer);
 
   const handleInlineCommentClick = (e) => {
     e.preventDefault();
