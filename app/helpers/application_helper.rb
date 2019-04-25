@@ -6,6 +6,18 @@ module ApplicationHelper
     raw BlueDoc::HTML.render(body, opts)
   end
 
+  def logo_tag(href: "/")
+    site_logo = Setting.site_logo
+    style = ""
+    if site_logo
+      style = "background-image: url('#{site_logo}')"
+    end
+
+    link_to href, class: "navbar-brand", style: style do
+      yield
+    end
+  end
+
   def sanitize_html(html)
     raw Sanitize.fragment(html, BlueDoc::Sanitize::DEFAULT)
   end

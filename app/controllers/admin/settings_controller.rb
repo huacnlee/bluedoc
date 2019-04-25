@@ -15,7 +15,12 @@ class Admin::SettingsController < Admin::ApplicationController
   end
 
   def create
+    if setting_params[:site_logo]
+      Setting.site_logo = BlueDoc::Blob.upload(setting_params[:site_logo])
+    end
+
     setting_params.keys.each do |key|
+      next if key.to_s == "site_logo"
       Setting.send("#{key}=", setting_params[key].strip) unless setting_params[key].nil?
     end
     redirect_to admin_settings_path(_action: params[:_action]), notice: t(".Setting was successfully updated")
@@ -32,6 +37,6 @@ class Admin::SettingsController < Admin::ApplicationController
         :broadcast_message_html, :application_footer_html, :dashboard_sidebar_html, :anonymous_enable,
         :plantuml_service_host, :mathjax_service_host, :confirmable_enable, :user_email_suffixes,
         :captcha_enable, :ldap_name, :ldap_title, :ldap_description, :ldap_options,
-        :mailer_from, :mailer_options)
+        :mailer_from, :mailer_options, :site_logo)
     end
 end

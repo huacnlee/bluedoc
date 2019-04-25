@@ -63,6 +63,7 @@ class Setting < RailsSettings::Base
   end
 
   field :host, type: :string, default: (ENV["APP_HOST"] || "http://localhost:3000")
+  field :site_logo, type: :string
   field :default_locale, default: "en", type: :string
   field :admin_emails, default: "admin@bluedoc.io", type: :array
   field :broadcast_message_html, default: "", type: :string

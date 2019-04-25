@@ -34,7 +34,7 @@
   <div id="editor-form">
     <div class="editor-navbar">
       <div class="navbar-title">
-        <a class="navbar-brand" href="<%= @user.to_path %>"><span class="blue">Blue</span>Doc</a>
+        <%= logo_tag href: @user.to_path do %><span class="blue">Blue</span>Doc<% end %>
         <span class= "divider">/</span>
         <%= user_name_tag @user %>
         <span class= "divider">/</span>

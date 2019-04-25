@@ -287,6 +287,8 @@ en:
         Save: Save
       ui:
         Customize UI: Customize UI
+        Site Logo: "Logo:"
+        Custom site logo: "Upload a square logo for custom navigation (recommended for transparent backgrounds, square PNG images)."
         Default language: "Default language:"
         Setup default language for BlueDoc: "Setup default language for BlueDoc."
         Broadcast Message: "Broadcast Message:"

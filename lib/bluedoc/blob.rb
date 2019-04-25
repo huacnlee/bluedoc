@@ -44,6 +44,10 @@ module BlueDoc
       end
 
       def upload(path_or_url)
+        if path_or_url.is_a?(::ActionDispatch::Http::UploadedFile)
+          path_or_url = path_or_url.tempfile.path
+        end
+
         path_or_url = path_or_url.to_s.strip
 
         filename = File.basename(path_or_url)
