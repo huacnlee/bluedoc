@@ -47,7 +47,10 @@ export const createToc = graph(`
     $url: String,
     $external: Boolean,
     $targetId: ID,
-    $position: String
+    $position: String,
+    $format: String,
+    $body: String,
+    $bodySml: String
   ) {
     createToc(
       repositoryId: $repositoryId,
@@ -55,7 +58,10 @@ export const createToc = graph(`
       url: $url,
       external: $external,
       targetId: $targetId,
-      position: $position
+      position: $position,
+      format: $format,
+      body: $body,
+      bodySml: $bodySml,
     ) {
       id,
       title,
@@ -65,10 +71,7 @@ export const createToc = graph(`
 `);
 
 export const Fetch = ({
-  api,
-  params,
-  onSuccess,
-  onError = handleError,
+  api, params, onSuccess, onError = handleError,
 }) => {
   if (!api) return;
   api(params)
@@ -78,12 +81,12 @@ export const Fetch = ({
       } else {
         onSuccess(result);
       }
-    }).catch((result) => {
+    })
+    .catch((result) => {
       console.log('error', result);
       handleError(result);
     });
 };
-
 
 export const handleSuccess = (result) => {
   console.log('success', result);
