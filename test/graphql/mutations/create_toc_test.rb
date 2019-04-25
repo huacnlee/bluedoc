@@ -62,5 +62,17 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal toc0.id, toc3.parent_id
     assert_equal toc0, toc3.parent
     assert_equal toc1, toc3.prev
+
+    # create doc and import markdown file
+    toc4 = perform(repository_id: repository.id, title: "Import Markdown", format: "markdown", body: "#title\n##test\n* list1\n* list2")
+    assert_equal true, toc4.is_a?(Toc)
+    assert_equal "Import Markdown", toc4.title
+    assert_equal "markdown", toc4.doc.format
+    assert_not_nil toc4.url
+    assert_not_nil toc4.doc
+    assert_equal toc4.title, toc4.doc.title
+    assert_equal toc4.url, toc4.doc.slug
+    assert_equal repository.id, toc4.doc.repository_id
+    assert_equal "#title\n##test\n* list1\n* list2", toc4.doc.body_plain
   end
 end
