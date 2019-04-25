@@ -50,6 +50,10 @@ const initInlineComments = () => {
   const blocks = document.querySelectorAll('.reader-body .markdown-body > [nid]');
   const docId = document.querySelector('.reader-body .markdown-body').getAttribute('data-id');
 
+  if (!docId) {
+    return;
+  }
+
   const existInlineComments = {};
   getInlineComments({ subjectType: 'Doc', subjectId: docId }).then((result) => {
     result.inlineComments.forEach((item) => {
