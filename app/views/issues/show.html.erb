@@ -47,6 +47,18 @@
             destroy: can?(:destroy, @issue),
           },
         } %>
+
+        <% if can?(:update, @issue) %>
+        <%= form_for(@issue, url: @issue.to_path, html: { id: "issue-status-actions", style: "margin-top: -71px;", class: "float-right" }) do |f| %>
+          <% if @issue.open? %>
+            <%= f.hidden_field :status, value: "closed" %>
+            <button type="submit" class="btn"><%= t(".Close Issue") %></button>
+          <% else %>
+            <%= f.hidden_field :status, value: "open" %>
+            <button type="submit" class="btn"><%= t(".Reopen Issue") %></button>
+          <% end %>
+        <% end %>
+        <% end %>
       </div>
     </div>
 
@@ -63,6 +75,8 @@
         },
         participants: @issue.participants.collect(&:as_item_json),
       } %>
+
+
     </div>
   </div>
 </div>
