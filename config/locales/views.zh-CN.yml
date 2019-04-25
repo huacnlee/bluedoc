@@ -287,7 +287,7 @@ zh-CN:
       ui:
         Customize UI: UI 定制
         Site Logo: "网站 Logo:"
-        Custom site logo: "上传一个正方形的图片用于替换导航栏的 Logo (建议使用透明背景，正方形的 PNG 图片)。"
+        Custom site logo: "上传一个的图片用于替换导航栏的 Logo (建议使用透明背景 PNG 图片)。"
         Broadcast Message: "广播消息:"
         Write boradcast message, this will show on all pages: "编写一段广播消息，可以在所有页面顶部显示 (支持 HTML)。"
         Application Footer HTML: "全局页脚 HTML:"

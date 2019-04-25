@@ -6,6 +6,11 @@
   padding-left: 48px;
   width: 0;
   overflow: hidden;
+
+  img {
+    height: 45px;
+    vertical-align: middle;
+  }
   @include breakpoint(md) {
     width: auto;
     display: inline-block;

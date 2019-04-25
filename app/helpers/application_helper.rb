@@ -10,11 +10,11 @@ module ApplicationHelper
     site_logo = Setting.site_logo
     style = ""
     if site_logo
-      style = "background-image: url('#{site_logo}')"
+      style = "background: none; padding: 0"
     end
 
     link_to href, class: "navbar-brand", style: style do
-      yield
+      image_tag(Setting.site_logo)
     end
   end
 
