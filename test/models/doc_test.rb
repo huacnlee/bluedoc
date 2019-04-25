@@ -296,8 +296,10 @@ class DocTest < ActiveSupport::TestCase
   end
 
   test "indexed_changed?" do
-    doc = create(:doc)
+    doc = build(:doc)
     assert_equal true, doc.indexed_changed?
+
+    doc.save
 
     doc = Doc.find(doc.id)
     assert_equal false, doc.indexed_changed?

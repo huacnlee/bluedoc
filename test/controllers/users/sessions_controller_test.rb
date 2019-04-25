@@ -148,6 +148,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/sign_in with uncomfirmed user, should not allow login" do
+    Setting.confirmable_enable = "1"
     user = create(:user, password: "123456", password_confirmation: "123456", confirmed_at: nil)
 
     post user_session_path, params: { user: { email: user.email, password: "123456" } }

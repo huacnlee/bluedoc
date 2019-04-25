@@ -180,8 +180,10 @@ class NoteTest < ActiveSupport::TestCase
   end
 
   test "indexed_changed?" do
-    note = create(:note)
+    note = build(:note)
     assert_equal true, note.indexed_changed?
+
+    note = create(:note)
 
     note = Note.find(note.id)
     assert_equal false, note.indexed_changed?

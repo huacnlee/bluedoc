@@ -4,6 +4,7 @@ require "test_helper"
 
 class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "normal user sign up" do
+    Setting.confirmable_enable = "1"
     get new_user_registration_path
     assert_equal 200, response.status
     assert_match /Sign in/, response.body
@@ -73,6 +74,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Signup with captcha disabled" do
+    Setting.confirmable_enable = "1"
     Setting.stub(:captcha_enable?, false) do
       get new_user_registration_path
       assert_equal 200, response.status
@@ -159,6 +161,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Sign up with Omniauth" do
+    Setting.confirmable_enable = "1"
     ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
     OmniAuth.config.add_mock(:google_oauth2, uid: "123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" })
 
