@@ -16,7 +16,8 @@ class Admin::SettingsController < Admin::ApplicationController
 
   def create
     if setting_params[:site_logo]
-      Setting.site_logo = BlueDoc::Blob.upload(setting_params[:site_logo])
+      content_type = setting_params[:site_logo].content_type
+      Setting.site_logo = "data:#{content_type};base64,#{Base64.encode64(setting_params[:site_logo].read)}"
     end
 
     setting_params.keys.each do |key|

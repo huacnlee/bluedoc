@@ -126,6 +126,33 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_html_equal expected, html
   end
 
+  test "logo_tag" do
+    html = ""
+    Setting.stub(:site_logo, "foo") do
+      html = logo_tag(href: "/test") do
+        "Foo"
+      end
+    end
+
+    assert_equal %(<a class="navbar-brand" href="/test">Foo</a>), html
+
+    Setting.stub(:site_logo, nil) do
+      html = logo_tag do
+        "BlueDoc"
+      end
+    end
+
+    assert_equal %(<a class="navbar-brand" href="/">BlueDoc</a>), html
+
+    Setting.stub(:site_logo, "data:image/png;base64,test") do
+      html = logo_tag do
+        "BlueDoc"
+      end
+    end
+
+    assert_equal %(<a class="navbar-brand" style="background: none; padding: 0" href="/"><img src="data:image/png;base64,test" /></a>), html
+  end
+
   private
 
     def assert_action_button(html, target, action_type, opts = {})

@@ -10,10 +10,10 @@
         <label class="control-label"><%= t(".Site Logo") %></label>
         <div class="clearfix">
           <div class="float-left">
-            <%= f.file_field :site_logo, class: "form-control", accept: "image/png" %>
+            <%= f.file_field :site_logo, class: "form-control", accept: "image/png,image/svg+xml" %>
           </div>
           <div class="float-left ml-3">
-            <img src="<%= Setting.site_logo %>" style="width: 45px" />
+            <img src="<%= Setting.site_logo %>" style="margin-left: 30px; height: 45px" />
           </div>
         </div>
         <div class="form-text">

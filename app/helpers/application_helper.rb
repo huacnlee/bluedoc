@@ -9,12 +9,15 @@ module ApplicationHelper
   def logo_tag(href: "/")
     site_logo = Setting.site_logo
     style = ""
-    if site_logo
+    if site_logo && site_logo.start_with?("data:")
       style = "background: none; padding: 0"
-    end
-
-    link_to href, class: "navbar-brand", style: style do
-      image_tag(Setting.site_logo)
+      link_to href, class: "navbar-brand", style: style do
+        image_tag(Setting.site_logo)
+      end
+    else
+      link_to href, class: "navbar-brand" do
+        yield
+      end
     end
   end
 
