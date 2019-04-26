@@ -3,16 +3,15 @@ import React, { Component } from 'react';
 import Dialog from 'bluebox/dialog';
 import { Icon } from 'bluebox/iconfont';
 import { Fetch, createToc } from './api';
-import { getNewUrl, readAsText } from './utils';
+import { readAsText, getValidParams, getMarkdownTitle } from './utils';
 
 export default class CreateDialog extends Component {
   constructor(props) {
     super(props);
-
     const randomSlug = Math.random()
       .toString(36)
       .substring(8);
-    const hasInputedSlug = props.info.url.length > 0;
+
     this.state = {
       // normal 正常目录+文本
       // external 外链目录
@@ -22,13 +21,16 @@ export default class CreateDialog extends Component {
       open: props.open,
       fileName: undefined,
       randomSlug,
-      hasInputedSlug,
       params: {
+        repositoryId: props.repository.id,
+        targetId: props.info.id,
+        position: props.position || 'child',
         title: '',
         url: '',
         external: false,
         format: '',
         body: '',
+        bodySml: '',
       },
     };
   }
@@ -54,43 +56,14 @@ export default class CreateDialog extends Component {
 
   // create toc inset toc tree
   handleCreateToc = () => {
-    const {
-      repository,
-      info: { id: targetId },
-      onSuccessBack,
-      active,
-      position = 'child',
-    } = this.props;
-    const {
-      type,
-      params: { title, url, body },
-    } = this.state;
-    const params = {
-      repositoryId: repository.id,
-      title,
-      targetId,
-      url,
-      position,
-    };
-    if (!url) {
-      delete params.url;
-    }
-    // if (fileName) {
-    //   params.body = body;
-    //   params.format = 'markdown';
-    // }
+    const params = getValidParams(this.state.params);
     Fetch({
       api: createToc,
       params,
       onSuccess: (result) => {
         window.App.notice(this.props.t('.Toc has successfully updated'));
-        // 修改当前文档，页面重载， 否则更新treedate数据
-        if (active) {
-          window.Turbolinks.visit(getNewUrl(url));
-        } else {
-          onSuccessBack && onSuccessBack({ ...result.createToc });
-          this.setState({ loading: false }, this.handleClose);
-        }
+        this.props.onSuccessBack && this.props.onSuccessBack({ ...result.createToc });
+        this.setState({ loading: false }, this.handleClose);
       },
     });
   };
@@ -101,13 +74,17 @@ export default class CreateDialog extends Component {
       const p = readAsText(file);
       p.then(
         (arg) => {
-          const title = file.name.split('.')[0];
-          const url = App.generateSlugByTitle(this.state.randomSlug, title);
+          const fileName = file.name.split('.')[0];
+          const url = App.generateSlugByTitle(this.state.randomSlug, fileName);
+          const title = getMarkdownTitle(arg);
           this.setState({
             fileName: file.name,
-            title,
-            url,
-            body: arg,
+            params: {
+              ...this.state.params,
+              title,
+              url,
+              body: arg,
+            },
           });
         },
         error => App.alert('Invalid Markdown file, can not read it'),
@@ -115,24 +92,12 @@ export default class CreateDialog extends Component {
     }
   };
 
-  handleChange = name => (e) => {
-    const { value } = e.currentTarget.value;
-    this.setState({ params: { ...this.state.params, [name]: value } });
-  };
+  handleChange = name => e => this.setState({ params: { ...this.state.params, [name]: e.target.value } });
 
-  handleChangeType = type => () => this.setState({ type });
-
-  onTitleChange = (e) => {
-    const name = e.currentTarget.value;
-
-    const { hasInputedSlug, randomSlug } = this.state;
-    const autoSlug = App.generateSlugByTitle(randomSlug, name);
-
-    if (!hasInputedSlug) {
-      this.setState({
-        url: autoSlug,
-      });
-    }
+  handleChangeType = type => () => {
+    const external = type === 'toc' || type === 'external';
+    const format = type === 'markdown' ? 'markdown' : '';
+    this.setState({ type, params: { ...this.state.params, external, format } });
   };
 
   renderForm = (type) => {
@@ -153,7 +118,6 @@ export default class CreateDialog extends Component {
                 autoFocus
                 onChange={this.handleChange('title')}
                 value={title}
-                ref={this.titleRef}
               />
             </div>
             <div className="form-group mb-button">
@@ -167,8 +131,7 @@ export default class CreateDialog extends Component {
                   type="text"
                   value={url}
                   placeholder={'slug'}
-                  onChange={this.handleChange('title')}
-                  ref={this.urlRef}
+                  onChange={this.handleChange('url')}
                 />
               </div>
             </div>
@@ -202,7 +165,6 @@ export default class CreateDialog extends Component {
                 autoFocus
                 onChange={this.handleChange('title')}
                 value={title}
-                ref={this.titleRef}
               />
             </div>
             <div className="form-group mb-button">
@@ -216,8 +178,7 @@ export default class CreateDialog extends Component {
                   type="text"
                   value={url}
                   placeholder={'slug'}
-                  onChange={this.handleChange('title')}
-                  ref={this.urlRef}
+                  onChange={this.handleChange('url')}
                 />
               </div>
             </div>
@@ -234,7 +195,6 @@ export default class CreateDialog extends Component {
                 autoFocus
                 onChange={this.handleChange('title')}
                 value={title}
-                ref={this.titleRef}
               />
             </div>
             <div className="form-group mb-button">
@@ -243,9 +203,8 @@ export default class CreateDialog extends Component {
                 className="form-control"
                 type="text"
                 value={url}
-                placeholder={'slug'}
-                onChange={this.handleChange('title')}
-                ref={this.urlRef}
+                placeholder={'https://bluedoc.io/'}
+                onChange={this.handleChange('url')}
               />
             </div>
           </form>
@@ -261,7 +220,6 @@ export default class CreateDialog extends Component {
                 autoFocus
                 onChange={this.handleChange('title')}
                 value={title}
-                ref={this.titleRef}
               />
             </div>
           </form>
@@ -322,7 +280,6 @@ export default class CreateDialog extends Component {
   render() {
     const { open, type } = this.state;
     const { title: dialogTitle, afterClose } = this.props;
-    console.log(type);
     return (
       <Dialog
         open={open}

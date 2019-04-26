@@ -46,7 +46,6 @@ class TocTree extends Component {
 
   componentDidMount() {
     const { tocs } = this.props;
-    console.log(tocs);
     if (!tocs) {
       this.getTocList();
     }
@@ -85,9 +84,7 @@ class TocTree extends Component {
     Fetch({
       api: moveTocList,
       params,
-      onSuccess: (result) => {
-        console.log(result, params, '排序成功');
-      },
+      onSuccess: result => console.log(result, params, '排序成功'),
     });
   };
 

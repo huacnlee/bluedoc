@@ -231,3 +231,29 @@ export const readAsText = blob => new Promise((resolve, reject) => {
   reader.onerror = reject;
   reader.readAsText(blob, 'utf-8');
 });
+
+export const getValidParams = (obj) => {
+  const param = {};
+  if (isObject(obj)) {
+    for (const key in obj) {
+      if (obj[key] !== null && obj[key] !== undefined && obj[key] !== '') {
+        param[key] = obj[key];
+      }
+    }
+  }
+  return param;
+};
+
+const isObject = (value) => {
+  const type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+};
+
+export const getMarkdownTitle = (str) => {
+  const reg = /^(#{1}\s)(.*)/;
+  const result = reg.exec(str);
+  if (result !== null) {
+    return result[0].replace('# ', '');
+  }
+  return null;
+};
