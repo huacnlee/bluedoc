@@ -19,10 +19,9 @@ export default class DialogComponent extends Component {
     };
   }
 
-
   render() {
     const {
-      open, title, children, actionsEle, content, onClose,
+      open, title, children, actionsEle, content, onClose, ...args
     } = this.props;
     return (
       <Dialog
@@ -30,14 +29,15 @@ export default class DialogComponent extends Component {
         onClose={onClose}
         onExited={this.props.afterClose}
         aria-labelledby="form-dialog-title"
+        {...args}
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-        <DialogContent style={{ minWidth: 400 }}>
-          {children || content || ''}
-        </DialogContent>
+        <DialogContent style={{ minWidth: 400 }}>{children || content || ''}</DialogContent>
         <DialogActions style={{ margin: '0 24px 24px 24px' }}>
           {actionsEle || (
-            <button className='btn' onClick={this.handleClose}>{window.i18n.t('.dialog.Cancel')}</button>
+            <button className="btn" onClick={this.handleClose}>
+              {window.i18n.t('.dialog.Cancel')}
+            </button>
           )}
         </DialogActions>
       </Dialog>

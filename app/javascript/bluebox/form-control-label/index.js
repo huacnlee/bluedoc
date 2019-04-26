@@ -1,11 +1,11 @@
-import BaseSwitch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Theme } from 'bluebox/theme';
 
 export default class Switch extends React.Component {
   render() {
     return (
       <Theme>
-        <BaseSwitch {...this.props} />
+        <FormControlLabel {...this.props} />
       </Theme>
     );
   }

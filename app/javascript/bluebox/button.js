@@ -7,7 +7,7 @@ export class Button extends Component {
     this.state = {
       disabled: props.disabled || false,
       children: props.children,
-    }
+    };
   }
 
   onClick = (e) => {
@@ -18,7 +18,7 @@ export class Button extends Component {
     if (disableWith) {
       this.setState({
         disabled: true,
-      })
+      });
     }
 
     if (onClick) {
@@ -26,28 +26,30 @@ export class Button extends Component {
     }
 
     return false;
-  }
+  };
 
   render() {
-    const { children, className = "" } = this.props;
+    const { children, className = '' } = this.props;
     const { disabled } = this.state;
 
-    let newClassName = `btn ${className}`;
+    const newClassName = `btn ${className}`;
 
-    return <button {...this.props} className={newClassName} disabled={disabled} onClick={this.onClick}>{children}</button>
+    return (
+      <button {...this.props} className={newClassName} disabled={disabled} onClick={this.onClick}>
+        {children}
+      </button>
+    );
   }
 }
 
 export class PrimaryButton extends Button {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    let { className, children } = this.props;
-    className = `btn-primary ${className}`
+    const { children, className } = this.props;
 
-    return <Button {...this.props} className={className}>{children}</Button>
+    return (
+      <Button {...this.props} className={`btn-primary ${className}`}>
+        {children}
+      </Button>
+    );
   }
 }
-
