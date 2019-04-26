@@ -35,7 +35,7 @@
       <% feature_for(:limit_user_emails) do %>
       <div class="form-group">
         <label class="control-label"><%= t(".Account Email suffix") %></label>
-        <%= f.text_area :user_email_suffixes, value: Setting.user_email_suffixes, class: "form-control", style: "height: 100px; min-height: 100px"  %>
+        <%= f.text_area :user_email_suffixes, value: Setting.user_email_suffixes.join("\n"), class: "form-control", style: "height: 100px; min-height: 100px"  %>
         <div class="form-text">
           <%= t(".Limit user registration email must has suffx with in this list, empty it to allow any emails_html") %>
         </div>
@@ -67,7 +67,7 @@
 
       <div class="form-group">
         <label class="control-label"><%= t(".Admin Emails") %></label>
-        <%= f.text_area :admin_emails, value: Setting.admin_emails, class: "form-control", style: "height: 100px; min-height: 100px"  %>
+        <%= f.text_area :admin_emails, value: Setting.admin_emails.join("\n"), class: "form-control", style: "height: 100px; min-height: 100px"  %>
         <div class="form-text">
           <%= t(".Special account emails as admin with each line") %>
         </div>

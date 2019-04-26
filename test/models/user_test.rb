@@ -391,7 +391,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, group.valid?
 
     allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+      Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
         assert_equal false, user.valid?
         assert_equal true, group.valid?
         assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
@@ -405,7 +405,7 @@ class UserTest < ActiveSupport::TestCase
     user.reload
     group.reload
     allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, "dar.com,bar.com") do
+      Setting.stub(:user_email_suffixes, %w[dar.com bar.com]) do
         assert_equal false, user.valid?
         assert_equal true, group.valid?
         assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]

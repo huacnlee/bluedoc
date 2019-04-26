@@ -269,7 +269,7 @@ Devise.setup do |config|
     config.omniauth :gitlab, Setting.omniauth_gitlab_client_id, Setting.omniauth_gitlab_client_secret, client_options: client_options
   end
   if Setting.ldap_enable?
-    config.omniauth :ldap, Setting.ldap_option_hash
+    config.omniauth :ldap, Setting.ldap_options
   end
 
   # ==> Warden configuration

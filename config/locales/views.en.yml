@@ -284,6 +284,12 @@ en:
         If you wants customize MaxJax SVG service: "If you want to customize MaxJax SVG service, you can config here. Your services must be compatible with these paths <code>${mathjax_service_host}/svg?tex={tex}</code>"
         Admin Emails: "Admin Emails:"
         Special account emails as admin with each line: "Add email to this list (one at each line or split by comma). These email will be granted admin authorities. Please be careful not to delete yourself."
+        LDAP Name: LDAP Name
+        Display name of LDAP_html: "Custom a LDAP name, for example: Windows User."
+        LDAP Title: LDAP Form Title
+        For customize the LDAP Login button title and page title_html: "Custom LDAP sign in page title (including button text)"
+        LDAP Description: LDAP Description
+        Customize the LDAP Login page description_html: "Write a HTML for description of the LDAP login."
         Save: Save
       ui:
         Customize UI: Customize UI

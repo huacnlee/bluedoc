@@ -18,7 +18,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".user-email-suffix-support-list", 0
 
     allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, "foo.com,bar.com") do
+      Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
         get account_settings_path
         assert_equal 200, response.status
         assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
