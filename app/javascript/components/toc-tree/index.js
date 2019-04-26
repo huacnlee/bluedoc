@@ -46,7 +46,7 @@ class TocTree extends Component {
 
   componentDidMount() {
     const { tocs } = this.props;
-    if (!tocs) {
+    if (tocs) {
       this.getTocList();
     }
   }

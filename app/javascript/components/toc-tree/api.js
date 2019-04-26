@@ -9,7 +9,7 @@ export const getTocList = graph(`
       title,
       url,
       parentId,
-      depth
+      depth,
     }
   }
 `);
@@ -83,15 +83,11 @@ export const Fetch = ({
       }
     })
     .catch((result) => {
-      console.log('error', result);
+      console.error('error', result);
       handleError(result);
     });
 };
 
-export const handleSuccess = (result) => {
-  console.log('success', result);
-};
+export const handleSuccess = result => console.success('success', result);
 
-export const handleError = (result) => {
-  result.error.message && window.App.notice(result.error.message, 'error');
-};
+export const handleError = result => result.error.message && window.App.notice(result.error.message, 'error');

@@ -29,7 +29,7 @@ export default class CreateDialog extends Component {
       // external 外链目录
       // markdown 导入markdown初始化文档
       // toc 纯目录，无文档
-      type: 'toc',
+      type: types[0],
       open,
       fileName: undefined,
       randomSlug,
@@ -45,7 +45,7 @@ export default class CreateDialog extends Component {
         bodySml: '',
       },
     };
-
+    this.isAutoSlug = true;
     this.items = types.map(type => t(`.${type}`));
   }
 
@@ -106,7 +106,27 @@ export default class CreateDialog extends Component {
     }
   };
 
-  handleChange = name => e => this.setState({ params: { ...this.state.params, [name]: e.target.value } });
+  handleChange = name => e => this.setState({ params: { ...this.state.params, [name]: e.target.value } }, () => {
+    if (name === 'title' && this.isAutoSlug && this.state.type === 'doc') {
+      this.autoSlug();
+    }
+    if (name === 'url') {
+      this.isAutoSlug = false;
+    }
+  });
+
+  autoSlug = () => {
+    const {
+      randomSlug,
+      params: { title },
+    } = this.state;
+    this.setState({
+      params: {
+        ...this.state.params,
+        url: App.generateSlugByTitle(randomSlug, title),
+      },
+    });
+  };
 
   handleChangeType = (index) => {
     const type = types[index];
@@ -132,7 +152,6 @@ export default class CreateDialog extends Component {
       fileName,
       params: { title, url },
     } = this.state;
-    console.log(type);
     switch (type) {
       case 'doc':
         return (
