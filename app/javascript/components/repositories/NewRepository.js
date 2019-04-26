@@ -2,7 +2,7 @@ import { Icon } from 'bluebox/iconfont';
 import { UserAvatar } from 'bluebox/avatar';
 import { Form, FormGroup, ControlLabel } from 'bluebox/form';
 import { PrimaryButton } from 'bluebox/button';
-import { Tab } from 'bluebox/tab';
+import Tab from 'bluebox/tab';
 
 const { Component } = React;
 
