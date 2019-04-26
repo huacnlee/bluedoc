@@ -3,32 +3,10 @@
 require "test_helper"
 
 class SettingTest < ActiveSupport::TestCase
-  test "anonymous_enable" do
-    assert_equal "1", Setting.anonymous_enable
-    assert_equal true, Setting.anonymous_enable?
-
-    Setting.anonymous_enable = "0"
-    assert_equal false, Setting.anonymous_enable?
-
-    Setting.anonymous_enable = "1"
-    assert_equal true, Setting.anonymous_enable?
-  end
-
-  test "confirmable_enable" do
-    assert_equal "0", Setting.confirmable_enable
-    assert_equal false, Setting.confirmable_enable?
-
-    Setting.confirmable_enable = "1"
-    assert_equal true, Setting.confirmable_enable?
-
-    Setting.confirmable_enable = "0"
-    assert_equal false, Setting.confirmable_enable?
-  end
-
   test "has_admin?" do
     Setting.admin_emails = "admin@gitbook.io\nhuacnlee@gmail.com"
-    assert_equal 2, Setting.admin_email_list.length
-    assert_equal %w[admin@gitbook.io huacnlee@gmail.com], Setting.admin_email_list
+    assert_equal 2, Setting.admin_emails.length
+    assert_equal %w[admin@gitbook.io huacnlee@gmail.com], Setting.admin_emails
     assert_equal true, Setting.has_admin?("admin@gitbook.io")
     assert_equal true, Setting.has_admin?("huacnlee@gmail.com")
     assert_equal false, Setting.has_admin?("foo@gmail.com")
@@ -59,12 +37,11 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "valid_user_email?" do
-    assert_equal "", Setting.user_email_suffixes
-    assert_equal [], Setting.user_email_suffix_list
+    assert_equal [], Setting.user_email_suffixes
     assert_equal true, Setting.valid_user_email?("foo")
 
-    Setting.stub(:user_email_suffixes, "foo.com,Bar.com") do
-      assert_equal ["foo.com", "Bar.com"], Setting.user_email_suffix_list
+    Setting.stub(:user_email_suffixes, %w[foo.com Bar.com]) do
+      assert_equal ["foo.com", "Bar.com"], Setting.user_email_suffixes
       allow_feature(:limit_user_emails) do
         assert_equal false, Setting.valid_user_email?(nil)
         assert_equal false, Setting.valid_user_email?("aaa@gmail.com")
@@ -86,7 +63,7 @@ class SettingTest < ActiveSupport::TestCase
   test "user_email_limit_enable?" do
     allow_feature(:limit_user_emails) do
       assert_equal false, Setting.user_email_limit_enable?
-      Setting.stub(:user_email_suffixes, "foo.com,Bar.com") do
+      Setting.stub(:user_email_suffixes, %w[foo.com Bar.com]) do
         assert_equal true, Setting.user_email_limit_enable?
       end
     end
@@ -103,25 +80,17 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "ldap_options" do
-    assert_kind_of String, Setting.ldap_options
-    assert_kind_of Hash, Setting.ldap_option_hash
-    Setting.ldap_options = <<~YAML
-    host: "foo.com"
-    encryption: "aaa"
-    YAML
-    assert_equal "foo.com", Setting.ldap_option_hash[:host]
-    assert_equal "aaa", Setting.ldap_option_hash[:encryption]
+    assert_kind_of Hash, Setting.ldap_options
   end
 
   test "mailer_options" do
-    assert_kind_of String, Setting.mailer_options
-    assert_kind_of Hash, Setting.mailer_option_hash
+    assert_kind_of Hash, Setting.mailer_options
     Setting.mailer_options = <<~YAML
     address: "foo.com"
     user_name: "aaa"
     YAML
 
-    assert_equal "foo.com", Setting.mailer_option_hash[:address]
-    assert_equal "aaa", Setting.mailer_option_hash[:user_name]
+    assert_equal "foo.com", Setting.mailer_options[:address]
+    assert_equal "aaa", Setting.mailer_options[:user_name]
   end
 end

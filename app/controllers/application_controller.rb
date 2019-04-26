@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     }
     QUERY
 
-    result = BlueDocSchema.execute(query)
+    result = BlueDocSchema.execute(query, context: { current_user: current_user })
     result["data"][method.to_s]
   end
 end

@@ -2,79 +2,19 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
-  SEPARATOR_REGEXP = /[\s,]/
-
-  class << self
-    def field(*keys, **opts)
-      keys = [keys] unless keys.is_a?(Array)
-
-      keys.each do |key|
-        if opts[:readonly]
-          _define_readonly_field(key)
-        else
-          _define_field(key, default: opts[:default], type: opts[:type], separator: opts[:separator])
-        end
-      end
-    end
-
-    private
-      def _define_field(key, default: nil, type: :string, separator: nil)
-        self.class.define_method(key) do
-          val = self[key]
-          default_val = default
-          default_val = default.call if default.is_a?(Proc)
-          if type == :hash
-            default_val = YAML.dump(default_val.deep_stringify_keys)
-          end
-          return default_val if val.nil?
-          val
-        end
-
-        if type == :boolean
-          self.class.define_method("#{key}?") do
-            val = self.send(key.to_sym)
-            val == "true" || val == "1"
-          end
-        elsif type == :array
-          self.class.define_method("#{key.to_s.singularize}_list") do
-            val = self.send(key.to_sym) || ""
-            separator = SEPARATOR_REGEXP if separator.nil?
-            val.split(separator).reject { |str| str.empty? }
-          end
-        elsif type == :hash
-          self.class.define_method("#{key.to_s.singularize}_hash") do
-            val = self.send(key.to_sym) || "{}"
-            if val.is_a?(String)
-              val = YAML.load(val).to_hash rescue {}
-            end
-            val.deep_symbolize_keys
-          end
-        end
-      end
-
-      def _define_readonly_field(key)
-        self.class.define_method(key) do
-          val = RailsSettings::Default[key.to_sym]
-          default = default.call if default.is_a?(Proc)
-          return default if val.nil?
-          val
-        end
-      end
-  end
-
   field :host, type: :string, default: (ENV["APP_HOST"] || "http://localhost:3000")
   field :site_logo, type: :string
   field :default_locale, default: "en", type: :string
-  field :admin_emails, default: "admin@bluedoc.io", type: :array
+  field :admin_emails, default: ["admin@bluedoc.io"], type: :array
   field :broadcast_message_html, default: "", type: :string
   field :application_footer_html, default: "", type: :string
   field :dashboard_sidebar_html, default: "", type: :string
-  field :anonymous_enable, default: "1", type: :boolean
+  field :anonymous_enable, default: true, type: :boolean
   field :plantuml_service_host, default: (ENV["PLANTUML_SERVICE_HOST"] || "http://localhost:1608"), type: :string
   field :mathjax_service_host, default: (ENV["MATHJAX_SERVICE_HOST"] || "http://localhost:4010"), type: :string
-  field :confirmable_enable, default: "0", type: :boolean
-  field :user_email_suffixes, default: "", type: :array
-  field :captcha_enable, default: "1", type: :boolean
+  field :confirmable_enable, default: false, type: :boolean
+  field :user_email_suffixes, default: [], type: :array
+  field :captcha_enable, default: true, type: :boolean
   field :license, default: "", type: :string
 
   # ActionMailer
@@ -108,17 +48,17 @@ class Setting < RailsSettings::Base
     # - password - the admin password
     bind_dn: (ENV["LDAP_BIND_DN"] || "cn=admin,dc=example,dc=org"),
     password: (ENV["LDAP_PASSWORD"] || "admin")
-  }
+  }, readonly: true
   field :ldap_name, default: "LDAP", type: :string
   field :ldap_title, default: "LDAP Login", type: :string
   field :ldap_description, default: "Enter you LDAP account to login and binding BlueDoc.", type: :string
-  field :omniauth_google_client_id, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] || ""), type: :string
-  field :omniauth_google_client_secret, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] || ""), type: :string
-  field :omniauth_github_client_id, default: (ENV["OMNIAUTH_GITHUB_CLIENT_ID"] || ""), type: :string
-  field :omniauth_github_client_secret, default: (ENV["OMNIAUTH_GITHUB_CLIENT_SECRET"] || ""), type: :string
-  field :omniauth_gitlab_client_id, default: (ENV["OMNIAUTH_GITLAB_CLIENT_ID"] || ""), type: :string
-  field :omniauth_gitlab_client_secret, default: (ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"] || ""), type: :string
-  field :omniauth_gitlab_api_prefix, default: (ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"), type: :string
+  field :omniauth_google_client_id, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] || ""), type: :string, readonly: true
+  field :omniauth_google_client_secret, default: (ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] || ""), type: :string, readonly: true
+  field :omniauth_github_client_id, default: (ENV["OMNIAUTH_GITHUB_CLIENT_ID"] || ""), type: :string, readonly: true
+  field :omniauth_github_client_secret, default: (ENV["OMNIAUTH_GITHUB_CLIENT_SECRET"] || ""), type: :string, readonly: true
+  field :omniauth_gitlab_client_id, default: (ENV["OMNIAUTH_GITLAB_CLIENT_ID"] || ""), type: :string, readonly: true
+  field :omniauth_gitlab_client_secret, default: (ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"] || ""), type: :string, readonly: true
+  field :omniauth_gitlab_api_prefix, default: (ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"), type: :string, readonly: true
 
   class << self
     LOCALES = {
@@ -127,8 +67,8 @@ class Setting < RailsSettings::Base
     }
 
     def has_admin?(email)
-      return false if self.admin_email_list.blank?
-      self.admin_email_list.include?(email.downcase)
+      return false if self.admin_emails.blank?
+      self.admin_emails.include?(email.downcase)
     end
 
     def locale_options
@@ -141,18 +81,18 @@ class Setting < RailsSettings::Base
 
     # PRO-begin
     def user_email_limit_enable?
-      License.allow_feature?(:limit_user_emails) && self.user_email_suffix_list.any?
+      License.allow_feature?(:limit_user_emails) && self.user_email_suffixes.any?
     end
 
     # Check User email by user_email_suffixes setting
     def valid_user_email?(email)
       return false if email.blank?
       return true unless License.allow_feature?(:limit_user_emails)
-      return true if self.user_email_suffix_list.blank?
+      return true if self.user_email_suffixes.blank?
 
       found = false
 
-      self.user_email_suffix_list.each do |suffix|
+      self.user_email_suffixes.each do |suffix|
         if email.downcase.end_with?(suffix.downcase)
           found = true
           break
@@ -168,7 +108,7 @@ class Setting < RailsSettings::Base
     end
 
     def ldap_enable?
-      Setting.ldap_option_hash[:host].present?
+      Setting.ldap_options[:host].present?
     end
   end
 end

@@ -16,7 +16,7 @@
 
       <div class="form-group">
         <label class="control-label"><%= t(".SMTP options") %></label>
-        <%= f.text_area :mailer_options, value: Setting.mailer_options, class: "form-control", style: "height: 180px;"  %>
+        <%= f.text_area :mailer_options, value: YAML.dump(Setting.mailer_options), class: "form-control", style: "height: 180px;"  %>
         <div class="form-text">
           <%= t(".Use YAML format to config the SMTP_html") %>
         </details>

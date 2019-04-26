@@ -44,6 +44,7 @@ class ActiveSupport::TestCase
     Rails.cache.clear
     Current.reset
     DatabaseCleaner.clean
+    Setting.clear_cache
   end
 
   # Mock Current.xxx to a value

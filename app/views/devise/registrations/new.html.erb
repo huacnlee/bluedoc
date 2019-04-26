@@ -50,7 +50,7 @@ end
 
       <% if Setting.user_email_limit_enable? %>
       <div class="form-text user-email-suffix-support-list">
-        <%= t(".Supported email suffix with list_html", emails: Setting.user_email_suffix_list.join(", ")) %>
+        <%= t(".Supported email suffix with list_html", emails: Setting.user_email_suffixes.join(", ")) %>
       </div>
       <% end %>
     <% end %>

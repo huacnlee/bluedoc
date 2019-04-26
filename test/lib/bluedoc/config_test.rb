@@ -10,7 +10,7 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
       foo: "aaa",
       bar: "bbb"
     }
-    Setting.stub(:mailer_option_hash, mailer_options) do
+    Setting.stub(:mailer_options, mailer_options) do
       assert_equal(mailer_options, Rails.application.config.action_mailer.smtp_settings)
     end
 
@@ -36,7 +36,7 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
       foo: "aaa",
       bar: "bbb"
     }
-    Setting.stub(:mailer_option_hash, mailer_options) do
+    Setting.stub(:mailer_options, mailer_options) do
       assert_equal(mailer_options, ActionMailer::Base.smtp_settings)
     end
   end

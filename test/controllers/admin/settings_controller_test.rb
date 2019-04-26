@@ -58,9 +58,22 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     post admin_settings_path, params: { setting: setting_params }
     assert_redirected_to admin_settings_path
 
-    setting_params.each_key do |key|
-      assert_equal setting_params[key]&.strip, Setting.send(key)&.strip
-    end
+    assert_equal "http://foo.com", Setting.host
+    assert_equal false, Setting.anonymous_enable
+    assert_equal false, Setting.confirmable_enable
+    assert_equal false, Setting.captcha_enable
+    assert_equal ["foo@gmail.com", "bar@gmail.com", @user.email], Setting.admin_emails
+    assert_equal "<span>hello world</span>", Setting.broadcast_message_html
+    assert_equal "<span>hello</span>", Setting.application_footer_html
+    assert_equal "<span>world</span>", Setting.dashboard_sidebar_html
+    assert_equal "http://my-plantuml.com", Setting.plantuml_service_host
+    assert_equal "http://my-mathjax.com", Setting.mathjax_service_host
+    assert_equal "zh-CN", Setting.default_locale
+    assert_equal "Foo", Setting.ldap_name
+    assert_equal "LDAP Foo", Setting.ldap_title
+    assert_equal "LDAP Foo bar", Setting.ldap_description
+    assert_equal "foo@bar.com", Setting.mailer_from
+    assert_equal({ address: "foo.com", username: "foo" }.deep_stringify_keys, Setting.mailer_options)
 
     get admin_settings_path(_action: "ui")
     assert_equal 200, response.status

@@ -21,7 +21,7 @@ module BlueDoc
       end
 
       def smtp_settings
-        Setting.mailer_option_hash.deep_symbolize_keys
+        Setting.mailer_options.deep_symbolize_keys
       end
     end
   end
