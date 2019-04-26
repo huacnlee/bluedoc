@@ -1,5 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Dialog from 'bluebox/dialog';
 import { Icon } from 'bluebox/iconfont';
 import { Fetch, createToc } from './api';
@@ -9,22 +9,28 @@ export default class CreateDialog extends Component {
   constructor(props) {
     super(props);
 
-    const { info = {}, type } = props;
-
+    const randomSlug = Math.random()
+      .toString(36)
+      .substring(8);
+    const hasInputedSlug = props.info.url.length > 0;
     this.state = {
-      open: this.props.open,
+      // normal 正常目录+文本
+      // external 外链目录
+      // markdown 导入markdown初始化文档
+      // toc 纯目录，无文档
+      type: '', // ['normal', 'external', 'markdown', 'toc']
+      open: props.open,
       fileName: undefined,
-      title: type === 'createToc' ? '' : info.title,
-      url: type === 'createToc' ? '' : info.url,
-      hasInputedSlug: info.url.length > 0,
-      randomSlug: Math.random()
-        .toString(36)
-        .substring(8),
-      body: '',
+      randomSlug,
+      hasInputedSlug,
+      params: {
+        title: '',
+        url: '',
+        external: false,
+        format: '',
+        body: '',
+      },
     };
-
-    this.titleRef = React.createRef();
-    this.urlRef = React.createRef();
   }
 
   componentDidMount() {
@@ -55,9 +61,10 @@ export default class CreateDialog extends Component {
       active,
       position = 'child',
     } = this.props;
-    const { fileName, body } = this.state;
-    const title = this.titleRef.current.value;
-    const url = this.urlRef.current.value;
+    const {
+      type,
+      params: { title, url, body },
+    } = this.state;
     const params = {
       repositoryId: repository.id,
       title,
@@ -68,10 +75,10 @@ export default class CreateDialog extends Component {
     if (!url) {
       delete params.url;
     }
-    if (fileName) {
-      params.body = body;
-      params.format = 'markdown';
-    }
+    // if (fileName) {
+    //   params.body = body;
+    //   params.format = 'markdown';
+    // }
     Fetch({
       api: createToc,
       params,
@@ -108,6 +115,13 @@ export default class CreateDialog extends Component {
     }
   };
 
+  handleChange = name => (e) => {
+    const { value } = e.currentTarget.value;
+    this.setState({ params: { ...this.state.params, [name]: value } });
+  };
+
+  handleChangeType = type => () => this.setState({ type });
+
   onTitleChange = (e) => {
     const name = e.currentTarget.value;
 
@@ -121,34 +135,48 @@ export default class CreateDialog extends Component {
     }
   };
 
-  render() {
+  renderForm = (type) => {
     const {
-      open, fileName, title = '', url = '',
+      fileName,
+      params: { title, url },
     } = this.state;
-    const {
-      title: dialogTitle, t, repository, type, afterClose,
-    } = this.props;
-    return (
-      <Dialog
-        open={open}
-        title={dialogTitle}
-        onClose={this.handleClose}
-        afterClose={afterClose}
-        actionsEle={[
-          <button className="btn" style={{ minWidth: '88px' }} onClick={this.handleClose}>
-            {t('.Cancel')}
-          </button>,
-          <button
-            className="btn btn-primary"
-            style={{ minWidth: '88px' }}
-            onClick={this.handleConfirm}
-          >
-            {t('.Update')}
-          </button>,
-        ]}
-      >
-        <form>
-          {type === 'createToc' && (
+    const { t, repository } = this.props;
+    switch (type) {
+      case 'normal':
+        return (
+          <form>
+            <div className="form-group">
+              <label className="control-label">{t('.Title')}</label>
+              <input
+                className="form-control"
+                type="text"
+                autoFocus
+                onChange={this.handleChange('title')}
+                value={title}
+                ref={this.titleRef}
+              />
+            </div>
+            <div className="form-group mb-button">
+              <label className="control-label">{t('.Url')}</label>
+              <div className="input-group d-flex">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">{`${repository.path}/`}</div>
+                </div>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={url}
+                  placeholder={'slug'}
+                  onChange={this.handleChange('title')}
+                  ref={this.urlRef}
+                />
+              </div>
+            </div>
+          </form>
+        );
+      case 'markdown':
+        return (
+          <form>
             <div className="form-group">
               <label className="form-input-file">
                 <div className="btn btn-upload mb-2">
@@ -166,35 +194,146 @@ export default class CreateDialog extends Component {
               </label>
               <div className="form-text">{t('.Import markdown tips')}</div>
             </div>
-          )}
-          <div className="form-group">
-            <label className="control-label" />
-            <input
-              className="form-control"
-              type="text"
-              autoFocus
-              onChange={this.onTitleChange}
-              defaultValue={title}
-              placeholder={t('.Title')}
-              ref={this.titleRef}
-            />
-          </div>
-          <div className="form-group mb-button">
-            <label className="control-label">{t('.Url')}</label>
-            <div className="input-group d-flex">
-              <div className="input-group-prepend">
-                <div className="input-group-text">{`${repository.path}/`}</div>
-              </div>
+            <div className="form-group">
+              <label className="control-label">{t('.Title')}</label>
               <input
                 className="form-control"
                 type="text"
-                defaultValue={url}
+                autoFocus
+                onChange={this.handleChange('title')}
+                value={title}
+                ref={this.titleRef}
+              />
+            </div>
+            <div className="form-group mb-button">
+              <label className="control-label">{t('.Url')}</label>
+              <div className="input-group d-flex">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">{`${repository.path}/`}</div>
+                </div>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={url}
+                  placeholder={'slug'}
+                  onChange={this.handleChange('title')}
+                  ref={this.urlRef}
+                />
+              </div>
+            </div>
+          </form>
+        );
+      case 'external':
+        return (
+          <form>
+            <div className="form-group">
+              <label className="control-label">{t('.Title')}</label>
+              <input
+                className="form-control"
+                type="text"
+                autoFocus
+                onChange={this.handleChange('title')}
+                value={title}
+                ref={this.titleRef}
+              />
+            </div>
+            <div className="form-group mb-button">
+              <label className="control-label">{t('.External Url')}</label>
+              <input
+                className="form-control"
+                type="text"
+                value={url}
                 placeholder={'slug'}
+                onChange={this.handleChange('title')}
                 ref={this.urlRef}
               />
             </div>
-          </div>
-        </form>
+          </form>
+        );
+      case 'toc':
+        return (
+          <form>
+            <div className="form-group">
+              <label className="control-label">{t('.Title')}</label>
+              <input
+                className="form-control"
+                type="text"
+                autoFocus
+                onChange={this.handleChange('title')}
+                value={title}
+                ref={this.titleRef}
+              />
+            </div>
+          </form>
+        );
+      case '':
+        return (
+          <>
+            <button
+              className={'btn btn-primary btn-full mb-4'}
+              onClick={this.handleChangeType('toc')}
+            >
+              {'toc'}
+            </button>
+            <button
+              className={'btn btn-primary btn-full mb-4'}
+              onClick={this.handleChangeType('external')}
+            >
+              {'external'}
+            </button>
+            <button
+              className={'btn btn-primary btn-full mb-4'}
+              onClick={this.handleChangeType('normal')}
+            >
+              {'normal'}
+            </button>
+            <button
+              className={'btn btn-primary btn-full mb-4'}
+              onClick={this.handleChangeType('markdown')}
+            >
+              {'markdown'}
+            </button>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  renderAction = (type) => {
+    const { t } = this.props;
+    if (type) {
+      return [
+        <button className="btn" style={{ minWidth: '88px' }} onClick={this.handleClose}>
+          {t('.Cancel')}
+        </button>,
+        <button
+          className="btn btn-primary"
+          style={{ minWidth: '88px' }}
+          onClick={this.handleConfirm}
+        >
+          {t('.Update')}
+        </button>,
+      ];
+    }
+    return [];
+  };
+
+  render() {
+    const { open, type } = this.state;
+    const { title: dialogTitle, afterClose } = this.props;
+    console.log(type);
+    return (
+      <Dialog
+        open={open}
+        title={dialogTitle}
+        onClose={this.handleClose}
+        afterClose={afterClose}
+        maxWidth="sm"
+        fullWidth
+        actionsEle={this.renderAction(type)}
+      >
+        {this.renderForm(type)}
       </Dialog>
     );
   }
