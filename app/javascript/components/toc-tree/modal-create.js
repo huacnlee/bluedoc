@@ -2,8 +2,24 @@
 import React, { Component } from 'react';
 import Dialog from 'bluebox/dialog';
 import { Icon } from 'bluebox/iconfont';
+import styled from 'styled-components';
 import { Fetch, createToc } from './api';
 import { readAsText, getValidParams, getMarkdownTitle } from './utils';
+
+const CardWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const Card = styled.div`
+  width: 24%;
+  text-align: center;
+  padding: 10% 3%;
+  font-size: 13px;
+  cursor: pointer;
+  &:hover {
+    background: #ebebeb;
+  }
+`;
 
 export default class CreateDialog extends Component {
   constructor(props) {
@@ -226,32 +242,20 @@ export default class CreateDialog extends Component {
         );
       case '':
         return (
-          <>
-            <button
-              className={'btn btn-primary btn-full mb-4'}
-              onClick={this.handleChangeType('toc')}
-            >
-              {'toc'}
-            </button>
-            <button
-              className={'btn btn-primary btn-full mb-4'}
-              onClick={this.handleChangeType('external')}
-            >
-              {'external'}
-            </button>
-            <button
-              className={'btn btn-primary btn-full mb-4'}
-              onClick={this.handleChangeType('normal')}
-            >
-              {'normal'}
-            </button>
-            <button
-              className={'btn btn-primary btn-full mb-4'}
-              onClick={this.handleChangeType('markdown')}
-            >
-              {'markdown'}
-            </button>
-          </>
+          <CardWrap>
+            <Card className={'card-box'} onClick={this.handleChangeType('normal')}>
+              {t('.normal')}
+            </Card>
+            <Card className={'card-box'} onClick={this.handleChangeType('markdown')}>
+              {t('.markdown')}
+            </Card>
+            <Card className={'card-box'} onClick={this.handleChangeType('toc')}>
+              {t('.toc')}
+            </Card>
+            <Card className={'card-box'} onClick={this.handleChangeType('external')}>
+              {t('.external')}
+            </Card>
+          </CardWrap>
         );
       default:
         return null;
