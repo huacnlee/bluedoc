@@ -1,7 +1,5 @@
-import { Form, FormGroup, ControlLabel } from "bluebox/form";
-import { PrimaryButton } from "bluebox/button";
-
-const slugFormat = /[^A-Za-z0-9\-\_\.]/g;
+import { Form, FormGroup, ControlLabel } from 'bluebox/form';
+import { PrimaryButton } from 'bluebox/button';
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -17,7 +15,7 @@ export default class NewNote extends React.Component {
       description: note.description,
       hasInputedSlug: false,
       randomSlug: Math.random().toString(36).substring(8),
-    }
+    };
   }
 
   t = (key) => {
@@ -28,7 +26,7 @@ export default class NewNote extends React.Component {
   }
 
   onSlugChange = (e) => {
-    const value = e.currentTarget.value;
+    const { value } = e.currentTarget;
 
     if (value.length > 0) {
       this.setState({ hasInputedSlug: true });
@@ -38,19 +36,16 @@ export default class NewNote extends React.Component {
   }
 
   onTitleChange = (e) => {
-    let title = e.currentTarget.value;
+    const title = e.currentTarget.value;
 
     const { hasInputedSlug, randomSlug } = this.state;
 
-    let autoSlug = title.replace(slugFormat, "-").toLowerCase();
-    if (autoSlug.replace(/[-]/g, "").length <= 2) {
-      autoSlug = randomSlug;
-    }
+    const autoSlug = App.generateSlugByTitle(randomSlug, title);
 
     if (!hasInputedSlug) {
       this.setState({
         slug: autoSlug,
-      })
+      });
     }
   }
 
@@ -61,59 +56,61 @@ export default class NewNote extends React.Component {
   onPrivacyChange = (e) => {
     this.setState({
       privacy: e.target.value,
-    })
+    });
   }
 
   render() {
     const { action, user, note } = this.props;
     const { t } = this;
 
-    const { title, slug, description, privacy } = this.state;
+    const {
+      title, slug, description, privacy,
+    } = this.state;
 
     return <div className="new-note-form">
-      <h2 class="sub-title">{t(".New Note")}</h2>
+      <h2 class="sub-title">{t('.New Note')}</h2>
       <Form action={action} method="POST" ref={this.formRef}>
         <FormGroup name="title" object={note}>
-          <ControlLabel title={t("activerecord.attributes.note.title")} />
-          <input type="text" name="note[title]" style={{ maxWidth: "450px" }} className="form-control" onChange={this.onTitleChange} defaultValue={title} />
+          <ControlLabel title={t('activerecord.attributes.note.title')} />
+          <input type="text" name="note[title]" style={{ maxWidth: '450px' }} className="form-control" onChange={this.onTitleChange} defaultValue={title} />
         </FormGroup>
 
         <FormGroup name="slug" object={note}>
-          <ControlLabel title={t("activerecord.attributes.note.slug")} />
+          <ControlLabel title={t('activerecord.attributes.note.slug')} />
           <div className="input-group d-flex">
             <div className="input-group-prepend"><div className="input-group-text text-overflow">{user.to_url}/notes/</div></div>
-            <input type="text" name="note[slug]" style={{ minWidth: "100px", maxWidth: "250px" }} className="form-control" defaultValue={slug} onChange={this.onSlugChange} />
+            <input type="text" name="note[slug]" style={{ minWidth: '100px', maxWidth: '250px' }} className="form-control" defaultValue={slug} onChange={this.onSlugChange} />
           </div>
         </FormGroup>
 
         <FormGroup name="description" object={note}>
-          <ControlLabel title={t("activerecord.attributes.note.description")} />
+          <ControlLabel title={t('activerecord.attributes.note.description')} />
           <textarea name="note[description]" rows="3" className="form-control" defaultValue={description} />
           <div class="form-text">
-            {t(".Use a short description to describe of this Note")}
+            {t('.Use a short description to describe of this Note')}
           </div>
         </FormGroup>
 
         <FormGroup name="privacy" object={note}>
-          <ControlLabel title={t("activerecord.attributes.note.privacy")} />
+          <ControlLabel title={t('activerecord.attributes.note.privacy')} />
           <div class="form-checkbox">
-            <label style={{ display: "block" }}>
-              <input type="radio" name="note[privacy]" onChange={this.onPrivacyChange} checked={privacy != "private"} value="public" /> {t(".Public")}
-              <div class="form-text">{t(".Anyone can see this Note")}</div>
+            <label style={{ display: 'block' }}>
+              <input type="radio" name="note[privacy]" onChange={this.onPrivacyChange} checked={privacy != 'private'} value="public" /> {t('.Public')}
+              <div class="form-text">{t('.Anyone can see this Note')}</div>
             </label>
           </div>
           <div class="form-checkbox">
-            <label style={{ display: "block" }}>
-              <input type="radio" name="note[privacy]" onChange={this.onPrivacyChange} checked={privacy == "private"} value="private" /> {t(".Private")}
-              <div class="form-text">{t(".Only you can see this Note")}</div>
+            <label style={{ display: 'block' }}>
+              <input type="radio" name="note[privacy]" onChange={this.onPrivacyChange} checked={privacy == 'private'} value="private" /> {t('.Private')}
+              <div class="form-text">{t('.Only you can see this Note')}</div>
             </label>
           </div>
         </FormGroup>
 
         <div className="form-actions">
-          <PrimaryButton onClick={this.onSubmit} disableWith="Submiting...">{t(".Create Note")}</PrimaryButton>
+          <PrimaryButton onClick={this.onSubmit} disableWith="Submiting...">{t('.Create Note')}</PrimaryButton>
         </div>
       </Form>
-    </div>
+    </div>;
   }
 }

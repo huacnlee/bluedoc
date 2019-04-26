@@ -66,6 +66,14 @@ window.App = {
       block: 'start',
     });
   },
+
+  generateSlugByTitle: (randomSlug, title) => {
+    let autoSlug = title.replace(/[^A-Za-z0-9\-\_\.]/g, '-').toLowerCase();
+    if (autoSlug.replace(/[-]/g, '').length <= 2) {
+      autoSlug = randomSlug;
+    }
+    return autoSlug;
+  },
 };
 
 document.addEventListener('turbolinks:load', () => {

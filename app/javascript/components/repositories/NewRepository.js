@@ -6,8 +6,6 @@ import { Tab } from 'bluebox/tab';
 
 const { Component } = React;
 
-const slugFormat = /[^A-Za-z0-9\-\_\.]/g;
-
 class GroupSelectMenu extends Component {
   constructor(props) {
     super(props);
@@ -187,11 +185,7 @@ export default class NewRepository extends Component {
     const name = e.currentTarget.value;
 
     const { hasInputedSlug, randomSlug } = this.state;
-
-    let autoSlug = name.replace(slugFormat, '-').toLowerCase();
-    if (autoSlug.replace(/[-]/g, '').length <= 2) {
-      autoSlug = randomSlug;
-    }
+    const autoSlug = App.generateSlugByTitle(randomSlug, name);
 
     if (!hasInputedSlug) {
       this.setState({
