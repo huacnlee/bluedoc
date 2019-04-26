@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import Dialog from 'bluebox/dialog';
-import { Icon } from 'bluebox/iconfont';
 import Tab from 'bluebox/tab';
 import { Fetch, createToc } from './api';
 import { readAsText, getValidParams, getMarkdownTitle } from './utils';
-
+import {
+  TitleInput, UrlInput, MarkdownInput, ExternalInput,
+} from './form-unit';
 // doc 正常目录+文本
 // external 外链目录
 // markdown 导入markdown初始化文档
@@ -28,7 +29,7 @@ export default class CreateDialog extends Component {
       // external 外链目录
       // markdown 导入markdown初始化文档
       // toc 纯目录，无文档
-      type: 'doc',
+      type: 'toc',
       open,
       fileName: undefined,
       randomSlug,
@@ -125,91 +126,52 @@ export default class CreateDialog extends Component {
     });
   };
 
-  renderTitle = () => (
-    <div className="form-group">
-      <label className="control-label">{this.props.t('.Title')}</label>
-      <input
-        className="form-control"
-        type="text"
-        autoFocus
-        onChange={this.handleChange('title')}
-        value={this.state.params.title}
-      />
-    </div>
-  );
-
-  renderMarkdown = () => (
-    <div className="form-group">
-      <label className="form-input-file">
-        <div className="btn btn-upload mb-2">
-          <div>
-            <Icon name="file" /> {this.props.t('.Select markdown file')}
-          </div>
-          {this.state.fileName && <div className="text-gray mt-1">{this.state.fileName}</div>}
-        </div>
-        <input type="file" className="form-control" accept=".md" onChange={this.handleMarkdown} />
-      </label>
-      <div className="form-text">{this.props.t('.Import markdown tips')}</div>
-    </div>
-  );
-
-  renderUrl = () => (
-    <div className="form-group mb-button">
-      <label className="control-label">{this.props.t('.Url')}</label>
-      <div className="input-group d-flex">
-        <div className="input-group-prepend">
-          <div className="input-group-text">{`${this.props.repository.path}/`}</div>
-        </div>
-        <input
-          className="form-control"
-          type="text"
-          value={this.state.params.url}
-          placeholder={'slug'}
-          onChange={this.handleChange('url')}
-        />
-      </div>
-    </div>
-  );
-
-  renderExternalUrl = () => (
-    <div className="form-group mb-button">
-      <label className="control-label">{this.props.t('.External Url')}</label>
-      <input
-        className="form-control"
-        type="text"
-        value={this.state.params.url}
-        placeholder={'https://bluedoc.io/'}
-        onChange={this.handleChange('url')}
-      />
-    </div>
-  );
-
   renderForm = (type) => {
+    const { t, repository } = this.props;
+    const {
+      fileName,
+      params: { title, url },
+    } = this.state;
+    console.log(type);
     switch (type) {
       case 'doc':
         return (
           <form>
-            {this.renderTitle()}
-            {this.renderUrl()}
+            <TitleInput value={title} t={t} onChange={this.handleChange('title')} />
+            <UrlInput
+              value={url}
+              t={t}
+              onChange={this.handleChange('url')}
+              prefix={repository.path}
+            />
           </form>
         );
       case 'markdown':
         return (
           <form>
-            {this.renderMarkdown()}
-            {this.renderTitle()}
-            {this.renderUrl()}
+            <MarkdownInput value={fileName} t={t} onChange={this.handleMarkdown} />
+            <TitleInput value={title} t={t} onChange={this.handleChange('title')} />
+            <UrlInput
+              value={url}
+              t={t}
+              onChange={this.handleChange('url')}
+              prefix={repository.path}
+            />
           </form>
         );
       case 'external':
         return (
           <form>
-            {this.renderTitle()}
-            {this.renderExternalUrl()}
+            <TitleInput value={title} t={t} onChange={this.handleChange('title')} />
+            <ExternalInput value={url} t={t} onChange={this.handleChange('url')} />
           </form>
         );
       case 'toc':
-        return <form>{this.renderTitle()}</form>;
+        return (
+          <form>
+            <TitleInput value={title} t={t} onChange={this.handleChange('title')} />
+          </form>
+        );
       default:
         return null;
     }
