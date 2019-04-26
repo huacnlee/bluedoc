@@ -18,7 +18,6 @@ export default class UpdataDialog extends Component {
       open,
       title,
       url,
-      // hasInputedSlug: url.length > 0,
       randomSlug: Math.random()
         .toString(36)
         .substring(8),
@@ -83,18 +82,6 @@ export default class UpdataDialog extends Component {
   };
 
   handleChange = name => e => this.setState({ [name]: e.target.value });
-
-  onTitleChange = (e) => {
-    const name = e.currentTarget.value;
-
-    const { hasInputedSlug, randomSlug } = this.state;
-    const autoSlug = App.generateSlugByTitle(randomSlug, name);
-    if (!hasInputedSlug) {
-      this.setState({
-        url: autoSlug,
-      });
-    }
-  };
 
   renderForm = () => {
     const { title = '', url = '' } = this.state;
