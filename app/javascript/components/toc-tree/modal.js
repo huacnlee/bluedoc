@@ -9,9 +9,15 @@ class ConfirmDialog extends Component {
   constructor(props) {
     super(props);
 
+    const { info = {}, type } = props;
+
     this.state = {
       open: this.props.open,
       fileName: undefined,
+      title: type === 'createToc' ? '' : info.title,
+      url: type === 'createToc' ? '' : info.url,
+      hasInputedSlug: info.url.length > 0,
+      randomSlug: Math.random().toString(36).substring(8),
       body: '',
     };
 
@@ -126,18 +132,38 @@ class ConfirmDialog extends Component {
       const file = e.target.files[0];
       const p = readAsText(file);
       p.then(
-        arg => this.setState({ fileName: file.name, body: arg }),
-        error => console.error(`read md file Failed: ${error}`),
+        (arg) => {
+          const title = file.name.split('.')[0];
+          const url = App.generateSlugByTitle(this.state.randomSlug, title);
+          this.setState({
+            fileName: file.name, title, url, body: arg,
+          });
+        },
+        error => App.alert('Invalid Markdown file, can not read it'),
       );
     }
   };
 
+  onTitleChange = (e) => {
+    const name = e.currentTarget.value;
+
+    const { hasInputedSlug, randomSlug } = this.state;
+    const autoSlug = App.generateSlugByTitle(randomSlug, name);
+
+    if (!hasInputedSlug) {
+      this.setState({
+        url: autoSlug,
+      });
+    }
+  }
+
   render() {
-    const { open, fileName } = this.state;
     const {
-      title: dialogTitle, info = {}, t, repository, type, afterClose,
+      open, fileName, title = '', url = '',
+    } = this.state;
+    const {
+      title: dialogTitle, t, repository, type, afterClose,
     } = this.props;
-    const { url = '', title = '' } = info;
     return (
       <Dialog
         open={open}
@@ -158,13 +184,31 @@ class ConfirmDialog extends Component {
         ]}
       >
         <form>
+           {type === 'createToc' && (
+            <div className="form-group">
+              <label className="form-input-file">
+                <div className="btn btn-upload mb-2">
+                  <div><Icon name="file" /> {t('.Select markdown file')}</div>
+                  {fileName && <div className="text-gray mt-1">{fileName}</div>}
+                </div>
+                <input
+                  type="file"
+                  className="form-control"
+                  accept=".md"
+                  onChange={this.handleMarkdown}
+                />
+              </label>
+              <div className="form-text">{t('.Import markdown tips')}</div>
+            </div>
+           )}
           <div className="form-group">
             <label className="control-label" />
             <input
               className="form-control"
               type="text"
               autoFocus
-              defaultValue={type === 'updateToc' ? title : ''}
+              onChange={this.onTitleChange}
+              defaultValue={title}
               placeholder={t('.Title')}
               ref={this.titleRef}
             />
@@ -178,35 +222,12 @@ class ConfirmDialog extends Component {
               <input
                 className="form-control"
                 type="text"
-                defaultValue={
-                  type === 'updateToc'
-                    ? url
-                    : Math.random()
-                      .toString(36)
-                      .substring(8)
-                }
+                defaultValue={url}
                 placeholder={'slug'}
                 ref={this.urlRef}
               />
             </div>
           </div>
-          {type === 'createToc' && (
-            <div className="form-group">
-              <label className="form-input-file">
-                <span className="btn mb-2">
-                  {t('.Import markdown file')}
-                  {fileName && <span className="text-primary">({fileName})</span>}
-                </span>
-                <input
-                  type="file"
-                  className="form-control"
-                  accept=".md"
-                  onChange={this.handleMarkdown}
-                />
-              </label>
-              <div className="form-text">{t('.Import markdown tips')}</div>
-            </div>
-          )}
         </form>
       </Dialog>
     );
