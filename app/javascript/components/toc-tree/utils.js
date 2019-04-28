@@ -250,8 +250,9 @@ const isObject = (value) => {
 };
 
 export const getMarkdownTitle = (str) => {
-  const reg = /^(#{1}\s)(.*)/;
-  const result = reg.exec(str);
+  const index = str.indexOf('\n');
+  const result = str.substr(0, index);
+
   if (result !== null) {
     return result[0].replace('# ', '');
   }
