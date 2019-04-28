@@ -23,8 +23,6 @@ export default class UpdataDialog extends Component {
         .substring(8),
       body: '',
     };
-
-    this.type = this.getType(props.info);
   }
 
   componentDidMount() {
@@ -34,16 +32,6 @@ export default class UpdataDialog extends Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyEnter);
   }
-
-  getType = ({ docId, url }) => {
-    if (docId === null && url === null) {
-      return 'toc';
-    }
-    if (docId === null) {
-      return 'external';
-    }
-    return 'doc';
-  };
 
   handleClose = () => this.setState({ open: false });
 
@@ -85,8 +73,8 @@ export default class UpdataDialog extends Component {
 
   renderForm = () => {
     const { title = '', url = '' } = this.state;
-    const { t, repository } = this.props;
-    switch (this.type) {
+    const { t, repository, nodeType } = this.props;
+    switch (nodeType) {
       case 'doc':
         return (
           <form>
