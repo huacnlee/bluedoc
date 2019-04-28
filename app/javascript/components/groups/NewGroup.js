@@ -1,11 +1,9 @@
-import { Form, FormGroup, ControlLabel } from "bluebox/form";
-import { PrimaryButton } from "bluebox/button";
-
-const slugFormat = /[^A-Za-z0-9\-\_\.]/g;
+import { Form, FormGroup, ControlLabel } from 'bluebox/form';
+import { PrimaryButton } from 'bluebox/button';
 
 export default class NewGroup extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     const { group } = props;
 
@@ -16,7 +14,7 @@ export default class NewGroup extends React.Component {
       name: group.name,
       hasInputedSlug: false,
       randomSlug: Math.random().toString(36).substring(8),
-    }
+    };
   }
 
   t = (key) => {
@@ -27,33 +25,30 @@ export default class NewGroup extends React.Component {
   }
 
   onNameChange = (e) => {
-    let name = e.currentTarget.value;
+    const name = e.currentTarget.value;
 
     const { hasInputedSlug, randomSlug } = this.state;
 
-    let autoSlug = name.replace(slugFormat, "-").toLowerCase();
-    if (autoSlug.replace(/[-]/g, "").length <= 2) {
-      autoSlug = randomSlug;
-    }
+    const autoSlug = App.generateSlugByTitle(randomSlug, name);
 
     if (!hasInputedSlug) {
       this.setState({
         slug: autoSlug,
-      })
+      });
     }
   }
 
   onSlugChange = (e) => {
-    const value = e.currentTarget.value;
+    const { value } = e.currentTarget;
 
     if (value.length > 0) {
       this.setState({
         hasInputedSlug: true,
-      })
+      });
     } else {
       this.setState({
         hasInputedSlug: false,
-      })
+      });
     }
   }
 
@@ -69,39 +64,39 @@ export default class NewGroup extends React.Component {
 
     return <div className="new-group-form">
       <div className="heading mb-4">
-        <div className="f1 mb-2">{t(".New Group")}</div>
-        <div className="text-main">{t(".Group accounts allow your team to plan, build, review, and ship documents")}</div>
+        <div className="f1 mb-2">{t('.New Group')}</div>
+        <div className="text-main">{t('.Group accounts allow your team to plan, build, review, and ship documents')}</div>
       </div>
 
       <Form action="/groups" method="POST" ref={this.formRef}>
         <FormGroup name="name" object={group}>
-          <ControlLabel name={t(".Name")} />
-          <input type="text" className="form-control" name="group[name]" style={{ width: "250px" }} onChange={this.onNameChange} defaultValue={name} />
-          <div class="form-text">{t(".Display title of this Group")}</div>
+          <ControlLabel name={t('.Name')} />
+          <input type="text" className="form-control" name="group[name]" style={{ width: '250px' }} onChange={this.onNameChange} defaultValue={name} />
+          <div class="form-text">{t('.Display title of this Group')}</div>
         </FormGroup>
 
         <FormGroup name="slug" object={group}>
-          <ControlLabel name={t(".Slug")} />
+          <ControlLabel name={t('.Slug')} />
           <div className="input-group d-flex">
             <div className="input-group-prepend"><div className="input-group-text text-overflow">{App.host}/</div></div>
             <input type="text" className="form-control" onChange={this.onSlugChange} name="group[slug]" defaultValue={slug} />
           </div>
           <div class="form-text">
-            <p>{t(".Great group path names are short and memorable")}</p>
-            <p>{t(".The letters, numbers or dash is allow, for example")} <code>BlueDoc-Help</code></p>
+            <p>{t('.Great group path names are short and memorable')}</p>
+            <p>{t('.The letters, numbers or dash is allow, for example')} <code>BlueDoc-Help</code></p>
           </div>
         </FormGroup>
 
         <FormGroup name="description" object={group}>
-          <ControlLabel name={t(".Description")} />
+          <ControlLabel name={t('.Description')} />
 
           <textarea name="group[description]" defaultValue={description} className="form-control" />
         </FormGroup>
 
         <div class="actions">
-          <PrimaryButton style={{ width: "200px" }} onClick={this.onSubmit} disableWith="Submiting...">{t(".Create Group")}</PrimaryButton>
+          <PrimaryButton style={{ width: '200px' }} onClick={this.onSubmit} disableWith="Submiting...">{t('.Create Group')}</PrimaryButton>
         </div>
       </Form>
-    </div>
+    </div>;
   }
 }

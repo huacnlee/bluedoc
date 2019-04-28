@@ -90,6 +90,20 @@
   display: block;
 }
 
+.btn-upload {
+  display: block;
+  background: #f7f7f7;
+  border: 1px solid #eee;
+  padding: 30px 0;
+  line-height: 100%;
+  height: auto;
+
+  &:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+  }
+}
+
 .btn-submit {
   width: 310px;
 }

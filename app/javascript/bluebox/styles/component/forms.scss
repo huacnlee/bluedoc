@@ -11,7 +11,9 @@ form {
   .form-text {
     font-size: 13px;
     color: $text-gray-light;
-    a { color: $text-gray-dark; }
+    a {
+      color: $text-gray-dark;
+    }
     code {
       padding: 0;
       font-weight: bold;
@@ -29,7 +31,7 @@ form {
 
   .form-error {
     margin-top: 5px;
-    color: #EE4343;
+    color: #ee4343;
   }
 }
 
@@ -41,7 +43,7 @@ form {
 }
 .form-control {
   width: 100%;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
   padding: 9px 15px;
   height: 36px;
   line-height: 1.5;
@@ -55,14 +57,13 @@ form {
   &[readonly],
   &[disabled] {
     background: #f9f9f9 !important;
-    border-color: #D9D9D9 !important;
+    border-color: #d9d9d9 !important;
   }
 }
 textarea.form-control {
   resize: vertical;
   height: auto;
 }
-
 
 .input-group {
   position: relative;
@@ -80,6 +81,7 @@ textarea.form-control {
 
   .form-control {
     width: auto;
+    flex: 1;
     min-width: 300px;
     position: relative;
     margin-bottom: 0;
@@ -120,29 +122,29 @@ textarea.form-control {
   }
 }
 
-input[type=checkbox],
-input[type=radio] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   margin-right: 5px;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   margin-bottom: 2px;
   width: 14px;
   height: 14px;
   vertical-align: middle;
-  background-image: url('~images/icon-selected.svg');
+  background-image: url("~images/icon-selected.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  -webkit-appearance:none;
+  -webkit-appearance: none;
   outline: none;
   &:checked {
-    background-image: url('~images/icon-selected-fill.svg');
+    background-image: url("~images/icon-selected-fill.svg");
   }
   &.checkbox-radius {
-    background-image: url('~images/icon-checkbox.svg');
+    background-image: url("~images/icon-checkbox.svg");
     &:checked {
-      background-image: url('~images/icon-checkbox-fill.svg');
+      background-image: url("~images/icon-checkbox-fill.svg");
     }
   }
 }
@@ -153,7 +155,7 @@ input[type=checkbox] {
   vertical-align: middle;
   position: relative;
   line-height: 1.5;
-  input[type=radio] {
+  input[type="radio"] {
     position: absolute;
     left: 1px;
     top: 2px;

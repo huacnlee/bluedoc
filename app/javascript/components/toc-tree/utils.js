@@ -1,9 +1,6 @@
 import { findDOMNode } from 'react-dom';
 
-const expandedActiveNode = ({
-  flatData,
-  active,
-}) => {
+const expandedActiveNode = ({ flatData, active }) => {
   if (!active || !flatData) return [];
   const activeNode = flatData.find(node => node.docId === active);
   if (!activeNode || !active) return flatData;
@@ -12,10 +9,7 @@ const expandedActiveNode = ({
   return setNodeExpanded({ flatData, id: parentId });
 };
 
-function setNodeExpanded({
-  id,
-  flatData,
-}) {
+function setNodeExpanded({ id, flatData }) {
   const tempArr = [...flatData];
   const nodeIndex = flatData.findIndex(node => node.id === id);
   tempArr[nodeIndex] = { ...tempArr[nodeIndex], expanded: true };
@@ -71,11 +65,7 @@ export const getTreeFromFlatData = ({
   return childrenToParents[rootKey].map(child => trav(child));
 };
 
-export function getFlatDataFromTree({
-  treeData,
-  getNodeKey,
-  ignoreCollapsed = true,
-}) {
+export function getFlatDataFromTree({ treeData, getNodeKey, ignoreCollapsed = true }) {
   if (!treeData || treeData.length < 1) {
     return [];
   }
@@ -104,10 +94,7 @@ export function getFlatDataFromTree({
  * @return void
  */
 export function walk({
-  treeData,
-  getNodeKey,
-  callback,
-  ignoreCollapsed = true,
+  treeData, getNodeKey, callback, ignoreCollapsed = true,
 }) {
   if (!treeData || treeData.length < 1) {
     return;
@@ -156,9 +143,7 @@ function walkDescendants({
   lowerSiblingCounts = [],
 }) {
   // The pseudo-root is not considered in the path
-  const selfPath = isPseudoRoot
-    ? []
-    : [...path, getNodeKey({ node, treeIndex: currentIndex })];
+  const selfPath = isPseudoRoot ? [] : [...path, getNodeKey({ node, treeIndex: currentIndex })];
   const selfInfo = isPseudoRoot
     ? null
     : {
@@ -179,10 +164,7 @@ function walkDescendants({
   }
 
   // Return self on nodes with no children or hidden children
-  if (
-    !node.children
-    || (node.expanded !== true && ignoreCollapsed && !isPseudoRoot)
-  ) {
+  if (!node.children || (node.expanded !== true && ignoreCollapsed && !isPseudoRoot)) {
     return currentIndex;
   }
 
@@ -235,4 +217,44 @@ export const getNewUrl = (url) => {
   const pathArr = window.location.pathname.split('/');
   pathArr.splice(-1, 1, url);
   return `${window.location.origin}${pathArr.join('/')}`;
+};
+
+// get markdown file content
+export const readAsText = blob => new Promise((resolve, reject) => {
+  if (!window.FileReader) {
+    reject(new Error('浏览器不支持'));
+  }
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    resolve(evt.target.result);
+  };
+  reader.onerror = reject;
+  reader.readAsText(blob, 'utf-8');
+});
+
+export const getValidParams = (obj) => {
+  const param = {};
+  if (isObject(obj)) {
+    for (const key in obj) {
+      if (obj[key] !== null && obj[key] !== undefined && obj[key] !== '') {
+        param[key] = obj[key];
+      }
+    }
+  }
+  return param;
+};
+
+const isObject = (value) => {
+  const type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+};
+
+export const getMarkdownTitle = (str) => {
+  const index = str.indexOf('\n');
+  const result = str.substr(0, index);
+
+  if (result !== null) {
+    return result[0].replace('# ', '');
+  }
+  return null;
 };

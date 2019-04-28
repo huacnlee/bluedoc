@@ -1,16 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import ContentLoader from 'react-content-loader';
-import { Switch } from 'bluebox/switch';
-import { Icon } from 'bluebox/iconfont';;
+import Switch from 'bluebox/switch';
+import { Icon } from 'bluebox/iconfont';
 import update from 'immutability-helper';
-import Tree from './tree';
+import Tree from './Tree';
 import ListNode from './ListNode';
-import dialog from './modal';
+import dialog from './Modal';
 
-import {
-  getTreeFromFlatData,
-} from './utils';
+import { getTreeFromFlatData } from './utils';
 import {
   Fetch, getTocList, moveTocList, deleteToc,
 } from './api';
@@ -20,14 +18,20 @@ class TocTree extends Component {
     super(props);
     const {
       // type : ['center', 'side']
-      abilities, repository, tocs, currentDocId, type,
+      abilities,
+      repository,
+      tocs,
+      currentDocId,
+      type,
     } = props;
     const viewMode = repository.has_toc ? 'tree' : 'list';
-    const treeData = viewMode === 'tree' ? getTreeFromFlatData({
-      flatData: tocs || [],
-      rootKey: null,
-      active: currentDocId,
-    }) : tocs;
+    const treeData = viewMode === 'tree'
+      ? getTreeFromFlatData({
+        flatData: tocs || [],
+        rootKey: null,
+        active: currentDocId,
+      })
+      : tocs;
     const canEdit = abilities.update;
     // 只有在文档页面侧边并且有权限 默认可编辑
     const editMode = canEdit && type === 'side';
@@ -42,7 +46,7 @@ class TocTree extends Component {
 
   componentDidMount() {
     const { tocs } = this.props;
-    if (!tocs) {
+    if (tocs) {
       this.getTocList();
     }
   }
@@ -50,28 +54,27 @@ class TocTree extends Component {
   // fetch Toc List
   getTocList = () => {
     const { repository, currentDocId } = this.props;
-    repository && Fetch({
-      api: getTocList,
-      params: {
-        repositoryId: repository.id,
-      },
-      onSuccess: (result) => {
-        this.setState({
-          treeData: getTreeFromFlatData({
-            flatData: result.repositoryTocs,
-            rootKey: null,
-            active: currentDocId,
-          }),
-          loading: false,
-        });
-      },
-    });
-  }
+    repository
+      && Fetch({
+        api: getTocList,
+        params: {
+          repositoryId: repository.id,
+        },
+        onSuccess: (result) => {
+          this.setState({
+            treeData: getTreeFromFlatData({
+              flatData: result.repositoryTocs,
+              rootKey: null,
+              active: currentDocId,
+            }),
+            loading: false,
+          });
+        },
+      });
+  };
 
   onMoveNode = (data) => {
-    const {
-      targetId, dragId, position,
-    } = data;
+    const { targetId, dragId, position } = data;
 
     const params = {
       id: dragId,
@@ -81,9 +84,9 @@ class TocTree extends Component {
     Fetch({
       api: moveTocList,
       params,
-      onSuccess: (result) => { console.log(result, params, '排序成功'); },
+      onSuccess: result => console.log(result, params, '排序成功'),
     });
-  }
+  };
 
   onDeleteNode = (params, reload) => {
     if (!window.confirm(this.t('.Are you sure to delete'))) {
@@ -104,18 +107,18 @@ class TocTree extends Component {
       },
     });
     return true;
-  }
+  };
 
   t = (key) => {
     if (key.startsWith('.')) {
       return window.i18n.t(`toc-tree${key}`);
     }
     return window.i18n.t(key);
-  }
+  };
 
-  onChange = treeData => this.setState({ treeData })
+  onChange = treeData => this.setState({ treeData });
 
-  toggleEditMode = () => this.setState({ editMode: !this.state.editMode })
+  toggleEditMode = () => this.setState({ editMode: !this.state.editMode });
 
   handleCreate = () => {
     const { repository } = this.props;
@@ -132,7 +135,7 @@ class TocTree extends Component {
         this.onChange(newTreeData);
       },
     });
-  }
+  };
 
   renderItems() {
     const {
@@ -144,30 +147,37 @@ class TocTree extends Component {
     }
 
     if (viewMode === 'list') {
-      return <ul className="toc-items">
-        {treeData.map(toc => <ListNode toc={toc}
-          onDeleteNode={this.onDeleteNode}
-          t={this.t}
-          editMode={editMode}
-          repository={repository}
-          currentDocId={currentDocId}
-        />)}
-      </ul>;
+      return (
+        <ul className="toc-items">
+          {treeData.map(toc => (
+            <ListNode
+              toc={toc}
+              onDeleteNode={this.onDeleteNode}
+              t={this.t}
+              editMode={editMode}
+              repository={repository}
+              currentDocId={currentDocId}
+            />
+          ))}
+        </ul>
+      );
     }
 
-    return <Tree
-      treeData={treeData}
-      editMode={editMode}
-      viewMode={viewMode}
-      onChange={this.onChange}
-      onMoveNode={this.onMoveNode}
-      onDeleteNode={this.onDeleteNode}
-      repository={repository}
-      currentDocId={currentDocId}
-      // 默认折叠的层级
-      expandedDepth={3}
-      t={this.t}
-     />;
+    return (
+      <Tree
+        treeData={treeData}
+        editMode={editMode}
+        viewMode={viewMode}
+        onChange={this.onChange}
+        onMoveNode={this.onMoveNode}
+        onDeleteNode={this.onDeleteNode}
+        repository={repository}
+        currentDocId={currentDocId}
+        // 默认折叠的层级
+        expandedDepth={3}
+        t={this.t}
+      />
+    );
   }
 
   render() {
@@ -177,13 +187,17 @@ class TocTree extends Component {
       <div className="toc-tree" data-edit-mode={editMode}>
         {type === 'side' && (
           <div className="toc-tree-toolbar doc-parents">
-            <a className="link-back text-main" href={repository.path}>{repository.name}</a>
-            <a className="link-group text-gray-light" href={user.path}>{user.name}</a>
+            <a className="link-back text-main" href={repository.path}>
+              {repository.name}
+            </a>
+            <a className="link-group text-gray-light" href={user.path}>
+              {user.name}
+            </a>
           </div>
         )}
         {type === 'center' && canEdit && (
           <div className="repo-toc-toolbar">
-            <div className='btn btn-sm btn-success btn-new-doc' onClick={this.handleCreate}>
+            <div className="btn btn-sm btn-success btn-new-doc" onClick={this.handleCreate}>
               <Icon name="add-doc" /> {this.t('.Create Doc')}
             </div>
 
@@ -199,10 +213,7 @@ class TocTree extends Component {
           </div>
         )}
         {type === 'side' && canEdit && (
-          <div
-            className="toc-tree-bottom-toolbar btn-new btn-block"
-            onClick={this.handleCreate}
-          >
+          <div className="toc-tree-bottom-toolbar btn-new btn-block" onClick={this.handleCreate}>
             <Icon name="add-doc" /> {this.t('.Create Doc')}
           </div>
         )}

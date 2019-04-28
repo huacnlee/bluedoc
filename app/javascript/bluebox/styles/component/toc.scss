@@ -7,7 +7,6 @@
   }
   // edit-switch-component
 
-
   .btn-new {
     height: 32px;
     line-height: 32px;
@@ -45,7 +44,15 @@
       justify-content: space-between;
       align-items: center;
       cursor: default;
-
+      &[data-link="true"] {
+        .item-slug,
+        .item-link {
+          cursor: pointer;
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
       &.active {
         color: $primary;
       }
@@ -60,7 +67,7 @@
         margin-left: 23px;
       }
       &.drop-child {
-        background: #E6EEFF;;
+        background: #e6eeff;
       }
     }
   }
@@ -68,10 +75,6 @@
   .item-link {
     @extend .text-overflow;
     z-index: 1;
-    cursor: pointer;
-    &:hover {
-      color: $primary;
-    }
   }
   .item-link {
     font-size: 15px;
@@ -99,7 +102,7 @@
 
 .drop {
   display: block;
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -109,8 +112,6 @@
 
 .toc-tree-bottom-toolbar {
   margin-bottom: 8px;
-
-
 }
 
 .toc-tree-toolbar {
@@ -136,7 +137,7 @@
   }
 }
 
-.toc-tree[data-edit-mode=true] {
+.toc-tree[data-edit-mode="true"] {
   .toc-items {
     .toc-item {
       cursor: default;
@@ -160,7 +161,9 @@
             border-color: #e0e0e0;
           }
         }
-        .item-connect-line { display: none; }
+        .item-connect-line {
+          display: none;
+        }
       }
       .item-more {
         display: none;

@@ -9,7 +9,7 @@ export const getTocList = graph(`
       title,
       url,
       parentId,
-      depth
+      depth,
     }
   }
 `);
@@ -47,7 +47,10 @@ export const createToc = graph(`
     $url: String,
     $external: Boolean,
     $targetId: ID,
-    $position: String
+    $position: String,
+    $format: String,
+    $body: String,
+    $bodySml: String
   ) {
     createToc(
       repositoryId: $repositoryId,
@@ -55,7 +58,10 @@ export const createToc = graph(`
       url: $url,
       external: $external,
       targetId: $targetId,
-      position: $position
+      position: $position,
+      format: $format,
+      body: $body,
+      bodySml: $bodySml,
     ) {
       id,
       title,
@@ -65,10 +71,7 @@ export const createToc = graph(`
 `);
 
 export const Fetch = ({
-  api,
-  params,
-  onSuccess,
-  onError = handleError,
+  api, params, onSuccess, onError = handleError,
 }) => {
   if (!api) return;
   api(params)
@@ -78,17 +81,13 @@ export const Fetch = ({
       } else {
         onSuccess(result);
       }
-    }).catch((result) => {
-      console.log('error', result);
+    })
+    .catch((result) => {
+      console.error('error', result);
       handleError(result);
     });
 };
 
+export const handleSuccess = result => console.success('success', result);
 
-export const handleSuccess = (result) => {
-  console.log('success', result);
-};
-
-export const handleError = (result) => {
-  result.error.message && window.App.notice(result.error.message, 'error');
-};
+export const handleError = result => result.error.message && window.App.notice(result.error.message, 'error');
