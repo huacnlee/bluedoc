@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UpdateDialog from './modal-update';
-import CreateDialog from './modal-create';
+import UpdateDialog from './EditModal';
+import CreateDialog from './NewModal';
 
 const ConfirmDialog = (props) => {
   const { type } = props;

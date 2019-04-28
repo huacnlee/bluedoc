@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Dialog from 'bluebox/dialog';
 import { Fetch, updateToc } from './api';
 import { getNewUrl } from './utils';
-import { TitleInput, UrlInput, ExternalInput } from './form-unit';
+import { TitleInput, UrlInput, ExternalInput } from './FormControls';
 
 export default class UpdataDialog extends Component {
   constructor(props) {

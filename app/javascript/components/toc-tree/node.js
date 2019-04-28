@@ -4,7 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import cn from 'classnames';
 import { getTargetPosition } from './utils';
-import dialog from './modal';
+import dialog from './Modal';
 
 class Node extends Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import { Fetch, createToc } from './api';
 import { readAsText, getValidParams, getMarkdownTitle } from './utils';
 import {
   TitleInput, UrlInput, MarkdownInput, ExternalInput,
-} from './form-unit';
+} from './FormControls';
 // doc 正常目录+文本
 // external 外链目录
 // markdown 导入markdown初始化文档

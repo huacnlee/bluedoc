@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
-import TreeNode from './node';
+import TreeNode from './Node';
 import DragLayer from './customerDragLayer';
 
 class Tree extends Component {

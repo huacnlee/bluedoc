@@ -4,9 +4,9 @@ import ContentLoader from 'react-content-loader';
 import Switch from 'bluebox/switch';
 import { Icon } from 'bluebox/iconfont';
 import update from 'immutability-helper';
-import Tree from './tree';
+import Tree from './Tree';
 import ListNode from './ListNode';
-import dialog from './modal';
+import dialog from './Modal';
 
 import { getTreeFromFlatData } from './utils';
 import {
