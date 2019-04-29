@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import TreeNode from './Node';
-import DragLayer from './customerDragLayer';
+import DragLayer from './DragLayer';
 
 class Tree extends Component {
   // del node event
