@@ -28,6 +28,17 @@ class IssueTest < ActiveSupport::TestCase
     end
   end
 
+  test "status" do
+    assert_equal [["Open", "open"], ["Closed", "closed"]], Issue.status_options
+    issue = build(:issue, status: :open)
+    assert_equal 0, issue.status_value
+    assert_equal "Open", issue.status_name
+
+    issue.status = :closed
+    assert_equal 1, issue.status_value
+    assert_equal "Closed", issue.status_name
+  end
+
   test "issue_title" do
     issue = create(:issue, title: "Hello world")
     assert_equal "Hello world ##{issue.iid}", issue.issue_title

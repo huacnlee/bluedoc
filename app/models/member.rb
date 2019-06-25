@@ -13,15 +13,7 @@ class Member < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :subject, required: false, polymorphic: true, counter_cache: true
 
-  def role_name
-    self.class.role_name(role)
-  end
-
-  def self.role_options
-    roles.keys.map { |key| [I18n.t("member_role.#{key}"), key] }
-  end
-
   def self.role_name(role)
-    I18n.t("member_role.#{role}")
+    I18n.t("activerecord.enums.member.role.#{role}")
   end
 end

@@ -151,6 +151,8 @@ GEM
     elasticsearch-transport (6.1.0)
       faraday
       multi_json
+    enumize (0.2.0)
+      rails (>= 5.0.0)
     erubi (1.8.0)
     escape_utils (1.2.1)
     exception-track (0.6.0)
@@ -456,6 +458,7 @@ DEPENDENCIES
   devise
   elasticsearch-model
   elasticsearch-rails
+  enumize
   exception-track
   factory_bot_rails
   file_validators
