@@ -617,6 +617,7 @@
 .markdown-body .cm-s-default .cm-tag{ color: #008080; }
 .markdown-body .cm-s-default .cm-def{ color: #990000; font-weight: bold; }
 
+.markdown-body,
 .markdown-raw {
   .CodeMirror {
     padding: 16px;
@@ -630,5 +631,9 @@
     .CodeMirror-vscrollbar {
       display: none !important;
     }
+  }
+
+  .CodeMirror-scroll {
+    overflow: hidden !important;
   }
 }
