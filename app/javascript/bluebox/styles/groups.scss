@@ -52,7 +52,7 @@
         }
 
         .group-description {
-          color: #777;
+          color: rgb(68, 68, 68);
           margin-top: 6px;
           max-width: 450px;
           @extend .text-overflow;
@@ -64,10 +64,10 @@
 
         .group-info {
           margin-bottom: 10px;
-          color: #777;
+          color: rgb(68, 68, 68);
 
           .group-url {
-            color: #777;
+            color: rgb(68, 68, 68);
             line-height: 100%;
 
             span {

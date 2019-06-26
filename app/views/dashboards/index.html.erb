@@ -40,7 +40,7 @@
                     </div>
                   <% else %>
                     <% docs.each do |doc| %>
-                      <div class="doc-item mb-2">
+                      <div class="doc-item">
                         <div class="doc-link"><%= link_to doc.title, doc.to_path %></div>
                         <div class="info mt-1"><%= user_name_tag(doc.last_editor) %> <%= timeago doc.body_updated_at %></div>
                       </div>
