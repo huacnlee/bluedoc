@@ -3,12 +3,16 @@
 }
 
 .card {
-  padding: 12px 20px;
+  padding: 12px 0px;
   line-height: 1.4;
   list-style: none;
   position: relative;
   @extend .card-box;
+  box-shadow: 0 0 0;
+  border: 0px;
+
   &:hover {
+    box-shadow: 0 0 0;
     .action {
       visibility: visible;
     }
@@ -49,6 +53,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    a {
+      color: $text-gray;
+    }
   }
   .action {
     visibility: hidden;

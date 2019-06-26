@@ -144,12 +144,10 @@
     }
 
     .doc-info {
-      padding-bottom: 30px;
+      padding-bottom: 20px;
       margin-bottom: 30px;
       border-bottom: 1px solid #E6E6E6;
-      .user-name {
-        @extend .link-gray-dark;
-      }
+      color: $text-gray;
     }
 
     .doc-reaction {

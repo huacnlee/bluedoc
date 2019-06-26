@@ -1,7 +1,7 @@
 .page-dashboards {
 
   .dashboard-nav {
-    background: #F7F7F7;
+    background: #fff;
     padding: 14px 0;
 
     display: flex;
@@ -62,12 +62,18 @@
     .wached-repository-groups {
       display: flex;
       flex-wrap: wrap;
+
+      .repository-title {
+        font-weight: 600;
+      }
+
+      .doc-item {
+        margin-bottom: 15px;
+      }
     }
   }
 
   .aside-wrap {
-    padding: 30px 20px;
-    background: #F9F9F9;
     margin-left: 50px;
 
     @media (max-width: 768px) {
@@ -136,7 +142,7 @@
         line-height: auto;
         color: #333;
         .fas {
-          color: #777;
+          color: rgb(68, 68, 68);
         }
         &:hover {
           color: $primary;

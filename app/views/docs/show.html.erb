@@ -65,7 +65,7 @@
 
         <h1 class="doc-title"><%= @doc.title %></h1>
 
-        <div class="doc-info text-gray-light">
+        <div class="doc-info">
           <span class="editors">
             <% @doc.editors.each do |user| %>
               <%= user_avatar_tag(user, style: :tiny) %>

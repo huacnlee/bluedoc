@@ -113,12 +113,15 @@
   .issue-list {
     .issue {
       position: relative;
-      padding: 12px 20px;
-      padding-left: 42px;
+      padding: 12px 0px;
+      padding-left: 26px;
       line-height: 1.4;
       list-style: none;
       position: relative;
-      @extend .card-box;
+
+      .title {
+        font-size: 15px;
+      }
 
       .info {
         margin-top: 8px;
@@ -144,7 +147,7 @@
       .status {
         position: absolute;
         top: 13px;
-        left: 20px;
+        left: 0px;
         width: 24px;
         .fas {
           color: $green;
@@ -162,8 +165,7 @@
 
 
   .issue-sidebar {
-    background: #f7f7f7;
-    padding: 25px;
+    padding: 25px 0;
     margin-left: 30px;
     height: 100vh;
 
@@ -282,6 +284,10 @@
   .label-item-new {
     background: #f7f7f7;
   }
+}
+
+.issue-reaction {
+  margin-top: 20px;
 }
 
 
