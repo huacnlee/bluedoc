@@ -4,7 +4,7 @@
   </div>
   <div class="path">
     <span class="issue-iid mr-2">#<%= item.subject.iid %></span>
-  <span class="issue-status issue-status-<%= item.subject.status %>"><%= t("issue_status.#{item.subject.status}") %></span>
+  <span class="issue-status issue-status-<%= item.subject.status %>"><%= item.subject.status_name %></span>
 
     <%= user_name_tag(item.subject.repository.user) %> /
     <%= repository_name_tag(item.subject&.repository) %>

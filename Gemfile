@@ -52,6 +52,7 @@ gem "action-store"
 gem "exception-track"
 gem "status-page"
 gem "rucaptcha"
+gem "enumize"
 
 gem "html-pipeline"
 gem "html-pipeline-rouge_filter"

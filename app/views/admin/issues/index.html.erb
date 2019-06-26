@@ -34,7 +34,7 @@
 
       <td><%= user_avatar_tag(item.user, style: :tiny) %></td>
 
-      <td><%= t("issue_status.#{item.status}") %></td>
+      <td style="color: <%= item.status_color %>"><%= item.status_name %></td>
 
       <td><%= l(item.created_at) %></td>
       <td class="opts">

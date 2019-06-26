@@ -13,11 +13,11 @@
             <summary class="btn btn-sm select-menu-button"><%= member.role_name %></summary>
             <details-menu class="select-menu-modal">
               <div class="select-menu-list">
-                <% Member.role_options.each do |name, role| %>
-                <button class="select-menu-item" name="member[role]" value="<%= role %>" type="submit">
-                  <div class="select-menu-item-icon"><%= icon_tag("check") if member.role == role %></div>
+                <% Member.role_options.each do |label, value| %>
+                <button class="select-menu-item" name="member[role]" value="<%= value %>" type="submit">
+                  <div class="select-menu-item-icon"><%= icon_tag("check") if member.role == value %></div>
                   <div class="select-menu-item-text js-select-button-text">
-                    <%= name %>
+                    <%= label %>
                   </div>
                 </button>
                 <% end %>

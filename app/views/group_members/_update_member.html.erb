@@ -7,11 +7,11 @@
     <%= form_with(model: member, url: group_member_path(@group, member), method: :put) do |form| %>
       <div class="form-group f6 mb-button">
         <%= form.label :role, class: "control-label" %>
-        <% Member.role_options.each do |item| %>
+        <% Member.role_options.each do |label, value| %>
         <div class="form-checkbox">
           <label>
-            <input type="radio" name="member[role]" value="<%= item[1] %>" <%= "checked" if member.role === item[1] %> >
-            <%= item[0] %>
+            <input type="radio" name="member[role]" value="<%= value %>" <%= "checked" if member.role == value %> >
+            <%= label %>
           </label>
         </div>
         <% end %>

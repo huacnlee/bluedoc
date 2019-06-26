@@ -8,20 +8,20 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "role_options" do
-    assert_equal [[I18n.t("member_role.admin"), "admin"], [I18n.t("member_role.editor"), "editor"], [I18n.t("member_role.reader"), "reader"]], Member.role_options
+    assert_equal [[I18n.t("activerecord.enums.member.role.admin"), "admin"], [I18n.t("activerecord.enums.member.role.editor"), "editor"], [I18n.t("activerecord.enums.member.role.reader"), "reader"]], Member.role_options
   end
 
   test "role_name" do
-    assert_equal I18n.t("member_role.editor"), Member.role_name("editor")
-    assert_equal I18n.t("member_role.admin"), Member.role_name("admin")
-    assert_equal I18n.t("member_role.reader"), Member.role_name("reader")
+    assert_equal I18n.t("activerecord.enums.member.role.editor"), Member.role_name("editor")
+    assert_equal I18n.t("activerecord.enums.member.role.admin"), Member.role_name("admin")
+    assert_equal I18n.t("activerecord.enums.member.role.reader"), Member.role_name("reader")
 
     member = Member.new(role: :editor)
-    assert_equal I18n.t("member_role.editor"), member.role_name
+    assert_equal I18n.t("activerecord.enums.member.role.editor"), member.role_name
     member.role = :reader
-    assert_equal I18n.t("member_role.reader"), member.role_name
+    assert_equal I18n.t("activerecord.enums.member.role.reader"), member.role_name
     member.role = :admin
-    assert_equal I18n.t("member_role.admin"), member.role_name
+    assert_equal I18n.t("activerecord.enums.member.role.admin"), member.role_name
   end
 
 
