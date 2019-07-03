@@ -13,7 +13,7 @@ cache:
   bundler: true
 
 rvm:
-  - 2.6.2
+  - 2.6.3
 
 matrix:
   fast_finish: true
@@ -28,5 +28,5 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 
 script:
-  - RAILS_ENV=test bundle exec rake
+  - RAILS_ENV=test bundle exec rails test
   - bundle exec rubocop .
