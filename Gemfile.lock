@@ -127,7 +127,6 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
-    database_cleaner (1.7.0)
     devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -454,7 +453,6 @@ DEPENDENCIES
   cancancan
   codecov
   commonmarker
-  database_cleaner
   devise
   elasticsearch-model
   elasticsearch-rails
