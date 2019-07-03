@@ -13,7 +13,7 @@ class Admin::LicensesController < Admin::ApplicationController
     else
       redirect_to admin_licenses_path, alert: t(".Invalid license")
     end
-  rescue => e
+  rescue
     redirect_to admin_licenses_path, alert: t(".Invalid license")
   end
 

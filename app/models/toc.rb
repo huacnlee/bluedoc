@@ -56,27 +56,27 @@ class Toc < ApplicationRecord
 
     docs = repo.docs.all
 
-    items.each do |toc|
+    items.each do |item|
       if last_item
-        if toc.depth > last_item.depth
+        if item.depth > last_item.depth
           parent = last_item
-        elsif toc.depth < last_item.depth
-          (last_item.depth - toc.depth).times do
+        elsif item.depth < last_item.depth
+          (last_item.depth - item.depth).times do
             parent = parent&.parent
           end
         end
       end
 
-      if toc.id.blank?
-        doc = docs.find { |doc| doc.slug == toc.url }
-        toc.id = doc&.id
+      if item.id.blank?
+        doc = docs.find { |_doc| _doc.slug == item.url }
+        item.id = doc&.id
       end
 
       last_item = self.create!(
         repository_id: repo.id,
-        title: toc.title,
-        url: toc.url,
-        doc_id: toc.id,
+        title: item.title,
+        url: item.url,
+        doc_id: item.id,
         parent: parent,
       )
     end

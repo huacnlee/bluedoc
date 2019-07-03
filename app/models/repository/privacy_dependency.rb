@@ -16,7 +16,6 @@ class Repository
   end
 
   private
-
     def check_on_make_private
       if self.privacy_changed? && self.private?
         self.destroy_depend_activities

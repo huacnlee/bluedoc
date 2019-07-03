@@ -59,7 +59,6 @@ module Mentionable
   end
 
   private
-
     def no_mention_user_ids
       self.mention_user_ids + [self.mention_actor_id]
     end

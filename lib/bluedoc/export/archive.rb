@@ -48,7 +48,7 @@ module BlueDoc
           next if blob.blank?
 
           fname = File.join(images_dir, blob.filename.to_s)
-          if File.exists?(fname)
+          if File.exist?(fname)
             # if same filename exist, rename into {key}.ext
             ext = File.extname(fname)
             fname = File.join(images_dir, "#{file_key}#{ext}")

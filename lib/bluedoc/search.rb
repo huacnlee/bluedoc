@@ -50,7 +50,6 @@ module BlueDoc
     end
 
     private
-
       def search_docs
         filter = []
 

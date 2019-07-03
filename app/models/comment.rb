@@ -56,18 +56,16 @@ class Comment < ApplicationRecord
   end
 
   def self.class_with_commentable_type(type)
-    klass = case type
+    case type
     when "Doc" then Doc
     when "Note" then Note
     when "Issue" then Issue
     when "InlineComment" then InlineComment
-    else
-      raise "Invalid :commentable_type #{type}"
+    else raise "Invalid :commentable_type #{type}"
     end
   end
 
   private
-
     def clear_relation_parent_id
       Comment.where(commentable: self.commentable, parent_id: self.id).update_all(parent_id: nil)
     end

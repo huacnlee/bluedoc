@@ -6,10 +6,10 @@ module BlueDoc::Status
       host ||= ""
       uri = URI.parse(host)
 
-      Timeout::timeout(timeout) do
+      Timeout.timeout(timeout) do
         s = TCPSocket.new(uri.host, uri.port)
         s.close
-      rescue SocketError => e
+      rescue SocketError
         raise "#{host} service not exist"
       end
     end

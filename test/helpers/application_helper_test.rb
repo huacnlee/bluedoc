@@ -154,7 +154,6 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   private
-
     def assert_action_button(html, target, action_type, opts = {})
       text = opts[:text]
       label = opts[:label]

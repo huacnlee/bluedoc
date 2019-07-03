@@ -36,7 +36,6 @@ module Smlable
         begin
           return BlueDoc::HTML.render(sml, format: :sml, public: opts[:public])
         rescue => e
-          error_body = sml
           BlueDoc::Error.track(e,
             title: "doc:#{self.id} body_html with SML render faield, fallback to markdown",
             body: sml)

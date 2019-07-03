@@ -42,7 +42,6 @@ class Repository < ApplicationRecord
       return false
     end
 
-    from_user = self.user
     self.update(user_id: user.id)
     Activities::Repository.new(self).transfer
     true

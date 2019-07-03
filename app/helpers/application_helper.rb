@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def logo_tag(href: "/")
     site_logo = Setting.site_logo
-    style = ""
+
     if site_logo && site_logo.start_with?("data:")
       style = "background: none; padding: 0"
       link_to href, class: "navbar-brand", style: style do

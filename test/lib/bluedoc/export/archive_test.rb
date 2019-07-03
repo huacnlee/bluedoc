@@ -44,10 +44,10 @@ class BlueDoc::Export::ArchiveTest < ActiveSupport::TestCase
     assert_equal expected, exporter.send(:downlod_images, body, body_html)
 
     images_dir = File.join(exporter.repo_dir, "images")
-    assert_equal true, File.exists?(File.join(images_dir, "blank.png"))
+    assert_equal true, File.exist?(File.join(images_dir, "blank.png"))
     assert_equal file0.size, File.size(File.join(images_dir, "blank.png"))
 
-    assert_equal true, File.exists?(File.join(images_dir, "#{file_key1}.png"))
+    assert_equal true, File.exist?(File.join(images_dir, "#{file_key1}.png"))
     assert_equal file0.size, File.size(File.join(images_dir, "#{file_key1}.png"))
   end
 end

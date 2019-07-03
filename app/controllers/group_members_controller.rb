@@ -39,7 +39,6 @@ class GroupMembersController < Groups::ApplicationController
   end
 
   private
-
     def member_params
       params.require(:member).permit(:user_slug, :role)
     end

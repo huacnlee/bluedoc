@@ -48,7 +48,6 @@ class Doc < ApplicationRecord
   # return next and prev of docs in same repository
   # { next: Doc, prev: Doc }
   def prev_and_next_of_docs
-    ordered_docs = self.repository.tocs.nested_tree
     { next: self.toc&.next&.doc, prev: self.toc&.prev&.doc }
   end
 
