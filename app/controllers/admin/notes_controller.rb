@@ -30,7 +30,6 @@ class Admin::NotesController < Admin::ApplicationController
   # PRO-end
 
   private
-
     def set_note
       @note = Note.unscoped.find(params[:id])
     end

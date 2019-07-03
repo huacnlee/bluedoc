@@ -5,7 +5,6 @@ class ApplicationController
   before_action :set_model_current_user
 
   protected
-
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:slug, :omniauth_provider, :omniauth_uid, :name])
     end

@@ -170,7 +170,7 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     $name = $foo
     ```
     CODE
-    svg_code = URI::encode(code_1)
+    svg_code = URI.encode(code_1)
 
     svg_url = "http://localhost:4010/svg?tex=#{svg_code}"
     # puts "svg_url: #{svg_url}"

@@ -16,11 +16,9 @@ module ActiveStorageS3ServiceURL
 
   def upload(key, io, checksum: nil, **)
     instrument :upload, key: key, checksum: checksum do
-      begin
-        object_for(key).put(upload_options.merge(body: io, content_md5: checksum, cache_control: "max-age=#{300.days}"))
-      rescue Aws::S3::Errors::BadDigest
-        raise ActiveStorage::IntegrityError
-      end
+      object_for(key).put(upload_options.merge(body: io, content_md5: checksum, cache_control: "max-age=#{300.days}"))
+    rescue Aws::S3::Errors::BadDigest
+      raise ActiveStorage::IntegrityError
     end
   end
 

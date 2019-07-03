@@ -52,7 +52,6 @@ module Memberable
   end
 
   private
-
     def add_creator_as_admin!
       return if Current.user.blank?
       self.members.create!(user_id: Current.user.id, subject: self, role: :admin)

@@ -62,21 +62,19 @@ module SoftDelete
 
     self.class.transaction do
       run_callbacks(:restore) do
-        begin
-          if attrs[:slug]
-            raise ActiveRecord::RecordNotUnique if self.class.where(slug: attrs[:slug]).any?
-          end
+        if attrs[:slug]
+          raise ActiveRecord::RecordNotUnique if self.class.where(slug: attrs[:slug]).any?
+        end
 
-          update_columns(attrs)
-        rescue ActiveRecord::RecordNotUnique => e
-          attrs[:slug] = "#{original_slug}-#{BlueDoc::Slug.random}"
-          retry_times += 1
+        update_columns(attrs)
+      rescue ActiveRecord::RecordNotUnique
+        attrs[:slug] = "#{original_slug}-#{BlueDoc::Slug.random}"
+        retry_times += 1
 
-          if retry_times < 10
-            retry
-          else
-            raise 2
-          end
+        if retry_times < 10
+          retry
+        else
+          raise 2
         end
       end
     end

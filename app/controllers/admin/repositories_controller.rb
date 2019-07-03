@@ -58,7 +58,6 @@ class Admin::RepositoriesController < Admin::ApplicationController
   # PRO-end
 
   private
-
     def set_repository
       @repository = Repository.unscoped.find(params[:id])
     end

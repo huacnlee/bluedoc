@@ -41,7 +41,6 @@ class Repository
   end
 
   private
-
     def save_source_url
       if self.gitbook_url.present?
         self.source ||= RepositorySource.new(repository: self)

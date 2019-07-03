@@ -14,7 +14,6 @@ class Doc
   end
 
   private
-
     def touch_body_updated_at_on_publish
       if self.body_touch?
         self.body_updated_at = Time.now

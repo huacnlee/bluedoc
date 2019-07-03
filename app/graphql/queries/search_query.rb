@@ -16,7 +16,7 @@ module Queries
                  search_docs(params)
                when "user"
                  search_users(params)
-               end
+      end
 
       result[:limit] = params[:limit]
       result

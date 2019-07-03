@@ -29,7 +29,6 @@ class GroupsController < Groups::ApplicationController
   end
 
   private
-
     def set_group
       @group = Group.find_by_slug!(params[:id])
     end

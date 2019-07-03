@@ -84,7 +84,6 @@ class ProRepositorySettingsControllerTest < ActionDispatch::IntegrationTest
           end
         end
       end
-
     end
   end
 

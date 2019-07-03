@@ -10,7 +10,6 @@ module BlueDoc
       end
 
       private
-
         def draw_route(path)
           return false unless File.exist?(path)
 

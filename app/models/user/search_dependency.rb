@@ -25,7 +25,6 @@ class User
   end
 
   def self.prefix_search(term, user: nil, group: nil, repository: nil, limit: 30)
-    following = []
     term = "#{term}%"
     users = User.where(type: "User").without_system
     users = users.where("slug ilike ? or email ilike ? or name ilike ?", term, term, term)
@@ -33,8 +32,6 @@ class User
     users = users.limit(limit).to_a
 
     following = []
-    group_members = []
-    repository_members = []
 
     if user
       following = user.follow_users.without_system.where("slug ilike ? or email ilike ? or name ilike ?", term, term, term)

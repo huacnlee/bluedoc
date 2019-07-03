@@ -16,8 +16,8 @@ class SmlableTest < ActiveSupport::TestCase
     assert_html_equal body_html, doc.body_html
     assert_equal draft_body_html, doc.draft_body_html
 
-    stub_method = Proc.new do |body, opts|
-      opts[:public] ? "Render public" : body
+    stub_method = Proc.new do |_body, opts|
+      opts[:public] ? "Render public" : _body
     end
 
     BlueDoc::HTML.stub(:render, stub_method) do
@@ -65,8 +65,8 @@ class SmlableTest < ActiveSupport::TestCase
     assert_equal body, version.body_plain
     assert_equal body_html, body_html
 
-    stub_method = Proc.new do |body, opts|
-      opts[:public] ? "Render public" : body
+    stub_method = Proc.new do |_body, opts|
+      opts[:public] ? "Render public" : _body
     end
 
     BlueDoc::HTML.stub(:render, stub_method) do

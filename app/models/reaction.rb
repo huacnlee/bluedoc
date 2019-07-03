@@ -68,13 +68,12 @@ class Reaction < ApplicationRecord
   end
 
   def self.class_with_subject_type(type)
-    klass = case type
+    case type
     when "Doc" then Doc
     when "Note" then Note
     when "Issue" then Issue
     when "Comment" then Comment
-    else
-      raise "Invalid :subject_type #{type}"
+    else raise "Invalid :subject_type #{type}"
     end
   end
 end

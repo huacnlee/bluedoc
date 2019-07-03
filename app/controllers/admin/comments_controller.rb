@@ -24,7 +24,6 @@ class Admin::CommentsController < Admin::ApplicationController
   end
 
   private
-
     def set_comment
       @comment = Comment.find(params[:id])
     end

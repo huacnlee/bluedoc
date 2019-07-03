@@ -55,7 +55,6 @@ class Admin::GroupsController < Admin::ApplicationController
   # PRO-end
 
   private
-
     def set_group
       @group = Group.unscoped.find(params[:id])
     end

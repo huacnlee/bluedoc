@@ -118,7 +118,6 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
   end
 
   private
-
     def assert_sanitize(expected, html)
       assert_equal expected, BlueDoc::HTML.render_without_cache(html, format: :html)
       assert_equal expected, sanitize_html(html)

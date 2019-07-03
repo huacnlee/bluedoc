@@ -48,5 +48,4 @@ class DashboardsController < ApplicationController
       @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
     end
   end
-
 end
