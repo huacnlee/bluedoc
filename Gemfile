@@ -89,7 +89,3 @@ group :development do
   gem "rubocop-performance"
   gem "graphiql-rails"
 end
-
-group :test do
-  gem "database_cleaner"
-end

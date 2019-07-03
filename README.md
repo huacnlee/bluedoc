@@ -1,6 +1,6 @@
 # BlueDoc
 
-[![CircleCI](https://circleci.com/gh/thebluedoc/bluedoc-new.svg?style=svg&circle-token=d663814d573cc68097aba6947a062680acc8b889)](https://circleci.com/gh/thebluedoc/bluedoc-new)
+[![Build Status](https://travis-ci.org/thebluedoc/bluedoc.svg?branch=master)](https://travis-ci.org/thebluedoc/bluedoc)
 
 ## Development
 

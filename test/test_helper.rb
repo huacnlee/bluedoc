@@ -18,7 +18,6 @@ require_relative "../config/environment"
 require "minitest/autorun"
 require "mocha/minitest"
 require "rails/test_help"
-require "database_cleaner"
 require_relative "../lib/bluedoc/graphql/integration_test"
 require_relative "./support/mock_elastic_search"
 require_relative "./support/groups/sign_in_helpers"
@@ -26,15 +25,12 @@ require_relative "./support/jobs_test_helper"
 
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 
-DatabaseCleaner.strategy = :deletion
-DatabaseCleaner.orm = :active_record
 OmniAuth.config.test_mode = true
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 
   setup do
-    DatabaseCleaner.start
     MockElasticSearch.start
     I18n.locale = "en"
     Setting.host = "http://www.example.com"
@@ -43,7 +39,6 @@ class ActiveSupport::TestCase
   teardown do
     Rails.cache.clear
     Current.reset
-    DatabaseCleaner.clean
     Setting.clear_cache
   end
 
