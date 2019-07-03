@@ -18,7 +18,6 @@ class Note
   end
 
   private
-
     def track_note_version_on_create
       _track_note_version
     end

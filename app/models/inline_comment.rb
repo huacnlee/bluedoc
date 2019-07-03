@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InlineComment < ApplicationRecord
   belongs_to :subject, polymorphic: true
   has_many :comments, as: :commentable, dependent: :destroy

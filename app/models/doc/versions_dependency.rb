@@ -18,7 +18,6 @@ class Doc
   end
 
   private
-
     def track_doc_version_on_create
       _track_doc_version
     end

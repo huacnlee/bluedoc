@@ -21,10 +21,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "navbar/Search" do |props|
       assert_equal "/search/docs", props[:action]
 
-      assert_react_component "navbar/Search" do |props|
-        assert_equal docs_search_path, props[:action]
-        assert_nil props[:scope]
-        assert_equal "Hello", props[:value]
+      assert_react_component "navbar/Search" do |props1|
+        assert_equal docs_search_path, props1[:action]
+        assert_nil props1[:scope]
+        assert_equal "Hello", props1[:value]
       end
     end
 
@@ -47,10 +47,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "navbar/Search" do |props|
       assert_equal "/search/notes", props[:action]
 
-      assert_react_component "navbar/Search" do |props|
-        assert_equal notes_search_path, props[:action]
-        assert_nil props[:scope]
-        assert_equal "Hello", props[:value]
+      assert_react_component "navbar/Search" do |props1|
+        assert_equal notes_search_path, props1[:action]
+        assert_nil props1[:scope]
+        assert_equal "Hello", props1[:value]
       end
     end
 
@@ -73,10 +73,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "navbar/Search" do |props|
       assert_equal "/search/issues", props[:action]
 
-      assert_react_component "navbar/Search" do |props|
-        assert_equal issues_search_path, props[:action]
-        assert_nil props[:scope]
-        assert_equal "Hello", props[:value]
+      assert_react_component "navbar/Search" do |props1|
+        assert_equal issues_search_path, props1[:action]
+        assert_nil props1[:scope]
+        assert_equal "Hello", props1[:value]
       end
     end
 

@@ -12,7 +12,7 @@ class BlueDoc::Import::BaseTest < ActiveSupport::TestCase
     importer = BlueDoc::Import::GitBook.new(repository: @repo, user: @user, url: "foo bar")
     assert_equal "foobar", importer.url
     assert_equal Rails.root.join("tmp", "BlueDoc::Import::GitBook"), importer.tmp_path
-    assert_equal true, Dir.exists?(importer.tmp_path)
+    assert_equal true, Dir.exist?(importer.tmp_path)
     assert_equal File.join(importer.tmp_path, Digest::MD5.hexdigest(importer.url)), importer.repo_dir
     assert_equal @repo, importer.repository
     assert_equal @user, importer.user

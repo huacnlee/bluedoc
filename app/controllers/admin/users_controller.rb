@@ -55,7 +55,6 @@ class Admin::UsersController < Admin::ApplicationController
   # PRO-end
 
   private
-
     def set_user
       @user = User.unscoped.find(params[:id])
     end

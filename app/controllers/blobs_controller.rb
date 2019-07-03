@@ -14,7 +14,6 @@ class BlobsController < ActiveStorage::BaseController
   end
 
   private
-
     def disk?
       BlueDoc::Blob.service_name == "Disk"
     end

@@ -59,7 +59,7 @@ module BlueDoc
             raise FileNotFoundError.new(e.message)
           end
         else
-          if !File.exists?(path_or_url)
+          if !File.exist?(path_or_url)
             raise FileNotFoundError.new(path_or_url)
           end
 

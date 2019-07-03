@@ -99,7 +99,7 @@ class TocTest < ActiveSupport::TestCase
     Last item
     TOC
     repo_tocs = repo.tocs.nested_tree
-    toc_struct = repo_tocs.map { |toc| "  " * toc.depth + toc.title }.join("\n")
+    toc_struct = repo_tocs.map { |item| "  " * item.depth + item.title }.join("\n")
     assert_equal expected_struct.strip, toc_struct.strip
 
     assert_equal 7, repo.tocs.count
@@ -129,7 +129,7 @@ class TocTest < ActiveSupport::TestCase
 
     # check nested order
     repo_tocs = repo.tocs.nested_tree
-    toc_struct = repo_tocs.map { |toc| "  " * toc.depth + toc.title }.join("\n")
+    toc_struct = repo_tocs.map { |item| "  " * item.depth + item.title }.join("\n")
     expected_struct = <<~TOC
     First item
     title 1

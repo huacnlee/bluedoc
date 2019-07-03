@@ -27,9 +27,6 @@ class Doc
     end
 
     def sync_update_toc_after_update
-      toc_url = self.slug
-      toc_url = self.slug_before_last_save if self.saved_change_to_slug?
-
       # Only update on slug or title has changed
       if self.saved_change_to_slug? || self.saved_change_to_title?
         self.toc&.update(title: self.title, url: self.slug)

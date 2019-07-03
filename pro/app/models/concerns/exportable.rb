@@ -48,7 +48,7 @@ module Exportable
               self.title
             else
               "bluedoc-export"
-            end
+    end
 
     if type == :pdf
       BlueDoc::Slug.filenameize("#{fname}.pdf")

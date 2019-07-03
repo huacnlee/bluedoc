@@ -21,9 +21,7 @@ class Issue
     records.sort_by { |record| self.label_ids.index(record.id) }
   end
 
-  def labels=(val)
-    @labels = val
-  end
+  attr_writer :labels
 
   class << self
     def preload_labels

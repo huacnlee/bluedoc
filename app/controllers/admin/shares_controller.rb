@@ -14,7 +14,6 @@ class Admin::SharesController < Admin::ApplicationController
   end
 
   private
-
     def set_share
       @share = Share.find(params[:id])
     end

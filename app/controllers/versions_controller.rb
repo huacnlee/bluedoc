@@ -10,7 +10,6 @@ class VersionsController < ApplicationController
   end
 
   private
-
     def set_version
       @version = Version.find(params[:id])
       @current_version = @version.subject.versions.includes(:user).first

@@ -28,7 +28,6 @@ module BlueDoc
 
           title_length = raw_text.length
           min_length = title_length * 0.3
-          words_length = /[a-z0-9]/i.match(raw_text)&.length || 0
 
           header_id = raw_text.gsub(/[^a-z0-9]+/i, "-").downcase.gsub(/^\-|\-$/, "")
           if title_length - header_id.length > min_length

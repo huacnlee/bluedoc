@@ -19,7 +19,6 @@ class Comment
   end
 
   private
-
     def watch_commentable_on_create
       return if self.commentable.blank?
       return if self.user.blank?

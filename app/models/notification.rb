@@ -45,12 +45,12 @@ class Notification < ActiveRecord::Base
 
     # create Activity for receivers, for dashboard timeline
     Notification.transaction do
-      user_ids.each do |user_id|
+      user_ids.each do |_user_id|
         note = Notification.new(notification_params)
-        note.user_id = user_id
+        note.user_id = _user_id
 
         # ingore create, if user not has ability to read target
-        ability = Ability.new(User.new(id: user_id))
+        ability = Ability.new(User.new(id: _user_id))
         next if ability.cannot?(:read, note.target)
 
         note.save!

@@ -379,7 +379,7 @@ class DocTest < ActiveSupport::TestCase
       foo-bar-2
     TOC
 
-    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |toc| "  " * toc.depth + toc.url }.join("\n").strip
+    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
 
     assert_not_nil toc
     repo = create(:repository)
@@ -401,8 +401,7 @@ class DocTest < ActiveSupport::TestCase
       foo-bar-11
     foo-bar-2
     TOC
-    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |toc| "  " * toc.depth + toc.url }.join("\n").strip
-
+    assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
   end
 
   test "transfer_docs" do

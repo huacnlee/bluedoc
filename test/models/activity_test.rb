@@ -155,8 +155,6 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal @actor.id, activity.actor_id
     assert_nil activity.repository_id
     assert_equal group.id, activity.group_id
-
-
   end
 
   test "action_to_actor?" do

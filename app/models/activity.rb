@@ -55,8 +55,8 @@ class Activity < ApplicationRecord
 
     # create Activity for receivers, for dashboard timeline
     Activity.bulk_insert(set_size: 100) do |worker|
-      user_ids.each do |user_id|
-        worker.add(activity_params.merge(user_id: user_id))
+      user_ids.each do |_user_id|
+        worker.add(activity_params.merge(user_id: _user_id))
       end
     end
   end
