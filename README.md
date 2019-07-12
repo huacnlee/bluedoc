@@ -4,6 +4,35 @@
 
 ## Development
 
+Setup base development env have two approach
+
+Default admin user: ***admin@bluedoc.io*** password: ***123456***
+
+### Setup with docker
+
+First you must have docker services and start it and then 
+
+`$ docker-compose up dev` 
+
+That all depends softwares have ready
+
+Next
+
+```bash
+$ yarn install
+$ bundle install
+$ rails db:create db:migrate
+$ rails s
+$ yarn start #other termal tab
+$ sidekiq -C ./config/sidekiq.yml #other termal tab if u need
+```
+
+Now u can open brower and visit [bluedoc](http://localhost:3000)
+
+More configuration you can look from ***docker-compose.yml***
+
+### Setup with local machine
+
 You need install depends softwares first:
 
 ```bash
