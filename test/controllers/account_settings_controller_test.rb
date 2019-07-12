@@ -45,7 +45,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       description: "new #{@user.description}",
       location: "new #{@user.location}",
       url: "http://foo.com",
-      locale: "en"
+      locale: "zh-CN"
     }
 
     assert_require_user do
@@ -60,7 +60,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     put account_settings_path, params: { user: account_params, _by: :profile }
     assert_redirected_to account_settings_path
     follow_redirect!
-    assert_select ".notice", text: "You have successfully updated your profile."
+    assert_select ".notice", text: "个人资料已经更新成功。"
     @user.reload
     assert_equal account_params[:name], @user.name
     assert_equal account_params[:slug], @user.slug

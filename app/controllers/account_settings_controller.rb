@@ -44,7 +44,7 @@ class AccountSettingsController < ApplicationController
 
     def update_profile
       if @user.update(user_params)
-        redirect_to account_settings_path, notice: t(".You have successfully updated your profile")
+        redirect_to account_settings_path, notice: t(".You have successfully updated your profile", locale: set_locale)
       else
         render :show
       end
