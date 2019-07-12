@@ -58,16 +58,16 @@ class DocTest < ActiveSupport::TestCase
     doc.draft_body = "Draft foo"
     assert_equal false, doc.body_touch?
     doc.save
-    assert_equal old_updated_at, doc.body_updated_at
+    assert_in_delta old_updated_at, doc.body_updated_at
     repo.reload
-    assert_equal old_repo_updated_at, repo.updated_at
+    assert_in_delta old_repo_updated_at, repo.updated_at
 
     # update title or other nod changes
     doc.title = "New Title"
     doc.save
-    assert_equal old_updated_at, doc.body_updated_at
+    assert_in_delta old_updated_at, doc.body_updated_at
     repo.reload
-    assert_equal old_repo_updated_at, repo.updated_at
+    assert_in_delta old_repo_updated_at, repo.updated_at
 
     # change body
     doc.body = "Foo"
