@@ -24,6 +24,7 @@
     "immutability-helper": "^3.0.0",
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
+    "lodash.template": "^4.2.4",
     "popper.js": "^1.15.0",
     "primer-support": "^4.7.2",
     "primer-utilities": "^4.14.4",
