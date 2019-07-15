@@ -42,7 +42,9 @@ class Node extends Component {
     if (this.nodeType === 'toc') return;
     if (this.nodeType === 'external') {
       window.open(this.getUrl());
+      return;
     }
+
     window.Turbolinks.visit(this.getUrl());
   };
 
