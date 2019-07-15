@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  dev:
+    image: ruby:2.5.3
+    links:
+      - postgres
+      - redis
+      - elasticsearch
+    environment:
+      LDAP_HOST: ${LDAP_HOST:-localhost}
+      OMNIAUTH_GITLAB_API_PREFIX: ${OMNIAUTH_GITLAB_API_PREFIX:-''}
+      OMNIAUTH_GITLAB_CLIENT_SECRET: ${OMNIAUTH_GITLAB_CLIENT_SECRET:-''}
+      OMNIAUTH_GITLAB_CLIENT_ID: ${OMNIAUTH_GITLAB_CLIENT_ID:-''}
+      OMNIAUTH_GITHUB_CLIENT_SECRET: ${OMNIAUTH_GITHUB_CLIENT_SECRET:-''}
+      OMNIAUTH_GITHUB_CLIENT_ID: ${OMNIAUTH_GITHUB_CLIENT_ID:-''}
+      OMNIAUTH_GOOGLE_CLIENT_SECRET: ${OMNIAUTH_GOOGLE_CLIENT_SECRET:-''}
+      OMNIAUTH_GOOGLE_CLIENT_ID: ${OMNIAUTH_GOOGLE_CLIENT_ID:-''}
+    command: echo 'dev environment started'
+
+  postgres:
+    image: postgres:9.6.5
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB_NAME:-bluedoc-dev}
+    volumes:
+      - postgres:/usr/local/var/postgres
+
+  redis:
+    image: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+
+  elasticsearch:
+    image: elasticsearch:6.8.1
+    ports:
+      - "${ES_PORT:-9200}:9200"
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+volumes:
+  postgres:
+  elasticsearch:
