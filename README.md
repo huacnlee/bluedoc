@@ -21,7 +21,7 @@ Next
 ```bash
 $ yarn install
 $ bundle install
-$ rails db:create db:migrate
+$ POSTGRES_USER=postgres POSTGRES_HOST=localhost rails db:create db:migrate
 $ rails s
 $ yarn start #other termal tab
 $ sidekiq -C ./config/sidekiq.yml #other termal tab if u need

@@ -22,10 +22,9 @@ services:
   postgres:
     image: postgres:9.6.5
     ports:
-      - "${POSTGRES_URL:-5432}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-''}
       POSTGRES_DB: ${POSTGRES_DB_NAME:-bluedoc-dev}
     volumes:
       - postgres:/usr/local/var/postgres
@@ -33,12 +32,12 @@ services:
   redis:
     image: redis
     ports:
-      - "${REDIS_URL:-6379}:6379"
+      - "${REDIS_PORT:-6379}:6379"
 
   elasticsearch:
     image: elasticsearch:6.8.1
     ports:
-      - "${ES_URL:-9200}:9200"
+      - "${ES_PORT:-9200}:9200"
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
 
