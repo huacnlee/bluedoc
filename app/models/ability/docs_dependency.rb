@@ -3,7 +3,7 @@
 class Ability
   def abilities_for_docs
     can :read, Doc do |doc|
-      can? :read, doc.repository
+      doc.share || can?(:read, doc.repository)
     end
     can :create_comment, Doc do |doc|
       can? :read, doc.repository

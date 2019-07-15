@@ -3,6 +3,25 @@
 require "test_helper"
 
 class AbilityTest < ActiveSupport::TestCase
+  test "anonymous can not read private repository doc" do
+    ab = Ability.new nil
+    private_doc = build :doc, repository: build(:repository, privacy: :private)
+    assert ab.cannot?(:read, private_doc)
+  end
+
+  test "anonymous can read public repository doc" do
+    ab = Ability.new nil
+    public_repository_doc = build :doc
+    assert ab.can?(:read, public_repository_doc)
+  end
+
+  test "anonymous can read private repository but shared doc" do
+    ab = Ability.new nil
+    shared_doc = build :doc, repository: build(:repository, privacy: :private)
+    shared_doc.stubs(:share).returns(build :share)
+    assert ab.can?(:read, shared_doc)
+  end
+
   test "admin can manage all" do
     user = create(:user)
     user.stub(:admin?, true) do
