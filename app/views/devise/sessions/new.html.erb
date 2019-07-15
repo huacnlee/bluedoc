@@ -60,13 +60,13 @@ auth_info = auth_session["info"]
   <div class="text-center f6 text-gray-light mb-3"><%= t(".Sign in with") %></div>
   <div class="d-flex text-center text-gray">
     <% if Devise.omniauth_configs[:google_oauth2] %>
-      <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), class: "" %>
+      <%= link_to icon_tag("google", label: "Google"), omniauth_authorize_path("user", "google_oauth2"), method: :post, class: "" %>
     <% end %>
     <% if Devise.omniauth_configs[:github] %>
-      <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), class: "flex-auto" %>
+      <%= link_to icon_tag("github", label: "GitHub"), omniauth_authorize_path("user", "github"), method: :post, class: "flex-auto" %>
     <% end %>
     <% if Devise.omniauth_configs[:gitlab] %>
-      <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), class: "" %>
+      <%= link_to icon_tag("gitlab", label: "GitLab"), omniauth_authorize_path("user", "gitlab"), method: :post, class: "" %>
     <% end %>
   </div>
 </div>

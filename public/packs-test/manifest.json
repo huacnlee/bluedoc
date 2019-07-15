@@ -5,12 +5,12 @@
   "admin.js.map": "/packs-test/js/admin-43c3372f297b8cd1d925.js.map",
   "application.css": "/packs-test/css/application-7835f9d6.css",
   "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
-  "application.js": "/packs-test/js/application-8237825d58df7fd80a00.js",
-  "application.js.map": "/packs-test/js/application-8237825d58df7fd80a00.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-d28befe3.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-d28befe3.css.map",
-  "bluedoc.js": "/packs-test/js/bluedoc-515d537ec6416160fa00.js",
-  "bluedoc.js.map": "/packs-test/js/bluedoc-515d537ec6416160fa00.js.map",
+  "application.js": "/packs-test/js/application-21ef6da1eba8d167189c.js",
+  "application.js.map": "/packs-test/js/application-21ef6da1eba8d167189c.js.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-3de1729e.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-3de1729e.css.map",
+  "bluedoc.js": "/packs-test/js/bluedoc-c2ce238117d006386194.js",
+  "bluedoc.js.map": "/packs-test/js/bluedoc-c2ce238117d006386194.js.map",
   "entrypoints": {
     "admin": {
       "css": [
@@ -31,27 +31,27 @@
         "/packs-test/css/application-7835f9d6.css"
       ],
       "js": [
-        "/packs-test/js/application-8237825d58df7fd80a00.js"
+        "/packs-test/js/application-21ef6da1eba8d167189c.js"
       ],
       "css.map": [
         "/packs-test/css/application-7835f9d6.css.map"
       ],
       "js.map": [
-        "/packs-test/js/application-8237825d58df7fd80a00.js.map"
+        "/packs-test/js/application-21ef6da1eba8d167189c.js.map"
       ]
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-d28befe3.css"
+        "/packs-test/css/bluedoc-3de1729e.css"
       ],
       "js": [
-        "/packs-test/js/bluedoc-515d537ec6416160fa00.js"
+        "/packs-test/js/bluedoc-c2ce238117d006386194.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-d28befe3.css.map"
+        "/packs-test/css/bluedoc-3de1729e.css.map"
       ],
       "js.map": [
-        "/packs-test/js/bluedoc-515d537ec6416160fa00.js.map"
+        "/packs-test/js/bluedoc-c2ce238117d006386194.js.map"
       ]
     },
     "print": {
