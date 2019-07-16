@@ -394,6 +394,7 @@ zh-CN:
       You does not have any action_name repositories: 你还未收藏过任何知识库。
     action_notes:
       Stared Notes: 收藏的笔记
+      No star notes: 没有收藏的笔记
       You does not have any action_name notes: 你还未收藏过笔记。
       Notes: 笔记
     menu:
