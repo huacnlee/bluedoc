@@ -40,7 +40,7 @@ gem "second_level_cache"
 gem "bulk_insert"
 
 gem "devise"
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-rails_csrf_protection"
 gem "omniauth-ldap"
 gem "omniauth-google-oauth2"
 gem "omniauth-github"
