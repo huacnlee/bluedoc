@@ -4,24 +4,28 @@
 
 ## Development
 
-Setup base development env have two approach
-
-Default admin user: ***admin@bluedoc.io*** password: ***123456***
-
 ### Setup with docker
 
-First you must have docker services and start it and then 
+First you must have docker services and start it then 
 
 `$ docker-compose up dev` 
 
 That all depends softwares have ready
+
+And you should rename project root file `.env.example` to `.env`
+ 
+```bash
+$ cd bluedoc && mv .env.example .env
+```
+You can change `.env` configuration to any what u need. More `.env` you can find at [here](https://github.com/bkeepers/dotenv)
 
 Next
 
 ```bash
 $ yarn install
 $ bundle install
-$ POSTGRES_USER=postgres POSTGRES_HOST=localhost rails db:create db:migrate
+$ rails db:create db:migrate
+$ rails db:seed
 $ rails s
 $ yarn start #other termal tab
 $ sidekiq -C ./config/sidekiq.yml #other termal tab if u need
@@ -83,6 +87,8 @@ $ brew services start bitjourney/self/plantuml-service
 ```
 
 ### Generate Admin
+
+Default admin user: ***admin@bluedoc.io*** password: ***123456***
 
 ```bash
 $ rails g scaffold_controller admin/repository slug:string name:string user:references description:string
