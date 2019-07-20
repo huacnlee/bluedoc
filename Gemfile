@@ -72,6 +72,7 @@ gem "foreman"
 
 group :development, :test do
   gem "mocha"
+  gem "dotenv", github: "ihavecoke/dotenv", tag: "v0.7.0", require: "dotenv-rails"
   gem "letter_opener"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
