@@ -39,3 +39,5 @@ yarn-debug.log*
 yarn-debug.log*
 .yarn-integrity
 coverage/
+.env
+.env.development

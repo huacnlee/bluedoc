@@ -15,7 +15,7 @@ That all depends softwares have ready
 And you should rename project root file `.env.example` to `.env`
  
 ```bash
-$ cd bluedoc && mv .env.example .env
+$ cd bluedoc && cp .env.example .env
 ```
 You can change `.env` configuration to any what u need. More `.env` you can find at [here](https://github.com/bkeepers/dotenv)
 
