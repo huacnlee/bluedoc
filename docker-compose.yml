@@ -8,6 +8,7 @@ services:
       - postgres
       - redis
       - elasticsearch
+      - plantuml-server
     environment:
       LDAP_HOST: ${LDAP_HOST:-localhost}
       OMNIAUTH_GITLAB_API_PREFIX: ${OMNIAUTH_GITLAB_API_PREFIX:-''}
@@ -40,6 +41,11 @@ services:
       - "${ES_PORT:-9200}:9200"
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
+
+  plantuml-server:
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - "${PLS_PORT:-1608}:8080"
 
 volumes:
   postgres:
