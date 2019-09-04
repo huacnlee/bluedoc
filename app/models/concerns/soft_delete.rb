@@ -11,6 +11,8 @@ module SoftDelete
     define_callbacks :soft_delete, :restore
     alias_method :destroy!, :destroy
     # PRO-end
+
+    after_destroy :expire_second_level_cache
   end
 
   def deleted?
