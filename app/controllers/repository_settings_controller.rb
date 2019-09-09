@@ -122,6 +122,21 @@ class RepositorySettingsController < Users::ApplicationController
     end
   end
 
+  # GET /:user/:repo/settings/integrations
+  def integrations
+    authorize! :manage, @repository
+    @jira_service = @repository.jira_service
+  end
+
+  # POST /:user/:repo/settings/jira
+  def jira
+    authorize! :manage, @repository
+
+    @jira_service = @repository.jira_service
+    @jira_service.update(params.require(:jira_service).permit(:active))
+    redirect_to integrations_user_repository_settings_path, notice: t(".Repository was successfully updated")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repository
@@ -129,6 +144,6 @@ class RepositorySettingsController < Users::ApplicationController
     end
 
     def repository_params
-      params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc, :has_issues)
+      params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc, :has_issues, :has_jira)
     end
 end

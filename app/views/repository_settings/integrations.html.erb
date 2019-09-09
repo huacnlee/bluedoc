@@ -1,0 +1,24 @@
+<% title_tag t(".Integrations"), @repository.name %>
+
+<%= render "menu" %>
+<div class="col-12 col-md-9 float-left">
+  <%= form_with(model: @jira_service, url: jira_user_repository_settings_path(@user, @repository),  remote: true, method: :post) do |form| %>
+    <h2 class="sub-title"><%= t(".Integrations") %></h2>
+
+    <div class="box mb-3">
+      <div class="box-row d-flex flex-items-center pb-3">
+        <div class="form-check">
+          <%= form.check_box :active, checked: @jira_service.active?, class: "form-check-input form-check-submit" %>
+          <%= form.label :active, t(".Jira"), class: "form-check-label font-weight-bold" %>
+          <div class="form-text mt-1">
+            <%= t(".You need to configure JIRA before enabling this service") %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions mb-section">
+      <%= form.submit t(".Update"), class: "btn btn-primary btn-submit" %>
+    </div>
+  <% end %>
+</div>
+

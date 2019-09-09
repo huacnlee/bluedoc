@@ -14,6 +14,7 @@ module BlueDoc
       Rails.root.join("lib")
     ]
     config.eager_load_paths += [
+      Rails.root.join("app/models/project_services"),
       Rails.root.join("lib/bluedoc"),
     ]
 

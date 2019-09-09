@@ -133,6 +133,8 @@ Rails.application.routes.draw do
           post :collaborator
           delete :collaborator
           post :retry_import
+          get :integrations
+          post :jira
         end
       end
       resources :docs, only: %i(new create)

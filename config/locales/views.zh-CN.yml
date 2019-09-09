@@ -739,6 +739,13 @@ zh-CN:
   repository_settings:
     update:
       Repository was successfully updated: 更新成功
+    integrations:
+      Integrations: 第三方服务集成
+      Jira: Jira
+      Enable to mention Jira Issue in docs and comments: 允许在正文和评论中关联 Jira 的 Issue
+      Update: 更新
+    jira:
+      Repository was successfully updated: 更新成功
     exports:
       archive:
         Export as Archive: 导出 Zip 包
@@ -787,6 +794,7 @@ zh-CN:
       Manage docs: 管理文档
       Collaborators: 协作者
       Advanced: 高级设置
+      Integrations: 第三方服务集成
     privacy:
       public: 公开
       private: 私密

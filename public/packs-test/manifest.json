@@ -1,71 +1,71 @@
 {
-  "admin.css": "/packs-test/css/admin-039fa0b5.css",
-  "admin.css.map": "/packs-test/css/admin-039fa0b5.css.map",
-  "admin.js": "/packs-test/js/admin-c30773ca53c71a823cee.js",
-  "admin.js.map": "/packs-test/js/admin-c30773ca53c71a823cee.js.map",
-  "application.css": "/packs-test/css/application-7835f9d6.css",
-  "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
-  "application.js": "/packs-test/js/application-819e2395f7dc2abdb763.js",
-  "application.js.map": "/packs-test/js/application-819e2395f7dc2abdb763.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-3de1729e.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-3de1729e.css.map",
-  "bluedoc.js": "/packs-test/js/bluedoc-42846db0c5be86821217.js",
-  "bluedoc.js.map": "/packs-test/js/bluedoc-42846db0c5be86821217.js.map",
+  "admin.css": "/packs-test/css/admin-af77e46d.css",
+  "admin.css.map": "/packs-test/css/admin-af77e46d.css.map",
+  "admin.js": "/packs-test/js/admin-1867e98554180aa3690c.js",
+  "admin.js.map": "/packs-test/js/admin-1867e98554180aa3690c.js.map",
+  "application.css": "/packs-test/css/application-0f7ab88e.css",
+  "application.css.map": "/packs-test/css/application-0f7ab88e.css.map",
+  "application.js": "/packs-test/js/application-aaa35c52b0c1072e75ba.js",
+  "application.js.map": "/packs-test/js/application-aaa35c52b0c1072e75ba.js.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-1a3f503f.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-1a3f503f.css.map",
+  "bluedoc.js": "/packs-test/js/bluedoc-573e809ec974100ccd63.js",
+  "bluedoc.js.map": "/packs-test/js/bluedoc-573e809ec974100ccd63.js.map",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-039fa0b5.css"
+        "/packs-test/css/admin-af77e46d.css"
       ],
       "js": [
-        "/packs-test/js/admin-c30773ca53c71a823cee.js"
+        "/packs-test/js/admin-1867e98554180aa3690c.js"
       ],
       "css.map": [
-        "/packs-test/css/admin-039fa0b5.css.map"
+        "/packs-test/css/admin-af77e46d.css.map"
       ],
       "js.map": [
-        "/packs-test/js/admin-c30773ca53c71a823cee.js.map"
+        "/packs-test/js/admin-1867e98554180aa3690c.js.map"
       ]
     },
     "application": {
       "css": [
-        "/packs-test/css/application-7835f9d6.css"
+        "/packs-test/css/application-0f7ab88e.css"
       ],
       "js": [
-        "/packs-test/js/application-819e2395f7dc2abdb763.js"
+        "/packs-test/js/application-aaa35c52b0c1072e75ba.js"
       ],
       "css.map": [
-        "/packs-test/css/application-7835f9d6.css.map"
+        "/packs-test/css/application-0f7ab88e.css.map"
       ],
       "js.map": [
-        "/packs-test/js/application-819e2395f7dc2abdb763.js.map"
+        "/packs-test/js/application-aaa35c52b0c1072e75ba.js.map"
       ]
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-3de1729e.css"
+        "/packs-test/css/bluedoc-1a3f503f.css"
       ],
       "js": [
-        "/packs-test/js/bluedoc-42846db0c5be86821217.js"
+        "/packs-test/js/bluedoc-573e809ec974100ccd63.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-3de1729e.css.map"
+        "/packs-test/css/bluedoc-1a3f503f.css.map"
       ],
       "js.map": [
-        "/packs-test/js/bluedoc-42846db0c5be86821217.js.map"
+        "/packs-test/js/bluedoc-573e809ec974100ccd63.js.map"
       ]
     },
     "print": {
       "css": [
-        "/packs-test/css/print-2fd45c11.css"
+        "/packs-test/css/print-ee3e24d4.css"
       ],
       "js": [
-        "/packs-test/js/print-48ca4128f9f71b859b9f.js"
+        "/packs-test/js/print-820160301c60888f9135.js"
       ],
       "css.map": [
-        "/packs-test/css/print-2fd45c11.css.map"
+        "/packs-test/css/print-ee3e24d4.css.map"
       ],
       "js.map": [
-        "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
+        "/packs-test/js/print-820160301c60888f9135.js.map"
       ]
     }
   },
@@ -102,8 +102,8 @@
   "media/lib/iconfont.svg": "/packs-test/media/lib/iconfont-fd2108ea.svg",
   "media/lib/iconfont.ttf": "/packs-test/media/lib/iconfont-6fdb9622.ttf",
   "media/lib/iconfont.woff": "/packs-test/media/lib/iconfont-cdf44bd0.woff",
-  "print.css": "/packs-test/css/print-2fd45c11.css",
-  "print.css.map": "/packs-test/css/print-2fd45c11.css.map",
-  "print.js": "/packs-test/js/print-48ca4128f9f71b859b9f.js",
-  "print.js.map": "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
+  "print.css": "/packs-test/css/print-ee3e24d4.css",
+  "print.css.map": "/packs-test/css/print-ee3e24d4.css.map",
+  "print.js": "/packs-test/js/print-820160301c60888f9135.js",
+  "print.js.map": "/packs-test/js/print-820160301c60888f9135.js.map"
 }

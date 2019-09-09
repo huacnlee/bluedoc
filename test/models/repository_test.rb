@@ -334,4 +334,17 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 2, target_users.count
     assert_equal [user, users[3]].sort, target_users.sort
   end
+
+  test "jira_service" do
+    repo = create(:repository)
+
+    assert repo.jira_service.present?
+    assert repo.jira_service.new_record?
+    assert !repo.jira_service.active
+
+    repo.jira_service.update(active: true)
+    assert repo.jira_service.present?
+    assert !repo.jira_service.new_record?
+    assert repo.jira_service.active
+  end
 end

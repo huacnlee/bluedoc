@@ -752,6 +752,13 @@ en:
   repository_settings:
     update:
       Repository was successfully updated: Repository was successfully updated
+    integrations:
+      Integrations: Integrations
+      Jira: Jira
+      Enable to mention Jira Issue in docs and comments: Enable to mention Jira Issue in docs and comments
+      Update: Update
+    jira:
+      Repository was successfully updated: Repository was successfully updated
     exports:
       archive:
         Export as Archive: Export as Archive
@@ -800,6 +807,7 @@ en:
       Manage docs: Manage docs
       Collaborators: Collaborators
       Advanced: Advanced
+      Integrations: Integrations
     privacy:
       public: public
       private: private
