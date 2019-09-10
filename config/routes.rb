@@ -110,6 +110,11 @@ Rails.application.routes.draw do
       end
     end
     resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
+      resource :services do
+        collection do
+          get :jira_issues
+        end
+      end
       member do
         get :docs, path: "docs/list"
         get :search, path: "docs/search"

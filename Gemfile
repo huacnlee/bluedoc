@@ -70,6 +70,8 @@ gem "pghero"
 
 gem "foreman"
 
+gem "jira-ruby"
+
 group :development, :test do
   gem "mocha"
   gem "letter_opener"
