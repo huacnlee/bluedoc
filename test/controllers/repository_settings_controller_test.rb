@@ -448,7 +448,8 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[checked=checked]", 0
     end
 
-    repo.jira_service.update(active: true)
+    JiraService.any_instance.stubs(:auth_service).once
+    repo.jira_service.update(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd')
     get "/#{repo.user.slug}/#{repo.slug}/settings/integrations"
     assert_equal 200, response.status
 
@@ -460,19 +461,20 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
   test "POST /:user/:repo/settings/jira" do
     repo = create(:repository, user: @group)
     assert_require_user do
-      post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1 } }
+      post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
     end
 
     sign_in @user
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1 } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1 } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1 } }
+    JiraService.any_instance.stubs(:auth_service).once
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd' } }
     assert_redirected_to integrations_user_repository_settings_path
     assert_flash notice: "Repository was successfully updated"
     assert repo.jira_service.active?

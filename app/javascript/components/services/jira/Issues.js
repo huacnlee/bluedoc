@@ -22,7 +22,7 @@ export default class Issues extends React.Component {
       return <span></span>
     }
     return <div className="service jira">
-      <div className="sub-title">关联的 JIRA Issues</div>
+      <div className="sub-title">JIRA Issues</div>
       { issues && (
         <ul>
           { issues.map(issue => {

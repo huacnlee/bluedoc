@@ -40,11 +40,11 @@ class JiraService < Service
     end
 
     def jira_issue_key_regex
-      /\[.+\]\(#{Regexp.escape(Setting.jira_service_site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
+      /\[.+\]\(#{Regexp.escape(site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
     end
 
     def issue_url issue
-      "#{Setting.jira_service_site}/browse/#{issue.key}"
+      "#{site}/browse/#{issue.key}"
     end
 
     def issue_as_json issue

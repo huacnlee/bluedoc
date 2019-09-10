@@ -341,10 +341,5 @@ class RepositoryTest < ActiveSupport::TestCase
     assert repo.jira_service.present?
     assert repo.jira_service.new_record?
     assert !repo.jira_service.active
-
-    repo.jira_service.update(active: true)
-    assert repo.jira_service.present?
-    assert !repo.jira_service.new_record?
-    assert repo.jira_service.active
   end
 end

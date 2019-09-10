@@ -15,6 +15,6 @@ class ServicesController  < Users::ApplicationController
     end
 
     def require_jira_service_active
-      render status: 404 unless @repository.jira_service.active?
+      render status: 403 unless @repository.jira_service.active?
     end
 end
