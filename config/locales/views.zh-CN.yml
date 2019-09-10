@@ -741,9 +741,14 @@ zh-CN:
       Repository was successfully updated: 更新成功
     integrations:
       Integrations: 第三方服务集成
-      Jira: Jira
-      Enable to mention Jira Issue in docs and comments: 允许在正文和评论中关联 Jira 的 Issue
+      JIRA: JIRA
+      Active: 开启
+      Enable to collect Jira Issue form docs: 显示正文中的 JIRA Issue
       Update: 更新
+      Use a JIRA site URL: JIRA 地址
+      Use a username for JIRA: JIRA 用户名
+      Use a password for JIRA: JIRA 密码
+
     jira:
       Repository was successfully updated: 更新成功
     exports:

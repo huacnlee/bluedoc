@@ -754,9 +754,13 @@ en:
       Repository was successfully updated: Repository was successfully updated
     integrations:
       Integrations: Integrations
-      Jira: Jira
-      Enable to mention Jira Issue in docs and comments: Enable to mention Jira Issue in docs and comments
+      JIRA: JIRA
+      Active: Active
+      Enable to collect Jira Issue form docs: Enable to collect Jira Issue form docs
       Update: Update
+      Use a JIRA site URL: Use a JIRA site URL
+      Use a username for JIRA: Use a username for JIRA
+      Use a password for JIRA: Use a password for JIRA
     jira:
       Repository was successfully updated: Repository was successfully updated
     exports:

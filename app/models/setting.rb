@@ -60,11 +60,6 @@ class Setting < RailsSettings::Base
   field :omniauth_gitlab_client_secret, default: (ENV["OMNIAUTH_GITLAB_CLIENT_SECRET"] || ""), type: :string, readonly: true
   field :omniauth_gitlab_api_prefix, default: (ENV["OMNIAUTH_GITLAB_API_PREFIX"] || "https://gitlab.com/api/v4"), type: :string, readonly: true
 
-  field :jira_service_enable, default: (ENV["JIRA_SERVICE_ENABLE"] || ""), type: :boolean, readonly: true
-  field :jira_service_site, default: (ENV["JIRA_SERVICE_SITE"] || ""), type: :string, readonly: true
-  field :jira_service_username, default: (ENV["JIRA_SERVICE_USERNAME"] || ""), type: :string, readonly: true
-  field :jira_service_password, default: (ENV["JIRA_SERVICE_PASSWORD"] || ""), type: :string, readonly: true
-
   class << self
     LOCALES = {
       "en": "English (US)",

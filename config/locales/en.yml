@@ -80,7 +80,13 @@ en:
         status: Status
         body: Body
         body_sml: Body
+      jira_service:
+        site: Jira site
+        username: Username
+        password: Password
     errors:
       messages:
         invalid, slug is a keyword: invalid, [%{slug}] is a keyword.
         is invalid email suffix: suffix is not in the supported list (admin setting user Email must conform to the specified suffix).
+        is not a valid site, only support HTTP or HTTPS protocol: is not a valid site, only support HTTP or HTTPS protocol
+        test JIRA service connection faield, please check the JIRA user name and password: Test JIRA service connection faield, please check the JIRA user name and password

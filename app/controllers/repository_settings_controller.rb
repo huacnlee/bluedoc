@@ -133,8 +133,11 @@ class RepositorySettingsController < Users::ApplicationController
     authorize! :manage, @repository
 
     @jira_service = @repository.jira_service
-    @jira_service.update(params.require(:jira_service).permit(:active))
-    redirect_to integrations_user_repository_settings_path, notice: t(".Repository was successfully updated")
+    if @jira_service.update(params.require(:jira_service).permit(:active, :site, :username, :password))
+      redirect_to integrations_user_repository_settings_path, notice: t(".Repository was successfully updated")
+    else
+      render action: :integrations
+    end
   end
 
   private
