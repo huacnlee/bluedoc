@@ -266,6 +266,8 @@ zh-CN:
         BlueDoc application host_html: "[必填] 为 BlueDoc 配置基本的网站 URL 地址，网站地址为访问 BlueDoc 的地址，格式如： <code>http(s)://your-domain.com</code>。"
         Enable anonymous visit public contents: 允许未登录用户访问 BlueDoc 上的公开内容。
         Require Email confirm for new account: 用户需要完成 Email 验证才能登录。
+        Jira integration: Jira 服务集成
+        Enable to collection Jira issue from Doc: 允许列出文档的 Jira Issue
         Account Email suffix: 用户 Email 后缀限制
         Enable captcha: 启用验证码
         Check to enable captcha for protected some important form: "在一些重要的表单开启验证码功能（注册、找回密码...）"
@@ -740,14 +742,14 @@ zh-CN:
     update:
       Repository was successfully updated: 更新成功
     integrations:
-      Integrations: 第三方服务集成
-      JIRA: JIRA
+      Integrations: 服务集成
+      JIRA: Jira
       Active: 开启
-      Enable to collect Jira Issue form docs: 显示正文中的 JIRA Issue
+      Enable to collect Jira Issue form docs: 列出正文中的 Jira Issue
       Update: 更新
-      Use a JIRA site URL: JIRA 地址
-      Use a username for JIRA: JIRA 用户名
-      Use a password for JIRA: JIRA 密码
+      Use a JIRA site URL: Jira 地址
+      Use a username for JIRA: Jira 用户名
+      Use a password for JIRA: Jira 密码
 
     jira:
       Repository was successfully updated: 更新成功
@@ -799,7 +801,7 @@ zh-CN:
       Manage docs: 管理文档
       Collaborators: 协作者
       Advanced: 高级设置
-      Integrations: 第三方服务集成
+      Integrations: 服务集成
     privacy:
       public: 公开
       private: 私密

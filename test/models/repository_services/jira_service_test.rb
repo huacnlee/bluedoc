@@ -16,7 +16,7 @@ class JiraServiceTest < ActiveSupport::TestCase
     JiraService.any_instance.stubs(:jira_request).once
     jira_service.instance_variable_set(:@request_error, true)
     assert !jira_service.valid?
-    assert_equal ["Test JIRA service connection faield, please check the JIRA user name and password"], jira_service.errors.full_messages
+    assert_equal ["Test Jira service connection faield, please check the Jira user name and password"], jira_service.errors.full_messages
 
     jira_service.assign_attributes(site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd')
     jira_service.remove_instance_variable(:@request_error)
@@ -25,10 +25,7 @@ class JiraServiceTest < ActiveSupport::TestCase
   end
 
   test "extract_jira_keys" do
-    JiraService.any_instance.stubs(:auth_service).once
-    jira_service = JiraService.create(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd', repository: create(:repository))
-
-    keys = jira_service.extract_jira_keys <<-EOF
+    body = <<-EOF
 http://my-jira.com/browse/PP-1
 [PP-3](http://my-jira.com/browse/PP-3)
 [PP-3](http://my-jira.com/browse/PP-3)
@@ -36,6 +33,14 @@ http://my-jira.com/browse/PP-1
 [PP-5](http://other-jira.com/browse/PP-5)
 [PP-10](http://my-jira.com/projects/PP/issues/PP-10?filter=allopenissues)
     EOF
-    assert_equal ["PP-3", "PP-10"], keys
+    doc = create(:doc, body: body)
+
+    JiraService.any_instance.stubs(:auth_service).once
+    jira_service = JiraService.create(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd', repository: create(:repository))
+
+    keys = jira_service.extract_jira_keys doc
+    expected = ["PP-3", "PP-10"]
+    assert_equal expected, keys
+    assert_equal expected, Rails.cache.read(["jira_service", "doc_issue_keys", doc.id, doc.updated_at])
   end
 end

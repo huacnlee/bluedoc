@@ -277,6 +277,8 @@ en:
         Enable captcha: Enable Captcha
         Check to enable captcha for protected some important form: "Check to enable captcha for important forms such as (registration, reset password)"
         Require Email confirm for new account: Require account to confirmed email before sign in.
+        Jira integration: Jira integration
+        Enable to collection Jira issue from Doc: Enable to collection Jira issue from Doc
         Disable this BlueDoc will requirement sign in for all pages: "Disable this feature, BlueDoc will require you to signin to all content pages."
         PlantUML Service Host: "PlantUML Service Host:"
         BlueDoc use plantuml-service for generate PlantUML SVG image, change this config to can use a custom service of your deployment: "BlueDoc use %{link} to generate PlantUML SVG image. You can change this config to custom your deployment."
@@ -754,13 +756,13 @@ en:
       Repository was successfully updated: Repository was successfully updated
     integrations:
       Integrations: Integrations
-      JIRA: JIRA
+      JIRA: Jira
       Active: Active
       Enable to collect Jira Issue form docs: Enable to collect Jira Issue form docs
       Update: Update
-      Use a JIRA site URL: Use a JIRA site URL
-      Use a username for JIRA: Use a username for JIRA
-      Use a password for JIRA: Use a password for JIRA
+      Use a JIRA site URL: Use a Jira site URL
+      Use a username for JIRA: Use a username for Jira
+      Use a password for JIRA: Use a password for Jira
     jira:
       Repository was successfully updated: Repository was successfully updated
     exports:

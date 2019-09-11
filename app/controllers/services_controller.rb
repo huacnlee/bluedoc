@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class ServicesController  < Users::ApplicationController
-  before_action :set_user, :set_repository
-  before_action :require_jira_service_active
+  before_action :set_user, :set_repository, :require_jira_service_active
 
   def jira_issues
+    authorize! :read, @repository
     render json: @repository.jira_service.issues(Array(params[:keys]))
   end
 
@@ -15,6 +15,6 @@ class ServicesController  < Users::ApplicationController
     end
 
     def require_jira_service_active
-      render status: 403 unless @repository.jira_service.active?
+      raise BlueDoc::FeatureNotAvailableError.new("Jira integrations is not actived") unless @repository.jira_service_active?
     end
 end

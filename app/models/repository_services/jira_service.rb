@@ -5,11 +5,13 @@ class JiraService < Service
   validates :site, :username, :password, presence: true, if: :active?
   validate :validate_site, :auth_service, if: :active?
 
-  def extract_jira_keys text
-    text
-      .scan(jira_issue_key_regex)
-      .flatten
-      .uniq
+  def extract_jira_keys doc
+    Rails.cache.fetch(["jira_service", "doc_issue_keys", doc.id, doc.updated_at], expires_in: 1.day) do
+      doc.body_plain
+        .scan(jira_issue_key_regex)
+        .flatten
+        .uniq
+    end
   end
 
   def issues issue_keys

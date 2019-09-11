@@ -16,6 +16,7 @@ class Setting < RailsSettings::Base
   field :user_email_suffixes, default: [], type: :array
   field :captcha_enable, default: true, type: :boolean
   field :license, default: "", type: :string
+  field :jira_service_enable, default: false, type: :boolean
 
   # ActionMailer
   field :mailer_from, type: :string, default: "no-reply@bluedoc.io"

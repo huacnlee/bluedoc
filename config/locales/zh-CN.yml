@@ -92,7 +92,7 @@ zh-CN:
         body: 正文
         body_sml: 正文
       jira_service:
-        site: JIRA 地址
+        site: Jira 地址
         username: 用户名
         password: 密码
     errors:
@@ -100,7 +100,7 @@ zh-CN:
         invalid, slug is a keyword: 不支持，“%{slug}” 为保留关键字。
         is invalid email suffix: 域名后缀不在支持的列表（管理员后台设定限制 Email 必须符合规定的后缀）
         is not a valid site, only support HTTP or HTTPS protocol: 只支持 HTTP/HTTPS 开头的地址
-        test JIRA service connection faield, please check the JIRA user name and password: 测试 JIRA 服务连接失败，请检查 JIRA 用户名和密码
+        test JIRA service connection faield, please check the JIRA user name and password: 测试 Jira 服务连接失败，请检查 Jira 用户名和密码
   views:
     pagination:
       first: "&laquo; 第一页"
