@@ -11,6 +11,7 @@ class DocsController < Users::ApplicationController
   before_action :set_user
   before_action :set_repository
   before_action :set_doc, except: %i[index new create]
+  before_action :set_jira_issue_keys, only: :show
 
   # GET /:user/:repo/:slug
   def show
@@ -196,5 +197,10 @@ class DocsController < Users::ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def doc_params
       params.require(:doc).permit(:title, :draft_title, :body, :body_sml, :draft_body, :draft_body_sml, :slug, :format)
+    end
+
+    def set_jira_issue_keys
+      return if !@repository.jira_service_active? || @doc.nil?
+      @jira_issue_keys = @repository.jira_service.extract_jira_keys @doc
     end
 end

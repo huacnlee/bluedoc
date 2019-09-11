@@ -1,0 +1,13 @@
+.service {
+  .sub-title {
+    font-size: 18px;
+  }
+  &.jira {
+    ul {
+      list-style: none;
+    }
+   .issue-key {
+     @extend .text-gray-light;
+   }
+  }
+}

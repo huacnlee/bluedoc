@@ -7,6 +7,7 @@
       li << link_to(t(".Options"), user_repository_settings_path(@user, @repository), class: "menu-item")
       li << link_to(t(".Manage docs"), docs_user_repository_settings_path(@user, @repository), class: "menu-item")
       li << link_to(t(".Collaborators"), collaborators_user_repository_settings_path(@user, @repository), class: "menu-item")
+      li << link_to(t(".Integrations"), integrations_user_repository_settings_path(@user, @repository), class: "menu-item") if Setting.jira_service_enable?
       li << link_to(t(".Advanced"), advanced_user_repository_settings_path(@user, @repository), class: "menu-item")
     end %>
   </details>
