@@ -19,6 +19,7 @@ namespace :admin do
       post :test_mail
     end
   end
+  resources :integrations
   resources :groups
   resources :users
   resources :repositories

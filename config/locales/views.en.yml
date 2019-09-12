@@ -190,6 +190,20 @@ en:
       Comment was successfully updated: Comment was successfully updated.
       index:
         Private contents, hide comment: Private contents, hide comment.
+    integrations:
+      menu:
+        Integrations: Integrations
+        Jira: Jira
+      jira:
+        JIRA: Jira
+        Active: As template
+        Enable to collect Jira Issue form docs: As Jira account default
+        Update: Update
+        Use a JIRA site URL: Use a Jira site URL
+        Use a username for JIRA: Use a username for Jira
+        Use a password for JIRA: Use a password for Jira
+      update:
+        Jira was successfully updated: Jira config was successfully updated.
     dashboards:
       show:
         Tools: Tools

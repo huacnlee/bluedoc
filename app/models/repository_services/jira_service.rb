@@ -2,8 +2,16 @@
 
 class JiraService < Service
   store_accessor :properties, :site, :username, :password
-  validates :site, :username, :password, presence: true, if: :active?
-  validate :validate_site, :auth_service, if: :active?
+  validates :site, :username, :password, presence: true, if: :need_validate?
+  validate :validate_site, :auth_service, if: :need_validate?
+
+  def self.actived_template
+    self.templates.actives.find_by(repository_id: nil)
+  end
+
+  def self.accessible_attrs
+    super.concat [:site, :username, :password]
+  end
 
   def extract_jira_keys doc
     Rails.cache.fetch(["jira_service", "doc_issue_keys", doc.id, doc.updated_at], expires_in: 1.day) do

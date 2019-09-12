@@ -10,6 +10,9 @@
         <a href="/admin/pghero" target="_blank" class="btn mb-2"><%= icon_tag("dashboard") %> <%= t(".Database Stats") %></a>
       </div>
       <div class="box-row">
+        <a href="<%= edit_admin_integration_path(id: :jira) %>" class="btn mb-2"><%= t(".Integrations") %></a>
+      </div>
+      <div class="box-row">
         <a href="<%= reindex_admin_dashboard_path %>" data-method="post" class="btn mb-2"><%= t(".Rebuild Search Index") %></a>
       </div>
       <div class="box-row">

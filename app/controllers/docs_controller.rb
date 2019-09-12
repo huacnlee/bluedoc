@@ -200,7 +200,7 @@ class DocsController < Users::ApplicationController
     end
 
     def set_jira_issue_keys
-      return if !@repository.jira_service_active? || @doc.nil?
-      @jira_issue_keys = @repository.jira_service.extract_jira_keys @doc
+      return unless @doc
+      @jira_issue_keys = @repository.actived_jira_service.extract_jira_keys @doc if @repository.actived_jira_service
     end
 end

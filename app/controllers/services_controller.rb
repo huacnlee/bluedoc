@@ -5,7 +5,7 @@ class ServicesController  < Users::ApplicationController
 
   def jira_issues
     authorize! :read, @repository
-    render json: @repository.jira_service.issues(Array(params[:keys]))
+    render json: @repository.actived_jira_service.issues(Array(params[:keys]))
   end
 
   private
@@ -15,6 +15,6 @@ class ServicesController  < Users::ApplicationController
     end
 
     def require_jira_service_active
-      raise BlueDoc::FeatureNotAvailableError.new("Jira integrations is not actived") unless @repository.jira_service_active?
+      raise BlueDoc::FeatureNotAvailableError.new("Jira integrations is not actived") unless @repository.actived_jira_service
     end
 end
