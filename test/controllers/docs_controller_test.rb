@@ -133,7 +133,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     # issue_keys = ['PP-1', 'PP-2']
     JiraService.any_instance.stubs(:auth_service).once
-    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd', repository: @repo)
+    JiraService.create!(active: true, site: "http://my-jira.com", username: "jirausername", password: "jirapwd", repository: @repo)
 
     # JiraService.any_instance.stubs(:extract_jira_keys).with(doc).returns(issue_keys)
     get doc.to_path
@@ -148,7 +148,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     # jira issue keys
     assert_react_component "services/jira/Issues" do |props|
-      assert_equal jira_issues_user_repository_services_path(@group, @repo, keys:  ['PP-1']), props[:fetchUrl]
+      assert_equal jira_issues_user_repository_services_path(@group, @repo, keys:  ["PP-1"]), props[:fetchUrl]
     end
 
     # reactions

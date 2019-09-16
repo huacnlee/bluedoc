@@ -16,7 +16,6 @@ class Admin::IntegrationsController < Admin::ApplicationController
   end
 
   private
-
     def set_type
       @type = params[:id]
       raise ActiveRecord::RecordNotFound if %w(jira).exclude?(@type)

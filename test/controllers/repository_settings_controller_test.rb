@@ -450,7 +450,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     JiraService.any_instance.stubs(:auth_service).once
-    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'globaljira', password: 'jirapwd', template: true)
+    JiraService.create!(active: true, site: "http://my-jira.com", username: "globaljira", password: "jirapwd", template: true)
     get "/#{repo.user.slug}/#{repo.slug}/settings/integrations"
 
     assert_equal 200, response.status
@@ -460,7 +460,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='jira_service[username]'][value=globaljira]"
 
     JiraService.any_instance.stubs(:auth_service).once
-    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'myjira', password: 'jirapwd', repository: repo)
+    JiraService.create!(active: true, site: "http://my-jira.com", username: "myjira", password: "jirapwd", repository: repo)
     get "/#{repo.user.slug}/#{repo.slug}/settings/integrations"
 
     assert_equal 200, response.status
@@ -487,7 +487,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in_role :admin, group: @group
     JiraService.any_instance.stubs(:auth_service).once
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd' } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1, site: "http://my-jira.com", username: "jirausername", password: "jirapwd" } }
     assert_redirected_to integrations_user_repository_settings_path
     assert_flash notice: "Repository was successfully updated"
     assert repo.jira_service.active?

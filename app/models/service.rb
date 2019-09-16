@@ -15,7 +15,6 @@ class Service < ApplicationRecord
   end
 
   private
-
     def need_validate?
       active? || template?
     end
