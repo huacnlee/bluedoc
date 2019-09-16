@@ -5,10 +5,6 @@ class JiraService < Service
   validates :site, :username, :password, presence: true, if: :need_validate?
   validate :validate_site, :auth_service, if: :need_validate?
 
-  def self.actived_template
-    self.templates.actives.find_by(repository_id: nil)
-  end
-
   def self.accessible_attrs
     super.concat [:site, :username, :password]
   end
@@ -50,7 +46,7 @@ class JiraService < Service
     end
 
     def jira_issue_key_regex
-      /\[.+\]\(#{Regexp.escape(site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
+      /\[.+?\]\(#{Regexp.escape(site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
     end
 
     def issue_url issue

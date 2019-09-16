@@ -3,11 +3,11 @@
   <div class="col-12 col-md-9">
 
   <h2 class="sub-title"><%= t(".JIRA") %></h2>
-  <%= form_with(model: @resource, url: admin_integration_path(id: :jira), local: true, method: :patch) do |form| %>
-    <%= render "/shared/error_messages", target: @resource %>
+  <%= form_with(model: @service, url: admin_integration_path(id: :jira), local: true, method: :patch) do |form| %>
+    <%= render "/shared/error_messages", target: @service %>
     <div class="form-group">
       <div class="form-check">
-        <%= form.check_box :active, checked: @resource.active?, class: "form-check-input form-check-submit" %>
+        <%= form.check_box :active, checked: @service.active?, class: "form-check-input form-check-submit" %>
         <%= form.label :active, t(".Active"), class: "form-check-label font-weight-bold" %>
         <div class="form-text mt-1">
           <%= t(".Enable to collect Jira Issue form docs") %>

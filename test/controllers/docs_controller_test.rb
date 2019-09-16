@@ -129,7 +129,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /:user/:repo/:slug" do
-    doc = create(:doc, repository: @repo)
+    doc = create(:doc, repository: @repo, body: "[PP-1](http://my-jira.com/projects/PP/issues/PP-1)")
+
+    # issue_keys = ['PP-1', 'PP-2']
+    JiraService.any_instance.stubs(:auth_service).once
+    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd', repository: @repo)
+
+    # JiraService.any_instance.stubs(:extract_jira_keys).with(doc).returns(issue_keys)
     get doc.to_path
     assert_equal 200, response.status
     assert_match /#{doc.title}/, response.body
@@ -137,6 +143,12 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".label.label-private", 0
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
+    end
+
+
+    # jira issue keys
+    assert_react_component "services/jira/Issues" do |props|
+      assert_equal jira_issues_user_repository_services_path(@group, @repo, keys:  ['PP-1']), props[:fetchUrl]
     end
 
     # reactions

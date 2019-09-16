@@ -335,11 +335,27 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal [user, users[3]].sort, target_users.sort
   end
 
-  test "jira_service" do
+  test "actived_jira_service" do
     repo = create(:repository)
+    assert !repo.actived_jira_service.present?
+    JiraService.any_instance.stubs(:auth_service)
+    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'globaljira', password: 'jirapwd', template: true)
 
-    assert repo.jira_service.present?
-    assert repo.jira_service.new_record?
-    assert !repo.jira_service.active
+    assert repo.actived_jira_service.present?
+    assert 'globaljira', repo.actived_jira_service.username
+
+    JiraService.find_by(repository_id: nil).update(active: false)
+    assert repo.actived_jira_service.nil?
+
+    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'myjira', password: 'jirapwd', repository: repo)
+
+    assert repo.reload.actived_jira_service.present?
+    assert 'myjira', repo.actived_jira_service.username
+
+    JiraService.find_by(repository_id: repo.id).update(active: false)
+    assert repo.reload.actived_jira_service.nil?
+
+    JiraService.find_by(repository_id: nil).update(active: true)
+    assert repo.reload.actived_jira_service.nil?
   end
 end

@@ -6,6 +6,10 @@ class Service < ApplicationRecord
   scope :templates, -> { where(template: :true) }
   scope :actives, -> { where(active: :true) }
 
+  def self.actived_template
+    self.templates.actives.find_by(repository_id: nil)
+  end
+
   def self.accessible_attrs
     [:repository_id, :active]
   end

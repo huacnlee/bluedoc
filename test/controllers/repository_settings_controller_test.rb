@@ -450,13 +450,24 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     JiraService.any_instance.stubs(:auth_service).once
-    repo.jira_service.update(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd')
+    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'globaljira', password: 'jirapwd', template: true)
     get "/#{repo.user.slug}/#{repo.slug}/settings/integrations"
-    assert_equal 200, response.status
 
+    assert_equal 200, response.status
     assert_select "input[name='jira_service[active]']" do
       assert_select "[checked=?]", "checked"
     end
+    assert_select "input[name='jira_service[username]'][value=globaljira]"
+
+    JiraService.any_instance.stubs(:auth_service).once
+    JiraService.create!(active: true, site: 'http://my-jira.com', username: 'myjira', password: 'jirapwd', repository: repo)
+    get "/#{repo.user.slug}/#{repo.slug}/settings/integrations"
+
+    assert_equal 200, response.status
+    assert_select "input[name='jira_service[active]']" do
+      assert_select "[checked=?]", "checked"
+    end
+    assert_select "input[name='jira_service[username]'][value=myjira]"
   end
 
   test "POST /:user/:repo/settings/jira" do
