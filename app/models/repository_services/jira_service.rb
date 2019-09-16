@@ -2,10 +2,14 @@
 
 class JiraService < Service
   store_accessor :properties, :site, :username, :password
-  validates :site, :username, :password, presence: true, if: :active?
-  validate :validate_site, :auth_service, if: :active?
+  validates :site, :username, :password, presence: true, if: :need_validate?
+  validate :validate_site, :auth_service, if: :need_validate?
 
-  def extract_jira_keys doc
+  def self.accessible_attrs
+    super.concat [:site, :username, :password]
+  end
+
+  def extract_jira_keys(doc)
     Rails.cache.fetch(["jira_service", "doc_issue_keys", doc.id, doc.updated_at], expires_in: 1.day) do
       doc.body_plain
         .scan(jira_issue_key_regex)
@@ -14,14 +18,13 @@ class JiraService < Service
     end
   end
 
-  def issues issue_keys
+  def issues(issue_keys)
     return [] if issue_keys.blank?
     data = jira_request { JIRA::Resource::Issue.jql(client, "id in (#{issue_keys.join(",")})", fields: issue_fields, validate_query: false) }
     Array(data).map { |issue| issue_as_json(issue) }
   end
 
   private
-
     def validate_site
       self.errors.add(:site, t(".is not a valid site, only support HTTP or HTTPS protocol")) unless BlueDoc::Validate.url?(site)
     end
@@ -42,14 +45,14 @@ class JiraService < Service
     end
 
     def jira_issue_key_regex
-      /\[.+\]\(#{Regexp.escape(site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
+      /\[.+?\]\(#{Regexp.escape(site)}(?:\/)?(?:browse|.+\/issues)\/([A-Z][A-Z_0-9]+-\d+).*\)/
     end
 
-    def issue_url issue
+    def issue_url(issue)
       "#{site}/browse/#{issue.key}"
     end
 
-    def issue_as_json issue
+    def issue_as_json(issue)
       { key: issue.key, summary: issue.summary, url: issue_url(issue) }
     end
 
@@ -60,11 +63,11 @@ class JiraService < Service
     def client
       return @client if @client
       options = {
-        :site         => site,
-        :username     => username,
-        :password     => password,
-        :context_path => '',
-        :auth_type    => :basic
+        site: site,
+        username: username,
+        password: password,
+        context_path: "",
+        auth_type: :basic
       }
 
       @client = JIRA::Client.new(options)

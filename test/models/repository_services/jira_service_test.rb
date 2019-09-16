@@ -9,16 +9,16 @@ class JiraServiceTest < ActiveSupport::TestCase
     assert jira_service.valid?
 
     jira_service.assign_attributes(active: true)
-    assert !jira_service.valid?
+    assert_not jira_service.valid?
     assert_equal ["Jira site can't be blank", "Jira site is not a valid site, only support HTTP or HTTPS protocol", "Username can't be blank", "Password can't be blank"], jira_service.errors.full_messages
 
-    jira_service.assign_attributes(site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd')
+    jira_service.assign_attributes(site: "http://my-jira.com", username: "jirausername", password: "jirapwd")
     JiraService.any_instance.stubs(:jira_request).once
     jira_service.instance_variable_set(:@request_error, true)
-    assert !jira_service.valid?
+    assert_not jira_service.valid?
     assert_equal ["Test Jira service connection faield, please check the Jira user name and password"], jira_service.errors.full_messages
 
-    jira_service.assign_attributes(site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd')
+    jira_service.assign_attributes(site: "http://my-jira.com", username: "jirausername", password: "jirapwd")
     jira_service.remove_instance_variable(:@request_error)
     JiraService.any_instance.stubs(:jira_request).once
     assert jira_service.valid?
@@ -36,7 +36,7 @@ http://my-jira.com/browse/PP-1
     doc = create(:doc, body: body)
 
     JiraService.any_instance.stubs(:auth_service).once
-    jira_service = JiraService.create(active: true, site: 'http://my-jira.com', username: 'jirausername', password: 'jirapwd', repository: create(:repository))
+    jira_service = JiraService.create(active: true, site: "http://my-jira.com", username: "jirausername", password: "jirapwd", repository: create(:repository))
 
     keys = jira_service.extract_jira_keys doc
     expected = ["PP-3", "PP-10"]
