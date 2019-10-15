@@ -16,9 +16,9 @@ gem "sidekiq"
 
 gem "webpacker"
 gem "turbolinks"
-gem "jbuilder", github: "rails/jbuilder"
+gem "jbuilder"
 gem "kaminari"
-gem "awesome_nested_set", github: "huacnlee/awesome_nested_set"
+gem "awesome_nested_set"
 gem "request_store"
 
 gem "aws-sdk-s3", require: false
