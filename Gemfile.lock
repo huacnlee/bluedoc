@@ -289,7 +289,7 @@ GEM
     pghero (2.2.0)
       activerecord
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.2)
     pyu-ruby-sasl (0.0.3.3)
     rack (2.0.7)
     rack-protection (2.0.5)
@@ -484,7 +484,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pg
   pghero
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (= 6.0.0)
   rails-i18n
   rails-settings-cached
