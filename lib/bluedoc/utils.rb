@@ -11,9 +11,9 @@ module BlueDoc
 
         case provider
         when "ldap"
-          return Setting.ldap_name
+          Setting.ldap_name
         when "google_oauth2"
-          return "Google"
+          "Google"
         else
           OmniAuth::Utils.camelize(provider)
         end

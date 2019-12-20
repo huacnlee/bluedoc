@@ -22,9 +22,9 @@ module BlueDoc
         size = IMAGE_SIZES[style] || IMAGE_SIZES[:small]
 
         if style == :xlarge
-          return "image/resize,w_#{size}"
+          "image/resize,w_#{size}"
         else
-          return "image/resize,m_fill,w_#{size},h_#{size}"
+          "image/resize,m_fill,w_#{size},h_#{size}"
         end
       end
 
