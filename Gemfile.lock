@@ -112,7 +112,7 @@ GEM
       json
       simplecov
       url
-    commonmarker (0.18.2)
+    commonmarker (0.20.2)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
@@ -170,7 +170,7 @@ GEM
       sprockets-rails
     graphql (1.8.14)
     hashie (3.5.7)
-    html-pipeline (2.9.1)
+    html-pipeline (2.12.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
     html-pipeline-rouge_filter (1.0.7)
@@ -353,7 +353,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rouge (3.3.0)
+    rouge (3.14.0)
     rubocop (0.78.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
