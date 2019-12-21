@@ -61,8 +61,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    addressable (2.5.2)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     aliyun-sdk (0.7.1)
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
@@ -108,7 +108,7 @@ GEM
       activerecord (>= 3.2.0)
     byebug (11.0.1)
     cancancan (2.3.0)
-    codecov (0.1.14)
+    codecov (0.1.16)
       json
       simplecov
       url
@@ -287,7 +287,7 @@ GEM
     pg (1.1.4)
     pghero (2.4.1)
       activerecord (>= 5)
-    public_suffix (3.0.3)
+    public_suffix (4.0.1)
     puma (3.12.2)
     pyu-ruby-sasl (0.0.3.3)
     rack (2.0.8)
@@ -407,7 +407,7 @@ GEM
       rails (>= 4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
-    tilt (2.0.9)
+    tilt (2.0.10)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
