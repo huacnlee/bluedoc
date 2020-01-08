@@ -4,18 +4,19 @@ const expandedActiveNode = ({ flatData, active }) => {
   if (!active || !flatData) return [];
   const activeNode = flatData.find(node => node.docId === active);
   if (!activeNode || !active) return flatData;
-  const { parentId = null } = activeNode;
-  if (!parentId) return flatData;
-  return setNodeExpanded({ flatData, id: parentId });
+  const newflatData = setNodeExpanded({ flatData, id: activeNode.id });
+  return newflatData;
 };
 
 function setNodeExpanded({ id, flatData }) {
   const tempArr = [...flatData];
   const nodeIndex = flatData.findIndex(node => node.id === id);
   tempArr[nodeIndex] = { ...tempArr[nodeIndex], expanded: true };
+  // console.log('----- expanded', id);
   const { parentId = null } = flatData[nodeIndex];
   if (parentId !== null) {
-    setNodeExpanded({ id: parentId, flatData: tempArr });
+    // console.log('----- parent', parentId);
+    return setNodeExpanded({ id: parentId, flatData: tempArr });
   }
   return tempArr;
 }
