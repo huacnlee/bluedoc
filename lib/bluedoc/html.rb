@@ -11,8 +11,8 @@ module BlueDoc
       ::HTML::Pipeline.new(pipelineClasses)
     end
 
-    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax)
-    SmlPileline = constantizePilelines(:sml, :normalize_mention, :mention, :plantuml)
+    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax, :auto_correct)
+    SmlPileline = constantizePilelines(:sml, :normalize_mention, :mention, :plantuml, :auto_correct)
     PublicAttachmentPipeline = constantizePilelines(:public_attachments)
 
     class << self
@@ -23,7 +23,7 @@ module BlueDoc
       def render(body, opts = {})
         return "" if body.blank?
 
-        cache_version = opts[:format].to_s == "sml" ? BlueDoc::SML::VERSION : "v1"
+        cache_version = opts[:format].to_s == "sml" ? "#{BlueDoc::SML::VERSION}/v1.1" : "v1.1"
 
         Rails.cache.fetch(["bluedoc/html", cache_version, Digest::MD5.hexdigest(body), opts]) do
           render_without_cache(body, opts)

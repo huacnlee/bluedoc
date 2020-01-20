@@ -10,7 +10,7 @@ class Doc < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  depends_on :publish, :soft_delete, :contents, :tocs, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search
+  depends_on :publish, :soft_delete, :contents, :tocs, :actors, :watches, :locks, :body_touch, :user_actives, :versions, :search, :auto_correct
 
   delegate :private?, :public?, to: :repository
 
