@@ -358,4 +358,11 @@ class RepositoryTest < ActiveSupport::TestCase
     JiraService.find_by(repository_id: nil).update(active: true)
     assert repo.reload.actived_jira_service.nil?
   end
+
+  test "auto_correct" do
+    repo = build(:repository, name: "演示Ruby知识库", description: "创立与2019年")
+    assert_equal true, repo.valid?
+    assert_equal "演示 Ruby 知识库", repo.name
+    assert_equal "创立与 2019 年", repo.description
+  end
 end
