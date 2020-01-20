@@ -54,10 +54,12 @@ gem "exception-track"
 gem "status-page"
 gem "rucaptcha"
 gem "enumize"
+gem "auto-correct"
 
 gem "html-pipeline"
-gem "html-pipeline-rouge_filter"
+gem "html-pipeline-auto-correct"
 gem "commonmarker"
+gem "rouge"
 gem "sanitize"
 
 gem "bluedoc-toc"
