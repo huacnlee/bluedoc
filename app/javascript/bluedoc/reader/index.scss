@@ -16,10 +16,16 @@
   @include breakpoint(lg) {
     .doc-sidebar {
       display: block;
-      width: 235px;
       margin-right: 50px;
       padding-top: 0px;
-      min-height: 100vh;
+    }
+
+    .toc-tree {
+      position: sticky;
+      top: 100px;
+      width: 235px;
+      z-index: 3;
+      background: #fff;
     }
 
     .doc-body-toc {
@@ -95,6 +101,7 @@
       .doc-parents {
         @extend .card;
         @extend .card:hover;
+        padding-top: 5px;
         margin-bottom: 20px;
 
         text-align: left;
