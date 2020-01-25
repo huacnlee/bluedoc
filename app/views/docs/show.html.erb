@@ -136,6 +136,14 @@
           } %>
         </div>
 
+        <% if @jira_issue_keys.present? %>
+          <div class="jira-container">
+            <%= react_component "services/jira/Issues", {
+              fetchUrl: jira_issues_user_repository_services_path(@user, @repository, keys: @jira_issue_keys)
+            } %>
+          </div>
+        <% end %>
+
         <%= render "readers", doc: @doc, readers: @readers %>
 
         <% if @between_docs %>

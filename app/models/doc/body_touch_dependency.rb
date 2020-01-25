@@ -17,7 +17,7 @@ class Doc
     def touch_body_updated_at_on_publish
       if self.body_touch?
         self.body_updated_at = Time.now
-        self.repository.touch
+        self.repository.touch if self.repository.persisted?
       end
     end
 end

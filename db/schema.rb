@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_22_095304) do
+ActiveRecord::Schema.define(version: 2019_09_12_072827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -295,6 +295,17 @@ ActiveRecord::Schema.define(version: 2019_04_22_095304) do
     t.integer "number", default: 0, null: false
     t.index ["target_type", "target_id", "scope", "number"], name: "uk_target_scope_number", unique: true
     t.index ["target_type", "target_id", "scope"], name: "uk_target_scope", unique: true
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "type", null: false
+    t.integer "repository_id"
+    t.boolean "active", default: false, null: false
+    t.text "properties"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "template", default: false, null: false
+    t.index ["type", "repository_id"], name: "index_services_on_type_and_repository_id", unique: true
   end
 
   create_table "settings", force: :cascade do |t|

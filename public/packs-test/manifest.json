@@ -1,29 +1,29 @@
 {
   "admin.css": "/packs-test/css/admin-039fa0b5.css",
   "admin.css.map": "/packs-test/css/admin-039fa0b5.css.map",
-  "admin.js": "/packs-test/js/admin-43c3372f297b8cd1d925.js",
-  "admin.js.map": "/packs-test/js/admin-43c3372f297b8cd1d925.js.map",
+  "admin.js": "/packs-test/js/admin-c30773ca53c71a823cee.js",
+  "admin.js.map": "/packs-test/js/admin-c30773ca53c71a823cee.js.map",
   "application.css": "/packs-test/css/application-7835f9d6.css",
   "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
-  "application.js": "/packs-test/js/application-21ef6da1eba8d167189c.js",
-  "application.js.map": "/packs-test/js/application-21ef6da1eba8d167189c.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-3de1729e.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-3de1729e.css.map",
-  "bluedoc.js": "/packs-test/js/bluedoc-c2ce238117d006386194.js",
-  "bluedoc.js.map": "/packs-test/js/bluedoc-c2ce238117d006386194.js.map",
+  "application.js": "/packs-test/js/application-4b314b892cf23eef610b.js",
+  "application.js.map": "/packs-test/js/application-4b314b892cf23eef610b.js.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-bbfafb2e.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-bbfafb2e.css.map",
+  "bluedoc.js": "/packs-test/js/bluedoc-42846db0c5be86821217.js",
+  "bluedoc.js.map": "/packs-test/js/bluedoc-42846db0c5be86821217.js.map",
   "entrypoints": {
     "admin": {
       "css": [
         "/packs-test/css/admin-039fa0b5.css"
       ],
       "js": [
-        "/packs-test/js/admin-43c3372f297b8cd1d925.js"
+        "/packs-test/js/admin-c30773ca53c71a823cee.js"
       ],
       "css.map": [
         "/packs-test/css/admin-039fa0b5.css.map"
       ],
       "js.map": [
-        "/packs-test/js/admin-43c3372f297b8cd1d925.js.map"
+        "/packs-test/js/admin-c30773ca53c71a823cee.js.map"
       ]
     },
     "application": {
@@ -31,27 +31,27 @@
         "/packs-test/css/application-7835f9d6.css"
       ],
       "js": [
-        "/packs-test/js/application-21ef6da1eba8d167189c.js"
+        "/packs-test/js/application-4b314b892cf23eef610b.js"
       ],
       "css.map": [
         "/packs-test/css/application-7835f9d6.css.map"
       ],
       "js.map": [
-        "/packs-test/js/application-21ef6da1eba8d167189c.js.map"
+        "/packs-test/js/application-4b314b892cf23eef610b.js.map"
       ]
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-3de1729e.css"
+        "/packs-test/css/bluedoc-bbfafb2e.css"
       ],
       "js": [
-        "/packs-test/js/bluedoc-c2ce238117d006386194.js"
+        "/packs-test/js/bluedoc-42846db0c5be86821217.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-3de1729e.css.map"
+        "/packs-test/css/bluedoc-bbfafb2e.css.map"
       ],
       "js.map": [
-        "/packs-test/js/bluedoc-c2ce238117d006386194.js.map"
+        "/packs-test/js/bluedoc-42846db0c5be86821217.js.map"
       ]
     },
     "print": {
@@ -59,13 +59,13 @@
         "/packs-test/css/print-2fd45c11.css"
       ],
       "js": [
-        "/packs-test/js/print-30c2c99b34f918abadef.js"
+        "/packs-test/js/print-48ca4128f9f71b859b9f.js"
       ],
       "css.map": [
         "/packs-test/css/print-2fd45c11.css.map"
       ],
       "js.map": [
-        "/packs-test/js/print-30c2c99b34f918abadef.js.map"
+        "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
       ]
     }
   },
@@ -104,6 +104,6 @@
   "media/lib/iconfont.woff": "/packs-test/media/lib/iconfont-cdf44bd0.woff",
   "print.css": "/packs-test/css/print-2fd45c11.css",
   "print.css.map": "/packs-test/css/print-2fd45c11.css.map",
-  "print.js": "/packs-test/js/print-30c2c99b34f918abadef.js",
-  "print.js.map": "/packs-test/js/print-30c2c99b34f918abadef.js.map"
+  "print.js": "/packs-test/js/print-48ca4128f9f71b859b9f.js",
+  "print.js.map": "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
 }

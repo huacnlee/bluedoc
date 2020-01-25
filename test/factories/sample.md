@@ -66,6 +66,8 @@ The `<>`, `><`, `>` and `<` will keep, but <b>will</b> will render as html.
 
 ### 全是中文
 
+这行包含中文English混排的例子，此方式已在Ruby China使用多年，支持HTML处理，于3月10日开始。
+
 ## Tables
 
 First Header | Second Header

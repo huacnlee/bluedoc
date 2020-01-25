@@ -1,0 +1,31 @@
+.service {
+  margin-bottom: 30px;
+  .sub-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .description {
+    color: #444;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  &.jira {
+    ul {
+      list-style: none;
+      li {
+        padding: 4px 0;
+      }
+    }
+
+    a {
+      font-size: 14px;
+
+      .issue-key {
+        @extend .text-gray-light;
+        margin-right: 5px;
+      }
+    }
+  }
+}

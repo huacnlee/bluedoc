@@ -494,4 +494,10 @@ class DocTest < ActiveSupport::TestCase
       assert_equal [user1, user2].sort, doc.read_by_users.sort
     end
   end
+
+  test "auto_correct" do
+    doc = build(:doc, title: "演示Ruby文档")
+    assert_equal true, doc.valid?
+    assert_equal "演示 Ruby 文档", doc.title
+  end
 end

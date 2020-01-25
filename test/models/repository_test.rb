@@ -334,4 +334,35 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 2, target_users.count
     assert_equal [user, users[3]].sort, target_users.sort
   end
+
+  test "actived_jira_service" do
+    repo = create(:repository)
+    assert_not repo.actived_jira_service.present?
+    JiraService.any_instance.stubs(:auth_service)
+    JiraService.create!(active: true, site: "http://my-jira.com", username: "globaljira", password: "jirapwd", template: true)
+
+    assert repo.actived_jira_service.present?
+    assert "globaljira", repo.actived_jira_service.username
+
+    JiraService.find_by(repository_id: nil).update(active: false)
+    assert repo.actived_jira_service.nil?
+
+    JiraService.create!(active: true, site: "http://my-jira.com", username: "myjira", password: "jirapwd", repository: repo)
+
+    assert repo.reload.actived_jira_service.present?
+    assert "myjira", repo.actived_jira_service.username
+
+    JiraService.find_by(repository_id: repo.id).update(active: false)
+    assert repo.reload.actived_jira_service.nil?
+
+    JiraService.find_by(repository_id: nil).update(active: true)
+    assert repo.reload.actived_jira_service.nil?
+  end
+
+  test "auto_correct" do
+    repo = build(:repository, name: "演示Ruby知识库", description: "创立与2019年")
+    assert_equal true, repo.valid?
+    assert_equal "演示 Ruby 知识库", repo.name
+    assert_equal "创立与 2019 年", repo.description
+  end
 end

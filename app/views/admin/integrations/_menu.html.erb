@@ -1,0 +1,12 @@
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item"><%= t(".Integrations") %></li>
+  <li class="breadcrumb-item"><%= t(".Jira") %></li>
+<% end %>
+
+<div class="col-12 col-md-3">
+  <ul class="menu">
+    <%= render_list_items(class: "menu-item", type: :link, active_class: "selected") do |li|
+      li << link_to(t(".Jira"), edit_admin_integration_path(id: :jira), class: "menu-item")
+    end %>
+  </ul>
+</div>

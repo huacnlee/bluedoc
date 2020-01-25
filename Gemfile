@@ -3,11 +3,11 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "6.0.0.rc1"
+gem "rails"
 gem "pg"
 gem "redis"
 gem "redis-objects"
-gem "puma", "~> 3.11"
+gem "puma", "~> 3.12"
 gem "react-rails"
 
 gem "graphql"
@@ -16,9 +16,9 @@ gem "sidekiq"
 
 gem "webpacker"
 gem "turbolinks"
-gem "jbuilder", github: "rails/jbuilder"
+gem "jbuilder"
 gem "kaminari"
-gem "awesome_nested_set", github: "huacnlee/awesome_nested_set"
+gem "awesome_nested_set"
 gem "request_store"
 
 gem "aws-sdk-s3", require: false
@@ -54,10 +54,12 @@ gem "exception-track"
 gem "status-page"
 gem "rucaptcha"
 gem "enumize"
+gem "auto-correct"
 
 gem "html-pipeline"
-gem "html-pipeline-rouge_filter"
+gem "html-pipeline-auto-correct"
 gem "commonmarker"
+gem "rouge"
 gem "sanitize"
 
 gem "bluedoc-toc"
@@ -69,6 +71,8 @@ gem "wicked_pdf"
 gem "pghero"
 
 gem "foreman"
+
+gem "jira-ruby"
 
 group :development, :test do
   gem "mocha"
@@ -82,7 +86,7 @@ end
 
 group :development do
   gem "web-console", ">= 3.3.0"
-  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "listen"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rubocop"

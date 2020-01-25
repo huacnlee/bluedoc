@@ -195,7 +195,7 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
   test "markdown render full" do
     raw = read_file("sample.md")
     out = BlueDoc::HTML.render(raw, format: :markdown)
-    expected = read_file("sample.html")
+    expected = read_file("sample.html.txt")
 
     # puts "\n--------------------------------------\n" + out
     # puts "\n--------------------------------------\n"

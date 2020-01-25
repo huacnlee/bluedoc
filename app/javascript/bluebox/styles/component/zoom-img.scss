@@ -1,0 +1,66 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.zoom-img-in {
+  overflow: hidden;
+}
+
+.zoom-img-in {
+  .zoom-container {
+    opacity: 1;
+    animation-name: fadeIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+
+    display: block;
+    cursor: zoom-out;
+
+    img {
+      cursor: zoom-out;
+    }
+  }
+}
+
+.zoom-container {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  overflow: scroll;
+  padding: 0px;
+
+  .zoom-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  img {
+    margin: auto;
+    display: inline-block;
+    max-width: 100%;
+  }
+}

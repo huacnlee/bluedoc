@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-ENV["RAILS_ENV"] ||= "test"
-ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] ||= "fake-client-id"
-ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] ||= "fake-client-secret"
-ENV["LDAP_HOST"] ||= "localhost"
+ENV["RAILS_ENV"] = "test"
+ENV["OMNIAUTH_GOOGLE_CLIENT_ID"] = "fake-client-id"
+ENV["OMNIAUTH_GOOGLE_CLIENT_SECRET"] = "fake-client-secret"
+ENV["LDAP_HOST"] = "localhost"
+ENV["PLANTUML_SERVICE_HOST"] = "http://localhost:1608"
+ENV["MATHJAX_SERVICE_HOST"] = "http://localhost:4010"
 
 require "simplecov"
 if ENV["CI"] == "true"

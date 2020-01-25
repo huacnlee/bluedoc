@@ -174,7 +174,7 @@ class TocTree extends Component {
         repository={repository}
         currentDocId={currentDocId}
         // 默认折叠的层级
-        expandedDepth={3}
+        expandedDepth={2}
         t={this.t}
       />
     );

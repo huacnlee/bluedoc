@@ -1,8 +1,6 @@
 import InlineComments from 'components/inline_comments/index';
 import { graph } from 'bluedoc/graphql';
 import BodyToc from './body_toc';
-import mediumZoom from './medium-zoom';
-
 
 document.addEventListener('turbolinks:load', () => {
   if ($('.doc-page').length === 0) {
@@ -26,9 +24,6 @@ document.addEventListener('turbolinks:load', () => {
     e.preventDefault();
     GoOutFullscreen();
   });
-
-  // zoom markdown-body img
-  mediumZoom($('.markdown-body img:not(.plantuml-image,.tex-image)'));
 
 
   initInlineComments();

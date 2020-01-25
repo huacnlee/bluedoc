@@ -34,7 +34,7 @@ module Pro
         include HelperMethods
         helper_method :check_feature!, :allow_feature?, :feature_for
 
-        rescue_from FeatureNotAvailableError do |exception|
+        rescue_from ::BlueDoc::FeatureNotAvailableError do |exception|
           respond_to do |format|
             format.json { head :not_implemented }
             format.html { render plain: "Feature not available!", status: :not_implemented }
