@@ -51,6 +51,11 @@
     margin: auto;
     display: flex;
     align-items: center;
+
+    .navbar.admin-navbar {
+      display: flex;
+      align-items: center;
+    }
   }
   .dropdown {
     margin-left: 10px;
