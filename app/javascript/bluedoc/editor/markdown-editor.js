@@ -1,18 +1,22 @@
 import Toolbar from './markdown-toolbar';
 import { AttachmentUpload } from './attachment-upload';
 
-const CodeMirror = require('react-codemirror');
 require('codemirror/mode/markdown/markdown.js');
 require('codemirror/mode/gfm/gfm.js');
 require('codemirror/addon/mode/overlay.js');
 require('codemirror/addon/selection/mark-selection.js');
 
+const CodeMirror = require('react-codemirror');
+
+const codeMirrorOptions = {
+  mode: 'gfm',
+  showCursorWhenSelecting: true,
+  lineWrapping: true,
+};
+
 export default class MarkdownEditor extends React.Component {
   editorRef = React.createRef();
 
-  codeMirrorOptions = {
-    mode: 'gfm',
-  }
 
   codemirror = null
 
@@ -188,7 +192,7 @@ export default class MarkdownEditor extends React.Component {
             </div>
           )}
           <div className="editor-text">
-            <CodeMirror className="editor-body-text" autoFocus options={this.codeMirrorOptions} ref={this.editorRef} value={value} onChange={this.onChange} />
+            <CodeMirror className="editor-body-text" autoFocus options={codeMirrorOptions} ref={this.editorRef} value={value} onChange={this.onChange} />
           </div>
         </div>
       </div>
