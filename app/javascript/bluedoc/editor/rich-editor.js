@@ -1,6 +1,6 @@
 import { Container, serializer } from '@thebluedoc/editor';
 import { AttachmentUpload } from './attachment-upload';
-import Toolbar from './toolbar';
+import Toolbar from './rich-toolbar';
 import {
   MentionList,
   getMentionInput,
@@ -208,10 +208,7 @@ export default class RichEditor extends React.Component {
     return i18n.t(key);
   }
 
-  coreT = (key) => {
-    console.log(`I18n editor.Core.${key}`);
-    return i18n.t(`editor.Core.${key}`);
-  }
+  coreT = key => i18n.t(`editor.Core.${key}`)
 
   searchUsers = (query) => {
     this.setState({
@@ -271,7 +268,7 @@ export default class RichEditor extends React.Component {
               mathJaxServiceHost={this.props.mathJaxServiceHost}
               t={this.coreT}
               placeholder={this.t('.Write document contents here')}
-             />
+            />
             <MentionList
               anchor=".mention-context"
               users={this.state.mentionUsers}
