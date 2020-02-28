@@ -12,7 +12,31 @@ export default class DocSetting extends React.Component {
 
   slugInputRef = React.createRef()
 
-  containerRef= React.createRef()
+  containerRef = React.createRef()
+
+  onConvertFormat = (e) => {
+    e.preventDefault();
+
+    const target = e.currentTarget;
+    const format = target.getAttribute('format');
+
+    const { saveURL } = this.state;
+    $.ajax({
+      method: 'PUT',
+      url: saveURL,
+      dataType: 'JSON',
+      data: {
+        doc: {
+          format,
+        },
+      },
+      success: (res) => {
+        location.href = location.href;
+      },
+    });
+
+    return false;
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -63,14 +87,14 @@ export default class DocSetting extends React.Component {
 
   render() {
     const { slug } = this.state;
-    const { repositoryURL } = this.props;
+    const { repositoryURL, format } = this.props;
 
     return (
       <details className="doc-setting-box position-relative details-overlay details-reset d-inline-block" ref={this.containerRef}>
         <summary className="btn"><i className="fas fa-setting"></i></summary>
         <div className="dropdown-menu dropdown-menu-sw p-4 text-left">
           <ErrorMessages messages={this.state.messages} />
-          <div className="form-group mb-4">
+          <div className="form-group">
             <label className="control-label">{this.t('.Slug')}</label>
             <div className="input-group d-flex">
               <div className="input-group-prepend mr-2" title={`${repositoryURL}/`}>
@@ -79,11 +103,22 @@ export default class DocSetting extends React.Component {
               <input type="text" ref={this.slugInputRef} className="form-control input-slug flex-auto" defaultValue={slug} />
             </div>
           </div>
-          <div className="text-right">
+          <div className="form-group" style={{ display: 'none' }}>
+            <label className="control-label">{this.t('.File Format')}</label>
+            {format === 'markdown'
+              && <button className="btn btn-danger" format="sml" onClick={this.onConvertFormat}>{this.t('.Covert into RichText')}</button>
+            }
+            {format !== 'markdown'
+              && <button className="btn btn-danger" format="markdown" onClick={this.onConvertFormat}>{this.t('.Covert into RichText')}</button>
+            }
+            <div className="form-text">{this.t('.Warning')}</div>
+          </div>
+
+          <div className="text-right mt-4">
             <span className="btn btn-primary" onClick={this.onSubmit}>{this.t('.Done')}</span>
           </div>
         </div>
-      </details>
+      </details >
     );
   }
 }

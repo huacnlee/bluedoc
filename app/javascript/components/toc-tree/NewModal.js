@@ -5,7 +5,7 @@ import Tab from 'bluebox/tab';
 import { Fetch, createToc } from './api';
 import { readAsText, getValidParams, getMarkdownTitle } from './utils';
 import {
-  TitleInput, UrlInput, MarkdownInput, ExternalInput,
+  TitleInput, UrlInput, FormatSelect, MarkdownInput, ExternalInput,
 } from './FormControls';
 // doc 正常目录+文本
 // external 外链目录
@@ -150,7 +150,7 @@ export default class CreateDialog extends Component {
     const { t, repository } = this.props;
     const {
       fileName,
-      params: { title, url },
+      params: { title, url, format },
     } = this.state;
     switch (type) {
       case 'doc':
@@ -163,6 +163,7 @@ export default class CreateDialog extends Component {
               onChange={this.handleChange('url')}
               prefix={repository.path}
             />
+            <FormatSelect t={t} value={format} onChange={this.handleChange('format')} />
           </form>
         );
       case 'markdown':
