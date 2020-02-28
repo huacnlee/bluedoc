@@ -1,4 +1,5 @@
 import RichEditor from './rich-editor';
+import MarkdownEditor from './markdown-editor';
 import DocSetting from './doc-setting';
 
 class EditorBox {
@@ -113,17 +114,29 @@ class EditorBox {
 
     const value = formatInput.value === 'markdown' ? bodyInput.value : bodySMLInput.value;
 
-    ReactDOM.render(
-      <RichEditor
-        onChange={onChange}
-        onChangeTitle={onChangeTitle}
-        plantumlServiceHost={bodyInput.attributes['data-plantuml-service-host'].value}
-        mathJaxServiceHost={bodyInput.attributes['data-mathjax-service-host'].value}
-        title={titleInput.value}
-        format={formatInput.value}
-        value={value} />,
-      document.querySelector('.editor-container'),
-    );
+    if (formatInput.value === 'markdown') {
+      ReactDOM.render(
+        <MarkdownEditor
+          onChange={onChange}
+          onChangeTitle={onChangeTitle}
+          title={titleInput.value}
+          format={formatInput.value}
+          value={value} />,
+        document.querySelector('.editor-container'),
+      );
+    } else {
+      ReactDOM.render(
+        <RichEditor
+          onChange={onChange}
+          onChangeTitle={onChangeTitle}
+          plantumlServiceHost={bodyInput.attributes['data-plantuml-service-host'].value}
+          mathJaxServiceHost={bodyInput.attributes['data-mathjax-service-host'].value}
+          title={titleInput.value}
+          format={formatInput.value}
+          value={value} />,
+        document.querySelector('.editor-container'),
+      );
+    }
 
     ReactDOM.render(
       <DocSetting

@@ -180,19 +180,19 @@ export default class Toolbar extends React.Component {
 
   onImagePicked = async (ev) => {
     const { editor } = this.props;
-    editor._uploadImageEvent(ev, () => {});
+    editor._uploadImageEvent(ev, () => { });
     ev.target.value = '';
   };
 
   onFilePicked = (ev) => {
     const { editor } = this.props;
-    editor._uploadFileEvent(ev, () => {});
+    editor._uploadFileEvent(ev, () => { });
     ev.target.value = '';
   };
 
   onVideoPicked = (ev) => {
     const { editor } = this.props;
-    editor._uploadVideoEvent(ev, () => {});
+    editor._uploadVideoEvent(ev, () => { });
     ev.target.value = '';
   };
 
@@ -317,7 +317,7 @@ export default class Toolbar extends React.Component {
     const redos = data.get('redos');
 
     return (
-      <div className="editor-toolbar">
+      <div className="editor-toolbar rich-toolbar">
         <div className="container">
           <HiddenInput
             type="file"
