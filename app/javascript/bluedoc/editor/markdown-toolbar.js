@@ -1,17 +1,24 @@
 /* eslint-disable no-underscore-dangle */
 import styled from 'styled-components';
+import { SetValueOperation } from 'slate';
 import BarButton from './bar-button';
 
-// import LinkToolbar from "rich-md-editor/lib/components/Toolbar/LinkToolbar"
-
 export default class Toolbar extends React.Component {
-  state = {};
-
   imageFile = React.createRef();
 
   file = React.createRef();
 
   videoFile = React.createRef();
+
+  constructor(props) {
+    super(props);
+
+    const { editor } = props;
+
+    this.state = {
+      editor,
+    };
+  }
 
   t = (key) => {
     if (key.startsWith('.')) {
@@ -47,18 +54,98 @@ export default class Toolbar extends React.Component {
     return false;
   };
 
+  onImagePicked = async (ev) => {
+    const { editor } = this.props;
+    editor._uploadFileEvent(ev, 'image', () => { });
+  };
 
-  handleHeading = (ev, type) => {
-    ev.preventDefault();
-    ev.stopPropagation();
+  onFilePicked = async (ev) => {
+    const { editor } = this.props;
+    editor._uploadFileEvent(ev, 'file', () => { });
+  };
 
-    // TODO: Heading
+  onVideoPicked = async (ev) => {
+    const { editor } = this.props;
+    editor._uploadFileEvent(ev, 'video', () => { });
+  };
+
+  isActiveMarkup = (type) => {
+    const { editor } = this.props;
+    const cm = editor.codemirror;
+    if (!cm) return false;
+
+    const pos = cm.getCursor('start');
+    const stat = cm.getTokenAt(pos);
+    if (!stat.type) return false;
+    const types = stat.type.split(' ');
+
+    for (let i = 0; i < types.length; i++) {
+      const mark = types[i];
+      if (mark === type) {
+        return true;
+      }
+    }
 
     return false;
   };
 
 
+  /**
+   * When a mark button is clicked, toggle the current mark.
+   *
+   * @param {Event} ev
+   * @param {String} type
+   */
+  onClickMark = (ev, type) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    switch (type) {
+      case 'bold':
+        break;
+      case 'italic':
+        break;
+      case 'strike':
+        break;
+      case 'ordered-list':
+        break;
+      case 'blockquote':
+        break;
+      case 'codeblock':
+        break;
+      default:
+        break;
+    }
+
+    return false;
+  };
+
+
+  handleHeading = (ev, type) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const { editor } = this.props;
+
+    switch (type) {
+      case 'heading1':
+        break;
+      case 'heading2':
+        break;
+      case 'heading3':
+        break;
+      default:
+        break;
+    }
+
+    return false;
+  };
+
   renderButton = (type, icon, title) => {
+    const isActive = this.isActiveMarkup(type);
+
     const onMouseDown = (ev) => {
       ev.preventDefault();
       ev.stopPropagation();
@@ -71,6 +158,7 @@ export default class Toolbar extends React.Component {
     return (
       <BarButton
         icon={icon}
+        active={isActive}
         title={this.t(`.${title}`)}
         onMouseDown={onMouseDown}
       />
@@ -98,7 +186,7 @@ export default class Toolbar extends React.Component {
             onChange={this.onVideoPicked}
             accept="video/mp4,video/x-m4v,video/*"
           />
-          <div className="dropdown d-inline-block">
+          {/* <div className="dropdown d-inline-block">
             <button className="bar-button">
               <i className="fas fa-text-heading" />
               <div className="dropdown-caret" />
@@ -121,24 +209,6 @@ export default class Toolbar extends React.Component {
                 >
                   {t('.Heading 3')}
                 </li>
-                <li
-                  className="dropdown-item heading4"
-                  onMouseDown={e => this.handleHeading(e, 'heading4')}
-                >
-                  {t('.Heading 4')}
-                </li>
-                <li
-                  className="dropdown-item heading5"
-                  onMouseDown={e => this.handleHeading(e, 'heading5')}
-                >
-                  {t('.Heading 5')}
-                </li>
-                <li
-                  className="dropdown-item heading6"
-                  onMouseDown={e => this.handleHeading(e, 'heading6')}
-                >
-                  {t('.Heading 6')}
-                </li>
               </ul>
             </div>
           </div>
@@ -152,7 +222,7 @@ export default class Toolbar extends React.Component {
           <span className="bar-divider" />
           {this.renderButton('blockquote', 'quote', 'Quote')}
           {this.renderButton('codeblock', 'codeblock', 'Insert Code block')}
-          <span className="bar-divider" />
+          <span className="bar-divider" /> */}
           <BarButton
             icon="image"
             title={this.t('.Insert Image')}
