@@ -38,7 +38,7 @@ class DocsController < Users::ApplicationController
   def new
     authorize! :create_doc, @repository
 
-    @doc = Doc.create_new(@repository, current_user.id, slug: params[:slug])
+    @doc = Doc.create_new(@repository, current_user.id, slug: params[:slug], format: params[:format])
     redirect_to @doc.to_path("/edit")
   rescue ActiveRecord::RecordInvalid
     redirect_to @repository.to_path("/#{params[:slug]}"), alert: "Create slug as #{params[:slug]} failed, maybe it exist."

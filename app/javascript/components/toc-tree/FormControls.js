@@ -7,6 +7,16 @@ export const TitleInput = ({ t, onChange, value }) => (
   </div>
 );
 
+export const FormatSelect = ({ t, onChange, value }) => (
+  <div className="form-group">
+    <label className="control-label">{t('.Format')}</label>
+    <select onChange={onChange} value={value} className="form-control">
+      <option value="sml">{t('.RichText')}</option>
+      <option value="markdown">{t('.Markdown')}</option>
+    </select>
+  </div>
+);
+
 export const MarkdownInput = ({ t, onChange, value }) => (
   <div className="form-group">
     <label className="form-input-file">
@@ -25,22 +35,22 @@ export const MarkdownInput = ({ t, onChange, value }) => (
 export const UrlInput = ({
   t, onChange, value, prefix,
 }) => (
-  <div className="form-group mb-button">
-    <label className="control-label">{t('.Url')}</label>
-    <div className="input-group d-flex">
-      <div className="input-group-prepend">
-        <div className="input-group-text">{`${prefix}/`}</div>
+    <div className="form-group mb-button">
+      <label className="control-label">{t('.Url')}</label>
+      <div className="input-group d-flex">
+        <div className="input-group-prepend">
+          <div className="input-group-text">{`${prefix}/`}</div>
+        </div>
+        <input
+          className="form-control"
+          type="text"
+          value={value}
+          placeholder={'slug'}
+          onChange={onChange}
+        />
       </div>
-      <input
-        className="form-control"
-        type="text"
-        value={value}
-        placeholder={'slug'}
-        onChange={onChange}
-      />
     </div>
-  </div>
-);
+  );
 
 export const ExternalInput = ({ t, onChange, value }) => (
   <div className="form-group mb-button">

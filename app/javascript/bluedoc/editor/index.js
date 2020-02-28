@@ -142,6 +142,7 @@ class EditorBox {
       <DocSetting
         saveURL={saveURL}
         onChange={onChangeSettings}
+        format={formatInput.value}
         repositoryURL={bodyInput.attributes['data-repository-url'].value}
         slug={bodyInput.attributes['data-slug'].value} />,
       document.querySelector('.btn-doc-info-box'),

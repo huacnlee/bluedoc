@@ -1,13 +1,10 @@
 /* eslint-disable */
 import i18n from "i18next";
 const deepAssign = require('deep-assign');
-
 const metaLocale = document.querySelector('meta[name=locale]');
 const lang = (metaLocale && metaLocale.content || 'en').replace('-', '_');
-
 <% I18n.backend.eager_load! %>
 const RAILS_I18N = <%= I18n.backend.translations.to_json %>;
-
 i18n.init({
   // we init with resources
   resources: {
@@ -20,8 +17,8 @@ i18n.init({
         "dialog": {
           "Cancel": "Cancel",
         },
-        "user":{
-          "loginRequiredDialog":{
+        "user": {
+          "loginRequiredDialog": {
             "title": "Login Required",
             "description": "You need to sign in or sign up before continuing.",
             "okButtonTitle": "Login",
@@ -111,6 +108,10 @@ i18n.init({
           "DocSetting": {
             "Slug": "Doc path",
             "Done": "Done",
+            "Warning": "WARNING! Converting the document format may lose some content, please use it with caution!",
+            "File Format": "File format",
+            "Covert into Markdown": "Covert into Markdown",
+            "Covert into RichText": "Covert into RichText",
           },
         },
         "notes": {
@@ -191,6 +192,9 @@ i18n.init({
           "Delete doc": "Delete",
           "Title": "Title",
           "Url": "Custom link",
+          "Format": "File format",
+          "RichText": "RichText (Default)",
+          "Markdown": "Markdown",
           "Update": "Save",
           "Cancel": "Cancel",
           "Add a Doc inside": "Add a Doc inside",
@@ -234,8 +238,8 @@ i18n.init({
         "dialog": {
           "Cancel": "取消",
         },
-        "user":{
-          "loginRequiredDialog":{
+        "user": {
+          "loginRequiredDialog": {
             "title": "提示",
             "description": "你需要先登录才能继续操作",
             "okButtonTitle": "登录",
@@ -324,7 +328,11 @@ i18n.init({
           },
           "DocSetting": {
             "Slug": "文档路径",
-            "Done": "更新"
+            "Done": "更新",
+            "File Format": "文档模式",
+            "Warning": "警告！转换文档格式可能会丢失部分内容，请谨慎使用！",
+            "Covert into Markdown": "转换为 Markdown 模式",
+            "Covert into RichText": "转换为 RichText 模式",
           },
         },
         "notes": {
@@ -405,6 +413,9 @@ i18n.init({
           "Delete doc": "删除",
           "Title": "标题",
           "Url": "自定义链接",
+          "Format": "文档格式",
+          "RichText": "富文本 (默认)",
+          "Markdown": "Markdown",
           "Update": "保存",
           "Cancel": "取消",
           "Add a Doc inside": "添加子文档",
@@ -443,20 +454,15 @@ i18n.init({
   fallbackLng: "en",
   debug: false,
   lng: lang,
-
   // have a common namespace used around the full app
   ns: ["locales"],
   defaultNS: "locales",
-
   interpolation: {
     prefix: "%{",
     suffix: "}",
   },
-
   react: {
     wait: true
   }
 });
-
 export default i18n;
-

@@ -52,9 +52,10 @@ class Doc < ApplicationRecord
   end
 
   class << self
-    def create_new(repo, user_id, slug: nil, title: nil)
+    def create_new(repo, user_id, slug: nil, title: nil, format: nil)
+      format = "sml" if format.blank?
       doc = Doc.new
-      doc.format = "sml"
+      doc.format = format
       doc.repository_id = repo.id
       doc.creator_id = user_id
       doc.last_editor_id = user_id

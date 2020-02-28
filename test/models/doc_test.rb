@@ -249,6 +249,7 @@ class DocTest < ActiveSupport::TestCase
     doc = Doc.create_new(repo, 123)
     assert_equal false, doc.new_record?
     assert_not_nil doc.slug
+    assert_equal "sml", doc.format
     assert_equal "New Document", doc.title
     assert_equal "New Document", doc.draft_title
     assert_equal repo.id, doc.repository_id
@@ -256,9 +257,10 @@ class DocTest < ActiveSupport::TestCase
     assert_equal 123, doc.last_editor_id
 
     # with :slug
-    doc = Doc.create_new(repo, 123, slug: "new-doc-123")
+    doc = Doc.create_new(repo, 123, slug: "new-doc-123", format: "markdown")
     assert_equal false, doc.new_record?
     assert_equal "new-doc-123", doc.slug
+    assert_equal "markdown", doc.format
 
     # create same slug again will give a random slug
     assert_raise(ActiveRecord::RecordInvalid) do

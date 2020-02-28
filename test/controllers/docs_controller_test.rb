@@ -119,6 +119,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
     doc = @repo.docs.last
     assert_equal "hello-world", doc.slug
+    assert_equal "sml", doc.format
     assert_redirected_to doc.to_path("/edit")
 
     # with same slug
@@ -126,6 +127,15 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       get @repo.to_path("/docs/new"), params: { slug: "hello-world" }
     end
     assert_redirected_to doc.to_path
+
+    # with format param
+    assert_changes -> { @repo.docs.count }, 1 do
+      get @repo.to_path("/docs/new"), params: { slug: "hello-world1", format: "markdown" }
+    end
+    doc = @repo.reload.docs.last
+    assert_equal "hello-world1", doc.slug
+    assert_equal "markdown", doc.format
+    assert_redirected_to doc.to_path("/edit")
   end
 
   test "GET /:user/:repo/:slug" do
