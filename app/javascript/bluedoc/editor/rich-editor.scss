@@ -1,0 +1,229 @@
+.rich-editor {
+  .editor-text {
+    font-size: 15px;
+    line-height: 24px;
+    cursor: text;
+
+    // Prism highlight
+    pre {
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #969896;
+      }
+      .token.punctuation,
+      .token.string,
+      .token.atrule,
+      .token.attr-value {
+        color: #183691;
+      }
+      .token.property,
+      .token.tag {
+        color: #63a35c;
+      }
+      .token.boolean,
+      .token.number {
+        color: #0086b3;
+      }
+      .token.selector,
+      .token.attr-name,
+      .token.attr-value .punctuation:first-child,
+      .token.keyword,
+      .token.regex,
+      .token.important {
+        color: #795da3;
+      }
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string {
+        color: #a71d5d;
+      }
+      .token.entity {
+        cursor: help;
+      }
+      .namespace {
+        opacity: 0.7;
+      }
+    }
+
+    .code-container {
+      position: relative;
+      .select-lang {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    ul,
+    ol {
+      margin-bottom: 0.25em !important;
+    }
+
+    .attachment-file {
+      cursor: pointer;
+    }
+
+    [data-active="true"] {
+      position: relative;
+
+      hr {
+        background: $primary;
+      }
+    }
+
+    .attachment-file[data-active="true"] {
+      background: rgba(84, 141, 252, 0.07) !important;
+    }
+
+    blockquote {
+      .paragraph {
+        margin-bottom: 0px;
+      }
+    }
+
+    table tr,
+    table td,
+    .math-box,
+    .link-item,
+    .image {
+      &[data-active="true"],
+      [data-active="true"] {
+        &:before {
+          content: "";
+        }
+      }
+    }
+
+    [data-valid="false"] {
+      border: 2px solid $danger;
+    }
+
+    .codeblock-box {
+      position: relative;
+
+      .select-language {
+        float: left;
+        -webkit-appearance: none;
+        background: transparent;
+        border: 0;
+        outline: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #555;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: 240px;
+      }
+      .close {
+        float: right;
+        color: rgb(155, 155, 155);
+        display: none;
+      }
+    }
+
+    .CodeMirror {
+      background-color: #f6f8fa;
+      border-radius: 3px;
+      padding: 16px;
+      margin-bottom: 18px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      font-family: Monaco, monospace;
+
+      .CodeMirror-hscrollbar,
+      .CodeMirror-vscrollbar {
+        display: none !important;
+      }
+    }
+
+    .math-box {
+      &[data-active="true"] {
+        .tex-image {
+          background: rgba(187, 201, 255, 0.18) !important;
+        }
+      }
+    }
+    .link-item {
+      cursor: pointer;
+      &[data-active="true"] {
+        .link-title {
+          background: rgba(187, 201, 255, 0.18) !important;
+        }
+      }
+    }
+
+    .plantuml-box {
+      &[data-active="true"] {
+        .plantuml-image {
+          background: rgba(187, 201, 255, 0.18) !important;
+        }
+      }
+
+      .plantuml-image {
+        margin-bottom: 0 !important;
+      }
+
+      .actions {
+        bottom: -38px;
+      }
+
+      textarea {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  /* HOTFIX */
+  .markdown-body {
+    ol > li > p,
+    ul > li > p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+
+    a:not([href]) {
+      color: #3c6fe8;
+      text-decoration: underline;
+    }
+
+    .paragraph {
+      margin-bottom: 16px;
+    }
+
+    p:empty {
+      margin: 0;
+    }
+  }
+
+  ul + .paragraph,
+  ul + h1,
+  ul + h2,
+  ul + h3,
+  ul + h4,
+  ul + h5,
+  ul + h6,
+  ol + .paragraph,
+  ol + h1,
+  ol + h2,
+  ol + h3,
+  ol + h4,
+  ol + h5,
+  ol + h6 {
+    margin-top: 20px !important;
+  }
+}
