@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BlueDoc
-  VERSION = "1.1.0"
+  VERSION = "1.2.0"
 
   def self.full_version
     version_str = VERSION
