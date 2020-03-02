@@ -242,7 +242,7 @@ export default class RichEditor extends React.Component {
       placeholder = this.t('.New Document');
       title = '';
     }
-    return <div className={`rich-editor-${mode}`}>
+    return <div className={`rich-editor-${mode} rich-editor`}>
       <Toolbar value={value} mode={mode} editor={this.editor} container={this} />
       <div className="editor-bg" ref={this.containerRef}>
         <div className="editor-box">
