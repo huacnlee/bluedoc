@@ -9,10 +9,10 @@ export const TitleInput = ({ t, onChange, value }) => (
 
 export const FormatSelect = ({ t, onChange, value }) => (
   <div className="form-group">
-    <label className="control-label">{t('.Format')}</label>
-    <select onChange={onChange} value={value} className="form-control">
-      <option value="sml">{t('.RichText')}</option>
-      <option value="markdown">{t('.Markdown')}</option>
+    <label className="control-label">{t('activerecord.attributes.doc.format')}</label>
+    < select onChange={onChange} value={value} className="form-control" >
+      <option value="sml">{t('shared.format.sml')}</option>
+      <option value="markdown">{t('shared.format.markdown')}</option>
     </select>
   </div>
 );

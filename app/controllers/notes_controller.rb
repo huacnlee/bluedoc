@@ -27,7 +27,6 @@ class NotesController < Users::ApplicationController
   def create
     @user = current_user
     @note = @user.notes.new(note_params)
-    @note.format = "sml"
     if @note.save
       redirect_to @note.to_path("/edit")
     else

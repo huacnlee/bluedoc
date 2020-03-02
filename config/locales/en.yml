@@ -59,6 +59,7 @@ en:
       doc:
         slug: Doc path
         title: Title
+        format: Content Format
       share:
         shareable: Content
         user: Creator
@@ -70,6 +71,7 @@ en:
         body: Body
         body_sml: Body
         privacy: Privacy
+        format: Content Format
       label:
         title: Label name
         color: Color

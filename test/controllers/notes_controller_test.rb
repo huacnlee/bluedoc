@@ -86,11 +86,13 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
 
+    # Create with Markdown
     note_params = {
       slug: "foo-bar",
       title: "Hello world",
       description: "This is description",
-      privacy: "private"
+      privacy: "private",
+      format: "markdown",
     }
     post user_notes_path(@user), params: { note: note_params }
     assert_redirected_to @user.to_path("/notes/foo-bar/edit")
@@ -100,6 +102,25 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal note_params[:title], note.title
     assert_equal note_params[:description], note.description
     assert_equal true, note.private?
+    assert_equal "markdown", note.format
+
+    # Create with SML
+    note_params = {
+      slug: "foo-bar-sml",
+      title: "Hello world - SML",
+      description: "This is description",
+      privacy: "public",
+      format: "sml",
+    }
+    post user_notes_path(@user), params: { note: note_params }
+    assert_redirected_to @user.to_path("/notes/foo-bar-sml/edit")
+
+    note = @user.notes.order("id asc").last
+    assert_equal note_params[:slug], note.slug
+    assert_equal note_params[:title], note.title
+    assert_equal note_params[:description], note.description
+    assert_equal false, note.private?
+    assert_equal "sml", note.format
   end
 
   test "GET /:user/notes/:slug" do

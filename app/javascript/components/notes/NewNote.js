@@ -91,6 +91,14 @@ export default class NewNote extends React.Component {
           </div>
         </FormGroup>
 
+        <FormGroup name="format" object={note}>
+          <ControlLabel title={t('activerecord.attributes.note.format')} />
+          <select name="note[format]" className="form-control">
+            <option value="sml">{t('shared.format.sml')}</option>
+            <option value="markdown">{t('shared.format.markdown')}</option>
+          </select>
+        </FormGroup>
+
         <FormGroup name="privacy" object={note}>
           <ControlLabel title={t('activerecord.attributes.note.privacy')} />
           <div class="form-checkbox">

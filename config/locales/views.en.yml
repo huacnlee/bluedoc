@@ -5,6 +5,9 @@ en:
   updated at: updated at
   Captcha: Captcha
   shared:
+    format:
+      sml: RichText (default)
+      markdown: Markdown
     more_button:
       More: "More ..."
     action_button:

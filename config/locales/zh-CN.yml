@@ -37,6 +37,7 @@ zh-CN:
         editors: 参与人员
         created_at: 创建时间
         updated_at: 更新时间
+        format: 文档格式
       user:
         slug: 用户名
         name: 姓名
@@ -81,6 +82,7 @@ zh-CN:
         body: 正文
         body_sml: 正文
         privacy: 隐私模式
+        format: 文档格式
       label:
         title: 标签名称
         color: 颜色

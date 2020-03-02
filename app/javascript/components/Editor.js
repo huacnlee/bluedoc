@@ -1,15 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
 import RichEditor from 'bluedoc/editor/rich-editor';
+import MarkdownEditor from 'bluedoc/editor/markdown-editor';
 
 export default class Editor extends React.PureComponent {
   inputRef = React.createRef()
+
   formatInputRef = React.createRef()
+
   markdownInputRef = React.createRef()
+
   titleInputRef = React.createRef()
+
   editorRef = React.createRef()
+
   editor = null
 
   avoidSubmit = (ev) => {
@@ -26,7 +30,7 @@ export default class Editor extends React.PureComponent {
     const { format } = this.props;
     this.markdownInputRef.current.value = markdownValue;
     if (smlValue) {
-      this.formatInputRef.current.value = "sml";
+      this.formatInputRef.current.value = 'sml';
       this.inputRef.current.value = smlValue;
     }
   }
@@ -38,8 +42,9 @@ export default class Editor extends React.PureComponent {
   render() {
     const {
       plantumlServiceHost, mathJaxServiceHost,
-      name = 'body_sml', markdownName = 'body', titleName = 'title', formatName = "format", value = '', title = '', format = 'markdown',
+      name = 'body_sml', markdownName = 'body', titleName = 'title', formatName = 'format', body = '', body_sml = '', title = '', format = 'markdown',
     } = this.props;
+
 
     return <div>
       <input name={titleName} ref={this.titleInputRef} value={title} style={{ display: 'none' }} />
@@ -47,17 +52,25 @@ export default class Editor extends React.PureComponent {
       <textarea name={name} ref={this.inputRef} style={{ display: 'none' }} />
       <textarea name={markdownName} ref={this.markdownInputRef} style={{ display: 'none' }} />
       <form onSubmit={this.avoidSubmit}>
-        <RichEditor
-          title={title}
-          ref={this.editorRef}
-          getEditor={this.setEditor}
-          plantumlServiceHost={plantumlServiceHost}
-          mathJaxServiceHost={mathJaxServiceHost}
-          onChange={this.onChange}
-          onChangeTitle={this.onChangeTitle}
-          format={format}
-          value={value}
-        />
+        {format === 'markdown'
+          && <MarkdownEditor
+            onChange={this.onChange}
+            onChangeTitle={this.onChangeTitle}
+            title={title}
+            format={format}
+            value={body} />}
+        {format !== 'markdown'
+
+          && <RichEditor
+            ref={this.editorRef}
+            getEditor={this.setEditor}
+            onChange={this.onChange}
+            onChangeTitle={this.onChangeTitle}
+            plantumlServiceHost={plantumlServiceHost}
+            mathJaxServiceHost={mathJaxServiceHost}
+            title={title}
+            format={format}
+            value={body_sml} />}
       </form>
     </div>;
   }

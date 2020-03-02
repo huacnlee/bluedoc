@@ -5,6 +5,9 @@ zh-CN:
   updated at: 更新于
   Captcha: 验证码
   shared:
+    format:
+      sml: 富文本 (默认)
+      markdown: Markdown
     more_button:
       More: "加载更多 ..."
     action_button:
