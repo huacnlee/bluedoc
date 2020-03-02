@@ -72,13 +72,18 @@ class Toc < ApplicationRecord
         item.id = doc&.id
       end
 
-      last_item = self.create!(
-        repository_id: repo.id,
-        title: item.title,
-        url: item.url,
-        doc_id: item.id,
-        parent: parent,
-      )
+      last_item = self.find_by(repository_id: repo.id, doc_id: item.id)
+      if last_item
+        last_item.update(parent: parent)
+      else
+        last_item = self.create!(
+          repository_id: repo.id,
+          title: item.title,
+          url: item.url,
+          doc_id: item.id,
+          parent: parent,
+        )
+      end
     end
 
     repo.touch

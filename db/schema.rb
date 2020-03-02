@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_072827) do
+ActiveRecord::Schema.define(version: 2020_03_02_153940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -341,7 +341,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_072827) do
     t.integer "parent_id"
     t.integer "lft", null: false
     t.integer "rgt", null: false
-    t.index ["repository_id", "doc_id"], name: "index_tocs_on_repository_id_and_doc_id"
+    t.index ["repository_id", "doc_id"], name: "index_tocs_on_repository_id_and_doc_id", unique: true, where: "(doc_id IS NOT NULL)"
     t.index ["repository_id", "lft"], name: "index_tocs_on_repository_id_and_lft"
     t.index ["repository_id", "parent_id"], name: "index_tocs_on_repository_id_and_parent_id"
     t.index ["repository_id", "rgt"], name: "index_tocs_on_repository_id_and_rgt"
