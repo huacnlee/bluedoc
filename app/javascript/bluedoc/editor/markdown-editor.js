@@ -120,6 +120,143 @@ export default class MarkdownEditor extends React.Component {
     this._insertText(text);
   }
 
+  getSelection = () => {
+    const { codemirror } = this;
+    const { doc } = codemirror;
+    const cursor = doc.getCursor();
+    const selection = doc.getSelection();
+
+    return { cm: doc, cursor, selection };
+  }
+
+  _bold = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+    cm.replaceSelection(`**${selection}**`);
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 2);
+    }
+  }
+
+  _italic = () => {
+    const { cm, cursor, selection } = this.getSelection();
+    cm.replaceSelection(`*${selection}*`);
+
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 1);
+    }
+  }
+
+  _strike = () => {
+    const { cm, cursor, selection } = this.getSelection();
+    cm.replaceSelection(`~~${selection}~~`);
+
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 2);
+    }
+  }
+
+  _link = () => {
+    const { cm, cursor, selection } = this.getSelection();
+    cm.replaceSelection(`[${selection}]()`);
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 2);
+    }
+  }
+
+  _code = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+    cm.replaceSelection(`\`${selection}\``);
+
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 1);
+    }
+  }
+
+  _codeblock = () => {
+    const { cm, cursor, selection } = this.getSelection();
+    this._insertText('\n```\n```\n');
+
+    if (selection === '') {
+      cm.setCursor(cursor.line, cursor.ch + 3);
+    }
+  }
+
+  _blockquote = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+    if (cursor.ch !== 0) {
+      cm.setCursor(cursor.line, 0);
+      cm.replaceSelection(`> ${selection}`);
+      cm.setCursor(cursor.line, cursor.ch + 2);
+    } else {
+      cm.replaceSelection(`> ${selection}`);
+    }
+  }
+
+  _heading = (num) => {
+    const { cm, cursor, selection } = this.getSelection();
+    const prefix = `${'#'.repeat(num)} `;
+
+    if (cursor.ch !== 0) {
+      cm.setCursor(cursor.line, 0);
+      cm.replaceSelection(prefix + selection);
+      cm.setCursor(cursor.line, cursor.ch + num + 1);
+    } else {
+      cm.replaceSelection(prefix + selection);
+    }
+  }
+
+  _bulletedList = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+    if (selection === '') {
+      cm.replaceSelection(`- ${selection}`);
+    } else {
+      const selectionText = selection.split('\n');
+
+      for (let i = 0, len = selectionText.length; i < len; i++) {
+        selectionText[i] = (selectionText[i] === '') ? '' : `- ${selectionText[i]}`;
+      }
+
+      cm.replaceSelection(selectionText.join('\n'));
+    }
+  }
+
+  _numberedList = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+
+    if (selection === '') {
+      cm.replaceSelection(`1. ${selection}`);
+    } else {
+      const selectionText = selection.split('\n');
+
+      for (let i = 0, len = selectionText.length; i < len; i++) {
+        selectionText[i] = (selectionText[i] === '') ? '' : `${i + 1}. ${selectionText[i]}`;
+      }
+
+      cm.replaceSelection(selectionText.join('\n'));
+    }
+  }
+
+  _hr = () => {
+    const { cm, cursor, selection } = this.getSelection();
+
+    cm.replaceSelection(`${(cursor.ch !== 0) ? '\n\n' : '\n'}------------\n\n`);
+  }
+
+  _undo = () => {
+    const { cm } = this.getSelection();
+    cm.undo();
+  }
+
+  _redo = () => {
+    const { cm } = this.getSelection();
+    cm.redo();
+  }
+
   _uploadFileEvent = (event, fileType, next) => {
     const service = this.attachmentService;
     const { imageUpload, attachmentUpload, videoUpload } = service;

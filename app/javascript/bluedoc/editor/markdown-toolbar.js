@@ -104,16 +104,34 @@ export default class Toolbar extends React.Component {
 
     switch (type) {
       case 'bold':
+        editor._bold();
         break;
       case 'italic':
+        editor._italic();
         break;
       case 'strike':
+        editor._strike();
         break;
-      case 'ordered-list':
+      case 'link':
+        editor._link();
+        break;
+      case 'image':
+        editor._image();
+        break;
+      case 'code':
+        editor._code();
+        break;
+      case 'numbered-list':
+        editor._numberedList();
+        break;
+      case 'bulleted-list':
+        editor._bulletedList();
         break;
       case 'blockquote':
+        editor._blockquote();
         break;
       case 'codeblock':
+        editor._codeblock();
         break;
       default:
         break;
@@ -131,10 +149,22 @@ export default class Toolbar extends React.Component {
 
     switch (type) {
       case 'heading1':
+        editor._heading(1);
         break;
       case 'heading2':
+        editor._heading(2);
         break;
       case 'heading3':
+        editor._heading(3);
+        break;
+      case 'heading4':
+        editor._heading(4);
+        break;
+      case 'heading5':
+        editor._heading(5);
+        break;
+      case 'heading6':
+        editor._heading(6);
         break;
       default:
         break;
@@ -142,6 +172,20 @@ export default class Toolbar extends React.Component {
 
     return false;
   };
+
+  handleUndo = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    const { editor } = this.props;
+    editor._undo();
+  }
+
+  handleRedo = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    const { editor } = this.props;
+    editor._redo();
+  }
 
   renderButton = (type, icon, title) => {
     const isActive = this.isActiveMarkup(type);
@@ -186,17 +230,28 @@ export default class Toolbar extends React.Component {
             onChange={this.onVideoPicked}
             accept="video/mp4,video/x-m4v,video/*"
           />
-          {/* <div className="dropdown d-inline-block">
+          {mode === 'full' && (
+            <span>
+              <BarButton
+                icon="undo"
+                title={this.t('.Undo')}
+                onMouseDown={this.handleUndo}
+              />
+              <BarButton
+                icon="redo"
+                title={this.t('.Redo')}
+                onMouseDown={this.handleRedo}
+              />
+              <span className="bar-divider" />
+            </span>
+          )}
+          <div className="dropdown d-inline-block">
             <button className="bar-button">
               <i className="fas fa-text-heading" />
               <div className="dropdown-caret" />
             </button>
             <div className="dropdown-menu dropdown-menu-se">
               <ul>
-                <li className="dropdown-item" onMouseDown={e => this.handleHeading(e, 'paragraph')}>
-                  {t('.Paragraph')}
-                </li>
-                <li className="dropdown-divider" />
                 <li
                   className="dropdown-item heading2"
                   onMouseDown={e => this.handleHeading(e, 'heading2')}
@@ -209,6 +264,24 @@ export default class Toolbar extends React.Component {
                 >
                   {t('.Heading 3')}
                 </li>
+                <li
+                  className="dropdown-item heading4"
+                  onMouseDown={e => this.handleHeading(e, 'heading4')}
+                >
+                  {t('.Heading 4')}
+                </li>
+                <li
+                  className="dropdown-item heading5"
+                  onMouseDown={e => this.handleHeading(e, 'heading5')}
+                >
+                  {t('.Heading 5')}
+                </li>
+                <li
+                  className="dropdown-item heading6"
+                  onMouseDown={e => this.handleHeading(e, 'heading6')}
+                >
+                  {t('.Heading 6')}
+                </li>
               </ul>
             </div>
           </div>
@@ -216,13 +289,15 @@ export default class Toolbar extends React.Component {
           {this.renderButton('bold', 'bold', 'Bold')}
           {this.renderButton('italic', 'italic', 'Italic')}
           {this.renderButton('strike', 'strikethrough', 'Strike Through')}
-          {this.renderButton('underline', 'underline', 'Underline')}
-          {this.renderButton('code', 'code', 'Inline Code')}
           {this.renderButton('link', 'link', 'Insert Link')}
+          {this.renderButton('code', 'code', 'Inline Code')}
           <span className="bar-divider" />
           {this.renderButton('blockquote', 'quote', 'Quote')}
           {this.renderButton('codeblock', 'codeblock', 'Insert Code block')}
-          <span className="bar-divider" /> */}
+          <span className="bar-divider" />
+          {this.renderButton('bulleted-list', 'bulleted-list', 'Bulleted list')}
+          {this.renderButton('numbered-list', 'numbered-list', 'Numbered list')}
+          <span className="bar-divider" />
           <BarButton
             icon="image"
             title={this.t('.Insert Image')}
