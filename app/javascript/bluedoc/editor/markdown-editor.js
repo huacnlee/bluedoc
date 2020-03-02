@@ -191,7 +191,7 @@ export default class MarkdownEditor extends React.Component {
                 className="editor-title-text" />
             </div>
           )}
-          <div className="editor-text">
+          <div className="editor-text markdown-body">
             <CodeMirror className="editor-body-text" autoFocus options={codeMirrorOptions} ref={this.editorRef} value={value} onChange={this.onChange} />
           </div>
         </div>

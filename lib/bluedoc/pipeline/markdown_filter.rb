@@ -8,7 +8,7 @@ module BlueDoc
   class Pipeline
     class MarkdownFilter < ::HTML::Pipeline::TextFilter
       def call
-        doc = CommonMarker.render_doc(@text, [:DEFAULT, :UNSAFE], [:tagfilter, :autolink, :table, :strikethrough])
+        doc = CommonMarker.render_doc(@text, [:DEFAULT, :UNSAFE, :FOOTNOTES], [:tagfilter, :autolink, :table, :strikethrough])
         html = Render.new(options: [:DEFAULT, :UNSAFE]).render(doc)
         html.strip!
         html

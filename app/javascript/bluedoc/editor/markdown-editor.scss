@@ -1,22 +1,10 @@
 .markdown-editor {
   .editor-text {
     .CodeMirror {
-      font-size: 15px;
-      font-family: -apple-system, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
       padding: 0;
       background: #fff;
       color: #222;
-
-      .cm-header {
-        color: #222;
-      }
-      .cm-header-2 {
-        font-size: 1.5em;
-      }
-      .cm-link,
-      .cm-url {
-        color: #2f70ff;
-      }
+      overflow: hidden;
     }
   }
 }

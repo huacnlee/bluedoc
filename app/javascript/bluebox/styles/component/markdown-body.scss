@@ -773,7 +773,28 @@
 }
 .markdown-body .cm-s-default .CodeMirror-matchingbracket {
   text-decoration: underline;
-  color: #24292e !important;
+  color: #222 !important;
+}
+.markdown-body .cm-s-default {
+  font-size: 15px;
+  font-family: -apple-system, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+
+  .cm-header {
+    color: #222;
+    font-size: 1.5em;
+  }
+  .cm-header-1 {
+    font-size: 2em;
+  }
+  .cm-header-2 {
+    font-size: 1.5em;
+  }
+  .cm-header-3 {
+    font-size: 1.3em;
+  }
+  .cm-header-4 {
+    font-size: 1.1em;
+  }
 }
 .markdown-body .cm-s-default .cm-comment {
   color: #6a737d;
@@ -798,7 +819,10 @@
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
-  color: #d14;
+  color: #1b20e2;
+}
+.markdown-body .cm-s-default .cm-link {
+  color: #111;
 }
 .markdown-body .cm-s-default .cm-support {
   font-weight: normal;
@@ -813,7 +837,7 @@
   color: #008080;
 }
 .markdown-body .cm-s-default .cm-def {
-  color: #990000;
+  color: #d73a49;
   font-weight: bold;
 }
 
