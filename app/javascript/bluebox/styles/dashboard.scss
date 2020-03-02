@@ -1,5 +1,4 @@
 .page-dashboards {
-
   .dashboard-nav {
     background: #fff;
     padding: 14px 0;
@@ -91,9 +90,20 @@
     @extend .clearfix;
 
     .group-item {
-      float: left;
-      margin-right: 10px;
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 15px;
+
+      .user-avatar {
+        margin-right: 8px;
+      }
+      .user-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 
@@ -132,7 +142,6 @@
         margin-bottom: 15px;
         width: calc(50% - 30px);
       }
-
     }
 
     .more-button {
