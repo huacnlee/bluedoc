@@ -14,7 +14,6 @@ class TocTest < ActiveSupport::TestCase
       { id: docs[1].id, url: docs[1].slug, title: docs[1].title, depth: 0 }.as_json,
       { id: docs[0].id, url: docs[0].slug, title: docs[0].title, depth: 1 }.as_json,
       { id: docs[2].id, url: docs[2].slug, title: docs[2].title, depth: 2 }.as_json,
-      { id: docs[2].id, url: docs[2].slug, title: docs[2].title, depth: 3 }.as_json,
       { id: docs[4].id, url: docs[4].slug, title: docs[4].title, depth: 0 }.as_json,
       { id: nil, url: "test", title: "Test url", depth: 1 }.as_json,
       { id: docs[3].id, url: docs[3].slug, title: docs[3].title, depth: 0 }.as_json,

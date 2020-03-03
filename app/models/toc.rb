@@ -70,11 +70,13 @@ class Toc < ApplicationRecord
       if item.id.blank?
         doc = docs.find { |_doc| _doc.slug == item.url }
         item.id = doc&.id
+      else
+        exist_item = self.find_by(repository_id: repo.id, doc_id: item.id)
       end
 
-      last_item = self.find_by(repository_id: repo.id, doc_id: item.id)
-      if last_item
-        last_item.update(parent: parent)
+      if exist_item
+        exist_item.update!(parent: parent)
+        last_item = exist_item
       else
         last_item = self.create!(
           repository_id: repo.id,
