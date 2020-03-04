@@ -11,8 +11,8 @@ module BlueDoc
       ::HTML::Pipeline.new(pipelineClasses)
     end
 
-    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax, :auto_correct)
-    SmlPileline = constantizePilelines(:sml, :normalize_mention, :mention, :plantuml, :auto_correct)
+    MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax, :pdf_preview, :auto_correct)
+    SmlPileline = constantizePilelines(:sml, :normalize_mention, :mention, :plantuml, :pdf_preview, :auto_correct)
     PublicAttachmentPipeline = constantizePilelines(:public_attachments)
 
     class << self

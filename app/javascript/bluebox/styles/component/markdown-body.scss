@@ -301,6 +301,11 @@
     background-color: transparent;
   }
 
+  .attachment-pdf-preview {
+    width: 100%;
+    height: calc(100vw);
+  }
+
   // Lists, Blockquotes & Such
   ul,
   ol {

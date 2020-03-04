@@ -124,6 +124,23 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     out = BlueDoc::HTML.render(raw, format: :markdown)
     assert_html_equal html, out
 
+    # PDF attachment
+    raw = <<~MD
+    [This is a attachment.pdf](/uploads/foobar)
+    MD
+    html = <<~HTML
+    <p>
+    <a class="attachment-file" title="This is a attachment.pdf" target="_blank" href="/uploads/foobar">
+      <span class="icon-box"><i class="fas fa-file"></i></span>
+      <span class="filename">This is a attachment.pdf</span>
+      <span class="filesize"></span>
+    </a>
+    <embed src="/uploads/foobar" class="attachment-pdf-preview">
+    </p>
+    HTML
+    out = BlueDoc::HTML.render(raw, format: :markdown)
+    assert_html_equal html, out
+
 
     # empty link should work
     raw = <<~MD
