@@ -7,8 +7,8 @@
   "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
   "application.js": "/packs-test/js/application-bdc24d0ff7aad47d1fa5.js",
   "application.js.map": "/packs-test/js/application-bdc24d0ff7aad47d1fa5.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-defc433b.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-defc433b.css.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-79e168fc.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-79e168fc.css.map",
   "bluedoc.js": "/packs-test/js/bluedoc-42846db0c5be86821217.js",
   "bluedoc.js.map": "/packs-test/js/bluedoc-42846db0c5be86821217.js.map",
   "entrypoints": {
@@ -42,13 +42,13 @@
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-defc433b.css"
+        "/packs-test/css/bluedoc-79e168fc.css"
       ],
       "js": [
         "/packs-test/js/bluedoc-42846db0c5be86821217.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-defc433b.css.map"
+        "/packs-test/css/bluedoc-79e168fc.css.map"
       ],
       "js.map": [
         "/packs-test/js/bluedoc-42846db0c5be86821217.js.map"

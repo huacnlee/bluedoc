@@ -303,7 +303,9 @@
 
   .attachment-pdf-preview {
     width: 100%;
-    height: calc(100vw);
+    min-height: 640px;
+    max-height: 800px;
+    height: calc(100vw * 0.75);
   }
 
   // Lists, Blockquotes & Such
