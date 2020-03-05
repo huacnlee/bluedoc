@@ -33,6 +33,7 @@ zh-CN:
     not_found:
       Page not found: 页面无法找到 (404)
       Sorry, that page does not exist: 当前访问的 URL 地址未能在服务器上找到。
+      Back to home: "返回首页"
   layouts:
     user_menu:
       New Repository: 新建知识库

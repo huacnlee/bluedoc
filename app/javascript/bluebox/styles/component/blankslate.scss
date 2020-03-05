@@ -1,16 +1,19 @@
 .blankslate {
   color: #555;
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
   padding: 10px 0;
 
-  h2, h3 {
+  h2,
+  h3 {
     font-size: 16px;
     color: #000;
     margin-bottom: 10px;
   }
 
-  a { color: $text-gray-dark; }
+  a {
+    color: $text-gray-dark;
+  }
 
   &.no-data {
     padding-top: 260px;
@@ -26,46 +29,46 @@
     */
 
     &.no-doc {
-      background-image: url('~images/nodata/doc.svg');
+      background-image: url("~images/nodata/doc.svg");
     }
     &.no-repo {
-      background-image: url('~images/nodata/repo.svg');
+      background-image: url("~images/nodata/repo.svg");
     }
     &.no-group {
-      background-image: url('~images/nodata/group.svg');
+      background-image: url("~images/nodata/group.svg");
     }
     &.no-empty {
-      background-image: url('~images/nodata/empty.svg');
+      background-image: url("~images/nodata/empty.svg");
     }
     &.no-activity {
-      background-image: url('~images/nodata/activity.svg');
+      background-image: url("~images/nodata/activity.svg");
     }
     &.no-follow {
-      background-image: url('~images/nodata/follow.svg');
+      background-image: url("~images/nodata/follow.svg");
     }
     &.no-result {
-      background-image: url('~images/nodata/result.svg');
+      background-image: url("~images/nodata/result.svg");
     }
     &.not-found {
-      background-image: url('~images/nodata/not-found.svg');
+      background-image: url("~images/nodata/not-found.svg");
     }
     &.no-star-doc {
-      background-image: url('~images/nodata/empty.svg');
+      background-image: url("~images/nodata/empty.svg");
     }
     &.no-star-repo {
-      background-image: url('~images/nodata/star.svg');
+      background-image: url("~images/nodata/star.svg");
     }
     &.no-note {
-      background-image: url('~images/nodata/note.svg');
+      background-image: url("~images/nodata/note.svg");
     }
     &.no-timeline {
-      background-image: url('~images/nodata/timeline.svg');
+      background-image: url("~images/nodata/timeline.svg");
     }
     &.no-issue {
-      background-image: url('~images/nodata/issue.svg');
+      background-image: url("~images/nodata/issue.svg");
     }
     &.no-todo {
-      background-image: url('~images/nodata/todo.svg');
+      background-image: url("~images/nodata/todo.svg");
     }
   }
 }

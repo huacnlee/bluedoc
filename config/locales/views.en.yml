@@ -33,6 +33,7 @@ en:
     not_found:
       Page not found: Page not found (404)
       Sorry, that page does not exist: "Sorry, the requested URL cannot be found."
+      Back to home: "Back to home"
   layouts:
     user_menu:
       New Repository: New Repository
