@@ -440,6 +440,7 @@ en:
       Watch: Watches
       Note: Notes
       Activity: Activities
+      Explore: Explore
     index:
       Recent edited docs: Recent edited docs
       Watched updates: Watched updates
@@ -453,6 +454,9 @@ en:
     activities:
       All activity: All activity
       You have no activity in recently: You have no activity recently.
+    explore:
+      Groups: Groups
+      Repositories: Repositories
   versions:
     version:
       Current: Current

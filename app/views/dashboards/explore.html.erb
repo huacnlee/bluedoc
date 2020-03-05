@@ -1,0 +1,32 @@
+<%= render "menu" %>
+<div class="flex-wrap">
+  <div class="main-wrap">
+    <div class="main-content dashboard-explore">
+      <div class="dashboard-content">
+        <div class="dashboard-section explore-groups">
+          <div class="subhead">
+            <h2><%= t(".Groups") %></h2>
+          </div>
+          <div class="flex flex-wrap aic">
+            <% @groups.each do |group| %>
+              <div class="group-item">
+                <%= user_avatar_tag(group, style: :medium) %>
+                <%= user_name_tag(group, style: :medium) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="dashboard-section explore-repos">
+          <div class="subhead">
+            <h2><%= t(".Repositories") %></h2>
+          </div>
+          <ul class="items flex flex-wrap aisb">
+            <% @repositories.each do |repo| %>
+              <%= render "/repositories/repository", repository: repo %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

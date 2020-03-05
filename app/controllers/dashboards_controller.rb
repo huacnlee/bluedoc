@@ -48,4 +48,9 @@ class DashboardsController < ApplicationController
       @repositories = current_user.star_repositories.includes(:user).page(params[:page]).per(12)
     end
   end
+
+  def explore
+    @groups = Group.order("members_count desc").limit(12)
+    @repositories = Repository.publics.order("watches_count desc").limit(12)
+  end
 end

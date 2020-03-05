@@ -44,9 +44,9 @@ Rails.application.routes.draw do
       get :repositories
       get :groups
       get :stars
+      get :explore
     end
   end
-  resource :expore
   # GET /new
   get "new", to: "repositories#new", as: :new_repository
   # GET /new/import

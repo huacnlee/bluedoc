@@ -121,7 +121,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".menu-item.selected", text: "Docs"
   end
 
-  test "GET /dashboard/stars?tab=otes" do
+  test "GET /dashboard/stars?tab=notes" do
     assert_require_user do
       get "/dashboard/stars?tab=notes"
     end
@@ -137,5 +137,21 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".recent-notes .recent-doc-item", 2
     assert_select ".menu-item.selected", text: "Notes"
+  end
+
+  test "GET /dashboard/explore" do
+    assert_require_user do
+      get "/dashboard/explore"
+    end
+
+    sign_in @user
+    groups = create_list(:group, 2)
+    repos = create_list(:repository, 3, user_id: groups[0].id)
+    create(:repository, privacy: :private, user_id: groups[0].id)
+
+    get "/dashboard/explore"
+    assert_equal 200, response.status
+    assert_select ".group-item", 2
+    assert_select ".repository-item", 3
   end
 end

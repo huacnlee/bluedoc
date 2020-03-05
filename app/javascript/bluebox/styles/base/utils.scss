@@ -1,7 +1,8 @@
-.clearfix::before, .clearfix::after {
-	display: table;
-	clear: both;
-	content: '';
+.clearfix::before,
+.clearfix::after {
+  display: table;
+  clear: both;
+  content: "";
 }
 
 .icon-middle-wrap {
@@ -17,13 +18,44 @@
   width: 0;
 }
 
+.flex {
+  display: flex;
+}
+
+.aic {
+  align-items: center !important;
+}
+
+.aib {
+  align-items: baseline !important;
+}
+
+.jcc {
+  justify-content: center !important;
+}
+
+.jcsb {
+  justify-content: space-between !important;
+}
+
+.jcsa {
+  justify-content: space-around !important;
+}
+
 .details-reset {
   // Remove marker added by the display: list-item browser default
-  > summary { list-style: none; outline: none; }
+  > summary {
+    list-style: none;
+    outline: none;
+  }
   // Remove marker added by details polyfill
-  > summary::before { display: none; }
+  > summary::before {
+    display: none;
+  }
   // Remove marker added by Chrome
-  > summary::-webkit-details-marker { display: none; }
+  > summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 .button-reset {
@@ -36,15 +68,27 @@
   }
 }
 
-.float-right { float: right; }
-.float-left { float: left; }
-.border-bottom { border-bottom: 1px solid #eee; }
-.border-top { border-top: 1px solid #eee; }
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.border-bottom {
+  border-bottom: 1px solid #eee;
+}
+.border-top {
+  border-top: 1px solid #eee;
+}
 .position-relative {
   position: relative;
 }
-.d-block { display: block; }
-.font-weight-bold { font-weight: bold; }
+.d-block {
+  display: block;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
 
 // Responsive padding spacer utilities
 @each $breakpoint, $variant in $responsive-variants {
@@ -52,18 +96,28 @@
     // Loop through the spacer values
     @for $i from 1 through length($spacers) {
       $size: nth($spacers, $i); // xs, sm, md, lg, xl
-      $scale: $i - 1;  // 0, 1, 2, 3, 4, 5, 6
+      $scale: $i - 1; // 0, 1, 2, 3, 4, 5, 6
 
       /* Set a $size padding to all sides at $breakpoint */
-      .p#{$variant}-#{$scale}  { padding: $size !important; }
+      .p#{$variant}-#{$scale} {
+        padding: $size !important;
+      }
       /* Set a $size padding to the top at $breakpoint */
-      .pt#{$variant}-#{$scale} { padding-top: $size !important; }
+      .pt#{$variant}-#{$scale} {
+        padding-top: $size !important;
+      }
       /* Set a $size padding to the right at $breakpoint */
-      .pr#{$variant}-#{$scale} { padding-right: $size !important; }
+      .pr#{$variant}-#{$scale} {
+        padding-right: $size !important;
+      }
       /* Set a $size padding to the bottom at $breakpoint */
-      .pb#{$variant}-#{$scale} { padding-bottom: $size !important; }
+      .pb#{$variant}-#{$scale} {
+        padding-bottom: $size !important;
+      }
       /* Set a $size padding to the left at $breakpoint */
-      .pl#{$variant}-#{$scale} { padding-left: $size !important; }
+      .pl#{$variant}-#{$scale} {
+        padding-left: $size !important;
+      }
 
       /* Set a $size padding to the left & right at $breakpoint */
       .px#{$variant}-#{$scale} {
@@ -85,28 +139,46 @@
     // Loop through the spacer values
     @for $i from 1 through length($spacers) {
       $size: nth($spacers, $i); // sm, md, lg, xl
-      $scale: $i - 1;  // 0, 1, 2, 3, 4, 5, 6
+      $scale: $i - 1; // 0, 1, 2, 3, 4, 5, 6
 
       /* Set a $size margin to all sides at $breakpoint */
-      .m#{$variant}-#{$scale}  { margin: $size !important; }
+      .m#{$variant}-#{$scale} {
+        margin: $size !important;
+      }
       /* Set a $size margin on the top at $breakpoint */
-      .mt#{$variant}-#{$scale} { margin-top: $size !important; }
+      .mt#{$variant}-#{$scale} {
+        margin-top: $size !important;
+      }
       /* Set a $size margin on the right at $breakpoint */
-      .mr#{$variant}-#{$scale} { margin-right: $size !important; }
+      .mr#{$variant}-#{$scale} {
+        margin-right: $size !important;
+      }
       /* Set a $size margin on the bottom at $breakpoint */
-      .mb#{$variant}-#{$scale} { margin-bottom: $size !important; }
+      .mb#{$variant}-#{$scale} {
+        margin-bottom: $size !important;
+      }
       /* Set a $size margin on the left at $breakpoint */
-      .ml#{$variant}-#{$scale} { margin-left: $size !important; }
+      .ml#{$variant}-#{$scale} {
+        margin-left: $size !important;
+      }
 
       @if ($size != 0) {
         /* Set a negative $size margin on top at $breakpoint */
-        .mt#{$variant}-n#{$scale} { margin-top   : -$size !important; }
+        .mt#{$variant}-n#{$scale} {
+          margin-top: -$size !important;
+        }
         /* Set a negative $size margin on the right at $breakpoint */
-        .mr#{$variant}-n#{$scale} { margin-right : -$size !important; }
+        .mr#{$variant}-n#{$scale} {
+          margin-right: -$size !important;
+        }
         /* Set a negative $size margin on the bottom at $breakpoint */
-        .mb#{$variant}-n#{$scale} { margin-bottom: -$size !important; }
+        .mb#{$variant}-n#{$scale} {
+          margin-bottom: -$size !important;
+        }
         /* Set a negative $size margin on the left at $breakpoint */
-        .ml#{$variant}-n#{$scale} { margin-left  : -$size !important; }
+        .ml#{$variant}-n#{$scale} {
+          margin-left: -$size !important;
+        }
       }
 
       /* Set a $size margin on the left & right at $breakpoint */

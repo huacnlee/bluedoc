@@ -1,11 +1,12 @@
 <% content_for :subnav do %>
-<div class="dashboard-nav">
-  <div class="container">
-    <%= render_list_items(type: :link, class: "dashboard-nav-item", active_class: "selected", check_parameters: false) do |item|
+  <div class="dashboard-nav">
+    <div class="container">
+      <%= render_list_items(type: :link, class: "dashboard-nav-item", active_class: "selected", check_parameters: false) do |item|
       item << link_to(icon_tag("home", label: t(".Dashboard")), "/", class: "dashboard-nav-item last")
       item << link_to(icon_tag("time", label: t(".Activity")), "/dashboard/activities", class: "dashboard-nav-item")
       item << link_to(icon_tag("star-repo", label: t(".Star")), "/dashboard/stars", class: "dashboard-nav-item")
+      item << link_to(icon_tag("search", label: t(".Explore")), "/dashboard/explore", class: "dashboard-nav-item")
     end %>
+    </div>
   </div>
-</div>
 <% end %>

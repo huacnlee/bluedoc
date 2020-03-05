@@ -1,26 +1,26 @@
 {
-  "admin.css": "/packs-test/css/admin-039fa0b5.css",
-  "admin.css.map": "/packs-test/css/admin-039fa0b5.css.map",
+  "admin.css": "/packs-test/css/admin-3acda739.css",
+  "admin.css.map": "/packs-test/css/admin-3acda739.css.map",
   "admin.js": "/packs-test/js/admin-c30773ca53c71a823cee.js",
   "admin.js.map": "/packs-test/js/admin-c30773ca53c71a823cee.js.map",
   "application.css": "/packs-test/css/application-7835f9d6.css",
   "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
-  "application.js": "/packs-test/js/application-f6b8f1694353d77ab2f3.js",
-  "application.js.map": "/packs-test/js/application-f6b8f1694353d77ab2f3.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-735af248.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-735af248.css.map",
+  "application.js": "/packs-test/js/application-6ece62ebb7c9f96660e7.js",
+  "application.js.map": "/packs-test/js/application-6ece62ebb7c9f96660e7.js.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-68283607.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-68283607.css.map",
   "bluedoc.js": "/packs-test/js/bluedoc-42846db0c5be86821217.js",
   "bluedoc.js.map": "/packs-test/js/bluedoc-42846db0c5be86821217.js.map",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-039fa0b5.css"
+        "/packs-test/css/admin-3acda739.css"
       ],
       "js": [
         "/packs-test/js/admin-c30773ca53c71a823cee.js"
       ],
       "css.map": [
-        "/packs-test/css/admin-039fa0b5.css.map"
+        "/packs-test/css/admin-3acda739.css.map"
       ],
       "js.map": [
         "/packs-test/js/admin-c30773ca53c71a823cee.js.map"
@@ -31,24 +31,24 @@
         "/packs-test/css/application-7835f9d6.css"
       ],
       "js": [
-        "/packs-test/js/application-f6b8f1694353d77ab2f3.js"
+        "/packs-test/js/application-6ece62ebb7c9f96660e7.js"
       ],
       "css.map": [
         "/packs-test/css/application-7835f9d6.css.map"
       ],
       "js.map": [
-        "/packs-test/js/application-f6b8f1694353d77ab2f3.js.map"
+        "/packs-test/js/application-6ece62ebb7c9f96660e7.js.map"
       ]
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-735af248.css"
+        "/packs-test/css/bluedoc-68283607.css"
       ],
       "js": [
         "/packs-test/js/bluedoc-42846db0c5be86821217.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-735af248.css.map"
+        "/packs-test/css/bluedoc-68283607.css.map"
       ],
       "js.map": [
         "/packs-test/js/bluedoc-42846db0c5be86821217.js.map"

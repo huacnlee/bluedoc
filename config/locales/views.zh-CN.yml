@@ -428,6 +428,7 @@ zh-CN:
       Watch: 订阅
       Note: 笔记
       Activity: 动态
+      Explore: 发现
     index:
       Recent edited docs: 参与的文档
       Watched updates: 订阅的知识库更新
@@ -441,6 +442,9 @@ zh-CN:
     activities:
       All activity: 动态
       You have no activity in recently: 暂无动态，开始关注一些人，他们的动作会在这里显示出来。
+    explore:
+      Groups: 团队
+      Repositories: 知识库
   versions:
     version:
       Current: 当前版本
