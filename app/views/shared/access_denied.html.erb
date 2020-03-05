@@ -1,4 +1,39 @@
-<div class="card mx-auto p-5" style="margin-top: 50px; max-width: 750px">
-  <h1><%= icon_tag("error") %> <%= t(".Access Denied") %></h1>
-  <p class="mt-2"><%= t(".Sorry you do not have permission visit it") %></p>
+<div  class="blankslate no-data not-found">
+  <h1><%= t(".Access Denied") %></h1>
+  <p class="mt-2 mb-5"><%= t(".Sorry you do not have permission visit it") %></p>
+  <h3 class="mt-3">
+    <% if @repository %>
+      <%= repository_path_tag(@repository) %>
+    <% end %>
+    <% if @doc %>
+      <span class="divider">/</span>
+      <%= doc_title_tag(@doc) %>
+    <% end %>
+    <% if @note %>
+      <%= user_name_tag(@user) %>
+      <span class="divider">/</span>
+      <%= t(".Notes") %>
+      <span class="divider">/</span>
+      <%= note_title_tag(@note) %>
+    <% end %>
+  </h3>
+  <div class="mt-2 mb-3"><%= request.url %></div>
+  <% if @user %>
+    <div class="mt-2 mb-2">
+      <%= t(".You can contact owners to get permission") %>
+    </div>
+    <div class="owners">
+      <% if @user.user? %>
+        <%= user_avatar_tag(@user, style: :medium) %>
+      <% else %>
+        <%
+        @members = @user.members.admin.includes(user: { avatar_attachment: :blob }).limit(5)
+      %>
+        <% @members.each do |member| %>
+          <%= user_avatar_tag(member.user, style: :medium) %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+>

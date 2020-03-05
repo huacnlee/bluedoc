@@ -16,7 +16,7 @@ module RepositoriesHelper
     return "" if repo.blank?
     return "" if repo.user.blank?
 
-    divider = %(<span class="divider">/</span>)
+    divider = %( <span class="divider">/</span> )
 
     text = safe_join([repo.user.name, repo.name], raw(divider))
 

@@ -28,12 +28,12 @@ class RepositoriesHelperTest < ActionView::TestCase
     assert_equal "", repository_name_tag(nil)
 
     html = repository_path_tag(@repo)
-    assert_equal %(<a class="repository-path" href="#{@repo.to_path}">#{@user.name}<span class="divider">/</span>#{@repo.name}</a>), html
+    assert_equal %(<a class="repository-path" href="#{@repo.to_path}">#{@user.name} <span class="divider">/</span> #{@repo.name}</a>), html
 
     @repo.stub(:name, "<script>") do
       @user.stub(:name, "<foo>") do
         html = repository_path_tag(@repo)
-        assert_equal %(<a class="repository-path" href="#{@repo.to_path}">&lt;foo&gt;<span class="divider">/</span>&lt;script&gt;</a>), html
+        assert_equal %(<a class="repository-path" href="#{@repo.to_path}">&lt;foo&gt; <span class="divider">/</span> &lt;script&gt;</a>), html
       end
     end
   end

@@ -27,6 +27,8 @@ en:
     access_denied:
       Access Denied: Access Denied (403 Error)
       Sorry you do not have permission visit it: "Sorry, you have no access to the data."
+      You can contact owners to get permission: "You can contact the owners to get permission."
+      Notes: "Notes"
     feature_not_enable:
       Feature not enable: Feature not Enabled
       Sorry, this Feature not in enable in current: "Sorry, this feature has not been enabled yet."

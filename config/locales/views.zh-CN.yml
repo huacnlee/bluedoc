@@ -27,6 +27,8 @@ zh-CN:
     access_denied:
       Access Denied: 访问拒绝 (403 错误)
       Sorry you do not have permission visit it: 抱歉，你没有访问这个数据的权限。
+      You can contact owners to get permission: "你可以联系下面的所有者获得权限。"
+      Notes: "笔记"
     feature_not_enable:
       Feature not enable: 功能未启用
       Sorry, this Feature not in enable in current: 抱歉，系统还未开启此项功能。

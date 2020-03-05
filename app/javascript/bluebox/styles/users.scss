@@ -1,4 +1,6 @@
-.page-users, .page-account_settings, .page-notes {
+.page-users,
+.page-account_settings,
+.page-notes {
   .user-title {
     text-align: center;
     margin-top: 20px;
@@ -17,7 +19,7 @@
   .user-sidebar {
     @include breakpoint(md) {
       padding: 30px 20px;
-      background: #F9F9F9;
+      background: #f9f9f9;
     }
   }
 
@@ -33,22 +35,26 @@
   }
 
   .user-name-box {
-    font-size: 12px;
+    font-size: 14px;
+    text-align: center;
+
     .real-name {
-      text-align: center;
       display: block;
+      font-weight: bold;
       font-size: 20px;
       color: $text-main;
     }
-    .user-name {
-      text-align: center;
-      margin-bottom: 20px;
+    .user-follow {
+      margin-top: 20px;
     }
     .user-bio {
+      margin-top: 20px;
+      text-align: left;
       margin-bottom: 10px;
       white-space: normal;
     }
-    .location, .created-on {
+    .location,
+    .created-on {
       .fas {
         vertical-align: baseline;
         margin-right: 5px;
@@ -86,8 +92,8 @@
     }
   }
 
-
-  .user-followers, .user-following {
+  .user-followers,
+  .user-following {
     .user-item .info {
       padding-right: 150px;
       width: 100%;
