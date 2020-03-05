@@ -1,8 +1,5 @@
 <% title_tag @group.name %>
-
 <%= render "groups/menu" %>
-
-
 <div class="clearfix">
   <h1 class="title mt-3">
     <%= t(".Repositories") %>
@@ -20,8 +17,10 @@
     <% if @repositories.blank? %>
       <div class="blankslate no-data no-repo">
         <h3><%= t(".There is no repository") %></h3>
-        <p><%= t(".You can create first repository") %></p>
-        <p><%= link_to t(".Create new"), new_repository_path(user_id: @group.id), class: "btn btn-primary" %></p>
+        <% if can? :create_repo, @group %>
+          <p><%= t(".You can create first repository") %></p>
+          <p><%= link_to t(".Create new"), new_repository_path(user_id: @group.id), class: "btn btn-primary" %></p>
+        <% end %>
       </div>
     <% else %>
       <%= render @repositories, no_path: true %>
