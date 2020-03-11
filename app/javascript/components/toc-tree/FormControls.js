@@ -11,6 +11,7 @@ export const FormatSelect = ({ t, onChange, value }) => (
   <div className="form-group">
     <label className="control-label">{t('activerecord.attributes.doc.format')}</label>
     < select onChange={onChange} value={value} className="form-control" >
+      <option value="html">{t('shared.format.html')}</option>
       <option value="sml">{t('shared.format.sml')}</option>
       <option value="markdown">{t('shared.format.markdown')}</option>
     </select>

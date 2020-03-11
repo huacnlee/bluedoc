@@ -4,7 +4,8 @@
 // This is styling for generic markdownized text. Anything you put in a
 // container with .markdown-body on it should render generally well. It also
 // includes some GitHub Flavored Markdown specific styling (like @mentions)
-.markdown-body {
+.markdown-body,
+.ck-content {
   font-family: $body-font;
   font-size: 16px;
   line-height: 1.5;
@@ -51,6 +52,10 @@
     text-decoration: none;
   }
 
+  .image-style-side {
+    float: right;
+  }
+
   // Link Colors
   .absent {
     color: $primary;
@@ -67,6 +72,10 @@
     margin-bottom: $spacer-3;
   }
 
+  .table {
+    border: 0;
+  }
+
   hr {
     height: 4px;
     padding: 0;
@@ -76,9 +85,11 @@
   }
 
   blockquote {
-    padding: 0 1em;
     color: $text-gray-light;
-    border-left: 0.25em solid #eee;
+    background: #f5f5f5 !important;
+    padding: 1em !important;
+    border: 0 !important;
+    font-style: normal !important;
 
     > :first-child {
       margin-top: 0;

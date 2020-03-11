@@ -1,5 +1,13 @@
 const { environment } = require('@rails/webpacker');
-const erb =  require('./loaders/erb');
+const erb = require('./loaders/erb');
+
+const nodeModulesLoader = environment.loaders.get('nodeModules');
+if (!Array.isArray(nodeModulesLoader.exclude)) {
+  nodeModulesLoader.exclude = (nodeModulesLoader.exclude == null)
+    ? []
+    : [nodeModulesLoader.exclude];
+}
+nodeModulesLoader.exclude.push(/ckeditor5\/*/);
 
 const extendConfig = {
   externals: {
@@ -26,5 +34,5 @@ const extendConfig = {
 
 environment.config.merge(extendConfig);
 
-environment.loaders.prepend('erb', erb)
+environment.loaders.prepend('erb', erb);
 module.exports = environment;

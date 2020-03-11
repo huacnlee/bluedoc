@@ -1,4 +1,5 @@
 import RichEditor from './rich-editor';
+import CkEditor from './ck-editor';
 import MarkdownEditor from './markdown-editor';
 import DocSetting from './doc-setting';
 
@@ -112,11 +113,21 @@ class EditorBox {
       $.post(lockURL);
     }, 15000);
 
-    const value = formatInput.value === 'markdown' ? bodyInput.value : bodySMLInput.value;
+    const value = formatInput.value === 'sml' ? bodySMLInput.value : bodyInput.value;
 
     if (formatInput.value === 'markdown') {
       ReactDOM.render(
         <MarkdownEditor
+          onChange={onChange}
+          onChangeTitle={onChangeTitle}
+          title={titleInput.value}
+          format={formatInput.value}
+          value={value} />,
+        document.querySelector('.editor-container'),
+      );
+    } else if (formatInput.value === 'html') {
+      ReactDOM.render(
+        <CkEditor
           onChange={onChange}
           onChangeTitle={onChangeTitle}
           title={titleInput.value}

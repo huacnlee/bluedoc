@@ -55,14 +55,14 @@ module BlueDoc
       elements: %w[
         div p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
         strong em strike del u a ul ol li span hr embed
-        table tr th td tbody thead tfoot video source
+        table tr th td tbody thead tfoot video source figure
       ],
       attributes: ::Sanitize::Config.merge({},
        {
          # Here must use :all not "all"
-         :all  => ["class", "nid", "id", "lang", "style", "title", "width", "height", :data],
+         :all  => ["class", "nid", "id", "lang", "style", "class", "title", "width", "height", "colspan", :data],
          "a"   => ["href", "rel", "target"],
-         "img" => ["alt", "src"],
+         "img" => ["alt", "src", "style", "width", "height"],
          "source" => ["src", "type"],
          "video" => ["controls", "preload"],
          "embed" => ["src", "width", "height", "title"],

@@ -8,6 +8,7 @@ zh-CN:
     format:
       sml: 富文本 (默认)
       markdown: Markdown
+      html: HTML 所见即所得编辑器
     more_button:
       More: "加载更多 ..."
     action_button:
