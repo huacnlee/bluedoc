@@ -2,6 +2,8 @@ import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import { stateFromHTML } from 'draft-js-import-html';
 import Toolbar from './draft-toolbar';
+import { blockRenderMap } from './draft-editor/blockRenderMap';
+import { styleMap } from './draft-editor/styleMap';
 
 export default class DraftEditor extends React.Component {
   constructor(props) {
@@ -53,6 +55,8 @@ export default class DraftEditor extends React.Component {
                 editorState={editorState}
                 handleKeyCommand={this.handleKeyCommand}
                 onChange={this.onChange}
+                customStyleMap={styleMap}
+                blockRenderMap={blockRenderMap}
               />
             </div>
           </div>
