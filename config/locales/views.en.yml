@@ -8,6 +8,7 @@ en:
     format:
       sml: RichText (default)
       markdown: Markdown
+      html: HTML
     more_button:
       More: "More ..."
     action_button:

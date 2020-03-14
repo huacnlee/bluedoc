@@ -3,34 +3,31 @@
   local: true,
   remote: true,
   id: "doc-form") do |form| %>
-
   <% if @doc.errors.any? %>
-  <details class="doc-validation-error details-reset details-overlay" open>
-    <summary></summary>
-    <details-dialog class="box box--overlay d-flex flex-column anim-fade-in fast">
-      <div class="box-body overflow-auto">
-        <button class="btn-cancel" type="button" aria-label="Close dialog" data-close-dialog>
-          <%= icon_tag "cancel" %>
-        </button>
-        <div class="mx-5 my-2">
-          <div class="mb-4 text-center text-red">
-            <p style="font-size: 32px"><%= icon_tag("error") %></p>
-            <div class="mb-1 text-red">
-              <strong><%= t(".Doc publish failed, because there has count issues", count: @doc.errors.count) %></strong>
+    <details class="doc-validation-error details-reset details-overlay" open>
+      <summary></summary>
+      <details-dialog class="box box--overlay d-flex flex-column anim-fade-in fast">
+        <div class="box-body overflow-auto">
+          <button class="btn-cancel" type="button" aria-label="Close dialog" data-close-dialog>
+            <%= icon_tag "cancel" %>
+          </button>
+          <div class="mx-5 my-2">
+            <div class="mb-4 text-center text-red">
+              <p style="font-size: 32px"><%= icon_tag("error") %></p>
+              <div class="mb-1 text-red">
+                <strong><%= t(".Doc publish failed, because there has count issues", count: @doc.errors.count) %></strong>
+              </div>
             </div>
+            <ul class="ml-3">
+              <% @doc.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
           </div>
-          <ul class="ml-3">
-            <% @doc.errors.full_messages.each do |msg| %>
-             <li><%= msg %></li>
-            <% end %>
-          </ul>
         </div>
-      </div>
-    </details-dialog>
+      </details-dialog>
     </details>
   <% end %>
-
-
   <div id="editor-form">
     <div class="editor-navbar">
       <div class="navbar-title">
@@ -46,7 +43,6 @@
         <span class="btn-doc-info-box"></span>
       </div>
     </div>
-
     <%= form.hidden_field :title, value: @doc.draft_title %>
     <%= form.hidden_field :format, value: @doc.format %>
     <%= form.text_area :body, class: "bluedoc-editor", value: doc.draft_body_plain, data: {
