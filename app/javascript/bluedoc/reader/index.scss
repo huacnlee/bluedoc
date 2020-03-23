@@ -21,16 +21,28 @@
     }
 
     .toc-tree {
-      position: sticky;
-      top: 100px;
       width: 235px;
+      height: calc(100vh - 50px);
+      padding-top: 20px;
+      padding-bottom: 30px;
+      padding-left: 30px;
+      padding-right: 20px;
+      left: 0px;
+      top: 50px;
+      overflow-y: scroll;
+      position: fixed;
       z-index: 3;
-      background: #fff;
+      background: #f5f5f5;
+      border-right: 1px solid #e0e0e0;
     }
 
     .doc-body-toc {
       width: 180px;
       margin-left: 30px;
+    }
+
+    .doc-center {
+      padding-left: 200px;
     }
   }
 

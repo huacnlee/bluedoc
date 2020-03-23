@@ -141,7 +141,7 @@ class TocTree extends Component {
     const {
       loading, treeData, editMode, viewMode,
     } = this.state;
-    const { repository, currentDocId } = this.props;
+    const { repository, currentDocId, remote } = this.props;
     if (loading) {
       return <TreeLoader />;
     }
@@ -157,6 +157,7 @@ class TocTree extends Component {
               editMode={editMode}
               repository={repository}
               currentDocId={currentDocId}
+              remote={remote}
             />
           ))}
         </ul>
@@ -165,6 +166,7 @@ class TocTree extends Component {
 
     return (
       <Tree
+        remote={remote}
         treeData={treeData}
         editMode={editMode}
         viewMode={viewMode}

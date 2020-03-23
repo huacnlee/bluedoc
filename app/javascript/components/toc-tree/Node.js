@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import cn from 'classnames';
-import { getTargetPosition } from './utils';
+import { getTargetPosition, visitDoc } from './utils';
 import dialog from './Modal';
 
 class Node extends Component {
@@ -40,12 +40,16 @@ class Node extends Component {
   // The safair browser will have an extra preview image when dragging the link.
   handleLink = () => {
     if (this.nodeType === 'toc') return;
+
+    const url = this.getUrl();
     if (this.nodeType === 'external') {
-      window.open(this.getUrl());
+      window.open(url);
       return;
     }
 
-    window.Turbolinks.visit(this.getUrl());
+    const { remote } = this.props;
+
+    visitDoc(url, { remote });
   };
 
   getUrl = () => {

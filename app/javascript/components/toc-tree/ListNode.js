@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import { visitDoc } from './utils';
 
 export default class ListNode extends Component {
+  onClick = (e) => {
+    e.preventDefault();
+    const url = e.currentTarget.getAttribute('href');
+    visitDoc(url);
+
+    return false;
+  }
+
   render() {
     const {
       toc, t, onDeleteNode, repository, editMode, currentDocId,
@@ -18,8 +27,8 @@ export default class ListNode extends Component {
     const docURL = `${repository.path}/${url}`;
 
     return <li className={className}>
-      <a className="item-link" href={docURL}>{title}</a>
-      <a className="item-slug" href={docURL}>{url}</a>
+      <a className="item-link" onClick={this.onClick} href={docURL}>{title}</a>
+      <a className="item-slug" onClick={this.onClick} href={docURL}>{url}</a>
       {editMode
         && <details className="item-more dropdown details-overlay details-reset d-inline-block">
           <summary><i className="fas fa-ellipsis"></i></summary>

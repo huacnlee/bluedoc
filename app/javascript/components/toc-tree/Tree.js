@@ -182,13 +182,14 @@ class Tree extends Component {
 
   renderTreeNode = (data = [], parentPath = []) => {
     const {
-      repository, editMode, viewMode, currentDocId, t,
+      repository, editMode, viewMode, currentDocId, t, remote,
     } = this.props;
     return data.map((node, index) => {
       const expanded = this.getExpanded(node, parentPath);
       return (
         <>
           <TreeNode
+            remote={remote}
             key={node.id}
             info={{ expanded, ...node }}
             repository={repository}

@@ -259,3 +259,19 @@ export const getMarkdownTitle = (str) => {
   }
   return null;
 };
+
+let lastTocTreePostion = 0;
+const tocTreeVisitScroll = () => {
+  document.querySelector('.toc-tree').scrollTop = lastTocTreePostion;
+};
+
+/**
+ * Help Toc node to visit a doc page, and keep toc-tree scroll position.
+ * @param {String} url
+ */
+export const visitDoc = (url) => {
+  lastTocTreePostion = document.querySelector('.toc-tree').scrollTop;
+  document.removeEventListener('turbolinks:load', tocTreeVisitScroll);
+  document.addEventListener('turbolinks:load', tocTreeVisitScroll);
+  window.Turbolinks.visit(url);
+};

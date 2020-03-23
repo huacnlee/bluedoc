@@ -1,29 +1,23 @@
 <% title_tag @repository.name %>
-
 <%= render "menu" %>
-
 <%
 toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
 %>
-
 <%= render "import_status" %>
-
 <div class="repo-desc text-center">
   <div class="text-gray mb-2"><%= @repository.description %></div>
-
   <% if @repository.source? && @repository.source.provider == "gitbook" %>
-  <div class="source text-gray">
-    <%= icon_tag("code-fork") %> <span class="source-url"><%= @repository.source_url %></span>
-  </div>
+    <div class="source text-gray">
+      <%= icon_tag("code-fork") %> <span class="source-url"><%= @repository.source_url %></span>
+    </div>
   <% end %>
 </div>
-
 <div class="repo-toc">
   <% if @repository.toc_json.blank? || @repository.toc_json == "[]" %>
     <%= render "empty_docs" %>
   <% else %>
-  <div class="toc-list">
-    <%= react_component("toc-tree/index", {
+    <div class="toc-list">
+      <%= react_component("toc-tree/index", {
       type: 'center',
       repository: {
         path: @repository.to_path,
@@ -40,7 +34,6 @@ toc_html = @repository.toc_html(prefix: @repository.to_path("/"))
         update: can?(:create_doc, @repository),
       }
     } ) %>
-  </div>
+    </div>
   <% end %>
 </div>
-
