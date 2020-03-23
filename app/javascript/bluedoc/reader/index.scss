@@ -16,12 +16,11 @@
   @include breakpoint(lg) {
     .doc-sidebar {
       display: block;
-      margin-right: 50px;
       padding-top: 0px;
     }
 
     .toc-tree {
-      width: 235px;
+      width: 250px;
       height: calc(100vh - 50px);
       padding-top: 20px;
       padding-bottom: 30px;
@@ -39,10 +38,12 @@
     .doc-body-toc {
       width: 180px;
       margin-left: 30px;
+      display: none;
     }
 
     .doc-center {
-      padding-left: 200px;
+      padding-left: 270px;
+      padding-right: 50px;
     }
   }
 
@@ -50,7 +51,7 @@
     .doc-body-toc {
       width: 230px;
       margin-left: 50px;
-      display: block;
+      display: none;
     }
   }
 
