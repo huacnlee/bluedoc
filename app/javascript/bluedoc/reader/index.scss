@@ -45,6 +45,10 @@
       padding-left: 270px;
       padding-right: 50px;
     }
+
+    .footer {
+      display: none;
+    }
   }
 
   @include breakpoint(xl) {
