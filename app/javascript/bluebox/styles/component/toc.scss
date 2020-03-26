@@ -10,23 +10,27 @@
   .btn-new {
     height: 32px;
     line-height: 32px;
-    padding-left: 2px;
+    padding-left: calc(15px + 3px);
     text-align: left;
     color: #333;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #f0f0f0;
 
     .fas {
-      font-size: 14px;
+      font-size: 1.2em;
       color: #444;
       font-weight: bold;
+      margin-right: 5px;
     }
 
     &:hover {
       color: $black !important;
-      background: #f7f7f7;
-      border-color: #f7f7f7;
+      background: #fff;
+      border-color: #f0f0f0;
     }
     &:active {
       background: #eaeaea;
@@ -55,6 +59,7 @@
       }
       &.active {
         color: $primary;
+        background: #fff;
       }
       &.drop-left::after {
         top: -1px;
@@ -79,6 +84,7 @@
   .item-link {
     font-size: 15px;
     position: relative;
+    padding-left: 20px;
 
     .fa-arrow {
       cursor: pointer;
@@ -149,7 +155,7 @@
       }
 
       &:hover {
-        background: #f7f7f7;
+        background: #fff;
         .item-slug {
           visibility: hidden;
         }

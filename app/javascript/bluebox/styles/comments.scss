@@ -1,7 +1,10 @@
 .comments {
   .sub-title {
     font-size: 18px;
-    .fas { font-size: 28px; margin-right: 8px; }
+    .fas {
+      font-size: 28px;
+      margin-right: 8px;
+    }
   }
 
   .pagination {
@@ -40,12 +43,18 @@
   }
 
   .comment {
-    border-bottom: 1px dashed #E6E6E6;
+    border-bottom: 1px dashed #e6e6e6;
     .info {
       margin-bottom: 8px;
       position: relative;
-      .user-name { font-size: 14px; @extend .text-main; }
-      .time { font-size: 12px;  @extend .text-gray-light; }
+      .user-name {
+        font-size: 14px;
+        @extend .text-main;
+      }
+      .time {
+        font-size: 12px;
+        @extend .text-gray-light;
+      }
       .opts {
         position: absolute;
         right: 0;
@@ -58,15 +67,22 @@
           float: left;
         }
 
-        & > a { width: 20px; height: 20px; margin-left: 5px; display: inline-block; text-align: center; }
+        & > a {
+          width: 20px;
+          height: 20px;
+          margin-left: 5px;
+          display: inline-block;
+          text-align: center;
+        }
         & > a:hover,
-        summary > .fas:hover
-        .details-overlay[open] .fas {
+        summary > .fas:hover .details-overlay[open] .fas {
           color: #555 !important;
         }
         & > a,
         summary > .fas,
-        & > .fas { color: #ccc; }
+        & > .fas {
+          color: #ccc;
+        }
 
         .add-reaction-popover.dropdown-menu-ne {
           left: -2px;
@@ -81,9 +97,13 @@
           height: auto;
           margin-top: 3px;
 
-          i.fas { color: #ccc; }
+          i.fas {
+            color: #ccc;
+          }
           &:hover {
-            .fas { color: #555 !important; }
+            .fas {
+              color: #555 !important;
+            }
           }
         }
       }
@@ -96,7 +116,9 @@
     }
 
     .markdown-body {
-      .heading-anchor { display: none; }
+      .heading-anchor {
+        display: none;
+      }
     }
 
     .in-reply-to {
@@ -110,8 +132,13 @@
         color: #666;
         display: block;
 
-        .user-name { color: #333; font-weight: bold; }
-        .comment-id { color: #333; }
+        .user-name {
+          color: #333;
+          font-weight: bold;
+        }
+        .comment-id {
+          color: #333;
+        }
         .body {
           margin-top: 8px;
           font-size: 14px;
@@ -119,7 +146,9 @@
       }
     }
 
-    .reaction-box-empty { display: none; }
+    .reaction-box-empty {
+      display: none;
+    }
   }
 }
 
@@ -137,21 +166,21 @@
       width: 30px;
       height: 10px;
       border-radius: 5px;
-      background: #E6E6E6;
+      background: #e6e6e6;
       &::after {
         display: block;
         position: absolute;
-        content: '';
+        content: "";
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background: #BEBEBE;
+        background: #bebebe;
         box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.14);
         left: 0;
         top: -3px;
       }
       &.checked {
-        background: #ACC6FF;
+        background: #acc6ff;
         &::after {
           left: auto;
           right: 0;
@@ -172,6 +201,10 @@
     top: 18px;
     left: 0px;
   }
+
+  .rich-editor-inline {
+    max-width: 640px;
+  }
 }
 
 #new_comment {
@@ -184,17 +217,27 @@
 @media (min-width: 768px) {
   #new_comment {
     padding: 15px 0 15px 50px;
-    .avatar-box { display: block; }
+    .avatar-box {
+      display: block;
+    }
   }
 }
 
 #new_comment {
   margin-bottom: 20px;
-  textarea.form-control { border-color: #d9d9d9 !important; height: 100px; min-height: 50px; }
+  textarea.form-control {
+    border-color: #d9d9d9 !important;
+    height: 100px;
+    min-height: 50px;
+  }
 
-  .form-group { margin-top: 0; }
+  .form-group {
+    margin-top: 0;
+  }
   .form-actions {
-    .btn { float: left; }
+    .btn {
+      float: left;
+    }
 
     .in-reply-info {
       float: left;
@@ -202,13 +245,18 @@
       margin-left: 10px;
       color: rgb(155, 155, 155);
 
-      .user-name { color: #333; font-weight: bold; }
-      .comment-id { color: #333; }
+      .user-name {
+        color: #333;
+        font-weight: bold;
+      }
+      .comment-id {
+        color: #333;
+      }
 
       .close {
-        color: #333; margin-left: 6px;
+        color: #333;
+        margin-left: 6px;
       }
     }
   }
 }
-
