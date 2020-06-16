@@ -376,7 +376,7 @@ GEM
     rubyntlm (0.6.2)
     rucaptcha (2.5.2)
       railties (>= 3.2)
-    sanitize (5.1.0)
+    sanitize (5.2.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
       nokogumbo (~> 2.0)
