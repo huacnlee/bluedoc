@@ -9130,6 +9130,11 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+turbolinks-prefetch@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/turbolinks-prefetch/download/turbolinks-prefetch-1.0.3.tgz?cache=0&sync_timestamp=1602300605488&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fturbolinks-prefetch%2Fdownload%2Fturbolinks-prefetch-1.0.3.tgz#9818c6ceab6ef36e5fd2d095235389f71485a6dc"
+  integrity sha1-mBjGzqtu825f0tCVI1OJ9xSFptw=
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.npm.taobao.org/tweetnacl/download/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"

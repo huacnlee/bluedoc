@@ -13,8 +13,14 @@ import './reader/index.js';
 import './versions/index.js';
 import './follow-user/index.js';
 
+import TurbolinksPrefetch from 'turbolinks-prefetch';
+
+window.Turbolinks = Turbolinks;
+
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(150);
+
+TurbolinksPrefetch.start();
 
 window.$ = jQuery;
 window.i18n = i18n;

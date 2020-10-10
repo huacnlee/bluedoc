@@ -110,10 +110,9 @@ GEM
       activerecord (>= 3.2.0)
     byebug (11.0.1)
     cancancan (2.3.0)
-    codecov (0.1.16)
+    codecov (0.2.12)
       json
       simplecov
-      url
     commonmarker (0.20.2)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.6)
@@ -195,7 +194,7 @@ GEM
       multipart-post
       oauth (~> 0.5, >= 0.5.0)
     jmespath (1.4.0)
-    json (2.3.0)
+    json (2.3.1)
     jwt (2.1.0)
     kaminari (1.2.0)
       activesupport (>= 4.1.0)
@@ -388,11 +387,10 @@ GEM
       rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
-    simplecov (0.17.1)
+    simplecov (0.19.0)
       docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
+      simplecov-html (~> 0.11)
+    simplecov-html (0.12.3)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -420,7 +418,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.6)
     unicode-display_width (1.6.1)
-    url (0.3.2)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
@@ -513,4 +510,4 @@ DEPENDENCIES
   wicked_pdf
 
 BUNDLED WITH
-   1.17.3
+   2.1.4
