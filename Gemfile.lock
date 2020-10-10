@@ -377,7 +377,7 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
       nokogumbo (~> 2.0)
-    second_level_cache (2.5.3)
+    second_level_cache (2.6.4)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
     semantic_range (2.3.0)
