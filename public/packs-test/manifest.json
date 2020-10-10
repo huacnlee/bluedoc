@@ -1,109 +1,109 @@
 {
-  "admin.css": "/packs-test/css/admin-3acda739.css",
-  "admin.css.map": "/packs-test/css/admin-3acda739.css.map",
-  "admin.js": "/packs-test/js/admin-c30773ca53c71a823cee.js",
-  "admin.js.map": "/packs-test/js/admin-c30773ca53c71a823cee.js.map",
-  "application.css": "/packs-test/css/application-7835f9d6.css",
-  "application.css.map": "/packs-test/css/application-7835f9d6.css.map",
-  "application.js": "/packs-test/js/application-6ece62ebb7c9f96660e7.js",
-  "application.js.map": "/packs-test/js/application-6ece62ebb7c9f96660e7.js.map",
-  "bluedoc.css": "/packs-test/css/bluedoc-68283607.css",
-  "bluedoc.css.map": "/packs-test/css/bluedoc-68283607.css.map",
-  "bluedoc.js": "/packs-test/js/bluedoc-42846db0c5be86821217.js",
-  "bluedoc.js.map": "/packs-test/js/bluedoc-42846db0c5be86821217.js.map",
+  "admin.css": "/packs-test/css/admin-33c30272.css",
+  "admin.css.map": "/packs-test/css/admin-33c30272.css.map",
+  "admin.js": "/packs-test/js/admin-80f06552ecc54fa5062a.js",
+  "admin.js.map": "/packs-test/js/admin-80f06552ecc54fa5062a.js.map",
+  "application.css": "/packs-test/css/application-ce6225a3.css",
+  "application.css.map": "/packs-test/css/application-ce6225a3.css.map",
+  "application.js": "/packs-test/js/application-81406daa6ae7524c6ddb.js",
+  "application.js.map": "/packs-test/js/application-81406daa6ae7524c6ddb.js.map",
+  "bluedoc.css": "/packs-test/css/bluedoc-f755a515.css",
+  "bluedoc.css.map": "/packs-test/css/bluedoc-f755a515.css.map",
+  "bluedoc.js": "/packs-test/js/bluedoc-6293512fe200da9e559a.js",
+  "bluedoc.js.map": "/packs-test/js/bluedoc-6293512fe200da9e559a.js.map",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-3acda739.css"
+        "/packs-test/css/admin-33c30272.css"
       ],
       "js": [
-        "/packs-test/js/admin-c30773ca53c71a823cee.js"
+        "/packs-test/js/admin-80f06552ecc54fa5062a.js"
       ],
       "css.map": [
-        "/packs-test/css/admin-3acda739.css.map"
+        "/packs-test/css/admin-33c30272.css.map"
       ],
       "js.map": [
-        "/packs-test/js/admin-c30773ca53c71a823cee.js.map"
+        "/packs-test/js/admin-80f06552ecc54fa5062a.js.map"
       ]
     },
     "application": {
       "css": [
-        "/packs-test/css/application-7835f9d6.css"
+        "/packs-test/css/application-ce6225a3.css"
       ],
       "js": [
-        "/packs-test/js/application-6ece62ebb7c9f96660e7.js"
+        "/packs-test/js/application-81406daa6ae7524c6ddb.js"
       ],
       "css.map": [
-        "/packs-test/css/application-7835f9d6.css.map"
+        "/packs-test/css/application-ce6225a3.css.map"
       ],
       "js.map": [
-        "/packs-test/js/application-6ece62ebb7c9f96660e7.js.map"
+        "/packs-test/js/application-81406daa6ae7524c6ddb.js.map"
       ]
     },
     "bluedoc": {
       "css": [
-        "/packs-test/css/bluedoc-68283607.css"
+        "/packs-test/css/bluedoc-f755a515.css"
       ],
       "js": [
-        "/packs-test/js/bluedoc-42846db0c5be86821217.js"
+        "/packs-test/js/bluedoc-6293512fe200da9e559a.js"
       ],
       "css.map": [
-        "/packs-test/css/bluedoc-68283607.css.map"
+        "/packs-test/css/bluedoc-f755a515.css.map"
       ],
       "js.map": [
-        "/packs-test/js/bluedoc-42846db0c5be86821217.js.map"
+        "/packs-test/js/bluedoc-6293512fe200da9e559a.js.map"
       ]
     },
     "print": {
       "css": [
-        "/packs-test/css/print-2fd45c11.css"
+        "/packs-test/css/print-e6d5a8ba.css"
       ],
       "js": [
-        "/packs-test/js/print-48ca4128f9f71b859b9f.js"
+        "/packs-test/js/print-92cfc5eedcdde5092361.js"
       ],
       "css.map": [
-        "/packs-test/css/print-2fd45c11.css.map"
+        "/packs-test/css/print-e6d5a8ba.css.map"
       ],
       "js.map": [
-        "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
+        "/packs-test/js/print-92cfc5eedcdde5092361.js.map"
       ]
     }
   },
-  "media/images/confirmations.svg": "/packs-test/media/images/confirmations-d8810f4db7c13fc1e83982bbe482adb0.svg",
-  "media/images/default-group.png": "/packs-test/media/images/default-group-29556085be4aee99e57a82495813bfdb.png",
-  "media/images/default-user.png": "/packs-test/media/images/default-user-ed12327aecde7a3149ef43d736bafac8.png",
-  "media/images/icon-checkbox-fill.svg": "/packs-test/media/images/icon-checkbox-fill-98f528510c9803a44606df1efa2fbf74.svg",
-  "media/images/icon-checkbox.svg": "/packs-test/media/images/icon-checkbox-c2148b7e0aad0b59f273240068ab3e49.svg",
-  "media/images/icon-selected-fill.svg": "/packs-test/media/images/icon-selected-fill-6c087bd599b40f5015e4e14b97e38690.svg",
-  "media/images/icon-selected.svg": "/packs-test/media/images/icon-selected-802a0c43716e9329568a7ec2f468212c.svg",
-  "media/images/loading.svg": "/packs-test/media/images/loading-28c9b0f5c3d98fe8feeeb6079f073c06.svg",
-  "media/images/logo.png": "/packs-test/media/images/logo-a438a644a2572aa6352b6a1cde6fc16a.png",
-  "media/images/logo.svg": "/packs-test/media/images/logo-9bcdb4873872646952d4e38cf844247a.svg",
-  "media/images/new-repo.svg": "/packs-test/media/images/new-repo-c3bdeeaa57174bdbd8403ad7abb245f8.svg",
-  "media/images/nodata/activity.svg": "/packs-test/media/images/nodata/activity-6c2d2525704535e4cf9505677ca7814d.svg",
-  "media/images/nodata/doc.svg": "/packs-test/media/images/nodata/doc-efa50a8f4fef0d55557576e1d3515429.svg",
-  "media/images/nodata/empty.svg": "/packs-test/media/images/nodata/empty-b66cb031341912313f5e659661357e4f.svg",
-  "media/images/nodata/follow.svg": "/packs-test/media/images/nodata/follow-adf03c606ca31105f316c42c701f2075.svg",
-  "media/images/nodata/group.svg": "/packs-test/media/images/nodata/group-e6b344db66560757a1aac47d83df8242.svg",
-  "media/images/nodata/issue.svg": "/packs-test/media/images/nodata/issue-1110401321feedc0c4e9c5be6b656a5d.svg",
-  "media/images/nodata/launch.svg": "/packs-test/media/images/nodata/launch-679680caaa1ef90ee13dc287194e9950.svg",
-  "media/images/nodata/not-found.svg": "/packs-test/media/images/nodata/not-found-487cd3d6de0909141a95c94451f2049e.svg",
-  "media/images/nodata/note.svg": "/packs-test/media/images/nodata/note-a827b53969f15462c3d584244bc79eb5.svg",
-  "media/images/nodata/repo.svg": "/packs-test/media/images/nodata/repo-bc06d55d15b8d8caae0bd168a9ce806f.svg",
-  "media/images/nodata/result.svg": "/packs-test/media/images/nodata/result-8514f06dfcbd1e768529296b6dab44a2.svg",
-  "media/images/nodata/star.svg": "/packs-test/media/images/nodata/star-484e3f7737ec6317218dc215ca9297b7.svg",
-  "media/images/nodata/timeline.svg": "/packs-test/media/images/nodata/timeline-71ead23a217a27d16e017a7a9eea1c78.svg",
-  "media/images/nodata/toc.svg": "/packs-test/media/images/nodata/toc-d296b0da01ea24c6b3fdb553baad1c77.svg",
-  "media/images/nodata/todo.svg": "/packs-test/media/images/nodata/todo-df37e18a2d4b02593563a4394ee80712.svg",
-  "media/images/password.svg": "/packs-test/media/images/password-4fd0e47ca446a8dcb33692aac1e645c0.svg",
-  "media/images/sign-in.svg": "/packs-test/media/images/sign-in-2ea81091b3b20e29945f26a8e2747f10.svg",
-  "media/images/sign-up.svg": "/packs-test/media/images/sign-up-c630046573a8dfc09932acd543d05374.svg",
-  "media/lib/iconfont.eot": "/packs-test/media/lib/iconfont-ebbc2ed4.eot",
-  "media/lib/iconfont.svg": "/packs-test/media/lib/iconfont-fd2108ea.svg",
-  "media/lib/iconfont.ttf": "/packs-test/media/lib/iconfont-6fdb9622.ttf",
-  "media/lib/iconfont.woff": "/packs-test/media/lib/iconfont-cdf44bd0.woff",
-  "print.css": "/packs-test/css/print-2fd45c11.css",
-  "print.css.map": "/packs-test/css/print-2fd45c11.css.map",
-  "print.js": "/packs-test/js/print-48ca4128f9f71b859b9f.js",
-  "print.js.map": "/packs-test/js/print-48ca4128f9f71b859b9f.js.map"
+  "media/images/confirmations.svg": "/packs-test/media/images/confirmations-3e5fbc12fddbb53a0495c1627c1458ee.svg",
+  "media/images/default-group.png": "/packs-test/media/images/default-group-b9369b07ac152d0eff04dcbccb108e4e.png",
+  "media/images/default-user.png": "/packs-test/media/images/default-user-3fea6817f5807a9d886caa68b5941575.png",
+  "media/images/icon-checkbox-fill.svg": "/packs-test/media/images/icon-checkbox-fill-cfdfdd277b49c7b8169a6f7609a08102.svg",
+  "media/images/icon-checkbox.svg": "/packs-test/media/images/icon-checkbox-403ad68137c1dbc63199592d735182e4.svg",
+  "media/images/icon-selected-fill.svg": "/packs-test/media/images/icon-selected-fill-16faafee3d1ea35518aec1b85efb6805.svg",
+  "media/images/icon-selected.svg": "/packs-test/media/images/icon-selected-bcd84aa093fc57291cc393e570a114b1.svg",
+  "media/images/loading.svg": "/packs-test/media/images/loading-ebaff35c7e13da16f627f7673a0808a8.svg",
+  "media/images/logo.png": "/packs-test/media/images/logo-eebb9cd07f34c0f2beb53de6726570cc.png",
+  "media/images/logo.svg": "/packs-test/media/images/logo-f1d0cbd8072f55d9835dc4c07dfa7088.svg",
+  "media/images/new-repo.svg": "/packs-test/media/images/new-repo-5baedd62423e946ccd8cf4b392696dee.svg",
+  "media/images/nodata/activity.svg": "/packs-test/media/images/nodata/activity-84c06a57b86fa29a07428394546e96b5.svg",
+  "media/images/nodata/doc.svg": "/packs-test/media/images/nodata/doc-4a4f47bbd22feb1ad2258205d32ae6e1.svg",
+  "media/images/nodata/empty.svg": "/packs-test/media/images/nodata/empty-f93c454f466a74e7ab8f04f689dbd457.svg",
+  "media/images/nodata/follow.svg": "/packs-test/media/images/nodata/follow-75da221889ca2475e866083acaa637b8.svg",
+  "media/images/nodata/group.svg": "/packs-test/media/images/nodata/group-f77331de5dd54b0e734b526f0af81b6e.svg",
+  "media/images/nodata/issue.svg": "/packs-test/media/images/nodata/issue-9c781f47234e1ace633a2f547f3286f6.svg",
+  "media/images/nodata/launch.svg": "/packs-test/media/images/nodata/launch-2db5ceaa8f22c253f8818de3f8607a0a.svg",
+  "media/images/nodata/not-found.svg": "/packs-test/media/images/nodata/not-found-f540ce11fb552c70947d074c833548a9.svg",
+  "media/images/nodata/note.svg": "/packs-test/media/images/nodata/note-4f7ee0b42e0e1b0b1a2209194e3b052a.svg",
+  "media/images/nodata/repo.svg": "/packs-test/media/images/nodata/repo-89371d7029751b90ed262ee5c7222ddf.svg",
+  "media/images/nodata/result.svg": "/packs-test/media/images/nodata/result-468a61c82c37f911c9f357b6395c3b11.svg",
+  "media/images/nodata/star.svg": "/packs-test/media/images/nodata/star-d6bd1ce5100310121fd073bc11b46c2e.svg",
+  "media/images/nodata/timeline.svg": "/packs-test/media/images/nodata/timeline-36fd3b63378ab3e1cb5289877d61d50c.svg",
+  "media/images/nodata/toc.svg": "/packs-test/media/images/nodata/toc-fcdf06f31c88b8bc7854c82210a1d6fd.svg",
+  "media/images/nodata/todo.svg": "/packs-test/media/images/nodata/todo-c7ed9f7ed3163b2e1b6dd1b4a7676909.svg",
+  "media/images/password.svg": "/packs-test/media/images/password-a7c8a5c84db868768ba959cf573e237f.svg",
+  "media/images/sign-in.svg": "/packs-test/media/images/sign-in-e1444a6d764597f1f134c611fe3b8475.svg",
+  "media/images/sign-up.svg": "/packs-test/media/images/sign-up-42bc5b9a369c0dd076f30736d7863bb5.svg",
+  "media/lib/iconfont.eot": "/packs-test/media/lib/iconfont-91902b48.eot",
+  "media/lib/iconfont.svg": "/packs-test/media/lib/iconfont-6d4c64c8.svg",
+  "media/lib/iconfont.ttf": "/packs-test/media/lib/iconfont-fd603820.ttf",
+  "media/lib/iconfont.woff": "/packs-test/media/lib/iconfont-ad9fb6bc.woff",
+  "print.css": "/packs-test/css/print-e6d5a8ba.css",
+  "print.css.map": "/packs-test/css/print-e6d5a8ba.css.map",
+  "print.js": "/packs-test/js/print-92cfc5eedcdde5092361.js",
+  "print.js.map": "/packs-test/js/print-92cfc5eedcdde5092361.js.map"
 }

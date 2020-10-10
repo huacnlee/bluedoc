@@ -18,14 +18,14 @@ class NotificationsController < ::ApplicationController
       return redirect_to notifications_path
     end
 
-    Notification.read!([@notification.id])
+    Notification.read!(current_user, [@notification.id])
 
     redirect_to @notification.target_url
   end
 
   def read
     ids = notifications.where(id: params[:ids]).pluck(:id)
-    Notification.read!(ids)
+    Notification.read!(current_user, ids)
     redirect_to notifications_path, notice: t(".Success marked notifications as read", num: ids.length)
   end
 

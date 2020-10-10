@@ -10,7 +10,7 @@ gem "redis-objects"
 gem "puma", "~> 3.12"
 gem "react-rails"
 
-gem "graphql"
+gem "graphql", "1.8.14"
 
 gem "sidekiq"
 
