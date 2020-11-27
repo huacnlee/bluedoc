@@ -30,7 +30,7 @@
   padding: 0 15px;
   @include breakpoint(lg) {
     padding: 0 25px;
-    width: 1080px;
+    width: 1280px;
   }
   margin: 0 auto;
 }
@@ -46,9 +46,11 @@
   }
 }
 
-
 // sign up page
-.page-registrations, .page-sessions, .page-ldaps, .page-omniauth_callbacks {
+.page-registrations,
+.page-sessions,
+.page-ldaps,
+.page-omniauth_callbacks {
   .main-container .container {
     max-width: 420px;
     margin-top: 70px;
