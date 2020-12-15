@@ -8,7 +8,7 @@ class RepositoryImportJob < ApplicationJob
     when "gitbook"
       importer = BlueDoc::Import::GitBook.new(repository: repo, user: user, url: url)
     when "archive"
-      url = repo.import_archive&.service_url(expires_in: 10.hours, disposition: :attachment)
+      url = repo.import_archive&.url(expires_in: 10.hours, disposition: :attachment)
       importer = BlueDoc::Import::Archive.new(repository: repo, user: user, url: url)
     else
       return false

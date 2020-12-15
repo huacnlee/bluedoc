@@ -32,7 +32,9 @@ class Activity < ApplicationRecord
       target_type: target.class.name,
       target_id: target.id,
       actor_id: actor_id,
-      meta: meta&.deep_symbolize_keys
+      meta: meta&.deep_symbolize_keys,
+      created_at: Time.now,
+      updated_at: Time.now,
     }
 
     fill_depend_id_for_target(activity_params)
@@ -53,11 +55,15 @@ class Activity < ApplicationRecord
       activity_params[:meta] = YAML.dump(activity_params[:meta])
     end
 
+    records = []
+    activity_params.delete(:target)
+    user_ids.each do |_user_id|
+      records << activity_params.merge(user_id: _user_id)
+    end
+
     # create Activity for receivers, for dashboard timeline
-    Activity.bulk_insert(set_size: 100) do |worker|
-      user_ids.each do |_user_id|
-        worker.add(activity_params.merge(user_id: _user_id))
-      end
+    records.each_slice(100) do |parts|
+      Activity.insert_all(parts)
     end
   end
 end

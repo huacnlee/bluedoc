@@ -18,7 +18,9 @@ gem "webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
-gem "awesome_nested_set"
+
+# https://github.com/collectiveidea/awesome_nested_set/pull/421
+gem "awesome_nested_set", github: "filippoliverani/awesome_nested_set", branch: "use-polimorphic-key-only-when-needed"
 gem "request_store"
 
 gem "aws-sdk-s3", require: false
@@ -37,7 +39,6 @@ gem "elasticsearch-model"
 gem "elasticsearch-rails"
 
 gem "second_level_cache"
-gem "bulk_insert"
 
 gem "devise"
 gem "omniauth-rails_csrf_protection"
