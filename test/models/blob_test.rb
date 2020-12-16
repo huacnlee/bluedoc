@@ -5,6 +5,6 @@ require "test_helper"
 class ActiveStorage::BlobTest < ActiveSupport::TestCase
   test "service_url with :disk" do
     blob = create(:blob)
-    assert_equal "#{Setting.host}/uploads/#{blob.key}", blob.service_url
+    assert_equal "#{Setting.host}/uploads/#{blob.key}", blob.url
   end
 end

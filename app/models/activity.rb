@@ -50,11 +50,6 @@ class Activity < ApplicationRecord
     # create Activity for actor, for display on user profile page
     Activity.create!(activity_params) if action_to_actor?(action)
 
-    if activity_params[:meta]
-      # bulk_insert must convert serialize field to String
-      activity_params[:meta] = YAML.dump(activity_params[:meta])
-    end
-
     records = []
     activity_params.delete(:target)
     user_ids.each do |_user_id|

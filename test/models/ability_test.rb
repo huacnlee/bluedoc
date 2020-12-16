@@ -5,7 +5,8 @@ require "test_helper"
 class AbilityTest < ActiveSupport::TestCase
   test "anonymous can not read private repository doc" do
     ab = Ability.new nil
-    private_doc = build :doc, repository: build(:repository, privacy: :private)
+    repo = create(:repository, privacy: :private)
+    private_doc = build :doc, repository: repo
     assert ab.cannot?(:read, private_doc)
   end
 

@@ -54,7 +54,7 @@ module BlueDoc
 
         if /^http[s]?:\/\//.match?(path_or_url)
           begin
-            io = open(path_or_url)
+            io = URI.open(path_or_url)
           rescue OpenURI::HTTPError => e
             raise FileNotFoundError.new(e.message)
           end
@@ -66,7 +66,7 @@ module BlueDoc
           io = File.open(path_or_url)
         end
 
-        blob = ActiveStorage::Blob.create_after_upload!(io: io, filename: filename)
+        blob = ActiveStorage::Blob.create_and_upload!(io: io, filename: filename)
         "/uploads/#{blob.key}"
       end
     end

@@ -2,13 +2,14 @@ AllCops:
   DisabledByDefault: true
   Exclude:
     - 'vendor/**/*'
+    - 'node_modules/**/*'
     - 'plugins/**/*'
     - 'lib/templates/**/*'
     - 'lib/tasks/release.rake'
     - 'app/models/cache_version.rb'
     - 'db/**/*'
     - 'bin/**/*'
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -116,7 +117,7 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 # Detect hard tabs, no hard tabs.
-Layout/Tab:
+Layout/IndentationStyle:
   Enabled: true
 
 # Blank lines should not have any spaces.

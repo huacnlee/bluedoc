@@ -15,9 +15,9 @@ class Repository
       end
 
       default_record = {
-        action_type: "watch", 
-        target_type: "Repository", 
-        target_id: self.id, 
+        action_type: "watch",
+        target_type: "Repository",
+        target_id: self.id,
         user_type: "User",
         created_at: Time.now,
         updated_at: Time.now,

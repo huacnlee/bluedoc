@@ -1,18 +1,18 @@
 # BlueDoc
 
-[![Build Status](https://travis-ci.org/thebluedoc/bluedoc.svg?branch=master)](https://travis-ci.org/thebluedoc/bluedoc)
+[![Test](https://github.com/huacnlee/bluedoc/workflows/Test/badge.svg)](https://github.com/huacnlee/bluedoc/actions)
 
 ## Development
 
 Setup base development env have two approach
 
-Default admin user: ***admin@bluedoc.io*** password: ***123456***
+Default admin user: ***admin@bluedoc.io*** password: **_123456_**
 
 ### Setup with docker
 
-First you must have docker services and start it and then 
+First you must have docker services and start it and then
 
-`$ docker-compose up dev` 
+`$ docker-compose up dev`
 
 That all depends softwares have ready
 
@@ -29,7 +29,7 @@ $ sidekiq -C ./config/sidekiq.yml #other termal tab if u need
 
 Now u can open brower and visit [bluedoc](http://localhost:3000)
 
-More configuration you can look from ***docker-compose.yml***
+More configuration you can look from **_docker-compose.yml_**
 
 ### Setup with local machine
 

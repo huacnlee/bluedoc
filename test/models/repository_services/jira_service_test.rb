@@ -10,7 +10,7 @@ class JiraServiceTest < ActiveSupport::TestCase
 
     jira_service.assign_attributes(active: true)
     assert_not jira_service.valid?
-    assert_equal ["Jira site can't be blank", "Jira site is not a valid site, only support HTTP or HTTPS protocol", "Username can't be blank", "Password can't be blank"], jira_service.errors.full_messages
+    assert_equal ["Jira site can't be blank", "Jira site is not a valid site, only support HTTP or HTTPS protocol", "Username can't be blank", "Password can't be blank"].sort, jira_service.errors.full_messages.sort
 
     jira_service.assign_attributes(site: "http://my-jira.com", username: "jirausername", password: "jirapwd")
     JiraService.any_instance.stubs(:jira_request).once

@@ -2,7 +2,7 @@
 
 # Override ActiveStorage DiskService service_url method to generate custom controller path
 module ActiveStorageDiskServiceURL
-  # Patch for storage = :local, blob.service_url generate https://host.com/uploads/:key
+  # Patch for storage = :local, blob.url generate https://host.com/uploads/:key
   def url(key, expires_in:, filename:, disposition:, content_type:)
     "#{Setting.host}/uploads/#{key}"
   end

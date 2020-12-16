@@ -187,7 +187,7 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     $name = $foo
     ```
     CODE
-    svg_code = URI.encode(code_1)
+    svg_code = CGI.escape(code_1)
 
     svg_url = "http://localhost:4010/svg?tex=#{svg_code}"
     # puts "svg_url: #{svg_url}"
@@ -279,8 +279,8 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     out = nil
 
     ActiveStorage::Blob.stub(:find_by, find_stub) do
-      blob0.stub(:service_url, fake_url0) do
-        blob1.stub(:service_url, fake_url1) do
+      blob0.stub(:url, fake_url0) do
+        blob1.stub(:url, fake_url1) do
           out = BlueDoc::HTML.render(raw, format: :markdown, public: true)
         end
       end

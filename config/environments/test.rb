@@ -20,7 +20,7 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-  config.cache_store = :null_store
+  # config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
-    
+
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
