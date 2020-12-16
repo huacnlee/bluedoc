@@ -54,7 +54,7 @@ class BlobsController < ActiveStorage::BaseController
           expires_in = 12.hours
         end
 
-        scope.service_url(disposition: blob_disposition, expires_in: expires_in)
+        scope.url(disposition: blob_disposition, expires_in: expires_in)
       end
     end
 

@@ -7,7 +7,7 @@ gem "rails"
 gem "pg"
 gem "redis"
 gem "redis-objects"
-gem "puma", "~> 3.12"
+gem "puma"
 gem "react-rails"
 
 gem "graphql", "1.8.14"
@@ -18,8 +18,9 @@ gem "webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
-gem "awesome_nested_set"
-gem "request_store"
+
+# https://github.com/collectiveidea/awesome_nested_set/pull/421
+gem "awesome_nested_set", github: "filippoliverani/awesome_nested_set", branch: "use-polimorphic-key-only-when-needed"
 
 gem "aws-sdk-s3", require: false
 gem "mini_magick"
@@ -28,16 +29,15 @@ gem "image_processing", "~> 1.2"
 gem "file_validators"
 gem "twemoji"
 
-gem "bootsnap", ">= 1.1.0", require: false
+gem "bootsnap"
 
 gem "rails-i18n"
 gem "rails-settings-cached"
 
-gem "elasticsearch-model"
-gem "elasticsearch-rails"
+gem "elasticsearch-model", "~> 6"
+gem "elasticsearch-rails", "~> 6"
 
 gem "second_level_cache"
-gem "bulk_insert"
 
 gem "devise"
 gem "omniauth-rails_csrf_protection"
@@ -85,10 +85,10 @@ group :development, :test do
 end
 
 group :development do
-  gem "web-console", ">= 3.3.0"
+  gem "web-console"
   gem "listen"
   gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "spring-watcher-listen"
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-performance"

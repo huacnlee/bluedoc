@@ -32,7 +32,9 @@ class Activity < ApplicationRecord
       target_type: target.class.name,
       target_id: target.id,
       actor_id: actor_id,
-      meta: meta&.deep_symbolize_keys
+      meta: meta&.deep_symbolize_keys,
+      created_at: Time.now,
+      updated_at: Time.now,
     }
 
     fill_depend_id_for_target(activity_params)
@@ -48,16 +50,15 @@ class Activity < ApplicationRecord
     # create Activity for actor, for display on user profile page
     Activity.create!(activity_params) if action_to_actor?(action)
 
-    if activity_params[:meta]
-      # bulk_insert must convert serialize field to String
-      activity_params[:meta] = YAML.dump(activity_params[:meta])
+    records = []
+    activity_params.delete(:target)
+    user_ids.each do |_user_id|
+      records << activity_params.merge(user_id: _user_id)
     end
 
     # create Activity for receivers, for dashboard timeline
-    Activity.bulk_insert(set_size: 100) do |worker|
-      user_ids.each do |_user_id|
-        worker.add(activity_params.merge(user_id: _user_id))
-      end
+    records.each_slice(100) do |parts|
+      Activity.insert_all(parts)
     end
   end
 end

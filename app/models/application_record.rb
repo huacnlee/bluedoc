@@ -18,7 +18,7 @@ class ApplicationRecord < ActiveRecord::Base
   def as_rc_json(options = {})
     json = self.as_json(options)
     errors = {}
-    self.errors.keys.each do |key|
+    self.errors.attribute_names.each do |key|
       errors[key.to_s] = self.errors.full_messages_for(key)&.first
     end
     json["errors"] = errors

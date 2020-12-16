@@ -28,7 +28,7 @@ module BlueDoc
         return nil if blob_key.blank?
         blob = ActiveStorage::Blob.find_by(key: blob_key)
         return nil if blob.blank?
-        blob.service_url(expires_in: 5.days)
+        blob.url(expires_in: 5.days)
       end
     end
   end
