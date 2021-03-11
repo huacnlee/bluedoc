@@ -17,5 +17,4 @@ docker run --detach \
            --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
            --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
            --env-file ${bluedoc_root}/data/production.env \
-           -p 5433:5432 \
            bluedoc/bluedoc:latest

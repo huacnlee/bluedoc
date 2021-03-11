@@ -3,7 +3,7 @@ version: '3'
 services:
 
   dev:
-    image: ruby:2.5.3
+    image: ruby:2.7.2
     links:
       - postgres
       - redis

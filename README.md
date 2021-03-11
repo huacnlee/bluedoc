@@ -87,3 +87,28 @@ $ brew services start bitjourney/self/plantuml-service
 ```bash
 $ rails g scaffold_controller admin/repository slug:string name:string user:references description:string
 ```
+
+## Deployment
+
+```bash
+#!/usr/bin/env sh
+docker stop bluedoc
+docker rm bluedoc
+
+bluedoc_root=/tmp/bluedoc
+mkdir -p /tmp/bluedoc/data
+touch ${bluedoc_root}/data/production.env
+docker run --detach \
+           --name bluedoc \
+           --publish 443:443 --publish 80:80 \
+           --restart always \
+           --volume ${bluedoc_root}/postgresql:/var/lib/postgresql \
+           --volume ${bluedoc_root}/redis:/var/lib/redis \
+           --volume ${bluedoc_root}/elasticsearch:/usr/share/elasticsearch/data \
+           --volume ${bluedoc_root}/storage:/home/app/bluedoc/storage \
+           --volume ${bluedoc_root}/data:/home/app/bluedoc/data \
+           --volume ${bluedoc_root}/log:/home/app/bluedoc/log \
+           --volume ${bluedoc_root}/tmp:/home/app/bluedoc/tmp \
+           --env-file ${bluedoc_root}/data/production.env \
+           bluedoc/bluedoc:latest
+```
