@@ -18,11 +18,14 @@
       <ul class="docs-list mb-3">
         <% @repository.docs.each do |doc| %>
         <li class="box-row">
-          <label for="doc-<%= doc.id %>-checkbox" style="font-weight: normal;" class="display-block clearfix">
-            <input id="doc-<%= doc.id %>-checkbox" type="checkbox" class="form-checkbox float-left mr-3 checkbox-radius" name="transfer[doc_id][]" value="<%= doc.id %>" />
-            <div class="title"><%= doc.title %></div>
-            <div class="slug text-gray-light"><%= doc.slug %></div>
+          <label for="doc-<%= doc.id %>-checkbox" style="font-weight: normal;" class="flex">
+            <input id="doc-<%= doc.id %>-checkbox" type="checkbox" class="form-checkbox checkbox-radius" name="transfer[doc_id][]" value="<%= doc.id %>" />
+            <div class="info">
+              <div class="title"><%= doc.title %></div>
+               <div class="slug text-gray-light"><%= doc.slug %></div>
+              </div>
           </label>
+         
         </li>
         <% end %>
       </ul>
