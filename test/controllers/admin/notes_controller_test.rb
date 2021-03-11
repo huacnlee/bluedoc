@@ -33,15 +33,11 @@ class Admin::NotesControllerTest < ActionDispatch::IntegrationTest
   test "should restore Note" do
     @note = create(:note, user: @admin)
     @note.destroy
-    post restore_admin_note_path(@note.id)
-    assert_equal 501, response.status
 
-    allow_feature(:soft_delete) do
-      post restore_admin_note_path(@note.id)
-    end
+    post restore_admin_note_path(@note.id)
     @note.reload
-    assert_equal false, @note.deleted?
     assert_redirected_to admin_notes_path(user_id: @note.user_id, q: @note.slug)
+    assert_equal false, @note.deleted?
 
     note = Note.find(@note.id)
     assert_equal false, note.deleted?

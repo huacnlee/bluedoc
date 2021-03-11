@@ -15,25 +15,23 @@ module Exportable
 
   def export(type)
     type = type.to_sym
-    self.set_export_status(type, "running")
+    set_export_status(type, "running")
 
     if type == :pdf
-      check_feature! :export_pdf
       PDFExportJob.perform_later(self)
     elsif type == :archive
-      check_feature! :export_archive
       ArchiveExportJob.perform_later(self)
     end
   end
 
   def export_url(type)
     type = type.to_sym
-    return nil unless self.send(type).attached?
+    return nil unless send(type).attached?
 
     if type == :pdf
-      "#{Setting.host}/uploads/#{self.pdf.blob.key}"
+      "#{Setting.host}/uploads/#{pdf.blob.key}"
     elsif type == :archive
-      "#{Setting.host}/uploads/#{self.archive.blob.key}"
+      "#{Setting.host}/uploads/#{archive.blob.key}"
     end
   end
 
@@ -41,11 +39,11 @@ module Exportable
     type = type.to_sym
     fname = case self.class.name
             when "Doc"
-              self.title
+              title
             when "Repository"
-              self.name
+              name
             when "Note"
-              self.title
+              title
             else
               "bluedoc-export"
     end
@@ -69,16 +67,16 @@ module Exportable
   def export_status(type)
     type = type.to_sym
     if type == :pdf
-      self.export_pdf_status
+      export_pdf_status
     elsif type == :archive
-      self.export_archive_status
+      export_archive_status
     end
   end
 
   def update_export!(type, io)
     type = type.to_sym
     return nil if io.blank?
-    self.send(type).attach(io: io, filename: self.export_filename(type))
-    self.save!
+    send(type).attach(io: io, filename: export_filename(type))
+    save!
   end
 end

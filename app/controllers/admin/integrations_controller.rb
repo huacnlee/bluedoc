@@ -16,16 +16,17 @@ class Admin::IntegrationsController < Admin::ApplicationController
   end
 
   private
-    def set_type
-      @type = params[:id]
-      raise ActiveRecord::RecordNotFound if %w(jira).exclude?(@type)
-    end
 
-    def set_service
-      @service = JiraService.templates.find_or_initialize_by repository_id: nil
-    end
+  def set_type
+    @type = params[:id]
+    raise ActiveRecord::RecordNotFound if %w[jira].exclude?(@type)
+  end
 
-    def jira_params
-      params.require(:jira_service).permit(JiraService.accessible_attrs)
-    end
+  def set_service
+    @service = JiraService.templates.find_or_initialize_by repository_id: nil
+  end
+
+  def jira_params
+    params.require(:jira_service).permit(JiraService.accessible_attrs)
+  end
 end

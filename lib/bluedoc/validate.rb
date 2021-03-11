@@ -4,7 +4,7 @@ module BlueDoc
   class Validate
     class << self
       def url?(src)
-        /^http[s]?:\/\//.match?(src)
+        /^https?:\/\//.match?(src)
       end
     end
   end

@@ -5,9 +5,9 @@ class User
 
   private
 
-    def auto_correct_attributes
-      self.name = AutoCorrect.format(self.name) if self.name_changed?
-      self.description = AutoCorrect.format(self.description) if self.description_changed?
-      self.location = AutoCorrect.format(self.location) if self.location_changed?
-    end
+  def auto_correct_attributes
+    self.name = AutoCorrect.format(name) if name_changed?
+    self.description = AutoCorrect.format(description) if description_changed?
+    self.location = AutoCorrect.format(location) if location_changed?
+  end
 end

@@ -174,7 +174,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.save
     repo.reload
 
-    assert_equal({ "has_toc" => "0" }, repo.preferences)
+    assert_equal({"has_toc" => "0"}, repo.preferences)
 
     # Issues
     assert_nil repo.preferences[:has_issues]
@@ -197,7 +197,7 @@ class RepositoryTest < ActiveSupport::TestCase
   test "toc_text / toc_html / toc_json" do
     repo = create(:repository)
     doc0 = create(:doc, repository: repo)
-    toc = [{ id: doc0.id, url: doc0.slug, title: doc0.title, depth: doc0.depth }.as_json].to_yaml
+    toc = [{id: doc0.id, url: doc0.slug, title: doc0.title, depth: doc0.depth}.as_json].to_yaml
 
     assert_equal toc, repo.toc_text
     assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
@@ -210,7 +210,7 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal [].to_yaml, repo.toc_text
 
     doc1 = create(:doc, repository: repo)
-    toc_hash = [{ id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0 }.as_json]
+    toc_hash = [{id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0}.as_json]
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
     assert_html_equal BlueDoc::Toc.parse(toc).to_html, repo.toc_html
@@ -218,7 +218,7 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal [doc1], repo.toc_ordered_docs
 
     doc2 = create(:doc, repository: repo)
-    toc_hash << { id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0 }.as_json
+    toc_hash << {id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0}.as_json
     toc = toc_hash.to_yaml
     assert_equal toc, repo.toc_text
     repo = Repository.find(repo.id)
@@ -229,9 +229,9 @@ class RepositoryTest < ActiveSupport::TestCase
     doc3 = create(:doc, repository: repo)
     doc3.move_to(doc1, :child)
     toc_hash = [
-      { id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0 }.as_json,
-      { id: doc3.id, url: doc3.slug, title: doc3.title, depth: 1 }.as_json,
-      { id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0 }.as_json,
+      {id: doc1.id, url: doc1.slug, title: doc1.title, depth: 0}.as_json,
+      {id: doc3.id, url: doc3.slug, title: doc3.title, depth: 1}.as_json,
+      {id: doc2.id, url: doc2.slug, title: doc2.title, depth: 0}.as_json
     ]
     toc = toc_hash.to_yaml
     repo = Repository.find(repo.id)
@@ -267,14 +267,14 @@ class RepositoryTest < ActiveSupport::TestCase
   test "as_indexed_json" do
     repo = create(:repository, description: "Hello world")
     repo.stub(:_search_body, "Search body") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true }, deleted: false }
+      data = {slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: true}, deleted: false}
       assert_equal data, repo.as_indexed_json
     end
 
     repo = create(:repository, privacy: :private, description: "Hello world", deleted_at: Time.now)
 
     repo.stub(:_search_body, "Search body") do
-      data = { slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false }, deleted: true }
+      data = {slug: repo.slug, title: repo.name, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: false}, deleted: true}
       assert_equal data, repo.as_indexed_json
     end
   end

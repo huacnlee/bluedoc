@@ -259,11 +259,11 @@ class UserTest < ActiveSupport::TestCase
     end
 
     user = create(:user, description: "Hello world")
-    data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false }
+    data = {sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false}
     assert_equal data, user.as_indexed_json
 
     group = create(:group, deleted_at: Time.now)
-    data = { sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id, deleted: true }
+    data = {sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id, deleted: true}
     assert_equal data, group.as_indexed_json
   end
 
@@ -302,7 +302,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "System user" do
     assert_not_nil User.system
-    assert_equal -1, User.system.id
+    assert_equal(-1, User.system.id)
     assert_equal "system", User.system.slug
     assert_equal "System", User.system.name
 
@@ -361,7 +361,7 @@ class UserTest < ActiveSupport::TestCase
     user = create(:user)
     user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
     assert_equal true, user.avatar_attached?
-    assert_match /\/uploads\/[\w]+\?s=large/, user.avatar_url
+    assert_match(/\/uploads\/\w+\?s=large/, user.avatar_url)
     old_avatar_url = user.avatar_url
 
     user.avatar.attach(io: load_file("blank.png"), filename: "blank1.png")
@@ -373,19 +373,19 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.valid_password?("123456")
 
     assert_equal false, user.update_password({})
-    assert_equal({ current_password: ["can't be blank"], password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({current_password: ["can't be blank"], password: ["can't be blank"], password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456")
-    assert_equal({ password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({password: ["can't be blank"], password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456", password: "654321")
-    assert_equal({ password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456", password: "654321", password_confirmation: "123456")
-    assert_equal({ password_confirmation: ["doesn't match Password"] }, user.errors.messages)
+    assert_equal({password_confirmation: ["doesn't match Password"]}, user.errors.messages)
 
     user.errors.clear
     user.update_password(current_password: "123456", password: "654321", password_confirmation: "654321")
@@ -398,28 +398,25 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.valid?
     assert_equal true, group.valid?
 
-    allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
-        assert_equal false, user.valid?
-        assert_equal true, group.valid?
-        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
-        user.email = "aaa@foo.com"
-        user.valid?
-      end
+    Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
+      assert_equal false, user.valid?
+      assert_equal true, group.valid?
+      assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+      user.email = "aaa@foo.com"
+      user.valid?
     end
     user.save
     group.save
 
     user.reload
     group.reload
-    allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, %w[dar.com bar.com]) do
-        assert_equal false, user.valid?
-        assert_equal true, group.valid?
-        assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
-        user.email = "aa@bar.com"
-        assert_equal true, user.valid?
-      end
+
+    Setting.stub(:user_email_suffixes, %w[dar.com bar.com]) do
+      assert_equal false, user.valid?
+      assert_equal true, group.valid?
+      assert_equal ["suffix is not in the supported list (admin setting user Email must conform to the specified suffix)."], user.errors[:email]
+      user.email = "aa@bar.com"
+      assert_equal true, user.valid?
     end
   end
 
@@ -430,10 +427,7 @@ class UserTest < ActiveSupport::TestCase
 
     # LDAP omniauth_provider
     user = build(:user, omniauth_provider: "ldap")
-    assert_equal true, user.password_required?
-    allow_feature(:ldap_auth) do
-      assert_equal false, user.password_required?
-    end
+    assert_equal false, user.password_required?
 
     # Other omniauth_provider
     user = build(:user, omniauth_provider: "github")
@@ -446,7 +440,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "find_or_create_by_omniauth with normal provider" do
-    omniauth_auth = { "provider" => "gitlab", "uid" => "123" }
+    omniauth_auth = {"provider" => "gitlab", "uid" => "123"}
     assert_nil User.find_or_create_by_omniauth(omniauth_auth)
 
     authorization = create(:authorization, provider: "gitlab", uid: "123")
@@ -459,39 +453,34 @@ class UserTest < ActiveSupport::TestCase
       "login" => "huacnlee",
       "email" => "huacnlee@example.org"
     }
-    omniauth_auth = { "provider" => "ldap", "uid" => "123", "info" => info }
+    omniauth_auth = {"provider" => "ldap", "uid" => "123", "info" => info}
+
     user0 = User.find_or_create_by_omniauth(omniauth_auth)
-    # When feature not allow, return nil
-    assert_nil user0
+    assert_not_nil user0
+    assert_equal false, user0.new_record?
+    assert_equal "Jason Lee", user0.name
+    assert_equal "huacnlee", user0.slug
+    assert_equal "huacnlee@example.org", user0.email
+    assert_equal true, user0.confirmed?
+    assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
 
-    allow_feature(:ldap_auth) do
-      user0 = User.find_or_create_by_omniauth(omniauth_auth)
-      assert_not_nil user0
-      assert_equal false, user0.new_record?
-      assert_equal "Jason Lee", user0.name
-      assert_equal "huacnlee", user0.slug
-      assert_equal "huacnlee@example.org", user0.email
-      assert_equal true, user0.confirmed?
-      assert_equal 1, user0.authorizations.where(provider: "ldap", uid: "123").count
+    # When same slug exist and no authorization bind found
+    create(:user, slug: "monster")
+    info = {
+      "name" => "Jason Lee",
+      "login" => "monster",
+      "email" => "huacnlee@example.org"
+    }
+    omniauth_auth = {"provider" => "ldap", "uid" => "124", "info" => info}
+    user1 = User.find_or_create_by_omniauth(omniauth_auth)
+    assert_not_nil user1
+    assert_equal true, user1.new_record?
+    assert_equal true, user1.errors.any?
 
-      # When same slug exist and no authorization bind found
-      create(:user, slug: "monster")
-      info = {
-        "name" => "Jason Lee",
-        "login" => "monster",
-        "email" => "huacnlee@example.org"
-      }
-      omniauth_auth = { "provider" => "ldap", "uid" => "124", "info" => info }
-      user1 = User.find_or_create_by_omniauth(omniauth_auth)
-      assert_not_nil user1
-      assert_equal true, user1.new_record?
-      assert_equal true, user1.errors.any?
-
-      # When same authorization bind exists return bind user
-      user2 = User.find_or_create_by_omniauth("provider" => "ldap", "uid" => "123")
-      assert_not_nil user2
-      assert_equal user0, user2
-    end
+    # When same authorization bind exists return bind user
+    user2 = User.find_or_create_by_omniauth("provider" => "ldap", "uid" => "123")
+    assert_not_nil user2
+    assert_equal user0, user2
   end
 
   test "as_item_json" do
@@ -499,5 +488,23 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal %w[id slug name avatar_url], user.as_item_json.keys
     assert_equal user.as_json(only: %i[id slug name], methods: %i[avatar_url]), user.as_item_json
+  end
+
+  test "read_target" do
+    user = create(:user)
+    doc = create(:doc)
+    note = create(:note)
+
+    # read doc
+    user.read_doc(doc)
+    user.read_doc(doc)
+    assert_equal true, user.read_doc?(doc)
+    assert_equal [user.id], doc.read_by_user_ids
+
+    # read note
+    user.read_note(note)
+    user.read_note(note)
+    assert_equal true, user.read_note?(note)
+    assert_equal [user.id], note.read_by_user_ids
   end
 end

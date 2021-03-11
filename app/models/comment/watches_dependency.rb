@@ -6,30 +6,31 @@ class Comment
   def commentable_watch_by_user_ids
     # editor will auto watch Doc on create/update
     user_ids = []
-    return user_ids if self.commentable.blank?
+    return user_ids if commentable.blank?
 
-    case self.commentable_type
+    case commentable_type
     when "Doc", "Issue"
-      user_ids = self.commentable.watch_comment_by_user_ids
+      user_ids = commentable.watch_comment_by_user_ids
     else
-      user_ids = self.commentable.watch_comment_by_user_actions.where("action_option is null or action_option != ?", "ignore").pluck(:user_id)
+      user_ids = commentable.watch_comment_by_user_actions.where("action_option is null or action_option != ?", "ignore").pluck(:user_id)
     end
 
     user_ids
   end
 
   private
-    def watch_commentable_on_create
-      return if self.commentable.blank?
-      return if self.user.blank?
 
-      case self.commentable_type
-      when "Doc"
-        self.user.watch_comment_doc(self.commentable)
-      when "Note"
-        self.user.watch_comment_note(self.commentable)
-      when "Issue"
-        self.user.watch_comment_issue(self.commentable)
-      end
+  def watch_commentable_on_create
+    return if commentable.blank?
+    return if user.blank?
+
+    case commentable_type
+    when "Doc"
+      user.watch_comment_doc(commentable)
+    when "Note"
+      user.watch_comment_note(commentable)
+    when "Issue"
+      user.watch_comment_issue(commentable)
     end
+  end
 end

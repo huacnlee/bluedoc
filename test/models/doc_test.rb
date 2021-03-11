@@ -284,7 +284,7 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, repository: repo, body: "Hello world")
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true }, deleted: false }
+      data = {slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: true}, deleted: false}
       assert_equal data, doc.as_indexed_json
     end
 
@@ -292,7 +292,7 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, repository: repo, body: "Hello world", deleted_at: Time.now)
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false }, deleted: true }
+      data = {slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: false}, deleted: true}
       assert_equal data, doc.as_indexed_json
     end
   end
@@ -375,10 +375,10 @@ class DocTest < ActiveSupport::TestCase
     toc = doc.toc
 
     expcted_toc = <<~TOC
-    foo-bar
-      foo-bar-1
-        foo-bar-11
-      foo-bar-2
+      foo-bar
+        foo-bar-1
+          foo-bar-11
+        foo-bar-2
     TOC
 
     assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
@@ -399,9 +399,9 @@ class DocTest < ActiveSupport::TestCase
     end
 
     expcted_toc = <<~TOC
-    foo-bar-1
-      foo-bar-11
-    foo-bar-2
+      foo-bar-1
+        foo-bar-11
+      foo-bar-2
     TOC
     assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
   end
@@ -454,10 +454,8 @@ class DocTest < ActiveSupport::TestCase
     # destroy doc and restore it
     doc2.destroy
     doc2 = Doc.unscoped.find(doc2.id)
-    allow_feature :soft_delete do
-      doc2.restore
-      assert_not_nil doc2.toc
-    end
+    doc2.restore
+    assert_not_nil doc2.toc
   end
 
   test "prev_and_next_of_docs" do
@@ -485,16 +483,14 @@ class DocTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
 
-    allow_feature(:reader_list) do
-      user1.read_doc(doc)
-      assert_equal 1, doc.reads_count
-      user2.read_doc(doc)
-      assert_equal 2, doc.reads_count
+    user1.read_doc(doc)
+    assert_equal 1, doc.reads_count
+    user2.read_doc(doc)
+    assert_equal 2, doc.reads_count
 
-      assert_equal true, user1.read_doc?(doc)
-      assert_equal true, user2.read_doc?(doc)
-      assert_equal [user1, user2].sort, doc.read_by_users.sort
-    end
+    assert_equal true, user1.read_doc?(doc)
+    assert_equal true, user2.read_doc?(doc)
+    assert_equal [user1, user2].sort, doc.read_by_users.sort
   end
 
   test "auto_correct" do

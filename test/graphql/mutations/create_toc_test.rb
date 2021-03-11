@@ -65,10 +65,10 @@ class Mutations::CreateTocTest < BlueDoc::GraphQL::IntegrationTest
 
     # create doc with body, body_sml, format args
     toc4 = perform(repository_id: repository.id,
-      title: "Create a doc with content",
-      format: "sml",
-      body: "Hello world",
-      body_sml: %(["p", {}, "Hello world"]))
+                   title: "Create a doc with content",
+                   format: "sml",
+                   body: "Hello world",
+                   body_sml: %(["p", {}, "Hello world"]))
     assert_equal true, toc4.is_a?(Toc)
     assert_equal "Create a doc with content", toc4.title
     assert_not_nil toc4.url

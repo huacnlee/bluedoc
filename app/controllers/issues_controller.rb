@@ -13,10 +13,10 @@ class IssuesController < Users::ApplicationController
     @repository.ensure_default_issue_labels
 
     @issues = @repository.issues.includes(:user, :last_editor, :assignees)
-    if params[:status] == "closed"
-      @issues = @issues.closed
+    @issues = if params[:status] == "closed"
+      @issues.closed
     else
-      @issues = @issues.open
+      @issues.open
     end
 
     if !params[:label_id].blank?
@@ -93,7 +93,7 @@ class IssuesController < Users::ApplicationController
       end
     end
 
-    render json: { ok: true, assignees: @issue.assignees.collect(&:as_item_json) }
+    render json: {ok: true, assignees: @issue.assignees.collect(&:as_item_json)}
   end
 
   def labels
@@ -107,22 +107,23 @@ class IssuesController < Users::ApplicationController
       end
     end
 
-    render json: { ok: true, labels: @issue.labels.as_json }
+    render json: {ok: true, labels: @issue.labels.as_json}
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
 
-      raise ActiveRecord::RecordNotFound unless @repository.has_issues?
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
 
-    def set_issue
-      @issue = @repository.issues.find_by_iid!(params[:id])
-    end
+    raise ActiveRecord::RecordNotFound unless @repository.has_issues?
+  end
 
-    def issue_params
-      params.require(:issue).permit(:title, :body, :body_sml, :format, :status, assignee_id: [], label_id: [])
-    end
+  def set_issue
+    @issue = @repository.issues.find_by_iid!(params[:id])
+  end
+
+  def issue_params
+    params.require(:issue).permit(:title, :body, :body_sml, :format, :status, assignee_id: [], label_id: [])
+  end
 end

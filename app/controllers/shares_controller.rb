@@ -17,7 +17,8 @@ class SharesController < ApplicationController
   end
 
   private
-    def set_share
-      @share = Share.find_by_slug!(params[:id])
-    end
+
+  def set_share
+    @share = Share.find_by_slug!(params[:id])
+  end
 end

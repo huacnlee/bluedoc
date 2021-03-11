@@ -24,7 +24,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "repositories/DocList" do |props|
       assert_equal @repo.id, props[:repositoryId]
       assert_equal @repo.to_path("/docs/new"), props[:newDocURL]
-      assert_equal({ update: false, destroy: false }, props[:abilities])
+      assert_equal({update: false, destroy: false}, props[:abilities])
     end
 
     # with anonymous disable
@@ -55,7 +55,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "repositories/DocList" do |props|
       assert_equal @private_repo.id, props[:repositoryId]
       assert_equal @private_repo.to_path("/docs/new"), props[:newDocURL]
-      assert_equal({ update: false, destroy: false }, props[:abilities])
+      assert_equal({update: false, destroy: false}, props[:abilities])
     end
 
     sign_in_role :editor, group: @group
@@ -64,12 +64,12 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "repositories/DocList" do |props|
       assert_equal @private_repo.id, props[:repositoryId]
       assert_equal @private_repo.to_path("/docs/new"), props[:newDocURL]
-      assert_equal({ update: true, destroy: true }, props[:abilities])
+      assert_equal({update: true, destroy: true}, props[:abilities])
     end
   end
 
   test "GET /:user/:repo/docs/search" do
-    get @repo.to_path("/docs/search"), params: { q: "test" }
+    get @repo.to_path("/docs/search"), params: {q: "test"}
     assert_equal 200, response.status
     assert_select ".reponav-item.selected" do
       assert_select "[href=?]", @repo.to_path("/docs/search")
@@ -78,15 +78,15 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get @private_repo.to_path("/docs/search")
     assert_redirected_to @private_repo.to_path("/docs/list")
 
-    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    get @private_repo.to_path("/docs/search"), params: {q: "test"}
     assert_equal 403, response.status
 
     sign_in @user
-    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    get @private_repo.to_path("/docs/search"), params: {q: "test"}
     assert_equal 403, response.status
 
     sign_in_role :reader, group: @group
-    get @private_repo.to_path("/docs/search"), params: { q: "test" }
+    get @private_repo.to_path("/docs/search"), params: {q: "test"}
     assert_equal 200, response.status
   end
 
@@ -115,7 +115,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     # with slug param
     assert_changes -> { @repo.docs.count }, 1 do
-      get @repo.to_path("/docs/new"), params: { slug: "hello-world" }
+      get @repo.to_path("/docs/new"), params: {slug: "hello-world"}
     end
     doc = @repo.docs.last
     assert_equal "hello-world", doc.slug
@@ -124,13 +124,13 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     # with same slug
     assert_no_changes -> { @repo.docs } do
-      get @repo.to_path("/docs/new"), params: { slug: "hello-world" }
+      get @repo.to_path("/docs/new"), params: {slug: "hello-world"}
     end
     assert_redirected_to doc.to_path
 
     # with format param
     assert_changes -> { @repo.docs.count }, 1 do
-      get @repo.to_path("/docs/new"), params: { slug: "hello-world1", format: "markdown" }
+      get @repo.to_path("/docs/new"), params: {slug: "hello-world1", format: "markdown"}
     end
     doc = @repo.reload.docs.last
     assert_equal "hello-world1", doc.slug
@@ -148,17 +148,16 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     # JiraService.any_instance.stubs(:extract_jira_keys).with(doc).returns(issue_keys)
     get doc.to_path
     assert_equal 200, response.status
-    assert_match /#{doc.title}/, response.body
+    assert_match(/#{doc.title}/, response.body)
     assert_select ".markdown-body"
     assert_select ".label.label-private", 0
     assert_select "a.group-name" do
       assert_select "[href=?]", @group.to_path
     end
 
-
     # jira issue keys
     assert_react_component "services/jira/Issues" do |props|
-      assert_equal jira_issues_user_repository_services_path(@group, @repo, keys:  ["PP-1"]), props[:fetchUrl]
+      assert_equal jira_issues_user_repository_services_path(@group, @repo, keys: ["PP-1"]), props[:fetchUrl]
     end
 
     # reactions
@@ -210,14 +209,9 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".doc-share-button-box", 0
 
     user = sign_in_role :editor, group: @group
-    allow_feature(:reader_list) do
-      get doc.to_path
-    end
+    get doc.to_path
     assert_equal 200, response.status
-
-    allow_feature(:reader_list) do
-      assert_equal true, user.read_doc?(doc)
-    end
+    assert_equal true, user.read_doc?(doc)
 
     assert_select "details.doc-share-button-box" do
       # assert_select "summary .text", text: "Share"
@@ -368,8 +362,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_react_component "toc-tree/index" do |props|
       assert_equal "side", props[:type]
       assert_not_nil props[:tocs]
-      assert_equal({ id: @repo.id, name: @repo.name, path: @repo.to_path, has_toc: @repo.has_toc? }, props[:repository])
-      assert_equal({ name: @repo.user.name, path: @repo.user.to_path }, props[:user])
+      assert_equal({id: @repo.id, name: @repo.name, path: @repo.to_path, has_toc: @repo.has_toc?}, props[:repository])
+      assert_equal({name: @repo.user.name, path: @repo.user.to_path}, props[:user])
       assert_equal doc.id, props[:currentDocId]
       assert_equal false, props[:abilities][:update]
     end
@@ -388,7 +382,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     get doc.to_path
     assert_equal 200, response.status
     assert_react_component "toc-tree/index" do |props|
-      assert_equal({ id: repo.id, name: repo.name, path: repo.to_path, has_toc: repo.has_toc? }, props[:repository])
+      assert_equal({id: repo.id, name: repo.name, path: repo.to_path, has_toc: repo.has_toc?}, props[:repository])
     end
   end
 
@@ -417,26 +411,26 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_require_user do
-      put doc.to_path, params: { doc: doc_params }
+      put doc.to_path, params: {doc: doc_params}
     end
 
     sign_in @user
-    put doc.to_path, params: { doc: doc_params }
+    put doc.to_path, params: {doc: doc_params}
     assert_equal 403, response.status
 
     sign_in_role :reader, group: @group
-    put doc.to_path, params: { doc: doc_params }
+    put doc.to_path, params: {doc: doc_params}
     assert_equal 403, response.status
 
     # should not unlock with json update
     user = sign_in_role :editor, group: @group
     doc.lock!(user)
-    put doc.to_path, params: { doc: doc_params, format: :json }
+    put doc.to_path, params: {doc: doc_params, format: :json}
     doc.reload
     assert_equal true, doc.locked?
 
     user = sign_in_role :editor, group: @group
-    put doc.to_path, params: { doc: doc_params }
+    put doc.to_path, params: {doc: doc_params}
     assert_redirected_to @repo.to_path("/#{doc_params[:slug]}")
     doc.reload
     assert_equal false, doc.locked?
@@ -453,14 +447,14 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal user.id, doc.last_editor_id
 
     # shoud save slug, and validation
-    put doc.to_path, params: { doc: { slug: "" }, format: :json }
+    put doc.to_path, params: {doc: {slug: ""}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal false, res["ok"]
     assert_equal true, res["messages"].is_a?(Array)
     assert_equal true, res["messages"].length > 0
 
-    put doc.to_path, params: { doc: { slug: "Hello world" }, format: :json }
+    put doc.to_path, params: {doc: {slug: "Hello world"}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal true, res["ok"]
@@ -485,7 +479,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
       body_sml: "Bla bla",
       format: "sml"
     }
-    put doc.to_path, params: { doc: doc_params }
+    put doc.to_path, params: {doc: doc_params}
     assert_equal 200, response.status
     assert_select "form[action=?]", doc_path
     assert_select "details.doc-validation-error" do
@@ -493,7 +487,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     end
 
     doc_params[:slug] = old_doc_slug
-    put doc.to_path, params: { doc: doc_params }
+    put doc.to_path, params: {doc: doc_params}
     assert_redirected_to doc.to_path
 
     doc.reload
@@ -599,7 +593,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#previus-version-content", html: previous_version.body_html
 
     # paginate with remote: true
-    get doc.to_path("/versions"), xhr: true, params: { page: 2 }
+    get doc.to_path("/versions"), xhr: true, params: {page: 2}
     assert_equal 200, response.status
     assert_match %($(".version-item-" + selectedVersionId).addClass("selected");), response.body
   end
@@ -612,15 +606,15 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "World hello", doc.body_plain
 
     sign_in @user
-    patch doc.to_path("/revert"), params: { version_id: version.id }
+    patch doc.to_path("/revert"), params: {version_id: version.id}
     assert_equal 403, response.status
 
     sign_in_role :reader, group: @group
-    patch doc.to_path("/revert"), params: { version_id: version.id }
+    patch doc.to_path("/revert"), params: {version_id: version.id}
     assert_equal 403, response.status
 
     u = sign_in_role :editor, group: @group
-    patch doc.to_path("/revert"), params: { version_id: version.id }
+    patch doc.to_path("/revert"), params: {version_id: version.id}
     assert_redirected_to doc.to_path
     doc = Doc.find_by_id(doc.id)
     assert_equal "Hello world", doc.body_plain
@@ -629,9 +623,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
   test "PATCH /:user/:repo/:slug/abort_draft" do
     doc = create(:doc, repository: @repo,
-      body: "Hello world", draft_body: "Hello world [draft]",
-      body_sml: %(["p", "Hello world"]), draft_body_sml: %(["p", "Hello world [draft]"]))
-
+                       body: "Hello world", draft_body: "Hello world [draft]",
+                       body_sml: %(["p", "Hello world"]), draft_body_sml: %(["p", "Hello world [draft]"]))
 
     sign_in @user
     patch doc.to_path("/abort_draft")
@@ -660,23 +653,23 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
 
     doc = create(:doc, repository: @repo, body: "Hello world")
 
-    post doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post doc.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 401, response.status
 
     sign_in @user
-    post doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post doc.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.doc-#{doc.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
+    assert_match(/.doc-#{doc.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-undo-label"\)/, response.body)
     assert_equal true, @user.star_doc?(doc)
 
-    post private_doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post private_doc.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 403, response.status
 
-    delete doc.to_path("/action"), params: { action_type: "star" }, xhr: true
+    delete doc.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.doc-#{doc.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-label\"\)/, response.body
+    assert_match(/.doc-#{doc.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-label"\)/, response.body)
     assert_equal false, @user.star_doc?(doc)
   end
 
@@ -697,7 +690,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     assert_select "script#edit-doc-script-lock", 0
-    assert_match /in editing this document now/, response.body
+    assert_match(/in editing this document now/, response.body)
     assert_select ".edit-doc-lock-overlay" do
       assert_select "form[action=?]", doc.to_path("/lock")
       assert_select ".user-name", text: user.name
@@ -724,7 +717,7 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal u, doc.locked_user
 
     u1 = sign_in_role :editor, group: @group
-    post doc.to_path("/lock"), params: { format: :js }, xhr: true
+    post doc.to_path("/lock"), params: {format: :js}, xhr: true
     assert_equal 200, response.status
     assert_equal u1, doc.locked_user
 
@@ -751,8 +744,8 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     post doc.to_path("/share"), xhr: true
     assert_equal 200, response.status
     assert_not_nil doc.share
-    assert_match /doc-share-button-box/, response.body
-    assert_match /open/, response.body
+    assert_match(/doc-share-button-box/, response.body)
+    assert_match(/open/, response.body)
     assert_match %($(".doc-share-button-box").replaceWith), response.body
 
     # Unshare
@@ -760,5 +753,154 @@ class DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     doc.reload
     assert_nil doc.share
+  end
+
+  test "GET /:user/:repo/:slug with readers" do
+    doc = create(:doc)
+
+    user = create(:user)
+    users = create_list(:user, 8)
+
+    users.map { |u| u.read_doc(doc) }
+
+    sign_in user
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-readers" do
+      assert_select "a.readers-link .avatar", 5
+    end
+  end
+
+  test "GET /:user/:repo/:slug/readers" do
+    doc = create(:doc)
+    users = create_list(:user, 8)
+
+    users.map { |u| u.read_doc(doc) }
+
+    get doc.to_path("/readers"), xhr: true
+    assert_equal 200, response.status
+
+    assert_match %(document.querySelector(".doc-readers").outerHTML = ), response.body
+  end
+
+  test "GET /:user/:repo/:slug with PDF" do
+    doc = create(:doc, repository: @repo)
+
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box", 0
+
+    sign_in_role :editor, group: @group
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".description", text: "Click button to genrate PDF file for this document."
+      assert_select ".btn-generate-pdf" do
+        assert_select "[href=?]", doc.to_path("/pdf?force=1")
+        assert_select "[data-method=?]", "post"
+        assert_select "[data-remote=?]", "true"
+      end
+    end
+
+    # pdf in running
+    doc.set_export_status(:pdf, "running")
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".pdf-export-running"
+      assert_select ".btn-generate-pdf", 0
+      assert_select ".pdf-export-retry-message" do
+        assert_select "a", text: "retry" do
+          assert_select "[href=?]", doc.to_path("/pdf?force=1")
+          assert_select "[data-method=?]", "post"
+          assert_select "[data-remote=?]", "true"
+        end
+      end
+    end
+
+    # pdf has done
+    doc.set_export_status(:pdf, "done")
+    doc.pdf.attach(io: load_file("blank.png"), filename: "foobar.pdf")
+    get doc.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".description", text: "PDF of this document page has been generated."
+      assert_select ".btn-download-pdf" do
+        assert_select "[href=?]", doc.export_url(:pdf)
+      end
+      assert_select ".btn-regenerate-pdf" do
+        assert_select "[href=?]", doc.to_path("/pdf?force=1")
+        assert_select "[data-method=?]", "post"
+        assert_select "[data-remote=?]", "true"
+      end
+    end
+  end
+
+  test "POST /:user/:repo/:slug/pdf" do
+    group = create(:group)
+    repo = create(:repository, user: group)
+    doc = create(:doc, repository: repo)
+
+    def assert_has_pdf_js(response)
+      assert_match %(var openStatus = $(".doc-export-pdf-box details[open]");), response.body
+      assert_match %($(".doc-export-pdf-box").replaceWith(html);), response.body
+      assert_match %($(".doc-export-pdf-box details").attr("open", "");), response.body
+    end
+
+    post doc.to_path("/pdf"), xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+
+    post doc.to_path("/pdf"), xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :reader, group: group
+    post doc.to_path("/pdf"), xhr: true
+    assert_equal 403, response.status
+
+    sign_in_role :editor, group: group
+    assert_no_enqueued_jobs only: PDFExportJob do
+      post doc.to_path("/pdf"), xhr: true
+    end
+
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-generate-pdf), response.body
+
+    # generate
+    assert_enqueued_with job: PDFExportJob do
+      post doc.to_path("/pdf?force=1"), xhr: true
+    end
+    assert_equal 200, response.status
+    assert_equal "running", doc.export_pdf_status.value
+    assert_has_pdf_js response
+    assert_match %(pdf-export-running), response.body
+    assert_match %(pdf-export-retry-message), response.body
+
+    # check status
+    post doc.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_equal "", response.body.strip
+
+    doc.set_export_status(:pdf, "done")
+    post doc.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-generate-pdf), response.body
+
+    doc.pdf.attach(io: load_file("blank.png"), filename: "blank.pdf")
+    post doc.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
+
+    post doc.to_path("/pdf"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
   end
 end

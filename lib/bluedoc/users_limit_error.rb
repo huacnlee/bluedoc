@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module BlueDoc
-  class UsersLimitError < Exception
+  class UsersLimitError < RuntimeError
   end
 end

@@ -22,7 +22,7 @@ module BlueDoc
       # Generate random HEX color
       # for example: #EA09DD
       def random_color
-        "##{Random.new.bytes(3).unpack("H*")[0]}"
+        "##{Random.new.bytes(3).unpack1("H*")}"
       end
 
       # Valid hex color
@@ -35,7 +35,7 @@ module BlueDoc
       def humanize_name(slug)
         return nil if slug.nil?
 
-        slug.split(/[\-\.\s]/).map { |s| s.humanize }.join(" ")
+        slug.split(/[\-.\s]/).map { |s| s.humanize }.join(" ")
       end
     end
   end

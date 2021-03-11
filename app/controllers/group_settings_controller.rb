@@ -28,7 +28,8 @@ class GroupSettingsController < Groups::ApplicationController
   end
 
   private
-    def group_params
-      params.require(:group).permit(:name, :description, :location, :url, :avatar, :slug)
-    end
+
+  def group_params
+    params.require(:group).permit(:name, :description, :location, :url, :avatar, :slug)
+  end
 end

@@ -7,8 +7,8 @@ module BlueDoc
     depends_on :mention_fragments
 
     def self.constantizePilelines(*pipelines)
-      pipelineClasses = pipelines.map { |name| "BlueDoc::Pipeline::#{name.to_s.camelize}Filter".constantize }
-      ::HTML::Pipeline.new(pipelineClasses)
+      pipeline_classes = pipelines.map { |name| "BlueDoc::Pipeline::#{name.to_s.camelize}Filter".constantize }
+      ::HTML::Pipeline.new(pipeline_classes)
     end
 
     MarkdownPileline = constantizePilelines(:normalize_mention, :markdown, :mention, :plantuml, :mathjax, :pdf_preview, :auto_correct)
@@ -33,13 +33,13 @@ module BlueDoc
       def render_without_cache(body, opts = {})
         opts[:format] ||= "html"
 
-        case opts[:format].to_s
+        result = case opts[:format].to_s
         when "sml"
-          result = SmlPileline.call(body)[:output].inner_html
+          SmlPileline.call(body)[:output].inner_html
         when "markdown"
-          result = MarkdownPileline.call(body)[:output].inner_html
+          MarkdownPileline.call(body)[:output].inner_html
         else
-          result = body
+          body
         end
 
         result = public_attachment(result) if opts[:public]
@@ -47,9 +47,10 @@ module BlueDoc
       end
 
       private
-        def public_attachment(body)
-          PublicAttachmentPipeline.call(body)[:output].inner_html
-        end
+
+      def public_attachment(body)
+        PublicAttachmentPipeline.call(body)[:output].inner_html
+      end
     end
   end
 end

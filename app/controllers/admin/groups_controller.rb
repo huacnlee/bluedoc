@@ -45,21 +45,18 @@ class Admin::GroupsController < Admin::ApplicationController
     redirect_to admin_groups_path(q: @group.slug), notice: t(".Group was successfully deleted")
   end
 
-  # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @group.restore
     redirect_to admin_groups_path(q: @group.slug), notice: t(".Group was successfully restored")
   end
-  # PRO-end
 
   private
-    def set_group
-      @group = Group.unscoped.find(params[:id])
-    end
 
-    def group_params
-      params.require(:group).permit!
-    end
+  def set_group
+    @group = Group.unscoped.find(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit!
+  end
 end

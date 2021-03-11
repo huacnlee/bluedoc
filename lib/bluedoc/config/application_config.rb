@@ -21,15 +21,15 @@ module BlueDoc
         fetch_config(:action_mailer,
           smtp_settings: Setting.mailer_options.deep_symbolize_keys,
           default_url_options: {
-            host: Setting.host,
-          }
-        )
+            host: Setting.host
+          })
       end
 
       private
-        def fetch_config(name, new_config)
-          @base_config.send(name).merge(new_config)
-        end
+
+      def fetch_config(name, new_config)
+        @base_config.send(name).merge(new_config)
+      end
     end
   end
 end

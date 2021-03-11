@@ -2,7 +2,7 @@
 
 class Issue
   # has_and_belongs_to_many :assignees, join_table: :users, class_name: "User", foreign_key: :assignee_ids
-  scope :with_labels, -> (ids) do
+  scope :with_labels, ->(ids) do
     ids = [ids] unless ids.is_a?(Array)
     ids = ids.collect { |id| id.to_i }
     ids.any? ? where("ARRAY[?] <@ label_ids", ids) : all
@@ -11,14 +11,14 @@ class Issue
   # Replace issue assignees
   def update_labels(label_ids)
     self.label_ids = label_ids.uniq
-    self.save
+    save
   end
 
   def labels
     return @labels if defined? @labels
 
-    records = self.repository.issue_labels.where(id: self.label_ids)
-    records.sort_by { |record| self.label_ids.index(record.id) }
+    records = repository.issue_labels.where(id: label_ids)
+    records.sort_by { |record| label_ids.index(record.id) }
   end
 
   attr_writer :labels

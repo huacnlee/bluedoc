@@ -41,7 +41,7 @@ auth_info = auth_session["info"]
       <%= f.submit t(".Sign in"), class: "btn btn-primary btn-full" %>
     </div>
 
-    <% if allow_feature?(:ldap_auth) && Setting.ldap_enable? %>
+    <% if Setting.ldap_enable? %>
     <div class="pt-3">
       <%= link_to Setting.ldap_title, new_ldap_user_session_path, class: "btn btn-full btn-ldap-auth" %>
     </div>

@@ -40,7 +40,7 @@ class Admin::CommentsControllerTest < ActionDispatch::IntegrationTest
     comment_params = {
       body: "New body"
     }
-    patch admin_comment_path(@comment.id), params: { comment: comment_params }
+    patch admin_comment_path(@comment.id), params: {comment: comment_params}
     assert_redirected_to admin_comments_path
 
     @comment.reload

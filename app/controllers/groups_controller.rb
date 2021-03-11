@@ -29,11 +29,12 @@ class GroupsController < Groups::ApplicationController
   end
 
   private
-    def set_group
-      @group = Group.find_by_slug!(params[:id])
-    end
 
-    def group_params
-      params.require(:group).permit(:slug, :name, :description)
-    end
+  def set_group
+    @group = Group.find_by_slug!(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit(:slug, :name, :description)
+  end
 end

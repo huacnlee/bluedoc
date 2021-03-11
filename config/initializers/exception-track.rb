@@ -9,12 +9,12 @@ ExceptionTrack.configure do
 end
 
 ExceptionNotification.configure do |config|
-  config.ignored_exceptions += %w(ActionView::TemplateError
-                                  ActionController::InvalidAuthenticityToken
-                                  ActionController::BadRequest
-                                  ActionView::MissingTemplate
-                                  ActionController::UrlGenerationError
-                                  ActionController::UnknownFormat
-                                  ActiveRecord::RecordInvalid
-                                  ActionController::InvalidCrossOriginRequest)
+  config.ignored_exceptions += %w[ActionView::TemplateError
+    ActionController::InvalidAuthenticityToken
+    ActionController::BadRequest
+    ActionView::MissingTemplate
+    ActionController::UrlGenerationError
+    ActionController::UnknownFormat
+    ActiveRecord::RecordInvalid
+    ActionController::InvalidCrossOriginRequest]
 end

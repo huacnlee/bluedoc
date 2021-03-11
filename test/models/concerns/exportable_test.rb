@@ -12,16 +12,10 @@ class ExportableTest < ActiveSupport::TestCase
     doc.title = "Hello/world"
     assert_equal "Hello-world.pdf", doc.export_filename(:pdf)
 
-    assert_check_feature do
+    assert_enqueued_with job: PDFExportJob do
       doc.export(:pdf)
     end
-
-    allow_feature(:export_pdf) do
-      assert_enqueued_with job: PDFExportJob do
-        doc.export(:pdf)
-      end
-      assert_equal "running", doc.export_pdf_status.value
-    end
+    assert_equal "running", doc.export_pdf_status.value
 
     doc.update_export!(:pdf, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{doc.pdf.blob.key}", doc.export_url(:pdf)
@@ -35,16 +29,10 @@ class ExportableTest < ActiveSupport::TestCase
     note.title = "Hello/world"
     assert_equal "Hello-world.pdf", note.export_filename(:pdf)
 
-    assert_check_feature do
+    assert_enqueued_with job: PDFExportJob do
       note.export(:pdf)
     end
-
-    allow_feature(:export_pdf) do
-      assert_enqueued_with job: PDFExportJob do
-        note.export(:pdf)
-      end
-      assert_equal "running", note.export_pdf_status.value
-    end
+    assert_equal "running", note.export_pdf_status.value
 
     note.update_export!(:pdf, load_file("blank.png"))
     assert_equal "#{Setting.host}/uploads/#{note.pdf.blob.key}", note.export_url(:pdf)
@@ -56,14 +44,8 @@ class ExportableTest < ActiveSupport::TestCase
     assert_nil repo.export_url(:pdf)
     assert_equal "测试-Repo.pdf", repo.export_filename(:pdf)
 
-    assert_check_feature do
+    assert_enqueued_with job: PDFExportJob do
       repo.export(:pdf)
-    end
-
-    allow_feature(:export_pdf) do
-      assert_enqueued_with job: PDFExportJob do
-        repo.export(:pdf)
-      end
     end
     assert_equal "running", repo.export_pdf_status.value
     assert_equal "running", repo.export_status(:pdf).value
@@ -78,14 +60,8 @@ class ExportableTest < ActiveSupport::TestCase
     assert_nil repo.export_url(:archive)
     assert_equal "测试-Repo.zip", repo.export_filename(:archive)
 
-    assert_check_feature do
+    assert_enqueued_with job: ArchiveExportJob do
       repo.export(:archive)
-    end
-
-    allow_feature(:export_archive) do
-      assert_enqueued_with job: ArchiveExportJob do
-        repo.export(:archive)
-      end
     end
     assert_equal "running", repo.export_archive_status.value
     assert_equal "running", repo.export_status(:archive).value

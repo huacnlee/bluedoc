@@ -1,7 +1,7 @@
 class AddUkForTocsDocId < ActiveRecord::Migration[6.0]
   def up
     execute <<~SQL
-    DELETE FROM tocs u WHERE u.id NOT IN (SELECT MIN(id) FROM tocs GROUP BY repository_id, doc_id)
+      DELETE FROM tocs u WHERE u.id NOT IN (SELECT MIN(id) FROM tocs GROUP BY repository_id, doc_id)
     SQL
 
     remove_index :tocs, [:repository_id, :doc_id]

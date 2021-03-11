@@ -42,10 +42,10 @@ module Queries
 
       @docs = @repository.docs.includes(:last_editor, :share)
 
-      if params[:sort] == "created"
-        @docs = @docs.order("id asc")
+      @docs = if params[:sort] == "created"
+        @docs.order("id asc")
       else
-        @docs = @docs.recent
+        @docs.recent
       end
 
       @docs.page(params[:page]).per(params[:per])

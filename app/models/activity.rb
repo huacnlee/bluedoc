@@ -34,7 +34,7 @@ class Activity < ApplicationRecord
       actor_id: actor_id,
       meta: meta&.deep_symbolize_keys,
       created_at: Time.now,
-      updated_at: Time.now,
+      updated_at: Time.now
     }
 
     fill_depend_id_for_target(activity_params)
@@ -52,8 +52,8 @@ class Activity < ApplicationRecord
 
     records = []
     activity_params.delete(:target)
-    user_ids.each do |_user_id|
-      records << activity_params.merge(user_id: _user_id)
+    user_ids.each do |uid|
+      records << activity_params.merge(user_id: uid)
     end
 
     # create Activity for receivers, for dashboard timeline

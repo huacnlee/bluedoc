@@ -4,8 +4,8 @@ class User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
-         :rememberable, :validatable, :confirmable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab ldap]
+    :rememberable, :validatable, :confirmable,
+    :omniauthable, omniauth_providers: %i[google_oauth2 github gitlab ldap]
 
   attr_accessor :omniauth_provider, :omniauth_uid
 
@@ -18,7 +18,7 @@ class User
   # Validate email suffix
   validate do |user|
     if user.user?
-      self.errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(self.email)
+      errors.add(:email, t(".is invalid email suffix")) unless Setting.valid_user_email?(email)
     end
   end
 
@@ -30,20 +30,20 @@ class User
   end
 
   def bind_omniauth_on_create
-    if self.omniauth_provider
-      Authorization.find_or_create_by!(provider: self.omniauth_provider, uid: self.omniauth_uid, user_id: self.id)
+    if omniauth_provider
+      Authorization.find_or_create_by!(provider: omniauth_provider, uid: omniauth_uid, user_id: id)
     end
   end
 
   # Update user password
   def update_password(params)
     %i[current_password password password_confirmation].each do |key|
-      self.errors.add(key, :blank) if params[key].blank?
+      errors.add(key, :blank) if params[key].blank?
     end
 
-    return false if self.errors.size > 0
+    return false if errors.size > 0
 
-    self.update_with_password(params)
+    update_with_password(params)
   end
 
   def confirmation_required?
@@ -53,12 +53,12 @@ class User
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     email = conditions.delete(:email)
-    where(conditions.to_h).where(["(slug ilike :value OR email ilike :value)", { value: email }]).first
+    where(conditions.to_h).where(["(slug ilike :value OR email ilike :value)", {value: email}]).first
   end
 
   # Allow empty password, when use LDAP or encrypted_password was empty
   def password_required?
-    return false if allow_feature?(:ldap_auth) && self.omniauth_provider == "ldap"
+    return false if omniauth_provider == "ldap"
 
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
@@ -68,8 +68,8 @@ class User
     user = Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
     return user if user
 
-    if allow_feature?(:ldap_auth) && omniauth_auth["provider"] == "ldap"
-      user = self.create(
+    if omniauth_auth["provider"] == "ldap"
+      user = create(
         omniauth_provider: omniauth_auth["provider"],
         omniauth_uid: omniauth_auth["uid"],
         name: omniauth_auth.dig("info", "name"),

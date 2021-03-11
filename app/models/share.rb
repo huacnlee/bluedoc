@@ -17,28 +17,28 @@ class Share < ApplicationRecord
       share = where(shareable: shareable).take
       return share if share
 
-      share = create(shareable: shareable, user: user)
-      share
+      create(shareable: shareable, user: user)
     end
   end
 
   def to_path
-    "/shares/#{self.slug}"
+    "/shares/#{slug}"
   end
 
   def to_url
-    "#{Setting.host}#{self.to_path}"
+    "#{Setting.host}#{to_path}"
   end
 
   private
-    def generate_unique_slug
-      self.slug ||= SecureRandom.base58
-    end
 
-    def save_repository_id_on_create
-      case self.shareable_type
-      when "Doc"
-        self.repository_id = self.shareable&.repository_id
-      end
+  def generate_unique_slug
+    self.slug ||= SecureRandom.base58
+  end
+
+  def save_repository_id_on_create
+    case shareable_type
+    when "Doc"
+      self.repository_id = shareable&.repository_id
     end
+  end
 end

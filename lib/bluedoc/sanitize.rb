@@ -6,7 +6,7 @@ module BlueDoc
   module Sanitize
     # https://github.com/rgrove/sanitize#example-transformer-to-whitelist-youtube-video-embeds
     EMBED_VIDEO_TRANSFORMER = lambda do |env|
-      node      = env[:node]
+      node = env[:node]
       node_name = env[:node_name]
 
       # Don't continue if this node is already whitelisted or is not an element.
@@ -31,7 +31,7 @@ module BlueDoc
       end
 
       # Youku
-      if node["src"].match?(%r{\A(?:http[s]{0,1}?:)?//player\.youku\.com/embed/})
+      if node["src"].match?(%r{\A(?:https{0,1}?:)?//player\.youku\.com/embed/})
         valid_video_url = true
       end
 
@@ -48,7 +48,7 @@ module BlueDoc
       # Now that we're sure that this is a valid YouTube embed and that there are
       # no unwanted elements or attributes hidden inside it, we can tell Sanitize
       # to whitelist the current node.
-      { node_whitelist: [node] }
+      {node_whitelist: [node]}
     end
 
     DEFAULT = ::Sanitize::Config.freeze_config(
@@ -58,23 +58,22 @@ module BlueDoc
         table tr th td tbody thead tfoot video source
       ],
       attributes: ::Sanitize::Config.merge({},
-       {
-         # Here must use :all not "all"
-         :all  => ["class", "nid", "id", "lang", "style", "title", "width", "height", :data],
-         "a"   => ["href", "rel", "target"],
-         "img" => ["alt", "src"],
-         "source" => ["src", "type"],
-         "video" => ["controls", "preload"],
-         "embed" => ["src", "width", "height", "title"],
-       }
-      ),
+        {
+          # Here must use :all not "all"
+          :all => ["class", "nid", "id", "lang", "style", "title", "width", "height", :data],
+          "a" => ["href", "rel", "target"],
+          "img" => ["alt", "src"],
+          "source" => ["src", "type"],
+          "video" => ["controls", "preload"],
+          "embed" => ["src", "width", "height", "title"]
+        }),
       css: {
-        properties: %w[width height text-align text-indent padding-left color background background-color],
+        properties: %w[width height text-align text-indent padding-left color background background-color]
       },
       protocols: {
-        "a" => { "href" => ["http", "https", "mailto", :relative] },
-        "img" => { "src" => ["http", "https", :relative] },
-        "source" => { "src" => ["http", "https", :relative] }
+        "a" => {"href" => ["http", "https", "mailto", :relative]},
+        "img" => {"src" => ["http", "https", :relative]},
+        "source" => {"src" => ["http", "https", :relative]}
       },
       transformers: [EMBED_VIDEO_TRANSFORMER]
     )

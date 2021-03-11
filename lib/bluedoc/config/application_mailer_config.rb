@@ -16,7 +16,7 @@ module BlueDoc
 
       def default_url_options
         {
-          host: Setting.host,
+          host: Setting.host
         }
       end
 

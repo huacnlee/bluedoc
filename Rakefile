@@ -11,7 +11,7 @@ namespace :elasticsearch do
   desc "Remove all exists indexes in ElasticSearch"
   task clear: :environment do
     puts "Remove elasticsearch..."
-    %w(Doc Repository Group User).each do |model_name|
+    %w[Doc Repository Group User].each do |model_name|
       model_name.constantize
     end
     puts Elasticsearch::Model::Registry.all.collect(&:index_name).join(", ").indent(4)

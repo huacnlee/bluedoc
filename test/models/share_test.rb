@@ -31,8 +31,8 @@ class ShareTest < ActiveSupport::TestCase
     repo = create(:repository)
     doc0 = create(:doc, repository: repo)
     doc1 = create(:doc, repository: repo)
-    share0 = create(:share,  shareable: doc0, repository_id: repo.id)
-    share1 = create(:share,  shareable: doc1, repository_id: repo.id)
+    share0 = create(:share, shareable: doc0, repository_id: repo.id)
+    share1 = create(:share, shareable: doc1, repository_id: repo.id)
 
     assert_equal 2, Share.where(repository_id: repo.id).count
     repo.destroy

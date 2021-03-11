@@ -10,7 +10,9 @@ class UsersHelperTest < ActionView::TestCase
     @user = create(:user)
   end
 
-  def current_user; @user; end
+  def current_user
+    @user
+  end
 
   test "user_slug_tag" do
     assert_equal "", user_slug_tag(nil)

@@ -4,8 +4,8 @@ class RepositoriesController < Users::ApplicationController
   before_action :authenticate_anonymous!
   before_action :authenticate_user!, only: %i[new import edit create update destroy action]
 
-  before_action :set_user, only: %i(show edit update destroy docs search action)
-  before_action :set_repository, only: %i(show edit update destroy docs search action)
+  before_action :set_user, only: %i[show edit update destroy docs search action]
+  before_action :set_repository, only: %i[show edit update destroy docs search action]
 
   def index
     authorize! :read, @user
@@ -53,11 +53,11 @@ class RepositoriesController < Users::ApplicationController
   def show
     authorize! :read, @repository
 
-    unless @repository.has_toc?
+    if @repository.has_toc?
+      @tocs = graphql_query(:repositoryTocs, "repositoryId: #{@repository.id}", "id, docId, title, url, parentId, depth")
+    else
       docs
       render "docs"
-    else
-      @tocs = graphql_query(:repositoryTocs, "repositoryId: #{@repository.id}", "id, docId, title, url, parentId, depth")
     end
   end
 
@@ -93,13 +93,14 @@ class RepositoriesController < Users::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def repository_params
-      params.require(:repository).permit(:user_id, :slug, :name, :description, :privacy, :gitbook_url, :import_archive)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def repository_params
+    params.require(:repository).permit(:user_id, :slug, :name, :description, :privacy, :gitbook_url, :import_archive)
+  end
 end

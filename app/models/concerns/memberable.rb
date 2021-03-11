@@ -15,7 +15,7 @@ module Memberable
 
     # PRO-begin
     set_callback :restore, :before do
-      self.restore_dependents(:members)
+      restore_dependents(:members)
     end
     # PRO-end
   end
@@ -23,37 +23,38 @@ module Memberable
   def user_role(user)
     return nil if user.blank?
     return nil unless user.user?
-    self.members.where(user: user).first&.role&.to_sym
+    members.where(user: user).first&.role&.to_sym
   end
 
   def has_member?(user)
-    self.members.where(user: user).any?
+    members.where(user: user).any?
   end
 
   def member_user_ids
-    self.members.pluck(:user_id)
+    members.pluck(:user_id)
   end
 
   def add_member(user, role)
     return false if user.blank?
     return false unless user.user?
-    self.members.create!(user: user, subject: self, role: role)
+    members.create!(user: user, subject: self, role: role)
   rescue ActiveRecord::RecordNotUnique
     update_member(user, role)
-    self.members.where(user: user, subject: self).first
+    members.where(user: user, subject: self).first
   end
 
   def update_member(user, role)
-    self.members.unscoped.where(user: user, subject: self).update_all(role: role, deleted_at: nil)
+    members.unscoped.where(user: user, subject: self).update_all(role: role, deleted_at: nil)
   end
 
   def remove_member(user)
-    self.members.where(user: user).destroy_all
+    members.where(user: user).destroy_all
   end
 
   private
-    def add_creator_as_admin!
-      return if Current.user.blank?
-      self.members.create!(user_id: Current.user.id, subject: self, role: :admin)
-    end
+
+  def add_creator_as_admin!
+    return if Current.user.blank?
+    members.create!(user_id: Current.user.id, subject: self, role: :admin)
+  end
 end

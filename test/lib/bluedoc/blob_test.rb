@@ -8,17 +8,17 @@ class BlueDoc::BlobTest < ActiveSupport::TestCase
   end
 
   test "combine_options" do
-    assert_equal({ thumbnail: "36x36^", gravity: "center", extent: "36x36" }, BlueDoc::Blob.combine_options(:tiny))
-    assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BlueDoc::Blob.combine_options(nil))
-    assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BlueDoc::Blob.combine_options(:small))
-    assert_equal({ thumbnail: "96x96^", gravity: "center", extent: "96x96" }, BlueDoc::Blob.combine_options(:medium))
-    assert_equal({ thumbnail: "440x440^", gravity: "center", extent: "440x440" }, BlueDoc::Blob.combine_options(:large))
-    assert_equal({ resize: "1600>" }, BlueDoc::Blob.combine_options(:xlarge))
+    assert_equal({thumbnail: "36x36^", gravity: "center", extent: "36x36"}, BlueDoc::Blob.combine_options(:tiny))
+    assert_equal({thumbnail: "64x64^", gravity: "center", extent: "64x64"}, BlueDoc::Blob.combine_options(nil))
+    assert_equal({thumbnail: "64x64^", gravity: "center", extent: "64x64"}, BlueDoc::Blob.combine_options(:small))
+    assert_equal({thumbnail: "96x96^", gravity: "center", extent: "96x96"}, BlueDoc::Blob.combine_options(:medium))
+    assert_equal({thumbnail: "440x440^", gravity: "center", extent: "440x440"}, BlueDoc::Blob.combine_options(:large))
+    assert_equal({resize: "1600>"}, BlueDoc::Blob.combine_options(:xlarge))
     # support string argument
-    assert_equal({ resize: "1600>" }, BlueDoc::Blob.combine_options("xlarge"))
+    assert_equal({resize: "1600>"}, BlueDoc::Blob.combine_options("xlarge"))
 
     # default use :small
-    assert_equal({ thumbnail: "64x64^", gravity: "center", extent: "64x64" }, BlueDoc::Blob.combine_options("foo"))
+    assert_equal({thumbnail: "64x64^", gravity: "center", extent: "64x64"}, BlueDoc::Blob.combine_options("foo"))
   end
 
   test "process_for_aliyun" do
@@ -47,7 +47,7 @@ class BlueDoc::BlobTest < ActiveSupport::TestCase
 
     assert_changes -> { ActiveStorage::Blob.where(filename: "blank.png").count }, 1 do
       result = BlueDoc::Blob.upload(Rails.root.join("test/factories/blank.png"))
-      assert_match /\/uploads\/(\w+)/, result
+      assert_match(/\/uploads\/(\w+)/, result)
     end
   end
 
@@ -56,9 +56,9 @@ class BlueDoc::BlobTest < ActiveSupport::TestCase
       BlueDoc::Blob.upload("https://images.apple.com/aajajajjajajaj.png")
     end
 
-    assert_changes -> { ActiveStorage::Blob.where(filename: "32.png").count }, 1 do
-      result = BlueDoc::Blob.upload("https://images.apple.com/ac/flags/1/images/us/32.png")
-      assert_match /\/uploads\/(\w+)/, result
+    assert_changes -> { ActiveStorage::Blob.where(filename: "favicon.ico").count }, 1 do
+      result = BlueDoc::Blob.upload("https://www.apple.com/favicon.ico")
+      assert_match(/\/uploads\/(\w+)/, result)
     end
   end
 end

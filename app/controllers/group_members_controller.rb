@@ -8,7 +8,7 @@ class GroupMembersController < Groups::ApplicationController
   def index
     authorize! :read, @group
 
-    @members = @group.members.includes(user: { avatar_attachment: :blob }).order("id asc").page(params[:page]).per(20)
+    @members = @group.members.includes(user: {avatar_attachment: :blob}).order("id asc").page(params[:page]).per(20)
   end
 
   def create
@@ -39,11 +39,12 @@ class GroupMembersController < Groups::ApplicationController
   end
 
   private
-    def member_params
-      params.require(:member).permit(:user_slug, :role)
-    end
 
-    def set_member
-      @member = Member.find(params[:id])
-    end
+  def member_params
+    params.require(:member).permit(:user_slug, :role)
+  end
+
+  def set_member
+    @member = Member.find(params[:id])
+  end
 end

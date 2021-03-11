@@ -10,28 +10,28 @@ module Activities
     end
 
     def star
-      return if self.repository.private?
+      return if repository.private?
 
       # actor followers
-      user_ids = self.actor.follower_ids
+      user_ids = actor.follower_ids
 
-      Activity.track_activity(:star_repo, repository, user_id: user_ids, actor_id: self.actor_id)
+      Activity.track_activity(:star_repo, repository, user_id: user_ids, actor_id: actor_id)
     end
 
     def create
-      return if self.repository.private?
+      return if repository.private?
 
       # actor followers
-      user_ids = self.actor.follower_ids
+      user_ids = actor.follower_ids
 
-      Activity.track_activity(:create_repo, repository, user_id: user_ids, actor_id: self.actor_id)
+      Activity.track_activity(:create_repo, repository, user_id: user_ids, actor_id: actor_id)
     end
 
     def transfer
       # watchers
-      user_ids = self.repository.watch_by_user_ids
+      user_ids = repository.watch_by_user_ids
 
-      Activity.track_activity(:transfer_repo, self.repository, user_id: user_ids, actor_id: self.actor_id)
+      Activity.track_activity(:transfer_repo, repository, user_id: user_ids, actor_id: actor_id)
     end
   end
 end

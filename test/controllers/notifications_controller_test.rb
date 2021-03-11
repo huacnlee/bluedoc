@@ -30,7 +30,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".notification", 2
     assert_select ".menu .menu-item .counter", text: "2"
 
-    get notifications_path, params: { tab: :all }
+    get notifications_path, params: {tab: :all}
     assert_equal 200, response.status
     assert_select ".notifications"
     assert_select ".sub-title", text: "All"
@@ -38,7 +38,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
 
     ids = unread_notes.collect(&:id)
     ids << other_notes.collect(&:id)
-    post read_notifications_path, params: { ids: unread_notes.collect(&:id) }
+    post read_notifications_path, params: {ids: unread_notes.collect(&:id)}
     unread_notes.each do |note|
       note.reload
       assert_not_nil note.read_at

@@ -3,7 +3,7 @@ class CreateIssues < ActiveRecord::Migration[6.0]
     create_table :sequences do |t|
       t.string :target_type, null: false, limit: 20
       t.integer :target_id, null: false
-      t.string :scope, null: false, default: '', limit: 20
+      t.string :scope, null: false, default: "", limit: 20
       t.integer :number, null: false, default: 0
     end
 

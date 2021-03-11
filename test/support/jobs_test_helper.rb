@@ -7,9 +7,11 @@ module JobsTestHelper
     def status
       values[0] || 200
     end
+
     def body
       values[1] || {}
     end
+
     def headers
       values[2] || {}
     end
@@ -19,11 +21,11 @@ module JobsTestHelper
     setup do
       # Capture performed requests
       @performed_requests = []
-      Elasticsearch::Model.client.stubs(:perform_request).with do |_method, _url, _params, _body|
+      Elasticsearch::Model.client.stubs(:perform_request).with do |method, url, params, body|
         # puts "request:"
-        # puts format_req(_method, _url, _body, params: _params)
+        # puts format_req(method, url, body, params: params)
 
-        @performed_requests << { method: _method, url: _url, params: _params, body: _body }
+        @performed_requests << {method: method, url: url, params: params, body: body}
       end.returns(FakeResponse.new)
     end
   end
@@ -53,13 +55,13 @@ module JobsTestHelper
     end
 
     message = <<~MSG
-    ## performed_requests
+      ## performed_requests
 
-    #{request_msg}
+      #{request_msg}
 
-    ## but not including
+      ## but not including
 
-    #{format_req(method, url, body)}
+      #{format_req(method, url, body)}
     MSG
 
     assert_equal true, found, message
@@ -67,10 +69,10 @@ module JobsTestHelper
 
   def format_req(method, url, body, params: nil)
     <<~MSG
-    - method: #{method}
-    - url:    #{url}
-    - params: #{params}
-    - body:   #{body}
+      - method: #{method}
+      - url:    #{url}
+      - params: #{params}
+      - body:   #{body}
     MSG
   end
 end

@@ -55,10 +55,11 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   end
 
   private
-    def assert_locale_equal(locale)
-      assert_equal 200, response.status
-      assert_select "meta[name=locale]" do
-        assert_select "[content=?]", locale
-      end
+
+  def assert_locale_equal(locale)
+    assert_equal 200, response.status
+    assert_select "meta[name=locale]" do
+      assert_select "[content=?]", locale
     end
+  end
 end

@@ -14,11 +14,12 @@ class Admin::SharesController < Admin::ApplicationController
   end
 
   private
-    def set_share
-      @share = Share.find(params[:id])
-    end
 
-    def share_params
-      params.require(:share).permit!
-    end
+  def set_share
+    @share = Share.find(params[:id])
+  end
+
+  def share_params
+    params.require(:share).permit!
+  end
 end

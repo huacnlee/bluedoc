@@ -22,9 +22,10 @@ module Erb
       end
 
       protected
-        def available_views
-          %w[index edit show new _form _base]
-        end
+
+      def available_views
+        %w[index edit show new _form _base]
+      end
     end
   end
 end

@@ -12,7 +12,9 @@ class RepositoriesHelperTest < ActionView::TestCase
     sign_in @user
   end
 
-  def current_user; @user; end
+  def current_user
+    @user
+  end
 
   test "repository_name_tag" do
     assert_equal "", repository_name_tag(nil)

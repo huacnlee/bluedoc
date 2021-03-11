@@ -11,8 +11,8 @@ module Sequenceable
       before_validation :sequence_generate_id, on: :create
 
       define_method(:sequence_generate_id) do
-        target = self.send(target_name)
-        self.send("#{column}=", Sequence.next(target, scope))
+        target = send(target_name)
+        send("#{column}=", Sequence.next(target, scope))
       end
     end
   end

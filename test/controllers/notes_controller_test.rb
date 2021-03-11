@@ -69,20 +69,20 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /:user/notes" do
     assert_require_user do
-      post user_notes_path(@user), params: { note: {} }
+      post user_notes_path(@user), params: {note: {}}
     end
 
     sign_in @user
     note_params = {
       slug: "foo-bar"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_equal 200, response.status
     assert_react_component "notes/NewNote" do |props|
       assert_equal user_notes_path(@user), props[:action]
       assert_equal "foo-bar", props[:note][:slug]
       assert_nil props[:note][:title]
-      assert_equal({ title: "Title can't be blank" }, props[:note][:errors])
+      assert_equal({title: "Title can't be blank"}, props[:note][:errors])
       assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
 
@@ -92,9 +92,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       title: "Hello world",
       description: "This is description",
       privacy: "private",
-      format: "markdown",
+      format: "markdown"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_redirected_to @user.to_path("/notes/foo-bar/edit")
 
     note = @user.notes.order("id asc").last
@@ -110,9 +110,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       title: "Hello world - SML",
       description: "This is description",
       privacy: "public",
-      format: "sml",
+      format: "sml"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_redirected_to @user.to_path("/notes/foo-bar-sml/edit")
 
     note = @user.notes.order("id asc").last
@@ -127,7 +127,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     note = create(:note, user: @user)
     get note.to_path
     assert_equal 200, response.status
-    assert_match /#{note.title}/, response.body
+    assert_match(/#{note.title}/, response.body)
     assert_select ".markdown-body"
     assert_select ".label.label-private", 0
     assert_select ".navbar-title a.user-name" do
@@ -251,7 +251,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       body_sml: "Bla bla",
       format: "sml"
     }
-    put note.to_path, params: { note: note_params }
+    put note.to_path, params: {note: note_params}
     assert_equal 200, response.status
     assert_select "form[action=?]", note_path
     assert_select "details.note-validation-error" do
@@ -259,7 +259,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     end
 
     note_params[:slug] = old_note_slug
-    put note.to_path, params: { note: note_params }
+    put note.to_path, params: {note: note_params}
     assert_redirected_to note.to_path
 
     note.reload
@@ -269,14 +269,14 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal note_params[:format], note.format
 
     # shoud save with JSON API
-    put note.to_path, params: { note: { slug: "", title: "" }, format: :json }
+    put note.to_path, params: {note: {slug: "", title: ""}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal false, res["ok"]
     assert_equal true, res["messages"].is_a?(Array)
     assert_equal true, res["messages"].length > 0
 
-    put note.to_path, params: { note: { slug: "Hello world", description: "New description", privacy: "private" }, format: :json }
+    put note.to_path, params: {note: {slug: "Hello world", description: "New description", privacy: "private"}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal true, res["ok"]
@@ -364,7 +364,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#previus-version-content", html: previous_version.body_html
 
     # paginate with remote: true
-    get note.to_path("/versions"), xhr: true, params: { page: 2 }
+    get note.to_path("/versions"), xhr: true, params: {page: 2}
     assert_equal 200, response.status
     assert_match %($(".version-item-" + selectedVersionId).addClass("selected");), response.body
   end
@@ -377,12 +377,11 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "World hello", note.body_plain
 
     sign_in @other_user
-    patch note.to_path("/revert"), params: { version_id: version.id }
+    patch note.to_path("/revert"), params: {version_id: version.id}
     assert_equal 403, response.status
 
-
     sign_in @user
-    patch note.to_path("/revert"), params: { version_id: version.id }
+    patch note.to_path("/revert"), params: {version_id: version.id}
     assert_redirected_to note.to_path
     note = Note.find_by_id(note.id)
     assert_equal "Hello world", note.body_plain
@@ -392,23 +391,164 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     private_note = create(:note, user: @other_user, privacy: :private)
     note = create(:note, user: @user, body: "Hello world")
 
-    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 401, response.status
 
     sign_in @user
-    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.note-#{note.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
+    assert_match(/.note-#{note.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-undo-label"\)/, response.body)
     assert_equal true, @user.star_note?(note)
 
-    post private_note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post private_note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 403, response.status
 
-    delete note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    delete note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.note-#{note.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-label\"\)/, response.body
+    assert_match(/.note-#{note.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-label"\)/, response.body)
     assert_equal false, @user.star_note?(note)
+  end
+
+  test "GET /:user/notes/:slug with readers" do
+    note = create(:note)
+
+    user = create(:user)
+    users = create_list(:user, 8)
+
+    users.map { |u| u.read_note(note) }
+
+    sign_in user
+
+    get note.to_path
+    assert_equal 200, response.status
+    assert_select ".note-readers" do
+      assert_select "a.readers-link .avatar", 5
+    end
+    assert_equal true, user.read_note?(note)
+  end
+
+  test "GET /:user/notes/:slug/readers" do
+    note = create(:note)
+    users = create_list(:user, 8)
+    users.map { |u| u.read_note(note) }
+
+    get note.to_path("/readers"), xhr: true
+    assert_equal 200, response.status
+
+    assert_match %(document.querySelector(".note-readers").outerHTML = ), response.body
+  end
+
+  test "GET /:user/notes/:slug with PDF export" do
+    note = create(:note)
+    get note.to_path
+    assert_equal 200, response.status
+
+    assert_select ".doc-export-pdf-box", 0
+
+    sign_in @user
+    note = create(:note, user: @user)
+    get note.to_path
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".description", text: "Click button to genrate PDF file for this document."
+      assert_select ".btn-generate-pdf" do
+        assert_select "[href=?]", note.to_path("/pdf?force=1")
+        assert_select "[data-method=?]", "post"
+        assert_select "[data-remote=?]", "true"
+      end
+    end
+
+    # pdf in running
+    note.set_export_status(:pdf, "running")
+    get note.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".pdf-export-running"
+      assert_select ".btn-generate-pdf", 0
+      assert_select ".pdf-export-retry-message" do
+        assert_select "a", text: "retry" do
+          assert_select "[href=?]", note.to_path("/pdf?force=1")
+          assert_select "[data-method=?]", "post"
+          assert_select "[data-remote=?]", "true"
+        end
+      end
+    end
+
+    # pdf has done
+    note.set_export_status(:pdf, "done")
+    note.pdf.attach(io: load_file("blank.png"), filename: "foobar.pdf")
+    get note.to_path
+    assert_equal 200, response.status
+    assert_select ".doc-export-pdf-box details" do
+      assert_select ".description", text: "PDF of this document page has been generated."
+      assert_select ".btn-download-pdf" do
+        assert_select "[href=?]", note.export_url(:pdf)
+      end
+      assert_select ".btn-regenerate-pdf" do
+        assert_select "[href=?]", note.to_path("/pdf?force=1")
+        assert_select "[data-method=?]", "post"
+        assert_select "[data-remote=?]", "true"
+      end
+    end
+  end
+
+  test "POST /:user/notes/:slug/pdf" do
+    def assert_has_pdf_js(response)
+      assert_match %(var openStatus = $(".doc-export-pdf-box details[open]");), response.body
+      assert_match %($(".doc-export-pdf-box").replaceWith(html);), response.body
+      assert_match %($(".doc-export-pdf-box details").attr("open", "");), response.body
+    end
+
+    note = create(:note)
+
+    post note.to_path("/pdf"), xhr: true
+    assert_equal 401, response.status
+
+    sign_in @user
+    post note.to_path("/pdf"), xhr: true
+    assert_equal 403, response.status
+
+    note = create(:note, user: @user)
+    assert_no_enqueued_jobs only: PDFExportJob do
+      post note.to_path("/pdf"), xhr: true
+    end
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-generate-pdf), response.body
+
+    # generate
+    assert_enqueued_with job: PDFExportJob do
+      post note.to_path("/pdf?force=1"), xhr: true
+    end
+    assert_equal 200, response.status
+    assert_equal "running", note.export_pdf_status.value
+    assert_has_pdf_js response
+    assert_match %(pdf-export-running), response.body
+    assert_match %(pdf-export-retry-message), response.body
+
+    # check status
+    post note.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_equal "", response.body.strip
+
+    note.set_export_status(:pdf, "done")
+    post note.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-generate-pdf), response.body
+
+    note.pdf.attach(io: load_file("blank.png"), filename: "blank.pdf")
+    post note.to_path("/pdf?check=1"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
+
+    post note.to_path("/pdf"), xhr: true
+    assert_equal 200, response.status
+    assert_has_pdf_js response
+    assert_match %(btn-regenerate-pdf), response.body
+    assert_match %(btn-download-pdf), response.body
   end
 end

@@ -31,10 +31,10 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  if ENV["ALIYUN_ACCESS_KEY_ID"]
-    config.active_storage.service = :aliyun
+  config.active_storage.service = if ENV["ALIYUN_ACCESS_KEY_ID"]
+    :aliyun
   else
-    config.active_storage.service = :local
+    :local
   end
 
   # Don't care if the mailer can't send.

@@ -11,7 +11,7 @@ module BlueDoc
       end
 
       def context
-        { current_user: @current_user }
+        {current_user: @current_user}
       end
 
       def response_data
@@ -45,8 +45,8 @@ module BlueDoc
         end
 
         assert_equal true, found, <<~MSG
-        expected: #{errors.inspect}
-        include:  #{message}
+          expected: #{errors.inspect}
+          include:  #{message}
         MSG
       end
 

@@ -29,7 +29,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     user_params = {
       name: "new name"
     }
-    patch admin_user_path(@user.id), params: { user: user_params }
+    patch admin_user_path(@user.id), params: {user: user_params}
     assert_redirected_to admin_users_path
   end
 
@@ -45,11 +45,6 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   test "should restore admin_user" do
     @user.destroy
     post restore_admin_user_path(@user.id)
-    assert_equal 501, response.status
-
-    allow_feature(:soft_delete) do
-      post restore_admin_user_path(@user.id)
-    end
     @user.reload
     assert_equal false, @user.deleted?
     assert_redirected_to admin_users_path(q: @user.slug)

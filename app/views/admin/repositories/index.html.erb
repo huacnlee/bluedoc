@@ -37,13 +37,9 @@
         <%= link_to icon_tag("list-alt"), admin_docs_path(repository_id: item.id), title: "All docs" %>
         <%= link_to icon_tag("pencil"), edit_admin_repository_path(item.id) %>
         <%= link_to icon_tag("trash"), admin_repository_path(item.id), method: :delete, 'data-confirm' => t("admin.Are you sure delete this item?") %>
-        <!-- PRO-begin -->
-        <% feature_for(:soft_delete) do %>
-          <% if item.deleted? %>
-            <%= link_to icon_tag("restore"), restore_admin_repository_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
-          <% end %>
+        <% if item.deleted? %>
+          <%= link_to icon_tag("restore"), restore_admin_repository_path(item.id), method: :post, 'data-confirm' => t("admin.Are you sure restore this item?") %>
         <% end %>
-        <!--PRO-end -->
       </td>
     </tr>
     <% end %>

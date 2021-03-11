@@ -29,7 +29,7 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
     group_params = {
       name: "new name"
     }
-    patch admin_group_path(@group.id), params: { group: group_params }
+    patch admin_group_path(@group.id), params: {group: group_params}
     assert_redirected_to admin_groups_path
   end
 
@@ -45,11 +45,6 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
   test "should restore admin_group" do
     @group.destroy
     post restore_admin_group_path(@group.id)
-    assert_equal 501, response.status
-
-    allow_feature(:soft_delete) do
-      post restore_admin_group_path(@group.id)
-    end
     @group.reload
     assert_equal false, @group.deleted?
     assert_redirected_to admin_groups_path(q: @group.slug)

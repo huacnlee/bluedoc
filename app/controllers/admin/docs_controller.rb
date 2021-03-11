@@ -57,19 +57,18 @@ class Admin::DocsController < Admin::ApplicationController
 
   # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @doc.restore
     redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: t(".Doc was successfully restored")
   end
   # PRO-end
 
   private
-    def set_doc
-      @doc = Doc.unscoped.find(params[:id])
-    end
 
-    def doc_params
-      params.require(:doc).permit!
-    end
+  def set_doc
+    @doc = Doc.unscoped.find(params[:id])
+  end
+
+  def doc_params
+    params.require(:doc).permit!
+  end
 end

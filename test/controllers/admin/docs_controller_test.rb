@@ -29,7 +29,7 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
     doc_params = {
       title: "new title"
     }
-    patch admin_doc_path(@doc.id), params: { doc: doc_params }
+    patch admin_doc_path(@doc.id), params: {doc: doc_params}
     assert_redirected_to admin_docs_path
   end
 
@@ -56,7 +56,7 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
     assert_equal true, doc.deleted?
 
     # permanently delete it
-    delete admin_doc_path(@doc.id), params: { permanent: true }
+    delete admin_doc_path(@doc.id), params: {permanent: true}
     assert_equal 0, Doc.unscoped.where(id: @doc.id).count
     assert_equal 0, @doc.versions.count
     assert_equal [], DocVersion.unscoped.where(subject: @doc).all
@@ -66,13 +66,7 @@ class Admin::DocsControllerTest < ActionDispatch::IntegrationTest
   test "should restore admin_doc" do
     @doc.destroy
 
-    assert_check_feature do
-      post restore_admin_doc_path(@doc.id)
-    end
-
-    allow_feature(:soft_delete) do
-      post restore_admin_doc_path(@doc.id)
-    end
+    post restore_admin_doc_path(@doc.id)
     @doc.reload
     assert_equal false, @doc.deleted?
     assert_redirected_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug)

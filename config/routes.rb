@@ -15,12 +15,60 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
-  get "/account/sign_in/ldap" => "users/ldaps#new", as: :new_ldap_user_session
+  get "/account/sign_in/ldap" => "users/ldaps#new", :as => :new_ldap_user_session
 
-  draw :admin
+  # /admin
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web, at: "/admin/sidekiq"
+    mount ExceptionTrack::Engine, at: "/admin/exception-track"
+    mount PgHero::Engine, at: "/admin/pghero"
+  end
+
+  namespace :admin do
+    root to: "dashboards#show"
+    resource :dashboard do
+      collection do
+        post :reindex
+      end
+    end
+    resource :settings do
+      collection do
+        post :test_mail
+      end
+    end
+    resources :integrations
+    resources :groups do
+      member do
+        post :restore
+      end
+    end
+    resources :users do
+      member do
+        post :restore
+      end
+    end
+    resources :repositories do
+      member do
+        post :restore
+      end
+    end
+    resources :docs do
+      member do
+        post :restore
+      end
+    end
+    resources :comments
+    resources :shares
+    resources :issues
+    resources :notes do
+      member do
+        post :restore
+      end
+    end
+  end
 
   # short attachment url
-  get "/uploads/:id" => "blobs#show", as: :upload
+  get "/uploads/:id" => "blobs#show", :as => :upload
 
   resources :notifications do
     collection do
@@ -91,13 +139,13 @@ Rails.application.routes.draw do
   resources :shares
 
   # NOTE! Keep :profile routes bottom of routes.rb
-  resources :repositories, only: %i(index create)
-  resources :users, id: /[#{BlueDoc::Slug::FORMAT}]*/, path: "", as: "users" do
+  resources :repositories, only: %i[index create]
+  resources :users, id: /[#{BlueDoc::Slug::FORMAT}]*/o, path: "", as: "users" do
     member do
       post :follow
       delete :unfollow
     end
-    resources :notes, only: %i(index create edit show update destroy) do
+    resources :notes, only: %i[index create edit show update destroy] do
       member do
         get :raw
         get :versions
@@ -110,7 +158,7 @@ Rails.application.routes.draw do
         post :pdf
       end
     end
-    resources :repositories, path: "", as: "repositories", only: %i(show update destroy) do
+    resources :repositories, path: "", as: "repositories", only: %i[show update destroy] do
       resource :services do
         collection do
           get :jira_issues
@@ -143,7 +191,7 @@ Rails.application.routes.draw do
           post :jira
         end
       end
-      resources :docs, only: %i(new create)
+      resources :docs, only: %i[new create]
       resources :labels, path: "issues/labels"
       resources :issues do
         collection do
@@ -154,7 +202,7 @@ Rails.application.routes.draw do
           post :labels
         end
       end
-      resources :docs, path: "", only: %i(show edit update destroy) do
+      resources :docs, path: "", only: %i[show edit update destroy] do
         member do
           get :raw
           post :pdf

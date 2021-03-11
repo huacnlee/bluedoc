@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :check_users_quota
-
   def create
     build_resource(sign_up_params)
 
@@ -34,11 +32,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_inactive_sign_up_path_for(resource_or_scope)
     new_user_session_path
-  end
-
-  def check_users_quota
-    # PRO-begin
-    License.check_users_limit!
-    # PRO-end
   end
 end

@@ -18,9 +18,9 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     label1 = create(:label, target: @repository)
     label2 = create(:label, target: @repository)
 
-    issue0 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user2.id], label_ids: [label1.id, label2.id])
-    issue1 = create(:issue,  repository: @repository, assignee_ids: [user0.id, user1.id, user2.id], label_ids: [label0.id, label2.id])
-    issue2 = create(:issue,  repository: @repository, assignee_ids: [user2.id], label_ids: [label0.id, label1.id, label2.id])
+    issue0 = create(:issue, repository: @repository, assignee_ids: [user0.id, user2.id], label_ids: [label1.id, label2.id])
+    issue1 = create(:issue, repository: @repository, assignee_ids: [user0.id, user1.id, user2.id], label_ids: [label0.id, label2.id])
+    issue2 = create(:issue, repository: @repository, assignee_ids: [user2.id], label_ids: [label0.id, label1.id, label2.id])
 
     get @repository.to_path("/issues")
     assert_equal 200, response.status
@@ -101,7 +101,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     }
 
     # Public Repository
-    post @repository.to_path("/issues"), params: { issue: issue_params }
+    post @repository.to_path("/issues"), params: {issue: issue_params}
     issue = @repository.issues.last
     assert_equal issue_params[:title], issue.title
     assert_equal issue_params[:body_sml], issue.body_sml_plain
@@ -111,11 +111,11 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to issue.to_path
 
     # Private Repository
-    post @private_repository.to_path("/issues"), params: { issue: issue_params }
+    post @private_repository.to_path("/issues"), params: {issue: issue_params}
     assert_equal 403, response.status
 
     user1 = sign_in_role :reader, group: @group
-    post @private_repository.to_path("/issues"), params: { issue: issue_params }
+    post @private_repository.to_path("/issues"), params: {issue: issue_params}
     issue = @private_repository.issues.last
     assert_equal issue_params[:title], issue.title
     assert_equal issue_params[:body_sml], issue.body_sml_plain
@@ -216,7 +216,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Set assignees
     sign_in_role :admin, group: @group
-    post issue.to_path("/assignees"), params: { issue: { assignee_id: users.collect(&:id) } }
+    post issue.to_path("/assignees"), params: {issue: {assignee_id: users.collect(&:id)}}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -227,7 +227,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Agian to override
     users1 = create_list(:user, 3)
-    post issue.to_path("/assignees"), params: { issue: { assignee_id: users1.collect(&:id) } }
+    post issue.to_path("/assignees"), params: {issue: {assignee_id: users1.collect(&:id)}}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -238,7 +238,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users1.sort_by { |u| u.id }, issue.assignees.sort
 
     # Clear all
-    post issue.to_path("/assignees"), params: { clear: 1 }
+    post issue.to_path("/assignees"), params: {clear: 1}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -267,7 +267,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Set labels
     sign_in_role :admin, group: @group
-    post issue.to_path("/labels"), params: { issue: { label_id: labels.collect(&:id) } }
+    post issue.to_path("/labels"), params: {issue: {label_id: labels.collect(&:id)}}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -278,7 +278,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
     # Agian to override
     labels1 = create_list(:label, 3, target: @repository)
-    post issue.to_path("/labels"), params: { issue: { label_id: labels1.collect(&:id) } }
+    post issue.to_path("/labels"), params: {issue: {label_id: labels1.collect(&:id)}}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -289,7 +289,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     assert_equal labels1.sort_by { |u| u.id }, issue.labels.sort_by { |u| u.id }
 
     # Clear all
-    post issue.to_path("/labels"), params: { clear: 1 }
+    post issue.to_path("/labels"), params: {clear: 1}
     assert_equal 200, response.status
     data = JSON.parse(response.body)
     assert_equal true, data["ok"]
@@ -351,7 +351,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     old_edited_at = issue.last_edited_at
 
     user1 = sign_in_role :admin, group: @group
-    put issue.to_path, params: { issue: issue_params }
+    put issue.to_path, params: {issue: issue_params}
     assert_redirected_to issue.to_path
 
     issue.reload

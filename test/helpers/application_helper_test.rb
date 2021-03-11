@@ -8,7 +8,9 @@ class ApplicationHelperTest < ActionView::TestCase
     sign_in @user
   end
 
-  def current_user; @user; end
+  def current_user
+    @user
+  end
 
   test "markdown" do
     raw = "Hello **world**, this is a __test__."
@@ -17,7 +19,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test "markdown with :public" do
-    stub_method = Proc.new do |body, opts|
+    stub_method = proc do |body, opts|
       opts[:public] ? "Render public" : body
     end
 
@@ -96,27 +98,27 @@ class ApplicationHelperTest < ActionView::TestCase
     end
 
     expected = <<~HTML
-    <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
-      <div class="form-group has-error">
-        <div class="field_with_errors">
-          <label class="control-label" for="user_slug">Username</label>
+      <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
+        <div class="form-group has-error">
+          <div class="field_with_errors">
+            <label class="control-label" for="user_slug">Username</label>
+          </div>
+          <div>input field</div>
+          <div class="form-error">Username is invalid</div>
         </div>
-        <div>input field</div>
-        <div class="form-error">Username is invalid</div>
-      </div>
-    </form>
+      </form>
     HTML
 
     assert_html_equal expected, html
 
     # without label
     expected = <<~HTML
-    <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
-      <div class="foo bar has-error">
-        <div>input field</div>
-        <div class="form-error">Username is invalid</div>
-      </div>
-    </form>
+      <form class="new_user" id="new_user" action="/" accept-charset="UTF-8" method="post">
+        <div class="foo bar has-error">
+          <div>input field</div>
+          <div class="form-error">Username is invalid</div>
+        </div>
+      </form>
     HTML
     html = form_for(user) do |f|
       form_group(f, :slug, label: false, class: "foo bar") do
@@ -154,39 +156,40 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   private
-    def assert_action_button(html, target, action_type, opts = {})
-      text = opts[:text]
-      label = opts[:label]
-      undo_label = opts[:undo_label]
-      icon = opts[:icon]
-      method = opts[:method]
-      with_count = opts[:with_count]
 
-      action_count = "#{action_type.to_s.pluralize}_count"
+  def assert_action_button(html, target, action_type, opts = {})
+    text = opts[:text]
+    label = opts[:label]
+    undo_label = opts[:undo_label]
+    icon = opts[:icon]
+    method = opts[:method]
+    with_count = opts[:with_count]
 
-      icon_html = raw(icon_tag(icon, label: text))
+    action_count = "#{action_type.to_s.pluralize}_count"
 
-      count_html = ""
-      if with_count
-        count_html = raw(%(<i class="social-count" >#{target.send(action_count)}</i>))
-      end
-      btn_class = opts[:class] || "btn btn-sm"
-      btn_class += " btn-with-count" if with_count
+    icon_html = raw(icon_tag(icon, label: text))
 
-      url = target.to_path("/action?action_type=#{action_type}")
-
-      expected = <<~TEXT
-        <span class="#{target.class.name.underscore}-#{target.id}-#{action_type}-button action-button">
-        <a data-method="#{method}" data-label="#{label}" data-undo-label="#{undo_label}" data-remote="true" data-disable="true" class="#{btn_class}" href="#{url}">
-        #{icon_html}
-        #{count_html}
-        </a>
-        </span>
-       TEXT
-      assert_equal expected.gsub(/\n/, ""), html
+    count_html = ""
+    if with_count
+      count_html = raw(%(<i class="social-count" >#{target.send(action_count)}</i>))
     end
+    btn_class = opts[:class] || "btn btn-sm"
+    btn_class += " btn-with-count" if with_count
 
-    def assert_sanitize_markdown(excepted, raw)
-      assert_equal excepted, markdown(raw)
-    end
+    url = target.to_path("/action?action_type=#{action_type}")
+
+    expected = <<~TEXT
+      <span class="#{target.class.name.underscore}-#{target.id}-#{action_type}-button action-button">
+      <a data-method="#{method}" data-label="#{label}" data-undo-label="#{undo_label}" data-remote="true" data-disable="true" class="#{btn_class}" href="#{url}">
+      #{icon_html}
+      #{count_html}
+      </a>
+      </span>
+    TEXT
+    assert_equal expected.delete("\n"), html
+  end
+
+  def assert_sanitize_markdown(excepted, raw)
+    assert_equal excepted, markdown(raw)
+  end
 end

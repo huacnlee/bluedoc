@@ -4,15 +4,15 @@ module Slugable
   extend ActiveSupport::Concern
 
   included do
-    validates :slug, format: { with: BlueDoc::Slug::REGEXP }, length: 2..128
+    validates :slug, format: {with: BlueDoc::Slug::REGEXP}, length: 2..128
 
     before_validation do
-      self.slug = BlueDoc::Slug.slugize(self.slug) unless self.is_a?(User)
+      self.slug = BlueDoc::Slug.slugize(slug) unless is_a?(User)
     end
   end
 
   def fullname
-    @fullname ||= "#{self.name} (#{self.slug})"
+    @fullname ||= "#{name} (#{slug})"
   end
 
   def to_param
@@ -20,17 +20,17 @@ module Slugable
   end
 
   def to_url(anchor: nil)
-    url = [Setting.host, self.to_path].join("")
+    url = [Setting.host, to_path].join("")
     url += "##{anchor}" if anchor
     url
   end
 
   def soft_delete_restore_attributes
-    { deleted_at: nil, updated_at: Time.now.utc, slug: self.deleted_slug, deleted_slug: nil }
+    {deleted_at: nil, updated_at: Time.now.utc, slug: deleted_slug, deleted_slug: nil}
   end
 
   def soft_delete_destroy_attributes
-    { deleted_at: Time.now.utc, updated_at: Time.now.utc, slug: "deleted-#{BlueDoc::Slug.random}", deleted_slug: self.slug }
+    {deleted_at: Time.now.utc, updated_at: Time.now.utc, slug: "deleted-#{BlueDoc::Slug.random}", deleted_slug: slug}
   end
 
   class_methods do

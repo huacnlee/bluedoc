@@ -6,7 +6,6 @@ class User
 
     # read Target, or update visit time if exist
     define_method("read_#{model}") do |target|
-      return false unless allow_feature?(:reader_list)
       return nil if target.blank?
 
       action = User.find_action(:read, target: target, user: self)

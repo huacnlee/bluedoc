@@ -8,6 +8,6 @@ class Doc
   end
 
   def publishing?
-    self._publishing == true
+    _publishing == true
   end
 end

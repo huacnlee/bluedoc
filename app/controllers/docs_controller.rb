@@ -78,10 +78,10 @@ class DocsController < Users::ApplicationController
           @doc.unlock!
           redirect_to @doc.to_path, notice: t(".Doc was successfully updated")
         }
-        format.json { render json: { ok: true, doc: { slug: @doc.slug } } }
+        format.json { render json: {ok: true, doc: {slug: @doc.slug}} }
       else
         format.html { render :edit, layout: "editor" }
-        format.json { render json: { ok: false, messages: @doc.errors.full_messages } }
+        format.json { render json: {ok: false, messages: @doc.errors.full_messages} }
       end
     end
   end
@@ -166,7 +166,7 @@ class DocsController < Users::ApplicationController
 
     respond_to do |format|
       format.json do
-        render json: { ok: true }
+        render json: {ok: true}
       end
       format.js
     end
@@ -185,22 +185,23 @@ class DocsController < Users::ApplicationController
   end
 
   private
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
-    end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_doc
-      @doc = @repository.docs.find_by_slug(params[:id])
-    end
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def doc_params
-      params.require(:doc).permit(:title, :draft_title, :body, :body_sml, :draft_body, :draft_body_sml, :slug, :format)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_doc
+    @doc = @repository.docs.find_by_slug(params[:id])
+  end
 
-    def set_jira_issue_keys
-      return unless @doc
-      @jira_issue_keys = @repository.actived_jira_service.extract_jira_keys(@doc) if @repository.actived_jira_service
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def doc_params
+    params.require(:doc).permit(:title, :draft_title, :body, :body_sml, :draft_body, :draft_body_sml, :slug, :format)
+  end
+
+  def set_jira_issue_keys
+    return unless @doc
+    @jira_issue_keys = @repository.actived_jira_service.extract_jira_keys(@doc) if @repository.actived_jira_service
+  end
 end

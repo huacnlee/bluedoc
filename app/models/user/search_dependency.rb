@@ -5,23 +5,23 @@ class User
 
   def as_indexed_json(_options = {})
     {
-      sub_type: self.type.downcase,
-      slug: self.slug,
-      title: self.name,
-      body: self.description,
-      user_id: self.id,
-      deleted: self.es_deleted?
+      sub_type: type.downcase,
+      slug: slug,
+      title: name,
+      body: description,
+      user_id: id,
+      deleted: es_deleted?
     }
   end
 
   def es_deleted?
-    self.deleted? || self.system?
+    deleted? || system?
   end
 
   def indexed_changed?
     saved_change_to_deleted_at? ||
-    saved_change_to_name? ||
-    saved_change_to_description?
+      saved_change_to_name? ||
+      saved_change_to_description?
   end
 
   def self.prefix_search(term, user: nil, group: nil, repository: nil, limit: 30)

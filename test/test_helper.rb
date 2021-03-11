@@ -62,11 +62,11 @@ class ActiveSupport::TestCase
   end
 
   def assert_html_equal(excepted, html)
-    assert_equal excepted.strip.gsub(/>[\s]+</, "><"), html.strip.gsub(/>[\s]+</, "><")
+    assert_equal excepted.strip.gsub(/>\s+</, "><"), html.strip.gsub(/>\s+</, "><")
   end
 
   def assert_tracked_notifications(notify_type, target: nil, actor_id: nil, user_id: nil, meta: nil)
-    where_opts = { notify_type: notify_type }
+    where_opts = {notify_type: notify_type}
     where_opts[:actor_id] = actor_id
     where_opts[:user_id] = user_id
     where_opts[:target] = target
@@ -74,27 +74,6 @@ class ActiveSupport::TestCase
     assert_equal true, Notification.where(where_opts).count > 0
     if meta
       assert_equal meta, Notification.where(where_opts).last.meta
-    end
-  end
-
-  # Mock to allow feature in a block
-  # allow_feature(:soft_delete) do
-  #   assert_equal true, License.allow_feature?(:soft_delete)
-  # end
-  def allow_feature(name)
-    License.stub(:allow_feature?, true) do
-      yield
-    end
-    # Rails.cache.write("mock/test/allow_features", nil)
-  end
-
-  # Assert the block process will check the Pro feature
-  def assert_check_feature(&block)
-    assert_raise(BlueDoc::FeatureNotAvailableError) do
-      yield block
-
-      # Patch for intergration test, if reponse.status == 501, invoke raise error
-      raise BlueDoc::FeatureNotAvailableError if response&.status == 501
     end
   end
 end
@@ -114,7 +93,7 @@ class ActionDispatch::IntegrationTest
   def assert_require_user(&block)
     yield block
     assert_equal 302, response.status
-    assert_match /\/account\/sign_in/, response.headers["Location"]
+    assert_match(/\/account\/sign_in/, response.headers["Location"])
   end
 
   def assert_signed_in

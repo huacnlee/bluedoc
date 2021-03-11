@@ -22,8 +22,8 @@ class GroupSettingsControllerTest < ActionDispatch::IntegrationTest
     sign_in_role :admin, group: @group
     get group_settings_path(@group)
     assert_equal 200, response.status
-    assert_match /group-settings/, response.body
-    assert_match /Danger zone/, response.body
+    assert_match(/group-settings/, response.body)
+    assert_match(/Danger zone/, response.body)
   end
 
   test "PUT /groups/settings" do
@@ -35,19 +35,19 @@ class GroupSettingsControllerTest < ActionDispatch::IntegrationTest
       location: "New #{@group.location}"
     }
 
-    put group_settings_path(@group), params: { group: group_params }
+    put group_settings_path(@group), params: {group: group_params}
     assert_equal 403, response.status
 
     sign_in_user
-    put group_settings_path(@group), params: { group: group_params }
+    put group_settings_path(@group), params: {group: group_params}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    put group_settings_path(@group), params: { group: group_params }
+    put group_settings_path(@group), params: {group: group_params}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    put group_settings_path(@group), params: { group: group_params }
+    put group_settings_path(@group), params: {group: group_params}
     @group.reload
     assert_redirected_to group_settings_path(@group)
 

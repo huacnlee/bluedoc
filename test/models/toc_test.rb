@@ -11,13 +11,13 @@ class TocTest < ActiveSupport::TestCase
     docs = create_list(:doc, 6, repository: repo)
 
     toc_docs = [
-      { id: docs[1].id, url: docs[1].slug, title: docs[1].title, depth: 0 }.as_json,
-      { id: docs[0].id, url: docs[0].slug, title: docs[0].title, depth: 1 }.as_json,
-      { id: docs[2].id, url: docs[2].slug, title: docs[2].title, depth: 2 }.as_json,
-      { id: docs[4].id, url: docs[4].slug, title: docs[4].title, depth: 0 }.as_json,
-      { id: nil, url: "test", title: "Test url", depth: 1 }.as_json,
-      { id: docs[3].id, url: docs[3].slug, title: docs[3].title, depth: 0 }.as_json,
-      { id: docs[5].id, url: docs[5].slug, title: docs[5].title, depth: 1 }.as_json,
+      {id: docs[1].id, url: docs[1].slug, title: docs[1].title, depth: 0}.as_json,
+      {id: docs[0].id, url: docs[0].slug, title: docs[0].title, depth: 1}.as_json,
+      {id: docs[2].id, url: docs[2].slug, title: docs[2].title, depth: 2}.as_json,
+      {id: docs[4].id, url: docs[4].slug, title: docs[4].title, depth: 0}.as_json,
+      {id: nil, url: "test", title: "Test url", depth: 1}.as_json,
+      {id: docs[3].id, url: docs[3].slug, title: docs[3].title, depth: 0}.as_json,
+      {id: docs[5].id, url: docs[5].slug, title: docs[5].title, depth: 1}.as_json
     ]
 
     repo.tocs.destroy_all
@@ -89,13 +89,13 @@ class TocTest < ActiveSupport::TestCase
     assert_equal docs[2].toc.id, docs[3].toc.parent_id
 
     expected_struct = <<~TOC
-    First item
-    Will delete item
-      title 1
-        title 3
-          title 4
-      title 2
-    Last item
+      First item
+      Will delete item
+        title 1
+          title 3
+            title 4
+        title 2
+      Last item
     TOC
     repo_tocs = repo.tocs.nested_tree
     toc_struct = repo_tocs.map { |item| "  " * item.depth + item.title }.join("\n")
@@ -130,21 +130,20 @@ class TocTest < ActiveSupport::TestCase
     repo_tocs = repo.tocs.nested_tree
     toc_struct = repo_tocs.map { |item| "  " * item.depth + item.title }.join("\n")
     expected_struct = <<~TOC
-    First item
-    title 1
-      title 3
-        title 4
-    title 2
-    Last item
+      First item
+      title 1
+        title 3
+          title 4
+      title 2
+      Last item
     TOC
 
     assert_equal expected_struct.strip, toc_struct.strip
 
     # Restore will revert toc
     doc = Doc.unscoped.find_by_id(doc.id)
-    allow_feature :soft_delete do
-      doc.restore
-    end
+
+    doc.restore
     doc = Doc.find_by_id(doc.id)
     assert_not_nil doc
     assert_not_nil doc.toc

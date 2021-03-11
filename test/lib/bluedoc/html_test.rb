@@ -5,30 +5,30 @@ require "test_helper"
 class BlueDoc::HTMLTest < ActiveSupport::TestCase
   test "render markdown" do
     raw = <<~RAW
-    # This is **title**
+      # This is **title**
 
-    hello **world**
+      hello **world**
     RAW
     out = BlueDoc::HTML.render(raw, format: :markdown)
     html = <<~HTML
-    <h1 id="this-is-title">
-      <a href="#this-is-title" class="heading-anchor">#</a>This is <strong>title</strong>
-    </h1>
-    <p>hello <strong>world</strong></p>
+      <h1 id="this-is-title">
+        <a href="#this-is-title" class="heading-anchor">#</a>This is <strong>title</strong>
+      </h1>
+      <p>hello <strong>world</strong></p>
     HTML
 
     assert_equal out, BlueDoc::HTML.render_without_cache(raw, format: :markdown)
     assert_html_equal html, out
 
     # cache test for Markdown
-    cache_key = ["bluedoc/html", "v1.3", Digest::MD5.hexdigest(raw), { format: :markdown }]
+    cache_key = ["bluedoc/html", "v1.3", Digest::MD5.hexdigest(raw), {format: :markdown}]
     Rails.cache.write(cache_key, "A cache value from Markdown")
     assert_equal "A cache value from Markdown", BlueDoc::HTML.render(raw, format: :markdown)
     Rails.cache.delete(cache_key)
     assert_html_equal html, BlueDoc::HTML.render(raw, format: :markdown)
 
     # cache test for SML
-    cache_key = ["bluedoc/html", "#{BlueDoc::SML::VERSION}/v1.2", Digest::MD5.hexdigest(raw), { format: :sml }]
+    cache_key = ["bluedoc/html", "#{BlueDoc::SML::VERSION}/v1.2", Digest::MD5.hexdigest(raw), {format: :sml}]
     Rails.cache.write(cache_key, "A cache value from SML")
     assert_equal "A cache value from SML", BlueDoc::HTML.render(raw, format: :sml)
     Rails.cache.delete(cache_key)
@@ -37,11 +37,11 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
 
   test "render html with Sanitize" do
     raw = <<~HTML
-    <div id="this-is-title" data-name="foo" style="color:red">
-      <a href="#this-is-title" target="_blank" rel="nofollow" class="heading-anchor">#</a> This is title
-    </div>
-    <img src="/foo.png" width="300" height="220" alt="this is img">
-    <p data-title="Bar" style="background: red; background-color: red;">hello <strong>world</strong></p>
+      <div id="this-is-title" data-name="foo" style="color:red">
+        <a href="#this-is-title" target="_blank" rel="nofollow" class="heading-anchor">#</a> This is title
+      </div>
+      <img src="/foo.png" width="300" height="220" alt="this is img">
+      <p data-title="Bar" style="background: red; background-color: red;">hello <strong>world</strong></p>
     HTML
     assert_equal raw, BlueDoc::HTML.render(raw)
     assert_equal raw, BlueDoc::HTML.render(raw, format: :html)
@@ -72,13 +72,13 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
 
   test "markdown mention" do
     raw = <<~MD
-    Hello @huacnlee this is a mention. `@title = "AAA"`
+      Hello @huacnlee this is a mention. `@title = "AAA"`
 
-    ```rb
-    @name = "Foo bar"
-    ```
+      ```rb
+      @name = "Foo bar"
+      ```
 
-    @nowazhu bla bla.
+      @nowazhu bla bla.
     MD
 
     out = BlueDoc::HTML.render(raw, format: :markdown)
@@ -95,56 +95,55 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
 
   test "markdown attachment-file" do
     raw = <<~MD
-    [This is a attachment](/uploads/foobar "size:12872363")
+      [This is a attachment](/uploads/foobar "size:12872363")
     MD
     html = <<~HTML
-    <p>
-      <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
-        <span class="icon-box"><i class="fas fa-file"></i></span>
-        <span class="filename">This is a attachment</span>
-        <span class="filesize">12.3 MB</span>
-      </a>
-    </p>
+      <p>
+        <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
+          <span class="icon-box"><i class="fas fa-file"></i></span>
+          <span class="filename">This is a attachment</span>
+          <span class="filesize">12.3 MB</span>
+        </a>
+      </p>
     HTML
     out = BlueDoc::HTML.render(raw, format: :markdown)
     assert_html_equal html, out
 
     raw = <<~MD
-    [download: This is a attachment <script>](/uploads/foobar)
+      [download: This is a attachment <script>](/uploads/foobar)
     MD
     html = <<~HTML
-    <p>
-      <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
-        <span class="icon-box"><i class="fas fa-file"></i></span>
-        <span class="filename">This is a attachment</span>
-        <span class="filesize"></span>
-      </a>
-    </p>
+      <p>
+        <a class="attachment-file" title="This is a attachment" target="_blank" href="/uploads/foobar">
+          <span class="icon-box"><i class="fas fa-file"></i></span>
+          <span class="filename">This is a attachment</span>
+          <span class="filesize"></span>
+        </a>
+      </p>
     HTML
     out = BlueDoc::HTML.render(raw, format: :markdown)
     assert_html_equal html, out
 
     # PDF attachment
     raw = <<~MD
-    [This is a attachment.pdf](/uploads/foobar)
+      [This is a attachment.pdf](/uploads/foobar)
     MD
     html = <<~HTML
-    <p>
-    <a class="attachment-file" title="This is a attachment.pdf" target="_blank" href="/uploads/foobar">
-      <span class="icon-box"><i class="fas fa-file"></i></span>
-      <span class="filename">This is a attachment.pdf</span>
-      <span class="filesize"></span>
-    </a>
-    <embed src="/uploads/foobar" class="attachment-pdf-preview">
-    </p>
+      <p>
+      <a class="attachment-file" title="This is a attachment.pdf" target="_blank" href="/uploads/foobar">
+        <span class="icon-box"><i class="fas fa-file"></i></span>
+        <span class="filename">This is a attachment.pdf</span>
+        <span class="filesize"></span>
+      </a>
+      <embed src="/uploads/foobar" class="attachment-pdf-preview">
+      </p>
     HTML
     out = BlueDoc::HTML.render(raw, format: :markdown)
     assert_html_equal html, out
 
-
     # empty link should work
     raw = <<~MD
-    [This is a attachment]()
+      [This is a attachment]()
     MD
     out = BlueDoc::HTML.render(raw, format: :markdown)
     assert_html_equal %(<p><a href="">This is a attachment</a></p>), out
@@ -160,15 +159,15 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
 
   test "markdown plantuml" do
     code = <<~CODE
-    @startuml
-    Alice -> Bob: test
-    @enduml
+      @startuml
+      Alice -> Bob: test
+      @enduml
     CODE
 
     raw = <<~MD
-    ```
-    #{code}
-    ```
+      ```
+      #{code}
+      ```
     MD
 
     out = BlueDoc::HTML.render(raw, format: :markdown)
@@ -181,11 +180,11 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     code_1 = '\int _{a}^{b}f(x)dx\approx {\frac {b-a} {n}}\left({f(a)+f(b) \over 2}+\sum _{{k=1}}^{{n-1}}f\left(a+k{\frac {b-a}{n}}\right)\right)\\\\n * 10 = u'
     # puts "--- raw code:\n#{code}"
     raw = <<~CODE
-    Hello world: $#{code}$ test, this `$name$` will not convert
+      Hello world: $#{code}$ test, this `$name$` will not convert
 
-    ```rb
-    $name = $foo
-    ```
+      ```rb
+      $name = $foo
+      ```
     CODE
     svg_code = CGI.escape(code_1)
 
@@ -193,10 +192,10 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     # puts "svg_url: #{svg_url}"
 
     html = <<~HTML
-    <p>Hello world: <img class="tex-image" src="#{svg_url}"> test, this <code>$name$</code> will not convert</p>
-    <div class="highlight">
-      <pre class="highlight ruby"><code><span class="vg">$name</span> <span class="o">=</span> <span class="vg">$foo</span></code></pre>
-    </div>
+      <p>Hello world: <img class="tex-image" src="#{svg_url}"> test, this <code>$name$</code> will not convert</p>
+      <div class="highlight">
+        <pre class="highlight ruby"><code><span class="vg">$name</span> <span class="o">=</span> <span class="vg">$foo</span></code></pre>
+      </div>
     HTML
 
     out = BlueDoc::HTML.render(raw, format: :markdown)
@@ -228,46 +227,46 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
     blob1 = create(:blob)
 
     raw = <<~MD
-    ![](/uploads/#{blob0.key})
+      ![](/uploads/#{blob0.key})
 
-    [Download File](/uploads/foobar)
+      [Download File](/uploads/foobar)
 
-    ## Hello world
+      ## Hello world
 
-    ![](/uploads/#{blob1.key})
+      ![](/uploads/#{blob1.key})
 
-    ![](/uploads/not-found-key)
+      ![](/uploads/not-found-key)
 
-    ![](https://www.google.com.hk/test.png)
+      ![](https://www.google.com.hk/test.png)
 
-    [download: The File](https://www.google.com.hk/test.zip)
+      [download: The File](https://www.google.com.hk/test.zip)
     MD
 
     fake_url0 = "https://foo.bar.com/aaa.jpg"
     fake_url1 = "https://foo.bar.com/bbb.jpg"
 
     html = <<~HTML
-    <p><img src="#{fake_url0}" alt=""></p>
-    <p>
-      <a class="attachment-file" title="Download File" target="_blank" href="#{Setting.host}/uploads/foobar">
-        <span class="icon-box"><i class="fas fa-file"></i></span>
-        <span class="filename">Download File</span>
-        <span class="filesize"></span>
-      </a>
-    </p>
-    <h2 id="hello-world">
-    <a href="#hello-world" class="heading-anchor">#</a>Hello world</h2>
-    <p><img src="#{fake_url1}" alt=""></p>
-    <p><img src="/uploads/not-found-key" alt=""></p>
+      <p><img src="#{fake_url0}" alt=""></p>
+      <p>
+        <a class="attachment-file" title="Download File" target="_blank" href="#{Setting.host}/uploads/foobar">
+          <span class="icon-box"><i class="fas fa-file"></i></span>
+          <span class="filename">Download File</span>
+          <span class="filesize"></span>
+        </a>
+      </p>
+      <h2 id="hello-world">
+      <a href="#hello-world" class="heading-anchor">#</a>Hello world</h2>
+      <p><img src="#{fake_url1}" alt=""></p>
+      <p><img src="/uploads/not-found-key" alt=""></p>
 
-    <p><img src="https://www.google.com.hk/test.png" alt=""></p>
-    <p>
-      <a class="attachment-file" title="The File" target="_blank" href="https://www.google.com.hk/test.zip">
-        <span class="icon-box"><i class="fas fa-file"></i></span>
-        <span class="filename">The File</span>
-        <span class="filesize"></span>
-      </a>
-    </p>
+      <p><img src="https://www.google.com.hk/test.png" alt=""></p>
+      <p>
+        <a class="attachment-file" title="The File" target="_blank" href="https://www.google.com.hk/test.zip">
+          <span class="icon-box"><i class="fas fa-file"></i></span>
+          <span class="filename">The File</span>
+          <span class="filesize"></span>
+        </a>
+      </p>
     HTML
 
     find_stub = lambda do |opts|
@@ -291,19 +290,19 @@ class BlueDoc::HTMLTest < ActiveSupport::TestCase
 
   test ".mention_fragments" do
     raw = <<~MD
-    # Hello @foo this is heading1
-    ## Hello @foo this is heading2
-    ### Hello @foo this is heading3
-    #### Hello @foo this is heading4
-    #### Hello @bar this is heading4
-    ##### Hello @foo this is heading5
-    ###### Hello @foo this is heading6
+      # Hello @foo this is heading1
+      ## Hello @foo this is heading2
+      ### Hello @foo this is heading3
+      #### Hello @foo this is heading4
+      #### Hello @bar this is heading4
+      ##### Hello @foo this is heading5
+      ###### Hello @foo this is heading6
 
-    Mention @foo in a paragraph
+      Mention @foo in a paragraph
 
-    Mention @bar in a paragraph
+      Mention @bar in a paragraph
 
-    > Mention @foo in blockquote
+      > Mention @foo in blockquote
     MD
 
     html = BlueDoc::HTML.render(raw, format: :markdown)

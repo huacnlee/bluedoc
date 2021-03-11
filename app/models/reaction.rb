@@ -8,8 +8,8 @@ class Reaction < ApplicationRecord
 
   before_validation :validate_name
   def validate_name
-    if Twemoji.find_by_text(self.text).blank?
-      self.errors.add(:name, "is an invalid emoji name")
+    if Twemoji.find_by_text(text).blank?
+      errors.add(:name, "is an invalid emoji name")
     end
   end
 
@@ -64,7 +64,7 @@ class Reaction < ApplicationRecord
   end
 
   def text
-    @emoji_text ||= ":#{self.name}:"
+    @emoji_text ||= ":#{name}:"
   end
 
   def self.class_with_subject_type(type)

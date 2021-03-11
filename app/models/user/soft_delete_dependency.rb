@@ -5,8 +5,8 @@ class User
 
   # PRO-begin
   set_callback :restore, :before do
-    self.restore_dependents(:owned_repositories)
-    self.restore_dependents(:notes)
+    restore_dependents(:owned_repositories)
+    restore_dependents(:notes)
   end
   # PRO-end
 end

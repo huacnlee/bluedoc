@@ -13,8 +13,8 @@ class IssueTest < ActiveSupport::TestCase
     issue = create(:issue, repository: @repo)
     assert_equal "#{@repo.to_path}/issues/#{issue.iid}", issue.to_path
     assert_equal "#{@repo.to_path}/issues/#{issue.iid}/comments", issue.to_path("/comments")
-    assert_equal "#{Setting.host}#{@repo.to_path}/issues/#{issue.iid}",  issue.to_url
-    assert_equal "#{Setting.host}#{@repo.to_path}/issues/#{issue.iid}#comment-1",  issue.to_url(anchor: "comment-1")
+    assert_equal "#{Setting.host}#{@repo.to_path}/issues/#{issue.iid}", issue.to_url
+    assert_equal "#{Setting.host}#{@repo.to_path}/issues/#{issue.iid}#comment-1", issue.to_url(anchor: "comment-1")
   end
 
   test "find_by_iid and find_by_iid!" do
@@ -49,16 +49,14 @@ class IssueTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
 
-    allow_feature(:reader_list) do
-      user1.read_issue(issue)
-      assert_equal 1, issue.reads_count
-      user2.read_issue(issue)
-      assert_equal 2, issue.reads_count
+    user1.read_issue(issue)
+    assert_equal 1, issue.reads_count
+    user2.read_issue(issue)
+    assert_equal 2, issue.reads_count
 
-      assert_equal true, user1.read_issue?(issue)
-      assert_equal true, user2.read_issue?(issue)
-      assert_equal [user1, user2].sort, issue.read_by_users.sort
-    end
+    assert_equal true, user1.read_issue?(issue)
+    assert_equal true, user2.read_issue?(issue)
+    assert_equal [user1, user2].sort, issue.read_by_users.sort
   end
 
   test "assignees" do
@@ -115,14 +113,14 @@ class IssueTest < ActiveSupport::TestCase
     # under a repository issues
     assert_equal [issue2, issue1, issue0], repo.issues.with_assignees([users[2].id]).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_assignees(users[2].id).recent
-    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees("#{users[2].id}").recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees([users[1].id]).recent
-    assert_equal [issue1, issue0],  repo.issues.with_assignees(["#{users[1].id}"]).recent
-    assert_equal [issue0],  repo.issues.with_assignees([users[0].id]).recent
-    assert_equal [issue2, issue1],  repo.issues.with_assignees([users[3].id]).recent
-    assert_equal [issue2, issue1, issue0],  repo.issues.with_assignees([]).recent
-    assert_equal [issue2],  repo.issues.closed.with_assignees([]).recent
-    assert_equal [issue1, issue0],  repo.issues.open.with_assignees([]).recent
+    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees(users[2].id.to_s).recent
+    assert_equal [issue1, issue0], repo.issues.with_assignees([users[1].id]).recent
+    assert_equal [issue1, issue0], repo.issues.with_assignees([users[1].id.to_s]).recent
+    assert_equal [issue0], repo.issues.with_assignees([users[0].id]).recent
+    assert_equal [issue2, issue1], repo.issues.with_assignees([users[3].id]).recent
+    assert_equal [issue2, issue1, issue0], repo.issues.with_assignees([]).recent
+    assert_equal [issue2], repo.issues.closed.with_assignees([]).recent
+    assert_equal [issue1, issue0], repo.issues.open.with_assignees([]).recent
   end
 
   test "participants" do
@@ -156,7 +154,6 @@ class IssueTest < ActiveSupport::TestCase
     labels0 = create_list(:label, 3, target: issue.repository)
     labels1 = create_list(:label, 2, target: issue.repository)
 
-
     issue.update_labels(labels0.collect(&:id))
     issue.reload
     assert_equal labels0.sort, issue.labels.sort
@@ -189,13 +186,13 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels([3]).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels(3).recent
     assert_equal [issue2, issue1, issue0], repo.issues.with_labels("3").recent
-    assert_equal [issue1, issue0],  repo.issues.with_labels([3, 2]).recent
-    assert_equal [issue1, issue0],  repo.issues.with_labels(["3", "2"]).recent
-    assert_equal [issue0],  repo.issues.with_labels([1, 2, 3]).recent
-    assert_equal [issue2, issue1],  repo.issues.with_labels([4]).recent
-    assert_equal [issue2, issue1, issue0],  repo.issues.with_labels([]).recent
-    assert_equal [issue2],  repo.issues.closed.with_labels([]).recent
-    assert_equal [issue1, issue0],  repo.issues.open.with_labels([]).recent
+    assert_equal [issue1, issue0], repo.issues.with_labels([3, 2]).recent
+    assert_equal [issue1, issue0], repo.issues.with_labels(["3", "2"]).recent
+    assert_equal [issue0], repo.issues.with_labels([1, 2, 3]).recent
+    assert_equal [issue2, issue1], repo.issues.with_labels([4]).recent
+    assert_equal [issue2, issue1, issue0], repo.issues.with_labels([]).recent
+    assert_equal [issue2], repo.issues.closed.with_labels([]).recent
+    assert_equal [issue1, issue0], repo.issues.open.with_labels([]).recent
   end
 
   test "watches / notifications" do

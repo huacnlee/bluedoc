@@ -4,18 +4,18 @@ module BlueDoc
   module Import
     class Archive < GitBook
       def valid_url?
-        self.url&.start_with?("http")
+        url&.start_with?("http")
       end
 
       def download
         script = <<~SCRIPT
-        mkdir -p #{self.repo_dir} && \
-        wget -O #{self.repo_dir}/archive.zip '#{self.url}' && \
-        unzip #{self.repo_dir}/archive.zip -d #{self.repo_dir}
+          mkdir -p #{repo_dir} && \
+          wget -O #{repo_dir}/archive.zip '#{url}' && \
+          unzip #{repo_dir}/archive.zip -d #{repo_dir}
         SCRIPT
 
         logger.info script
-        self.execute(script)
+        execute(script)
       end
     end
   end

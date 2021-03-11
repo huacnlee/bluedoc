@@ -17,12 +17,10 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".user-email-suffix-support-list", 0
 
-    allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
-        get account_settings_path
-        assert_equal 200, response.status
-        assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
-      end
+    Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
+      get account_settings_path
+      assert_equal 200, response.status
+      assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
     end
   end
 
@@ -53,11 +51,11 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     sign_in @user
-    put account_settings_path, params: { user: { name: "" }, _by: :profile }
+    put account_settings_path, params: {user: {name: ""}, _by: :profile}
     assert_equal 200, response.status
     assert_select ".form-group .form-error"
 
-    put account_settings_path, params: { user: account_params, _by: :profile }
+    put account_settings_path, params: {user: account_params, _by: :profile}
     assert_redirected_to account_settings_path
     follow_redirect!
     assert_select ".notice", text: "个人资料已经更新成功。"
@@ -95,13 +93,13 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     }
 
     sign_in user
-    put account_settings_path, params: { user: { current_password: password, password: "123", password_confirmation: "321" }, _by: :password }
+    put account_settings_path, params: {user: {current_password: password, password: "123", password_confirmation: "321"}, _by: :password}
     assert_equal 200, response.status
     assert_select "#account-change-password" do
       assert_select ".form-group .form-error"
     end
 
-    put account_settings_path, params: { user: account_params, _by: :password }
+    put account_settings_path, params: {user: account_params, _by: :password}
     assert_redirected_to account_account_settings_path
     follow_redirect!
     assert_select ".notice", text: "You have successfully changed your password."
@@ -115,14 +113,14 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user, name: "Jason Lee")
 
     sign_in user
-    put account_settings_path, params: { user: { slug: user0.slug }, _by: :username }
+    put account_settings_path, params: {user: {slug: user0.slug}, _by: :username}
     assert_equal 200, response.status
     assert_select "#account-change-username" do
       assert_select ".form-group .form-error", text: "Username has already been taken"
     end
 
     old_username = user.slug
-    put account_settings_path, params: { user: { slug: "#{old_username}-new", name: "Hello" }, _by: :username }
+    put account_settings_path, params: {user: {slug: "#{old_username}-new", name: "Hello"}, _by: :username}
     assert_redirected_to account_account_settings_path
     user.reload
     assert_equal "#{old_username}-new", user.slug

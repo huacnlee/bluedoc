@@ -18,27 +18,27 @@ class Doc < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_one :share, as: :shareable, dependent: :destroy
 
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :slug, length: { maximum: 200 }, uniqueness: { scope: :repository_id, case_sensitive: false }
+  validates :title, presence: true, length: {maximum: 255}
+  validates :slug, length: {maximum: 200}, uniqueness: {scope: :repository_id, case_sensitive: false}
 
   def to_path(suffix = nil)
-    "#{repository.to_path}/#{self.slug}#{suffix}"
+    "#{repository.to_path}/#{slug}#{suffix}"
   end
 
   def full_slug
-    [self.repository&.user&.slug, self.repository&.slug, self.slug].join("/")
+    [repository&.user&.slug, repository&.slug, slug].join("/")
   end
 
   # transfer doc to repository, if slug exist, auto rename
   def transfer_to(repo)
-    self.transaction do
+    transaction do
       self.repository_id = repo.id
-      self.save!(validate: false)
+      save!(validate: false)
       # free doc releative
-      self.toc.update(doc_id: nil)
+      toc.update(doc_id: nil)
       # destroy to invoke rebuild tree
-      self.toc.destroy
-      self.reload.ensure_toc!
+      toc.destroy
+      reload.ensure_toc!
     end
   rescue ActiveRecord::RecordNotUnique
     self.slug = BlueDoc::Slug.random
@@ -48,7 +48,7 @@ class Doc < ApplicationRecord
   # return next and prev of docs in same repository
   # { next: Doc, prev: Doc }
   def prev_and_next_of_docs
-    { next: self.toc&.next&.doc, prev: self.toc&.prev&.doc }
+    {next: toc&.next&.doc, prev: toc&.prev&.doc}
   end
 
   class << self

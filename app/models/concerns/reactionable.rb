@@ -8,6 +8,6 @@ module Reactionable
   end
 
   def reactions_as_json
-    self.reactions.grouped.as_json(only: %i[id name], methods: %i[url group_user_slugs group_count])
+    reactions.grouped.as_json(only: %i[id name], methods: %i[url group_user_slugs group_count])
   end
 end

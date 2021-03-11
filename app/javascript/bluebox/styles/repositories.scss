@@ -9,7 +9,7 @@
       background-size: 320px auto;
     }
 
-    &[type=import] {
+    &[type="import"] {
       background: none;
     }
 
@@ -25,10 +25,9 @@
 .page-labels {
   .repo-heading {
     text-align: left;
-    background: #F7F7F7;
+    background: #f7f7f7;
 
     .container {
-
     }
 
     @include breakpoint(lg) {
@@ -43,7 +42,8 @@
       margin: 20px 0 0px 20px;
 
       h1 {
-        font-size: 28px; line-height: 28px;
+        font-size: 28px;
+        line-height: 28px;
         text-align: center;
         margin-bottom: 20px;
       }
@@ -103,8 +103,6 @@
     }
   }
 
-
-
   .repo-actions {
     margin-right: 20px;
     .btn {
@@ -122,8 +120,14 @@
         margin-top: -1px;
       }
 
-      span { padding: 0px; }
-      .social-count { margin: 0; margin-left: 5px; color: $text-gray; }
+      span {
+        padding: 0px;
+      }
+      .social-count {
+        margin: 0;
+        margin-left: 5px;
+        color: $text-gray;
+      }
     }
     .social-count {
       font-style: normal;
@@ -131,7 +135,6 @@
     .btn-create-doc:hover,
     .action-button a:hover {
     }
-
   }
 
   .repo-description {
@@ -141,7 +144,8 @@
     overflow: hidden;
   }
 
-  .repository-docs, .repo-toc {
+  .repository-docs,
+  .repo-toc {
     @include breakpoint(md) {
       margin: 0 auto;
     }
@@ -194,7 +198,8 @@
   #repository-members {
     .repository-member {
       position: relative;
-      .edit-member, .delete-member {
+      .edit-member,
+      .delete-member {
         position: absolute;
         top: 5px;
       }
@@ -219,14 +224,15 @@
     }
   }
   .transfer-docs {
-    .docs-list{
+    .docs-list {
       max-height: 390px;
       overflow-y: scroll;
       border: 1px solid #e0e0e0;
       padding: 0 20px;
       .form-checkbox {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
       }
       .box-row {
         padding-top: 20px;

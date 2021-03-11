@@ -39,14 +39,14 @@ module NotifyTrackable
       user_ids = []
       if user_id.is_a?(Array)
         user_ids = user_id
-      else
-        user_ids = [user_id] if !user_id.blank?
+      elsif !user_id.blank?
+        user_ids = [user_id]
       end
 
       if user.is_a?(Array)
         users = user
-      else
-        users = [user] if !user.blank?
+      elsif !user.blank?
+        users = [user]
       end
 
       user_ids = users.map(&:id) if users.present?

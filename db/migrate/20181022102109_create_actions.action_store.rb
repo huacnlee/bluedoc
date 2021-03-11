@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from action_store (originally 20170204035500)
 class CreateActions < ActiveRecord::Migration[5.0]
   def change

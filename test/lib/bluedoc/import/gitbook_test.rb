@@ -35,9 +35,9 @@ class BlueDoc::Import::GitBookTest < ActiveSupport::TestCase
     assert_equal "this is body", res[:body]
 
     body = <<~BODY
-    Hello world
-    -----------
-    This is body
+      Hello world
+      -----------
+      This is body
     BODY
     res = importer.parse_title(body)
     assert_equal "Hello world", res[:title]
@@ -53,8 +53,8 @@ class BlueDoc::Import::GitBookTest < ActiveSupport::TestCase
       BlueDoc::Blob.stub(:upload, "/uploads/foooo") do
         body = importer.upload_images(local_path, body)
         assert_match %([world](http://github.com)), body
-        assert_match /\(\/uploads\/foooo\)/, body
-        assert_match /<img src='\/uploads\/foooo' \/>/, body
+        assert_match(/\(\/uploads\/foooo\)/, body)
+        assert_match(/<img src='\/uploads\/foooo' \/>/, body)
       end
     end
   end

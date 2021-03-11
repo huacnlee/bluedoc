@@ -3,8 +3,8 @@
 module Editorable
   def editors
     # TODO: Add cache, and make sure cache can work with avatar (when user changed it avatar)
-    users = User.where(id: self.editor_ids)
-    users.sort { |a, b| self.editor_ids.index(a.id) <=> self.editor_ids.index(b.id) }
+    users = User.where(id: editor_ids)
+    users.sort { |a, b| editor_ids.index(a.id) <=> editor_ids.index(b.id) }
   end
 
   def add_editor(editor_id)

@@ -9,7 +9,7 @@ module ApplicationHelper
   def logo_tag(href: "/")
     site_logo = Setting.site_logo
 
-    if site_logo && site_logo.start_with?("data:")
+    if site_logo&.start_with?("data:")
       style = "background: none; padding: 0"
       link_to href, class: "navbar-brand", style: style do
         image_tag(Setting.site_logo)
@@ -68,10 +68,10 @@ module ApplicationHelper
   def action_button_tag(target, action_type, opts = {})
     return "" if target.blank?
 
-    label      = opts[:label]
+    label = opts[:label]
     undo_label = opts[:undo_label]
-    icon       = opts[:icon]
-    undo       = opts[:undo]
+    icon = opts[:icon]
+    undo = opts[:undo]
     with_count = opts[:with_count]
 
     label ||= t("shared.action_button.#{action_type}")
@@ -81,9 +81,9 @@ module ApplicationHelper
     action_type_pluralize = action_type.to_s.pluralize
     action_count = "#{action_type_pluralize}_count"
 
-    url = target.to_path("/action?#{{ action_type: action_type }.to_query}")
+    url = target.to_path("/action?#{{action_type: action_type}.to_query}")
 
-    data = { method: :post, label: label, undo_label: undo_label, remote: true, disable: true }
+    data = {method: :post, label: label, undo_label: undo_label, remote: true, disable: true}
     class_names = opts[:class] || "btn btn-sm"
     if with_count
       class_names += " btn-with-count"

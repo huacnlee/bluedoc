@@ -2,6 +2,6 @@
 
 class ApplicationJob < ActiveJob::Base
   def job_id
-    self.provider_job_id || super
+    provider_job_id || super
   end
 end

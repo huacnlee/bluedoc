@@ -21,7 +21,7 @@ class SearchIndexJob < ApplicationJob
       obj = User.find_by_id(id)
     when "group"
       obj = Group.find_by_id(id)
-    when  "note"
+    when "note"
       obj = Note.find_by_id(id)
     when "issue"
       obj = Issue.find_by_id(id)
@@ -35,8 +35,8 @@ class SearchIndexJob < ApplicationJob
       if type == "repository"
         invoke_client :update_by_query, index: "#{Doc.index_name},#{Repository.index_name}", body: {
           conflicts: "proceed",
-          query: { term: { repository_id: obj.id } },
-          script: { inline: "ctx._source.repository.public = #{obj.public?}" }
+          query: {term: {repository_id: obj.id}},
+          script: {inline: "ctx._source.repository.public = #{obj.public?}"}
         }
       end
     elsif operation == "index"
@@ -53,12 +53,12 @@ class SearchIndexJob < ApplicationJob
     if type == "repository"
       invoke_client :delete_by_query, index: "_all", body: {
         conflicts: "proceed",
-        query: { term: { repository_id: id } }
+        query: {term: {repository_id: id}}
       }
     elsif type == "user" || type == "group"
       invoke_client :delete_by_query, index: "_all", body: {
         conflicts: "proceed",
-        query: { term: { user_id: id } }
+        query: {term: {user_id: id}}
       }
     end
   end

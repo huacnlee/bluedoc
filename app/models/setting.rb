@@ -15,7 +15,6 @@ class Setting < RailsSettings::Base
   field :confirmable_enable, default: false, type: :boolean
   field :user_email_suffixes, default: [], type: :array
   field :captcha_enable, default: true, type: :boolean
-  field :license, default: "", type: :string
 
   # ActionMailer
   field :mailer_from, type: :string, default: "no-reply@bluedoc.io"
@@ -27,7 +26,7 @@ class Setting < RailsSettings::Base
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"],
     authentication: ENV["SMTP_AUTHENTICATION"] || "login",
-    enable_starttls_auto: (ENV["SMTP_ENABLE_STARTTLS_AUTO"] || "true") == "true",
+    enable_starttls_auto: (ENV["SMTP_ENABLE_STARTTLS_AUTO"] || "true") == "true"
   }
 
   # Devise
@@ -67,8 +66,8 @@ class Setting < RailsSettings::Base
     }
 
     def has_admin?(email)
-      return false if self.admin_emails.blank?
-      self.admin_emails.include?(email.downcase)
+      return false if admin_emails.blank?
+      admin_emails.include?(email.downcase)
     end
 
     def locale_options
@@ -79,20 +78,18 @@ class Setting < RailsSettings::Base
       LOCALES[Setting.default_locale.to_sym] || LOCALES[I18n.default_locale]
     end
 
-    # PRO-begin
     def user_email_limit_enable?
-      License.allow_feature?(:limit_user_emails) && self.user_email_suffixes.any?
+      user_email_suffixes.any?
     end
 
     # Check User email by user_email_suffixes setting
     def valid_user_email?(email)
       return false if email.blank?
-      return true unless License.allow_feature?(:limit_user_emails)
-      return true if self.user_email_suffixes.blank?
+      return true if user_email_suffixes.blank?
 
       found = false
 
-      self.user_email_suffixes.each do |suffix|
+      user_email_suffixes.each do |suffix|
         if email.downcase.end_with?(suffix.downcase)
           found = true
           break
@@ -101,7 +98,6 @@ class Setting < RailsSettings::Base
 
       found
     end
-    # PRO-end
 
     def mailer_sender
       "BlueDoc <#{Setting.mailer_from}>"
