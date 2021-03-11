@@ -1,5 +1,6 @@
 FROM ruby:2.7.2-alpine
 
+MAINTAINER BlueDoc "https://github.com/thebluedoc"
 RUN gem install bundler
 RUN apk --update add ca-certificates tzdata imagemagick git curl zip redis postgresql postgresql-contrib \
     openssl nginx graphviz nodejs python2 &&\
@@ -64,3 +65,8 @@ RUN curl -L -o mathjax-service-master.zip https://github.com/ruby-china/homeland
     rm mathjax-service-master.zip && \
     cd /home/app/mathjax-service && \
     yarn
+
+# Add CaddyServer
+RUN curl -o /usr/bin/caddy https://l.ruby-china.com/downloads/caddy_linux_amd64  && \
+    chmod +x /usr/bin/caddy && \
+    /usr/bin/caddy version

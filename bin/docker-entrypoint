@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+set -e
+
+export PLANTUML_SERVICE_HOST=$APP_HOST/plantuml
+export MATHJAX_SERVICE_HOST=$APP_HOST/mathjax
+
+# Start ElasticSearch
+echo "Starting ElasticSearch"
+chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+export ES_JAVA_OPTS="-Xms512m -Xmx512m"
+su-exec elasticsearch elasticsearch -d
+
+# Start Redis Server
+echo "Starting Redis..."
+redis-server /etc/redis.conf
+
+# Check to init PostgreSQL DB
+mkdir -p /var/lib/postgresql /run/postgresql &&\
+chown postgres -R /var/lib/postgresql /run/postgresql &&\
+[ ! -d /var/lib/postgresql/data ] &&  su - postgres -c 'pg_ctl init -D /var/lib/postgresql/data'
+[ ! -f /var/lib/postgresql/data/_pg_hba_added_trust_host ] && echo "host all all all trust" >> /var/lib/postgresql/data/pg_hba.conf && touch /var/lib/postgresql/data/_pg_hba_added_trust_host
+
+# Start PostgreSQL
+echo "Starting PostgreSQL..."
+[ -f /var/lib/postgresql/data/postmaster.pid ] && rm /var/lib/postgresql/data/postmaster.pid
+su - postgres -c 'pg_ctl start --silent -w --timeout="10" -o "-c listen_addresses=0.0.0.0" --log="/var/lib/postgresql/data/postmaster.log" -D /var/lib/postgresql/data'
+
+# Check create bluedoc database
+psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = 'bluedoc'" | grep -q 1 || psql -U postgres -c "CREATE DATABASE bluedoc"
+
+# Start PlantUML Service
+echo "Starting PlantUML service..."
+java -jar /usr/local/plantuml-service.jar > /home/app/bluedoc/log/plantuml-service.log &
+
+# Start MathJax Service
+echo "Starting MathJax service..."
+node /home/app/mathjax-service/index.js > /home/app/bluedoc/log/mathjax-service.log &
+
+dockerize -wait tcp://localhost:5432 -wait tcp://localhost:6379 -timeout 30s
+
+exec "$@"

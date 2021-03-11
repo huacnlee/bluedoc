@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# ensure log tmp
+[ -z "$SECRET_KEY_BASE" ] && export SECRET_KEY_BASE=`openssl rand -hex 32`
+mkdir -p /home/app/bluedoc/log /home/app/bluedoc/tmp
+
+echo "Executing DB migration..."
+bundle exec rails db:migrate
+bundle exec rails db:seed
+
+echo "Starting BlueDoc Services..."
+bundle exec foreman start

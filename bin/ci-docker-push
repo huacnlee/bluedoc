@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+export VERSION=`cat RELEASE-VERSION`
+cd bluedoc
+export COMMIT_VERSION=`git rev-parse --short HEAD`
+if [ "$VERSION" = "master" ]; then
+  VERSION=master
+fi
+
+echo "Main version: $VERSION"
+echo "Commit version: $COMMIT_VERSION"
+
+docker login -u $DOCKER_USER -p $DOCKER_PASS
+docker push bluedoc/bluedoc:latest

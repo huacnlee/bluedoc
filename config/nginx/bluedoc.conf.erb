@@ -1,0 +1,97 @@
+upstream app_backend {
+  server 127.0.0.1:7000 fail_timeout=0;
+  keepalive 3;
+}
+
+log_format timed_combined '$remote_addr - $remote_user [$time_local] '
+                          '"$request" $status $body_bytes_sent '
+                          '"$http_referer" "$http_user_agent" '
+                          '$request_time $upstream_response_time $pipe';
+
+proxy_cache_path /home/app/bluedoc/tmp/cache/nginx levels=1:2 keys_zone=bluedoc_cache:10m max_size=10g inactive=60m use_temp_path=off;
+
+server {
+  listen 8080 default_server;
+
+  location /nginx_status {
+    allow 127.0.0.1;
+    deny all;
+    stub_status on;
+  }
+
+  root /home/app/bluedoc/public;
+
+  location ~ ^(/system|/twemoji|/favicon.ico|/*.txt) {
+    access_log        off;
+    expires           7d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  location ~ ^(/packs|/assets|/js) {
+    add_header        Access-Control-Allow-Origin *;
+    access_log        off;
+    expires           365d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  location /plantuml {
+    proxy_redirect     off;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_pass         http://127.0.0.1:1608/;
+    proxy_cache bluedoc_cache;
+    proxy_cache_valid 200 300d;
+    proxy_cache_background_update on;
+
+    add_header  Cache-Control public;
+    expires 300d;
+    gzip on;
+  }
+
+  location /mathjax {
+    rewrite /mathjax/(.*) /$1  break;
+
+    proxy_redirect     off;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_pass         http://127.0.0.1:4010/;
+    proxy_cache bluedoc_cache;
+    proxy_cache_valid 200 300d;
+    proxy_cache_background_update on;
+
+    add_header  Cache-Control public;
+    expires 300d;
+    gzip on;
+  }
+
+  location / {
+    gzip                       on;
+    proxy_redirect             off;
+    proxy_set_header           Host $http_host;
+    proxy_set_header           X-Forwarded-Host $http_host;
+    proxy_set_header           X-Forwarded-Server $http_host;
+    proxy_set_header           X-Real-IP        $remote_addr;
+    proxy_set_header           X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_buffering            on;
+    proxy_http_version         1.1;
+    proxy_set_header           Upgrade $http_upgrade;
+    proxy_set_header           Connection "Upgrade";
+    proxy_set_header           X-Forwarded-Proto $scheme;
+    proxy_pass                 http://app_backend;
+    proxy_buffer_size          128k;
+    proxy_buffers              4 256k;
+    proxy_busy_buffers_size    256k;
+    proxy_intercept_errors     on;
+
+    error_page 502 /maintenance.html;
+    error_page 404 = @fallback;
+  }
+
+  location /maintenance.html {
+    internal;
+  }
+
+  location @fallback {
+    try_files $uri =404;
+  }
+}

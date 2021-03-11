@@ -1,0 +1,5 @@
+{$APP_HOST}
+
+reverse_proxy {
+  to 127.0.0.1:8080
+}
