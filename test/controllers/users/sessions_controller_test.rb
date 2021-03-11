@@ -23,19 +23,19 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /account/sign_in with LDAP button" do
-    get new_user_session_path
-    assert_equal 200, response.status
-    assert_select ".btn-ldap-auth", 0
+    Setting.stub(:ldap_enable?, false) do
+      get new_user_session_path
+      assert_equal 200, response.status
+      assert_select ".btn-ldap-auth", 0
+    end
 
-    allow_feature :ldap_auth do
-      Setting.stub(:ldap_enable?, true) do
-        get new_user_session_path
-        assert_equal 200, response.status
-        assert_select ".btn-ldap-auth" do
-          assert_select "[href=?]", new_ldap_user_session_path
-        end
-        assert_select ".btn-ldap-auth", text: Setting.ldap_title
+    Setting.stub(:ldap_enable?, true) do
+      get new_user_session_path
+      assert_equal 200, response.status
+      assert_select ".btn-ldap-auth" do
+        assert_select "[href=?]", new_ldap_user_session_path
       end
+      assert_select ".btn-ldap-auth", text: Setting.ldap_title
     end
   end
 

@@ -32,7 +32,6 @@
         </div>
       </div>
 
-      <% feature_for(:limit_user_emails) do %>
       <div class="form-group">
         <label class="control-label"><%= t(".Account Email suffix") %></label>
         <%= f.text_area :user_email_suffixes, value: Setting.user_email_suffixes.join("\n"), class: "form-control", style: "height: 100px; min-height: 100px"  %>
@@ -40,7 +39,6 @@
           <%= t(".Limit user registration email must has suffx with in this list, empty it to allow any emails_html") %>
         </div>
       </div>
-      <% end %>
 
       <div class="form-group form-checkbox">
         <label>
@@ -73,34 +71,32 @@
         </div>
       </div>
 
-      <% feature_for :ldap_auth do %>
-        <% if Setting.ldap_enable? %>
-        <div class="ldap-auth-fields">
-          <div class="form-group">
-            <label class="control-label"><%= t(".LDAP Name") %></label>
-            <%= f.text_field :ldap_name, value: Setting.ldap_name, class: "form-control"  %>
-            <div class="form-text">
-              <%= t(".Display name of LDAP_html") %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label"><%= t(".LDAP Title") %></label>
-            <%= f.text_field :ldap_title, value: Setting.ldap_title, class: "form-control"  %>
-            <div class="form-text">
-              <%= t(".For customize the LDAP Login button title and page title_html") %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label"><%= t(".LDAP Description") %></label>
-            <%= f.text_area :ldap_description, value: Setting.ldap_description, class: "form-control"  %>
-            <div class="form-text">
-              <%= t(".Customize the LDAP Login page description_html") %>
-            </div>
+      <% if Setting.ldap_enable? %>
+      <div class="ldap-auth-fields">
+        <div class="form-group">
+          <label class="control-label"><%= t(".LDAP Name") %></label>
+          <%= f.text_field :ldap_name, value: Setting.ldap_name, class: "form-control"  %>
+          <div class="form-text">
+            <%= t(".Display name of LDAP_html") %>
           </div>
         </div>
-        <% end %>
+
+        <div class="form-group">
+          <label class="control-label"><%= t(".LDAP Title") %></label>
+          <%= f.text_field :ldap_title, value: Setting.ldap_title, class: "form-control"  %>
+          <div class="form-text">
+            <%= t(".For customize the LDAP Login button title and page title_html") %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label"><%= t(".LDAP Description") %></label>
+          <%= f.text_area :ldap_description, value: Setting.ldap_description, class: "form-control"  %>
+          <div class="form-text">
+            <%= t(".Customize the LDAP Login page description_html") %>
+          </div>
+        </div>
+      </div>
       <% end %>
 
       <div class="form-action">

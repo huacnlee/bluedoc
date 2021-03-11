@@ -1,46 +1,17 @@
-The BlueDoc Pro (BD) license (the “BD License”)
-Copyright © 2019-present BlueDoc.
- 
-With regard to the BlueDoc Software:
- 
-This software and associated documentation files ("the Software") 
-may only be used in production, by downloading and using the Software 
-you (and any entity that you represent) have agreed to be compliant 
-with the following terms:
+MIT License
 
-BlueDoc Free
+Copyright (c) 2021 Jason Lee
 
-As a BlueDoc Free user, you may use
-the BlueDoc Free Software ("Free Software") for development and
-testing purposes without requiring a subscription. You agree that
-BlueDoc and/or its licensors (as applicable) retain all right, 
-title and interest in and to all such modifications.  You are not
-granted any other rights beyond what is expressly stated herein.  
-Subject to the foregoing, it is forbidden to copy, merge, publish, 
-distribute, sublicense, and/or sell the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-BlueDoc Pro Subscription
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-In additional to all the rights of a BlueDoc Free user, as a user 
-that holds a valid BlueDoc Pro subscription for the correct number
-of user seats, you are free to use the Software that is part of
-the BlueDoc Pro Subscription ("Subscribed Software"). You agree
-that BlueDoc/or its licensors (as applicable) retain all right, 
-title and interest in and to all such modifications and/or patches,
-and all such modifications and/or patches may only be used, copied,
-modified, displayed, distributed, or otherwise exploited with a
-valid BlueDoc Pro subscription for the correct number of user 
-seats. Subject to the foregoing, it is forbidden to copy, merge,
-publish, distribute, sublicense, and/or sell the Software.
- 
-This BD License applies only to the part of this Software that is not
-distributed as part of BlueDoc, and that is not a file that produces 
-client-side JavaScript, in whole or in part. Any part of this Software 
-distributed as part of BD License or that is a file that produces 
-client-side JavaScript, in whole or in part, is copyrighted under 
-the MIT Expat license. The full text of this BD License shall be
-included in all copies or substantial portions of the Software.
- 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,7 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- 
-For all third party components incorporated into the BlueDoc, those 
-components are licensed under the original license provided by the 
-owner of the applicable component.

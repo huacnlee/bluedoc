@@ -45,14 +45,10 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to admin_users_path(q: @user.slug), notice: t(".User was successfully deleted")
   end
 
-  # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @user.restore
     redirect_to admin_users_path(q: @user.slug), notice: t(".User was successfully restored")
   end
-  # PRO-end
 
   private
     def set_user

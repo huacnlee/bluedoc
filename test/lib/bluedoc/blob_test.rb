@@ -56,8 +56,8 @@ class BlueDoc::BlobTest < ActiveSupport::TestCase
       BlueDoc::Blob.upload("https://images.apple.com/aajajajjajajaj.png")
     end
 
-    assert_changes -> { ActiveStorage::Blob.where(filename: "32.png").count }, 1 do
-      result = BlueDoc::Blob.upload("https://images.apple.com/ac/flags/1/images/us/32.png")
+    assert_changes -> { ActiveStorage::Blob.where(filename: "favicon.ico").count }, 1 do
+      result = BlueDoc::Blob.upload("https://www.apple.com/favicon.ico")
       assert_match /\/uploads\/(\w+)/, result
     end
   end

@@ -18,17 +18,11 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
 
 
   test "GET /admin/settings for check :ldap_auth" do
-    get admin_settings_path(_action: "show")
-    assert_equal 200, response.status
-    assert_select ".ldap-auth-fields", 0
-
-    allow_feature :ldap_auth do
-      Setting.stub(:ldap_enable?, true) do
-        get admin_settings_path(_action: "show")
-      end
-      assert_equal 200, response.status
-      assert_select ".ldap-auth-fields", 1
+    Setting.stub(:ldap_enable?, true) do
+      get admin_settings_path(_action: "show")
     end
+    assert_equal 200, response.status
+    assert_select ".ldap-auth-fields", 1
   end
 
 

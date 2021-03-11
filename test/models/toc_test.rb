@@ -142,9 +142,8 @@ class TocTest < ActiveSupport::TestCase
 
     # Restore will revert toc
     doc = Doc.unscoped.find_by_id(doc.id)
-    allow_feature :soft_delete do
-      doc.restore
-    end
+
+    doc.restore
     doc = Doc.find_by_id(doc.id)
     assert_not_nil doc
     assert_not_nil doc.toc

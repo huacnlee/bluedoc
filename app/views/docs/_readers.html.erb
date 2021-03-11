@@ -1,13 +1,12 @@
-<% feature_for(:reader_list) do %>
-<div class="note-readers text-gray">
-  <a href="<%= note.to_path("/readers") %>" class="readers-link" data-remote="true">
+<div class="doc-readers text-gray-light">
+  <a href="<%= doc.to_path("/readers") %>" class="readers-link" data-remote="true">
     <span class="avatars">
       <% readers.take(5).map do |action| %>
         <%= user_avatar_tag(action.user, style: :tiny, link: false)%>
       <% end %>
     </span>
-    <% if note.reads_count > 5 %>
-    ... <%= note.reads_count %> <%= t(".people") %>
+    <% if doc.reads_count > 5 %>
+    ... <%= doc.reads_count %> <%= t(".people") %>
     <% end %>
     <%= t(".has read") %>
   </a>
@@ -35,4 +34,4 @@
   </details>
   <% end %>
 </div>
-<% end %>
+

@@ -64,7 +64,6 @@ gem "sanitize"
 
 gem "bluedoc-toc"
 gem "bluedoc-sml"
-gem "bluedoc-license"
 
 gem "wicked_pdf"
 

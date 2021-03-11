@@ -57,8 +57,6 @@ class Admin::DocsController < Admin::ApplicationController
 
   # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @doc.restore
     redirect_to admin_docs_path(repository_id: @doc.repository_id, q: @doc.slug), notice: t(".Doc was successfully restored")
   end

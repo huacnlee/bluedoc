@@ -16,8 +16,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def ldap
-    check_feature! :ldap_auth
-
     process_callback
   end
 

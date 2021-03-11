@@ -454,10 +454,8 @@ class DocTest < ActiveSupport::TestCase
     # destroy doc and restore it
     doc2.destroy
     doc2 = Doc.unscoped.find(doc2.id)
-    allow_feature :soft_delete do
-      doc2.restore
-      assert_not_nil doc2.toc
-    end
+    doc2.restore
+    assert_not_nil doc2.toc
   end
 
   test "prev_and_next_of_docs" do
@@ -485,16 +483,14 @@ class DocTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
 
-    allow_feature(:reader_list) do
-      user1.read_doc(doc)
-      assert_equal 1, doc.reads_count
-      user2.read_doc(doc)
-      assert_equal 2, doc.reads_count
+    user1.read_doc(doc)
+    assert_equal 1, doc.reads_count
+    user2.read_doc(doc)
+    assert_equal 2, doc.reads_count
 
-      assert_equal true, user1.read_doc?(doc)
-      assert_equal true, user2.read_doc?(doc)
-      assert_equal [user1, user2].sort, doc.read_by_users.sort
-    end
+    assert_equal true, user1.read_doc?(doc)
+    assert_equal true, user2.read_doc?(doc)
+    assert_equal [user1, user2].sort, doc.read_by_users.sort
   end
 
   test "auto_correct" do

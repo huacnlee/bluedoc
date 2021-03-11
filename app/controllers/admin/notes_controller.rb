@@ -20,14 +20,10 @@ class Admin::NotesController < Admin::ApplicationController
     redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: t(".Note was successfully deleted")
   end
 
-  # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @note.restore
     redirect_to admin_notes_path(user_id: @note.user_id, q: @note.slug), notice: t(".Note was successfully restored")
   end
-  # PRO-end
 
   private
     def set_note

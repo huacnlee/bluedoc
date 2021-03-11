@@ -45,14 +45,9 @@ class Admin::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     @repository.destroy
 
     post restore_admin_repository_path(@repository.id)
-    assert_equal 501, response.status
-
-    allow_feature(:soft_delete) do
-      post restore_admin_repository_path(@repository.id)
-      @repository.reload
-      assert_redirected_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug)
-      assert_equal false, @repository.deleted?
-    end
+    @repository.reload
+    assert_redirected_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug)
+    assert_equal false, @repository.deleted?
 
     repo = Repository.find(@repository.id)
     assert_equal false, repo.deleted?

@@ -17,7 +17,55 @@ Rails.application.routes.draw do
   }
   get "/account/sign_in/ldap" => "users/ldaps#new", as: :new_ldap_user_session
 
-  draw :admin
+  # /admin
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web, at: "/admin/sidekiq"
+    mount ExceptionTrack::Engine, at: "/admin/exception-track"
+    mount PgHero::Engine, at: "/admin/pghero"
+  end
+
+  namespace :admin do
+    root to: "dashboards#show"
+    resource :dashboard do
+      collection do
+        post :reindex
+      end
+    end
+    resource :settings do
+      collection do
+        post :test_mail
+      end
+    end
+    resources :integrations
+    resources :groups do
+      member do
+        post :restore
+      end
+    end
+    resources :users do
+      member do
+        post :restore
+      end
+    end
+    resources :repositories do
+      member do
+        post :restore
+      end
+    end
+    resources :docs do
+      member do
+        post :restore
+      end
+    end
+    resources :comments
+    resources :shares
+    resources :issues
+    resources :notes do
+      member do
+        post :restore
+      end
+    end
+  end
 
   # short attachment url
   get "/uploads/:id" => "blobs#show", as: :upload

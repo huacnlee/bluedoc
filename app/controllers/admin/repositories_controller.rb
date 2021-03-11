@@ -48,14 +48,10 @@ class Admin::RepositoriesController < Admin::ApplicationController
     redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: t(".Repository was successfully deleted")
   end
 
-  # PRO-begin
   def restore
-    check_feature! :soft_delete
-
     @repository.restore
     redirect_to admin_repositories_path(user_id: @repository.user_id, q: @repository.slug), notice: t(".Repository was successfully restored")
   end
-  # PRO-end
 
   private
     def set_repository

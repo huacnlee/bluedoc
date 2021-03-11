@@ -14,12 +14,10 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select ".user-email-suffix-support-list", 0
 
-    allow_feature(:limit_user_emails) do
-      Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
-        get new_user_registration_path
-        assert_equal 200, response.status
-        assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
-      end
+    Setting.stub(:user_email_suffixes, %w[foo.com bar.com]) do
+      get new_user_registration_path
+      assert_equal 200, response.status
+      assert_select ".user-email-suffix-support-list", text: "Supported email suffix with foo.com, bar.com"
     end
 
     assert_no_match "Complete your account info", response.body
@@ -106,23 +104,8 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "visit sign up with Users limit" do
     ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
 
-    License.stub(:users_limit, 50) do
-      # Free version not users limit
-      get new_user_registration_path
-      assert_equal 200, response.status
-
-      License.stub(:license?, true) do
-        License.stub(:current_active_users_count, 100) do
-          get new_user_registration_path
-          assert_equal 403, response.status
-          assert_select "h1", text: "Users limit error"
-
-          post user_registration_path
-          assert_equal 403, response.status
-          assert_select "h1", text: "Users limit error"
-        end
-      end
-    end
+    get new_user_registration_path
+    assert_equal 200, response.status
   end
 
   test "user sign up with confirmable disable" do

@@ -223,45 +223,6 @@ zh-CN:
           ElasticSearchService: 全文搜索服务
       reindex:
         Search indexes has running reindex with async: 重建搜索索引的任务已经后台异步执行，你可以到“后台异步队列”功能里面查看进度。
-      license:
-        License: 专业版授权
-        No license: 暂无授权.
-        The license expired on expires_at: 专业版授权已于 %{expires_at} 到期。
-        The license will expire on expires_at: 专业版授权有效期至 %{expires_at}。
-        The license is invalid: 授权无效。
-        Add License: 设置授权证书
-        Licensee name: 姓名
-        Licensee email: Email
-        Licensee company: 公司
-        trial: 试用版
-        Trial yes: "是"
-        issued_at: 签发日
-        expires_at: 有效期
-        features:  开启功能
-        users limit: 用户数限制
-        users: 人
-        current actived: "已占用数:"
-        feature:
-          soft_delete: 软删除恢复
-          reader_list: 阅读记录
-          export_pdf: 知识库、文档导出 PDF
-          export_archive: 知识库导出 Zip
-          limit_user_emails: 用户邮件限制规则
-          ldap_auth: LDAP 登录支持
-    licenses:
-      show:
-        License: 专业版授权
-        Add License: 设置授权证书
-        Select license file: 选择授权证书文件
-        Pickup a bluedoc-license file to upload: 请选择 BlueDoc 授权流程获得到的 <code>.bluedoc-license</code> 文件，并上传。
-        Upload License: 上传证书
-        Are you sure remove license?: 你确定要删除当前的授权证书吗？
-        Remove current license: 删除当前证书
-      create:
-        Invalid license: 无效的 BlueDoc 授权证书，请确定文件是否选择正确。
-        License was successfully updated, thank you: 授权成功，感谢你的支持。
-      destroy:
-        License was successfully deleted: 授权信息清理成功。
     repositories:
       show:
         All docs: 所有文档

@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-# PRO-begin
 class DocsController
   # POST /:user/:repo/:slug/pdf
   def pdf
     set_doc
     authenticate_user!
-    check_feature! :export_pdf
 
     authorize! :update, @doc
 
@@ -15,4 +13,3 @@ class DocsController
     end
   end
 end
-# PRO-end

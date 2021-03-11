@@ -230,45 +230,6 @@ en:
         Statistics: Statistics
       reindex:
         Search indexes has running reindex with async: "Search indexes has running reindex with async"
-      license:
-        License: License
-        No license: No license.
-        The license expired on expires_at: The license expired on %{expires_at}.
-        The license will expire on expires_at: The license will expire on %{expires_at}.
-        The license is invalid: The license is invalid.
-        Add License: Add License
-        Licensee name: Name
-        Licensee email: Email
-        Licensee company: Company
-        trial: Trial
-        Trial yes: "YES"
-        issued_at: Issued Date
-        expires_at: Expires Date
-        features:  Features
-        users limit: Users Limit
-        users: Users
-        current actived: "Current actived:"
-        feature:
-          soft_delete: Soft Delete
-          reader_list: Reader List
-          export_pdf: Export PDF
-          export_archive: Export Archive
-          limit_user_emails: User Email limit rules
-          ldap_auth: LDAP Authentication
-    licenses:
-      show:
-        License: License
-        Add License: Add License
-        Select license file: Select License File
-        Pickup a bluedoc-license file to upload: Pickup a<code>.bluedoc-license</code> file to upload.
-        Upload License: Upload License
-        Are you sure remove license?: Are you sure to remove current License?
-        Remove current license: Remove current license
-      create:
-        Invalid license: Invalid BlueDoc license file.
-        License was successfully updated, thank you: "License was successfully updated, thank you."
-      destroy:
-        License was successfully deleted: License was successfully deleted.
     reposiories:
       show:
         All doc: All doc

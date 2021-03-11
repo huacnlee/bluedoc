@@ -15,7 +15,6 @@ class Setting < RailsSettings::Base
   field :confirmable_enable, default: false, type: :boolean
   field :user_email_suffixes, default: [], type: :array
   field :captcha_enable, default: true, type: :boolean
-  field :license, default: "", type: :string
 
   # ActionMailer
   field :mailer_from, type: :string, default: "no-reply@bluedoc.io"
@@ -79,15 +78,13 @@ class Setting < RailsSettings::Base
       LOCALES[Setting.default_locale.to_sym] || LOCALES[I18n.default_locale]
     end
 
-    # PRO-begin
     def user_email_limit_enable?
-      License.allow_feature?(:limit_user_emails) && self.user_email_suffixes.any?
+      self.user_email_suffixes.any?
     end
 
     # Check User email by user_email_suffixes setting
     def valid_user_email?(email)
       return false if email.blank?
-      return true unless License.allow_feature?(:limit_user_emails)
       return true if self.user_email_suffixes.blank?
 
       found = false
@@ -101,7 +98,6 @@ class Setting < RailsSettings::Base
 
       found
     end
-    # PRO-end
 
     def mailer_sender
       "BlueDoc <#{Setting.mailer_from}>"

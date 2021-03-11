@@ -49,16 +49,14 @@ class IssueTest < ActiveSupport::TestCase
     user1 = create(:user)
     user2 = create(:user)
 
-    allow_feature(:reader_list) do
-      user1.read_issue(issue)
-      assert_equal 1, issue.reads_count
-      user2.read_issue(issue)
-      assert_equal 2, issue.reads_count
+    user1.read_issue(issue)
+    assert_equal 1, issue.reads_count
+    user2.read_issue(issue)
+    assert_equal 2, issue.reads_count
 
-      assert_equal true, user1.read_issue?(issue)
-      assert_equal true, user2.read_issue?(issue)
-      assert_equal [user1, user2].sort, issue.read_by_users.sort
-    end
+    assert_equal true, user1.read_issue?(issue)
+    assert_equal true, user2.read_issue?(issue)
+    assert_equal [user1, user2].sort, issue.read_by_users.sort
   end
 
   test "assignees" do
