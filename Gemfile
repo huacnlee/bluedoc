@@ -19,8 +19,7 @@ gem "turbolinks"
 gem "jbuilder"
 gem "kaminari"
 
-# https://github.com/collectiveidea/awesome_nested_set/pull/421
-gem "awesome_nested_set", github: "filippoliverani/awesome_nested_set", branch: "use-polimorphic-key-only-when-needed"
+gem "awesome_nested_set"
 
 gem "aws-sdk-s3", require: false
 gem "mini_magick"
