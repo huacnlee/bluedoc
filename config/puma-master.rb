@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 port 7000
 environment ENV.fetch("RAILS_ENV", "production")
 workers ENV.fetch("WEB_CONCURRENCY", 2)
