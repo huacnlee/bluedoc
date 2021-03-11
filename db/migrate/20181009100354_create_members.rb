@@ -3,7 +3,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
     create_table :members do |t|
       t.references :user, null: false
       t.string :subject_type, limit: 50, null: false
-      t.integer :subject_id,  null: false
+      t.integer :subject_id, null: false
       t.integer :role, null: false, default: 0
 
       t.timestamps

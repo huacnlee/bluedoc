@@ -12,44 +12,44 @@ class Comment < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :reply_to, class_name: "Comment", required: false, foreign_key: :parent_id
 
-  validates :commentable_type, inclusion: { in: %w[Doc Note Issue InlineComment] }
-  validates :body, presence: true, length: { minimum: 2 }
+  validates :commentable_type, inclusion: {in: %w[Doc Note Issue InlineComment]}
+  validates :body, presence: true, length: {minimum: 2}
 
-  scope :with_includes, -> { includes(:reply_to, :reactions, user: { avatar_attachment: :blob }) }
+  scope :with_includes, -> { includes(:reply_to, :reactions, user: {avatar_attachment: :blob}) }
 
   after_destroy :clear_relation_parent_id
 
   def body_plain
-    self.body
+    body
   end
 
   def body_html
     if self.format == "markdown"
-      BlueDoc::HTML.render(self.body, format: :markdown)
+      BlueDoc::HTML.render(body, format: :markdown)
     else
-      BlueDoc::HTML.render(self.body_sml, format: :sml)
+      BlueDoc::HTML.render(body_sml, format: :sml)
     end
   end
 
   def commentable_title
-    case self.commentable_type
+    case commentable_type
     when "Doc"
-      doc = self.commentable
+      doc = commentable
       return "" if doc.blank?
-      [doc.repository&.user&.name, doc.repository&.name, self.commentable&.title].join(" / ")
-    when "Issue" then self.commentable&.issue_title || ""
-    when "InlineComment" then self.commentable&.title || ""
+      [doc.repository&.user&.name, doc.repository&.name, commentable&.title].join(" / ")
+    when "Issue" then commentable&.issue_title || ""
+    when "InlineComment" then commentable&.title || ""
     else
       ""
     end
   end
 
   def to_url
-    case self.commentable_type
-    when "Doc" then self.commentable&.to_url(anchor: "comment-#{self.id}")
-    when "Issue" then self.commentable&.to_url(anchor: "comment-#{self.id}")
+    case commentable_type
+    when "Doc" then commentable&.to_url(anchor: "comment-#{id}")
+    when "Issue" then commentable&.to_url(anchor: "comment-#{id}")
     when "InlineComment"
-      self.commentable&.to_url
+      commentable&.to_url
     else
       ""
     end
@@ -66,7 +66,8 @@ class Comment < ApplicationRecord
   end
 
   private
-    def clear_relation_parent_id
-      Comment.where(commentable: self.commentable, parent_id: self.id).update_all(parent_id: nil)
-    end
+
+  def clear_relation_parent_id
+    Comment.where(commentable: commentable, parent_id: id).update_all(parent_id: nil)
+  end
 end

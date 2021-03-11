@@ -13,14 +13,14 @@ class Users::PasswordsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user)
 
     form_params = {
-      email: user.email,
+      email: user.email
     }
-    post user_password_path, params: { user: form_params }
+    post user_password_path, params: {user: form_params}
     assert_equal 200, response.status
-    assert_match /The captcha code is incorrect/, response.body
+    assert_match(/The captcha code is incorrect/, response.body)
 
     ActionController::Base.any_instance.stubs(:verify_rucaptcha?).returns(true)
-    post user_password_path, params: { user: form_params }
+    post user_password_path, params: {user: form_params}
     assert_redirected_to new_user_session_path
 
     user.reload
@@ -33,7 +33,7 @@ class Users::PasswordsControllerTest < ActionDispatch::IntegrationTest
     user = create(:user)
 
     form_params = {
-      email: user.email,
+      email: user.email
     }
 
     Setting.stub(:captcha_enable?, false) do
@@ -42,7 +42,7 @@ class Users::PasswordsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name='_rucaptcha']", 0
       assert_select ".rucaptcha-image", 0
 
-      post user_password_path, params: { user: form_params }
+      post user_password_path, params: {user: form_params}
       assert_redirected_to new_user_session_path
       user.reload
 

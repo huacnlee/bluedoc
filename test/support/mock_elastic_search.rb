@@ -7,9 +7,11 @@ class MockElasticSearch
       def status
         values[0] || 200
       end
+
       def body
-        values[1] || { hits: { hits: [], total: 0 } }
+        values[1] || {hits: {hits: [], total: 0}}
       end
+
       def headers
         values[2] || {}
       end

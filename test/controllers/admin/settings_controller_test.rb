@@ -16,7 +16,6 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
   end
 
-
   test "GET /admin/settings for check :ldap_auth" do
     Setting.stub(:ldap_enable?, true) do
       get admin_settings_path(_action: "show")
@@ -24,7 +23,6 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".ldap-auth-fields", 1
   end
-
 
   test "POST /admin/settings" do
     setting_params = {
@@ -44,12 +42,12 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
       ldap_description: "LDAP Foo bar",
       mailer_from: "foo@bar.com",
       mailer_options: <<~YAML
-      address: foo.com
-      username: foo
+        address: foo.com
+        username: foo
       YAML
     }
 
-    post admin_settings_path, params: { setting: setting_params }
+    post admin_settings_path, params: {setting: setting_params}
     assert_redirected_to admin_settings_path
 
     assert_equal "http://foo.com", Setting.host
@@ -67,7 +65,7 @@ class Admin::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "LDAP Foo", Setting.ldap_title
     assert_equal "LDAP Foo bar", Setting.ldap_description
     assert_equal "foo@bar.com", Setting.mailer_from
-    assert_equal({ address: "foo.com", username: "foo" }.deep_stringify_keys, Setting.mailer_options)
+    assert_equal({address: "foo.com", username: "foo"}.deep_stringify_keys, Setting.mailer_options)
 
     get admin_settings_path(_action: "ui")
     assert_equal 200, response.status

@@ -7,11 +7,9 @@ class RepositorySettingsController
     authorize! :update, @repository
 
     if request.get? && params[:type] == "pdf"
-      render partial: "/export_pdf/repository", layout: "pdf", locals: { subject: @repository }
-    else
-      if params[:force]
-        @repository.export(params[:type])
-      end
+      render partial: "/export_pdf/repository", layout: "pdf", locals: {subject: @repository}
+    elsif params[:force]
+      @repository.export(params[:type])
     end
   end
 end

@@ -51,11 +51,12 @@ class Admin::GroupsController < Admin::ApplicationController
   end
 
   private
-    def set_group
-      @group = Group.unscoped.find(params[:id])
-    end
 
-    def group_params
-      params.require(:group).permit!
-    end
+  def set_group
+    @group = Group.unscoped.find(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit!
+  end
 end

@@ -5,8 +5,8 @@ class Repository
 
   private
 
-    def auto_correct_attributes
-      self.name = AutoCorrect.format(self.name) if self.name_changed?
-      self.description = AutoCorrect.format(self.description) if self.description_changed?
-    end
+  def auto_correct_attributes
+    self.name = AutoCorrect.format(name) if name_changed?
+    self.description = AutoCorrect.format(description) if description_changed?
+  end
 end

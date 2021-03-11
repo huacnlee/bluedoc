@@ -18,7 +18,7 @@ module BlueDoc
         stdout, stderr, status = Open3.capture3(script)
 
         if !status.success?
-          raise RuntimeError.new("execute error: #{stderr}")
+          raise "execute error: #{stderr}"
         end
 
         stdout

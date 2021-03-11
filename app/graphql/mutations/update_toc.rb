@@ -17,9 +17,7 @@ class Mutations::UpdateToc < Mutations::BaseMutation
     update_params[:url] = url if url
 
     @toc.update(update_params)
-    if @toc.doc
-      @toc.doc.update(title: @toc.title, slug: @toc.url)
-    end
+    @toc&.doc&.update(title: @toc.title, slug: @toc.url)
 
     true
   end

@@ -5,8 +5,8 @@ class Repository
   has_many :issue_labels, as: :target, dependent: :destroy, class_name: "Label"
 
   def has_issues?
-    return false if self.preferences[:has_issues].nil?
-    ActiveModel::Type::Boolean.new.cast(self.preferences[:has_issues])
+    return false if preferences[:has_issues].nil?
+    ActiveModel::Type::Boolean.new.cast(preferences[:has_issues])
   end
 
   DEFAULT_ISSUE_LABELS = {
@@ -19,7 +19,7 @@ class Repository
   }
 
   def ensure_default_issue_labels
-    return false if self.issue_labels.any?
+    return false if issue_labels.any?
     create_default_issue_labels!
   end
 
@@ -33,11 +33,11 @@ class Repository
 
   # Users that for issue assignee
   def issue_assignees
-    user_ids = self.members.pluck(:user_id)
-    if self.user.group?
-      user_ids += self.user.members.pluck(:user_id)
+    user_ids = members.pluck(:user_id)
+    if user.group?
+      user_ids += user.members.pluck(:user_id)
     else
-      user_ids << self.user_id
+      user_ids << user_id
     end
     users = User.where(id: user_ids.uniq).with_attached_avatar
     users.sort_by { |user| user_ids.index(user.id) }

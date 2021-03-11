@@ -76,8 +76,8 @@ class SettingTest < ActiveSupport::TestCase
   test "mailer_options" do
     assert_kind_of Hash, Setting.mailer_options
     Setting.mailer_options = <<~YAML
-    address: "foo.com"
-    user_name: "aaa"
+      address: "foo.com"
+      user_name: "aaa"
     YAML
 
     assert_equal "foo.com", Setting.mailer_options[:address]

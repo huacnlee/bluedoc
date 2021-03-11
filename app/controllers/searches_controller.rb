@@ -39,14 +39,15 @@ class SearchesController < ApplicationController
   end
 
   private
-    def set_totals
-      @totals = {
-        docs: BlueDoc::Search.new(:docs, params[:q]).execute.count,
-        notes: BlueDoc::Search.new(:notes, params[:q]).execute.count,
-        repositories: BlueDoc::Search.new(:repositories, params[:q]).execute.count,
-        groups: BlueDoc::Search.new(:groups, params[:q]).execute.count,
-        users: BlueDoc::Search.new(:users, params[:q]).execute.count,
-        issues: BlueDoc::Search.new(:issues, params[:q]).execute.count,
-      }
-    end
+
+  def set_totals
+    @totals = {
+      docs: BlueDoc::Search.new(:docs, params[:q]).execute.count,
+      notes: BlueDoc::Search.new(:notes, params[:q]).execute.count,
+      repositories: BlueDoc::Search.new(:repositories, params[:q]).execute.count,
+      groups: BlueDoc::Search.new(:groups, params[:q]).execute.count,
+      users: BlueDoc::Search.new(:users, params[:q]).execute.count,
+      issues: BlueDoc::Search.new(:issues, params[:q]).execute.count
+    }
+  end
 end

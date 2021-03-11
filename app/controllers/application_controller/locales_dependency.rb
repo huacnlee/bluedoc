@@ -10,15 +10,16 @@ class ApplicationController
   end
 
   private
-    def user_locale
-      return current_user&.locale if current_user&.locale.present?
 
-      Setting.default_locale || I18n.default_locale
-    end
+  def user_locale
+    return current_user&.locale if current_user&.locale.present?
 
-    def use_fallback_locale
-      I18n.locale = Setting.default_locale
-    rescue I18n::InvalidLocale
-      I18n.locale = I18n.default_locale
-    end
+    Setting.default_locale || I18n.default_locale
+  end
+
+  def use_fallback_locale
+    I18n.locale = Setting.default_locale
+  rescue I18n::InvalidLocale
+    I18n.locale = I18n.default_locale
+  end
 end

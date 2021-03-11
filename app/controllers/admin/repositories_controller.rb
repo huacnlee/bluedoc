@@ -54,11 +54,12 @@ class Admin::RepositoriesController < Admin::ApplicationController
   end
 
   private
-    def set_repository
-      @repository = Repository.unscoped.find(params[:id])
-    end
 
-    def repository_params
-      params.require(:repository).permit!
-    end
+  def set_repository
+    @repository = Repository.unscoped.find(params[:id])
+  end
+
+  def repository_params
+    params.require(:repository).permit!
+  end
 end

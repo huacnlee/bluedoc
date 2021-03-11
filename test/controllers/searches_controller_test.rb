@@ -15,7 +15,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /search/docs" do
-    get docs_search_path, params: { q: "Hello" }
+    get docs_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|
@@ -35,13 +35,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     # with anonymous disable
     Setting.stub(:anonymous_enable?, false) do
       assert_require_user do
-        get docs_search_path, params: { q: "Hello" }
+        get docs_search_path, params: {q: "Hello"}
       end
     end
   end
 
   test "GET /search/notes" do
-    get notes_search_path, params: { q: "Hello" }
+    get notes_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|
@@ -61,13 +61,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     # with anonymous disable
     Setting.stub(:anonymous_enable?, false) do
       assert_require_user do
-        get notes_search_path, params: { q: "Hello" }
+        get notes_search_path, params: {q: "Hello"}
       end
     end
   end
 
   test "GET /search/issues" do
-    get issues_search_path, params: { q: "Hello" }
+    get issues_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|
@@ -87,13 +87,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     # with anonymous disable
     Setting.stub(:anonymous_enable?, false) do
       assert_require_user do
-        get issues_search_path, params: { q: "Hello" }
+        get issues_search_path, params: {q: "Hello"}
       end
     end
   end
 
   test "GET /search/repositories" do
-    get repositories_search_path, params: { q: "Hello" }
+    get repositories_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|
@@ -106,7 +106,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /search/groups" do
-    get groups_search_path, params: { q: "Hello" }
+    get groups_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|
@@ -119,7 +119,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /search/users" do
-    get users_search_path, params: { q: "Hello" }
+    get users_search_path, params: {q: "Hello"}
     assert_equal 200, response.status
 
     assert_react_component "navbar/Search" do |props|

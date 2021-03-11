@@ -15,7 +15,7 @@ module BlueDoc
     ]
     config.eager_load_paths += [
       Rails.root.join("app/models/project_services"),
-      Rails.root.join("lib/bluedoc"),
+      Rails.root.join("lib/bluedoc")
     ]
 
     config.autoloader = :classic
@@ -28,7 +28,7 @@ module BlueDoc
     config.i18n.fallbacks = true
 
     redis_config = Application.config_for(:redis)
-    config.cache_store = [:redis_cache_store, { namespace: "cache-#{redis_config["namespace"]}", url: redis_config["url"], expires_in: 2.weeks }]
+    config.cache_store = [:redis_cache_store, {namespace: "cache-#{redis_config["namespace"]}", url: redis_config["url"], expires_in: 2.weeks}]
   end
 end
 

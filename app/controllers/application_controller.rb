@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def self.default_url_options
-    { host: Setting.host }
+    {host: Setting.host}
   end
 
   def set_nav_search(url: request.fullpath)
@@ -63,14 +63,14 @@ class ApplicationController < ActionController::Base
 
   def graphql_query(method, args = "", result = "")
     query = <<~QUERY
-    query {
-      #{method}(#{args}) {
-        #{result}
+      query {
+        #{method}(#{args}) {
+          #{result}
+        }
       }
-    }
     QUERY
 
-    result = BlueDocSchema.execute(query, context: { current_user: current_user })
+    result = BlueDocSchema.execute(query, context: {current_user: current_user})
     result["data"][method.to_s]
   end
 end

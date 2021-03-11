@@ -259,11 +259,11 @@ class UserTest < ActiveSupport::TestCase
     end
 
     user = create(:user, description: "Hello world")
-    data = { sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false }
+    data = {sub_type: "user", slug: user.slug, title: user.name, body: "Hello world", user_id: user.id, deleted: false}
     assert_equal data, user.as_indexed_json
 
     group = create(:group, deleted_at: Time.now)
-    data = { sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id, deleted: true }
+    data = {sub_type: "group", slug: group.slug, title: group.name, body: group.description, user_id: group.id, deleted: true}
     assert_equal data, group.as_indexed_json
   end
 
@@ -302,7 +302,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "System user" do
     assert_not_nil User.system
-    assert_equal -1, User.system.id
+    assert_equal(-1, User.system.id)
     assert_equal "system", User.system.slug
     assert_equal "System", User.system.name
 
@@ -361,7 +361,7 @@ class UserTest < ActiveSupport::TestCase
     user = create(:user)
     user.avatar.attach(io: load_file("blank.png"), filename: "blank.png")
     assert_equal true, user.avatar_attached?
-    assert_match /\/uploads\/[\w]+\?s=large/, user.avatar_url
+    assert_match(/\/uploads\/\w+\?s=large/, user.avatar_url)
     old_avatar_url = user.avatar_url
 
     user.avatar.attach(io: load_file("blank.png"), filename: "blank1.png")
@@ -373,19 +373,19 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.valid_password?("123456")
 
     assert_equal false, user.update_password({})
-    assert_equal({ current_password: ["can't be blank"], password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({current_password: ["can't be blank"], password: ["can't be blank"], password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456")
-    assert_equal({ password: ["can't be blank"], password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({password: ["can't be blank"], password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456", password: "654321")
-    assert_equal({ password_confirmation: ["can't be blank"] }, user.errors.messages)
+    assert_equal({password_confirmation: ["can't be blank"]}, user.errors.messages)
 
     user.errors.clear
     assert_equal false, user.update_password(current_password: "123456", password: "654321", password_confirmation: "123456")
-    assert_equal({ password_confirmation: ["doesn't match Password"] }, user.errors.messages)
+    assert_equal({password_confirmation: ["doesn't match Password"]}, user.errors.messages)
 
     user.errors.clear
     user.update_password(current_password: "123456", password: "654321", password_confirmation: "654321")
@@ -440,7 +440,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "find_or_create_by_omniauth with normal provider" do
-    omniauth_auth = { "provider" => "gitlab", "uid" => "123" }
+    omniauth_auth = {"provider" => "gitlab", "uid" => "123"}
     assert_nil User.find_or_create_by_omniauth(omniauth_auth)
 
     authorization = create(:authorization, provider: "gitlab", uid: "123")
@@ -453,7 +453,7 @@ class UserTest < ActiveSupport::TestCase
       "login" => "huacnlee",
       "email" => "huacnlee@example.org"
     }
-    omniauth_auth = { "provider" => "ldap", "uid" => "123", "info" => info }
+    omniauth_auth = {"provider" => "ldap", "uid" => "123", "info" => info}
 
     user0 = User.find_or_create_by_omniauth(omniauth_auth)
     assert_not_nil user0
@@ -471,7 +471,7 @@ class UserTest < ActiveSupport::TestCase
       "login" => "monster",
       "email" => "huacnlee@example.org"
     }
-    omniauth_auth = { "provider" => "ldap", "uid" => "124", "info" => info }
+    omniauth_auth = {"provider" => "ldap", "uid" => "124", "info" => info}
     user1 = User.find_or_create_by_omniauth(omniauth_auth)
     assert_not_nil user1
     assert_equal true, user1.new_record?

@@ -12,7 +12,7 @@ module BlueDoc
       def initialize(repository:, user:, url:)
         @user = user
         @repository = repository
-        @url = url.gsub(/[\s\'\"]+/, "")
+        @url = url.gsub(/[\s'"]+/, "")
       end
 
       def valid_url?
@@ -20,7 +20,7 @@ module BlueDoc
       end
 
       def repo_dir
-        @repo_dir ||= File.join(tmp_path, Digest::MD5.hexdigest(self.url))
+        @repo_dir ||= File.join(tmp_path, Digest::MD5.hexdigest(url))
       end
     end
   end

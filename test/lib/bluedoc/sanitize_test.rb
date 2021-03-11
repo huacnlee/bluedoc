@@ -13,7 +13,7 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
 
   test "links" do
     assert_sanitize "<a>link</a>", '<a href="javascript:alert()">link</a>'
-    assert_sanitize "foo", "<script>alert("");</script>foo"
+    assert_sanitize "foo", %(<script>alert("");</script>foo)
     assert_sanitize "foobar", "foo<style>.body{}</style>bar"
     assert_sanitize "", '<iframe src="https://foobar.com"></iframe>'
 
@@ -25,7 +25,7 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
     html = '<img src="javascript:alert" class="emoji" width="100" height="100">'
     assert_sanitize '<img class="emoji" width="100" height="100">', html
 
-    html = '<img src="javascript:alert('')">'
+    html = %(<img src="javascript:alert('')">)
     assert_sanitize "<img>", html
 
     html = '<img src="/img/a.jpg" class="emoji" width="100" height="100">'
@@ -97,9 +97,9 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
 
   test "video" do
     raw = <<~VIDEO
-    <video controls="controls" preload="no" width="300" height="200">
-      <source src="/uploads/foo" type="video/mov">
-    </video>
+      <video controls="controls" preload="no" width="300" height="200">
+        <source src="/uploads/foo" type="video/mov">
+      </video>
     VIDEO
     assert_sanitize raw, raw
   end
@@ -118,12 +118,13 @@ class BlueDoc::SanitizeTest < ActionView::TestCase
   end
 
   private
-    def assert_sanitize(expected, html)
-      assert_equal expected, BlueDoc::HTML.render_without_cache(html, format: :html)
-      assert_equal expected, sanitize_html(html)
-    end
 
-    def assert_sanitize_same(html)
-      assert_sanitize html, html
-    end
+  def assert_sanitize(expected, html)
+    assert_equal expected, BlueDoc::HTML.render_without_cache(html, format: :html)
+    assert_equal expected, sanitize_html(html)
+  end
+
+  def assert_sanitize_same(html)
+    assert_sanitize html, html
+  end
 end

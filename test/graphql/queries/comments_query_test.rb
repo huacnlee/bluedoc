@@ -43,9 +43,9 @@ class Queries::CommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal comments[0].created_at.iso8601, item["createdAt"]
     assert_equal comments[0].updated_at.iso8601, item["updatedAt"]
 
-    pageInfo = res["pageInfo"]
-    assert_equal 1, pageInfo["page"]
-    assert_equal 3, pageInfo["totalCount"]
+    page_info = res["pageInfo"]
+    assert_equal 1, page_info["page"]
+    assert_equal 3, page_info["totalCount"]
 
     execute(%| { comments(commentableType: "Doc", commentableId: #{doc.id}, per: 2, page: 2) #{query_body} } |)
     res = response_data["comments"]
@@ -88,8 +88,8 @@ class Queries::CommentsQueryTest < BlueDoc::GraphQL::IntegrationTest
     assert_equal comments[0].created_at.iso8601, item["createdAt"]
     assert_equal comments[0].updated_at.iso8601, item["updatedAt"]
 
-    pageInfo = res["pageInfo"]
-    assert_equal 1, pageInfo["page"]
-    assert_equal 3, pageInfo["totalCount"]
+    page_info = res["pageInfo"]
+    assert_equal 1, page_info["page"]
+    assert_equal 3, page_info["totalCount"]
   end
 end

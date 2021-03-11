@@ -35,14 +35,14 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     # update
     @job.perform("update", "repository", repo.id)
     assert_performed_request method: "PUT", url: "test-repositories/_doc/#{repo.id}", body: repo.as_indexed_json
-    query_body = { conflicts: "proceed", query: { term: { repository_id: repo.id } }, script: { inline: "ctx._source.repository.public = true" } }
+    query_body = {conflicts: "proceed", query: {term: {repository_id: repo.id}}, script: {inline: "ctx._source.repository.public = true"}}
     assert_performed_request method: "POST", url: "test-docs,test-repositories/_update_by_query", body: query_body
 
     # delete
     @job.perform("delete", "repository", 123)
     assert_performed_request method: "DELETE", url: "test-repositories/_doc/123"
 
-    query_body = { conflicts: "proceed", query: { term: { repository_id: 123 } } }
+    query_body = {conflicts: "proceed", query: {term: {repository_id: 123}}}
     assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
@@ -59,7 +59,7 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     # delete
     @job.perform("delete", "user", 123)
     assert_performed_request method: "DELETE", url: "test-users/_doc/123"
-    query_body = { conflicts: "proceed", query: { term: { user_id: 123 } } }
+    query_body = {conflicts: "proceed", query: {term: {user_id: 123}}}
     assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 
@@ -76,7 +76,7 @@ class SearchIndexJobTest < ActiveSupport::TestCase
     # delete
     @job.perform("delete", "group", 123)
     assert_performed_request method: "DELETE", url: "test-groups/_doc/123"
-    query_body = { conflicts: "proceed", query: { term: { user_id: 123 } } }
+    query_body = {conflicts: "proceed", query: {term: {user_id: 123}}}
     assert_performed_request method: "POST", url: "_all/_delete_by_query", body: query_body
   end
 

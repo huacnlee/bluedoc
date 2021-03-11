@@ -37,7 +37,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /dashboard/docs" do
-    get "/dashboard/docs", params: { format: :js }, xhr: true
+    get "/dashboard/docs", params: {format: :js}, xhr: true
     assert_equal 401, response.status
 
     doc0 = create(:doc)
@@ -46,13 +46,13 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(doc1, user: @user)
 
     sign_in @user
-    get "/dashboard/docs", params: { format: :js }, xhr: true
+    get "/dashboard/docs", params: {format: :js}, xhr: true
     assert_equal 200, response.status
     assert_match %{$(".dashboard-docs form.more-button")}, response.body
   end
 
   test "GET /dashboard/repositories" do
-    get "/dashboard/repositories", params: { format: :js }, xhr: true
+    get "/dashboard/repositories", params: {format: :js}, xhr: true
     assert_equal 401, response.status
 
     group = create(:group)
@@ -63,13 +63,13 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(repo1, user: @user)
 
     sign_in @user
-    get "/dashboard/repositories", params: { format: :js }, xhr: true
+    get "/dashboard/repositories", params: {format: :js}, xhr: true
     assert_equal 200, response.status
     assert_match %{$(".dashboard-repositories form.more-button")}, response.body
   end
 
   test "GET /dashboard/groups" do
-    get "/dashboard/groups", params: { format: :js }, xhr: true
+    get "/dashboard/groups", params: {format: :js}, xhr: true
     assert_equal 401, response.status
 
     group0 = create(:group)
@@ -80,7 +80,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     UserActive.track(group1, user: @user)
 
     sign_in @user
-    get "/dashboard/groups", params: { format: :js }, xhr: true
+    get "/dashboard/groups", params: {format: :js}, xhr: true
     assert_equal 200, response.status
     assert_match %{$(".dashboard-groups form.more-button")}, response.body
   end

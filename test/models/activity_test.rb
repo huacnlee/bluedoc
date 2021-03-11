@@ -64,7 +64,7 @@ class ActivityTest < ActiveSupport::TestCase
   test "track_activity with meta" do
     user = create(:user)
     actor = create(:user)
-    meta = { from: { id: 123, name: "Foo" }, age: 123 }
+    meta = {from: {id: 123, name: "Foo"}, age: 123}
     Activity.track_activity(:follow_user, user, user_id: user.id, actor_id: actor.id, meta: meta)
     activity = actor.actor_activities.last
     assert_equal meta, activity.meta
@@ -165,7 +165,7 @@ class ActivityTest < ActiveSupport::TestCase
 
   test "fill_depend_id_for_target for Group" do
     group = create(:group)
-    activity_params = { target: group }
+    activity_params = {target: group}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal group.id, activity_params[:group_id]
@@ -174,7 +174,7 @@ class ActivityTest < ActiveSupport::TestCase
 
   test "fill_depend_id_for_target for Repository" do
     repo = create(:repository)
-    activity_params = { target: repo }
+    activity_params = {target: repo}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal repo.user_id, activity_params[:group_id]
@@ -184,7 +184,7 @@ class ActivityTest < ActiveSupport::TestCase
 
   test "fill_depend_id_for_target for Doc" do
     doc = create(:doc)
-    activity_params = { target: doc }
+    activity_params = {target: doc}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal doc.repository.user_id, activity_params[:group_id]
@@ -194,7 +194,7 @@ class ActivityTest < ActiveSupport::TestCase
 
   test "fill_depend_id_for_target for Issue" do
     issue = create(:issue)
-    activity_params = { target: issue }
+    activity_params = {target: issue}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal issue.repository.user_id, activity_params[:group_id]
@@ -205,7 +205,7 @@ class ActivityTest < ActiveSupport::TestCase
   test "fill_depend_id_for_target for Member / Group" do
     group = create(:group)
     member = create(:member, subject: group)
-    activity_params = { target: member }
+    activity_params = {target: member}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal group.id, activity_params[:group_id]
@@ -216,7 +216,7 @@ class ActivityTest < ActiveSupport::TestCase
   test "fill_depend_id_for_target for Member / Repository" do
     repo = create(:repository)
     member = create(:member, subject: repo)
-    activity_params = { target: member }
+    activity_params = {target: member}
     Activity.fill_depend_id_for_target(activity_params)
 
     assert_equal repo.user_id, activity_params[:group_id]

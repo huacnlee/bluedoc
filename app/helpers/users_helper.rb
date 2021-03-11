@@ -3,23 +3,23 @@
 module UsersHelper
   def user_slug_tag(user)
     return "" if user.blank?
-    link_to user.slug, user.to_path, class: "user-slug", title: user.fullname, data: { type: user.type.downcase }
+    link_to user.slug, user.to_path, class: "user-slug", title: user.fullname, data: {type: user.type.downcase}
   end
 
   def user_name_tag(user, opts = {})
     return "" if user.blank?
 
     if opts[:with_icon]
-      link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-name icon-middle-wrap", title: user.fullname, data: { type: user.type.downcase }
+      link_to icon_tag(user.type.downcase, label: user.name), user.to_path, class: "user-name icon-middle-wrap", title: user.fullname, data: {type: user.type.downcase}
     else
-      link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: { type: user.type.downcase }
+      link_to user.name, user.to_path, class: "user-name", title: user.fullname, data: {type: user.type.downcase}
     end
   end
 
   def group_name_tag(group)
     return "" if group.blank?
 
-    link_to group.name, group.to_path, class: "group-name", title: group.fullname, data: { type: group.type.downcase }
+    link_to group.name, group.to_path, class: "group-name", title: group.fullname, data: {type: group.type.downcase}
   end
 
   def user_avatar_tag(user, opts = {})
@@ -29,15 +29,15 @@ module UsersHelper
 
     return "" if user.blank?
 
-    if user.avatar_attached?
-      image_html = image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
+    image_html = if user.avatar_attached?
+      image_tag(user.avatar_url, class: opts[:class], title: user.fullname)
     else
-      image_html = default_avatar_tag(user, class: opts[:class])
+      default_avatar_tag(user, class: opts[:class])
     end
 
     return image_html if opts[:link] == false
 
-    data = { name: user.name, slug: user.slug, type: user.type.downcase, toggle: "tooltip" }
+    data = {name: user.name, slug: user.slug, type: user.type.downcase, toggle: "tooltip"}
     link_to user.to_path, class: "user-avatar", title: user.name, data: data do
       image_html
     end
@@ -60,13 +60,13 @@ module UsersHelper
     opts[:class] ||= "btn btn-block"
 
     class_names = "btn-follow-user #{opts[:class]}"
-    slug        = user.slug
+    slug = user.slug
 
     label = t("shared.follow_button.follow")
     undo_label = t("shared.follow_button.unfollow")
     btn_label = followed ? undo_label : label
 
-    data = { id: slug, label: label, undo_label: undo_label }
+    data = {id: slug, label: label, undo_label: undo_label}
     class_names += " active" if followed
 
     content_tag :button, btn_label, data: data, class: class_names

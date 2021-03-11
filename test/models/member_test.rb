@@ -24,7 +24,6 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal I18n.t("activerecord.enums.member.role.admin"), member.role_name
   end
 
-
   test "Memberable base" do
     mock_current(user: @user)
     repo = create(:repository)

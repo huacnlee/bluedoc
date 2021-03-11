@@ -19,9 +19,9 @@ class LabelsController < Users::ApplicationController
 
     @label = @repository.issue_labels.new(label_params)
     if @label.save
-      render json: { ok: true }
+      render json: {ok: true}
     else
-      render json: { ok: false, errors: @label.errors.full_messages.first }
+      render json: {ok: false, errors: @label.errors.full_messages.first}
     end
   end
 
@@ -29,9 +29,9 @@ class LabelsController < Users::ApplicationController
     authorize! :update, @repository
 
     if @label.update(label_params)
-      render json: { ok: true }
+      render json: {ok: true}
     else
-      render json: { ok: false, errors: @label.errors.full_messages.first }
+      render json: {ok: false, errors: @label.errors.full_messages.first}
     end
   end
 
@@ -39,25 +39,26 @@ class LabelsController < Users::ApplicationController
     authorize! :update, @repository
 
     if @label.destroy
-      render json: { ok: true }
+      render json: {ok: true}
     else
-      render json: { ok: false, errors: @label.errors.full_messages }
+      render json: {ok: false, errors: @label.errors.full_messages}
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
 
-      raise ActiveRecord::RecordNotFound unless @repository.has_issues?
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
 
-    def set_label
-      @label = @repository.issue_labels.find(params[:id])
-    end
+    raise ActiveRecord::RecordNotFound unless @repository.has_issues?
+  end
 
-    def label_params
-      params.require(:label).permit(:title, :color)
-    end
+  def set_label
+    @label = @repository.issue_labels.find(params[:id])
+  end
+
+  def label_params
+    params.require(:label).permit(:title, :color)
+  end
 end

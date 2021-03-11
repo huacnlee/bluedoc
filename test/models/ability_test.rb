@@ -19,7 +19,7 @@ class AbilityTest < ActiveSupport::TestCase
   test "anonymous can read private repository but shared doc" do
     ab = Ability.new nil
     shared_doc = build :doc, repository: build(:repository, privacy: :private)
-    shared_doc.stubs(:share).returns(build :share)
+    shared_doc.stubs(:share).returns(build(:share))
     assert ab.can?(:read, shared_doc)
   end
 

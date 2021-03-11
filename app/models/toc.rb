@@ -8,7 +8,7 @@ class Toc < ApplicationRecord
   # Move children to left of self, on self destroy
   # NOTE! THIS METHOD MUST KEEP BEFORE THE acts_as_nested_set METHOD
   before_destroy do
-    next_children = Toc.where(repository_id: self.repository_id, parent_id: self.id).order("lft asc").all
+    next_children = Toc.where(repository_id: repository_id, parent_id: id).order("lft asc").all
     last = nil
     next_children.each do |child|
       last ||= self
@@ -22,16 +22,16 @@ class Toc < ApplicationRecord
   scope :nested_tree, -> { order("lft asc") }
 
   def next
-    self.repository.tocs.nested_tree.right_of(self.right).first
+    repository.tocs.nested_tree.right_of(right).first
   end
 
   def prev
-    self.repository.tocs.nested_tree.left_of(self.left).last
+    repository.tocs.nested_tree.left_of(left).last
   end
 
   def self.to_markdown
     outs = []
-    self.nested_tree.each do |item|
+    nested_tree.each do |item|
       prefix = "  " * item.depth
       outs << %(#{prefix}* [#{item.title}](#{item.url}))
     end
@@ -40,8 +40,8 @@ class Toc < ApplicationRecord
 
   def self.to_text
     outs = []
-    self.nested_tree.each do |item|
-      outs << { id: item.doc_id, url: item.url, title: item.title, depth: item.depth }.as_json
+    nested_tree.each do |item|
+      outs << {id: item.doc_id, url: item.url, title: item.title, depth: item.depth}.as_json
     end
     outs.to_yaml
   end
@@ -68,22 +68,22 @@ class Toc < ApplicationRecord
       end
 
       if item.id.blank?
-        doc = docs.find { |_doc| _doc.slug == item.url }
+        doc = docs.find { |doc| doc.slug == item.url }
         item.id = doc&.id
       else
-        exist_item = self.find_by(repository_id: repo.id, doc_id: item.id)
+        exist_item = find_by(repository_id: repo.id, doc_id: item.id)
       end
 
       if exist_item
         exist_item.update!(parent: parent)
         last_item = exist_item
       else
-        last_item = self.create!(
+        last_item = create!(
           repository_id: repo.id,
           title: item.title,
           url: item.url,
           doc_id: item.id,
-          parent: parent,
+          parent: parent
         )
       end
     end
@@ -98,7 +98,7 @@ class Toc < ApplicationRecord
 
     lines = []
     repo.docs.order("id asc").each do |doc|
-      lines << { title: doc.title, depth: 0, id: doc.id, url: doc.slug }.as_json
+      lines << {title: doc.title, depth: 0, id: doc.id, url: doc.slug}.as_json
     end
     lines.to_yaml
   end

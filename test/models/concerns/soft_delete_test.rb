@@ -103,7 +103,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
 
     assert_no_soft_delete Group, group
     assert_not_equal "group-0", group.slug
-    assert_match /group\-0\-/, group.slug
+    assert_match(/group-0-/, group.slug)
     assert_no_soft_delete Repository, repo0, slug: "repo-0"
     assert_no_soft_delete Doc, doc0, slug: "doc-0"
     assert_no_soft_delete Note, note0, slug: "note-0"
@@ -153,7 +153,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
 
     assert_no_soft_delete Repository, repo
     assert_not_equal "repo-0", repo.slug
-    assert_match /repo\-0\-/, repo.slug
+    assert_match(/repo-0-/, repo.slug)
     assert_no_soft_delete Doc, doc0, slug: "doc-0"
     assert_no_soft_delete Doc, doc1, slug: "doc-1"
     assert_no_soft_delete Comment, comment0
@@ -253,28 +253,29 @@ class SoftDeleteTest < ActiveSupport::TestCase
   end
 
   private
-    # check record has soft deleted
-    def assert_soft_deleted(klass, item, slug: nil)
-      assert_nil klass.find_by_id(item.id), "should not find anymore with id"
-      reload_item = klass.unscoped.find_by_id(item.id)
-      assert_not_nil reload_item
-      assert_not_nil reload_item.deleted_at, "deleted_at should present"
-      assert_equal reload_item.deleted_at.to_s, reload_item.updated_at.to_s, "updated_at should equal to deleted_at"
 
-      if slug
-        assert_equal slug, reload_item.deleted_slug, "deleted_slug should equal #{slug}"
-        assert_not_equal slug, reload_item.slug, "slug should not equal #{slug}"
-        assert_match /deleted\-/, reload_item.slug, "slug should prefix with deleted-"
-      end
+  # check record has soft deleted
+  def assert_soft_deleted(klass, item, slug: nil)
+    assert_nil klass.find_by_id(item.id), "should not find anymore with id"
+    reload_item = klass.unscoped.find_by_id(item.id)
+    assert_not_nil reload_item
+    assert_not_nil reload_item.deleted_at, "deleted_at should present"
+    assert_equal reload_item.deleted_at.to_s, reload_item.updated_at.to_s, "updated_at should equal to deleted_at"
+
+    if slug
+      assert_equal slug, reload_item.deleted_slug, "deleted_slug should equal #{slug}"
+      assert_not_equal slug, reload_item.slug, "slug should not equal #{slug}"
+      assert_match(/deleted-/, reload_item.slug, "slug should prefix with deleted-")
     end
+  end
 
-    def assert_no_soft_delete(klass, item, slug: nil)
-      reload_item = klass.unscoped.find_by_id(item.id)
-      assert_nil reload_item.deleted_at, "deleted_at should be nil"
+  def assert_no_soft_delete(klass, item, slug: nil)
+    reload_item = klass.unscoped.find_by_id(item.id)
+    assert_nil reload_item.deleted_at, "deleted_at should be nil"
 
-      if slug
-        assert_equal slug, reload_item.slug, "slug should equal #{slug}"
-        assert_nil reload_item.deleted_slug, "deleted_slug should be nil"
-      end
+    if slug
+      assert_equal slug, reload_item.slug, "slug should equal #{slug}"
+      assert_nil reload_item.deleted_slug, "deleted_slug should be nil"
     end
+  end
 end

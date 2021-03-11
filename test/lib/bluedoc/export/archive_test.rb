@@ -12,18 +12,18 @@ class BlueDoc::Export::ArchiveTest < ActiveSupport::TestCase
 
     file_url0 = BlueDoc::Blob.upload(file0.path)
     file_url1 = BlueDoc::Blob.upload(file0.path)
-    file_key1 = file_url1.match(/uploads\/([\w]+)/)[1]
+    file_key1 = file_url1.match(/uploads\/(\w+)/)[1]
 
     body = <<~MD
-    #{file_url0}
+      #{file_url0}
 
-    ![](/uploads/)
+      ![](/uploads/)
 
-    ![](#{file_url0})
+      ![](#{file_url0})
 
-    ![](#{file_url1})
+      ![](#{file_url1})
 
-    ![](https://www.google.com.hk/test.png)
+      ![](https://www.google.com.hk/test.png)
     MD
 
     body_html = BlueDoc::HTML.render(body, format: :markdown)
@@ -31,15 +31,15 @@ class BlueDoc::Export::ArchiveTest < ActiveSupport::TestCase
     exporter = BlueDoc::Export::Archive.new(repository: @repo)
 
     expected = <<~MD
-    ./images/blank.png
+      ./images/blank.png
 
-    ![](/uploads/)
+      ![](/uploads/)
 
-    ![](./images/blank.png)
+      ![](./images/blank.png)
 
-    ![](./images/#{file_key1}.png)
+      ![](./images/#{file_key1}.png)
 
-    ![](https://www.google.com.hk/test.png)
+      ![](https://www.google.com.hk/test.png)
     MD
     assert_equal expected, exporter.send(:downlod_images, body, body_html)
 

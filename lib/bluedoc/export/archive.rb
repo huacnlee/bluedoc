@@ -22,7 +22,7 @@ module BlueDoc
 
         repository.update_export!(:archive, File.open(zip_filename))
       ensure
-        FileUtils.rm_rf(self.repo_dir)
+        FileUtils.rm_rf(repo_dir)
         FileUtils.rm_rf(zip_filename) if defined? zip_filename
       end
 
@@ -38,7 +38,7 @@ module BlueDoc
           next if src.blank?
 
           # match src is /uploads/{key}
-          match = src.match(/\/uploads\/([\w]+)/i)
+          match = src.match(/\/uploads\/(\w+)/i)
           next if match.nil?
           file_key = match[1]
           next if file_key.nil?
@@ -56,7 +56,7 @@ module BlueDoc
 
           # Streaming download blob file into {fname}
           begin
-            File.open(fname, "w")  do |f|
+            File.open(fname, "w") do |f|
               blob.download { |data| f.write(data.force_encoding("UTF-8")) }
             end
           rescue => e

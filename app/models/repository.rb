@@ -18,31 +18,31 @@ class Repository < ApplicationRecord
   has_many :docs, dependent: :destroy
   has_many :shares, dependent: :destroy
 
-  validates :name, presence: true, length: { in: 2..50 }
-  validates :slug, uniqueness: { scope: :user_id, case_sensitive: false }
+  validates :name, presence: true, length: {in: 2..50}
+  validates :slug, uniqueness: {scope: :user_id, case_sensitive: false}
 
   scope :recent_updated, -> { order("updated_at desc") }
-  scope :with_query, -> (q) { where("name ilike ? or slug ilike ?", "%#{q}%", "%#{q}%") }
+  scope :with_query, ->(q) { where("name ilike ? or slug ilike ?", "%#{q}%", "%#{q}%") }
 
   before_validation :check_slug_keywords
   def check_slug_keywords
-    if !BlueDoc::Slug.valid_repo?(self.slug)
-      self.errors.add(:slug, t(".invalid, slug is a keyword", slug: self.slug))
+    if !BlueDoc::Slug.valid_repo?(slug)
+      errors.add(:slug, t(".invalid, slug is a keyword", slug: slug))
     end
   end
 
   def to_path(suffix = nil)
-    "/#{self.user.slug}/#{self.slug}#{suffix}"
+    "/#{user.slug}/#{slug}#{suffix}"
   end
 
   def transfer(to_slug)
     user = User.find_by_slug(to_slug)
     if user.blank?
-      self.errors.add(:user_id, "Transfer target: [#{to_slug}] does not exists, please check it.")
+      errors.add(:user_id, "Transfer target: [#{to_slug}] does not exists, please check it.")
       return false
     end
 
-    self.update(user_id: user.id)
+    update(user_id: user.id)
     Activities::Repository.new(self).transfer
     true
   end

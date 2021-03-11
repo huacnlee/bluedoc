@@ -40,9 +40,7 @@ class NotesController < Users::ApplicationController
     @between_notes = @note.prev_and_next_of_notes(with_user: current_user)
     @readers = @note.read_by_user_actions.order("updated_at desc").limit(5)
 
-    if current_user
-      current_user.read_note(@note)
-    end
+    current_user&.read_note(@note)
 
     render :show, layout: "reader"
   end
@@ -63,10 +61,10 @@ class NotesController < Users::ApplicationController
     respond_to do |format|
       if @note.update(note_params)
         format.html { redirect_to @note.to_path, notice: t(".Note was successfully updated") }
-        format.json { render json: { ok: true, note: { slug: @note.slug } } }
+        format.json { render json: {ok: true, note: {slug: @note.slug}} }
       else
         format.html { render :edit, layout: "editor" }
-        format.json { render json: { ok: false, messages: @note.errors.full_messages } }
+        format.json { render json: {ok: false, messages: @note.errors.full_messages} }
       end
     end
   end
@@ -128,12 +126,13 @@ class NotesController < Users::ApplicationController
   end
 
   private
-    def set_note
-      @note = @user.notes.find_by_slug(params[:id])
-      raise ActiveRecord::RecordNotFound if @note.blank?
-    end
 
-    def note_params
-      params.require(:note).permit(:title, :body, :body_sml, :slug, :format, :privacy, :description)
-    end
+  def set_note
+    @note = @user.notes.find_by_slug(params[:id])
+    raise ActiveRecord::RecordNotFound if @note.blank?
+  end
+
+  def note_params
+    params.require(:note).permit(:title, :body, :body_sml, :slug, :format, :privacy, :description)
+  end
 end

@@ -9,11 +9,12 @@ class ServicesController < Users::ApplicationController
   end
 
   private
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
-    end
 
-    def require_jira_service_active
-      raise BlueDoc::FeatureNotAvailableError.new("Jira integrations is not actived") unless @repository.actived_jira_service
-    end
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
+  end
+
+  def require_jira_service_active
+    raise BlueDoc::FeatureNotAvailableError.new("Jira integrations is not actived") unless @repository.actived_jira_service
+  end
 end

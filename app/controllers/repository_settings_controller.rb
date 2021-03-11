@@ -65,8 +65,7 @@ class RepositorySettingsController < Users::ApplicationController
 
       notice = t(".Successfully transfered docs to",
         num: transfer_docs.length,
-        path: "#{@target_repository.user&.name} / #{@target_repository.name}"
-      )
+        path: "#{@target_repository.user&.name} / #{@target_repository.name}")
       redirect_to docs_user_repository_settings_path(@user, @repository), notice: notice
     end
   end
@@ -87,7 +86,7 @@ class RepositorySettingsController < Users::ApplicationController
 
       @member = @repository.add_member(user, :editor)
     else
-      @members = @repository.members.includes(user: { avatar_attachment: :blob }).order("id asc").page(params[:page]).per(20)
+      @members = @repository.members.includes(user: {avatar_attachment: :blob}).order("id asc").page(params[:page]).per(20)
     end
   end
 
@@ -141,12 +140,13 @@ class RepositorySettingsController < Users::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
-    end
 
-    def repository_params
-      params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc, :has_issues)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_repository
+    @repository = @user.owned_repositories.find_by_slug!(params[:repository_id])
+  end
+
+  def repository_params
+    params.require(:repository).permit(:name, :slug, :description, :privacy, :has_toc, :has_issues)
+  end
 end

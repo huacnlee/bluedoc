@@ -3,8 +3,8 @@
 class Issue
   def participants
     return @participants if defined? @participants
-    users = self.comments.collect(&:user)
-    users << self.user
+    users = comments.collect(&:user)
+    users << user
     @participants = users.compact.uniq
     @participants
   end

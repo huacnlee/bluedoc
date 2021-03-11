@@ -56,15 +56,15 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     }
 
     sign_in @user
-    put repo.to_path("/settings/profile"), params: { repository: repo_params }
+    put repo.to_path("/settings/profile"), params: {repository: repo_params}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    put repo.to_path("/settings/profile"), params: { repository: repo_params }
+    put repo.to_path("/settings/profile"), params: {repository: repo_params}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    put repo.to_path("/settings/profile"), params: { repository: repo_params }
+    put repo.to_path("/settings/profile"), params: {repository: repo_params}
     assert_redirected_to "/#{repo.user.slug}/new-#{repo.slug}/settings/profile"
 
     updated_repo = Repository.find_by_id(repo.id)
@@ -89,18 +89,18 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     patch repo.to_path("/settings/transfer")
     assert_equal 403, response.status
 
-    repo_params = { transfer_to_user: "not-exist" }
+    repo_params = {transfer_to_user: "not-exist"}
 
     sign_in_role :admin, group: @group
-    patch repo.to_path("/settings/transfer"), params: { repository: repo_params }
+    patch repo.to_path("/settings/transfer"), params: {repository: repo_params}
     assert_redirected_to repo.to_path("/settings/advanced")
     get repo.to_path("/settings/advanced")
     assert_equal 200, response.status
     assert_match "Transfer target: [not-exist] does not exists", response.body
 
     user = create(:user)
-    repo_params = { transfer_to_user: user.slug }
-    patch repo.to_path("/settings/transfer"), params: { repository: repo_params }
+    repo_params = {transfer_to_user: user.slug}
+    patch repo.to_path("/settings/transfer"), params: {repository: repo_params}
     assert_redirected_to "/#{user.slug}/#{repo.slug}"
 
     updated_repo = Repository.find_by_id(repo.id)
@@ -165,33 +165,33 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     doc_ids = docs1.collect(&:id)
 
     assert_require_user do
-      post repo.to_path("/settings/docs"), params: { transfer: {} }
+      post repo.to_path("/settings/docs"), params: {transfer: {}}
     end
 
     sign_in @user
-    post repo.to_path("/settings/docs"), params: { transfer: {} }
+    post repo.to_path("/settings/docs"), params: {transfer: {}}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post repo.to_path("/settings/docs"), params: { transfer: {} }
+    post repo.to_path("/settings/docs"), params: {transfer: {}}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
 
     # admin but traget repo not have permission
-    post repo.to_path("/settings/docs"), params: { transfer: { repository_id: other_repo.id } }
+    post repo.to_path("/settings/docs"), params: {transfer: {repository_id: other_repo.id}}
     assert_equal 403, response.status
 
     # target repo not found
-    post repo.to_path("/settings/docs"), params: { transfer: { repository_id: -1 } }
+    post repo.to_path("/settings/docs"), params: {transfer: {repository_id: -1}}
     assert_equal 404, response.status
 
     # transfer to repo have permisson
     transfer_params = {
       repository_id: target_repo.id,
-      doc_id: doc_ids,
+      doc_id: doc_ids
     }
-    post repo.to_path("/settings/docs"), params: { transfer: transfer_params }
+    post repo.to_path("/settings/docs"), params: {transfer: transfer_params}
     assert_redirected_to repo.to_path("/settings/docs")
 
     docs1.each do |doc|
@@ -300,19 +300,19 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       user_slug: user.slug
     }
 
-    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborators"), params: {member: member_params}, xhr: true
     assert_equal 401, response.status
 
     sign_in user
-    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborators"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborators"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     user1 = sign_in_role :admin, group: @group
-    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborators"), params: {member: member_params}, xhr: true
     assert_equal 200, response.status
     assert_equal :editor, repo.user_role(user)
     member = repo.members.last
@@ -322,7 +322,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
 
     # should not add self
     member_params[:user_slug] = user1.slug
-    post repo.to_path("/settings/collaborators"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborators"), params: {member: member_params}, xhr: true
     assert_equal 404, response.status
   end
 
@@ -335,19 +335,19 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       role: "reader"
     }
 
-    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 401, response.status
 
     sign_in_role :reader, group: @group
-    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 200, response.status
     member.reload
     assert_equal "reader", member.role
@@ -358,7 +358,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     member0 = repo.add_member(user0, :admin)
     sign_in user0
     member_params[:id] = member0.id
-    post repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    post repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
     member0.reload
     assert_equal "admin", member0.role
@@ -372,20 +372,20 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
       id: member.id
     }
 
-    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    delete repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 401, response.status
 
     sign_in_role :reader, group: @group
-    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    delete repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    delete repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
     assert_changes -> { repo.members.count }, -1 do
-      delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+      delete repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     end
     assert_equal 200, response.status
     assert_equal false, repo.has_member?(user)
@@ -396,7 +396,7 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     member0 = repo.add_member(user0, :admin)
     sign_in user0
     member_params[:id] = member0.id
-    delete repo.to_path("/settings/collaborator"), params: { member: member_params }, xhr: true
+    delete repo.to_path("/settings/collaborator"), params: {member: member_params}, xhr: true
     assert_equal 403, response.status
     member0.reload
     assert_equal "admin", member0.role
@@ -474,20 +474,20 @@ class RepositorySettingsControllerTest < ActionDispatch::IntegrationTest
     repo = create(:repository, user: @group)
 
     assert_require_user do
-      post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
+      post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: {jira_service: {active: 0}}
     end
 
     sign_in @user
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: {jira_service: {active: 0}}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 0 } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: {jira_service: {active: 0}}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
     JiraService.any_instance.stubs(:auth_service).once
-    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: { jira_service: { active: 1, site: "http://my-jira.com", username: "jirausername", password: "jirapwd" } }
+    post "/#{repo.user.slug}/#{repo.slug}/settings/jira", params: {jira_service: {active: 1, site: "http://my-jira.com", username: "jirausername", password: "jirapwd"}}
     assert_redirected_to integrations_user_repository_settings_path
     assert_flash notice: "Repository was successfully updated"
     assert repo.jira_service.active?

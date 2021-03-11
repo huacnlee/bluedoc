@@ -28,11 +28,12 @@ class Admin::IssuesController < Admin::ApplicationController
   end
 
   private
-    def set_issue
-      @issue = Issue.find(params[:id])
-    end
 
-    def issue_params
-      params.require(:issue).permit!
-    end
+  def set_issue
+    @issue = Issue.find(params[:id])
+  end
+
+  def issue_params
+    params.require(:issue).permit!
+  end
 end

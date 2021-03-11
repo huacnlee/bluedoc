@@ -7,7 +7,7 @@ class NoteTest < ActiveSupport::TestCase
     user = create(:user)
     note = Note.create_new(user.id)
     assert_not_nil note.slug
-    assert_match /[\w]+/, note.slug
+    assert_match(/\w+/, note.slug)
 
     check_note = user.notes.find_by_slug(note.slug)
     assert_equal note, check_note
@@ -112,7 +112,6 @@ class NoteTest < ActiveSupport::TestCase
     assert_nil result[:prev]
     assert_equal public_notes[1], result[:next]
 
-
     # with normal
     result = notes[2].prev_and_next_of_notes(with_user: user)
     assert_equal notes[1], result[:prev]
@@ -167,14 +166,14 @@ class NoteTest < ActiveSupport::TestCase
     note = create(:note, body: "Hello world")
 
     note.stub(:_search_body, "Search body") do
-      data = { slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: true, deleted: false }
+      data = {slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: true, deleted: false}
       assert_equal data, note.as_indexed_json
     end
 
     note = create(:note, body: "Hello world", privacy: "private", deleted_at: Time.now)
 
     note.stub(:_search_body, "Search body") do
-      data = { slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: false, deleted: true }
+      data = {slug: note.slug, title: note.title, body: "Hello world", search_body: "Search body", user_id: note.user_id, public: false, deleted: true}
       assert_equal data, note.as_indexed_json
     end
   end

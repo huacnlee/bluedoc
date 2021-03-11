@@ -5,12 +5,12 @@ class Label < ApplicationRecord
 
   belongs_to :target, polymorphic: true
 
-  validates :title, presence: true, uniqueness: { scope: :target }, length: 2..50
+  validates :title, presence: true, uniqueness: {scope: :target}, length: 2..50
   validates :color, presence: true
 
   validate do
-    unless BlueDoc::Utils.valid_color?(self.color)
-      self.errors.add :color, "Invalid color format"
+    unless BlueDoc::Utils.valid_color?(color)
+      errors.add :color, "Invalid color format"
     end
   end
 end

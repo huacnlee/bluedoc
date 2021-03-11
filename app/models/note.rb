@@ -9,9 +9,9 @@ class Note < ApplicationRecord
 
   second_level_cache expires_in: 1.week
 
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :slug, length: { maximum: 200 }, uniqueness: { scope: :user_id, case_sensitive: false }
-  validates :description, length: { maximum: 200 }
+  validates :title, presence: true, length: {maximum: 255}
+  validates :slug, length: {maximum: 200}, uniqueness: {scope: :user_id, case_sensitive: false}
+  validates :description, length: {maximum: 200}
 
   scope :recent, -> { order("id desc") }
 
@@ -21,18 +21,18 @@ class Note < ApplicationRecord
   depends_on :privacy, :soft_delete, :publish, :body_touch, :versions, :search, :watches, :auto_correct
 
   def to_path(suffix = nil)
-    "#{user.to_path}/notes/#{self.slug}#{suffix}"
+    "#{user.to_path}/notes/#{slug}#{suffix}"
   end
 
   # return next and prev of notes in same user
   # { next: Note, prev: Note }
   def prev_and_next_of_notes(with_user: nil)
-    result = { next: nil, prev: nil }
-    recent_docs = self.user.notes.recent
-    if with_user&.id != self.user_id
+    result = {next: nil, prev: nil}
+    recent_docs = user.notes.recent
+    if with_user&.id != user_id
       recent_docs = recent_docs.publics
     end
-    idx = recent_docs.find_index { |note| note.id == self.id }
+    idx = recent_docs.find_index { |note| note.id == id }
     return result if idx.nil?
     if idx < recent_docs.length
       result[:next] = recent_docs[idx + 1]

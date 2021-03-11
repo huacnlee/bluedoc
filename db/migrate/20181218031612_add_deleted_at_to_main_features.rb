@@ -6,12 +6,12 @@ class AddDeletedAtToMainFeatures < ActiveRecord::Migration[5.2]
     remove_column :docs, :deleted_at
     remove_column :docs, :deleted_slug
 
-    %i(users repositories docs members comments).each do |table_name|
+    %i[users repositories docs members comments].each do |table_name|
       add_column table_name, :deleted_at, :datetime
       add_index table_name, :deleted_at
     end
 
-    %i(users repositories docs).each do |table_name|
+    %i[users repositories docs].each do |table_name|
       add_column table_name, :deleted_slug, :string
     end
 

@@ -23,12 +23,12 @@ module Queries
     end
 
     def search_docs(params)
-      search_options = { include_private: false }
+      search_options = {include_private: false}
       if params[:repository_id]
         repository = Repository.find(params[:repository_id])
         authorize! :read, repository
 
-        search_options = { repository_id: repository.id, include_private: true }
+        search_options = {repository_id: repository.id, include_private: true}
       end
 
       result = BlueDoc::Search.new(:docs, params[:query], search_options).execute.limit(params[:limit])
@@ -36,7 +36,7 @@ module Queries
       result.records.each_with_hit do |item, hit|
         @docs << item
       end
-      { total: result.total_count, records: @docs }
+      {total: result.total_count, records: @docs}
     end
 
     def search_users(params)
@@ -45,7 +45,7 @@ module Queries
       result.records.each_with_hit do |item, hit|
         @users << item
       end
-      { total: result.total_count, records: @users }
+      {total: result.total_count, records: @users}
     end
   end
 end

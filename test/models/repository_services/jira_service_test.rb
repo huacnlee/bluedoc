@@ -25,13 +25,13 @@ class JiraServiceTest < ActiveSupport::TestCase
   end
 
   test "extract_jira_keys" do
-    body = <<-EOF
-http://my-jira.com/browse/PP-1
-[PP-3](http://my-jira.com/browse/PP-3)
-[PP-3](http://my-jira.com/browse/PP-3)
-[test](http://my-jira.com/browse/go)
-[PP-5](http://other-jira.com/browse/PP-5)
-[PP-10](http://my-jira.com/projects/PP/issues/PP-10?filter=allopenissues)
+    body = <<~EOF
+      http://my-jira.com/browse/PP-1
+      [PP-3](http://my-jira.com/browse/PP-3)
+      [PP-3](http://my-jira.com/browse/PP-3)
+      [test](http://my-jira.com/browse/go)
+      [PP-5](http://other-jira.com/browse/PP-5)
+      [PP-10](http://my-jira.com/projects/PP/issues/PP-10?filter=allopenissues)
     EOF
     doc = create(:doc, body: body)
 

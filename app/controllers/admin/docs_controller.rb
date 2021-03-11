@@ -63,11 +63,12 @@ class Admin::DocsController < Admin::ApplicationController
   # PRO-end
 
   private
-    def set_doc
-      @doc = Doc.unscoped.find(params[:id])
-    end
 
-    def doc_params
-      params.require(:doc).permit!
-    end
+  def set_doc
+    @doc = Doc.unscoped.find(params[:id])
+  end
+
+  def doc_params
+    params.require(:doc).permit!
+  end
 end

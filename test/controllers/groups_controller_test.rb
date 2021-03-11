@@ -14,7 +14,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     get @group.to_path
     assert_equal 200, response.status
-    assert_match /#{@group.name}/, response.body
+    assert_match(/#{@group.name}/, response.body)
     assert_select ".group-avatar-box"
     assert_select ".group-repositories"
     assert_select ".group-repositories .repository-item", 2
@@ -31,7 +31,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    get @group.to_path, params: { q: "bar" }
+    get @group.to_path, params: {q: "bar"}
     assert_equal 200, response.status
     assert_select ".group-repositories .repository-item", 1
     assert_select ".subnav-search input.subnav-search-input" do
@@ -56,18 +56,18 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     private_repo.add_member(@user, :reader)
     get @group.to_path
     assert_select ".repository-item", 3
-    assert_match /#{private_repo.name}/, response.body
+    assert_match(/#{private_repo.name}/, response.body)
 
     # sign in with other user as reader in Group
     sign_in_role :reader, group: @group
     get @group.to_path
     assert_select ".repository-item", 3
-    assert_match /#{private_repo.name}/, response.body
+    assert_match(/#{private_repo.name}/, response.body)
 
     sign_in_role :editor, group: @group
     get @group.to_path
     assert_select ".repository-item", 3
-    assert_match /#{private_repo.name}/, response.body
+    assert_match(/#{private_repo.name}/, response.body)
   end
 
   test "GET /groups/new" do
@@ -78,7 +78,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/groups/new"
     assert_equal 200, response.status
-    assert_match /New Group/, response.body
+    assert_match(/New Group/, response.body)
     assert_react_component "groups/NewGroup" do |props|
       assert_not_nil props[:group]
     end
@@ -86,13 +86,13 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /groups" do
     g = build(:group)
-    group_params = { name: g.name, slug: g.slug, description: "Hello world" }
+    group_params = {name: g.name, slug: g.slug, description: "Hello world"}
     assert_require_user do
-      post "/groups", params: { group: group_params }
+      post "/groups", params: {group: group_params}
     end
 
     sign_in @user
-    post "/groups", params: { group: group_params }
+    post "/groups", params: {group: group_params}
 
     group = Group.find_by_slug(group_params[:slug])
     assert_not_nil group
@@ -101,7 +101,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "", group.email
     assert_redirected_to "/#{group_params[:slug]}"
 
-    post "/groups", params: { group: group_params }
+    post "/groups", params: {group: group_params}
     assert_equal 200, response.status
     assert_react_component "groups/NewGroup" do |props|
       assert_not_nil props[:group]
@@ -118,7 +118,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     get search_group_path(@group)
     assert_redirected_to @group.to_path
 
-    get search_group_path(@group), params: { q: "test" }
+    get search_group_path(@group), params: {q: "test"}
     assert_equal 200, response.status
     assert_select ".reponav-item.selected" do
       assert_select "[href=?]", search_group_path(@group)

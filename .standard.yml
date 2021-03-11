@@ -1,0 +1,6 @@
+ignore:
+  - tmp/**/*
+  - lib/templates/**/*
+  - 'test/**/*':
+    - Lint/UselessAssignment
+

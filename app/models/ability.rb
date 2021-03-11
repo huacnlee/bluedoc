@@ -37,18 +37,18 @@ class Ability
   end
 
   def can?(action, obj)
-    if obj.respond_to?(:cache_key)
-      cache_key = "#{action}:#{obj.cache_key}"
+    cache_key = if obj.respond_to?(:cache_key)
+      "#{action}:#{obj.cache_key}"
     else
-      cache_key = "#{action}:#{obj}"
+      "#{action}:#{obj}"
     end
-    res = self.cache[cache_key]
-    if res != nil
+    res = cache[cache_key]
+    if !res.nil?
       Rails.logger.debug "  CACHE CanCanCan load: #{cache_key} (#{res})"
       return res
     end
-    self.cache[cache_key] = super(action, obj)
-    self.cache[cache_key]
+    cache[cache_key] = super(action, obj)
+    cache[cache_key]
   end
 
   def reload

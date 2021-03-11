@@ -9,7 +9,7 @@ class GraphQLController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      current_user: current_user,
+      current_user: current_user
     }
     result = BlueDocSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -19,28 +19,29 @@ class GraphQLController < ApplicationController
   end
 
   private
-    # Handle form data, JSON body, or a blank value
-    def ensure_hash(ambiguous_param)
-      case ambiguous_param
-      when String
-        if ambiguous_param.present?
-          ensure_hash(JSON.parse(ambiguous_param))
-        else
-          {}
-        end
-      when Hash, ActionController::Parameters
-        ambiguous_param
-      when nil
-        {}
+
+  # Handle form data, JSON body, or a blank value
+  def ensure_hash(ambiguous_param)
+    case ambiguous_param
+    when String
+      if ambiguous_param.present?
+        ensure_hash(JSON.parse(ambiguous_param))
       else
-        raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
+        {}
       end
+    when Hash, ActionController::Parameters
+      ambiguous_param
+    when nil
+      {}
+    else
+      raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
+  end
 
-    def handle_error_in_development(e)
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
+  def handle_error_in_development(e)
+    logger.error e.message
+    logger.error e.backtrace.join("\n")
 
-      render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
-    end
+    render json: {error: {message: e.message, backtrace: e.backtrace}, data: {}}, status: 500
+  end
 end

@@ -15,7 +15,7 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
     end
 
     Setting.stub(:host, "http://bluedoc-test.com") do
-      assert_equal({ host: "http://bluedoc-test.com" }, Rails.application.config.action_mailer.default_url_options)
+      assert_equal({host: "http://bluedoc-test.com"}, Rails.application.config.action_mailer.default_url_options)
     end
   end
 
@@ -29,8 +29,8 @@ class BlueDoc::ConfigTest < ActiveSupport::TestCase
   end
 
   test "ApplicationMailer.default_url_options" do
-    assert_equal({ host: Setting.host }, ApplicationMailer.default_url_options)
-    assert_equal({ host: Setting.host }, ActionMailer::Base.default_url_options)
+    assert_equal({host: Setting.host}, ApplicationMailer.default_url_options)
+    assert_equal({host: Setting.host}, ActionMailer::Base.default_url_options)
 
     mailer_options = {
       foo: "aaa",

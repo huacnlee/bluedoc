@@ -7,24 +7,24 @@ class Issue
 
   def as_indexed_json(_options = {})
     {
-      iid: self.iid,
-      title: self.title,
-      body: self.body_plain,
-      search_body: self._search_body,
-      repository_id: self.repository_id,
-      user_id: self.repository.user_id,
+      iid: iid,
+      title: title,
+      body: body_plain,
+      search_body: _search_body,
+      repository_id: repository_id,
+      user_id: repository.user_id,
       repository: {
-        public: self.repository.public?,
+        public: repository.public?
       }
     }
   end
 
   def indexed_changed?
     saved_change_to_title? ||
-    body.changed?
+      body.changed?
   end
 
   def _search_body
-    [self.repository&.user&.fullname, self.repository&.fullname, self.to_path, self.body_plain].join("\n\n")
+    [repository&.user&.fullname, repository&.fullname, to_path, body_plain].join("\n\n")
   end
 end

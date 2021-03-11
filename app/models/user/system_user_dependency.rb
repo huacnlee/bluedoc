@@ -6,7 +6,7 @@ class User
   scope :without_system, -> { where.not(slug: SYSTEM_USER_SLUGS) }
 
   def system?
-    @system ||= SYSTEM_USER_SLUGS.include?(self.slug)
+    @system ||= SYSTEM_USER_SLUGS.include?(slug)
   end
 
   class << self

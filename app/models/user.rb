@@ -19,28 +19,33 @@ class User < ApplicationRecord
   has_many :issues, through: :issue_assignees
   has_many :owned_issues, class_name: "Issue"
 
-  validates :name, presence: true, length: { in: 2..50 }
-  validates :location, length: { maximum: 50 }
-  validates :description, length: { maximum: 150 }
-  validates :url, length: { maximum: 250 }
-  validates :slug, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, length: {in: 2..50}
+  validates :location, length: {maximum: 50}
+  validates :description, length: {maximum: 150}
+  validates :url, length: {maximum: 250}
+  validates :slug, uniqueness: {case_sensitive: false}
 
   before_validation :check_slug_keywords
   def check_slug_keywords
-    if self.slug.present? && !BlueDoc::Slug.valid_user?(self.slug)
-      self.errors.add(:slug, t(".invalid, slug is a keyword", slug: self.slug))
+    if slug.present? && !BlueDoc::Slug.valid_user?(slug)
+      errors.add(:slug, t(".invalid, slug is a keyword", slug: slug))
     end
   end
 
   def to_path(suffix = nil)
-    "/#{self.slug}#{suffix}"
+    "/#{slug}#{suffix}"
   end
 
-  def group?; false; end
-  def user?; true; end
+  def group?
+    false
+  end
+
+  def user?
+    true
+  end
 
   def admin?
-    Setting.has_admin?(self.email)
+    Setting.has_admin?(email)
   end
 end
 

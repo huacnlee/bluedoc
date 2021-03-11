@@ -284,7 +284,7 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, repository: repo, body: "Hello world")
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: true }, deleted: false }
+      data = {slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: true}, deleted: false}
       assert_equal data, doc.as_indexed_json
     end
 
@@ -292,7 +292,7 @@ class DocTest < ActiveSupport::TestCase
     doc = create(:doc, repository: repo, body: "Hello world", deleted_at: Time.now)
 
     doc.stub(:_search_body, "Search body") do
-      data = { slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: { public: false }, deleted: true }
+      data = {slug: doc.slug, title: doc.title, body: "Hello world", search_body: "Search body", repository_id: repo.id, user_id: repo.user_id, repository: {public: false}, deleted: true}
       assert_equal data, doc.as_indexed_json
     end
   end
@@ -375,10 +375,10 @@ class DocTest < ActiveSupport::TestCase
     toc = doc.toc
 
     expcted_toc = <<~TOC
-    foo-bar
-      foo-bar-1
-        foo-bar-11
-      foo-bar-2
+      foo-bar
+        foo-bar-1
+          foo-bar-11
+        foo-bar-2
     TOC
 
     assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
@@ -399,9 +399,9 @@ class DocTest < ActiveSupport::TestCase
     end
 
     expcted_toc = <<~TOC
-    foo-bar-1
-      foo-bar-11
-    foo-bar-2
+      foo-bar-1
+        foo-bar-11
+      foo-bar-2
     TOC
     assert_equal expcted_toc.strip, repo0.tocs.nested_tree.map { |item| "  " * item.depth + item.url }.join("\n").strip
   end

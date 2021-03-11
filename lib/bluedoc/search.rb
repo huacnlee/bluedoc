@@ -15,7 +15,7 @@ module BlueDoc
     end
 
     def execute
-      case self.type
+      case type
       when :docs then search_docs
       when :repositories then search_repositories
       when :groups then search_groups
@@ -28,154 +28,152 @@ module BlueDoc
     end
 
     def private?
-      self.include_private == true
+      include_private == true
     end
 
     def search_params(query, filter = [])
       filter << query
-      params = {
+      {
         query: {
           bool: {
             must: filter,
-            must_not: { term: { deleted: true } }
+            must_not: {term: {deleted: true}}
           }
         },
         highlight: {
-          fields: { title: {}, body: {}, search_body: {} },
+          fields: {title: {}, body: {}, search_body: {}},
           pre_tags: ["[h]"],
-          post_tags: ["[/h]"],
+          post_tags: ["[/h]"]
         }
       }
-      params
     end
 
     private
-      def search_docs
-        filter = []
 
-        if self.user_id
-          filter << { term: { user_id: self.user_id } }
-        elsif self.repository_id
-          filter << { term: { repository_id: self.repository_id } }
-        end
+    def search_docs
+      filter = []
 
-        if !self.private?
-          filter << { term: { "repository.public" => true } }
-        end
-
-
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: (self.query || ""),
-            default_operator: "AND",
-            minimum_should_match: "70%",
-          }
-        }
-
-        params = search_params(q, filter)
-
-        client.search(params, Doc)
+      if user_id
+        filter << {term: {user_id: user_id}}
+      elsif repository_id
+        filter << {term: {repository_id: repository_id}}
       end
 
-      def search_repositories
-        filter = []
-
-        if self.user_id
-          filter << { term: { user_id: self.user_id } }
-        end
-
-        if !self.private?
-          filter << { term: { "repository.public" => true } }
-        end
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: "#{self.query} or *#{self.query}*",
-          }
-        }
-
-        client.search(search_params(q, filter), Repository)
+      if !private?
+        filter << {term: {"repository.public" => true}}
       end
 
-      def search_notes
-        filter = []
-
-        if self.user_id
-          filter << { term: { user_id: self.user_id } }
-        end
-
-        if !self.private?
-          filter << { term: { public: true } }
-        end
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: (self.query || ""),
-            default_operator: "AND",
-            minimum_should_match: "70%",
-          }
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: (query || ""),
+          default_operator: "AND",
+          minimum_should_match: "70%"
         }
+      }
 
-        client.search(search_params(q, filter), Note)
+      params = search_params(q, filter)
+
+      client.search(params, Doc)
+    end
+
+    def search_repositories
+      filter = []
+
+      if user_id
+        filter << {term: {user_id: user_id}}
       end
 
-      def search_groups
-        filter = []
-        filter << { term: { sub_type: "group" } }
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: "#{self.query} or *#{self.query}*",
-          }
-        }
-
-        client.search(search_params(q, filter), Group)
+      if !private?
+        filter << {term: {"repository.public" => true}}
       end
 
-      def search_users
-        filter = []
-        filter << { term: { sub_type: "user" } }
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: "#{self.query} or *#{self.query}*",
-          }
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: "#{query} or *#{query}*"
         }
+      }
 
-        client.search(search_params(q, filter), User)
+      client.search(search_params(q, filter), Repository)
+    end
+
+    def search_notes
+      filter = []
+
+      if user_id
+        filter << {term: {user_id: user_id}}
       end
 
-      def search_issues
-        filter = []
-
-        if self.user_id
-          filter << { term: { user_id: self.user_id } }
-        elsif self.repository_id
-          filter << { term: { repository_id: self.repository_id } }
-        end
-
-        if !self.private?
-          filter << { term: { "repository.public" => true } }
-        end
-
-        q = {
-          query_string: {
-            fields: %w[slug title^10 body search_body],
-            query: (self.query || ""),
-            default_operator: "AND",
-            minimum_should_match: "70%",
-          }
-        }
-
-        params = search_params(q, filter)
-
-        client.search(params, Issue)
+      if !private?
+        filter << {term: {public: true}}
       end
+
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: (query || ""),
+          default_operator: "AND",
+          minimum_should_match: "70%"
+        }
+      }
+
+      client.search(search_params(q, filter), Note)
+    end
+
+    def search_groups
+      filter = []
+      filter << {term: {sub_type: "group"}}
+
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: "#{query} or *#{query}*"
+        }
+      }
+
+      client.search(search_params(q, filter), Group)
+    end
+
+    def search_users
+      filter = []
+      filter << {term: {sub_type: "user"}}
+
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: "#{query} or *#{query}*"
+        }
+      }
+
+      client.search(search_params(q, filter), User)
+    end
+
+    def search_issues
+      filter = []
+
+      if user_id
+        filter << {term: {user_id: user_id}}
+      elsif repository_id
+        filter << {term: {repository_id: repository_id}}
+      end
+
+      if !private?
+        filter << {term: {"repository.public" => true}}
+      end
+
+      q = {
+        query_string: {
+          fields: %w[slug title^10 body search_body],
+          query: (query || ""),
+          default_operator: "AND",
+          minimum_should_match: "70%"
+        }
+      }
+
+      params = search_params(q, filter)
+
+      client.search(params, Issue)
+    end
   end
 end

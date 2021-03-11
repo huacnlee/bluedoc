@@ -45,12 +45,12 @@ class Notification < ActiveRecord::Base
 
     # create Activity for receivers, for dashboard timeline
     Notification.transaction do
-      user_ids.each do |_user_id|
+      user_ids.each do |uid|
         note = Notification.new(notification_params)
-        note.user_id = _user_id
+        note.user_id = uid
 
         # ingore create, if user not has ability to read target
-        ability = Ability.new(User.new(id: _user_id))
+        ability = Ability.new(User.new(id: uid))
         next if ability.cannot?(:read, note.target)
 
         note.save!
@@ -66,9 +66,9 @@ class Notification < ActiveRecord::Base
 
   def target_url
     case notify_type
-    when "add_member" then self.target&.subject&.to_url
+    when "add_member" then target&.subject&.to_url
     when "repo_import", "comment", "mention", "issue_assign", "new_issue", "close_issue", "reopen_issue"
-      self.target&.to_url
+      target&.to_url
     else
       Setting.host
     end
@@ -77,9 +77,9 @@ class Notification < ActiveRecord::Base
   def target_mention_fragment
     return @target_mention_fragment if defined? @target_mention_fragment
     @target_mention_fragment = case target_type
-                               when "Doc" then BlueDoc::HTML.mention_fragments(self.target&.body_html, self.user&.slug).join("<br /><br />")
+                               when "Doc" then BlueDoc::HTML.mention_fragments(target&.body_html, user&.slug).join("<br /><br />")
                                when "Comment", "Issue"
-                                 self.target&.body_html
+                                 target&.body_html
                                else
                                  ""
     end
@@ -88,46 +88,47 @@ class Notification < ActiveRecord::Base
   end
 
   def mail_body
-    ApplicationController.renderer.render "/notifications/body/#{notify_type}", layout: false, locals: { notification: self }
+    ApplicationController.renderer.render "/notifications/body/#{notify_type}", layout: false, locals: {notification: self}
   rescue => e
     BlueDoc::Error.track(e, title: "notification body render failed, fallbacked to title")
     mail_title
   end
 
   def mail_title
-    html = ApplicationController.renderer.render "/notifications/title/#{notify_type}", layout: false, locals: { notification: self }
+    html = ApplicationController.renderer.render "/notifications/title/#{notify_type}", layout: false, locals: {notification: self}
     html.gsub(/<.+?>/, "").gsub(/\s+/, " ").strip
   end
 
   # comment-doc-id
   def mail_message_id
-    message_ids = [self.notify_type]
+    message_ids = [notify_type]
 
-    case self.notify_type
+    case notify_type
     when "comment"
-      message_ids += [self.target&.commentable_type, self.target&.commentable_id]
+      message_ids += [target&.commentable_type, target&.commentable_id]
     when "add_member"
-      message_ids += [self.target&.subject_type, self.target&.subject_id]
+      message_ids += [target&.subject_type, target&.subject_id]
     when "mention"
-      case self.target_type
+      message_ids = case target_type
       when "Comment"
-        message_ids = ["comment", self.target&.commentable_type, self.target&.commentable_id]
+        ["comment", target&.commentable_type, target&.commentable_id]
       else
-        message_ids = ["comment", self.target_type, self.target_id]
+        ["comment", target_type, target_id]
       end
     else
-      message_ids += [self.target_type, self.target_id]
+      message_ids += [target_type, target_id]
     end
 
     message_ids.join("-")
   end
 
   private
-    def bind_relation_for_target
-      self.class.fill_depend_id_for_target(self)
-    end
 
-    def create_email_notify
-      NotificationMailer.with(notification: self).to_user.deliver_later
-    end
+  def bind_relation_for_target
+    self.class.fill_depend_id_for_target(self)
+  end
+
+  def create_email_notify
+    NotificationMailer.with(notification: self).to_user.deliver_later
+  end
 end

@@ -17,12 +17,12 @@ class RepositoryImportJob < ApplicationJob
     importer.perform
 
     repo.source.update(status: :done, message: "", retries_count: 0)
-    Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :success })
+    Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: {status: :success})
     true
   rescue => e
     retries_count = (repo.source&.retries_count || 0) + 1
     repo.source.update(status: :failed, message: e.message, retries_count: retries_count)
     BlueDoc::Error.track(e, title: "RepositoryImportJob [#{repo.slug}] #{url} error")
-    Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: { status: :failed, message: e.message })
+    Notification.track_notification(:repo_import, repo, user: user, actor_id: User.system.id, meta: {status: :failed, message: e.message})
   end
 end

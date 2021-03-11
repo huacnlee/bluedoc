@@ -8,11 +8,11 @@ class BlueDoc::SearchText < ActionView::TestCase
       query: {
         bool: {
           must: filter,
-          must_not: { term: { deleted: true } }
+          must_not: {term: {deleted: true}}
         }
       },
       highlight: {
-        fields: { title: {}, body: {}, search_body: {} },
+        fields: {title: {}, body: {}, search_body: {}},
         pre_tags: ["[h]"],
         post_tags: ["[/h]"]
       }
@@ -29,23 +29,23 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "Hello world",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }
 
-    filter = [ { a: 1 } ]
+    filter = [{a: 1}]
 
-    assert_search_params [ { a: 1 }, query ], @search.search_params(query, filter)
+    assert_search_params [{a: 1}, query], @search.search_params(query, filter)
 
     query = {
       term: {
-        sub_type: "user",
+        sub_type: "user"
       }
     }
 
-    filter = [ { b: 1 } ]
+    filter = [{b: 1}]
 
-    assert_search_params [ { b: 1 }, query ], @search.search_params(query, filter)
+    assert_search_params [{b: 1}, query], @search.search_params(query, filter)
   end
 
   test "search docs" do
@@ -59,10 +59,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { "repository.public" => true } }
+      {term: {"repository.public" => true}}
     ])
 
     mock.expect(:search, [], [search_params, Doc])
@@ -77,10 +77,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { user_id: 2 } }
+      {term: {user_id: 2}}
     ])
 
     mock.expect(:search, [], [search_params, Doc])
@@ -95,11 +95,11 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { repository_id: 2 } },
-      { term: { "repository.public" => true } }
+      {term: {repository_id: 2}},
+      {term: {"repository.public" => true}}
     ])
 
     mock.expect(:search, [], [search_params, Doc])
@@ -116,10 +116,10 @@ class BlueDoc::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title^10 body search_body],
-        query: "foo or *foo*",
+        query: "foo or *foo*"
       }
     }, [
-      { term: { "repository.public" => true } }
+      {term: {"repository.public" => true}}
     ])
 
     mock.expect(:search, [], [search_params, Repository])
@@ -132,10 +132,10 @@ class BlueDoc::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title^10 body search_body],
-        query: "foo or *foo*",
+        query: "foo or *foo*"
       }
     }, [
-      { term: { user_id: 123 } }
+      {term: {user_id: 123}}
     ])
 
     mock.expect(:search, [], [search_params, Repository])
@@ -152,10 +152,10 @@ class BlueDoc::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title^10 body search_body],
-        query: "foo or *foo*",
+        query: "foo or *foo*"
       }
     }, [
-      { term: { sub_type: "group" } }
+      {term: {sub_type: "group"}}
     ])
 
     mock.expect(:search, [], [search_params, Group])
@@ -172,10 +172,10 @@ class BlueDoc::SearchText < ActionView::TestCase
     search_params = search.search_params({
       query_string: {
         fields: %w[slug title^10 body search_body],
-        query: "foo or *foo*",
+        query: "foo or *foo*"
       }
     }, [
-      { term: { sub_type: "user" } }
+      {term: {sub_type: "user"}}
     ])
 
     mock.expect(:search, [], [search_params, User])
@@ -194,10 +194,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { public: true } }
+      {term: {public: true}}
     ])
 
     mock.expect(:search, [], [search_params, Note])
@@ -212,10 +212,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { user_id: 2 } }
+      {term: {user_id: 2}}
     ])
 
     mock.expect(:search, [], [search_params, Note])
@@ -230,11 +230,11 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { user_id: 2 } },
-      { term: { public: true } }
+      {term: {user_id: 2}},
+      {term: {public: true}}
     ])
 
     mock.expect(:search, [], [search_params, Note])
@@ -253,10 +253,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { "repository.public" => true } }
+      {term: {"repository.public" => true}}
     ])
 
     mock.expect(:search, [], [search_params, Issue])
@@ -271,10 +271,10 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { user_id: 2 } }
+      {term: {user_id: 2}}
     ])
 
     mock.expect(:search, [], [search_params, Issue])
@@ -289,11 +289,11 @@ class BlueDoc::SearchText < ActionView::TestCase
         fields: %w[slug title^10 body search_body],
         query: "foo",
         default_operator: "AND",
-        minimum_should_match: "70%",
+        minimum_should_match: "70%"
       }
     }, [
-      { term: { repository_id: 2 } },
-      { term: { "repository.public" => true } }
+      {term: {repository_id: 2}},
+      {term: {"repository.public" => true}}
     ])
 
     mock.expect(:search, [], [search_params, Issue])

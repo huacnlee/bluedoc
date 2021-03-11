@@ -19,7 +19,7 @@ module BlueDoc
 
         class << self
           def renderer
-            @renderer ||= self.new
+            @renderer ||= new
           end
         end
 
@@ -29,7 +29,7 @@ module BlueDoc
           title_length = raw_text.length
           min_length = title_length * 0.3
 
-          header_id = raw_text.gsub(/[^a-z0-9]+/i, "-").downcase.gsub(/^\-|\-$/, "")
+          header_id = raw_text.gsub(/[^a-z0-9]+/i, "-").downcase.gsub(/^-|-$/, "")
           if title_length - header_id.length > min_length
             header_id = Digest::MD5.hexdigest(raw_text.strip)[0..8]
           end

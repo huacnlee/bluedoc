@@ -30,45 +30,46 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
-    def process_callback
-      if omniauth_auth.blank?
-        redirect_to(new_user_session_path) && (return)
-      end
 
-      @user = User.find_or_create_by_omniauth(omniauth_auth)
-      if @user&.persisted?
-        # Sign in @user when exists binding or successfully created a user with binding
-        sign_in_and_redirect @user, event: :authentication
-      else
-        # Otherwice (username/email has been used or not match with User validation)
-        # Save auth info to Session and showup the Sign up/Sign in form for manual binding account.
-        if @user
-          set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
-        end
-
-        session[:omniauth] = omniauth_auth
-        redirect_to new_user_registration_path
-      end
+  def process_callback
+    if omniauth_auth.blank?
+      redirect_to(new_user_session_path) && return
     end
 
-    def omniauth_auth
-      return @omniauth_auth if defined? @omniauth_auth
-      auth = request.env["omniauth.auth"]
-
-      login = auth.info&.login
-      if login.blank? && auth.info&.email
-        login = auth.info&.email.split("@").first
+    @user = User.find_or_create_by_omniauth(omniauth_auth)
+    if @user&.persisted?
+      # Sign in @user when exists binding or successfully created a user with binding
+      sign_in_and_redirect @user, event: :authentication
+    else
+      # Otherwice (username/email has been used or not match with User validation)
+      # Save auth info to Session and showup the Sign up/Sign in form for manual binding account.
+      if @user
+        set_flash_message! :alert, :failure, kind: BlueDoc::Utils.omniauth_camelize(omniauth_auth["provider"]), reason: @user.errors.full_messages.first
       end
 
-      @omniauth_auth = {
-        "provider" => auth.provider,
-        "uid" => auth.uid,
-        "info" => {
-          "name" => auth.info&.name,
-          "login" => login,
-          "image" => auth.info&.image,
-          "email" => auth.info&.email
-        }
+      session[:omniauth] = omniauth_auth
+      redirect_to new_user_registration_path
+    end
+  end
+
+  def omniauth_auth
+    return @omniauth_auth if defined? @omniauth_auth
+    auth = request.env["omniauth.auth"]
+
+    login = auth.info&.login
+    if login.blank?
+      login = auth.info&.email&.split("@")&.first
+    end
+
+    @omniauth_auth = {
+      "provider" => auth.provider,
+      "uid" => auth.uid,
+      "info" => {
+        "name" => auth.info&.name,
+        "login" => login,
+        "image" => auth.info&.image,
+        "email" => auth.info&.email
       }
-    end
+    }
+  end
 end

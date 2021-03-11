@@ -29,7 +29,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     user_params = {
       name: "new name"
     }
-    patch admin_user_path(@user.id), params: { user: user_params }
+    patch admin_user_path(@user.id), params: {user: user_params}
     assert_redirected_to admin_users_path
   end
 

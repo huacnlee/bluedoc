@@ -6,7 +6,7 @@ class CreateUserActives < ActiveRecord::Migration[5.2]
       t.integer :subject_id
 
       t.timestamps
-      
+
       t.index [:user_id, :subject_type, :subject_id], unique: true
       t.index :updated_at
     end

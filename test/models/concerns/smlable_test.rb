@@ -16,8 +16,8 @@ class SmlableTest < ActiveSupport::TestCase
     assert_html_equal body_html, doc.body_html
     assert_equal draft_body_html, doc.draft_body_html
 
-    stub_method = Proc.new do |_body, opts|
-      opts[:public] ? "Render public" : _body
+    stub_method = proc do |body, opts|
+      opts[:public] ? "Render public" : body
     end
 
     BlueDoc::HTML.stub(:render, stub_method) do
@@ -26,11 +26,11 @@ class SmlableTest < ActiveSupport::TestCase
 
     # SML
     raw = <<~SML
-    ["div",
-      ["span",{"data-type":"color", "style": "color:green"},"",
-        ["a",{"title":"Ruby on Rails","href":"https://rubyonrails.org"},"Ruby on Rails"]
+      ["div",
+        ["span",{"data-type":"color", "style": "color:green"},"",
+          ["a",{"title":"Ruby on Rails","href":"https://rubyonrails.org"},"Ruby on Rails"]
+        ]
       ]
-    ]
     SML
     draft_raw = %(["p", "Hello world"])
     doc = create(:doc, body_sml: raw, draft_body_sml: draft_raw, format: :sml)
@@ -65,8 +65,8 @@ class SmlableTest < ActiveSupport::TestCase
     assert_equal body, version.body_plain
     assert_equal body_html, body_html
 
-    stub_method = Proc.new do |_body, opts|
-      opts[:public] ? "Render public" : _body
+    stub_method = proc do |body, opts|
+      opts[:public] ? "Render public" : body
     end
 
     BlueDoc::HTML.stub(:render, stub_method) do

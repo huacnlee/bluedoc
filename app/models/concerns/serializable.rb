@@ -8,6 +8,11 @@ module Serializable
     include ActiveModel::Serialization
   end
 
-  def persisted?; true end
-  def id; 1 end
+  def persisted?
+    true
+  end
+
+  def id
+    1
+  end
 end

@@ -39,9 +39,9 @@ class Queries::DocsQueryTest < BlueDoc::GraphQL::IntegrationTest
     records = res["records"]
     assert_equal 2, records.length
 
-    pageInfo = res["pageInfo"]
-    assert_equal 1, pageInfo["page"]
-    assert_equal 2, pageInfo["totalCount"]
+    page_info = res["pageInfo"]
+    assert_equal 1, page_info["page"]
+    assert_equal 2, page_info["totalCount"]
 
     # private repo
     repo = create(:repository, privacy: :private)

@@ -26,7 +26,7 @@ class Setting < RailsSettings::Base
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"],
     authentication: ENV["SMTP_AUTHENTICATION"] || "login",
-    enable_starttls_auto: (ENV["SMTP_ENABLE_STARTTLS_AUTO"] || "true") == "true",
+    enable_starttls_auto: (ENV["SMTP_ENABLE_STARTTLS_AUTO"] || "true") == "true"
   }
 
   # Devise
@@ -66,8 +66,8 @@ class Setting < RailsSettings::Base
     }
 
     def has_admin?(email)
-      return false if self.admin_emails.blank?
-      self.admin_emails.include?(email.downcase)
+      return false if admin_emails.blank?
+      admin_emails.include?(email.downcase)
     end
 
     def locale_options
@@ -79,17 +79,17 @@ class Setting < RailsSettings::Base
     end
 
     def user_email_limit_enable?
-      self.user_email_suffixes.any?
+      user_email_suffixes.any?
     end
 
     # Check User email by user_email_suffixes setting
     def valid_user_email?(email)
       return false if email.blank?
-      return true if self.user_email_suffixes.blank?
+      return true if user_email_suffixes.blank?
 
       found = false
 
-      self.user_email_suffixes.each do |suffix|
+      user_email_suffixes.each do |suffix|
         if email.downcase.end_with?(suffix.downcase)
           found = true
           break

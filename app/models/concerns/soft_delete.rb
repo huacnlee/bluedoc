@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module SoftDelete
@@ -25,7 +24,7 @@ module SoftDelete
       run_callbacks(:soft_delete) do
         run_callbacks(:destroy) do
           if persisted?
-            self.delete
+            delete
           end
 
           @destroyed = true
@@ -37,7 +36,7 @@ module SoftDelete
 
   # PRO-begin
   def destroy
-    attrs = { deleted_at: Time.now.utc, updated_at: Time.now.utc }
+    attrs = {deleted_at: Time.now.utc, updated_at: Time.now.utc}
     attrs = soft_delete_destroy_attributes if defined? soft_delete_destroy_attributes
 
     self.class.transaction do
@@ -56,7 +55,7 @@ module SoftDelete
 
   def restore
     @destroyed = false
-    attrs = { deleted_at: nil, updated_at: Time.now.utc }
+    attrs = {deleted_at: nil, updated_at: Time.now.utc}
     attrs = soft_delete_restore_attributes if defined? soft_delete_restore_attributes
 
     original_slug = attrs[:slug]
@@ -83,7 +82,7 @@ module SoftDelete
   end
 
   def restore_dependents(field)
-    self.send(field).unscoped.where("deleted_at >= ?", self.deleted_at).restore_all
+    send(field).unscoped.where("deleted_at >= ?", deleted_at).restore_all
   end
 
   class_methods do

@@ -29,7 +29,7 @@ class Admin::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository_params = {
       name: "new name"
     }
-    patch admin_repository_path(@repository.id), params: { repository: repository_params }
+    patch admin_repository_path(@repository.id), params: {repository: repository_params}
     assert_redirected_to admin_repositories_path
   end
 

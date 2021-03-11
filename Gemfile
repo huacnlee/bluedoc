@@ -88,8 +88,6 @@ group :development do
   gem "listen"
   gem "spring"
   gem "spring-watcher-listen"
-  gem "rubocop"
-  gem "rubocop-rails"
-  gem "rubocop-performance"
+  gem "standard"
   gem "graphiql-rails"
 end

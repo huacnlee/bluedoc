@@ -10,6 +10,6 @@ class InlineComment < ApplicationRecord
   delegate :watch_comment_by_user_actions, :watch_comment_by_users, :watch_comment_by_user_ids, to: :subject
 
   def to_url
-    self.subject&.to_url(anchor: self.nid)
+    subject&.to_url(anchor: nid)
   end
 end

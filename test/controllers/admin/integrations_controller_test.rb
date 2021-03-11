@@ -16,7 +16,7 @@ class Admin::IntegrationsControllerTest < ActionDispatch::IntegrationTest
   test "should put admin_integration_path" do
     JiraService.any_instance.stubs(:auth_service).once
     assert_difference "JiraService.count" do
-      put admin_integration_path(:jira, params: { jira_service: { active: 0, site: "http://my-jira.com", username: "jirausername", password: "jirapwd" } })
+      put admin_integration_path(:jira, params: {jira_service: {active: 0, site: "http://my-jira.com", username: "jirausername", password: "jirapwd"}})
     end
 
     jira = JiraService.last
@@ -25,7 +25,7 @@ class Admin::IntegrationsControllerTest < ActionDispatch::IntegrationTest
 
     JiraService.any_instance.stubs(:auth_service).once
     assert_no_difference "JiraService.count" do
-      put admin_integration_path(:jira, params: { jira_service: { active: 1, site: "http://my-jira.com", username: "jirausername", password: "jirapwd" } })
+      put admin_integration_path(:jira, params: {jira_service: {active: 1, site: "http://my-jira.com", username: "jirausername", password: "jirapwd"}})
     end
     assert_equal true, jira.reload.active
     assert_redirected_to edit_admin_integration_path(:jira)

@@ -72,13 +72,13 @@ class UsersController < ApplicationController
   def follow
     current_user.follow_user(@user)
     @user.reload
-    render json: { count: @user.followers_count }
+    render json: {count: @user.followers_count}
   end
 
   def unfollow
     current_user.unfollow_user(@user)
     @user.reload
-    render json: { count: @user.followers_count }
+    render json: {count: @user.followers_count}
   end
 
   def new
@@ -95,12 +95,13 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find_by_slug!(params[:id])
-      raise ActiveRecord::RecordNotFound if @user.system?
-    end
 
-    def user_params
-      params.require(:user).permit(:slug, :name, :description)
-    end
+  def set_user
+    @user = User.find_by_slug!(params[:id])
+    raise ActiveRecord::RecordNotFound if @user.system?
+  end
+
+  def user_params
+    params.require(:user).permit(:slug, :name, :description)
+  end
 end

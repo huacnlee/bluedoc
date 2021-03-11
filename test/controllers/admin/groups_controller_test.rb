@@ -29,7 +29,7 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
     group_params = {
       name: "new name"
     }
-    patch admin_group_path(@group.id), params: { group: group_params }
+    patch admin_group_path(@group.id), params: {group: group_params}
     assert_redirected_to admin_groups_path
   end
 

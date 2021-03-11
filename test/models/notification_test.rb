@@ -42,10 +42,10 @@ class NotificationTest < ActiveSupport::TestCase
     mock_current user: @actor
 
     assert_enqueued_emails 1 do
-      Notification.track_notification(:add_member, member, user_id: @user.id, meta: { foo: "bar" })
+      Notification.track_notification(:add_member, member, user_id: @user.id, meta: {foo: "bar"})
     end
 
-    assert_tracked_notifications :add_member, target: member, user_id: @user.id, actor_id: @actor.id, meta: { foo: "bar" }
+    assert_tracked_notifications :add_member, target: member, user_id: @user.id, actor_id: @actor.id, meta: {foo: "bar"}
   end
 
   test "read_targets" do
@@ -122,7 +122,7 @@ class NotificationTest < ActiveSupport::TestCase
 
   test "repo_import" do
     repo = create(:repository)
-    note = create(:notification, notify_type: :repo_import, target: repo, meta: { status: :success })
+    note = create(:notification, notify_type: :repo_import, target: repo, meta: {status: :success})
 
     assert_equal repo.to_url, note.target_url
     assert_equal "Repository [#{repo.user.name} / #{repo.name}] has been imported success.", note.mail_body.strip

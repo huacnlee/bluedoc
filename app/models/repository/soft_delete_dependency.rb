@@ -5,7 +5,7 @@ class Repository
 
   # PRO-begin
   set_callback :restore, :before do
-    self.restore_dependents(:docs)
+    restore_dependents(:docs)
   end
   # PRO-end
 end

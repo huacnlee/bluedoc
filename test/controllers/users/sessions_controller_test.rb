@@ -40,16 +40,16 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/sign_in with username" do
-    post user_session_path, params: { user: { email: "huacnlee" } }
+    post user_session_path, params: {user: {email: "huacnlee"}}
     assert_equal 200, response.status
-    assert_match /Invalid Email or password./, response.body
+    assert_match(/Invalid Email or password./, response.body)
 
-    post user_session_path, params: { user: { email: "huacnlee", password: "1234" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "1234"}}
     assert_equal 200, response.status
-    assert_match /Invalid Email or password./, response.body
+    assert_match(/Invalid Email or password./, response.body)
 
     # Do sign in
-    post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -57,23 +57,23 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /account/sign_in with username insensitive" do
     # Do sign in
-    post user_session_path, params: { user: { email: "HUacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "HUacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
   end
 
   test "POST /account/sign_in with email" do
-    post user_session_path, params: { user: { email: "huacnlee@gmail.com" } }
+    post user_session_path, params: {user: {email: "huacnlee@gmail.com"}}
     assert_equal 200, response.status
-    assert_match /Invalid Email or password./, response.body
+    assert_match(/Invalid Email or password./, response.body)
 
-    post user_session_path, params: { user: { email: "huacnlee@gmail.com", password: "1234" } }
+    post user_session_path, params: {user: {email: "huacnlee@gmail.com", password: "1234"}}
     assert_equal 200, response.status
-    assert_match /Invalid Email or password./, response.body
+    assert_match(/Invalid Email or password./, response.body)
 
     # Do sign in
-    post user_session_path, params: { user: { email: "huacnlee@gmail.com", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee@gmail.com", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -81,7 +81,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /account/sign_in with email insensitive" do
     # Do sign in
-    post user_session_path, params: { user: { email: "HUacnlee@Gmail.com", password: "123456" } }
+    post user_session_path, params: {user: {email: "HUacnlee@Gmail.com", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -94,7 +94,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
 
     # go to sign in page to bind user
-    post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -111,7 +111,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     OmniAuth.config.add_mock(:google_oauth2, uid: "234")
     get "/account/auth/google_oauth2/callback"
     assert_redirected_to new_user_registration_path
-    post user_session_path, params: { user: { email: user1.email, password: "123456" } }
+    post user_session_path, params: {user: {email: user1.email, password: "123456"}}
     assert_redirected_to root_path
 
     auth = user1.authorizations.where(provider: "google_oauth2").first
@@ -134,7 +134,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
 
     # make sure sign in will bind
-    post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -151,7 +151,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     Setting.confirmable_enable = "1"
     user = create(:user, password: "123456", password_confirmation: "123456", confirmed_at: nil)
 
-    post user_session_path, params: { user: { email: user.email, password: "123456" } }
+    post user_session_path, params: {user: {email: user.email, password: "123456"}}
     assert_redirected_to new_user_session_path
     follow_redirect!
     assert_select ".notice", text: "You have to confirm your email address before continuing."
@@ -162,7 +162,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".heading", text: "Resend confirmation email"
 
     # Resend confirmation mail
-    post user_confirmation_path, params: { user: { email: user.email } }
+    post user_confirmation_path, params: {user: {email: user.email}}
     assert_redirected_to new_user_session_path
     user.reload
     assert_not_nil user.confirmation_token
@@ -170,7 +170,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
 
     # Do confirm, and resign in
     user.update(confirmed_at: Time.now)
-    post user_session_path, params: { user: { email: user.email, password: "123456" } }
+    post user_session_path, params: {user: {email: user.email, password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in

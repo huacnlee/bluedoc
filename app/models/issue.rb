@@ -18,24 +18,24 @@ class Issue < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :repository, presence: true
-  validates :title, presence: true, length: { maximum: 255 }
+  validates :title, presence: true, length: {maximum: 255}
 
-  enum status: %i(open closed)
+  enum status: %i[open closed]
 
   scope :recent, -> { order("iid desc") }
 
   def to_path(suffix = nil)
-    "#{repository.to_path}/issues/#{self.iid}#{suffix}"
+    "#{repository.to_path}/issues/#{iid}#{suffix}"
   end
 
   def to_url(anchor: nil)
-    url = [Setting.host, self.to_path].join("")
+    url = [Setting.host, to_path].join("")
     url += "##{anchor}" if anchor
     url
   end
 
   def issue_title
-    [self.title, "##{self.iid}"].join(" ")
+    [title, "##{iid}"].join(" ")
   end
 
   def self.find_by_iid(iid)

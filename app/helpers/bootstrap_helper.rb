@@ -20,17 +20,17 @@ module BootstrapHelper
     items = []
     list.each do |link|
       urls = link.match(/href=(["'])(.*?)(\1)/) || []
-      url  = urls.length > 2 ? urls[2] : nil
+      url = urls.length > 2 ? urls[2] : nil
 
       controller_names = link.match(/data-controller=(["'])(.*?)(\1)/) || []
       c_name = controller_names.length > 2 ? controller_names[2] : nil
 
-      if url && current_page?("#{url}", check_parameters: opts[:check_parameters])
+      if url && current_page?(url.to_s, check_parameters: opts[:check_parameters])
         link = link.gsub(opts[:class], "#{opts[:class]} #{opts[:active_class]}")
       end
 
       # [labels issues].include?(issues)
-      if c_name && c_name.split(" ").include?(controller_name.to_s)
+      if c_name&.split(" ")&.include?(controller_name.to_s)
         link = link.gsub(opts[:class], "#{opts[:class]} #{opts[:active_class]}")
       end
 
@@ -48,10 +48,10 @@ module BootstrapHelper
   def current_page?(url_string, check_parameters: false)
     if url_string.index("?") || check_parameters
       clean_params = request.query_parameters.except(:page)
-      if request.fullpath.index("?")
-        fullpath = request.path + "?" + clean_params.to_query
+      fullpath = if request.fullpath.index("?")
+        request.path + "?" + clean_params.to_query
       else
-        fullpath = request.path
+        request.path
       end
 
       fullpath == url_string

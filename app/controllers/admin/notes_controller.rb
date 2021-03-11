@@ -26,11 +26,12 @@ class Admin::NotesController < Admin::ApplicationController
   end
 
   private
-    def set_note
-      @note = Note.unscoped.find(params[:id])
-    end
 
-    def note_params
-      params.require(:note).permit!
-    end
+  def set_note
+    @note = Note.unscoped.find(params[:id])
+  end
+
+  def note_params
+    params.require(:note).permit!
+  end
 end

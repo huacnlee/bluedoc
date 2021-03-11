@@ -51,11 +51,12 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   private
-    def set_user
-      @user = User.unscoped.find(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit!
-    end
+  def set_user
+    @user = User.unscoped.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit!
+  end
 end

@@ -14,6 +14,6 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [user.email], mail.to
     assert_equal "Welcome to use BlueDoc", mail.subject
-    assert_match /Hi, #{user.name}/, mail.body.to_s
+    assert_match(/Hi, #{user.name}/, mail.body.to_s)
   end
 end

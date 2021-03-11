@@ -69,20 +69,20 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /:user/notes" do
     assert_require_user do
-      post user_notes_path(@user), params: { note: {} }
+      post user_notes_path(@user), params: {note: {}}
     end
 
     sign_in @user
     note_params = {
       slug: "foo-bar"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_equal 200, response.status
     assert_react_component "notes/NewNote" do |props|
       assert_equal user_notes_path(@user), props[:action]
       assert_equal "foo-bar", props[:note][:slug]
       assert_nil props[:note][:title]
-      assert_equal({ title: "Title can't be blank" }, props[:note][:errors])
+      assert_equal({title: "Title can't be blank"}, props[:note][:errors])
       assert_equal @user.as_json(only: %i[id slug name], methods: :to_url), props[:user].deep_stringify_keys
     end
 
@@ -92,9 +92,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       title: "Hello world",
       description: "This is description",
       privacy: "private",
-      format: "markdown",
+      format: "markdown"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_redirected_to @user.to_path("/notes/foo-bar/edit")
 
     note = @user.notes.order("id asc").last
@@ -110,9 +110,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       title: "Hello world - SML",
       description: "This is description",
       privacy: "public",
-      format: "sml",
+      format: "sml"
     }
-    post user_notes_path(@user), params: { note: note_params }
+    post user_notes_path(@user), params: {note: note_params}
     assert_redirected_to @user.to_path("/notes/foo-bar-sml/edit")
 
     note = @user.notes.order("id asc").last
@@ -127,7 +127,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     note = create(:note, user: @user)
     get note.to_path
     assert_equal 200, response.status
-    assert_match /#{note.title}/, response.body
+    assert_match(/#{note.title}/, response.body)
     assert_select ".markdown-body"
     assert_select ".label.label-private", 0
     assert_select ".navbar-title a.user-name" do
@@ -251,7 +251,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
       body_sml: "Bla bla",
       format: "sml"
     }
-    put note.to_path, params: { note: note_params }
+    put note.to_path, params: {note: note_params}
     assert_equal 200, response.status
     assert_select "form[action=?]", note_path
     assert_select "details.note-validation-error" do
@@ -259,7 +259,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     end
 
     note_params[:slug] = old_note_slug
-    put note.to_path, params: { note: note_params }
+    put note.to_path, params: {note: note_params}
     assert_redirected_to note.to_path
 
     note.reload
@@ -269,14 +269,14 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal note_params[:format], note.format
 
     # shoud save with JSON API
-    put note.to_path, params: { note: { slug: "", title: "" }, format: :json }
+    put note.to_path, params: {note: {slug: "", title: ""}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal false, res["ok"]
     assert_equal true, res["messages"].is_a?(Array)
     assert_equal true, res["messages"].length > 0
 
-    put note.to_path, params: { note: { slug: "Hello world", description: "New description", privacy: "private" }, format: :json }
+    put note.to_path, params: {note: {slug: "Hello world", description: "New description", privacy: "private"}, format: :json}
     assert_equal 200, response.status
     res = JSON.parse(response.body)
     assert_equal true, res["ok"]
@@ -364,7 +364,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#previus-version-content", html: previous_version.body_html
 
     # paginate with remote: true
-    get note.to_path("/versions"), xhr: true, params: { page: 2 }
+    get note.to_path("/versions"), xhr: true, params: {page: 2}
     assert_equal 200, response.status
     assert_match %($(".version-item-" + selectedVersionId).addClass("selected");), response.body
   end
@@ -377,12 +377,11 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "World hello", note.body_plain
 
     sign_in @other_user
-    patch note.to_path("/revert"), params: { version_id: version.id }
+    patch note.to_path("/revert"), params: {version_id: version.id}
     assert_equal 403, response.status
 
-
     sign_in @user
-    patch note.to_path("/revert"), params: { version_id: version.id }
+    patch note.to_path("/revert"), params: {version_id: version.id}
     assert_redirected_to note.to_path
     note = Note.find_by_id(note.id)
     assert_equal "Hello world", note.body_plain
@@ -392,23 +391,23 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     private_note = create(:note, user: @other_user, privacy: :private)
     note = create(:note, user: @user, body: "Hello world")
 
-    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 401, response.status
 
     sign_in @user
-    post note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.note-#{note.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-undo-label\"\)/, response.body
+    assert_match(/.note-#{note.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-undo-label"\)/, response.body)
     assert_equal true, @user.star_note?(note)
 
-    post private_note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    post private_note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 403, response.status
 
-    delete note.to_path("/action"), params: { action_type: "star" }, xhr: true
+    delete note.to_path("/action"), params: {action_type: "star"}, xhr: true
     assert_equal 200, response.status
-    assert_match /.note-#{note.id}-star-button/, response.body
-    assert_match /btn.attr\(\"data-label\"\)/, response.body
+    assert_match(/.note-#{note.id}-star-button/, response.body)
+    assert_match(/btn.attr\("data-label"\)/, response.body)
     assert_equal false, @user.star_note?(note)
   end
 

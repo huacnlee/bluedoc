@@ -20,7 +20,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    get new_ldap_user_session_path, params: { username: "hello" }
+    get new_ldap_user_session_path, params: {username: "hello"}
     assert_equal 200, response.status
     assert_select "#session-ldap" do
       assert_select "input[name=username]" do
@@ -36,7 +36,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
 
     # go to sign in page to bind user
-    post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in
@@ -53,7 +53,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
     OmniAuth.config.add_mock(:ldap, uid: "234")
     get "/account/auth/ldap/callback"
     assert_redirected_to new_user_registration_path
-    post user_session_path, params: { user: { email: user1.email, password: "123456" } }
+    post user_session_path, params: {user: {email: user1.email, password: "123456"}}
     assert_redirected_to root_path
 
     auth = user1.authorizations.where(provider: "ldap").first
@@ -82,7 +82,7 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/auth/ldap/callback with Not binding exist, auto create a user" do
-    OmniAuth.config.add_mock(:ldap, uid: "124", info: { username: "joseen", name: "Joseen", email: "joseen@gmail.com" })
+    OmniAuth.config.add_mock(:ldap, uid: "124", info: {username: "joseen", name: "Joseen", email: "joseen@gmail.com"})
     post "/account/auth/ldap/callback"
     assert_redirected_to root_path
     assert_signed_in
@@ -97,14 +97,14 @@ class Users::LdapsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/auth/ldap/callback with Not binding exist, and give username was exists" do
-    OmniAuth.config.add_mock(:ldap, uid: "125", info: { username: "huacnlee" })
+    OmniAuth.config.add_mock(:ldap, uid: "125", info: {username: "huacnlee"})
     post "/account/auth/ldap/callback"
     assert_redirected_to new_user_registration_path
     follow_redirect!
     assert_select ".notice", text: %(Could not authenticate you from #{Setting.ldap_name} because "Username is invalid".)
 
     # make sure sign in will bind
-    post user_session_path, params: { user: { email: "huacnlee", password: "123456" } }
+    post user_session_path, params: {user: {email: "huacnlee", password: "123456"}}
     assert_redirected_to root_path
 
     assert_signed_in

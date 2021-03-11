@@ -5,7 +5,7 @@ require "test_helper"
 class SearchableTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
-  TYPES = %i(doc repository group user)
+  TYPES = %i[doc repository group user]
 
   test "index_name" do
     assert_equal "test-docs", Doc.index_name

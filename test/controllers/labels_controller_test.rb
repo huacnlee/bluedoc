@@ -40,18 +40,18 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
 
     label_params = {
       title: "Hello world",
-      color: "#000000",
+      color: "#000000"
     }
 
-    post @repository.to_path("/issues/labels"), params: { label: label_params }
+    post @repository.to_path("/issues/labels"), params: {label: label_params}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    post @repository.to_path("/issues/labels"), params: { label: label_params }
+    post @repository.to_path("/issues/labels"), params: {label: label_params}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    post @repository.to_path("/issues/labels"), params: { label: label_params }
+    post @repository.to_path("/issues/labels"), params: {label: label_params}
     assert_equal 200, response.status
     json = JSON.parse(response.body)
     assert_equal true, json["ok"]
@@ -60,7 +60,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
     assert_equal label_params[:title], label.title
     assert_equal label_params[:color], label.color
 
-    post @repository.to_path("/issues/labels"), params: { label: { title: "" } }
+    post @repository.to_path("/issues/labels"), params: {label: {title: ""}}
     assert_equal 200, response.status
     json = JSON.parse(response.body)
     assert_equal false, json["ok"]
@@ -78,18 +78,18 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
 
     label_params = {
       title: "Hello world",
-      color: "#000000",
+      color: "#000000"
     }
 
-    put @repository.to_path("/issues/labels/#{label.id}"), params: { label: label_params }
+    put @repository.to_path("/issues/labels/#{label.id}"), params: {label: label_params}
     assert_equal 403, response.status
 
     sign_in_role :editor, group: @group
-    put @repository.to_path("/issues/labels/#{label.id}"), params: { label: label_params }
+    put @repository.to_path("/issues/labels/#{label.id}"), params: {label: label_params}
     assert_equal 403, response.status
 
     sign_in_role :admin, group: @group
-    put @repository.to_path("/issues/labels/#{label.id}"), params: { label: label_params }
+    put @repository.to_path("/issues/labels/#{label.id}"), params: {label: label_params}
     assert_equal 200, response.status
     json = JSON.parse(response.body)
     assert_equal true, json["ok"]
@@ -98,7 +98,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
     assert_equal label_params[:title], label.title
     assert_equal label_params[:color], label.color
 
-    put @repository.to_path("/issues/labels/#{label.id}"), params: { label: { color: "1" } }
+    put @repository.to_path("/issues/labels/#{label.id}"), params: {label: {color: "1"}}
     assert_equal 200, response.status
     json = JSON.parse(response.body)
     assert_equal false, json["ok"]

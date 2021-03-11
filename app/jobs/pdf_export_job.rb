@@ -16,12 +16,12 @@ class PDFExportJob < ApplicationJob
   rescue => e
     BlueDoc::Error.track(e, title: "PDFExportJob [#{subject.class} #{subject.slug}] error")
   ensure
-    pdf_file.close! if pdf_file
+    pdf_file&.close!
     subject.set_export_status(:pdf, "done")
   end
 
   def render(name, subject)
-    html = ApplicationController.renderer.render(partial: "export_pdf/#{name}", layout: "pdf", locals: { subject: subject })
+    html = ApplicationController.renderer.render(partial: "export_pdf/#{name}", layout: "pdf", locals: {subject: subject})
     WickedPdf.new.pdf_from_string(html, return_file: true)
   end
 end

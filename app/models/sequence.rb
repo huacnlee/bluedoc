@@ -6,11 +6,11 @@ class Sequence < ApplicationRecord
   def increment!
     # LOCK ROW
     with_lock do
-      self.number = self.number + 1
-      self.save!
+      self.number = number + 1
+      save!
     end
 
-    self.number
+    number
   end
 
   class << self

@@ -4,10 +4,10 @@ require "open-uri"
 
 module BlueDoc
   class Blob
-    class FileNotFoundError < Exception; end
+    class FileNotFoundError < RuntimeError; end
 
     class << self
-      IMAGE_SIZES = { tiny: 36, small: 64, medium: 96, large: 440, xlarge: 1600 }
+      IMAGE_SIZES = {tiny: 36, small: 64, medium: 96, large: 440, xlarge: 1600}
 
       def service_name
         ActiveStorage::Blob.service.send(:service_name)
@@ -33,9 +33,9 @@ module BlueDoc
         size = IMAGE_SIZES[style] || IMAGE_SIZES[:small]
 
         if style == :xlarge
-          { resize: "#{size}>" }
+          {resize: "#{size}>"}
         else
-          { thumbnail: "#{size}x#{size}^", gravity: "center", extent: "#{size}x#{size}" }
+          {thumbnail: "#{size}x#{size}^", gravity: "center", extent: "#{size}x#{size}"}
         end
       end
 
@@ -52,9 +52,9 @@ module BlueDoc
 
         filename = File.basename(path_or_url)
 
-        if /^http[s]?:\/\//.match?(path_or_url)
+        if /^https?:\/\//.match?(path_or_url)
           begin
-            io = URI.open(path_or_url)
+            io = URI.parse(path_or_url).open
           rescue OpenURI::HTTPError => e
             raise FileNotFoundError.new(e.message)
           end

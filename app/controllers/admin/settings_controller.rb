@@ -33,11 +33,12 @@ class Admin::SettingsController < Admin::ApplicationController
   end
 
   private
-    def setting_params
-      params.require(:setting).permit(:host, :default_locale, :admin_emails,
-        :broadcast_message_html, :application_footer_html, :dashboard_sidebar_html, :anonymous_enable,
-        :plantuml_service_host, :mathjax_service_host, :confirmable_enable, :user_email_suffixes,
-        :captcha_enable, :ldap_name, :ldap_title, :ldap_description, :ldap_options,
-        :mailer_from, :mailer_options, :site_logo)
-    end
+
+  def setting_params
+    params.require(:setting).permit(:host, :default_locale, :admin_emails,
+      :broadcast_message_html, :application_footer_html, :dashboard_sidebar_html, :anonymous_enable,
+      :plantuml_service_host, :mathjax_service_host, :confirmable_enable, :user_email_suffixes,
+      :captcha_enable, :ldap_name, :ldap_title, :ldap_description, :ldap_options,
+      :mailer_from, :mailer_options, :site_logo)
+  end
 end
