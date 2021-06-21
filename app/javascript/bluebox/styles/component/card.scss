@@ -80,10 +80,10 @@
 }
 
 .card-success {
-  border: 0.5px solid #3BB46E;
+  border: 0.5px solid #3bb46e;
 }
 
 .card-static {
   @extend .card;
-  @extend .card:hover;
+  // @extend .card:hover;
 }
