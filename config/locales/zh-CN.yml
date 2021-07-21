@@ -5,7 +5,7 @@ zh-CN:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
       long: "%Y-%m-%d %H:%M:%S"
-      short: "%m月%d日 %H:%M"
+      short: "%m 月 %d 日 %H:%M"
   activerecord:
     enums:
       member:
