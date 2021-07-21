@@ -81,7 +81,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "auto_correct" do
-    u = build(:user, name: "演示Ruby用户", description: "创立与2019年", location: "天府4街")
+    u = build(:user, name: "演示 Ruby 用户", description: "创立与 2019 年", location: "天府 4 街")
     assert_equal true, u.valid?
     assert_equal "演示 Ruby 用户", u.name
     assert_equal "创立与 2019 年", u.description

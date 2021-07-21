@@ -77,7 +77,7 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   test "auto_correct" do
-    u = build(:group, name: "演示Ruby团队", description: "创立与2019年", location: "天府4街")
+    u = build(:group, name: "演示 Ruby 团队", description: "创立与 2019 年", location: "天府 4 街")
     assert_equal true, u.valid?
     assert_equal "演示 Ruby 团队", u.name
     assert_equal "创立与 2019 年", u.description

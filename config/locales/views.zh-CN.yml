@@ -222,7 +222,7 @@ zh-CN:
           MathjaxService: 数学公式服务
           ElasticSearchService: 全文搜索服务
       reindex:
-        Search indexes has running reindex with async: 重建搜索索引的任务已经后台异步执行，你可以到“后台异步队列”功能里面查看进度。
+        Search indexes has running reindex with async: 重建搜索索引的任务已经后台异步执行，你可以到 “后台异步队列” 功能里面查看进度。
     repositories:
       show:
         All docs: 所有文档
@@ -750,7 +750,7 @@ zh-CN:
         Archive of this repository was generated: 知识库 Zip 包已经生成。
         Click the button to download it: 你可以点击下面的下载按钮下载，如果内容有更新，也可以重新生成。
         Download: 下载 Zip 包
-        Generate Again: 重新生成!
+        Generate Again: 重新生成！
         Submiting: 提交中...
         Archive as zip: 导出 Zip 包
         Generate Archive will take a long time: 导出 Zip 包将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
@@ -765,7 +765,7 @@ zh-CN:
         PDF of this repository was generated: 此知识库的 PDF 已生成。
         Click the button to download it: 点击下面的下载按钮下载 PDF 文件。
         Download: 下载 PDF
-        Generate Again: 重新生成!
+        Generate Again: 重新生成！
         Submiting: 提交中...
         Generate PDF: 导出 PDF
         Generate PDF will take a long time: 导出 PDF 将会在后台执行一段较长的时间（由内容复杂度决定），这个等待过程你可以继续做其他工作，然后过一段时间以后在回来查看是否完成了。
@@ -902,8 +902,8 @@ zh-CN:
       Stars: 收藏的知识库
       no star repositories: 还未收藏过知识库。
     profile:
-      This photo will be used to identify you in BlueDoc It will be visible to anyone: 此照片将用于在BlueDoc中识别您的身份。任何人都可以看到它
-      Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传132px或更大的正方形图像
+      This photo will be used to identify you in BlueDoc It will be visible to anyone: 此照片将用于在 BlueDoc 中识别您的身份。任何人都可以看到它
+      Use a photo or image rather than text and upload an image that is 132px square or larger: 使用照片或图片而不是文字，并上传 132px 或更大的正方形图像
   notes:
     card:
       Notes: 笔记

@@ -217,7 +217,7 @@ class NoteTest < ActiveSupport::TestCase
   end
 
   test "auto_correct" do
-    note = build(:note, title: "演示Ruby笔记", description: "创立与2019年")
+    note = build(:note, title: "演示 Ruby 笔记", description: "创立与 2019 年")
     assert_equal true, note.valid?
     assert_equal "演示 Ruby 笔记", note.title
     assert_equal "创立与 2019 年", note.description

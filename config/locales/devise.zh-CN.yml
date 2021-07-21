@@ -16,7 +16,7 @@
       unconfirmed: 请先进入邮箱，点击确认链接激活您的帐号才可使用。
     omniauth_callbacks:
       failure: 无法通过 %{kind} 登录，因为 "%{reason}"。
-      success: 成功通过 %{kind} 登录账号.
+      success: 成功通过 %{kind} 登录账号。
     passwords:
       no_token: 此页面必须通过找回密码链接打开，如果你是通过这种方式，请检查 URL 和邮件里面的 URL 是否一致。
       send_instructions: 稍后，您将收到重置密码的电子邮件。
