@@ -15,7 +15,7 @@ Fill in the info in form.
 - Scopes: api, read_user, openid
 
 > NOTE: the callback url path must equal to "${your-host}/account/auth/gitlab/callback", please do not change path
-> And please makesure enabled `api`, `read_user`, 'openid` in Scopes!!
+> And please makesure enabled `api`, `read_user`, `openid` in Scopes!!
 
 
 After form submited, you will get the:
